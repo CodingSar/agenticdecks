@@ -1,0 +1,4338 @@
+{
+ "deck_name": "Kubernetes",
+ "file": "Kubernetes.apkg",
+ "description": "Core Kubernetes from architecture to security, plus the surrounding cloud-native stack (Prometheus, OpenTelemetry, Istio, Cilium, LFCS Linux). Organised by concept for a platform/enterprise architect working in production and preparing for the CKA, CKAD, CKS, KCNA and KCSA (Kubestronaut) exams.",
+ "notes": [
+  {
+   "guid": "Cs>(pwZJxd",
+   "type": "basic",
+   "deck": "Kubernetes::01 Architecture & Control Plane",
+   "tags": [
+    "Kubernetes::Architecture_Control_Plane",
+    "Exam::KCNA"
+   ],
+   "front": "What core problem does Kubernetes solve?",
+   "back": "It's a container <b>orchestrator</b>: you declare desired state and it schedules, runs, heals and scales containers across a cluster of nodes, instead of you managing individual machines.",
+   "text": "",
+   "image": "",
+   "analogy": "Like an air-traffic control tower: aircraft (containers) don't pick their own runways; the tower assigns slots and reroutes them when a runway closes.",
+   "extra": "",
+   "source": "KIA Ch 1 · KCNA",
+   "reverse": false
+  },
+  {
+   "guid": "lIlS?ju-of",
+   "type": "cloze",
+   "deck": "Kubernetes::01 Architecture & Control Plane",
+   "tags": [
+    "Kubernetes::Architecture_Control_Plane",
+    "Exam::KCNA"
+   ],
+   "front": "",
+   "back": "",
+   "text": "A Kubernetes cluster has {{c1::control plane}} nodes, which manage the cluster, and {{c2::worker}} nodes, which run the application pods.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 1 · KCNA",
+   "reverse": false
+  },
+  {
+   "guid": "P>H257aUON",
+   "type": "cloze",
+   "deck": "Kubernetes::01 Architecture & Control Plane",
+   "tags": [
+    "Kubernetes::Architecture_Control_Plane",
+    "Exam::KCNA",
+    "Exam::CKA"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Kubernetes control plane components: {{c1::kube-apiserver}} (the front end everything talks to), {{c2::kube-scheduler}} (assigns pods to nodes), {{c3::kube-controller-manager}} (runs the reconciliation loops), {{c4::etcd}} (key-value store of all cluster state).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 1 · KCNA/CKA",
+   "reverse": false
+  },
+  {
+   "guid": "b8i1;xFA#U",
+   "type": "cloze",
+   "deck": "Kubernetes::01 Architecture & Control Plane",
+   "tags": [
+    "Kubernetes::Architecture_Control_Plane",
+    "Exam::KCNA",
+    "Exam::CKA"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Components on every Kubernetes worker node: the {{c1::kubelet}} (node agent that runs pods), {{c2::kube-proxy}} (programs Service routing), and the {{c3::container runtime}} (e.g. containerd, CRI-O).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 1 · KCNA/CKA",
+   "reverse": false
+  },
+  {
+   "guid": "M7Y!KCzp@r",
+   "type": "basic",
+   "deck": "Kubernetes::01 Architecture & Control Plane",
+   "tags": [
+    "Kubernetes::Architecture_Control_Plane",
+    "Exam::CKA",
+    "Exam::KCNA"
+   ],
+   "front": "In Kubernetes, what is etcd's role, and which component talks to it directly?",
+   "back": "The consistent (Raft-based) key-value store holding all cluster state, the single source of truth. Only the <b>API server</b> reads and writes it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 11 · CKA/KCNA",
+   "reverse": false
+  },
+  {
+   "guid": "fH_o25H&nv",
+   "type": "basic",
+   "deck": "Kubernetes::01 Architecture & Control Plane",
+   "tags": [
+    "Kubernetes::Architecture_Control_Plane",
+    "Exam::CKA"
+   ],
+   "front": "Why is the API server called the hub of the Kubernetes architecture?",
+   "back": "It validates and persists every object to etcd and is the only component touching etcd. All other components watch it and never talk to each other directly.",
+   "text": "",
+   "image": "",
+   "analogy": "A hub-and-spoke airline network: every flight goes through the hub; there are no direct flights between spokes.",
+   "extra": "",
+   "source": "KIA Ch 11 · CKA",
+   "reverse": false
+  },
+  {
+   "guid": "o5R5{}:Qa;",
+   "type": "basic",
+   "deck": "Kubernetes::01 Architecture & Control Plane",
+   "tags": [
+    "Kubernetes::Architecture_Control_Plane",
+    "Exam::CKA"
+   ],
+   "front": "What does kube-scheduler do, and what does it <i>not</i> do?",
+   "back": "Watches for pods with no node assigned, <b>filters</b> feasible nodes, <b>scores</b> them, and writes the binding. It doesn't start the pod; the kubelet does.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 11 · CKA",
+   "reverse": false
+  },
+  {
+   "guid": "js)wo:)X[8",
+   "type": "basic",
+   "deck": "Kubernetes::01 Architecture & Control Plane",
+   "tags": [
+    "Kubernetes::Architecture_Control_Plane",
+    "Exam::CKA"
+   ],
+   "front": "What is kube-controller-manager?",
+   "back": "One process running many built-in <b>controllers</b> (ReplicaSet, Deployment, Node, EndpointSlice…), each a loop driving actual state toward desired state.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 11 · CKA",
+   "reverse": false
+  },
+  {
+   "guid": "BCNjHj|Vkm",
+   "type": "basic",
+   "deck": "Kubernetes::01 Architecture & Control Plane",
+   "tags": [
+    "Kubernetes::Architecture_Control_Plane",
+    "Exam::CKA"
+   ],
+   "front": "What is the kubelet's job?",
+   "back": "The node agent: watches for pods bound to its node, has the container runtime (via CRI) run them, runs their probes, and reports pod and node status to the API server.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 11 · CKA",
+   "reverse": false
+  },
+  {
+   "guid": "LQRe-JoDa4",
+   "type": "basic",
+   "deck": "Kubernetes::01 Architecture & Control Plane",
+   "tags": [
+    "Kubernetes::Architecture_Control_Plane",
+    "Exam::KCNA",
+    "Exam::CGOA"
+   ],
+   "front": "What is the Kubernetes reconciliation (control) loop?",
+   "back": "Each controller continuously compares <b>desired state</b> (<code>spec</code>) with <b>observed state</b> (<code>status</code>) and acts to close the gap. It keeps running after deploy time, so drift gets corrected.",
+   "text": "",
+   "image": "",
+   "analogy": "A thermostat: you set the target temperature; it keeps measuring and switching the heater until the room matches, and starts again if someone opens a window.",
+   "extra": "",
+   "source": "KIA Ch 11 · KCNA/CGOA",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Kubernetes::01 Architecture & Control Plane",
+   "tags": [
+    "Kubernetes::Architecture_Control_Plane",
+    "Exam::CKA"
+   ],
+   "front": "How do Kubernetes components find out that objects changed?",
+   "back": "They open a <b>watch</b> on the API server and receive change events instead of polling, which is cheap and near real-time.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 11 · CKA",
+   "reverse": false
+  },
+  {
+   "guid": "cTVmcLM%,Y",
+   "type": "basic",
+   "deck": "Kubernetes::01 Architecture & Control Plane",
+   "tags": [
+    "Kubernetes::Architecture_Control_Plane",
+    "Exam::KCNA",
+    "Exam::CNPA"
+   ],
+   "front": "Imperative vs declarative management in Kubernetes?",
+   "back": "<b>Imperative</b>: commands that say <i>how</i> (<code>kubectl create</code>, <code>scale</code>). <b>Declarative</b>: you submit the desired end state (manifests, <code>kubectl apply</code>) and controllers reconcile toward it.",
+   "text": "",
+   "image": "",
+   "analogy": "Imperative is giving a taxi driver turn-by-turn directions; declarative is just giving the address.",
+   "extra": "",
+   "source": "KCNA · concepts · CNPA",
+   "reverse": false
+  },
+  {
+   "guid": "ph8B$5qYSo",
+   "type": "basic",
+   "deck": "Kubernetes::01 Architecture & Control Plane",
+   "tags": [
+    "Kubernetes::Architecture_Control_Plane",
+    "Exam::CKA",
+    "Exam::KCNA"
+   ],
+   "front": "Which Kubernetes component does <code>kubectl</code> actually talk to?",
+   "back": "Only the <b>API server</b> (REST over HTTPS, with credentials from kubeconfig). It never contacts nodes or etcd directly.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 2 · CKA/KCNA",
+   "reverse": false
+  },
+  {
+   "guid": "s&,~LQ;`~>",
+   "type": "basic",
+   "deck": "Kubernetes::01 Architecture & Control Plane",
+   "tags": [
+    "Kubernetes::Architecture_Control_Plane",
+    "Exam::CKA",
+    "Exam::KCNA"
+   ],
+   "front": "What do Kubernetes namespaces provide, and what do they <i>not</i> provide?",
+   "back": "A scope for names, RBAC, quotas and policies (soft multi-tenancy). They do <b>not</b> isolate network traffic; that needs NetworkPolicies.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 3 · CKA/KCNA",
+   "reverse": false
+  },
+  {
+   "guid": "wd,7r%<{CA",
+   "type": "cloze",
+   "deck": "Kubernetes::01 Architecture & Control Plane",
+   "tags": [
+    "Kubernetes::Architecture_Control_Plane",
+    "Exam::KCNA"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Kubernetes plugs in implementations through standard interfaces: {{c1::CRI}} for container runtimes, {{c2::CNI}} for pod networking, {{c3::CSI}} for storage drivers.",
+   "image": "",
+   "analogy": "Like USB ports: the laptop defines the socket, and any vendor's device that fits the standard works.",
+   "extra": "<b>Why:</b> the core stays vendor-neutral; runtimes, networks and storage can be swapped without changing Kubernetes.",
+   "source": "KCNA · interfaces",
+   "reverse": false
+  },
+  {
+   "guid": "p*>N9CmEpq",
+   "type": "basic",
+   "deck": "Kubernetes::01 Architecture & Control Plane",
+   "tags": [
+    "Kubernetes::Architecture_Control_Plane",
+    "Exam::KCNA"
+   ],
+   "front": "Under the kubelet, what do containerd/CRI-O do vs runc?",
+   "back": "<b>containerd / CRI-O</b>: CRI runtimes that pull images and manage container lifecycles. <b>runc</b>: the low-level OCI runtime that actually creates the container process.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>History that matters:</b> dockershim was removed (1.24), so the kubelet no longer drives Docker directly; Docker-built images still run fine (they're OCI images).",
+   "source": "KCNA · runtime",
+   "reverse": false
+  },
+  {
+   "guid": "o?pmHrv#Id",
+   "type": "basic",
+   "deck": "Kubernetes::01 Architecture & Control Plane",
+   "tags": [
+    "Kubernetes::Architecture_Control_Plane",
+    "Exam::KCNA",
+    "Exam::CKAD"
+   ],
+   "front": "What is a CustomResourceDefinition (CRD)?",
+   "back": "It registers a new resource type with the API server, so custom objects (e.g. <code>kind: Database</code>) are stored in etcd and managed with kubectl like built-ins.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 18 · KCNA/CKAD",
+   "reverse": false
+  },
+  {
+   "guid": "z``M#eCVWo",
+   "type": "basic",
+   "deck": "Kubernetes::01 Architecture & Control Plane",
+   "tags": [
+    "Kubernetes::Architecture_Control_Plane",
+    "Exam::KCNA",
+    "Exam::CNPE"
+   ],
+   "front": "What is the Operator pattern?",
+   "back": "A custom controller plus CRDs that encodes an application's operational knowledge (provisioning, backups, upgrades, failover) and reconciles it continuously, turning runbooks into automation.",
+   "text": "",
+   "image": "",
+   "analogy": "A robot SRE that knows only one database, but knows it deeply and never sleeps.",
+   "extra": "<b>Depth:</b> controller implementation patterns live in the Platform Engineering / Go decks.",
+   "source": "KIA Ch 18 · KCNA/CNPE",
+   "reverse": false
+  },
+  {
+   "guid": "C.1n1_K`*6",
+   "type": "basic",
+   "deck": "Kubernetes::02 Workloads & Pods",
+   "tags": [
+    "Kubernetes::Workloads_Pods",
+    "Exam::CKAD",
+    "Exam::KCNA"
+   ],
+   "front": "What is a Pod?",
+   "back": "The smallest deployable unit: one or more containers that are always co-scheduled on one node and share a network namespace (one IP, one port space) and, optionally, volumes.",
+   "text": "",
+   "image": "",
+   "analogy": "Containers in a pod are roommates: same street address and shared kitchen (volumes), separate bedrooms (filesystems/processes).",
+   "extra": "",
+   "source": "KIA Ch 3 · CKAD/KCNA",
+   "reverse": false
+  },
+  {
+   "guid": "pQb{qB07N/",
+   "type": "basic",
+   "deck": "Kubernetes::02 Workloads & Pods",
+   "tags": [
+    "Kubernetes::Workloads_Pods",
+    "Exam::CKAD"
+   ],
+   "front": "When should two containers share a Pod rather than run in separate Pods?",
+   "back": "Only when tightly coupled and needing shared network/files, e.g. an app plus its sidecar. Independent components go in separate pods so they scale and fail independently.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 3 · CKAD",
+   "reverse": false
+  },
+  {
+   "guid": "MM3Nhq!+F!",
+   "type": "cloze",
+   "deck": "Kubernetes::02 Workloads & Pods",
+   "tags": [
+    "Kubernetes::Workloads_Pods",
+    "Exam::CKAD",
+    "Exam::CKA"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Multi-container pod patterns: a {{c1::sidecar}} assists the main container (e.g. log shipper), an {{c2::ambassador}} proxies its connections to the outside world, an {{c3::adapter}} normalizes its output for consumers.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKAD · pod patterns",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Kubernetes::02 Workloads & Pods",
+   "tags": [
+    "Kubernetes::Workloads_Pods",
+    "Exam::CKAD"
+   ],
+   "front": "How is a native sidecar container declared (Kubernetes 1.29+)?",
+   "back": "As an <code>initContainer</code> with <code>restartPolicy: Always</code>: it starts before the app containers, keeps running alongside them, and is stopped after them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKAD · pod patterns",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Kubernetes::02 Workloads & Pods",
+   "tags": [
+    "Kubernetes::Workloads_Pods",
+    "Exam::CKAD",
+    "Exam::CKA"
+   ],
+   "front": "What is an init container, and when do you use one?",
+   "back": "A container that runs to completion, in order, before app containers start. Used for setup: wait for a dependency, fetch config, run a migration.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKAD · pod patterns",
+   "reverse": false
+  },
+  {
+   "guid": "Lvv,v<K.GY",
+   "type": "basic",
+   "deck": "Kubernetes::02 Workloads & Pods",
+   "tags": [
+    "Kubernetes::Workloads_Pods",
+    "Exam::CKA"
+   ],
+   "front": "What is the pause (infrastructure) container in a Pod?",
+   "back": "A tiny container that holds the pod's network (and IPC) namespace. App containers join it, so the pod keeps one IP even as app containers restart.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 11 · CKA",
+   "reverse": false
+  },
+  {
+   "guid": "Og#j$M>Qsx",
+   "type": "basic",
+   "deck": "Kubernetes::02 Workloads & Pods",
+   "tags": [
+    "Kubernetes::Workloads_Pods",
+    "Exam::CKAD",
+    "Exam::KCNA"
+   ],
+   "front": "What are labels and label selectors for?",
+   "back": "Labels are key-value pairs on objects; <b>selectors</b> pick sets of objects by them. This is how Services, ReplicaSets and NetworkPolicies find their pods.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 3 · CKAD/KCNA",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Kubernetes::02 Workloads & Pods",
+   "tags": [
+    "Kubernetes::Workloads_Pods",
+    "Exam::CKAD"
+   ],
+   "front": "Labels vs annotations in Kubernetes?",
+   "back": "<b>Labels</b> identify and select objects (short, indexed, used by selectors). <b>Annotations</b> hold non-identifying metadata for tools (build info, config hints) and can't be selected on.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 3 · CKAD",
+   "reverse": false
+  },
+  {
+   "guid": "qWeFvKG@X1",
+   "type": "basic",
+   "deck": "Kubernetes::02 Workloads & Pods",
+   "tags": [
+    "Kubernetes::Workloads_Pods",
+    "Exam::CKAD"
+   ],
+   "front": "ReplicaSet vs ReplicationController?",
+   "back": "Both keep N pod replicas running. ReplicaSet (the successor) adds <b>set-based selectors</b> (<code>in</code>, <code>notin</code>, <code>exists</code>). You rarely create either directly; Deployments manage ReplicaSets.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 4 · CKAD",
+   "reverse": false
+  },
+  {
+   "guid": "rmnFg)LUuC",
+   "type": "basic",
+   "deck": "Kubernetes::02 Workloads & Pods",
+   "tags": [
+    "Kubernetes::Workloads_Pods",
+    "Exam::CKAD",
+    "Exam::CKA"
+   ],
+   "front": "What does a Deployment add over a bare ReplicaSet?",
+   "back": "Declarative rolling updates and rollback: it creates a new ReplicaSet per revision and shifts pods from the old ReplicaSet to the new one.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 9 · CKAD/CKA",
+   "reverse": false
+  },
+  {
+   "guid": "nk[Yo}]7}_",
+   "type": "basic",
+   "deck": "Kubernetes::02 Workloads & Pods",
+   "tags": [
+    "Kubernetes::Workloads_Pods",
+    "Exam::CKAD"
+   ],
+   "front": "RollingUpdate vs Recreate Deployment strategy?",
+   "back": "<b>RollingUpdate</b> (default): replace pods gradually, no downtime, two versions coexist briefly. <b>Recreate</b>: kill all, then start new; downtime, but two versions never run at once.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Not built in:</b> canary and blue-green need extra tooling (Argo Rollouts, a service mesh).",
+   "source": "KIA Ch 9 · CKAD",
+   "reverse": false
+  },
+  {
+   "guid": "L4EV9ZCuCq",
+   "type": "cloze",
+   "deck": "Kubernetes::02 Workloads & Pods",
+   "tags": [
+    "Kubernetes::Workloads_Pods",
+    "Exam::CKAD"
+   ],
+   "front": "",
+   "back": "",
+   "text": "In a Deployment RollingUpdate, {{c1::maxSurge}} caps how many pods may exist <i>above</i> the desired count, and {{c2::maxUnavailable}} caps how many may be unavailable during the update.",
+   "image": "",
+   "analogy": "",
+   "extra": "Both default to 25%. <code>maxUnavailable: 0</code> + <code>maxSurge: 1</code> = add-before-remove, safest for capacity.",
+   "source": "KIA Ch 9 · CKAD",
+   "reverse": false
+  },
+  {
+   "guid": "yQSe?!Ze{{",
+   "type": "basic",
+   "deck": "Kubernetes::02 Workloads & Pods",
+   "tags": [
+    "Kubernetes::Workloads_Pods",
+    "Exam::CKAD",
+    "Exam::CKA"
+   ],
+   "front": "How do you roll back a Deployment, and why is it possible?",
+   "back": "<code>kubectl rollout undo deploy/&lt;name&gt; [--to-revision=N]</code>. Old ReplicaSets are kept (up to <code>revisionHistoryLimit</code>) and simply scaled back up.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 9 · CKAD/CKA",
+   "reverse": false
+  },
+  {
+   "guid": "rbZa|VF$NF",
+   "type": "basic",
+   "deck": "Kubernetes::02 Workloads & Pods",
+   "tags": [
+    "Kubernetes::Workloads_Pods",
+    "Exam::CKA"
+   ],
+   "front": "DaemonSet vs Deployment: how are pods placed?",
+   "back": "<b>DaemonSet</b>: exactly one pod per (matching) node, added automatically to new nodes; for node agents (CNI, log/metrics collectors). <b>Deployment</b>: N replicas placed anywhere by the scheduler.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 4 · CKA",
+   "reverse": false
+  },
+  {
+   "guid": "F^.Lh~g?Mz",
+   "type": "basic",
+   "deck": "Kubernetes::02 Workloads & Pods",
+   "tags": [
+    "Kubernetes::Workloads_Pods",
+    "Exam::CKAD"
+   ],
+   "front": "Job vs CronJob?",
+   "back": "<b>Job</b>: runs pods to completion for a finite task (not restarted after success). <b>CronJob</b>: creates Jobs on a cron schedule.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 4 · CKAD",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Kubernetes::02 Workloads & Pods",
+   "tags": [
+    "Kubernetes::Workloads_Pods",
+    "Exam::CKAD"
+   ],
+   "front": "",
+   "back": "",
+   "text": "In a Job spec, {{c1::completions}} sets how many pods must succeed, {{c2::parallelism}} how many run at once, and {{c3::backoffLimit}} how many retries before the Job is marked failed.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKAD · workloads",
+   "reverse": false
+  },
+  {
+   "guid": "CgN1ZO2Nh#",
+   "type": "basic",
+   "deck": "Kubernetes::02 Workloads & Pods",
+   "tags": [
+    "Kubernetes::Workloads_Pods",
+    "Exam::CKAD",
+    "Exam::CKA"
+   ],
+   "front": "What does a StatefulSet guarantee that a Deployment doesn't?",
+   "back": "Stable per-pod identity: ordinal names (<code>web-0</code>, <code>web-1</code>), stable DNS via a headless Service, per-pod persistent storage, and ordered creation/deletion.",
+   "text": "",
+   "image": "",
+   "analogy": "Deployment pods are interchangeable taxis; StatefulSet pods are numbered seats on a train: each passenger always returns to the same seat and the same luggage rack.",
+   "extra": "",
+   "source": "KIA Ch 10 · CKAD/CKA",
+   "reverse": false
+  },
+  {
+   "guid": "FEBJejMme+",
+   "type": "basic",
+   "deck": "Kubernetes::02 Workloads & Pods",
+   "tags": [
+    "Kubernetes::Workloads_Pods",
+    "Exam::CKAD"
+   ],
+   "front": "Why does a StatefulSet need a headless Service?",
+   "back": "To give each pod a stable DNS name (<code>web-0.&lt;svc&gt;.&lt;ns&gt;.svc.cluster.local</code>) so peers can reach specific members, which clustered databases and brokers require.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 10 · CKAD",
+   "reverse": false
+  },
+  {
+   "guid": "Qwne3,.{yN",
+   "type": "basic",
+   "deck": "Kubernetes::02 Workloads & Pods",
+   "tags": [
+    "Kubernetes::Workloads_Pods",
+    "Exam::CKA"
+   ],
+   "front": "How does a StatefulSet give each pod its own persistent storage?",
+   "back": "<code>volumeClaimTemplates</code> create one PVC per pod (<code>data-web-0</code>, …). A rescheduled pod reattaches to the <b>same</b> PVC, keeping its data.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 10 · CKA",
+   "reverse": false
+  },
+  {
+   "guid": "L79i%=8&)y",
+   "type": "basic",
+   "deck": "Kubernetes::02 Workloads & Pods",
+   "tags": [
+    "Kubernetes::Workloads_Pods",
+    "Exam::CKAD"
+   ],
+   "front": "What does the kubelet do when a liveness probe fails?",
+   "back": "It <b>restarts</b> the container (subject to the pod's restartPolicy).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 3 · CKAD",
+   "reverse": false
+  },
+  {
+   "guid": "n%q/!mlhV=",
+   "type": "basic",
+   "deck": "Kubernetes::02 Workloads & Pods",
+   "tags": [
+    "Kubernetes::Workloads_Pods",
+    "Exam::CKAD"
+   ],
+   "front": "Liveness vs readiness probe: what does each failure do?",
+   "back": "<b>Liveness</b> fail → container restarted. <b>Readiness</b> fail → pod removed from Service endpoints (no restart) until it passes again.",
+   "text": "",
+   "image": "",
+   "analogy": "Readiness is the 'closed' sign on a shop door; liveness is calling an ambulance for the shopkeeper.",
+   "extra": "",
+   "source": "KIA Ch 5 · CKAD",
+   "reverse": false
+  },
+  {
+   "guid": "j**-iBEEe$",
+   "type": "basic",
+   "deck": "Kubernetes::02 Workloads & Pods",
+   "tags": [
+    "Kubernetes::Workloads_Pods",
+    "Exam::CKAD"
+   ],
+   "front": "What does a startup probe do?",
+   "back": "It holds off liveness and readiness checks until the app has started, so slow-booting apps aren't killed during startup.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKAD · probes",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Kubernetes::02 Workloads & Pods",
+   "tags": [
+    "Kubernetes::Workloads_Pods",
+    "Exam::CKAD"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Kubernetes probe handlers: {{c1::httpGet}} (2xx/3xx = healthy), {{c2::tcpSocket}} (connection opens), {{c3::exec}} (exit code 0), {{c4::grpc}} (gRPC health check).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 3 · CKAD",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Kubernetes::02 Workloads & Pods",
+   "tags": [
+    "Kubernetes::Workloads_Pods",
+    "Exam::CKAD"
+   ],
+   "front": "What goes wrong if a liveness probe checks a downstream dependency such as the database?",
+   "back": "A DB outage fails every pod's liveness check, so they all restart in a loop: a cascading failure. Liveness should check only the process itself.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKAD · probes",
+   "reverse": false
+  },
+  {
+   "guid": "At?qHy6X!<",
+   "type": "basic",
+   "deck": "Kubernetes::03 Scheduling, Resources & Autoscaling",
+   "tags": [
+    "Kubernetes::Scheduling_Resources_Autoscaling",
+    "Exam::CKA",
+    "Exam::CKAD"
+   ],
+   "front": "<code>nodeSelector</code> vs node affinity?",
+   "back": "Both steer pods to nodes by node labels. <code>nodeSelector</code> is a simple hard equality match. <b>Node affinity</b> adds operators (<code>In</code>, <code>NotIn</code>, <code>Exists</code>) and soft (preferred) rules.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 16 · CKA/CKAD",
+   "reverse": false
+  },
+  {
+   "guid": "zDniQJ)l5O",
+   "type": "basic",
+   "deck": "Kubernetes::03 Scheduling, Resources & Autoscaling",
+   "tags": [
+    "Kubernetes::Scheduling_Resources_Autoscaling",
+    "Exam::CKA"
+   ],
+   "front": "How do taints and tolerations work together?",
+   "back": "A <b>taint</b> on a node repels pods. A matching <b>toleration</b> on a pod allows (but doesn't force) it onto that node.",
+   "text": "",
+   "image": "",
+   "analogy": "A taint is a 'members only' sign on a club door; a toleration is a membership card. Holding a card doesn't make you go to that club.",
+   "extra": "",
+   "source": "KIA Ch 16 · CKA",
+   "reverse": false
+  },
+  {
+   "guid": "x?52lb=|TR",
+   "type": "cloze",
+   "deck": "Kubernetes::03 Scheduling, Resources & Autoscaling",
+   "tags": [
+    "Kubernetes::Scheduling_Resources_Autoscaling",
+    "Exam::CKA"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Taint effects: {{c1::NoSchedule}} blocks new pods that don't tolerate it; {{c2::PreferNoSchedule}} avoids the node if possible; {{c3::NoExecute}} also evicts running pods that don't tolerate it.",
+   "image": "",
+   "analogy": "",
+   "extra": "<code>kubectl taint nodes n1 key=val:NoSchedule</code>; remove with a trailing <code>-</code>.",
+   "source": "CKA · scheduling",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Kubernetes::03 Scheduling, Resources & Autoscaling",
+   "tags": [
+    "Kubernetes::Scheduling_Resources_Autoscaling",
+    "Exam::CKA"
+   ],
+   "front": "Taints/tolerations vs node affinity: which side does what?",
+   "back": "Taints let a <b>node repel</b> pods (node-centric); node affinity lets a <b>pod seek</b> nodes (pod-centric). Dedicated nodes usually need both: taint to keep others off, affinity to pull the right pods on.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 16 · CKA",
+   "reverse": false
+  },
+  {
+   "guid": "kjo5trCEcW",
+   "type": "cloze",
+   "deck": "Kubernetes::03 Scheduling, Resources & Autoscaling",
+   "tags": [
+    "Kubernetes::Scheduling_Resources_Autoscaling",
+    "Exam::CKA"
+   ],
+   "front": "",
+   "back": "",
+   "text": "{{c1::Node affinity}} attracts a pod to nodes by node labels; {{c2::pod affinity}} co-locates it with matching pods in the same topology domain; {{c3::pod anti-affinity}} keeps it away from them (e.g. spread replicas across zones).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 16 · CKA",
+   "reverse": false
+  },
+  {
+   "guid": "vX@K,TPN20",
+   "type": "basic",
+   "deck": "Kubernetes::03 Scheduling, Resources & Autoscaling",
+   "tags": [
+    "Kubernetes::Scheduling_Resources_Autoscaling",
+    "Exam::CKA"
+   ],
+   "front": "Affinity rules: <code>requiredDuringScheduling…</code> vs <code>preferredDuringScheduling…</code>, and what does <code>IgnoredDuringExecution</code> mean?",
+   "back": "<b>Required</b> = hard (pod stays Pending if unmet); <b>preferred</b> = weighted soft rule. <b>IgnoredDuringExecution</b>: running pods aren't evicted if labels change later.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKA · scheduling",
+   "reverse": false
+  },
+  {
+   "guid": "rU?3|=zU#M",
+   "type": "basic",
+   "deck": "Kubernetes::03 Scheduling, Resources & Autoscaling",
+   "tags": [
+    "Kubernetes::Scheduling_Resources_Autoscaling",
+    "Exam::CKA",
+    "Exam::CKAD"
+   ],
+   "front": "Container resource <b>request</b> vs <b>limit</b>?",
+   "back": "<b>Request</b>: the amount the scheduler reserves on a node to place the pod. <b>Limit</b>: the hard runtime cap.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 14 · CKA/CKAD",
+   "reverse": false
+  },
+  {
+   "guid": "gdLy:X4Y5,",
+   "type": "basic",
+   "deck": "Kubernetes::03 Scheduling, Resources & Autoscaling",
+   "tags": [
+    "Kubernetes::Scheduling_Resources_Autoscaling",
+    "Exam::CKA"
+   ],
+   "front": "What happens when a container exceeds its CPU limit vs its memory limit?",
+   "back": "CPU: <b>throttled</b> (CPU is compressible). Memory: <b>OOM-killed</b> (memory is incompressible).",
+   "text": "",
+   "image": "",
+   "analogy": "CPU is a tap you can turn down; memory is a glass you can't make smaller, so it overflows.",
+   "extra": "",
+   "source": "CKA · resources",
+   "reverse": false
+  },
+  {
+   "guid": "JXxz=cc)P(",
+   "type": "cloze",
+   "deck": "Kubernetes::03 Scheduling, Resources & Autoscaling",
+   "tags": [
+    "Kubernetes::Scheduling_Resources_Autoscaling",
+    "Exam::CKA"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Pod QoS classes: {{c1::Guaranteed}} = every container has requests == limits for CPU and memory; {{c2::Burstable}} = some requests/limits set but not Guaranteed; {{c3::BestEffort}} = none set.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 14 · CKA",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Kubernetes::03 Scheduling, Resources & Autoscaling",
+   "tags": [
+    "Kubernetes::Scheduling_Resources_Autoscaling",
+    "Exam::CKA"
+   ],
+   "front": "Under node memory pressure, in which QoS order are pods evicted?",
+   "back": "<b>BestEffort</b> first, then <b>Burstable</b> (those furthest over their requests), <b>Guaranteed</b> last.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 14 · CKA",
+   "reverse": false
+  },
+  {
+   "guid": "KX|Tj-<_H.",
+   "type": "basic",
+   "deck": "Kubernetes::03 Scheduling, Resources & Autoscaling",
+   "tags": [
+    "Kubernetes::Scheduling_Resources_Autoscaling",
+    "Exam::CKA"
+   ],
+   "front": "ResourceQuota vs LimitRange?",
+   "back": "<b>ResourceQuota</b>: aggregate cap for a whole namespace (total CPU/memory, object counts). <b>LimitRange</b>: per-container/pod defaults and min/max, and it auto-fills missing requests/limits.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 14 · CKA",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Kubernetes::03 Scheduling, Resources & Autoscaling",
+   "tags": [
+    "Kubernetes::Scheduling_Resources_Autoscaling",
+    "Exam::CKA"
+   ],
+   "front": "A namespace has a CPU ResourceQuota. What happens to a new pod with no CPU request?",
+   "back": "It's <b>rejected</b>, unless a LimitRange in the namespace supplies a default request.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 14 · CKA",
+   "reverse": false
+  },
+  {
+   "guid": "vigN_:)x_A",
+   "type": "basic",
+   "deck": "Kubernetes::03 Scheduling, Resources & Autoscaling",
+   "tags": [
+    "Kubernetes::Scheduling_Resources_Autoscaling",
+    "Exam::CKA",
+    "Exam::CKAD"
+   ],
+   "front": "What does the Horizontal Pod Autoscaler (HPA) do?",
+   "back": "Adjusts a workload's replica count to keep a metric (CPU utilization, custom or external metric) near a target.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Pitfall:</b> utilization is a % of the <b>request</b>; no requests set = HPA can't compute CPU utilization. Needs metrics-server.",
+   "source": "KIA Ch 15 · CKA/CKAD",
+   "reverse": false
+  },
+  {
+   "guid": "hh*OWvij:a",
+   "type": "cloze",
+   "deck": "Kubernetes::03 Scheduling, Resources & Autoscaling",
+   "tags": [
+    "Kubernetes::Scheduling_Resources_Autoscaling",
+    "Exam::KCNA",
+    "Exam::CKA"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Kubernetes autoscalers: {{c1::HPA}} changes the number of pod replicas; {{c2::VPA}} changes a pod's CPU/memory requests; {{c3::Cluster Autoscaler}} adds/removes nodes when pods are unschedulable or nodes sit idle.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 15 · KCNA/CKA",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Kubernetes::03 Scheduling, Resources & Autoscaling",
+   "tags": [
+    "Kubernetes::Scheduling_Resources_Autoscaling",
+    "Exam::KCNA"
+   ],
+   "front": "What does KEDA add over a plain HPA?",
+   "back": "Event-driven scaling on external sources (queue length, Kafka lag, cron), including scaling <b>to and from zero</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KCNA · autoscaling",
+   "reverse": false
+  },
+  {
+   "guid": "Pk~6txk|@(",
+   "type": "basic",
+   "deck": "Kubernetes::04 Networking & Services",
+   "tags": [
+    "Kubernetes::Networking_Services",
+    "Exam::CKA"
+   ],
+   "front": "What does the Kubernetes pod network model require?",
+   "back": "Every pod gets its own IP, and all pods can reach all other pods on any node <b>without NAT</b>; node agents can reach local pods. A CNI plugin implements it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Pitfall:</b> pod CIDR must not overlap the node or Service CIDRs.",
+   "source": "KIA Ch 11 · CKA",
+   "reverse": false
+  },
+  {
+   "guid": "cg{><b$X7?",
+   "type": "basic",
+   "deck": "Kubernetes::04 Networking & Services",
+   "tags": [
+    "Kubernetes::Networking_Services",
+    "Exam::CKAD",
+    "Exam::KCNA"
+   ],
+   "front": "What is a Service, and why is it needed?",
+   "back": "A stable virtual IP + DNS name that load-balances across the pods matching a label selector. Needed because pod IPs change as pods come and go.",
+   "text": "",
+   "image": "",
+   "analogy": "A company switchboard number: it never changes, even as the people (pods) answering behind it come and go.",
+   "extra": "",
+   "source": "KIA Ch 5 · CKAD/KCNA",
+   "reverse": false
+  },
+  {
+   "guid": "PBfEzQV6X#",
+   "type": "cloze",
+   "deck": "Kubernetes::04 Networking & Services",
+   "tags": [
+    "Kubernetes::Networking_Services",
+    "Exam::KCNA",
+    "Exam::CKAD"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Service types build on each other: {{c1::ClusterIP}} (internal virtual IP, the default) → {{c2::NodePort}} (same port on every node, 30000–32767) → {{c3::LoadBalancer}} (cloud LB in front). {{c4::ExternalName}} is just a DNS CNAME alias.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KCNA · networking · CKAD",
+   "reverse": false
+  },
+  {
+   "guid": "q`h4JxI{>U",
+   "type": "basic",
+   "deck": "Kubernetes::04 Networking & Services",
+   "tags": [
+    "Kubernetes::Networking_Services",
+    "Exam::CKAD"
+   ],
+   "front": "How does external traffic reach a NodePort Service?",
+   "back": "Clients hit <code>&lt;anyNodeIP&gt;:&lt;nodePort&gt;</code>; the node forwards to a backing pod, which may be on a different node.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 5 · CKAD",
+   "reverse": false
+  },
+  {
+   "guid": "iR>#J}tH(a",
+   "type": "basic",
+   "deck": "Kubernetes::04 Networking & Services",
+   "tags": [
+    "Kubernetes::Networking_Services",
+    "Exam::CKAD"
+   ],
+   "front": "What does a LoadBalancer Service add, and what's its drawback at scale?",
+   "back": "The cloud provider provisions an external LB with its own IP that forwards to the node ports. One LB per Service gets expensive, which is why Ingress/Gateway exist.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 5 · CKAD",
+   "reverse": false
+  },
+  {
+   "guid": "VBs3L()&|",
+   "type": "basic",
+   "deck": "Kubernetes::04 Networking & Services",
+   "tags": [
+    "Kubernetes::Networking_Services",
+    "Exam::CKAD"
+   ],
+   "front": "What is a headless Service?",
+   "back": "A Service with <code>clusterIP: None</code>: no virtual IP; DNS returns the individual ready pod IPs. Used for StatefulSets and client-side discovery.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 5 · CKAD",
+   "reverse": false
+  },
+  {
+   "guid": "jq~>F%)98?",
+   "type": "basic",
+   "deck": "Kubernetes::04 Networking & Services",
+   "tags": [
+    "Kubernetes::Networking_Services",
+    "Exam::CKA"
+   ],
+   "front": "What are Endpoints / EndpointSlices?",
+   "back": "The list of <b>ready</b> pod IP:port pairs behind a Service, kept in sync by a controller as pods come, go, or change readiness.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 5 · CKA",
+   "reverse": false
+  },
+  {
+   "guid": "Eg,N(-$231",
+   "type": "basic",
+   "deck": "Kubernetes::04 Networking & Services",
+   "tags": [
+    "Kubernetes::Networking_Services",
+    "Exam::CKA"
+   ],
+   "front": "What does kube-proxy do?",
+   "back": "On every node it programs the dataplane (iptables or IPVS rules) so traffic to a Service's virtual IP is load-balanced to the backend pods.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 11 · CKA",
+   "reverse": false
+  },
+  {
+   "guid": "QQQYJ#U@pX",
+   "type": "basic",
+   "deck": "Kubernetes::04 Networking & Services",
+   "tags": [
+    "Kubernetes::Networking_Services",
+    "Exam::CKA"
+   ],
+   "front": "kube-proxy: iptables mode vs IPVS mode?",
+   "back": "<b>iptables</b>: rule chains with linear matching; fine for most clusters. <b>IPVS</b>: kernel hash-table load balancer; scales better to thousands of Services and offers more LB algorithms.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "eBPF dataplanes (e.g. Cilium) can replace kube-proxy entirely.",
+   "source": "CKA · networking",
+   "reverse": false
+  },
+  {
+   "guid": "bSH0$*q^Wd",
+   "type": "basic",
+   "deck": "Kubernetes::04 Networking & Services",
+   "tags": [
+    "Kubernetes::Networking_Services",
+    "Exam::CKA"
+   ],
+   "front": "What provides in-cluster DNS in Kubernetes?",
+   "back": "<b>CoreDNS</b>, a Deployment behind the <code>kube-dns</code> Service. The kubelet points each pod's <code>/etc/resolv.conf</code> at that Service IP.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKA · DNS",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Kubernetes::04 Networking & Services",
+   "tags": [
+    "Kubernetes::Networking_Services",
+    "Exam::CKA",
+    "Exam::CKAD"
+   ],
+   "front": "",
+   "back": "",
+   "text": "A Kubernetes Service's DNS name is {{c1::<code>&lt;service&gt;.&lt;namespace&gt;.svc.cluster.local</code>}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKA · DNS · CKAD",
+   "reverse": false
+  },
+  {
+   "guid": "eSqIs!x7Ow",
+   "type": "basic",
+   "deck": "Kubernetes::04 Networking & Services",
+   "tags": [
+    "Kubernetes::Networking_Services",
+    "Exam::CKAD",
+    "Exam::CKA"
+   ],
+   "front": "What is an Ingress, and why use it instead of many LoadBalancer Services?",
+   "back": "An HTTP(S) routing layer (host/path rules) that exposes many Services through <b>one</b> entry point, run by an Ingress controller. Cheaper and more flexible than one cloud LB per Service.",
+   "text": "",
+   "image": "",
+   "analogy": "A hotel receptionist who directs every guest to the right room, instead of giving each room its own street door.",
+   "extra": "",
+   "source": "KIA Ch 5 · CKAD/CKA",
+   "reverse": false
+  },
+  {
+   "guid": "vjwc_6ZdPJ",
+   "type": "basic",
+   "deck": "Kubernetes::04 Networking & Services",
+   "tags": [
+    "Kubernetes::Networking_Services",
+    "Exam::CKA"
+   ],
+   "front": "Why was the Gateway API created as a successor to Ingress?",
+   "back": "Ingress is one overloaded object (HTTP only, vendor features via annotations). Gateway API is role-oriented, portable and expressive, covering L4 and L7 (HTTP, gRPC, TCP).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKA · networking",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Kubernetes::04 Networking & Services",
+   "tags": [
+    "Kubernetes::Networking_Services",
+    "Exam::CKA"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Gateway API resources by role: {{c1::GatewayClass}} (the controller/infrastructure type), {{c2::Gateway}} (a listener instance, owned by cluster operators), {{c3::HTTPRoute}} (routing rules, owned by app teams).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKA · networking",
+   "reverse": false
+  },
+  {
+   "guid": "A0;f6.daCP",
+   "type": "basic",
+   "deck": "Kubernetes::04 Networking & Services",
+   "tags": [
+    "Kubernetes::Networking_Services",
+    "Exam::CKA",
+    "Exam::CKAD"
+   ],
+   "front": "What does a NetworkPolicy do, and what's needed for it to take effect?",
+   "back": "An L3/L4 allow-list for ingress/egress of pods selected by labels. It works only if the CNI enforces it (e.g. Calico, Cilium); otherwise it's silently ignored.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 13 · CKA/CKAD",
+   "reverse": false
+  },
+  {
+   "guid": "g~~A[5cnB}",
+   "type": "basic",
+   "deck": "Kubernetes::04 Networking & Services",
+   "tags": [
+    "Kubernetes::Networking_Services",
+    "Exam::CCA",
+    "Exam::CKA",
+    "Exam::CKS"
+   ],
+   "front": "When does a pod become isolated by NetworkPolicy?",
+   "back": "Pods are non-isolated by default. Once any policy selects a pod for a direction (ingress or egress), that direction becomes default-deny and only allowed flows pass. Policies are additive.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CCA · network policy · CKA/CKS",
+   "reverse": false
+  },
+  {
+   "guid": "x;[~c*X_g_",
+   "type": "basic",
+   "deck": "Kubernetes::04 Networking & Services",
+   "tags": [
+    "Kubernetes::Networking_Services",
+    "Exam::CKS"
+   ],
+   "front": "What is a default-deny NetworkPolicy, and why start with it?",
+   "back": "A policy with <code>podSelector: {}</code> and no allow rules, isolating every pod in the namespace. You then add explicit allows: least-privilege networking.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKS · network policy",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Kubernetes::04 Networking & Services",
+   "tags": [
+    "Kubernetes::Networking_Services",
+    "Exam::CKA",
+    "Exam::CKS"
+   ],
+   "front": "After applying a default-deny egress policy, what usually breaks first?",
+   "back": "<b>DNS</b>: pods can't reach CoreDNS on port 53 (UDP/TCP) until you explicitly allow it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKS · network policy · CKA",
+   "reverse": false
+  },
+  {
+   "guid": "F]D@)$`2VX",
+   "type": "basic",
+   "deck": "Kubernetes::05 Storage",
+   "tags": [
+    "Kubernetes::Storage",
+    "Exam::CKAD"
+   ],
+   "front": "What is an <code>emptyDir</code> volume?",
+   "back": "A volume created empty when the pod starts on a node and deleted when the pod is removed. Used for scratch space or sharing files between containers in the pod.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 6 · CKAD",
+   "reverse": false
+  },
+  {
+   "guid": "miN|[t#r.A",
+   "type": "basic",
+   "deck": "Kubernetes::05 Storage",
+   "tags": [
+    "Kubernetes::Storage",
+    "Exam::CKA",
+    "Exam::CKS"
+   ],
+   "front": "What is a <code>hostPath</code> volume, and why avoid it?",
+   "back": "It mounts a file/directory from the node's filesystem. Data is tied to one node (not portable), and it can expose node files, so it's for node-level system pods only.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Pod Security <b>baseline</b> forbids hostPath volumes.",
+   "source": "KIA Ch 6 · CKA/CKS",
+   "reverse": false
+  },
+  {
+   "guid": "xR&qI6L8W9",
+   "type": "basic",
+   "deck": "Kubernetes::05 Storage",
+   "tags": [
+    "Kubernetes::Storage",
+    "Exam::CKA",
+    "Exam::CKAD"
+   ],
+   "front": "PersistentVolume (PV) vs PersistentVolumeClaim (PVC)?",
+   "back": "<b>PV</b>: a piece of cluster storage (cluster-scoped), provisioned by an admin or dynamically. <b>PVC</b>: a namespaced request for storage (size, access mode) that binds to a matching PV.",
+   "text": "",
+   "image": "",
+   "analogy": "A PVC is a hotel reservation (room size and type); the PV is the actual room the hotel assigns to it.",
+   "extra": "",
+   "source": "KIA Ch 6 · CKA/CKAD",
+   "reverse": false
+  },
+  {
+   "guid": "d*W}tD5M2v",
+   "type": "basic",
+   "deck": "Kubernetes::05 Storage",
+   "tags": [
+    "Kubernetes::Storage",
+    "Exam::CKA"
+   ],
+   "front": "What does a StorageClass enable?",
+   "back": "<b>Dynamic provisioning</b>: a PVC that names the class makes its provisioner (usually a CSI driver) create a matching PV on demand. No pre-made PVs needed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 6 · CKA",
+   "reverse": false
+  },
+  {
+   "guid": "JM19I*`n1Q",
+   "type": "basic",
+   "deck": "Kubernetes::05 Storage",
+   "tags": [
+    "Kubernetes::Storage",
+    "Exam::CKA"
+   ],
+   "front": "What problem does <code>volumeBindingMode: WaitForFirstConsumer</code> solve?",
+   "back": "It delays provisioning until a pod using the PVC is scheduled, so the volume is created in that pod's zone. <code>Immediate</code> can create it in the wrong zone.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKA · storage",
+   "reverse": false
+  },
+  {
+   "guid": "e#[Eh[!B>r",
+   "type": "cloze",
+   "deck": "Kubernetes::05 Storage",
+   "tags": [
+    "Kubernetes::Storage",
+    "Exam::CKA"
+   ],
+   "front": "",
+   "back": "",
+   "text": "PV access modes: {{c1::ReadWriteOnce (RWO)}} = read-write by a single <b>node</b>; {{c2::ReadOnlyMany (ROX)}} = read-only by many nodes; {{c3::ReadWriteMany (RWX)}} = read-write by many nodes; {{c4::ReadWriteOncePod (RWOP)}} = read-write by a single <b>pod</b>.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Pitfall:</b> RWO still lets several pods on the <i>same node</i> mount the volume; use RWOP for true single-writer.",
+   "source": "KIA Ch 6 · CKA",
+   "reverse": false
+  },
+  {
+   "guid": "GlDl3h]mOj",
+   "type": "cloze",
+   "deck": "Kubernetes::05 Storage",
+   "tags": [
+    "Kubernetes::Storage",
+    "Exam::CKA"
+   ],
+   "front": "",
+   "back": "",
+   "text": "PV reclaim policies (after the claim is deleted): {{c1::Retain}} keeps the volume and data for manual cleanup; {{c2::Delete}} removes the backing storage asset; {{c3::Recycle}} (deprecated) scrubbed it for reuse.",
+   "image": "",
+   "analogy": "",
+   "extra": "Dynamically provisioned PVs inherit the StorageClass <code>reclaimPolicy</code>, default <b>Delete</b>.",
+   "source": "CKA · storage",
+   "reverse": false
+  },
+  {
+   "guid": "k>[BJRSkui",
+   "type": "basic",
+   "deck": "Kubernetes::06 Config & Secrets",
+   "tags": [
+    "Kubernetes::Config_Secrets",
+    "Exam::CKAD"
+   ],
+   "front": "What is a ConfigMap, and how can a pod consume it?",
+   "back": "An object holding non-sensitive config as key-value pairs, decoupled from the image. Consumed as environment variables, command args, or files in a mounted volume.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 7 · CKAD",
+   "reverse": false
+  },
+  {
+   "guid": "i#{Nk@47DS",
+   "type": "basic",
+   "deck": "Kubernetes::06 Config & Secrets",
+   "tags": [
+    "Kubernetes::Config_Secrets",
+    "Exam::CKAD"
+   ],
+   "front": "How does a Secret differ from a ConfigMap?",
+   "back": "Same consumption model (env vars or files), but meant for sensitive data: values are base64-encoded, can be mounted on tmpfs, and access can be restricted separately with RBAC.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 7 · CKAD",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Kubernetes::06 Config & Secrets",
+   "tags": [
+    "Kubernetes::Config_Secrets",
+    "Exam::CKAD",
+    "Exam::CKS",
+    "Exam::KCSA"
+   ],
+   "front": "Is a Kubernetes Secret encrypted by default?",
+   "back": "No. Base64 is <b>encoding</b>, not encryption; Secrets are stored readable in etcd unless encryption at rest is configured.",
+   "text": "",
+   "image": "",
+   "analogy": "Base64 is writing a note in pig Latin: it looks scrambled but anyone can read it.",
+   "extra": "",
+   "source": "KIA Ch 7 · CKAD/CKS/KCSA",
+   "reverse": false
+  },
+  {
+   "guid": "e)]TQ|Y3,4",
+   "type": "basic",
+   "deck": "Kubernetes::06 Config & Secrets",
+   "tags": [
+    "Kubernetes::Config_Secrets",
+    "Exam::CKAD"
+   ],
+   "front": "You update a ConfigMap. What happens to pods using it as a volume vs as env vars?",
+   "back": "Mounted files update automatically after a kubelet sync delay (not with <code>subPath</code>). <b>Env vars</b> never update; the pod must be restarted.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 7 · CKAD",
+   "reverse": false
+  },
+  {
+   "guid": "v::*E_SGt>",
+   "type": "basic",
+   "deck": "Kubernetes::06 Config & Secrets",
+   "tags": [
+    "Kubernetes::Config_Secrets",
+    "Exam::CKAD"
+   ],
+   "front": "What is the Downward API?",
+   "back": "A way to expose a pod's own metadata (name, namespace, labels, node name, pod IP, resource limits) to its containers as env vars or files, without calling the API server.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 8 · CKAD",
+   "reverse": false
+  },
+  {
+   "guid": "klkq$Nx|aL",
+   "type": "cloze",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::CKS",
+    "Exam::KCSA"
+   ],
+   "front": "",
+   "back": "",
+   "text": "The 4Cs of cloud native security, outermost to innermost: {{c1::Cloud}} → {{c2::Cluster}} → {{c3::Container}} → {{c4::Code}}.",
+   "image": "",
+   "analogy": "Nested Russian dolls: if the outer doll is open, the inner ones are exposed.",
+   "extra": "A weak outer layer can't be compensated by strong inner layers.",
+   "source": "CKS · 4Cs · KCSA",
+   "reverse": false
+  },
+  {
+   "guid": "Gs?9SDqKq^",
+   "type": "cloze",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::CKA",
+    "Exam::CKS",
+    "Exam::KCSA"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Every Kubernetes API request passes {{c1::authentication}} (who are you?) → {{c2::authorization}} (may you do this?) → {{c3::admission control}} (mutate/validate the object) → persistence to etcd.",
+   "image": "",
+   "analogy": "Airport: passport check (authn), boarding pass for this flight (authz), then security screening that may tag or confiscate items (admission).",
+   "extra": "",
+   "source": "KIA Ch 12 · CKA/CKS/KCSA",
+   "reverse": false
+  },
+  {
+   "guid": "e}M43qtC1K",
+   "type": "basic",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::KCSA"
+   ],
+   "front": "How does the API server authenticate users, and what's notably missing?",
+   "back": "X.509 client certs, bearer tokens (ServiceAccount, OIDC), or an authenticating proxy/webhook. There are <b>no User objects</b>: users exist only as names asserted by credentials.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KCSA · access control",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::KCSA",
+    "Exam::CKS"
+   ],
+   "front": "Which Kubernetes authorization modes exist besides RBAC?",
+   "back": "<b>Node</b> (for kubelets), <b>Webhook</b> (external decision), <b>ABAC</b> (legacy), and AlwaysAllow/AlwaysDeny (testing only).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KCSA · access control · CKS",
+   "reverse": false
+  },
+  {
+   "guid": "IX6O5~H^%<",
+   "type": "basic",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::CKA",
+    "Exam::CKAD"
+   ],
+   "front": "What is a ServiceAccount?",
+   "back": "An identity for processes in pods (not humans). Each pod runs as one; its token lets the app authenticate to the API server.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 12 · CKA/CKAD",
+   "reverse": false
+  },
+  {
+   "guid": "ig2/qMVNK2",
+   "type": "basic",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::CKS"
+   ],
+   "front": "Why set <code>automountServiceAccountToken: false</code> where a workload doesn't call the API?",
+   "back": "A mounted token can be stolen from a compromised pod and used against the API server. Don't mount what isn't needed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Modern tokens are short-lived, audience-bound projected tokens, not long-lived Secrets.",
+   "source": "CKS · least privilege",
+   "reverse": false
+  },
+  {
+   "guid": "jgCjilB)h!",
+   "type": "cloze",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::CKA"
+   ],
+   "front": "",
+   "back": "",
+   "text": "RBAC: a {{c1::Role}} grants verbs on resources within one namespace and is granted by a {{c2::RoleBinding}}; a {{c3::ClusterRole}} grants cluster-wide (or reusable) permissions and is granted cluster-wide by a {{c4::ClusterRoleBinding}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 12 · CKA",
+   "reverse": false
+  },
+  {
+   "guid": "raI|q:etzr",
+   "type": "basic",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::CKA"
+   ],
+   "front": "Can Kubernetes RBAC express a deny rule?",
+   "back": "No. RBAC rules are purely <b>additive</b> allow-lists; anything not granted is denied.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKA · RBAC",
+   "reverse": false
+  },
+  {
+   "guid": "nhOyhhX#@U",
+   "type": "basic",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::CKA"
+   ],
+   "front": "Why would you bind a ClusterRole with a namespaced RoleBinding?",
+   "back": "To reuse one ClusterRole definition (e.g. built-in <code>view</code>, <code>edit</code>) while granting it only inside that RoleBinding's namespace.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "A ClusterRole + ClusterRoleBinding is required for cluster-scoped resources such as nodes and PVs.",
+   "source": "KIA Ch 12 · CKA",
+   "reverse": false
+  },
+  {
+   "guid": "PUWDs2GgPk",
+   "type": "basic",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::CKA"
+   ],
+   "front": "How do you check whether a subject may perform an action?",
+   "back": "<code>kubectl auth can-i &lt;verb&gt; &lt;resource&gt; --as &lt;user&gt; -n &lt;ns&gt;</code>, e.g. <code>kubectl auth can-i create deployments --as dev -n web</code>. Add <code>--list</code> for all permissions.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "For a ServiceAccount: <code>--as system:serviceaccount:&lt;ns&gt;:&lt;name&gt;</code>.",
+   "source": "CKA · RBAC",
+   "reverse": false
+  },
+  {
+   "guid": "pubyxaOVoq",
+   "type": "basic",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::CKA"
+   ],
+   "front": "How do you onboard a human user with a client certificate?",
+   "back": "Submit a <code>CertificateSigningRequest</code> with the base64 CSR, <code>kubectl certificate approve</code> it, put the issued cert in a kubeconfig, then grant RBAC to its CN (user) / O (group).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKA · auth",
+   "reverse": false
+  },
+  {
+   "guid": "LDA8@:y*OE",
+   "type": "basic",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::CKS",
+    "Exam::KCA"
+   ],
+   "front": "Mutating vs validating admission webhooks?",
+   "back": "<b>Mutating</b> may modify objects (inject sidecars, set defaults); <b>validating</b> may only accept or reject. Mutating runs first, so validators see the final object.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Policy engines (Kyverno, Gatekeeper) register as these webhooks.",
+   "source": "CKS · admission control · KCA",
+   "reverse": false
+  },
+  {
+   "guid": "rAYP#1}xW",
+   "type": "basic",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::CKS"
+   ],
+   "front": "What does the ImagePolicyWebhook admission controller do?",
+   "back": "Sends each pod's image list to an external service that returns allow/deny, enforcing image policy at admission. Configured via <code>--admission-control-config-file</code>, including fail-open vs fail-closed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKS · admission control",
+   "reverse": false
+  },
+  {
+   "guid": "EI|=EG`@y+",
+   "type": "basic",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::CKS"
+   ],
+   "front": "What replaced PodSecurityPolicy?",
+   "back": "<b>Pod Security Admission</b>: a built-in admission controller (PSP was removed in 1.25) that enforces the Pod Security Standards per namespace.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 13 · CKS",
+   "reverse": false
+  },
+  {
+   "guid": "MMg>K![yfV",
+   "type": "cloze",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::CKS"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Pod Security Standards: {{c1::privileged}} = unrestricted; {{c2::baseline}} = blocks known privilege escalations (privileged, hostNetwork, hostPath); {{c3::restricted}} = hardened (non-root, drop ALL caps, seccomp RuntimeDefault).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKS · pod security",
+   "reverse": false
+  },
+  {
+   "guid": "LN8cDd<e#9",
+   "type": "basic",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::CKS"
+   ],
+   "front": "How do you enforce a Pod Security level on a namespace?",
+   "back": "Label the namespace <code>pod-security.kubernetes.io/&lt;mode&gt;=&lt;level&gt;</code>, e.g. <code>pod-security.kubernetes.io/enforce=restricted</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Modes: <b>enforce</b> rejects, <b>audit</b> logs to the audit log, <b>warn</b> returns a warning to the user.",
+   "source": "CKS · pod security",
+   "reverse": false
+  },
+  {
+   "guid": "s>kE?2&]dT",
+   "type": "basic",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::CKAD",
+    "Exam::CKS"
+   ],
+   "front": "What does a pod/container <code>securityContext</code> control?",
+   "back": "Security settings such as <code>runAsUser</code>/<code>runAsNonRoot</code>, <code>privileged</code>, capabilities, <code>readOnlyRootFilesystem</code>, <code>allowPrivilegeEscalation</code>, and seccomp/AppArmor/SELinux profiles.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 13 · CKAD/CKS",
+   "reverse": false
+  },
+  {
+   "guid": "tn[H1XX>A$",
+   "type": "basic",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::CKS"
+   ],
+   "front": "What is the best-practice Linux capabilities setting in a securityContext?",
+   "back": "<code>capabilities: {drop: [\"ALL\"], add: [\"NET_BIND_SERVICE\"]}</code>: drop everything, add back only what's needed. Never <code>privileged</code> or <code>SYS_ADMIN</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKS · runtime hardening",
+   "reverse": false
+  },
+  {
+   "guid": "m/2Q*+y-=",
+   "type": "basic",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::CKS"
+   ],
+   "front": "How do you apply the container runtime's default seccomp profile to a pod?",
+   "back": "<code>securityContext.seccompProfile.type: RuntimeDefault</code> (or <code>Localhost</code> with a profile file on the node). It blocks rarely needed, dangerous syscalls.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKS · runtime hardening",
+   "reverse": false
+  },
+  {
+   "guid": "bQ6Weaw.;p",
+   "type": "basic",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::CKS"
+   ],
+   "front": "How is an AppArmor profile applied to a container in current Kubernetes?",
+   "back": "<code>securityContext.appArmorProfile</code> (type <code>RuntimeDefault</code> or <code>Localhost</code>), GA in 1.30. Older clusters used the <code>container.apparmor.security.beta.kubernetes.io/&lt;c&gt;</code> annotation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "A <code>Localhost</code> profile must already be loaded on the node.",
+   "source": "CKS · runtime hardening",
+   "reverse": false
+  },
+  {
+   "guid": "O=&pb>^W|H",
+   "type": "basic",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::CKS"
+   ],
+   "front": "gVisor vs Kata Containers?",
+   "back": "<b>gVisor</b>: a user-space kernel intercepts the container's syscalls. <b>Kata</b>: each pod runs in a lightweight VM. Both sandbox untrusted or multi-tenant workloads beyond namespace isolation.",
+   "text": "",
+   "image": "",
+   "analogy": "gVisor is an interpreter who answers on the kernel's behalf; Kata gives each guest a house of their own.",
+   "extra": "",
+   "source": "CKS · isolation",
+   "reverse": false
+  },
+  {
+   "guid": "t(]HFz>$Ad",
+   "type": "basic",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::CKS"
+   ],
+   "front": "How does a pod select a sandboxed runtime such as gVisor?",
+   "back": "Set <code>spec.runtimeClassName</code> to a <b>RuntimeClass</b>, which maps to a CRI handler (e.g. runc, runsc, kata).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKS · isolation",
+   "reverse": false
+  },
+  {
+   "guid": "Hq@B*&?1*(",
+   "type": "basic",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::CKS"
+   ],
+   "front": "How do you harden the kubelet API (port 10250), and why?",
+   "back": "<code>--anonymous-auth=false</code>, <code>--authorization-mode=Webhook</code> (not AlwaysAllow), and the <b>NodeRestriction</b> admission plugin. The kubelet can exec into pods and read logs, and NodeRestriction limits a node to its own objects.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKS · cluster hardening",
+   "reverse": false
+  },
+  {
+   "guid": "qC[,Gj8t?o",
+   "type": "cloze",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::CKS"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Kubernetes audit levels, least to most detail: {{c1::None}} → {{c2::Metadata}} (who, what, when) → {{c3::Request}} (+ request body) → {{c4::RequestResponse}} (+ response body).",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Tip:</b> log Secrets at <code>Metadata</code> only, or the audit log leaks them.",
+   "source": "CKS · audit",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::CKS"
+   ],
+   "front": "Which kube-apiserver flags enable audit logging?",
+   "back": "<code>--audit-policy-file</code> (the rules) and <code>--audit-log-path</code> (log backend; a webhook backend is also possible).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKS · audit",
+   "reverse": false
+  },
+  {
+   "guid": "sTsz.GxKv;",
+   "type": "basic",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::CKS"
+   ],
+   "front": "How do you enable encryption at rest for Secrets in etcd?",
+   "back": "Give kube-apiserver an <b>EncryptionConfiguration</b> via <code>--encryption-provider-config</code>, with a provider such as <code>aescbc</code>, <code>aesgcm</code> or KMS v2 first in the list.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKS · secrets",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::CKS"
+   ],
+   "front": "After enabling encryption at rest, why must existing Secrets be rewritten?",
+   "back": "Only new writes are encrypted. Existing Secrets stay unencrypted until rewritten: <code>kubectl get secrets -A -o json | kubectl replace -f -</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKS · secrets",
+   "reverse": false
+  },
+  {
+   "guid": "w50tWzqt+>",
+   "type": "basic",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::KCSA"
+   ],
+   "front": "Why is etcd the most valuable asset to protect in a cluster?",
+   "back": "It holds all state, including Secrets (unencrypted by default): read access ≈ full cluster compromise. Protect it with mTLS, control-plane-only network access, encryption at rest and backups.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KCSA · etcd",
+   "reverse": false
+  },
+  {
+   "guid": "NFjIm?$_Mv",
+   "type": "cloze",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::KCSA"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Insecure Kubernetes defaults: all pod-to-pod traffic is {{c1::allowed (no NetworkPolicy)}}; ServiceAccount tokens are {{c2::auto-mounted}}; no {{c3::Pod Security}} level is enforced; Secrets are only {{c4::base64-encoded}} in etcd.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KCSA · defaults",
+   "reverse": false
+  },
+  {
+   "guid": "AYgMfE~SJ+",
+   "type": "basic",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::KCSA"
+   ],
+   "front": "In KCSA threat modelling, how is STRIDE applied to a cluster?",
+   "back": "Map each trust boundary (user→API server, API server→etcd, control plane→kubelet, pod→pod, cluster→cloud) to Spoofing, Tampering, Repudiation, Info disclosure, DoS and Elevation of privilege, then choose controls.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KCSA · threat modeling",
+   "reverse": false
+  },
+  {
+   "guid": "wgffc>/&1]",
+   "type": "basic",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::KCSA"
+   ],
+   "front": "Why apply microsegmentation inside a cluster?",
+   "back": "Allowing only required pod-to-pod flows (NetworkPolicies or mesh authz) limits <b>lateral movement</b> after one pod is compromised.",
+   "text": "",
+   "image": "",
+   "analogy": "Watertight compartments in a ship: one breach floods a single compartment, not the whole hull.",
+   "extra": "",
+   "source": "KCSA · network security",
+   "reverse": false
+  },
+  {
+   "guid": "vVs`xT[j&h",
+   "type": "basic",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::CKS",
+    "Exam::KCSA"
+   ],
+   "front": "How do you minimize a container image's attack surface?",
+   "back": "Minimal/distroless base, multi-stage builds (no build tools), pin by digest, run as non-root, no embedded secrets, scan in CI. Fewer binaries → fewer CVEs and no shell for an attacker.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKS · containers · KCSA",
+   "reverse": false
+  },
+  {
+   "guid": "l,AQm.3EtN",
+   "type": "basic",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::CKS"
+   ],
+   "front": "What does Trivy scan for?",
+   "back": "Container images, filesystems and IaC: OS/library CVEs, misconfigurations and leaked secrets; it can also emit an SBOM. Usually run in CI to gate images before they reach the registry.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKS · supply chain",
+   "reverse": false
+  },
+  {
+   "guid": "f+Z5_B-im4",
+   "type": "basic",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::CKS"
+   ],
+   "front": "What is kube-bench?",
+   "back": "A tool that checks a cluster against the <b>CIS Kubernetes Benchmark</b> (control-plane flags, file permissions, kubelet config) and reports pass/fail with remediation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKS · benchmarking",
+   "reverse": false
+  },
+  {
+   "guid": "o}q&$(Hk2K",
+   "type": "basic",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::KCSA"
+   ],
+   "front": "Which supply-chain attack vectors does KCSA emphasize?",
+   "back": "Compromised base images, malicious or typosquatted dependencies, unsigned artifacts, leaked credentials, and tampered build systems.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Mitigations:</b> SBOMs, image signing (Cosign), SLSA provenance, scanning, admission-time verification. Depth: Platform Engineering deck.",
+   "source": "KCSA · supply chain",
+   "reverse": false
+  },
+  {
+   "guid": "N_T2XZ&v%d",
+   "type": "basic",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::CKS"
+   ],
+   "front": "What does Falco detect?",
+   "back": "Suspicious <b>runtime</b> behaviour from kernel syscall events (via eBPF), e.g. a shell spawned in a container, writes under <code>/etc</code>, sensitive file reads, unexpected connections.",
+   "text": "",
+   "image": "",
+   "analogy": "A CCTV camera inside the building, where admission control is the guard at the door.",
+   "extra": "Complements admission controls: it catches what happens after a pod is admitted.",
+   "source": "CKS · runtime security",
+   "reverse": false
+  },
+  {
+   "guid": "uRE4ntk%FF",
+   "type": "basic",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::CCA"
+   ],
+   "front": "Tetragon vs Falco?",
+   "back": "Both are eBPF runtime security tools. Falco mainly <b>detects and alerts</b> on rules; Tetragon (Cilium project) can also <b>enforce</b> in-kernel, e.g. kill the offending process.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CCA · runtime security",
+   "reverse": false
+  },
+  {
+   "guid": "q/|t^:>}>N",
+   "type": "basic",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::KCSA"
+   ],
+   "front": "Why does KCSA treat logging and monitoring as a security control?",
+   "back": "You can't respond to what you can't see. Audit logs, runtime detection (Falco) and metrics provide detection and forensics.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KCSA · detection",
+   "reverse": false
+  },
+  {
+   "guid": "iq2%zs@q/k",
+   "type": "basic",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::KCSA"
+   ],
+   "front": "What is the shared responsibility split in managed Kubernetes?",
+   "back": "The provider secures the control plane and infrastructure (the Cloud C); you secure workloads, RBAC, network policy, images and configs (Cluster/Container/Code).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KCSA · cloud",
+   "reverse": false
+  },
+  {
+   "guid": "t_d`gr4om",
+   "type": "basic",
+   "deck": "Kubernetes::08 Cluster Operations & Troubleshooting",
+   "tags": [
+    "Kubernetes::Cluster_Operations_Troubleshooting",
+    "Exam::CKA"
+   ],
+   "front": "What is a kubeconfig context?",
+   "back": "A named tuple of <b>cluster + user + namespace</b>. The current context is the default target of every kubectl command.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKA · config",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Kubernetes::08 Cluster Operations & Troubleshooting",
+   "tags": [
+    "Kubernetes::Cluster_Operations_Troubleshooting",
+    "Exam::CKA"
+   ],
+   "front": "kubectl commands to switch context and to set the default namespace?",
+   "back": "<code>kubectl config use-context &lt;name&gt;</code>; <code>kubectl config set-context --current --namespace=&lt;ns&gt;</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKA · config",
+   "reverse": false
+  },
+  {
+   "guid": "yn;O^nSg-H",
+   "type": "basic",
+   "deck": "Kubernetes::08 Cluster Operations & Troubleshooting",
+   "tags": [
+    "Kubernetes::Cluster_Operations_Troubleshooting",
+    "Exam::CKA",
+    "Exam::CKAD"
+   ],
+   "front": "How do you generate a manifest quickly in the exam instead of writing YAML by hand?",
+   "back": "<code>--dry-run=client -o yaml</code>, e.g. <code>kubectl create deploy web --image=nginx --dry-run=client -o yaml &gt; d.yaml</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Works with <code>run</code>, <code>create job/cronjob/configmap/secret/role</code>, <code>expose</code>.",
+   "source": "CKA · exam technique · CKAD",
+   "reverse": false
+  },
+  {
+   "guid": "DKG(J!I8P>",
+   "type": "basic",
+   "deck": "Kubernetes::08 Cluster Operations & Troubleshooting",
+   "tags": [
+    "Kubernetes::Cluster_Operations_Troubleshooting",
+    "Exam::CKA"
+   ],
+   "front": "What is a static pod?",
+   "back": "A pod the <b>kubelet</b> runs directly from a manifest file on its node, without the scheduler. The API only shows a read-only <b>mirror pod</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKA · static pods",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Kubernetes::08 Cluster Operations & Troubleshooting",
+   "tags": [
+    "Kubernetes::Cluster_Operations_Troubleshooting",
+    "Exam::CKA"
+   ],
+   "front": "Where does the kubelet look for static pod manifests on kubeadm clusters?",
+   "back": "The <code>staticPodPath</code> (<code>--pod-manifest-path</code>), default <code>/etc/kubernetes/manifests</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKA · static pods",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Kubernetes::08 Cluster Operations & Troubleshooting",
+   "tags": [
+    "Kubernetes::Cluster_Operations_Troubleshooting",
+    "Exam::CKA"
+   ],
+   "front": "Why do kubeadm control-plane components run as static pods?",
+   "back": "The kubelet can start them before any API server exists, which solves the bootstrap chicken-and-egg problem.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKA · static pods",
+   "reverse": false
+  },
+  {
+   "guid": "t0HUIh{;.I",
+   "type": "basic",
+   "deck": "Kubernetes::08 Cluster Operations & Troubleshooting",
+   "tags": [
+    "Kubernetes::Cluster_Operations_Troubleshooting",
+    "Exam::CKA"
+   ],
+   "front": "Which flags does <code>etcdctl snapshot save</code> need on a kubeadm cluster?",
+   "back": "<code>--endpoints</code>, <code>--cacert</code>, <code>--cert</code>, <code>--key</code> (etcd CA and client cert, from the etcd manifest), with <code>ETCDCTL_API=3</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKA · etcd backup",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Kubernetes::08 Cluster Operations & Troubleshooting",
+   "tags": [
+    "Kubernetes::Cluster_Operations_Troubleshooting",
+    "Exam::CKA"
+   ],
+   "front": "How do you restore an etcd snapshot on a kubeadm cluster?",
+   "back": "<code>etcdctl snapshot restore snap.db --data-dir /var/lib/etcd-new</code> (newer: <code>etcdutl</code>), then point the etcd static pod's data hostPath at the new directory.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKA · etcd backup",
+   "reverse": false
+  },
+  {
+   "guid": "N`ES5bWD}`",
+   "type": "cloze",
+   "deck": "Kubernetes::08 Cluster Operations & Troubleshooting",
+   "tags": [
+    "Kubernetes::Cluster_Operations_Troubleshooting",
+    "Exam::CKA"
+   ],
+   "front": "",
+   "back": "",
+   "text": "kubeadm upgrade on the control-plane node: upgrade the {{c1::kubeadm}} package → run {{c2::<code>kubeadm upgrade plan</code>, then <code>kubeadm upgrade apply vX.Y.Z</code>}} → drain, upgrade {{c3::kubelet and kubectl}}, restart kubelet, uncordon.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKA · upgrades",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Kubernetes::08 Cluster Operations & Troubleshooting",
+   "tags": [
+    "Kubernetes::Cluster_Operations_Troubleshooting",
+    "Exam::CKA"
+   ],
+   "front": "kubeadm upgrade: what do you do on each worker node?",
+   "back": "Upgrade kubeadm, run <code>kubeadm upgrade node</code>, drain, upgrade kubelet + kubectl, restart kubelet, uncordon.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKA · upgrades",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Kubernetes::08 Cluster Operations & Troubleshooting",
+   "tags": [
+    "Kubernetes::Cluster_Operations_Troubleshooting",
+    "Exam::CKA"
+   ],
+   "front": "How many minor versions can a kubeadm upgrade skip?",
+   "back": "None: upgrade <b>one minor version at a time</b> (e.g. 1.30 → 1.31 → 1.32).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKA · upgrades",
+   "reverse": false
+  },
+  {
+   "guid": "jTh~j_,wBV",
+   "type": "basic",
+   "deck": "Kubernetes::08 Cluster Operations & Troubleshooting",
+   "tags": [
+    "Kubernetes::Cluster_Operations_Troubleshooting",
+    "Exam::CKA"
+   ],
+   "front": "<code>kubectl cordon</code> vs <code>drain</code>?",
+   "back": "<b>cordon</b>: mark the node unschedulable only. <b>drain</b>: cordon + evict its pods, respecting PodDisruptionBudgets. <code>uncordon</code> re-enables scheduling.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Typical flags: <code>--ignore-daemonsets --delete-emptydir-data</code>.",
+   "source": "CKA · node maintenance",
+   "reverse": false
+  },
+  {
+   "guid": "LFN~OXs~L!",
+   "type": "basic",
+   "deck": "Kubernetes::08 Cluster Operations & Troubleshooting",
+   "tags": [
+    "Kubernetes::Cluster_Operations_Troubleshooting",
+    "Exam::CKA"
+   ],
+   "front": "How long are kubeadm certificates valid, and how do you check and renew them?",
+   "back": "Leaf certs <b>1 year</b>, CA 10 years. <code>kubeadm certs check-expiration</code>; <code>kubeadm certs renew all</code>. <code>kubeadm upgrade</code> also renews them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKA · certificates",
+   "reverse": false
+  },
+  {
+   "guid": "PfxWf.,Vtf",
+   "type": "basic",
+   "deck": "Kubernetes::08 Cluster Operations & Troubleshooting",
+   "tags": [
+    "Kubernetes::Cluster_Operations_Troubleshooting",
+    "Exam::CKA"
+   ],
+   "front": "A pod is stuck in Pending. First triage step, and the usual causes?",
+   "back": "<code>kubectl describe pod</code> → Events. Causes: not enough CPU/memory, unmet nodeSelector/affinity/taints, unbound PVC, or no Ready nodes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKA · troubleshooting",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Kubernetes::08 Cluster Operations & Troubleshooting",
+   "tags": [
+    "Kubernetes::Cluster_Operations_Troubleshooting",
+    "Exam::CKA",
+    "Exam::CKAD"
+   ],
+   "front": "A pod is in CrashLoopBackOff. How do you see why its last run died?",
+   "back": "<code>kubectl logs &lt;pod&gt; --previous</code> for the crashed instance's logs, and <code>kubectl describe pod</code> for the exit code and reason (e.g. OOMKilled).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKA · troubleshooting · CKAD",
+   "reverse": false
+  },
+  {
+   "guid": "MvO/zwk~%i",
+   "type": "basic",
+   "deck": "Kubernetes::08 Cluster Operations & Troubleshooting",
+   "tags": [
+    "Kubernetes::Cluster_Operations_Troubleshooting",
+    "Exam::CKA"
+   ],
+   "front": "The API server is down on a kubeadm cluster. Where do you look?",
+   "back": "kubectl won't work, so on the node: <code>journalctl -u kubelet</code>, <code>crictl ps -a</code> / <code>crictl logs</code>, and <code>/etc/kubernetes/manifests/kube-apiserver.yaml</code> (bad flags, certs, etcd reachability).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKA · troubleshooting",
+   "reverse": false
+  },
+  {
+   "guid": "P9CL)WOMxK",
+   "type": "cloze",
+   "deck": "Kubernetes::09 Observability",
+   "tags": [
+    "Kubernetes::Observability",
+    "Exam::KCNA"
+   ],
+   "front": "",
+   "back": "",
+   "text": "The three pillars of observability: {{c1::metrics}} (aggregatable numeric time series), {{c2::logs}} (discrete timestamped events), {{c3::traces}} (one request's path across services).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KCNA · observability",
+   "reverse": false
+  },
+  {
+   "guid": "v`&A:STU,!",
+   "type": "basic",
+   "deck": "Kubernetes::09 Observability",
+   "tags": [
+    "Kubernetes::Observability",
+    "Exam::CKA"
+   ],
+   "front": "What does <code>kubectl top</code> need, and what doesn't it give you?",
+   "back": "The <b>metrics-server</b> add-on (<code>metrics.k8s.io</code> API). It shows live node/pod CPU and memory only, with no history; use Prometheus for that.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKA · observability",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Kubernetes::09 Observability",
+   "tags": [
+    "Kubernetes::Observability",
+    "Exam::PCA",
+    "Exam::CKA"
+   ],
+   "front": "node_exporter vs kube-state-metrics vs metrics-server?",
+   "back": "<b>node_exporter</b>: host CPU/memory/disk. <b>kube-state-metrics</b>: object state (desired replicas, pod phase). <b>metrics-server</b>: live usage for <code>kubectl top</code> and HPA, not for Prometheus.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "PCA · exporters · CKA",
+   "reverse": false
+  },
+  {
+   "guid": "h<iwF.y>Ti",
+   "type": "cloze",
+   "deck": "Kubernetes::09 Observability",
+   "tags": [
+    "Kubernetes::Observability",
+    "Exam::PCA"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Prometheus metric types: a {{c1::Counter}} only goes up (resets on restart); a {{c2::Gauge}} goes up and down; a {{c3::Histogram}} counts observations into buckets (+ <code>_sum</code>/<code>_count</code>); a {{c4::Summary}} computes quantiles client-side.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "PCA · data model",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Kubernetes::09 Observability",
+   "tags": [
+    "Kubernetes::Observability",
+    "Exam::PCA"
+   ],
+   "front": "Histogram vs Summary: why prefer histograms in Prometheus?",
+   "back": "Histogram buckets can be <b>aggregated</b> across instances and quantiles computed at query time. Summary quantiles are per instance and can't be meaningfully averaged.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "PCA · data model",
+   "reverse": false
+  },
+  {
+   "guid": "hWLkedjOSG",
+   "type": "basic",
+   "deck": "Kubernetes::09 Observability",
+   "tags": [
+    "Kubernetes::Observability",
+    "Exam::PCA"
+   ],
+   "front": "How does Prometheus collect metrics?",
+   "back": "It <b>pulls</b>: it scrapes each target's HTTP <code>/metrics</code> endpoint on an interval. Pull makes target health visible (<code>up</code>) and keeps config central.",
+   "text": "",
+   "image": "",
+   "analogy": "A meter reader walking the route, rather than every household posting in its own readings.",
+   "extra": "",
+   "source": "PCA · architecture",
+   "reverse": false
+  },
+  {
+   "guid": "G#]ae;:`YD",
+   "type": "basic",
+   "deck": "Kubernetes::09 Observability",
+   "tags": [
+    "Kubernetes::Observability",
+    "Exam::PCA"
+   ],
+   "front": "What is the Prometheus Pushgateway for, and what's its caveat?",
+   "back": "Short-lived batch jobs push metrics to it and Prometheus scrapes it. Caveat: pushed metrics persist until deleted (stale values) and it isn't for long-running services.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "PCA · architecture",
+   "reverse": false
+  },
+  {
+   "guid": "z]uBK/rAO8",
+   "type": "basic",
+   "deck": "Kubernetes::09 Observability",
+   "tags": [
+    "Kubernetes::Observability",
+    "Exam::PCA"
+   ],
+   "front": "What uniquely identifies a Prometheus time series?",
+   "back": "The metric name plus the full set of label key/value pairs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "PCA · data model",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Kubernetes::09 Observability",
+   "tags": [
+    "Kubernetes::Observability",
+    "Exam::PCA"
+   ],
+   "front": "Why is a user ID a bad Prometheus label?",
+   "back": "Each distinct label value creates a new series. Unbounded <b>cardinality</b> explodes memory and query cost.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "PCA · data model",
+   "reverse": false
+  },
+  {
+   "guid": "x{1aNqq~X*",
+   "type": "basic",
+   "deck": "Kubernetes::09 Observability",
+   "tags": [
+    "Kubernetes::Observability",
+    "Exam::PCA"
+   ],
+   "front": "PromQL: instant vector vs range vector?",
+   "back": "<b>Instant vector</b>: one sample per series at a single timestamp. <b>Range vector</b>: samples over a window (<code>metric[5m]</code>). <code>rate()</code> takes a range vector and returns an instant vector.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "PCA · PromQL",
+   "reverse": false
+  },
+  {
+   "guid": "Q*c2?IZnJ/",
+   "type": "basic",
+   "deck": "Kubernetes::09 Observability",
+   "tags": [
+    "Kubernetes::Observability",
+    "Exam::PCA"
+   ],
+   "front": "PromQL <code>rate()</code> vs <code>irate()</code>?",
+   "back": "<b>rate()</b>: per-second average over the whole window; smooth, use for alerts and dashboards. <b>irate()</b>: uses only the last two samples; spiky, fast-reacting.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "PCA · PromQL",
+   "reverse": false
+  },
+  {
+   "guid": "fEX?`T`D+#",
+   "type": "basic",
+   "deck": "Kubernetes::09 Observability",
+   "tags": [
+    "Kubernetes::Observability",
+    "Exam::PCA"
+   ],
+   "front": "Why always wrap counters in <code>rate()</code>/<code>increase()</code> instead of subtracting raw values?",
+   "back": "Counters reset to 0 when a process restarts. <code>rate()</code>/<code>increase()</code> detect and correct for resets; manual differences go negative or wrong.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "PCA · PromQL",
+   "reverse": false
+  },
+  {
+   "guid": "FLR&&9N|gY",
+   "type": "basic",
+   "deck": "Kubernetes::09 Observability",
+   "tags": [
+    "Kubernetes::Observability",
+    "Exam::PCA"
+   ],
+   "front": "PromQL for p95 latency from a histogram?",
+   "back": "<code>histogram_quantile(0.95, sum by (le) (rate(http_request_duration_seconds_bucket[5m])))</code>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<code>_bucket</code> series are cumulative, labelled by <code>le</code> (upper bound). Keep <code>le</code> in the <code>sum by</code>.",
+   "source": "PCA · PromQL",
+   "reverse": false
+  },
+  {
+   "guid": "fy1VAy(mOw",
+   "type": "basic",
+   "deck": "Kubernetes::09 Observability",
+   "tags": [
+    "Kubernetes::Observability",
+    "Exam::PCA"
+   ],
+   "front": "What is a Prometheus exporter?",
+   "back": "A process that exposes metrics, in Prometheus text format, for a system that doesn't do so natively, e.g. <b>node_exporter</b> (host), blackbox_exporter (probes).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "PCA · exporters",
+   "reverse": false
+  },
+  {
+   "guid": "y%E|?NNPG6",
+   "type": "basic",
+   "deck": "Kubernetes::09 Observability",
+   "tags": [
+    "Kubernetes::Observability",
+    "Exam::PCA"
+   ],
+   "front": "Why does Prometheus need service discovery in Kubernetes?",
+   "back": "Targets come and go, so <code>kubernetes_sd_configs</code> discovers pods/services/nodes dynamically, and relabeling decides which to scrape and which labels they get.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "PCA · config",
+   "reverse": false
+  },
+  {
+   "guid": "E:jsUHN_!{",
+   "type": "basic",
+   "deck": "Kubernetes::09 Observability",
+   "tags": [
+    "Kubernetes::Observability",
+    "Exam::PCA"
+   ],
+   "front": "What does a Prometheus <code>scrape_config</code> define?",
+   "back": "A <code>job_name</code>, interval/timeout, metrics path and scheme, target discovery (<code>static_configs</code> or <code>*_sd_configs</code>) and <code>relabel_configs</code>. Each series gets a <code>job</code> label.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "PCA · config",
+   "reverse": false
+  },
+  {
+   "guid": "J$a#Xp)]n)",
+   "type": "basic",
+   "deck": "Kubernetes::09 Observability",
+   "tags": [
+    "Kubernetes::Observability",
+    "Exam::PCA"
+   ],
+   "front": "What is a Prometheus recording rule, and why use one?",
+   "back": "A precomputed expression saved as a new series at each evaluation (<code>record:</code>). It speeds up expensive dashboard queries and stabilizes alert expressions.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "PCA · rules",
+   "reverse": false
+  },
+  {
+   "guid": "x@+b)oG`Td",
+   "type": "basic",
+   "deck": "Kubernetes::09 Observability",
+   "tags": [
+    "Kubernetes::Observability",
+    "Exam::PCA"
+   ],
+   "front": "What does the <code>for:</code> clause in a Prometheus alerting rule do?",
+   "back": "The condition must hold continuously for that duration before the alert moves from <b>pending</b> to <b>firing</b>, which cuts flapping.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "PCA · alerting",
+   "reverse": false
+  },
+  {
+   "guid": "zLVgZ%cABP",
+   "type": "cloze",
+   "deck": "Kubernetes::09 Observability",
+   "tags": [
+    "Kubernetes::Observability",
+    "Exam::PCA"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Alertmanager: {{c1::grouping}} batches related alerts into one notification; {{c2::inhibition}} suppresses alerts while a higher-level alert fires; {{c3::silencing}} mutes matching alerts for a time window.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "PCA · Alertmanager",
+   "reverse": false
+  },
+  {
+   "guid": "ntJPGI&BJG",
+   "type": "basic",
+   "deck": "Kubernetes::09 Observability",
+   "tags": [
+    "Kubernetes::Observability",
+    "Exam::PCA"
+   ],
+   "front": "Prometheus storage: what's local, and how do you get long-term retention / HA?",
+   "back": "A local single-node TSDB (in-memory head block + WAL, compacted to disk blocks). For long-term retention and HA, <code>remote_write</code> to Thanos, Mimir or Cortex.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "PCA · storage",
+   "reverse": false
+  },
+  {
+   "guid": "yr}uTEn?K{",
+   "type": "cloze",
+   "deck": "Kubernetes::09 Observability",
+   "tags": [
+    "Kubernetes::Observability",
+    "Exam::PCA"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Metric selection methods: {{c1::USE}} for resources (Utilization, Saturation, Errors); {{c2::RED}} for request-driven services (Rate, Errors, Duration).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "PCA · methodology",
+   "reverse": false
+  },
+  {
+   "guid": "DLf4MD71xi",
+   "type": "basic",
+   "deck": "Kubernetes::09 Observability",
+   "tags": [
+    "Kubernetes::Observability",
+    "Exam::OTCA",
+    "Exam::KCNA"
+   ],
+   "front": "What is OpenTelemetry?",
+   "back": "The CNCF vendor-neutral standard (API, SDKs, Collector, OTLP) for generating, collecting and exporting traces, metrics and logs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Also emerging: <b>profiles</b>; plus <b>baggage</b> for propagating key/values.",
+   "source": "OTCA · signals · KCNA",
+   "reverse": false
+  },
+  {
+   "guid": "v7(=e;MKQs",
+   "type": "basic",
+   "deck": "Kubernetes::09 Observability",
+   "tags": [
+    "Kubernetes::Observability",
+    "Exam::OTCA"
+   ],
+   "front": "OpenTelemetry: span vs trace?",
+   "back": "A <b>span</b> is one timed operation (name, start/end, attributes, status). A <b>trace</b> is the tree of spans sharing a trace ID: one request's path across services.",
+   "text": "",
+   "image": "",
+   "analogy": "A trace is a parcel's tracking history; each span is one scan at a depot.",
+   "extra": "",
+   "source": "OTCA · tracing",
+   "reverse": false
+  },
+  {
+   "guid": "k[MrgcG0R+",
+   "type": "basic",
+   "deck": "Kubernetes::09 Observability",
+   "tags": [
+    "Kubernetes::Observability",
+    "Exam::OTCA"
+   ],
+   "front": "What is context propagation in OpenTelemetry?",
+   "back": "Passing trace context (trace ID, span ID, flags) across service boundaries, usually in the W3C <code>traceparent</code>/<code>tracestate</code> headers, so spans join one trace.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OTCA · context",
+   "reverse": false
+  },
+  {
+   "guid": "MJV;(Fr?C2",
+   "type": "cloze",
+   "deck": "Kubernetes::09 Observability",
+   "tags": [
+    "Kubernetes::Observability",
+    "Exam::OTCA"
+   ],
+   "front": "",
+   "back": "",
+   "text": "OpenTelemetry Collector pipeline: {{c1::receivers}} (ingest, e.g. OTLP) → {{c2::processors}} (batch, filter, transform) → {{c3::exporters}} (send to backends).",
+   "image": "",
+   "analogy": "",
+   "extra": "Decouples apps from observability backends: switch vendors by changing Collector config.",
+   "source": "OTCA · collector",
+   "reverse": false
+  },
+  {
+   "guid": "k.)UVA{+<U",
+   "type": "basic",
+   "deck": "Kubernetes::09 Observability",
+   "tags": [
+    "Kubernetes::Observability",
+    "Exam::OTCA"
+   ],
+   "front": "Why deploy the OTel Collector as both agent and gateway?",
+   "back": "<b>Agent</b> (per node/sidecar): local, low-latency collection. <b>Gateway</b> (central pool): heavy processing (tail sampling, batching) and fan-out to backends.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OTCA · deployment",
+   "reverse": false
+  },
+  {
+   "guid": "uSvc`T1isO",
+   "type": "basic",
+   "deck": "Kubernetes::09 Observability",
+   "tags": [
+    "Kubernetes::Observability",
+    "Exam::OTCA"
+   ],
+   "front": "What is OTLP?",
+   "back": "The OpenTelemetry Protocol: the native wire format (protobuf over gRPC or HTTP) for traces, metrics and logs between SDKs, Collectors and backends.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OTCA · protocol",
+   "reverse": false
+  },
+  {
+   "guid": "u?m26u&ZKD",
+   "type": "basic",
+   "deck": "Kubernetes::09 Observability",
+   "tags": [
+    "Kubernetes::Observability",
+    "Exam::OTCA"
+   ],
+   "front": "OpenTelemetry auto-instrumentation vs manual instrumentation?",
+   "back": "<b>Auto</b>: agents/libraries instrument common frameworks with no code changes. <b>Manual</b>: you call the API for custom spans/metrics around business logic. Usually combine both.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OTCA · instrumentation",
+   "reverse": false
+  },
+  {
+   "guid": "M]mo!d:,3@",
+   "type": "basic",
+   "deck": "Kubernetes::09 Observability",
+   "tags": [
+    "Kubernetes::Observability",
+    "Exam::OTCA"
+   ],
+   "front": "OpenTelemetry API vs SDK?",
+   "back": "The <b>API</b> is the interface code instruments against (a no-op if unconfigured). The <b>SDK</b> implements sampling, processing and export. Libraries depend only on the API; the app wires in the SDK.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OTCA · architecture",
+   "reverse": false
+  },
+  {
+   "guid": "Er%VW6h5x0",
+   "type": "basic",
+   "deck": "Kubernetes::09 Observability",
+   "tags": [
+    "Kubernetes::Observability",
+    "Exam::OTCA"
+   ],
+   "front": "Why do OpenTelemetry semantic conventions matter?",
+   "back": "Standard attribute/metric names (<code>service.name</code>, <code>http.request.method</code>) make telemetry consistent across languages and vendors, so dashboards and queries are reusable.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OTCA · conventions",
+   "reverse": false
+  },
+  {
+   "guid": "rhf`iu:?/i",
+   "type": "basic",
+   "deck": "Kubernetes::09 Observability",
+   "tags": [
+    "Kubernetes::Observability",
+    "Exam::OTCA"
+   ],
+   "front": "What is a Resource in OpenTelemetry?",
+   "back": "Immutable attributes describing the telemetry source (<code>service.name</code>, version, host, k8s pod), attached to all its signals.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OTCA · concepts",
+   "reverse": false
+  },
+  {
+   "guid": "ebm@Vq=0k_",
+   "type": "basic",
+   "deck": "Kubernetes::09 Observability",
+   "tags": [
+    "Kubernetes::Observability",
+    "Exam::OTCA"
+   ],
+   "front": "Head sampling vs tail sampling?",
+   "back": "<b>Head</b>: decided at trace start; cheap but blind to the outcome. <b>Tail</b>: decided after the whole trace is seen (keep errors/slow traces); done in the Collector, needs buffering.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OTCA · sampling",
+   "reverse": false
+  },
+  {
+   "guid": "hGD-^0YS,_",
+   "type": "basic",
+   "deck": "Kubernetes::09 Observability",
+   "tags": [
+    "Kubernetes::Observability",
+    "Exam::OTCA"
+   ],
+   "front": "What is an exemplar?",
+   "back": "A sample on a metric (e.g. in a histogram bucket) carrying a trace ID, linking an aggregate back to a representative trace for drill-down.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OTCA · metrics",
+   "reverse": false
+  },
+  {
+   "guid": "LqK&$i;09R",
+   "type": "basic",
+   "deck": "Kubernetes::09 Observability",
+   "tags": [
+    "Kubernetes::Observability",
+    "Exam::OTCA"
+   ],
+   "front": "OpenTelemetry span kinds: which pair describes a synchronous call, and which an async message?",
+   "back": "Sync: <b>CLIENT</b> (caller) → <b>SERVER</b> (callee). Async: <b>PRODUCER</b> → <b>CONSUMER</b>. In-process work is <b>INTERNAL</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Span status values: Unset, Ok, Error.",
+   "source": "OTCA · tracing",
+   "reverse": false
+  },
+  {
+   "guid": "Q./!Mi),,q",
+   "type": "cloze",
+   "deck": "Kubernetes::09 Observability",
+   "tags": [
+    "Kubernetes::Observability",
+    "Exam::OTCA"
+   ],
+   "front": "",
+   "back": "",
+   "text": "OpenTelemetry was formed by merging {{c1::OpenTracing}} (tracing API) and {{c2::OpenCensus}} (metrics + tracing libraries).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OTCA · history",
+   "reverse": false
+  },
+  {
+   "guid": "Dvd@(5GdHZ",
+   "type": "basic",
+   "deck": "Kubernetes::10 Service Mesh & Cilium",
+   "tags": [
+    "Kubernetes::Service_Mesh_Cilium",
+    "Exam::KCNA"
+   ],
+   "front": "What is a service mesh?",
+   "back": "An infrastructure layer (proxies + control plane) that handles service-to-service traffic management, mTLS and telemetry transparently, moving those concerns out of app code.",
+   "text": "",
+   "image": "",
+   "analogy": "Each service gets a personal assistant who places and answers its calls, encrypting, retrying and logging them, so the service just talks.",
+   "extra": "",
+   "source": "KCNA · networking",
+   "reverse": false
+  },
+  {
+   "guid": "rgWuXm,M4Q",
+   "type": "basic",
+   "deck": "Kubernetes::10 Service Mesh & Cilium",
+   "tags": [
+    "Kubernetes::Service_Mesh_Cilium",
+    "Exam::ICA"
+   ],
+   "front": "Istio control plane vs data plane?",
+   "back": "Control plane: <b>istiod</b> (discovery, config, certificate authority), pushing config via xDS. Data plane: <b>Envoy</b> sidecars per pod, or ztunnel + waypoint proxies in ambient mode.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ICA · architecture",
+   "reverse": false
+  },
+  {
+   "guid": "Fo59i{vLWh",
+   "type": "basic",
+   "deck": "Kubernetes::10 Service Mesh & Cilium",
+   "tags": [
+    "Kubernetes::Service_Mesh_Cilium",
+    "Exam::ICA"
+   ],
+   "front": "Istio sidecar mode vs ambient mode?",
+   "back": "<b>Sidecar</b>: an Envoy in every pod (full L7, per-pod overhead). <b>Ambient</b>: no sidecars; a per-node <b>ztunnel</b> does L4 mTLS, and optional <b>waypoint</b> proxies add L7 only where needed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ICA · architecture",
+   "reverse": false
+  },
+  {
+   "guid": "i^V8|M#c4e",
+   "type": "basic",
+   "deck": "Kubernetes::10 Service Mesh & Cilium",
+   "tags": [
+    "Kubernetes::Service_Mesh_Cilium",
+    "Exam::ICA"
+   ],
+   "front": "What is ztunnel in Istio ambient mode?",
+   "back": "A per-node proxy (DaemonSet, written in Rust) handling L4 mTLS, authentication and telemetry for all pods on the node.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ICA · ambient",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Kubernetes::10 Service Mesh & Cilium",
+   "tags": [
+    "Kubernetes::Service_Mesh_Cilium",
+    "Exam::ICA"
+   ],
+   "front": "What is HBONE in Istio ambient mode?",
+   "back": "HTTP-Based Overlay Network Environment: mTLS-encrypted HTTP CONNECT tunnelling (port 15008) carrying traffic between ztunnels and waypoints.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ICA · ambient",
+   "reverse": false
+  },
+  {
+   "guid": "tg1HM@qB1e",
+   "type": "basic",
+   "deck": "Kubernetes::10 Service Mesh & Cilium",
+   "tags": [
+    "Kubernetes::Service_Mesh_Cilium",
+    "Exam::ICA"
+   ],
+   "front": "What is an Istio waypoint proxy, and how is it deployed?",
+   "back": "An Envoy providing L7 features (routing, retries, L7 authz) in ambient mode, shared per namespace/service account. Deployed as a Gateway API Gateway with <code>gatewayClassName: istio-waypoint</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ICA · ambient",
+   "reverse": false
+  },
+  {
+   "guid": "lw(2l))eU_",
+   "type": "basic",
+   "deck": "Kubernetes::10 Service Mesh & Cilium",
+   "tags": [
+    "Kubernetes::Service_Mesh_Cilium",
+    "Exam::ICA"
+   ],
+   "front": "What does an Istio VirtualService configure?",
+   "back": "L7 routing rules for a host: match on URI/headers, then route by weight to destinations/subsets, with retries, timeouts and fault injection.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ICA · traffic management",
+   "reverse": false
+  },
+  {
+   "guid": "d1Jq#U8,Px",
+   "type": "basic",
+   "deck": "Kubernetes::10 Service Mesh & Cilium",
+   "tags": [
+    "Kubernetes::Service_Mesh_Cilium",
+    "Exam::ICA"
+   ],
+   "front": "Istio VirtualService vs DestinationRule?",
+   "back": "VirtualService = <b>how requests are routed</b> to a host. DestinationRule = <b>what applies after routing</b>: named subsets (v1/v2 by pod labels), LB policy, connection pools, outlier detection.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ICA · traffic management",
+   "reverse": false
+  },
+  {
+   "guid": "MYy$.m%nc;",
+   "type": "basic",
+   "deck": "Kubernetes::10 Service Mesh & Cilium",
+   "tags": [
+    "Kubernetes::Service_Mesh_Cilium",
+    "Exam::ICA"
+   ],
+   "front": "How do you run a weighted canary in Istio?",
+   "back": "In a VirtualService, split route weights across subsets (e.g. 90% v1, 10% v2) defined in a DestinationRule, then shift the weights gradually.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ICA · traffic management",
+   "reverse": false
+  },
+  {
+   "guid": "vADqj1~D[,",
+   "type": "basic",
+   "deck": "Kubernetes::10 Service Mesh & Cilium",
+   "tags": [
+    "Kubernetes::Service_Mesh_Cilium",
+    "Exam::ICA"
+   ],
+   "front": "What does an Istio Gateway resource do?",
+   "back": "Configures a load balancer at the mesh edge: which ports, protocols and hosts are exposed. A VirtualService bound to the Gateway routes that traffic to services.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ICA · traffic management",
+   "reverse": false
+  },
+  {
+   "guid": "FGr9yzT2HC",
+   "type": "basic",
+   "deck": "Kubernetes::10 Service Mesh & Cilium",
+   "tags": [
+    "Kubernetes::Service_Mesh_Cilium",
+    "Exam::ICA"
+   ],
+   "front": "What does an Istio ServiceEntry do?",
+   "back": "Adds an external service to the mesh registry, so traffic to it gets Istio routing, policy, mTLS origination and telemetry.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ICA · traffic management",
+   "reverse": false
+  },
+  {
+   "guid": "D^]g+=rG~F",
+   "type": "cloze",
+   "deck": "Kubernetes::10 Service Mesh & Cilium",
+   "tags": [
+    "Kubernetes::Service_Mesh_Cilium",
+    "Exam::ICA"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Istio PeerAuthentication mTLS modes: {{c1::STRICT}} accepts mTLS only; {{c2::PERMISSIVE}} accepts mTLS or plaintext (the default, eases migration); {{c3::DISABLE}} turns mTLS off.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ICA · security",
+   "reverse": false
+  },
+  {
+   "guid": "JkBj@L~V(}",
+   "type": "basic",
+   "deck": "Kubernetes::10 Service Mesh & Cilium",
+   "tags": [
+    "Kubernetes::Service_Mesh_Cilium",
+    "Exam::ICA"
+   ],
+   "front": "Istio RequestAuthentication vs AuthorizationPolicy?",
+   "back": "<b>RequestAuthentication</b> validates end-user JWTs (issuer/JWKS); it authenticates but doesn't authorize. <b>AuthorizationPolicy</b> ALLOWs/DENYs by identity, namespace, JWT claims, method, path.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ICA · security",
+   "reverse": false
+  },
+  {
+   "guid": "J|nKw8O$,>",
+   "type": "basic",
+   "deck": "Kubernetes::10 Service Mesh & Cilium",
+   "tags": [
+    "Kubernetes::Service_Mesh_Cilium",
+    "Exam::ICA"
+   ],
+   "front": "How does Istio give each workload an mTLS identity?",
+   "back": "istiod acts as a CA issuing X.509 certs with a <b>SPIFFE</b> ID derived from the pod's ServiceAccount: <code>spiffe://&lt;trust-domain&gt;/ns/&lt;ns&gt;/sa/&lt;sa&gt;</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ICA · security",
+   "reverse": false
+  },
+  {
+   "guid": "zgQ-1U*b|0",
+   "type": "basic",
+   "deck": "Kubernetes::10 Service Mesh & Cilium",
+   "tags": [
+    "Kubernetes::Service_Mesh_Cilium",
+    "Exam::ICA"
+   ],
+   "front": "What is Istio fault injection for?",
+   "back": "Deliberately injecting <b>delays</b> or <b>aborts</b> (e.g. HTTP 500 for 10% of requests) via a VirtualService to test resilience without changing app code.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ICA · resilience",
+   "reverse": false
+  },
+  {
+   "guid": "P.RjG/w3?B",
+   "type": "basic",
+   "deck": "Kubernetes::10 Service Mesh & Cilium",
+   "tags": [
+    "Kubernetes::Service_Mesh_Cilium",
+    "Exam::ICA"
+   ],
+   "front": "What is outlier detection in Istio?",
+   "back": "A DestinationRule setting that ejects endpoints returning consecutive errors from the LB pool for a cooldown, so one bad instance doesn't drag the service down (circuit breaking).",
+   "text": "",
+   "image": "",
+   "analogy": "A relay team benching a runner who keeps dropping the baton, then letting them back after a rest.",
+   "extra": "",
+   "source": "ICA · resilience",
+   "reverse": false
+  },
+  {
+   "guid": "eiu{iy}pQ!",
+   "type": "basic",
+   "deck": "Kubernetes::10 Service Mesh & Cilium",
+   "tags": [
+    "Kubernetes::Service_Mesh_Cilium",
+    "Exam::ICA"
+   ],
+   "front": "<code>istioctl analyze</code> vs <code>istioctl proxy-config</code>?",
+   "back": "<b>analyze</b>: validates mesh config for problems. <b>proxy-config</b> <code>&lt;cluster|route|listener|endpoint&gt; &lt;pod&gt;</code>: dumps the Envoy config a proxy actually received, the main tool for routing bugs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ICA · troubleshooting",
+   "reverse": false
+  },
+  {
+   "guid": "oIz8zA;?wN",
+   "type": "basic",
+   "deck": "Kubernetes::10 Service Mesh & Cilium",
+   "tags": [
+    "Kubernetes::Service_Mesh_Cilium",
+    "Exam::ICA"
+   ],
+   "front": "What telemetry does Istio give you without app changes?",
+   "back": "Proxies emit standard L7 metrics (request count, duration, size), access logs, trace spans and service-graph data, feeding Prometheus, Grafana, Jaeger and Kiali.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ICA · observability",
+   "reverse": false
+  },
+  {
+   "guid": "vWu2LrCr|T",
+   "type": "basic",
+   "deck": "Kubernetes::10 Service Mesh & Cilium",
+   "tags": [
+    "Kubernetes::Service_Mesh_Cilium",
+    "Exam::CCA"
+   ],
+   "front": "Why does Cilium use eBPF instead of iptables?",
+   "back": "eBPF programs run in-kernel at hooks (tc, XDP, sockets), so policy, Service load balancing and visibility use efficient hash-map lookups instead of long linear iptables chains.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "eBPF internals: see the Linux deck.",
+   "source": "CCA · eBPF",
+   "reverse": false
+  },
+  {
+   "guid": "A9Pf$w|8lW",
+   "type": "basic",
+   "deck": "Kubernetes::10 Service Mesh & Cilium",
+   "tags": [
+    "Kubernetes::Service_Mesh_Cilium",
+    "Exam::CCA"
+   ],
+   "front": "How does Cilium's identity-based policy differ from IP-based rules?",
+   "back": "Each endpoint (usually a pod) gets a numeric security <b>identity</b> derived from its labels; policy is enforced on identities, so it stays correct as pods churn and IPs are reused.",
+   "text": "",
+   "image": "",
+   "analogy": "Checking ID badges instead of desk numbers: people can move desks without the security rules breaking.",
+   "extra": "Inspect with <code>cilium endpoint list</code>.",
+   "source": "CCA · security model",
+   "reverse": false
+  },
+  {
+   "guid": "b53t}3w&l/",
+   "type": "basic",
+   "deck": "Kubernetes::10 Service Mesh & Cilium",
+   "tags": [
+    "Kubernetes::Service_Mesh_Cilium",
+    "Exam::CCA"
+   ],
+   "front": "What does a CiliumNetworkPolicy add over a standard NetworkPolicy?",
+   "back": "Standard policy is L3/L4 only. CiliumNetworkPolicy adds <b>L7</b> rules (e.g. allow only <code>GET /api</code>, Kafka topics), DNS-based egress, and cluster-wide policies.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CCA · network policy",
+   "reverse": false
+  },
+  {
+   "guid": "Ect7erSa,v",
+   "type": "basic",
+   "deck": "Kubernetes::10 Service Mesh & Cilium",
+   "tags": [
+    "Kubernetes::Service_Mesh_Cilium",
+    "Exam::CCA"
+   ],
+   "front": "How does Cilium allow egress to an external service by DNS name?",
+   "back": "<code>toFQDNs</code> rules: Cilium intercepts DNS answers, learns the resolved IPs and allows egress only to them, so you don't need to know external IPs in advance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CCA · network policy",
+   "reverse": false
+  },
+  {
+   "guid": "m5-G5&TE@y",
+   "type": "basic",
+   "deck": "Kubernetes::10 Service Mesh & Cilium",
+   "tags": [
+    "Kubernetes::Service_Mesh_Cilium",
+    "Exam::CCA"
+   ],
+   "front": "What is Hubble?",
+   "back": "Cilium's eBPF-based observability layer: flow visibility (who talked to whom, allowed/denied, L7 verbs), a service map and metrics, without app instrumentation. CLI: <code>hubble observe</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CCA · observability",
+   "reverse": false
+  },
+  {
+   "guid": "P4k!m7Ptw^",
+   "type": "basic",
+   "deck": "Kubernetes::10 Service Mesh & Cilium",
+   "tags": [
+    "Kubernetes::Service_Mesh_Cilium",
+    "Exam::CCA"
+   ],
+   "front": "What does kube-proxy replacement mean in Cilium?",
+   "back": "Cilium implements Service load balancing (ClusterIP, NodePort, …) directly in eBPF, so kube-proxy and its iptables rules aren't needed; it scales better with many Services.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CCA · dataplane",
+   "reverse": false
+  },
+  {
+   "guid": "AQBzkj.4#%",
+   "type": "basic",
+   "deck": "Kubernetes::10 Service Mesh & Cilium",
+   "tags": [
+    "Kubernetes::Service_Mesh_Cilium",
+    "Exam::CCA"
+   ],
+   "front": "Cilium agent vs Cilium operator?",
+   "back": "<b>Agent</b> (DaemonSet): per node, manages eBPF programs/maps, identities, policy and Service LB. <b>Operator</b>: cluster-wide tasks such as IPAM and garbage collection.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CCA · architecture",
+   "reverse": false
+  },
+  {
+   "guid": "KxP3<8(uM9",
+   "type": "basic",
+   "deck": "Kubernetes::10 Service Mesh & Cilium",
+   "tags": [
+    "Kubernetes::Service_Mesh_Cilium",
+    "Exam::CCA"
+   ],
+   "front": "What is Cilium Cluster Mesh?",
+   "back": "Connects multiple clusters into one network and identity domain: cross-cluster service discovery, global services with failover, and network policy across clusters.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CCA · multi-cluster",
+   "reverse": false
+  },
+  {
+   "guid": "iG%i[@xwYS",
+   "type": "basic",
+   "deck": "Kubernetes::10 Service Mesh & Cilium",
+   "tags": [
+    "Kubernetes::Service_Mesh_Cilium",
+    "Exam::CCA"
+   ],
+   "front": "What transparent encryption options does Cilium offer?",
+   "back": "<b>WireGuard</b> (simple, fast) or <b>IPsec</b>, enabled at the agent level to encrypt node-to-node pod traffic with no app changes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CCA · encryption",
+   "reverse": false
+  },
+  {
+   "guid": "jL_{MN|wY&",
+   "type": "basic",
+   "deck": "Kubernetes::10 Service Mesh & Cilium",
+   "tags": [
+    "Kubernetes::Service_Mesh_Cilium",
+    "Exam::CCA"
+   ],
+   "front": "How does Cilium relate to Ingress and the Gateway API?",
+   "back": "Cilium can be the Ingress / Gateway API controller itself (Envoy + eBPF), consolidating CNI, load balancing and ingress in one dataplane.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CCA · ingress",
+   "reverse": false
+  },
+  {
+   "guid": "j[8Z*<VbrE",
+   "type": "basic",
+   "deck": "Kubernetes::11 Cloud Native Ecosystem",
+   "tags": [
+    "Kubernetes::Cloud_Native_Ecosystem",
+    "Exam::KCNA"
+   ],
+   "front": "What is cloud native, in essence (CNCF definition)?",
+   "back": "Building and running scalable apps in dynamic environments with <b>containers, microservices, immutable infrastructure and declarative APIs</b>, giving loosely coupled, resilient, observable systems that change often with low risk.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KCNA · concepts",
+   "reverse": false
+  },
+  {
+   "guid": "p*z<JVFA-b",
+   "type": "cloze",
+   "deck": "Kubernetes::11 Cloud Native Ecosystem",
+   "tags": [
+    "Kubernetes::Cloud_Native_Ecosystem",
+    "Exam::KCNA"
+   ],
+   "front": "",
+   "back": "",
+   "text": "CNCF project maturity levels: {{c1::Sandbox}} (early) → {{c2::Incubating}} (growing adoption) → {{c3::Graduated}} (mature, e.g. Kubernetes, Prometheus, Envoy).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KCNA · CNCF",
+   "reverse": false
+  },
+  {
+   "guid": "y@z`V`1^JC",
+   "type": "cloze",
+   "deck": "Kubernetes::11 Cloud Native Ecosystem",
+   "tags": [
+    "Kubernetes::Cloud_Native_Ecosystem",
+    "Exam::KCNA"
+   ],
+   "front": "",
+   "back": "",
+   "text": "The Open Container Initiative (OCI) defines the {{c1::image-spec}} (image format), the {{c2::runtime-spec}} (how to run a filesystem bundle) and the {{c3::distribution-spec}} (registry API).",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Why it matters:</b> an image built by any tool runs on any compliant runtime and registry.",
+   "source": "KCNA · standards",
+   "reverse": false
+  },
+  {
+   "guid": "I,GAOuU~d|",
+   "type": "basic",
+   "deck": "Kubernetes::11 Cloud Native Ecosystem",
+   "tags": [
+    "Kubernetes::Cloud_Native_Ecosystem",
+    "Exam::KCNA"
+   ],
+   "front": "What is the gist of the Twelve-Factor App?",
+   "back": "Principles for portable cloud apps, e.g. config in the environment, stateless disposable processes, backing services as attached resources, build/release/run separation, logs as event streams.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KCNA · concepts",
+   "reverse": false
+  },
+  {
+   "guid": "ued#4@m(j/",
+   "type": "basic",
+   "deck": "Kubernetes::11 Cloud Native Ecosystem",
+   "tags": [
+    "Kubernetes::Cloud_Native_Ecosystem",
+    "Exam::KCNA"
+   ],
+   "front": "What is serverless, and what does Knative bring to Kubernetes?",
+   "back": "Running code without managing servers, scaling to zero when idle. Knative adds this to Kubernetes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KCNA · serverless",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Kubernetes::11 Cloud Native Ecosystem",
+   "tags": [
+    "Kubernetes::Cloud_Native_Ecosystem",
+    "Exam::KCNA"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Knative components: {{c1::Serving}} provides request-driven autoscaling including scale-to-zero; {{c2::Eventing}} provides event sources, brokers and delivery.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KCNA · serverless",
+   "reverse": false
+  },
+  {
+   "guid": "e.5m8e5{e4",
+   "type": "basic",
+   "deck": "Kubernetes::11 Cloud Native Ecosystem",
+   "tags": [
+    "Kubernetes::Cloud_Native_Ecosystem",
+    "Exam::CKAD",
+    "Exam::CKA"
+   ],
+   "front": "Kustomize vs Helm?",
+   "back": "<b>Kustomize</b>: template-free; a <b>base</b> plus per-environment <b>overlays</b> of plain YAML patches, built into kubectl (<code>kubectl apply -k</code>). <b>Helm</b>: Go templates + packaging, versioned releases and rollback.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Helm depth: Platform Engineering deck.",
+   "source": "CKAD · packaging",
+   "reverse": false
+  },
+  {
+   "guid": "A4.o||l5~y",
+   "type": "basic",
+   "deck": "Kubernetes::11 Cloud Native Ecosystem",
+   "tags": [
+    "Kubernetes::Cloud_Native_Ecosystem",
+    "Exam::KCNA"
+   ],
+   "front": "What is GitOps (KCNA-level definition)?",
+   "back": "An operating model where Git is the single source of truth for declarative infra/app state and an in-cluster agent continuously reconciles the cluster to it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Principles, Argo CD and Flux depth: Platform Engineering deck.",
+   "source": "KCNA · GitOps",
+   "reverse": false
+  },
+  {
+   "guid": "H!`4#;nu@U",
+   "type": "basic",
+   "deck": "Kubernetes::11 Cloud Native Ecosystem",
+   "tags": [
+    "Kubernetes::Cloud_Native_Ecosystem",
+    "Exam::CGOA"
+   ],
+   "front": "How does GitOps relate to CI/CD?",
+   "back": "CI builds and tests artifacts outside the cluster. GitOps is one way to do the <b>CD</b> half: declarative, Git-driven, pull-based and continuously reconciled.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CGOA · scope",
+   "reverse": false
+  },
+  {
+   "guid": "Kq3[eg(1aV",
+   "type": "basic",
+   "deck": "Kubernetes::11 Cloud Native Ecosystem",
+   "tags": [
+    "Kubernetes::Cloud_Native_Ecosystem",
+    "Exam::CGOA"
+   ],
+   "front": "Why separate the app source repo from the config (deployment) repo in GitOps?",
+   "back": "CI builds the code and just bumps an image tag in the config repo; the GitOps agent deploys from the config repo. Deploy state stays declarative, auditable and decoupled from builds.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CGOA · patterns",
+   "reverse": false
+  },
+  {
+   "guid": "jHog$]SA4`",
+   "type": "basic",
+   "deck": "Kubernetes::11 Cloud Native Ecosystem",
+   "tags": [
+    "Kubernetes::Cloud_Native_Ecosystem",
+    "Exam::CNPE"
+   ],
+   "front": "What is a sound promotion strategy across environments?",
+   "back": "Promote the <b>same immutable artifact</b> (image digest) dev → staging → prod via Git changes, gated by automated tests/policy and progressive delivery. Kargo can orchestrate it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CNPE · delivery",
+   "reverse": false
+  },
+  {
+   "guid": "MpH0eRMlH+",
+   "type": "basic",
+   "deck": "Kubernetes::11 Cloud Native Ecosystem",
+   "tags": [
+    "Kubernetes::Cloud_Native_Ecosystem",
+    "Exam::CNPE"
+   ],
+   "front": "Canary vs blue-green deployment?",
+   "back": "<b>Canary</b>: shift a small % of traffic to the new version, watch metrics, ramp up. <b>Blue-green</b>: a full standby environment, then switch all traffic at once (instant rollback).",
+   "text": "",
+   "image": "",
+   "analogy": "Canary: let a few diners taste the new recipe first. Blue-green: cook a full second kitchen, then swap which one serves the room.",
+   "extra": "",
+   "source": "CNPE · progressive delivery",
+   "reverse": false
+  },
+  {
+   "guid": "zpaXW8RYW~",
+   "type": "basic",
+   "deck": "Kubernetes::11 Cloud Native Ecosystem",
+   "tags": [
+    "Kubernetes::Cloud_Native_Ecosystem",
+    "Exam::CAPA"
+   ],
+   "front": "Argo CD vs Argo Rollouts: who does progressive delivery?",
+   "back": "Argo CD only syncs manifests. <b>Argo Rollouts</b>' <code>Rollout</code> CRD runs canary/blue-green steps; Argo CD deploys the Rollout object.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CAPA · integration",
+   "reverse": false
+  },
+  {
+   "guid": "O0bAb=5lU4",
+   "type": "basic",
+   "deck": "Kubernetes::11 Cloud Native Ecosystem",
+   "tags": [
+    "Kubernetes::Cloud_Native_Ecosystem",
+    "Exam::CAPA"
+   ],
+   "front": "What is an Argo Rollouts AnalysisTemplate?",
+   "back": "Metric queries (e.g. Prometheus) with success/failure conditions evaluated during rollout steps. A breach automatically aborts and rolls back the release.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CAPA · Rollouts",
+   "reverse": false
+  },
+  {
+   "guid": "lohRCRRCQL",
+   "type": "basic",
+   "deck": "Kubernetes::11 Cloud Native Ecosystem",
+   "tags": [
+    "Kubernetes::Cloud_Native_Ecosystem",
+    "Exam::CAPA"
+   ],
+   "front": "What is Argo Workflows?",
+   "back": "A Kubernetes-native workflow engine (Workflow CRD) where each step runs in a container, ordered as steps or a DAG. Used for CI, batch/data and ML pipelines.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CAPA · Workflows",
+   "reverse": false
+  },
+  {
+   "guid": "DUK;kvdj>~",
+   "type": "basic",
+   "deck": "Kubernetes::11 Cloud Native Ecosystem",
+   "tags": [
+    "Kubernetes::Cloud_Native_Ecosystem",
+    "Exam::CAPA"
+   ],
+   "front": "Argo Workflows: <code>steps</code> vs <code>dag</code> templates?",
+   "back": "<b>steps</b>: sequential stages (items within a stage run in parallel). <b>dag</b>: tasks declare <code>dependencies</code> and run as soon as those finish, for more flexible parallelism.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CAPA · Workflows",
+   "reverse": false
+  },
+  {
+   "guid": "CQ}<oVs:(M",
+   "type": "basic",
+   "deck": "Kubernetes::11 Cloud Native Ecosystem",
+   "tags": [
+    "Kubernetes::Cloud_Native_Ecosystem",
+    "Exam::CAPA"
+   ],
+   "front": "What is Argo Events?",
+   "back": "Event-driven automation: <b>EventSources</b> ingest events (webhooks, queues, cron) and <b>Sensors</b> evaluate dependencies and trigger actions, e.g. start an Argo Workflow.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CAPA · Events",
+   "reverse": false
+  },
+  {
+   "guid": "i4jzq#8[jX",
+   "type": "basic",
+   "deck": "Kubernetes::11 Cloud Native Ecosystem",
+   "tags": [
+    "Kubernetes::Cloud_Native_Ecosystem",
+    "Exam::KCA"
+   ],
+   "front": "Kyverno Policy vs ClusterPolicy?",
+   "back": "<b>Policy</b> is namespaced and applies only in its namespace; <b>ClusterPolicy</b> applies cluster-wide. Both hold rules with match/exclude selectors.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KCA · scope",
+   "reverse": false
+  },
+  {
+   "guid": "mU/v6-P<o(",
+   "type": "basic",
+   "deck": "Kubernetes::11 Cloud Native Ecosystem",
+   "tags": [
+    "Kubernetes::Cloud_Native_Ecosystem",
+    "Exam::KCA"
+   ],
+   "front": "What does a Kyverno policy's failure action (Enforce vs Audit) control?",
+   "back": "<b>Enforce</b>: a failed validate rule blocks the request. <b>Audit</b>: allowed but recorded in a PolicyReport. Roll out in Audit first, then switch to Enforce.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KCA · enforcement",
+   "reverse": false
+  },
+  {
+   "guid": "CXdcS4d>t(",
+   "type": "basic",
+   "deck": "Kubernetes::11 Cloud Native Ecosystem",
+   "tags": [
+    "Kubernetes::Cloud_Native_Ecosystem",
+    "Exam::KCA"
+   ],
+   "front": "What are Kyverno PolicyReports?",
+   "back": "Custom resources holding per-resource results (pass, fail, warn, error, skip) reflecting current state, not history. PolicyReport is namespaced; ClusterPolicyReport is cluster-wide.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KCA · reporting",
+   "reverse": false
+  },
+  {
+   "guid": "K!5T^pD(W=",
+   "type": "basic",
+   "deck": "Kubernetes::11 Cloud Native Ecosystem",
+   "tags": [
+    "Kubernetes::Cloud_Native_Ecosystem",
+    "Exam::KCA"
+   ],
+   "front": "Typical use case for a Kyverno <code>generate</code> rule?",
+   "back": "When a Namespace is created, automatically create a default-deny NetworkPolicy and a ResourceQuota in it, optionally kept in sync with their source.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KCA · generate",
+   "reverse": false
+  },
+  {
+   "guid": "fo$E9X<alE",
+   "type": "basic",
+   "deck": "Kubernetes::11 Cloud Native Ecosystem",
+   "tags": [
+    "Kubernetes::Cloud_Native_Ecosystem",
+    "Exam::KCA"
+   ],
+   "front": "What is a Kyverno PolicyException?",
+   "back": "A resource exempting specific resources/namespaces from named policy rules: a scoped, governed escape hatch instead of weakening the policy itself.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KCA · exceptions",
+   "reverse": false
+  },
+  {
+   "guid": "Ek>pNK)Tps",
+   "type": "basic",
+   "deck": "Kubernetes::11 Cloud Native Ecosystem",
+   "tags": [
+    "Kubernetes::Cloud_Native_Ecosystem",
+    "Exam::KCA"
+   ],
+   "front": "How do you test Kyverno policies before they reach a cluster?",
+   "back": "Kyverno CLI: <code>kyverno apply</code> runs policies against manifests locally; <code>kyverno test</code> runs declarative test cases. Both fit in CI.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KCA · tooling",
+   "reverse": false
+  },
+  {
+   "guid": "jDt:Id1@H/",
+   "type": "basic",
+   "deck": "Kubernetes::11 Cloud Native Ecosystem",
+   "tags": [
+    "Kubernetes::Cloud_Native_Ecosystem",
+    "Exam::CNPA"
+   ],
+   "front": "Platform engineering vs DevOps?",
+   "back": "DevOps is a culture of shared ownership between dev and ops. Platform engineering builds an <b>Internal Developer Platform</b> as a product, giving teams self-service paved roads so each team doesn't reinvent infrastructure.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Depth (golden paths, Backstage, TVP): Platform Engineering deck.",
+   "source": "CNPA · fundamentals",
+   "reverse": false
+  },
+  {
+   "guid": "p61:(/)6*Z",
+   "type": "basic",
+   "deck": "Kubernetes::11 Cloud Native Ecosystem",
+   "tags": [
+    "Kubernetes::Cloud_Native_Ecosystem",
+    "Exam::CNPA"
+   ],
+   "front": "What is the CNCF Platform Engineering Maturity Model for?",
+   "back": "Assessing a platform across aspects (investment, adoption, interfaces, operations, measurement) at levels Provisional → Operational → Scalable → Optimizing, to plan its evolution.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CNPA · maturity",
+   "reverse": false
+  },
+  {
+   "guid": "v1t3$x<[_a",
+   "type": "basic",
+   "deck": "Kubernetes::11 Cloud Native Ecosystem",
+   "tags": [
+    "Kubernetes::Cloud_Native_Ecosystem",
+    "Exam::CNPA"
+   ],
+   "front": "Continuous Integration vs Continuous Delivery vs Continuous Deployment?",
+   "back": "<b>CI</b>: merge, build and test often. <b>Continuous Delivery</b>: every passing build is releasable; prod deploy is a manual click. <b>Continuous Deployment</b>: every passing build goes to prod automatically.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CNPA · delivery",
+   "reverse": false
+  },
+  {
+   "guid": "hF(#[dy]O8",
+   "type": "basic",
+   "deck": "Kubernetes::12 Linux Admin (LFCS)",
+   "tags": [
+    "Kubernetes::Linux_Admin_LFCS",
+    "Exam::LFCS"
+   ],
+   "front": "What does <code>chmod 750 file</code> grant?",
+   "back": "Owner <b>rwx</b> (7), group <b>r-x</b> (5), others nothing (0); r=4, w=2, x=1.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Symbolic form: <code>chmod u+x f</code>; ownership: <code>chown user:group f</code>.",
+   "source": "LFCS · permissions",
+   "reverse": false
+  },
+  {
+   "guid": "kPAOR7.v[|",
+   "type": "cloze",
+   "deck": "Kubernetes::12 Linux Admin (LFCS)",
+   "tags": [
+    "Kubernetes::Linux_Admin_LFCS",
+    "Exam::LFCS"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Special permission bits: {{c1::SUID}} (4xxx) runs an executable as its owner; {{c2::SGID}} (2xxx) runs as the group / new files inherit the directory's group; the {{c3::sticky bit}} (1xxx) on a directory lets only owners delete their files (e.g. <code>/tmp</code>).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "LFCS · permissions",
+   "reverse": false
+  },
+  {
+   "guid": "gj_d6*wNR}",
+   "type": "basic",
+   "deck": "Kubernetes::12 Linux Admin (LFCS)",
+   "tags": [
+    "Kubernetes::Linux_Admin_LFCS",
+    "Exam::LFCS"
+   ],
+   "front": "With <code>umask 022</code>, what permissions do new files and directories get?",
+   "back": "Files <b>644</b>, directories <b>755</b> (base 666/777 minus the mask; files never get execute by default).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "LFCS · permissions",
+   "reverse": false
+  },
+  {
+   "guid": "s-674MbAS=",
+   "type": "basic",
+   "deck": "Kubernetes::12 Linux Admin (LFCS)",
+   "tags": [
+    "Kubernetes::Linux_Admin_LFCS",
+    "Exam::LFCS"
+   ],
+   "front": "<code>systemctl start</code> vs <code>enable</code>?",
+   "back": "<b>start</b> runs the unit now; <b>enable</b> makes it start at boot (<code>enable --now</code> does both). After editing unit files: <code>systemctl daemon-reload</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "LFCS · systemd",
+   "reverse": false
+  },
+  {
+   "guid": "G-.Ag>+qL6",
+   "type": "basic",
+   "deck": "Kubernetes::12 Linux Admin (LFCS)",
+   "tags": [
+    "Kubernetes::Linux_Admin_LFCS",
+    "Exam::LFCS"
+   ],
+   "front": "What replaced SysV runlevels in systemd, and how do you set the default?",
+   "back": "<b>Targets</b>: <code>multi-user.target</code> (≈ runlevel 3) and <code>graphical.target</code> (≈ 5). <code>systemctl set-default &lt;target&gt;</code>; switch now with <code>systemctl isolate</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "LFCS · systemd",
+   "reverse": false
+  },
+  {
+   "guid": "s;1a8pu0Hj",
+   "type": "basic",
+   "deck": "Kubernetes::12 Linux Admin (LFCS)",
+   "tags": [
+    "Kubernetes::Linux_Admin_LFCS",
+    "Exam::LFCS",
+    "Exam::CKA"
+   ],
+   "front": "journalctl: a unit's logs, follow mode, current boot only?",
+   "back": "<code>journalctl -u &lt;unit&gt;</code>, <code>-f</code> to follow, <code>-b</code> for this boot. Also <code>--since \"10 min ago\"</code>, <code>-p err</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Persistent logs need <code>/var/log/journal</code> to exist. Key for kubelet debugging: <code>journalctl -u kubelet</code>.",
+   "source": "LFCS · logging · CKA",
+   "reverse": false
+  },
+  {
+   "guid": "OL.ve`lUno",
+   "type": "basic",
+   "deck": "Kubernetes::12 Linux Admin (LFCS)",
+   "tags": [
+    "Kubernetes::Linux_Admin_LFCS",
+    "Exam::LFCS"
+   ],
+   "front": "Modern commands for IP addresses, routes and listening sockets?",
+   "back": "<code>ip addr</code>, <code>ip route</code>, <code>ip link set dev eth0 up</code> (iproute2); <code>ss -tulpn</code> for listening sockets (replaces netstat).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "LFCS · networking",
+   "reverse": false
+  },
+  {
+   "guid": "P-A5#A<6^6",
+   "type": "cloze",
+   "deck": "Kubernetes::12 Linux Admin (LFCS)",
+   "tags": [
+    "Kubernetes::Linux_Admin_LFCS",
+    "Exam::LFCS"
+   ],
+   "front": "",
+   "back": "",
+   "text": "LVM layers: {{c1::Physical Volumes}} (disks/partitions) are pooled into a {{c2::Volume Group}}, which is carved into {{c3::Logical Volumes}} that you format and mount.",
+   "image": "",
+   "analogy": "",
+   "extra": "Grow: <code>lvextend</code> then <code>resize2fs</code> / <code>xfs_growfs</code> (or <code>lvextend -r</code>).",
+   "source": "LFCS · storage",
+   "reverse": false
+  },
+  {
+   "guid": "JU-kl>oOaz",
+   "type": "basic",
+   "deck": "Kubernetes::12 Linux Admin (LFCS)",
+   "tags": [
+    "Kubernetes::Linux_Admin_LFCS",
+    "Exam::LFCS"
+   ],
+   "front": "How do you make a mount persistent across reboots safely?",
+   "back": "Add an <code>/etc/fstab</code> line (<code>UUID=… /mnt/data xfs defaults 0 0</code>), using UUIDs from <code>blkid</code>, and test with <code>mount -a</code> before rebooting.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "LFCS · storage",
+   "reverse": false
+  },
+  {
+   "guid": "xWRf7D[&zx",
+   "type": "basic",
+   "deck": "Kubernetes::12 Linux Admin (LFCS)",
+   "tags": [
+    "Kubernetes::Linux_Admin_LFCS",
+    "Exam::LFCS"
+   ],
+   "front": "<code>df</code> vs <code>du</code>?",
+   "back": "<code>df -h</code>: free/used space per <b>filesystem</b>. <code>du -sh &lt;dir&gt;</code>: space used by a <b>directory tree</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<code>lsblk</code> lists block devices.",
+   "source": "LFCS · storage",
+   "reverse": false
+  },
+  {
+   "guid": "qq#-]OxNZD",
+   "type": "basic",
+   "deck": "Kubernetes::12 Linux Admin (LFCS)",
+   "tags": [
+    "Kubernetes::Linux_Admin_LFCS",
+    "Exam::LFCS"
+   ],
+   "front": "<code>kill</code> vs <code>kill -9</code>?",
+   "back": "<code>kill</code> sends <b>SIGTERM</b> (15): the process can clean up. <code>kill -9</code> sends <b>SIGKILL</b>: immediate and uncatchable; last resort.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Same model as pod termination: SIGTERM, grace period, then SIGKILL. Find PIDs with <code>pgrep -f</code>.",
+   "source": "LFCS · processes",
+   "reverse": false
+  },
+  {
+   "guid": "OJMJ}n.z8G",
+   "type": "cloze",
+   "deck": "Kubernetes::12 Linux Admin (LFCS)",
+   "tags": [
+    "Kubernetes::Linux_Admin_LFCS",
+    "Exam::LFCS",
+    "Exam::CKAD"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Cron fields, in order: {{c1::minute hour day-of-month month day-of-week}}. <code>0 2 * * 1</code> means {{c2::02:00 every Monday}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "Same syntax as a Kubernetes CronJob <code>schedule</code>.",
+   "source": "LFCS · scheduling · CKAD",
+   "reverse": false
+  },
+  {
+   "guid": "IWpt_(06}4",
+   "type": "basic",
+   "deck": "Kubernetes::12 Linux Admin (LFCS)",
+   "tags": [
+    "Kubernetes::Linux_Admin_LFCS",
+    "Exam::LFCS"
+   ],
+   "front": "Package management: Debian family vs RHEL family?",
+   "back": "Debian/Ubuntu: <code>apt</code> / <code>dpkg</code> with <code>.deb</code>. RHEL/Fedora: <code>dnf</code> (yum) / <code>rpm</code> with <code>.rpm</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "LFCS · packages",
+   "reverse": false
+  },
+  {
+   "guid": "I#p`M.1yZ~",
+   "type": "basic",
+   "deck": "Kubernetes::12 Linux Admin (LFCS)",
+   "tags": [
+    "Kubernetes::Linux_Admin_LFCS",
+    "Exam::LFCS"
+   ],
+   "front": "SELinux enforcing vs permissive mode?",
+   "back": "<b>Enforcing</b>: denials are blocked and logged. <b>Permissive</b>: only logged, for debugging. Check/toggle with <code>getenforce</code> / <code>setenforce 0|1</code>; persist in <code>/etc/selinux/config</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "LFCS · security",
+   "reverse": false
+  },
+  {
+   "guid": "oErLaKXt9$",
+   "type": "basic",
+   "deck": "Kubernetes::12 Linux Admin (LFCS)",
+   "tags": [
+    "Kubernetes::Linux_Admin_LFCS",
+    "Exam::LFCS"
+   ],
+   "front": "Why is <code>usermod -G</code> dangerous without <code>-a</code>?",
+   "back": "<code>-G</code> alone <b>replaces</b> the user's supplementary groups; <code>-aG</code> appends.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Create a user with home dir: <code>useradd -m -s /bin/bash alice</code>, then <code>passwd alice</code>.",
+   "source": "LFCS · users",
+   "reverse": false
+  },
+  {
+   "guid": "u9w?JXc@6q",
+   "type": "basic",
+   "deck": "Kubernetes::12 Linux Admin (LFCS)",
+   "tags": [
+    "Kubernetes::Linux_Admin_LFCS",
+    "Exam::LFCS"
+   ],
+   "front": "What does <code>cmd &gt; out.log 2&gt;&amp;1</code> do?",
+   "back": "Sends stdout to <code>out.log</code>, then points stderr at the same place, so both go to the file. Order matters: <code>2&gt;&amp;1 &gt; f</code> leaves stderr on the terminal.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "LFCS · shell",
+   "reverse": false
+  },
+  {
+   "guid": "o*Av#ue}?4",
+   "type": "cloze",
+   "deck": "Kubernetes::12 Linux Admin (LFCS)",
+   "tags": [
+    "Kubernetes::Linux_Admin_LFCS",
+    "Exam::LFCS"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Text tools: {{c1::grep}} searches lines by pattern; {{c2::sed}} stream-edits (<code>s/old/new/g</code>); {{c3::awk}} processes fields (<code>'{print $2}'</code>).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "LFCS · text tools",
+   "reverse": false
+  },
+  {
+   "guid": "l:@(Aiqzw_",
+   "type": "basic",
+   "deck": "Kubernetes::12 Linux Admin (LFCS)",
+   "tags": [
+    "Kubernetes::Linux_Admin_LFCS",
+    "Exam::LFCS"
+   ],
+   "front": "How do you set up passwordless SSH key authentication?",
+   "back": "<code>ssh-keygen</code>, then <code>ssh-copy-id user@host</code> (appends the public key to the server's <code>~/.ssh/authorized_keys</code>). Keep the private key at 600 permissions.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "LFCS · ssh",
+   "reverse": false
+  },
+  {
+   "guid": "C%.$_|7%#>",
+   "type": "basic",
+   "deck": "Kubernetes::12 Linux Admin (LFCS)",
+   "tags": [
+    "Kubernetes::Linux_Admin_LFCS",
+    "Exam::LFCS"
+   ],
+   "front": "Hard link vs symbolic link?",
+   "back": "<b>Hard link</b>: another name for the same inode; can't cross filesystems or link directories. <b>Symlink</b>: a pointer to a path; can cross filesystems and can dangle.",
+   "text": "",
+   "image": "",
+   "analogy": "A hard link is a second name on the same house deed; a symlink is a signpost pointing to an address, which may have been demolished.",
+   "extra": "",
+   "source": "LFCS · filesystem",
+   "reverse": false
+  },
+  {
+   "guid": "y7?3G~BJ3W",
+   "type": "basic",
+   "deck": "Kubernetes::12 Linux Admin (LFCS)",
+   "tags": [
+    "Kubernetes::Linux_Admin_LFCS",
+    "Exam::LFCS"
+   ],
+   "front": "Allow HTTP through firewalld vs ufw?",
+   "back": "firewalld: <code>firewall-cmd --add-service=http --permanent</code> then <code>--reload</code>. ufw: <code>ufw allow 80/tcp</code>, <code>ufw enable</code>. Both front nftables/iptables.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "LFCS · networking",
+   "reverse": false
+  },
+  {
+   "guid": "N;?apVoJJQ",
+   "type": "basic",
+   "deck": "Kubernetes::12 Linux Admin (LFCS)",
+   "tags": [
+    "Kubernetes::Linux_Admin_LFCS",
+    "Exam::LFCS"
+   ],
+   "front": "tar commands to create, list and extract a gzip archive?",
+   "back": "Create <code>tar -czf out.tar.gz dir/</code>; list <code>tar -tzf out.tar.gz</code>; extract <code>tar -xzf out.tar.gz</code> (c/t/x = create/list/extract, z = gzip, f = file).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "LFCS · files",
+   "reverse": false
+  }
+ ]
+}
