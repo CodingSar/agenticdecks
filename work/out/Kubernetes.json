@@ -301,24 +301,6 @@
    "reverse": false
   },
   {
-   "guid": "z``M#eCVWo",
-   "type": "basic",
-   "deck": "Kubernetes::01 Architecture & Control Plane",
-   "tags": [
-    "Kubernetes::Architecture_Control_Plane",
-    "Exam::KCNA",
-    "Exam::CNPE"
-   ],
-   "front": "What is the Operator pattern?",
-   "back": "A custom controller plus CRDs that encodes an application's operational knowledge (provisioning, backups, upgrades, failover) and reconciles it continuously, turning runbooks into automation.",
-   "text": "",
-   "image": "",
-   "analogy": "A robot SRE that knows only one database, but knows it deeply and never sleeps.",
-   "extra": "<b>Depth:</b> controller implementation patterns live in the Platform Engineering / Go decks.",
-   "source": "KIA Ch 18 · KCNA/CNPE",
-   "reverse": false
-  },
-  {
    "guid": "C.1n1_K`*6",
    "type": "basic",
    "deck": "Kubernetes::02 Workloads & Pods",
@@ -1862,23 +1844,6 @@
    "reverse": false
   },
   {
-   "guid": "O=&pb>^W|H",
-   "type": "basic",
-   "deck": "Kubernetes::07 Security & Hardening",
-   "tags": [
-    "Kubernetes::Security_Hardening",
-    "Exam::CKS"
-   ],
-   "front": "gVisor vs Kata Containers?",
-   "back": "<b>gVisor</b>: a user-space kernel intercepts the container's syscalls. <b>Kata</b>: each pod runs in a lightweight VM. Both sandbox untrusted or multi-tenant workloads beyond namespace isolation.",
-   "text": "",
-   "image": "",
-   "analogy": "gVisor is an interpreter who answers on the kernel's behalf; Kata gives each guest a house of their own.",
-   "extra": "",
-   "source": "CKS · isolation",
-   "reverse": false
-  },
-  {
    "guid": "t(]HFz>$Ad",
    "type": "basic",
    "deck": "Kubernetes::07 Security & Hardening",
@@ -2132,23 +2097,6 @@
    "analogy": "A CCTV camera inside the building, where admission control is the guard at the door.",
    "extra": "Complements admission controls: it catches what happens after a pod is admitted.",
    "source": "CKS · runtime security",
-   "reverse": false
-  },
-  {
-   "guid": "uRE4ntk%FF",
-   "type": "basic",
-   "deck": "Kubernetes::07 Security & Hardening",
-   "tags": [
-    "Kubernetes::Security_Hardening",
-    "Exam::CCA"
-   ],
-   "front": "Tetragon vs Falco?",
-   "back": "Both are eBPF runtime security tools. Falco mainly <b>detects and alerts</b> on rules; Tetragon (Cilium project) can also <b>enforce</b> in-kernel, e.g. kill the offending process.",
-   "text": "",
-   "image": "",
-   "analogy": "",
-   "extra": "",
-   "source": "CCA · runtime security",
    "reverse": false
   },
   {
@@ -3738,23 +3686,6 @@
    "reverse": false
   },
   {
-   "guid": "zpaXW8RYW~",
-   "type": "basic",
-   "deck": "Kubernetes::11 Cloud Native Ecosystem",
-   "tags": [
-    "Kubernetes::Cloud_Native_Ecosystem",
-    "Exam::CAPA"
-   ],
-   "front": "Argo CD vs Argo Rollouts: who does progressive delivery?",
-   "back": "Argo CD only syncs manifests. <b>Argo Rollouts</b>' <code>Rollout</code> CRD runs canary/blue-green steps; Argo CD deploys the Rollout object.",
-   "text": "",
-   "image": "",
-   "analogy": "",
-   "extra": "",
-   "source": "CAPA · integration",
-   "reverse": false
-  },
-  {
    "guid": "O0bAb=5lU4",
    "type": "basic",
    "deck": "Kubernetes::11 Cloud Native Ecosystem",
@@ -4027,23 +3958,6 @@
    "reverse": false
   },
   {
-   "guid": "s-674MbAS=",
-   "type": "basic",
-   "deck": "Kubernetes::12 Linux Admin (LFCS)",
-   "tags": [
-    "Kubernetes::Linux_Admin_LFCS",
-    "Exam::LFCS"
-   ],
-   "front": "<code>systemctl start</code> vs <code>enable</code>?",
-   "back": "<b>start</b> runs the unit now; <b>enable</b> makes it start at boot (<code>enable --now</code> does both). After editing unit files: <code>systemctl daemon-reload</code>.",
-   "text": "",
-   "image": "",
-   "analogy": "",
-   "extra": "",
-   "source": "LFCS · systemd",
-   "reverse": false
-  },
-  {
    "guid": "G-.Ag>+qL6",
    "type": "basic",
    "deck": "Kubernetes::12 Linux Admin (LFCS)",
@@ -4144,23 +4058,6 @@
    "analogy": "",
    "extra": "<code>lsblk</code> lists block devices.",
    "source": "LFCS · storage",
-   "reverse": false
-  },
-  {
-   "guid": "qq#-]OxNZD",
-   "type": "basic",
-   "deck": "Kubernetes::12 Linux Admin (LFCS)",
-   "tags": [
-    "Kubernetes::Linux_Admin_LFCS",
-    "Exam::LFCS"
-   ],
-   "front": "<code>kill</code> vs <code>kill -9</code>?",
-   "back": "<code>kill</code> sends <b>SIGTERM</b> (15): the process can clean up. <code>kill -9</code> sends <b>SIGKILL</b>: immediate and uncatchable; last resort.",
-   "text": "",
-   "image": "",
-   "analogy": "",
-   "extra": "Same model as pod termination: SIGTERM, grace period, then SIGKILL. Find PIDs with <code>pgrep -f</code>.",
-   "source": "LFCS · processes",
    "reverse": false
   },
   {
@@ -4281,23 +4178,6 @@
    "analogy": "",
    "extra": "",
    "source": "LFCS · ssh",
-   "reverse": false
-  },
-  {
-   "guid": "C%.$_|7%#>",
-   "type": "basic",
-   "deck": "Kubernetes::12 Linux Admin (LFCS)",
-   "tags": [
-    "Kubernetes::Linux_Admin_LFCS",
-    "Exam::LFCS"
-   ],
-   "front": "Hard link vs symbolic link?",
-   "back": "<b>Hard link</b>: another name for the same inode; can't cross filesystems or link directories. <b>Symlink</b>: a pointer to a path; can cross filesystems and can dangle.",
-   "text": "",
-   "image": "",
-   "analogy": "A hard link is a second name on the same house deed; a symlink is a signpost pointing to an address, which may have been demolished.",
-   "extra": "",
-   "source": "LFCS · filesystem",
    "reverse": false
   },
   {

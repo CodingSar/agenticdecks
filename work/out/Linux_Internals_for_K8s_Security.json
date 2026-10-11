@@ -868,22 +868,6 @@
    "reverse": false
   },
   {
-   "guid": "ANhYBD3&*L",
-   "type": "basic",
-   "deck": "Linux Internals for Kubernetes & Security::04 Cgroups",
-   "tags": [
-    "Linux::cgroups"
-   ],
-   "front": "What happens when a container exceeds its CPU limit vs its memory limit?",
-   "back": "CPU: throttled (slower, keeps running). Memory: OOM-killed.",
-   "text": "",
-   "image": "",
-   "analogy": "A CPU limit is a speed governor on a truck; a memory limit is a wall at the end of the road.",
-   "extra": "",
-   "source": "Cgroups",
-   "reverse": false
-  },
-  {
    "guid": "t2=pX/c0G:",
    "type": "basic",
    "deck": "Linux Internals for Kubernetes & Security::04 Cgroups",
@@ -2020,22 +2004,6 @@
    "reverse": false
   },
   {
-   "guid": "PBpX-<k9L-",
-   "type": "basic",
-   "deck": "Linux Internals for Kubernetes & Security::09 Networking Internals",
-   "tags": [
-    "Linux::networking"
-   ],
-   "front": "What is a veth pair?",
-   "back": "Two connected virtual interfaces: a packet into one end comes out the other. The standard link from a container's netns to the host or a bridge.",
-   "text": "",
-   "image": "",
-   "analogy": "A virtual patch cable with a plug in each room.",
-   "extra": "",
-   "source": "Networking Internals",
-   "reverse": false
-  },
-  {
    "guid": "L&W3hFb;Lu",
    "type": "basic",
    "deck": "Linux Internals for Kubernetes & Security::09 Networking Internals",
@@ -2044,22 +2012,6 @@
    ],
    "front": "What is a Linux bridge, and how do containers use it?",
    "back": "A kernel L2 virtual switch. Each container's host-side veth end attaches to it (e.g. <code>docker0</code>); NAT reaches the outside.",
-   "text": "",
-   "image": "",
-   "analogy": "",
-   "extra": "",
-   "source": "Networking Internals",
-   "reverse": false
-  },
-  {
-   "guid": "OFG~J[CAeZ",
-   "type": "basic",
-   "deck": "Linux Internals for Kubernetes & Security::09 Networking Internals",
-   "tags": [
-    "Linux::networking"
-   ],
-   "front": "How does a typical CNI plugin wire up a new pod?",
-   "back": "Creates a veth pair, moves one end into the pod netns as <code>eth0</code>, attaches/routes the host end and assigns an IP (IPAM).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2096,22 +2048,6 @@
    "image": "",
    "analogy": "",
    "extra": "Most distros' <code>iptables</code> binary is now <code>iptables-nft</code>, translating to the nftables kernel API.",
-   "source": "Networking Internals",
-   "reverse": false
-  },
-  {
-   "guid": "m`+#T!xB_u",
-   "type": "basic",
-   "deck": "Linux Internals for Kubernetes & Security::09 Networking Internals",
-   "tags": [
-    "Linux::networking"
-   ],
-   "front": "What is conntrack?",
-   "back": "Kernel connection tracking: records flow state so netfilter/NAT can be stateful (allow return traffic, NAT a flow consistently).",
-   "text": "",
-   "image": "",
-   "analogy": "A doorman who remembers who went out, so he lets them back in without checking the guest list again.",
-   "extra": "<b>Pitfall:</b> a full conntrack table drops new connections on busy nodes.",
    "source": "Networking Internals",
    "reverse": false
   },
@@ -2176,22 +2112,6 @@
    "image": "",
    "analogy": "",
    "extra": "",
-   "source": "Networking Internals",
-   "reverse": false
-  },
-  {
-   "guid": "s]?+2LD?k>",
-   "type": "basic",
-   "deck": "Linux Internals for Kubernetes & Security::09 Networking Internals",
-   "tags": [
-    "Linux::networking"
-   ],
-   "front": "Why does a VXLAN overlay reduce MTU, and what breaks if ignored?",
-   "back": "Encapsulation adds ~50 bytes of headers, so pod MTU must be lower than the physical MTU; otherwise packets fragment or are dropped.",
-   "text": "",
-   "image": "",
-   "analogy": "",
-   "extra": "<b>Symptom:</b> small requests work, large responses hang.",
    "source": "Networking Internals",
    "reverse": false
   },
@@ -2543,22 +2463,6 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "",
-   "source": "Container Runtime",
-   "reverse": false
-  },
-  {
-   "guid": "g`dUEFwR<T",
-   "type": "basic",
-   "deck": "Linux Internals for Kubernetes & Security::11 Container Runtimes & Breakouts",
-   "tags": [
-    "Linux::runtime"
-   ],
-   "front": "containerd vs runc?",
-   "back": "<b>containerd:</b> daemon managing images, snapshots and lifecycle. It calls a low-level runtime (<b>runc</b>) to actually start each container.",
-   "text": "",
-   "image": "",
-   "analogy": "containerd is the restaurant manager; runc is the chef who actually cooks each dish.",
    "extra": "",
    "source": "Container Runtime",
    "reverse": false
