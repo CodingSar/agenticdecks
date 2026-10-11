@@ -96,5 +96,5 @@ Output: **252 notes** in one deck `Kubernetes` with 12 concept subdecks (exam la
 - GK#203 "What does the CNPE certification add over CNPA?": exam-meta: what the CNPE certification format is
 - GK#138 "What is XDP and where does it run?": XDP internals: owned by Linux/Networking decks (eBPF internals); Cilium eBPF card kept
 
-## New contrast / pitfall cards
+## New contrast / pitfall cards (split-derived ones are counted under splits)
 Labels vs annotations; taints vs node affinity; quota-without-requests rejection; liveness probe on a dependency (cascading restarts); default-deny egress breaks DNS; CrashLoopBackOff `logs --previous`; histogram vs summary; node_exporter vs kube-state-metrics vs metrics-server; init containers; Secrets are not encrypted by default (split).
