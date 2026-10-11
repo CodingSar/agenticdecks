@@ -1,0 +1,21 @@
+# Foundations: Fitness, Sleep & Money: changelog
+
+- **Notes in → out:** 49 → 56
+- **Subdecks:** 2 → 5 (01 Exercise, 02 Sleep, 03 Saving & Runway, 04 Investing, 05 Systems & Reviews).
+- **Format:** the embedded `<span class="ex">`/`<span class="rt">` example and routine blocks moved out of `back` into `extra` (`<b>Example:</b>` / `<b>Routine:</b>`). Backs are trimmed to the principle.
+- **Splits (7):**
+  - WHO dose → aerobic + strength
+  - Zone 2 → what/talk test + why it matters
+  - progressive overload → definition + double progression
+  - sleep need → 7–9 h + hidden cost of 6-h nights
+  - morning light → why + how much
+  - compound growth → why early + Rule of 72
+  - napping → nap length + coffee nap
+- **Rewrites:**
+  - "Name three behavioural traps" became a 3-deletion cloze.
+  - The 7-item annual review checklist was condensed to one line.
+  - "Sleep hygiene in one sentence" was reworded to a plain definition.
+  - The minimal strength template now asks for the five movement patterns.
+- **Merges:** none. Emergency fund vs F-you fund was kept as an explicit contrast card.
+- **Deletions:** none. All notes are actionable principles.
+- **Analogies added:** 17 (30%). Examples: wake time as anchor, alcohol = sedation not sleep, IPS = Ulysses and the mast, Coast FI = ball rolling to goal, big rocks first, debt payoff = guaranteed return.
