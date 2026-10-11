@@ -24,7 +24,7 @@ Output: **252 notes** in one deck `Kubernetes` with 12 concept subdecks (exam la
 - Deleted: 47
 - Split-off cards (guid null): 26
 - New cards (contrast/pitfall, guid null): 4
-- Analogies: 27 cards carry one (sources had 0); ~10%
+- Analogies: 62 cards carry one (sources had 0); ~24%
 - Every card rewritten for atomicity and short answers; enumerations (control-plane parts, Service types, QoS, access modes, PSS levels, audit levels, Alertmanager, etc.) became per-item clozes.
 - LFCS, Prometheus (PCA), OpenTelemetry (OTCA), Istio (ICA) and Cilium (CCA) kept as their own concept subdecks; GitOps/Argo/Backstage/Kyverno/platform cards that duplicate the Platform Engineering deck were deleted, unique ones kept in `11 Cloud Native Ecosystem`.
 

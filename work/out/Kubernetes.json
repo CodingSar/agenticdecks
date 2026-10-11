@@ -50,7 +50,7 @@
    "back": "",
    "text": "Kubernetes control plane components: {{c1::kube-apiserver}} (the front end everything talks to), {{c2::kube-scheduler}} (assigns pods to nodes), {{c3::kube-controller-manager}} (runs the reconciliation loops), {{c4::etcd}} (key-value store of all cluster state).",
    "image": "",
-   "analogy": "",
+   "analogy": "The control plane is a company HQ: reception (API server), HR placing staff at sites (scheduler), managers chasing targets (controllers), and the filing cabinet of record (etcd).",
    "extra": "",
    "source": "KIA Ch 1 · KCNA/CKA",
    "reverse": false
@@ -120,7 +120,7 @@
    "back": "Watches for pods with no node assigned, <b>filters</b> feasible nodes, <b>scores</b> them, and writes the binding. It doesn't start the pod; the kubelet does.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "A wedding seating planner: first rule out tables that can't work (filter), then pick the best remaining seat (score). The guest still has to walk there themselves (kubelet).",
    "extra": "",
    "source": "KIA Ch 11 · CKA",
    "reverse": false
@@ -154,7 +154,7 @@
    "back": "The node agent: watches for pods bound to its node, has the container runtime (via CRI) run them, runs their probes, and reports pod and node status to the API server.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "The kubelet is a site foreman: it reads the work orders posted at HQ for its site, gets the crew to do them, and reports progress back.",
    "extra": "",
    "source": "KIA Ch 11 · CKA",
    "reverse": false
@@ -243,7 +243,7 @@
    "back": "A scope for names, RBAC, quotas and policies (soft multi-tenancy). They do <b>not</b> isolate network traffic; that needs NetworkPolicies.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "Namespaces are folders in a shared drive: they organise and scope permissions, but don't wall off the network between them.",
    "extra": "",
    "source": "KIA Ch 3 · CKA/KCNA",
    "reverse": false
@@ -418,7 +418,7 @@
    "back": "A tiny container that holds the pod's network (and IPC) namespace. App containers join it, so the pod keeps one IP even as app containers restart.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "The pause container is the apartment's lease holder: tenants (app containers) can move in and out while the address (IP) stays the same.",
    "extra": "",
    "source": "KIA Ch 11 · CKA",
    "reverse": false
@@ -436,7 +436,7 @@
    "back": "Labels are key-value pairs on objects; <b>selectors</b> pick sets of objects by them. This is how Services, ReplicaSets and NetworkPolicies find their pods.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "Labels are hashtags; selectors are hashtag searches. Services 'follow' whatever pods currently carry their hashtag.",
    "extra": "",
    "source": "KIA Ch 3 · CKAD/KCNA",
    "reverse": false
@@ -470,7 +470,7 @@
    "back": "Both keep N pod replicas running. ReplicaSet (the successor) adds <b>set-based selectors</b> (<code>in</code>, <code>notin</code>, <code>exists</code>). You rarely create either directly; Deployments manage ReplicaSets.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "A ReplicaSet is a headcount rule: 'always three cashiers on shift'. If one leaves, hire another.",
    "extra": "",
    "source": "KIA Ch 4 · CKAD",
    "reverse": false
@@ -488,7 +488,7 @@
    "back": "Declarative rolling updates and rollback: it creates a new ReplicaSet per revision and shifts pods from the old ReplicaSet to the new one.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "A Deployment is a shift change: the new crew (new ReplicaSet) clocks in while the old crew clocks out, and you can call the old crew back.",
    "extra": "",
    "source": "KIA Ch 9 · CKAD/CKA",
    "reverse": false
@@ -557,7 +557,7 @@
    "back": "<b>DaemonSet</b>: exactly one pod per (matching) node, added automatically to new nodes; for node agents (CNI, log/metrics collectors). <b>Deployment</b>: N replicas placed anywhere by the scheduler.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "A DaemonSet is one smoke detector per room: add a room (node) and it gets its own detector automatically.",
    "extra": "",
    "source": "KIA Ch 4 · CKA",
    "reverse": false
@@ -917,7 +917,7 @@
    "back": "<b>ResourceQuota</b>: aggregate cap for a whole namespace (total CPU/memory, object counts). <b>LimitRange</b>: per-container/pod defaults and min/max, and it auto-fills missing requests/limits.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "ResourceQuota is a department's total budget; LimitRange is the per-purchase spending rule (and default amount) within it.",
    "extra": "",
    "source": "KIA Ch 14 · CKA",
    "reverse": false
@@ -952,7 +952,7 @@
    "back": "Adjusts a workload's replica count to keep a metric (CPU utilization, custom or external metric) near a target.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "HPA is a supermarket opening more checkout lanes when the queues get long, and closing them when it's quiet.",
    "extra": "<b>Pitfall:</b> utilization is a % of the <b>request</b>; no requests set = HPA can't compute CPU utilization. Needs metrics-server.",
    "source": "KIA Ch 15 · CKA/CKAD",
    "reverse": false
@@ -1004,7 +1004,7 @@
    "back": "Every pod gets its own IP, and all pods can reach all other pods on any node <b>without NAT</b>; node agents can reach local pods. A CNI plugin implements it.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "A flat pod network is one big office floor where every desk has a direct phone line, with no switchboard rewriting numbers (NAT) in between.",
    "extra": "<b>Pitfall:</b> pod CIDR must not overlap the node or Service CIDRs.",
    "source": "KIA Ch 11 · CKA",
    "reverse": false
@@ -1108,7 +1108,7 @@
    "back": "The list of <b>ready</b> pod IP:port pairs behind a Service, kept in sync by a controller as pods come, go, or change readiness.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "Endpoints are the live roster behind the switchboard number: who is on shift and ready to take calls right now.",
    "extra": "",
    "source": "KIA Ch 5 · CKA",
    "reverse": false
@@ -1159,7 +1159,7 @@
    "back": "<b>CoreDNS</b>, a Deployment behind the <code>kube-dns</code> Service. The kubelet points each pod's <code>/etc/resolv.conf</code> at that Service IP.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "CoreDNS is the cluster's phone book: look up a Service name, get its stable number.",
    "extra": "",
    "source": "CKA · DNS",
    "reverse": false
@@ -1318,7 +1318,7 @@
    "back": "A volume created empty when the pod starts on a node and deleted when the pod is removed. Used for scratch space or sharing files between containers in the pod.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "emptyDir is a whiteboard in a meeting room: shared by everyone in the meeting (containers in the pod), wiped when the meeting (pod) ends.",
    "extra": "",
    "source": "KIA Ch 6 · CKAD",
    "reverse": false
@@ -1371,7 +1371,7 @@
    "back": "<b>Dynamic provisioning</b>: a PVC that names the class makes its provisioner (usually a CSI driver) create a matching PV on demand. No pre-made PVs needed.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "A StorageClass is a print-on-demand catalogue: order a book (PVC) and it's printed (PV) when you ask, instead of pulling from a pre-stocked shelf.",
    "extra": "",
    "source": "KIA Ch 6 · CKA",
    "reverse": false
@@ -1439,7 +1439,7 @@
    "back": "An object holding non-sensitive config as key-value pairs, decoupled from the image. Consumed as environment variables, command args, or files in a mounted volume.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "A ConfigMap is a settings sheet slipped under the door: same image, different behaviour per environment.",
    "extra": "",
    "source": "KIA Ch 7 · CKAD",
    "reverse": false
@@ -1599,7 +1599,7 @@
    "back": "An identity for processes in pods (not humans). Each pod runs as one; its token lets the app authenticate to the API server.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "A ServiceAccount is a staff badge issued to a machine, while user accounts are badges for people.",
    "extra": "",
    "source": "KIA Ch 12 · CKA/CKAD",
    "reverse": false
@@ -1633,7 +1633,7 @@
    "back": "",
    "text": "RBAC: a {{c1::Role}} grants verbs on resources within one namespace and is granted by a {{c2::RoleBinding}}; a {{c3::ClusterRole}} grants cluster-wide (or reusable) permissions and is granted cluster-wide by a {{c4::ClusterRoleBinding}}.",
    "image": "",
-   "analogy": "",
+   "analogy": "A Role is a job description (what you may do); a RoleBinding is the employment contract assigning that job to a person.",
    "extra": "",
    "source": "KIA Ch 12 · CKA",
    "reverse": false
@@ -1719,7 +1719,7 @@
    "back": "<b>Mutating</b> may modify objects (inject sidecars, set defaults); <b>validating</b> may only accept or reject. Mutating runs first, so validators see the final object.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "Mutating admission is the copy editor who fixes the text; validating admission is the publisher who approves or rejects it. The editor always works first.",
    "extra": "Policy engines (Kyverno, Gatekeeper) register as these webhooks.",
    "source": "CKS · admission control · KCA",
    "reverse": false
@@ -1753,7 +1753,7 @@
    "back": "<b>Pod Security Admission</b>: a built-in admission controller (PSP was removed in 1.25) that enforces the Pod Security Standards per namespace.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "Pod Security Admission is a building code inspector with three rulebooks (privileged, baseline, restricted), each namespace choosing which book applies.",
    "extra": "",
    "source": "KIA Ch 13 · CKS",
    "reverse": false
@@ -2249,7 +2249,7 @@
    "back": "A pod the <b>kubelet</b> runs directly from a manifest file on its node, without the scheduler. The API only shows a read-only <b>mirror pod</b>.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "A static pod is a standing order the foreman keeps without asking HQ: whatever manifest is pinned on the site board, he keeps running.",
    "extra": "",
    "source": "CKA · static pods",
    "reverse": false
@@ -2300,7 +2300,7 @@
    "back": "<code>--endpoints</code>, <code>--cacert</code>, <code>--cert</code>, <code>--key</code> (etcd CA and client cert, from the etcd manifest), with <code>ETCDCTL_API=3</code>.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "An etcd snapshot is a photograph of the company's filing cabinet: restore it and the cluster 'remembers' everything as of that moment.",
    "extra": "",
    "source": "CKA · etcd backup",
    "reverse": false
@@ -2385,7 +2385,7 @@
    "back": "<b>cordon</b>: mark the node unschedulable only. <b>drain</b>: cordon + evict its pods, respecting PodDisruptionBudgets. <code>uncordon</code> re-enables scheduling.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "Cordon is a 'no new guests' sign on a hotel floor; drain also politely moves the existing guests to other floors.",
    "extra": "Typical flags: <code>--ignore-daemonsets --delete-emptydir-data</code>.",
    "source": "CKA · node maintenance",
    "reverse": false
@@ -2523,7 +2523,7 @@
    "back": "",
    "text": "Prometheus metric types: a {{c1::Counter}} only goes up (resets on restart); a {{c2::Gauge}} goes up and down; a {{c3::Histogram}} counts observations into buckets (+ <code>_sum</code>/<code>_count</code>); a {{c4::Summary}} computes quantiles client-side.",
    "image": "",
-   "analogy": "",
+   "analogy": "A counter is a car odometer, a gauge a speedometer, a histogram a tally of trips by distance band.",
    "extra": "",
    "source": "PCA · data model",
    "reverse": false
@@ -2864,7 +2864,7 @@
    "back": "Passing trace context (trace ID, span ID, flags) across service boundaries, usually in the W3C <code>traceparent</code>/<code>tracestate</code> headers, so spans join one trace.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "Context propagation is a relay baton carrying the trace ID, so every runner's lap is recorded under the same race.",
    "extra": "",
    "source": "OTCA · context",
    "reverse": false
@@ -2881,7 +2881,7 @@
    "back": "",
    "text": "OpenTelemetry Collector pipeline: {{c1::receivers}} (ingest, e.g. OTLP) → {{c2::processors}} (batch, filter, transform) → {{c3::exporters}} (send to backends).",
    "image": "",
-   "analogy": "",
+   "analogy": "The Collector is a mail sorting office: intake (receivers), sorting and bundling (processors), dispatch to destinations (exporters).",
    "extra": "Decouples apps from observability backends: switch vendors by changing Collector config.",
    "source": "OTCA · collector",
    "reverse": false
@@ -3000,7 +3000,7 @@
    "back": "<b>Head</b>: decided at trace start; cheap but blind to the outcome. <b>Tail</b>: decided after the whole trace is seen (keep errors/slow traces); done in the Collector, needs buffering.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "Head sampling is deciding which letters to photocopy before reading them; tail sampling is reading them first and keeping the interesting ones.",
    "extra": "",
    "source": "OTCA · sampling",
    "reverse": false
@@ -3085,7 +3085,7 @@
    "back": "Control plane: <b>istiod</b> (discovery, config, certificate authority), pushing config via xDS. Data plane: <b>Envoy</b> sidecars per pod, or ztunnel + waypoint proxies in ambient mode.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "istiod is air-traffic control issuing flight plans; Envoy proxies are the pilots actually flying the traffic.",
    "extra": "",
    "source": "ICA · architecture",
    "reverse": false
@@ -3255,7 +3255,7 @@
    "back": "",
    "text": "Istio PeerAuthentication mTLS modes: {{c1::STRICT}} accepts mTLS only; {{c2::PERMISSIVE}} accepts mTLS or plaintext (the default, eases migration); {{c3::DISABLE}} turns mTLS off.",
    "image": "",
-   "analogy": "",
+   "analogy": "PERMISSIVE is a door that accepts both keycards and old metal keys during the migration; STRICT accepts keycards only.",
    "extra": "",
    "source": "ICA · security",
    "reverse": false
@@ -3459,7 +3459,7 @@
    "back": "Cilium implements Service load balancing (ClusterIP, NodePort, …) directly in eBPF, so kube-proxy and its iptables rules aren't needed; it scales better with many Services.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "Replacing kube-proxy's iptables with eBPF is like swapping a long paper checklist read top to bottom for an indexed lookup table.",
    "extra": "",
    "source": "CCA · dataplane",
    "reverse": false
@@ -3578,7 +3578,7 @@
    "back": "",
    "text": "The Open Container Initiative (OCI) defines the {{c1::image-spec}} (image format), the {{c2::runtime-spec}} (how to run a filesystem bundle) and the {{c3::distribution-spec}} (registry API).",
    "image": "",
-   "analogy": "",
+   "analogy": "OCI specs are the shipping-container standard: any crane (runtime) and any port (registry) can handle any box (image).",
    "extra": "<b>Why it matters:</b> an image built by any tool runs on any compliant runtime and registry.",
    "source": "KCNA · standards",
    "reverse": false
@@ -3664,7 +3664,7 @@
    "back": "An operating model where Git is the single source of truth for declarative infra/app state and an in-cluster agent continuously reconciles the cluster to it.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "GitOps makes Git the architect's blueprint; an on-site inspector (agent) keeps rebuilding the house to match the latest approved drawing.",
    "extra": "Principles, Argo CD and Flux depth: Platform Engineering deck.",
    "source": "KCNA · GitOps",
    "reverse": false
@@ -4021,7 +4021,7 @@
    "back": "Files <b>644</b>, directories <b>755</b> (base 666/777 minus the mask; files never get execute by default).",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "umask is a stencil laid over the default permissions: whatever it covers gets masked out.",
    "extra": "",
    "source": "LFCS · permissions",
    "reverse": false
@@ -4107,7 +4107,7 @@
    "back": "",
    "text": "LVM layers: {{c1::Physical Volumes}} (disks/partitions) are pooled into a {{c2::Volume Group}}, which is carved into {{c3::Logical Volumes}} that you format and mount.",
    "image": "",
-   "analogy": "",
+   "analogy": "LVM is pooling several bank accounts (disks) into one fund (volume group) and then writing budgets (logical volumes) you can enlarge later.",
    "extra": "Grow: <code>lvextend</code> then <code>resize2fs</code> / <code>xfs_growfs</code> (or <code>lvextend -r</code>).",
    "source": "LFCS · storage",
    "reverse": false
