@@ -1,0 +1,917 @@
+{
+ "source_file": "cloud_aws_azure_gcp.apkg",
+ "notes": [
+  {
+   "guid": "LHcAynmBT-",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "service-mapping"
+   ],
+   "front": "Object storage service — AWS / Azure / GCP?",
+   "back": "<b>AWS:</b> S3 (Simple Storage Service)<br><b>Azure:</b> Blob Storage<br><b>GCP:</b> Cloud Storage (GCS)",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "All three: bucket-based, eventually-or-strongly-consistent, tiered. S3 has had strong read-after-write consistency since Dec 2020.",
+   "source": ""
+  },
+  {
+   "guid": "J){WiFlawN",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "service-mapping",
+    "kubernetes"
+   ],
+   "front": "Managed Kubernetes — AWS / Azure / GCP?",
+   "back": "<b>AWS:</b> EKS (Elastic Kubernetes Service)<br><b>Azure:</b> AKS (Azure Kubernetes Service)<br><b>GCP:</b> GKE (Google Kubernetes Engine)",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "GKE is generally considered the most mature (Google originated Kubernetes). GKE Autopilot fully manages nodes.",
+   "source": ""
+  },
+  {
+   "guid": "p!8>6l,F3V",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "service-mapping",
+    "compute"
+   ],
+   "front": "Virtual machine / IaaS compute — AWS / Azure / GCP?",
+   "back": "<b>AWS:</b> EC2 (Elastic Compute Cloud)<br><b>Azure:</b> Virtual Machines (VMs)<br><b>GCP:</b> Compute Engine (GCE)",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "Q+,8]TUkt`",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "service-mapping",
+    "compute"
+   ],
+   "front": "Serverless functions (FaaS) — AWS / Azure / GCP?",
+   "back": "<b>AWS:</b> Lambda<br><b>Azure:</b> Functions<br><b>GCP:</b> Cloud Functions (and Cloud Run for containers)",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "FaaS = Function as a Service. GCP Cloud Run is request-driven containers, a middle ground between FaaS and full orchestration.",
+   "source": ""
+  },
+  {
+   "guid": "O+p05)7l|Z",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "service-mapping",
+    "databases"
+   ],
+   "front": "Managed relational database — AWS / Azure / GCP?",
+   "back": "<b>AWS:</b> RDS (Relational Database Service) + Aurora<br><b>Azure:</b> Azure SQL Database, Azure Database for PostgreSQL/MySQL<br><b>GCP:</b> Cloud SQL + AlloyDB",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Aurora and AlloyDB are cloud-native re-architectures of Postgres/MySQL with separated storage/compute.",
+   "source": ""
+  },
+  {
+   "guid": "bKNZn/WBPf",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "service-mapping",
+    "databases"
+   ],
+   "front": "Managed NoSQL key-value/document store — AWS / Azure / GCP?",
+   "back": "<b>AWS:</b> DynamoDB<br><b>Azure:</b> Cosmos DB<br><b>GCP:</b> Firestore (document) + Bigtable (wide-column)",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Cosmos DB is multi-model with five tunable consistency levels. Bigtable is the GCP analog to DynamoDB at very high scale.",
+   "source": ""
+  },
+  {
+   "guid": "weV@dxV$Om",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "service-mapping",
+    "databases"
+   ],
+   "front": "Cloud data warehouse — AWS / Azure / GCP?",
+   "back": "<b>AWS:</b> Redshift<br><b>Azure:</b> Synapse Analytics → Microsoft Fabric (SaaS successor)<br><b>GCP:</b> BigQuery",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "As of 2026 Fabric is the strategic successor to Synapse (which still ships as PaaS). BigQuery is the reference serverless warehouse: storage/compute fully separated.",
+   "source": ""
+  },
+  {
+   "guid": "jQnklP[k1u",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "service-mapping",
+    "storage"
+   ],
+   "front": "Block storage for VMs — AWS / Azure / GCP?",
+   "back": "<b>AWS:</b> EBS (Elastic Block Store)<br><b>Azure:</b> Managed Disks<br><b>GCP:</b> Persistent Disk (+ Hyperdisk)",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "Q;:593-clv",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "service-mapping",
+    "networking",
+    "tradeoffs"
+   ],
+   "front": "Virtual network primitive — AWS / Azure / GCP?",
+   "back": "<b>AWS:</b> VPC (Virtual Private Cloud) — regional<br><b>Azure:</b> Virtual Network (VNet) — regional<br><b>GCP:</b> VPC — <i>global</i>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Key difference: a GCP VPC spans all regions; subnets are regional. AWS/Azure networks are scoped to one region.",
+   "source": ""
+  },
+  {
+   "guid": "Jhb<|=4V=B",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "service-mapping"
+   ],
+   "front": "Container registry — AWS / Azure / GCP?",
+   "back": "<b>AWS:</b> ECR (Elastic Container Registry)<br><b>Azure:</b> Azure Container Registry (ACR)<br><b>GCP:</b> Artifact Registry (replaced Container Registry)",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "c5pv-RozE-",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "service-mapping",
+    "security"
+   ],
+   "front": "Secrets management — AWS / Azure / GCP?",
+   "back": "<b>AWS:</b> Secrets Manager (+ Parameter Store)<br><b>Azure:</b> Key Vault<br><b>GCP:</b> Secret Manager",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Key Vault also handles keys & certificates; AWS splits secrets (Secrets Manager) from KMS keys.",
+   "source": ""
+  },
+  {
+   "guid": "d4XQgd;WN|",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "service-mapping"
+   ],
+   "front": "Message queue (point-to-point) — AWS / Azure / GCP?",
+   "back": "<b>AWS:</b> SQS (Simple Queue Service)<br><b>Azure:</b> Service Bus<br><b>GCP:</b> Pub/Sub (+ Cloud Tasks)",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "FAM89l}jd@",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "service-mapping"
+   ],
+   "front": "Event/stream ingestion (high-throughput log) — AWS / Azure / GCP?",
+   "back": "<b>AWS:</b> Kinesis (Data Streams)<br><b>Azure:</b> Event Hubs<br><b>GCP:</b> Pub/Sub",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Event Hubs is Kafka-protocol compatible. GCP uses Pub/Sub for both queueing and streaming.",
+   "source": ""
+  },
+  {
+   "guid": "GSW{)aI&t;",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "service-mapping"
+   ],
+   "front": "Native infrastructure-as-code (IaC) — AWS / Azure / GCP?",
+   "back": "<b>AWS:</b> CloudFormation (+ CDK)<br><b>Azure:</b> ARM templates → Bicep<br><b>GCP:</b> Cloud Deployment Manager → Config Controller / Terraform",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "ARM = Azure Resource Manager. Terraform is the dominant cross-cloud tool regardless of native options.",
+   "source": ""
+  },
+  {
+   "guid": "m<G;RjHmC)",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "service-mapping"
+   ],
+   "front": "Observability / metrics & logs — AWS / Azure / GCP?",
+   "back": "<b>AWS:</b> CloudWatch<br><b>Azure:</b> Azure Monitor (Log Analytics + App Insights)<br><b>GCP:</b> Cloud Operations (formerly Stackdriver)",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "Tkk@C7jX@",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "service-mapping",
+    "networking"
+   ],
+   "front": "CDN — AWS / Azure / GCP?",
+   "back": "<b>AWS:</b> CloudFront<br><b>Azure:</b> Front Door / Azure CDN<br><b>GCP:</b> Cloud CDN",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "CDN = Content Delivery Network. Azure Front Door also does global L7 load balancing + WAF.",
+   "source": ""
+  },
+  {
+   "guid": "E.Yk^*~nY@",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "service-mapping",
+    "networking"
+   ],
+   "front": "Managed DNS — AWS / Azure / GCP?",
+   "back": "<b>AWS:</b> Route 53<br><b>Azure:</b> Azure DNS (+ Traffic Manager for routing)<br><b>GCP:</b> Cloud DNS",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Route 53 uniquely combines DNS + health-checked routing policies in one service.",
+   "source": ""
+  },
+  {
+   "guid": "usyd$qM6Us",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "service-mapping",
+    "iam-governance"
+   ],
+   "front": "Identity & access management service — AWS / Azure / GCP?",
+   "back": "<b>AWS:</b> IAM (Identity and Access Management)<br><b>Azure:</b> Microsoft Entra ID (formerly Azure AD) + Azure RBAC<br><b>GCP:</b> Cloud IAM",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Azure splits identity (Entra ID — users/groups/apps) from authorization (RBAC role assignments on scopes).",
+   "source": ""
+  },
+  {
+   "guid": "u2hf-q%hYZ",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "iam-governance",
+    "tradeoffs"
+   ],
+   "front": "How does the IAM authorization <i>model</i> differ across the three clouds?",
+   "back": "<b>AWS:</b> JSON policies (allow/deny statements) attached to users, roles, or resources; explicit deny wins.<br><b>Azure:</b> RBAC = role definition + assignment on a scope (management group / subscription / resource group / resource).<br><b>GCP:</b> IAM bindings = role granted to a principal on a node of the resource hierarchy; policies inherit down.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "RBAC = Role-Based Access Control. GCP and Azure inherit permissions down a hierarchy; AWS does not inherit (uses Organizations SCPs as guardrails instead).",
+   "source": ""
+  },
+  {
+   "guid": "DLb,-Jcnqs",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "iam-governance",
+    "tradeoffs"
+   ],
+   "front": "What is the primary isolation / billing boundary in each cloud?",
+   "back": "<b>AWS:</b> the Account<br><b>Azure:</b> the Subscription<br><b>GCP:</b> the Project",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Best practice everywhere: many small boundaries (per-team/per-env), not one giant one. AWS Organizations / Azure Management Groups / GCP Folders group them.",
+   "source": ""
+  },
+  {
+   "guid": "v?jq}@14OU",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "iam-governance",
+    "tradeoffs"
+   ],
+   "front": "Resource hierarchy — AWS / Azure / GCP top-to-bottom?",
+   "back": "<b>AWS:</b> Organization → Organizational Unit (OU) → Account → Resource<br><b>Azure:</b> Management Group → Subscription → Resource Group → Resource<br><b>GCP:</b> Organization → Folder → Project → Resource",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Azure's Resource Group is a mandatory grouping with no AWS/GCP equivalent (resources must live in exactly one). GCP folders can nest; AWS OUs can nest.",
+   "source": ""
+  },
+  {
+   "guid": "Pa0NB6|x>p",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "iam-governance"
+   ],
+   "front": "Org-wide permission guardrails — AWS / Azure / GCP?",
+   "back": "<b>AWS:</b> Service Control Policies (SCPs) on OUs/accounts<br><b>Azure:</b> Azure Policy + RBAC deny assignments<br><b>GCP:</b> Organization Policy constraints + IAM",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "SCPs set the *maximum* permissions; they don't grant, only bound. Azure Policy can also enforce config (e.g. 'only allowed regions').",
+   "source": ""
+  },
+  {
+   "guid": "oNzE{:7g:9",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "iam-governance",
+    "security",
+    "kubernetes"
+   ],
+   "front": "Workload identity without static keys — AWS / Azure / GCP?",
+   "back": "<b>AWS:</b> IAM Roles (incl. IRSA — IAM Roles for Service Accounts, on EKS)<br><b>Azure:</b> Managed Identities / Workload Identity<br><b>GCP:</b> Workload Identity / service accounts",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "All three let pods/VMs assume an identity via the platform rather than embedding long-lived credentials — the preferred pattern.",
+   "source": ""
+  },
+  {
+   "guid": "htI|w%9DYE",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "networking",
+    "tradeoffs"
+   ],
+   "front": "Stateful firewall primitive — AWS / Azure / GCP?",
+   "back": "<b>AWS:</b> Security Groups (stateful) + Network ACLs (stateless, subnet-level)<br><b>Azure:</b> Network Security Groups (NSGs, stateful)<br><b>GCP:</b> VPC firewall rules (stateful)",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "AWS is the odd one with a second *stateless* layer (NACLs). GCP firewall rules attach via network tags or service accounts, not per-NIC objects.",
+   "source": ""
+  },
+  {
+   "guid": "b%`cTHTAOb",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "networking"
+   ],
+   "front": "Private service connectivity (reach a service without traversing the internet) — AWS / Azure / GCP?",
+   "back": "<b>AWS:</b> PrivateLink<br><b>Azure:</b> Private Link<br><b>GCP:</b> Private Service Connect (PSC)",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "All expose a provider/SaaS service as a private endpoint inside your VPC/VNet.",
+   "source": ""
+  },
+  {
+   "guid": "yC3,Hx{ql$",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "networking"
+   ],
+   "front": "Dedicated hybrid on-prem connectivity — AWS / Azure / GCP?",
+   "back": "<b>AWS:</b> Direct Connect<br><b>Azure:</b> ExpressRoute<br><b>GCP:</b> Cloud Interconnect",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Private fiber, bypassing the public internet for bandwidth/latency/compliance.",
+   "source": ""
+  },
+  {
+   "guid": "c0MDX9(V9L",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "networking",
+    "tradeoffs"
+   ],
+   "front": "Why is GCP's global VPC a meaningful trade-off vs AWS/Azure?",
+   "back": "One GCP VPC spans every region, so cross-region VMs share private routing with no peering. In AWS/Azure each VPC/VNet is regional, so multi-region designs need explicit peering / transit gateways.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Upside: simpler global topology in GCP. Downside: a larger single blast radius / fault & policy domain. AWS Transit Gateway and Azure Virtual WAN exist to stitch regional networks together.",
+   "source": ""
+  },
+  {
+   "guid": "L13LHJ*,wP",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "kubernetes",
+    "compute",
+    "pricing",
+    "tradeoffs"
+   ],
+   "front": "EKS vs AKS vs GKE — control-plane cost difference?",
+   "back": "<b>EKS:</b> charges per cluster-hour for the control plane (~$0.10/hr) <i>plus</i> nodes.<br><b>AKS:</b> control plane is free on the standard tier (pay only for nodes; paid 'Standard'/uptime-SLA tier optional).<br><b>GKE:</b> per-cluster management fee (one free zonal cluster historically); Autopilot bills per pod resource request.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Pricing details drift — verify current rates before quoting. The structural point (EKS bills the control plane, AKS generally doesn't) is the durable exam-style fact.",
+   "source": ""
+  },
+  {
+   "guid": "B2-mKru$kg",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "kubernetes",
+    "compute",
+    "tradeoffs"
+   ],
+   "front": "GKE Autopilot vs Standard (and the EKS/AKS equivalent)?",
+   "back": "<b>Autopilot:</b> Google manages nodes; you only declare pods and pay per pod resource request — no node ops.<br><b>Standard:</b> you manage the node pools.<br>EKS/AKS analog: managed node groups + AWS Fargate / ACI 'serverless' nodes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Autopilot trades flexibility (no daemonsets-on-every-node freedom, fewer privileged options) for zero node management.",
+   "source": ""
+  },
+  {
+   "guid": "Qa]5OEM<BR",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "compute",
+    "kubernetes"
+   ],
+   "front": "Serverless containers (no node management) — AWS / Azure / GCP?",
+   "back": "<b>AWS:</b> Fargate (with ECS or EKS)<br><b>Azure:</b> Container Apps / ACI (Azure Container Instances)<br><b>GCP:</b> Cloud Run",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Cloud Run is the most polished 'request → container → scale-to-zero' experience; Fargate removes EC2 node ops under ECS/EKS.",
+   "source": ""
+  },
+  {
+   "guid": "Me3l.2o#9L",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "compute",
+    "pricing"
+   ],
+   "front": "ARM-based compute options — AWS / Azure / GCP?",
+   "back": "<b>AWS:</b> Graviton (custom ARM)<br><b>Azure:</b> Cobalt (custom) + Ampere Altra<br><b>GCP:</b> Axion (custom ARM) + Tau T2A (Ampere)",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "ARM instances typically offer ~20–40% better price-performance for scale-out, compatible workloads. Graviton is the most mature.",
+   "source": ""
+  },
+  {
+   "guid": "wp0n.jdJSV",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "compute",
+    "reliability-regions",
+    "tradeoffs"
+   ],
+   "front": "GCP VM live migration — what does it do that AWS/Azure typically don't?",
+   "back": "GCP can <b>live-migrate</b> a running VM to another host during host maintenance, with no reboot. AWS/Azure typically require a scheduled reboot/stop-start for some maintenance events.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Practical effect: fewer maintenance-driven interruptions on GCP for long-running stateful VMs.",
+   "source": ""
+  },
+  {
+   "guid": "prrvg)N8Ta",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "storage",
+    "pricing",
+    "tradeoffs"
+   ],
+   "front": "Object storage tiers — AWS / Azure / GCP (hot → archive)?",
+   "back": "<table><tr><th>AWS S3</th><th>Azure Blob</th><th>GCP GCS</th></tr><tr><td>Standard</td><td>Hot</td><td>Standard</td></tr><tr><td>Standard-IA / One Zone-IA</td><td>Cool / Cold</td><td>Nearline / Coldline</td></tr><tr><td>Glacier / Deep Archive</td><td>Archive</td><td>Archive</td></tr></table>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "IA = Infrequent Access. Colder tiers = cheaper storage but higher retrieval cost + latency, and minimum storage durations.",
+   "source": ""
+  },
+  {
+   "guid": "JyKgR1du4c",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "storage",
+    "databases"
+   ],
+   "front": "S3 read-after-write consistency — what changed and when?",
+   "back": "Since <b>December 2020</b>, S3 provides <b>strong read-after-write</b> consistency for all operations. Before that, new-object reads could be eventually consistent.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Old interview answers calling S3 'eventually consistent' are outdated. All three clouds' object stores are now strongly consistent for object reads.",
+   "source": ""
+  },
+  {
+   "guid": "f!!s;Fm[N1",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "databases",
+    "tradeoffs"
+   ],
+   "front": "DynamoDB vs Cosmos DB — multi-region & consistency trade-off?",
+   "back": "<b>DynamoDB:</b> single-region by default; Global Tables add active-active multi-region (last-writer-wins). Reads: eventually or strongly consistent.<br><b>Cosmos DB:</b> turnkey global distribution with <b>five</b> consistency levels: Strong, Bounded Staleness, Session, Consistent Prefix, Eventual.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Cosmos DB's tunable consistency spectrum is its signature feature — you trade latency/availability against staleness per request.",
+   "source": ""
+  },
+  {
+   "guid": "EpzWlyf1_F",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "databases",
+    "tradeoffs"
+   ],
+   "front": "Name Cosmos DB's five consistency levels (strongest → weakest).",
+   "back": "1. <b>Strong</b><br>2. <b>Bounded Staleness</b><br>3. <b>Session</b> (default)<br>4. <b>Consistent Prefix</b><br>5. <b>Eventual</b>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Maps cleanly onto the CAP/PACELC latency-vs-consistency tradeoff. Session is the practical default (read-your-own-writes per client).",
+   "source": ""
+  },
+  {
+   "guid": "w_JRS+OBte",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "databases",
+    "tradeoffs"
+   ],
+   "front": "BigQuery vs Redshift — core architectural difference?",
+   "back": "<b>BigQuery:</b> fully serverless; storage and compute completely separated; you query without provisioning a cluster (pay per-byte-scanned or via slots).<br><b>Redshift:</b> originally provisioned clusters (nodes you size and pay for); Redshift Serverless now also offered.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "BigQuery is the reference 'no cluster to manage' warehouse. Azure's serverless analog is Fabric / Synapse serverless SQL pools.",
+   "source": ""
+  },
+  {
+   "guid": "x36k=z@#+W",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "databases"
+   ],
+   "front": "Aurora vs AlloyDB — what are they?",
+   "back": "<b>Aurora (AWS):</b> MySQL/Postgres-compatible engine re-built on a distributed, log-structured storage layer (6-way replicated across 3 AZs).<br><b>AlloyDB (GCP):</b> Postgres-compatible with a similar disaggregated storage design + columnar acceleration for analytics.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Both decouple compute from a purpose-built storage tier for faster failover and read scaling vs vanilla managed Postgres (RDS / Cloud SQL).",
+   "source": ""
+  },
+  {
+   "guid": "rMm4>(1N@)",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "databases",
+    "pricing"
+   ],
+   "front": "Serverless relational/DB scale-to-low options — AWS / Azure / GCP?",
+   "back": "<b>AWS:</b> Aurora Serverless v2 (auto-scales capacity units)<br><b>Azure:</b> Azure SQL serverless / Cosmos DB serverless<br><b>GCP:</b> Firestore & BigQuery are inherently serverless; Cloud SQL is not scale-to-zero",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "A-T86AG]{u",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "pricing",
+    "tradeoffs"
+   ],
+   "front": "Why is data egress the classic cloud cost trap?",
+   "back": "Inbound data is usually free, but <b>outbound (egress) to the internet is billed per GB</b>, and even <b>cross-AZ</b> and <b>cross-region</b> traffic is charged. Costs accrue invisibly in chatty/multi-region architectures.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Order of magnitude (varies): internet egress > cross-region > cross-AZ > same-AZ (often free). Design to keep traffic local; this also drives lock-in concerns.",
+   "source": ""
+  },
+  {
+   "guid": "L?9d.>xTEw",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "pricing",
+    "compute",
+    "tradeoffs"
+   ],
+   "front": "Spot/interruptible compute — naming and behavior across clouds?",
+   "back": "<b>AWS:</b> Spot Instances (reclaimed with 2-min warning)<br><b>Azure:</b> Spot VMs (30-sec eviction notice)<br><b>GCP:</b> Spot VMs (formerly Preemptible; Preemptible had a hard 24-h cap, Spot does not)",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "All offer steep discounts (up to ~60–90%) for interruptible capacity. Good for batch/fault-tolerant work, bad for stateful single-instance services.",
+   "source": ""
+  },
+  {
+   "guid": "KiQcWY98E.",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "pricing",
+    "tradeoffs"
+   ],
+   "front": "Commitment-based discount models — AWS / Azure / GCP?",
+   "back": "<b>AWS:</b> Reserved Instances + Savings Plans (1- or 3-yr commit)<br><b>Azure:</b> Reservations + Savings Plans<br><b>GCP:</b> Committed Use Discounts (CUDs)",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Trade upfront/term commitment for ~30–70% off on-demand. AWS Savings Plans are more flexible (commit $/hr, not a specific instance).",
+   "source": ""
+  },
+  {
+   "guid": "kpp[PS^/4H",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "pricing",
+    "tradeoffs"
+   ],
+   "front": "What automatic discount is unique to GCP?",
+   "back": "<b>Sustained Use Discounts (SUDs):</b> GCP automatically discounts Compute Engine VMs that run for a large fraction of the month — no commitment or action required.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "AWS/Azure require an explicit Reserved/Savings commitment to get comparable discounts; GCP applies SUDs by default on top of (separate from) CUDs.",
+   "source": ""
+  },
+  {
+   "guid": "g=j!Mja79J",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "reliability-regions"
+   ],
+   "front": "Define Region vs Availability Zone (AZ).",
+   "back": "<b>Region:</b> a geographic area (e.g. eu-west-1) containing multiple isolated data-center groups.<br><b>Availability Zone (AZ):</b> one or more discrete data centers within a region with independent power/cooling/network, low-latency linked to peer AZs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Deploy across ≥2–3 AZs for HA within a region; across regions for disaster recovery / data residency. GCP calls AZs 'zones'.",
+   "source": ""
+  },
+  {
+   "guid": "lPN6f~d[C*",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "reliability-regions",
+    "tradeoffs"
+   ],
+   "front": "Which cloud has the most 'global' (non-regional) resources, and give examples?",
+   "back": "<b>GCP</b> leans most global: the VPC is global, Cloud Load Balancing offers a single global anycast IP, Cloud Storage buckets can be multi-region. AWS/Azure keep most resources regional; AWS exposes a few global services (IAM, Route 53, CloudFront).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Global resources simplify multi-region but widen blast radius and complicate data-residency control.",
+   "source": ""
+  },
+  {
+   "guid": "H.AY|!TDs(",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "networking",
+    "reliability-regions"
+   ],
+   "front": "Load balancer types — AWS / Azure / GCP?",
+   "back": "<b>AWS:</b> ALB (L7), NLB (L4), GLB/CLB<br><b>Azure:</b> Application Gateway (L7), Azure Load Balancer (L4), Front Door (global L7)<br><b>GCP:</b> Cloud Load Balancing (single product, global or regional, L4/L7)",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "ALB = Application LB, NLB = Network LB. GCP's global L7 LB with one anycast IP is a distinctive selling point.",
+   "source": ""
+  },
+  {
+   "guid": "GLp]SJ8==",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "security"
+   ],
+   "front": "Encryption at rest — what's true across all three clouds?",
+   "back": "All three <b>encrypt at rest by default</b> with platform-managed keys. You can optionally supply <b>customer-managed keys (CMK)</b> via the KMS: AWS KMS / Azure Key Vault / Cloud KMS.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Trade-off: CMK gives control/revocation/audit but adds operational burden (rotation, availability of the key = availability of the data).",
+   "source": ""
+  },
+  {
+   "guid": "yDx%5~UpU@",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "security"
+   ],
+   "front": "Confidential computing (encrypt data in-use) — AWS / Azure / GCP?",
+   "back": "<b>AWS:</b> Nitro Enclaves<br><b>Azure:</b> Confidential VMs / confidential containers<br><b>GCP:</b> Confidential VMs (AMD SEV / Intel TDX)",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Protects memory contents even from the hypervisor/host operator — for highly sensitive workloads (keys, regulated data).",
+   "source": ""
+  },
+  {
+   "guid": "Pdq#1(Y_-F",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "security",
+    "iam-governance"
+   ],
+   "front": "State the shared responsibility model in one line.",
+   "back": "The cloud provider secures the infrastructure (<b>security <i>of</i> the cloud</b>); the customer secures their data, identities, configs, and workloads (<b>security <i>in</i> the cloud</b>).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Identical in principle across AWS/Azure/GCP. The line shifts with the service model: more provider responsibility for SaaS/serverless, more customer responsibility for IaaS.",
+   "source": ""
+  },
+  {
+   "guid": "fB>}FE(_E~",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "security",
+    "kubernetes",
+    "networking",
+    "tradeoffs"
+   ],
+   "front": "Managed service mesh — current state across clouds (2026)?",
+   "back": "<b>AWS:</b> App Mesh is end-of-support 2026-09-30 → use <b>VPC Lattice</b> or <b>ECS Service Connect</b>.<br><b>Azure:</b> Open Service Mesh (OSM) retired → Istio-based add-on for AKS.<br><b>GCP:</b> Cloud Service Mesh (managed Istio, formerly Anthos Service Mesh).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "This area churns hard — both AWS App Mesh and Azure OSM were deprecated. Istio is the converging open standard underneath GCP's and Azure's current offerings.",
+   "source": ""
+  },
+  {
+   "guid": "OWd=?A#`DC",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "tradeoffs"
+   ],
+   "front": "When does multi-cloud actually pay off vs cost more than it's worth?",
+   "back": "<b>Pays off:</b> regulatory/sovereignty mandates, avoiding vendor lock-in leverage, best-of-breed services (e.g. BigQuery + AWS app), M&A reality.<br><b>Costs more:</b> doubled ops/skills, lowest-common-denominator architecture, cross-cloud egress fees, weaker per-cloud discounts, more security surface.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Common pragmatic stance: pick one primary cloud; stay portable at the boundaries (containers, Terraform, open formats) rather than truly running everything everywhere.",
+   "source": ""
+  },
+  {
+   "guid": "d:;d9kAQuf",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "tradeoffs"
+   ],
+   "front": "Managed/abstracted (PaaS, serverless) vs self-run (IaaS) — the core trade-off?",
+   "back": "<b>Managed:</b> less ops, faster delivery, built-in scaling/patching — but higher per-unit cost, less control, and tighter vendor lock-in.<br><b>Self-run:</b> full control and portability — but you own patching, scaling, HA, and on-call.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "The decision rarely hinges on raw compute price; it hinges on the cost of the engineering time the managed service removes.",
+   "source": ""
+  },
+  {
+   "guid": "x5V^wo>fqc",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "tradeoffs"
+   ],
+   "front": "What primarily drives vendor lock-in on a cloud?",
+   "back": "Not compute (that's portable) but the <b>differentiated managed services</b> you build against: proprietary databases (DynamoDB, Cosmos DB, BigQuery), IAM models, eventing, and especially <b>data gravity</b> — egress fees make moving large datasets expensive.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Mitigations: open formats (Parquet/Delta), Kubernetes + containers, Terraform, abstracting provider SDKs behind interfaces. Each mitigation has its own cost.",
+   "source": ""
+  },
+  {
+   "guid": "H?kbd%,~q@",
+   "type": "basic",
+   "deck": "Cloud: AWS / Azure / GCP Concepts & Trade-offs",
+   "tags": [
+    "cloud",
+    "kubernetes",
+    "tradeoffs"
+   ],
+   "front": "Kubernetes as a portability layer — what does it equalize, and what does it NOT?",
+   "back": "<b>Equalizes:</b> compute scheduling, deployment model, service networking inside the cluster — workloads move across EKS/AKS/GKE fairly cleanly.<br><b>Does NOT:</b> storage (CSI drivers differ), load balancers & ingress (cloud-specific), IAM integration, and the managed databases/queues your apps actually depend on.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "CSI = Container Storage Interface, CNI = Container Network Interface. Portability is real at the orchestration layer but leaks at every cloud-integration boundary.",
+   "source": ""
+  }
+ ]
+}

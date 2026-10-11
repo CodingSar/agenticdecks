@@ -1,0 +1,890 @@
+{
+ "source_file": "data-engineering-basics.apkg",
+ "notes": [
+  {
+   "guid": "nd_V^O,QK7",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "storage_engines"
+   ],
+   "front": "What is a Log-Structured Merge tree (LSM tree) and which workloads favor it?",
+   "back": "Writes land in an in-memory <b>memtable</b> (plus a Write-Ahead Log (WAL) for durability), are flushed as immutable sorted files (<b>SSTables</b>), and merged in the background by <b>compaction</b>.<br><br>Favors <b>write-heavy</b> workloads: every write is sequential I/O. Reads may have to check several levels, mitigated by bloom filters and indexes.<br><br>Examples: RocksDB, Cassandra, ScyllaDB, HBase, and the storage layer of many streaming state stores (Kafka Streams uses RocksDB).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Storage engines"
+  },
+  {
+   "guid": "k.4tsJ6I_J",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "storage_engines"
+   ],
+   "front": "B-tree vs LSM tree: state the core trade-off.",
+   "back": "<b>B-tree</b>: update in place, random I/O, one copy of each key → fast point reads and range scans, higher write cost on spinning/networked disks, page-level locking.<br><b>LSM tree</b>: append-only, sequential writes, multiple copies of a key until compaction → high write throughput, worse read/space amplification, background compaction consumes CPU/I/O.<br><br>Rule of thumb: read-dominated + transactional → B-tree (PostgreSQL, MySQL InnoDB). Write-dominated / time-series / wide-column → LSM.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Storage engines"
+  },
+  {
+   "guid": "niK?WfLt.:",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "storage_engines"
+   ],
+   "front": "Define write amplification, read amplification and space amplification.",
+   "back": "<b>Write amplification</b>: bytes physically written ÷ bytes logically written (compaction rewrites data repeatedly; also an SSD-lifetime concern).<br><b>Read amplification</b>: number of disk reads / levels consulted to answer one logical read.<br><b>Space amplification</b>: bytes on disk ÷ bytes of live data (stale versions awaiting compaction).<br><br>No engine minimizes all three at once (the RUM conjecture: Read, Update, Memory). Tuning compaction strategy moves you along the triangle.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Storage engines"
+  },
+  {
+   "guid": "F&sjWx_<%7",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "storage_engines"
+   ],
+   "front": "What role do bloom filters play in an LSM-based store?",
+   "back": "A per-SSTable probabilistic set: answers 'definitely not here' or 'maybe here'. Lets a point lookup skip files that cannot contain the key, cutting read amplification. False positives are possible, false negatives are not. Cost is a few bits per key in memory.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Storage engines"
+  },
+  {
+   "guid": "N5v{!z2NhY",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "storage_engines"
+   ],
+   "front": "Why does almost every database keep a Write-Ahead Log (WAL)?",
+   "back": "Durability and crash recovery: the change is appended to the log (sequential, fsync'd) <i>before</i> the main data structure is modified. On crash, replay the log. Also the basis for <b>physical replication</b> (PostgreSQL streaming replication, MySQL binlog) and for <b>Change Data Capture (CDC)</b> tools such as Debezium.<br><br>Ops implication on cloud disks: WAL latency = commit latency, so WAL benefits from low-latency block storage (io2 / Premium SSD v2), not object storage.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Storage engines"
+  },
+  {
+   "guid": "LgC~S44[<0",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "storage_engines"
+   ],
+   "front": "Row-oriented vs column-oriented storage: what does each optimize?",
+   "back": "<b>Row store</b>: all columns of a record stored contiguously → cheap to fetch/update one whole record. Suits Online Transaction Processing (OLTP).<br><b>Column store</b>: each column stored contiguously → scans touch only needed columns, excellent compression (similar values adjacent), vectorized execution. Suits Online Analytical Processing (OLAP).<br><br>Writes to a column store are expensive (touch N files per row), so they batch/append.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Storage engines"
+  },
+  {
+   "guid": "l,J*VQM[?t",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "storage_engines"
+   ],
+   "front": "What are Apache Parquet and ORC, and which features make them efficient on object storage?",
+   "back": "Columnar <b>file formats</b> for analytics. Key features:<br>• <b>Row groups</b> with per-column min/max statistics → predicate pushdown skips whole chunks.<br>• Column pruning → read only requested columns (byte-range GETs on S3/Blob).<br>• Per-column encoding + compression (dictionary, RLE, Snappy/ZSTD).<br>• Self-describing schema in the footer.<br><br>Parquet dominates in AWS (Athena, Redshift Spectrum) and Azure (Synapse, Fabric, Databricks).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Storage engines"
+  },
+  {
+   "guid": "iFp;{|s;tN",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "storage_engines"
+   ],
+   "front": "What is Multi-Version Concurrency Control (MVCC)?",
+   "back": "Readers see a consistent snapshot without blocking writers, and vice versa, by keeping multiple versions of a row tagged with transaction IDs/timestamps. Old versions are garbage-collected (PostgreSQL VACUUM, InnoDB purge).<br><br>Cost: space amplification and cleanup work; long-running transactions prevent cleanup (bloat). Cloud-managed variants (Aurora, Azure Database for PostgreSQL) still expose this behavior.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Storage engines"
+  },
+  {
+   "guid": "s>jgsSwhOq",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "storage_engines"
+   ],
+   "front": "Block vs file vs object storage: name the AWS and Azure services and the Kubernetes abstraction for each.",
+   "back": "<b>Block</b> (single-attach disk, low latency, POSIX filesystem on top): AWS Elastic Block Store (EBS) · Azure Managed Disk · k8s PersistentVolume with access mode <code>ReadWriteOnce</code>.<br><b>File</b> (shared network filesystem): AWS Elastic File System (EFS) / FSx · Azure Files / Azure NetApp Files · k8s <code>ReadWriteMany</code>.<br><b>Object</b> (HTTP API, flat namespace, immutable objects, cheapest, highest durability): AWS Simple Storage Service (S3) · Azure Blob Storage / Azure Data Lake Storage Gen2 (ADLS) · no native k8s PV; accessed via SDK or CSI drivers like Mountpoint for S3 / BlobFuse.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Storage engines"
+  },
+  {
+   "guid": "MEY1Z!_L7y",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "storage_engines"
+   ],
+   "front": "Why are EBS volumes and Azure Managed Disks a scheduling concern for stateful workloads on Kubernetes?",
+   "back": "Both are <b>zonal</b>: a disk lives in one Availability Zone (AZ) and can only attach to nodes in that zone. If a pod is rescheduled to another zone it cannot mount its volume.<br><br>Mitigations: <code>StorageClass</code> with <code>volumeBindingMode: WaitForFirstConsumer</code> (provision the disk where the pod lands), topology-aware scheduling, node/zone affinity, and application-level replication across zones instead of relying on the disk. Azure additionally offers Zone-Redundant Storage (ZRS) disks; AWS has no cross-AZ EBS.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Storage engines"
+  },
+  {
+   "guid": "O?dbx)/%eE",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "storage_engines"
+   ],
+   "front": "Why is a StatefulSet (not a Deployment) the right controller for a database or Kafka broker on Kubernetes?",
+   "back": "StatefulSets give each replica a <b>stable identity</b> (ordinal name, stable DNS via a headless Service) and a <b>dedicated PersistentVolumeClaim (PVC)</b> that survives pod rescheduling. Ordered, graceful rolling updates and scale-down protect quorum and replication.<br><br>Deployments treat pods as interchangeable and would let two pods contend for the same volume or lose the PVC binding.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Storage engines"
+  },
+  {
+   "guid": "pL(Ev-Lgek",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "storage_engines"
+   ],
+   "front": "What is the Container Storage Interface (CSI) and what do the EBS/Azure Disk CSI drivers add beyond basic mounting?",
+   "back": "CSI is the standard plugin API letting storage vendors integrate with Kubernetes out-of-tree. Cloud CSI drivers (aws-ebs-csi-driver, azuredisk-csi-driver) provide dynamic provisioning, online volume expansion, <b>VolumeSnapshot</b> objects (backed by EBS snapshots / Azure disk snapshots), volume cloning, and topology reporting so the scheduler knows which zone a volume lives in.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Storage engines"
+  },
+  {
+   "guid": "c]F%sqY?|I",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "storage_engines"
+   ],
+   "front": "What problem do open table formats (Apache Iceberg, Delta Lake, Apache Hudi) solve on top of Parquet in S3/ADLS?",
+   "back": "Object storage gives you files, not tables. Table formats add a <b>metadata layer</b> providing: ACID transactions (atomic multi-file commits), schema evolution, hidden partitioning, <b>time travel</b>/snapshots, row-level updates and deletes (needed for CDC and GDPR erasure), and concurrent writers.<br><br>AWS: Iceberg via Glue Data Catalog, Athena, Redshift, S3 Tables. Azure: Delta Lake is the native format of Microsoft Fabric OneLake and Azure Databricks.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Storage engines"
+  },
+  {
+   "guid": "p6M,Vv,yw2",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "storage_engines"
+   ],
+   "front": "Data lake vs data warehouse vs lakehouse — one-line distinction of each.",
+   "back": "<b>Data lake</b>: raw files (any format) in cheap object storage; schema-on-read; S3 + Glue/Athena, ADLS Gen2.<br><b>Data warehouse</b>: curated, schema-on-write, columnar engine with its own storage format; Redshift, Synapse dedicated SQL pool, Snowflake.<br><b>Lakehouse</b>: warehouse semantics (ACID, governance, performance) directly on open table formats in the lake, decoupling compute engines from storage; Databricks, Microsoft Fabric, Athena+Iceberg.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Storage engines"
+  },
+  {
+   "guid": "LFyZC{CE-b",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "kafka"
+   ],
+   "front": "Define topic, partition and offset in Kafka.",
+   "back": "<b>Topic</b>: a named, append-only stream of records.<br><b>Partition</b>: a topic is split into N ordered, immutable logs; the unit of parallelism, replication and placement.<br><b>Offset</b>: a monotonically increasing sequence number within one partition. Consumers track progress by committing offsets (to the internal <code>__consumer_offsets</code> topic).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kafka"
+  },
+  {
+   "guid": "Lf^kdOom);",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "kafka"
+   ],
+   "front": "What ordering guarantee does Kafka give?",
+   "back": "Ordering is guaranteed <b>only within a single partition</b>. There is no ordering across partitions of a topic. Therefore all events that must be ordered relative to each other (e.g., updates to one customer) must share a partition key. Global ordering requires a single partition, which caps throughput.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kafka"
+  },
+  {
+   "guid": "yxcbS,vre|",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "kafka"
+   ],
+   "front": "How do consumer groups work, and what is the relationship between partition count and consumer parallelism?",
+   "back": "Consumers with the same <code>group.id</code> divide a topic's partitions among themselves; each partition is read by exactly one consumer in the group. Different groups each get the full stream.<br><br>Max useful consumers in a group = number of partitions; extra consumers sit idle. Adding/removing consumers triggers a <b>rebalance</b> (cooperative/incremental rebalancing reduces the stop-the-world effect). Partition count is hard to shrink and changing it breaks key→partition mapping, so choose it deliberately up front.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kafka"
+  },
+  {
+   "guid": "N|o]Re]I0_",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "kafka"
+   ],
+   "front": "What is the In-Sync Replica set (ISR), and how do <code>acks</code>, <code>replication.factor</code> and <code>min.insync.replicas</code> combine for durability?",
+   "back": "Each partition has a leader and followers; the ISR is the followers fully caught up with the leader.<br>• <code>replication.factor=3</code>: three copies (typically across 3 AZs).<br>• <code>acks=all</code>: producer waits until all ISR members have the write.<br>• <code>min.insync.replicas=2</code>: reject writes if fewer than 2 replicas are in sync.<br><br>Together: tolerate one broker/AZ loss with no data loss. Setting <code>acks=1</code> or <code>0</code> trades durability for latency.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kafka"
+  },
+  {
+   "guid": "C5icI#FE?,",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "kafka"
+   ],
+   "front": "Explain at-most-once, at-least-once and exactly-once delivery in Kafka.",
+   "back": "<b>At-most-once</b>: commit offset before processing → may lose messages on crash.<br><b>At-least-once</b> (default practice): process, then commit → duplicates on retry/crash; consumers must be idempotent.<br><b>Exactly-once</b>: idempotent producer (<code>enable.idempotence=true</code>, sequence numbers dedupe broker-side) + <b>transactions</b> (atomic write to multiple partitions plus offset commit) + <code>isolation.level=read_committed</code> consumers. Holds only within Kafka→Kafka pipelines (Kafka Streams); once you write to an external system you need idempotent sinks or 2-phase commit.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kafka"
+  },
+  {
+   "guid": "rtcAH56VMR",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "kafka"
+   ],
+   "front": "Retention vs log compaction: when do you use each?",
+   "back": "<b>Time/size retention</b> (<code>cleanup.policy=delete</code>): segments older than N days / larger than N bytes are dropped. For event streams (clicks, metrics).<br><b>Log compaction</b> (<code>cleanup.policy=compact</code>): keep at least the <i>latest</i> record per key forever; a null value is a <b>tombstone</b> that deletes the key. For changelogs / materialized state (Kafka Streams state store backups, CDC tables, config topics). Both can be combined.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kafka"
+  },
+  {
+   "guid": "Lq@OYrZTz)",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "kafka"
+   ],
+   "front": "How does the record key determine placement, and what is a hot partition?",
+   "back": "Default partitioner: <code>hash(key) mod partitions</code>; null key → sticky/round-robin. A skewed key distribution (one tenant generating most traffic) concentrates load on one partition → one broker and one consumer become the bottleneck while others idle.<br><br>Fixes: better key (add a sub-key/salt), more partitions, or accept loss of per-entity ordering. The same problem appears as hot partitions in DynamoDB and Cosmos DB — partition-key design is a shared skill across data systems.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kafka"
+  },
+  {
+   "guid": "pWi&co{(E@",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "kafka"
+   ],
+   "front": "What is consumer lag and why is it the primary Kafka health metric?",
+   "back": "Lag = (latest offset in partition) − (consumer's committed offset), i.e., how far behind the consumer is. Growing lag means consumers cannot keep up (under-provisioned, slow downstream, rebalancing storms). Export via Burrow, kafka-exporter (Prometheus) or the managed service's metrics (MSK CloudWatch <code>MaxOffsetLag</code>, Event Hubs <i>Incoming/Outgoing messages</i>). Common Horizontal Pod Autoscaler (HPA)/KEDA scaling signal for consumers on Kubernetes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kafka"
+  },
+  {
+   "guid": "xeV6>?O7G8",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "kafka"
+   ],
+   "front": "ZooKeeper vs KRaft: what changed in Kafka's control plane?",
+   "back": "Historically Kafka stored cluster metadata (brokers, topic configs, controller election) in Apache ZooKeeper, a separate quorum to operate. <b>KRaft</b> (Kafka Raft) moves metadata into an internal Raft-replicated log managed by controller nodes, removing ZooKeeper. ZooKeeper mode was removed in Kafka 4.0. Benefits: simpler ops, faster controller failover, higher partition counts.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kafka"
+  },
+  {
+   "guid": "n7fF2~/mYw",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "kafka"
+   ],
+   "front": "What is Strimzi, and how does it run Kafka on Kubernetes?",
+   "back": "A Cloud Native Computing Foundation (CNCF) <b>operator</b> for Kafka. You declare <code>Kafka</code>, <code>KafkaTopic</code>, <code>KafkaUser</code>, <code>KafkaConnect</code> Custom Resources (CRs); the operator reconciles brokers/controllers as pods with PVCs (via StrimziPodSets), handles rolling restarts, TLS certificates, listeners/ingress, Cruise Control rebalancing and KRaft migration.<br><br>Broker storage = block PVs (EBS/Azure Disk, gp3/Premium SSD). Pin pods across zones with <code>topologySpreadConstraints</code> and set <code>rack: topologyKey: topology.kubernetes.io/zone</code> so Strimzi sets <code>broker.rack</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kafka"
+  },
+  {
+   "guid": "bd.(v?Y:;C",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "kafka"
+   ],
+   "front": "Why does rack awareness (<code>broker.rack</code>) matter when Kafka spans Availability Zones?",
+   "back": "The controller uses <code>broker.rack</code> to place each partition's replicas in different racks/zones, so <code>replication.factor=3</code> actually survives an AZ outage instead of landing all replicas in one zone. Without it, zone loss can make partitions unavailable or lose data. Also feeds the fetch-from-follower (rack-aware consumer) optimization.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kafka"
+  },
+  {
+   "guid": "l6jg#*W018",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "kafka"
+   ],
+   "front": "Amazon Managed Streaming for Apache Kafka (MSK) vs Amazon Kinesis Data Streams — key differences.",
+   "back": "<b>MSK</b>: real Apache Kafka (wire-compatible clients, Connect, Streams); you pick broker sizes/partitions (Provisioned) or pay per throughput (Serverless); supports tiered storage to S3; long retention; multi-VPC private connectivity.<br><b>Kinesis Data Streams</b>: proprietary API; capacity in <b>shards</b> (1 MB/s in, 2 MB/s out each) or on-demand; retention 24 h–365 days; tight integration with Lambda/Firehose; no consumer groups (use enhanced fan-out); simpler ops but ecosystem lock-in.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kafka"
+  },
+  {
+   "guid": "c(lkC8Fe9,",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "kafka"
+   ],
+   "front": "How does Azure Event Hubs relate to Kafka?",
+   "back": "Event Hubs is Azure's native event-streaming service that exposes a <b>Kafka-compatible endpoint</b> (protocol level, port 9093) — Kafka clients work with a connection-string change; Kafka Connect and Streams are not fully supported natively. Vocabulary map: namespace ≈ cluster, event hub ≈ topic, partition = partition, consumer group = consumer group.<br><br>Capacity: Throughput Units (Standard), Processing Units (Premium), Capacity Units (Dedicated). <b>Event Hubs Capture</b> lands data automatically in Blob/ADLS Gen2 (Avro) — a data-gravity shortcut into the analytics estate. Azure also offers <i>Azure HDInsight on AKS</i> / Confluent Cloud for full Kafka.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kafka"
+  },
+  {
+   "guid": "PUcgjBc&E:",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "kafka"
+   ],
+   "front": "What is Kafka Connect and when do you use it instead of writing a consumer?",
+   "back": "A framework for running reusable <b>source</b> (external → Kafka) and <b>sink</b> (Kafka → external) connectors with offset tracking, scaling by tasks, and Single Message Transforms (SMTs). Use it for boring plumbing: JDBC, S3/ADLS sinks, Elasticsearch, Debezium CDC. Write custom consumers only for actual business logic. Runs as workers (a Kubernetes Deployment; Strimzi provides <code>KafkaConnect</code> CRs; MSK Connect / Confluent Cloud offer it managed).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kafka"
+  },
+  {
+   "guid": "CioEI{[L]Q",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "kafka"
+   ],
+   "front": "What is Change Data Capture (CDC) and why is Debezium the usual bridge from OLTP to streaming?",
+   "back": "CDC turns the database's own transaction log (PostgreSQL logical replication slot, MySQL binlog, SQL Server CDC tables, MongoDB oplog) into a stream of row-change events — no polling, no application changes, captures deletes. Debezium runs as Kafka Connect source connectors and emits before/after images with schema.<br><br>Cloud hooks: AWS Database Migration Service (DMS) also does CDC to Kinesis/MSK; Azure Data Factory / Fabric mirroring offer managed CDC into the lake. Watch replication-slot growth on the source database when consumers stall.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kafka"
+  },
+  {
+   "guid": "oz]@)q,J%F",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "kafka"
+   ],
+   "front": "Why run a Schema Registry, and what do the compatibility modes mean?",
+   "back": "Producers/consumers agree on Avro/Protobuf/JSON schemas by ID (a few bytes per message instead of embedding the schema). The registry enforces compatibility on new versions:<br>• <b>BACKWARD</b>: new schema can read old data (delete fields / add optional) → upgrade consumers first.<br>• <b>FORWARD</b>: old schema can read new data → upgrade producers first.<br>• <b>FULL</b>: both.<br><br>Options: Confluent Schema Registry, Apicurio (Strimzi-friendly), AWS Glue Schema Registry, Azure Schema Registry (in Event Hubs).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kafka"
+  },
+  {
+   "guid": "APcVX22,%%",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "kafka"
+   ],
+   "front": "What is Kafka tiered storage (KIP-405) and how does it change the data-gravity picture?",
+   "back": "Brokers keep recent log segments on local disk (hot tier) and asynchronously copy older segments to object storage (S3 / Blob), serving historical reads from there. Effects:<br>• Retention limited by cheap object storage, not broker disk.<br>• Broker disks shrink → faster re-replication and rebalancing on Kubernetes.<br>• Kafka becomes a long-term store, pulling more workloads (replay, backfill) toward it.<br><br>Available in MSK (Provisioned), Confluent, Strimzi + Kafka ≥ 3.6 with a remote storage plugin.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kafka"
+  },
+  {
+   "guid": "t{ouw]%vk?",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "kafka"
+   ],
+   "front": "Kafka Streams vs Apache Flink: how do you choose?",
+   "back": "<b>Kafka Streams</b>: a Java library, runs inside your app (a plain Kubernetes Deployment), Kafka-to-Kafka only, exactly-once, state in local RocksDB backed by changelog topics; scaling = more pods ≤ partitions. Simple and operationally light.<br><b>Flink</b>: a distributed engine with its own cluster (Flink Kubernetes Operator; managed as Amazon Managed Service for Apache Flink; Azure via HDInsight on AKS / Fabric Eventstreams), many sources/sinks, richer windowing and event-time semantics, SQL, checkpoints to S3/Blob. Choose when joining non-Kafka sources, very large state, or complex event-time processing.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kafka"
+  },
+  {
+   "guid": "k$Y49PfQ55",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "kafka"
+   ],
+   "front": "Event time vs processing time; what is a watermark?",
+   "back": "<b>Event time</b>: when the event actually happened (embedded timestamp). <b>Processing time</b>: when the engine sees it. Out-of-order and late arrival (mobile clients, retries, region failover) make the two diverge.<br><br>A <b>watermark</b> is the engine's assertion that no events older than T will arrive; it lets windows close and results emit. Late events beyond the allowed lateness are dropped or routed to a side output. Correct window results depend on choosing event time.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kafka"
+  },
+  {
+   "guid": "hAlJ&xm@,y",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "kafka"
+   ],
+   "front": "What is a dead-letter topic (DLT) and where does it fit in a consumer's error strategy?",
+   "back": "A separate topic receiving records that failed processing after retries (poison messages, schema mismatches), with headers recording the error and origin offset. It keeps the main partition moving (otherwise one bad record blocks all subsequent ones in that partition). Pair with alerting on DLT growth and a replay tool. Kafka Connect (<code>errors.deadletterqueue.topic.name</code>), Spring Kafka and Event Hubs/Service Bus (dead-letter queue) all support the pattern.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kafka"
+  },
+  {
+   "guid": "nX(]MjTfPP",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "kafka"
+   ],
+   "front": "Name the three main cost sources of a multi-AZ Kafka cluster in AWS/Azure and the mitigations.",
+   "back": "1. <b>Cross-AZ replication traffic</b> (each write to RF=3 crosses 2 zone boundaries) — mitigate with compression (<code>compression.type=zstd/lz4</code>), batching (<code>linger.ms</code>), tiered storage.<br>2. <b>Cross-AZ consumer reads</b> — mitigate with <b>fetch-from-follower</b> (KIP-392, <code>client.rack</code>) so consumers read from the replica in their own zone.<br>3. <b>Broker block storage</b> (gp3/Premium SSD IOPS and throughput) — size by throughput not just capacity; tiered storage shrinks it.<br><br>Managed services (MSK, Event Hubs) absorb replication egress but price it into the service.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kafka"
+  },
+  {
+   "guid": "i65X;[#uX(",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "olap_vs_oltp"
+   ],
+   "front": "Characterize Online Transaction Processing (OLTP) workloads.",
+   "back": "Many small, short transactions (insert/update/point-read of a few rows), high concurrency, strict ACID and low latency, normalized schema (3NF), indexed by primary/foreign keys, row storage, B-tree engines, hot working set in memory. Sized by transactions per second and p99 latency.<br><br>AWS: Amazon Relational Database Service (RDS), Aurora, DynamoDB. Azure: Azure SQL Database, Azure Database for PostgreSQL/MySQL Flexible Server, Cosmos DB.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OLAP vs OLTP"
+  },
+  {
+   "guid": "O>I*S=b+@{",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "olap_vs_oltp"
+   ],
+   "front": "Characterize Online Analytical Processing (OLAP) workloads.",
+   "back": "Few but large read queries scanning millions–billions of rows with aggregations, joins and group-bys; batch or micro-batch loads; denormalized (star/snowflake) or wide tables; columnar storage; massively parallel processing (MPP); eventual freshness acceptable (minutes–hours). Sized by scan throughput and concurrency slots.<br><br>AWS: Amazon Redshift, Athena, EMR. Azure: Synapse Analytics, Microsoft Fabric warehouse/lakehouse, Azure Databricks, Azure Data Explorer (Kusto).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OLAP vs OLTP"
+  },
+  {
+   "guid": "f&hz8`YCfX",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "olap_vs_oltp"
+   ],
+   "front": "Why must OLTP and OLAP generally run on separate systems?",
+   "back": "They optimize opposite things: row vs column layout, point-index vs full-scan execution, latency vs throughput, small working set vs whole-dataset scans. Analytical scans on the OLTP database evict the hot working set from cache, hold long MVCC snapshots (bloat) and lock/contend with writers.<br><br>So data is moved: ETL/ELT batches, CDC streams (Debezium → Kafka → lake/warehouse), or managed zero-ETL links (Aurora → Redshift zero-ETL; Azure SQL/Cosmos DB → Fabric mirroring, Synapse Link).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OLAP vs OLTP"
+  },
+  {
+   "guid": "krRFH4~scY",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "olap_vs_oltp"
+   ],
+   "front": "What is Hybrid Transactional/Analytical Processing (HTAP), and what do cloud vendors actually ship?",
+   "back": "HTAP = one system serving both workloads, usually by maintaining a columnar replica of row data. Real offerings: Azure Synapse Link for Cosmos DB / SQL (analytical store auto-synced), Microsoft Fabric mirroring, Aurora zero-ETL to Redshift, Google AlloyDB columnar engine, TiDB/SingleStore. Under the hood these are still two engines with a managed replication path — latency is seconds to minutes, not transactional.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OLAP vs OLTP"
+  },
+  {
+   "guid": "xH.r:l4WYy",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "olap_vs_oltp"
+   ],
+   "front": "Star schema: fact vs dimension tables.",
+   "back": "<b>Fact table</b>: one row per business event/measurement (order line, sensor reading); numeric measures + foreign keys to dimensions; very large, append-mostly.<br><b>Dimension table</b>: descriptive context (customer, product, date); small, wide, joined to facts. Slowly Changing Dimensions (SCD Type 2) keep history by versioning rows.<br><br>Star schemas let column engines scan the narrow fact table and hash-join small dimensions (Redshift <code>DISTSTYLE ALL</code> / Synapse <code>REPLICATE</code> for dimensions).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OLAP vs OLTP"
+  },
+  {
+   "guid": "C!^]eaQ333",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "olap_vs_oltp"
+   ],
+   "front": "Amazon Redshift architecture: leader node, compute nodes, RA3, distribution and sort keys.",
+   "back": "• <b>Leader node</b> parses/plans and coordinates; <b>compute nodes</b> hold slices that scan in parallel (MPP).<br>• <b>RA3</b> nodes decouple compute from Redshift Managed Storage (RMS) on S3 with local SSD cache → scale each independently; Redshift Serverless goes further.<br>• <b>Distribution key</b> (<code>KEY</code>/<code>ALL</code>/<code>EVEN</code>/<code>AUTO</code>): which node a row lives on — co-locate join keys to avoid data shuffling.<br>• <b>Sort key</b>: physical order → zone maps skip blocks (like Parquet min/max).<br>• <b>Redshift Spectrum</b> queries Parquet in S3 directly (data gravity: query in place).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OLAP vs OLTP"
+  },
+  {
+   "guid": "ckuM`j(z5*",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "olap_vs_oltp"
+   ],
+   "front": "Azure Synapse dedicated SQL pool: distributions and table distribution strategies.",
+   "back": "Data is always split into <b>60 distributions</b>; compute (Data Warehouse Units, DWU) decides how many nodes serve them.<br>• <b>HASH(column)</b>: for large fact tables; pick a high-cardinality, evenly distributed join key.<br>• <b>ROUND_ROBIN</b>: default, fastest load, but joins need data movement (shuffle).<br>• <b>REPLICATE</b>: full copy on every node for small dimension tables.<br><br>Clustered columnstore index is the default storage. Microsoft Fabric's warehouse is the successor with storage in OneLake (Delta/Parquet).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OLAP vs OLTP"
+  },
+  {
+   "guid": "x3Y8C$d*Ql",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "olap_vs_oltp"
+   ],
+   "front": "How does Amazon Aurora's storage layer differ from a classic RDS instance?",
+   "back": "Aurora sends only <b>redo log records</b> ('the log is the database') to a purpose-built distributed storage service that keeps <b>6 copies across 3 AZs</b> (4/6 write quorum, 3/6 read quorum) and materializes pages itself. Results: up to 15 low-lag read replicas sharing the same storage, fast failover, storage auto-grows to 128 TiB, and far less replication traffic than shipping full pages.<br><br>Azure's analogue for decoupled storage is Azure SQL Hyperscale (page servers + log service).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OLAP vs OLTP"
+  },
+  {
+   "guid": "eJTV><c)~p",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "olap_vs_oltp"
+   ],
+   "front": "DynamoDB and Cosmos DB: what design decision dominates performance, and what is the shared failure mode?",
+   "back": "The <b>partition key</b>. Both hash it to physical partitions and cap throughput per partition (DynamoDB ≈ 3,000 RCU / 1,000 WCU per partition; Cosmos DB 10,000 RU/s per physical partition, 20 GB logical partition limit). A low-cardinality or temporally clustered key (date, status) creates a <b>hot partition</b> → throttling despite spare aggregate capacity.<br><br>Mitigations: high-cardinality keys, write sharding (key + suffix), DynamoDB adaptive capacity/on-demand, Cosmos DB hierarchical partition keys. Same lesson as Kafka partition keys.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OLAP vs OLTP"
+  },
+  {
+   "guid": "iiSh2|S2LM",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "olap_vs_oltp"
+   ],
+   "front": "Name Cosmos DB's five consistency levels, strongest to weakest.",
+   "back": "<b>Strong</b> → <b>Bounded staleness</b> (lag bounded by K versions or T seconds) → <b>Session</b> (default; read-your-writes within a session token) → <b>Consistent prefix</b> (never out of order) → <b>Eventual</b>.<br><br>Weaker levels cost fewer Request Units (RU) and enable multi-region writes with lower latency. DynamoDB offers only eventually consistent (default) vs strongly consistent reads, and Global Tables are last-writer-wins across regions.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OLAP vs OLTP"
+  },
+  {
+   "guid": "x^AdQztkkx",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "olap_vs_oltp"
+   ],
+   "front": "Amazon Athena / Redshift Spectrum / Synapse serverless SQL: what pattern do they share and what makes queries cheap?",
+   "back": "<b>Query-in-place</b> over files in object storage (S3 / ADLS Gen2) with a metadata catalog (AWS Glue Data Catalog / Synapse or Fabric catalog), billed per data scanned. Cost levers: columnar formats (Parquet), compression, <b>partitioning</b> by prefix (e.g., <code>dt=2026-09-13/</code>) so the engine prunes directories, sensible file sizes (128 MB–1 GB; avoid the small-files problem), and table formats (Iceberg/Delta) for statistics and pruning.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OLAP vs OLTP"
+  },
+  {
+   "guid": "vlz<6>{QL$",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "olap_vs_oltp"
+   ],
+   "front": "ETL vs ELT — and why did the cloud shift the industry toward ELT?",
+   "back": "<b>ETL</b>: Extract → Transform on a separate engine → Load the curated result. <b>ELT</b>: load raw data into the warehouse/lake first, transform there with SQL (dbt, Spark).<br><br>Cloud warehouses have cheap, elastic compute next to the data, so moving raw data once and transforming in place beats shipping it through an external tool (data gravity again). Orchestration: AWS Glue / Step Functions / MWAA (Airflow); Azure Data Factory / Fabric Data Pipelines.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OLAP vs OLTP"
+  },
+  {
+   "guid": "lZ{p+aR`SQ",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "olap_vs_oltp"
+   ],
+   "front": "What does 'separation of storage and compute' mean and why does it matter for platform design?",
+   "back": "Durable data lives in shared object storage (S3, ADLS/OneLake); stateless or cache-only compute engines (Redshift RA3, Snowflake, Databricks, Trino on Kubernetes, Fabric) attach on demand. Benefits: independent scaling, pay-per-use compute, multiple engines over the same data, zero-copy sharing.<br><br>Trade-off: network becomes the bottleneck → engines rely on local SSD caching, so co-location (same region/AZ) and high-bandwidth instance types matter. On Kubernetes this is the Trino/Spark-operator-on-EKS/AKS pattern with data in the lake.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OLAP vs OLTP"
+  },
+  {
+   "guid": "j?cYzP<Bv<",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "data_gravity"
+   ],
+   "front": "Define data gravity.",
+   "back": "Term coined by Dave McCrory (2010): as a dataset grows, it attracts applications and services toward it, because moving data is slow and expensive (bandwidth, latency, egress fees, consistency), while moving compute is cheap. Large datasets therefore anchor where new systems get built — and lock in the platform hosting them.<br><br>Design corollary: <b>bring compute to the data</b>; plan the location of the largest datasets first.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Data gravity"
+  },
+  {
+   "guid": "w*(l.vq)V^",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "data_gravity"
+   ],
+   "front": "Which network flows in AWS/Azure cost money, and roughly how much? Rank them.",
+   "back": "Free-ish: inbound from the internet; traffic within the same AZ over private IPs; to S3/Blob in the same region through a gateway endpoint / service endpoint.<br>Cheap but everywhere: <b>cross-AZ</b> traffic — on the order of $0.01/GB <i>per direction</i> in both clouds (bills on both sides for AWS).<br>Moderate: cross-region replication/transfer (~$0.02/GB).<br>Expensive: <b>internet egress</b>, roughly $0.05–0.09/GB after a small free tier.<br><br>Architecture reading: a chatty multi-AZ microservice mesh or a Kafka cluster can quietly generate more cross-AZ bill than compute. Verify current pricing per region.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Data gravity"
+  },
+  {
+   "guid": "mxxhHnt#fB",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "data_gravity"
+   ],
+   "front": "How do you keep Kubernetes traffic inside one Availability Zone?",
+   "back": "• Spread pods evenly with <code>topologySpreadConstraints</code> on <code>topology.kubernetes.io/zone</code>.<br>• Service <code>trafficDistribution: PreferClose</code> (formerly Topology Aware Routing hints) so kube-proxy/eBPF prefers same-zone endpoints.<br>• Service mesh locality load balancing (Istio <code>localityLbSetting</code>).<br>• Zone-aware clients (Kafka <code>client.rack</code>, Cassandra/ScyllaDB rack awareness).<br>• Keep node pools per zone (EKS managed node groups / AKS zone-aligned node pools) so PVCs and pods co-locate.<br><br>Balance against resilience: full zonal isolation means a zone loss removes a third of capacity at once.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Data gravity"
+  },
+  {
+   "guid": "Ig>8oPB3w~",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "data_gravity"
+   ],
+   "front": "Zonal vs regional storage in AWS and Azure — list examples of each.",
+   "back": "<b>Zonal</b> (one AZ; you must replicate): AWS EBS, instance store, single-AZ RDS; Azure Managed Disks (LRS), Azure Files Premium LRS.<br><b>Regional / multi-AZ</b>: AWS S3, EFS, Aurora storage, DynamoDB, multi-AZ RDS, MSK with RF=3; Azure Blob/ADLS with Zone-Redundant Storage (ZRS), ZRS Managed Disks, Cosmos DB, Azure SQL zone-redundant, Event Hubs.<br><br>Rule: state that must survive a zone outage either sits on a regional service or is replicated by the application (Kafka ISR, database replicas) — never on a single zonal disk.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Data gravity"
+  },
+  {
+   "guid": "J`fk*!|idA",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "data_gravity"
+   ],
+   "front": "How do private endpoints reduce both cost and risk when Kubernetes workloads talk to object storage?",
+   "back": "Traffic to S3/Blob otherwise leaves via NAT gateways (per-GB processing fee, ~$0.045/GB on AWS) or public IPs. <b>S3 Gateway Endpoint</b> (free, route-table based) and Azure <b>Service Endpoints</b> keep it on the provider backbone; <b>AWS PrivateLink interface endpoints</b> / Azure <b>Private Endpoints</b> give a private IP inside the VPC/VNet (hourly + per-GB, but no NAT). Also enables policies that deny public access to the bucket/container entirely. On EKS/AKS this is table stakes for lake-facing workloads (Spark, Trino, Kafka Connect S3/ADLS sinks).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Data gravity"
+  },
+  {
+   "guid": "wPn0bV_t%V",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "data_gravity"
+   ],
+   "front": "Why do hybrid platforms usually end up with compute on-premises, and what do the cloud vendors offer for it?",
+   "back": "Because the master data (ERP databases, sensor archives, regulated records) sits on-prem, and its gravity plus residency rules and link bandwidth pull processing there. Vendor answers extend the cloud control plane to your datacenter: <b>AWS Outposts</b> / EKS Anywhere / Local Zones; <b>Azure Arc</b> (Arc-enabled Kubernetes and data services, i.e., managed SQL/PostgreSQL on your cluster) and Azure Local (formerly Stack HCI). Connectivity: AWS Direct Connect, Azure ExpressRoute — provisioned bandwidth is a hard cap on how much data can migrate per day (1 Gbps ≈ 10 TB/day).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Data gravity"
+  },
+  {
+   "guid": "dl}~9.QQPM",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "data_gravity"
+   ],
+   "front": "What is fetch-from-follower (KIP-392) and why is it a data-gravity feature?",
+   "back": "Consumers set <code>client.rack</code>; the broker's replica selector (<code>RackAwareReplicaSelector</code>) directs them to a follower replica in the same zone instead of the partition leader. Read traffic stays in-zone, cutting cross-AZ egress substantially for read-heavy topics. Compute (the consumer) is effectively moved to where a copy of the data is. Trade-off: follower reads lag slightly behind the leader's high watermark.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Data gravity"
+  },
+  {
+   "guid": "lWa}FSoa~8",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "data_gravity"
+   ],
+   "front": "Storage tiers and lifecycle policies in S3 and Azure Blob: names and the trap to avoid.",
+   "back": "<b>S3</b>: Standard → Intelligent-Tiering → Standard-IA / One Zone-IA → Glacier Instant / Flexible Retrieval → Glacier Deep Archive. <b>Azure Blob</b>: Hot → Cool → Cold → Archive.<br><br>Lifecycle rules transition or expire objects by age. Trap: cold/archive tiers charge <b>retrieval fees, early-deletion minimums (30/90/180 days) and rehydration latency</b> (hours for Archive/Deep Archive), so archiving data that a Kafka replay or an audit query will read back is a false economy. Also: millions of small objects make per-request and per-transition costs dominate.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Data gravity"
+  },
+  {
+   "guid": "wt=^QLJ#g6",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "data_gravity"
+   ],
+   "front": "How do you back up stateful workloads on Kubernetes in AWS/Azure?",
+   "back": "Two layers:<br>• <b>Volume level</b>: CSI <code>VolumeSnapshot</code> → EBS snapshot (stored in S3, incremental) / Azure Disk snapshot; tools like Velero orchestrate cluster objects + snapshots and copy to S3/Blob.<br>• <b>Application level</b> (preferred for databases/Kafka): native dumps or backups shipped to object storage (pgBackRest/WAL-G to S3/Blob, Kafka MirrorMaker 2 or tiered storage), because a disk snapshot of a running database is only crash-consistent.<br><br>Restores test the gravity: a multi-TB restore across regions is bounded by bandwidth — plan Recovery Time Objective (RTO) accordingly.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Data gravity"
+  },
+  {
+   "guid": "PkX6A(}Fcz",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "data_gravity"
+   ],
+   "front": "Data residency and sovereignty as a form of gravity: what platform controls implement it?",
+   "back": "Legal/regulatory constraints (GDPR, sector rules) fix where data may live, which then fixes where compute must run. Controls: region allow-lists (AWS Service Control Policies / Azure Policy <code>allowedLocations</code>), storage replication scoped to in-jurisdiction regions (avoid cross-region replication defaults), sovereign offerings (AWS European Sovereign Cloud, Azure sovereign controls), customer-managed keys (KMS / Key Vault) with region-bound keys, and Kubernetes cluster placement plus admission policies (Kyverno/Gatekeeper) rejecting workloads outside allowed regions.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Data gravity"
+  },
+  {
+   "guid": "n/pxPJH$KE",
+   "type": "basic",
+   "deck": "Data Engineering Basics (k8s / AWS / Azure)",
+   "tags": [
+    "data_gravity"
+   ],
+   "front": "You are placing a new stream-processing service. Walk through the placement checklist an architect who respects data gravity would use.",
+   "back": "1. Where is the largest input dataset (Kafka cluster, lake bucket)? Place compute in that region; same AZ set.<br>2. Which flows cross zones? Use rack-aware clients, PreferClose routing, and RF-aware sizing.<br>3. Which flows cross regions or the internet? Justify each; use private endpoints; batch/compress.<br>4. State on disk: zonal (EBS/Disk) vs regional (S3/Blob/managed DB)? Match RTO/RPO.<br>5. Output location: land results next to their consumers (lake for analytics, OLTP store for serving).<br>6. Growth: will this dataset become the new center of gravity? Then choose open formats (Parquet/Iceberg/Delta) to avoid lock-in.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Data gravity"
+  }
+ ]
+}

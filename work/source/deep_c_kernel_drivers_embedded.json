@@ -1,0 +1,2563 @@
+{
+ "source_file": "deep_c_kernel_drivers_embedded.apkg",
+ "notes": [
+  {
+   "guid": "llEDZg&>w]",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::01 Language Core and Undefined Behaviour",
+   "tags": [
+    "deepc",
+    "ub"
+   ],
+   "front": "<div>What is the difference between <b>undefined</b>, <b>unspecified</b> and <b>implementation-defined</b> behaviour in C?</div>",
+   "back": "<ul><li><b>Undefined Behaviour (UB)</b>: the standard imposes no requirements. The compiler may assume it never happens and optimise on that assumption (signed overflow, out-of-bounds access, data races, strict-aliasing violations).</li><li><b>Unspecified</b>: several outcomes are allowed and the implementation need not document which (evaluation order of function arguments).</li><li><b>Implementation-defined</b>: the implementation chooses and must document it (<code>sizeof(int)</code>, signedness of <code>char</code>, right shift of a negative value).</li></ul><div>In kernel and firmware code there is no safety net: UB becomes silent memory corruption or a security hole.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour"
+  },
+  {
+   "guid": "Klc)^2jlEJ",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::01 Language Core and Undefined Behaviour",
+   "tags": [
+    "deepc",
+    "ub",
+    "integers"
+   ],
+   "front": "<div>What does the compiler assume about <code>int</code> overflow, and how does the Linux kernel deal with that?</div>",
+   "back": "<div>Signed overflow is Undefined Behaviour (UB), so the optimiser assumes it never happens: <code>if (x + 1 &lt; x)</code> folds to false, <code>int</code> loop counters are assumed not to wrap.</div><div>Unsigned arithmetic is defined to wrap modulo 2^N.</div><div>The kernel builds with <code>-fno-strict-overflow</code> (GCC: equivalent to <code>-fwrapv -fwrapv-pointer</code>), which defines signed wrap as two's complement.</div><div>Portable code: test before the operation, or use <code>__builtin_add_overflow()</code> (kernel wrapper: <code>check_add_overflow()</code>).</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour"
+  },
+  {
+   "guid": "m`y{R9B*Ml",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::01 Language Core and Undefined Behaviour",
+   "tags": [
+    "deepc",
+    "ub",
+    "integers",
+    "embedded"
+   ],
+   "front": "<pre><code>uint16_t x = 0xFFFF;\nuint32_t y = x * x;</code></pre><div>What is wrong on a target with 32-bit <code>int</code>? What happens on a 16-bit <code>int</code> microcontroller?</div>",
+   "back": "<div><b>Integer promotion</b>: any operand of rank below <code>int</code> (<code>char</code>, <code>short</code>, <code>uint8_t</code>, <code>uint16_t</code>, bitfields) is converted to <code>int</code> if <code>int</code> can hold all its values, otherwise to <code>unsigned int</code>.</div><ul><li>32-bit <code>int</code>: both operands become <i>signed</i> <code>int</code>; 0xFFFF * 0xFFFF = 0xFFFE0001 &gt; <code>INT_MAX</code> → signed overflow → Undefined Behaviour.</li><li>16-bit <code>int</code> (AVR, MSP430): <code>uint16_t</code> is <code>unsigned int</code>; the product wraps to 0x0001 before widening. Defined, but wrong.</li></ul><div>Fix for both: <code>(uint32_t)x * x</code>.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour"
+  },
+  {
+   "guid": "q&-ijrR)$w",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::01 Language Core and Undefined Behaviour",
+   "tags": [
+    "deepc",
+    "integers",
+    "security"
+   ],
+   "front": "<div><code>if (-1 &lt; 1U)</code>: which branch is taken, and what real-world bug class does this cause?</div>",
+   "back": "<div>False. <b>Usual arithmetic conversions</b>: with equal rank, the signed operand converts to unsigned, so -1 becomes <code>UINT_MAX</code>.</div><div>Bug class: signed lengths.</div><pre><code>int len = user_len;\nif (len &gt; MAX)          /* negative len passes */\n        return -EINVAL;\nmemcpy(dst, src, len);  /* converted to size_t: huge copy */</code></pre><div>Any comparison against <code>sizeof</code> silently becomes unsigned. Use <code>size_t</code>/<code>u32</code> for lengths and build with <code>-Wsign-compare</code>.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour"
+  },
+  {
+   "guid": "dd=3?Z#1/:",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::01 Language Core and Undefined Behaviour",
+   "tags": [
+    "deepc",
+    "ub",
+    "aliasing"
+   ],
+   "front": "<div>State the <b>strict aliasing</b> rule. Which accesses are exempt, and what does the kernel do about it?</div>",
+   "back": "<div>An object may only be accessed through an lvalue of: its effective type, a qualified version of it, its signed/unsigned counterpart, an aggregate or union containing such a member, or a <b>character type</b>.</div><div>Anything else is Undefined Behaviour: the compiler may assume an <code>int *</code> and a <code>float *</code> never alias and cache or reorder loads and stores.</div><div>The exemption is one-way: any object may be read through <code>unsigned char *</code>, but a <code>char buf[]</code> may not be read through a <code>uint32_t *</code>.</div><div>The kernel builds with <code>-fno-strict-aliasing</code>; much firmware does as well. Otherwise use <code>memcpy()</code>.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour"
+  },
+  {
+   "guid": "]>PCl`.lo",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::01 Language Core and Undefined Behaviour",
+   "tags": [
+    "deepc",
+    "aliasing"
+   ],
+   "front": "<div>Give two correct ways to reinterpret the bits of a <code>float</code> as a <code>uint32_t</code>. Which common way is wrong?</div>",
+   "back": "<pre><code>uint32_t u;\nmemcpy(&amp;u, &amp;f, sizeof u);       /* always valid; compiles to one move */\n\nunion { float f; uint32_t u; } p = { .f = f };\nu = p.u;                        /* valid in C (not in C++) */</code></pre><div>Wrong: <code>*(uint32_t *)&amp;f</code>. That is a strict-aliasing violation, and in the general case also a potential alignment fault.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour"
+  },
+  {
+   "guid": "OU!!Q?=gl`",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::01 Language Core and Undefined Behaviour",
+   "tags": [
+    "deepc",
+    "volatile",
+    "embedded"
+   ],
+   "front": "<div>What exactly does <code>volatile</code> guarantee, and what does it <b>not</b> guarantee?</div>",
+   "back": "<div>Guarantees: every read and write in the source becomes an actual load/store, in source order, never cached in a register, never elided.</div><div>Does not give:</div><ul><li>atomicity (<code>v++</code> is still load, add, store)</li><li>mutual exclusion</li><li>memory barriers or ordering between CPUs</li><li>cache coherency for Direct Memory Access (DMA) buffers</li></ul><div>Legitimate uses: Memory-Mapped Input/Output (MMIO) registers, variables shared with an Interrupt Service Routine (ISR) or signal handler, locals that must survive <code>longjmp()</code>.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour"
+  },
+  {
+   "guid": "I}=s(*v8y`",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::01 Language Core and Undefined Behaviour",
+   "tags": [
+    "deepc",
+    "volatile",
+    "kernel"
+   ],
+   "front": "<div>Why does the kernel documentation call <code>volatile</code> \"considered harmful\"? What is used instead?</div>",
+   "back": "<div>Shared kernel data is protected by locks, atomics or Read-Copy-Update (RCU), which already force correct accesses. <code>volatile</code> on the declaration pessimises every access and hides the real concurrency design.</div><div>Instead:</div><ul><li>Memory-Mapped Input/Output (MMIO): <code>readl()</code>/<code>writel()</code> on <code>__iomem</code> pointers</li><li>a single lockless access: <code>READ_ONCE()</code> / <code>WRITE_ONCE()</code> (volatile at the <i>access</i>, not the declaration)</li><li>busy-wait: <code>cpu_relax()</code></li><li>counters: <code>atomic_t</code>, <code>refcount_t</code></li></ul><div>Accepted exceptions: <code>jiffies</code>, and some memory that a device modifies behind the CPU's back.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour"
+  },
+  {
+   "guid": "dbtYe1(`Oq",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::01 Language Core and Undefined Behaviour",
+   "tags": [
+    "deepc",
+    "aliasing"
+   ],
+   "front": "<div>What does <code>restrict</code> promise, and who pays if the promise is broken?</div>",
+   "back": "<div><code>restrict</code> on a pointer promises that, for the lifetime of that pointer, the object it points to is accessed only through it (or pointers derived from it). The compiler may then skip reloads and vectorise.</div><div>Breaking the promise is Undefined Behaviour; nothing is diagnosed.</div><div><code>memcpy(void *restrict d, const void *restrict s, size_t n)</code>: overlapping buffers are UB, which is why <code>memmove()</code> exists.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour"
+  },
+  {
+   "guid": "E,)G;{dD)|",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::01 Language Core and Undefined Behaviour",
+   "tags": [
+    "deepc",
+    "const"
+   ],
+   "front": "<div>Read: <code>const char *p</code>, <code>char *const p</code>, <code>const char *const p</code>. What happens if you cast away <code>const</code> and write?</div>",
+   "back": "<div>Read right to left: pointer to const char (cannot write through <code>p</code>); const pointer to char (cannot reseat <code>p</code>); both.</div><div>Writing through a cast-away <code>const</code> is Undefined Behaviour only if the <i>object itself</i> was defined <code>const</code>. In practice:</div><ul><li>kernel: object lives in write-protected <code>.rodata</code> → page fault / oops</li><li>microcontroller: object lives in flash → write ignored or bus fault</li></ul><div><code>const</code> on a pointer parameter is a promise by the callee, not a guarantee that the data does not change: another alias may still modify it.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour"
+  },
+  {
+   "guid": "Pc^(t8Z0aG",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::01 Language Core and Undefined Behaviour",
+   "tags": [
+    "deepc",
+    "ub"
+   ],
+   "front": "<div>Which of these are Undefined Behaviour?</div><pre><code>i = i++ + 1;\na[i] = i++;\nf(i++, i++);\ni = i + 1;</code></pre>",
+   "back": "<div>The first three: an object is modified twice, or modified and separately read, with no sequence point in between (unsequenced side effects). The last is fine.</div><div>Related but only <i>unspecified</i>: whether <code>g()</code> or <code>h()</code> runs first in <code>f(g(), h())</code>.</div><div>Sequence points: end of a full expression, <code>&amp;&amp;</code>, <code>||</code>, <code>?:</code>, the comma operator, and after argument evaluation just before a call.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour"
+  },
+  {
+   "guid": "L-GMbEeg3s",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::01 Language Core and Undefined Behaviour",
+   "tags": [
+    "deepc",
+    "ub",
+    "integers",
+    "kernel"
+   ],
+   "front": "<div>List the undefined and implementation-defined cases of the C shift operators. Why is the kernel's <code>BIT(n)</code> defined as <code>(1UL &lt;&lt; (n))</code>?</div>",
+   "back": "<div>Undefined Behaviour:</div><ul><li>count negative or ≥ width of the <i>promoted</i> left operand</li><li>left shift of a negative value</li><li>left shift of a signed value whose result is not representable (<code>1 &lt;&lt; 31</code> with 32-bit <code>int</code>)</li></ul><div>Implementation-defined: right shift of a negative value (arithmetic shift on every relevant Application Binary Interface (ABI)).</div><div><code>1U &lt;&lt; 31</code> is fine, hence the unsigned constant. For bits ≥ 32 use <code>BIT_ULL(n)</code> / <code>1ULL &lt;&lt; n</code>: <code>1UL &lt;&lt; 40</code> is UB on a 32-bit target.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour"
+  },
+  {
+   "guid": "s`Zp$;N?P8",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::01 Language Core and Undefined Behaviour",
+   "tags": [
+    "deepc",
+    "ub",
+    "integers",
+    "embedded"
+   ],
+   "front": "<pre><code>uint8_t b[4];\nuint64_t v = b[0] | b[1] &lt;&lt; 8 | b[2] &lt;&lt; 16 | b[3] &lt;&lt; 24;</code></pre><div>Find the bug.</div>",
+   "back": "<div><code>b[3]</code> is promoted to <i>signed</i> <code>int</code>. If <code>b[3] &gt;= 0x80</code>, <code>b[3] &lt;&lt; 24</code> shifts into the sign bit (Undefined Behaviour; in practice a negative <code>int</code>). Converting that to <code>uint64_t</code> sign-extends, so the upper 32 bits become all ones.</div><div>Fix: <code>(uint32_t)b[3] &lt;&lt; 24</code>.</div><div>Kernel: <code>get_unaligned_le32(b)</code>.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour"
+  },
+  {
+   "guid": "hiOfLHg8AR",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::01 Language Core and Undefined Behaviour",
+   "tags": [
+    "deepc",
+    "pointers",
+    "ub"
+   ],
+   "front": "<div>What are the rules for valid pointer arithmetic and pointer comparison?</div>",
+   "back": "<ul><li>Arithmetic is valid only inside one array object (a single object counts as an array of 1) or to one-past-the-end; one-past may not be dereferenced. Merely <i>forming</i> a pointer outside that range is Undefined Behaviour.</li><li><code>&lt;</code> and <code>&gt;</code> only between pointers into the same object; <code>==</code> between any.</li><li>Subtraction: same array; result type <code>ptrdiff_t</code>.</li><li>Arithmetic on <code>void *</code> is a GNU extension (element size 1), used all over the kernel.</li><li>Pointer ↔ integer conversion is implementation-defined; use <code>uintptr_t</code> (kernel: <code>unsigned long</code>).</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour"
+  },
+  {
+   "guid": "fc-:<GHeA5",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::01 Language Core and Undefined Behaviour",
+   "tags": [
+    "deepc",
+    "ub",
+    "security",
+    "kernel"
+   ],
+   "front": "<pre><code>struct sock *sk = tun-&gt;sk;\nif (!tun)\n        return POLLERR;</code></pre><div>Why was this an exploitable kernel bug (CVE-2009-1897), and what build flag resulted?</div>",
+   "back": "<div><code>tun</code> is dereferenced before the check, so the compiler infers <code>tun != NULL</code> (otherwise Undefined Behaviour) and <b>deletes the check</b>. With page zero mapped by user space, the kernel carried on using an attacker-controlled structure.</div><div>Fixes: check before dereferencing; the kernel builds with <code>-fno-delete-null-pointer-checks</code>; <code>mmap_min_addr</code> prevents mapping page 0.</div><div>Lesson: UB is not \"whatever the hardware does\". The optimiser reasons backwards from it.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour"
+  },
+  {
+   "guid": "mwsA7-9*?J",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::01 Language Core and Undefined Behaviour",
+   "tags": [
+    "deepc",
+    "pointers",
+    "arrays"
+   ],
+   "front": "<div>When does an array <b>not</b> decay to a pointer? What is <code>sizeof(buf)</code> inside <code>void f(char buf[64])</code>?</div>",
+   "back": "<div>No decay when the array is the operand of <code>sizeof</code>, <code>_Alignof</code>, <code>typeof</code>, unary <code>&amp;</code> (yields <code>char (*)[64]</code>), or when a string literal initialises an array.</div><div>In a parameter list <code>char buf[64]</code> is <i>adjusted</i> to <code>char *buf</code>, so <code>sizeof(buf)</code> is the pointer size (4 or 8).</div><div>That is why the kernel's <code>ARRAY_SIZE()</code> includes <code>__must_be_array()</code>, which breaks the build when given a pointer.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour"
+  },
+  {
+   "guid": "Bv1{F$|=^6",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::01 Language Core and Undefined Behaviour",
+   "tags": [
+    "deepc",
+    "linkage"
+   ],
+   "front": "<div>What are the meanings of <code>static</code> in C, and what does <code>-fno-common</code> change?</div>",
+   "back": "<ul><li>File scope: <b>internal linkage</b>. The default for every driver-internal function and variable: no namespace pollution, and the compiler can inline or drop it.</li><li>Block scope: <b>static storage duration</b>. One instance in <code>.data</code>/<code>.bss</code> that keeps its value. Makes the function non-reentrant.</li><li><code>void f(int a[static 4])</code>: caller guarantees at least 4 elements (rare).</li></ul><div><code>-fno-common</code> (default since GCC 10): a tentative definition <code>int x;</code> appearing in two files is a multiple-definition link error instead of being silently merged. Put <code>extern int x;</code> in the header and one definition in a <code>.c</code> file.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour"
+  },
+  {
+   "guid": "nS)[b7KHJ?",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::01 Language Core and Undefined Behaviour",
+   "tags": [
+    "deepc",
+    "security",
+    "kernel",
+    "layout"
+   ],
+   "front": "<div>A driver fills a stack <code>struct</code> member by member and then <code>copy_to_user()</code>s it. What is the vulnerability?</div>",
+   "back": "<div>Padding bytes and any unassigned members still hold stale kernel stack contents → <b>information leak</b> (defeats Kernel Address Space Layout Randomisation (KASLR), may leak keys).</div><div><code>= {0}</code> and designated initialisers zero the <i>members</i>; padding is not guaranteed to be zeroed.</div><div>Fix: <code>memset(&amp;s, 0, sizeof(s))</code> before filling, or lay out the struct with no implicit padding (explicit <code>__u32 reserved;</code>).</div><div>Hardening: <code>CONFIG_INIT_STACK_ALL_ZERO</code> (<code>-ftrivial-auto-var-init=zero</code>). Objects with static storage duration are always zero-initialised.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour"
+  },
+  {
+   "guid": "Kay/)_c)R8",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::01 Language Core and Undefined Behaviour",
+   "tags": [
+    "deepc",
+    "kernel",
+    "layout"
+   ],
+   "front": "<div>What is a <b>flexible array member</b>? How is it allocated safely in the kernel, and why were <code>[0]</code> and <code>[1]</code> trailing arrays purged?</div>",
+   "back": "<pre><code>struct msg {\n        u32 len;\n        u8  data[];     /* C99; must be the last member */\n};\nm = kmalloc(struct_size(m, data, n), GFP_KERNEL);</code></pre><div><code>sizeof(struct msg)</code> excludes <code>data</code>. <code>struct_size()</code> saturates to <code>SIZE_MAX</code> on overflow, so the allocation fails instead of being too small.</div><div><code>[0]</code> (GNU) and <code>[1]</code> (C89 hack) defeat compiler bounds checking (<code>-fstrict-flex-arrays=3</code>, <code>FORTIFY_SOURCE</code>, <code>__counted_by(len)</code>), and <code>[1]</code> makes <code>sizeof</code> off by one element.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour"
+  },
+  {
+   "guid": "A<)v|o=m5z",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::01 Language Core and Undefined Behaviour",
+   "tags": [
+    "deepc",
+    "layout",
+    "drivers",
+    "embedded"
+   ],
+   "front": "<div>Why are C bitfields avoided for hardware registers and wire formats?</div>",
+   "back": "<div>Implementation-defined: bit order within the storage unit, whether fields straddle units, the storage unit's type and alignment, signedness of a plain <code>int</code> bitfield.</div><div>Additionally:</div><ul><li>access width is not guaranteed; the register may demand a 32-bit access while the compiler emits a byte access</li><li>each assignment is a separate read-modify-write: non-atomic, several bus writes where hardware wants one, and it clobbers write-1-to-clear bits</li><li>adjacent bitfields share a storage unit, so two contexts writing <i>different</i> fields still race</li></ul><div>Use masks and shifts: <code>GENMASK()</code>, <code>FIELD_PREP()</code>, <code>FIELD_GET()</code>.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour"
+  },
+  {
+   "guid": "q$t7]cyv%q",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::01 Language Core and Undefined Behaviour",
+   "tags": [
+    "deepc",
+    "abi",
+    "embedded",
+    "layout"
+   ],
+   "front": "<div>What is the underlying type of an <code>enum</code>, and why is <code>-fshort-enums</code> an Application Binary Interface (ABI) hazard?</div>",
+   "back": "<div>Enumeration <i>constants</i> have type <code>int</code>; the enumerated <i>type</i> is an implementation-defined integer type able to hold all values.</div><div><code>-fshort-enums</code> picks the smallest such type. Bare-metal ARM toolchains (<code>arm-none-eabi</code>) commonly default to variable-size enums, while Linux ABIs use <code>int</code>.</div><div>Mixing objects built with different settings changes struct layouts and argument sizes silently. The linker warning \"uses variable-size enums yet the output is to use 32-bit enums\" is the symptom, typically with a vendor binary library.</div><div>Never put an <code>enum</code> in a wire format or a user-space ABI struct; use a fixed-width integer.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour"
+  },
+  {
+   "guid": "o-lP*l;hMf",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::01 Language Core and Undefined Behaviour",
+   "tags": [
+    "deepc",
+    "abi",
+    "integers"
+   ],
+   "front": "<div>Is plain <code>char</code> signed? How has that bitten portable kernel and embedded code?</div>",
+   "back": "<div>Implementation-defined. x86: signed. ARM, PowerPC, RISC-V: unsigned.</div><div>Typical bugs: <code>if (c &lt; 0)</code>, <code>c == EOF</code>, <code>char</code> used as an array index (negative index), sign extension in <code>int x = c;</code> for bytes ≥ 0x80. The code works on the x86 workstation and breaks on the ARM target, or vice versa.</div><div>Since Linux 6.2 the kernel builds with <code>-funsigned-char</code> on all architectures.</div><div>Use <code>u8</code>/<code>uint8_t</code> for bytes and <code>char</code> only for text.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour"
+  },
+  {
+   "guid": "joP(y<U$fN",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::01 Language Core and Undefined Behaviour",
+   "tags": [
+    "deepc",
+    "abi",
+    "integers",
+    "kernel"
+   ],
+   "front": "<div>What are the ILP32, LP64 and LLP64 data models? Which assumption does Linux kernel code rely on?</div>",
+   "back": "<ul><li><b>ILP32</b>: <code>int</code>, <code>long</code>, pointer are 32-bit (32-bit Linux, most 32-bit microcontrollers)</li><li><b>LP64</b>: <code>long</code> and pointer are 64-bit, <code>int</code> 32 (64-bit Linux, BSD, macOS)</li><li><b>LLP64</b>: only <code>long long</code> and pointer are 64-bit (Windows)</li></ul><div>Kernel invariant: <code>sizeof(long) == sizeof(void *)</code>, so <code>unsigned long</code> is the pointer-sized integer.</div><div>Use <code>u8/u16/u32/u64</code> for hardware and fixed layouts, <code>__u32</code> etc. in user-visible (uapi) headers, <code>size_t</code> for sizes. Never put <code>long</code> or a pointer in an ioctl struct: 32-bit user space on a 64-bit kernel sees a different layout.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour"
+  },
+  {
+   "guid": "iS]]B3z:D2",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::01 Language Core and Undefined Behaviour",
+   "tags": [
+    "deepc",
+    "kernel",
+    "idioms"
+   ],
+   "front": "<div>How does C express polymorphism in the kernel? Show the pattern.</div>",
+   "back": "<div>A <code>const</code> struct of function pointers (an \"ops table\"), filled with designated initialisers, plus a pointer to it in the object:</div><pre><code>static const struct file_operations foo_fops = {\n        .owner          = THIS_MODULE,\n        .open           = foo_open,\n        .read           = foo_read,\n        .unlocked_ioctl = foo_ioctl,\n};</code></pre><div>Unset members are <code>NULL</code>; the core checks before calling or substitutes a default.</div><div><code>const</code> places the table in read-only memory, so it cannot be overwritten to hijack control flow. The \"derived\" object is recovered with <code>container_of()</code>.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour"
+  },
+  {
+   "guid": "yJCC6I%o$E",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::01 Language Core and Undefined Behaviour",
+   "tags": [
+    "deepc",
+    "toolchain",
+    "linkage"
+   ],
+   "front": "<div>Why is <code>static inline</code> the idiom for functions in headers? What goes wrong with plain <code>inline</code>?</div>",
+   "back": "<div>C99 plain <code>inline</code> gives an <i>inline definition</i> only: no external symbol is emitted. If the compiler decides not to inline (for example at <code>-O0</code>), the link fails with an undefined reference unless exactly one translation unit also declares it <code>extern inline</code>. GNU89 semantics were the reverse.</div><div><code>static inline</code> avoids the issue: each translation unit gets a private copy if one is needed.</div><div><code>inline</code> is only a hint. Kernel: <code>__always_inline</code> where correctness depends on inlining, <code>noinline</code> to keep a separate stack frame.</div><div>Prefer it to function-like macros: type checking and single evaluation of arguments.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour"
+  },
+  {
+   "guid": "Dx<suj<;Hr",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::01 Language Core and Undefined Behaviour",
+   "tags": [
+    "deepc",
+    "macros",
+    "kernel"
+   ],
+   "front": "<div>Why wrap multi-statement macros in <code>do { ... } while (0)</code>? What is a GNU <b>statement expression</b>, and which problem does it solve?</div>",
+   "back": "<div><code>do { } while (0)</code> makes the macro a single statement that requires a <code>;</code>, so <code>if (x) FOO(); else ...</code> parses correctly.</div><div>A statement expression <code>({ ...; value; })</code> lets a macro declare temporaries <i>and</i> yield a value, so each argument is evaluated once:</div><pre><code>#define min(a, b) ({            \\\n        typeof(a) _a = (a);     \\\n        typeof(b) _b = (b);     \\\n        _a &lt; _b ? _a : _b; })</code></pre><div>The naive <code>((a) &lt; (b) ? (a) : (b))</code> evaluates an argument twice: <code>min(i++, j)</code>, or <code>min(readl(reg), x)</code> reading a read-to-clear register twice.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour"
+  },
+  {
+   "guid": "uM+EZ)+ZO<",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::01 Language Core and Undefined Behaviour",
+   "tags": [
+    "deepc",
+    "macros"
+   ],
+   "front": "<div>What do <code>#</code> and <code>##</code> do in a macro, and why is the two-level <code>__stringify()</code> needed?</div>",
+   "back": "<div><code>#x</code> turns the argument into a string literal; <code>a##b</code> pastes tokens.</div><div>Arguments that are operands of <code>#</code> or <code>##</code> are <b>not</b> macro-expanded first:</div><pre><code>#define __stringify_1(x) #x\n#define __stringify(x)   __stringify_1(x)\n\n__stringify_1(PAGE_SIZE)   /* \"PAGE_SIZE\" */\n__stringify(PAGE_SIZE)     /* \"4096\"      */</code></pre><div>Token pasting generates families of symbols from one definition (initcall entries, per-register accessor functions, X-macro tables).</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour"
+  },
+  {
+   "guid": "jIhV/@RgdX",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::01 Language Core and Undefined Behaviour",
+   "tags": [
+    "deepc",
+    "lifetime"
+   ],
+   "front": "<div>What is the lifetime of a compound literal such as <code>(struct pt){ .x = 1 }</code>?</div>",
+   "back": "<ul><li>At file scope: static storage duration.</li><li>Inside a function: automatic storage, living until the end of the <b>enclosing block</b>. It is not a temporary that dies at the end of the expression.</li></ul><div>So <code>p = &amp;(struct pt){1, 2};</code> is valid for the rest of the block, but returning it, or using it after the block ends, is a dangling pointer.</div><div>Handy for passing a one-off struct or array argument: <code>f((int[]){1, 2, 3}, 3);</code></div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour"
+  },
+  {
+   "guid": "Kh;,{1$j)6",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::01 Language Core and Undefined Behaviour",
+   "tags": [
+    "deepc",
+    "kernel",
+    "embedded",
+    "stack"
+   ],
+   "front": "<div>Why are Variable Length Arrays (VLAs) banned from the kernel, and what replaced them?</div>",
+   "back": "<ul><li>The kernel stack is small and fixed (8 to 16 KiB); a VLA sized from user input is a stack overflow primitive.</li><li><code>alloca</code>-like code is slower than a fixed-size array.</li><li>Stack-depth analysis becomes impossible.</li></ul><div>The kernel has been VLA-free since 4.20 and builds with <code>-Wvla</code>. Replacements: a fixed worst-case array, or <code>kmalloc()</code>.</div><div>On a microcontroller the argument is stronger: no Memory Management Unit (MMU) means no guard page, so an overflow silently corrupts <code>.bss</code> or the heap.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour"
+  },
+  {
+   "guid": "oX_O0^am2&",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::01 Language Core and Undefined Behaviour",
+   "tags": [
+    "deepc",
+    "kernel",
+    "layout"
+   ],
+   "front": "<div>How do you check an invariant at compile time in C11 and in the kernel? Give a typical driver use.</div>",
+   "back": "<div>C11: <code>_Static_assert(expr, \"message\");</code> (<code>static_assert</code> via <code>&lt;assert.h&gt;</code>).</div><div>Kernel: <code>BUILD_BUG_ON(cond)</code> breaks the build when <code>cond</code> is true; <code>static_assert()</code> is also available. <code>BUILD_BUG_ON_ZERO()</code> works inside expressions.</div><div>Typical use: pin down a hardware or Application Binary Interface (ABI) layout so a refactor cannot silently break it:</div><pre><code>static_assert(sizeof(struct foo_desc) == 16);\nstatic_assert(offsetof(struct foo_regs, irq_status) == 0x20);</code></pre>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour"
+  },
+  {
+   "guid": "Ce9B>m6cTA",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::01 Language Core and Undefined Behaviour",
+   "tags": [
+    "deepc",
+    "memory",
+    "drivers"
+   ],
+   "front": "<div><code>memcpy()</code> vs <code>memmove()</code>: what is the rule, and how does it bite in driver code?</div>",
+   "back": "<div><code>memcpy()</code> with overlapping source and destination is Undefined Behaviour (the parameters are <code>restrict</code>). <code>memmove()</code> handles overlap.</div><div>Trap: shifting data inside a single buffer (dropping a consumed header from a receive buffer, inserting into an array) overlaps by construction → <code>memmove()</code>.</div><div>For Memory-Mapped Input/Output (MMIO) regions use neither: <code>memcpy_toio()</code> / <code>memcpy_fromio()</code>. The optimised <code>memcpy()</code> may use access widths, unaligned accesses or instructions that device memory does not tolerate.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour"
+  },
+  {
+   "guid": "z(HUUR@tm/",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::01 Language Core and Undefined Behaviour",
+   "tags": [
+    "deepc",
+    "integers",
+    "ub"
+   ],
+   "front": "<pre><code>for (size_t i = n - 1; i &gt;= 0; i--)\n        process(a[i]);</code></pre><div>What happens?</div>",
+   "back": "<div><code>i &gt;= 0</code> is always true for an unsigned type. After <code>i == 0</code>, <code>i--</code> wraps to <code>SIZE_MAX</code> → out-of-bounds access and an endless loop. With <code>n == 0</code> the first index is already <code>SIZE_MAX</code>.</div><div>Correct idiom:</div><pre><code>for (size_t i = n; i-- &gt; 0; )\n        process(a[i]);</code></pre><div><code>-Wtype-limits</code> (part of <code>-Wextra</code>) reports the always-true comparison.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour"
+  },
+  {
+   "guid": "l}$8cwLVC)",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::01 Language Core and Undefined Behaviour",
+   "tags": [
+    "deepc",
+    "integers"
+   ],
+   "front": "<div>What happens when an out-of-range value is converted to a <i>signed</i> integer type? What did C23 change about integer representation?</div>",
+   "back": "<div>Conversion to a signed type that cannot represent the value is <b>implementation-defined</b> (or raises an implementation-defined signal), not undefined. Every mainstream compiler truncates modulo 2^N.</div><div>Conversion to an unsigned type is always defined: modulo 2^N.</div><div>C23 mandates two's complement. Earlier standards also allowed ones' complement and sign-magnitude. Signed <i>arithmetic</i> overflow remains Undefined Behaviour in C23.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour"
+  },
+  {
+   "guid": "Qe8[oK0DH-",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::01 Language Core and Undefined Behaviour",
+   "tags": [
+    "deepc",
+    "kernel",
+    "abi"
+   ],
+   "front": "<div><code>printk(\"%d\\n\", val)</code> where <code>val</code> is <code>u64</code>: what is wrong, and which formats does kernel code use for <code>u64</code>, <code>size_t</code>, <code>phys_addr_t</code> and <code>dma_addr_t</code>?</div>",
+   "back": "<div>Variadic arguments undergo only the <b>default argument promotions</b> (small integers → <code>int</code>, <code>float</code> → <code>double</code>). A specifier/argument mismatch is Undefined Behaviour; on 32-bit targets a 64-bit argument also misaligns every argument after it.</div><ul><li><code>u64</code>: <code>%llu</code> / <code>%llx</code></li><li><code>size_t</code>: <code>%zu</code>; <code>ssize_t</code>: <code>%zd</code></li><li><code>phys_addr_t</code>: <code>%pa</code> (pass by reference: <code>&amp;addr</code>)</li><li><code>dma_addr_t</code>: <code>%pad</code></li></ul><div><code>__printf(1, 2)</code> (<code>__attribute__((format))</code>) makes the compiler check custom logging functions.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour"
+  },
+  {
+   "guid": "zpJi)e?{R(",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::01 Language Core and Undefined Behaviour",
+   "tags": [
+    "deepc",
+    "layout",
+    "drivers"
+   ],
+   "front": "<div>What are <code>offsetof</code>, <code>_Alignof</code> and <code>_Alignas</code>, and where do drivers need them?</div>",
+   "back": "<ul><li><code>offsetof(type, member)</code>: byte offset of a member; the basis of <code>container_of()</code> and of layout assertions for register blocks.</li><li><code>_Alignof(type)</code>: required alignment; a power of two.</li><li><code>_Alignas(n)</code>: raise an object's alignment. GNU spelling: <code>__attribute__((aligned(n)))</code>; kernel: <code>__aligned(n)</code>, <code>____cacheline_aligned</code>.</li></ul><div>Driver uses: Direct Memory Access (DMA) descriptors that hardware requires on 8/16/64-byte boundaries, buffers aligned to the cache line for cache maintenance, per-CPU data kept on separate cache lines.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour"
+  },
+  {
+   "guid": "C._Nd*v79g",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::01 Language Core and Undefined Behaviour",
+   "tags": [
+    "deepc",
+    "lifetime",
+    "drivers"
+   ],
+   "front": "<div>What are the ways to end up with a dangling pointer in C, and which one is specific to interrupt or callback driven code?</div>",
+   "back": "<ul><li>returning or storing the address of an automatic variable</li><li>use after <code>free()</code> / <code>kfree()</code></li><li>a compound literal or block-scope object used after its block ends</li><li><code>realloc()</code> moving the block while old pointers are still held</li></ul><div>Specific to asynchronous code: handing a pointer to a <b>stack</b> object to something that outlives the function: a timer, a work item, a Direct Memory Access (DMA) transfer, a queued message. The function returns, the frame is reused, and the callback or the hardware writes into someone else's stack.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour"
+  },
+  {
+   "guid": "bc.Cd_5xsQ",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::02 Memory, Layout and the ABI",
+   "tags": [
+    "deepc",
+    "layout"
+   ],
+   "front": "<pre><code>struct a { char c1; int i; char c2; };\nstruct b { int i; char c1; char c2; };</code></pre><div>What are the sizes on a typical 32/64-bit Application Binary Interface (ABI), and why? Which tool shows struct holes in kernel objects?</div>",
+   "back": "<div><code>struct a</code>: 12 bytes. c1 (1) + 3 padding + i (4) + c2 (1) + 3 tail padding.<br><code>struct b</code>: 8 bytes. i (4) + c1 + c2 + 2 tail padding.</div><div>Rules: each member is placed at a multiple of its own alignment; the struct's alignment is that of its strictest member; tail padding makes <code>sizeof</code> a multiple of that, so arrays of the struct stay aligned.</div><div>Ordering members from largest to smallest alignment minimises padding.</div><div>Tool: <code>pahole</code> (reads DWARF debug info) prints offsets, holes and cache-line boundaries.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "02 Memory, Layout and the ABI"
+  },
+  {
+   "guid": "B6JPZ)P,Jm",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::02 Memory, Layout and the ABI",
+   "tags": [
+    "deepc",
+    "layout",
+    "embedded",
+    "drivers"
+   ],
+   "front": "<div>What does <code>__attribute__((packed))</code> do, and what are its hazards?</div>",
+   "back": "<div>Removes padding and sets the struct's alignment to 1, so members may sit at unaligned addresses.</div><ul><li>Access <i>through the struct</i> is safe: the compiler emits byte-wise or unaligned-capable code (slower).</li><li>Taking the <b>address of a member</b> and using it as a normal <code>u32 *</code> is not: the alignment information is lost (<code>-Waddress-of-packed-member</code>).</li><li>Unaligned access cost varies: fine on x86; always faults on Cortex-M0; configurable trap on Cortex-M3/M4; on ARMv7-A some instructions cannot do it.</li></ul><div>Kernel helpers: <code>get_unaligned()</code>, <code>put_unaligned()</code>, <code>get_unaligned_le32()</code>.</div><div>Use <code>__packed</code> only for layouts dictated by hardware or a protocol.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "02 Memory, Layout and the ABI"
+  },
+  {
+   "guid": "pN/t^0GYR|",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::02 Memory, Layout and the ABI",
+   "tags": [
+    "deepc",
+    "layout",
+    "endianness",
+    "drivers"
+   ],
+   "front": "<div>Why is this a bad way to parse a packet, and what is the robust way?</div><pre><code>struct hdr *h = (struct hdr *)buf;\nlen = h-&gt;length;</code></pre>",
+   "back": "<div>Four independent problems:</div><ul><li><b>alignment</b>: <code>buf</code> may not satisfy the alignment of <code>struct hdr</code></li><li><b>aliasing</b>: a <code>char</code> array read through a <code>struct hdr</code> lvalue</li><li><b>endianness</b>: the wire order may differ from the CPU</li><li><b>padding</b>: the compiler's layout may not match the wire layout</li></ul><div>Robust: assemble fields from bytes (<code>get_unaligned_be16(buf + 2)</code>), or <code>memcpy()</code> into a local struct with explicitly sized, endian-annotated members and then convert.</div><div>The kernel frequently does cast, but only onto <code>__packed</code> structs with <code>__be16</code>/<code>__le32</code> members, and it builds with <code>-fno-strict-aliasing</code>.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "02 Memory, Layout and the ABI"
+  },
+  {
+   "guid": "AAh&Req76A",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::02 Memory, Layout and the ABI",
+   "tags": [
+    "deepc",
+    "endianness",
+    "kernel",
+    "drivers"
+   ],
+   "front": "<div>How does kernel code handle endianness, and how are mistakes caught at build time?</div>",
+   "back": "<div>Conversion helpers: <code>cpu_to_le32()</code>, <code>le32_to_cpu()</code>, <code>cpu_to_be16()</code>, <code>be16_to_cpu()</code>, etc. They compile to nothing when the CPU already matches.</div><div>Annotated types: <code>__le16</code>, <code>__le32</code>, <code>__be32</code>... are <code>__bitwise</code> types. The static checker <b>sparse</b> (<code>make C=1</code>) reports mixing them with plain integers or with each other without a conversion.</div><div>Rule: data in device-visible or on-wire structures uses <code>__leXX</code>/<code>__beXX</code>; convert exactly once at the boundary.</div><div>Network byte order is big-endian. PCI and USB are little-endian.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "02 Memory, Layout and the ABI"
+  },
+  {
+   "guid": "iCWWTNBVCA",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::02 Memory, Layout and the ABI",
+   "tags": [
+    "deepc",
+    "abi",
+    "kernel"
+   ],
+   "front": "<div>x86-64 System V calling convention: which registers carry arguments, which are callee-saved, and why does the kernel build with <code>-mno-red-zone</code>?</div>",
+   "back": "<ul><li>Integer/pointer arguments: <code>rdi, rsi, rdx, rcx, r8, r9</code>, the rest on the stack. Return value: <code>rax</code>.</li><li>Callee-saved: <code>rbx, rbp, r12</code> to <code>r15</code>. Everything else is caller-saved.</li><li>Stack is 16-byte aligned at the call instruction.</li></ul><div><b>Red zone</b>: a leaf function may use the 128 bytes <i>below</i> <code>rsp</code> without moving <code>rsp</code>. In the kernel an interrupt or exception pushes its frame onto the same stack and would overwrite that area, so the kernel disables it with <code>-mno-red-zone</code>.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "02 Memory, Layout and the ABI"
+  },
+  {
+   "guid": "en[IUr?${V",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::02 Memory, Layout and the ABI",
+   "tags": [
+    "deepc",
+    "abi",
+    "embedded"
+   ],
+   "front": "<div>ARM Procedure Call Standard (AAPCS, 32-bit): argument registers, callee-saved registers, stack alignment. Why does it matter for Cortex-M interrupt handlers?</div>",
+   "back": "<ul><li>Arguments and return value: <code>r0</code> to <code>r3</code> (64-bit values in <code>r0:r1</code>); further arguments on the stack.</li><li>Callee-saved: <code>r4</code> to <code>r11</code>, plus <code>sp</code>. <code>lr</code> holds the return address; <code>r12</code> is scratch.</li><li>Stack: 8-byte aligned at public interfaces.</li></ul><div>On exception entry, Cortex-M hardware pushes exactly the <i>caller-saved</i> set (<code>r0-r3, r12, lr, pc, xPSR</code>). Therefore an Interrupt Service Routine (ISR) is an ordinary C function: no assembly wrapper and no special attribute.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "02 Memory, Layout and the ABI"
+  },
+  {
+   "guid": "f)KsEb4]2.",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::02 Memory, Layout and the ABI",
+   "tags": [
+    "deepc",
+    "kernel",
+    "stack"
+   ],
+   "front": "<div>How large is a kernel stack, and what coding constraints follow from that?</div>",
+   "back": "<div>Fixed per thread: 16 KiB on x86-64 and arm64, 8 KiB on 32-bit ARM. It does not grow.</div><div>Consequences:</div><ul><li>no large local buffers (a <code>char buf[1024]</code> is already questionable): use <code>kmalloc()</code></li><li>no unbounded recursion</li><li>no Variable Length Arrays (VLAs) or <code>alloca()</code></li><li><code>-Wframe-larger-than=</code> warns per function; <code>scripts/checkstack.pl</code> lists offenders</li></ul><div><code>CONFIG_VMAP_STACK</code> puts stacks in vmalloc space with guard pages, so an overflow faults immediately instead of corrupting a neighbour. Side effect: stack memory must not be used for Direct Memory Access (DMA).</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "02 Memory, Layout and the ABI"
+  },
+  {
+   "guid": "ehka$B}z-I",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::02 Memory, Layout and the ABI",
+   "tags": [
+    "deepc",
+    "toolchain",
+    "embedded",
+    "sections"
+   ],
+   "front": "<div>Name the main sections of a C program image. In firmware, what is the difference between the Load Memory Address (LMA) and Virtual Memory Address (VMA) of <code>.data</code>?</div>",
+   "back": "<ul><li><code>.text</code>: code</li><li><code>.rodata</code>: <code>const</code> objects, string literals</li><li><code>.data</code>: initialised writable objects</li><li><code>.bss</code>: zero-initialised objects; occupies no space in the image</li><li>heap and stack: carved out of the remaining RAM by the linker script</li></ul><div>On a microcontroller <code>.text</code> and <code>.rodata</code> execute in place from flash. <code>.data</code> must <i>run</i> in RAM (VMA) but its initial values are <i>stored</i> in flash (LMA). Startup code copies LMA → VMA and zeroes <code>.bss</code> before <code>main()</code>.</div><div>Linker script: <code>.data : { ... } &gt; RAM AT &gt; FLASH</code>.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "02 Memory, Layout and the ABI"
+  },
+  {
+   "guid": "d]e_p1i1vx",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::02 Memory, Layout and the ABI",
+   "tags": [
+    "deepc",
+    "kernel",
+    "memory"
+   ],
+   "front": "<div>The kernel has no <code>malloc()</code>. What are the allocators and how do you choose between them?</div>",
+   "back": "<ul><li><code>kmalloc(size, gfp)</code>: slab-backed, <b>physically contiguous</b>, fast; for small objects (the practical limit is a few MiB, in reality use it for kilobytes). <code>kzalloc()</code> zeroes. <code>kcalloc()</code>/<code>kmalloc_array()</code> check <code>n * size</code> for overflow.</li><li><code>vmalloc(size)</code>: virtually contiguous only; for large buffers; may sleep; not directly usable for Direct Memory Access (DMA).</li><li><code>kvmalloc()</code>: tries <code>kmalloc</code>, falls back to <code>vmalloc</code>; free with <code>kvfree()</code>.</li><li><code>kmem_cache_create()</code>: dedicated slab cache for many same-sized objects.</li><li><code>dma_alloc_coherent()</code>: for buffers shared with a device.</li><li><code>alloc_pages()</code>: whole pages.</li></ul><div>Every allocation can fail: always check for <code>NULL</code>.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "02 Memory, Layout and the ABI"
+  },
+  {
+   "guid": "G2yIjgv;;~",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::02 Memory, Layout and the ABI",
+   "tags": [
+    "deepc",
+    "kernel",
+    "memory",
+    "concurrency"
+   ],
+   "front": "<div>What do the allocation flags <code>GFP_KERNEL</code>, <code>GFP_ATOMIC</code> and <code>GFP_NOWAIT</code> mean? What happens if you get it wrong?</div>",
+   "back": "<div>\"GFP\" stands for Get Free Pages.</div><ul><li><code>GFP_KERNEL</code>: may sleep to reclaim memory or do Input/Output. Process context only, with no spinlock held.</li><li><code>GFP_ATOMIC</code>: never sleeps and may dip into emergency reserves. For interrupt handlers and code under a spinlock. Fails more readily.</li><li><code>GFP_NOWAIT</code>: never sleeps, no access to the reserves.</li></ul><div><code>GFP_KERNEL</code> in atomic context produces \"BUG: sleeping function called from invalid context\" (with <code>CONFIG_DEBUG_ATOMIC_SLEEP</code>) or a deadlock.</div><div>Better design: allocate in <code>probe()</code> or process context, and only use the memory in the interrupt path.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "02 Memory, Layout and the ABI"
+  },
+  {
+   "guid": "Eu*#g<Z5}J",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::02 Memory, Layout and the ABI",
+   "tags": [
+    "deepc",
+    "drivers",
+    "memory",
+    "dma"
+   ],
+   "front": "<div>A driver deals with three kinds of address. Name them and the rules for each.</div>",
+   "back": "<ul><li><b>Kernel virtual address</b> (<code>void *</code>): what the CPU dereferences.</li><li><b>Physical address</b> (<code>phys_addr_t</code>): what the memory controller sees. Never dereferenced; it must be mapped first (<code>ioremap()</code> for device registers, <code>kmap</code>/<code>memremap()</code> for memory).</li><li><b>Bus / Direct Memory Access (DMA) address</b> (<code>dma_addr_t</code>): what the <i>device</i> puts on the bus. It may differ from the physical address because of an Input-Output Memory Management Unit (IOMMU) or bus offsets.</li></ul><div><code>virt_to_phys()</code> is valid only for the kernel's linear mapping (<code>kmalloc</code> memory), not for <code>vmalloc</code>, stack or <code>ioremap</code> addresses. Only addresses returned by the DMA mapping API may be given to a device.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "02 Memory, Layout and the ABI"
+  },
+  {
+   "guid": "nJ2GYwuKV)",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::02 Memory, Layout and the ABI",
+   "tags": [
+    "deepc",
+    "kernel",
+    "drivers",
+    "security"
+   ],
+   "front": "<div>Why may a driver not simply dereference a pointer passed from user space? What does it use instead?</div>",
+   "back": "<ul><li>The pointer may be invalid, unmapped or swapped out: the access must be able to fault and recover.</li><li>It may point into <i>kernel</i> memory: a confused-deputy read or write.</li><li>Hardware enforces the separation: Supervisor Mode Access Prevention (SMAP, x86) and Privileged Access Never (PAN, ARM) fault on a direct access.</li></ul><div>Use <code>copy_from_user()</code> / <code>copy_to_user()</code>. They return the number of bytes <b>not</b> copied, so non-zero means <code>return -EFAULT</code>. For scalars: <code>get_user()</code> / <code>put_user()</code>.</div><div>The <code>__user</code> annotation lets sparse flag direct dereferences.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "02 Memory, Layout and the ABI"
+  },
+  {
+   "guid": "g)NJ#g;hX5",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::02 Memory, Layout and the ABI",
+   "tags": [
+    "deepc",
+    "security",
+    "drivers"
+   ],
+   "front": "<div>What is a <b>double fetch</b> (Time-Of-Check to Time-Of-Use (TOCTOU)) bug in an ioctl handler?</div>",
+   "back": "<pre><code>get_user(len, &amp;uarg-&gt;len);\nif (len &gt; MAX) return -EINVAL;\n...\ncopy_from_user(&amp;k, uarg, sizeof(k));\nmemcpy(dst, k.data, k.len);      /* second fetch of len */</code></pre><div>User space can change <code>uarg-&gt;len</code> from another thread between the two fetches, so the validated value is not the value used.</div><div>Rule: copy the whole argument into kernel memory <b>once</b>, then validate and use only the kernel copy.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "02 Memory, Layout and the ABI"
+  },
+  {
+   "guid": "wx5dY^K/,M",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::02 Memory, Layout and the ABI",
+   "tags": [
+    "deepc",
+    "performance",
+    "layout",
+    "concurrency"
+   ],
+   "front": "<div>What is <b>false sharing</b>, and which kernel annotations address it?</div>",
+   "back": "<div>Two CPUs write <i>different</i> variables that happen to share one cache line (typically 64 bytes). Each write invalidates the other CPU's copy; the line bounces between cores and throughput collapses even though there is no logical sharing.</div><div>Remedies:</div><ul><li><code>____cacheline_aligned</code> / <code>____cacheline_aligned_in_smp</code> on hot members or structs</li><li>group read-mostly fields apart from frequently written ones (<code>__read_mostly</code>)</li><li>per-CPU variables for counters</li></ul><div><code>pahole</code> shows where cache-line boundaries fall within a struct.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "02 Memory, Layout and the ABI"
+  },
+  {
+   "guid": "Dr)]`Dt<um",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::02 Memory, Layout and the ABI",
+   "tags": [
+    "deepc",
+    "drivers",
+    "mmio"
+   ],
+   "front": "<div>Memory-Mapped Input/Output (MMIO) vs port Input/Output: what is the difference, and what does a driver use for each?</div>",
+   "back": "<ul><li><b>MMIO</b>: device registers appear in the physical address space. Map with <code>ioremap()</code> (or <code>devm_ioremap_resource()</code>), access with <code>readb/w/l/q()</code> and <code>writeb/w/l/q()</code>. Universal on ARM and RISC-V; used by PCI Express devices everywhere.</li><li><b>Port I/O</b>: separate x86 address space reached with the <code>in</code>/<code>out</code> instructions: <code>inb()</code>, <code>outb()</code>, after <code>request_region()</code>. Legacy devices.</li></ul><div><code>ioread32()</code>/<code>iowrite32()</code> with <code>pci_iomap()</code> work for both.</div><div>Device mappings are created uncached and with device memory attributes; ordinary RAM mappings are not. That is one reason a physical register address cannot just be cast to a pointer.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "02 Memory, Layout and the ABI"
+  },
+  {
+   "guid": "OPd>2}:QFA",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::02 Memory, Layout and the ABI",
+   "tags": [
+    "deepc",
+    "kernel",
+    "abi"
+   ],
+   "front": "<div>Why is floating point forbidden in kernel code, and what is the escape hatch?</div>",
+   "back": "<div>On kernel entry only the integer registers are saved. The Floating-Point Unit (FPU) / vector state still belongs to the interrupted user task, so kernel code using it would corrupt user-space state. Saving it on every entry would be too expensive.</div><div>The kernel is built with flags such as <code>-mno-sse</code> / <code>-mgeneral-regs-only</code>, so accidental use fails to compile.</div><div>Escape hatch: <code>kernel_fpu_begin()</code> ... <code>kernel_fpu_end()</code> on x86, <code>kernel_neon_begin()</code> on ARM. Used for crypto and RAID code. Preemption is disabled inside and sleeping is not allowed.</div><div>Otherwise: fixed-point integer arithmetic.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "02 Memory, Layout and the ABI"
+  },
+  {
+   "guid": "KiMi~9n=JR",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::02 Memory, Layout and the ABI",
+   "tags": [
+    "deepc",
+    "kernel",
+    "memory"
+   ],
+   "front": "<div>What are <code>PAGE_SIZE</code>, <code>PAGE_SHIFT</code> and <code>PAGE_MASK</code>? Why must driver code not hard-code 4096?</div>",
+   "back": "<div><code>PAGE_SIZE == 1UL &lt;&lt; PAGE_SHIFT</code>; <code>PAGE_MASK == ~(PAGE_SIZE - 1)</code>.</div><div>Helpers: <code>PAGE_ALIGN(x)</code> rounds up; <code>offset_in_page(p)</code>; <code>x &gt;&gt; PAGE_SHIFT</code> gives a Page Frame Number (PFN).</div><div>The page size is a build-time architecture choice: arm64 supports 4, 16 and 64 KiB; PowerPC commonly uses 64 KiB. Drivers that assume 4096 break <code>mmap()</code> handlers, scatter-gather lists and ring sizing on those systems.</div><div>The general power-of-two idiom: <code>ALIGN(x, a)</code> = <code>(x + a - 1) &amp; ~(a - 1)</code>.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "02 Memory, Layout and the ABI"
+  },
+  {
+   "guid": "oHD[rlD264",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::02 Memory, Layout and the ABI",
+   "tags": [
+    "deepc",
+    "aliasing",
+    "memory",
+    "embedded"
+   ],
+   "front": "<div>What is an object's <b>effective type</b>, and why does it matter for memory obtained from an allocator or a raw buffer?</div>",
+   "back": "<div>For a declared object, the effective type is its declared type. Allocated memory has none until it is written: the first store through a non-character lvalue sets the effective type for subsequent reads.</div><div>Consequences:</div><ul><li>allocator memory may be used as any type, and re-used as another after being rewritten</li><li>a declared <code>char buf[N]</code> keeps type <code>char</code>; reading it through a <code>u32 *</code> violates strict aliasing even when the alignment is fine. <code>memcpy()</code> out of it is always valid.</li></ul><div>Custom pool and arena allocators in firmware are usually built on a <code>char</code> array, which is one more reason such projects use <code>-fno-strict-aliasing</code>.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "02 Memory, Layout and the ABI"
+  },
+  {
+   "guid": "qg_HIx7qp{",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::03 Compiler, Linker and Startup",
+   "tags": [
+    "deepc",
+    "toolchain"
+   ],
+   "front": "<div>Name the stages from <code>.c</code> to a running image, the file type each produces, and what a <b>translation unit</b> is.</div>",
+   "back": "<ul><li>Preprocess (<code>cpp</code>, <code>gcc -E</code>): expands <code>#include</code> and macros → <code>.i</code>. That output is the translation unit: one <code>.c</code> file with all of its headers.</li><li>Compile (<code>cc1</code>, <code>gcc -S</code>): → assembly <code>.s</code></li><li>Assemble (<code>as</code>, <code>gcc -c</code>): → relocatable object <code>.o</code> in Executable and Linkable Format (ELF)</li><li>Link (<code>ld</code>): resolves symbols, applies relocations and places sections according to the linker script → ELF executable, or for the kernel <code>vmlinux</code> / a <code>.ko</code> module</li><li>Firmware only: <code>objcopy -O binary</code> / <code>-O ihex</code> strips ELF down to a flashable image</li></ul><div>The compiler sees one translation unit at a time; cross-file knowledge comes only from declarations, unless Link Time Optimisation (LTO) is enabled.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "03 Compiler, Linker and Startup"
+  },
+  {
+   "guid": "IU{FPJQZds",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::03 Compiler, Linker and Startup",
+   "tags": [
+    "deepc",
+    "toolchain",
+    "embedded",
+    "kernel"
+   ],
+   "front": "<div>What is the difference between a <b>hosted</b> and a <b>freestanding</b> C implementation? What may you still rely on with <code>-ffreestanding -nostdlib</code>?</div>",
+   "back": "<div>Hosted: full standard library, and the program starts at <code>main()</code>. Freestanding (kernels, bare-metal firmware): no library, and the entry point is implementation-defined.</div><div>Headers that are still guaranteed (C11): <code>&lt;stddef.h&gt;</code>, <code>&lt;stdint.h&gt;</code>, <code>&lt;limits.h&gt;</code>, <code>&lt;stdarg.h&gt;</code>, <code>&lt;stdbool.h&gt;</code>, <code>&lt;float.h&gt;</code>, <code>&lt;iso646.h&gt;</code>, <code>&lt;stdalign.h&gt;</code>, <code>&lt;stdnoreturn.h&gt;</code>. They contain only types and macros.</div><div>Catch: GCC and Clang still emit calls to <code>memcpy</code>, <code>memmove</code>, <code>memset</code> and <code>memcmp</code> (struct assignment, large initialisers), and to <code>libgcc</code> helpers such as <code>__aeabi_uldivmod</code> for 64-bit division on 32-bit ARM. You must provide them. The kernel provides its own and uses <code>do_div()</code> / <code>div_u64()</code> for 64-bit division.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "03 Compiler, Linker and Startup"
+  },
+  {
+   "guid": "A7195ifqzL",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::03 Compiler, Linker and Startup",
+   "tags": [
+    "deepc",
+    "embedded",
+    "startup"
+   ],
+   "front": "<div>What happens between reset and <code>main()</code> on an ARM Cortex-M microcontroller?</div>",
+   "back": "<ul><li>Hardware loads the initial Main Stack Pointer (MSP) from vector table word 0 and the program counter from word 1 (the reset handler). The table sits at address 0 by default.</li><li><code>Reset_Handler</code>:</li><li>copy <code>.data</code> initial values from flash to RAM</li><li>zero <code>.bss</code></li><li><code>SystemInit()</code>: clocks, flash wait states, Floating-Point Unit (FPU) enable, Vector Table Offset Register (VTOR)</li><li><code>__libc_init_array()</code>: constructors</li><li>call <code>main()</code>; if it returns, loop forever</li></ul><div>Until <code>.data</code>/<code>.bss</code> are set up, C code must not touch globals. A stack pointer is all that C fundamentally needs, which Cortex-M hardware provides, so the reset handler itself can be written in C.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "03 Compiler, Linker and Startup"
+  },
+  {
+   "guid": "cS*b2f-T+&",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::03 Compiler, Linker and Startup",
+   "tags": [
+    "deepc",
+    "toolchain",
+    "embedded",
+    "linker"
+   ],
+   "front": "<div>How does C code use symbols defined in a linker script, for example <code>_sbss</code> and <code>_ebss</code>?</div>",
+   "back": "<div>A linker symbol is an <i>address</i> with no storage behind it. Declare it as an object and use only its address:</div><pre><code>extern uint32_t _sbss, _ebss;\n\nfor (uint32_t *p = &amp;_sbss; p &lt; &amp;_ebss; p++)\n        *p = 0;</code></pre><div>Reading <code>_sbss</code> as a value would fetch whatever happens to be stored at the start of <code>.bss</code>.</div><div>The kernel uses the same mechanism for <code>__init_begin</code>, <code>__start___ex_table</code>, the initcall arrays, and so on, usually declared as <code>extern char name[];</code>.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "03 Compiler, Linker and Startup"
+  },
+  {
+   "guid": "F!4$6He=Uc",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::03 Compiler, Linker and Startup",
+   "tags": [
+    "deepc",
+    "toolchain",
+    "embedded",
+    "linker"
+   ],
+   "front": "<div>What is a <b>weak symbol</b>, and how do embedded startup files and the kernel use it?</div>",
+   "back": "<div>A weak definition (<code>__attribute__((weak))</code>, kernel <code>__weak</code>) is overridden at link time by any strong definition of the same name, without a duplicate-symbol error.</div><ul><li>Startup files: every Interrupt Service Routine (ISR) name in the vector table is a weak alias of <code>Default_Handler</code> (an endless loop). Defining <code>void USART1_IRQHandler(void)</code> in your own code replaces it.</li><li>Kernel: architecture-overridable defaults, for example <code>__weak</code> functions in generic code that an architecture may reimplement.</li></ul><div>Trap: misspell the handler name and the link still succeeds; the interrupt lands in <code>Default_Handler</code> and the system appears to hang.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "03 Compiler, Linker and Startup"
+  },
+  {
+   "guid": "k]lJa<|9h}",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::03 Compiler, Linker and Startup",
+   "tags": [
+    "deepc",
+    "toolchain",
+    "embedded",
+    "linker"
+   ],
+   "front": "<div>What do <code>-ffunction-sections -fdata-sections -Wl,--gc-sections</code> do, and why does the vector table need <code>KEEP()</code>?</div>",
+   "back": "<div>The compiler places every function and object in its own section (<code>.text.foo</code>, <code>.data.bar</code>); the linker then discards every section not reachable from the entry point. This gives significant flash savings with vendor libraries.</div><div>Nothing in the C code <i>references</i> the vector table; only the hardware reads it. Without <code>KEEP(*(.isr_vector))</code> in the linker script it is garbage-collected and the chip does not boot.</div><div>The same applies to anything found only via section iteration: init tables, command tables. The kernel's linker script uses <code>KEEP()</code> for its initcall and <code>__ksymtab</code> sections for that reason.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "03 Compiler, Linker and Startup"
+  },
+  {
+   "guid": "fd>f`zx/Cz",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::03 Compiler, Linker and Startup",
+   "tags": [
+    "deepc",
+    "toolchain",
+    "kernel",
+    "linker"
+   ],
+   "front": "<div>What does <code>__attribute__((section(\"name\")))</code> enable? Explain <code>__init</code> and how <code>module_init()</code> works for built-in code.</div>",
+   "back": "<div>It places a function or object in a named section. Combined with linker-script start/end symbols, the linker builds an <b>array with no central registry</b>.</div><ul><li><code>__init</code> → <code>.init.text</code>, <code>__initdata</code> → <code>.init.data</code>: freed after boot (\"Freeing unused kernel memory\"). Calling an <code>__init</code> function later is a use-after-free, which <code>modpost</code> reports as a section mismatch.</li><li>For built-in code <code>module_init(fn)</code> stores <code>fn</code> in an <code>.initcallN.init</code> section; <code>do_initcalls()</code> iterates over them in level order (<code>core</code>, <code>postcore</code>, <code>arch</code>, <code>subsys</code>, <code>fs</code>, <code>device</code>, <code>late</code>). <code>module_init</code> maps to device level.</li><li>For a loadable module, <code>module_init(fn)</code> aliases <code>fn</code> to <code>init_module</code>.</li></ul><div>Firmware uses the same trick for shell command tables and driver registries.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "03 Compiler, Linker and Startup"
+  },
+  {
+   "guid": "y&,1U]j@Bp",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::03 Compiler, Linker and Startup",
+   "tags": [
+    "deepc",
+    "kernel",
+    "toolchain",
+    "ub"
+   ],
+   "front": "<div>Which C dialect and which semantics-changing compiler flags does the Linux kernel build with?</div>",
+   "back": "<div>Dialect: <code>-std=gnu11</code> since 5.18 (previously <code>gnu89</code>). GNU extensions are used freely: <code>typeof</code>, statement expressions, <code>__attribute__</code>, case ranges, <code>void *</code> arithmetic.</div><div>Flags that turn Undefined Behaviour into defined behaviour:</div><ul><li><code>-fno-strict-aliasing</code></li><li><code>-fno-strict-overflow</code> (signed and pointer wrap are defined)</li><li><code>-fno-delete-null-pointer-checks</code></li><li><code>-funsigned-char</code> (since 6.2)</li></ul><div>Others: <code>-fno-common</code>, <code>-fno-PIE</code>, <code>-mno-red-zone</code> (x86-64), no floating point/vector code generation, <code>-Wvla</code>, <code>-fstack-protector-strong</code>, <code>-ftrivial-auto-var-init=zero</code> (when configured).</div><div><code>-O0</code> is not supported: the code relies on inlining and dead-code elimination.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "03 Compiler, Linker and Startup"
+  },
+  {
+   "guid": "r!:SmDG-o?",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::03 Compiler, Linker and Startup",
+   "tags": [
+    "deepc",
+    "kernel",
+    "performance"
+   ],
+   "front": "<div>What are <code>likely()</code> / <code>unlikely()</code>, and when should a driver use them?</div>",
+   "back": "<div><code>#define likely(x) __builtin_expect(!!(x), 1)</code>. It tells the compiler which branch to lay out as the fall-through path, keeping the hot path contiguous and moving the cold path away.</div><div>It affects <b>code layout</b>, not the CPU's dynamic branch predictor.</div><div>Use only for error paths and conditions that really are heavily skewed, in hot code. A wrong annotation is worse than none. <code>IS_ERR()</code> already contains <code>unlikely()</code>.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "03 Compiler, Linker and Startup"
+  },
+  {
+   "guid": "HVI|#Cu`F=",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::03 Compiler, Linker and Startup",
+   "tags": [
+    "deepc",
+    "kernel",
+    "idioms"
+   ],
+   "front": "<div>What is <code>__attribute__((cleanup(fn)))</code>, and how does the kernel (6.5+) use it?</div>",
+   "back": "<div>When the annotated variable goes out of scope, <code>fn(&amp;var)</code> is called: scope-based resource management in C.</div><div>Kernel wrappers in <code>&lt;linux/cleanup.h&gt;</code>:</div><pre><code>struct foo *f __free(kfree) = kzalloc(sizeof(*f), GFP_KERNEL);\nif (!f)\n        return -ENOMEM;\n\nguard(mutex)(&amp;dev-&gt;lock);       /* unlocked on every return path */\n...\nreturn_ptr(f);                  /* hand ownership out, skip cleanup */</code></pre><div>It removes a class of <code>goto</code>-unwind mistakes (a missed unlock, a leak on an early return).</div><div>Rule: define and initialise the variable in the same statement, and do not mix this style with <code>goto</code> cleanup in one function.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "03 Compiler, Linker and Startup"
+  },
+  {
+   "guid": "PL7N7&c}Bq",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::03 Compiler, Linker and Startup",
+   "tags": [
+    "deepc",
+    "toolchain",
+    "debugging"
+   ],
+   "front": "<div>What are <code>nm</code>, <code>objdump</code>, <code>readelf</code>, <code>size</code>, <code>addr2line</code> and the linker map file used for?</div>",
+   "back": "<ul><li><code>nm</code>: symbol table. <code>T/t</code> text, <code>D/d</code> data, <code>B/b</code> bss, <code>U</code> undefined, <code>W</code> weak; upper case means global.</li><li><code>objdump -d</code> / <code>-S</code>: disassembly, optionally interleaved with source. <code>-h</code>: section headers with Load Memory Address (LMA) and Virtual Memory Address (VMA).</li><li><code>readelf -S -l -r</code>: sections, segments, relocations.</li><li><code>size</code>: text/data/bss totals. Flash use ≈ text + data; static RAM use ≈ data + bss.</li><li><code>addr2line -e vmlinux &lt;addr&gt;</code>: address → file:line. For kernel oops lines use <code>scripts/faddr2line</code> with <code>func+0x1c/0x80</code>.</li><li>Map file (<code>-Wl,-Map=out.map</code>): where every section of every object landed, and why it was pulled in.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "03 Compiler, Linker and Startup"
+  },
+  {
+   "guid": "DL[aq$cUy+",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::03 Compiler, Linker and Startup",
+   "tags": [
+    "deepc",
+    "kernel",
+    "toolchain",
+    "modules"
+   ],
+   "front": "<div>What kind of file is a <code>.ko</code> kernel module, and what does loading it involve? What do <code>EXPORT_SYMBOL</code> and <code>EXPORT_SYMBOL_GPL</code> do?</div>",
+   "back": "<div>A <code>.ko</code> is a <b>relocatable</b> Executable and Linkable Format (ELF) object, i.e. not fully linked. The module loader:</div><ul><li>allocates memory and copies the sections</li><li>resolves undefined symbols against the kernel's exported symbol table</li><li>applies relocations</li><li>checks <code>vermagic</code> and, with <code>CONFIG_MODVERSIONS</code>, symbol checksums</li><li>runs the module's init function</li></ul><div>Only symbols marked <code>EXPORT_SYMBOL()</code> are visible to modules; <code>EXPORT_SYMBOL_GPL()</code> only to modules declaring a GPL-compatible <code>MODULE_LICENSE</code>. A proprietary licence string taints the kernel.</div><div>Hence the usual failure mode: \"Unknown symbol in module\".</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "03 Compiler, Linker and Startup"
+  },
+  {
+   "guid": "DK2+Z&?9Qy",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::03 Compiler, Linker and Startup",
+   "tags": [
+    "deepc",
+    "kernel",
+    "toolchain"
+   ],
+   "front": "<div>What is <b>sparse</b>, and which annotations does it check?</div>",
+   "back": "<div>A semantic checker for kernel C, run with <code>make C=1</code> (or <code>C=2</code> to check all files).</div><ul><li><code>__user</code>: user-space pointer; no direct dereference</li><li><code>__iomem</code>: Memory-Mapped Input/Output (MMIO) cookie; accessors only</li><li><code>__percpu</code>, <code>__rcu</code>: separate address spaces</li><li><code>__bitwise</code> types (<code>__le32</code>, <code>__be16</code>, <code>gfp_t</code>): no mixing without conversion</li><li><code>__must_hold(l)</code>, <code>__acquires(l)</code>, <code>__releases(l)</code>: lock balance</li></ul><div>In a normal compile these expand to nothing; under sparse they become address-space and context attributes. They give C a few extra type-system dimensions at no run-time cost.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "03 Compiler, Linker and Startup"
+  },
+  {
+   "guid": "mP{k;7+w*R",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::03 Compiler, Linker and Startup",
+   "tags": [
+    "deepc",
+    "toolchain",
+    "kernel",
+    "embedded"
+   ],
+   "front": "<div>How do you cross-compile the kernel or a module? What is the difference between the <code>arm-none-eabi-</code> and <code>aarch64-linux-gnu-</code> toolchains?</div>",
+   "back": "<pre><code>make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- defconfig Image modules dtbs\nmake -C &lt;kernel-build-dir&gt; M=$PWD ARCH=arm64 CROSS_COMPILE=... modules</code></pre><div>Triplet: <code>arch-vendor-os-abi</code>.</div><ul><li><code>arm-none-eabi-</code>: no operating system; bare-metal Embedded Application Binary Interface (EABI); ships newlib. For microcontroller firmware.</li><li><code>arm-linux-gnueabihf-</code>, <code>aarch64-linux-gnu-</code>: target Linux with glibc. For user space and, by convention, the kernel (which uses no libc anyway).</li></ul><div>An out-of-tree module must be built against the exact configured kernel tree it will be loaded into; otherwise <code>vermagic</code> or symbol versions mismatch.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "03 Compiler, Linker and Startup"
+  },
+  {
+   "guid": "x6REKwSLnX",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::03 Compiler, Linker and Startup",
+   "tags": [
+    "deepc",
+    "embedded",
+    "toolchain"
+   ],
+   "front": "<div>How do you get <code>printf()</code> working on a bare-metal newlib target, and what does it cost?</div>",
+   "back": "<div>newlib implements <code>printf()</code> on top of stubs that you provide (\"retargeting\"):</div><pre><code>int _write(int fd, const char *buf, int len)\n{\n        for (int i = 0; i &lt; len; i++)\n                uart_putc(buf[i]);\n        return len;\n}</code></pre><div>Also <code>_sbrk()</code> (heap growth for <code>malloc()</code>), <code>_read</code>, <code>_close</code>, <code>_fstat</code>, <code>_isatty</code>, <code>_lseek</code>. <code>--specs=nosys.specs</code> supplies dummy versions; <code>--specs=nano.specs</code> selects the small newlib-nano.</div><div>Cost: tens of KiB of flash with float formatting, hundreds of bytes of stack, possible heap use, not reentrant by default, and it blocks on the Universal Asynchronous Receiver-Transmitter (UART). Never call it from an interrupt handler.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "03 Compiler, Linker and Startup"
+  },
+  {
+   "guid": "ljE(iqj>5z",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::03 Compiler, Linker and Startup",
+   "tags": [
+    "deepc",
+    "embedded",
+    "volatile",
+    "toolchain"
+   ],
+   "front": "<div>Why does a busy-wait delay loop vanish at <code>-O2</code>, and what are the correct alternatives?</div><pre><code>for (int i = 0; i &lt; 100000; i++)\n        ;</code></pre>",
+   "back": "<div>The loop has no observable side effect, so the optimiser removes it. Making <code>i</code> <code>volatile</code> keeps it, but the duration still depends on the compiler, flags, clock and flash wait states.</div><div>Alternatives:</div><ul><li>a hardware timer or SysTick-based <code>delay_ms()</code></li><li>a calibrated cycle counter (Data Watchpoint and Trace (DWT) <code>CYCCNT</code> on Cortex-M3 and above)</li><li>kernel: <code>udelay()</code> / <code>mdelay()</code> for calibrated busy-waits; <code>usleep_range()</code> / <code>msleep()</code> when sleeping is allowed</li></ul><div>General lesson: code that works at <code>-O0</code> and fails at <code>-O2</code> almost always has a missing <code>volatile</code>, a race, or Undefined Behaviour.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "03 Compiler, Linker and Startup"
+  },
+  {
+   "guid": "I*Mw?w5|IQ",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::03 Compiler, Linker and Startup",
+   "tags": [
+    "deepc",
+    "kernel",
+    "idioms",
+    "toolchain"
+   ],
+   "front": "<div><code>IS_ENABLED(CONFIG_FOO)</code> vs <code>#ifdef CONFIG_FOO</code>: why does the kernel prefer the former inside functions?</div>",
+   "back": "<pre><code>if (IS_ENABLED(CONFIG_FOO))\n        foo_setup(dev);</code></pre><div><code>IS_ENABLED()</code> expands to a constant 1 or 0 (it is true for both <code>=y</code> and <code>=m</code>). Both branches are <b>parsed and type-checked</b> in every configuration, then the dead branch is eliminated. The code cannot bit-rot in rarely built configurations.</div><div><code>#ifdef</code> hides code from the compiler entirely and fragments the control flow.</div><div>Requirement: declarations used in the dead branch must still be visible, so headers provide <code>static inline</code> stubs when the option is off. <code>#ifdef</code> remains necessary around struct members and whole function definitions.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "03 Compiler, Linker and Startup"
+  },
+  {
+   "guid": "jjBGHF;ZUr",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::04 Concurrency, Atomics and Interrupt Context",
+   "tags": [
+    "deepc",
+    "concurrency",
+    "ub"
+   ],
+   "front": "<div>What is a <b>data race</b> in C11 terms, and what is the consequence? Which kernel tool detects them?</div>",
+   "back": "<div>Two accesses to the same object from different threads of execution, at least one of them a write, with no synchronisation and not both atomic. In C11 that is Undefined Behaviour.</div><div>Practical consequences: torn reads and writes, a value re-loaded halfway through a computation, stores invented or merged by the compiler, stale values kept in registers.</div><div>An Interrupt Service Routine (ISR) versus the main loop on a single core counts as well: it is concurrency without parallelism.</div><div>Tool: Kernel Concurrency Sanitizer (KCSAN), which sets watchpoints on sampled accesses and reports concurrent conflicting ones.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "04 Concurrency, Atomics and Interrupt Context"
+  },
+  {
+   "guid": "np1e9DT@eI",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::04 Concurrency, Atomics and Interrupt Context",
+   "tags": [
+    "deepc",
+    "concurrency",
+    "kernel",
+    "volatile"
+   ],
+   "front": "<div>What do <code>READ_ONCE()</code> and <code>WRITE_ONCE()</code> do, and which compiler transformations do they prevent?</div>",
+   "back": "<div>They perform the access through a <code>volatile</code>-qualified lvalue, so exactly one load or store is emitted, at that point in the code.</div><div>Prevented:</div><ul><li><b>refetching</b>: <code>p = ptr; if (p) use(p);</code> compiled as two loads of <code>ptr</code>, with the second possibly <code>NULL</code></li><li><b>load/store tearing</b>: one access split into several smaller ones</li><li><b>invented stores</b>: the variable used as scratch space before its final store</li><li><b>fusing</b> of repeated loads in a polling loop</li></ul><div>They provide no atomicity for read-modify-write and no ordering between CPUs. They also document to KCSAN and to readers that the access is deliberately lockless.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "04 Concurrency, Atomics and Interrupt Context"
+  },
+  {
+   "guid": "bSx<]NP<yV",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::04 Concurrency, Atomics and Interrupt Context",
+   "tags": [
+    "deepc",
+    "concurrency",
+    "kernel"
+   ],
+   "front": "<div><code>barrier()</code> vs <code>mb()</code> / <code>rmb()</code> / <code>wmb()</code> / <code>smp_mb()</code>: which problem does each solve? How do x86 and ARM differ?</div>",
+   "back": "<ul><li><code>barrier()</code>: a <b>compiler</b> barrier. Stops the optimiser from moving or merging accesses across that point. Emits no instruction.</li><li><code>mb()</code>, <code>rmb()</code>, <code>wmb()</code>: <b>CPU</b> memory barriers. Force the ordering of loads and stores as observed by other CPUs or by devices. <code>smp_*()</code> variants reduce to <code>barrier()</code> on uniprocessor builds.</li></ul><div>x86 has Total Store Order (TSO): only a store followed by a load may be reordered, so <code>smp_rmb()</code>/<code>smp_wmb()</code> are just <code>barrier()</code>, while <code>smp_mb()</code> is a real locked instruction. ARM, PowerPC and RISC-V are weakly ordered: all of them emit real instructions (<code>dsb</code>/<code>dmb</code> on ARM).</div><div>Most drivers never write barriers explicitly: locks, atomics and <code>writel()</code> contain them. They appear in lockless rings shared with hardware.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "04 Concurrency, Atomics and Interrupt Context"
+  },
+  {
+   "guid": "d0Ib,SfYWZ",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::04 Concurrency, Atomics and Interrupt Context",
+   "tags": [
+    "deepc",
+    "concurrency",
+    "kernel"
+   ],
+   "front": "<div><code>atomic_t</code> vs <code>refcount_t</code> vs plain <code>int</code>: when is each appropriate?</div>",
+   "back": "<ul><li>Plain <code>int</code> with <code>++</code>: load, add, store. Updates are lost under concurrency, <code>volatile</code> or not.</li><li><code>atomic_t</code> / <code>atomic64_t</code>: <code>atomic_inc()</code>, <code>atomic_dec_and_test()</code>, <code>atomic_cmpxchg()</code>. Use for counters, flags and state machines.</li><li><code>refcount_t</code>: for <b>object lifetimes</b>. It saturates instead of wrapping and warns on increment-from-zero and on underflow, turning refcount bugs from exploitable use-after-free into a leak plus a warning.</li><li>Bit flags: <code>set_bit()</code>, <code>clear_bit()</code>, <code>test_and_set_bit()</code> are atomic; the <code>__set_bit()</code> forms are not.</li></ul><div>The kernel does not use C11 <code>_Atomic</code> / <code>&lt;stdatomic.h&gt;</code>; it has per-architecture implementations.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "04 Concurrency, Atomics and Interrupt Context"
+  },
+  {
+   "guid": "qV:W,T@npd",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::04 Concurrency, Atomics and Interrupt Context",
+   "tags": [
+    "deepc",
+    "concurrency",
+    "embedded"
+   ],
+   "front": "<div>What happens with C11 <code>_Atomic</code> on a Cortex-M0, and what is the usual alternative there?</div>",
+   "back": "<div>ARMv6-M (Cortex-M0/M0+) lacks the exclusive-access instructions <code>LDREX</code>/<code>STREX</code> that ARMv7-M uses for lock-free atomics. The compiler emits calls to <code>__atomic_*</code> / <code>__sync_*</code> library routines, which on bare metal are frequently missing (link error) or implemented with a lock.</div><div><code>ATOMIC_INT_LOCK_FREE</code> reports whether a type is lock-free.</div><div>Usual alternative on a single core: a short critical section.</div><pre><code>uint32_t primask = __get_PRIMASK();\n__disable_irq();\ncounter++;\n__set_PRIMASK(primask);         /* restore, do not blindly enable */</code></pre><div>Save and restore the previous state so the section nests correctly, the same idea as <code>spin_lock_irqsave()</code>.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "04 Concurrency, Atomics and Interrupt Context"
+  },
+  {
+   "guid": "GY^=B}aKSC",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::04 Concurrency, Atomics and Interrupt Context",
+   "tags": [
+    "deepc",
+    "concurrency",
+    "kernel",
+    "drivers"
+   ],
+   "front": "<div>Spinlock vs mutex in the kernel: what are the context rules, and when is <code>spin_lock_irqsave()</code> required?</div>",
+   "back": "<ul><li><code>mutex</code>: a contended caller <b>sleeps</b>. Process context only. The holder may sleep.</li><li><code>spinlock_t</code>: a contended caller <b>busy-waits</b> and preemption is disabled. Usable in any context. The holder must not sleep: no <code>GFP_KERNEL</code> allocation, no <code>copy_from_user()</code>, no <code>mutex_lock()</code>, no <code>msleep()</code>.</li></ul><div>If a lock is also taken in an interrupt handler, every process-context user must take it with <code>spin_lock_irqsave(&amp;lock, flags)</code>. Otherwise the interrupt can arrive on the same CPU while the lock is held and spin forever: a self-deadlock. <code>spin_lock_bh()</code> suffices when the other user is a softirq.</div><div>With PREEMPT_RT, <code>spinlock_t</code> becomes a sleeping lock; <code>raw_spinlock_t</code> remains a true spinlock.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "04 Concurrency, Atomics and Interrupt Context"
+  },
+  {
+   "guid": "sHrwi>@.%3",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::04 Concurrency, Atomics and Interrupt Context",
+   "tags": [
+    "deepc",
+    "concurrency",
+    "kernel",
+    "drivers"
+   ],
+   "front": "<div>Which execution contexts exist in the kernel, and which of them may sleep?</div>",
+   "back": "<ul><li><b>Process context</b> (system calls, kernel threads, workqueues, threaded interrupt handlers): may sleep, unless a spinlock is held or preemption/interrupts are disabled.</li><li><b>Softirq / tasklet / timer callback</b>: may not sleep.</li><li><b>Hard interrupt handler</b>: may not sleep.</li><li><b>Non-Maskable Interrupt (NMI)</b>: may not sleep and may not even take ordinary spinlocks.</li></ul><div>\"Atomic context\" is everything that may not sleep. Violations show up as \"BUG: scheduling while atomic\" or \"sleeping function called from invalid context\".</div><div>Annotate functions that may sleep with <code>might_sleep()</code> so misuse is caught even when the sleep rarely happens.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "04 Concurrency, Atomics and Interrupt Context"
+  },
+  {
+   "guid": "s}rbCu9dE>",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::04 Concurrency, Atomics and Interrupt Context",
+   "tags": [
+    "deepc",
+    "concurrency",
+    "kernel"
+   ],
+   "front": "<div>Describe Read-Copy-Update (RCU) at the API level. What is the C-level trick in <code>rcu_assign_pointer()</code> / <code>rcu_dereference()</code>?</div>",
+   "back": "<div>Readers proceed without locks or atomic operations; updaters publish a new version and free the old one only after every pre-existing reader has finished (a <i>grace period</i>).</div><pre><code>rcu_read_lock();\np = rcu_dereference(gp);        /* READ_ONCE + checks */\nif (p) use(p-&gt;field);\nrcu_read_unlock();\n\nnew = kmalloc(...); *new = *old; new-&gt;field = v;\nrcu_assign_pointer(gp, new);    /* barrier, then publish */\nsynchronize_rcu();              /* or kfree_rcu(old, rcu) */\nkfree(old);</code></pre><div><code>rcu_assign_pointer()</code> guarantees the object's initialisation reaches memory before the pointer becomes visible; <code>rcu_dereference()</code> fetches the pointer exactly once.</div><div>Readers may not block (classic RCU). Best for read-mostly data.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "04 Concurrency, Atomics and Interrupt Context"
+  },
+  {
+   "guid": "L#=7PU3D$j",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::04 Concurrency, Atomics and Interrupt Context",
+   "tags": [
+    "deepc",
+    "concurrency",
+    "kernel"
+   ],
+   "front": "<div>What are per-CPU variables, and why must preemption be considered when using them?</div>",
+   "back": "<div><code>DEFINE_PER_CPU(type, name)</code> creates one instance per CPU: no locking, no cache-line bouncing. Typical for statistics and per-CPU queues.</div><div>Hazard: a task preempted and migrated between computing the per-CPU address and using it updates another CPU's copy, racing with that CPU.</div><ul><li><code>get_cpu_var(x)</code> / <code>put_cpu_var(x)</code>: disable and re-enable preemption around the access</li><li><code>this_cpu_inc(x)</code>, <code>this_cpu_add(x, n)</code>: a single preemption-safe operation (one instruction on x86)</li><li>if an interrupt handler touches the same variable, interrupts must also be disabled, or the <code>this_cpu_*</code> operations used</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "04 Concurrency, Atomics and Interrupt Context"
+  },
+  {
+   "guid": "fJfvR94q.<",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::04 Concurrency, Atomics and Interrupt Context",
+   "tags": [
+    "deepc",
+    "concurrency",
+    "kernel",
+    "debugging"
+   ],
+   "front": "<div>What is an ABBA deadlock, and how does the kernel find lock-ordering bugs before they hang a system?</div>",
+   "back": "<div>Thread 1 takes A then B; thread 2 takes B then A. Each holds what the other needs.</div><div>Rule: define a global order for locks that nest, and always acquire in that order.</div><div><b>lockdep</b> (<code>CONFIG_PROVE_LOCKING</code>) records the order in which lock <i>classes</i> are acquired and reports a possible deadlock the first time an inverse order is observed, even if the deadlock never actually occurred. It also catches a lock used both with interrupts enabled and from an interrupt handler, and sleeping while holding a spinlock.</div><div>Develop drivers with lockdep enabled.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "04 Concurrency, Atomics and Interrupt Context"
+  },
+  {
+   "guid": "k6$Y5w1uJM",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::04 Concurrency, Atomics and Interrupt Context",
+   "tags": [
+    "deepc",
+    "concurrency",
+    "drivers"
+   ],
+   "front": "<div>How does a driver put a process to sleep until the hardware has data? Why is the condition an argument of the macro?</div>",
+   "back": "<pre><code>/* read() path */\nret = wait_event_interruptible(dev-&gt;wq, dev-&gt;data_ready);\nif (ret)\n        return ret;             /* -ERESTARTSYS: a signal arrived */\n\n/* interrupt handler */\ndev-&gt;data_ready = true;\nwake_up_interruptible(&amp;dev-&gt;wq);</code></pre><div>The macro checks the condition, marks the task as sleeping, <b>checks again</b>, and only then schedules. That closes the lost-wakeup window where the interrupt fires between the check and the sleep. It also re-checks after every wake-up, because wake-ups can be spurious.</div><div>For a one-shot \"operation finished\" event use <code>struct completion</code> (<code>wait_for_completion_timeout()</code> / <code>complete()</code>).</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "04 Concurrency, Atomics and Interrupt Context"
+  },
+  {
+   "guid": "OSuzmoV~jQ",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::04 Concurrency, Atomics and Interrupt Context",
+   "tags": [
+    "deepc",
+    "concurrency",
+    "embedded",
+    "volatile"
+   ],
+   "front": "<div>Bare metal, single core: a 32-bit tick counter is incremented in a timer interrupt and read in <code>main()</code> on an 8-bit AVR. <code>volatile</code> is present. What is still wrong?</div>",
+   "back": "<div>The read takes four byte-loads. The interrupt can fire between them: <code>0x0000FFFF</code> → <code>0x00010000</code> may be read as <code>0x0001FFFF</code> or <code>0x00000000</code>. This is a <b>torn read</b>. The same occurs with a 64-bit variable on a 32-bit Cortex-M.</div><div><code>volatile</code> only forces the loads to happen; it does not make them atomic.</div><div>Fixes:</div><ul><li>read inside a critical section (save interrupt state, disable, copy, restore)</li><li>or read twice until both reads agree (the lock-free equivalent of a seqlock)</li></ul><div>Any object wider than the native word, and any multi-member state, needs this treatment.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "04 Concurrency, Atomics and Interrupt Context"
+  },
+  {
+   "guid": "Am#0-$2{}q",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::04 Concurrency, Atomics and Interrupt Context",
+   "tags": [
+    "deepc",
+    "concurrency",
+    "embedded",
+    "kernel"
+   ],
+   "front": "<div>How does a lock-free single-producer/single-consumer ring buffer work, and why is its size a power of two?</div>",
+   "back": "<pre><code>#define N 256u                          /* power of two */\nstatic uint8_t buf[N];\nstatic volatile uint32_t head, tail;    /* free-running */\n\n/* producer (ISR) */\nif (head - tail &lt; N) { buf[head &amp; (N - 1)] = c; head++; }\n/* consumer (main) */\nif (head != tail)    { c = buf[tail &amp; (N - 1)]; tail++; }</code></pre><ul><li>each index is written by exactly one side, so no lock is needed; indices must be native-word sized so reads are not torn</li><li>power-of-two size: masking replaces modulo, and unsigned wrap-around keeps <code>head - tail</code> correct, so all N slots are usable</li><li>write the data first, then advance the index</li></ul><div>Kernel: <code>kfifo</code>. On multi-core systems barriers are required; <code>kfifo</code> contains them.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "04 Concurrency, Atomics and Interrupt Context"
+  },
+  {
+   "guid": "iOa{t49nH$",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::04 Concurrency, Atomics and Interrupt Context",
+   "tags": [
+    "deepc",
+    "concurrency",
+    "embedded",
+    "rtos"
+   ],
+   "front": "<div>What is <b>priority inversion</b>, and how is it handled in a Real-Time Operating System (RTOS) and in Linux?</div>",
+   "back": "<div>A low-priority task L holds a mutex needed by high-priority H. A medium-priority task M preempts L, so H effectively waits for M, without bound. The Mars Pathfinder resets are the textbook case.</div><div><b>Priority inheritance</b>: while H is blocked on the mutex, L runs at H's priority.</div><ul><li>FreeRTOS: mutexes implement inheritance; binary semaphores do <b>not</b>, so do not use them for mutual exclusion</li><li>Linux: <code>rt_mutex</code>, <code>PTHREAD_PRIO_INHERIT</code>; under PREEMPT_RT most kernel locks are rt_mutex based</li></ul><div>Mitigations by design: short critical sections, and not sharing locks across widely separated priorities.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "04 Concurrency, Atomics and Interrupt Context"
+  },
+  {
+   "guid": "L;&OD?EI+e",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::04 Concurrency, Atomics and Interrupt Context",
+   "tags": [
+    "deepc",
+    "concurrency",
+    "embedded"
+   ],
+   "front": "<div>Reentrant vs thread-safe: what is the difference, and why does it matter for interrupt handlers?</div>",
+   "back": "<ul><li><b>Thread-safe</b>: correct when called concurrently from several threads, typically thanks to a lock.</li><li><b>Reentrant</b>: correct when interrupted mid-execution and entered again <i>on the same thread</i>. That requires no static state and no non-recursive locks.</li></ul><div>A lock-based thread-safe function is not reentrant: if an Interrupt Service Routine (ISR) interrupts the lock holder and calls the same function, it deadlocks. Hence <code>malloc()</code> and <code>printf()</code> are forbidden in an ISR.</div><div>Not reentrant: anything with static buffers (<code>strtok()</code>, <code>asctime()</code>) or a function-local <code>static</code>.</div><div>FreeRTOS provides separate non-blocking <code>...FromISR()</code> variants of its API for this reason.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "04 Concurrency, Atomics and Interrupt Context"
+  },
+  {
+   "guid": "rV<WPKAgjA",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::04 Concurrency, Atomics and Interrupt Context",
+   "tags": [
+    "deepc",
+    "concurrency",
+    "kernel"
+   ],
+   "front": "<div>What is a <b>seqlock</b>, and when is it a better fit than a spinlock?</div>",
+   "back": "<div>The writer increments a sequence counter before and after updating (the counter is odd while an update is in progress). Readers take no lock: they read the counter, read the data, and retry if the counter was odd or has changed.</div><pre><code>do {\n        seq = read_seqbegin(&amp;sl);\n        t = shared_time;\n} while (read_seqretry(&amp;sl, seq));</code></pre><div>Good for small data that is read very often and written rarely; writers are never delayed by readers. The kernel's timekeeping uses it.</div><div>Limitation: readers must not follow pointers inside the protected data, since they may be looking at a half-updated state.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "04 Concurrency, Atomics and Interrupt Context"
+  },
+  {
+   "guid": "tG,8O@!:<,",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::05 Linux Kernel C Idioms",
+   "tags": [
+    "deepc",
+    "kernel",
+    "idioms",
+    "pointers"
+   ],
+   "front": "<div>Write <code>container_of()</code> and explain why the kernel is built around it.</div>",
+   "back": "<pre><code>#define container_of(ptr, type, member) ({                      \\\n        void *__mptr = (void *)(ptr);                           \\\n        ((type *)(__mptr - offsetof(type, member))); })</code></pre><div>Given a pointer to a <i>member</i>, it returns a pointer to the <i>enclosing struct</i>. (The real macro also statically asserts that the types match.)</div><div>It enables <b>intrusive</b> data structures and C-style inheritance: generic code deals only with the embedded <code>struct list_head</code>, <code>struct kref</code>, <code>struct work_struct</code>, <code>struct device</code> or <code>struct cdev</code>; the driver recovers its private struct in the callback.</div><pre><code>static void foo_work(struct work_struct *w)\n{\n        struct foo *foo = container_of(w, struct foo, work);\n}</code></pre><div>No separate allocation per node, no <code>void *</code> context pointer, and the data stays cache-local.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "05 Linux Kernel C Idioms"
+  },
+  {
+   "guid": "xz4rYNhgvC",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::05 Linux Kernel C Idioms",
+   "tags": [
+    "deepc",
+    "kernel",
+    "idioms"
+   ],
+   "front": "<div>How does the kernel's <code>struct list_head</code> differ from a textbook linked list? Which iterator is required when deleting during iteration?</div>",
+   "back": "<div>It is an <b>intrusive, circular, doubly linked</b> list. The node (<code>next</code>, <code>prev</code>) is embedded in your struct; the list head is a node of the same type, so an empty list points to itself and there are no <code>NULL</code> checks.</div><pre><code>struct foo { int v; struct list_head node; };\nLIST_HEAD(foos);\n\nlist_add_tail(&amp;f-&gt;node, &amp;foos);\nlist_for_each_entry(f, &amp;foos, node)\n        pr_info(\"%d\\n\", f-&gt;v);</code></pre><div>Deleting while iterating: <code>list_for_each_entry_safe(f, tmp, &amp;foos, node)</code>, which caches the next element first.</div><div><code>list_del()</code> poisons the pointers (<code>LIST_POISON1/2</code>) so a stale use faults at a recognisable address. One object can sit on several lists by embedding several nodes. Locking is the caller's job.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "05 Linux Kernel C Idioms"
+  },
+  {
+   "guid": "Fv;y98#(fS",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::05 Linux Kernel C Idioms",
+   "tags": [
+    "deepc",
+    "kernel",
+    "idioms",
+    "errors"
+   ],
+   "front": "<div>How do <code>ERR_PTR()</code>, <code>PTR_ERR()</code> and <code>IS_ERR()</code> work? What is the classic mistake?</div>",
+   "back": "<div>The top 4095 values of the address space (<code>-MAX_ERRNO</code> to <code>-1</code> as <code>unsigned long</code>) are never valid kernel pointers, so a negative errno can be encoded in a pointer return value.</div><pre><code>clk = devm_clk_get(dev, NULL);\nif (IS_ERR(clk))\n        return PTR_ERR(clk);</code></pre><div><code>IS_ERR(p)</code> is <code>(unsigned long)p &gt;= (unsigned long)-MAX_ERRNO</code>.</div><div>Classic mistake: testing with <code>if (!p)</code>. A function returns <b>either</b> <code>NULL</code> <b>or</b> <code>ERR_PTR</code> on failure; check its documentation. <code>IS_ERR(NULL)</code> is false. <code>IS_ERR_OR_NULL()</code> exists, but needing it usually indicates an unclear API.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "05 Linux Kernel C Idioms"
+  },
+  {
+   "guid": "i?I0)pR$@r",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::05 Linux Kernel C Idioms",
+   "tags": [
+    "deepc",
+    "kernel",
+    "idioms",
+    "errors"
+   ],
+   "front": "<div>Show the kernel's <code>goto</code>-based error unwinding pattern and its rules.</div>",
+   "back": "<pre><code>static int foo_probe(struct platform_device *pdev)\n{\n        int ret;\n\n        ret = a_init();\n        if (ret)\n                return ret;\n        ret = b_init();\n        if (ret)\n                goto err_a;\n        ret = c_init();\n        if (ret)\n                goto err_b;\n        return 0;\n\nerr_b:\n        b_exit();\nerr_a:\n        a_exit();\n        return ret;\n}</code></pre><ul><li>release in exact reverse order of acquisition</li><li>name labels after what they undo</li><li>one exit path per resource level; never jump backwards</li><li><code>remove()</code> performs the same sequence in full</li></ul><div><code>devm_*</code> and <code>__free()</code>/<code>guard()</code> reduce the need for it, but the pattern is everywhere.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "05 Linux Kernel C Idioms"
+  },
+  {
+   "guid": "GITv7=NOp6",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::05 Linux Kernel C Idioms",
+   "tags": [
+    "deepc",
+    "kernel",
+    "idioms",
+    "errors"
+   ],
+   "front": "<div>What are the kernel's return-value conventions?</div>",
+   "back": "<ul><li>Actions/commands: <code>0</code> on success, <b>negative errno</b> on failure (<code>-ENOMEM</code>, <code>-EINVAL</code>, <code>-EIO</code>, <code>-ENODEV</code>, <code>-EBUSY</code>, <code>-EFAULT</code>, <code>-ETIMEDOUT</code>).</li><li>Predicates (<code>pci_dev_present()</code>, <code>list_empty()</code>): non-zero / <code>true</code> means yes.</li><li>Pointer-returning functions: <code>NULL</code> <i>or</i> <code>ERR_PTR(-errno)</code>, depending on the function.</li><li><code>read()</code>/<code>write()</code> handlers: byte count ≥ 0, or negative errno.</li><li>Interrupt handlers: <code>IRQ_HANDLED</code>, <code>IRQ_NONE</code>, <code>IRQ_WAKE_THREAD</code>.</li></ul><div>Propagate the error code you received rather than inventing a new one. The negative errno travels unchanged up to the system-call boundary, where libc turns it into <code>-1</code> plus <code>errno</code>.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "05 Linux Kernel C Idioms"
+  },
+  {
+   "guid": "qJ-Sai7j*C",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::05 Linux Kernel C Idioms",
+   "tags": [
+    "deepc",
+    "kernel",
+    "drivers",
+    "idioms"
+   ],
+   "front": "<div>What are <code>BIT()</code>, <code>GENMASK()</code>, <code>FIELD_PREP()</code> and <code>FIELD_GET()</code>? Rewrite <code>val = (reg &gt;&gt; 4) &amp; 0x7;</code> with them.</div>",
+   "back": "<pre><code>#define CTRL_EN         BIT(0)\n#define CTRL_MODE       GENMASK(6, 4)   /* bits 6..4 inclusive */\n\nmode = FIELD_GET(CTRL_MODE, reg);\nreg &amp;= ~CTRL_MODE;\nreg |= FIELD_PREP(CTRL_MODE, 5);</code></pre><div><code>GENMASK(h, l)</code> builds a contiguous mask and fails to compile if <code>h &lt; l</code>. <code>FIELD_PREP</code>/<code>FIELD_GET</code> derive the shift from the mask at compile time, and <code>FIELD_PREP</code> rejects constant values that do not fit.</div><div>One definition per field, matching the datasheet, with no separate <code>_SHIFT</code> macro to drift out of sync.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "05 Linux Kernel C Idioms"
+  },
+  {
+   "guid": "d!,9T[.7N.",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::05 Linux Kernel C Idioms",
+   "tags": [
+    "deepc",
+    "kernel",
+    "security",
+    "integers"
+   ],
+   "front": "<div>How does kernel code guard against integer overflow in size calculations?</div>",
+   "back": "<pre><code>if (check_mul_overflow(n, size, &amp;bytes))        /* also _add, _sub */\n        return -EOVERFLOW;\n\np = kmalloc_array(n, sizeof(*p), GFP_KERNEL);   /* NULL on overflow */\np = kcalloc(n, sizeof(*p), GFP_KERNEL);\np = kmalloc(struct_size(p, items, n), GFP_KERNEL);\np = kmalloc(array_size(a, b), GFP_KERNEL);</code></pre><div><code>check_*_overflow()</code> wrap <code>__builtin_*_overflow()</code>: correct for any mix of integer types, no Undefined Behaviour, and compiled to a flag check.</div><div><code>array_size()</code>, <code>array3_size()</code> and <code>struct_size()</code> saturate to <code>SIZE_MAX</code>, which no allocator can satisfy.</div><div>Pattern to eliminate: <code>kmalloc(n * sizeof(*p), ...)</code> with <code>n</code> from user space or a device. A wrapped product gives an undersized buffer and a heap overflow.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "05 Linux Kernel C Idioms"
+  },
+  {
+   "guid": "BC%h.`S}=9",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::05 Linux Kernel C Idioms",
+   "tags": [
+    "deepc",
+    "kernel",
+    "drivers",
+    "debugging"
+   ],
+   "front": "<div>How should a driver log? Cover <code>printk</code> levels, <code>pr_*</code>, <code>dev_*</code>, dynamic debug, and pointer printing.</div>",
+   "back": "<ul><li><code>printk(KERN_ERR \"...\")</code>: levels 0 to 7 (<code>EMERG, ALERT, CRIT, ERR, WARNING, NOTICE, INFO, DEBUG</code>).</li><li><code>pr_err()</code>, <code>pr_info()</code>...: shorthands. Define <code>pr_fmt(fmt)</code> as <code>KBUILD_MODNAME \": \" fmt</code> <i>before</i> the includes to prefix every message.</li><li>With a <code>struct device</code>, use <code>dev_err(dev, ...)</code>, <code>dev_warn()</code>, <code>dev_dbg()</code>: they prefix the driver and device name.</li><li><code>dev_dbg()</code>/<code>pr_debug()</code> compile to nothing unless <code>DEBUG</code> is defined, or can be toggled at run time with <code>CONFIG_DYNAMIC_DEBUG</code>.</li><li><code>dev_err_probe(dev, ret, ...)</code> in <code>probe()</code>: stays quiet for <code>-EPROBE_DEFER</code> and returns <code>ret</code>.</li><li><code>%p</code> prints a <b>hashed</b> value to avoid leaking addresses; <code>%px</code> prints the real value (debugging only).</li><li>In hot or interrupt paths use <code>*_ratelimited()</code> or <code>*_once()</code>.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "05 Linux Kernel C Idioms"
+  },
+  {
+   "guid": "zbBO,}QQ,b",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::05 Linux Kernel C Idioms",
+   "tags": [
+    "deepc",
+    "kernel",
+    "idioms",
+    "lifetime"
+   ],
+   "front": "<div>Show the <code>kref</code> reference-counting pattern. Why is the release function a callback?</div>",
+   "back": "<pre><code>struct foo { struct kref ref; ... };\n\nstatic void foo_release(struct kref *k)\n{\n        struct foo *f = container_of(k, struct foo, ref);\n        kfree(f);\n}\n\nkref_init(&amp;f-&gt;ref);                     /* count = 1 */\nkref_get(&amp;f-&gt;ref);\nkref_put(&amp;f-&gt;ref, foo_release);         /* frees at 0 */</code></pre><div>The object frees itself when the <i>last</i> holder drops it, whoever that is: <code>remove()</code>, the final <code>close()</code>, or a work item.</div><div>Rules: take a reference before handing the pointer to another context; never <code>kref_get()</code> on an object whose count may already be zero (use <code>kref_get_unless_zero()</code> under the lookup lock).</div><div>This is how an object outlives the hot-unplugged device while a file descriptor is still open.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "05 Linux Kernel C Idioms"
+  },
+  {
+   "guid": "b9DNcvkwQ]",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::05 Linux Kernel C Idioms",
+   "tags": [
+    "deepc",
+    "kernel",
+    "debugging",
+    "errors"
+   ],
+   "front": "<div><code>BUG_ON()</code> vs <code>WARN_ON()</code>: which should a driver use?</div>",
+   "back": "<div><code>BUG_ON(cond)</code> kills the current context with an oops. Locks that were held stay held and the machine usually dies. It is essentially banned in new code.</div><div><code>WARN_ON(cond)</code> prints a backtrace, taints the kernel and <b>continues</b>; it returns the condition, so:</div><pre><code>if (WARN_ON_ONCE(!dev-&gt;regs))\n        return -EINVAL;</code></pre><div>Use it for \"cannot happen\" driver bugs and recover gracefully. Prefer the <code>_ONCE</code> variant to avoid flooding the log. Never make it triggerable from user space: systems running with <code>panic_on_warn</code> would reboot.</div><div>Expected run-time failures (bad input, hardware timeout) are not warnings: return an errno and, if useful, <code>dev_err()</code>.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "05 Linux Kernel C Idioms"
+  },
+  {
+   "guid": "yW_wN:eUO=",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::05 Linux Kernel C Idioms",
+   "tags": [
+    "deepc",
+    "kernel",
+    "idioms",
+    "security"
+   ],
+   "front": "<div>The kernel has no libc. Which string and parsing functions should be used, and which are deprecated?</div>",
+   "back": "<div>Available from <code>lib/</code>: <code>memcpy</code>, <code>memset</code>, <code>strlen</code>, <code>strcmp</code>, <code>snprintf</code>, <code>kasprintf</code>, <code>kstrdup</code>, <code>sort</code>, <code>bsearch</code>.</div><ul><li>copying strings: <b><code>strscpy(dst, src, size)</code></b>: always NUL-terminates and returns the length or <code>-E2BIG</code>. <code>strcpy</code>, <code>strncpy</code> on NUL-terminated strings, and <code>strlcpy</code> are deprecated or removed.</li><li>parsing numbers: <b><code>kstrtoint()</code>, <code>kstrtou32()</code>, <code>kstrtoul()</code></b>: strict, overflow-checked, return errno. <code>simple_strtoul()</code> and <code>sscanf(\"%d\")</code> are discouraged.</li><li>formatting into a buffer: <code>scnprintf()</code> returns the number of characters <i>actually written</i> (<code>snprintf()</code> returns what it <i>would</i> have written). For sysfs <code>show()</code> use <code>sysfs_emit()</code>.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "05 Linux Kernel C Idioms"
+  },
+  {
+   "guid": "qP%lc$ezt:",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::05 Linux Kernel C Idioms",
+   "tags": [
+    "deepc",
+    "kernel",
+    "embedded",
+    "integers"
+   ],
+   "front": "<div>How do you compare wrapping tick counters such as <code>jiffies</code> correctly? Give the portable embedded form as well.</div>",
+   "back": "<div><code>if (jiffies &gt; timeout)</code> breaks when the counter wraps.</div><div>Kernel:</div><pre><code>unsigned long timeout = jiffies + msecs_to_jiffies(100);\nwhile (!done) {\n        if (time_after(jiffies, timeout))\n                return -ETIMEDOUT;\n        ...\n}</code></pre><div><code>time_after(a, b)</code> is <code>((long)((b) - (a)) &lt; 0)</code>: unsigned subtraction wraps correctly, and the signed cast interprets the difference. Valid for intervals below half the counter range.</div><div>Bare-metal equivalent, relying only on unsigned wrap-around:</div><pre><code>uint32_t start = millis();\nif ((uint32_t)(millis() - start) &gt;= timeout_ms) { ... }</code></pre><div>Compare <b>elapsed time</b>, never absolute time stamps.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "05 Linux Kernel C Idioms"
+  },
+  {
+   "guid": "G5Q(h7s$%]",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::05 Linux Kernel C Idioms",
+   "tags": [
+    "deepc",
+    "kernel",
+    "debugging"
+   ],
+   "front": "<div>An oops reads: \"unable to handle kernel NULL pointer dereference at 0000000000000018\". What does the 0x18 tell you, and how do you locate the line?</div>",
+   "back": "<div>The faulting address is <code>NULL + 0x18</code>: code accessed a <b>member at offset 0x18 through a NULL struct pointer</b>. Find which struct in that function has a member at offset 24 (<code>pahole -C struct_name</code>).</div><div>Locating it:</div><ul><li><code>RIP: foo_read+0x3c/0x120 [foo]</code> gives function, offset and module</li><li><code>scripts/faddr2line foo.ko foo_read+0x3c</code> gives file:line (needs debug info)</li><li>or <code>objdump -dS foo.ko</code>, or <code>gdb foo.ko</code> with <code>list *(foo_read+0x3c)</code></li><li><code>scripts/decode_stacktrace.sh</code> decodes a whole log</li></ul><div>Also read the taint flags and the call trace; entries marked <code>?</code> are unreliable.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "05 Linux Kernel C Idioms"
+  },
+  {
+   "guid": "F=VJ$]G~IO",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::05 Linux Kernel C Idioms",
+   "tags": [
+    "deepc",
+    "kernel",
+    "debugging",
+    "ub"
+   ],
+   "front": "<div>Which run-time checkers does the kernel offer for C memory and Undefined Behaviour bugs?</div>",
+   "back": "<ul><li><b>Kernel Address Sanitizer (KASAN)</b>: out-of-bounds and use-after-free on heap, stack and globals, via shadow memory</li><li><b>Undefined Behaviour Sanitizer (UBSAN)</b>: bad shifts, out-of-bounds array indexing, misaligned access, overflow</li><li><b>Kernel Memory Sanitizer (KMSAN)</b>: use of uninitialised memory</li><li><b>Kernel Concurrency Sanitizer (KCSAN)</b>: data races</li><li><b>kmemleak</b>: unreferenced allocations</li><li><b>lockdep</b>: lock ordering and context misuse</li><li><code>CONFIG_DEBUG_ATOMIC_SLEEP</code>, <code>CONFIG_DEBUG_LIST</code>, <code>CONFIG_FORTIFY_SOURCE</code>, <code>CONFIG_DMA_API_DEBUG</code></li><li><b>kfence</b>: low-overhead sampling heap checker suitable for production</li></ul><div>Test a driver on a debug kernel with these enabled (QEMU is fine). They find what review misses.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "05 Linux Kernel C Idioms"
+  },
+  {
+   "guid": "us,#])mOu|",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::05 Linux Kernel C Idioms",
+   "tags": [
+    "deepc",
+    "kernel",
+    "style"
+   ],
+   "front": "<div>What are the main points of the kernel coding style, and which tool checks it?</div>",
+   "back": "<ul><li>tabs, 8 columns wide; more than three indentation levels suggests the function needs splitting</li><li>line length about 80, hard limit 100</li><li>opening brace on the same line, except for function definitions</li><li>no <code>typedef</code> for structs; write <code>struct foo</code>. Exceptions: opaque or arch-varying types (<code>pte_t</code>), and <code>u8/u16/u32/u64</code></li><li><code>snake_case</code>, short local names, descriptive global names</li><li><code>sizeof(*p)</code> rather than <code>sizeof(struct foo)</code></li><li>no casting of <code>void *</code></li><li>functions that do one thing, with a central exit via <code>goto</code></li><li>comments explain <i>why</i>; kernel-doc <code>/** */</code> for exported APIs</li></ul><div><code>scripts/checkpatch.pl --strict</code> for patches; sparse and <code>W=1</code> builds for semantics.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "05 Linux Kernel C Idioms"
+  },
+  {
+   "guid": "x6QwP8{^9L",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::05 Linux Kernel C Idioms",
+   "tags": [
+    "deepc",
+    "kernel",
+    "toolchain"
+   ],
+   "front": "<div>What do the attributes <code>__must_check</code>, <code>noinline</code>, <code>__always_inline</code>, <code>__maybe_unused</code>, <code>__cold</code> and the <code>fallthrough;</code> pseudo-keyword do?</div>",
+   "back": "<ul><li><code>__must_check</code> (<code>warn_unused_result</code>): warning when the caller ignores the return value; applied to many functions returning errors</li><li><code>noinline</code> / <code>__always_inline</code>: override the inlining heuristics</li><li><code>__maybe_unused</code>: suppresses unused warnings, e.g. power-management callbacks that are only referenced when <code>CONFIG_PM</code> is set</li><li><code>__cold</code>: rarely executed; optimised for size and placed away from hot code</li><li><code>fallthrough;</code>: expands to <code>__attribute__((fallthrough))</code>. Required for every intentional switch fall-through since the kernel builds with <code>-Wimplicit-fallthrough</code></li><li>also: <code>__pure</code>, <code>__noreturn</code>, <code>__aligned(n)</code>, <code>__packed</code>, <code>__printf(a, b)</code>, <code>__section(name)</code></li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "05 Linux Kernel C Idioms"
+  },
+  {
+   "guid": "ePPqx1RxEb",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::05 Linux Kernel C Idioms",
+   "tags": [
+    "deepc",
+    "kernel",
+    "idioms",
+    "memory"
+   ],
+   "front": "<div>Why does kernel style write <code>p = kmalloc(sizeof(*p), GFP_KERNEL);</code> without a cast and without naming the type?</div>",
+   "back": "<ul><li><code>sizeof(*p)</code> follows the declaration: if the type of <code>p</code> changes, the size remains right. <code>sizeof(struct foo)</code> can silently go stale and become an under-allocation.</li><li><code>sizeof</code> does not evaluate its operand, so <code>*p</code> is fine even though <code>p</code> is uninitialised.</li><li>In C, <code>void *</code> converts implicitly to any object pointer type. A cast adds nothing and can hide a missing prototype or a wrong type.</li><li>Prefer <code>kzalloc()</code> unless every byte is about to be overwritten: it avoids uninitialised-member bugs and information leaks.</li><li>For arrays: <code>kcalloc(n, sizeof(*p), GFP_KERNEL)</code>.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "05 Linux Kernel C Idioms"
+  },
+  {
+   "guid": "ii6pcoay)Q",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::06 Linux Driver Programming",
+   "tags": [
+    "deepc",
+    "drivers",
+    "modules"
+   ],
+   "front": "<div>Write the minimal loadable kernel module. What does each macro do?</div>",
+   "back": "<pre><code>#include &lt;linux/module.h&gt;\n#include &lt;linux/init.h&gt;\n\nstatic int __init foo_init(void)\n{\n        pr_info(\"foo: loaded\\n\");\n        return 0;               /* non-zero: load fails */\n}\n\nstatic void __exit foo_exit(void)\n{\n        pr_info(\"foo: unloaded\\n\");\n}\n\nmodule_init(foo_init);\nmodule_exit(foo_exit);\nMODULE_LICENSE(\"GPL\");\nMODULE_AUTHOR(\"...\");\nMODULE_DESCRIPTION(\"...\");</code></pre><ul><li><code>module_init</code>/<code>module_exit</code>: entry points for <code>insmod</code> and <code>rmmod</code></li><li><code>__init</code>/<code>__exit</code>: code discarded after init / omitted when built in</li><li><code>MODULE_LICENSE</code>: determines access to <code>EXPORT_SYMBOL_GPL</code> symbols and kernel tainting</li></ul><div>Makefile: <code>obj-m += foo.o</code>, built with <code>make -C /lib/modules/$(uname -r)/build M=$PWD modules</code>. Real drivers use <code>module_platform_driver()</code> and friends instead of hand-written init/exit.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "06 Linux Driver Programming"
+  },
+  {
+   "guid": "v*%i&=K.]O",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::06 Linux Driver Programming",
+   "tags": [
+    "deepc",
+    "drivers",
+    "chardev"
+   ],
+   "front": "<div>What are the steps to expose a character device at <code>/dev/foo</code>? What is the shortcut?</div>",
+   "back": "<ul><li><code>alloc_chrdev_region(&amp;devt, 0, 1, \"foo\")</code>: reserve a major/minor number</li><li><code>cdev_init(&amp;foo-&gt;cdev, &amp;foo_fops); cdev_add(&amp;foo-&gt;cdev, devt, 1)</code>: bind the numbers to the <code>file_operations</code></li><li><code>class_create()</code> + <code>device_create()</code>: creates the sysfs entries; udev/devtmpfs then creates the <code>/dev/foo</code> node</li><li>teardown in reverse order</li></ul><div>Shortcut for a single node: <code>struct miscdevice</code> with <code>misc_register()</code>: major 10, dynamic minor, node created automatically.</div><div>In <code>open()</code>, recover the driver state with <code>container_of(inode-&gt;i_cdev, struct foo, cdev)</code> and store it in <code>file-&gt;private_data</code>.</div><div>First check whether an existing subsystem fits (IIO, input, hwmon, GPIO, tty, V4L2): a framework is preferred over a custom character device.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "06 Linux Driver Programming"
+  },
+  {
+   "guid": "JtSGU[hX)x",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::06 Linux Driver Programming",
+   "tags": [
+    "deepc",
+    "drivers",
+    "chardev"
+   ],
+   "front": "<div>Give the prototype and return semantics of the <code>read</code> file operation. What must it do with <code>*ppos</code>?</div>",
+   "back": "<pre><code>ssize_t foo_read(struct file *file, char __user *buf,\n                 size_t count, loff_t *ppos);</code></pre><ul><li>return the number of bytes transferred (may be less than <code>count</code>), <code>0</code> for end of file, or a negative errno</li><li><code>buf</code> is a user pointer: <code>copy_to_user()</code>, and <code>-EFAULT</code> if it fails</li><li>advance <code>*ppos</code> when the device has a notion of position. <code>simple_read_from_buffer()</code> handles this for a memory buffer</li><li>no data available: block (<code>wait_event_interruptible()</code>), or return <code>-EAGAIN</code> if <code>file-&gt;f_flags &amp; O_NONBLOCK</code></li></ul><div>A <code>read()</code> that always returns <code>count</code> without ever returning 0 makes <code>cat</code> loop forever.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "06 Linux Driver Programming"
+  },
+  {
+   "guid": "w{nWj8BTk.",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::06 Linux Driver Programming",
+   "tags": [
+    "deepc",
+    "drivers",
+    "abi",
+    "chardev"
+   ],
+   "front": "<div>How are ioctl command numbers built, and how do you design an ioctl argument struct that works for 32-bit user space on a 64-bit kernel?</div>",
+   "back": "<pre><code>#define FOO_IOC_MAGIC   'f'\n#define FOO_GET_STATUS  _IOR(FOO_IOC_MAGIC, 1, struct foo_status)\n#define FOO_SET_CFG     _IOW(FOO_IOC_MAGIC, 2, struct foo_cfg)</code></pre><div>The 32-bit number encodes direction (2 bits), argument size (14), magic/type (8) and sequence number (8). The direction is from user space's point of view.</div><div>Struct design for the user-space Application Binary Interface (ABI):</div><ul><li>only fixed-width <code>__u8</code>..<code>__u64</code> / <code>__s32</code>; no <code>long</code>, no pointers (carry them as <code>__u64</code>), no <code>enum</code>, no bitfields</li><li>explicit padding so there are no holes; align 64-bit members to 8 bytes (i386 aligns <code>u64</code> to 4, x86-64 to 8)</li><li>reserved fields that must be zero, plus a flags word for later extension</li></ul><div>Then <code>.compat_ioctl = compat_ptr_ioctl</code> suffices. Handler: unknown commands return <code>-ENOTTY</code>; copy the argument in once, validate it, act.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "06 Linux Driver Programming"
+  },
+  {
+   "guid": "m3Z_nWET|#",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::06 Linux Driver Programming",
+   "tags": [
+    "deepc",
+    "drivers",
+    "devicemodel"
+   ],
+   "front": "<div>Explain the Linux device model triad of bus, device and driver. When is <code>probe()</code> called?</div>",
+   "back": "<ul><li>A <b>bus</b> (platform, PCI, USB, I2C, SPI...) knows how to enumerate or describe devices and how to match them to drivers.</li><li>A <b>device</b> (<code>struct device</code> embedded in <code>struct pci_dev</code>, <code>struct platform_device</code>, <code>struct i2c_client</code>...) represents one hardware instance.</li><li>A <b>driver</b> registers a match table and callbacks.</li></ul><div>When a device and a driver on the same bus match (PCI IDs, USB IDs, the Device Tree <code>compatible</code> string, ACPI ID, or name), the core calls the driver's <code>probe(dev)</code>. <code>remove()</code> runs on unbind, module unload or hot-unplug.</div><div><code>MODULE_DEVICE_TABLE(of, foo_of_match)</code> exports the table so udev can autoload the module. All per-device state lives in a struct allocated in <code>probe()</code>, never in globals: there may be several instances.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "06 Linux Driver Programming"
+  },
+  {
+   "guid": "jDXdv|m3n_",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::06 Linux Driver Programming",
+   "tags": [
+    "deepc",
+    "drivers",
+    "devicetree"
+   ],
+   "front": "<div>Show the skeleton of a platform driver bound through the Device Tree (DT).</div>",
+   "back": "<pre><code>static int foo_probe(struct platform_device *pdev)\n{\n        struct device *dev = &amp;pdev-&gt;dev;\n        struct foo *foo;\n        int irq;\n\n        foo = devm_kzalloc(dev, sizeof(*foo), GFP_KERNEL);\n        if (!foo)\n                return -ENOMEM;\n\n        foo-&gt;regs = devm_platform_ioremap_resource(pdev, 0);\n        if (IS_ERR(foo-&gt;regs))\n                return PTR_ERR(foo-&gt;regs);\n\n        irq = platform_get_irq(pdev, 0);\n        if (irq &lt; 0)\n                return irq;\n\n        platform_set_drvdata(pdev, foo);\n        return devm_request_irq(dev, irq, foo_isr, 0,\n                                dev_name(dev), foo);\n}\n\nstatic const struct of_device_id foo_of_match[] = {\n        { .compatible = \"acme,foo-1.0\" },\n        { }\n};\nMODULE_DEVICE_TABLE(of, foo_of_match);\n\nstatic struct platform_driver foo_driver = {\n        .probe  = foo_probe,\n        .driver = { .name = \"foo\", .of_match_table = foo_of_match },\n};\nmodule_platform_driver(foo_driver);</code></pre><div>The DT node supplies <code>compatible</code>, <code>reg</code> (register base and size), <code>interrupts</code>, <code>clocks</code> and so on. The hardware description lives outside the C code.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "06 Linux Driver Programming"
+  },
+  {
+   "guid": "FqIEWPP_%9",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::06 Linux Driver Programming",
+   "tags": [
+    "deepc",
+    "drivers",
+    "devicetree",
+    "embedded"
+   ],
+   "front": "<div>What is the Device Tree, and how does a driver read custom properties from it?</div>",
+   "back": "<div>A data structure describing non-discoverable hardware (System-on-Chip peripherals, devices on I2C/SPI buses). Source <code>.dts</code> files are compiled by <code>dtc</code> into a Device Tree Blob (<code>.dtb</code>) that the bootloader passes to the kernel. One kernel binary can thus serve many boards.</div><pre><code>foo@40010000 {\n        compatible = \"acme,foo-1.0\";\n        reg = &lt;0x40010000 0x1000&gt;;\n        interrupts = &lt;GIC_SPI 42 IRQ_TYPE_LEVEL_HIGH&gt;;\n        clocks = &lt;&amp;clk 7&gt;;\n        acme,fifo-depth = &lt;64&gt;;\n};</code></pre><div>Reading a property, firmware-agnostic (works for ACPI as well):</div><pre><code>device_property_read_u32(dev, \"acme,fifo-depth\", &amp;depth);</code></pre><div>The DT describes <i>hardware</i>, not policy or Linux configuration. Custom properties carry a vendor prefix and are documented in a YAML binding schema.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "06 Linux Driver Programming"
+  },
+  {
+   "guid": "MHk9E}*KTG",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::06 Linux Driver Programming",
+   "tags": [
+    "deepc",
+    "drivers",
+    "lifetime",
+    "devicemodel"
+   ],
+   "front": "<div>What are <code>devm_*</code> managed resources? What is the classic lifetime bug with them?</div>",
+   "back": "<div>Resources obtained with <code>devm_kzalloc()</code>, <code>devm_ioremap_resource()</code>, <code>devm_request_irq()</code>, <code>devm_clk_get()</code>... are tied to the device binding and released automatically, in reverse order, when <code>probe()</code> fails or after <code>remove()</code> returns. Most <code>goto</code> unwinding disappears.</div><div>Pitfalls:</div><ul><li><b>lifetime</b>: devm memory is freed at <i>unbind</i>, but user space may still hold an open file descriptor whose file operations dereference it → use-after-free. State reachable from open files needs its own reference count.</li><li><b>ordering</b>: a devm interrupt is released <i>after</i> <code>remove()</code> returns, so the handler can still run during <code>remove()</code>. Quiesce the hardware first, or free the interrupt explicitly.</li><li>devm is for <code>probe()</code>-time resources only, not for allocations made per <code>open()</code> or per request.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "06 Linux Driver Programming"
+  },
+  {
+   "guid": "QAte4!+p}.",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::06 Linux Driver Programming",
+   "tags": [
+    "deepc",
+    "drivers",
+    "mmio",
+    "volatile"
+   ],
+   "front": "<div>Why must Memory-Mapped Input/Output (MMIO) go through <code>readl()</code>/<code>writel()</code> on an <code>__iomem</code> pointer rather than a plain dereference?</div>",
+   "back": "<ul><li><b>Correct access</b>: the accessors guarantee a single access of exactly the stated width, with the barriers the architecture requires. A plain dereference may be merged, reordered, split or widened.</li><li><b>Endianness</b>: <code>readl()</code>/<code>writel()</code> are defined as little-endian and swap on big-endian CPUs. <code>ioread32be()</code> exists for big-endian devices.</li><li><b>Portability</b>: on some architectures MMIO is not an ordinary load/store at all.</li><li><b>Checking</b>: <code>__iomem</code> places the pointer in a separate sparse address space, so accidental dereferences and <code>memcpy()</code> are flagged. Use <code>memcpy_toio()</code> / <code>memcpy_fromio()</code>.</li><li><b>Instrumentation</b>: accessors can be traced.</li></ul><div>Typical driver wrapper: <code>static inline u32 foo_rd(struct foo *f, u32 off) { return readl(f-&gt;regs + off); }</code></div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "06 Linux Driver Programming"
+  },
+  {
+   "guid": "FU2s/|P,R<",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::06 Linux Driver Programming",
+   "tags": [
+    "deepc",
+    "drivers",
+    "embedded",
+    "mmio"
+   ],
+   "front": "<div>A status register has <b>write-1-to-clear (W1C)</b> bits. What is wrong with <code>writel(readl(STATUS) | IRQ_RX, STATUS);</code>?</div>",
+   "back": "<div>The read returns <i>all</i> currently pending bits. OR-ing and writing back writes a 1 to each of them, which acknowledges every pending interrupt, including ones that have not been handled. Events are lost, and only intermittently.</div><div>Correct: write only the bit(s) to be cleared.</div><pre><code>writel(IRQ_RX, regs + STATUS);</code></pre><div>Typical handler: <code>stat = readl(STATUS); writel(stat, STATUS);</code> then process exactly the bits in <code>stat</code>.</div><div>General rule: read-modify-write is only valid for plain read/write registers. Check the datasheet's access type for every field: W1C, read-to-clear, write-only, self-clearing. The same trap exists in microcontroller firmware: <code>TIMx-&gt;SR |= flag;</code> is wrong.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "06 Linux Driver Programming"
+  },
+  {
+   "guid": "O71X6gLXhm",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::06 Linux Driver Programming",
+   "tags": [
+    "deepc",
+    "drivers",
+    "interrupts"
+   ],
+   "front": "<div>Write a correct interrupt handler for a possibly shared interrupt line. What must it return, and why?</div>",
+   "back": "<pre><code>static irqreturn_t foo_isr(int irq, void *dev_id)\n{\n        struct foo *foo = dev_id;\n        u32 stat = readl(foo-&gt;regs + FOO_IRQ_STAT);\n\n        if (!(stat &amp; FOO_IRQ_MASK))\n                return IRQ_NONE;        /* not ours */\n\n        writel(stat, foo-&gt;regs + FOO_IRQ_STAT); /* ack (W1C) */\n        /* minimal work: read the FIFO, complete(), wake_up() */\n        return IRQ_HANDLED;\n}</code></pre><ul><li>With <code>IRQF_SHARED</code> every handler on the line is called; each must check <b>its own device</b> and return <code>IRQ_NONE</code> if idle. The core uses this to detect and disable stuck \"nobody cared\" interrupts.</li><li><code>dev_id</code> must be unique per device; it is also the key for <code>free_irq()</code>.</li><li>Level-triggered: the device-side source must be cleared before returning, or the interrupt re-fires at once.</li><li>The handler runs in hard interrupt context: no sleeping, <code>GFP_ATOMIC</code> only, only spinlocks.</li><li>Register the handler only once everything it uses has been initialised.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "06 Linux Driver Programming"
+  },
+  {
+   "guid": "ni|r?4xwaK",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::06 Linux Driver Programming",
+   "tags": [
+    "deepc",
+    "drivers",
+    "interrupts",
+    "concurrency"
+   ],
+   "front": "<div>Top half vs bottom half: what deferral mechanisms exist, and which would you choose for a new driver?</div>",
+   "back": "<div>The hard interrupt handler (top half) should acknowledge the hardware, capture volatile state, and defer the rest.</div><ul><li><b>Threaded interrupt</b>: <code>request_threaded_irq(irq, hard_fn, thread_fn, IRQF_ONESHOT, ...)</code>. <code>thread_fn</code> runs in a kernel thread and may sleep (mutexes, I2C/SPI transfers). The default choice. With <code>hard_fn == NULL</code> the line stays masked until the thread finishes. Mandatory for devices behind slow buses.</li><li><b>Workqueue</b>: <code>schedule_work()</code> / <code>queue_work()</code>; process context, may sleep. Good for work not tied to one interrupt; <code>delayed_work</code> for timeouts.</li><li><b>Softirq</b>: fixed set, reserved for core subsystems (networking, block, timers); network drivers use it through NAPI.</li><li><b>Tasklet</b>: atomic context; deprecated and being removed.</li><li><b>Timers / hrtimers</b>: atomic context callbacks.</li></ul><div><code>cancel_work_sync()</code>, <code>del_timer_sync()</code> and <code>free_irq()</code> in <code>remove()</code>: nothing may fire after teardown.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "06 Linux Driver Programming"
+  },
+  {
+   "guid": "uJzwmwc:lQ",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::06 Linux Driver Programming",
+   "tags": [
+    "deepc",
+    "drivers",
+    "dma"
+   ],
+   "front": "<div>Direct Memory Access (DMA) API: what is the difference between <b>coherent</b> and <b>streaming</b> mappings, and what is the ownership rule?</div>",
+   "back": "<div><b>Coherent</b> (<code>dma_alloc_coherent()</code>): long-lived memory that the CPU and the device may access at any time without explicit synchronisation. Used for descriptor rings and mailboxes. Possibly uncached, so slower for the CPU.</div><div><b>Streaming</b> (<code>dma_map_single()</code>, <code>dma_map_sg()</code>, <code>dma_map_page()</code>): maps an existing buffer for one transfer, with a direction: <code>DMA_TO_DEVICE</code>, <code>DMA_FROM_DEVICE</code>, <code>DMA_BIDIRECTIONAL</code>.</div><pre><code>addr = dma_map_single(dev, buf, len, DMA_FROM_DEVICE);\nif (dma_mapping_error(dev, addr))\n        return -ENOMEM;\n/* device owns buf: the CPU must not touch it */\ndma_unmap_single(dev, addr, len, DMA_FROM_DEVICE);\n/* CPU owns buf again */</code></pre><div>Ownership: between map and unmap the buffer belongs to the device. The map/unmap calls perform cache flush/invalidate and bounce-buffer copies. To look at the data without unmapping: <code>dma_sync_single_for_cpu()</code> / <code>_for_device()</code>.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "06 Linux Driver Programming"
+  },
+  {
+   "guid": "r{p]gx]JPp",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::06 Linux Driver Programming",
+   "tags": [
+    "deepc",
+    "drivers",
+    "dma",
+    "memory"
+   ],
+   "front": "<div>Which memory may be used for streaming Direct Memory Access (DMA), and what does the DMA mask do?</div>",
+   "back": "<div>Allowed: memory from <code>kmalloc()</code> or the page allocator.</div><div>Not allowed:</div><ul><li><b>stack</b> memory (with <code>CONFIG_VMAP_STACK</code> it is not in the linear map, and it shares cache lines with unrelated data)</li><li><code>vmalloc()</code> memory via <code>dma_map_single()</code> (not physically contiguous)</li><li>static/global objects in modules; <code>.rodata</code></li><li>a small buffer embedded in a struct next to fields the CPU keeps using: cache invalidation works on whole cache lines</li></ul><div><code>kmalloc()</code> guarantees <code>ARCH_DMA_MINALIGN</code> alignment for this reason.</div><div><b>DMA mask</b>: <code>dma_set_mask_and_coherent(dev, DMA_BIT_MASK(32))</code> declares how many address bits the device can drive. If a buffer lies outside that range the core uses an Input-Output Memory Management Unit (IOMMU) mapping or a bounce buffer (swiotlb). Set it in <code>probe()</code> and check the return value.</div><div><code>CONFIG_DMA_API_DEBUG</code> catches most misuse.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "06 Linux Driver Programming"
+  },
+  {
+   "guid": "P&P|8k)St,",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::06 Linux Driver Programming",
+   "tags": [
+    "deepc",
+    "drivers",
+    "mmio",
+    "pci"
+   ],
+   "front": "<div>Your driver writes a reset bit and then calls <code>udelay(10)</code>. On PCI Express the device is sometimes not reset in time. Why?</div>",
+   "back": "<div>PCI Express memory writes are <b>posted</b>: the CPU continues as soon as the write is queued, and it may reach the device later. The delay started before the device saw the write.</div><div>Fix: read any harmless register of the same device after the write. A read is non-posted and cannot complete until the preceding writes have been delivered.</div><pre><code>writel(CTRL_RESET, regs + CTRL);\nreadl(regs + CTRL);             /* flush posted write */\nudelay(10);</code></pre><div>The same flush is needed after masking interrupts, before relying on \"no more interrupts will arrive\".</div><div>Better than fixed delays: poll a status bit with <code>readl_poll_timeout(addr, val, cond, sleep_us, timeout_us)</code> from <code>&lt;linux/iopoll.h&gt;</code>.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "06 Linux Driver Programming"
+  },
+  {
+   "guid": "E|,!vlT9~W",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::06 Linux Driver Programming",
+   "tags": [
+    "deepc",
+    "drivers",
+    "timing"
+   ],
+   "front": "<div><code>udelay()</code>, <code>usleep_range()</code>, <code>msleep()</code>, <code>fsleep()</code>: which one when?</div>",
+   "back": "<ul><li><code>udelay(us)</code> / <code>ndelay()</code>: <b>busy-wait</b>. The only option in atomic context. Keep it to a few microseconds; <code>mdelay()</code> is almost always a design smell.</li><li><code>usleep_range(min, max)</code>: sleeps using a high-resolution timer. For roughly 10 us to 20 ms in process context. The range allows wake-ups to be coalesced.</li><li><code>msleep(ms)</code>: jiffies-based, for 20 ms and more. <code>msleep(1)</code> may take 10 to 20 ms depending on <code>HZ</code>.</li><li><code>fsleep(us)</code>: picks the right one automatically.</li></ul><div>For \"wait until the hardware signals X\": not a delay at all, but an interrupt plus a completion, or <code>readl_poll_timeout()</code>. Every wait on hardware needs a <b>timeout</b> and an error path; hardware does hang.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "06 Linux Driver Programming"
+  },
+  {
+   "guid": "E[:!w3Ub;m",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::06 Linux Driver Programming",
+   "tags": [
+    "deepc",
+    "drivers",
+    "buses"
+   ],
+   "front": "<div>What is <code>regmap</code>, and why use it in an I2C or SPI device driver?</div>",
+   "back": "<div>An abstraction for register access over any bus: <code>regmap_read()</code>, <code>regmap_write()</code>, <code>regmap_update_bits()</code>, <code>regmap_bulk_read()</code>. Created with <code>devm_regmap_init_i2c()</code>, <code>devm_regmap_init_spi()</code> or <code>devm_regmap_init_mmio()</code>.</div><div>Benefits:</div><ul><li>a single driver core supports a chip that comes in I2C and SPI variants</li><li>built-in locking around read-modify-write</li><li>register <b>cache</b> (fewer slow bus transfers; restore state after suspend)</li><li>tables for readable/writable/volatile registers</li><li>debugfs register dump; <code>regmap_irq</code> for chips with interrupt controllers</li></ul><div>Bus transfers sleep, so such drivers need threaded interrupts and mutexes rather than hard handlers and spinlocks.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "06 Linux Driver Programming"
+  },
+  {
+   "guid": "K/~u$@+jPs",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::06 Linux Driver Programming",
+   "tags": [
+    "deepc",
+    "drivers",
+    "memory",
+    "security"
+   ],
+   "front": "<div>How does a driver implement <code>mmap()</code> to expose device memory or a buffer to user space?</div>",
+   "back": "<pre><code>static int foo_mmap(struct file *file, struct vm_area_struct *vma)\n{\n        struct foo *foo = file-&gt;private_data;\n        size_t size = vma-&gt;vm_end - vma-&gt;vm_start;\n\n        if (vma-&gt;vm_pgoff || size &gt; foo-&gt;mem_size)\n                return -EINVAL;\n\n        vma-&gt;vm_page_prot = pgprot_noncached(vma-&gt;vm_page_prot);\n        return io_remap_pfn_range(vma, vma-&gt;vm_start,\n                                  foo-&gt;mem_phys &gt;&gt; PAGE_SHIFT,\n                                  size, vma-&gt;vm_page_prot);\n}</code></pre><ul><li>device registers: <code>io_remap_pfn_range()</code> with non-cached protection</li><li>a coherent DMA buffer: <code>dma_mmap_coherent()</code></li><li><code>vmalloc</code> memory: <code>remap_vmalloc_range()</code>; individual pages: <code>vm_insert_page()</code></li></ul><div>Validate offset and size against the region: otherwise user space can map arbitrary physical memory. Mappings are page-granular, so everything else in the same page is exposed too. The mapping can outlive <code>close()</code>, so the backing memory needs proper lifetime handling.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "06 Linux Driver Programming"
+  },
+  {
+   "guid": "Fuf!bwb`cG",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::06 Linux Driver Programming",
+   "tags": [
+    "deepc",
+    "drivers",
+    "devicemodel"
+   ],
+   "front": "<div>What does returning <code>-EPROBE_DEFER</code> from <code>probe()</code> mean?</div>",
+   "back": "<div>A resource this device depends on (clock, regulator, GPIO, reset controller, PHY, another driver's device) is not available <i>yet</i> because its provider has not been probed. The core puts the device on a deferred list and retries after other drivers have bound.</div><pre><code>foo-&gt;clk = devm_clk_get(dev, NULL);\nif (IS_ERR(foo-&gt;clk))\n        return dev_err_probe(dev, PTR_ERR(foo-&gt;clk),\n                             \"failed to get clock\\n\");</code></pre><div><code>dev_err_probe()</code> does not log for <code>-EPROBE_DEFER</code>, records the reason in <code>/sys/kernel/debug/devices_deferred</code>, and returns the error.</div><div>Consequences: acquire all resources <i>before</i> touching hardware or registering interfaces, and make <code>probe()</code> safe to run repeatedly.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "06 Linux Driver Programming"
+  },
+  {
+   "guid": "w:@=i!}66/",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::06 Linux Driver Programming",
+   "tags": [
+    "deepc",
+    "drivers",
+    "abi"
+   ],
+   "front": "<div>Which kernel-to-user-space interfaces exist for a driver, and when is each appropriate?</div>",
+   "back": "<ul><li><b>Existing subsystem interface</b> (IIO, hwmon, input, V4L2, netdev, tty, GPIO): first choice; user space already has tools.</li><li><b>sysfs attributes</b>: simple configuration and state; one value per file, text; <code>sysfs_emit()</code>. It is a stable interface.</li><li><b>ioctl on a character device</b>: structured commands and binary data.</li><li><b>read/write/poll/mmap</b>: data streams and zero-copy buffers.</li><li><b>netlink</b>: asynchronous events and complex configuration, mainly networking.</li><li><b>configfs</b>: user space creates kernel objects.</li><li><b>debugfs</b>: debugging only, no stability promise, may be absent in production.</li><li><b>procfs</b>: legacy; not for new driver interfaces.</li></ul><div>Anything exposed to user space becomes an interface that must not break. Design it for extension: flags and reserved fields.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "06 Linux Driver Programming"
+  },
+  {
+   "guid": "k[,|UAdBhs",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::06 Linux Driver Programming",
+   "tags": [
+    "deepc",
+    "drivers",
+    "kernel",
+    "abi"
+   ],
+   "front": "<div>What stability guarantees does Linux give for the in-kernel driver API, and for the user-space interface?</div>",
+   "back": "<div><b>In-kernel API and Application Binary Interface (ABI): none.</b> Function signatures, struct layouts and whole subsystems change between releases (see <code>Documentation/process/stable-api-nonsense.rst</code>). Whoever changes an API fixes all in-tree users. Out-of-tree drivers break regularly and must be rebuilt for every kernel; binary modules are tied to one exact build.</div><div><b>User-space ABI: stable indefinitely.</b> System calls, ioctls, sysfs and procfs formats. \"We do not break user space.\"</div><div>Practical consequence for embedded products: upstream the driver, or budget for forward-porting it at every kernel upgrade. Vendor Board Support Package (BSP) kernels full of out-of-tree drivers are the main reason devices remain on old, unpatched kernels.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "06 Linux Driver Programming"
+  },
+  {
+   "guid": "vWG^!xQVfY",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::06 Linux Driver Programming",
+   "tags": [
+    "deepc",
+    "drivers",
+    "embedded"
+   ],
+   "front": "<div>When is a user-space driver (UIO, <code>spidev</code>, <code>i2c-dev</code>, libgpiod, VFIO) appropriate instead of a kernel driver?</div>",
+   "back": "<div>Suitable when: the device is simple or a one-off, latency requirements are modest, no other kernel subsystem needs it, or the logic is proprietary or needs floating point and libraries.</div><ul><li><b>Userspace I/O (UIO)</b>: <code>mmap()</code> the registers, block in <code>read()</code> for interrupts; a tiny kernel stub only acknowledges the interrupt</li><li><b><code>spidev</code> / <code>i2c-dev</code></b>: raw bus transfers from user space</li><li><b>libgpiod</b> (GPIO character device); the sysfs GPIO interface is deprecated</li><li><b>VFIO</b>: safe Direct Memory Access (DMA) from user space through the Input-Output Memory Management Unit (IOMMU); used by DPDK/SPDK</li></ul><div>Not suitable when: the device must work during boot, other drivers depend on it (clocks, regulators), a standard interface is expected, interrupt latency is critical, or DMA is needed without an IOMMU.</div><div>Advantages: a crash does not take the kernel down, normal debuggers work, and there is no dependence on the unstable in-kernel API.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "06 Linux Driver Programming"
+  },
+  {
+   "guid": "j{S$yJgsBz",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::06 Linux Driver Programming",
+   "tags": [
+    "deepc",
+    "drivers",
+    "power"
+   ],
+   "front": "<div>What does runtime power management require from a driver at the C level?</div>",
+   "back": "<pre><code>ret = pm_runtime_resume_and_get(dev);   /* power up + usage count */\nif (ret &lt; 0)\n        return ret;\n/* ... access hardware ... */\npm_runtime_mark_last_busy(dev);\npm_runtime_put_autosuspend(dev);</code></pre><ul><li><code>runtime_suspend()</code> / <code>runtime_resume()</code> callbacks in <code>struct dev_pm_ops</code>: gate clocks, save and restore register context</li><li><code>pm_runtime_enable()</code> in <code>probe()</code>, <code>pm_runtime_disable()</code> in <code>remove()</code></li><li><b>every</b> hardware access must happen between a get and a put: touching a block whose clock or power domain is off causes a bus error or a hang</li><li>gets and puts must balance on all error paths (<code>pm_runtime_resume_and_get()</code> drops its reference on failure; the older <code>pm_runtime_get_sync()</code> does not)</li><li>system sleep: <code>DEFINE_SIMPLE_DEV_PM_OPS()</code>; quiesce interrupts and DMA in <code>suspend()</code></li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "06 Linux Driver Programming"
+  },
+  {
+   "guid": "wtC*Mg/jg!",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::07 Embedded Systems Engineering",
+   "tags": [
+    "deepc",
+    "embedded",
+    "mmio",
+    "volatile"
+   ],
+   "front": "<div>Show the two standard ways of accessing a memory-mapped peripheral register in bare-metal C, and explain each keyword.</div>",
+   "back": "<div>Single register:</div><pre><code>#define RCC_AHB1ENR (*(volatile uint32_t *)0x40023830u)\nRCC_AHB1ENR |= 1u &lt;&lt; 0;</code></pre><div>Struct overlay, in the style of the Common Microcontroller Software Interface Standard (CMSIS):</div><pre><code>typedef struct {\n        volatile uint32_t CR1;  /* 0x00 */\n        volatile uint32_t CR2;  /* 0x04 */\n        volatile uint32_t SR;   /* 0x08 */\n        volatile uint32_t DR;   /* 0x0C */\n} USART_TypeDef;\n#define USART1 ((USART_TypeDef *)0x40011000u)\n\nwhile (!(USART1-&gt;SR &amp; USART_SR_TXE)) ;\nUSART1-&gt;DR = c;</code></pre><ul><li><code>volatile</code>: every access is a bus access with side effects; without it the polling loop becomes an infinite loop on a cached value</li><li><code>uint32_t</code>: fixes the access width</li><li>integer-to-pointer cast: implementation-defined, valid on every such target</li><li><code>u</code> suffix: keeps the constants unsigned</li><li>the struct must contain explicit <code>reserved</code> members for gaps; verify with <code>static_assert(offsetof(...))</code></li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "07 Embedded Systems Engineering"
+  },
+  {
+   "guid": "mP4pk+7zf<",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::07 Embedded Systems Engineering",
+   "tags": [
+    "deepc",
+    "embedded",
+    "concurrency",
+    "mmio"
+   ],
+   "front": "<div><code>GPIOA-&gt;ODR |= (1u &lt;&lt; 5);</code> in the main loop, and an interrupt handler also changes pins on GPIOA. What is the bug, and what hardware features avoid it?</div>",
+   "back": "<div><code>|=</code> is load, OR, store. If the interrupt fires between the load and the store, the main loop writes back a stale value and <b>undoes the handler's change</b>. It happens rarely and is very hard to reproduce.</div><div>Solutions:</div><ul><li>dedicated <b>set/clear registers</b>: a write of 1 affects only that bit, with no read involved. STM32: <code>GPIOA-&gt;BSRR = 1u &lt;&lt; 5;</code> (set), <code>GPIOA-&gt;BSRR = 1u &lt;&lt; (5 + 16);</code> (clear). Other vendors: <code>OUTSET</code>/<code>OUTCLR</code>/<code>OUTTGL</code>.</li><li><b>bit-banding</b> (optional on Cortex-M3/M4): each bit has an alias word address, and the hardware performs the read-modify-write atomically</li><li>otherwise a critical section around the read-modify-write</li></ul><div>The same analysis applies to any register or variable shared between contexts.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "07 Embedded Systems Engineering"
+  },
+  {
+   "guid": "b2Hl5L]+ly",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::07 Embedded Systems Engineering",
+   "tags": [
+    "deepc",
+    "embedded",
+    "interrupts",
+    "abi"
+   ],
+   "front": "<div>What does Cortex-M hardware do on exception entry and return? What follows for writing handlers in C?</div>",
+   "back": "<div>Entry: the hardware pushes <code>r0-r3, r12, lr, pc, xPSR</code> (8 words, plus floating-point registers if that context is active) onto the current stack, loads the handler address from the vector table, and puts a special <code>EXC_RETURN</code> value (<code>0xFFFFFFF1/F9/FD</code>...) in <code>lr</code>.</div><div>Return: branching to <code>EXC_RETURN</code> (an ordinary <code>bx lr</code>) makes the hardware pop the frame and resume.</div><div>Consequences:</div><ul><li>the pushed set equals the caller-saved registers of the ARM procedure call standard, so a handler is a <b>plain <code>void f(void)</code> C function</b></li><li><b>tail-chaining</b>: back-to-back interrupts skip the pop/push pair</li><li><b>late arrival</b>: a higher-priority interrupt arriving during stacking is serviced first</li><li>the stacked <code>pc</code> is the key to fault debugging</li></ul><div>Classic ARM, RISC-V, AVR and others do need <code>__attribute__((interrupt))</code> or an assembly wrapper.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "07 Embedded Systems Engineering"
+  },
+  {
+   "guid": "Bp&Wrf{K&E",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::07 Embedded Systems Engineering",
+   "tags": [
+    "deepc",
+    "embedded",
+    "interrupts",
+    "rtos"
+   ],
+   "front": "<div>How do Nested Vectored Interrupt Controller (NVIC) priorities work on Cortex-M? What is the difference between <code>PRIMASK</code> and <code>BASEPRI</code>?</div>",
+   "back": "<ul><li><b>A lower number means a higher priority.</b> Reset, Non-Maskable Interrupt (NMI) and HardFault have fixed negative priorities.</li><li>Only the top N bits of the 8-bit priority field are implemented (often 3 or 4). <code>NVIC_SetPriority()</code> shifts for you; writing the raw register with an unshifted value is a classic bug.</li><li>A strictly higher <i>preemption</i> priority interrupts a running handler (nesting). The priority grouping splits the field into preemption and sub-priority.</li><li><code>PRIMASK</code> (<code>__disable_irq()</code>): masks everything except NMI and HardFault.</li><li><code>BASEPRI</code> (ARMv7-M and later, not on Cortex-M0): masks only priorities at or below a threshold, so critical high-priority interrupts keep running.</li></ul><div>FreeRTOS uses <code>BASEPRI</code>: interrupts with a priority above <code>configMAX_SYSCALL_INTERRUPT_PRIORITY</code> (numerically lower) are never masked by the kernel, and in exchange must not call any FreeRTOS API.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "07 Embedded Systems Engineering"
+  },
+  {
+   "guid": "ocNa^?<X#^",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::07 Embedded Systems Engineering",
+   "tags": [
+    "deepc",
+    "embedded",
+    "interrupts"
+   ],
+   "front": "<div>What are the design rules for an Interrupt Service Routine (ISR) in firmware?</div>",
+   "back": "<ul><li>Keep it short and bounded: acknowledge, move data, set a flag or notify a task, return.</li><li>No blocking, no busy-wait delays, no <code>printf()</code>, no <code>malloc()</code>, no non-reentrant library calls.</li><li><b>Clear the interrupt source</b>, or the handler re-enters immediately and <code>main()</code> never runs.</li><li>Clear it <i>early</i> in the handler. If the clearing write is the last instruction, it may not have propagated through the bus before exception return, causing a spurious second entry. Read the register back or add <code>__DSB()</code>.</li><li>Shared variables: <code>volatile</code>, plus a critical section on the reader side for anything wider than one native word.</li><li>Defer work: a flag for the super-loop, or a queue / semaphore / task notification in a Real-Time Operating System (RTOS), using the <code>FromISR</code> API.</li><li>Know the worst-case execution time; it adds directly to the latency of every lower-priority interrupt.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "07 Embedded Systems Engineering"
+  },
+  {
+   "guid": "bBbazGPm(k",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::07 Embedded Systems Engineering",
+   "tags": [
+    "deepc",
+    "embedded",
+    "debugging"
+   ],
+   "front": "<div>A Cortex-M target ends up in <code>HardFault_Handler</code>. How do you find the cause?</div>",
+   "back": "<ul><li>Determine which stack was active (bit 2 of <code>EXC_RETURN</code> in <code>lr</code>: MSP or PSP) and read the stacked frame: <code>r0-r3, r12, lr, pc, xPSR</code>. The stacked <b><code>pc</code></b> is the faulting instruction (or the one after it); the stacked <code>lr</code> identifies the caller.</li><li>Read the fault status registers: Configurable Fault Status Register <code>CFSR</code> (<code>0xE000ED28</code>), HardFault Status Register <code>HFSR</code> (<code>0xE000ED2C</code>), and the fault addresses <code>MMFAR</code> / <code>BFAR</code> when their valid bits are set.</li><li>Look up the <code>pc</code> in the map file or with <code>addr2line</code>.</li></ul><div>Usual causes: <code>NULL</code> or wild pointer (bus fault), access to a peripheral whose clock is off, stack overflow, calling a function pointer with bit 0 clear (<code>INVSTATE</code>: no Thumb bit), unaligned access with trapping enabled, divide by zero when <code>DIV_0_TRP</code> is set, returning from a Real-Time Operating System (RTOS) task function.</div><div><code>IMPRECISERR</code>: the bus fault was reported late and <code>pc</code> is unreliable. Temporarily disable write buffering (<code>DISDEFWBUF</code>) to make it precise.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "07 Embedded Systems Engineering"
+  },
+  {
+   "guid": "sgMwuNbuv]",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::07 Embedded Systems Engineering",
+   "tags": [
+    "deepc",
+    "embedded",
+    "stack",
+    "debugging"
+   ],
+   "front": "<div>How does a stack overflow show up on a microcontroller, and how can it be detected?</div>",
+   "back": "<div>Without a Memory Management Unit (MMU) there is no guard page. The stack grows silently into <code>.bss</code>, the heap or another task's stack. Symptoms appear far from the cause: globals changing on their own, faults in unrelated code.</div><div>Detection and prevention:</div><ul><li><b>static analysis</b>: <code>-fstack-usage</code> (<code>.su</code> files) and call-graph tools; avoid recursion and large locals</li><li><b>stack painting</b>: fill the stack with a pattern at start-up and check the high-water mark (FreeRTOS: <code>uxTaskGetStackHighWaterMark()</code>)</li><li>FreeRTOS <code>configCHECK_FOR_STACK_OVERFLOW</code> = 2: checks the pattern at each context switch (after the fact)</li><li><b>Memory Protection Unit (MPU)</b> guard region below the stack: immediate fault</li><li>ARMv8-M Mainline stack limit registers <code>MSPLIM</code> / <code>PSPLIM</code>: hardware fault on overflow</li><li>place the stack at the <i>bottom</i> of RAM so an overflow runs into unmapped space and faults immediately</li></ul><div>Budget for interrupts: on Cortex-M all handlers run on the main stack, nested, on top of whatever is already there.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "07 Embedded Systems Engineering"
+  },
+  {
+   "guid": "t.yWpn<6Q{",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::07 Embedded Systems Engineering",
+   "tags": [
+    "deepc",
+    "embedded",
+    "memory"
+   ],
+   "front": "<div>Why is dynamic memory allocation avoided in small embedded systems, and what replaces it?</div>",
+   "back": "<ul><li><b>fragmentation</b>: with kilobytes of RAM and months of uptime, a general-purpose heap eventually fails although enough total memory is free</li><li><b>non-deterministic timing</b> of <code>malloc()</code> / <code>free()</code></li><li><b>failure handling</b>: there is no sensible response to <code>NULL</code> deep inside a control loop</li><li>not reentrant unless locked; leaks are fatal in a device that never restarts</li></ul><div>MISRA C (Motor Industry Software Reliability Association guidelines): Rule 21.3 bans <code>&lt;stdlib.h&gt;</code> allocation; Directive 4.12 bans dynamic allocation in general.</div><div>Replacements:</div><ul><li>static allocation of everything, sized for the worst case; the linker then proves it fits</li><li>allocation only during initialisation, never freed</li><li><b>fixed-block memory pools</b>: O(1), no fragmentation, one pool per object size</li><li>FreeRTOS: <code>configSUPPORT_STATIC_ALLOCATION</code>, or <code>heap_1</code> (never frees) / <code>heap_4</code> (coalescing)</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "07 Embedded Systems Engineering"
+  },
+  {
+   "guid": "AV7ge7J*|)",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::07 Embedded Systems Engineering",
+   "tags": [
+    "deepc",
+    "embedded",
+    "reliability"
+   ],
+   "front": "<div>What is a watchdog timer for, and where should it be serviced?</div>",
+   "back": "<div>An independent hardware counter that resets the system unless the software refreshes it in time. It is the last line of defence against hangs, deadlocks and runaway code.</div><ul><li>Do <b>not</b> refresh it from a timer interrupt: interrupts keep running while the main loop is dead.</li><li>Refresh in the main loop or in a supervisor task, and only after verifying that <i>every</i> critical task has checked in since the last refresh.</li><li>A <b>windowed</b> watchdog also resets when refreshed too early, catching code stuck in a tight loop around the refresh.</li><li>Choose the timeout from the worst-case loop time; account for flash erase stalls and the bootloader.</li><li>Prefer a watchdog with its own clock; verify that a debugger halt freezes it.</li><li>After reset, read the reset-cause register and log it. An unnoticed watchdog reset hides a bug.</li></ul><div>Linux: <code>/dev/watchdog</code>, serviced by systemd or a daemon on top of a hardware watchdog driver.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "07 Embedded Systems Engineering"
+  },
+  {
+   "guid": "hy.KucMDaU",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::07 Embedded Systems Engineering",
+   "tags": [
+    "deepc",
+    "embedded",
+    "drivers",
+    "debugging"
+   ],
+   "front": "<div>A newly written peripheral driver reads zeros from every register and its writes have no effect (or the first access faults). What is the most likely cause?</div>",
+   "back": "<div>The peripheral's <b>clock is gated off</b> (or the block is held in reset, or its power domain is down). After reset almost all peripherals on a modern microcontroller are unclocked to save power.</div><ul><li>enable the clock first: e.g. <code>RCC-&gt;APB2ENR |= RCC_APB2ENR_USART1EN;</code></li><li>some parts need a short delay or a dummy read-back after enabling the clock before the first register access is reliable</li><li>also enable the clock of the GPIO port and select the pin's alternate function</li></ul><div>Depending on the chip, access to an unclocked block reads zero, is ignored, or raises a bus fault.</div><div>Linux equivalent: <code>devm_clk_get_enabled()</code>, the reset controller API and runtime power management in <code>probe()</code>. Forgetting them produces a synchronous external abort on the first <code>readl()</code>.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "07 Embedded Systems Engineering"
+  },
+  {
+   "guid": "g[_}m~1xV]",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::07 Embedded Systems Engineering",
+   "tags": [
+    "deepc",
+    "embedded",
+    "integers"
+   ],
+   "front": "<div>No Floating-Point Unit (FPU): how does fixed-point Q-format arithmetic work in C? Show a Q15 multiply and its trap.</div>",
+   "back": "<div>Qm.n: an integer interpreted as <code>value / 2^n</code>. Q15 (Q0.15 in <code>int16_t</code>) covers [-1, 1). Q16.16 in <code>int32_t</code> is a common general-purpose choice.</div><ul><li>add/subtract: plain integer operations, given equal formats</li><li>multiply: the product carries 2n fractional bits, so widen first and shift back</li></ul><pre><code>static inline int16_t q15_mul(int16_t a, int16_t b)\n{\n        int32_t p = (int32_t)a * b;     /* Q30 */\n        p += 1 &lt;&lt; 14;                   /* rounding */\n        p &gt;&gt;= 15;\n        if (p &gt; INT16_MAX)              /* -1 * -1 = +1: not representable */\n                p = INT16_MAX;\n        return (int16_t)p;\n}</code></pre><ul><li>divide: <code>((int32_t)a &lt;&lt; 15) / b</code></li><li>right-shifting a negative value is implementation-defined (arithmetic on all relevant compilers)</li></ul><div>Software floating point costs hundreds of cycles per operation and kilobytes of library code. Also note that on a Cortex-M4F with a single-precision FPU, <code>double</code> arithmetic is still done in software: write <code>1.0f</code>, not <code>1.0</code>.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "07 Embedded Systems Engineering"
+  },
+  {
+   "guid": "O&AFF(OJfD",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::07 Embedded Systems Engineering",
+   "tags": [
+    "deepc",
+    "embedded",
+    "dma",
+    "memory"
+   ],
+   "front": "<div>A Cortex-M7 (or any core with a data cache) uses Direct Memory Access (DMA). Received data is sometimes stale and transmitted data sometimes wrong. Why, and what are the fixes?</div>",
+   "back": "<div>The device reads and writes <b>physical RAM</b> while the CPU sees its <b>data cache</b>. They disagree unless they are synchronised.</div><ul><li>transmit: data the CPU just wrote may still be only in the cache → <b>clean (flush)</b> the buffer to RAM before starting DMA: <code>SCB_CleanDCache_by_Addr()</code></li><li>receive: the CPU may read an old cached copy → <b>invalidate</b> the range after DMA completes: <code>SCB_InvalidateDCache_by_Addr()</code></li><li>cache maintenance acts on whole cache lines (32 bytes on Cortex-M7): DMA buffers must be <b>aligned to, and padded to a multiple of, the cache line size</b>, or neighbouring variables are corrupted</li><li>alternative: place DMA buffers in a region that the Memory Protection Unit (MPU) marks non-cacheable, or in tightly coupled memory if the DMA controller can reach it</li></ul><div>This is precisely what <code>dma_map_single()</code> / <code>dma_sync_*()</code> do in Linux; on bare metal it is your responsibility.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "07 Embedded Systems Engineering"
+  },
+  {
+   "guid": "E.,b)u%=-(",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::07 Embedded Systems Engineering",
+   "tags": [
+    "deepc",
+    "embedded",
+    "architecture"
+   ],
+   "front": "<div>What is the difference between a microcontroller and an application processor from a software point of view? What does each typically run?</div>",
+   "back": "<div><b>Microcontroller (MCU)</b>: Cortex-M, RISC-V, AVR. No Memory Management Unit (MMU), at most a Memory Protection Unit (MPU). Kilobytes to a few megabytes of on-chip RAM and flash, code executes in place from flash, deterministic interrupt latency, microamp sleep currents. Runs bare-metal firmware or a Real-Time Operating System (RTOS): FreeRTOS, Zephyr, ThreadX. One flat address space; a wild pointer can corrupt anything.</div><div><b>Application processor (MPU)</b>: Cortex-A, x86, RISC-V application cores. Has an MMU, external DRAM, caches, often several cores. Runs Linux: virtual memory, process isolation, drivers, file systems, networking. Boots in seconds, draws more power, and offers only soft real-time behaviour unless PREEMPT_RT or a companion real-time core is used.</div><div>Common architecture: both. Linux on the application cores for connectivity and user interface, a microcontroller core for hard real-time control, communicating over RPMsg or shared memory.</div><div>The C language is identical; the execution environment is completely different.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "07 Embedded Systems Engineering"
+  },
+  {
+   "guid": "h]h_n*fF2,",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::07 Embedded Systems Engineering",
+   "tags": [
+    "deepc",
+    "embedded",
+    "linux",
+    "boot"
+   ],
+   "front": "<div>Describe the boot chain of a typical embedded Linux system on an ARM System-on-Chip.</div>",
+   "back": "<ul><li><b>Boot ROM</b> (mask ROM in the chip): reads the boot-mode pins and loads the first stage from eMMC, SD, SPI flash or USB into on-chip SRAM. Secure boot verifies signatures here.</li><li><b>Secondary Program Loader (SPL)</b> / first-stage bootloader: small enough for SRAM; initialises the DRAM controller and clocks; loads the full bootloader into DRAM. On ARMv8, Trusted Firmware-A runs around this stage and provides secure-world services.</li><li><b>U-Boot</b> (or barebox, or UEFI): storage, network and USB drivers, environment and scripts; loads the kernel image, the Device Tree Blob (DTB) and optionally an initramfs; sets <code>bootargs</code>; jumps to the kernel.</li><li><b>Linux kernel</b>: decompresses, sets up the MMU, parses the DTB, runs initcalls (driver probing), mounts the root file system.</li><li><b>init</b> (systemd, BusyBox init): user space.</li></ul><div>Build systems: Yocto or Buildroot. Robust field updates use A/B partitions with a boot counter and rollback.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "07 Embedded Systems Engineering"
+  },
+  {
+   "guid": "m5y&~1ajP9",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::07 Embedded Systems Engineering",
+   "tags": [
+    "deepc",
+    "embedded",
+    "rtos",
+    "concurrency"
+   ],
+   "front": "<div>Super-loop vs Real-Time Operating System (RTOS): what are the trade-offs, and how does an interrupt hand work to a task?</div>",
+   "back": "<div><b>Super-loop</b> (<code>while (1) { poll_a(); poll_b(); }</code> plus interrupts): simple, one stack, easy to reason about. The worst-case response of any function equals the sum of all the others. Scales through cooperative state machines.</div><div><b>RTOS</b> (preemptive, priority-based): every activity is a task with its own stack; the highest-priority ready task always runs. Blocking calls make sequential logic easy to write. Costs: RAM per stack, plus all the concurrency hazards: races, deadlock, priority inversion, stack sizing.</div><div>Handing work from an interrupt to a task (FreeRTOS):</div><pre><code>void USART1_IRQHandler(void)\n{\n        BaseType_t woken = pdFALSE;\n        uint8_t c = USART1-&gt;DR;\n\n        xQueueSendFromISR(rx_queue, &amp;c, &amp;woken);\n        portYIELD_FROM_ISR(woken);      /* switch now if a higher-priority task woke */\n}</code></pre><div>The task blocks in <code>xQueueReceive()</code>. This is the same split as top half / threaded handler in Linux.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "07 Embedded Systems Engineering"
+  },
+  {
+   "guid": "w^q4W12*rQ",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::07 Embedded Systems Engineering",
+   "tags": [
+    "deepc",
+    "embedded",
+    "concurrency",
+    "power"
+   ],
+   "front": "<div>Low-power main loop: <code>if (!event_flag) __WFI();</code>. What is the race, and what is the correct Cortex-M idiom?</div>",
+   "back": "<div>If the interrupt fires <i>after</i> the flag test and <i>before</i> Wait For Interrupt (<code>WFI</code>), the flag is set but the core goes to sleep anyway: a lost wake-up. The system sleeps until some unrelated interrupt arrives.</div><div>Correct idiom:</div><pre><code>__disable_irq();\nif (!event_flag)\n        __WFI();        /* wakes on a pending interrupt even with PRIMASK set */\n__enable_irq();         /* the pending handler runs here */</code></pre><div>On Cortex-M, <code>WFI</code> wakes up when an interrupt becomes <i>pending</i>, even if <code>PRIMASK</code> prevents it from being taken. With interrupts disabled there is no window between the test and the sleep; the handler runs as soon as interrupts are re-enabled.</div><div>This is the same lost-wakeup problem that <code>wait_event()</code> solves in the kernel by re-checking the condition after marking the task as sleeping.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "07 Embedded Systems Engineering"
+  },
+  {
+   "guid": "eh2K?F(EAx",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::07 Embedded Systems Engineering",
+   "tags": [
+    "deepc",
+    "embedded",
+    "boot"
+   ],
+   "front": "<div>What must a bootloader do in C to jump to an application image on a Cortex-M?</div>",
+   "back": "<pre><code>#define APP_BASE 0x08008000u\n\nvoid jump_to_app(void)\n{\n        const uint32_t *vt = (const uint32_t *)APP_BASE;\n\n        __disable_irq();\n        /* stop SysTick, disable and clear pending NVIC interrupts,\n         * de-initialise peripherals and DMA the bootloader used */\n        SCB-&gt;VTOR = APP_BASE;           /* relocate the vector table */\n        __set_MSP(vt[0]);               /* application's initial stack pointer */\n        __enable_irq();\n        ((void (*)(void))vt[1])();      /* application's reset handler */\n}</code></pre><ul><li>word 0 of the application's vector table is its stack pointer, word 1 its reset handler (bit 0 set: Thumb)</li><li>validate the image first: stack pointer within RAM, reset vector within flash, checksum or signature</li><li>after <code>__set_MSP()</code> do not touch local variables; production code does the last two steps in assembly or a <code>naked</code> function</li><li>the application must be linked for <code>APP_BASE</code></li><li>Cortex-M0 has no Vector Table Offset Register (VTOR); Cortex-M0+ has it optionally. Without it, the vectors must be copied to RAM and remapped.</li><li>peripherals left running with their interrupts enabled will fire into the application's handlers before it is ready</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "07 Embedded Systems Engineering"
+  },
+  {
+   "guid": "LH+Ut)iut7",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::07 Embedded Systems Engineering",
+   "tags": [
+    "deepc",
+    "embedded",
+    "memory",
+    "const"
+   ],
+   "front": "<div>Where does a <code>const</code> object live on a microcontroller, and what is special about Harvard-architecture parts such as the 8-bit AVR?</div>",
+   "back": "<div>On Cortex-M and other single-address-space parts: <code>const</code> objects with static storage and string literals go to <code>.rodata</code> in <b>flash</b> and consume no RAM. So declare lookup tables, fonts and configuration as <code>static const</code>. Without <code>const</code> they land in <code>.data</code>: a flash copy <i>plus</i> RAM.</div><div>Note that <code>const char *names[]</code> is a writable array of pointers and lives in RAM; <code>const char *const names[]</code> lives in flash.</div><div>Classic AVR has separate program and data address spaces. A normal pointer cannot address flash, so plain <code>const</code> data is copied to RAM at start-up. Keeping it in flash requires <code>PROGMEM</code> plus <code>pgm_read_byte()</code>, or the <code>__flash</code> named address space in avr-gcc.</div><div>Writing to a flash-resident object through a cast-away <code>const</code> is silently ignored or faults.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "07 Embedded Systems Engineering"
+  },
+  {
+   "guid": "AT&7ZhKBDD",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::07 Embedded Systems Engineering",
+   "tags": [
+    "deepc",
+    "embedded",
+    "safety",
+    "ub"
+   ],
+   "front": "<div>What is MISRA C, and which of its rules reflect the C hazards covered in this deck?</div>",
+   "back": "<div>Guidelines from the Motor Industry Software Reliability Association for C in safety-related systems (automotive, medical, industrial, avionics). It restricts C to a subset that avoids undefined, unspecified and implementation-defined behaviour. Rules are classed as mandatory, required or advisory; compliance is checked by static analysers, and deviations must be documented.</div><div>Examples:</div><ul><li>essential type model: no implicit conversions that change signedness or narrow (Rules 10.x)</li><li>Rule 17.2: no recursion (bounded stack)</li><li>Rule 21.3 and Directive 4.12: no dynamic memory</li><li>Rule 11.x: restrictions on pointer casts (aliasing, alignment)</li><li>Rule 13.2: no dependence on evaluation order</li><li>Rule 12.2: shift counts within range</li><li>Rule 1.3: no Undefined Behaviour</li><li>Rule 15.5 (advisory): single point of exit</li></ul><div>Related: CERT C (security-oriented), and functional-safety standards (IEC 61508, ISO 26262) that require such a coding standard. The Linux kernel does not follow MISRA.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "07 Embedded Systems Engineering"
+  },
+  {
+   "guid": "DQbo%`=ZFl",
+   "type": "basic",
+   "deck": "Deep C - Kernel, Drivers, Embedded::07 Embedded Systems Engineering",
+   "tags": [
+    "deepc",
+    "embedded",
+    "debugging"
+   ],
+   "front": "<div>Debugging firmware without <code>printf()</code>: which facilities does an ARM Cortex-M target offer?</div>",
+   "back": "<ul><li><b>Serial Wire Debug (SWD)</b> / <b>Joint Test Action Group (JTAG)</b>: halt, single-step, hardware breakpoints (flash-resident code needs hardware breakpoints; typically 4 to 8), data <b>watchpoints</b> (\"who writes to this address?\", the tool of choice for memory corruption)</li><li>GDB through OpenOCD, J-Link GDB server, or pyOCD</li><li><b>Instrumentation Trace Macrocell (ITM)</b> over the SWO pin: <code>printf</code>-style output at very low cost (Cortex-M3 and above)</li><li><b>Real-Time Transfer (RTT)</b>: ring buffer in target RAM, read by the probe in the background; fast enough to use inside interrupt handlers</li><li><b>semihosting</b>: the target's <code>printf</code> is executed by the debugger host; very slow, and hangs without a debugger attached</li><li><b>Embedded Trace Macrocell (ETM)</b>: full instruction trace</li><li>a GPIO toggle plus oscilloscope or logic analyser: the most accurate timing measurement there is</li><li>the Data Watchpoint and Trace (DWT) cycle counter for profiling</li></ul><div>For field failures: store the fault registers and stacked frame in no-init RAM or flash, and report them after the reboot.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "07 Embedded Systems Engineering"
+  }
+ ]
+}

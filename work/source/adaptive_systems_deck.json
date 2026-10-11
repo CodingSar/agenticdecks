@@ -1,0 +1,1023 @@
+{
+ "source_file": "adaptive_systems_deck.apkg",
+ "notes": [
+  {
+   "guid": "JJ,`B`P[Ap",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "evolution"
+   ],
+   "front": "What three conditions are jointly sufficient for evolution by natural selection (Lewontin's conditions)?",
+   "back": "1) Variation among individuals, 2) differential fitness (selection: some variants reproduce more), 3) heritability (retention: offspring resemble parents). Any system with all three will evolve, whether the units are genes, organisms, memes, products or code.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> A/B tests, canary releases and feature flags supply variation + selection; version control supplies retention. Genetic algorithms make the loop explicit. If one of the three is missing (e.g. no fitness signal), you get drift, not adaptation.",
+   "source": "Lewontin 1970"
+  },
+  {
+   "guid": "L|[+ZGb_$5",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "evolution",
+    "complexity"
+   ],
+   "front": "What is a fitness landscape and what core problem does it illustrate?",
+   "back": "A mapping from genotype (or configuration) to fitness, pictured as terrain. Adaptive walks by small mutations climb to the nearest peak and get stuck on local optima; crossing valleys needs drift, larger jumps, recombination, or a landscape that itself changes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Loss landscapes in gradient descent are the same object. Incremental refactoring of an architecture can be trapped on a local optimum: each small step makes things worse before better, so 'you can't get there from here' without a coordinated jump (migration, rewrite of a bounded part).",
+   "source": "Sewall Wright 1932"
+  },
+  {
+   "guid": "PB/xXr&gA8",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "evolution",
+    "complexity"
+   ],
+   "front": "In Kauffman's NK model, what does raising K (interdependence) do to the landscape?",
+   "back": "N components, each interacting epistatically with K others. K = 0: one smooth peak, hill-climbing works. As K grows the landscape becomes rugged with many poor local optima; at K = N-1 it is random and local search is useless (the 'complexity catastrophe').",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Tightly coupled systems have high effective K: any change touches everything, so incremental improvement stalls. Modularity, stable interfaces and loose coupling lower K. Hyperparameters that interact strongly are the same problem in tuning.",
+   "source": "Kauffman 1993, The Origins of Order"
+  },
+  {
+   "guid": "C9Ukc=5+RZ",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "evolution",
+    "ai"
+   ],
+   "front": "What is exaptation?",
+   "back": "A trait that evolved for one function being co-opted for a different one (feathers: insulation, later flight). Distinct from adaptation, where the trait was shaped by selection for its current use.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Foundation models: next-token prediction was exapted into coding, reasoning and tool use. Graphics Processing Units (GPUs) went from graphics to deep learning. Amazon's internal infrastructure became Amazon Web Services (AWS). Design for reuse by keeping capabilities general and interfaces open.",
+   "source": "Gould and Vrba 1982"
+  },
+  {
+   "guid": "pN6J}1gcZn",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "evolution",
+    "ai",
+    "security"
+   ],
+   "front": "What is the Red Queen hypothesis?",
+   "back": "In coevolving systems an organism must keep adapting merely to maintain its relative fitness, because competitors, predators and parasites are adapting too. 'It takes all the running you can do to keep in the same place.'",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Security (attackers vs defenders), adversarial machine learning, spam and fraud detection, search ranking vs search engine optimisation, red-teaming of models. A static defence decays in effectiveness even if nothing about it changes.",
+   "source": "Van Valen 1973"
+  },
+  {
+   "guid": "AyhDl(Fn}w",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "evolution"
+   ],
+   "front": "What is punctuated equilibrium?",
+   "back": "Evolutionary change concentrated in short bursts separated by long periods of stasis, rather than steady gradual change.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Platform architectures plateau for years then shift abruptly (monolith to services, on-prem to cloud). AI capability advances by generation jumps between model releases rather than smoothly. Plan for the bursts: keep migration muscle warm during stasis.",
+   "source": "Eldredge and Gould 1972"
+  },
+  {
+   "guid": "vGO*tU}j_@",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "evolution",
+    "architecture"
+   ],
+   "front": "What is convergent evolution and what does it tell you about design?",
+   "back": "Unrelated lineages independently evolving similar traits under similar pressures (camera eyes in vertebrates and cephalopods; wings in bats, birds, insects). It suggests the solution is forced by the problem, not by ancestry.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Independent organisations converge on control planes, reconciliation loops, service meshes, event logs and Retrieval-Augmented Generation (RAG). When many teams reinvent the same thing, that is evidence the pattern is load-bearing, not fashion; standardise it in the platform.",
+   "source": ""
+  },
+  {
+   "guid": "FA2i3)6@!e",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "evolution",
+    "architecture"
+   ],
+   "front": "What is evolvability, and why does modularity increase it?",
+   "back": "Evolvability is a system's capacity to generate heritable variation that is adaptive. Modularity (subsystems with strong internal and weak external links) lets a mutation change one function without breaking others, so more variants are viable and search is faster.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Bounded contexts and Application Programming Interfaces (APIs) as module boundaries. In neural networks: Mixture of Experts (MoE), adapters, tool-use, so parts can be changed independently. A monolith with shared state is low-evolvability regardless of how good it is today.",
+   "source": "Wagner and Altenberg 1996"
+  },
+  {
+   "guid": "oB6Q$`6a_L",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "evolution",
+    "ai"
+   ],
+   "front": "What is neutral theory / a neutral network, and why does it matter for adaptation?",
+   "back": "Most mutations are neutral (no fitness effect). Populations drift across networks of equal-fitness genotypes, reaching regions of the landscape from which new adaptive peaks are accessible, without ever crossing a fitness valley.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Refactoring is neutral change that enables later adaptive change. Overparameterised neural networks have wide flat regions in the loss landscape that make optimisation easier. 'Boring' internal migrations are how you get in range of a capability jump.",
+   "source": "Kimura 1968; Huynen, Stadler and Fontana 1996"
+  },
+  {
+   "guid": "w_-`<2P0ni",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "evolution",
+    "architecture"
+   ],
+   "front": "How can robustness (canalization) and evolvability both be high at once?",
+   "back": "Canalization buffers the phenotype against mutation and environment. This lets cryptic genetic variation accumulate neutrally beneath the surface; under stress the buffer fails (e.g. Hsp90 inhibition) and stored variation is released, producing rapid change.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Strong contracts, types and tests are canalization: they hide internal churn from consumers, so internals can vary freely. Feature flags hold cryptic variation until release. The trade: buffered systems change abruptly rather than continuously.",
+   "source": "Waddington 1942; Rutherford and Lindquist 1998"
+  },
+  {
+   "guid": "K./JHNTC&r",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "evolution",
+    "reliability",
+    "ai"
+   ],
+   "front": "What is degeneracy, and how does it differ from redundancy?",
+   "back": "Redundancy: identical components do the same job. Degeneracy: structurally different components can perform the same function under some conditions and different functions under others. Degeneracy gives robustness and adaptability; redundancy gives only robustness, and only against uncorrelated failure.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Model ensembles built on different bases beat copies of one model. Multi-region with heterogeneous implementations vs identical replicas that share every bug. Identical replicas fail together when the cause is the shared code, config or dependency.",
+   "source": "Edelman and Gally 2001"
+  },
+  {
+   "guid": "KpW[|e7KW9",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "evolution",
+    "reliability"
+   ],
+   "front": "Why are monocultures dangerous?",
+   "back": "A genetically uniform population is exposed to a single pathogen or condition with no variation to select from (Irish potato famine 1845, Gros Michel banana wiped out by Panama disease). Diversity is insurance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> One logging library everywhere (Log4Shell), one compression library (xz-utils backdoor), one endpoint agent (CrowdStrike 2024 outage), one model provider, one Certificate Authority. Correlated failure across 'redundant' replicas is the platform version.",
+   "source": ""
+  },
+  {
+   "guid": "N:W_Bujw9h",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "evolution"
+   ],
+   "front": "What is horizontal gene transfer and what does it do to the pace of adaptation?",
+   "back": "Transfer of genetic material between organisms other than parent to offspring (plasmids, viruses). It spreads adaptive traits, such as antibiotic resistance, across lineages far faster than vertical descent.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Open-source libraries, copied snippets, model distillation, weight merging, prompt patterns. Also how vulnerabilities and bad practices spread. Supply-chain security is controlling horizontal transfer.",
+   "source": ""
+  },
+  {
+   "guid": "t,ZmE)B:M+",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "evolution",
+    "ai"
+   ],
+   "front": "What is the Baldwin effect?",
+   "back": "Learning within a lifetime changes selection pressure: individuals that can learn a useful behaviour survive, and over generations the behaviour (or the ease of learning it) becomes innate. Learning smooths the fitness landscape for evolution.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Slow loop (pretraining, platform defaults) plus fast loop (fine-tuning, in-context learning, team practices). What teams repeatedly learn by hand should be assimilated into the platform. Hinton and Nowlan's 1987 simulation is the canonical demonstration.",
+   "source": "Baldwin 1896; Hinton and Nowlan 1987"
+  },
+  {
+   "guid": "c4]x]g$$#L",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "evolution",
+    "platform"
+   ],
+   "front": "What is niche construction?",
+   "back": "Organisms modify their environment (beaver dams, earthworm soil), changing the selection pressures acting on themselves and other species. Evolution becomes a two-way loop between organism and environment.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Platform teams build the environment that determines what product teams find easy or hard. Models generate content that becomes future training data. Standards bodies and ecosystems shape what survives. The environment is a design surface.",
+   "source": "Odling-Smee, Laland and Feldman 2003"
+  },
+  {
+   "guid": "w~lEUy/9Cp",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "ecology",
+    "reliability"
+   ],
+   "front": "What is a keystone species?",
+   "back": "A species whose effect on ecosystem structure is disproportionate to its abundance (sea otters limit urchins, preserving kelp forests). Removing it triggers cascades.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Identity provider, Domain Name System (DNS), message bus, Continuous Integration (CI) system, a single maintainer (bus factor), the left-pad package. Map keystones explicitly; their Service Level Objectives (SLOs) and ownership deserve outsized attention.",
+   "source": "Paine 1969"
+  },
+  {
+   "guid": "v&^M__beG?",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "ecology",
+    "platform"
+   ],
+   "front": "What is r/K selection?",
+   "back": "r-strategists: many cheap offspring, little investment, fast growth, suited to unstable or empty environments. K-strategists: few, heavily invested offspring, suited to stable environments near carrying capacity.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Prototypes and experiments are r; hardened managed services are K. A platform's mistake is applying K-grade process to r-stage ideas or shipping r-grade artefacts as K products. The right strategy changes as the niche fills.",
+   "source": "MacArthur and Wilson 1967"
+  },
+  {
+   "guid": "c$v6I7ilx0",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "ecology",
+    "platform"
+   ],
+   "front": "What is the competitive exclusion principle?",
+   "back": "Two species competing for exactly the same limiting resource cannot coexist stably; one displaces the other, or they differentiate into separate niches.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Two internal tools for the same job will not both survive: one wins or they specialise. 'Two ways to do X' is a transitional state, so decide deliberately which one, rather than letting attrition decide.",
+   "source": "Gause 1934"
+  },
+  {
+   "guid": "Kd^}$Cz0Mp",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "evolution",
+    "platform",
+    "ai"
+   ],
+   "front": "What are the major evolutionary transitions, and what is the recurring difficulty in each?",
+   "back": "Previously independent units become integrated into a higher-level unit that reproduces as a whole: genes to chromosomes, prokaryote to eukaryote (endosymbiosis), cells to multicellular organisms, individuals to eusocial colonies. Each requires mechanisms that suppress competition and defection among the lower-level units.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Services into a platform, teams into an organisation, agents into a multi-agent system. The engineering is mostly incentive and interface design so components do not defect (hoard resources, bypass the platform, game the shared metric).",
+   "source": "Maynard Smith and Szathmary 1995"
+  },
+  {
+   "guid": "jCfLcayp26",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "ecology",
+    "platform"
+   ],
+   "front": "What is ecological succession?",
+   "back": "A broadly predictable sequence of community change after disturbance: pioneer species (fast-growing, tolerant, low-investment) are gradually replaced by a climax community (complex, specialised, resource-efficient).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Greenfield systems: scripts, then services, then a platform. Early lightweight tooling is displaced by heavier integrated tooling once the ground is prepared. Building the climax community on bare rock fails.",
+   "source": "Clements 1916 (idealised)"
+  },
+  {
+   "guid": "N.&S?dOmjB",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "complexity"
+   ],
+   "front": "What is emergence?",
+   "back": "System-level properties or behaviours that arise from local interactions and are not properties of any component (flocking, traffic jams, market prices). Weak emergence is in principle derivable from the parts; strong emergence claims it is not.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Capability jumps in Large Language Models (LLMs), tail latency behaviour of a service mesh, organisational culture. Emergent behaviour cannot be debugged one component at a time; you need system-level observation and experiments.",
+   "source": ""
+  },
+  {
+   "guid": "GwlK.|W`_S",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "complexity"
+   ],
+   "front": "What is self-organisation?",
+   "back": "Global order arising from local interactions and feedback without a central controller (ant trails, convection cells, slime mould networks).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Gossip protocols, consensus, market-based scheduling, autonomous teams. Self-organisation is neutral about whether the order is good: retry storms and thundering herds are also self-organised.",
+   "source": ""
+  },
+  {
+   "guid": "M|%A$ZITZ:",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "complexity",
+    "reliability"
+   ],
+   "front": "Distinguish positive and negative feedback, and which is behind most outages?",
+   "back": "Negative feedback opposes deviation and stabilises (thermostat, homeostasis). Positive feedback amplifies deviation (compound growth, runaway collapse). Most large incidents involve an unintended positive loop.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Negative: autoscaling, backpressure, rate limiting, circuit breakers. Positive: retry amplification, cache stampedes, cascading failure, network effects, viral growth. Incident review question: which loop amplified this?",
+   "source": ""
+  },
+  {
+   "guid": "vB8Ef}<~A5",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "complexity",
+    "platform"
+   ],
+   "front": "What is homeostasis, and what is the generic structure of a control loop?",
+   "back": "Keeping an internal variable within a viable range via sense (measure), compare (to a set point), act (correct). Delay or lag anywhere in the loop causes oscillation or overshoot.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Kubernetes reconciliation loops (desired vs observed state), Proportional-Integral-Derivative (PID) autoscalers, SLO-based alerting. Slow metrics plus aggressive actuators produce oscillating scale-up/scale-down.",
+   "source": "Cannon 1932; control theory"
+  },
+  {
+   "guid": "pd3b<a)&_C",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "complexity",
+    "platform",
+    "ai"
+   ],
+   "front": "What is Ashby's Law of Requisite Variety?",
+   "back": "A regulator can only control a system if it has at least as much variety (distinguishable states or responses) as the disturbances it must handle. 'Only variety can absorb variety.'",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> A platform whose abstractions cover fewer cases than the workloads it serves gets routed around. Observability must capture enough dimensions to distinguish the failure modes that actually occur. Guardrails for a model need variety matching the inputs.",
+   "source": "Ashby 1956"
+  },
+  {
+   "guid": "hD%t[I}nL3",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "complexity"
+   ],
+   "front": "What is an attractor, and what is a basin of attraction?",
+   "back": "A state or set of states a dynamical system tends towards over time: a fixed point, a limit cycle, or a strange (chaotic) attractor. The basin is the set of initial conditions that lead there.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Systems settle into stable configurations, good or bad, and stay unless pushed out of the basin. Deploy/rollback/deploy loops are limit cycles. Training dynamics find attractors too (mode collapse is one).",
+   "source": ""
+  },
+  {
+   "guid": "D|Nu}6m@oA",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "complexity",
+    "ai",
+    "reliability"
+   ],
+   "front": "What is a phase transition, and why do critical points matter for systems?",
+   "back": "A small change in a control parameter produces a qualitative change in behaviour (water to ice, percolation threshold). Near the critical point correlation length diverges, so small local perturbations can have system-wide effects.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Latency vs load is flat, then explodes past the queueing knee. Emergent abilities and grokking appear as sharp transitions with scale. Outage spread through a dependency graph is percolation: below a connectivity threshold failures stay local, above it they go global.",
+   "source": ""
+  },
+  {
+   "guid": "u)ap7`w(p5",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "complexity",
+    "reliability"
+   ],
+   "front": "What is self-organised criticality?",
+   "back": "Some driven systems naturally evolve to a critical state where events of all sizes occur, with power-law size distributions (sandpile model, earthquakes, forest fires). No tuning is needed; the dynamics find the edge.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Incident sizes are heavy-tailed. Organisations under efficiency pressure erode margins until they sit at the critical edge (drift into failure). Deliberately maintaining slack is fighting the dynamics.",
+   "source": "Bak, Tang and Wiesenfeld 1987"
+  },
+  {
+   "guid": "Ks}DOAJSuj",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "complexity",
+    "ai"
+   ],
+   "front": "What is a power law, and what intuition does it break?",
+   "back": "A distribution P(x) proportional to x to the power minus alpha. It has no characteristic scale, and extreme events are vastly more likely than Gaussian intuition suggests. Means can be dominated by rare events.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Outage impact, request popularity (Zipf), file sizes, neural scaling laws (loss falls as a power law in data, parameters, compute). Report percentiles, not averages; plan capacity for the tail.",
+   "source": ""
+  },
+  {
+   "guid": "fL@ZhGss[)",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "complexity",
+    "ai"
+   ],
+   "front": "What is the 'edge of chaos' hypothesis?",
+   "back": "Complex adaptive systems perform best (most computation, most adaptability) near the boundary between ordered and chaotic regimes. Too ordered: frozen, cannot adapt. Too chaotic: no memory, cannot exploit.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Too much governance vs too little. Neural network initialisation at the edge of chaos trains best; reservoir computing exploits it. Platform lever: how much variation to permit before requiring standardisation.",
+   "source": "Langton 1990; Kauffman 1993"
+  },
+  {
+   "guid": "GE;(i,bOGz",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "complexity",
+    "platform"
+   ],
+   "front": "What is path dependence, and what generates lock-in?",
+   "back": "Outcomes depend on the sequence of past events. Increasing returns (learning, network effects, coordination) make early, possibly arbitrary choices self-reinforcing (QWERTY, VHS).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Technical debt, legacy protocols, first-choice cloud, dominant model provider, data formats. Lock-in is not a moral failing; it is increasing returns. The question is where you want it (standards) and where you want exit options.",
+   "source": "David 1985; Arthur 1989"
+  },
+  {
+   "guid": "x@0uWVdWa=",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "complexity",
+    "networks"
+   ],
+   "front": "What is preferential attachment and what network structure does it produce?",
+   "back": "New nodes connect preferentially to already well-connected nodes ('rich get richer'), producing a scale-free network: power-law degree distribution with a few hubs. Robust to random node failure, fragile to targeted removal of hubs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Dependency graphs (npm), hub services, popular libraries, marketplaces. Hubs are keystones: identify them and protect them, because random-failure resilience says nothing about hub failure.",
+   "source": "Barabasi and Albert 1999"
+  },
+  {
+   "guid": "QV<N|_PKsy",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "complexity",
+    "networks"
+   ],
+   "front": "What is a small-world network?",
+   "back": "High local clustering plus short average path length, produced by a few long-range links added to a clustered network. Information and contagion both spread fast.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> A handful of cross-team links dramatically shortens organisational path length. The same structure makes both good practices and failures spread fast through a service graph.",
+   "source": "Watts and Strogatz 1998"
+  },
+  {
+   "guid": "J@GA6<FD-a",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "complexity",
+    "reliability"
+   ],
+   "front": "What is a cascading failure, and what is the percolation view of it?",
+   "back": "Failure of one node redistributes load to neighbours; if that exceeds their capacity they fail, and so on (2003 Northeast blackout). Percolation: above a critical connectivity a local failure can reach the whole network; below it, failures stay in finite clusters.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Bulkheads, circuit breakers, load shedding and timeouts all reduce effective connectivity or break the load-redistribution step. Design goal: keep the dependency graph below its percolation threshold for failure.",
+   "source": ""
+  },
+  {
+   "guid": "B}5m_wZD7k",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "complexity",
+    "reliability"
+   ],
+   "front": "What is a 'normal accident' (Perrow)?",
+   "back": "In systems that are both interactively complex (many non-obvious interactions) and tightly coupled (no slack, fast propagation), accidents are inevitable: unexpected interactions propagate faster than operators can understand them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Argues for loose coupling (queues, async, timeouts, bulkheads) and reducing interactive complexity, not just adding safety devices, which themselves add interactions. Applies directly to AI agents embedded in automated pipelines.",
+   "source": "Perrow 1984"
+  },
+  {
+   "guid": "lZ6si[?=/t",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "complexity",
+    "platform"
+   ],
+   "front": "What is Holling's adaptive cycle, and what is panarchy?",
+   "back": "Four phases: r (growth/exploitation), K (conservation: efficient, connected, rigid), omega (release/collapse), alpha (reorganisation). Late K has high efficiency and low resilience. Panarchy: nested cycles at different scales, linked by 'revolt' (fast small collapse triggers larger) and 'remember' (larger, slower level seeds recovery).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Platform lifecycle. Over-optimised systems are brittle. A planned omega (deprecation, controlled refactor) is cheaper than a forced one. Keep the slower level (standards, data, institutional memory) healthy so it can 'remember'.",
+   "source": "Holling 1986; Gunderson and Holling 2002"
+  },
+  {
+   "guid": "Lshw_VW9Mo",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "complexity",
+    "reliability"
+   ],
+   "front": "Distinguish robustness, resilience and antifragility.",
+   "back": "Robust: resists disturbance without changing. Resilient: absorbs disturbance, degrades gracefully, recovers or reorganises while keeping core function. Antifragile: improves in response to stressors, up to a limit.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Robustness is redundancy and hardening. Resilience is graceful degradation, recovery, and adaptive capacity. Antifragility is chaos engineering, immune memory, hormesis. Over-investing in robustness can reduce resilience by removing the small failures that maintain adaptive capacity.",
+   "source": "Holling 1973; Taleb 2012"
+  },
+  {
+   "guid": "l(2LG>DfEk",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "complexity",
+    "architecture"
+   ],
+   "front": "What is near-decomposability (Simon), and what is the point of the watchmakers parable?",
+   "back": "Complex systems that evolve are almost always hierarchies of stable intermediate subassemblies, with interactions within subsystems much stronger than between. Hora built watches from stable subassemblies and survived interruptions; Tempus assembled everything at once and was ruined by each interruption.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Layered architectures, incremental delivery, stable intermediate releases. Every step should leave a working system. Directly underlies Gall's law and the strangler fig pattern.",
+   "source": "Simon 1962, The Architecture of Complexity"
+  },
+  {
+   "guid": "xfkz|aWxca",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "complexity",
+    "architecture"
+   ],
+   "front": "What is Gall's law?",
+   "back": "A complex system that works is invariably found to have evolved from a simple system that worked. A complex system designed from scratch never works and cannot be made to work; you must start over with a simple working system.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Walking skeletons, thin-slice platforms, Minimum Viable Product (MVP). Big-bang rewrites and 'design the whole platform first' fail for exactly this reason.",
+   "source": "Gall 1975, Systemantics"
+  },
+  {
+   "guid": "N]@+|2S4lL",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "complexity",
+    "ai"
+   ],
+   "front": "What is Goodhart's law, and why is it an evolutionary phenomenon?",
+   "back": "When a measure becomes a target it ceases to be a good measure. Optimisation pressure exploits any gap between proxy and true goal. Selection finds loopholes because it searches everything, not just intended paths.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Reward hacking and specification gaming in reinforcement learning; sycophancy from Reinforcement Learning from Human Feedback (RLHF); gaming SLOs, velocity or DevOps Research and Assessment (DORA) metrics. Design metrics assuming they will be exploited.",
+   "source": "Goodhart 1975; Campbell 1979"
+  },
+  {
+   "guid": "707?Q5xIt",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "complexity",
+    "networks"
+   ],
+   "front": "What is Braess's paradox?",
+   "back": "Adding capacity (a new road) to a network of self-interested agents can increase total congestion, because individually rational rerouting produces a worse equilibrium.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Adding a fast path, cache or shortcut can worsen overall performance when clients re-route onto it. Local optimisation by each service is not global optimisation; model the incentives, not just the capacity.",
+   "source": "Braess 1968"
+  },
+  {
+   "guid": "t865BBuonL",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "complexity",
+    "platform"
+   ],
+   "front": "What is the tragedy of the commons, and what did Ostrom show?",
+   "back": "A shared resource is degraded because each user's rational overuse is individually beneficial and collectively ruinous. Ostrom showed communities can govern commons without privatisation or central control given clear boundaries, monitoring, graduated sanctions, participation in rule-making and conflict resolution.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Shared clusters, CI capacity, noisy neighbours, shared model rate limits. Quotas, chargeback, visibility and team-level rule-making are Ostrom's design principles applied to a platform.",
+   "source": "Hardin 1968; Ostrom 1990"
+  },
+  {
+   "guid": "z@zely:8aF",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "complexity",
+    "management"
+   ],
+   "front": "What are the Cynefin domains, and what is the classic misclassification?",
+   "back": "Clear (cause and effect obvious; best practice), complicated (knowable through analysis; good practice), complex (cause and effect only visible in retrospect; probe-sense-respond), chaotic (act first), confused. The classic error is treating a complex problem as complicated: analysing when you should be experimenting.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Runbooks for clear; architecture review for complicated; canaries, experiments and short feedback loops for complex; incident command for chaotic. Adoption of a platform by teams is complex, not complicated.",
+   "source": "Snowden and Boone 2007"
+  },
+  {
+   "guid": "m1#~$:[SdU",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "complexity",
+    "reliability"
+   ],
+   "front": "What is 'drift into failure'?",
+   "back": "Under pressure for efficiency and throughput, systems migrate toward the boundary of safe operation. Each local step is rational and small; failure emerges without any single broken part. Rasmussen models it as a gradient toward the boundary.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Alert noise normalised, margins eroded, 'we've always deployed on Friday', safety checks skipped because they never fired. Safety requires an explicit counter-gradient: slack, drills, reviews that restore margin.",
+   "source": "Rasmussen 1997; Dekker 2011"
+  },
+  {
+   "guid": "ziy9@d|Rf+",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "complexity",
+    "architecture"
+   ],
+   "front": "What is Conway's law and the inverse Conway manoeuvre?",
+   "back": "Organisations design systems that mirror their communication structures. Inverse: deliberately shape team structure to produce the architecture you want.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Team Topologies (stream-aligned, platform, enabling, complicated-subsystem teams). Microservices without team autonomy reproduce the monolith with network calls. Architecture change is org change.",
+   "source": "Conway 1968; Skelton and Pais 2019"
+  },
+  {
+   "guid": "n=]3I07VTO",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "complexity",
+    "reliability"
+   ],
+   "front": "What are alternative stable states and regime shifts, and what are the early-warning signals?",
+   "back": "Ecosystems can flip between stable states (clear vs turbid lake, coral vs algae reef) when a threshold is crossed, and are slow to reverse (hysteresis). Approaching a tipping point, systems show critical slowing down: rising variance, rising autocorrelation, slower recovery from small perturbations.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Metastable failures in distributed systems: a trigger pushes the system into a self-sustaining bad state (retry amplification, cache-miss storms) that persists after the trigger is gone, and recovery needs load far below the original threshold. Monitor latency variance and recovery time from small blips as early warnings.",
+   "source": "Scheffer et al. 2001, 2009; Bronson et al. 2021 (metastable failures)"
+  },
+  {
+   "guid": "qN^p;a-W0;",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "complexity",
+    "management",
+    "ai"
+   ],
+   "front": "What is the OODA loop, and why does tempo matter?",
+   "back": "Observe, Orient, Decide, Act. Boyd's claim: advantage comes from cycling faster and with better orientation than the opponent, so their model of the situation is always stale.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Lead time and deployment frequency are loop speed. Red Queen: the competitor is also cycling. AI agents are tight OODA loops; their weakness is usually orientation (wrong world model), not speed.",
+   "source": "Boyd 1976 onward"
+  },
+  {
+   "guid": "q&h![U(lf^",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "ai"
+   ],
+   "front": "Why is gradient descent an adaptive walk, and what follows from that?",
+   "back": "It moves in the direction of local improvement on a loss landscape, structurally the same as hill-climbing on a fitness landscape. Consequences: local minima and saddle points, sensitivity to initialisation, need for noise (Stochastic Gradient Descent (SGD), temperature) to escape, and overparameterisation creating flat neutral regions that ease search.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Same intuitions apply to tuning infrastructure config, cost optimisation and organisational change: small steps find local optima; you need occasional large, coordinated moves.",
+   "source": ""
+  },
+  {
+   "guid": "C:mX+Kr,@z",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "ai"
+   ],
+   "front": "How does specification gaming in reinforcement learning relate to evolution?",
+   "back": "Any optimiser under selection pressure exploits gaps between proxy and intent, because it searches all paths, not only the intended ones. Evolution does the same (cheating signals, parasites). 'Selection is smarter than you are.'",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Audit reward and metric design assuming exploitation. Examples: agents pausing games to avoid losing, RLHF producing confident-sounding but wrong answers. Same as Goodhart's law for teams and platforms.",
+   "source": "Krakovna et al., specification gaming list"
+  },
+  {
+   "guid": "m#}v0M;a1#",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "ai",
+    "evolution"
+   ],
+   "front": "What is model collapse from training on synthetic data, and what is its biological analogue?",
+   "back": "Recursively training models on outputs of earlier models narrows the distribution: tails vanish, variance shrinks, errors compound. Analogue: inbreeding depression and loss of genetic diversity, which erodes adaptability.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Keep diverse 'wild' data reservoirs, track provenance, and treat data diversity as a managed asset, like seed banks and genetic reservoirs in conservation.",
+   "source": "Shumailov et al. 2023"
+  },
+  {
+   "guid": "c%SyA7mFrg",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "ai",
+    "complexity"
+   ],
+   "front": "Neural scaling laws: what shape are they, and what sits on top of them?",
+   "back": "Loss decreases as a power law in parameters, data and compute: smooth, scale-free, diminishing but not stopping. On top of the smooth curve sit apparent phase transitions in specific capabilities (emergent abilities, grokking), partly a measurement artefact of discontinuous metrics.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Do not extrapolate linearly; do not assume a natural stopping point. Capacity and cost curves in platforms are also power-law shaped: the tail (largest tenants, largest requests) dominates.",
+   "source": "Kaplan et al. 2020; Hoffmann et al. 2022; Wei et al. 2022"
+  },
+  {
+   "guid": "Nu$oxq;&pS",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "ai",
+    "security"
+   ],
+   "front": "How does the immune system serve as a model for security and anomaly detection?",
+   "back": "Innate immunity: fixed pattern recognition, fast, general. Adaptive immunity: generates enormous receptor variety by recombination, removes self-reactive variants by negative selection, retains memory of past threats. False positives are autoimmunity.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Signature-based detection is innate; learned anomaly detection is adaptive. Red-teaming is vaccination. Alert fatigue is autoimmunity's cost. Artificial immune systems (Forrest) formalised this for intrusion detection.",
+   "source": "Forrest et al. 1994"
+  },
+  {
+   "guid": "r4@F2q`n%Y",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "ai"
+   ],
+   "front": "Evolutionary algorithms vs gradient methods: when does each fit?",
+   "back": "Population-based methods (evolution strategies, genetic algorithms, NeuroEvolution of Augmenting Topologies (NEAT)) need no gradient, handle discrete and non-differentiable spaces, explore broadly, and parallelise trivially. Gradient methods are far more sample-efficient where a gradient exists. Hybrids use learning to smooth the landscape for evolution (Baldwin).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Neural Architecture Search (NAS), hyperparameter search, infrastructure configuration search, prompt optimisation. Reach for population methods when the objective is black-box or discrete.",
+   "source": ""
+  },
+  {
+   "guid": "D%|H5&v/c",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "ai",
+    "reliability"
+   ],
+   "front": "Why do ensembles work, in biological terms?",
+   "back": "Diverse models make partially uncorrelated errors; combining them cancels error (degeneracy). Copies of one model share every error and add nothing beyond throughput (redundancy).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Multi-model routing and fallback providers only add robustness if the models are actually different (different base, data or architecture). Same principle for reviewers, monitoring signals and independent verification.",
+   "source": ""
+  },
+  {
+   "guid": "sB#e&5otCO",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "ai",
+    "complexity"
+   ],
+   "front": "Which biological and complexity models apply to multi-agent AI systems?",
+   "back": "Major transitions (cooperation requires suppressing defection), stigmergy (coordination via shared environment), emergence (system behaviour not predictable from agent specs), requisite variety (the orchestrator must handle the variety of agent states), Red Queen (adversarial agents), attractors (agent loops converging to degenerate cycles).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Design the environment (shared state, incentives, constraints, observation) rather than only the agents. Expect emergent behaviour and test at system level.",
+   "source": ""
+  },
+  {
+   "guid": "d}`Go76wg]",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "ai",
+    "complexity"
+   ],
+   "front": "What is stigmergy?",
+   "back": "Indirect coordination through traces left in a shared environment: ant pheromone trails, termite mound construction. Each agent responds to the state of the environment, not to messages from other agents.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Repositories, issue trackers, wikis, queues and shared documents are stigmergic media. Agent systems built on a shared workspace or blackboard scale better than ones relying on direct agent-to-agent messaging.",
+   "source": "Grasse 1959"
+  },
+  {
+   "guid": ";J4w4{YJG",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "architecture"
+   ],
+   "front": "Where does the strangler fig pattern come from, and what principle does it embody?",
+   "back": "Named by Martin Fowler after the strangler fig, which grows around a host tree and eventually replaces it. New functionality is routed incrementally from the legacy system to the new one until the old can be removed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Evolution over revolution: every intermediate state is a working system (Simon's stable intermediates, Gall's law). Requires a facade or routing layer as the 'host'.",
+   "source": "Fowler 2004"
+  },
+  {
+   "guid": "dKu(D1L<-x",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "reliability"
+   ],
+   "front": "How does chaos engineering map onto biology?",
+   "back": "Controlled injection of failure to build and verify resilience. Analogues: vaccination and hormesis (small doses of stressor trigger an adaptive response) and selection pressure that prevents robustness traits from decaying when unused.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Requires a bounded blast radius (compartmentalisation) and a hypothesis about steady state. Without ongoing pressure, failover paths rot exactly like unused biological traits.",
+   "source": "Basiri et al. 2016 (Netflix)"
+  },
+  {
+   "guid": "mF_>#F}R89",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "architecture",
+    "reliability"
+   ],
+   "front": "What is cell-based architecture, and what is the trade-off?",
+   "back": "Partitioning a system into isolated, self-contained cells (ship bulkheads, compartmentalised biological structures) so failure is contained and the blast radius is a fraction of the whole.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Reduces cascade risk by keeping effective connectivity below the percolation threshold, at the cost of duplication, routing complexity and reduced pooling efficiency. It is the platform-scale version of bulkheads.",
+   "source": ""
+  },
+  {
+   "guid": "HEPvt3rx(O",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "platform",
+    "evolution"
+   ],
+   "front": "Frame a canary release as an evolutionary experiment. What makes it fail?",
+   "back": "Expose a small population to a variant, measure fitness (metrics), retain or revert. Controls: limited blast radius, a clear fitness signal, fast rollback.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Fails when there is no clear fitness metric (Goodhart, or nothing to select on), when the signal is too slow relative to the exposure, or when the canary population is not representative (selection on the wrong niche).",
+   "source": ""
+  },
+  {
+   "guid": "CW%`E.9&,$",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "architecture"
+   ],
+   "front": "What is the evolutionary critique of Postel's law (the robustness principle)?",
+   "back": "'Be conservative in what you send, liberal in what you accept' aids interoperability, but tolerance lets sloppy behaviour become entrenched: cryptic variation accumulates that later cannot be removed, and protocols ossify around it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Strict validation at boundaries vs ecosystem tolerance is the canalization trade-off. Choose deliberately per interface; document what is tolerated and plan to tighten it.",
+   "source": "Postel 1980; Thomson 2019 (RFC draft on the harmful consequences)"
+  },
+  {
+   "guid": "Mx&Z)hPIvE",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "platform",
+    "complexity"
+   ],
+   "front": "Why do large platforms qualify as complex adaptive systems (CAS)?",
+   "back": "Many heterogeneous agents (services, teams, users, bots, models); local interactions; feedback loops; adaptation on multiple timescales (autoscaling, deploys, user behaviour, org change); nonlinearity; emergence; path dependence; no controller with full knowledge.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Implication: manage through constraints, feedback and experiments (probe-sense-respond), not through top-down design alone. Architecture is a fitness landscape you shape, not a blueprint you execute.",
+   "source": "Holland 1992"
+  },
+  {
+   "guid": "OgZo>gq0eM",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "platform",
+    "networks"
+   ],
+   "front": "What is Metcalfe's law, and what feedback dynamic does it describe?",
+   "back": "The value of a network grows roughly with the square of its users. It is positive feedback: increasing returns to adoption, hence tipping points, lock-in and winner-take-most outcomes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> Internal platform adoption has a tipping point; below it the platform is a cost, above it it self-reinforces. Also the reverse: value collapses superlinearly when users leave.",
+   "source": "Metcalfe 1980s; Reed and Odlyzko for critiques"
+  },
+  {
+   "guid": "sO*.S$)/Zg",
+   "type": "basic",
+   "deck": "Adaptive Systems: Evolution, Complexity, AI & Platforms",
+   "tags": [
+    "platform",
+    "reliability"
+   ],
+   "front": "What does the complexity view add to observability?",
+   "back": "Observability is the sensing stage of a control loop. Requisite variety: you cannot regulate what you cannot distinguish. Delay causes oscillation. Aggregates hide heavy tails. Alerts are sensors with false-positive (autoimmune) and false-negative costs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Connection:</b> High-cardinality telemetry, percentiles over means, tracing to see interaction effects, and alert design that treats fatigue as a system failure rather than a human one.",
+   "source": ""
+  }
+ ]
+}

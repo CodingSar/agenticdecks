@@ -1,0 +1,1524 @@
+{
+ "source_file": "STACKIT_Hybrid_Cloud_Architect.apkg",
+ "notes": [
+  {
+   "guid": "cK/XLk*rs2",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::01 STACKIT Foundations",
+   "tags": [
+    "stackit",
+    "foundations"
+   ],
+   "front": "What is STACKIT, and what is its core positioning as a cloud provider?",
+   "back": "<ul>\n<li>European sovereign cloud platform of the <b>Schwarz Group</b> (Lidl, Kaufland), launched commercially 2019/2020.</li>\n<li>Data centers exclusively in <b>Germany and Austria</b>; primary region <b>eu01</b> with availability zones eu01-1/2/3.</li>\n<li>Infrastructure as a Service (IaaS) layer is built on <b>OpenStack</b>.</li>\n<li>Positioning: <b>digital sovereignty</b> — EU data residency, General Data Protection Regulation (GDPR) compliance, no exposure to the US CLOUD Act; certifications such as ISO 27001 and BSI C5.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "stackit · foundations"
+  },
+  {
+   "guid": "lUdU01]4`.",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::01 STACKIT Foundations",
+   "tags": [
+    "stackit",
+    "foundations",
+    "landingzone"
+   ],
+   "front": "Describe the STACKIT resource hierarchy and what a <i>Project</i> represents.",
+   "back": "<ul>\n<li>Hierarchy: <b>Organization → Folder(s) → Project</b>.</li>\n<li>A <b>Project</b> is the unit of resource ownership, Identity and Access Management (IAM) role assignment, quotas, and billing attribution — comparable to a Google Cloud Platform (GCP) project or an Azure resource group + subscription hybrid.</li>\n<li>Folders group projects (e.g., per business unit or environment) and allow role inheritance downward.</li>\n<li>Landing-zone practice: project per <i>team × environment</i> (e.g., payments-dev, payments-prod).</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "stackit · foundations · landingzone"
+  },
+  {
+   "guid": "C&i_JR%oU+",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::01 STACKIT Foundations",
+   "tags": [
+    "stackit",
+    "iam"
+   ],
+   "front": "Which identity types exist in STACKIT Identity and Access Management (IAM), and how do machines authenticate?",
+   "back": "<ul>\n<li><b>User accounts</b> (portal login) and <b>service accounts</b> (machine identities, scoped to a project).</li>\n<li>Members get <b>roles</b> (e.g., owner, editor, reader, plus service-specific roles) on organization, folder, or project.</li>\n<li>Service accounts authenticate via:\n  <ul>\n  <li><b>Key flow</b> — RSA key pair, client signs a JSON Web Token (JWT) and exchanges it for a short-lived access token (preferred for Terraform).</li>\n  <li><b>Token flow</b> — static long-lived token (simpler, weaker; rotate!).</li>\n  <li><b>OpenID Connect (OIDC) federation</b> — exchange a Continuous Integration (CI) workload token for STACKIT credentials, i.e. keyless pipelines.</li>\n  </ul></li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "stackit · iam"
+  },
+  {
+   "guid": "H,&3sz|h2u",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::01 STACKIT Foundations",
+   "tags": [
+    "stackit",
+    "foundations",
+    "iac"
+   ],
+   "front": "Which four interfaces can you use to manage STACKIT resources programmatically or interactively?",
+   "back": "<ol>\n<li><b>STACKIT Portal</b> (web UI, self-service).</li>\n<li><b>STACKIT CLI</b> (<code>stackit</code>) — also acts as a kubectl credential helper.</li>\n<li><b>REST APIs + SDKs</b> (Go, Python, Java, JavaScript).</li>\n<li><b>Terraform provider</b> <code>stackitcloud/stackit</code> — the standard for Infrastructure as Code (IaC).</li>\n</ol>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "stackit · foundations · iac"
+  },
+  {
+   "guid": "DDYv6ofA=",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::01 STACKIT Foundations",
+   "tags": [
+    "stackit",
+    "portfolio"
+   ],
+   "front": "Name the main STACKIT <b>runtime/compute</b> offerings and their rough analogues.",
+   "back": "<ul>\n<li><b>Compute Engine</b> — OpenStack virtual machines (flavors incl. general purpose g1.x, memory/compute optimized, GPU). ≈ EC2.</li>\n<li><b>STACKIT Kubernetes Engine (SKE)</b> — managed Kubernetes. ≈ GKE/AKS/EKS.</li>\n<li><b>Cloud Foundry</b> — Platform as a Service (PaaS) for pushing apps without cluster management.</li>\n<li><b>Confidential Server / Confidential Kubernetes</b> — in-memory-encrypted compute for highly sensitive workloads (limited availability).</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "stackit · portfolio"
+  },
+  {
+   "guid": "wEbfLae?h4",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::01 STACKIT Foundations",
+   "tags": [
+    "stackit",
+    "portfolio",
+    "data"
+   ],
+   "front": "List the managed <b>data services</b> STACKIT offers.",
+   "back": "<ul>\n<li><b>PostgreSQL Flex</b>, <b>MongoDB Flex</b>, <b>SQL Server Flex</b>, <b>MariaDB</b> — relational/NoSQL databases with high-availability plans and automated backups.</li>\n<li><b>Redis</b> — in-memory cache/store.</li>\n<li><b>OpenSearch</b> — search and log analytics.</li>\n<li><b>RabbitMQ</b> and <b>PubSub</b> — messaging.</li>\n<li>Architectural note: prefer these over self-operating stateful workloads inside SKE unless you need features/versions they lack — state is the hard part of multi-cluster.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "stackit · portfolio · data"
+  },
+  {
+   "guid": "jJHR7wRjR:",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::01 STACKIT Foundations",
+   "tags": [
+    "stackit",
+    "portfolio",
+    "storage"
+   ],
+   "front": "Which <b>storage classes of service</b> exist on STACKIT, and which Kubernetes access modes do they map to?",
+   "back": "<ul>\n<li><b>Block Storage</b> (OpenStack Cinder; multiple performance classes, e.g. <code>storage_premium_perfX</code>) → PersistentVolumes, ReadWriteOnce (RWO).</li>\n<li><b>File storage / NFS Shares</b> → ReadWriteMany (RWX) volumes.</li>\n<li><b>Object Storage</b> — S3-compatible; buckets + credential groups. Used for backups (Velero), Terraform state, Loki chunks, registry backends.</li>\n<li><b>Backup Storage</b> — cost-optimized, geo-redundant target for volume backups.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "stackit · portfolio · storage"
+  },
+  {
+   "guid": "Q|u@*(q&[W",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::01 STACKIT Foundations",
+   "tags": [
+    "stackit",
+    "portfolio",
+    "security"
+   ],
+   "front": "Which STACKIT services cover <b>security & developer tooling</b> (secrets, keys, images, code)?",
+   "back": "<ul>\n<li><b>Secrets Manager</b> — managed storage/rotation of secrets, portal-integrated.</li>\n<li><b>Key Management Service (KMS)</b> — cryptographic key operations, envelope encryption.</li>\n<li><b>Container Registry</b> — private Open Container Initiative (OCI) registry with access control and vulnerability scanning.</li>\n<li><b>STACKIT Git</b> — managed Git repositories.</li>\n<li><b>Run Command</b> — remote script execution on Compute Engine instances without direct SSH.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "stackit · portfolio · security"
+  },
+  {
+   "guid": "xk?T#7f$_*",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::01 STACKIT Foundations",
+   "tags": [
+    "stackit",
+    "portfolio",
+    "observability"
+   ],
+   "front": "Which STACKIT services cover <b>observability</b>, and what stack are they based on?",
+   "back": "<ul>\n<li><b>STACKIT Observability</b> (formerly <b>Argus</b> — that name is deprecated): managed <b>Prometheus, Grafana, Loki, Tempo</b> for metrics, logs, traces, alerting.</li>\n<li><b>Logs / LogMe</b> — centralized log ingestion, storage, and search.</li>\n<li><b>Telemetry Router</b> — centralized handling of audit streams.</li>\n<li>SKE clusters can be wired to an Observability instance via a cluster extension.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "stackit · portfolio · observability"
+  },
+  {
+   "guid": "vD2?PoWwfi",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::01 STACKIT Foundations",
+   "tags": [
+    "stackit",
+    "portfolio",
+    "network"
+   ],
+   "front": "Name the STACKIT <b>networking</b> products relevant to a hybrid platform design.",
+   "back": "<ul>\n<li><b>STACKIT Network Area (SNA)</b> — organization-level network layer connecting projects privately; hub for hybrid connectivity.</li>\n<li><b>VPN</b> — managed IPsec site-to-site service into the SNA.</li>\n<li><b>Network Load Balancer</b> (Layer 4) and <b>Application Load Balancer</b> (Layer 7, host/path routing, Web Application Firewall (WAF) option).</li>\n<li><b>DNS</b> — hosted zones/record sets (works with external-dns).</li>\n<li><b>Security Groups</b> (stateful instance firewalls) and <b>Unified Firewall</b> (beta; central rule management across projects).</li>\n<li><b>Content Delivery Network (CDN)</b>.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "stackit · portfolio · network"
+  },
+  {
+   "guid": "HH~#JiXBNm",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::01 STACKIT Foundations",
+   "tags": [
+    "stackit",
+    "compliance",
+    "tradeoff"
+   ],
+   "front": "Why is STACKIT specifically attractive for workloads under Dutch/EU public-sector compliance regimes (BIO2, NIS2), and what do YOU still have to do?",
+   "back": "<ul>\n<li>Provider side: EU-only data residency (DE/AT), GDPR alignment, no US CLOUD Act exposure, ISO 27001 / BSI C5 attestations — strong answers for sovereignty questions in Baseline Informatiebeveiliging Overheid 2 (BIO2) and Network and Information Security 2 (NIS2) assessments.</li>\n<li>Your side (shared responsibility): environment zoning/segmentation, access control and joiner-mover-leaver via your Active Directory (AD), central audit logging, encryption configuration, incident response, and demonstrable control of the deployment chain (GitOps + signed images help).</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "stackit · compliance · tradeoff"
+  },
+  {
+   "guid": "F@9YM;lrXo",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::02 SKE Core",
+   "tags": [
+    "ske",
+    "gardener"
+   ],
+   "front": "What is the STACKIT Kubernetes Engine (SKE), and which open-source project is it built on?",
+   "back": "<ul>\n<li>SKE is STACKIT's managed, Cloud Native Computing Foundation (CNCF)-conformant Kubernetes service.</li>\n<li>Built on <b>Gardener</b> (open-sourced by SAP): a Kubernetes-native system that manages fleets of clusters using Kubernetes itself.</li>\n<li>STACKIT operates the control planes; you get self-service cluster creation via Portal, CLI, API, or Terraform, with auto-updates and automatic repair.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ske · gardener"
+  },
+  {
+   "guid": "f3AICXdN7j",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::02 SKE Core",
+   "tags": [
+    "ske",
+    "gardener"
+   ],
+   "front": "Explain Gardener's <b>Garden / Seed / Shoot</b> model and where your SKE cluster fits in.",
+   "back": "<ul>\n<li><b>Garden cluster</b> — the central management cluster running Gardener itself.</li>\n<li><b>Seed clusters</b> — provider-operated clusters that <i>host the control planes</i> (kube-apiserver, etcd, controllers) of customer clusters as pods.</li>\n<li><b>Shoot cluster</b> — <i>your</i> cluster: its control plane lives in a STACKIT-managed seed; only the <b>worker nodes</b> run as Compute Engine VMs inside your project.</li>\n<li>Consequence: you never see or SSH the control plane; control-plane scaling, high availability (HA), and etcd backups are STACKIT's job.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ske · gardener"
+  },
+  {
+   "guid": "f0t]*s&PbN",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::02 SKE Core",
+   "tags": [
+    "ske",
+    "nodepools"
+   ],
+   "front": "Which properties do you configure per SKE <b>node pool</b>?",
+   "back": "<ul>\n<li>Machine type/flavor (e.g., <code>g1.3</code>), and <b>min/max node count</b> for autoscaling.</li>\n<li><b>Availability zones</b> (eu01-1/2/3) — spread pools across zones for HA.</li>\n<li>Boot volume <b>size and type</b> (block-storage performance class).</li>\n<li>Node operating system: <b>Flatcar Container Linux</b> (immutable, auto-updating).</li>\n<li>Kubernetes <b>labels and taints</b> — the basis for tenant/workload placement.</li>\n<li>Multiple pools per cluster are normal: e.g., system pool, tenant pools, GPU pool.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ske · nodepools"
+  },
+  {
+   "guid": "zSuJ;??Hwa",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::02 SKE Core",
+   "tags": [
+    "ske",
+    "lifecycle",
+    "fleet"
+   ],
+   "front": "How does SKE handle <b>Kubernetes version and node OS updates</b>, and what must an architect plan around?",
+   "back": "<ul>\n<li>Auto-updates for Kubernetes patch versions and Flatcar OS run inside a configurable <b>maintenance window</b>.</li>\n<li>Each Kubernetes minor version has a support window; expired versions get <b>force-upgraded</b> — you cannot pin forever.</li>\n<li>Plan: stagger maintenance windows across the fleet (canary ring first), keep PodDisruptionBudgets (PDBs) correct so node drains don't take services down, and test against version skew (kubectl/API deprecations) continuously.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ske · lifecycle · fleet"
+  },
+  {
+   "guid": "J[{Lj|2C0v",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::02 SKE Core",
+   "tags": [
+    "ske",
+    "cost"
+   ],
+   "front": "What is SKE cluster <b>hibernation</b> and when is it useful?",
+   "back": "<ul>\n<li>Scheduled temporary shutdown of a cluster (control plane and worker nodes are stopped/scaled to zero).</li>\n<li>Cuts cost for non-production clusters, e.g., dev/test clusters hibernating nights and weekends.</li>\n<li>Trade-off: wake-up latency; unsuitable for anything that must receive traffic or run background jobs. In a many-cluster tenancy model, hibernation makes cluster-per-team affordable for dev.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ske · cost"
+  },
+  {
+   "guid": "n|-g|LtrWl",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::02 SKE Core",
+   "tags": [
+    "ske",
+    "autoscaling"
+   ],
+   "front": "Which <b>autoscaling</b> mechanisms are available on SKE, and at which layers?",
+   "back": "<ul>\n<li><b>Node layer:</b> Cluster Autoscaler per node pool between configured min/max.</li>\n<li><b>Pod layer:</b> Horizontal Pod Autoscaler (HPA) and Vertical Pod Autoscaler (VPA).</li>\n<li><b>Event-driven:</b> Kubernetes Event-Driven Autoscaling (KEDA) — scale on queue depth, etc.; SKE advertises event-driven autoscaling support.</li>\n<li>Architectural note: autoscaler limits are also a <b>tenancy quota</b> — a runaway tenant can only grow to the pool max.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ske · autoscaling"
+  },
+  {
+   "guid": "e.5uJ}/HEV",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::02 SKE Core",
+   "tags": [
+    "ske",
+    "identity",
+    "tradeoff"
+   ],
+   "front": "Which three ways exist to obtain credentials for an SKE cluster, and what are the security trade-offs?",
+   "back": "<ol>\n<li><b>Admin kubeconfig</b> — client-certificate based, expiry up to 180 days. Coarse revocation: rotating credentials invalidates <i>all</i> admin kubeconfigs and ServiceAccount tokens. Treat as break-glass, store offline.</li>\n<li><b>CLI login</b> — <code>stackit ske kubeconfig login</code> as a kubectl exec plugin; fetches <b>short-lived</b> credentials on demand via your STACKIT identity. Good default for operators.</li>\n<li><b>STACKIT Identity Provider (IDP) integration</b> — enable per cluster, then bind Kubernetes Role-Based Access Control (RBAC) RoleBindings to user <b>email addresses</b>; users log in with STACKIT accounts.</li>\n</ol>\n<div class=\"note\">None of these speak your corporate Active Directory (AD) directly — that gap drives the PingFederate/Pinniped designs in the Identity subdeck.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ske · identity · tradeoff"
+  },
+  {
+   "guid": "u<<oy;NSC?",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::02 SKE Core",
+   "tags": [
+    "ske",
+    "networking",
+    "loadbalancer"
+   ],
+   "front": "What happens when you create a Kubernetes Service of type <code>LoadBalancer</code> on SKE (2026 state)?",
+   "back": "<ul>\n<li>The cloud controller manager provisions a <b>STACKIT Load Balancer</b> (Layer 4, TCP/UDP) with a public IP; the LB resources appear (and are billed) in your project.</li>\n<li>History: clusters created before June 2024 used <b>yawol</b> (STACKIT's open-source OpenStack LB operator, LB = small VMs in your project); new clusters use the dedicated Load Balancer service.</li>\n<li>HTTP(S)/Layer 7: run your own ingress controller behind the L4 LB, or use the <b>Application Load Balancer</b> SKE extension (was in preview).</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ske · networking · loadbalancer"
+  },
+  {
+   "guid": "vEbI!B8N*m",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::02 SKE Core",
+   "tags": [
+    "ske",
+    "networking",
+    "hybrid"
+   ],
+   "front": "Which Service annotations/fields matter for SKE load balancers in a hybrid design?",
+   "back": "<ul>\n<li><b>Internal LB</b> annotation — LB gets a private IP in the node network instead of a public IP → the way to expose services only to on-prem over the VPN.</li>\n<li><code>spec.loadBalancerSourceRanges</code> — Classless Inter-Domain Routing (CIDR) allow-list of callers (add on-prem ranges; include pod CIDR if pods must reach it).</li>\n<li><b>PROXY protocol v2</b> annotation (<code>lb.stackit.cloud/...</code>) — preserves client source IPs to the backend.</li>\n<li>Session persistence with source IP is available via annotation.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ske · networking · hybrid"
+  },
+  {
+   "guid": "pSTm.[yIb=",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::02 SKE Core",
+   "tags": [
+    "ske",
+    "storage"
+   ],
+   "front": "How is <b>persistent storage</b> provided in SKE, and where do its limits push you architecturally?",
+   "back": "<ul>\n<li>Container Storage Interface (CSI) driver on OpenStack <b>Cinder block storage</b>; StorageClasses map to performance tiers; ReadWriteOnce (RWO) only; volumes are zone-bound → StatefulSets must respect zones.</li>\n<li>ReadWriteMany (RWX) via NFS/file-storage offerings.</li>\n<li>Volume snapshots via CSI → enables <b>Velero</b> backups to Object Storage.</li>\n<li>Push: for multi-cluster or Disaster Recovery (DR), prefer managed databases and Object Storage over cluster-local volumes — block storage does not replicate across clusters.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ske · storage"
+  },
+  {
+   "guid": "P6Mz<(Ml7/",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::02 SKE Core",
+   "tags": [
+    "ske",
+    "networking",
+    "security"
+   ],
+   "front": "Describe the default <b>network posture</b> of SKE worker nodes and the API server, and how to harden API access.",
+   "back": "<ul>\n<li><b>Nodes are private</b> — no public IPs (and you can't mark them public at creation). Inbound only via load balancers; outbound via provider NAT.</li>\n<li>The <b>kube-apiserver endpoint is public</b> by default (it lives in the STACKIT seed, not your network).</li>\n<li>Hardening: enable the <b>Access Control List (ACL) extension</b> to allow-list CIDRs (e.g., only your on-prem egress IPs / VPN ranges); private API-server access patterns exist for reaching it from within the STACKIT network — verify current options per cluster.</li>\n<li>Cluster metadata such as the pod CIDR is exposed in the <code>shoot-info</code> ConfigMap (kube-system).</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ske · networking · security"
+  },
+  {
+   "guid": "A3.L*3/J{)",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::02 SKE Core",
+   "tags": [
+    "ske",
+    "extensions",
+    "iac"
+   ],
+   "front": "Which official <b>SKE cluster extensions</b> can you toggle (e.g., via Terraform), and what do they do?",
+   "back": "<ul>\n<li><b>observability</b> — wires the cluster to a STACKIT Observability instance (the old <code>argus</code> block is deprecated).</li>\n<li><b>dns</b> — cluster DNS domain integration with STACKIT DNS.</li>\n<li><b>acl</b> — API-server access allow-listing.</li>\n<li><b>application_load_balancer</b> — managed Layer 7 ingress (private preview initially).</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ske · extensions · iac"
+  },
+  {
+   "guid": "tr#|]j}A,B",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::02 SKE Core",
+   "tags": [
+    "ske",
+    "iac",
+    "terraform",
+    "tradeoff"
+   ],
+   "front": "How do you provision an SKE cluster and then Kubernetes resources <b>in one Terraform run</b>, and what is the main pitfall?",
+   "back": "<ul>\n<li><code>stackit_ske_cluster</code> creates the cluster; <code>stackit_ske_kubeconfig</code> (with <code>refresh = true</code>) yields credentials; feed host/CA/client certs into the <code>kubernetes</code>/<code>helm</code> providers.</li>\n<li>Alternative: exec-plugin auth in the provider using <code>stackit ske kubeconfig login</code> → no long-lived certs in state.</li>\n<li><b>Pitfalls:</b> kubeconfig material lands in Terraform state (encrypt/protect the backend!); provider-inside-same-apply ordering is fragile — better: Terraform bootstraps only the GitOps agent, everything else via GitOps.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ske · iac · terraform · tradeoff"
+  },
+  {
+   "guid": "f(ziTm](GF",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::02 SKE Core",
+   "tags": [
+    "ske",
+    "platform",
+    "fleet"
+   ],
+   "front": "An SKE cluster is 'managed' — which platform components do YOU still own (the day-2 stack)?",
+   "back": "<ul>\n<li>Ingress controller + certificates (cert-manager), external-dns.</li>\n<li>GitOps agent (Argo CD/Flux), policy engine (Kyverno/Gatekeeper).</li>\n<li>Secrets sync (External Secrets Operator), workload identity story.</li>\n<li>Observability agents (Grafana Alloy / OpenTelemetry (OTel) collector), Velero backups.</li>\n<li>Registry credentials, image policy/signing, NetworkPolicies, ResourceQuotas.</li>\n<li>This 'golden stack' must be <b>identical across the fleet</b> — that is the real multi-cluster problem, and why it lives in Git, not in hand-applied manifests.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ske · platform · fleet"
+  },
+  {
+   "guid": "e%$6Mwnn!",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::02 SKE Core",
+   "tags": [
+    "ske",
+    "cost",
+    "tradeoff"
+   ],
+   "front": "What determines SKE's cost model, and which two levers reduce non-production spend?",
+   "back": "<ul>\n<li>You pay a fee for the managed <b>control plane per cluster</b> plus normal Compute Engine/storage/LB prices for workers.</li>\n<li>Lever 1: <b>hibernation schedules</b> for dev/test clusters.</li>\n<li>Lever 2: autoscaling node pools with low minimums (scale-to-few), right-sized flavors.</li>\n<li>Tenancy consequence: per-cluster fees make 'a cluster for everyone' more expensive than namespaces — quantify this in the multitenancy decision.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ske · cost · tradeoff"
+  },
+  {
+   "guid": "c9(2-ENGk:",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::02 SKE Core",
+   "tags": [
+    "ske",
+    "networking",
+    "multitenancy"
+   ],
+   "front": "How does <b>NetworkPolicy</b> behave on SKE and why must a platform team set defaults?",
+   "back": "<ul>\n<li>SKE ships a Container Network Interface (CNI) plugin that enforces the standard Kubernetes NetworkPolicy API — but Kubernetes' default is <b>allow-all</b> between pods across all namespaces.</li>\n<li>Platform baseline: default-deny ingress (and ideally egress) per tenant namespace, then explicit allows; permit kube-dns; document how tenants request cross-namespace flows.</li>\n<li>Note: you don't control which CNI or its low-level config on a managed cluster — don't design around CNI-specific features you can't guarantee fleet-wide.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ske · networking · multitenancy"
+  },
+  {
+   "guid": "yf|c)#K@Bd",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::03 IaaS & Networking",
+   "tags": [
+    "iaas",
+    "compute"
+   ],
+   "front": "What are the building blocks of STACKIT <b>Compute Engine</b>?",
+   "back": "<ul>\n<li>OpenStack-based virtual machines: <b>flavors</b> (general purpose g1.x, compute-/memory-optimized, GPU incl. NVIDIA A100), placed in an <b>availability zone</b>.</li>\n<li><b>Boot volume</b> (from an image — Ubuntu, Flatcar, Red Hat Enterprise Linux (RHEL), Windows...) + attachable <b>data volumes</b> (block storage).</li>\n<li>Attached to project <b>networks</b>; firewalled by <b>security groups</b>; optionally a <b>public IP</b>.</li>\n<li>Relevant even in a Kubernetes-centric design: VPN test endpoints, jump hosts, self-managed appliances.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "iaas · compute"
+  },
+  {
+   "guid": "G%xXF?;nQ}",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::03 IaaS & Networking",
+   "tags": [
+    "iaas",
+    "storage"
+   ],
+   "front": "How is STACKIT <b>Block Storage</b> tiered, and what operational features does it have?",
+   "back": "<ul>\n<li>Multiple <b>performance classes</b> (e.g., <code>storage_premium_perfX</code> with increasing input/output operations per second (IOPS) per class) — chosen per volume / per StorageClass in SKE.</li>\n<li>Volumes are <b>zonal</b>; snapshots and backups supported (Backup Storage as geo-redundant target).</li>\n<li>Based on OpenStack Cinder → this is what the SKE Container Storage Interface (CSI) driver provisions.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "iaas · storage"
+  },
+  {
+   "guid": "cM1_JXQpG*",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::03 IaaS & Networking",
+   "tags": [
+    "iaas",
+    "storage",
+    "s3"
+   ],
+   "front": "What is STACKIT <b>Object Storage</b> and what six roles does it typically play in a platform architecture?",
+   "back": "<ul>\n<li>S3-compatible object store; access via <b>credential groups</b> + access/secret keys per bucket scope.</li>\n<li>Typical platform roles:\n<ol>\n<li>Velero backup target</li>\n<li>Terraform state backend (see locking caveat card)</li>\n<li>Loki/Tempo/Thanos chunk storage</li>\n<li>Registry storage backend</li>\n<li>Artifact/report storage for CI</li>\n<li>Data exchange with on-prem without opening databases</li>\n</ol></li>\n<li>Keep backup traffic cloud-local — do not haul it over the VPN.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "iaas · storage · s3"
+  },
+  {
+   "guid": "k&oXil/u<<",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::03 IaaS & Networking",
+   "tags": [
+    "network",
+    "sna",
+    "hybrid"
+   ],
+   "front": "What is a <b>STACKIT Network Area (SNA)</b> and why is it the cornerstone of a multi-project + hybrid design?",
+   "back": "<ul>\n<li>An <b>organization-level</b> networking construct: a centrally administered pool of IP ranges from which member projects get their networks.</li>\n<li>Connects <b>multiple projects privately</b> (no public internet transit) — the STACKIT answer to a shared Virtual Private Cloud (VPC) / hub-and-spoke.</li>\n<li>Hybrid: <b>VPN and Multiprotocol Label Switching (MPLS)</b> connections terminate into the SNA, making on-prem routes available to all attached projects.</li>\n<li>Central Internet Protocol Address Management (IPAM) + route governance by the platform team; project teams consume.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "network · sna · hybrid"
+  },
+  {
+   "guid": "nh@HSQXa$U",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::03 IaaS & Networking",
+   "tags": [
+    "network",
+    "sna",
+    "tradeoff",
+    "multitenancy"
+   ],
+   "front": "Trade-off: one shared SNA for the whole organization vs. isolated per-project networking. When do you choose which?",
+   "back": "<table>\n<tr><th></th><th>Shared SNA</th><th>Isolated projects</th></tr>\n<tr><td>Connectivity</td><td>Private project↔project and single hybrid hub</td><td>Each project needs its own path (or public endpoints)</td></tr>\n<tr><td>Governance</td><td>Central IPAM, non-overlapping CIDRs enforced</td><td>None needed; CIDRs may overlap</td></tr>\n<tr><td>Blast radius</td><td>Misrouting/compromise can propagate; needs security groups + firewall discipline</td><td>Hard network isolation by default</td></tr>\n<tr><td>Fit</td><td>Platform-managed landing zone, hybrid mandatory (your case)</td><td>Fully independent tenants, no shared services</td></tr>\n</table>\n<div class=\"note\">Hybrid + central management effectively forces the SNA; compensate with segmentation (security groups, Unified Firewall, NetworkPolicy).</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "network · sna · tradeoff · multitenancy"
+  },
+  {
+   "guid": "FW>>=pIXc5",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::03 IaaS & Networking",
+   "tags": [
+    "network",
+    "security"
+   ],
+   "front": "How do STACKIT <b>security groups</b> behave, and what is the <b>Unified Firewall</b>?",
+   "back": "<ul>\n<li>Security groups: <b>stateful</b> firewall rule sets attached to instances/interfaces; default posture blocks inbound until allowed; reusable across servers.</li>\n<li><b>Unified Firewall</b> (beta): central dashboard combining security groups, database Access Control Lists (ACLs), and public-IP rules <i>across projects</i>, with rule templates — the tool for a platform team enforcing one policy over many projects.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "network · security"
+  },
+  {
+   "guid": "s|$wx/C,<_",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::03 IaaS & Networking",
+   "tags": [
+    "network",
+    "vpn",
+    "hybrid"
+   ],
+   "front": "Describe the managed <b>STACKIT VPN</b> service: protocol, topology, routing, HA, and throughput.",
+   "back": "<ul>\n<li>Managed <b>IPsec (IKEv2)</b> gateways attached to a STACKIT Network Area (SNA).</li>\n<li>Topology: <b>site-to-site</b> and site-to-multisite. <b>No point-to-site/client VPN.</b></li>\n<li>Routing: policy-based, static, or dynamic via <b>Border Gateway Protocol (BGP)</b> (BGP recommended for HA failover).</li>\n<li>High availability: gateways are <b>active-active</b> pairs with parallel tunnels.</li>\n<li>Service plans from <b>100 Mbit/s to 1,000 Mbit/s</b> (plan upgrade possible with brief interruption).</li>\n<li><b>No NAT support</b> → on-prem and SNA address space must not overlap.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "network · vpn · hybrid"
+  },
+  {
+   "guid": "zqXmbZ|yL:",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::03 IaaS & Networking",
+   "tags": [
+    "network",
+    "vpn",
+    "hybrid",
+    "tradeoff"
+   ],
+   "front": "Trade-off: managed STACKIT VPN vs. self-managed VPN VMs (strongSwan/WireGuard) vs. MPLS/dedicated line for on-prem connectivity.",
+   "back": "<ul>\n<li><b>Managed VPN:</b> + no ops, HA built-in, BGP; − ≤1 Gbit/s, IPsec only, no NAT, no client VPN, internet-dependent latency/jitter.</li>\n<li><b>Self-managed on Compute Engine:</b> + full control (WireGuard, NAT, policy quirks, client VPN possible); − you own HA, patching, monitoring; still internet transport.</li>\n<li><b>MPLS / dedicated connectivity into the SNA:</b> + predictable latency/bandwidth, private transport (compliance-friendly); − cost, lead time, carrier contracts.</li>\n<li>Common pattern: start managed VPN; add MPLS when bandwidth/latency/compliance demands it; keep VPN as backup path (BGP handles failover).</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "network · vpn · hybrid · tradeoff"
+  },
+  {
+   "guid": "mZg^MFY16&",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::03 IaaS & Networking",
+   "tags": [
+    "network",
+    "loadbalancer",
+    "tradeoff"
+   ],
+   "front": "Compare STACKIT <b>Network Load Balancer</b> and <b>Application Load Balancer</b> — and when do you use neither and run your own ingress?",
+   "back": "<ul>\n<li><b>Network Load Balancer (NLB):</b> Layer 4, TCP/UDP, PROXY protocol for client IPs; what SKE Services of type LoadBalancer create.</li>\n<li><b>Application Load Balancer (ALB):</b> Layer 7 HTTP(S), host/path/header routing, TLS termination, Web Application Firewall (WAF) option.</li>\n<li><b>Own ingress controller</b> (ingress-nginx, Envoy Gateway, Traefik) behind an NLB: maximal feature control (canary, auth hooks, custom middlewares), identical config across clusters and on-prem — usually the right call for a hybrid fleet; managed ALB reduces ops for simpler setups.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "network · loadbalancer · tradeoff"
+  },
+  {
+   "guid": "MWrY.|l17P",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::03 IaaS & Networking",
+   "tags": [
+    "network",
+    "dns"
+   ],
+   "front": "How does the STACKIT <b>DNS</b> service fit into a Kubernetes platform, and what tooling automates it?",
+   "back": "<ul>\n<li>Hosted zones + record sets with API/Terraform support.</li>\n<li>Automate records from Kubernetes with <b>external-dns</b> (webhook based provider support) pointing at cluster ingress/LB IPs.</li>\n<li>In hybrid: STACKIT DNS holds the <i>cloud/public</i> zones; corporate zones stay on the on-prem Active Directory (AD) DNS — see the split-horizon card in the Hybrid subdeck.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "network · dns"
+  },
+  {
+   "guid": "c1&ys`re>_",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::03 IaaS & Networking",
+   "tags": [
+    "data",
+    "tradeoff",
+    "ske"
+   ],
+   "front": "Trade-off: managed database (e.g., PostgreSQL Flex) vs. running a Kubernetes operator (e.g., CloudNativePG) inside SKE.",
+   "back": "<ul>\n<li><b>Managed (PostgreSQL Flex):</b> + HA plans, automated backups/patching, survives cluster rebuilds, offloads ops; − version/extension lag, less tuning control, per-instance cost, network hop from pods.</li>\n<li><b>In-cluster operator:</b> + latest versions/extensions, cluster-local latency, GitOps-native config, fine-grained multi-tenant packing; − you own backup/restore correctness, upgrades, failover testing; DB dies with the cluster unless backups/DR are solid.</li>\n<li>Heuristic: production system-of-record → managed; ephemeral/dev, per-tenant micro-DBs, or special extensions → operator.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "data · tradeoff · ske"
+  },
+  {
+   "guid": "c~emtKcP8/",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::03 IaaS & Networking",
+   "tags": [
+    "iaas",
+    "multitenancy",
+    "quota"
+   ],
+   "front": "Which quota layers exist on STACKIT/SKE and how do they compose into tenant limits?",
+   "back": "<ol>\n<li><b>Project quotas</b> — caps on cores, RAM, volumes, public IPs per project (raiseable via support).</li>\n<li><b>Node pool min/max</b> — hard ceiling on cluster compute.</li>\n<li><b>Kubernetes ResourceQuota</b> — per-namespace CPU/memory/object caps.</li>\n<li><b>LimitRange</b> — per-pod/container defaults and bounds (forces requests to be set, protecting the scheduler).</li>\n</ol>\n<div class=\"note\">Tenancy design = deciding at which of these layers a 'tenant' is throttled.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "iaas · multitenancy · quota"
+  },
+  {
+   "guid": "iKOVIP#Ohd",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::04 Identity, Access & Secrets",
+   "tags": [
+    "identity",
+    "architecture"
+   ],
+   "front": "Enumerate the four identity planes in a hybrid STACKIT platform and what asserts identity in each.",
+   "back": "<ol>\n<li><b>Cloud control plane</b> — STACKIT Identity and Access Management (IAM): users + service accounts, roles on org/folder/project.</li>\n<li><b>Kubernetes API plane</b> — kubeconfigs, OpenID Connect (OIDC) tokens, Kubernetes Role-Based Access Control (RBAC).</li>\n<li><b>Application plane</b> — end-user single sign-on (SSO) via PingFederate (OIDC/SAML) in front of workloads.</li>\n<li><b>Machine plane</b> — STACKIT service accounts, Kubernetes ServiceAccounts, CI workload identities, registry robot accounts.</li>\n</ol>\n<div class=\"note\">Architect's job: one source of truth (Active Directory (AD)) projected into all four, with joiner-mover-leaver working end to end.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "identity · architecture"
+  },
+  {
+   "guid": "NXCfpoUMPl",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::04 Identity, Access & Secrets",
+   "tags": [
+    "identity",
+    "oidc",
+    "pingfederate"
+   ],
+   "front": "Why can Kubernetes not authenticate users against LDAP/Active Directory directly, and what is the standard bridge?",
+   "back": "<ul>\n<li>kube-apiserver has <b>no Lightweight Directory Access Protocol (LDAP) authenticator</b>. Supported user authN: client certificates, static/bootstrap tokens, <b>OpenID Connect (OIDC)</b>, or webhook token authentication.</li>\n<li>Standard bridge: an <b>OIDC Provider (OP) federating to AD/LDAP</b> — exactly what <b>PingFederate</b> does. It authenticates the user against AD and issues a JSON Web Token (JWT) ID token containing username + group claims.</li>\n<li>Kubernetes validates the JWT signature against the issuer's published keys (JSON Web Key Set (JWKS)) — no per-request call to AD.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "identity · oidc · pingfederate"
+  },
+  {
+   "guid": "9M_fG%dGb",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::04 Identity, Access & Secrets",
+   "tags": [
+    "identity",
+    "rbac",
+    "oidc"
+   ],
+   "front": "How do OIDC claims map to Kubernetes RBAC, and what is the recommended group-based design?",
+   "back": "<ul>\n<li>API server maps the token's <b>username claim</b> (e.g., <code>email</code>) and <b>groups claim</b> to a Kubernetes user + group set, usually with a prefix (e.g., <code>oidc:</code>) to avoid collisions with built-ins.</li>\n<li>Design: define <b>persona ClusterRoles</b> (platform-admin, tenant-admin, developer, viewer), then bind them to <b>AD groups</b> via (Cluster)RoleBindings with <code>kind: Group</code>.</li>\n<li>Result: access management happens in AD group membership — no per-user changes in clusters; RoleBindings themselves are GitOps-managed and identical fleet-wide.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "identity · rbac · oidc"
+  },
+  {
+   "guid": "tQWCcQ|=.n",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::04 Identity, Access & Secrets",
+   "tags": [
+    "identity",
+    "oidc",
+    "multicluster",
+    "tradeoff"
+   ],
+   "front": "On a managed cluster like SKE you may not control kube-apiserver flags. Which architectures still give you PingFederate-based login, fleet-wide?",
+   "back": "<ol>\n<li><b>Native OIDC config</b>, if the managed offering exposes it (SKE ships its own STACKIT IDP integration; support for customer-supplied issuers must be verified per current SKE feature set).</li>\n<li><b>Pinniped</b> — Supervisor (one instance, federates to PingFederate as upstream OIDC) + Concierge per cluster (exchanges Supervisor tokens for cluster credentials via TokenCredentialRequest). Works <b>without touching apiserver flags</b>; one login config for the whole fleet.</li>\n<li><b>kube-oidc-proxy / authenticating reverse proxy</b> in front of each API server — impersonates users after verifying OIDC; adds a hop and a critical component you operate.</li>\n</ol>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "identity · oidc · multicluster · tradeoff"
+  },
+  {
+   "guid": "Hp-6@=SEdb",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::04 Identity, Access & Secrets",
+   "tags": [
+    "identity",
+    "multicluster",
+    "tradeoff"
+   ],
+   "front": "Trade-off: per-cluster OIDC configuration vs. Pinniped for a multi-cluster fleet.",
+   "back": "<ul>\n<li><b>Per-cluster OIDC:</b> + no extra moving parts, native kubectl flows (kubelogin); − N client registrations in PingFederate or shared client per cluster, config drift risk, only possible where the managed offering exposes OIDC settings.</li>\n<li><b>Pinniped:</b> + single upstream integration, uniform login UX (<code>pinniped get kubeconfig</code>) across SKE + on-prem clusters, short-lived cluster certs, works on any conformant cluster; − you operate Supervisor (an availability-critical SPOF for interactive login) and Concierge agents; break-glass path still needed.</li>\n<li>Hybrid fleets with mixed cluster types usually justify Pinniped.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "identity · multicluster · tradeoff"
+  },
+  {
+   "guid": "p>XH];7Iv;",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::04 Identity, Access & Secrets",
+   "tags": [
+    "identity",
+    "tradeoff"
+   ],
+   "front": "Where does <b>Dex</b> fit relative to PingFederate, and do you need it if you already run PingFederate?",
+   "back": "<ul>\n<li>Dex is a lightweight OIDC broker with connectors (LDAP, SAML, GitHub...) — commonly used to give Kubernetes an OIDC front for an LDAP directory.</li>\n<li>If <b>PingFederate</b> already fronts your Active Directory as a full-featured OIDC/SAML provider, Dex is redundant for that job — adding it just adds a hop and an ops burden.</li>\n<li>Legitimate niche: as an app-local broker where a component only supports a narrow OIDC dialect, or to decouple lab environments from enterprise change processes.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "identity · tradeoff"
+  },
+  {
+   "guid": "KotJQ1`haq",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::04 Identity, Access & Secrets",
+   "tags": [
+    "identity",
+    "operations",
+    "security"
+   ],
+   "front": "Design a <b>break-glass access</b> procedure for SKE clusters when the identity chain (VPN → PingFederate → AD) is down.",
+   "back": "<ul>\n<li>Keep a sealed <b>admin kubeconfig</b> (client-cert, ≤180-day expiry) per cluster in an offline/escrowed secret store with dual control; calendar its renewal.</li>\n<li>Alternative path: STACKIT CLI login by a platform owner account (depends on STACKIT IAM, not on your AD).</li>\n<li>After use: run SKE <b>credential rotation</b> — note it invalidates ALL admin kubeconfigs and ServiceAccount tokens for that cluster; plan the blast radius.</li>\n<li>Audit: alert on any use of break-glass credentials.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "identity · operations · security"
+  },
+  {
+   "guid": "IwxYGb[&f]",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::04 Identity, Access & Secrets",
+   "tags": [
+    "identity",
+    "iac",
+    "terraform",
+    "ci"
+   ],
+   "front": "How should Terraform and CI pipelines authenticate to STACKIT, from least to most preferred?",
+   "back": "<ol>\n<li>Static service-account <b>token</b> — simplest, long-lived bearer secret; avoid.</li>\n<li>Service-account <b>key flow</b> — RSA private key signs a JWT exchanged for short-lived tokens; key still needs safekeeping (Vault/CI secret).</li>\n<li><b>OIDC workload identity federation</b> — the Terraform provider accepts an OIDC request token/URL, so a CI job (e.g., GitLab CI ID token) authenticates as a STACKIT service account <b>with no stored key at all</b>.</li>\n</ol>\n<div class=\"note\">Scope service accounts per project + least-privilege roles; one god-account for the whole org is the classic anti-pattern.</div>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "identity · iac · terraform · ci"
+  },
+  {
+   "guid": "GZJSk4k%&?",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::04 Identity, Access & Secrets",
+   "tags": [
+    "secrets",
+    "tradeoff",
+    "hybrid"
+   ],
+   "front": "Compare the secret-management options for a hybrid STACKIT platform: STACKIT Secrets Manager, self-hosted Vault/OpenBao on-prem, sealed-secrets/SOPS in Git.",
+   "back": "<ul>\n<li><b>STACKIT Secrets Manager:</b> managed, cloud-local (low latency for cloud workloads), portal/API integrated; another store outside your DC's control sphere.</li>\n<li><b>Central Vault/OpenBao on-prem:</b> single sovereign source of truth, rich auth (LDAP!), dynamic secrets, audit; but every cloud read crosses the VPN → availability coupling, and you operate it in HA.</li>\n<li><b>Sealed-secrets / SOPS (Secrets OPerationS) in Git:</b> GitOps-native, no runtime store; but rotation is a commit, no dynamic secrets, key custody per cluster (sealed-secrets) or per KMS (SOPS).</li>\n<li>Common hybrid answer: central Vault as source of truth + <b>External Secrets Operator</b> caching into cluster Secrets (tolerates short link outages), SOPS only for bootstrap material.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "secrets · tradeoff · hybrid"
+  },
+  {
+   "guid": "j4BZkp//VN",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::04 Identity, Access & Secrets",
+   "tags": [
+    "secrets",
+    "multicluster",
+    "operations"
+   ],
+   "front": "What does the <b>External Secrets Operator (ESO)</b> do in a multi-cluster design, and which failure mode must you plan for?",
+   "back": "<ul>\n<li>ESO runs in each cluster, reads from external stores (Vault, STACKIT Secrets Manager, ...) via (Cluster)SecretStore configs, and materializes native Kubernetes Secrets from ExternalSecret manifests — manifests live in Git, values never do.</li>\n<li>Fleet pattern: identical ExternalSecrets everywhere; per-cluster identity to the store scopes what each cluster may read (blast-radius control).</li>\n<li>Failure mode: store unreachable (VPN down) → existing Secrets persist, but <b>rotation and new secrets stall</b>; set sane refresh intervals and alert on sync failures.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "secrets · multicluster · operations"
+  },
+  {
+   "guid": "s*B0X}D2xt",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::04 Identity, Access & Secrets",
+   "tags": [
+    "secrets",
+    "registry",
+    "supplychain"
+   ],
+   "front": "Which credentials does the <b>container image supply chain</b> need across the fleet, and how are they distributed?",
+   "back": "<ul>\n<li>Pull credentials per cluster/namespace for your registry (Harbor robot accounts / STACKIT Container Registry credentials) → distribute as imagePullSecrets via External Secrets Operator or your GitOps bootstrap; wire into ServiceAccounts.</li>\n<li>Push credentials only in CI, short-lived where possible.</li>\n<li>Image trust: sign in CI (cosign), verify in-cluster with a policy engine (Kyverno verifyImages) — the enforcement manifest is part of the golden stack.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "secrets · registry · supplychain"
+  },
+  {
+   "guid": "v5rE^A8Fi#",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::04 Identity, Access & Secrets",
+   "tags": [
+    "security",
+    "kms",
+    "compliance"
+   ],
+   "front": "What is the role of a <b>Key Management Service (KMS)</b> in this architecture, and what stays outside your control on SKE?",
+   "back": "<ul>\n<li>KMS (STACKIT KMS or on-prem Hardware Security Module (HSM)-backed) provides envelope encryption for application-level data, SOPS, and backup encryption — with key sovereignty as the compliance argument.</li>\n<li>On SKE the control plane (including etcd and its encryption at rest) is operated by STACKIT — you configure workload-level crypto, not apiserver encryption providers.</li>\n<li>Rule: anything you back up off-platform (Velero, DB dumps) is encrypted with keys YOU control.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "security · kms · compliance"
+  },
+  {
+   "guid": "IP&D[{}k.s",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::05 Multitenancy",
+   "tags": [
+    "multitenancy",
+    "tradeoff"
+   ],
+   "front": "Define <b>soft vs. hard multitenancy</b>, and what question decides which one you need.",
+   "back": "<ul>\n<li><b>Soft:</b> tenants are trusted-but-separated (internal teams); isolation guards against accidents and noisy neighbors, not determined attackers.</li>\n<li><b>Hard:</b> tenants are mutually untrusted (external customers, differing security classifications); isolation must hold against deliberate escape attempts.</li>\n<li>Deciding question: <i>\"What is the worst credible actor inside a tenant, and what may they never reach?\"</i> Compliance zoning (e.g., BIO2 classification levels, production vs. rest) often forces hard boundaries regardless of trust.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "multitenancy · tradeoff"
+  },
+  {
+   "guid": "G8t^2YpSSs",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::05 Multitenancy",
+   "tags": [
+    "multitenancy",
+    "namespaces"
+   ],
+   "front": "Namespace-per-tenant on a shared SKE cluster: which SIX mechanisms combine to make it work?",
+   "back": "<ol>\n<li><b>RBAC</b> — tenant admins scoped to their namespace(s).</li>\n<li><b>ResourceQuota</b> — CPU/memory/object caps per namespace.</li>\n<li><b>LimitRange</b> — per-pod defaults/bounds so quotas are enforceable.</li>\n<li><b>NetworkPolicy</b> — default-deny between tenant namespaces.</li>\n<li><b>Admission policy</b> (Kyverno/Gatekeeper) — forbid privileged pods, hostPath, node ports; enforce Pod Security Standards.</li>\n<li><b>PriorityClass / node placement</b> — protect system workloads; optionally dedicated node pools per tenant via taints.</li>\n</ol>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "multitenancy · namespaces"
+  },
+  {
+   "guid": "ku-Y;:W-7P",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::05 Multitenancy",
+   "tags": [
+    "multitenancy",
+    "namespaces",
+    "tradeoff"
+   ],
+   "front": "What does namespace isolation NOT isolate? (The case against soft multitenancy)",
+   "back": "<ul>\n<li><b>Control plane:</b> one kube-apiserver + etcd — a tenant's request flood or huge object churn degrades everyone.</li>\n<li><b>Cluster-scoped resources:</b> CustomResourceDefinitions (CRDs), their versions, admission webhooks, ClusterRoles — tenants needing different operator versions collide.</li>\n<li><b>Nodes/kernel:</b> containers share kernels; a container escape lands on a node possibly running other tenants' pods.</li>\n<li><b>Upgrades:</b> one Kubernetes version and one maintenance window for all tenants.</li>\n<li><b>DNS/service visibility</b> unless additionally restricted.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "multitenancy · namespaces · tradeoff"
+  },
+  {
+   "guid": "E)A{3l%/@-",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::05 Multitenancy",
+   "tags": [
+    "multitenancy",
+    "clusters",
+    "tradeoff",
+    "ske"
+   ],
+   "front": "Cluster-per-tenant on SKE: pros and cons.",
+   "back": "<ul>\n<li><b>Pros:</b> real control-plane + node isolation, independent Kubernetes versions and CRDs, per-tenant blast radius, clean cost attribution (whole cluster), tenant-specific maintenance windows, simple offboarding (delete cluster).</li>\n<li><b>Cons:</b> per-cluster control-plane fee + baseline node cost (poor bin-packing), fleet sprawl → you MUST have fleet automation (Terraform + GitOps + ApplicationSets), slower global changes, N× observability/agents overhead.</li>\n<li>SKE-specific mitigations: hibernation for dev tenants; small autoscaling pools.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "multitenancy · clusters · tradeoff · ske"
+  },
+  {
+   "guid": "In#Q}QYD.f",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::05 Multitenancy",
+   "tags": [
+    "multitenancy",
+    "vcluster",
+    "tradeoff"
+   ],
+   "front": "What is <b>vCluster</b>, and where does it sit between namespaces and full clusters?",
+   "back": "<ul>\n<li>A virtual cluster: a real kube-apiserver + datastore running as pods <i>inside a namespace</i> of a host cluster; a syncer maps its pods onto host nodes.</li>\n<li><b>Gives tenants:</b> own API server (no CRD/webhook collisions, own versions, cluster-admin feeling), fast creation, cheap (no cloud control-plane fee).</li>\n<li><b>Does NOT give:</b> node/kernel isolation (workloads share host nodes), network isolation beyond host NetworkPolicy, independence from host outages.</li>\n<li>Sweet spot: many dev/test tenants, platform-engineering self-service, CI ephemeral clusters — on top of a few well-governed SKE host clusters.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "multitenancy · vcluster · tradeoff"
+  },
+  {
+   "guid": "wPr<gm?V.X",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::05 Multitenancy",
+   "tags": [
+    "multitenancy",
+    "tooling"
+   ],
+   "front": "Which tools implement 'namespace-as-a-service' style tenancy, and what do they add over raw namespaces?",
+   "back": "<ul>\n<li><b>Capsule</b> — Tenant CRD grouping multiple namespaces; tenant owners self-create namespaces within quota/policy guardrails.</li>\n<li><b>Hierarchical Namespace Controller (HNC)</b> — parent/child namespaces with policy propagation.</li>\n<li><b>Kiosk / project-style operators</b> — similar self-service abstractions.</li>\n<li>Value: turns tenancy from a ticket-driven process into self-service with centrally enforced defaults (quotas, NetworkPolicies, RBAC templates propagated automatically).</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "multitenancy · tooling"
+  },
+  {
+   "guid": "PY_!8,`OUH",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::05 Multitenancy",
+   "tags": [
+    "multitenancy",
+    "nodes",
+    "security"
+   ],
+   "front": "How do you achieve <b>node-level isolation</b> for a sensitive tenant inside a shared SKE cluster, and where is the ceiling?",
+   "back": "<ul>\n<li>Dedicated <b>node pool</b> with taints; tenant workloads get tolerations + nodeSelector/affinity; admission policy prevents others from tolerating.</li>\n<li>Result: no kernel/node sharing with other tenants — closes the container-escape-to-shared-node hole.</li>\n<li>Ceiling: still shared control plane, CRDs, upgrades. Kernel-sandboxed runtimes (gVisor/Kata) are generally <b>not</b> configurable on managed SKE nodes — if you need them, that's a separate-cluster (or Confidential Kubernetes) decision.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "multitenancy · nodes · security"
+  },
+  {
+   "guid": "lj,!,7P?u(",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::05 Multitenancy",
+   "tags": [
+    "multitenancy",
+    "landingzone",
+    "tradeoff"
+   ],
+   "front": "At the STACKIT layer: tenant = <b>project</b> vs. tenants sharing one project — trade-offs?",
+   "back": "<ul>\n<li><b>Project per tenant/team-env:</b> hard IAM boundary, own quotas, clean billing, independent service instances; SNA still gives private connectivity where wanted. Cost: more projects to govern → automate with Terraform landing-zone modules.</li>\n<li><b>Shared project:</b> less overhead, easy resource sharing; but IAM roles are project-wide (tenant separation collapses at cloud level), quota contention, murky cost attribution.</li>\n<li>Guideline: cloud-level tenancy boundaries should be <b>at least as strong</b> as your strongest in-cluster boundary — don't run hard-isolated clusters of two tenants in one shared project with shared IAM.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "multitenancy · landingzone · tradeoff"
+  },
+  {
+   "guid": "ryw)p3-|I*",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::05 Multitenancy",
+   "tags": [
+    "multitenancy",
+    "tradeoff",
+    "decision"
+   ],
+   "front": "Give a decision matrix: which tenancy model for which situation (namespaces / vCluster / dedicated node pools / cluster-per-tenant)?",
+   "back": "<ul>\n<li><b>Same org, trusted teams, standard workloads</b> → namespaces + quotas + NetworkPolicy (cheapest, densest).</li>\n<li><b>Teams needing own CRDs/operators/versions or cluster-admin</b> → vCluster on shared hosts.</li>\n<li><b>One tenant with elevated data sensitivity, rest standard</b> → shared cluster + dedicated tainted node pool (+ stricter policies).</li>\n<li><b>Untrusted tenants, prod/compliance zones, regulatory separation</b> → cluster-per-tenant (per zone), separate projects.</li>\n<li>Drivers to weigh: trust level, compliance zoning, cost per tenant, ops maturity, upgrade independence, blast radius.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "multitenancy · tradeoff · decision"
+  },
+  {
+   "guid": "e7++:4k{N$",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::05 Multitenancy",
+   "tags": [
+    "multitenancy",
+    "networking"
+   ],
+   "front": "How is <b>network multitenancy</b> enforced inside a shared cluster, and what is the correct default?",
+   "back": "<ul>\n<li>Correct default: <b>default-deny ingress AND egress</b> NetworkPolicy per tenant namespace, shipped automatically with namespace creation (Capsule/GitOps template).</li>\n<li>Explicit allows: kube-dns, ingress-controller → tenant services, tenant-internal traffic, named cross-tenant flows.</li>\n<li>Egress governance: restrict which tenants may reach on-prem ranges over the VPN — the hybrid link is itself a shared, capacity-limited resource.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "multitenancy · networking"
+  },
+  {
+   "guid": "k,eI?_a`#G",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::05 Multitenancy",
+   "tags": [
+    "multitenancy",
+    "platform",
+    "tradeoff"
+   ],
+   "front": "How do you multitenant the <b>shared platform services</b> — ingress and monitoring — and what are the trade-offs?",
+   "back": "<ul>\n<li><b>Ingress:</b> one shared controller (+ IngressClass, per-tenant hostname policy, rate limits) = cheap, single LB; per-tenant controllers = config blast-radius isolation and independent tuning at N× LB cost.</li>\n<li><b>Monitoring:</b> shared Prometheus with tenant labels + query federation = cheap but cardinality abuse by one tenant hurts all; per-tenant agents shipping to a multi-tenant backend (Mimir/Thanos or STACKIT Observability instances per tenant) scales cleaner.</li>\n<li>Watch: quotas exist for compute, but rarely for <i>metric cardinality, log volume, ingress config size</i> — set explicit limits there too.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "multitenancy · platform · tradeoff"
+  },
+  {
+   "guid": "pk:v*k@ERi",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::05 Multitenancy",
+   "tags": [
+    "multitenancy",
+    "gitops",
+    "argocd"
+   ],
+   "front": "How does <b>Argo CD</b> support multitenancy so tenants can self-serve deployments safely?",
+   "back": "<ul>\n<li><b>AppProjects</b> constrain: allowed source repos, destination clusters/namespaces, permitted resource kinds (e.g., forbid ClusterRole), and orphaned-resource monitoring.</li>\n<li>Tenant RBAC in Argo CD (SSO groups from PingFederate!) maps AD groups → AppProject roles.</li>\n<li>Pattern: platform team owns the golden-stack Applications; each tenant gets an AppProject + ApplicationSet generating their apps per cluster — self-service within guardrails.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "multitenancy · gitops · argocd"
+  },
+  {
+   "guid": "H`YSf%{0aB",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::06 Multi-Cluster & GitOps",
+   "tags": [
+    "multicluster",
+    "architecture"
+   ],
+   "front": "List the legitimate reasons to run MULTIPLE clusters instead of one big one.",
+   "back": "<ul>\n<li>Environment separation (dev/test/prod) with independent upgrade cadence.</li>\n<li>Tenant/compliance isolation (hard boundaries, BIO2/NIS2 zones).</li>\n<li>Blast-radius control — a bad rollout, poisoned CRD, or control-plane outage stays local.</li>\n<li>Upgrade canarying — rings of clusters take new Kubernetes/platform versions first.</li>\n<li>Placement — on-prem + STACKIT (hybrid), later multi-provider.</li>\n<li>Scale/limits — avoid mega-cluster etcd and upgrade risk.</li>\n<li>Anti-reason: 'one cluster per microservice' — cluster count must stay proportional to your automation maturity.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "multicluster · architecture"
+  },
+  {
+   "guid": "kgoKg9(XDz",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::06 Multi-Cluster & GitOps",
+   "tags": [
+    "multicluster",
+    "gitops",
+    "architecture"
+   ],
+   "front": "Describe the <b>management-cluster (hub) + workload-clusters</b> pattern as used on STACKIT.",
+   "back": "<ul>\n<li>A small, hardened <b>admin/management cluster</b> runs the fleet machinery: Argo CD (or Flux controllers), External Secrets tooling, backup orchestration, observability aggregation, possibly Terraform runners.</li>\n<li><b>Workload clusters</b> stay boring: golden stack + tenant apps, everything reconciled from Git.</li>\n<li>Proven in practice on STACKIT (e.g., published Deloitte platform build): admin cluster keeps app clusters in sync via GitOps; Velero → Object Storage; Alloy agents → central Observability.</li>\n<li>The hub is your most sensitive cluster — it holds credentials to everything. Minimal tenants: zero.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "multicluster · gitops · architecture"
+  },
+  {
+   "guid": "x}:uPqq(}$",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::06 Multi-Cluster & GitOps",
+   "tags": [
+    "multicluster",
+    "hybrid",
+    "tradeoff",
+    "decision"
+   ],
+   "front": "KEY DECISION: place the management/GitOps hub <b>on-prem</b> or <b>in STACKIT</b> when the platform must be 'centrally managed from the on-prem DC'?",
+   "back": "<ul>\n<li><b>Hub on-prem:</b> + control plane physically in your DC (sovereignty optics, direct access to AD/Vault/Git without crossing the VPN); − every reconcile to cloud clusters traverses the VPN; link down = no deploys AND degraded fleet visibility; hub sizing bound to DC capacity.</li>\n<li><b>Hub in STACKIT:</b> + adjacent to the fleet (fast, reliable reconciles), survives DC maintenance; on-prem remains authoritative via <b>Git + IdP + Vault</b> (which is what 'centrally managed' really requires); − hub credentials live in cloud; Git unreachable = no <i>new</i> changes (last state keeps reconciling).</li>\n<li>Middle path: hub in STACKIT, sources of truth (Git, identity, secrets) on-prem, pull-based agents → central management without central fragility.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "multicluster · hybrid · tradeoff · decision"
+  },
+  {
+   "guid": "]cdLhh8W4",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::06 Multi-Cluster & GitOps",
+   "tags": [
+    "multicluster",
+    "gitops",
+    "tradeoff"
+   ],
+   "front": "Push-based vs. pull-based GitOps for a fleet — compare.",
+   "back": "<ul>\n<li><b>Push (central Argo CD managing remote clusters):</b> + one pane of glass, instant fleet-wide operations, single install; − hub needs network reachability to EVERY kube-apiserver (through VPN/ACLs), hub stores credentials for all clusters (crown-jewel target), hub outage stalls the fleet.</li>\n<li><b>Pull (agent per cluster — Flux, or Argo CD per cluster/agent mode):</b> + outbound-only from clusters (no inbound API exposure), clusters keep reconciling through hub/link outages, scales horizontally; − N installations to upgrade, fleet visibility needs aggregation (dashboards/metrics), bootstrap per cluster.</li>\n<li>Hybrid architectures bias toward <b>pull</b>, because the WAN link is the least reliable component.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "multicluster · gitops · tradeoff"
+  },
+  {
+   "guid": "Q@mOM@H/ca",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::06 Multi-Cluster & GitOps",
+   "tags": [
+    "multicluster",
+    "gitops",
+    "tradeoff"
+   ],
+   "front": "Argo CD vs. Flux for fleet GitOps — practical differences.",
+   "back": "<ul>\n<li><b>Argo CD:</b> rich UI + Single Sign-On (SSO) (PingFederate!), AppProject multitenancy, ApplicationSets for fleet generation, sync waves/hooks; heavier footprint; UI can tempt click-ops.</li>\n<li><b>Flux:</b> lean controllers, Git/OCI/Helm sources, Kustomize-native, image-update automation, per-cluster by design (pull); no built-in UI (use Weave GitOps/Headlamp/Grafana), multitenancy via Kubernetes RBAC.</li>\n<li>Both are CNCF-graduated; team familiarity and UI/SSO requirements usually decide. Helm-heavy shops report smoother Helm semantics with Flux's HelmController (real <code>helm upgrade</code>) vs Argo's template-and-diff.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "multicluster · gitops · tradeoff"
+  },
+  {
+   "guid": "wi(TaawJ,.",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::06 Multi-Cluster & GitOps",
+   "tags": [
+    "multicluster",
+    "gitops"
+   ],
+   "front": "What do Argo CD <b>ApplicationSets</b> (or Flux equivalents) contribute to multi-cluster operations?",
+   "back": "<ul>\n<li>An ApplicationSet is a template that <b>generates one Application per target</b> from generators: cluster generator (every registered cluster), Git directory/file generator, matrix combinations.</li>\n<li>Fleet pattern: register/label clusters (env=prod, tier=tenant-a) → ApplicationSets stamp the golden stack and tenant apps onto matching clusters automatically; a new cluster becomes 'just another label match'.</li>\n<li>Flux equivalent: bootstrap per cluster from a shared repo structure (<code>clusters/&lt;name&gt;/</code> overlays), optionally templated by Terraform.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "multicluster · gitops"
+  },
+  {
+   "guid": "K(po^UN:]R",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::06 Multi-Cluster & GitOps",
+   "tags": [
+    "iac",
+    "gitops",
+    "terraform",
+    "tradeoff"
+   ],
+   "front": "Draw the line: what does <b>Terraform</b> own vs. what does <b>GitOps/Helm</b> own, and why not manage Kubernetes workloads in Terraform?",
+   "back": "<ul>\n<li><b>Terraform:</b> STACKIT resources — projects, SNA, VPN, SKE clusters + node pools + extensions, managed DBs, DNS, Object Storage, IAM. Plus the one-time in-cluster <b>bootstrap</b>: GitOps agent + its repo credentials.</li>\n<li><b>GitOps (Argo/Flux + Helm):</b> everything inside clusters — golden stack, tenant workloads, RBAC, policies.</li>\n<li>Why not workloads in Terraform: state drift vs. controllers, slow monolithic applies, no continuous reconciliation, plan noise, and the kubeconfig-in-state problem. Terraform hands off; controllers keep truth.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "iac · gitops · terraform · tradeoff"
+  },
+  {
+   "guid": "I*,VI&vp*}",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::06 Multi-Cluster & GitOps",
+   "tags": [
+    "gitops",
+    "helm",
+    "fleet"
+   ],
+   "front": "How do you structure <b>Helm/Kustomize configuration layering</b> so 30 clusters don't become 30 snowflakes?",
+   "back": "<ul>\n<li>One <b>golden-stack repo</b>: base charts/manifests + a values hierarchy: <code>global.yaml</code> → <code>env/prod.yaml</code> → <code>cluster/&lt;name&gt;.yaml</code> (narrowing scope, last wins). Cluster files should be tiny — mostly names/IPs.</li>\n<li>Choose per component: Helm for parameterized third-party software; Kustomize overlays for your own manifests; umbrella charts sparingly (version-coupling pain).</li>\n<li>Rules: no manual edits on clusters; every divergence is a values line with a reviewable diff; renovate-bot pins chart versions per ring.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "gitops · helm · fleet"
+  },
+  {
+   "guid": "v;A?]TOb$N",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::06 Multi-Cluster & GitOps",
+   "tags": [
+    "multicluster",
+    "iac",
+    "gitops",
+    "fleet"
+   ],
+   "front": "Walk through the lifecycle: a NEW SKE workload cluster from zero to serving, fully automated.",
+   "back": "<ol>\n<li>Terraform module instantiated (project/SNA attachment, <code>stackit_ske_cluster</code>, extensions: observability, ACL).</li>\n<li>Terraform obtains kubeconfig (<code>stackit_ske_kubeconfig</code>) → installs GitOps agent via Helm provider, registers cluster in the hub (or agent self-registers) with labels (env, tier, tenant).</li>\n<li>ApplicationSets match labels → golden stack rolls in (ingress, cert-manager, external-dns, ESO, policies, Alloy, Velero).</li>\n<li>ESO pulls secrets (registry creds, Vault access) → tenant apps sync → external-dns publishes records → traffic.</li>\n<li>Deletion is the reverse Terraform destroy; state (backups, metrics) survives in Object Storage/central stores.</li>\n</ol>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "multicluster · iac · gitops · fleet"
+  },
+  {
+   "guid": "bkTa<Qttdg",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::06 Multi-Cluster & GitOps",
+   "tags": [
+    "multicluster",
+    "networking",
+    "tradeoff"
+   ],
+   "front": "Multi-cluster NETWORKING: compare 'independent clusters + DNS' vs. Cilium ClusterMesh vs. Istio multi-cluster vs. Skupper/Submariner.",
+   "back": "<ul>\n<li><b>Independent + Global Server Load Balancing (GSLB)/DNS:</b> clusters don't know each other; cross-cluster calls go through normal ingress/LB. Simplest, works everywhere, DR-friendly. Default recommendation.</li>\n<li><b>Cilium ClusterMesh:</b> pod-to-pod across clusters; needs non-overlapping pod CIDRs, mutual network reachability, and CNI control — risky on managed SKE where you don't own the CNI.</li>\n<li><b>Istio multi-cluster</b> (multi-primary or primary-remote + east-west gateways): mutual TLS (mTLS), locality failover, works over LBs without CNI coupling; operationally heavy.</li>\n<li><b>Submariner:</b> L3 tunnels between clusters; CNI-adjacent, similar constraints. <b>Skupper:</b> L7 application interconnect, no network coupling — nice for selective hybrid service sharing.</li>\n<li>Rule: introduce cross-cluster networking only for a named requirement, never 'by default'.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "multicluster · networking · tradeoff"
+  },
+  {
+   "guid": "zHl5M8e!P}",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::06 Multi-Cluster & GitOps",
+   "tags": [
+    "multicluster",
+    "dr",
+    "hybrid",
+    "tradeoff"
+   ],
+   "front": "Disaster Recovery (DR) options when your provider footprint is one STACKIT region with three availability zones + an on-prem DC.",
+   "back": "<ul>\n<li><b>In-region HA:</b> node pools spread over eu01-1/2/3; zonal-volume awareness for StatefulSets; managed DBs on HA plans.</li>\n<li><b>Backup/restore:</b> Velero (manifests + volume snapshots) to Object Storage; DB Point-in-Time Recovery (PITR). Cheapest; hours of Recovery Time Objective (RTO).</li>\n<li><b>Pilot light / warm standby:</b> second cluster (other zones or on-prem) with golden stack synced but apps scaled down; restore data on failover.</li>\n<li><b>Active-active:</b> both sites serve; needs data-layer replication and GSLB — expensive, only for the few truly critical services.</li>\n<li>Hybrid bonus: the on-prem DC doubles as the out-of-provider DR site (and vice versa) — a genuine sovereignty argument for hybrid.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "multicluster · dr · hybrid · tradeoff"
+  },
+  {
+   "guid": "B6W!B=Bc2b",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::06 Multi-Cluster & GitOps",
+   "tags": [
+    "multicluster",
+    "data",
+    "architecture"
+   ],
+   "front": "Why is <b>state/data gravity</b> the real constraint of multi-cluster design, and what are the standard answers?",
+   "back": "<ul>\n<li>Stateless workloads move freely between clusters; <b>data does not</b> — block volumes are cluster/zone-local, databases replicate on their own terms.</li>\n<li>Answers, in order of preference:\n<ol>\n<li>Externalize state to managed services (PostgreSQL Flex, Object Storage) reachable from any cluster.</li>\n<li>Application-level replication (DB streaming replicas, event sourcing) between sites.</li>\n<li>Backup/restore as the fallback consistency story.</li>\n</ol></li>\n<li>Anti-pattern: stretching etcd, storage systems, or synchronous replication across the VPN — latency and partition behavior will break you.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "multicluster · data · architecture"
+  },
+  {
+   "guid": "hiEnPu1|fl",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::06 Multi-Cluster & GitOps",
+   "tags": [
+    "fleet",
+    "operations",
+    "gitops"
+   ],
+   "front": "How do you roll out changes across the fleet safely (upgrade rings)?",
+   "back": "<ul>\n<li>Order clusters into <b>rings</b>: lab → dev → staging → prod-canary → prod-rest; promote Git changes (chart versions, K8s minor upgrades) ring by ring with soak time and automated verification (smoke tests, error-budget checks).</li>\n<li>Stagger SKE maintenance windows to match rings; never let all prod clusters take the same auto-update night.</li>\n<li>PodDisruptionBudgets + surge-capable node pools keep drains safe; Renovate/CI automates the version bumps so rings are diffs, not manual work.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "fleet · operations · gitops"
+  },
+  {
+   "guid": "z9p^O5~w0]",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::07 Hybrid & Central Management",
+   "tags": [
+    "hybrid",
+    "architecture"
+   ],
+   "front": "Sketch the reference topology: on-prem DC as control center, STACKIT as workload landing zone. What lives where, and what flows over the link?",
+   "back": "<ul>\n<li><b>On-prem:</b> Active Directory (AD)/Lightweight Directory Access Protocol (LDAP), PingFederate, Git + Continuous Integration (CI), Vault/secrets source of truth, Harbor (or registry source), central monitoring/Security Information and Event Management (SIEM), Terraform runners.</li>\n<li><b>STACKIT:</b> STACKIT Network Area (SNA) ← VPN/MPLS; projects per team/env; SKE workload clusters (+ optional hub cluster); managed DBs, Object Storage, DNS, Observability.</li>\n<li><b>Over the link:</b> GitOps pulls, OIDC/LDAP auth traffic, secret syncs, image replication, telemetry to SIEM, kubectl/Terraform API calls. <b>Not</b> over the link: backups, bulk data, registry pulls at scale (keep those in-region).</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "hybrid · architecture"
+  },
+  {
+   "guid": "m=up)}/-Zb",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::07 Hybrid & Central Management",
+   "tags": [
+    "hybrid",
+    "networking",
+    "ipam"
+   ],
+   "front": "Which IP/CIDR planning rules does a STACKIT hybrid deployment impose?",
+   "back": "<ul>\n<li>STACKIT VPN does <b>no NAT</b> → SNA ranges and on-prem ranges must be <b>non-overlapping</b>; agree the split with the network team BEFORE the first project exists (renumbering later is brutal).</li>\n<li>Carve the SNA into per-project/per-cluster node-network blocks; document in central IPAM.</li>\n<li>Pod/Service Classless Inter-Domain Routing (CIDR) ranges: may repeat across clusters (they're cluster-internal) — UNLESS you later want ClusterMesh-style pod routing or expose pod IPs on-prem; reserving unique ranges up front keeps that door open.</li>\n<li>Reserve space for: LB IPs, VPN transfer nets, future DR site, vCluster hosts.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "hybrid · networking · ipam"
+  },
+  {
+   "guid": "EuoKP.GYTp",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::07 Hybrid & Central Management",
+   "tags": [
+    "hybrid",
+    "dns"
+   ],
+   "front": "Design the <b>DNS strategy</b> for on-prem + STACKIT (split-horizon).",
+   "back": "<ul>\n<li><b>Corporate zones</b> (corp.example.internal): authoritative on on-prem AD DNS.</li>\n<li><b>Cloud zones</b> (apps.example.com, cloud.example.internal): STACKIT DNS, records automated by external-dns from cluster ingresses.</li>\n<li><b>Cluster → corp names:</b> CoreDNS forwarders (stub domains) pointing to on-prem DNS over the VPN.</li>\n<li><b>On-prem → cloud-internal names:</b> conditional forwarders on AD DNS toward the cloud resolver, or publish internal LB records into a corp subzone.</li>\n<li>Failure mode: VPN down → corp-name resolution in clusters fails; set forwarder timeouts/caching consciously and keep cloud-local dependencies on cloud zones.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "hybrid · dns"
+  },
+  {
+   "guid": "mEt2(7jCyd",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::07 Hybrid & Central Management",
+   "tags": [
+    "hybrid",
+    "ske",
+    "security"
+   ],
+   "front": "How does central tooling (Terraform, Argo CD, kubectl) on-prem reach the SKE API servers, and how do you secure that path?",
+   "back": "<ul>\n<li>SKE API servers live in STACKIT seeds with <b>public endpoints</b> — reachable from on-prem over the internet by default.</li>\n<li>Harden: <b>ACL extension</b> allow-listing only your on-prem egress IPs (and VPN ranges where applicable); short-lived credentials via <code>stackit ske kubeconfig login</code>; audit tool identities separately.</li>\n<li>Design consequence: API access does NOT depend on the VPN (good for break-glass), but data-plane access to internal LBs does.</li>\n<li>If policy demands no public API exposure at all, verify current SKE private-endpoint options — otherwise that requirement pushes those clusters on-prem.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "hybrid · ske · security"
+  },
+  {
+   "guid": "e;P*!ft!iP",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::07 Hybrid & Central Management",
+   "tags": [
+    "hybrid",
+    "identity",
+    "availability"
+   ],
+   "front": "Your clusters authenticate users via PingFederate ON-PREM. What does that dependency mean for availability, and how do you mitigate?",
+   "back": "<ul>\n<li>Interactive logins (kubectl OIDC, Argo CD SSO, app SSO) require the on-prem IdP → VPN or internet path to PingFederate becomes an <b>authentication dependency</b> for the whole cloud estate.</li>\n<li>Mitigations:\n<ol>\n<li>Apps validate JSON Web Tokens (JWTs) locally against cached JSON Web Key Sets (JWKS) — <i>existing</i> sessions survive IdP unreachability; only new logins fail.</li>\n<li>Reasonable token/refresh lifetimes — balance outage tolerance vs. revocation speed.</li>\n<li>Expose PingFederate redundantly (HA pair, dual uplinks) — it is Tier-0 infrastructure.</li>\n<li>Break-glass paths that bypass the IdP (sealed admin kubeconfigs, STACKIT-IAM login).</li>\n</ol></li>\n<li>Machine traffic (GitOps, ESO) should use non-interactive credentials so deployments don't stop when SSO does.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "hybrid · identity · availability"
+  },
+  {
+   "guid": "qzM%0re-g|",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::07 Hybrid & Central Management",
+   "tags": [
+    "hybrid",
+    "registry",
+    "tradeoff",
+    "harbor"
+   ],
+   "front": "Registry strategy for a hybrid fleet when Harbor is your on-prem source of truth — options and failure modes.",
+   "back": "<ul>\n<li><b>Pull directly from on-prem Harbor:</b> simplest; but every image pull crosses the VPN (capacity!), and link down = pods can't schedule on new nodes. Only acceptable for small fleets.</li>\n<li><b>Harbor replication → cloud registry</b> (STACKIT Container Registry or a Harbor in STACKIT): push-based replication rules per project; clusters pull in-region; link outage only delays NEW images. Preferred.</li>\n<li><b>Pull-through proxy cache in-region:</b> lazy replication; first pull still crosses the link, cache eviction can bite during incidents.</li>\n<li>Always: pin digests, pre-pull critical images, keep the golden-stack images replicated with priority; vulnerability-scan at the source (your Trivy/Grype pipeline) and enforce signatures in-cluster.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "hybrid · registry · tradeoff · harbor"
+  },
+  {
+   "guid": "zw,LvN2,*Q",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::07 Hybrid & Central Management",
+   "tags": [
+    "hybrid",
+    "ci",
+    "tradeoff"
+   ],
+   "front": "Where do CI runners and Terraform executors live — on-prem or in-cloud? Trade-offs.",
+   "back": "<ul>\n<li><b>On-prem runners:</b> adjacent to Git/Vault/artifacts; reach STACKIT via public APIs (fine); builds pulling cloud data cross the link.</li>\n<li><b>In-cluster runners on SKE:</b> adjacent to deploy targets and cloud services; outbound-only access to on-prem Git over VPN; elastic scaling on node pools; but now CI capacity is a cloud tenant to govern (quotas! it's the classic noisy neighbor).</li>\n<li>Common split: build/test in the cloud near caches and scale; release/state-changing jobs (Terraform apply) from a controlled on-prem runner pool with OIDC federation to STACKIT (no stored keys).</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "hybrid · ci · tradeoff"
+  },
+  {
+   "guid": "eWSsNHPVvw",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::07 Hybrid & Central Management",
+   "tags": [
+    "iac",
+    "terraform",
+    "tradeoff"
+   ],
+   "front": "Compare Terraform <b>state backend</b> options for this platform.",
+   "back": "<ul>\n<li><b>STACKIT Object Storage (S3 backend):</b> in-cloud, versioned; caveat — classic S3 locking needed DynamoDB, and Terraform ≥1.10 native S3 lockfiles rely on conditional writes: <b>verify support on the S3-compatible endpoint</b> before trusting concurrent applies.</li>\n<li><b>PostgreSQL backend on PostgreSQL Flex:</b> real locking out of the box; officially shown in the STACKIT provider docs as a state+locking pattern. Solid cloud-side default.</li>\n<li><b>GitLab/Terraform-cloud-style HTTP backend on-prem:</b> state stays in the DC next to CI, access via existing Git auth; adds GitLab as a dependency for all applies.</li>\n<li>Whatever you pick: state contains secrets (kubeconfigs!) → encrypt, restrict, and never share one state across trust boundaries — split state per project/stack.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "iac · terraform · tradeoff"
+  },
+  {
+   "guid": "JL;}QG_^*j",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::07 Hybrid & Central Management",
+   "tags": [
+    "hybrid",
+    "pki",
+    "security",
+    "tradeoff"
+   ],
+   "front": "Certificates & PKI: which issuers serve which surface in the hybrid platform?",
+   "back": "<ul>\n<li><b>Public endpoints:</b> Automatic Certificate Management Environment (ACME)/Let's Encrypt via cert-manager (DNS-01 against STACKIT DNS for wildcards).</li>\n<li><b>Internal services & mutual TLS (mTLS):</b> private Public Key Infrastructure (PKI) — corporate CA (AD CS) or Vault PKI as cert-manager issuer; short-lived certs, automated rotation.</li>\n<li><b>Trust distribution:</b> ship the corporate root/intermediates to all clusters (trust-manager) so cloud workloads trust on-prem services and vice versa.</li>\n<li>Trade-off: AD CS keeps PKI where auditors expect it but is automation-hostile; Vault PKI automates beautifully but adds Vault to the critical path. Many run: offline corp root → Vault as issuing intermediate.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "hybrid · pki · security · tradeoff"
+  },
+  {
+   "guid": "IU#Hxj-})G",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::07 Hybrid & Central Management",
+   "tags": [
+    "hybrid",
+    "observability",
+    "tradeoff"
+   ],
+   "front": "Centralize observability: how do 10+ SKE clusters feed ONE pane of glass, and where should that pane live?",
+   "back": "<ul>\n<li>Per cluster: a lightweight agent (Grafana Alloy / OpenTelemetry (OTel) Collector) collects metrics, logs, traces and <b>remote-writes outbound</b> — no inbound scraping across the WAN.</li>\n<li><b>Backend in STACKIT</b> (Observability service or self-hosted Mimir/Loki/Tempo on a hub cluster): telemetry stays in-region (cheap, link-tolerant); on-prem viewers just need Grafana access. Usually right.</li>\n<li><b>Backend on-prem</b>: single sovereign store next to the SIEM; but all telemetry crosses the VPN continuously — budget bandwidth, expect gaps on outage (agents buffer briefly).</li>\n<li>Compliance middle path: metrics/traces in-region; <i>audit-relevant logs</i> forwarded (filtered!) to the on-prem SIEM via Telemetry Router/Alloy pipelines.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "hybrid · observability · tradeoff"
+  },
+  {
+   "guid": "HWpuG}spxI",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::07 Hybrid & Central Management",
+   "tags": [
+    "hybrid",
+    "networking",
+    "capacity"
+   ],
+   "front": "What is the <b>bandwidth & latency budget</b> discipline for the on-prem↔STACKIT link, given managed VPN tops out at 1 Gbit/s?",
+   "back": "<ul>\n<li>Inventory every flow crossing the link: GitOps pulls (tiny), auth (tiny), secrets sync (tiny), telemetry (can be huge), image replication (bursty, large), backups (must NOT cross), user traffic to internal LBs (depends).</li>\n<li>Keep heavy flows in-region: Velero→Object Storage, registry pulls from in-region replica, logs aggregated in-region with filtered forwarding.</li>\n<li>Latency: AuthN round-trips and synchronous cross-site calls are the killers — design services to be site-local with async replication.</li>\n<li>If the honest budget exceeds ~1 Gbit/s sustained or needs latency guarantees → MPLS/dedicated connectivity, VPN as failover (BGP).</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "hybrid · networking · capacity"
+  },
+  {
+   "guid": "Ks_{~1xaH-",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::07 Hybrid & Central Management",
+   "tags": [
+    "hybrid",
+    "security",
+    "tradeoff"
+   ],
+   "front": "Egress control: should cloud workloads reach the internet directly, or hairpin through on-prem inspection? Trade-offs.",
+   "back": "<ul>\n<li><b>Hairpin all egress via VPN → on-prem proxy/firewall:</b> single inspection/policy point (SIEM-friendly, familiar to security), but consumes scarce VPN bandwidth, adds latency, and the proxy becomes a fleet-wide SPOF.</li>\n<li><b>Cloud-local egress with policy:</b> NetworkPolicy egress rules + DNS-based filtering + security groups; scalable and link-independent, but policy now lives in two stacks and L7 inspection needs an in-cloud proxy.</li>\n<li>Pragmatic: cloud-local egress for platform traffic (registries, APIs) with tight allow-lists; hairpin only flows your compliance framework explicitly requires to be inspected.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "hybrid · security · tradeoff"
+  },
+  {
+   "guid": "g=t5b1kgZ5",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::07 Hybrid & Central Management",
+   "tags": [
+    "hybrid",
+    "dr",
+    "backup"
+   ],
+   "front": "Backup & restore architecture for the whole platform (clusters + data), hybrid edition.",
+   "back": "<ul>\n<li><b>Cluster state:</b> Velero per cluster → in-region Object Storage (manifests + CSI volume snapshots); schedule daily volumes / weekly full-cluster; test restores into a scratch cluster regularly — untested backups are hopes, not backups.</li>\n<li><b>Managed DBs:</b> built-in automated backups + PITR; export logical dumps to Object Storage for provider-independent copies.</li>\n<li><b>Cross-site copies:</b> replicate the backup buckets (or dump exports) to on-prem storage for sovereignty/DR-from-provider-loss — this is a scheduled bulk job; run it off-peak and NOT through the same VPN plan that carries production auth traffic if volumes are large.</li>\n<li><b>Git is a backup too:</b> the entire desired state must be reconstructible from Git + secrets store + backups. Rebuild-from-scratch time IS your real RTO.</li>\n</ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "hybrid · dr · backup"
+  },
+  {
+   "guid": "NBw1HM(@1t",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::07 Hybrid & Central Management",
+   "tags": [
+    "hybrid",
+    "architecture",
+    "synthesis"
+   ],
+   "front": "Final synthesis: name the seven pillars that make 'centrally managed from on-prem' actually work on STACKIT.",
+   "back": "<ol>\n<li><b>Landing zone:</b> org/folders/projects via Terraform modules; SNA with clean IPAM.</li>\n<li><b>Connectivity:</b> managed VPN (BGP, active-active) or MPLS into the SNA; non-overlapping CIDRs.</li>\n<li><b>Identity:</b> AD → PingFederate (OIDC) → clusters (Pinniped or native) + Argo SSO; STACKIT service accounts with OIDC federation for machines.</li>\n<li><b>Delivery:</b> Git on-prem as single source of truth; pull-based GitOps agents; Terraform for infra only.</li>\n<li><b>Distribution:</b> registry replication in-region; secrets via central store + ESO.</li>\n<li><b>Operations:</b> fleet observability with in-region storage + SIEM forwarding; Velero + DB backups; upgrade rings.</li>\n<li><b>Governance:</b> tenancy model per trust/compliance zone; quotas at every layer; policy engine + image signing enforced fleet-wide.</li>\n</ol>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "hybrid · architecture · synthesis"
+  }
+ ]
+}

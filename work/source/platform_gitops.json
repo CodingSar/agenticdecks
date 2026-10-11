@@ -1,0 +1,1745 @@
+{
+ "source_file": "platform_gitops.apkg",
+ "notes": [
+  {
+   "guid": "qSQ7aa#{3*",
+   "type": "basic",
+   "deck": "Platform Engineering::GitOps",
+   "tags": [
+    "GitOps"
+   ],
+   "front": "What are the four OpenGitOps principles?",
+   "back": "1. <b>Declarative</b> – desired state is expressed declaratively.<br>2. <b>Versioned and immutable</b> – stored with full history.<br>3. <b>Pulled automatically</b> – agents pull desired state from the source.<br>4. <b>Continuously reconciled</b> – agents observe actual state and converge it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "Q|~4N@1k|p",
+   "type": "basic",
+   "deck": "Platform Engineering::GitOps",
+   "tags": [
+    "GitOps"
+   ],
+   "front": "Push-based vs pull-based deployment: core difference and security implication?",
+   "back": "Push: Continuous Integration (CI) pipeline holds cluster credentials and applies changes.<br>Pull: an in-cluster agent pulls from Git/OCI. Cluster credentials never leave the cluster; only read access to the source is needed. Pull also gives continuous drift correction.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "oK@9gvd#,t",
+   "type": "basic",
+   "deck": "Platform Engineering::GitOps",
+   "tags": [
+    "GitOps"
+   ],
+   "front": "Why is Git (or an OCI registry) alone not sufficient to call a setup 'GitOps'?",
+   "back": "Without continuous reconciliation, drift from manual changes is never detected or corrected. A one-shot <code>kubectl apply</code> from CI is push-based CD, not GitOps.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "LZ$%UaPqy+",
+   "type": "basic",
+   "deck": "Platform Engineering::GitOps",
+   "tags": [
+    "GitOps"
+   ],
+   "front": "Common patterns to manage secrets in GitOps repos?",
+   "back": "Encrypted-in-Git: Sealed Secrets, Secrets OPerationS (SOPS).<br>Reference-in-Git: External Secrets Operator (ESO), Secrets Store CSI driver – Git holds only a pointer to Vault / cloud Key Management Service (KMS).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "iQd,JcNEeb",
+   "type": "basic",
+   "deck": "Platform Engineering::GitOps",
+   "tags": [
+    "GitOps"
+   ],
+   "front": "Environment promotion: branch-per-environment vs directory-per-environment?",
+   "back": "Directory (or overlay) per environment on one branch is generally preferred: diffs between envs are visible, no cherry-pick/merge drift between long-lived branches. Branch-per-env tends to diverge.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "d)v46QtlTp",
+   "type": "basic",
+   "deck": "Platform Engineering::IaC",
+   "tags": [
+    "IaC"
+   ],
+   "front": "Declarative vs imperative Infrastructure as Code (IaC)?",
+   "back": "Declarative: describe the end state (Terraform, CloudFormation, Kubernetes manifests); the tool computes the diff.<br>Imperative: describe the steps (shell scripts, many Ansible playbooks, SDK scripts).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "M&Z`Q>#VAH",
+   "type": "basic",
+   "deck": "Platform Engineering::IaC",
+   "tags": [
+    "IaC"
+   ],
+   "front": "What does idempotency mean in IaC and why does it matter?",
+   "back": "Applying the same configuration N times yields the same result as applying it once. Enables safe retries, re-runs and continuous reconciliation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "x/46/>H*sp",
+   "type": "basic",
+   "deck": "Platform Engineering::IaC",
+   "tags": [
+    "IaC"
+   ],
+   "front": "What is configuration drift?",
+   "back": "Divergence between the declared state and the real infrastructure, typically from manual/out-of-band changes. Detected by <code>terraform plan</code> (refresh) or continuously by reconcilers (Crossplane, Argo CD, Flux).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "N=-S5[88qH",
+   "type": "basic",
+   "deck": "Platform Engineering::IaC",
+   "tags": [
+    "IaC"
+   ],
+   "front": "Mutable vs immutable infrastructure?",
+   "back": "Mutable: servers are patched/changed in place → snowflakes, drift.<br>Immutable: never modify; build a new artifact/image and replace instances. Easier rollback, reproducibility.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "Ep)+X[T]NF",
+   "type": "basic",
+   "deck": "Platform Engineering::IaC",
+   "tags": [
+    "IaC"
+   ],
+   "front": "What is Terraform state and why is it needed?",
+   "back": "A mapping of config resource addresses → real-world object IDs plus cached attributes and dependency metadata. Needed to know what Terraform manages, compute diffs, and order destroys.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "vGah-P~DI|",
+   "type": "basic",
+   "deck": "Platform Engineering::IaC",
+   "tags": [
+    "IaC"
+   ],
+   "front": "Why must remote Terraform state be locked, and how is it typically done?",
+   "back": "To prevent concurrent applies corrupting state / racing changes.<br>S3 backend: native lockfile (<code>use_lockfile = true</code>, Terraform ≥1.10) or legacy DynamoDB table; azurerm: blob lease; gcs: lock object; HCP Terraform: built-in.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "B*g1ovz}R^",
+   "type": "basic",
+   "deck": "Platform Engineering::IaC",
+   "tags": [
+    "IaC"
+   ],
+   "front": "Security concern with Terraform state?",
+   "back": "State stores attribute values in plaintext, including secrets (DB passwords, keys) even when marked <code>sensitive</code>. Encrypt the backend at rest, restrict access. OpenTofu offers client-side state encryption.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "z{?p=5+7L|",
+   "type": "basic",
+   "deck": "Platform Engineering::IaC",
+   "tags": [
+    "IaC"
+   ],
+   "front": "<code>count</code> vs <code>for_each</code>: why prefer <code>for_each</code> for collections?",
+   "back": "<code>count</code> addresses by index (<code>res[0]</code>); removing a middle element shifts indices → destroys/recreates. <code>for_each</code> addresses by stable key (<code>res[\"web\"]</code>).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "vY{$xwX!1b",
+   "type": "basic",
+   "deck": "Platform Engineering::IaC",
+   "tags": [
+    "IaC"
+   ],
+   "front": "Name the four <code>lifecycle</code> meta-arguments and their purpose.",
+   "back": "<code>create_before_destroy</code> – avoid downtime on replacement.<br><code>prevent_destroy</code> – error on any plan that destroys it.<br><code>ignore_changes</code> – ignore drift on listed attributes.<br><code>replace_triggered_by</code> – force replace when referenced item changes.<br>(Also <code>precondition</code>/<code>postcondition</code> blocks.)",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "kQv*i`rsFw",
+   "type": "basic",
+   "deck": "Platform Engineering::IaC",
+   "tags": [
+    "IaC"
+   ],
+   "front": "How do you rename/move a resource in Terraform without destroying it?",
+   "back": "A <code>moved { from = ... to = ... }</code> block (Terraform ≥1.1), or legacy <code>terraform state mv</code>. <code>moved</code> is declarative and reviewable in a pull request.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "Q=r.l~PpdG",
+   "type": "basic",
+   "deck": "Platform Engineering::IaC",
+   "tags": [
+    "IaC"
+   ],
+   "front": "How do you bring an existing resource under Terraform management?",
+   "back": "<code>import { to = aws_s3_bucket.b  id = \"name\" }</code> block (≥1.5), optionally with <code>terraform plan -generate-config-out=gen.tf</code>; or legacy CLI <code>terraform import</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "ifCX;m7)gk",
+   "type": "basic",
+   "deck": "Platform Engineering::IaC",
+   "tags": [
+    "IaC"
+   ],
+   "front": "Why is <code>terraform apply -target</code> considered dangerous?",
+   "back": "Applies a partial graph: leaves state inconsistent with config and skips dependent changes. Intended only for exceptional recovery, not routine use.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "I>qobf(jm^",
+   "type": "basic",
+   "deck": "Platform Engineering::IaC",
+   "tags": [
+    "IaC"
+   ],
+   "front": "Purpose of <code>.terraform.lock.hcl</code>?",
+   "back": "Dependency lock file: pins exact provider versions and checksums for reproducible <code>init</code>. Commit it. (Does not lock module versions.)",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "kIrh:BbVbo",
+   "type": "basic",
+   "deck": "Platform Engineering::IaC",
+   "tags": [
+    "IaC"
+   ],
+   "front": "Resource vs data source vs module vs provider?",
+   "back": "Resource: object Terraform manages (create/update/delete).<br>Data source: read-only lookup.<br>Module: reusable container of resources with inputs/outputs.<br>Provider: plugin talking to an API.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "Ih3B*hy~t`",
+   "type": "basic",
+   "deck": "Platform Engineering::IaC",
+   "tags": [
+    "IaC"
+   ],
+   "front": "When do you need explicit <code>depends_on</code>?",
+   "back": "Only for hidden dependencies not expressed via references (e.g. an IAM policy that must exist before an app uses it). Overuse makes plans less precise.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "cUJ3wX.-w*",
+   "type": "basic",
+   "deck": "Platform Engineering::IaC",
+   "tags": [
+    "IaC"
+   ],
+   "front": "What is <code>terraform plan -refresh-only</code> for?",
+   "back": "Shows/accepts drift: updates state to match reality without proposing infrastructure changes. Replaces deprecated <code>terraform refresh</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "g~A]T@Q:+r",
+   "type": "basic",
+   "deck": "Platform Engineering::IaC",
+   "tags": [
+    "IaC"
+   ],
+   "front": "Terraform CLI workspaces: what are they and their caveat?",
+   "back": "Multiple state files for the same configuration (<code>terraform.workspace</code>). Same backend & credentials for all, so weak isolation; many teams prefer separate root modules/directories per environment.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "fj((&=2sOu",
+   "type": "basic",
+   "deck": "Platform Engineering::IaC",
+   "tags": [
+    "IaC"
+   ],
+   "front": "What is OpenTofu and why does it exist?",
+   "back": "Open-source fork of Terraform under the Linux Foundation, created after HashiCorp moved Terraform to the Business Source License (BSL) in August 2023. Largely drop-in compatible; adds e.g. state encryption.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "]gM$%`U0n",
+   "type": "basic",
+   "deck": "Platform Engineering::IaC",
+   "tags": [
+    "IaC"
+   ],
+   "front": "Pulumi vs Terraform in one line?",
+   "back": "Same desired-state engine idea, but infrastructure is defined in general-purpose languages (TypeScript, Python, Go, ...) instead of HashiCorp Configuration Language (HCL).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "tG.sv1bw_5",
+   "type": "basic",
+   "deck": "Platform Engineering::IaC",
+   "tags": [
+    "IaC"
+   ],
+   "front": "What is Crossplane and how does it differ from Terraform?",
+   "back": "A Kubernetes-native control plane: cloud resources are Custom Resources (CRs) reconciled continuously by providers. Composite Resource Definitions (XRDs) + Compositions build platform APIs. No state file; etcd is the state; drift is auto-corrected.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "e!1,/[6#mL",
+   "type": "basic",
+   "deck": "Platform Engineering::IaC",
+   "tags": [
+    "IaC"
+   ],
+   "front": "Provisioning vs configuration management?",
+   "back": "Provisioning creates infrastructure (Terraform, CloudFormation). Configuration management configures what runs on it (Ansible, Puppet, Chef). Ansible is agentless and push-based over SSH.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "L?{#0GcSDe",
+   "type": "basic",
+   "deck": "Platform Engineering::IaC",
+   "tags": [
+    "IaC"
+   ],
+   "front": "Name policy-as-code tools for IaC.",
+   "back": "Open Policy Agent (OPA) / Conftest (Rego), HashiCorp Sentinel, Checkov, tfsec/Trivy, Kyverno (Kubernetes).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "M1Hz$#8[9J",
+   "type": "basic",
+   "deck": "Platform Engineering::Helm",
+   "tags": [
+    "Helm"
+   ],
+   "front": "Define chart, release, revision, repository.",
+   "back": "Chart: package of templates + defaults.<br>Release: an installed instance of a chart in a namespace.<br>Revision: numbered version of a release, incremented by each upgrade/rollback.<br>Repository: where charts are published (HTTP index or OCI registry).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "FMM~@P`ViF",
+   "type": "basic",
+   "deck": "Platform Engineering::Helm",
+   "tags": [
+    "Helm"
+   ],
+   "front": "Biggest architectural change from Helm 2 to Helm 3?",
+   "back": "Removal of Tiller (in-cluster server). Helm 3 is client-only and uses the user's kubeconfig Role-Based Access Control (RBAC). Also 3-way merge, release names scoped per namespace, <code>apiVersion: v2</code> charts.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "mLo.+;hJWU",
+   "type": "basic",
+   "deck": "Platform Engineering::Helm",
+   "tags": [
+    "Helm"
+   ],
+   "front": "Where does Helm 3 store release information?",
+   "back": "As Secrets (default driver) in the release's namespace, type <code>helm.sh/release.v1</code>, named <code>sh.helm.release.v1.&lt;name&gt;.v&lt;rev&gt;</code>. Contains gzipped/base64 manifest, values, chart.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "G/,@iH)F4R",
+   "type": "basic",
+   "deck": "Platform Engineering::Helm",
+   "tags": [
+    "Helm"
+   ],
+   "front": "Helm values precedence (lowest → highest)?",
+   "back": "Chart <code>values.yaml</code> → parent chart values for subcharts → <code>-f/--values</code> files (left to right, last wins) → <code>--set</code> / <code>--set-string</code> / <code>--set-file</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "y2ymbu&T5)",
+   "type": "basic",
+   "deck": "Platform Engineering::Helm",
+   "tags": [
+    "Helm"
+   ],
+   "front": "Explain Helm 3's three-way strategic merge on upgrade.",
+   "back": "Compares old manifest, live state, and new manifest. Changes made manually in the cluster that conflict with the new chart are overwritten, while unrelated live fields (e.g. sidecars injected) are preserved.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "PJsziRzQ=3",
+   "type": "basic",
+   "deck": "Platform Engineering::Helm",
+   "tags": [
+    "Helm"
+   ],
+   "front": "<code>include</code> vs <code>template</code>?",
+   "back": "Both render a named template (<code>define</code>). <code>include</code> returns a string so it can be piped (<code>{{ include \"x\" . | nindent 4 }}</code>); <code>template</code> is an action and can't be piped.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "l028+H@B~A",
+   "type": "basic",
+   "deck": "Platform Engineering::Helm",
+   "tags": [
+    "Helm"
+   ],
+   "front": "What goes in <code>_helpers.tpl</code>?",
+   "back": "Named templates (<code>define</code>) like fullname, labels, selectorLabels. Files starting with <code>_</code> are not rendered as manifests.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "v8/3eH2oI",
+   "type": "basic",
+   "deck": "Platform Engineering::Helm",
+   "tags": [
+    "Helm"
+   ],
+   "front": "How does Helm handle CRDs in the <code>crds/</code> directory?",
+   "back": "Installed on first install only, never templated, never upgraded, never deleted. Upgrading CRDs must be done out of band (or by shipping them as templates / separate chart).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "te&w`wlbG8",
+   "type": "basic",
+   "deck": "Platform Engineering::Helm",
+   "tags": [
+    "Helm"
+   ],
+   "front": "List common Helm hook types and related annotations.",
+   "back": "<code>pre-install, post-install, pre-upgrade, post-upgrade, pre-delete, post-delete, pre-rollback, post-rollback, test</code>.<br>Annotations: <code>helm.sh/hook</code>, <code>helm.sh/hook-weight</code> (ordering), <code>helm.sh/hook-delete-policy</code> (<code>before-hook-creation, hook-succeeded, hook-failed</code>). Hook resources are not part of the release's managed resources.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "P<I2_&EOj:",
+   "type": "basic",
+   "deck": "Platform Engineering::Helm",
+   "tags": [
+    "Helm"
+   ],
+   "front": "How do you force pods to roll when a ConfigMap rendered by the same chart changes?",
+   "back": "Checksum annotation on the pod template:<br><code>checksum/config: {{ include (print $.Template.BasePath \"/configmap.yaml\") . | sha256sum }}</code>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "kx=+RN-7:`",
+   "type": "basic",
+   "deck": "Platform Engineering::Helm",
+   "tags": [
+    "Helm"
+   ],
+   "front": "What does <code>helm upgrade --install --atomic --wait</code> do?",
+   "back": "Installs if release absent, else upgrades; waits for resources to become ready; on failure automatically rolls back (<code>--atomic</code> implies <code>--wait</code>).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "IfGE}F#>^@",
+   "type": "basic",
+   "deck": "Platform Engineering::Helm",
+   "tags": [
+    "Helm"
+   ],
+   "front": "Does <code>helm rollback</code> restore an old revision number?",
+   "back": "No. It creates a <b>new</b> revision whose content equals the target revision.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "H=8^GjJ}O0",
+   "type": "basic",
+   "deck": "Platform Engineering::Helm",
+   "tags": [
+    "Helm"
+   ],
+   "front": "How are chart dependencies declared and fetched?",
+   "back": "<code>dependencies:</code> in <code>Chart.yaml</code> (name, version, repository, <code>condition</code>, <code>tags</code>, <code>alias</code>). <code>helm dependency update</code> fetches into <code>charts/</code> and writes <code>Chart.lock</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "u(aZ[m7N{q",
+   "type": "basic",
+   "deck": "Platform Engineering::Helm",
+   "tags": [
+    "Helm"
+   ],
+   "front": "How do parent and subchart share values?",
+   "back": "Parent sets subchart values under the subchart's name key. <code>.Values.global</code> is visible to parent and all subcharts.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "G5((4Z_;<i",
+   "type": "basic",
+   "deck": "Platform Engineering::Helm",
+   "tags": [
+    "Helm"
+   ],
+   "front": "What is a library chart?",
+   "back": "<code>type: library</code> in Chart.yaml. Provides only named templates for reuse; cannot be installed on its own.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "j_ZrG}!|?B",
+   "type": "basic",
+   "deck": "Platform Engineering::Helm",
+   "tags": [
+    "Helm"
+   ],
+   "front": "How do you validate chart values?",
+   "back": "<code>values.schema.json</code> (JSON Schema) – checked on install/upgrade/lint/template. In templates: <code>required</code> and <code>fail</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "pX}&KK_vQ9",
+   "type": "basic",
+   "deck": "Platform Engineering::Helm",
+   "tags": [
+    "Helm"
+   ],
+   "front": "Pitfall of the <code>lookup</code> function?",
+   "back": "It queries the live cluster; during <code>helm template</code> or client-side dry-run it returns an empty map. Also empty in Argo CD, which renders via <code>helm template</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "cukD~_D@yN",
+   "type": "basic",
+   "deck": "Platform Engineering::Helm",
+   "tags": [
+    "Helm"
+   ],
+   "front": "What does <code>tpl</code> do?",
+   "back": "Renders a string as a template, e.g. allowing templated values: <code>{{ tpl .Values.host . }}</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "u2I<0)K}wI",
+   "type": "basic",
+   "deck": "Platform Engineering::Helm",
+   "tags": [
+    "Helm"
+   ],
+   "front": "How do you keep a resource when the release is uninstalled?",
+   "back": "Annotation <code>helm.sh/resource-policy: keep</code> (commonly on PersistentVolumeClaims (PVCs) or Secrets). Resource becomes orphaned.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "i%11JtWz6!",
+   "type": "basic",
+   "deck": "Platform Engineering::Helm",
+   "tags": [
+    "Helm"
+   ],
+   "front": "<code>helm template</code> vs <code>helm install --dry-run</code>?",
+   "back": "<code>template</code>: renders locally, no cluster access (no <code>lookup</code>, uses default capabilities). <code>install --dry-run</code>: talks to the cluster for validation/capabilities but does not persist. <code>--dry-run=server</code> enables <code>lookup</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "Gk2n)Y|l|H",
+   "type": "basic",
+   "deck": "Platform Engineering::Helm",
+   "tags": [
+    "Helm"
+   ],
+   "front": "How are charts distributed via OCI registries?",
+   "back": "<code>helm push chart.tgz oci://registry/ns</code>, <code>helm install x oci://registry/ns/chart --version 1.2.3</code>. General Availability (GA) since Helm 3.8. No <code>helm repo add</code> needed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "o^}:qXK$k+",
+   "type": "basic",
+   "deck": "Platform Engineering::Helm",
+   "tags": [
+    "Helm"
+   ],
+   "front": "What controls how many release revisions Helm keeps?",
+   "back": "<code>helm upgrade --history-max</code> (default 10). Older release Secrets are pruned.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "L;8+M]!*.C",
+   "type": "basic",
+   "deck": "Platform Engineering::Helm",
+   "tags": [
+    "Helm"
+   ],
+   "front": "Notable changes in Helm 4?",
+   "back": "Released November 2025: server-side apply support, a new WebAssembly-based plugin system, and modernised SDK/logging; Helm 3 charts (<code>apiVersion: v2</code>) remain compatible.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "eNO,27.`,K",
+   "type": "basic",
+   "deck": "Platform Engineering::Operators",
+   "tags": [
+    "Operators"
+   ],
+   "front": "What is a Kubernetes Operator?",
+   "back": "A custom controller paired with Custom Resource Definitions (CRDs) that encodes human operational knowledge (install, upgrade, backup, failover) for a specific application into a reconciliation loop.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "si6-9d?4*I",
+   "type": "basic",
+   "deck": "Platform Engineering::Operators",
+   "tags": [
+    "Operators"
+   ],
+   "front": "Level-triggered vs edge-triggered and which do controllers use?",
+   "back": "Edge: react to individual events. Level: act on the current observed state vs desired state. Kubernetes controllers are level-triggered: a missed event is fine because the next reconcile sees full state.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "u^Mm+X[Le,",
+   "type": "basic",
+   "deck": "Platform Engineering::Operators",
+   "tags": [
+    "Operators"
+   ],
+   "front": "Why must <code>Reconcile()</code> be idempotent?",
+   "back": "It can be called any number of times for the same object (resyncs, requeues, multiple events coalesced). It must converge to the same result without side-effect duplication.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "w45^i=?%)(",
+   "type": "basic",
+   "deck": "Platform Engineering::Operators",
+   "tags": [
+    "Operators"
+   ],
+   "front": "<code>spec</code> vs <code>status</code>, and the status subresource?",
+   "back": "spec = desired state (user-owned); status = observed state (controller-owned). With the <code>/status</code> subresource, status updates go through a separate endpoint and spec updates ignore status, enabling separate RBAC.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "K^s-hL<#LI",
+   "type": "basic",
+   "deck": "Platform Engineering::Operators",
+   "tags": [
+    "Operators"
+   ],
+   "front": "<code>metadata.generation</code> vs <code>resourceVersion</code>?",
+   "back": "<code>generation</code>: increments only on spec changes (with status subresource).<br><code>resourceVersion</code>: opaque, changes on any write; used for optimistic concurrency and watches.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "xB1rB%de;<",
+   "type": "basic",
+   "deck": "Platform Engineering::Operators",
+   "tags": [
+    "Operators"
+   ],
+   "front": "What is <code>status.observedGeneration</code> for?",
+   "back": "Controller writes the <code>generation</code> it last reconciled, so clients can tell if status reflects the latest spec.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "Ai}jhUzDU~",
+   "type": "basic",
+   "deck": "Platform Engineering::Operators",
+   "tags": [
+    "Operators"
+   ],
+   "front": "What are finalizers and when does an Operator use them?",
+   "back": "Strings in <code>metadata.finalizers</code> that block deletion. Deletion sets <code>deletionTimestamp</code>; controller does external cleanup (e.g. delete cloud DB), then removes its finalizer so the object is deleted.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "QZ<5tN$1ZY",
+   "type": "basic",
+   "deck": "Platform Engineering::Operators",
+   "tags": [
+    "Operators"
+   ],
+   "front": "How do OwnerReferences work?",
+   "back": "Child objects point to their owner (<code>controller: true</code> for the managing controller). The garbage collector deletes dependents when the owner is deleted. Must be same namespace (or owner cluster-scoped). Cross-namespace/external → finalizers.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "uL}KAmSS`r",
+   "type": "basic",
+   "deck": "Platform Engineering::Operators",
+   "tags": [
+    "Operators"
+   ],
+   "front": "Cascading deletion modes?",
+   "back": "Background (default): owner deleted immediately, GC deletes dependents.<br>Foreground: dependents deleted first (<code>foregroundDeletion</code> finalizer).<br>Orphan: dependents kept, ownerRefs removed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "w)|AJq1G?/",
+   "type": "basic",
+   "deck": "Platform Engineering::Operators",
+   "tags": [
+    "Operators"
+   ],
+   "front": "Role of informers, cache and workqueue in client-go/controller-runtime?",
+   "back": "Informer: list+watch, keeps a local indexed cache (reads hit the cache, not the API server).<br>Event handlers enqueue object keys (namespace/name) into a rate-limited, deduplicating workqueue; workers call Reconcile.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "m;]]xh1aee",
+   "type": "basic",
+   "deck": "Platform Engineering::Operators",
+   "tags": [
+    "Operators"
+   ],
+   "front": "Why does a controller receive only a namespace/name, not the object diff?",
+   "back": "Level-triggered design: reconcile reads current state from the cache; events are coalesced by key.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "h@~;z;l0y.",
+   "type": "basic",
+   "deck": "Platform Engineering::Operators",
+   "tags": [
+    "Operators"
+   ],
+   "front": "Return values of a controller-runtime Reconcile and their effect?",
+   "back": "<code>Result{}, nil</code>: done.<br><code>Result{RequeueAfter: d}, nil</code>: requeue after d.<br><code>_, err</code>: requeue with exponential backoff (rate limiter).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "H%rU>p,^kW",
+   "type": "basic",
+   "deck": "Platform Engineering::Operators",
+   "tags": [
+    "Operators"
+   ],
+   "front": "How do multiple Operator replicas avoid conflicting?",
+   "back": "Leader election using a <code>coordination.k8s.io</code> Lease; only the leader runs controllers.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "jG(4eJW)w@",
+   "type": "basic",
+   "deck": "Platform Engineering::Operators",
+   "tags": [
+    "Operators"
+   ],
+   "front": "How do you handle a 409 Conflict on update?",
+   "back": "Optimistic concurrency via resourceVersion – re-fetch and retry (<code>retry.RetryOnConflict</code>), or use server-side apply / patches to avoid full-object updates.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "iWb|daf[S6",
+   "type": "basic",
+   "deck": "Platform Engineering::Operators",
+   "tags": [
+    "Operators"
+   ],
+   "front": "What is Server-Side Apply (SSA) and why is it useful in controllers?",
+   "back": "API server merges declared fields and tracks ownership per field manager (<code>managedFields</code>). Controllers send only fields they care about; conflicts are explicit.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "D}~a<jB?K9",
+   "type": "basic",
+   "deck": "Platform Engineering::Operators",
+   "tags": [
+    "Operators"
+   ],
+   "front": "CRD versioning: served vs storage version, and conversion?",
+   "back": "Multiple versions can be <code>served</code>; exactly one is <code>storage</code>. Non-trivial schema differences need a conversion webhook (hub-and-spoke conversion in Kubebuilder).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "nkk!3whq!f",
+   "type": "basic",
+   "deck": "Platform Engineering::Operators",
+   "tags": [
+    "Operators"
+   ],
+   "front": "Options for validating Custom Resources?",
+   "back": "OpenAPI v3 schema in the CRD; Common Expression Language (CEL) rules via <code>x-kubernetes-validations</code> (GA 1.29); ValidatingAdmissionPolicy (GA 1.30); validating/mutating admission webhooks.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "d^701~C_U;",
+   "type": "basic",
+   "deck": "Platform Engineering::Operators",
+   "tags": [
+    "Operators"
+   ],
+   "front": "Kubebuilder vs Operator SDK vs controller-runtime?",
+   "back": "controller-runtime: Go library (manager, client, cache, reconcilers).<br>Kubebuilder: scaffolding + controller-gen on top of it.<br>Operator SDK: builds on Kubebuilder, adds Ansible/Helm operators, Operator Lifecycle Manager (OLM) bundle and scorecard tooling.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "d9]-*%4!S^",
+   "type": "basic",
+   "deck": "Platform Engineering::Operators",
+   "tags": [
+    "Operators"
+   ],
+   "front": "Operator Framework capability levels (1–5)?",
+   "back": "1 Basic Install, 2 Seamless Upgrades, 3 Full Lifecycle (backup/restore, failure recovery), 4 Deep Insights (metrics, alerts), 5 Auto Pilot (auto-scaling, tuning, healing).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "I)y##_buDQ",
+   "type": "basic",
+   "deck": "Platform Engineering::Operators",
+   "tags": [
+    "Operators"
+   ],
+   "front": "What is the Operator Lifecycle Manager (OLM)?",
+   "back": "Manages installation, upgrades, dependencies and RBAC of Operators via CatalogSources, Subscriptions, InstallPlans and ClusterServiceVersions (CSVs). Default on OpenShift.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "A%,oQy>=!:",
+   "type": "basic",
+   "deck": "Platform Engineering::Operators",
+   "tags": [
+    "Operators"
+   ],
+   "front": "Conventional structure of a status <code>condition</code>?",
+   "back": "<code>type, status (True/False/Unknown), reason (CamelCase), message, lastTransitionTime, observedGeneration</code>. Use <code>meta.SetStatusCondition</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "N|*E?uL~Us",
+   "type": "basic",
+   "deck": "Platform Engineering::Operators",
+   "tags": [
+    "Operators"
+   ],
+   "front": "How does a controller watch resources it creates and other related objects?",
+   "back": "<code>For(&amp;MyCR{})</code> primary; <code>Owns(&amp;appsv1.Deployment{})</code> enqueues the owner; <code>Watches(src, handler.EnqueueRequestsFromMapFunc(...))</code> for arbitrary mappings.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "Qe$Qa)]A{&",
+   "type": "basic",
+   "deck": "Platform Engineering::Operators",
+   "tags": [
+    "Operators"
+   ],
+   "front": "Purpose of <code>GenerationChangedPredicate</code>?",
+   "back": "Filters update events so reconcile runs only on spec changes, not on status/metadata-only updates (prevents self-trigger loops).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "OA2UD88Cte",
+   "type": "basic",
+   "deck": "Platform Engineering::Operators",
+   "tags": [
+    "Operators"
+   ],
+   "front": "Why avoid writing status on every reconcile unconditionally?",
+   "back": "Each write changes resourceVersion → triggers another event → hot loop, API server load. Compare before writing.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "m@FmBJkBb<",
+   "type": "basic",
+   "deck": "Platform Engineering::Argo CD",
+   "tags": [
+    "ArgoCD"
+   ],
+   "front": "Main Argo CD components?",
+   "back": "<code>argocd-server</code> (API/UI), <code>argocd-repo-server</code> (clones repos, renders manifests: Helm/Kustomize/plain/plugins), <code>argocd-application-controller</code> (compares live vs desired, syncs), Redis (cache), Dex (Single Sign-On (SSO)), ApplicationSet controller, notifications controller.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "wA$5Qg#-xS",
+   "type": "basic",
+   "deck": "Platform Engineering::Argo CD",
+   "tags": [
+    "ArgoCD"
+   ],
+   "front": "Key fields of an <code>Application</code>?",
+   "back": "<code>project</code>, <code>source</code>/<code>sources</code> (repoURL, targetRevision, path/chart, helm/kustomize options), <code>destination</code> (server/name + namespace), <code>syncPolicy</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "k^Tn<8UP,b",
+   "type": "basic",
+   "deck": "Platform Engineering::Argo CD",
+   "tags": [
+    "ArgoCD"
+   ],
+   "front": "What does an <code>AppProject</code> restrict?",
+   "back": "Allowed source repos, destination clusters/namespaces, allowed/denied cluster-scoped and namespaced kinds, project roles + JSON Web Tokens (JWTs), sync windows, orphaned resource monitoring.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "P<]#aFm?Cy",
+   "type": "basic",
+   "deck": "Platform Engineering::Argo CD",
+   "tags": [
+    "ArgoCD"
+   ],
+   "front": "Sync status vs health status?",
+   "back": "Sync: does live state match Git (Synced/OutOfSync).<br>Health: is the app working (Healthy, Progressing, Degraded, Suspended, Missing, Unknown) – from built-in or custom Lua health checks.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "vyrol0Vo_B",
+   "type": "basic",
+   "deck": "Platform Engineering::Argo CD",
+   "tags": [
+    "ArgoCD"
+   ],
+   "front": "Automated sync options <code>prune</code> and <code>selfHeal</code>?",
+   "back": "<code>prune: true</code> – delete resources removed from Git.<br><code>selfHeal: true</code> – revert manual live changes (drift) without a new commit. Both off by default even with automated sync.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "i?9+PBV$mj",
+   "type": "basic",
+   "deck": "Platform Engineering::Argo CD",
+   "tags": [
+    "ArgoCD"
+   ],
+   "front": "Sync phases and waves?",
+   "back": "Phases: PreSync → Sync → PostSync (SyncFail on failure). Within a phase, <code>argocd.argoproj.io/sync-wave</code> orders resources (lower first, can be negative); Argo waits for health between waves.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "s%AoPSgTu,",
+   "type": "basic",
+   "deck": "Platform Engineering::Argo CD",
+   "tags": [
+    "ArgoCD"
+   ],
+   "front": "How are Argo CD hooks declared?",
+   "back": "<code>argocd.argoproj.io/hook: PreSync|Sync|PostSync|SyncFail|Skip</code> and <code>argocd.argoproj.io/hook-delete-policy: HookSucceeded|HookFailed|BeforeHookCreation</code>. Helm hooks are mapped to these.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "fCL4sult$b",
+   "type": "basic",
+   "deck": "Platform Engineering::Argo CD",
+   "tags": [
+    "ArgoCD"
+   ],
+   "front": "Is a Helm chart deployed by Argo CD a Helm release?",
+   "back": "No. Argo renders with <code>helm template</code> and applies manifests itself. <code>helm ls</code> shows nothing; <code>lookup</code> returns empty; lifecycle is Argo's.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "jyrj(n&(<p",
+   "type": "basic",
+   "deck": "Platform Engineering::Argo CD",
+   "tags": [
+    "ArgoCD"
+   ],
+   "front": "What is the App of Apps pattern?",
+   "back": "A parent Application whose source contains Application manifests, bootstrapping a set of child apps from one entry point.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "MpR]]A*}gK",
+   "type": "basic",
+   "deck": "Platform Engineering::Argo CD",
+   "tags": [
+    "ArgoCD"
+   ],
+   "front": "ApplicationSet generators?",
+   "back": "List, Cluster (from registered cluster Secrets/labels), Git (directories or files), Matrix, Merge, SCM Provider, Pull Request, Cluster Decision Resource, Plugin.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "zVf7[z@kH[",
+   "type": "basic",
+   "deck": "Platform Engineering::Argo CD",
+   "tags": [
+    "ArgoCD"
+   ],
+   "front": "Typical ApplicationSet for 'deploy addons to every cluster labelled env=prod'?",
+   "back": "Cluster generator with <code>selector.matchLabels: {env: prod}</code>, templating <code>{{name}}</code>/<code>{{server}}</code> into the Application; often Matrix'd with a Git directory generator.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "k@up2H6U1p",
+   "type": "basic",
+   "deck": "Platform Engineering::Argo CD",
+   "tags": [
+    "ArgoCD"
+   ],
+   "front": "How do multi-source Applications help with Helm?",
+   "back": "<code>spec.sources</code> lets a chart from a Helm/OCI repo use values files from a separate Git repo via a <code>ref</code> source: <code>valueFiles: [$values/envs/prod.yaml]</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "Pt49>K8;(y",
+   "type": "basic",
+   "deck": "Platform Engineering::Argo CD",
+   "tags": [
+    "ArgoCD"
+   ],
+   "front": "How do you stop Argo flagging fields mutated by other controllers (e.g. HPA replicas)?",
+   "back": "<code>ignoreDifferences</code> (jsonPointers/jqPathExpressions/managedFieldsManagers), plus sync option <code>RespectIgnoreDifferences=true</code> so sync doesn't overwrite them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "pkV?wWd|GY",
+   "type": "basic",
+   "deck": "Platform Engineering::Argo CD",
+   "tags": [
+    "ArgoCD"
+   ],
+   "front": "Useful sync options?",
+   "back": "<code>CreateNamespace=true</code>, <code>ServerSideApply=true</code>, <code>PruneLast=true</code>, <code>ApplyOutOfSyncOnly=true</code>, <code>Replace=true</code>, <code>Prune=false</code> (per resource), <code>FailOnSharedResource=true</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "qPS!}rwNh%",
+   "type": "basic",
+   "deck": "Platform Engineering::Argo CD",
+   "tags": [
+    "ArgoCD"
+   ],
+   "front": "How does Argo CD track which resources belong to an app?",
+   "back": "Resource tracking method: <code>annotation</code> (<code>argocd.argoproj.io/tracking-id</code>; default since Argo CD 3.0), <code>label</code> (<code>app.kubernetes.io/instance</code>; old default, clashes with Helm labels), or <code>annotation+label</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "O|e9!^2}=A",
+   "type": "basic",
+   "deck": "Platform Engineering::Argo CD",
+   "tags": [
+    "ArgoCD"
+   ],
+   "front": "How is a remote cluster registered and stored?",
+   "back": "<code>argocd cluster add</code> creates a ServiceAccount + RBAC in the target and stores credentials as a Secret labelled <code>argocd.argoproj.io/secret-type: cluster</code> in the Argo namespace (can be declared directly).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "P`bt+cKxXU",
+   "type": "basic",
+   "deck": "Platform Engineering::Argo CD",
+   "tags": [
+    "ArgoCD"
+   ],
+   "front": "Hub-and-spoke vs instance-per-cluster Argo CD trade-offs?",
+   "back": "Hub: single pane of glass, central RBAC, but needs network access + credentials to all clusters and is a blast-radius/scale bottleneck.<br>Per-cluster: isolation and pull-only networking, but N instances to manage.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "PjL(U6c:e`",
+   "type": "basic",
+   "deck": "Platform Engineering::Argo CD",
+   "tags": [
+    "ArgoCD"
+   ],
+   "front": "How often does Argo CD poll Git, and how to speed it up?",
+   "back": "Default ~3 minutes (<code>timeout.reconciliation</code>, 180s, plus jitter). Configure Git provider webhooks to <code>/api/webhook</code> for immediate refresh.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "vXH``XZJ6e",
+   "type": "basic",
+   "deck": "Platform Engineering::Argo CD",
+   "tags": [
+    "ArgoCD"
+   ],
+   "front": "Refresh vs hard refresh?",
+   "back": "Refresh: re-compare using cached manifests (checks Git revision).<br>Hard refresh: invalidate repo-server manifest cache and re-render.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "h$X{H4E-Vb",
+   "type": "basic",
+   "deck": "Platform Engineering::Argo CD",
+   "tags": [
+    "ArgoCD"
+   ],
+   "front": "How to scale the application controller for many clusters?",
+   "back": "Run multiple replicas with sharding (by cluster; algorithms legacy / round-robin / consistent-hashing), tune <code>--status-processors</code> and <code>--operation-processors</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "vjI?~As;YW",
+   "type": "basic",
+   "deck": "Platform Engineering::Argo CD",
+   "tags": [
+    "ArgoCD"
+   ],
+   "front": "What are Config Management Plugins (CMPs)?",
+   "back": "Custom manifest generators run as sidecars on the repo-server (configured via <code>plugin.yaml</code> ConfigManagementPlugin), e.g. for cdk8s, Jsonnet variants, envsubst.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "lE$l=-vNGQ",
+   "type": "basic",
+   "deck": "Platform Engineering::Argo CD",
+   "tags": [
+    "ArgoCD"
+   ],
+   "front": "Where is Argo CD RBAC configured?",
+   "back": "<code>argocd-rbac-cm</code> <code>policy.csv</code> (Casbin): <code>p, role:x, applications, sync, proj/*, allow</code> and <code>g, sso-group, role:x</code>; plus AppProject roles.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "C.h@!|_+O6",
+   "type": "basic",
+   "deck": "Platform Engineering::Argo CD",
+   "tags": [
+    "ArgoCD"
+   ],
+   "front": "Why do the Argo CD docs discourage manifest-injecting secret plugins (e.g. argocd-vault-plugin)?",
+   "back": "Secrets end up in rendered manifests cached in Redis/repo-server and visible to anyone who can view the app's manifests. Prefer operators that create Secrets in-cluster (External Secrets, Sealed Secrets).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "Gn,j,qYRVU",
+   "type": "basic",
+   "deck": "Platform Engineering::Argo CD",
+   "tags": [
+    "ArgoCD"
+   ],
+   "front": "What is Argo Rollouts?",
+   "back": "Separate controller providing Rollout CRD for blue-green and canary with traffic shaping (Istio, NGINX, Gateway API, ...) and automated analysis (AnalysisTemplates against Prometheus etc.).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "Fy89@ORm1j",
+   "type": "basic",
+   "deck": "Platform Engineering::Flux",
+   "tags": [
+    "Flux"
+   ],
+   "front": "Flux (GitOps Toolkit) controllers and their roles?",
+   "back": "source-controller (fetch Git/OCI/Helm/Bucket → artifacts), kustomize-controller (apply Kustomizations), helm-controller (HelmReleases), notification-controller (alerts + inbound webhooks), image-reflector-controller + image-automation-controller (image update automation).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "pGe*=[RkYa",
+   "type": "basic",
+   "deck": "Platform Engineering::Flux",
+   "tags": [
+    "Flux"
+   ],
+   "front": "Flux source kinds?",
+   "back": "<code>GitRepository</code>, <code>OCIRepository</code>, <code>HelmRepository</code> (HTTP or OCI type), <code>HelmChart</code>, <code>Bucket</code> (S3-compatible).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "dB#Te1cn81",
+   "type": "basic",
+   "deck": "Platform Engineering::Flux",
+   "tags": [
+    "Flux"
+   ],
+   "front": "Flux <code>Kustomization</code> vs Kustomize's <code>kustomization.yaml</code>?",
+   "back": "<code>kustomize.toolkit.fluxcd.io/Kustomization</code> is a CR telling kustomize-controller what path from which source to build/apply, with interval, prune, health checks. <code>kustomize.config.k8s.io/Kustomization</code> is the Kustomize build config file. If absent in the path, Flux generates one.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "z:4o$@fk%{",
+   "type": "basic",
+   "deck": "Platform Engineering::Flux",
+   "tags": [
+    "Flux"
+   ],
+   "front": "Does a Flux <code>HelmRelease</code> create a real Helm release?",
+   "back": "Yes. helm-controller uses the Helm SDK; release appears in <code>helm ls</code>, hooks run natively, <code>lookup</code> works.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "h(On;`zUT]",
+   "type": "basic",
+   "deck": "Platform Engineering::Flux",
+   "tags": [
+    "Flux"
+   ],
+   "front": "HelmRelease remediation and drift detection?",
+   "back": "<code>install.remediation.retries</code>, <code>upgrade.remediation.retries</code> + <code>strategy: rollback|uninstall</code>.<br><code>driftDetection.mode: enabled|warn</code> compares live cluster to release manifest and corrects it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "g$nYK?rG0X",
+   "type": "basic",
+   "deck": "Platform Engineering::Flux",
+   "tags": [
+    "Flux"
+   ],
+   "front": "How do you order Flux reconciliations?",
+   "back": "<code>spec.dependsOn</code> on Kustomizations/HelmReleases (e.g. CRDs/infra before apps), combined with <code>wait: true</code> or <code>healthChecks</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "zDwwC|]>72",
+   "type": "basic",
+   "deck": "Platform Engineering::Flux",
+   "tags": [
+    "Flux"
+   ],
+   "front": "Meaning of <code>interval</code>, <code>retryInterval</code>, <code>timeout</code>, <code>prune</code>, <code>wait</code> on a Kustomization?",
+   "back": "interval: reconcile period; retryInterval: retry after failure; timeout: for apply + health; prune: garbage-collect removed objects; wait: wait for all applied resources to be ready.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "C/_vKv~b^}",
+   "type": "basic",
+   "deck": "Platform Engineering::Flux",
+   "tags": [
+    "Flux"
+   ],
+   "front": "How does Flux decrypt SOPS-encrypted secrets?",
+   "back": "Natively in kustomize-controller: <code>spec.decryption: {provider: sops, secretRef: {name: sops-age}}</code> (age/PGP keys) or cloud KMS via workload identity.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "s5i1gs`kms",
+   "type": "basic",
+   "deck": "Platform Engineering::Flux",
+   "tags": [
+    "Flux"
+   ],
+   "front": "What are post-build variable substitutions?",
+   "back": "<code>spec.postBuild.substitute</code> and <code>substituteFrom</code> (ConfigMaps/Secrets) replace <code>${VAR}</code> / <code>${VAR:=default}</code> after kustomize build. Disable per object with <code>kustomize.toolkit.fluxcd.io/substitute: disabled</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "i^j_,AYPQl",
+   "type": "basic",
+   "deck": "Platform Engineering::Flux",
+   "tags": [
+    "Flux"
+   ],
+   "front": "What does <code>flux bootstrap</code> do?",
+   "back": "Installs Flux controllers, commits their manifests plus a GitRepository + Kustomization (flux-system) to the repo, and configures deploy keys – so Flux manages its own installation from Git.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "wD}EcF/pe3",
+   "type": "basic",
+   "deck": "Platform Engineering::Flux",
+   "tags": [
+    "Flux"
+   ],
+   "front": "How does Flux enforce multi-tenancy?",
+   "back": "<code>spec.serviceAccountName</code> impersonation per Kustomization/HelmRelease, controller flags <code>--no-cross-namespace-refs</code> and <code>--default-service-account</code>, and <code>spec.targetNamespace</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "qi]#q>Ur!l",
+   "type": "basic",
+   "deck": "Platform Engineering::Flux",
+   "tags": [
+    "Flux"
+   ],
+   "front": "How can Flux deploy to a remote cluster?",
+   "back": "<code>spec.kubeConfig.secretRef</code> on Kustomization/HelmRelease (or configMapRef for workload-identity based auth) – a hub cluster applies to spoke clusters.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "e?8L5*XmU6",
+   "type": "basic",
+   "deck": "Platform Engineering::Flux",
+   "tags": [
+    "Flux"
+   ],
+   "front": "Flux image update automation objects?",
+   "back": "<code>ImageRepository</code> (scan registry tags), <code>ImagePolicy</code> (semver/alphabetical/numerical selection), <code>ImageUpdateAutomation</code> (commit back to Git). Manifests are marked with <code># {\"$imagepolicy\": \"ns:policy\"}</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "lx]ML1&?aS",
+   "type": "basic",
+   "deck": "Platform Engineering::Flux",
+   "tags": [
+    "Flux"
+   ],
+   "front": "Flux notification objects?",
+   "back": "<code>Provider</code> (Slack, Teams, GitHub commit status, ...), <code>Alert</code> (which events to which provider), <code>Receiver</code> (inbound webhook that triggers reconcile).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "PlV_]`^986",
+   "type": "basic",
+   "deck": "Platform Engineering::Flux",
+   "tags": [
+    "Flux"
+   ],
+   "front": "How to force or pause a Flux reconciliation?",
+   "back": "<code>flux reconcile kustomization x --with-source</code> (sets <code>reconcile.fluxcd.io/requestedAt</code>); <code>flux suspend</code>/<code>resume</code> or <code>spec.suspend: true</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "O5~nu)Z[>C",
+   "type": "basic",
+   "deck": "Platform Engineering::Flux",
+   "tags": [
+    "Flux"
+   ],
+   "front": "How does Flux verify artifact authenticity?",
+   "back": "<code>spec.verify</code> on GitRepository (OpenPGP commit signatures) and OCIRepository (cosign / Notation signatures), e.g. artifacts pushed with <code>flux push artifact</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "xDvL`oU+E",
+   "type": "basic",
+   "deck": "Platform Engineering::Flux",
+   "tags": [
+    "Flux"
+   ],
+   "front": "Flux equivalent of Argo Rollouts?",
+   "back": "Flagger: progressive delivery (canary, A/B, blue-green) with service mesh / ingress traffic shifting and metric analysis.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "h(.0Wca=ZM",
+   "type": "basic",
+   "deck": "Platform Engineering::Flux",
+   "tags": [
+    "Flux"
+   ],
+   "front": "Argo CD vs Flux: key differences?",
+   "back": "Argo: built-in UI, Application-centric, Helm via <code>helm template</code>, natural hub-and-spoke, SSO/RBAC in-tool.<br>Flux: set of composable controllers, no built-in UI, native Helm releases, Kubernetes RBAC + impersonation for tenancy, typically per-cluster pull, strong OCI artifact support.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  }
+ ]
+}

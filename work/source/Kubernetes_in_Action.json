@@ -1,0 +1,965 @@
+{
+ "source_file": "Kubernetes_in_Action.apkg",
+ "notes": [
+  {
+   "guid": "Cs>(pwZJxd",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::intro"
+   ],
+   "front": "What problem does Kubernetes solve?",
+   "back": "It's a container <b>orchestrator</b>: it abstracts the underlying infrastructure and automatically schedules, runs, monitors, scales, and reschedules containerized apps across a cluster of nodes, so you declare desired state rather than managing individual machines.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 1 · Introduction"
+  },
+  {
+   "guid": "lIlS?ju-of",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::intro"
+   ],
+   "front": "What are the two node roles in a Kubernetes cluster?",
+   "back": "<ul><li><b>Master / control plane node(s)</b> — run the components that control and manage the cluster.</li><li><b>Worker nodes</b> — run your actual containerized applications.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 1 · Introduction"
+  },
+  {
+   "guid": "P>H257aUON",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::intro"
+   ],
+   "front": "Name the four control plane components.",
+   "back": "<ul><li><b>API server</b> — front end you and other components talk to.</li><li><b>Scheduler</b> — assigns pods to nodes.</li><li><b>Controller Manager</b> — runs the controllers (reconciliation loops).</li><li><b>etcd</b> — distributed key-value store holding all cluster state.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 1 · Introduction"
+  },
+  {
+   "guid": "b8i1;xFA#U",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::intro"
+   ],
+   "front": "Name the three components running on every worker node.",
+   "back": "<ul><li><b>Kubelet</b> — talks to the API server and manages containers on its node.</li><li><b>Kube-proxy</b> — load-balances network traffic to Service backends.</li><li><b>Container runtime</b> — (containerd, CRI-O, etc.) actually runs the containers.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 1 · Introduction"
+  },
+  {
+   "guid": "ph8B$5qYSo",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::intro"
+   ],
+   "front": "What is <code>kubectl</code>?",
+   "back": "The command-line client that sends requests to the API server to create, read, update, and delete cluster resources.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 2 · First steps"
+  },
+  {
+   "guid": "C.1n1_K`*6",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::pods"
+   ],
+   "front": "What is a Pod?",
+   "back": "The smallest deployable unit in Kubernetes: a group of one or more containers that share the same network namespace (one IP, shared ports) and can share storage volumes. Containers in a pod are always co-located and co-scheduled on the same node.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 3 · Pods"
+  },
+  {
+   "guid": "pQb{qB07N/",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::pods"
+   ],
+   "front": "Why would you put multiple containers in one Pod instead of one each?",
+   "back": "Only when they're tightly coupled and must run together — e.g. a main app plus a <b>sidecar</b> (log shipper, proxy, adapter) that needs to share the same network/filesystem. Independent components should go in separate pods so they can scale independently.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 3 · Pods"
+  },
+  {
+   "guid": "Og#j$M>Qsx",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::pods"
+   ],
+   "front": "What are labels and how are they used?",
+   "back": "Arbitrary key-value pairs attached to resources for organization. <b>Label selectors</b> then let you filter and operate on subsets of resources (e.g. a Service selecting all pods with <code>app=web</code>). Labels are the primary grouping mechanism in Kubernetes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 3 · Pods"
+  },
+  {
+   "guid": "s&,~LQ;`~>",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::pods"
+   ],
+   "front": "What are namespaces for?",
+   "back": "They partition resources into isolated groups (scoping, multi-tenancy, name uniqueness within the namespace). Note: namespaces don't provide network isolation by themselves — that requires NetworkPolicies.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 3 · Pods"
+  },
+  {
+   "guid": "L79i%=8&)y",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::pods"
+   ],
+   "front": "What is a liveness probe and what are its three mechanisms?",
+   "back": "A periodic check the kubelet runs to decide whether to <b>restart</b> a container. Mechanisms: <ul><li><b>HTTP GET</b> — 2xx/3xx = healthy.</li><li><b>TCP socket</b> — connection opens = healthy.</li><li><b>Exec</b> — command exit code 0 = healthy.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 3 · Pods"
+  },
+  {
+   "guid": "g;*_9.b]By",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::controllers"
+   ],
+   "front": "What does a ReplicationController do?",
+   "back": "Keeps a specified number of pod replicas running, recreating them if they die or are deleted. (Legacy — superseded by ReplicaSet, which is itself usually managed by a Deployment.)",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 4 · Controllers"
+  },
+  {
+   "guid": "qWeFvKG@X1",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::controllers"
+   ],
+   "front": "How does a ReplicaSet differ from a ReplicationController?",
+   "back": "A ReplicaSet is the newer generation with more expressive <b>set-based</b> label selectors (e.g. <code>in</code>, <code>notin</code>, <code>exists</code>), whereas a ReplicationController only supports equality-based selectors. You rarely create ReplicaSets directly — Deployments manage them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 4 · Controllers"
+  },
+  {
+   "guid": "rbZa|VF$NF",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::controllers"
+   ],
+   "front": "What is a DaemonSet?",
+   "back": "A controller that runs exactly one copy of a pod on every node (or every node matching a selector). Used for node-level agents: log collectors, monitoring agents, kube-proxy, CNI plugins.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 4 · Controllers"
+  },
+  {
+   "guid": "F^.Lh~g?Mz",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::controllers"
+   ],
+   "front": "Difference between a Job and a CronJob?",
+   "back": "<ul><li><b>Job</b> — runs one or more pods to completion for a finite task, then stops (not restarted on success).</li><li><b>CronJob</b> — creates Jobs on a repeating schedule using cron syntax.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 4 · Controllers"
+  },
+  {
+   "guid": "cg{><b$X7?",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::services"
+   ],
+   "front": "What is a Service and why is it needed?",
+   "back": "A stable network endpoint (single virtual IP + DNS name) that load-balances across a dynamic set of pods selected by labels. Needed because pod IPs are ephemeral — pods come and go — so clients need a fixed address to reach them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 5 · Services"
+  },
+  {
+   "guid": "j!my)[,B~_",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::services"
+   ],
+   "front": "What does a <b>ClusterIP</b> Service provide?",
+   "back": "A virtual IP reachable only from <b>inside</b> the cluster. This is the default Service type, used for internal service-to-service communication.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 5 · Services"
+  },
+  {
+   "guid": "q`h4JxI{>U",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::services"
+   ],
+   "front": "What does a <b>NodePort</b> Service do?",
+   "back": "Exposes the Service on a static port (default range 30000–32767) on <b>every node's IP</b>, so external traffic hitting <code>&lt;nodeIP&gt;:&lt;nodePort&gt;</code> is routed to the Service. Builds on ClusterIP.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 5 · Services"
+  },
+  {
+   "guid": "iR>#J}tH(a",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::services"
+   ],
+   "front": "What does a <b>LoadBalancer</b> Service do?",
+   "back": "Provisions an external load balancer from the cloud provider that fronts the Service and forwards to the NodePort/ClusterIP. Gives the Service a single externally reachable IP. Builds on NodePort.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 5 · Services"
+  },
+  {
+   "guid": "jq~>F%)98?",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::services"
+   ],
+   "front": "What is an Endpoints object?",
+   "back": "The list of actual pod IP:port pairs currently backing a Service. The Service selects pods by label; the Endpoints (or EndpointSlices) controller keeps this list in sync as pods come and go.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 5 · Services"
+  },
+  {
+   "guid": "eSqIs!x7Ow",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::services"
+   ],
+   "front": "What is an Ingress and why use it over many LoadBalancer Services?",
+   "back": "An Ingress is an HTTP(S) routing layer (host/path-based) that exposes many Services through a <b>single</b> external entry point managed by an Ingress controller. Cheaper and more flexible than one cloud load balancer per Service.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 5 · Services"
+  },
+  {
+   "guid": "VBs3L()&|",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::services"
+   ],
+   "front": "What is a headless Service?",
+   "back": "A Service with <code>clusterIP: None</code>. Instead of a single virtual IP, DNS returns the individual pod IPs directly. Used when clients need to address specific pods — e.g. StatefulSets.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 5 · Services"
+  },
+  {
+   "guid": "n%q/!mlhV=",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::services"
+   ],
+   "front": "What is a readiness probe and how does it differ from a liveness probe?",
+   "back": "A readiness probe decides whether a pod should <b>receive traffic</b> — failing it removes the pod from Service endpoints (no restart). A liveness probe decides whether to <b>restart</b> the container. Readiness gates traffic; liveness gates lifecycle.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 5 · Services"
+  },
+  {
+   "guid": "F]D@)$`2VX",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::volumes"
+   ],
+   "front": "What is an <code>emptyDir</code> volume?",
+   "back": "A volume created empty when the pod is scheduled and deleted when the pod is removed. Lives as long as the pod; useful for scratch space or sharing files between containers in the same pod.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 6 · Volumes"
+  },
+  {
+   "guid": "miN|[t#r.A",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::volumes"
+   ],
+   "front": "What is a <code>hostPath</code> volume and its main caveat?",
+   "back": "Mounts a file or directory from the node's own filesystem into the pod. Caveat: data is tied to a specific node, so it's not portable if the pod is rescheduled elsewhere — generally only for node-level system pods.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 6 · Volumes"
+  },
+  {
+   "guid": "xR&qI6L8W9",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::volumes"
+   ],
+   "front": "Persistent Volume (PV) vs Persistent Volume Claim (PVC)?",
+   "back": "<ul><li><b>PV</b> — a piece of storage in the cluster, provisioned by an admin or dynamically. Cluster-level resource.</li><li><b>PVC</b> — a user's request for storage (size, access mode) that binds to a matching PV.</li></ul>This decouples app authors from storage details.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 6 · Volumes"
+  },
+  {
+   "guid": "d*W}tD5M2v",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::volumes"
+   ],
+   "front": "What does a StorageClass enable?",
+   "back": "<b>Dynamic provisioning</b>: when a PVC references a StorageClass, a matching PersistentVolume is created on demand by the associated provisioner — no pre-provisioned PVs required.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 6 · Volumes"
+  },
+  {
+   "guid": "e#[Eh[!B>r",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::volumes"
+   ],
+   "front": "What are the PV access modes?",
+   "back": "<ul><li><b>ReadWriteOnce (RWO)</b> — mounted read-write by a single node.</li><li><b>ReadOnlyMany (ROX)</b> — read-only by many nodes.</li><li><b>ReadWriteMany (RWX)</b> — read-write by many nodes.</li><li><b>ReadWriteOncePod</b> — read-write by a single pod.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 6 · Volumes"
+  },
+  {
+   "guid": "k>[BJRSkui",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::config"
+   ],
+   "front": "What is a ConfigMap?",
+   "back": "An API object holding non-sensitive configuration as key-value pairs, decoupled from the image. Consumed by pods as environment variables, command-line args, or files in a mounted volume.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 7 · ConfigMaps & Secrets"
+  },
+  {
+   "guid": "i#{Nk@47DS",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::config"
+   ],
+   "front": "How is a Secret different from a ConfigMap?",
+   "back": "Functionally similar (key-value config injected as env vars or files), but intended for sensitive data. Values are base64-encoded in the object and can be kept out of node disk (tmpfs). Note: base64 is <b>encoding, not encryption</b> — enable encryption-at-rest in etcd and RBAC for real protection.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 7 · ConfigMaps & Secrets"
+  },
+  {
+   "guid": "e)]TQ|Y3,4",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::config"
+   ],
+   "front": "What happens when you mount a ConfigMap as a volume and then update it?",
+   "back": "The mounted files are eventually updated automatically (kubelet sync, with some delay). However, values injected as <b>environment variables</b> are NOT updated — the pod must be restarted to pick those up.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 7 · ConfigMaps & Secrets"
+  },
+  {
+   "guid": "v::*E_SGt>",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::downward"
+   ],
+   "front": "What is the Downward API?",
+   "back": "A mechanism to expose a pod's own metadata (name, namespace, labels, annotations, resource requests/limits, node name, pod IP) to its containers via environment variables or files, without calling the API server.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 8 · Downward API"
+  },
+  {
+   "guid": "rmnFg)LUuC",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::deployments"
+   ],
+   "front": "What does a Deployment add over a bare ReplicaSet?",
+   "back": "Declarative updates with controlled <b>rollout</b> strategies and easy <b>rollback</b>. A Deployment manages ReplicaSets under the hood, creating a new one for each revision and shifting pods between them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 9 · Deployments"
+  },
+  {
+   "guid": "nk[Yo}]7}_",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::deployments"
+   ],
+   "front": "Compare the <b>RollingUpdate</b> and <b>Recreate</b> deployment strategies.",
+   "back": "<ul><li><b>RollingUpdate</b> (default) — gradually replaces old pods with new ones; no downtime.</li><li><b>Recreate</b> — kills all old pods first, then creates new ones; causes downtime but guarantees no two versions run at once.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 9 · Deployments"
+  },
+  {
+   "guid": "L4EV9ZCuCq",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::deployments"
+   ],
+   "front": "What do <code>maxSurge</code> and <code>maxUnavailable</code> control?",
+   "back": "RollingUpdate pacing: <ul><li><b>maxSurge</b> — how many pods above the desired count may exist during the update.</li><li><b>maxUnavailable</b> — how many pods may be unavailable during the update.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 9 · Deployments"
+  },
+  {
+   "guid": "yQSe?!Ze{{",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::deployments"
+   ],
+   "front": "How do you roll back a Deployment?",
+   "back": "<code>kubectl rollout undo deployment/&lt;name&gt;</code> (optionally <code>--to-revision=N</code>). Kubernetes keeps old ReplicaSets (up to <code>revisionHistoryLimit</code>) so it can scale a previous one back up.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 9 · Deployments"
+  },
+  {
+   "guid": "CgN1ZO2Nh#",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::statefulsets"
+   ],
+   "front": "What does a StatefulSet provide that a Deployment doesn't?",
+   "back": "Stable, sticky <b>per-pod identity</b>: predictable ordinal names (<code>web-0</code>, <code>web-1</code>…), stable network IDs via a headless Service, and stable per-pod persistent storage that survives rescheduling. Pods are created/deleted in order.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 10 · StatefulSets"
+  },
+  {
+   "guid": "FEBJejMme+",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::statefulsets"
+   ],
+   "front": "Why does a StatefulSet require a headless Service?",
+   "back": "To give each pod a stable DNS name (<code>&lt;pod&gt;.&lt;service&gt;.&lt;ns&gt;.svc</code>) so peers can address specific instances directly — essential for clustered stateful systems (databases, message brokers).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 10 · StatefulSets"
+  },
+  {
+   "guid": "Qwne3,.{yN",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::statefulsets"
+   ],
+   "front": "How does per-pod storage work in a StatefulSet?",
+   "back": "Via <code>volumeClaimTemplates</code>: each pod gets its own PVC (and thus PV). When a pod is rescheduled, it reattaches to the <b>same</b> PVC, preserving its data and identity.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 10 · StatefulSets"
+  },
+  {
+   "guid": "M7Y!KCzp@r",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::internals"
+   ],
+   "front": "What is etcd's role?",
+   "back": "A distributed, consistent key-value store (uses the Raft consensus algorithm) that is the single source of truth for all cluster state. Only the API server talks to it directly.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 11 · Internals"
+  },
+  {
+   "guid": "fH_o25H&nv",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::internals"
+   ],
+   "front": "What is the API server's role in the architecture?",
+   "back": "The central hub: it validates and persists resource objects to etcd and is the only component that reads/writes etcd. All other components watch it for changes and never talk to each other directly.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 11 · Internals"
+  },
+  {
+   "guid": "o5R5{}:Qa;",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::internals"
+   ],
+   "front": "What does the Scheduler actually do?",
+   "back": "Watches for newly created pods with no assigned node, then selects a suitable node (filtering by constraints, then scoring/prioritizing) and writes the node assignment back. It doesn't run the pod — the kubelet does.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 11 · Internals"
+  },
+  {
+   "guid": "js)wo:)X[8",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::internals"
+   ],
+   "front": "What is the Controller Manager?",
+   "back": "A process running many <b>controllers</b>, each a reconciliation loop watching the API server and driving actual state toward desired state (ReplicaSet controller, Deployment controller, Node controller, Endpoints controller, etc.).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 11 · Internals"
+  },
+  {
+   "guid": "BCNjHj|Vkm",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::internals"
+   ],
+   "front": "What is the kubelet's job?",
+   "back": "The node agent: watches the API server for pods assigned to its node, instructs the container runtime to run them, monitors their health (probes), and reports status back to the API server.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 11 · Internals"
+  },
+  {
+   "guid": "Eg,N(-$231",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::internals"
+   ],
+   "front": "What does kube-proxy do?",
+   "back": "Implements Services on each node by programming the data plane (iptables or IPVS mode) so traffic to a Service's virtual IP is load-balanced across the backing pod endpoints.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 11 · Internals"
+  },
+  {
+   "guid": "LQRe-JoDa4",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::internals"
+   ],
+   "front": "Explain the watch mechanism and reconciliation loop.",
+   "back": "Components don't poll; they <b>watch</b> the API server for changes to resources they care about. Each controller continuously compares desired state (spec) to observed state (status) and takes corrective action — the core 'control loop' / declarative model of Kubernetes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 11 · Internals"
+  },
+  {
+   "guid": "Pk~6txk|@(",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::internals"
+   ],
+   "front": "What networking guarantee must a Kubernetes pod network satisfy?",
+   "back": "Every pod gets its own IP and all pods can reach all other pods directly <b>without NAT</b>, regardless of node. This flat network is implemented by a CNI (Container Network Interface) plugin.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 11 · Internals"
+  },
+  {
+   "guid": "Lvv,v<K.GY",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::internals"
+   ],
+   "front": "What is the pause / infrastructure container?",
+   "back": "A tiny container that holds the pod's shared network (and IPC) namespace. App containers join its namespace, so they share one IP even as individual app containers restart.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 11 · Internals"
+  },
+  {
+   "guid": "IX6O5~H^%<",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::security"
+   ],
+   "front": "What is a ServiceAccount?",
+   "back": "An identity for processes running in pods (as opposed to human users). Each pod runs as a ServiceAccount, whose token can be mounted so the app can authenticate to the API server.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 12 · API server security"
+  },
+  {
+   "guid": "jgCjilB)h!",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::security"
+   ],
+   "front": "What does Role-Based Access Control (RBAC) consist of?",
+   "back": "<ul><li><b>Role</b> / <b>ClusterRole</b> — a set of allowed verbs on resources (namespaced vs cluster-wide).</li><li><b>RoleBinding</b> / <b>ClusterRoleBinding</b> — grants a Role/ClusterRole to a user, group, or ServiceAccount.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 12 · API server security"
+  },
+  {
+   "guid": "nhOyhhX#@U",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::security"
+   ],
+   "front": "Role vs ClusterRole?",
+   "back": "A <b>Role</b> grants permissions within a single namespace. A <b>ClusterRole</b> grants permissions cluster-wide or to cluster-scoped resources (nodes, PVs) and can be reused across namespaces via RoleBindings.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 12 · API server security"
+  },
+  {
+   "guid": "Gs?9SDqKq^",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::security"
+   ],
+   "front": "What are the three stages a request passes through at the API server?",
+   "back": "<ul><li><b>Authentication</b> — who are you? (certs, tokens, ServiceAccounts).</li><li><b>Authorization</b> — are you allowed? (RBAC).</li><li><b>Admission control</b> — mutate/validate the request (e.g. defaulting, policy webhooks).</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 12 · API server security"
+  },
+  {
+   "guid": "s>kE?2&]dT",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::security"
+   ],
+   "front": "What is a SecurityContext?",
+   "back": "Pod- or container-level settings controlling security: runAsUser/runAsNonRoot, privileged mode, capabilities to add/drop, read-only root filesystem, SELinux options, etc.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 13 · Node & network security"
+  },
+  {
+   "guid": "A0;f6.daCP",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::security"
+   ],
+   "front": "What does a NetworkPolicy do?",
+   "back": "Defines allowed ingress/egress traffic for pods selected by labels — effectively a firewall between pods. Without any policy, all pod-to-pod traffic is allowed; a policy enforcement requires a CNI plugin that supports it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 13 · Node & network security"
+  },
+  {
+   "guid": "EI|=EG`@y+",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::security"
+   ],
+   "front": "What was PodSecurityPolicy and what replaced it?",
+   "back": "A (now-removed) cluster-level resource controlling security-sensitive pod fields. Replaced by <b>Pod Security Admission</b> (built-in admission controller enforcing the Pod Security Standards: privileged / baseline / restricted).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 13 · Node & network security"
+  },
+  {
+   "guid": "rU?3|=zU#M",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::resources"
+   ],
+   "front": "Requests vs limits for CPU and memory?",
+   "back": "<ul><li><b>Request</b> — the guaranteed amount; used by the scheduler to place the pod and reserved on the node.</li><li><b>Limit</b> — the hard cap. Exceeding a CPU limit throttles; exceeding a memory limit gets the container OOM-killed.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 14 · Resources"
+  },
+  {
+   "guid": "JXxz=cc)P(",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::resources"
+   ],
+   "front": "Name the three Quality of Service (QoS) classes and how they're determined.",
+   "back": "<ul><li><b>Guaranteed</b> — every container has requests == limits for both CPU and memory.</li><li><b>Burstable</b> — at least one request set, but not Guaranteed.</li><li><b>BestEffort</b> — no requests or limits set.</li></ul>Under node memory pressure, BestEffort pods are evicted first, then Burstable, then Guaranteed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 14 · Resources"
+  },
+  {
+   "guid": "KX|Tj-<_H.",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::resources"
+   ],
+   "front": "LimitRange vs ResourceQuota?",
+   "back": "<ul><li><b>LimitRange</b> — per-object defaults/min/max for requests and limits within a namespace.</li><li><b>ResourceQuota</b> — aggregate caps on total resource consumption (and object counts) across a whole namespace.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 14 · Resources"
+  },
+  {
+   "guid": "vigN_:)x_A",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::autoscaling"
+   ],
+   "front": "What does the Horizontal Pod Autoscaler (HPA) do?",
+   "back": "Automatically adjusts the replica count of a workload based on observed metrics (CPU/memory utilization or custom metrics) to keep them near a target. It scales pods <b>out/in</b>, not resources within a pod.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 15 · Autoscaling"
+  },
+  {
+   "guid": "hh*OWvij:a",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::autoscaling"
+   ],
+   "front": "HPA vs Vertical Pod Autoscaler (VPA) vs Cluster Autoscaler?",
+   "back": "<ul><li><b>HPA</b> — changes the number of pod replicas.</li><li><b>VPA</b> — adjusts a pod's CPU/memory requests/limits.</li><li><b>Cluster Autoscaler</b> — adds/removes <b>nodes</b> when pods can't be scheduled or nodes are underused.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 15 · Autoscaling"
+  },
+  {
+   "guid": "At?qHy6X!<",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::scheduling"
+   ],
+   "front": "What is the difference between <code>nodeSelector</code> and node affinity?",
+   "back": "Both steer pods to nodes by labels. <code>nodeSelector</code> is a simple hard equality match. <b>Node affinity</b> is more expressive — supports operators and both <b>required</b> (hard) and <b>preferred</b> (soft) rules.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 16 · Advanced scheduling"
+  },
+  {
+   "guid": "zDniQJ)l5O",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::scheduling"
+   ],
+   "front": "How do taints and tolerations work together?",
+   "back": "A <b>taint</b> on a node repels pods that don't tolerate it (effects: NoSchedule, PreferNoSchedule, NoExecute). A pod with a matching <b>toleration</b> is allowed onto the tainted node. Taints push away; tolerations grant exceptions.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 16 · Advanced scheduling"
+  },
+  {
+   "guid": "kjo5trCEcW",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::scheduling"
+   ],
+   "front": "Node affinity vs pod affinity/anti-affinity?",
+   "back": "<ul><li><b>Node affinity</b> — attracts pods to nodes based on <b>node</b> labels.</li><li><b>Pod affinity</b> — co-locates a pod near other <b>pods</b> matching a selector (same topology domain).</li><li><b>Pod anti-affinity</b> — keeps pods <b>apart</b> (e.g. spread replicas across nodes/zones).</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 16 · Advanced scheduling"
+  },
+  {
+   "guid": "o?pmHrv#Id",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::extending"
+   ],
+   "front": "What is a Custom Resource Definition (CRD)?",
+   "back": "A way to register your own resource type with the API server, so you can create and manage custom objects (e.g. <code>kind: Database</code>) using the standard kubectl/API tooling, stored in etcd like built-in resources.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 18 · Extending Kubernetes"
+  },
+  {
+   "guid": "z``M#eCVWo",
+   "type": "basic",
+   "deck": "Kubernetes in Action",
+   "tags": [
+    "KIA::extending"
+   ],
+   "front": "What is the Operator pattern?",
+   "back": "A custom controller paired with one or more CRDs that encodes operational/domain knowledge for an application. It watches custom resources and reconciles real-world state (provisioning, backups, upgrades) — automating what a human operator would do.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 18 · Extending Kubernetes"
+  }
+ ]
+}

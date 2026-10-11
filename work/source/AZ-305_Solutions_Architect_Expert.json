@@ -1,0 +1,2255 @@
+{
+ "source_file": "AZ-305_Solutions_Architect_Expert.apkg",
+ "notes": [
+  {
+   "guid": "r58k(Q9KE+",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
+   ],
+   "front": "In Azure Monitor, what is the core difference between Metrics and Logs, and when do you recommend each?",
+   "back": "Metrics are lightweight, near-real-time numerical time-series values (e.g., CPU percentage) stored in a time-series database, best for fast dashboards and threshold-based alerting. Logs are structured/unstructured event records stored in a Log Analytics workspace and queried with Kusto Query Language (KQL), best for deep diagnostic investigation, correlation across resources, and complex analysis.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "JPG3}w!wBq",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
+   ],
+   "front": "A company wants a single query surface across logs from multiple Azure subscriptions and on-premises servers. What should you recommend?",
+   "back": "A centralized Log Analytics workspace. Diagnostic settings and the Azure Monitor Agent (AMA) can route platform logs, guest OS logs, and on-premises server logs (via Azure Arc) into one workspace for cross-resource Kusto Query Language (KQL) queries.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "I`LJ,$<X}`",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
+   ],
+   "front": "What replaced the legacy Log Analytics agent (Microsoft Monitoring Agent, MMA) for collecting guest-level telemetry from Azure VMs?",
+   "back": "The Azure Monitor Agent (AMA), configured through Data Collection Rules (DCRs). The legacy agent was retired in 2024 and its backend ingestion services are being shut down in 2026, so any AZ-305 design involving VM log collection should specify AMA, not MMA.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "f@)6SDzZ8$",
+   "type": "cloze",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
+   ],
+   "front": "",
+   "back": "",
+   "text": "In Azure Monitor Agent (AMA) architecture, a {{c1::Data Collection Rule (DCR)}} defines what data to collect, how to transform it, and where to send it.",
+   "image": "",
+   "analogy": "",
+   "extra": "DCRs decouple collection configuration from the agent itself, letting you target different rules to different machines via Azure Policy or manual association.",
+   "source": ""
+  },
+  {
+   "guid": "DRMoDWeZeh",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
+   ],
+   "front": "You need to route the Azure Activity Log and resource diagnostic logs to a Security Information and Event Management (SIEM) tool outside Azure. What Azure Monitor feature enables this, and what destination would you use?",
+   "back": "Diagnostic settings, streamed to an Event Hub. The Security Information and Event Management (SIEM) tool (or a Log Analytics workspace, storage account, or partner solution) then consumes the Event Hub stream.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "tF$0d;{5C_",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
+   ],
+   "front": "What are the four possible destinations for a diagnostic setting in Azure Monitor?",
+   "back": "Log Analytics workspace, Azure Storage account, Azure Event Hubs, and a partner solution (via Azure Monitor partner integrations).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "K3I+i(iHd[",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
+   ],
+   "front": "What is the difference between a metric alert and a log alert in Azure Monitor, in terms of latency and query cost?",
+   "back": "Metric alerts evaluate near-real-time numeric data with low latency (as fast as roughly 1 minute) and are cheaper to run frequently. Log alerts run a Kusto Query Language (KQL) query against a Log Analytics workspace on a schedule (minimum 5 minutes), giving richer logic but higher latency and query cost.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "NXI{|D~4bj",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
+   ],
+   "front": "What Azure Monitor component decouples 'what happens when an alert fires' (email, SMS, webhook, Azure Function, IT Service Management, or ITSM, ticket) from the alert rule itself?",
+   "back": "An Action Group. Alert rules reference one or more action groups, so the same notification/automation logic can be reused across many alert rules.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "vtilI%OZ@D",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
+   ],
+   "front": "When should you recommend multiple Log Analytics workspaces instead of one centralized workspace?",
+   "back": "When you need data sovereignty/regional residency across geographies, different retention or access-control requirements per business unit, separate billing/cost attribution, or strict data isolation between teams. Otherwise, a single centralized workspace simplifies querying, alerting, and cost management via commitment tiers.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "mt6.T56wZf",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
+   ],
+   "front": "In a Log Analytics workspace, what is the difference between workspace-context and resource-context access control?",
+   "back": "Workspace-context grants a user access to all data in the workspace they have workspace read permission on, regardless of which resource generated it. Resource-context grants access only to the logs belonging to the specific Azure resource the user has access to (via Azure role-based access control, or RBAC), even in a shared workspace — enabling multi-team workspaces without exposing everyone's data.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "l`$;IW]px:",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
+   ],
+   "front": "What is Application Insights, and how does it relate to Azure Monitor and Log Analytics?",
+   "back": "Application Insights is the Azure Monitor feature for Application Performance Monitoring (APM) — it collects request rates, response times, dependency calls, exceptions, and custom telemetry from live applications. Its data is stored in a Log Analytics workspace (workspace-based Application Insights), so it's queried with the same Kusto Query Language (KQL) as other Azure Monitor logs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "v}j>&O?fMh",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
+   ],
+   "front": "You need long-term (7+ year) retention of security logs for compliance, but the data is rarely queried and cost matters. What Log Analytics feature should you recommend?",
+   "back": "Archive a table's data beyond the interactive retention period, then use Search jobs or table restore to query it on demand. Archived data storage is billed at a much lower rate than interactive retention, trading query convenience for cost.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "JF>JekEY:I",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
+   ],
+   "front": "What Azure service provides network-level diagnostics such as IP flow verify, next-hop analysis, and packet capture for troubleshooting connectivity issues?",
+   "back": "Network Watcher. It's a regional service offering tools like Connection Monitor, Network Security Group (NSG) flow logs, IP flow verify, and packet capture for diagnosing Virtual Network (VNet) connectivity problems.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "QR,m%(!iPC",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
+   ],
+   "front": "What Azure Monitor feature lets you build interactive, shareable reports combining logs, metrics, and Azure Resource Graph data with visualizations, parameters, and text — beyond what a static dashboard offers?",
+   "back": "Azure Monitor Workbooks. They support parameterized, multi-step interactive documents ideal for post-incident reviews or capacity-planning reports, and can be version-controlled as Azure Resource Manager (ARM) templates.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "L~+zuqp!T2",
+   "type": "cloze",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Azure Monitor pricing for Log Analytics ingestion offers {{c1::commitment tiers}} (e.g., 100 GB/day, 200 GB/day) that lower the per-GB cost in exchange for a fixed daily minimum spend, appropriate for predictable high-volume ingestion.",
+   "image": "",
+   "analogy": "",
+   "extra": "For unpredictable or low-volume workloads, pay-as-you-go per-GB pricing avoids the fixed commitment.",
+   "source": ""
+  },
+  {
+   "guid": "u(+6!HNjNT",
+   "type": "cloze",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
+   ],
+   "front": "",
+   "back": "",
+   "text": "The default interactive retention period for a Log Analytics workspace is {{c1::30}} days, configurable up to 2 years for most tables (with the option to archive beyond that at a lower cost).",
+   "image": "",
+   "analogy": "",
+   "extra": "Interactive retention keeps data immediately queryable; the Archive tier keeps it cheaper but requires a search job or restore to query.",
+   "source": ""
+  },
+  {
+   "guid": "Q.95KQX7B.",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
+   ],
+   "front": "What is the current name for the identity service formerly called Azure Active Directory (Azure AD)?",
+   "back": "Microsoft Entra ID. Microsoft rebranded Azure AD to Microsoft Entra ID as part of the broader Microsoft Entra product family (which also includes Permissions Management and Verified ID); the underlying tenant/directory concepts are unchanged.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "MhB|~/NEjV",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
+   ],
+   "front": "A company wants passwordless authentication resistant to phishing. Name two Microsoft Entra ID-supported methods and briefly describe each.",
+   "back": "Windows Hello for Business (device-bound biometric/PIN unlocking a cryptographic key) and FIDO2 security keys (hardware tokens using public-key cryptography). Both eliminate shared secrets that can be phished, unlike passwords or even Short Message Service (SMS) one-time codes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "snu`zRc35.",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
+   ],
+   "front": "What Microsoft Entra ID feature lets you enforce access policies like 'require multifactor authentication when signing in from an untrusted network' or 'block legacy authentication protocols'?",
+   "back": "Conditional Access. It evaluates signals (user, location, device state, application, risk level) at sign-in time and applies grant/session controls, forming the core of a Zero Trust access strategy.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "y(cq4k?AI~",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
+   ],
+   "front": "Compare the three hybrid identity synchronization methods available with Microsoft Entra Connect: Password Hash Synchronization, Pass-through Authentication, and Federation.",
+   "back": "Password Hash Synchronization (PHS) syncs a hash of the password hash to Microsoft Entra ID, so authentication happens entirely in the cloud — simplest, most resilient. Pass-through Authentication (PTA) validates passwords against on-premises Active Directory in real time via a lightweight agent, keeping passwords on-premises but adding an on-premises dependency. Federation (e.g., Active Directory Federation Services, or AD FS) delegates authentication entirely to an on-premises identity provider — most complex, needed only for specific requirements like smart-card auth or on-premises multifactor authentication (MFA) at sign-in.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "LRXpK,ZZd,",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
+   ],
+   "front": "What is the difference between Microsoft Entra ID B2B (Business-to-Business) and Microsoft Entra External ID / B2C (Business-to-Consumer)?",
+   "back": "B2B (Business-to-Business) invites external partner/organization users to access your resources as guests, using their own home-tenant credentials — for cross-company collaboration. B2C/External ID is for building customer-facing applications where external consumers sign up and authenticate with social or local accounts, in a separate, customizable tenant.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "s:?x:/g.eq",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
+   ],
+   "front": "When should you recommend a system-assigned managed identity versus a user-assigned managed identity for an Azure resource?",
+   "back": "System-assigned: tied 1:1 to a single resource's lifecycle (created and deleted with it) — use when the identity's permissions are unique to that one resource. User-assigned: an independent Azure resource that can be attached to multiple resources (e.g., several Virtual Machines, or VMs, sharing one identity) and persists independently — use when you need to pre-provision an identity, share it across resources, or manage its lifecycle separately.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "g(k&r8F2!8",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
+   ],
+   "front": "Why should you recommend a managed identity over storing a connection string or application secret in code or configuration for accessing Azure resources?",
+   "back": "A managed identity eliminates the need to manage, rotate, or protect credentials — Microsoft Entra ID handles authentication automatically for the resource, and access to target resources is granted via Azure role-based access control (RBAC), removing an entire class of credential-leakage risk.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "BQod%W~LAf",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
+   ],
+   "front": "What is the fundamental difference between Azure role-based access control (RBAC) and Azure Policy?",
+   "back": "Azure RBAC controls WHO can do WHAT to a resource (identity-to-action authorization, e.g., 'can this user restart this Virtual Machine?'). Azure Policy controls WHAT resources can look like or exist (governance/compliance rules, e.g., 'VMs must use approved SKUs'), independent of who is deploying them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "y%iC>05Ua",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
+   ],
+   "front": "A team needs a permission set that doesn't map to any Azure built-in role (e.g., 'restart VMs and read logs but not create/delete resources'). What should you recommend?",
+   "back": "A custom role definition, scoped to the narrowest appropriate level (resource group or subscription), combining specific Actions/NotActions/DataActions. Custom roles follow the principle of least privilege when no built-in role fits.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "I$ElDUP<No",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
+   ],
+   "front": "What Azure service centrally stores and manages secrets, encryption keys, and Transport Layer Security (TLS) certificates, and what are the two access-control models it supports?",
+   "back": "Azure Key Vault. It supports the legacy vault access policy model (vault-scoped permissions) and the Azure role-based access control (RBAC) permission model, integrated with standard Azure RBAC for fine-grained, auditable, Conditional-Access-aware control — RBAC is the recommended model for new deployments.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "lOSWLVV]IW",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
+   ],
+   "front": "What Azure service should you recommend when an organization needs FIPS 140-2 Level 3 validated, single-tenant Hardware Security Modules (HSMs) for cryptographic key storage, beyond what the standard Key Vault provides?",
+   "back": "Azure Key Vault Managed HSM — a dedicated, single-tenant HSM pool giving full administrative and cryptographic control, used when regulatory requirements mandate FIPS 140-2 Level 3 (versus Level 2 for standard Key Vault).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "Pd4vUJQ8!b",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
+   ],
+   "front": "What Microsoft Entra ID feature provides just-in-time, time-bound elevation to privileged roles (like Global Administrator) instead of standing access?",
+   "back": "Microsoft Entra Privileged Identity Management (PIM). Eligible role assignments require activation (often with approval and multifactor authentication) for a limited duration, reducing the attack surface of always-on admin accounts.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "hHJ3KHXefE",
+   "type": "cloze",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Microsoft Entra Privileged Identity Management (PIM) requires eligible role assignments to be {{c1::activated}} before they grant standing permissions, typically for a limited, admin-defined time window.",
+   "image": "",
+   "analogy": "",
+   "extra": "Activation can require justification, approval, and multifactor authentication, replacing always-on admin access with just-in-time elevation.",
+   "source": ""
+  },
+  {
+   "guid": "tA5-m#9T5x",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
+   ],
+   "front": "For authorizing access to on-premises resources from a hybrid environment, what is Microsoft Entra Domain Services and when would you recommend it over extending on-premises Active Directory Domain Services (AD DS)?",
+   "back": "Microsoft Entra Domain Services provides managed, cloud-hosted domain services (Kerberos/NTLM authentication, group policy, LDAP) synchronized from Microsoft Entra ID, without deploying or patching domain controllers. Recommend it when legacy apps need traditional AD DS-style authentication in Azure but there's no desire to extend the on-premises AD DS forest into Azure via Virtual Network domain controllers.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "OTA?9IcOK)",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
+   ],
+   "front": "What Microsoft Entra ID feature should you recommend to periodically verify that guest users or group memberships are still needed, satisfying compliance requirements for access recertification?",
+   "back": "Access Reviews (part of Microsoft Entra ID Governance). They let resource owners or reviewers periodically confirm or revoke access for users, groups, or applications on a defined schedule.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "dW,.V%rg!g",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Governance"
+   ],
+   "front": "Describe the Azure resource hierarchy from top to bottom, and the primary purpose of each level.",
+   "back": "Management Groups (organize multiple subscriptions and apply policy/RBAC at scale) then Subscriptions (billing boundary and a hard scale/quota boundary) then Resource Groups (lifecycle-based grouping of related resources, deployed/deleted together) then Resources (individual services like a VM or storage account).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "r~;Z?I&`75",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Governance"
+   ],
+   "front": "What are two common criteria for deciding subscription boundaries in a large enterprise, beyond billing?",
+   "back": "Environment separation (e.g., production vs. non-production, for blast-radius isolation) and hitting Azure scale limits/quotas that apply per subscription, or differing governance/compliance requirements per business unit.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "LjCUG.da>f",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Governance"
+   ],
+   "front": "What Azure governance feature lets you enforce a naming and metadata convention (e.g., every resource must have a CostCenter tag) across a subscription or management group?",
+   "back": "Azure Policy, using a policy definition with the 'append' or 'deny' effect for required tags — often combined with the 'modify' effect to add missing tags automatically at deployment or via remediation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "JN(egF{5l)",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Governance"
+   ],
+   "front": "Explain the difference between the Azure Policy effects 'deny', 'audit', and 'deployIfNotExists'.",
+   "back": "Deny blocks a non-compliant resource from being created or updated. Audit allows the operation but flags the resource as non-compliant for reporting. DeployIfNotExists automatically deploys a related resource or configuration (e.g., enabling diagnostic settings) when a condition isn't met, remediating rather than just flagging.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "sh35v-nThZ",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Governance"
+   ],
+   "front": "What is an Azure Policy initiative (policySetDefinition), and why recommend one over assigning individual policies?",
+   "back": "An initiative groups multiple related policy definitions into a single assignable set (e.g., a regulatory benchmark that bundles dozens of controls). Assigning one initiative is simpler to manage, version, and report on than assigning many individual policies separately.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "jXBOSIw,b-",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Governance"
+   ],
+   "front": "Azure Blueprints is being retired. What two services does Microsoft recommend migrating to, and what is the primary replacement for the management-plane locking/grouping behavior Blueprints provided?",
+   "back": "Template Specs (for storing and versioning a reusable Azure Resource Manager, or ARM, template/Bicep file) and Azure Deployment Stacks (recommended replacement for Blueprints' grouping, lifecycle management, and deny-assignment locking behavior). Blueprints is being phased out beginning July 2026, retiring January 2027.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "k$NTlG2D-=",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Governance"
+   ],
+   "front": "What Azure service aggregates compliance status against regulatory standards and internal benchmarks, giving a secure score and improvement actions?",
+   "back": "Microsoft Defender for Cloud's regulatory compliance dashboard (secure score), often paired with Microsoft Purview Compliance Manager for broader organizational compliance assessment across Microsoft 365 and Azure.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "ufdvoJ%Qs|",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Governance"
+   ],
+   "front": "A company wants to prevent accidental deletion or modification of a critical production resource, regardless of a user's role-based access control (RBAC) permissions. What should you recommend?",
+   "back": "An Azure resource lock (CanNotDelete or ReadOnly), applied at the resource, resource group, or subscription scope. Locks apply on top of RBAC and block the specified operation for all users, including owners, until the lock is removed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "KW.s,A5q$V",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Governance"
+   ],
+   "front": "What is the difference in scope and purpose between a management-group-level Azure Policy assignment and a resource-group-level assignment?",
+   "back": "Management-group-level assignments apply governance consistently across many subscriptions (e.g., an organization-wide rule against public IPs on VMs), enforcing standards at scale. Resource-group-level assignments target a narrower, specific set of resources — useful for exceptions or workload-specific rules that shouldn't apply organization-wide.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "cXV!kl2K>&",
+   "type": "cloze",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Governance"
+   ],
+   "front": "",
+   "back": "",
+   "text": "{{c1::Microsoft Entra ID Governance}} combines entitlement management, access reviews, and Privileged Identity Management (PIM) to automate the request, approval, provisioning, and periodic recertification of identity and access lifecycle.",
+   "image": "",
+   "analogy": "",
+   "extra": "Entitlement management specifically lets you package multiple resources (groups, apps, sites) into an 'access package' that users can request, subject to approval workflows and expiration policies.",
+   "source": ""
+  },
+  {
+   "guid": "ipILz`.J9{",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Governance"
+   ],
+   "front": "What should you recommend to give an external auditor time-limited, read-only visibility into a subscription's resource configuration for a compliance review, without granting standing access?",
+   "back": "A Microsoft Entra ID B2B guest invitation combined with a Privileged Identity Management (PIM) eligible role assignment (e.g., Reader) with a defined activation window and expiration, avoiding standing access.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "g(=T*r[w%P",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Governance"
+   ],
+   "front": "What is the Azure Well-Architected Framework, and how does it relate to the AZ-305 exam's 'recommend a solution' style questions?",
+   "back": "It's Microsoft's set of architectural best-practice guidance organized around five pillars: Reliability, Security, Cost Optimization, Operational Excellence, and Performance Efficiency. AZ-305 scenario questions implicitly test whether your recommendation balances these pillars correctly for the stated business requirements, not just whether it technically works.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "Hf!9D0$J!/",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Governance"
+   ],
+   "front": "What is the Cloud Adoption Framework (CAF) for Azure, and how does it differ in scope from the Well-Architected Framework?",
+   "back": "The Cloud Adoption Framework (CAF) is broader, end-to-end guidance covering an organization's entire cloud journey — strategy, planning, readiness, adoption, governance, and management. The Well-Architected Framework is narrower, focused on the design quality of individual workloads once you're building or migrating them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "Dzy!QIK/-J",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Governance"
+   ],
+   "front": "What governance mechanism should you recommend to ensure that only pre-approved Virtual Machine (VM) images or resource SKUs are deployable, blocking anything else at deployment time?",
+   "back": "Azure Policy with a 'deny' effect (e.g., an allowed VM SKUs policy or allowed resource types policy). This is enforced before the resource is created, unlike RBAC, which only controls who can attempt the deployment.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "C9u.d(n.st",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Governance"
+   ],
+   "front": "What is a resource tagging strategy, and name two practical governance uses of tags beyond documentation.",
+   "back": "A consistent key-value labeling scheme (e.g., CostCenter, Environment, Owner) applied across resources. Practical uses: cost allocation/chargeback in Cost Management reports, and scoping Azure Policy or automation (e.g., auto-shutdown) to resources with a specific tag value.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "wRT_e18CUb",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Data_Storage::Relational"
+   ],
+   "front": "Compare Azure SQL Database, Azure SQL Managed Instance, and SQL Server on an Azure Virtual Machine (VM) in terms of management overhead and instance-level compatibility.",
+   "back": "Azure SQL Database: fully managed Platform as a Service (PaaS), database-scoped (no instance-level features like cross-database queries or SQL Agent), least management overhead. SQL Managed Instance: near-100% instance-level compatibility (cross-database queries, SQL Agent) as PaaS, ideal for lift-and-shift migrations needing instance features. SQL Server on Azure VM: Infrastructure as a Service (IaaS), full control and 100% compatibility, but you patch the operating system and manage the SQL Server instance yourself.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "CmhZf1r1(v",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Data_Storage::Relational"
+   ],
+   "front": "What is the key difference between the DTU-based and vCore-based purchasing models for Azure SQL Database?",
+   "back": "DTU (Database Transaction Unit) bundles compute, memory, and I/O into a single blended metric with simplified tiers — easier to start with but less transparent. vCore lets you independently choose compute and storage, supports Azure Hybrid Benefit for SQL Server licensing cost savings, and offers more granular scaling and cost control — recommended for most production and enterprise scenarios.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "v4qZ?(ks8K",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Data_Storage::Relational"
+   ],
+   "front": "Name the three Azure SQL Database (vCore) service tiers and briefly distinguish them.",
+   "back": "General Purpose (balanced compute/storage on remote storage, for most business workloads), Business Critical (local NVMe storage with built-in high-availability replicas for low-latency, high-IOPS workloads), and Hyperscale (independently scalable storage up to 100 TB+ with fast backups/restores, for very large or rapidly growing databases).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "M~UWFNy0$X",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Data_Storage::Relational"
+   ],
+   "front": "A Software-as-a-Service (SaaS) provider hosts hundreds of small, independent tenant databases with unpredictable, non-overlapping usage spikes. What Azure SQL Database feature should you recommend to control cost?",
+   "back": "An Elastic Pool. It shares a pool of compute/storage resources across many databases, billed at the pool level, so peaks from different tenants are absorbed by shared capacity instead of over-provisioning each database individually.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "EC`W.d@.cO",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Data_Storage::Relational"
+   ],
+   "front": "How should you recommend scaling read-heavy reporting workloads off a primary Azure SQL Database without impacting the transactional workload?",
+   "back": "Read replicas — either the built-in read-scale-out replica included with Business Critical/Premium tiers, or geo-replicated secondary databases — so reporting queries are directed to a replica's connection endpoint instead of the primary.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "g0!Fk1_k{-",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Data_Storage::Relational"
+   ],
+   "front": "What is an Azure SQL Database auto-failover group, and what does it provide beyond simple active geo-replication?",
+   "back": "A failover group wraps one or more databases with geo-replication and adds a stable listener endpoint plus automatic (or manual) failover orchestration to a secondary region. Applications connect to the group's listener, so failover doesn't require reconfiguring connection strings.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "~|??eV?|5",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Data_Storage::Relational"
+   ],
+   "front": "Compare Point-in-Time Restore (PITR) and Long-Term Retention (LTR) for Azure SQL Database backups.",
+   "back": "Point-in-Time Restore (PITR) uses automated backups to restore to any point within a shorter retention window, for operational recovery from mistakes or corruption. Long-Term Retention (LTR) keeps periodic full backups for up to 10 years, for compliance/audit requirements, restored as a new database.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "M]7ELVD>cB",
+   "type": "cloze",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Data_Storage::Relational"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Azure SQL Database Point-in-Time Restore (PITR) keeps a default retention window of {{c1::7}} days, configurable up to 35 days.",
+   "image": "",
+   "analogy": "",
+   "extra": "PITR uses a chain of full, differential, and transaction-log backups automatically managed by the service.",
+   "source": ""
+  },
+  {
+   "guid": "d(2NStjuDB",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Data_Storage::Relational"
+   ],
+   "front": "When should you recommend Azure Database for PostgreSQL Flexible Server (or MySQL Flexible Server) over Azure SQL Database?",
+   "back": "When the application requires the open-source PostgreSQL or MySQL engine specifically (existing code/tooling dependency), and you want a managed Platform as a Service (PaaS) offering with zone-redundant high availability, custom maintenance windows, and cost-efficient burstable compute tiers — rather than Microsoft SQL Server's engine and Transact-SQL (T-SQL) dialect.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "I;Gnc]HL7}",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Data_Storage::Relational"
+   ],
+   "front": "What data protection mechanism is enabled by default on all new Azure SQL Database and Managed Instance deployments, and what threat does it primarily mitigate?",
+   "back": "Transparent Data Encryption (TDE), encrypting data at rest (data files, log files, backups) with the Advanced Encryption Standard (AES). It mitigates the risk of physical media theft or unauthorized access to raw storage exposing readable data.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "wb4-kf0)#D",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Data_Storage::Relational"
+   ],
+   "front": "A regulated customer requires that they, not Microsoft, control the encryption keys protecting their Azure SQL Database, with the ability to revoke access. What should you recommend?",
+   "back": "Transparent Data Encryption (TDE) with customer-managed keys (also called 'Bring Your Own Key'), storing the key in Azure Key Vault. The customer retains control over key rotation and can revoke Key Vault access to render the database inaccessible.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "l7y*`{pw:N",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Data_Storage::Relational"
+   ],
+   "front": "What Azure SQL feature continuously monitors for anomalous database activity (e.g., SQL injection, unusual access patterns) and alerts administrators?",
+   "back": "Microsoft Defender for SQL (part of Microsoft Defender for Cloud), providing vulnerability assessment and advanced threat protection with actionable alerts.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "yfdq{Cg7Z&",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Data_Storage::Relational"
+   ],
+   "front": "How do you recommend achieving horizontal write scalability beyond a single Azure SQL Database instance for an extremely high-throughput application?",
+   "back": "Sharding — partitioning data across multiple independent databases (e.g., using the Elastic Database tools/split-merge, or a custom sharding key in application logic) since a single Azure SQL Database instance has a compute ceiling per tier that vertical scaling alone can't exceed indefinitely.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "A1)1Oa!@?x",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Data_Storage::Semi_Unstructured"
+   ],
+   "front": "What is Azure Cosmos DB's key differentiator versus a traditional relational database for global applications?",
+   "back": "Cosmos DB offers turnkey global distribution (multi-region read/write replication with single-digit-millisecond latency Service Level Agreements, or SLAs), elastic horizontal scale of throughput and storage, and multiple consistency-level choices — designed for planet-scale, schema-flexible applications rather than fixed-schema transactional workloads.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "L@qyR$;rBY",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Data_Storage::Semi_Unstructured"
+   ],
+   "front": "Name Cosmos DB's five consistency levels from strongest to weakest, and briefly what each guarantees.",
+   "back": "Strong (linearizability, reads always see the latest committed write), Bounded Staleness (reads lag writes by a configured time/version bound), Session (a single client's own reads/writes are consistent, the common default), Consistent Prefix (reads never see out-of-order writes), Eventual (no ordering guarantee, lowest latency and highest availability).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "n?N}Ly0Z[u",
+   "type": "cloze",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Data_Storage::Semi_Unstructured"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Azure Cosmos DB's default and most commonly used consistency level is {{c1::Session}} consistency, which guarantees a single client's own writes are visible in its own subsequent reads.",
+   "image": "",
+   "analogy": "",
+   "extra": "Session consistency balances strong-enough guarantees for most applications against the latency and availability cost of Strong consistency.",
+   "source": ""
+  },
+  {
+   "guid": "M%=hit%gaX",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Data_Storage::Semi_Unstructured"
+   ],
+   "front": "An application team is migrating an existing MongoDB-based application to Azure with minimal code changes. What should you recommend?",
+   "back": "Azure Cosmos DB for MongoDB (the MongoDB-compatible Application Programming Interface, or API, of Cosmos DB), which lets existing MongoDB drivers and tools connect with little to no application code change, while gaining Cosmos DB's global distribution and elastic scale.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "b#}X/by,Nh",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Data_Storage::Semi_Unstructured"
+   ],
+   "front": "What are the four Azure Storage account service types, and give a one-line purpose for each?",
+   "back": "Blob (object storage for unstructured data — files, images, backups, data lake), Files (fully managed SMB/NFS file shares, a cloud replacement for on-premises file servers), Queue (simple asynchronous message queuing between application components), Table (NoSQL key-value store for semi-structured data, largely superseded by Cosmos DB Table API for new designs).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "LZ{`_#Cp`J",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Data_Storage::Semi_Unstructured"
+   ],
+   "front": "Compare the Hot, Cool, Cold, and Archive access tiers for Azure Blob Storage, in terms of storage cost, access cost, and retrieval latency.",
+   "back": "Hot: highest storage cost, lowest access cost, immediate access, for frequently accessed data. Cool: lower storage cost, higher access cost, immediate access, for infrequently accessed data stored 30+ days. Cold: even lower storage cost, higher access cost than Cool, immediate access, for rarely accessed data stored 90+ days. Archive: lowest storage cost, highest access cost, hours of retrieval latency (rehydration required), for long-term compliance/audit data.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "O$v_G^,JOy",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Data_Storage::Semi_Unstructured"
+   ],
+   "front": "What Azure Storage redundancy option should you recommend for an application requiring high availability within a region and resilience to a datacenter-level failure, without needing cross-region replication?",
+   "back": "Zone-Redundant Storage (ZRS), which synchronously replicates data across three Availability Zones within one region, tolerating a full zone/datacenter failure, without the cost or data residency implications of geo-replication.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "u-m|f;XVdP",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Data_Storage::Semi_Unstructured"
+   ],
+   "front": "Explain the difference between Geo-Redundant Storage (GRS) and Read-Access Geo-Redundant Storage (RA-GRS).",
+   "back": "GRS asynchronously replicates data to a secondary, paired region, but that secondary is not readable unless Microsoft initiates a failover. RA-GRS adds a read-only endpoint to the secondary region, letting applications read from the secondary region even before any failover occurs, improving read availability during a primary-region outage.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "wSj]{w{HS!",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Data_Storage::Semi_Unstructured"
+   ],
+   "front": "What Azure storage solution should you recommend as the foundation for a big data analytics platform requiring hierarchical namespace, fine-grained POSIX-style access control, and Hadoop-compatible access?",
+   "back": "Azure Data Lake Storage Gen2 — Blob Storage with a hierarchical namespace enabled, giving efficient directory/file-level operations, POSIX-style access control lists (ACLs), and compatibility with Hadoop Distributed File System (HDFS)-based analytics engines like Azure Databricks and Synapse.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "FJ%nLd?<@i",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Data_Storage::Semi_Unstructured"
+   ],
+   "front": "A company is lifting-and-shifting an on-premises file server used by Windows and Linux clients via SMB and NFS protocols. What Azure service should you recommend, and what identity integration does it support?",
+   "back": "Azure Files (Premium tier for performance-sensitive workloads), supporting both SMB and NFS protocols. It integrates with on-premises Active Directory Domain Services or Microsoft Entra Kerberos, preserving existing file-share permissions.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "2?5{]?&-:",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Data_Storage::Semi_Unstructured"
+   ],
+   "front": "What Azure service should you recommend for a High-Performance Computing (HPC) or enterprise workload requiring very low, consistent latency and high-throughput shared storage (e.g., SAP HANA, electronic design automation)?",
+   "back": "Azure NetApp Files — a fully managed, high-performance NFS/SMB file service built on NetApp technology, offering sub-millisecond latency tiers, well beyond what standard Azure Files provides.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "LmF!viwUgS",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Data_Storage::Semi_Unstructured"
+   ],
+   "front": "What is the durability distinction between choosing Locally Redundant Storage (LRS) versus Zone-Redundant Storage (ZRS) or Geo-Redundant Storage (GRS) for a storage account, and when is LRS still an acceptable recommendation?",
+   "back": "LRS replicates three synchronous copies within a single datacenter, protecting against drive/rack failure but not a datacenter-level disaster. It's acceptable when the application itself provides geo-resilience, or when cost is the overriding constraint for non-critical or reproducible data.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "Q!|,*A+U{,",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Data_Storage::Semi_Unstructured"
+   ],
+   "front": "What should you recommend to protect an Azure Storage account's blob data against accidental deletion or ransomware-style overwrite, allowing recovery of a prior version?",
+   "back": "Blob versioning combined with soft delete for blobs and containers, and optionally immutable storage policies (time-based retention or legal hold) to make data write-once-read-many (WORM) for compliance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "c;|*8@cI6=",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Data_Storage::Integration"
+   ],
+   "front": "What Azure service should you recommend for orchestrating scheduled Extract-Transform-Load (ETL) or Extract-Load-Transform (ELT) pipelines that move and transform data across on-premises and cloud sources?",
+   "back": "Azure Data Factory (or Synapse Pipelines within Azure Synapse Analytics, which shares the same pipeline engine). It provides many built-in connectors, a visual pipeline designer, and a Self-Hosted Integration Runtime for reaching on-premises data sources.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "E&`_4<7:27",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Data_Storage::Integration"
+   ],
+   "front": "Compare Azure Synapse Analytics' dedicated SQL pool and serverless SQL pool consumption models.",
+   "back": "Dedicated SQL pool: pre-provisioned, reserved compute (billed hourly regardless of usage) for predictable, high-performance data warehouse workloads. Serverless SQL pool: pay-per-query (per Terabyte scanned) with no infrastructure to provision, ideal for ad hoc exploration or infrequent querying directly over data lake files.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "MDCa=P_E@#",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Data_Storage::Integration"
+   ],
+   "front": "When should you recommend Azure Databricks over Azure Synapse Analytics for a data engineering workload?",
+   "back": "When the team needs a collaborative, notebook-first Apache Spark environment with strong support for machine learning/data science workflows, complex custom transformations in Python/Scala, and Delta Lake's ACID transaction layer over a data lake — Databricks is optimized for engineering-heavy, code-first pipelines rather than SQL-centric warehousing.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "t?C?m@HXtn",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Data_Storage::Integration"
+   ],
+   "front": "Compare Azure Service Bus, Azure Event Grid, and Azure Event Hubs by their primary messaging pattern.",
+   "back": "Service Bus: reliable, ordered enterprise messaging with queues (point-to-point) and topics (publish/subscribe), supporting transactions and sessions, for discrete business messages that must not be lost. Event Grid: lightweight, reactive event routing with push delivery to many subscribers, for event-driven architecture 'glue'. Event Hubs: high-throughput streaming ingestion of large volumes of telemetry/log data for real-time analytics pipelines.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "eMG(Oc_s7m",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Data_Storage::Integration"
+   ],
+   "front": "What Azure service should you recommend for real-time analytics over a streaming data source (e.g., detecting anomalies in sensor telemetry as it arrives), using a SQL-like query language?",
+   "back": "Azure Stream Analytics — a fully managed, serverless real-time analytics engine that reads from Event Hubs, IoT Hub, or Blob Storage, applies windowed SQL-like queries, and writes results to outputs like Power BI, Storage, or Cosmos DB.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "fTLcex|xNE",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Data_Storage::Integration"
+   ],
+   "front": "What should you recommend for ingesting and querying very high-volume, high-velocity time-series/log data with ad hoc exploratory query performance?",
+   "back": "Azure Data Explorer (Kusto), optimized for fast ad hoc analytics over large volumes of structured, semi-structured, and time-series data using Kusto Query Language (KQL) — the same engine underlying Log Analytics.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "M.sn7Hn+yB",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Data_Storage::Integration"
+   ],
+   "front": "A company needs to combine data from Azure SQL Database, an on-premises Oracle database, and a Software-as-a-Service (SaaS) application into a single nightly reporting dataset. What Azure Data Factory component enables reaching the on-premises source?",
+   "back": "The Self-Hosted Integration Runtime — software installed on an on-premises (or Virtual Network-connected) machine that securely bridges Azure Data Factory to data sources that aren't publicly reachable, without opening inbound firewall ports.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "zgjS4K.FLx",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Business_Continuity::Backup_DR"
+   ],
+   "front": "Define Recovery Point Objective (RPO) and Recovery Time Objective (RTO), and explain how each drives a different design decision.",
+   "back": "Recovery Point Objective (RPO) is the maximum acceptable data loss, measured in time — it drives your backup/replication FREQUENCY. Recovery Time Objective (RTO) is the maximum acceptable downtime before service is restored — it drives your FAILOVER AUTOMATION and standby-capacity design (cold/warm/hot standby).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "rF&l>;&06~",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Business_Continuity::Backup_DR"
+   ],
+   "front": "What Azure service should you recommend for scheduled, application-consistent backup of Azure VMs, on-premises servers, and platform databases, with centralized policy management?",
+   "back": "Azure Backup, using a Recovery Services vault. It supports Azure VMs, on-premises machines/files (via the Microsoft Azure Recovery Services, or MARS, agent), Azure Files shares, and SQL Server/SAP HANA on Azure VMs, all governed by reusable backup policies.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "LD~bB9c=T`",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Business_Continuity::Backup_DR"
+   ],
+   "front": "Compare Azure Backup and Azure Site Recovery by primary purpose.",
+   "back": "Azure Backup protects against data loss/corruption by creating recoverable point-in-time copies (long retention, granular restore), answering 'can I get my data back'. Azure Site Recovery replicates entire workloads continuously to a secondary region/site and orchestrates failover to keep the application RUNNING during a regional disaster, answering 'can my application keep running', with much lower RTO than restoring from backup.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "jvK&4/SJ)?",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Business_Continuity::Backup_DR"
+   ],
+   "front": "What backup vault redundancy setting should you recommend to protect Azure Backup data itself against a regional disaster, and what tradeoff does it involve?",
+   "back": "Geo-Redundant Storage (GRS) for the Recovery Services vault, versus the cheaper but region-only Locally Redundant Storage (LRS). GRS is the safer default for disaster recovery scenarios since it protects the backups even if the primary region is lost.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "EQadTn:1[S",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Business_Continuity::Backup_DR"
+   ],
+   "front": "What Azure Backup feature protects backup data against a ransomware attack that compromises an administrator account and attempts to delete backups?",
+   "back": "Soft delete (deleted backup data is retained and recoverable for a defined period, typically 14 days, even after a delete command) combined with Multi-User Authorization (requiring a second approver via Azure Resource Guard for critical operations like disabling soft delete or reducing retention).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "C63_{!y;8o",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Business_Continuity::Backup_DR"
+   ],
+   "front": "For an Azure SQL Database, what is the recommended cross-region disaster recovery approach versus for SQL Server running on an Azure VM?",
+   "back": "Azure SQL Database: use auto-failover groups (built-in geo-replication with automatic failover), no separate backup product needed for DR. SQL Server on an Azure VM: use Azure Site Recovery to replicate the whole VM, or SQL Server Always On Availability Groups spanning regions for database-level DR with application-aware failover.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "mv$AC9sd}9",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Business_Continuity::Backup_DR"
+   ],
+   "front": "What should you recommend to protect and enable recovery of unstructured data in Azure Blob Storage against accidental overwrite or deletion, distinct from storage account redundancy (LRS/GRS/ZRS)?",
+   "back": "Blob soft delete, container soft delete, and blob versioning — these protect against logical/application-level data loss (a mistaken delete or overwrite), which storage redundancy does NOT protect against, since redundancy replicates the mistake too.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "bc=>EE688&",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Business_Continuity::Backup_DR"
+   ],
+   "front": "A company must be able to restore an Azure VM's backup data into a different Azure region than where it normally resides, for compliance testing. What Azure Backup capability enables this?",
+   "back": "Cross Region Restore — available when the Recovery Services vault uses Geo-Redundant Storage (GRS) or Read-Access Geo-Redundant Storage (RA-GRS), letting you restore backed-up data directly in the secondary (paired) region without waiting for an actual regional failover.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "i>}k=4-6R&",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Business_Continuity::Backup_DR"
+   ],
+   "front": "What is the Azure Site Recovery replication frequency and typical achievable Recovery Point Objective (RPO) for Azure-to-Azure VM replication?",
+   "back": "Continuous, near-synchronous replication of disk writes, typically achieving an RPO in the range of tens of seconds to a few minutes — far tighter than a nightly or hourly backup job could provide.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "b9N0I$h[~5",
+   "type": "cloze",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Business_Continuity::Backup_DR"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Azure Site Recovery for Azure-to-Azure VM replication typically achieves a Recovery Point Objective (RPO) as low as {{c1::about 30 seconds to a few minutes}} due to near-continuous, near-synchronous replication of disk writes.",
+   "image": "",
+   "analogy": "",
+   "extra": "This is why Site Recovery, not periodic backup, is the recommendation whenever the requirement is keeping the application running (low RTO/RPO) rather than just recovering data.",
+   "source": ""
+  },
+  {
+   "guid": "wMJ1oF]tNU",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Business_Continuity::Backup_DR"
+   ],
+   "front": "How should you design backup retention to satisfy both a short-term operational recovery need (restore yesterday's accidental delete) and a 7-year regulatory retention requirement?",
+   "back": "Combine a short-term backup policy (e.g., daily backups retained 30 days) for operational recovery with long-term retention (LTR) policies that retain periodic (e.g., monthly or yearly) backup copies for up to the required 7+ years, layered on one backup policy.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "dgp!p.pcNH",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Business_Continuity::High_Availability"
+   ],
+   "front": "What is the difference between an Availability Set and Availability Zones for Azure Virtual Machines?",
+   "back": "An Availability Set distributes VMs across multiple fault domains (separate power/network) and update domains (separate maintenance windows) WITHIN a single datacenter, protecting against rack-level failure. Availability Zones distribute VMs across physically separate datacenters WITHIN a region, protecting against a full datacenter failure — a stronger guarantee.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "HDWG<d:tbn",
+   "type": "cloze",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Business_Continuity::High_Availability"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Availability Zones within an Azure region offer a Service Level Agreement (SLA) of {{c1::99.99%}} for VMs distributed across at least two zones.",
+   "image": "",
+   "analogy": "",
+   "extra": "This is a stronger SLA than an Availability Set alone (99.95%), because zones protect against a full datacenter-level failure, not just a rack-level failure.",
+   "source": ""
+  },
+  {
+   "guid": "o^!h(a]P@4",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Business_Continuity::High_Availability"
+   ],
+   "front": "What Azure feature should you recommend to automatically scale a stateless web tier both horizontally in response to load, while distributing traffic across zones?",
+   "back": "A Virtual Machine Scale Set (VMSS) configured as zone-redundant, paired with autoscale rules based on metrics like CPU percentage or queue length, and fronted by a Load Balancer or Application Gateway to distribute traffic.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "wQ:+Ur?Z%U",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Business_Continuity::High_Availability"
+   ],
+   "front": "Compare the uniform and flexible orchestration modes for Virtual Machine Scale Sets (VMSS).",
+   "back": "Uniform orchestration: identical VM instances from one model, optimized for large-scale stateless workloads, simpler but less flexible. Flexible orchestration: instances can differ (different VM sizes, mixed on-demand/Spot), each is a standard VM with individual identity, supports high availability distribution across zones/fault domains, and is the recommended mode for new deployments needing Availability Set-like guarantees at scale.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "FptFUU<eqX",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Business_Continuity::High_Availability"
+   ],
+   "front": "What is the built-in high availability architecture of the Azure SQL Database Business Critical and Premium tiers, without any extra configuration?",
+   "back": "An Always On availability-group-based architecture with additional replicas kept in sync (locally, and optionally in a different Availability Zone if zone-redundant configuration is enabled), providing near-instant automatic failover and a readable secondary for read-scale-out, at no separate cost beyond the tier itself.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "g{vN~VDw[:",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Business_Continuity::High_Availability"
+   ],
+   "front": "How does Azure Cosmos DB achieve high availability and low-latency reads for a globally distributed user base?",
+   "back": "By enabling multi-region replication so data is physically close to users worldwide, combined with automatic failover priorities so the account fails over to another region without application changes. Multi-region WRITES additionally allow all regions to accept writes, minimizing write latency and improving availability further.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "F!~g,;mozP",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Business_Continuity::High_Availability"
+   ],
+   "front": "What is the purpose of region pairs in Azure, and how do they relate to a business continuity design?",
+   "back": "Azure pairs regions within the same geography with physical isolation and sequential planned-maintenance updates, so a paired region isn't updated simultaneously. Many geo-redundant services (Storage GRS, SQL geo-replication defaults) use the paired region as the DR target, minimizing simultaneous-outage risk.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "pezXY=KUu8",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Business_Continuity::High_Availability"
+   ],
+   "front": "For a globally distributed application needing both high availability across regions and the ability to route users to the closest healthy region, what Azure networking service should you recommend?",
+   "back": "Azure Front Door (for HTTP/S applications — global Layer 7 load balancing with health-probe-based failover and latency-based routing) or Azure Traffic Manager (DNS-based routing across regions, protocol-agnostic) — Front Door is generally preferred for web workloads due to its additional Web Application Firewall (WAF) and caching capabilities.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "DW1/?mWtt&",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Business_Continuity::High_Availability"
+   ],
+   "front": "How should you recommend achieving high availability for unstructured data stored in Azure Blob Storage across an entire region failure?",
+   "back": "Use Geo-Redundant Storage (GRS) or Geo-Zone-Redundant Storage (GZRS) so data is asynchronously replicated to a paired secondary region; for read access to the secondary before failover, choose the RA- variants (RA-GRS/RA-GZRS).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "Gkgm)^+Gf*",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Business_Continuity::High_Availability"
+   ],
+   "front": "What distinguishes Geo-Zone-Redundant Storage (GZRS) from Geo-Redundant Storage (GRS)?",
+   "back": "GZRS combines Zone-Redundant Storage (three synchronous zone copies) in the primary region WITH asynchronous replication to a secondary region, giving both the highest regional durability/availability AND disaster recovery — versus GRS, which only uses three locally redundant copies in the primary region before replicating to the secondary.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "EOAg[Eul|b",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Business_Continuity::High_Availability"
+   ],
+   "front": "What load-balancing design should you recommend when an application's compute tier spans multiple Availability Zones and needs Layer 7 (HTTP) routing, SSL termination, and Web Application Firewall (WAF) protection, but only within a single region?",
+   "back": "Azure Application Gateway v2 configured as zone-redundant, with the WAF SKU/tier enabled — it operates at Layer 7 within a region, unlike Azure Front Door (global) or the standard Load Balancer (Layer 4).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "n-F?sm}Pu{",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Compute"
+   ],
+   "front": "What are the primary Azure VM series letters and their general workload focus? Give four examples.",
+   "back": "B-series: burstable, low-cost for variable/light workloads. D-series: general-purpose balanced compute/memory. E-series: memory-optimized for in-memory workloads like databases. F-series: compute-optimized for CPU-intensive workloads like batch processing or gaming servers.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "um%u9?M]ON",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Compute"
+   ],
+   "front": "When designing compute for a workload, what four factors should drive the choice between a Virtual Machine (VM), containers, or serverless?",
+   "back": "1) Required control over the operating system/runtime (VM = most, serverless = least). 2) Statefulness and startup latency tolerance. 3) Scaling pattern, steady vs. event-driven/bursty. 4) Operational overhead the team is willing to own (patching, orchestration) versus wanting the platform to manage.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "Pa|.tq#(2G",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Compute"
+   ],
+   "front": "When should you recommend Azure Kubernetes Service (AKS) over Azure Container Apps for a containerized workload?",
+   "back": "When the team needs fine-grained control over Kubernetes primitives (custom controllers, complex networking, StatefulSets, multiple namespaces for multi-tenancy), runs many interdependent microservices at scale, or has existing Kubernetes operational expertise. Container Apps is the simpler, serverless-Kubernetes option for teams that want container orchestration WITHOUT managing Kubernetes directly.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "NMr5vsYh5P",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Compute"
+   ],
+   "front": "What is the difference between Azure Container Instances (ACI) and Azure Container Apps?",
+   "back": "Azure Container Instances (ACI): the simplest way to run a single container or container group on demand, with no orchestration platform, no scaling rules, no ingress management, for quick or short-lived container tasks. Azure Container Apps: a managed serverless platform on top of Kubernetes, providing revisions, ingress, and scale-to-zero, for running scalable microservices without managing Kubernetes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "k$42:<OvXx",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Compute"
+   ],
+   "front": "Compare the Azure Functions Consumption, Premium, and Dedicated (App Service) hosting plans.",
+   "back": "Consumption: true serverless, pay-per-execution, scales to zero, but has cold-start latency and a maximum execution timeout. Premium: pre-warmed instances (no cold start), Virtual Network integration, longer/unlimited execution duration, still elastically scales, for latency-sensitive or long-running functions. Dedicated: runs on an already-provisioned App Service Plan you're paying for regardless, useful when co-locating with an existing plan or needing predictable capacity.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "bgcf{cD9Oa",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Compute"
+   ],
+   "front": "What Azure Functions feature should you recommend for orchestrating a multi-step, stateful workflow (sequential steps with retries, fan-out/fan-in) using code instead of a visual designer?",
+   "back": "Durable Functions, an extension of Azure Functions that manages state, checkpoints, and restarts for long-running orchestrations defined in code, supporting patterns like function chaining, fan-out/fan-in, and human interaction/approval waits.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "GBPyNZa#pm",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Compute"
+   ],
+   "front": "For a nightly job processing millions of records that can tolerate being interrupted and resumed, needs to run on hundreds of parallel compute nodes, and should minimize compute cost, what Azure service should you recommend?",
+   "back": "Azure Batch, designed specifically for large-scale parallel and high-performance batch computing, automatically provisioning a pool of (optionally Spot/low-priority) VMs, distributing work, and scaling down when done, more cost-efficient for this pattern than Functions or a permanently running VM.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "v0rW<Nx>zy",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Compute"
+   ],
+   "front": "What is Azure Spot Virtual Machines pricing, and what workload characteristic makes it an appropriate recommendation?",
+   "back": "Spot VMs offer significant discounts on unused Azure compute capacity, but can be evicted with short notice when Azure needs the capacity back. Appropriate for interruption-tolerant, stateless, or checkpoint-able workloads like batch processing, dev/test, or rendering farms, never for workloads requiring guaranteed availability.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "czE~P2j(EM",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Compute"
+   ],
+   "front": "What compute purchasing option should you recommend for a workload with a stable, predictable baseline running 24/7 for the next 1-3 years, to reduce cost versus pay-as-you-go?",
+   "back": "Azure Reserved Virtual Machine Instances (or a Savings Plan for broader compute flexibility), committing to 1- or 3-year terms in exchange for a significant discount — appropriate because the baseline usage is predictable and long-running, unlike Spot VMs which suit interruptible workloads.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "D}$4Z8>Ur@",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Compute"
+   ],
+   "front": "What should you recommend for a workload requiring dedicated physical servers for regulatory/compliance reasons, or licensing tied to physical cores?",
+   "back": "Azure Dedicated Host, providing a physical server dedicated entirely to one customer's VMs, giving visibility and control over the underlying hardware for compliance and Bring-Your-Own-License (BYOL) scenarios like per-core licensed software.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "BD*lZw{0w]",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Compute"
+   ],
+   "front": "Compare Azure App Service and Azure Virtual Machines for hosting a traditional web application, focusing on operational responsibility.",
+   "back": "App Service (Platform as a Service): Microsoft manages the OS, patching, and web-server runtime, you deploy code/containers and get built-in scaling, deployment slots, and SSL management. Virtual Machines (Infrastructure as a Service): you manage the OS, runtime, patching, and web server configuration yourself, chosen only when App Service's supported runtimes/customization limits don't fit the application's requirements.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "n~L5KT~4=%",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Compute"
+   ],
+   "front": "What App Service feature should you recommend to enable zero-downtime deployments with the ability to quickly roll back a bad release?",
+   "back": "Deployment slots — deploy the new version to a staging slot, warm it up, then swap it into production instantly (a virtual IP swap with no downtime); if issues arise, swap back just as quickly.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": ".vuy,b,25",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Compute"
+   ],
+   "front": "What compute solution should you recommend for a batch or event-driven workload requiring GPU acceleration for machine learning inference at unpredictable, bursty volume?",
+   "back": "Azure Container Apps or Azure Kubernetes Service (AKS) with GPU-enabled node pools and event-driven autoscaling, or Azure Machine Learning managed online endpoints for a fully managed inference-serving option, chosen over a fixed VM to avoid paying for idle GPU capacity.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "M7,LUwe=o0",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Application_Architecture"
+   ],
+   "front": "What Azure service should you recommend to expose multiple backend microservices behind a single, secured, versioned Application Programming Interface (API) surface, including rate limiting and key management?",
+   "back": "Azure API Management — acts as a facade/gateway in front of backend services, providing a developer portal, subscription keys, rate limiting/quotas, request transformation, and centralized policy enforcement (like Microsoft Entra ID token validation) without changing backend code.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "hVE18t@yZT",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Application_Architecture"
+   ],
+   "front": "In an event-driven architecture, when should you recommend Azure Event Grid over Azure Service Bus for connecting a resource change to a downstream action?",
+   "back": "When the requirement is 'react to a discrete event' with push-based, low-latency, high-scale fan-out to many subscribers, and Event Grid's at-least-once retry semantics are acceptable — Service Bus is preferred when you need guaranteed, ordered, transactional delivery of business messages.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "KBi<%17}^N",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Application_Architecture"
+   ],
+   "front": "What Azure service should you recommend to reduce database load and improve response times for frequently-read, rarely-changed data in a web application?",
+   "back": "Azure Cache for Redis — an in-memory, low-latency data store used as a look-aside cache in front of the database (or for session state, or pub/sub messaging), dramatically reducing repeated reads hitting the primary data store.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "nPK^>!Tk>B",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Application_Architecture"
+   ],
+   "front": "What Azure service centralizes application configuration values (feature flags, connection strings, settings) across multiple microservices/environments, separate from Azure Key Vault's secret-specific role?",
+   "back": "Azure App Configuration — a dedicated service for non-secret configuration and feature flags, with point-in-time snapshots and dynamic refresh; it integrates with, but is distinct from, Key Vault, which should still hold actual secrets referenced from App Configuration.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "B4WWhs.vhf",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Application_Architecture"
+   ],
+   "front": "What should you recommend for automating build, test, and deployment pipelines for an application targeting Azure, especially when the organization already uses GitHub for source control?",
+   "back": "GitHub Actions (native integration with GitHub-hosted repos) or Azure DevOps Pipelines (if the organization already standardizes on Azure DevOps for work tracking). Both support Continuous Integration/Continuous Deployment (CI/CD) to Azure targets like App Service, AKS, or Functions via native deployment tasks.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "GI$aMrme+&",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Application_Architecture"
+   ],
+   "front": "What messaging feature should you recommend when downstream message consumers process at a different rate than producers, and you need to prevent message loss during a consumer outage?",
+   "back": "A message queue (Azure Service Bus queue or Azure Storage Queue) — it durably persists messages until a consumer is available to process them, decoupling producer and consumer throughput/availability, unlike direct synchronous calls which fail immediately if the consumer is down.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "s~=h-?A>#;",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Application_Architecture"
+   ],
+   "front": "What is the difference between Azure Service Bus queues and topics?",
+   "back": "A queue delivers each message to exactly ONE consumer (point-to-point), for competing-consumer work distribution. A topic delivers a copy of each message to EVERY subscription that matches its filter rules (publish/subscribe), for broadcasting an event to multiple independent downstream systems.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "w(jT_i1g0e",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Application_Architecture"
+   ],
+   "front": "What should you recommend for exposing a legacy SOAP-based backend service to modern REST/JSON clients, without rewriting the backend?",
+   "back": "Azure API Management's transformation policies — it can accept REST/JSON requests, transform them into SOAP/XML for the backend call, and transform the SOAP response back into JSON for the client, acting as a protocol-translation facade.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "Fc*j>qk2bm",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Application_Architecture"
+   ],
+   "front": "What Azure service should you recommend for ingesting a high-volume Internet of Things (IoT) device telemetry stream, including bi-directional device communication (commands, device twins), beyond what Event Hubs alone provides?",
+   "back": "Azure IoT Hub — built on similar streaming ingestion as Event Hubs but adds device identity/registry management, bi-directional command-and-control messaging, and device twin state synchronization, which Event Hubs doesn't provide.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "lB-~x0V.M8",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Application_Architecture"
+   ],
+   "front": "What automated deployment approach should you recommend to ensure Azure infrastructure is deployed consistently and repeatably, with configuration expressed as version-controlled code?",
+   "back": "Infrastructure as Code (IaC) using Bicep (Azure-native, more concise) or Terraform (multi-cloud), deployed through a CI/CD pipeline, replacing manual portal-based configuration, which is error-prone and unauditable at scale.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "x$95~5t!Al",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Application_Architecture"
+   ],
+   "front": "What is the key architectural benefit of decoupling application components with asynchronous messaging (queues/topics) rather than direct synchronous HTTP calls?",
+   "back": "Resilience and elasticity — if a downstream component is slow, unavailable, or needs to scale independently, the message buffer absorbs the mismatch instead of the failure/latency cascading back to the caller (the Queue-Based Load Leveling pattern), and each component can be deployed, scaled, and fail independently.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "Q|Cy7%s:,Z",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Migration"
+   ],
+   "front": "What are the main phases of the Microsoft Cloud Adoption Framework (CAF) migration journey, in order?",
+   "back": "Strategy (define business justification and outcomes), Plan (align actionable adoption plans, digital estate rationalization), Ready (prepare the Azure landing zone environment), Adopt (split into Migrate and Innovate), Govern, then Manage.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "K/`s_u(!Jm",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Migration"
+   ],
+   "front": "What Azure service should you recommend as the primary discovery and assessment tool for an organization's on-premises servers before migration, including right-sizing and cost estimation?",
+   "back": "Azure Migrate — a centralized hub that discovers on-premises VMs/physical servers (via an appliance), assesses migration readiness and Azure VM right-sizing/cost, and hands off directly to migration tools for execution.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "r4pr%kf+^Q",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Migration"
+   ],
+   "front": "In the Cloud Adoption Framework's migration strategy options (the '5 R's'), name and briefly define them.",
+   "back": "Rehost (lift and shift, move as-is, minimal changes, fastest), Refactor/Repackage (minor changes to fit a Platform as a Service target, e.g., containerizing), Rearchitect (significant redesign to leverage cloud-native services), Rebuild (discard and rewrite from scratch using cloud-native architecture), Replace (retire and switch to a Software as a Service alternative).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "O^e7.2:|0_",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Migration"
+   ],
+   "front": "What tool should you recommend to assess an on-premises SQL Server database for compatibility issues before migrating it to Azure SQL Database or Managed Instance?",
+   "back": "Data Migration Assistant (DMA) — scans for breaking changes, deprecated features, and compatibility issues between the source SQL Server version and the target Azure SQL platform, before you commit to a migration path.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "GT-7}/f{.&",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Migration"
+   ],
+   "front": "What Azure service performs the actual online (minimal-downtime) migration of a database schema and data into Azure SQL Database, Managed Instance, or Cosmos DB?",
+   "back": "Azure Database Migration Service (DMS) — supports both offline (one-time cutover) and online (continuous sync with minimal-downtime cutover) migrations for various source engines into their corresponding Azure targets.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "J)2HQ{O&mX",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Migration"
+   ],
+   "front": "For migrating petabytes of unstructured data from an on-premises datacenter to Azure Blob Storage when network bandwidth is the primary constraint, what should you recommend?",
+   "back": "Azure Data Box (or Data Box Heavy for larger volumes) — a physical, ruggedized storage appliance shipped to the customer, filled with data on-premises, then shipped back to Microsoft for offline upload into a storage account, avoiding the transfer time and cost of a bandwidth-limited network link.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "q(|kPHP6(3",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Migration"
+   ],
+   "front": "What lightweight command-line tool should you recommend for scripted, ongoing (not one-time bulk) transfer of files into Azure Blob Storage or Files, e.g., as part of an automated pipeline?",
+   "back": "AzCopy — a command-line utility optimized for high-throughput upload/download/copy operations to and from Azure Storage, suited for scripted and repeatable transfers rather than the one-time bulk offline transfer that Data Box addresses.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "jE1ir0S:qp",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Migration"
+   ],
+   "front": "What Azure service should you recommend for migrating on-premises Windows file server shares to Azure Files or an Azure VM file server, while preserving access control lists (ACLs) and minimizing end-user disruption via a cutover process?",
+   "back": "Storage Migration Service — a Windows Server feature that inventories, transfers, and cuts over file servers (including their identity, so the old server name can be reassigned), preserving permissions and shares.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "b02:BqtK2h",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Migration"
+   ],
+   "front": "What is a 'landing zone' in the context of Azure migration, and why does the Cloud Adoption Framework recommend establishing one before large-scale migration?",
+   "back": "A landing zone is the pre-provisioned, governed Azure environment (subscriptions, networking, identity, policy, monitoring baseline) that migrated workloads land into. Establishing it first ensures every migrated workload inherits consistent security, connectivity, and governance from day one, rather than retrofitting governance after ad hoc migrations.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "p=G_Mh22M-",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Network"
+   ],
+   "front": "Compare Azure VPN Gateway and Azure ExpressRoute for connecting an on-premises network to Azure.",
+   "back": "VPN Gateway: encrypted tunnel over the public internet (IPsec/IKE), lower cost, variable latency/throughput dependent on internet conditions, suitable for smaller workloads or as a backup path. ExpressRoute: private, dedicated connection through a connectivity provider, bypassing the public internet, higher bandwidth, more predictable low latency, and typically a Service Level Agreement (SLA), at higher cost, recommended for mission-critical or high-throughput hybrid connectivity.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "sEUp$_&zaA",
+   "type": "cloze",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Network"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Azure ExpressRoute connections bypass the public internet by connecting through a {{c1::connectivity provider}} (or via ExpressRoute Direct), typically offering a Service Level Agreement (SLA) that standard VPN Gateway connections lack.",
+   "image": "",
+   "analogy": "",
+   "extra": "Because ExpressRoute is still a single physical path, Microsoft recommends pairing it with a VPN Gateway as a failover route for full resilience.",
+   "source": ""
+  },
+  {
+   "guid": "J0@7vJK]-8",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Network"
+   ],
+   "front": "What should you recommend as a resilient backup connectivity path for an ExpressRoute circuit, in case the circuit itself fails?",
+   "back": "A Site-to-Site VPN Gateway connection configured as a failover path — since ExpressRoute, despite its SLA, is still a single physical path that can be disrupted, a VPN over the public internet provides an independent backup route.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "qT<n*=0l9;",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Network"
+   ],
+   "front": "What is Virtual Network (VNet) peering, and what is the key limitation that leads architects to recommend Azure Virtual WAN or a hub-spoke topology instead of full-mesh peering at scale?",
+   "back": "VNet peering directly connects two VNets' address spaces (even across regions with Global Peering) with low-latency, private Microsoft backbone traffic. It's NOT transitive, so connecting many VNets via direct peering requires a rapidly growing number of peering connections as VNets are added, which doesn't scale; a hub VNet (or Virtual WAN) centralizes connectivity instead.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "An5QnFz*q@",
+   "type": "cloze",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Network"
+   ],
+   "front": "",
+   "back": "",
+   "text": "VNet peering is {{c1::non-transitive}}: if VNet A peers with B, and B peers with C, A cannot reach C through that peering relationship alone.",
+   "image": "",
+   "analogy": "",
+   "extra": "This is why hub-spoke topologies or Azure Virtual WAN are recommended once an organization needs more than a handful of interconnected VNets, rather than a full mesh of direct peerings.",
+   "source": ""
+  },
+  {
+   "guid": "f8a[.WHpDw",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Network"
+   ],
+   "front": "Describe the hub-spoke network topology and its main governance/security benefit.",
+   "back": "A central 'hub' Virtual Network hosts shared services (VPN/ExpressRoute gateway, Azure Firewall, DNS) and peers with multiple 'spoke' VNets, each typically hosting one workload/application. Spokes route through the hub for on-premises and inter-spoke traffic, centralizing security inspection, connectivity management, and cost, rather than duplicating gateways/firewalls per workload.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "mb|A4@{~#q",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Network"
+   ],
+   "front": "What Azure service should you recommend when an organization has dozens or hundreds of branch offices and VNets needing simplified, any-to-any connectivity, rather than manually managing a complex hub-spoke and VPN mesh?",
+   "back": "Azure Virtual WAN — a managed networking service that automates hub-and-spoke connectivity, branch (SD-WAN) integration, and any-to-any transitive routing between VNets and branches at scale, without hand-building the topology.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "pIQ7F;[1if",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Network"
+   ],
+   "front": "Compare Network Security Groups (NSGs) and Azure Firewall in terms of the OSI layer they operate at and their typical role.",
+   "back": "NSGs are Layer 3/4 (IP, port, protocol) stateful packet filters applied to a subnet or network interface, a basic, free, distributed access-control mechanism. Azure Firewall is a centralized, stateful Layer 3-7 firewall-as-a-service with FQDN filtering, threat intelligence, and centralized logging, typically deployed once in a hub VNet to enforce organization-wide egress/traffic-inspection policy, complementing rather than replacing NSGs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "N]o2/v2~0I",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Network"
+   ],
+   "front": "What should you recommend to protect a public-facing web application against Layer 7 attacks like SQL injection and cross-site scripting, distinct from network-layer Distributed Denial-of-Service (DDoS) protection?",
+   "back": "A Web Application Firewall (WAF) — available as a SKU/policy on Azure Application Gateway (regional) or Azure Front Door (global) — inspects HTTP(S) request content against Open Web Application Security Project (OWASP) Core Rule Set patterns, unlike NSGs or Azure Firewall, which don't inspect application-layer payloads by default.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "fu@#nKi)NE",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Network"
+   ],
+   "front": "Compare Azure Load Balancer, Application Gateway, Front Door, and Traffic Manager by the network layer they operate at and their scope.",
+   "back": "Load Balancer: Layer 4 (TCP/UDP), regional, fast, protocol-agnostic distribution across instances. Application Gateway: Layer 7 (HTTP/S), regional, path-based routing, SSL termination, WAF. Front Door: Layer 7 (HTTP/S), global, edge-based routing, caching, WAF, and cross-region failover. Traffic Manager: DNS-level, global, protocol-agnostic, routes clients to an endpoint's IP via DNS resolution, without proxying traffic itself.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "o/y^E5p,wT",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Network"
+   ],
+   "front": "Why might you recommend Azure Traffic Manager over Azure Front Door for a specific scenario, despite Front Door's richer feature set?",
+   "back": "Traffic Manager works for ANY protocol, not just HTTP/S, since it operates at the DNS level rather than proxying traffic, so it's the right choice for non-web workloads (e.g., a game server or a custom TCP service) needing global routing/failover, which Front Door cannot handle since it only proxies HTTP(S).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "u!Pb!sD4QG",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Network"
+   ],
+   "front": "What is the difference between a Service Endpoint and a Private Endpoint for securing access to an Azure Platform-as-a-Service (PaaS) resource like a Storage Account from a Virtual Network?",
+   "back": "A Service Endpoint extends the VNet's identity to the Azure backbone, letting the PaaS resource's firewall allow traffic FROM that subnet, but the resource still has a public IP/endpoint reachable in principle. A Private Endpoint provisions a private IP address INSIDE the VNet for the PaaS resource, so traffic never touches the public internet at all, a stronger isolation guarantee and the recommended approach for most new designs, especially where on-premises access via VPN/ExpressRoute is also required.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "RdMh~-@e]t",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Network"
+   ],
+   "front": "What Domain Name System (DNS) feature is required alongside a Private Endpoint to ensure clients resolve the PaaS resource's name to its new private IP address instead of its public IP?",
+   "back": "A Private DNS Zone (linked to the Virtual Network) with the appropriate DNS record automatically created by the Private Endpoint — without it, clients would still resolve the public fully qualified domain name to the public IP, bypassing the private connection.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "s:xycPW6Bt",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Network"
+   ],
+   "front": "What should you recommend to optimize network performance for a Virtual Machine Scale Set (VMSS)-based application distributing large volumes of internal, chatty traffic between instances, when standard networking overhead becomes noticeable?",
+   "back": "Accelerated Networking — enables single root I/O virtualization (SR-IOV) on supported VM sizes, bypassing the host's virtual switch for a direct data path to the network interface, reducing latency, jitter, and CPU overhead for network-intensive workloads.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "A}n/VEh4x{",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Network"
+   ],
+   "front": "How should you design User Defined Routes (UDRs) and Azure Firewall to force all outbound internet traffic from spoke VNets through centralized inspection in a hub-spoke topology?",
+   "back": "Apply a User Defined Route (UDR) to each spoke subnet with a default route (0.0.0.0/0) pointing to the Azure Firewall's private IP in the hub as the next hop, overriding the default system route that would otherwise send traffic directly to the internet, forcing traffic through the centralized inspection point.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "tEqOPF^um6",
+   "type": "basic",
+   "deck": "Azure::AZ-305 Solutions Architect Expert",
+   "tags": [
+    "AZ305::Infrastructure::Network"
+   ],
+   "front": "What Azure DDoS protection tier should you recommend for an internet-facing production application requiring cost protection guarantees, adaptive tuning, and access to a rapid-response mitigation team, beyond the free basic protection?",
+   "back": "Azure DDoS Protection (the paid tier applied at the Virtual Network level) — adds application-layer (with WAF) and network-layer mitigation tuned to the specific application's traffic patterns, cost protection guarantees during an attack, and access to the DDoS Rapid Response team, versus the free Basic tier's platform-wide, non-tunable protection.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  }
+ ]
+}

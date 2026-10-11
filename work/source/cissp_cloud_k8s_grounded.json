@@ -1,0 +1,1317 @@
+{
+ "source_file": "cissp_cloud_k8s_grounded.apkg",
+ "notes": [
+  {
+   "guid": "cfSYgs$WVE",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D1_SecurityRiskMgmt",
+    "CISSP::Fundamentals"
+   ],
+   "front": "What are the three components of the CIA triad?",
+   "back": "<b>Confidentiality</b> — prevent unauthorized disclosure. <b>Integrity</b> — prevent unauthorized alteration. <b>Availability</b> — ensure timely, reliable access for authorized users.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Confidentiality: <code>etcd</code> encryption at rest + Transport Layer Security (TLS) everywhere. Integrity: signed images and immutable tags in Harbor. Availability: multi-cluster failover via Karmada, PodDisruptionBudgets, autoscaling.",
+   "source": ""
+  },
+  {
+   "guid": "zv9e:Cd;:J",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D1_SecurityRiskMgmt",
+    "CISSP::Fundamentals"
+   ],
+   "front": "What is the DAD triad — the inverse of the CIA triad?",
+   "back": "<b>Disclosure</b> (defeats confidentiality), <b>Alteration</b> (defeats integrity), <b>Destruction / Denial</b> (defeats availability). Useful for framing what an attacker is trying to achieve.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Disclosure: secrets leaked via an over-permissive ServiceAccount. Alteration: mutated image tag in a registry without tag immutability. Denial: resource exhaustion in a cluster without LimitRanges / ResourceQuotas.",
+   "source": ""
+  },
+  {
+   "guid": "guY1tL1]}l",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D1_SecurityRiskMgmt",
+    "CISSP::Fundamentals"
+   ],
+   "front": "Beyond CIA, what do <i>authenticity</i> and <i>non-repudiation</i> mean?",
+   "back": "<b>Authenticity</b>: verifying that data or a subject genuinely originates from its claimed source. <b>Non-repudiation</b>: the originator cannot later deny having created or sent it — typically achieved with digital signatures.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Container image signing with Sigstore <code>cosign</code>: the signature proves the image came from your pipeline (authenticity) and the build system cannot deny producing it (non-repudiation). Kyverno <code>verifyImages</code> enforces this at admission.",
+   "source": ""
+  },
+  {
+   "guid": "g)Q:0)k;OO",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D1_SecurityRiskMgmt",
+    "CISSP::RiskManagement"
+   ],
+   "front": "Distinguish <i>due diligence</i> from <i>due care</i>.",
+   "back": "<b>Due diligence</b>: investigating and understanding risk — research, assessments, gathering information (\"do detect\"). <b>Due care</b>: acting prudently on that knowledge — implementing and maintaining controls (\"do correct\"). Failing either can create liability for negligence.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Due diligence: running <code>kube-bench</code> against the Center for Internet Security (CIS) Kubernetes Benchmark and scanning images with Trivy. Due care: actually remediating the findings and enforcing policy with Kyverno.",
+   "source": ""
+  },
+  {
+   "guid": "AVfEgh$s@X",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D1_SecurityRiskMgmt",
+    "CISSP::RiskManagement"
+   ],
+   "front": "Give the quantitative risk formulas: SLE, ALE.",
+   "back": "<b>Single Loss Expectancy (SLE)</b> = Asset Value (AV) × Exposure Factor (EF).<br><b>Annualized Loss Expectancy (ALE)</b> = SLE × Annualized Rate of Occurrence (ARO).<br>Used to compare expected annual loss against the annual cost of a control (cost/benefit: ALE_before − ALE_after − annual control cost).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Example: a production cluster outage. AV = €500k revenue-dependent workload, EF = 20% per incident → SLE = €100k. ARO = 0.5 → ALE = €50k/yr. A €20k/yr multi-cluster high-availability setup (Karmada + hot standby) is justified.",
+   "source": ""
+  },
+  {
+   "guid": "GFiC,cj)%E",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D1_SecurityRiskMgmt",
+    "CISSP::RiskManagement"
+   ],
+   "front": "What are the four risk response strategies?",
+   "back": "<b>Mitigate</b> (reduce with controls), <b>Accept</b> (formally tolerate residual risk), <b>Transfer</b> (shift to another party — insurance, contracts), <b>Avoid</b> (stop the risky activity). Residual risk = risk remaining after controls; it must be formally accepted by management.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Using a managed offering like STACKIT Kubernetes Engine (SKE) <i>transfers</i> control-plane risk to the provider under the shared responsibility model — but workload, configuration, and data risk stay with you.",
+   "source": ""
+  },
+  {
+   "guid": "J*8xR}2NMG",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D1_SecurityRiskMgmt",
+    "CISSP::RiskManagement"
+   ],
+   "front": "Qualitative vs quantitative risk analysis — key difference and typical tools?",
+   "back": "<b>Quantitative</b>: numeric values (monetary loss, probabilities) — SLE/ALE calculations; objective but data-hungry. <b>Qualitative</b>: relative ratings (high/medium/low) — risk matrices, Delphi technique, scenarios; faster, subjective. In practice most programs are hybrid.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> A platform team typically scores risks qualitatively in a risk register (e.g., 'cluster-admin sprawl: likelihood medium, impact high') and reserves quantitative analysis for board-level decisions like disaster recovery investment.",
+   "source": ""
+  },
+  {
+   "guid": "oxbFb/./^:",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D1_SecurityRiskMgmt",
+    "CISSP::ThreatModeling"
+   ],
+   "front": "What does each letter of the STRIDE threat model stand for, and which security property does each threaten?",
+   "back": "<b>S</b>poofing → authenticity. <b>T</b>ampering → integrity. <b>R</b>epudiation → non-repudiation. <b>I</b>nformation disclosure → confidentiality. <b>D</b>enial of service → availability. <b>E</b>levation of privilege → authorization.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> STRIDE on a Kubernetes cluster: spoofing a kubelet identity, tampering with <code>etcd</code>, unsigned/unlogged API actions (repudiation), leaked Secrets (disclosure), API server flooding (DoS), privileged-container escape (elevation).",
+   "source": ""
+  },
+  {
+   "guid": "g,[`PX:P=L",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D1_SecurityRiskMgmt",
+    "CISSP::Governance"
+   ],
+   "front": "Order the governance document hierarchy: policy, standard, procedure, guideline. Which are mandatory?",
+   "back": "<b>Policy</b> (mandatory, high-level management intent) → <b>Standard</b> (mandatory, specific uniform requirements) → <b>Procedure</b> (mandatory, step-by-step instructions) → <b>Guideline</b> (recommended, discretionary advice). Baselines are minimum mandatory security configurations.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Policy-as-code collapses this stack into enforcement: a written standard ('all images must be signed and from an approved registry') becomes a Kyverno <code>ClusterPolicy</code> in <code>Enforce</code> mode — the standard and its enforcement mechanism become one artifact, versioned in Git.",
+   "source": ""
+  },
+  {
+   "guid": "tYQbB>&0Mh",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D1_SecurityRiskMgmt",
+    "CISSP::Controls"
+   ],
+   "front": "What are the seven categories of controls by <i>function</i>?",
+   "back": "<b>Preventive</b> (stop incidents), <b>Detective</b> (identify them), <b>Corrective</b> (fix after), <b>Deterrent</b> (discourage attackers), <b>Recovery</b> (restore operations), <b>Compensating</b> (alternative when primary control infeasible), <b>Directive</b> (mandate behavior). By <i>type</i>: administrative, technical (logical), physical.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Preventive: NetworkPolicy, admission control. Detective: Falco runtime alerts, audit logs. Corrective: ArgoCD self-heal reverting drift. Recovery: Velero restore, CloudNativePG (CNPG) point-in-time recovery. Compensating: strict egress filtering where a legacy workload can't run unprivileged.",
+   "source": ""
+  },
+  {
+   "guid": "rP^#Bnm<h<",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D1_SecurityRiskMgmt",
+    "CISSP::Controls"
+   ],
+   "front": "What is defense in depth?",
+   "back": "Layering multiple, diverse, overlapping controls so the failure of any single control does not compromise the system. Layers span physical, technical, and administrative controls across perimeter, network, host, application, and data.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Kubernetes layers: cloud network controls → NetworkPolicy microsegmentation → Pod Security Admission → Kyverno policies → Role-Based Access Control (RBAC) → seccomp/AppArmor on the runtime → encrypted <code>etcd</code> → Falco runtime detection. An escaped container still faces the next layer.",
+   "source": ""
+  },
+  {
+   "guid": "mE:gd{1e]E",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D1_SecurityRiskMgmt",
+    "CISSP::SupplyChain"
+   ],
+   "front": "What is supply chain risk management (SCRM), and which artifacts/frameworks support it?",
+   "back": "Managing risk introduced by third parties: vendors, hardware, software dependencies, and service providers. Key tools: contractual security requirements, minimum security baselines for suppliers, third-party assessments, a Software Bill of Materials (SBOM), and provenance attestation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Cloud-native SCRM: generate SBOMs (SPDX / CycloneDX) in the pipeline, sign images and attestations with Sigstore, target Supply-chain Levels for Software Artifacts (SLSA) build levels, enforce provenance verification at admission, and pin registries with Harbor tag immutability.",
+   "source": ""
+  },
+  {
+   "guid": "MKg|h!6H~Y",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D1_SecurityRiskMgmt",
+    "CISSP::BusinessContinuity"
+   ],
+   "front": "In business continuity planning, define BIA, RTO, RPO, and MTD.",
+   "back": "<b>Business Impact Analysis (BIA)</b>: identifies critical processes and quantifies impact of disruption over time. <b>Recovery Time Objective (RTO)</b>: max acceptable time to restore service. <b>Recovery Point Objective (RPO)</b>: max acceptable data loss, measured in time. <b>Maximum Tolerable Downtime (MTD)</b>: total outage the business can survive; RTO + Work Recovery Time (WRT) must fit within MTD.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> RPO maps directly to backup mechanics: CNPG continuous Write-Ahead Log (WAL) archiving gives an RPO of seconds; nightly Velero backups give an RPO of up to 24h. RTO maps to topology: active-active multi-cluster with Karmada approaches zero; restore-from-backup RTO is hours.",
+   "source": ""
+  },
+  {
+   "guid": "C$~4x*#HFk",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D1_SecurityRiskMgmt",
+    "CISSP::LegalRegulatory"
+   ],
+   "front": "What is the EU NIS2 Directive, and how does it typically reach a member-state organization?",
+   "back": "The Network and Information Security Directive 2 (NIS2) is a European Union (EU) directive imposing cybersecurity risk-management and incident-reporting duties on 'essential' and 'important' entities. As a directive it binds via national transposition law, with management personally accountable and 24h/72h incident-reporting timelines.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> In the Netherlands NIS2 is transposed as the Cyberbeveiligingswet. For a platform team, its risk-management measures land as concrete controls: hardened baselines (Baseline Informatiebeveiliging Overheid (BIO2)-style), logging/monitoring, supply chain requirements on cloud providers, and tested incident-response runbooks.",
+   "source": ""
+  },
+  {
+   "guid": "cEi(oej*EH",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D2_AssetSecurity",
+    "CISSP::DataRoles"
+   ],
+   "front": "Define the data roles: owner, controller, processor, custodian, steward, subject.",
+   "back": "<b>Owner</b>: accountable for the data, sets classification. <b>Controller</b> (General Data Protection Regulation (GDPR) term): determines purposes and means of processing. <b>Processor</b>: processes on the controller's behalf. <b>Custodian</b>: technical day-to-day protection (backups, permissions). <b>Steward</b>: data quality and business context. <b>Subject</b>: the person the data is about.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Running workloads on a public cloud makes the provider a <i>processor</i> and your organization the <i>controller</i> — which is why Data Processing Agreements (DPAs) and sub-processor lists matter in provider selection. The platform team acts as custodian.",
+   "source": ""
+  },
+  {
+   "guid": "nByu/yAqJ{",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D2_AssetSecurity",
+    "CISSP::DataLifecycle"
+   ],
+   "front": "What are the phases of the data (security) lifecycle?",
+   "back": "Create → Store → Use → Share → Archive → Destroy. Controls must follow the data through every phase; classification is assigned at creation and drives handling requirements in each subsequent phase.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> In-cluster mapping: create (app writes to CNPG), store (encrypted Persistent Volume), use (least-privilege access via RBAC + database grants), share (mutual TLS (mTLS) between services), archive (object storage with lifecycle rules), destroy (crypto-shredding, PV reclaim policy <code>Delete</code>).",
+   "source": ""
+  },
+  {
+   "guid": "f+?nzMj,E;",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D2_AssetSecurity",
+    "CISSP::DataDestruction"
+   ],
+   "front": "Distinguish the sanitization levels: clearing, purging, destruction. What is crypto-erasure?",
+   "back": "<b>Clearing</b>: logical overwrite; protects against ordinary recovery tools. <b>Purging</b>: stronger removal (degaussing, secure erase, crypto-erase); protects against laboratory recovery. <b>Destruction</b>: physical (shred, incinerate). <b>Crypto-erasure</b>: encrypt data, then destroy the key — the data becomes unrecoverable.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> In cloud you can't shred the provider's disks, so crypto-erasure is the practical purge: encrypt volumes with customer-managed keys and destroy the key on decommission. Data <i>remanence</i> risk also applies to forgotten <code>etcd</code> snapshots and registry layers.",
+   "source": ""
+  },
+  {
+   "guid": "N+e4+uDTBQ",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D2_AssetSecurity",
+    "CISSP::DataStates"
+   ],
+   "front": "What are the three data states, and a protection mechanism for each?",
+   "back": "<b>At rest</b>: storage encryption (Advanced Encryption Standard (AES)). <b>In transit</b>: TLS / Internet Protocol Security (IPsec). <b>In use</b>: memory protections, and increasingly confidential computing (hardware Trusted Execution Environments (TEEs)).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> At rest: <code>etcd</code> encryption via a Key Management Service (KMS) provider plugin + encrypted Persistent Volumes. In transit: mTLS via service mesh or Cilium WireGuard node-to-node encryption. In use: confidential-computing node pools (AMD SEV / Intel TDX) offered by several clouds.",
+   "source": ""
+  },
+  {
+   "guid": "DDS)mHNg%1",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D2_AssetSecurity",
+    "CISSP::Baselines"
+   ],
+   "front": "What are scoping and tailoring of a security baseline?",
+   "back": "<b>Scoping</b>: selecting which baseline controls apply to a system (removing irrelevant ones). <b>Tailoring</b>: adjusting the remaining controls to fit the organization — parameters, compensating controls, implementation detail. Both must be documented and justified.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Exactly the BIO2 / DigiD Normenkader exercise: taking a government baseline, scoping it to the platform ('physical media controls → provider responsibility'), and tailoring norms into Kubernetes-level technical controls with documented rationale for the auditor. Same logic as choosing a CIS Benchmark profile level.",
+   "source": ""
+  },
+  {
+   "guid": "PR?Ov}1{Q*",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D2_AssetSecurity",
+    "CISSP::Sovereignty"
+   ],
+   "front": "What do data sovereignty, residency, and localization mean?",
+   "back": "<b>Residency</b>: where data is physically stored. <b>Sovereignty</b>: data is subject to the laws of the country where it resides (and potentially of the provider's home jurisdiction — e.g., the US CLOUD Act). <b>Localization</b>: legal requirement that data must remain within a jurisdiction.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> This is the core argument for sovereign clouds: an EU-owned provider like STACKIT keeps data both resident in the EU and outside the reach of foreign-jurisdiction disclosure laws — a common requirement in Dutch public-sector procurement.",
+   "source": ""
+  },
+  {
+   "guid": "oGl<G<vEj&",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D2_AssetSecurity",
+    "CISSP::AssetMgmt"
+   ],
+   "front": "Why is asset inventory foundational to security, and what should it cover?",
+   "back": "You cannot protect what you don't know exists. Inventory must cover hardware, software, data, and cloud/virtual assets, with ownership and classification recorded. It underpins vulnerability management, incident response, licensing, and audits.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Cloud-native inventory is declarative: Git (via GitOps) is the intended-state inventory, the cluster Application Programming Interface (API) is the actual-state inventory, and an internal developer portal / service catalog records ownership. Drift between the two is itself a detective control (ArgoCD <code>OutOfSync</code>).",
+   "source": ""
+  },
+  {
+   "guid": "N7.+FbOn29",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D2_AssetSecurity",
+    "CISSP::DLP"
+   ],
+   "front": "What is a Data Loss Prevention (DLP) system, and what are its two main deployment points?",
+   "back": "DLP identifies and blocks unauthorized exfiltration of sensitive data based on classification, patterns, or fingerprints. <b>Network DLP</b>: inspects data in motion at egress points. <b>Endpoint DLP</b>: controls data on hosts (copy, print, USB). Cloud Access Security Brokers (CASBs) extend this to Software as a Service (SaaS).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Cluster-level analogues: egress NetworkPolicies and egress gateways restrict where data can flow; admission policies block Secrets being mounted into untrusted workloads; API-server audit logs detect bulk reads of Secrets or ConfigMaps.",
+   "source": ""
+  },
+  {
+   "guid": "n%&}H,r[.|",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D3_SecArchEngineering",
+    "CISSP::SecurityModels"
+   ],
+   "front": "State the Bell-LaPadula model's two main rules. What property does it protect?",
+   "back": "<b>Confidentiality</b> model for multilevel security. <b>Simple Security Property</b>: no read up. <b>* (Star) Property</b>: no write down. (Strong Star: read/write only at your own level.) It ignores integrity and availability.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Multitenant analogue: a workload in a lower-trust tenant namespace must not read higher-classification data (no read up), and a high-classification service should not write into lower-classification stores (no write down) — enforced via RBAC scoping plus egress NetworkPolicies.",
+   "source": ""
+  },
+  {
+   "guid": "b-#}TRW.+~",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D3_SecArchEngineering",
+    "CISSP::SecurityModels"
+   ],
+   "front": "State the Biba model's two main rules. What property does it protect?",
+   "back": "<b>Integrity</b> model — the inverse of Bell-LaPadula. <b>Simple Integrity Property</b>: no read down. <b>* (Star) Integrity Property</b>: no write up. Prevents low-integrity data from contaminating high-integrity data.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Supply chain reading: a production cluster (high integrity) must not pull images from an unvetted public registry (reading down), and a dev pipeline (low integrity) must not push to the production registry project (writing up) — Harbor projects + Kyverno registry allowlists enforce exactly this.",
+   "source": ""
+  },
+  {
+   "guid": "mdb?!+?93F",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D3_SecArchEngineering",
+    "CISSP::SecurityModels"
+   ],
+   "front": "What are the key elements of the Clark-Wilson integrity model?",
+   "back": "Integrity via <b>well-formed transactions</b> and <b>separation of duties</b>. Elements: Constrained Data Items (CDIs), Unconstrained Data Items (UDIs), Transformation Procedures (TPs) — the only way to modify CDIs — and Integrity Verification Procedures (IVPs). Users access data only through programs (the access triple: user → TP → CDI).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> GitOps <i>is</i> Clark-Wilson: engineers cannot mutate the cluster (CDI) directly; changes go through a well-formed transaction (pull request + review + pipeline = TP), reviewers ≠ authors (separation of duties), and ArgoCD's sync/drift check is the IVP.",
+   "source": ""
+  },
+  {
+   "guid": "E5%r0udl#c",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D3_SecArchEngineering",
+    "CISSP::SecurityModels"
+   ],
+   "front": "What problem does the Brewer-Nash (Chinese Wall) model solve?",
+   "back": "Conflicts of interest. Access rights adjust <i>dynamically</i>: once a subject accesses data of one company in a conflict-of-interest class, they are barred from competitors' data in the same class.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> The multitenancy analogue: a shared platform serving competing customers needs hard tenant isolation — separate namespaces or clusters, dedicated node pools, network segmentation — so no operator or workload can straddle competitors' data.",
+   "source": ""
+  },
+  {
+   "guid": "c=#Z{QbDeE",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D3_SecArchEngineering",
+    "CISSP::TrustedComputing"
+   ],
+   "front": "What is a reference monitor, and what three properties must it have?",
+   "back": "The abstract mechanism that mediates <i>every</i> access by subjects to objects, enforcing the security policy. It must be: <b>tamper-proof</b>, <b>always invoked</b> (non-bypassable), and <b>small enough to be verifiable</b>. The implementation is the security kernel, inside the Trusted Computing Base (TCB).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> The Kubernetes API server + admission chain approximates a reference monitor for cluster state: every write passes authentication → authorization → admission (ValidatingAdmissionPolicy, Kyverno). 'Always invoked' is why bypass paths — direct <code>etcd</code> access, kubelet APIs, node SSH — must be locked down.",
+   "source": ""
+  },
+  {
+   "guid": "tiq9}lzE}T",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D3_SecArchEngineering",
+    "CISSP::DesignPrinciples"
+   ],
+   "front": "List core secure design principles (ISC2 set).",
+   "back": "Threat modeling, least privilege, defense in depth, secure defaults, fail securely, separation of duties, keep it simple (economy of mechanism), zero trust / trust but verify, privacy by design, shared responsibility, secure access service edge — plus complete mediation and open design from the classic Saltzer &amp; Schroeder list.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> 'Fail securely' has a literal Kubernetes knob: a validating webhook's <code>failurePolicy</code>. <code>Fail</code> = fail closed (secure, may block deploys if the webhook is down); <code>Ignore</code> = fail open (available, insecure). Classic security-vs-availability trade-off in one field.",
+   "source": ""
+  },
+  {
+   "guid": "g1-8f&9[&W",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D3_SecArchEngineering",
+    "CISSP::Cryptography"
+   ],
+   "front": "Symmetric vs asymmetric cryptography — strengths, weaknesses, typical use.",
+   "back": "<b>Symmetric</b> (AES, ChaCha20): one shared key; fast; problem = key distribution and scaling (n(n−1)/2 keys). <b>Asymmetric</b> (Rivest-Shamir-Adleman (RSA), Elliptic Curve Cryptography (ECC)): public/private key pairs; slow; solves distribution, enables signatures. Hybrid systems use asymmetric to exchange a symmetric session key.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Every TLS connection in a cluster is hybrid crypto: an ECDHE (Elliptic Curve Diffie-Hellman Ephemeral) handshake establishes a symmetric AES/ChaCha20 session key. Certificates and image signatures are the asymmetric part; bulk pod-to-pod traffic encryption is symmetric.",
+   "source": ""
+  },
+  {
+   "guid": "fT1DyTE|gT",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D3_SecArchEngineering",
+    "CISSP::Cryptography"
+   ],
+   "front": "What properties do hashing, HMAC, and digital signatures each provide?",
+   "back": "<b>Hash</b> (Secure Hash Algorithm 256 (SHA-256)): integrity only — one-way, collision-resistant. <b>Hash-based Message Authentication Code (HMAC)</b>: integrity + authenticity via a shared secret (no non-repudiation). <b>Digital signature</b> (hash encrypted with a private key): integrity + authenticity + non-repudiation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Image digests (<code>@sha256:…</code>) are pure hashes — pin them to guarantee integrity regardless of tag mutation. A <code>cosign</code> signature over that digest adds authenticity and non-repudiation. Kubernetes ServiceAccount tokens are signed JSON Web Tokens (JWTs) — signature-based authenticity.",
+   "source": ""
+  },
+  {
+   "guid": "Kb#0-%KS;F",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D3_SecArchEngineering",
+    "CISSP::PKI"
+   ],
+   "front": "What are the core components of a Public Key Infrastructure (PKI)?",
+   "back": "<b>Certificate Authority (CA)</b> issues and signs certificates; <b>Registration Authority (RA)</b> verifies identities; <b>Certificate Revocation List (CRL)</b> / <b>Online Certificate Status Protocol (OCSP)</b> handle revocation; certificates bind identities to public keys (X.509). Trust chains root in offline root CAs with online intermediates.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> A cluster is a small PKI: the cluster CA signs API server, kubelet, and client certs; <code>cert-manager</code> automates issuance/renewal (ACME (Automatic Certificate Management Environment) or internal CA); SPIFFE/SPIRE issues short-lived X.509 workload identities (SVIDs) — short lifetimes largely replace revocation.",
+   "source": ""
+  },
+  {
+   "guid": "qR>fRJTg-n",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D3_SecArchEngineering",
+    "CISSP::Cryptography"
+   ],
+   "front": "What is envelope encryption, and why is it standard in cloud KMS design?",
+   "back": "Data is encrypted with a local <b>Data Encryption Key (DEK)</b>; the DEK is itself encrypted by a <b>Key Encryption Key (KEK)</b> held in the Key Management Service (KMS) / Hardware Security Module (HSM). Benefits: bulk data never leaves the system for encryption, key rotation only re-wraps DEKs, and the KEK stays in hardened storage.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Kubernetes <code>etcd</code> encryption with a KMS provider works precisely this way: each Secret gets a DEK, the DEK is wrapped by the cloud KMS KEK. Rotating the KEK re-wraps DEKs without re-encrypting all of <code>etcd</code>.",
+   "source": ""
+  },
+  {
+   "guid": "jqRDGzQlOa",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D3_SecArchEngineering",
+    "CISSP::Virtualization"
+   ],
+   "front": "Compare the isolation boundaries: hypervisor-based VMs vs OS containers. What are hardened container runtimes?",
+   "back": "<b>Virtual Machines (VMs)</b>: hardware-virtualized, separate kernels — strong boundary, higher overhead. <b>Containers</b>: shared host kernel, isolated via namespaces/cgroups — weaker boundary; a kernel exploit escapes all containers on the node. Hardened runtimes reintroduce a boundary: <b>gVisor</b> (user-space kernel) and <b>Kata Containers</b> (lightweight VM per pod).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> This drives multitenancy architecture: same-team workloads share nodes; hostile or untrusted tenants get Kata/gVisor RuntimeClasses, dedicated node pools, or separate clusters. Pod Security Admission and seccomp shrink — but never eliminate — the shared-kernel attack surface.",
+   "source": ""
+  },
+  {
+   "guid": "H*C&AO{`nu",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D3_SecArchEngineering",
+    "CISSP::HardwareSecurity"
+   ],
+   "front": "What are a TPM and an HSM, and what is measured/secure boot?",
+   "back": "<b>Trusted Platform Module (TPM)</b>: chip storing keys and platform measurements. <b>Hardware Security Module (HSM)</b>: dedicated tamper-resistant device for key storage and crypto operations (Federal Information Processing Standard (FIPS) 140 validated). <b>Secure boot</b>: firmware verifies signatures of each boot stage; <b>measured boot</b>: each stage is hashed into TPM Platform Configuration Registers (PCRs) for later attestation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Cloud KMS services back KEKs with HSMs. Node attestation (e.g., shielded/confidential nodes) uses measured boot so the control plane can verify a node's integrity before it joins — supply-chain thinking applied to compute itself.",
+   "source": ""
+  },
+  {
+   "guid": "FSw;q7*R[3",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D4_NetworkSecurity",
+    "CISSP::OSI"
+   ],
+   "front": "List the seven OSI layers, bottom-up, with one example protocol each.",
+   "back": "1 <b>Physical</b> (cables, bits) · 2 <b>Data Link</b> (Ethernet, MAC (Media Access Control), switches) · 3 <b>Network</b> (Internet Protocol (IP), routers) · 4 <b>Transport</b> (Transmission Control Protocol (TCP) / User Datagram Protocol (UDP)) · 5 <b>Session</b> · 6 <b>Presentation</b> (encryption, encoding) · 7 <b>Application</b> (Hypertext Transfer Protocol (HTTP), Domain Name System (DNS)).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Kubernetes networking placed on the stack: the Container Network Interface (CNI) plugin wires L2/L3; NetworkPolicy filters L3/L4; kube-proxy / Cilium eBPF (extended Berkeley Packet Filter) load-balance L4; Ingress controllers and service meshes operate at L7.",
+   "source": ""
+  },
+  {
+   "guid": "x25A.u6yVG",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D4_NetworkSecurity",
+    "CISSP::TCPIP"
+   ],
+   "front": "How does the TCP/IP model map onto the OSI model?",
+   "back": "<b>Link/Network Access</b> ↔ OSI 1–2 · <b>Internet</b> ↔ OSI 3 · <b>Transport</b> ↔ OSI 4 · <b>Application</b> ↔ OSI 5–7. TCP: connection-oriented, reliable (three-way handshake SYN → SYN/ACK → ACK). UDP: connectionless, best-effort.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Practical: DNS inside clusters (CoreDNS) uses UDP 53 with TCP fallback; the API server is TCP 6443; VXLAN (Virtual Extensible Local Area Network) overlays encapsulate over UDP. Knowing which layer a control operates at tells you what it can and cannot see.",
+   "source": ""
+  },
+  {
+   "guid": "th09:W7shn",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D4_NetworkSecurity",
+    "CISSP::TLS"
+   ],
+   "front": "What does mutual TLS (mTLS) add over standard TLS, and what problem does it solve?",
+   "back": "Standard TLS authenticates only the server. <b>mTLS</b>: both sides present certificates, so client identity is cryptographically verified — machine-to-machine authentication without shared secrets, plus encryption and integrity.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Service meshes (Istio, Linkerd) or Cilium mTLS give every pod a short-lived X.509 identity via SPIFFE (Secure Production Identity Framework For Everyone)/SPIRE and enforce mTLS transparently — implementing zero trust ('the network is hostile, identity is the perimeter') inside the cluster.",
+   "source": ""
+  },
+  {
+   "guid": "E=<ufKX8Gu",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D4_NetworkSecurity",
+    "CISSP::Segmentation"
+   ],
+   "front": "What is microsegmentation, and how does it differ from traditional segmentation?",
+   "back": "Traditional segmentation divides networks into zones (Virtual Local Area Networks (VLANs), subnets, firewalled DMZs (demilitarized zones)) — coarse, perimeter-oriented. <b>Microsegmentation</b> enforces policy per-workload, identity-based, east-west — assuming breach inside the perimeter.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> NetworkPolicy is microsegmentation as an API object: default-deny per namespace, then explicit allow by pod label. Cilium extends it to L7 (e.g., 'this pod may only <code>GET /api/v1/…</code> on that service') and to DNS-aware egress rules.",
+   "source": ""
+  },
+  {
+   "guid": "Kkv#0^w@NJ",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D4_NetworkSecurity",
+    "CISSP::Firewalls"
+   ],
+   "front": "Name the firewall generations/types and what each inspects.",
+   "back": "<b>Packet-filtering</b>: static rules on headers (stateless). <b>Stateful</b>: tracks connection state. <b>Application-layer / proxy</b>: understands protocols, terminates connections. <b>Next-Generation Firewall (NGFW)</b>: adds identity, Intrusion Prevention System (IPS), app awareness. <b>Web Application Firewall (WAF)</b>: HTTP-specific (injection, cross-site scripting (XSS)).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Cloud mapping: security groups ≈ stateful L3/L4; NetworkPolicy ≈ stateful-ish L3/L4 inside the cluster; an Ingress controller with ModSecurity/Coraza ≈ WAF; a service mesh authorization policy ≈ application-layer identity-aware filtering.",
+   "source": ""
+  },
+  {
+   "guid": "H=TM~yEeg1",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D4_NetworkSecurity",
+    "CISSP::VPN"
+   ],
+   "front": "Compare IPsec and TLS-based VPNs; where does WireGuard fit?",
+   "back": "<b>IPsec</b>: network-layer tunnel (Authentication Header (AH) / Encapsulating Security Payload (ESP), Internet Key Exchange (IKE)); site-to-site standard. <b>TLS Virtual Private Networks (VPNs)</b>: transport/application layer, firewall-friendly (TCP 443). <b>WireGuard</b>: modern, minimal-codebase L3 VPN with fixed modern crypto — far smaller attack surface.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Several CNIs (Cilium, Calico) offer transparent node-to-node WireGuard or IPsec encryption — encrypting all pod traffic crossing nodes without touching applications. Relevant when compliance demands encryption in transit inside the provider network.",
+   "source": ""
+  },
+  {
+   "guid": "hq6Juw9Ac5",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D4_NetworkSecurity",
+    "CISSP::DNS"
+   ],
+   "front": "What attacks target DNS, and what defenses exist?",
+   "back": "<b>Cache poisoning/spoofing</b>: forged responses redirect victims. <b>DNS tunneling</b>: exfiltration via queries. <b>Domain hijacking</b>. Defenses: Domain Name System Security Extensions (DNSSEC) (signed responses — integrity/authenticity, not confidentiality), DNS over HTTPS/TLS (DoH/DoT) for privacy, and monitoring query anomalies.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> In-cluster DNS (CoreDNS) is critical infrastructure: poisoning it redirects service traffic. Controls: restrict who can modify CoreDNS config (RBAC), Cilium DNS-aware egress policies (allow only expected external names), and alert on tunneling-shaped query volumes.",
+   "source": ""
+  },
+  {
+   "guid": "J#sAzl:0_|",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D4_NetworkSecurity",
+    "CISSP::ZeroTrust"
+   ],
+   "front": "What are the three main zero trust tenets?",
+   "back": "1) <b>Verify explicitly</b> — authenticate and authorize every request on all signals. 2) <b>Least-privilege access</b> — just-in-time, just-enough. 3) <b>Assume breach</b> — segment, encrypt everywhere, monitor continuously. 'Never trust, always verify' replaces perimeter trust.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Cloud-native zero trust: SPIFFE workload identities + mTLS (verify explicitly), namespace-scoped RBAC and short-lived tokens (least privilege), default-deny NetworkPolicies plus Falco/Tetragon runtime monitoring (assume breach). No flat trusted pod network.",
+   "source": ""
+  },
+  {
+   "guid": "CE[W~89A$P",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D4_NetworkSecurity",
+    "CISSP::NAT"
+   ],
+   "front": "What are the RFC 1918 private address ranges, and what is NAT?",
+   "back": "<code>10.0.0.0/8</code>, <code>172.16.0.0/12</code>, <code>192.168.0.0/16</code> — non-routable on the public Internet. <b>Network Address Translation (NAT)</b> maps private ↔ public addresses; Port Address Translation (PAT) multiplexes many private hosts behind one public IP.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Pod and Service Classless Inter-Domain Routing (CIDR) blocks are RFC 1918 space; egress to the Internet is source-NATed to the node or a NAT gateway IP. Consequence: external systems see the gateway IP, so egress allowlisting happens at that gateway, not per pod — unless you use an egress gateway with per-workload identity.",
+   "source": ""
+  },
+  {
+   "guid": "c[5A0P/$%w",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D4_NetworkSecurity",
+    "CISSP::SDN"
+   ],
+   "front": "What is Software-Defined Networking (SDN), and what security implications does it have?",
+   "back": "SDN separates the <b>control plane</b> (centralized controller with global view) from the <b>data plane</b> (forwarding devices), programmable via APIs. Benefits: agility, central policy. Risks: the controller becomes a high-value single point of compromise; API security is critical.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Kubernetes networking <i>is</i> SDN: the CNI controller programs routes/eBPF on every node from cluster state. Overlay networks (VXLAN, Geneve) build virtual topologies over the provider fabric. Compromising the CNI controller or its RBAC = compromising the network.",
+   "source": ""
+  },
+  {
+   "guid": "fYL<!g2&yX",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D5_IAM",
+    "CISSP::IAAA"
+   ],
+   "front": "Define the IAAA components.",
+   "back": "<b>Identification</b>: claiming an identity (username). <b>Authentication</b>: proving it (credentials). <b>Authorization</b>: what the proven identity may do. <b>Accountability</b>: tying actions to identities via audit trails (requires non-shared accounts and reliable logging).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Kubernetes maps 1:1 — identification/authentication: OpenID Connect (OIDC) tokens or client certs; authorization: RBAC (and webhook authorizers); accountability: API-server audit policy streaming to a Security Information and Event Management (SIEM) system.",
+   "source": ""
+  },
+  {
+   "guid": "HXih>iL0U]",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D5_IAM",
+    "CISSP::Authentication"
+   ],
+   "front": "What are the authentication factor categories, and what makes MFA genuine?",
+   "back": "<b>Type 1</b> something you <i>know</i> (password, PIN (Personal Identification Number)) · <b>Type 2</b> something you <i>have</i> (token, smartcard, phone) · <b>Type 3</b> something you <i>are</i> (biometrics). Plus somewhere you are / something you do. Genuine Multi-Factor Authentication (MFA) combines <i>different</i> categories — password + security question is still one factor.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Human cluster access should flow through an OIDC Identity Provider (IdP) (Keycloak, Entra ID) enforcing phishing-resistant MFA (FIDO2 (Fast IDentity Online 2) / passkeys) — never long-lived kubeconfig certificates handed to users, which are single-factor and unrevocable in practice.",
+   "source": ""
+  },
+  {
+   "guid": "l;WHC-?h9j",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D5_IAM",
+    "CISSP::Federation"
+   ],
+   "front": "Compare SAML, OAuth 2.0, and OIDC.",
+   "back": "<b>Security Assertion Markup Language (SAML)</b>: XML-based <i>authentication</i> federation (enterprise SSO (Single Sign-On)). <b>OAuth 2.0</b>: <i>authorization</i> delegation framework (access tokens, no identity semantics). <b>OpenID Connect (OIDC)</b>: authentication layer on top of OAuth 2.0 using JWTs (ID tokens).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> The API server natively validates OIDC ID tokens: users authenticate to the IdP, groups claims map to RBAC bindings. ArgoCD, Harbor, and Grafana all federate through the same IdP — one identity lifecycle, one MFA policy, one deprovisioning point.",
+   "source": ""
+  },
+  {
+   "guid": "z*_b}wRKK=",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D5_IAM",
+    "CISSP::AccessControlModels"
+   ],
+   "front": "Compare the access control models: DAC, MAC, RBAC, ABAC, rule-based.",
+   "back": "<b>Discretionary (DAC)</b>: owners grant access (file permissions). <b>Mandatory (MAC)</b>: system-enforced labels/clearances, no owner discretion. <b>Role-Based (RBAC)</b>: permissions bundled into roles. <b>Attribute-Based (ABAC)</b>: policy evaluates subject/object/environment attributes. <b>Rule-based</b>: uniform rules for all (firewall ACLs (Access Control Lists)).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Kubernetes RBAC is literal RBAC (Roles/ClusterRoles + bindings, additive-only, no deny). Policy engines (Kyverno, Open Policy Agent (OPA)) layer ABAC-style decisions on top — 'deny unless the image is signed <i>and</i> the namespace has label X'. SELinux on nodes is MAC.",
+   "source": ""
+  },
+  {
+   "guid": "C&?E>|9u=:",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D5_IAM",
+    "CISSP::LeastPrivilege"
+   ],
+   "front": "Least privilege vs need to know — what's the distinction?",
+   "back": "<b>Least privilege</b>: minimum <i>permissions/rights</i> to do the job (actions). <b>Need to know</b>: access to specific <i>information</i> only if required (data). Both limit blast radius; both require periodic review because privileges accrete over time ('privilege creep').",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Concrete: prefer namespaced <code>Role</code> over <code>ClusterRole</code>; never bind <code>cluster-admin</code> to service accounts; scope ESO (External Secrets Operator) SecretStores per namespace so teams can only pull <i>their</i> secrets — that's need to know applied to secret material.",
+   "source": ""
+  },
+  {
+   "guid": "J=R6OVKdeK",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D5_IAM",
+    "CISSP::PAM"
+   ],
+   "front": "What is Privileged Access Management (PAM), and which practices define it?",
+   "back": "Controlling high-power accounts: vaulted credentials, check-out workflows, session recording, <b>just-in-time (JIT)</b> elevation instead of standing privileges, and break-glass procedures for emergencies (heavily logged, alarmed, reviewed after use).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Cluster equivalent: no standing <code>cluster-admin</code>; humans get time-boxed elevated access via the IdP (group membership with expiry) or tools like Teleport with session recording; a sealed break-glass credential exists for IdP outage, and its use pages the security team.",
+   "source": ""
+  },
+  {
+   "guid": "h=kx2ux_re",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D5_IAM",
+    "CISSP::MachineIdentity"
+   ],
+   "front": "How should non-human (machine) identities be handled?",
+   "back": "Service accounts need the same lifecycle discipline as humans: unique identity per workload, least privilege, <b>short-lived credentials</b> over static secrets, rotation, and audit. Static API keys embedded in code are the classic failure.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Kubernetes ServiceAccounts get short-lived projected tokens (bound to pod + audience). Workload identity federation (IAM Roles for Service Accounts (IRSA), GCP Workload Identity) exchanges those tokens for cloud credentials — zero static cloud keys in the cluster. ESO fetches external secrets under the same model.",
+   "source": ""
+  },
+  {
+   "guid": "A`%Fn+2~$Q",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D5_IAM",
+    "CISSP::Kerberos"
+   ],
+   "front": "How does Kerberos work, at a high level?",
+   "back": "Symmetric-key SSO. The <b>Key Distribution Center (KDC)</b> = Authentication Server (AS) + Ticket-Granting Server (TGS). Login yields a <b>Ticket-Granting Ticket (TGT)</b>; the TGT buys service tickets for each resource. Timestamps prevent replay (clock sync required); port 88. Weakness: KDC compromise = total compromise; passwords still guessable offline from AS-REP data.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Conceptually the ancestor of token-based cloud auth: TGT ≈ OIDC refresh/ID token from the IdP; service tickets ≈ short-lived, audience-scoped access tokens. Same pattern: authenticate once to a trusted third party, then present time-boxed tickets.",
+   "source": ""
+  },
+  {
+   "guid": "jWvjO_Nkbq",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D5_IAM",
+    "CISSP::IdentityLifecycle"
+   ],
+   "front": "What belongs to identity lifecycle management (provisioning → deprovisioning)?",
+   "back": "Provisioning on joiner (approval, least-privilege birthright access), modification on mover (remove old rights — main source of creep), timely <b>deprovisioning</b> on leaver, plus periodic <b>access reviews/recertification</b> by data owners. Automation via an authoritative Human Resources (HR)-driven source is best practice.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> If all platform access federates through one IdP and RBAC bindings live in Git, then offboarding = disable the IdP account (immediate) plus a reviewable PR history of every access grant — access review becomes <code>git log</code> plus group-membership audit rather than spreadsheet archaeology.",
+   "source": ""
+  },
+  {
+   "guid": "OSXby=+>U?",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D5_IAM",
+    "CISSP::SSO"
+   ],
+   "front": "What are the benefits and risks of Single Sign-On (SSO)?",
+   "back": "Benefits: fewer passwords, stronger central authentication (MFA once), central deprovisioning, better audit. Risks: the IdP is a single point of failure and 'keys to the kingdom' — one compromised session unlocks everything; session/token theft becomes the prime attack.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Mitigations in a cloud-native stack: short token lifetimes, refresh-token rotation, phishing-resistant MFA at the IdP, conditional access, and an out-of-band break-glass path into clusters for IdP outages (availability side of the trade-off).",
+   "source": ""
+  },
+  {
+   "guid": "qIAh][/%v5",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D6_AssessmentTesting",
+    "CISSP::VulnMgmt"
+   ],
+   "front": "Vulnerability assessment vs penetration test — what's the difference?",
+   "back": "<b>Vulnerability assessment</b>: breadth-first, automated scanning to enumerate known weaknesses; no exploitation. <b>Penetration test</b>: depth-first, authorized exploitation to demonstrate real impact and chained attack paths. Pen tests require explicit written rules of engagement.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Cluster equivalents — assessment: <code>kube-bench</code> (CIS Benchmark), Trivy (images, IaC (Infrastructure as Code), K8s misconfig), kubeaudit. Pen-test-style: <code>kube-hunter</code>, peirates, or a red team attempting ServiceAccount-token theft → privilege escalation → node escape.",
+   "source": ""
+  },
+  {
+   "guid": "j$(^)^&z$S",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D6_AssessmentTesting",
+    "CISSP::SOC"
+   ],
+   "front": "Explain SOC 1 vs SOC 2 vs SOC 3, and Type I vs Type II.",
+   "back": "<b>Service Organization Control (SOC) 1</b>: controls relevant to financial reporting. <b>SOC 2</b>: Trust Services Criteria — security, availability, processing integrity, confidentiality, privacy; restricted distribution. <b>SOC 3</b>: public summary of SOC 2. <b>Type I</b>: control <i>design</i> at a point in time. <b>Type II</b>: <i>operating effectiveness</i> over a period (6–12 months) — far stronger assurance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> This is how you assess a cloud provider you can't audit yourself: request SOC 2 Type II, ISO/IEC (International Organization for Standardization / International Electrotechnical Commission) 27001, or Cloud Computing Compliance Criteria Catalogue (C5) reports. Same third-party-assurance logic as a DigiD audit: independent attestation replaces direct inspection.",
+   "source": ""
+  },
+  {
+   "guid": "eUI~HDn/=!",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D6_AssessmentTesting",
+    "CISSP::TestTypes"
+   ],
+   "front": "Black-box vs gray-box vs white-box testing?",
+   "back": "<b>Black-box</b>: tester has no internal knowledge (simulates external attacker). <b>White-box</b>: full knowledge — source, configs, credentials (most thorough per hour). <b>Gray-box</b>: partial knowledge (simulates insider or post-breach attacker). Trade-off: realism vs coverage vs cost.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> A gray-box cluster test is often most valuable: give the tester a low-privilege ServiceAccount token in one namespace and ask how far they get — it directly measures your RBAC, NetworkPolicy, and Pod Security blast-radius assumptions.",
+   "source": ""
+  },
+  {
+   "guid": "m:z!)1tKDz",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D6_AssessmentTesting",
+    "CISSP::AppSecTesting"
+   ],
+   "front": "Distinguish SAST, DAST, SCA, and IAST.",
+   "back": "<b>Static Application Security Testing (SAST)</b>: analyzes source/bytecode without running it (early, many false positives). <b>Dynamic (DAST)</b>: probes the running app from outside. <b>Software Composition Analysis (SCA)</b>: inventories third-party dependencies and their Common Vulnerabilities and Exposures (CVEs). <b>Interactive (IAST)</b>: instruments the running app from inside.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Pipeline placement (Tekton/GitLab): SAST + secret scanning (gitleaks) on commit → SCA + image scan (Trivy/Grype) at build → sign + attest results → admission policy verifies attestation → DAST against a preview environment. Shift-left with runtime verification at the gate.",
+   "source": ""
+  },
+  {
+   "guid": "GOx~i__0`*",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D6_AssessmentTesting",
+    "CISSP::Audits"
+   ],
+   "front": "Internal vs external vs third-party audits — who performs each, for whom?",
+   "back": "<b>Internal</b>: own staff, for management — improvement-oriented, least independent. <b>External</b>: independent audit firm engaged by the organization, for stakeholders/certification. <b>Third-party</b>: mandated by an outside authority (regulator, customer) — e.g., certification and regulatory conformity assessments. Independence increases assurance value.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> The DigiD assessment is a third-party/regulatory audit against a fixed Normenkader: your role is producing <i>auditable evidence</i> — policy docs mapped to technical controls, audit logs, screenshots of enforced Kyverno policies — not just being secure but demonstrably so.",
+   "source": ""
+  },
+  {
+   "guid": "J_P4nDzM`$",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D6_AssessmentTesting",
+    "CISSP::Monitoring"
+   ],
+   "front": "What are synthetic transactions and misuse-case testing?",
+   "back": "<b>Synthetic transactions</b>: scripted actions run against a live system to verify behavior and performance continuously (proactive monitoring). <b>Misuse-case testing</b>: deliberately testing what the system must <i>not</i> allow — the negative counterpart of use-case testing.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Synthetic: blackbox-exporter probes plus a scheduled job that performs a canary login/order and alerts on failure. Misuse-case: a Continuous Integration (CI) job that <i>attempts</i> to deploy an unsigned image, a privileged pod, or cross-namespace secret access — and fails the build if the platform <i>permits</i> it. Policy tests as code.",
+   "source": ""
+  },
+  {
+   "guid": "x7DKWq-p>|",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D6_AssessmentTesting",
+    "CISSP::DRTesting"
+   ],
+   "front": "Name the five DR/BC test types, in order of increasing risk and realism.",
+   "back": "1) <b>Read-through / checklist</b> — individuals review plans. 2) <b>Structured walk-through (tabletop)</b> — team talks through a scenario. 3) <b>Simulation</b> — realistic drill without touching production. 4) <b>Parallel</b> — recovery site activated alongside production. 5) <b>Full interruption</b> — production actually failed over (highest risk, needs executive sign-off).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Cloud-native ladder: tabletop an <code>etcd</code>-corruption scenario → simulation: restore Velero backups into a scratch cluster and measure real RTO → parallel: stand up the DR cluster via GitOps and replicate data → full interruption: chaos-engineering a zone/cluster kill with Karmada handling failover.",
+   "source": ""
+  },
+  {
+   "guid": "QY=RkxtO]b",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D6_AssessmentTesting",
+    "CISSP::Metrics"
+   ],
+   "front": "What distinguishes a KPI from a KRI in a security program?",
+   "back": "<b>Key Performance Indicator (KPI)</b>: backward/current-looking — how well controls perform (patch latency, detection coverage, Mean Time To Detect (MTTD)). <b>Key Risk Indicator (KRI)</b>: forward-looking — early-warning signals that risk exposure is rising (unpatched criticals trending up, privilege-grant velocity). Metrics must drive decisions, not decorate dashboards.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Platform KPIs: % workloads with NetworkPolicy, image-signature coverage, time-to-patch critical CVEs. KRIs: growth in <code>cluster-admin</code> bindings, count of policy exceptions ('Audit'-mode violations), age of oldest unrotated credential.",
+   "source": ""
+  },
+  {
+   "guid": "uN8Cs>^KM.",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D7_SecurityOperations",
+    "CISSP::IncidentResponse"
+   ],
+   "front": "List the seven ISC2 incident management steps, in order.",
+   "back": "<b>Detection → Response → Mitigation → Reporting → Recovery → Remediation → Lessons Learned</b>. Mitigation = containment; Remediation = root-cause fixes; Lessons Learned feeds improvements back. (NIST (National Institute of Standards and Technology) SP 800-61 compresses these into Preparation / Detection &amp; Analysis / Containment, Eradication &amp; Recovery / Post-Incident Activity.)",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Cluster incident: Falco alert on crypto-miner (detection) → triage (response) → <code>kubectl cordon</code> node, NetworkPolicy quarantine of the namespace (mitigation) → notify per NIS2 24h early-warning duty (reporting) → redeploy clean workloads from Git (recovery) → fix the vulnerable image + add admission rule (remediation) → post-mortem (lessons).",
+   "source": ""
+  },
+  {
+   "guid": "kIlq,zNwTh",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D7_SecurityOperations",
+    "CISSP::SIEM"
+   ],
+   "front": "What are SIEM and SOAR, and how do they relate?",
+   "back": "<b>Security Information and Event Management (SIEM)</b>: aggregates, correlates, and alerts on logs/events across the estate. <b>Security Orchestration, Automation and Response (SOAR)</b>: executes playbooks on those alerts — enrichment, containment, ticketing — reducing manual toil and response time.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Feed the SIEM from: API-server audit logs, Falco/Tetragon runtime events, Ingress/WAF logs, cloud provider logs, ArgoCD sync events. A SOAR playbook might auto-quarantine a pod (label-triggered deny-all NetworkPolicy) and open an incident ticket on a high-severity Falco rule.",
+   "source": ""
+  },
+  {
+   "guid": "NlM9Cf91i[",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D7_SecurityOperations",
+    "CISSP::Forensics"
+   ],
+   "front": "What is the forensic <i>order of volatility</i>, and what is chain of custody?",
+   "back": "Collect most-volatile evidence first: CPU registers/cache → RAM (memory, network state, processes) → disk → logs/backups → archival media. <b>Chain of custody</b>: documented, unbroken record of who handled evidence, when, and how — required for admissibility; hash evidence at collection.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Containers invert forensic instincts: a deleted pod's memory state is gone forever, so <i>don't kill the pod first</i> — isolate it with a NetworkPolicy, capture memory / <code>kubectl debug</code> artifacts, snapshot the node volume, export audit logs — then terminate. Ephemerality makes centralized off-node logging your durable evidence.",
+   "source": ""
+  },
+  {
+   "guid": "q64[t)5P,s",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D7_SecurityOperations",
+    "CISSP::Backups"
+   ],
+   "front": "Compare full, incremental, and differential backups (with archive-bit behavior and restore cost).",
+   "back": "<b>Full</b>: everything; clears archive bit; slowest backup, fastest restore. <b>Incremental</b>: changes since last <i>any</i> backup; clears bit; fast backup, restore needs full + every incremental. <b>Differential</b>: changes since last <i>full</i>; does not clear bit; restore = full + latest differential only. The 3-2-1 rule: 3 copies, 2 media, 1 offsite.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> CNPG maps neatly: periodic base backups (full) + continuous WAL archiving (fine-grained incrementals) → point-in-time recovery to any moment. Velero backs up cluster objects + volumes; with GitOps, Git itself is the 'backup' of desired state — only data and secrets need classical backup.",
+   "source": ""
+  },
+  {
+   "guid": "gf{:I2~l/j",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D7_SecurityOperations",
+    "CISSP::Storage"
+   ],
+   "front": "Name the classic RAID levels and their trade-offs.",
+   "back": "<b>RAID (Redundant Array of Independent Disks) 0</b>: striping, no redundancy. <b>RAID 1</b>: mirroring (50% capacity). <b>RAID 5</b>: striping + single parity (survives 1 disk). <b>RAID 6</b>: double parity (survives 2). <b>RAID 10</b>: mirrored stripes — performance + redundancy, expensive.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Distributed storage generalizes the same math: Ceph/Longhorn replicate (RAID 1-like, replica count 3) or erasure-code (RAID 5/6-like) <i>across nodes and zones</i> instead of across disks — the failure domain moves from a disk to a node or availability zone.",
+   "source": ""
+  },
+  {
+   "guid": "QQ)clqTSXW",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D7_SecurityOperations",
+    "CISSP::DisasterRecovery"
+   ],
+   "front": "Rank DR site options: hot, warm, cold, and cloud/mobile — by RTO and cost.",
+   "back": "<b>Hot site</b>: fully equipped, near-current data — RTO minutes-hours, highest cost. <b>Warm</b>: equipment ready, data restored on activation — RTO hours-days. <b>Cold</b>: space + power only — RTO days-weeks, cheapest. <b>Cloud DR</b>: pay-per-use recovery environment; <b>reciprocal agreements</b>: mutual aid, weak in practice.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> GitOps compresses the ladder: a 'pilot-light' cluster (minimal nodes + ArgoCD pointed at the same repos) is warm-site cost with near-hot-site RTO — scale up nodes, sync apps, restore data. Karmada active-active across clusters is a genuine hot configuration.",
+   "source": ""
+  },
+  {
+   "guid": "u[{j9$ex?.",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D7_SecurityOperations",
+    "CISSP::ChangeMgmt"
+   ],
+   "front": "What security purpose do change management and configuration management serve?",
+   "back": "<b>Change management</b>: formal request → approval → test → implement → review cycle prevents unauthorized/unvetted changes (a leading outage and breach cause). <b>Configuration management</b>: maintain known-good baselines, detect and correct drift. Both create the audit trail accountability depends on.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> GitOps is both, mechanized: the PR is the change request, review is approval, CI is testing, merge is implementation, <code>git log</code> is the audit trail. ArgoCD drift detection + self-heal is configuration management — unauthorized live changes are surfaced and reverted automatically.",
+   "source": ""
+  },
+  {
+   "guid": "o^aNqU;r|`",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D7_SecurityOperations",
+    "CISSP::PatchMgmt"
+   ],
+   "front": "What is patch management, and how does immutable infrastructure change it?",
+   "back": "Lifecycle: identify → evaluate/prioritize (risk-based, e.g. Common Vulnerability Scoring System (CVSS) + exploitability) → test → deploy → verify. Unpatched known vulnerabilities remain a top breach vector. <b>Immutable infrastructure</b>: never patch in place — replace with a new image.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Node patching = rolling node-pool image upgrades (cordon/drain, replace); workload patching = rebuild image on base-image update (automated by dependency bots + pipelines). Trivy Operator continuously rescans <i>running</i> images so 'patched at deploy time' doesn't silently rot.",
+   "source": ""
+  },
+  {
+   "guid": "Ey|@LNX4B_",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D7_SecurityOperations",
+    "CISSP::Allowlisting"
+   ],
+   "front": "Application allowlisting vs denylisting — which is stronger and why?",
+   "back": "<b>Allowlisting</b> (default deny, permit known-good) is stronger: unknown/novel malware is blocked by default. <b>Denylisting</b> (default allow, block known-bad) only stops what you've already identified. Cost: allowlists require maintenance and break agility if unmanaged.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Cluster allowlisting stack: Kyverno restricts images to approved Harbor registries/projects, requires signatures, and can pin digests; NetworkPolicies default-deny traffic; seccomp profiles allowlist syscalls. Denylist-style: blocking specific CVEs or bad tags — necessary but never sufficient.",
+   "source": ""
+  },
+  {
+   "guid": "ADM<0*,l;B",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D7_SecurityOperations",
+    "CISSP::Metrics"
+   ],
+   "front": "Define MTBF, MTTR, MTTD, and MTTC.",
+   "back": "<b>Mean Time Between Failures (MTBF)</b>: average uptime between failures (reliability). <b>Mean Time To Repair/Restore (MTTR)</b>: average time to fix. <b>Mean Time To Detect (MTTD)</b> and <b>Mean Time To Contain (MTTC)</b>: core incident-response speed metrics. Availability ≈ MTBF / (MTBF + MTTR).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Platform reading: MTTR shrinks with declarative recovery (redeploy from Git beats hand-rebuilding); MTTD shrinks with runtime detection coverage (Falco rules tuned to your workloads); MTTC shrinks with pre-built quarantine automation. Measure them per incident post-mortem.",
+   "source": ""
+  },
+  {
+   "guid": "nrii(<fl^6",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D7_SecurityOperations",
+    "CISSP::ThreatHunting"
+   ],
+   "front": "What is threat hunting, and how does it differ from alert-driven monitoring?",
+   "back": "Proactive, hypothesis-driven search for adversaries already inside — assuming detection has gaps — using frameworks like MITRE ATT&amp;CK (Adversarial Tactics, Techniques, and Common Knowledge) to structure hypotheses. Contrast: monitoring reacts to alerts; hunting looks for what didn't alert.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Cluster hunts: query audit logs for anomalous <code>secrets get</code> patterns, ServiceAccount tokens used from unexpected IPs, <code>exec</code> into production pods, image pulls from never-seen registries. MITRE's containers matrix (and threat-informed Falco rulesets) gives the hypothesis catalogue.",
+   "source": ""
+  },
+  {
+   "guid": "NJ|:;%-^rH",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D8_SoftwareDevSecurity",
+    "CISSP::SDLC"
+   ],
+   "front": "What does integrating security into the SDLC ('shift left') mean, and why is it economical?",
+   "back": "Embedding security requirements, threat modeling, secure design review, testing, and deployment controls into every Software Development Life Cycle (SDLC) phase rather than auditing at the end. Defects cost orders of magnitude more to fix in production than in design.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> DevSecOps pipeline: threat model at design → pre-commit secret scanning → SAST/SCA at build → signed artifacts + provenance → policy-gated admission → runtime detection. Security becomes pipeline stages and platform guardrails, not a final approval meeting.",
+   "source": ""
+  },
+  {
+   "guid": "d65H(mZ9s2",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D8_SoftwareDevSecurity",
+    "CISSP::Methodologies"
+   ],
+   "front": "Contrast waterfall, Agile, and DevOps/DevSecOps from a security standpoint.",
+   "back": "<b>Waterfall</b>: sequential phases; security gates fit naturally but feedback is late and change is costly. <b>Agile</b>: iterative; security must be in the definition of done or it's skipped. <b>DevOps/DevSecOps</b>: continuous delivery with automated, embedded security — velocity <i>and</i> control via automation rather than manual gates.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> The CISSP-exam mindset: separation of duties survives in DevOps not as 'ops deploys, devs don't' but as enforced pipeline controls — protected branches, mandatory review, signed commits/artifacts, and no human write access to production clusters.",
+   "source": ""
+  },
+  {
+   "guid": "Adc3{T?RN$",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D8_SoftwareDevSecurity",
+    "CISSP::CICD"
+   ],
+   "front": "What are the key controls for securing a CI/CD pipeline itself?",
+   "back": "The pipeline is a high-value target (it holds deploy credentials and produces trusted artifacts): harden runners, least-privilege scoped tokens, protected branches + mandatory review, no secrets in code, isolated build environments, signed and attested artifacts, and audit logging of pipeline changes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Tekton Chains signs taskruns and generates SLSA provenance attestations automatically; runners use short-lived workload identity instead of static cloud keys; Kyverno verifies both signature <i>and</i> provenance at admission — a poisoned build without valid attestation simply won't schedule.",
+   "source": ""
+  },
+  {
+   "guid": "mVyzZ;WK}Q",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D8_SoftwareDevSecurity",
+    "CISSP::OWASP"
+   ],
+   "front": "Name several evergreen OWASP Top 10 categories and the canonical defense for injection.",
+   "back": "Recurring categories: <b>Broken Access Control</b>, <b>Cryptographic Failures</b>, <b>Injection</b> (SQL (Structured Query Language), command), <b>Insecure Design</b>, <b>Security Misconfiguration</b>, <b>Vulnerable Components</b>, <b>Authentication Failures</b>, <b>SSRF (Server-Side Request Forgery)</b>. Injection defense: parameterized queries / prepared statements + input validation — never string concatenation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> OWASP (Open Worldwide Application Security Project) also publishes a Kubernetes Top 10 — workload misconfigurations, overly permissive RBAC, missing NetworkPolicies, secrets mismanagement — mapping appsec thinking onto the platform layer. SSRF is extra dangerous in-cluster: it can reach cloud metadata endpoints (credential theft).",
+   "source": ""
+  },
+  {
+   "guid": "t;Z^ym5`f#",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D8_SoftwareDevSecurity",
+    "CISSP::SupplyChain"
+   ],
+   "front": "What are an SBOM and SLSA, and how do they work together?",
+   "back": "<b>SBOM (Software Bill of Materials)</b>: machine-readable inventory of components/dependencies (formats: SPDX, CycloneDX) — enables rapid 'are we exposed?' answers (cf. Log4Shell). <b>SLSA (Supply-chain Levels for Software Artifacts)</b>: a maturity framework for build integrity; v1.0 Build Levels 1–3 climb from documented provenance to signed provenance from a hardened, non-falsifiable build platform.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Pipeline: Syft/Trivy generate the SBOM at build → attach it to the image as a signed attestation (cosign) in Harbor → admission policy requires SBOM + provenance → when a new CVE drops, query stored SBOMs instead of rescanning the world.",
+   "source": ""
+  },
+  {
+   "guid": "sG<Iso(Mt}",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D8_SoftwareDevSecurity",
+    "CISSP::SecretsMgmt"
+   ],
+   "front": "What are the rules for secrets in source code and configuration?",
+   "back": "Never commit secrets — repos are cloned, forked, cached, and history is forever (rotation, not deletion, is the fix for a leak). Use secret managers with audit trails, inject at runtime, scope narrowly, rotate automatically, and scan continuously for leaks.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> GitOps sharpens the problem: config lives in Git, so secrets need special handling — ESO pulls from an external manager (Vault, cloud secret stores) at runtime, or Sealed Secrets/SOPS (Secrets OPerationS) encrypt them for Git. Pre-commit + pipeline gitleaks scanning catches accidents.",
+   "source": ""
+  },
+  {
+   "guid": "dqbDu31L~S",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D8_SoftwareDevSecurity",
+    "CISSP::MaturityModels"
+   ],
+   "front": "What are software assurance maturity models — CMMI, OWASP SAMM, BSIMM?",
+   "back": "<b>Capability Maturity Model Integration (CMMI)</b>: five generic process-maturity levels (Initial → Managed → Defined → Quantitatively Managed → Optimizing). <b>OWASP Software Assurance Maturity Model (SAMM)</b>: prescriptive, open framework for maturing secure development. <b>Building Security In Maturity Model (BSIMM)</b>: descriptive — benchmarks your practices against observed industry data.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> Applied to a platform organization: measure maturity of practices like 'policy-as-code coverage', 'signed-artifact enforcement', 'threat modeling per service' — moving from heroic ad-hoc security (level 1) to measured, continuously improving guardrails (levels 4–5).",
+   "source": ""
+  },
+  {
+   "guid": "DrU$TNfc]x",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D8_SoftwareDevSecurity",
+    "CISSP::AcquiredSoftware"
+   ],
+   "front": "What risks come with acquired software (COTS and open source), and what controls apply?",
+   "back": "Commercial Off-The-Shelf (COTS) and open-source components import someone else's vulnerabilities, licenses, and maintenance posture. Controls: vendor/maintainer assessment, SCA scanning, license compliance, SBOM requirements in contracts, monitoring project health (abandonment, maintainer takeover), and patch commitments.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> The xz-utils backdoor (2024) is the canonical case: a trusted maintainer role was socially engineered. Mitigations in your stack: pin digests, verify signatures/provenance, prefer minimal base images (distroless), delay non-critical version bumps, and let SCA + SBOM tell you exactly where a poisoned package landed.",
+   "source": ""
+  },
+  {
+   "guid": "es+GcjM}&L",
+   "type": "basic",
+   "deck": "CISSP (Cloud & Kubernetes Grounded)",
+   "tags": [
+    "CISSP::D8_SoftwareDevSecurity",
+    "CISSP::APISecurity"
+   ],
+   "front": "What are APIs' main security concerns, and the standard control set?",
+   "back": "APIs expose business logic directly: broken object-level authorization (BOLA — the top API flaw), broken authentication, excessive data exposure, lack of rate limiting, and improper asset management (forgotten versions). Controls: strong authn (OAuth 2.0/OIDC), object-level authz checks, input validation, rate limiting, inventory, and gateway-enforced policy.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Grounding:</b> An API gateway or Ingress + service mesh centralizes: TLS termination, JWT validation, rate limits, and per-route authorization policies — while cluster NetworkPolicies ensure the backend is <i>only</i> reachable through the gateway (complete mediation, again).",
+   "source": ""
+  }
+ ]
+}

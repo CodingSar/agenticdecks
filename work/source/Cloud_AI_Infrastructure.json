@@ -1,0 +1,1295 @@
+{
+ "source_file": "Cloud_AI_Infrastructure.apkg",
+ "notes": [
+  {
+   "guid": "ra=xz**9)/",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "CPU"
+   ],
+   "front": "What does CPU stand for?",
+   "back": "Central Processing Unit — the general-purpose processor executing instructions in a computer.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "bAnO/og#n;",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "CPU"
+   ],
+   "front": "What is a CPU core?",
+   "back": "An independent processing unit within a CPU that can execute its own instruction stream; modern CPUs have many cores for parallel execution.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "C8S7*Zb=`Q",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "CPU"
+   ],
+   "front": "What is Simultaneous Multithreading (SMT), e.g. Intel Hyper-Threading?",
+   "back": "A technique letting one physical core run two (or more) threads concurrently by sharing execution resources, improving utilization but not doubling performance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "f-+F*[Zg?E",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "CPU"
+   ],
+   "front": "What is L1, L2, L3 cache?",
+   "back": "Layers of fast on-chip memory, from smallest/fastest (L1, per-core) to largest/slowest (L3, often shared across cores), buffering data between core and main memory.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "I@FCBC}3J.",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "CPU"
+   ],
+   "front": "What is Non-Uniform Memory Access (NUMA)?",
+   "back": "A multi-CPU/multi-socket memory architecture where each CPU has local memory it accesses fast, and remote memory (attached to another CPU) it accesses slower.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "QW8oW_m*;t",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "CPU"
+   ],
+   "front": "Why does NUMA matter for cloud workloads?",
+   "back": "Pinning processes/threads to the NUMA node holding their memory avoids costly cross-node memory traffic, which matters for high-performance and virtualized workloads.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "ha:BPuZRor",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "CPU"
+   ],
+   "front": "What is an Instruction Set Architecture (ISA)?",
+   "back": "The interface between hardware and software defining supported instructions, registers, and addressing modes — e.g. x86-64 or ARM.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "MGJRU^/V,&",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "CPU"
+   ],
+   "front": "x86-64 vs ARM in cloud infrastructure?",
+   "back": "x86-64 (Intel/AMD) is CISC-derived, dominant in traditional servers; ARM is RISC-based, increasingly used in cloud (AWS Graviton) for better performance-per-watt.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "f8A&O;:=Mg",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "CPU"
+   ],
+   "front": "What is Thermal Design Power (TDP)?",
+   "back": "The maximum heat a chip is expected to dissipate under sustained workload, in watts — used to size cooling and power infrastructure.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "u$LCQ&msp;",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "CPU"
+   ],
+   "front": "What is a CPU socket?",
+   "back": "The physical connector on a motherboard holding a CPU package; multi-socket servers connect multiple CPUs via interconnects like Intel UPI or AMD Infinity Fabric.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "po=6S1/]jj",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "CPU"
+   ],
+   "front": "What is vCPU in cloud computing?",
+   "back": "A virtual CPU — a share (often one hyperthread) of a physical CPU core allocated to a virtual machine or container.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "poaK3[$A86",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "CPU"
+   ],
+   "front": "What is clock speed / frequency?",
+   "back": "The rate (in GHz) at which a CPU executes clock cycles; higher frequency generally means faster single-threaded execution, within thermal limits.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "ySG)A2xAzX",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "CPU"
+   ],
+   "front": "What is an instruction pipeline?",
+   "back": "A CPU design technique overlapping the stages (fetch, decode, execute, etc.) of multiple instructions to increase throughput.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "g~}xNPuulS",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "CPU"
+   ],
+   "front": "What is branch prediction?",
+   "back": "A CPU technique that guesses the outcome of conditional branches ahead of time to keep the pipeline full, rolling back on misprediction.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "zf@]AP,}W1",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "GPU"
+   ],
+   "front": "What does GPU stand for?",
+   "back": "Graphics Processing Unit — a massively parallel processor originally for rendering graphics, now widely used for AI training/inference.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "kEu&s5Q2hC",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "GPU"
+   ],
+   "front": "Why are GPUs well-suited to AI workloads?",
+   "back": "They contain thousands of simple cores executing the same instruction across many data elements (SIMT), matching the highly parallel matrix math in neural networks.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "hdmuu5_MOa",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "GPU"
+   ],
+   "front": "What is Single Instruction, Multiple Threads (SIMT)?",
+   "back": "NVIDIA's execution model where groups of threads (warps) execute the same instruction in lockstep across different data, underlying GPU parallelism.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "Qul/m_+@Pi",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "GPU"
+   ],
+   "front": "What are CUDA cores?",
+   "back": "NVIDIA's general-purpose parallel processing cores that perform floating-point and integer arithmetic within a GPU streaming multiprocessor.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "h}yaq1EXf0",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "GPU"
+   ],
+   "front": "What are Tensor Cores?",
+   "back": "Specialized NVIDIA GPU units that accelerate matrix multiply-accumulate operations at reduced precision (e.g. FP16, INT8, FP8), core to AI training speed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "qAYdvVZ+]0",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "GPU"
+   ],
+   "front": "What is VRAM?",
+   "back": "Video Random Access Memory — dedicated high-bandwidth memory on a GPU used to store model weights, activations, and data during computation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "AdaRAOmJs2",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "GPU"
+   ],
+   "front": "What is High Bandwidth Memory (HBM)?",
+   "back": "A stacked DRAM technology placed very close to the GPU die (via an interposer) providing very high memory bandwidth, used in datacenter GPUs (HBM2e, HBM3).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "xh0[*(WQ**",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "GPU"
+   ],
+   "front": "Why does memory bandwidth matter more than capacity for many AI workloads?",
+   "back": "Many AI inference/training steps are memory-bound, meaning GPU compute idles waiting on data movement; higher bandwidth keeps compute units fed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "TJ06F$[t",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "GPU"
+   ],
+   "front": "What is NVLink?",
+   "back": "NVIDIA's high-speed direct GPU-to-GPU interconnect, offering much higher bandwidth than PCIe for multi-GPU communication.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "D{dhfa#%&u",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "GPU"
+   ],
+   "front": "What is NVSwitch?",
+   "back": "A switch chip enabling all-to-all NVLink connectivity among many GPUs in a single server node, so every GPU can talk to every other at full NVLink bandwidth.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "B=v>*1f:{U",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "GPU"
+   ],
+   "front": "PCIe vs NVLink for GPUs?",
+   "back": "PCIe (Peripheral Component Interconnect Express) is a general-purpose bus connecting GPUs to the CPU/system; NVLink is a purpose-built, much faster GPU-to-GPU link.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "ry]gk!Yw;1",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "GPU"
+   ],
+   "front": "What is GPU sharding / model parallelism?",
+   "back": "Splitting a large model's parameters or layers across multiple GPUs because it doesn't fit in one GPU's memory, requiring inter-GPU communication during compute.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "D[jP&p+WVE",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "GPU"
+   ],
+   "front": "What is mixed precision training?",
+   "back": "Training using lower-precision formats (FP16/BF16/FP8) for most operations to save memory and increase throughput, while keeping some operations in higher precision for stability.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "wovd:0=Mro",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "GPU"
+   ],
+   "front": "What is BF16 (bfloat16)?",
+   "back": "A 16-bit floating point format with the same exponent range as FP32 but reduced mantissa precision, popular for AI training due to stability and speed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "p5_wiaUdT!",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "GPU"
+   ],
+   "front": "What is a Streaming Multiprocessor (SM)?",
+   "back": "The core processing block of an NVIDIA GPU, containing CUDA cores, Tensor Cores, registers, and shared memory, replicated many times per chip.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "cD+n]/@u)`",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "GPU"
+   ],
+   "front": "What is GPU passthrough / vGPU?",
+   "back": "GPU passthrough dedicates a physical GPU directly to one VM; vGPU (virtual GPU) time-slices or partitions a physical GPU across multiple VMs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "kwiMkg?[Wl",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "GPU"
+   ],
+   "front": "Name some current datacenter GPUs.",
+   "back": "NVIDIA H100, H200, B200 (Blackwell); AMD MI300X — used for large-scale AI training and inference in cloud datacenters.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "xfS=.n~wm5",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "GPU"
+   ],
+   "front": "What is a GPU cluster / SuperPOD?",
+   "back": "A tightly interconnected group of GPU servers (via NVLink/NVSwitch and InfiniBand) designed to train very large models across hundreds or thousands of GPUs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "C?EU^RM58d",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "TPU"
+   ],
+   "front": "What does TPU stand for?",
+   "back": "Tensor Processing Unit — Google's custom Application-Specific Integrated Circuit (ASIC) built specifically to accelerate tensor/matrix operations for machine learning.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "A.hDWlThTY",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "TPU"
+   ],
+   "front": "What is a systolic array?",
+   "back": "A grid of processing elements that pass data rhythmically between neighbors, allowing matrix multiplication to be computed with high reuse and minimal memory traffic — the core of TPU design.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "k_iL08<F~r",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "TPU"
+   ],
+   "front": "TPU vs GPU: key design difference?",
+   "back": "TPUs are ASICs purpose-built for matrix multiplication with systolic arrays, trading flexibility for higher efficiency on ML workloads, whereas GPUs are more general-purpose parallel processors.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "xu,$j+{C>.",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "TPU"
+   ],
+   "front": "What is a TPU Pod?",
+   "back": "A large cluster of TPU chips connected via a dedicated high-speed interconnect, functioning as a single large accelerator for distributed training on Google Cloud.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "End3lZ1A|L",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "TPU"
+   ],
+   "front": "What is an Application-Specific Integrated Circuit (ASIC)?",
+   "back": "A chip custom-designed for one specific function (e.g. TPU for ML matrix math) rather than general-purpose computing, offering higher efficiency but no flexibility.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "bmV;Y<eJ6A",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "TPU"
+   ],
+   "front": "What is the TPU interconnect used within a pod?",
+   "back": "Google's Inter-Chip Interconnect (ICI), a dedicated high-bandwidth, low-latency mesh/torus network linking TPU chips directly without going through a CPU host.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "Hy<<c^^!R,",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "TPU"
+   ],
+   "front": "Why might a company choose custom AI ASICs (TPU, Trainium, etc.) over GPUs?",
+   "back": "Custom ASICs can offer better cost/performance and power efficiency for a specific, well-understood workload at large scale, at the cost of ecosystem flexibility (e.g. CUDA support).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "f`+*Ma/x`",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "TPU"
+   ],
+   "front": "What is AWS Trainium / Inferentia?",
+   "back": "Amazon's custom ASICs analogous to TPUs — Trainium for training, Inferentia for inference — designed to reduce cost per workload on AWS.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "oc2<2]losD",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Storage"
+   ],
+   "front": "HDD vs SSD?",
+   "back": "Hard Disk Drive (HDD) stores data magnetically on spinning platters with a moving read/write head; Solid State Drive (SSD) stores data electrically in flash memory with no moving parts, giving far lower latency.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "MXv~SD*XUm",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Storage"
+   ],
+   "front": "What is NVMe?",
+   "back": "Non-Volatile Memory Express — a storage protocol designed for flash/SSD storage over PCIe, offering much higher throughput and lower latency than older protocols like SATA/AHCI.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "oJpY0Y*NO9",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Storage"
+   ],
+   "front": "SATA vs NVMe?",
+   "back": "SATA (Serial ATA) is an older interface originally designed for spinning disks with limited bandwidth; NVMe uses PCIe lanes directly, enabling far higher IOPS and lower latency for SSDs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "ptuxX]:7.(",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Storage"
+   ],
+   "front": "What is IOPS?",
+   "back": "Input/Output Operations Per Second — a measure of how many read/write operations a storage device or system can handle per second.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "n{R0$~3+)r",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Storage"
+   ],
+   "front": "Block storage vs Object storage vs File storage?",
+   "back": "Block storage exposes raw addressable blocks (like a virtual disk, e.g. EBS); object storage stores immutable objects with metadata accessed via HTTP APIs (e.g. S3); file storage exposes a hierarchical filesystem shared over a network (e.g. NFS).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "mZaHH+e2YJ",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Storage"
+   ],
+   "front": "What is Redundant Array of Independent Disks (RAID)?",
+   "back": "A technique combining multiple physical disks into one logical unit for redundancy and/or performance, using schemes like RAID 0 (striping), RAID 1 (mirroring), RAID 5/6 (parity).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "s},ZPOT&B9",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Storage"
+   ],
+   "front": "What is RAID 5?",
+   "back": "A RAID level striping data with distributed parity across at least 3 disks, tolerating failure of one disk while balancing capacity and redundancy.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "n7GC:5]M?e",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Storage"
+   ],
+   "front": "What is erasure coding?",
+   "back": "A data protection technique (used in distributed/object storage) that splits data into fragments with added parity fragments, tolerating multiple failures with less overhead than full replication.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "rTAA3h$u$,",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Storage"
+   ],
+   "front": "What is a Storage Area Network (SAN)?",
+   "back": "A dedicated network providing block-level storage access to servers, typically over Fibre Channel or iSCSI, decoupling storage from compute.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "wK^@%XL4/o",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Storage"
+   ],
+   "front": "What is Network Attached Storage (NAS)?",
+   "back": "A storage device/service providing file-level access over a standard network (e.g. via NFS or SMB), simpler to manage than a SAN but typically lower performance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "n)~6IdFI}{",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Storage"
+   ],
+   "front": "What is data tiering in cloud storage?",
+   "back": "Automatically moving data between storage classes (hot, cool, cold, archive) based on access frequency to optimize cost versus latency.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "l5~r+erjhI",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Storage"
+   ],
+   "front": "What is Ceph?",
+   "back": "An open-source distributed storage system providing object, block, and file storage on a single cluster, commonly used to build storage backends for Kubernetes and OpenStack.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "Mv7ihn3$`",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Storage"
+   ],
+   "front": "What is a persistent volume in Kubernetes?",
+   "back": "An abstraction representing a piece of storage provisioned for a cluster, decoupled from any individual pod's lifecycle, backed by underlying storage like a SAN, NAS, or cloud disk.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "LUyrQu^ORz",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Storage"
+   ],
+   "front": "Why is storage often the bottleneck in AI training pipelines?",
+   "back": "Feeding large datasets to GPUs fast enough (data loading throughput) can lag behind GPU compute speed, requiring high-throughput parallel filesystems or local NVMe caching.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "tZftZ>,n=4",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Networking"
+   ],
+   "front": "What is InfiniBand?",
+   "back": "A high-throughput, low-latency networking technology (often used with RDMA) common in High-Performance Computing (HPC) and large AI training clusters for GPU-to-GPU communication across nodes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "sp&PuNc2sJ",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Networking"
+   ],
+   "front": "What is Remote Direct Memory Access (RDMA)?",
+   "back": "A technology letting one machine read/write another machine's memory directly, bypassing the CPU and OS kernel, drastically reducing latency and CPU overhead.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "j|j!bwCSto",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Networking"
+   ],
+   "front": "What is RDMA over Converged Ethernet (RoCE)?",
+   "back": "A protocol implementing RDMA over standard Ethernet networks instead of InfiniBand, letting datacenters get RDMA's low latency using Ethernet infrastructure.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "Tlsn,,I17",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Networking"
+   ],
+   "front": "What is a spine-leaf network topology?",
+   "back": "A two-tier datacenter network design where every leaf (top-of-rack) switch connects to every spine switch, giving predictable, non-blocking bandwidth between any two racks.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "<N#6SF:h&",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Networking"
+   ],
+   "front": "What is Top-of-Rack (ToR) switching?",
+   "back": "A network design where each server rack has its own switch at the top, aggregating that rack's traffic before sending it up to the spine layer.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "fNKRu+PZ{S",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Networking"
+   ],
+   "front": "What is network bisection bandwidth?",
+   "back": "The worst-case bandwidth available between two halves of a network if split in two — a key metric for distributed training performance across many nodes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "dkq)n~y-5z",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Networking"
+   ],
+   "front": "What is a Network Interface Card (NIC), and what is a SmartNIC?",
+   "back": "A NIC connects a server to the network; a SmartNIC offloads networking, storage, or security processing (e.g. via an onboard Data Processing Unit) from the host CPU.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "Q}8#/je::D",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Networking"
+   ],
+   "front": "What is a Data Processing Unit (DPU)?",
+   "back": "A programmable processor on a SmartNIC dedicated to handling networking, storage, and security tasks, freeing the host CPU/GPU for compute (e.g. NVIDIA BlueField).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "zr|0zI:UPX",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Networking"
+   ],
+   "front": "Why do large AI training clusters need specialized networking?",
+   "back": "Distributed training requires frequent, large gradient/parameter synchronization across nodes (all-reduce); network latency/bandwidth can become the bottleneck limiting scaling efficiency.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "t-S2kx:L5n",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Networking"
+   ],
+   "front": "What is an all-reduce operation?",
+   "back": "A collective communication pattern where every node combines (e.g. sums) values across all nodes and receives the combined result, used to synchronize gradients in distributed training.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "O:n)ET~xv1",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Datacenter"
+   ],
+   "front": "What is a rack unit (U)?",
+   "back": "A standard unit of rack height equal to 1.75 inches (4.45 cm); servers and switches are measured in U (e.g. 1U, 2U, 4U) to fit standard 19-inch racks.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "w;MU</%[J^",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Datacenter"
+   ],
+   "front": "What is a Power Distribution Unit (PDU)?",
+   "back": "A device that distributes electrical power to multiple devices within a rack, often with monitoring and remote power-cycling capability.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "t-#}VaC~CX",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Datacenter"
+   ],
+   "front": "What is Power Usage Effectiveness (PUE)?",
+   "back": "A datacenter efficiency metric equal to total facility power divided by IT equipment power; a PUE of 1.0 would mean zero overhead from cooling/power losses.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "I+r@4Ac)qI",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Datacenter"
+   ],
+   "front": "Why is liquid cooling increasingly used for AI infrastructure?",
+   "back": "High-density GPU racks generate more heat than air cooling can efficiently remove; liquid cooling (direct-to-chip or immersion) handles higher thermal density with better energy efficiency.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "j>8g;v7?9[",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Datacenter"
+   ],
+   "front": "What is direct-to-chip liquid cooling?",
+   "back": "A cooling method circulating coolant through cold plates mounted directly on hot components (CPU/GPU), removing heat more efficiently than air alone.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "rv1nuj7Z%j",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Datacenter"
+   ],
+   "front": "What is immersion cooling?",
+   "back": "A cooling method submerging entire servers/components in a dielectric (non-conductive) fluid that absorbs heat directly, used for very high-density compute.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "NS5vO.^=!o",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Datacenter"
+   ],
+   "front": "What is a hot aisle / cold aisle layout?",
+   "back": "A datacenter design alternating rows of racks so cold air intakes face one aisle and hot exhaust faces another, improving cooling efficiency.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "z>}Op](Z{.",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Datacenter"
+   ],
+   "front": "What is rack density measured in?",
+   "back": "Kilowatts (kW) per rack — traditional racks might draw 5-10kW, while dense AI GPU racks can exceed 40-100kW, driving the shift to liquid cooling.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "QJ_|V-j3P>",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Datacenter"
+   ],
+   "front": "What is redundancy tiering (e.g. Tier III/IV datacenter)?",
+   "back": "A classification (Uptime Institute) of datacenter resilience based on redundant power/cooling paths and fault tolerance, from Tier I (basic) to Tier IV (fully fault-tolerant).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "tPaBeU-q=i",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Datacenter"
+   ],
+   "front": "What is an Uninterruptible Power Supply (UPS)?",
+   "back": "A battery (or flywheel) backup system providing short-term power during outages, bridging the gap until generators start or power is restored.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "rFR5_5I;eY",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Cloud"
+   ],
+   "front": "What is a hypervisor?",
+   "back": "Software that creates and runs virtual machines by abstracting physical hardware; Type 1 (bare-metal, e.g. KVM, ESXi) runs directly on hardware, Type 2 runs atop a host OS.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "E_t-~L.@sm",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Cloud"
+   ],
+   "front": "What is Kernel-based Virtual Machine (KVM)?",
+   "back": "A Linux kernel module turning Linux into a Type 1 hypervisor, widely used as the virtualization backbone for OpenStack and many public clouds.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "L8X@6F~C^r",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Cloud"
+   ],
+   "front": "Bare metal vs virtualized cloud instances?",
+   "back": "Bare metal gives a tenant an entire physical server with no hypervisor overhead (common for GPU-heavy AI workloads); virtualized instances share physical hardware via a hypervisor.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "CrjP*Ah~JT",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Cloud"
+   ],
+   "front": "What is an availability zone?",
+   "back": "An isolated location (often a distinct datacenter or set of datacenters) within a cloud region, with independent power/cooling/networking, used to build fault-tolerant architectures.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "jWBU@f8)s<",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Cloud"
+   ],
+   "front": "What is a cloud region?",
+   "back": "A geographic area containing multiple availability zones, letting workloads be placed close to users while zones within it provide redundancy.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "PNFY/2o.4*",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Cloud"
+   ],
+   "front": "What is overprovisioning / oversubscription in cloud infrastructure?",
+   "back": "Allocating more virtual resources (CPU, network bandwidth) than physically exist, betting that not all tenants use their full allocation simultaneously.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "f$Cl>&/452",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Cloud"
+   ],
+   "front": "What is a container vs a virtual machine?",
+   "back": "A VM virtualizes hardware and runs a full guest OS via a hypervisor; a container virtualizes at the OS level, sharing the host kernel, making it lighter-weight and faster to start.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "JI`U$}&_t<",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Cloud"
+   ],
+   "front": "What is bin packing in cloud/cluster scheduling?",
+   "back": "The scheduling problem of placing workloads (VMs, containers, pods) onto physical hosts to maximize resource utilization while respecting constraints (CPU, memory, GPU, affinity).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "BGUWM>wNCB",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Cloud"
+   ],
+   "front": "What is GPU fractionalization / Multi-Instance GPU (MIG)?",
+   "back": "NVIDIA's technology partitioning a single physical GPU into several fully isolated instances, each with dedicated memory and compute, for multi-tenant efficiency.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "JCId)]~+_@",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Cloud"
+   ],
+   "front": "What is a Field-Programmable Gate Array (FPGA), and how does it relate to cloud infra?",
+   "back": "A reconfigurable chip whose logic can be rewritten after manufacturing, used in cloud for custom acceleration (networking, video transcoding, some ML inference) where ASIC-level efficiency isn't justified.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "Admv>.fcm@",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Cloud"
+   ],
+   "front": "What is total cost of ownership (TCO) in datacenter planning?",
+   "back": "The full cost of infrastructure including hardware purchase, power, cooling, networking, real estate, and maintenance over its lifetime — not just sticker price of servers/GPUs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "GMC/}K!NR^",
+   "type": "basic",
+   "deck": "Cloud & AI Infrastructure",
+   "tags": [
+    "Cloud"
+   ],
+   "front": "What is capacity planning in cloud/AI infrastructure?",
+   "back": "Forecasting future compute, storage, and network demand to ensure enough hardware (e.g. GPUs) is procured and racked ahead of need, given long hardware lead times.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  }
+ ]
+}

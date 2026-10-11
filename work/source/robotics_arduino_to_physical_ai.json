@@ -1,0 +1,3025 @@
+{
+ "source_file": "robotics_arduino_to_physical_ai.apkg",
+ "notes": [
+  {
+   "guid": "M,,^S2&$E)",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::01 Electronics Fundamentals",
+   "tags": [
+    "robotics::01-electronics-fundamentals"
+   ],
+   "front": "State Ohm's law and the three equivalent expressions for electrical power.",
+   "back": "V = I·R<br>P = V·I = I²·R = V²/R<br><br>Robotics use: sizing resistors, wire gauge, regulator heat, battery current.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Horowitz &amp; Hill, The Art of Electronics (3rd ed.) · 01 Electronics Fundamentals"
+  },
+  {
+   "guid": "G~wME>Cds0",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::01 Electronics Fundamentals",
+   "tags": [
+    "robotics::01-electronics-fundamentals"
+   ],
+   "front": "Voltage divider: give the formula and one correct and one incorrect use on a robot.",
+   "back": "V<sub>out</sub> = V<sub>in</sub> · R2 / (R1 + R2)<br><br><b>Correct:</b> scaling a 5 V signal down to 3.3 V (R1 = 1 kΩ, R2 = 2 kΩ → 3.33 V); reading resistive sensors; battery-voltage monitoring on an Analog-to-Digital Converter (ADC) pin.<br><b>Incorrect:</b> as a power supply — output sags as soon as a load draws current.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SparkFun Learn tutorials — https://learn.sparkfun.com/tutorials · 01 Electronics Fundamentals"
+  },
+  {
+   "guid": "GH1_uc!%y<",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::01 Electronics Fundamentals",
+   "tags": [
+    "robotics::01-electronics-fundamentals"
+   ],
+   "front": "How do you size the series resistor for an LED? Work the example: 5 V supply, forward voltage 2 V, target 10 mA.",
+   "back": "R = (V<sub>supply</sub> − V<sub>forward</sub>) / I = (5 − 2) / 0.010 = 300 Ω → use the next standard value, 330 Ω.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SparkFun Learn tutorials — https://learn.sparkfun.com/tutorials · 01 Electronics Fundamentals"
+  },
+  {
+   "guid": "el;Xl!}:`F",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::01 Electronics Fundamentals",
+   "tags": [
+    "robotics::01-electronics-fundamentals"
+   ],
+   "front": "What problem does a pull-up (or pull-down) resistor solve, and how does Arduino's INPUT_PULLUP change the button logic?",
+   "back": "A disconnected (floating) input picks up noise and reads randomly. A pull-up (~10 kΩ to Vcc) or pull-down (to ground) defines the idle level.<br><br><code>pinMode(pin, INPUT_PULLUP)</code> enables the internal ~20–50 kΩ pull-up, so the button is wired pin → ground and reads <b>LOW when pressed</b> (active-low).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Arduino Documentation — https://docs.arduino.cc/ · 01 Electronics Fundamentals"
+  },
+  {
+   "guid": "n0%eiRq<#D",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::01 Electronics Fundamentals",
+   "tags": [
+    "robotics::01-electronics-fundamentals"
+   ],
+   "front": "What is a decoupling (bypass) capacitor, and what is the standard practice for placing them?",
+   "back": "A small capacitor between an Integrated Circuit's (IC) supply pin and ground that supplies fast transient current locally and shunts high-frequency noise.<br><br>Practice: 100 nF ceramic as close as possible to <i>every</i> IC supply pin, plus bulk electrolytic capacitance (100–1000 µF) near motor drivers and servo rails.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Horowitz &amp; Hill, The Art of Electronics (3rd ed.) · 01 Electronics Fundamentals"
+  },
+  {
+   "guid": "K(Sly`uEAf",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::01 Electronics Fundamentals",
+   "tags": [
+    "robotics::01-electronics-fundamentals"
+   ],
+   "front": "Why does every relay, solenoid or brushed motor switched by a transistor need a flyback diode?",
+   "back": "Inductor current cannot stop instantly: V = −L·di/dt produces a large voltage spike when the switch opens, which destroys the transistor.<br><br>A diode in reverse-parallel across the load gives the current a path to decay. (H-bridge driver ICs usually have these built in or use the MOSFET body diodes.)",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Horowitz &amp; Hill, The Art of Electronics (3rd ed.) · 01 Electronics Fundamentals"
+  },
+  {
+   "guid": "H}H^xWT7X=",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::01 Electronics Fundamentals",
+   "tags": [
+    "robotics::01-electronics-fundamentals"
+   ],
+   "front": "Describe the standard circuit for switching a high-current load from a microcontroller pin with an N-channel Metal-Oxide-Semiconductor Field-Effect Transistor (MOSFET).",
+   "back": "<b>Low-side switch:</b> load between V+ and drain, source to ground, gate driven by the pin.<br>• Use a <b>logic-level</b> MOSFET (R<sub>DS(on)</sub> specified at 4.5 V or 2.5 V gate drive).<br>• ~100–220 Ω series gate resistor (limits the gate charging current).<br>• ~10 kΩ gate-to-source pull-down (keeps it off during reset).<br>• Flyback diode if the load is inductive.<br>• Common ground between load supply and microcontroller.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Horowitz &amp; Hill, The Art of Electronics (3rd ed.) · 01 Electronics Fundamentals"
+  },
+  {
+   "guid": "L+@0$%3jYF",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::01 Electronics Fundamentals",
+   "tags": [
+    "robotics::01-electronics-fundamentals"
+   ],
+   "front": "You must connect a 5 V Arduino to a 3.3 V sensor or Raspberry Pi. What are the level-shifting options, and what is the risk if you skip them?",
+   "back": "Risk: 5 V into a non-5 V-tolerant 3.3 V input forward-biases the protection diodes and can destroy the pin.<br><br>Options:<br>• Resistor divider — one direction, slow signals only.<br>• BSS138 MOSFET bidirectional shifter — ideal for Inter-Integrated Circuit (I2C).<br>• Dedicated translator IC (e.g. 74LVC245, TXS0108).<br><br>3.3 V → 5 V input usually works without shifting but is marginal (ATmega328P needs ≥ 0.6·Vcc = 3.0 V for HIGH).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SparkFun Learn tutorials — https://learn.sparkfun.com/tutorials · 01 Electronics Fundamentals"
+  },
+  {
+   "guid": "jr4D>F3gec",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::01 Electronics Fundamentals",
+   "tags": [
+    "robotics::01-electronics-fundamentals"
+   ],
+   "front": "Lithium-Polymer (LiPo) batteries: give cell voltages, what '3S 2200 mAh 25C' means, and the main safety rules.",
+   "back": "Per cell: 3.7 V nominal, 4.2 V full, do not discharge below ~3.0–3.3 V.<br><b>3S</b> = 3 cells in series = 11.1 V nominal (12.6 V full).<br><b>Max continuous current</b> = capacity × C-rating = 2.2 Ah × 25 = 55 A.<br><br>Safety: balance-charge with a LiPo charger, use a low-voltage cutoff/alarm, never puncture or charge unattended — fire hazard.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SparkFun Learn tutorials — https://learn.sparkfun.com/tutorials · 01 Electronics Fundamentals"
+  },
+  {
+   "guid": "M&$A&2609<",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::01 Electronics Fundamentals",
+   "tags": [
+    "robotics::01-electronics-fundamentals"
+   ],
+   "front": "Linear regulator vs. buck (step-down switching) converter: how do they differ and which do you use to power a Raspberry Pi from a 12 V robot battery?",
+   "back": "<b>Linear:</b> burns the excess as heat, P<sub>loss</sub> = (V<sub>in</sub> − V<sub>out</sub>)·I. Simple and low-noise, but 12 V → 5 V at 3 A would dissipate 21 W.<br><b>Buck:</b> switches an inductor, ~85–95 % efficient, slightly noisier.<br><br>→ Use a buck converter rated for the Pi's peak current (Pi 5: 5 V / 5 A).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Horowitz &amp; Hill, The Art of Electronics (3rd ed.) · 01 Electronics Fundamentals"
+  },
+  {
+   "guid": "v3~[n/Q`qi",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::01 Electronics Fundamentals",
+   "tags": [
+    "robotics::01-electronics-fundamentals"
+   ],
+   "front": "Why must all boards on a robot share a common ground, and how do you keep motor currents from corrupting logic signals?",
+   "back": "A signal voltage only has meaning relative to a shared 0 V reference; without it, levels are undefined and communication fails or damages pins.<br><br>Keep it clean: star-ground at the battery/regulator, route heavy motor return currents on their own thick wires (not through the logic ground), and decouple locally.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Horowitz &amp; Hill, The Art of Electronics (3rd ed.) · 01 Electronics Fundamentals"
+  },
+  {
+   "guid": "FhvKZ;ox%&",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::01 Electronics Fundamentals",
+   "tags": [
+    "robotics::01-electronics-fundamentals"
+   ],
+   "front": "Symptom: the microcontroller resets whenever the motors start. Cause and fixes?",
+   "back": "<b>Cause:</b> motor inrush/stall current sags the supply rail below the brown-out threshold (or injects noise).<br><br><b>Fixes:</b> separate regulator (or battery) for logic; bulk capacitor across the motor supply; never power servos/motors from the Arduino 5 V pin; thicker/shorter power wiring; ceramic capacitors across brushed motor terminals; keep common ground.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SparkFun Learn tutorials — https://learn.sparkfun.com/tutorials · 01 Electronics Fundamentals"
+  },
+  {
+   "guid": "ORq|{El)g7",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::02 Microcontrollers & Arduino",
+   "tags": [
+    "robotics::02-microcontrollers-arduino"
+   ],
+   "front": "Microcontroller Unit (MCU) vs. Microprocessor Unit (MPU): what is the difference and why do robots usually need both?",
+   "back": "<b>MCU:</b> CPU + flash + RAM + peripherals (timers, ADC, PWM) on one chip; runs bare-metal or a Real-Time Operating System (RTOS); deterministic microsecond timing. Examples: ATmega328P, STM32, ESP32, RP2040.<br><b>MPU:</b> CPU needing external RAM/storage; runs Linux; high throughput but non-deterministic timing. Examples: Raspberry Pi, Jetson.<br><br>Robots pair them: MPU for perception/planning, MCU for motor control and hard real-time I/O.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Arduino Documentation — https://docs.arduino.cc/ · 02 Microcontrollers & Arduino"
+  },
+  {
+   "guid": "k*CDSK%r9%",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::02 Microcontrollers & Arduino",
+   "tags": [
+    "robotics::02-microcontrollers-arduino"
+   ],
+   "front": "Arduino UNO R3: key specifications.",
+   "back": "ATmega328P, 8-bit AVR @ 16 MHz<br>32 KB flash · 2 KB SRAM · 1 KB EEPROM<br>5 V logic<br>14 digital I/O (6 with Pulse-Width Modulation (PWM): 3, 5, 6, 9, 10, 11)<br>6 analog inputs, 10-bit Analog-to-Digital Converter (ADC)<br>External interrupts on pins 2 and 3",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Arduino Documentation — https://docs.arduino.cc/ · 02 Microcontrollers & Arduino"
+  },
+  {
+   "guid": "x9N;*5C?&E",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::02 Microcontrollers & Arduino",
+   "tags": [
+    "robotics::02-microcontrollers-arduino"
+   ],
+   "front": "Arduino UNO R4 (Minima / WiFi): what changed relative to the R3?",
+   "back": "Renesas RA4M1, 32-bit Arm Cortex-M4 @ 48 MHz<br>256 KB flash · 32 KB SRAM<br>Still 5 V logic and the UNO form factor<br>14-bit ADC, a real 12-bit Digital-to-Analog Converter (DAC), Controller Area Network (CAN) peripheral, USB-C<br>WiFi variant adds an ESP32-S3 radio module and a 12×8 LED matrix<br><br>Caveat: only ~8 mA per I/O pin (R3 tolerated 20 mA).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Arduino Documentation — https://docs.arduino.cc/ · 02 Microcontrollers & Arduino"
+  },
+  {
+   "guid": "FTbF:NMW6A",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::02 Microcontrollers & Arduino",
+   "tags": [
+    "robotics::02-microcontrollers-arduino",
+    "robotics::volatile"
+   ],
+   "front": "Arduino UNO Q (2025): what is its 'dual-brain' architecture and why does it matter for robotics?",
+   "back": "One board combining:<br>• <b>Qualcomm Dragonwing QRB2210</b> Microprocessor Unit (MPU) — quad Arm Cortex-A53 @ 2.0 GHz, runs Debian Linux, 2 GB/16 GB or 4 GB/32 GB RAM/eMMC, Wi-Fi 5 + Bluetooth 5.1 → vision, AI inference, Python.<br>• <b>STM32U585</b> Microcontroller Unit (MCU) — Arm Cortex-M33, runs Arduino sketches on Zephyr OS → deterministic real-time I/O.<br><br>A bridge library links the two; Arduino App Lab combines sketches, Python and AI models. It is the 'Linux computer + real-time MCU' robot pattern on a single UNO-sized board.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Arduino UNO Q docs — https://docs.arduino.cc/hardware/uno-q · 02 Microcontrollers & Arduino"
+  },
+  {
+   "guid": "A-QivO|{_;",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::02 Microcontrollers & Arduino",
+   "tags": [
+    "robotics::02-microcontrollers-arduino"
+   ],
+   "front": "How do you convert an Arduino analogRead() value to volts, and what is the resolution on a 5 V UNO R3?",
+   "back": "V = reading × V<sub>ref</sub> / 2<sup>n</sup><br><br>UNO R3: 10-bit → 0…1023; 5 V / 1024 ≈ 4.88 mV per step.<br>More bits or a lower reference voltage (<code>analogReference()</code>) give finer resolution.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Arduino Documentation — https://docs.arduino.cc/ · 02 Microcontrollers & Arduino"
+  },
+  {
+   "guid": "G6BN.qbAG)",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::02 Microcontrollers & Arduino",
+   "tags": [
+    "robotics::02-microcontrollers-arduino"
+   ],
+   "front": "What does analogWrite() actually output on an Arduino UNO R3?",
+   "back": "Not an analog voltage — a Pulse-Width Modulation (PWM) square wave: 8-bit duty cycle (0–255), ~490 Hz (≈980 Hz on pins 5 and 6).<br><br>Average voltage = duty × 5 V. Fine for LED dimming and motor-driver speed inputs; needs a low-pass filter to become a true analog level. (UNO R4 has a real DAC on A0.)",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Arduino Documentation — https://docs.arduino.cc/ · 02 Microcontrollers & Arduino"
+  },
+  {
+   "guid": "I>sYN!a3UU",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::02 Microcontrollers & Arduino",
+   "tags": [
+    "robotics::02-microcontrollers-arduino"
+   ],
+   "front": "Why is delay() a problem in robot code, and what is the standard non-blocking pattern?",
+   "back": "<code>delay()</code> blocks the CPU: no sensor reads, no control updates, missed events.<br><br>Pattern ('blink without delay'):<br><code>unsigned long now = millis();<br>if (now - last >= interval) { last = now; task(); }</code><br><br>Each task gets its own timestamp, so many periodic jobs run cooperatively inside <code>loop()</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Arduino Documentation — https://docs.arduino.cc/ · 02 Microcontrollers & Arduino"
+  },
+  {
+   "guid": "kvY}nWGSE}",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::02 Microcontrollers & Arduino",
+   "tags": [
+    "robotics::02-microcontrollers-arduino"
+   ],
+   "front": "millis() overflows after about 49.7 days. How do you write timing code that survives the rollover?",
+   "back": "Use <b>unsigned long</b> and always compare by <b>subtraction</b>:<br><code>if (millis() - start >= interval)</code><br><br>Unsigned modular arithmetic makes the difference correct across the wrap. Never write <code>if (millis() >= start + interval)</code> — the addition overflows.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Arduino Documentation — https://docs.arduino.cc/ · 02 Microcontrollers & Arduino"
+  },
+  {
+   "guid": "m2?ojR?,?9",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::02 Microcontrollers & Arduino",
+   "tags": [
+    "robotics::02-microcontrollers-arduino"
+   ],
+   "front": "What are the rules for writing an Interrupt Service Routine (ISR) on an Arduino?",
+   "back": "• Keep it very short: set a flag or count, do the work in <code>loop()</code>.<br>• No <code>delay()</code>, no Serial printing; <code>millis()</code> does not advance inside it.<br>• Shared variables must be <code>volatile</code>.<br>• On 8-bit AVR, multi-byte shared variables are not atomic — copy them inside <code>noInterrupts()</code> / <code>interrupts()</code>.<br>• Attach with <code>attachInterrupt(digitalPinToInterrupt(pin), isr, RISING)</code>; on the UNO R3 only pins 2 and 3.<br><br>Typical use: wheel-encoder edges.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Arduino Documentation — https://docs.arduino.cc/ · 02 Microcontrollers & Arduino"
+  },
+  {
+   "guid": "A5y&nPJP~b",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::02 Microcontrollers & Arduino",
+   "tags": [
+    "robotics::02-microcontrollers-arduino"
+   ],
+   "front": "What is switch bounce and how do you debounce in software?",
+   "back": "Mechanical contacts chatter for ~1–20 ms, producing many edges per press.<br><br>Software debounce: accept a new state only after it has been stable for a debounce interval (e.g. 20–50 ms measured with <code>millis()</code>). Hardware alternative: RC filter + Schmitt trigger.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Arduino Documentation — https://docs.arduino.cc/ · 02 Microcontrollers & Arduino"
+  },
+  {
+   "guid": "kk3_T*p,VX",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::02 Microcontrollers & Arduino",
+   "tags": [
+    "robotics::02-microcontrollers-arduino"
+   ],
+   "front": "On an Arduino UNO R3, which side effect does including the Servo library have?",
+   "back": "The Servo library takes over <b>Timer1</b>, which disables <code>analogWrite()</code> Pulse-Width Modulation (PWM) on <b>pins 9 and 10</b>.<br><br>General lesson: timers are shared hardware — libraries (Servo, tone, motor shields, encoder libraries) can conflict.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Arduino Documentation — https://docs.arduino.cc/ · 02 Microcontrollers & Arduino"
+  },
+  {
+   "guid": "z:NZ!_v!Cb",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::02 Microcontrollers & Arduino",
+   "tags": [
+    "robotics::02-microcontrollers-arduino"
+   ],
+   "front": "How much current can an Arduino UNO R3 I/O pin supply, and what follows for driving motors or servos?",
+   "back": "20 mA recommended (40 mA absolute maximum) per pin, ~200 mA total for the chip.<br><br>→ Never drive a motor, relay coil or servo power from an I/O pin or the 5 V pin. Use a transistor/MOSFET or a motor-driver IC with its own supply.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Arduino Documentation — https://docs.arduino.cc/ · 02 Microcontrollers & Arduino"
+  },
+  {
+   "guid": "mqq+$yBEjv",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::02 Microcontrollers & Arduino",
+   "tags": [
+    "robotics::02-microcontrollers-arduino"
+   ],
+   "front": "ESP32: why is it popular in hobby robotics, and what are its pitfalls?",
+   "back": "Dual-core 240 MHz (Xtensa LX6/LX7 or RISC-V variants), Wi-Fi + Bluetooth, many peripherals, FreeRTOS built in, programmable from the Arduino IDE, very cheap.<br><br>Pitfalls: 3.3 V logic (not 5 V tolerant); non-linear 12-bit Analog-to-Digital Converter (ADC), and ADC2 is unusable while Wi-Fi is active; Wi-Fi current spikes (~500 mA) need a solid supply; some pins are boot-strapping pins.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Espressif ESP32 docs — https://docs.espressif.com/ · 02 Microcontrollers & Arduino"
+  },
+  {
+   "guid": "pBN^Y5>:7",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::02 Microcontrollers & Arduino",
+   "tags": [
+    "robotics::02-microcontrollers-arduino"
+   ],
+   "front": "Why structure robot firmware as a Finite State Machine (FSM)?",
+   "back": "An FSM has explicit states (e.g. IDLE, SEARCH, APPROACH, GRAB, FAULT), transitions triggered by events/sensor conditions, and actions per state.<br><br>Benefits: non-blocking, predictable, easy to debug and extend, and gives you an obvious place for a safe FAULT state. Usually an <code>enum</code> + <code>switch</code> inside <code>loop()</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Arduino Documentation — https://docs.arduino.cc/ · 02 Microcontrollers & Arduino"
+  },
+  {
+   "guid": "g-#t2i$^N=",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::02 Microcontrollers & Arduino",
+   "tags": [
+    "robotics::02-microcontrollers-arduino"
+   ],
+   "front": "What does a Real-Time Operating System (RTOS) such as FreeRTOS or Zephyr give you over a bare-metal super-loop?",
+   "back": "Pre-emptive, priority-based <b>tasks</b> with bounded latency, plus queues, semaphores/mutexes and software timers.<br><br>Use it when several activities with different rates and priorities must coexist (e.g. 1 kHz motor loop, 100 Hz sensor fusion, communications, logging). Costs: RAM per task stack, and new bug classes (priority inversion, races, deadlock).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FreeRTOS docs — https://www.freertos.org/ · 02 Microcontrollers & Arduino"
+  },
+  {
+   "guid": "NKlk#]AiT.",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::02 Microcontrollers & Arduino",
+   "tags": [
+    "robotics::02-microcontrollers-arduino"
+   ],
+   "front": "What is a watchdog timer and why should a mobile robot enable it?",
+   "back": "A hardware countdown that resets the microcontroller unless the firmware periodically 'kicks' it. If code hangs (deadlock, stuck bus, runaway loop), the robot reboots into a safe state instead of driving on with stale motor commands.<br><br>Complement it with a <b>command timeout</b>: stop the motors if no fresh command arrives within e.g. 200 ms.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Arduino Documentation — https://docs.arduino.cc/ · 02 Microcontrollers & Arduino"
+  },
+  {
+   "guid": "zzrIk<rf5`",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::03 Sensors",
+   "tags": [
+    "robotics::03-sensors"
+   ],
+   "front": "Proprioceptive vs. exteroceptive sensors: define and give examples.",
+   "back": "<b>Proprioceptive</b> — measure the robot's internal state: encoders, Inertial Measurement Unit (IMU), motor current, joint torque, battery voltage.<br><b>Exteroceptive</b> — measure the environment: camera, Light Detection and Ranging (LiDAR), ultrasonic, tactile, Global Navigation Satellite System (GNSS).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Siegwart, Nourbakhsh &amp; Scaramuzza, Introduction to Autonomous Mobile Robots (2nd ed.) · 03 Sensors"
+  },
+  {
+   "guid": "L-tS`BSLgw",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::03 Sensors",
+   "tags": [
+    "robotics::03-sensors"
+   ],
+   "front": "What does an Inertial Measurement Unit (IMU) contain, and what do '6-axis' and '9-axis' mean?",
+   "back": "• 3-axis accelerometer — specific force (gravity + linear acceleration).<br>• 3-axis gyroscope — angular velocity.<br>• (9-axis) 3-axis magnetometer — heading relative to Earth's field.<br><br>6-axis example: MPU-6050. 9-axis with on-chip fusion: BNO055. Roll and pitch are observable from gravity; yaw needs a magnetometer or another absolute reference.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Siegwart, Nourbakhsh &amp; Scaramuzza, Introduction to Autonomous Mobile Robots (2nd ed.) · 03 Sensors"
+  },
+  {
+   "guid": "nG+x1xds^D",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::03 Sensors",
+   "tags": [
+    "robotics::03-sensors"
+   ],
+   "front": "Why fuse gyroscope and accelerometer data, and how does a complementary filter do it?",
+   "back": "Gyro: smooth and fast, but integration <b>drifts</b> (bias). Accelerometer: drift-free gravity direction, but <b>noisy</b> and corrupted by motion.<br><br>Complementary filter:<br>θ = α·(θ + ω·dt) + (1 − α)·θ<sub>accel</sub>, α ≈ 0.95–0.98<br>= high-pass the gyro, low-pass the accelerometer. Cheap alternative to a Kalman filter; Madgwick/Mahony filters extend the idea to 3D with quaternions.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Siegwart, Nourbakhsh &amp; Scaramuzza, Introduction to Autonomous Mobile Robots (2nd ed.) · 03 Sensors"
+  },
+  {
+   "guid": "CBd>U{fAIz",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::03 Sensors",
+   "tags": [
+    "robotics::03-sensors"
+   ],
+   "front": "How does an incremental quadrature encoder give both position and direction?",
+   "back": "Two channels, A and B, 90° out of phase. Which channel leads tells the direction; counting edges gives displacement. Counting all edges of both channels yields <b>4× the pulses per revolution</b>. An optional index (Z) channel marks one absolute position per turn.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Siegwart, Nourbakhsh &amp; Scaramuzza, Introduction to Autonomous Mobile Robots (2nd ed.) · 03 Sensors"
+  },
+  {
+   "guid": "xLZj!,=I1c",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::03 Sensors",
+   "tags": [
+    "robotics::03-sensors"
+   ],
+   "front": "Incremental vs. absolute encoders: what is the practical difference for a robot arm?",
+   "back": "<b>Incremental:</b> only counts change → position is lost at power-off → needs a homing routine.<br><b>Absolute</b> (optical multi-track or magnetic, e.g. AS5600/AS5048): reports the true angle immediately at power-on → no homing; essential for arms and legged robots. Often placed on the joint output to see through gearbox backlash.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Siegwart, Nourbakhsh &amp; Scaramuzza, Introduction to Autonomous Mobile Robots (2nd ed.) · 03 Sensors"
+  },
+  {
+   "guid": "K~`CKNfxAS",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::03 Sensors",
+   "tags": [
+    "robotics::03-sensors"
+   ],
+   "front": "Compute the output-shaft resolution: 12 pulses-per-revolution encoder on the motor shaft, quadrature decoding, 50:1 gearbox.",
+   "back": "Counts per output revolution = 12 × 4 × 50 = <b>2400</b><br>→ 360° / 2400 = 0.15° per count.<br><br>Distance per count for a wheel = π·D / 2400.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Siegwart, Nourbakhsh &amp; Scaramuzza, Introduction to Autonomous Mobile Robots (2nd ed.) · 03 Sensors"
+  },
+  {
+   "guid": "n(haqC[1t0",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::03 Sensors",
+   "tags": [
+    "robotics::03-sensors"
+   ],
+   "front": "How does an HC-SR04 ultrasonic sensor measure distance, and what are its limitations?",
+   "back": "Send a 10 µs trigger → it emits a 40 kHz burst → echo pin stays HIGH for the round-trip time.<br>d = (t × 343 m/s) / 2 (speed of sound at ~20 °C). Range ≈ 2 cm – 4 m.<br><br>Limitations: wide cone (~15–30°), soft or angled surfaces reflect poorly, cross-talk between multiple sensors, slow update rate, temperature-dependent.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SparkFun Learn tutorials — https://learn.sparkfun.com/tutorials · 03 Sensors"
+  },
+  {
+   "guid": "oBzh5ncG:a",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::03 Sensors",
+   "tags": [
+    "robotics::03-sensors"
+   ],
+   "front": "How does Light Detection and Ranging (LiDAR) work and what types are used on robots?",
+   "back": "Measures distance by laser time-of-flight (or phase shift / triangulation on cheap units).<br><br>• <b>2D spinning</b> (e.g. RPLIDAR): one scan plane — the standard for indoor mapping and navigation.<br>• <b>3D multi-beam / solid-state</b>: point clouds for outdoor robots and cars.<br>• Single-point Time-of-Flight (ToF) chips (e.g. VL53L1X): cheap short-range replacement for ultrasonic.<br><br>Weak on glass, mirrors and very dark surfaces.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Siegwart, Nourbakhsh &amp; Scaramuzza, Introduction to Autonomous Mobile Robots (2nd ed.) · 03 Sensors"
+  },
+  {
+   "guid": "vSYDEOYQRW",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::03 Sensors",
+   "tags": [
+    "robotics::03-sensors"
+   ],
+   "front": "Name the three depth-camera principles and their trade-offs.",
+   "back": "• <b>Passive/active stereo</b> (e.g. Intel RealSense D4xx): triangulation between two cameras; works outdoors; struggles on texture-less surfaces unless an infrared projector adds texture.<br>• <b>Structured light</b>: project a known pattern; accurate at short range; fails in sunlight.<br>• <b>Time-of-Flight (ToF)</b>: measure light round-trip per pixel; good at range; multipath and interference issues.<br><br>All output Red-Green-Blue-Depth (RGB-D) images → point clouds.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Siegwart, Nourbakhsh &amp; Scaramuzza, Introduction to Autonomous Mobile Robots (2nd ed.) · 03 Sensors"
+  },
+  {
+   "guid": "RdX!@tGT{H",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::03 Sensors",
+   "tags": [
+    "robotics::03-sensors"
+   ],
+   "front": "What does a 6-axis force/torque sensor measure and where is it used?",
+   "back": "Three forces (F<sub>x</sub>, F<sub>y</sub>, F<sub>z</sub>) and three torques, usually via strain gauges, typically mounted at the wrist between arm and gripper.<br><br>Uses: contact detection, force-controlled assembly/insertion, polishing, hand-guiding (kinesthetic teaching), collision safety, and as an input modality for learned policies.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Siegwart, Nourbakhsh &amp; Scaramuzza, Introduction to Autonomous Mobile Robots (2nd ed.) · 03 Sensors"
+  },
+  {
+   "guid": "ma`:?#e6:&",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::03 Sensors",
+   "tags": [
+    "robotics::03-sensors"
+   ],
+   "front": "What is a Hall-effect sensor and where does it appear in robots?",
+   "back": "Outputs a voltage proportional to magnetic field (or a digital switch at a threshold).<br><br>Uses: rotor-position sensing for Brushless Direct-Current (BLDC) motor commutation, magnetic absolute encoders (AS5600), wheel-speed pickups, contact-less limit switches, and in-line current sensing.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Horowitz &amp; Hill, The Art of Electronics (3rd ed.) · 03 Sensors"
+  },
+  {
+   "guid": "gv*LcUj#nI",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::03 Sensors",
+   "tags": [
+    "robotics::03-sensors"
+   ],
+   "front": "Distinguish accuracy, precision (repeatability) and resolution for a sensor.",
+   "back": "<b>Accuracy:</b> closeness of the mean reading to the true value (systematic error/bias).<br><b>Precision:</b> spread of repeated readings (random error).<br><b>Resolution:</b> smallest change the sensor can report.<br><br>High resolution implies neither accuracy nor precision. Calibration fixes bias; filtering/averaging improves precision.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Siegwart, Nourbakhsh &amp; Scaramuzza, Introduction to Autonomous Mobile Robots (2nd ed.) · 03 Sensors"
+  },
+  {
+   "guid": "FQ!C!vYEI3",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::03 Sensors",
+   "tags": [
+    "robotics::03-sensors"
+   ],
+   "front": "What are vision-based tactile sensors (GelSight, DIGIT) and why do they matter for manipulation learning?",
+   "back": "A camera looks at the back of a soft, illuminated elastomer 'skin'; contact deforms the gel, and the image encodes contact geometry, shear/slip and force at very high spatial resolution.<br><br>Because the output is an image, it plugs straight into vision encoders — several Vision-Language-Action (VLA) models add tactile tokens for contact-rich tasks such as insertion.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kawaharazuka et al. 2025, VLA Models for Robotics: A Review — https://arxiv.org/abs/2510.07077 · 03 Sensors"
+  },
+  {
+   "guid": "F4U`L-[CXD",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::04 Actuators & Power Transmission",
+   "tags": [
+    "robotics::04-actuators-power-transmission"
+   ],
+   "front": "Brushed Direct-Current (DC) motor: what sets its speed and its torque?",
+   "back": "Speed ∝ applied voltage (minus back-EMF); torque ∝ current: τ = K<sub>t</sub>·I.<br><br>Consequences: control speed with Pulse-Width Modulation (PWM) duty cycle; measuring current gives a cheap torque estimate; stall = maximum current.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Hughes &amp; Drury, Electric Motors and Drives (5th ed.) · 04 Actuators & Power Transmission"
+  },
+  {
+   "guid": "g-+./89*b2",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::04 Actuators & Power Transmission",
+   "tags": [
+    "robotics::04-actuators-power-transmission"
+   ],
+   "front": "What is an H-bridge, and why do hobbyists move from the L298N to MOSFET-based drivers?",
+   "back": "Four switches around the motor; closing diagonal pairs reverses polarity → forward/reverse; Pulse-Width Modulation (PWM) on the enable input sets speed; both low-side (or high-side) on = brake. Never close both switches on one side (shoot-through).<br><br>L298N uses bipolar transistors and drops ~2 V (hot, inefficient). MOSFET drivers (TB6612FNG, DRV8833, DRV8871) drop a fraction of a volt.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SparkFun Learn tutorials — https://learn.sparkfun.com/tutorials · 04 Actuators & Power Transmission"
+  },
+  {
+   "guid": "xc[?5u|c++",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::04 Actuators & Power Transmission",
+   "tags": [
+    "robotics::04-actuators-power-transmission"
+   ],
+   "front": "Hobby (RC) servo: what is the control signal and what is inside?",
+   "back": "Signal: 50 Hz pulse train (20 ms period); pulse width 1.0–2.0 ms maps to roughly 0–180°, 1.5 ms = centre (many accept 0.5–2.5 ms).<br><br>Inside: DC motor + gearbox + potentiometer + a small closed-loop position controller. No position feedback to the user. Power from a separate 5–6 V rail; stall current can exceed 1 A.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Arduino Documentation — https://docs.arduino.cc/ · 04 Actuators & Power Transmission"
+  },
+  {
+   "guid": "f)Z.GbgO|n",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::04 Actuators & Power Transmission",
+   "tags": [
+    "robotics::04-actuators-power-transmission"
+   ],
+   "front": "Stepper motors: how do they work, and what are the strengths and weaknesses?",
+   "back": "Energising coils in sequence moves the rotor in fixed steps — typically 1.8° = 200 steps/rev; microstepping (e.g. 1/16 → 3200 steps/rev) smooths motion. Driver ICs (A4988, DRV8825, TMC2209) regulate coil current by chopping; control via STEP/DIR pins.<br><br>+ Precise open-loop positioning, holding torque.<br>− Torque falls with speed; lost steps go undetected without an encoder; draws full current at standstill; resonance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Hughes &amp; Drury, Electric Motors and Drives (5th ed.) · 04 Actuators & Power Transmission"
+  },
+  {
+   "guid": "Oy;!f`4zPT",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::04 Actuators & Power Transmission",
+   "tags": [
+    "robotics::04-actuators-power-transmission"
+   ],
+   "front": "Brushless Direct-Current (BLDC) motor vs. brushed motor.",
+   "back": "No brushes: permanent-magnet rotor, three-phase stator, commutated <b>electronically</b> by a controller using Hall sensors, an encoder or sensorless back-EMF.<br><br>+ Higher efficiency and power density, long life, less electrical noise.<br>− Needs a three-phase inverter/controller (Electronic Speed Controller (ESC) or Field-Oriented Control drive).<br><br>Standard in drones, quadrupeds, humanoids and modern robot arms.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Hughes &amp; Drury, Electric Motors and Drives (5th ed.) · 04 Actuators & Power Transmission"
+  },
+  {
+   "guid": "Qbnrgso7ru",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::04 Actuators & Power Transmission",
+   "tags": [
+    "robotics::04-actuators-power-transmission"
+   ],
+   "front": "What is Field-Oriented Control (FOC)?",
+   "back": "Vector control of a three-phase motor: measure phase currents → Clarke transform (3-phase → α/β) → Park transform using the rotor angle (→ rotating d/q frame). In that frame currents are DC quantities, so simple PI loops regulate <b>I<sub>q</sub></b> (torque-producing) and hold <b>I<sub>d</sub></b> ≈ 0; inverse transforms + space-vector PWM drive the inverter.<br><br>Result: smooth, quiet, efficient torque control down to zero speed — the basis of torque-controlled robot joints (ODrive, SimpleFOC, moteus).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SimpleFOC docs — https://docs.simplefoc.com/ · 04 Actuators & Power Transmission"
+  },
+  {
+   "guid": "F&|{D-r;;H",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::04 Actuators & Power Transmission",
+   "tags": [
+    "robotics::04-actuators-power-transmission"
+   ],
+   "front": "A gearbox has ratio N:1. How do speed, torque and reflected rotor inertia change at the output?",
+   "back": "Speed ÷ N · Torque × N (× efficiency) · Reflected rotor inertia × <b>N²</b><br><br>High ratios give torque but make the joint slow, hard to back-drive, and hide external forces behind friction and reflected inertia.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Lynch &amp; Park, Modern Robotics (2017) — http://modernrobotics.org · 04 Actuators & Power Transmission"
+  },
+  {
+   "guid": "F3p_Q_i;6N",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::04 Actuators & Power Transmission",
+   "tags": [
+    "robotics::04-actuators-power-transmission"
+   ],
+   "front": "On a DC motor's torque–speed line, where is mechanical power maximal?",
+   "back": "Torque falls linearly from stall torque (zero speed) to zero at no-load speed.<br>P = τ·ω is maximal at <b>half the no-load speed and half the stall torque</b>.<br><br>Choose motor + gear ratio so the operating point sits near this region, not near stall (overheating).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Hughes &amp; Drury, Electric Motors and Drives (5th ed.) · 04 Actuators & Power Transmission"
+  },
+  {
+   "guid": "jP+NLTR2JK",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::04 Actuators & Power Transmission",
+   "tags": [
+    "robotics::04-actuators-power-transmission"
+   ],
+   "front": "What is back-electromotive force (back-EMF)?",
+   "back": "A spinning motor acts as a generator: V<sub>emf</sub> = K<sub>e</sub>·ω, opposing the applied voltage. Current is I = (V − K<sub>e</sub>ω)/R, so current (and torque) are highest at stall and drop as speed rises.<br><br>Uses: sensorless speed estimation/commutation. Hazard: an externally driven or braking motor pumps energy back into the supply (regeneration).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Hughes &amp; Drury, Electric Motors and Drives (5th ed.) · 04 Actuators & Power Transmission"
+  },
+  {
+   "guid": "v}I~~8)fqE",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::04 Actuators & Power Transmission",
+   "tags": [
+    "robotics::04-actuators-power-transmission"
+   ],
+   "front": "What is a Quasi-Direct-Drive (QDD) or 'proprioceptive' actuator, and why did it transform legged robots?",
+   "back": "A high-torque-density 'pancake' Brushless DC motor with a <b>low gear ratio</b> (roughly 6:1–10:1) and no torque sensor.<br><br>Low reflected inertia and friction make it back-drivable and impact-tolerant, and joint torque can be controlled accurately from motor current alone. Pioneered in the MIT Cheetah; now standard in quadrupeds (Unitree) and many humanoids — and well suited to policies trained with reinforcement learning because it is easy to simulate.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Wensing et al. 2017, Proprioceptive Actuator Design in the MIT Cheetah (IEEE T-RO) · 04 Actuators & Power Transmission"
+  },
+  {
+   "guid": "C#H@2*J(T>",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::04 Actuators & Power Transmission",
+   "tags": [
+    "robotics::04-actuators-power-transmission"
+   ],
+   "front": "What is a Series Elastic Actuator (SEA)?",
+   "back": "A deliberately compliant spring between gearbox and load. Measuring spring deflection gives joint torque (Hooke's law), turning force control into a position-control problem.<br><br>+ Accurate force control, shock tolerance, energy storage.<br>− Lower control bandwidth.<br>Used in Baxter, NASA Valkyrie, ANYmal (ANYdrive).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Pratt &amp; Williamson 1995, Series Elastic Actuators (IROS) · 04 Actuators & Power Transmission"
+  },
+  {
+   "guid": "w!;b!:RLw]",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::04 Actuators & Power Transmission",
+   "tags": [
+    "robotics::04-actuators-power-transmission"
+   ],
+   "front": "Compare the three reducer types common in robot joints: planetary, strain-wave (harmonic) and cycloidal.",
+   "back": "<b>Planetary:</b> cheap, efficient, back-drivable at low ratios; has backlash. Used in Quasi-Direct-Drive (QDD) legs.<br><b>Strain-wave (Harmonic Drive):</b> ~50–160:1 in one compact stage, near-zero backlash; costly, some compliance, poor back-drivability. The classic industrial/collaborative arm joint.<br><b>Cycloidal:</b> high ratio, very robust to shock loads, low backlash; heavier, some vibration.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Lynch &amp; Park, Modern Robotics (2017) — http://modernrobotics.org · 04 Actuators & Power Transmission"
+  },
+  {
+   "guid": "luM<H^>@f]",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::04 Actuators & Power Transmission",
+   "tags": [
+    "robotics::04-actuators-power-transmission"
+   ],
+   "front": "What is a 'smart' bus servo (Dynamixel, Feetech STS3215) and why do low-cost learning arms such as the SO-101 use them?",
+   "back": "A servo with its own microcontroller on a daisy-chained serial bus (half-duplex TTL or RS-485). Each unit has an ID and reports position, velocity, load, voltage and temperature; supports position/velocity/current modes and torque-off.<br><br>For imitation learning this gives readable joint states on both the hand-moved <b>leader</b> arm and the <b>follower</b> arm with minimal wiring — the basis of the SO-100/SO-101 used with Hugging Face LeRobot.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Hugging Face LeRobot — https://github.com/huggingface/lerobot · SmolVLA https://arxiv.org/abs/2506.01844 · 04 Actuators & Power Transmission"
+  },
+  {
+   "guid": "tH9)E;][])",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::05 Communication Protocols",
+   "tags": [
+    "robotics::05-communication-protocols"
+   ],
+   "front": "Universal Asynchronous Receiver-Transmitter (UART): how does it work and what does '115200 8N1' mean?",
+   "back": "Asynchronous point-to-point serial: TX → RX crossed, plus common ground; no clock line, so both ends must agree on the baud rate.<br><br>115200 8N1 = 115 200 bit/s, 8 data bits, No parity, 1 stop bit (each byte framed by a start bit and a stop bit → 10 bits on the wire per byte).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SparkFun Learn tutorials — https://learn.sparkfun.com/tutorials · 05 Communication Protocols"
+  },
+  {
+   "guid": "nf^QBK7#2y",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::05 Communication Protocols",
+   "tags": [
+    "robotics::05-communication-protocols"
+   ],
+   "front": "Inter-Integrated Circuit (I2C): wiring, addressing, speeds, and the classic failure modes.",
+   "back": "Two open-drain lines — SDA (data) and SCL (clock) — with <b>pull-up resistors</b> (~2.2–10 kΩ); one controller, many targets selected by 7-bit address. 100 kbit/s standard, 400 kbit/s fast, 1 Mbit/s fast-mode plus.<br><br>Failure modes: missing pull-ups; two devices with the same fixed address (fix: address pins or a TCA9548A multiplexer); long wires (bus capacitance); a target holding SDA low after a glitch (bus lock-up).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "NXP UM10204 I2C-bus specification · 05 Communication Protocols"
+  },
+  {
+   "guid": "DE)W+B%Etr",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::05 Communication Protocols",
+   "tags": [
+    "robotics::05-communication-protocols"
+   ],
+   "front": "Serial Peripheral Interface (SPI): wiring and characteristics.",
+   "back": "Four wires: SCK (clock), MOSI/COPI, MISO/CIPO, and one Chip Select (CS) line per device. Full-duplex, push-pull, no addressing, tens of Mbit/s.<br><br>Must match clock polarity/phase (mode 0–3). Used for fast devices: displays, SD cards, high-rate IMUs, external ADCs, encoder chips.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SparkFun Learn tutorials — https://learn.sparkfun.com/tutorials · 05 Communication Protocols"
+  },
+  {
+   "guid": "pnxpK:%~xp",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::05 Communication Protocols",
+   "tags": [
+    "robotics::05-communication-protocols"
+   ],
+   "front": "UART vs. I2C vs. SPI — how do you choose?",
+   "back": "<b>UART:</b> two devices, simple streams (GPS, Bluetooth module, board-to-board link).<br><b>I2C:</b> many slow sensors on two wires, short distances.<br><b>SPI:</b> high data rate or low latency, few devices, more wires.<br><br>None of the three is robust over long, noisy cables — use differential buses (CAN, RS-485) for that.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SparkFun Learn tutorials — https://learn.sparkfun.com/tutorials · 05 Communication Protocols"
+  },
+  {
+   "guid": "c+e|zr+))U",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::05 Communication Protocols",
+   "tags": [
+    "robotics::05-communication-protocols"
+   ],
+   "front": "Controller Area Network (CAN) bus: how does it work?",
+   "back": "Two-wire <b>differential</b> bus (CAN_H / CAN_L), multi-master, 120 Ω termination at each end. Messages carry an <b>identifier, not an address</b>; every node sees every frame. Non-destructive bitwise arbitration: dominant 0 beats recessive 1, so the <b>lowest ID wins</b> = highest priority. Built-in CRC, acknowledgement and automatic retransmission.<br><br>Classical CAN: ≤ 1 Mbit/s, 8 data bytes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Bosch CAN 2.0 spec / CAN in Automation — https://www.can-cia.org/ · 05 Communication Protocols"
+  },
+  {
+   "guid": "jhP:lOfpd=",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::05 Communication Protocols",
+   "tags": [
+    "robotics::05-communication-protocols"
+   ],
+   "front": "What does CAN FD add, and why is CAN the default bus for robot joint actuators?",
+   "back": "CAN with Flexible Data-rate (CAN FD): up to 64 data bytes per frame and a faster data phase (typically 2–8 Mbit/s).<br><br>Why CAN in robots: noise immunity near motors, only two wires daisy-chained through the limbs, deterministic priority, built-in error handling, cheap transceivers — used by ODrive, moteus, MIT Mini Cheetah-style actuators and many humanoids.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Bosch CAN 2.0 spec / CAN in Automation — https://www.can-cia.org/ · 05 Communication Protocols"
+  },
+  {
+   "guid": "J*D1A=q1bh",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::05 Communication Protocols",
+   "tags": [
+    "robotics::05-communication-protocols"
+   ],
+   "front": "What is RS-485 and where is it used in robotics?",
+   "back": "A differential electrical standard (not a protocol): multi-drop (32+ nodes), long cables (up to ~1200 m at low rates), usually half-duplex with a driver-enable line; needs termination and biasing.<br><br>Carries Modbus RTU, Dynamixel Protocol 2.0, DMX and many industrial sensor links. Unlike CAN it has no arbitration or error handling — the protocol on top must provide them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Horowitz &amp; Hill, The Art of Electronics (3rd ed.) · 05 Communication Protocols"
+  },
+  {
+   "guid": "LT63].x}oj",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::05 Communication Protocols",
+   "tags": [
+    "robotics::05-communication-protocols"
+   ],
+   "front": "What is EtherCAT and why do high-performance arms and humanoids use it?",
+   "back": "Ethernet for Control Automation Technology: a master sends one Ethernet frame through all devices in a line/ring; each device reads and writes its data <b>on the fly</b> in hardware as the frame passes. Distributed clocks synchronise nodes to well under a microsecond.<br><br>→ Cycle times of 1 ms down to ~100 µs with dozens of axes; standard Ethernet hardware on the master side.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "EtherCAT Technology Group — https://www.ethercat.org/ · 05 Communication Protocols"
+  },
+  {
+   "guid": "k~f?opt|+_",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::05 Communication Protocols",
+   "tags": [
+    "robotics::05-communication-protocols"
+   ],
+   "front": "Why should you never close a fast control loop over Wi-Fi, and how is wireless used properly on robots?",
+   "back": "Wi-Fi/Bluetooth latency is variable (milliseconds to seconds) with packet loss and no determinism → instability if it sits inside a feedback loop.<br><br>Pattern: run stabilising loops on board; send only set-points, tele-operation commands and telemetry over wireless; add a command timeout/fail-safe; prefer UDP-style best-effort for fresh-data streams.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Siegwart, Nourbakhsh &amp; Scaramuzza, Introduction to Autonomous Mobile Robots (2nd ed.) · 05 Communication Protocols"
+  },
+  {
+   "guid": "dht8!ZDBkj",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::05 Communication Protocols",
+   "tags": [
+    "robotics::05-communication-protocols"
+   ],
+   "front": "When you design your own serial protocol between a Raspberry Pi and a microcontroller, what must every packet have?",
+   "back": "• <b>Framing</b>: start byte/length, or Consistent Overhead Byte Stuffing (COBS) with a 0x00 delimiter, so the receiver can resynchronise mid-stream.<br>• <b>Integrity</b>: checksum or Cyclic Redundancy Check (CRC).<br>• Message ID/type and fixed binary layout (mind endianness and struct padding).<br>• Timeouts and sequence numbers for lost packets.<br><br>Or use an existing solution: micro-ROS, MAVLink, Protocol Buffers/nanopb.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Horowitz &amp; Hill, The Art of Electronics (3rd ed.) · 05 Communication Protocols"
+  },
+  {
+   "guid": "nNi!B1/TiI",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::05 Communication Protocols",
+   "tags": [
+    "robotics::05-communication-protocols"
+   ],
+   "front": "What is MAVLink?",
+   "back": "Micro Air Vehicle Link: a lightweight binary messaging protocol between drones/rovers, companion computers and ground stations. Defines messages such as HEARTBEAT, ATTITUDE, GLOBAL_POSITION_INT and commands/missions; MAVLink 2 adds signing. Used by PX4 and ArduPilot with QGroundControl; bridges to ROS 2 exist (MAVROS; PX4 also offers a native uXRCE-DDS bridge).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "MAVLink developer guide — https://mavlink.io/ · 05 Communication Protocols"
+  },
+  {
+   "guid": "kY6A2<;g60",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::06 Raspberry Pi & Embedded Linux",
+   "tags": [
+    "robotics::06-raspberry-pi-embedded-linux"
+   ],
+   "front": "Why is a Raspberry Pi not a drop-in replacement for an Arduino in a robot?",
+   "back": "A Pi is a Linux Single-Board Computer (SBC): powerful, networked, runs Python/OpenCV/ROS 2 — but it has <b>non-deterministic timing</b> (scheduler jitter), no analog inputs, fragile 3.3 V I/O, slow boot, and needs a clean shutdown.<br><br>An Arduino-class microcontroller gives microsecond-deterministic I/O, ADC, hardware timers and instant boot. → Use both.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Raspberry Pi Documentation — https://www.raspberrypi.com/documentation/ · 06 Raspberry Pi & Embedded Linux"
+  },
+  {
+   "guid": "CyFdIhvSdo",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::06 Raspberry Pi & Embedded Linux",
+   "tags": [
+    "robotics::06-raspberry-pi-embedded-linux"
+   ],
+   "front": "Raspberry Pi 5: key specifications relevant to robotics.",
+   "back": "Broadcom BCM2712: 4× Arm Cortex-A76 @ 2.4 GHz (≈2–3× Pi 4), VideoCore VII GPU; up to 16 GB RAM.<br><b>RP1</b> in-house I/O controller (GPIO, USB, Ethernet, camera ports hang off it via PCIe).<br>PCIe 2.0 ×1 connector → NVMe storage or AI accelerators.<br>2× 4-lane camera/display (MIPI) ports, real-time clock, power button.<br>Needs 5 V / 5 A USB-C supply; active cooling recommended.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Raspberry Pi Documentation — https://www.raspberrypi.com/documentation/ · 06 Raspberry Pi & Embedded Linux"
+  },
+  {
+   "guid": "z}/1xs19Kp",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::06 Raspberry Pi & Embedded Linux",
+   "tags": [
+    "robotics::06-raspberry-pi-embedded-linux"
+   ],
+   "front": "What are the electrical rules for the Raspberry Pi 40-pin General-Purpose Input/Output (GPIO) header?",
+   "back": "• <b>3.3 V logic, NOT 5 V tolerant</b> — a 5 V signal can kill the pin/SoC.<br>• ~16 mA max per pin, ~50 mA total across pins — drive loads through transistors/drivers.<br>• <b>No analog inputs</b> — add an external ADC (MCP3008 on SPI, ADS1115 on I2C).<br>• Header also exposes I2C, SPI, UART and two hardware PWM channels, plus 5 V and 3.3 V rails.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Raspberry Pi Documentation — https://www.raspberrypi.com/documentation/ · 06 Raspberry Pi & Embedded Linux"
+  },
+  {
+   "guid": "IeA1d4-]Kx",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::06 Raspberry Pi & Embedded Linux",
+   "tags": [
+    "robotics::06-raspberry-pi-embedded-linux",
+    "robotics::volatile"
+   ],
+   "front": "GPIO code that worked on a Raspberry Pi 4 fails on a Pi 5. Why, and what should you use?",
+   "back": "On the Pi 5 the GPIO lives on the separate <b>RP1</b> chip, so libraries that poke the SoC's registers directly (classic RPi.GPIO, pigpio) no longer work.<br><br>Use the kernel's character-device interface: <b>libgpiod</b>, <b>lgpio</b>/rpi-lgpio, or <b>gpiozero</b> (which selects a working backend).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Raspberry Pi Documentation — https://www.raspberrypi.com/documentation/ · 06 Raspberry Pi & Embedded Linux"
+  },
+  {
+   "guid": "MPEB0hg|{a",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::06 Raspberry Pi & Embedded Linux",
+   "tags": [
+    "robotics::06-raspberry-pi-embedded-linux"
+   ],
+   "front": "Why does software Pulse-Width Modulation (PWM) from Linux make servos jitter, and what are the fixes?",
+   "back": "User-space timing is pre-empted by the scheduler, so pulse widths wobble by tens to hundreds of microseconds.<br><br>Fixes: the Pi's hardware PWM channels; a dedicated I2C PWM chip — <b>PCA9685</b> (16 channels, 12-bit); or hand servo/motor timing to a microcontroller.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Raspberry Pi Documentation — https://www.raspberrypi.com/documentation/ · 06 Raspberry Pi & Embedded Linux"
+  },
+  {
+   "guid": "LR{Ju_t&co",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::06 Raspberry Pi & Embedded Linux",
+   "tags": [
+    "robotics::06-raspberry-pi-embedded-linux"
+   ],
+   "front": "What is PREEMPT_RT and what does it not give you?",
+   "back": "The real-time pre-emption patch set for Linux, merged into the mainline kernel in version 6.12 (2024). It makes almost all kernel code pre-emptible and turns interrupt handlers into schedulable threads → <b>bounded worst-case latency</b> (tens to ~100 µs) for high-priority SCHED_FIFO threads.<br><br>It does not make code faster, and you must still avoid page faults (<code>mlockall</code>), dynamic allocation and blocking I/O in the real-time path. Enough for ~1 kHz loops (ros2_control, EtherCAT masters).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Linux kernel real-time docs — https://wiki.linuxfoundation.org/realtime/start · 06 Raspberry Pi & Embedded Linux"
+  },
+  {
+   "guid": "dD;pm4c~Iv",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::06 Raspberry Pi & Embedded Linux",
+   "tags": [
+    "robotics::06-raspberry-pi-embedded-linux"
+   ],
+   "front": "Describe the canonical two-tier compute architecture of a hobby-to-research mobile robot.",
+   "back": "<b>High level — Linux computer</b> (Raspberry Pi / Jetson): cameras, LiDAR, SLAM, planning, ROS 2, networking, AI inference.<br><b>Low level — microcontroller</b>: encoder counting, PID motor loops at 100 Hz–1 kHz+, IMU reads, safety timeouts.<br><br>Link: USB/UART, CAN or micro-ROS. Interface contract: velocity commands down (e.g. <code>cmd_vel</code>), odometry + sensor data up.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ROS 2 Documentation — https://docs.ros.org/ · 06 Raspberry Pi & Embedded Linux"
+  },
+  {
+   "guid": "Qz.UE{k>pi",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::06 Raspberry Pi & Embedded Linux",
+   "tags": [
+    "robotics::06-raspberry-pi-embedded-linux",
+    "robotics::volatile"
+   ],
+   "front": "How do you use cameras on a current Raspberry Pi?",
+   "back": "Camera modules connect over the MIPI Camera Serial Interface (CSI-2) ribbon. The software stack is <b>libcamera</b>: command-line <code>rpicam-apps</code> (rpicam-hello, rpicam-still, rpicam-vid) and the <b>Picamera2</b> Python library.<br><br>The legacy stack (raspistill, original picamera) is gone. USB webcams still appear as V4L2 devices for OpenCV's <code>VideoCapture</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Raspberry Pi Documentation — https://www.raspberrypi.com/documentation/ · 06 Raspberry Pi & Embedded Linux"
+  },
+  {
+   "guid": "C_|38]dCeb",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::06 Raspberry Pi & Embedded Linux",
+   "tags": [
+    "robotics::06-raspberry-pi-embedded-linux",
+    "robotics::volatile"
+   ],
+   "front": "What is the Raspberry Pi AI HAT+?",
+   "back": "A Hardware Attached on Top (HAT+) board for the Pi 5 with a Hailo neural accelerator on the PCIe link: <b>Hailo-8L, 13 Tera-Operations Per Second (TOPS)</b> or <b>Hailo-8, 26 TOPS</b>. Integrated with the camera stack (rpicam-apps) for real-time object detection, segmentation and pose estimation at a few watts.<br><br>It accelerates compiled vision networks — it is not a CUDA GPU and does not run large vision-language-action models.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Raspberry Pi Documentation — https://www.raspberrypi.com/documentation/ · 06 Raspberry Pi & Embedded Linux"
+  },
+  {
+   "guid": "bhf*RqR,-y",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::06 Raspberry Pi & Embedded Linux",
+   "tags": [
+    "robotics::06-raspberry-pi-embedded-linux",
+    "robotics::volatile"
+   ],
+   "front": "When do you step up from a Raspberry Pi to an NVIDIA Jetson?",
+   "back": "When you need an on-board <b>CUDA GPU</b>: deep-learning perception, GPU-accelerated SLAM (Isaac ROS), or running learned policies.<br><br>• Jetson Orin Nano Super — up to 67 TOPS, entry level.<br>• Jetson AGX Orin — up to 275 TOPS.<br>• Jetson AGX Thor (2025) — Blackwell GPU, up to 2070 FP4 teraFLOPS, 128 GB memory; aimed at humanoids running foundation models on board.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "NVIDIA Jetson — https://developer.nvidia.com/embedded-computing · 06 Raspberry Pi & Embedded Linux"
+  },
+  {
+   "guid": "AWTs!N4lw/",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::06 Raspberry Pi & Embedded Linux",
+   "tags": [
+    "robotics::06-raspberry-pi-embedded-linux"
+   ],
+   "front": "Two reliability killers on Pi-based robots are power and storage. Symptoms and countermeasures?",
+   "back": "<b>Under-voltage:</b> throttling, random reboots, USB drop-outs when motors start. Check with <code>vcgencmd get_throttled</code> (non-zero = trouble). Use a dedicated 5 V / 5 A buck converter and short, thick leads.<br><br><b>SD-card corruption</b> after hard power cuts: provide a clean-shutdown path, use a read-only/overlay root filesystem, or boot from NVMe/SSD; log to RAM or external storage.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Raspberry Pi Documentation — https://www.raspberrypi.com/documentation/ · 06 Raspberry Pi & Embedded Linux"
+  },
+  {
+   "guid": "EX33P/W9W:",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::06 Raspberry Pi & Embedded Linux",
+   "tags": [
+    "robotics::06-raspberry-pi-embedded-linux"
+   ],
+   "front": "Outline a minimal OpenCV colour-tracking pipeline that steers a robot toward a coloured ball.",
+   "back": "1. Grab frame (Picamera2 or <code>VideoCapture</code>).<br>2. Convert BGR → Hue-Saturation-Value (HSV) — hue is robust to lighting.<br>3. <code>inRange()</code> threshold → binary mask; clean with erode/dilate.<br>4. <code>findContours()</code> → largest contour → centroid (image moments) and area.<br>5. Error = centroid x − image centre → steering controller; area → distance proxy.<br><br>Send the command to the motor microcontroller; keep resolution low for frame rate.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenCV docs — https://docs.opencv.org/ · 06 Raspberry Pi & Embedded Linux"
+  },
+  {
+   "guid": "PgC4I?]:i6",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::06 Raspberry Pi & Embedded Linux",
+   "tags": [
+    "robotics::06-raspberry-pi-embedded-linux"
+   ],
+   "front": "Raspberry Pi Pico vs. Raspberry Pi: what is the Pico, and what is special about its chips?",
+   "back": "The Pico is a <b>microcontroller</b> board, not a Linux computer.<br>• RP2040: dual Arm Cortex-M0+ @ 133 MHz, 264 KB SRAM.<br>• RP2350 (Pico 2): dual Cortex-M33 <i>or</i> dual Hazard3 RISC-V @ 150 MHz, 520 KB SRAM, security features.<br><br>Special: <b>Programmable I/O (PIO)</b> state machines that implement custom, cycle-exact protocols in hardware (quadrature decoding, WS2812 LEDs, extra UARTs). Program with C/C++ SDK, MicroPython or Arduino core.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Raspberry Pi Documentation — https://www.raspberrypi.com/documentation/ · 06 Raspberry Pi & Embedded Linux"
+  },
+  {
+   "guid": "J0gU}uwJ/h",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::06 Raspberry Pi & Embedded Linux",
+   "tags": [
+    "robotics::06-raspberry-pi-embedded-linux"
+   ],
+   "front": "How do you run the Robot Operating System 2 (ROS 2) on a Raspberry Pi?",
+   "back": "ROS 2 binary packages target <b>Ubuntu</b> (Tier 1, arm64) → simplest: install 64-bit Ubuntu on the Pi and <code>apt install</code> the matching distribution.<br><br>On Raspberry Pi OS (Debian-based): run ROS 2 in a <b>Docker</b> container or build from source.<br><br>Tip: keep heavy visualisation (RViz) on a laptop in the same network/ROS domain; run only drivers and navigation on the Pi.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ROS 2 Documentation — https://docs.ros.org/ · 06 Raspberry Pi & Embedded Linux"
+  },
+  {
+   "guid": "p5g>?)z3n*",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::07 Control Theory",
+   "tags": [
+    "robotics::07-control-theory"
+   ],
+   "front": "Open-loop vs. closed-loop control.",
+   "back": "<b>Open-loop:</b> command computed without measuring the result (stepper moves, timed driving). Simple, but blind to disturbances and model error.<br><b>Closed-loop (feedback):</b> measure output, compute error e = r − y, correct continuously. Rejects disturbances and tolerates model error — at the risk of instability if badly tuned.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Åström &amp; Murray, Feedback Systems (2nd ed.) — https://fbswiki.org/ · 07 Control Theory"
+  },
+  {
+   "guid": "lGM!2mmUhS",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::07 Control Theory",
+   "tags": [
+    "robotics::07-control-theory"
+   ],
+   "front": "Write the Proportional-Integral-Derivative (PID) control law and state what each term does.",
+   "back": "u(t) = K<sub>p</sub>·e + K<sub>i</sub>·∫e dt + K<sub>d</sub>·de/dt<br><br><b>P</b> — reacts to present error; more gain = faster but more overshoot.<br><b>I</b> — accumulates past error; removes steady-state error; adds phase lag/overshoot.<br><b>D</b> — reacts to the error's rate; adds damping; amplifies noise.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Åström &amp; Murray, Feedback Systems (2nd ed.) — https://fbswiki.org/ · 07 Control Theory"
+  },
+  {
+   "guid": "u8}wIE6]Qr",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::07 Control Theory",
+   "tags": [
+    "robotics::07-control-theory"
+   ],
+   "front": "A proportional-only velocity loop on a wheel motor never quite reaches the set-point. Why, and what fixes it?",
+   "back": "With P-only control, output requires error: holding speed against friction/load needs a non-zero command, hence a non-zero steady-state error (smaller with higher K<sub>p</sub>, never zero).<br><br>Fix: add <b>integral</b> action, and/or a <b>feedforward</b> term that supplies the expected command directly.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Åström &amp; Murray, Feedback Systems (2nd ed.) — https://fbswiki.org/ · 07 Control Theory"
+  },
+  {
+   "guid": "yZ/VR(7lQr",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::07 Control Theory",
+   "tags": [
+    "robotics::07-control-theory"
+   ],
+   "front": "What practical modifications make the derivative term of a PID controller usable on real hardware?",
+   "back": "• <b>Low-pass filter</b> the derivative — raw differentiation amplifies sensor noise.<br>• <b>Derivative on measurement</b> (−K<sub>d</sub>·dy/dt) instead of on error — avoids the 'derivative kick' when the set-point steps.<br>• Use a consistent, accurately known sample time dt.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Åström &amp; Murray, Feedback Systems (2nd ed.) — https://fbswiki.org/ · 07 Control Theory"
+  },
+  {
+   "guid": "qBgXwza)*(",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::07 Control Theory",
+   "tags": [
+    "robotics::07-control-theory"
+   ],
+   "front": "What is integral windup and how do you prevent it?",
+   "back": "While the actuator is saturated (e.g. PWM at 100 %), the integrator keeps accumulating error it cannot act on; when the error finally reverses, the stored integral causes large overshoot and slow recovery.<br><br>Anti-windup: clamp the integrator; stop integrating while saturated (conditional integration); or back-calculation (bleed the integrator by the saturation excess).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Åström &amp; Murray, Feedback Systems (2nd ed.) — https://fbswiki.org/ · 07 Control Theory"
+  },
+  {
+   "guid": "gqc0Z+MUI6",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::07 Control Theory",
+   "tags": [
+    "robotics::07-control-theory"
+   ],
+   "front": "What does a discrete PID implementation on a microcontroller require that the textbook formula hides?",
+   "back": "A <b>fixed, known sample period</b>: run the loop from a timer interrupt or a <code>micros()</code>-scheduled task; integral ≈ Σ e·dt, derivative ≈ Δ/dt.<br><br>Also: output clamping + anti-windup, derivative filtering, consistent units, and no blocking calls (Serial prints, delay) inside the loop. Timing jitter acts like noise on the D term.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Åström &amp; Murray, Feedback Systems (2nd ed.) — https://fbswiki.org/ · 07 Control Theory"
+  },
+  {
+   "guid": "g;TH9>nFsE",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::07 Control Theory",
+   "tags": [
+    "robotics::07-control-theory"
+   ],
+   "front": "Ziegler–Nichols ultimate-gain tuning: procedure and the classic PID settings.",
+   "back": "1. Set K<sub>i</sub> = K<sub>d</sub> = 0.<br>2. Raise K<sub>p</sub> until sustained oscillation: that gain is K<sub>u</sub>, the period is T<sub>u</sub>.<br>3. Classic PID: K<sub>p</sub> = 0.6·K<sub>u</sub>, T<sub>i</sub> = T<sub>u</sub>/2, T<sub>d</sub> = T<sub>u</sub>/8 (→ K<sub>i</sub> = 1.2·K<sub>u</sub>/T<sub>u</sub>, K<sub>d</sub> = 0.075·K<sub>u</sub>·T<sub>u</sub>).<br><br>Gives an aggressive (~quarter-decay) response — a starting point, not a final tune. Do not drive fragile mechanisms to oscillation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Åström &amp; Murray, Feedback Systems (2nd ed.) — https://fbswiki.org/ · 07 Control Theory"
+  },
+  {
+   "guid": "tlGV0,2r%e",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::07 Control Theory",
+   "tags": [
+    "robotics::07-control-theory"
+   ],
+   "front": "Name the four standard step-response performance metrics.",
+   "back": "• <b>Rise time</b> — 10 % → 90 % of the final value.<br>• <b>Overshoot</b> — peak excess over the final value, in %.<br>• <b>Settling time</b> — time to stay within ±2 % (or 5 %).<br>• <b>Steady-state error</b> — remaining offset.<br><br>For a second-order system, overshoot is set by the damping ratio ζ and speed by the natural frequency ω<sub>n</sub>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Åström &amp; Murray, Feedback Systems (2nd ed.) — https://fbswiki.org/ · 07 Control Theory"
+  },
+  {
+   "guid": "zz{[)-7uX*",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::07 Control Theory",
+   "tags": [
+    "robotics::07-control-theory"
+   ],
+   "front": "What is cascaded control in a servo drive?",
+   "back": "Nested loops: <b>position</b> loop → commands velocity → <b>velocity</b> loop → commands current/torque → <b>current</b> loop → drives the PWM voltage.<br><br>Each inner loop must be roughly 5–10× faster than the one around it (e.g. current 10–20 kHz, velocity ~1–5 kHz, position ~1 kHz). Benefits: disturbances are rejected close to where they enter; limits (current, speed) are enforced naturally; loops are tuned inside-out.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Siciliano, Sciavicco, Villani &amp; Oriolo, Robotics: Modelling, Planning and Control · 07 Control Theory"
+  },
+  {
+   "guid": "EDl+k]HeNT",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::07 Control Theory",
+   "tags": [
+    "robotics::07-control-theory"
+   ],
+   "front": "What is feedforward control and why combine it with feedback?",
+   "back": "Feedforward computes the command expected to be needed from a model and the reference (e.g. velocity × k<sub>v</sub>, acceleration × k<sub>a</sub>, gravity torque g(q)) and adds it to the feedback output.<br><br>It acts <i>before</i> error appears and does not affect stability; feedback then only handles model error and disturbances → better tracking with lower gains. Gravity compensation on an arm is the classic example.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Lynch &amp; Park, Modern Robotics (2017) — http://modernrobotics.org · 07 Control Theory"
+  },
+  {
+   "guid": "h.HkXf6[ck",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::07 Control Theory",
+   "tags": [
+    "robotics::07-control-theory"
+   ],
+   "front": "How fast must a digital control loop sample?",
+   "back": "Shannon–Nyquist demands &gt; 2× the highest signal frequency just to avoid aliasing, but for control the rule of thumb is <b>10–20× the desired closed-loop bandwidth</b> (and an anti-aliasing filter before the ADC).<br><br>Delay matters as much as rate: computation + communication latency eats phase margin.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Åström &amp; Murray, Feedback Systems (2nd ed.) — https://fbswiki.org/ · 07 Control Theory"
+  },
+  {
+   "guid": "rTWF)fq%FJ",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::07 Control Theory",
+   "tags": [
+    "robotics::07-control-theory"
+   ],
+   "front": "Write the linear state-space model and the stability condition in continuous and discrete time.",
+   "back": "ẋ = A·x + B·u, y = C·x + D·u<br><br>Stable ⇔ all eigenvalues of A (the poles) have <b>negative real part</b> (left half-plane).<br>Discrete x<sub>k+1</sub> = A<sub>d</sub>x<sub>k</sub> + B<sub>d</sub>u<sub>k</sub>: all eigenvalues <b>inside the unit circle</b>.<br><br>Non-linear robots are linearised around an operating point (e.g. the upright pendulum).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Åström &amp; Murray, Feedback Systems (2nd ed.) — https://fbswiki.org/ · 07 Control Theory"
+  },
+  {
+   "guid": "d*>hhCAc31",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::07 Control Theory",
+   "tags": [
+    "robotics::07-control-theory"
+   ],
+   "front": "Define controllability and observability and give the rank tests.",
+   "back": "<b>Controllable:</b> inputs can drive the state anywhere in finite time ⇔ rank [B AB A²B … A<sup>n−1</sup>B] = n.<br><b>Observable:</b> the state can be reconstructed from outputs ⇔ rank [C; CA; …; CA<sup>n−1</sup>] = n.<br><br>Controllability permits arbitrary pole placement by state feedback; observability permits an observer/Kalman filter. Example: yaw is unobservable from an accelerometer alone.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Åström &amp; Murray, Feedback Systems (2nd ed.) — https://fbswiki.org/ · 07 Control Theory"
+  },
+  {
+   "guid": "jB^IsK?yyb",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::07 Control Theory",
+   "tags": [
+    "robotics::07-control-theory"
+   ],
+   "front": "What is the Linear Quadratic Regulator (LQR)?",
+   "back": "Optimal state feedback u = −K·x minimising J = ∫ (xᵀQx + uᵀRu) dt for a linear system. K = R⁻¹BᵀP, where P solves the algebraic Riccati equation.<br><br>Tuning means choosing weights: Q penalises state error, R penalises actuator effort. Guaranteed stable with good margins (given full state). Workhorse for balancing robots, quadrotors and stabilising trajectories (time-varying LQR).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Tedrake, Underactuated Robotics (MIT 6.832) — https://underactuated.mit.edu/ · 07 Control Theory"
+  },
+  {
+   "guid": "hj[0IkWQNy",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::07 Control Theory",
+   "tags": [
+    "robotics::07-control-theory"
+   ],
+   "front": "What is Model Predictive Control (MPC)?",
+   "back": "At every step: solve a finite-horizon optimal-control problem from the current state using a model, <b>subject to constraints</b> (torque limits, friction cones, obstacles); apply only the first input; shift the horizon and repeat (receding horizon).<br><br>+ Handles constraints and preview explicitly.<br>− Needs a model and real-time optimisation.<br>Used for legged locomotion (MIT Cheetah convex MPC), autonomous driving, drones.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Tedrake, Underactuated Robotics (MIT 6.832) — https://underactuated.mit.edu/ · 07 Control Theory"
+  },
+  {
+   "guid": "O`kg2Wn6.E",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::07 Control Theory",
+   "tags": [
+    "robotics::07-control-theory"
+   ],
+   "front": "What are gain margin and phase margin?",
+   "back": "Robustness measures read from the open-loop frequency response:<br><b>Gain margin</b> — factor by which loop gain can rise before instability (measured where phase = −180°).<br><b>Phase margin</b> — extra phase lag tolerated (measured where gain = 1).<br><br>Typical targets: ≥ 6 dB and 45–60°. Time delay subtracts phase (−ω·T<sub>d</sub>) — why latency destabilises loops.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Åström &amp; Murray, Feedback Systems (2nd ed.) — https://fbswiki.org/ · 07 Control Theory"
+  },
+  {
+   "guid": "jBYARV>7Y}",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::07 Control Theory",
+   "tags": [
+    "robotics::07-control-theory"
+   ],
+   "front": "Impedance control vs. admittance control.",
+   "back": "Both regulate the <i>dynamic relationship</i> between motion and contact force instead of pure position or pure force — the robot behaves like a virtual mass-spring-damper: F = K(x<sub>d</sub> − x) + D(ẋ<sub>d</sub> − ẋ).<br><br><b>Impedance:</b> measure motion → command force/torque; needs torque-controllable, back-drivable joints.<br><b>Admittance:</b> measure force → command motion; suits stiff, position-controlled industrial arms with a wrist force/torque sensor.<br><br>Essential for contact-rich manipulation and safe human interaction.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Siciliano, Sciavicco, Villani &amp; Oriolo, Robotics: Modelling, Planning and Control · 07 Control Theory"
+  },
+  {
+   "guid": "eno/x#LE}4",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::07 Control Theory",
+   "tags": [
+    "robotics::07-control-theory"
+   ],
+   "front": "What is computed-torque (inverse-dynamics) control of a manipulator?",
+   "back": "τ = M(q)·(q̈<sub>d</sub> + K<sub>d</sub>ė + K<sub>p</sub>e) + C(q,q̇)q̇ + g(q)<br><br>The model cancels the arm's non-linear, coupled dynamics (feedback linearisation), leaving decoupled linear error dynamics ë + K<sub>d</sub>ė + K<sub>p</sub>e = 0 for each joint. Needs a good dynamic model and torque-controlled joints; more accurate at speed than independent joint PID.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Lynch &amp; Park, Modern Robotics (2017) — http://modernrobotics.org · 07 Control Theory"
+  },
+  {
+   "guid": "t]QM,$gYSr",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::07 Control Theory",
+   "tags": [
+    "robotics::07-control-theory"
+   ],
+   "front": "What is Whole-Body Control (WBC) on a humanoid or legged robot?",
+   "back": "A ~1 kHz controller that computes all joint torques at once by solving a constrained optimisation — usually a Quadratic Program (QP) — over the full floating-base dynamics.<br><br>Tasks (centre-of-mass/balance, foot and hand poses, posture) are weighted or strictly prioritised; constraints include contact friction cones, torque and joint limits. Typically sits beneath an MPC or footstep planner. Increasingly replaced or complemented by reinforcement-learned whole-body policies.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Tedrake, Underactuated Robotics (MIT 6.832) — https://underactuated.mit.edu/ · 07 Control Theory"
+  },
+  {
+   "guid": "GD_uA|_oLK",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::08 Kinematics & Dynamics",
+   "tags": [
+    "robotics::08-kinematics-dynamics"
+   ],
+   "front": "Define Degrees of Freedom (DoF) and state Grübler's formula.",
+   "back": "DoF = the minimum number of independent coordinates that specify the configuration. A free rigid body has 6 in space, 3 in the plane.<br><br>Grübler: dof = m·(N − 1 − J) + Σ f<sub>i</sub><br>m = 6 (spatial) or 3 (planar), N = links including ground, J = joints, f<sub>i</sub> = freedoms of joint i. (Valid when joint constraints are independent.)",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Lynch &amp; Park, Modern Robotics (2017) — http://modernrobotics.org · 08 Kinematics & Dynamics"
+  },
+  {
+   "guid": "Lg3ad85jhV",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::08 Kinematics & Dynamics",
+   "tags": [
+    "robotics::08-kinematics-dynamics"
+   ],
+   "front": "Configuration space (C-space), task space and workspace: distinguish them.",
+   "back": "<b>C-space:</b> the space of all configurations q (e.g. joint angles); its dimension = DoF.<br><b>Task space:</b> the space in which the task is expressed (e.g. end-effector pose in SE(3)).<br><b>Workspace:</b> the set of poses/positions the end-effector can reach — a property of the robot, independent of the task.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Lynch &amp; Park, Modern Robotics (2017) — http://modernrobotics.org · 08 Kinematics & Dynamics"
+  },
+  {
+   "guid": "h=jl],>~68",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::08 Kinematics & Dynamics",
+   "tags": [
+    "robotics::08-kinematics-dynamics"
+   ],
+   "front": "What properties define a rotation matrix?",
+   "back": "R ∈ SO(3): 3×3, RᵀR = I (orthonormal columns), det R = +1.<br><br>Hence R⁻¹ = Rᵀ; columns are the body-frame axes expressed in the reference frame; composition is matrix multiplication and does <b>not</b> commute. 9 numbers with 6 constraints → 3 DoF.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Lynch &amp; Park, Modern Robotics (2017) — http://modernrobotics.org · 08 Kinematics & Dynamics"
+  },
+  {
+   "guid": "x/|WwDD|ND",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::08 Kinematics & Dynamics",
+   "tags": [
+    "robotics::08-kinematics-dynamics"
+   ],
+   "front": "What is gimbal lock?",
+   "back": "A singularity of any three-angle (Euler / roll-pitch-yaw) parameterisation: at a particular middle angle (pitch = ±90° for roll-pitch-yaw) the first and third rotation axes align, one degree of freedom is lost and the angle rates blow up.<br><br>It is a defect of the representation, not of the physical rotation. Avoid by using rotation matrices or quaternions internally.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Lynch &amp; Park, Modern Robotics (2017) — http://modernrobotics.org · 08 Kinematics & Dynamics"
+  },
+  {
+   "guid": "A!I@@KoV-%",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::08 Kinematics & Dynamics",
+   "tags": [
+    "robotics::08-kinematics-dynamics"
+   ],
+   "front": "Why are unit quaternions the standard orientation representation in robot software?",
+   "back": "q = (w, x, y, z), ‖q‖ = 1; encodes axis-angle as (cos θ/2, sin θ/2 · axis).<br><br>+ 4 numbers, no gimbal lock, cheap to compose and re-normalise, smooth interpolation via Spherical Linear Interpolation (SLERP).<br>− <b>Double cover:</b> q and −q are the same rotation (handle in filters and when averaging); not intuitive.<br><br>Beware conventions: ROS orders (x, y, z, w); Eigen's constructor takes (w, x, y, z).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Lynch &amp; Park, Modern Robotics (2017) — http://modernrobotics.org · 08 Kinematics & Dynamics"
+  },
+  {
+   "guid": "c&tmTs,SZ8",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::08 Kinematics & Dynamics",
+   "tags": [
+    "robotics::08-kinematics-dynamics"
+   ],
+   "front": "What is a homogeneous transformation matrix?",
+   "back": "T = [[R, p], [0 0 0, 1]] ∈ SE(3): a 4×4 matrix packing rotation R and translation p.<br><br>• Maps points between frames: p<sub>a</sub> = T<sub>ab</sub>·p<sub>b</sub><br>• Chains by multiplication: T<sub>ac</sub> = T<sub>ab</sub>·T<sub>bc</sub><br>• Inverse: [[Rᵀ, −Rᵀp], [0, 1]]<br><br>The backbone of forward kinematics, camera extrinsics and ROS tf2.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Lynch &amp; Park, Modern Robotics (2017) — http://modernrobotics.org · 08 Kinematics & Dynamics"
+  },
+  {
+   "guid": "N-FlCru)K/",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::08 Kinematics & Dynamics",
+   "tags": [
+    "robotics::08-kinematics-dynamics"
+   ],
+   "front": "Forward kinematics of a serial arm: definition and the two standard formulations.",
+   "back": "Map joint values q to the end-effector pose T(q).<br><br>1. <b>Denavit–Hartenberg (DH):</b> attach a frame to each link by convention; multiply link transforms T = A<sub>1</sub>(q<sub>1</sub>)…A<sub>n</sub>(q<sub>n</sub>).<br>2. <b>Product of Exponentials (PoE):</b> T(θ) = e<sup>[S<sub>1</sub>]θ<sub>1</sub></sup> … e<sup>[S<sub>n</sub>]θ<sub>n</sub></sup> · M, with joint screw axes S<sub>i</sub> in the base frame and home pose M — no per-link frames needed.<br><br>Always unique and easy for serial chains (the opposite holds for parallel robots).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Lynch &amp; Park, Modern Robotics (2017) — http://modernrobotics.org · 08 Kinematics & Dynamics"
+  },
+  {
+   "guid": "ofkK!FkI^i",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::08 Kinematics & Dynamics",
+   "tags": [
+    "robotics::08-kinematics-dynamics"
+   ],
+   "front": "What are the four Denavit–Hartenberg (DH) parameters?",
+   "back": "Per joint/link:<br>• <b>a</b> — link length (distance along the common normal, x-axis)<br>• <b>α</b> — link twist (angle about x)<br>• <b>d</b> — link offset (distance along z, the joint axis)<br>• <b>θ</b> — joint angle (about z)<br><br>Revolute joint: θ is the variable; prismatic: d. Beware: 'standard' and 'modified' (Craig) conventions differ.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Siciliano, Sciavicco, Villani &amp; Oriolo, Robotics: Modelling, Planning and Control · 08 Kinematics & Dynamics"
+  },
+  {
+   "guid": "#+lvS6=3C",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::08 Kinematics & Dynamics",
+   "tags": [
+    "robotics::08-kinematics-dynamics"
+   ],
+   "front": "Inverse kinematics (IK): what makes it hard and how is it solved?",
+   "back": "Find q such that T(q) = T<sub>desired</sub>. Non-linear; may have zero, several (e.g. up to 8 for a typical 6R arm with a spherical wrist) or infinitely many solutions.<br><br>• <b>Analytic:</b> closed form for special geometries (spherical wrist — Pieper); fast, all solutions.<br>• <b>Numerical:</b> Newton–Raphson, Δq = J⁺·e iterated from an initial guess; general, finds one nearby solution, may fail near singularities or joint limits. Optimisation-based solvers (TRAC-IK etc.) add limits and costs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Lynch &amp; Park, Modern Robotics (2017) — http://modernrobotics.org · 08 Kinematics & Dynamics"
+  },
+  {
+   "guid": "i(M]ZK60q@",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::08 Kinematics & Dynamics",
+   "tags": [
+    "robotics::08-kinematics-dynamics"
+   ],
+   "front": "What is the manipulator Jacobian?",
+   "back": "The configuration-dependent matrix mapping joint velocities to end-effector twist:<br>v = J(q)·q̇ (6×n for a spatial arm).<br><br>Used for velocity (resolved-rate) control, numerical IK, singularity and manipulability analysis, and force mapping. 'Geometric/space/body' Jacobians differ in the frame and representation of the twist.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Lynch &amp; Park, Modern Robotics (2017) — http://modernrobotics.org · 08 Kinematics & Dynamics"
+  },
+  {
+   "guid": "MuI+h8:y:&",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::08 Kinematics & Dynamics",
+   "tags": [
+    "robotics::08-kinematics-dynamics"
+   ],
+   "front": "What is a kinematic singularity, what happens near one, and what is the standard numerical remedy?",
+   "back": "A configuration where J(q) loses rank: the end-effector cannot move (or resist force) in some direction — e.g. arm fully stretched, or two wrist axes aligned.<br><br>Near it, the inverse demands huge joint velocities for small Cartesian motions.<br><br>Remedy: <b>damped least squares</b>, q̇ = Jᵀ(JJᵀ + λ²I)⁻¹·v — trades a little tracking error for bounded joint speeds; plus planning that avoids such regions (manipulability measure w = √det(JJᵀ)).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Siciliano, Sciavicco, Villani &amp; Oriolo, Robotics: Modelling, Planning and Control · 08 Kinematics & Dynamics"
+  },
+  {
+   "guid": "qa6Wd#[rz9",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::08 Kinematics & Dynamics",
+   "tags": [
+    "robotics::08-kinematics-dynamics"
+   ],
+   "front": "State the static force relationship between end-effector wrench and joint torques.",
+   "back": "τ = Jᵀ(q)·F<br><br>(Follows from conservation of power: τᵀq̇ = Fᵀv.) Uses: gravity/payload torque estimation, implementing Cartesian impedance control with joint torques, estimating contact forces from motor currents. Near singularities small joint torques can resist very large forces in the singular direction.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Lynch &amp; Park, Modern Robotics (2017) — http://modernrobotics.org · 08 Kinematics & Dynamics"
+  },
+  {
+   "guid": "yA;2a,c56B",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::08 Kinematics & Dynamics",
+   "tags": [
+    "robotics::08-kinematics-dynamics"
+   ],
+   "front": "What is kinematic redundancy and how is the null space used?",
+   "back": "More joints than task dimensions (e.g. 7-DoF arm for a 6-DoF pose) → infinitely many joint motions for one end-effector motion.<br><br>q̇ = J⁺·v + (I − J⁺J)·q̇<sub>0</sub><br><br>The second term moves the joints <i>without</i> moving the end-effector — used for secondary objectives: avoiding joint limits, obstacles and singularities, or keeping an elbow posture.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Siciliano, Sciavicco, Villani &amp; Oriolo, Robotics: Modelling, Planning and Control · 08 Kinematics & Dynamics"
+  },
+  {
+   "guid": "vqy@mIn~86",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::08 Kinematics & Dynamics",
+   "tags": [
+    "robotics::08-kinematics-dynamics"
+   ],
+   "front": "Write the manipulator equation of motion and name each term.",
+   "back": "M(q)·q̈ + C(q,q̇)·q̇ + g(q) = τ + Jᵀ(q)·F<sub>ext</sub><br><br>M — symmetric positive-definite mass (inertia) matrix<br>C·q̇ — Coriolis and centrifugal terms<br>g — gravity torques<br>τ — joint torques; JᵀF<sub>ext</sub> — external contact forces<br><br><b>Inverse dynamics</b> (motion → torque; recursive Newton–Euler, O(n)) is used for control; <b>forward dynamics</b> (torque → acceleration) for simulation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Lynch &amp; Park, Modern Robotics (2017) — http://modernrobotics.org · 08 Kinematics & Dynamics"
+  },
+  {
+   "guid": "Qt)`AQF~g#",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::08 Kinematics & Dynamics",
+   "tags": [
+    "robotics::08-kinematics-dynamics"
+   ],
+   "front": "Differential-drive robot: give the forward kinematics.",
+   "back": "With wheel linear speeds v<sub>r</sub>, v<sub>l</sub> (= radius × wheel angular speed) and track width L:<br>v = (v<sub>r</sub> + v<sub>l</sub>)/2, ω = (v<sub>r</sub> − v<sub>l</sub>)/L<br>ẋ = v·cos θ, ẏ = v·sin θ, θ̇ = ω<br><br>Inverse: v<sub>r,l</sub> = v ± ω·L/2 — exactly what a base controller does with a <code>cmd_vel</code> (v, ω) command.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Siegwart, Nourbakhsh &amp; Scaramuzza, Introduction to Autonomous Mobile Robots (2nd ed.) · 08 Kinematics & Dynamics"
+  },
+  {
+   "guid": "uG_EDYN;s!",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::08 Kinematics & Dynamics",
+   "tags": [
+    "robotics::08-kinematics-dynamics"
+   ],
+   "front": "What is wheel odometry (dead reckoning) and why does it drift?",
+   "back": "Integrating encoder-measured wheel motion through the kinematic model to estimate the pose.<br><br>Errors are <b>integrated</b>, so they grow without bound: wheel slip, uneven floors, unequal wheel diameters and uncertain track width (systematic → calibrate, e.g. UMBmark square test), finite encoder resolution. Heading error dominates because it converts into position error with distance travelled. → Fuse with an IMU and correct with exteroceptive localisation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Siegwart, Nourbakhsh &amp; Scaramuzza, Introduction to Autonomous Mobile Robots (2nd ed.) · 08 Kinematics & Dynamics"
+  },
+  {
+   "guid": "rlte*.uyb>",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::08 Kinematics & Dynamics",
+   "tags": [
+    "robotics::08-kinematics-dynamics"
+   ],
+   "front": "Holonomic vs. non-holonomic mobile robots.",
+   "back": "A <b>non-holonomic</b> constraint restricts velocities without reducing the reachable configurations: a differential-drive or car-like robot cannot slide sideways (ẏcos θ − ẋsin θ = 0) yet can reach any pose by manoeuvring (parallel parking).<br><br><b>Holonomic</b> (omnidirectional) bases — mecanum or omni wheels — can command v<sub>x</sub>, v<sub>y</sub> and ω independently. Trade-off: rollers reduce traction, efficiency and odometry accuracy.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Siegwart, Nourbakhsh &amp; Scaramuzza, Introduction to Autonomous Mobile Robots (2nd ed.) · 08 Kinematics & Dynamics"
+  },
+  {
+   "guid": "Eb2,4Rtd[5",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::08 Kinematics & Dynamics",
+   "tags": [
+    "robotics::08-kinematics-dynamics"
+   ],
+   "front": "What is an underactuated system? Give robotic examples.",
+   "back": "A system with fewer independent actuators than degrees of freedom — it cannot command arbitrary instantaneous accelerations, so control must exploit the natural dynamics.<br><br>Examples: cart-pole, Acrobot, quadrotor (4 inputs, 6 DoF), and <b>every legged robot</b> (the floating base is unactuated; it is moved only through contact forces).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Tedrake, Underactuated Robotics (MIT 6.832) — https://underactuated.mit.edu/ · 08 Kinematics & Dynamics"
+  },
+  {
+   "guid": "x4*rIT7;5|",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::08 Kinematics & Dynamics",
+   "tags": [
+    "robotics::08-kinematics-dynamics"
+   ],
+   "front": "What is the Zero Moment Point (ZMP) and how was it used for bipedal walking?",
+   "back": "The point on the ground where the net horizontal moment of the contact forces is zero (equivalently the centre of pressure on flat ground). If the ZMP stays strictly inside the <b>support polygon</b>, the foot does not tip.<br><br>Classical humanoids (e.g. ASIMO) planned centre-of-mass trajectories with the Linear Inverted Pendulum Model (LIPM) so that the ZMP tracks the footsteps — stable but flat-footed and conservative. Modern robots use MPC/whole-body control or reinforcement learning with dynamic contacts.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Siciliano, Sciavicco, Villani &amp; Oriolo, Robotics: Modelling, Planning and Control · 08 Kinematics & Dynamics"
+  },
+  {
+   "guid": "D8a#QHg~2?",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::08 Kinematics & Dynamics",
+   "tags": [
+    "robotics::08-kinematics-dynamics"
+   ],
+   "front": "What is the 'floating base' model of a legged or humanoid robot?",
+   "back": "The robot's state is the 6-DoF pose of a base link (unactuated) plus the n joint angles: q ∈ SE(3) × ℝⁿ. The equation of motion gains contact terms:<br>M(q)v̇ + h(q,v) = Sᵀτ + Σ J<sub>c</sub>ᵀ·f<sub>c</sub><br>where S selects the actuated joints and f<sub>c</sub> are contact forces constrained to friction cones.<br><br>Locomotion = choosing contacts and contact forces to move the base.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Tedrake, Underactuated Robotics (MIT 6.832) — https://underactuated.mit.edu/ · 08 Kinematics & Dynamics"
+  },
+  {
+   "guid": "25#y(S`7c",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::09 Perception & State Estimation",
+   "tags": [
+    "robotics::09-perception-state-estimation"
+   ],
+   "front": "Pinhole camera model: write the projection and name the intrinsic parameters.",
+   "back": "u = f<sub>x</sub>·X/Z + c<sub>x</sub>, v = f<sub>y</sub>·Y/Z + c<sub>y</sub><br><br>Intrinsic matrix K = [[f<sub>x</sub>, 0, c<sub>x</sub>], [0, f<sub>y</sub>, c<sub>y</sub>], [0, 0, 1]] — focal lengths in pixels and principal point. Full model: x ~ K·[R | t]·X, with extrinsics [R | t] giving the camera pose. Depth Z is lost in the projection.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Hartley &amp; Zisserman, Multiple View Geometry (2nd ed.); OpenCV calibration docs — https://docs.opencv.org/ · 09 Perception & State Estimation"
+  },
+  {
+   "guid": "M~)?;b~Hiv",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::09 Perception & State Estimation",
+   "tags": [
+    "robotics::09-perception-state-estimation"
+   ],
+   "front": "What does camera calibration estimate and how is it done in practice?",
+   "back": "<b>Intrinsics</b> (f<sub>x</sub>, f<sub>y</sub>, c<sub>x</sub>, c<sub>y</sub>) and <b>lens distortion</b> coefficients (radial k<sub>1</sub>,k<sub>2</sub>,k<sub>3</sub>; tangential p<sub>1</sub>,p<sub>2</sub>), optionally extrinsics.<br><br>Practice (Zhang's method): 15–30 images of a checkerboard/ChArUco board at varied poses → <code>cv2.calibrateCamera</code> → check reprojection error (&lt; ~0.5 px). Re-calibrate when focus or resolution changes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Hartley &amp; Zisserman, Multiple View Geometry (2nd ed.); OpenCV calibration docs — https://docs.opencv.org/ · 09 Perception & State Estimation"
+  },
+  {
+   "guid": "k$X]1|O&GQ",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::09 Perception & State Estimation",
+   "tags": [
+    "robotics::09-perception-state-estimation"
+   ],
+   "front": "What is hand–eye calibration?",
+   "back": "Finding the fixed transform between a camera and the robot so that detections can be expressed in the robot base frame.<br><br>• <b>Eye-in-hand:</b> camera on the end-effector → solve camera-to-flange.<br>• <b>Eye-to-hand:</b> static camera → solve camera-to-base.<br><br>Move the arm to many poses while viewing a calibration target and solve <b>AX = XB</b> (Tsai–Lenz, Park–Martin; <code>cv2.calibrateHandEye</code>).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Hartley &amp; Zisserman, Multiple View Geometry (2nd ed.); OpenCV calibration docs — https://docs.opencv.org/ · 09 Perception & State Estimation"
+  },
+  {
+   "guid": "gYNRa)heqC",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::09 Perception & State Estimation",
+   "tags": [
+    "robotics::09-perception-state-estimation"
+   ],
+   "front": "Stereo vision: give the depth equation and the error behaviour.",
+   "back": "For rectified cameras: Z = f·B / d<br>f = focal length (pixels), B = baseline, d = disparity (pixels).<br><br>Depth uncertainty grows <b>quadratically</b> with range: δZ ≈ Z²/(f·B) · δd. → A wider baseline or longer focal length improves far-range accuracy but increases the minimum range.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Hartley &amp; Zisserman, Multiple View Geometry (2nd ed.); OpenCV calibration docs — https://docs.opencv.org/ · 09 Perception & State Estimation"
+  },
+  {
+   "guid": "oukvyY7KcF",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::09 Perception & State Estimation",
+   "tags": [
+    "robotics::09-perception-state-estimation"
+   ],
+   "front": "How do classical visual pipelines find correspondences between images?",
+   "back": "Detect key-points → describe → match → reject outliers.<br><br>• Detectors/descriptors: SIFT (accurate, slow), ORB = Oriented FAST + Rotated BRIEF (binary, real-time; used in ORB-SLAM).<br>• Matching: nearest neighbour + ratio test.<br>• Outliers: Random Sample Consensus (RANSAC) fitting an essential/fundamental matrix or homography.<br><br>Learned replacements: SuperPoint + SuperGlue/LightGlue.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Hartley &amp; Zisserman, Multiple View Geometry (2nd ed.); OpenCV calibration docs — https://docs.opencv.org/ · 09 Perception & State Estimation"
+  },
+  {
+   "guid": "r&_hOh.}0W",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::09 Perception & State Estimation",
+   "tags": [
+    "robotics::09-perception-state-estimation"
+   ],
+   "front": "What are fiducial markers (AprilTag, ArUco) used for?",
+   "back": "Printed binary-coded squares that are trivial to detect robustly. With known tag size and camera intrinsics, a single tag yields the full 6-DoF camera-to-tag pose (Perspective-n-Point).<br><br>Uses: ground-truth localisation, docking, hand–eye and multi-camera calibration, object tracking in data collection rigs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AprilTag (Olson 2011; Wang &amp; Olson 2016) — https://april.eecs.umich.edu/software/apriltag · 09 Perception & State Estimation"
+  },
+  {
+   "guid": "IiE)??ST_>",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::09 Perception & State Estimation",
+   "tags": [
+    "robotics::09-perception-state-estimation"
+   ],
+   "front": "Describe the Bayes filter, the template behind all recursive state estimators.",
+   "back": "Maintain a belief bel(x<sub>t</sub>) and alternate:<br><b>Predict</b> (motion model, control u): bel⁻(x<sub>t</sub>) = ∫ p(x<sub>t</sub> | u<sub>t</sub>, x<sub>t−1</sub>) bel(x<sub>t−1</sub>) dx<sub>t−1</sub> — uncertainty grows.<br><b>Update</b> (measurement z): bel(x<sub>t</sub>) = η · p(z<sub>t</sub> | x<sub>t</sub>) · bel⁻(x<sub>t</sub>) — uncertainty shrinks.<br><br>Assumes the Markov property. Kalman filter = Gaussian beliefs; particle filter = samples; histogram filter = grid.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Thrun, Burgard &amp; Fox, Probabilistic Robotics (2005) · 09 Perception & State Estimation"
+  },
+  {
+   "guid": "j=Z@C7ZcH|",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::09 Perception & State Estimation",
+   "tags": [
+    "robotics::09-perception-state-estimation"
+   ],
+   "front": "Write the Kalman filter equations.",
+   "back": "<b>Predict</b><br>x̂⁻ = A·x̂ + B·u<br>P⁻ = A·P·Aᵀ + Q<br><b>Update</b><br>K = P⁻Hᵀ(H·P⁻Hᵀ + R)⁻¹<br>x̂ = x̂⁻ + K·(z − H·x̂⁻)<br>P = (I − K·H)·P⁻<br><br>Q = process noise, R = measurement noise. The Kalman gain K weights prediction against measurement by their uncertainties. Optimal for linear systems with Gaussian noise.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Thrun, Burgard &amp; Fox, Probabilistic Robotics (2005) · 09 Perception & State Estimation"
+  },
+  {
+   "guid": "vAbvMNXuCV",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::09 Perception & State Estimation",
+   "tags": [
+    "robotics::09-perception-state-estimation"
+   ],
+   "front": "Extended Kalman Filter (EKF) vs. Unscented Kalman Filter (UKF).",
+   "back": "Both handle non-linear models x<sub>t</sub> = f(x,u), z = h(x).<br><br><b>EKF:</b> linearise f and h with Jacobians at the current estimate; cheap; can diverge when strongly non-linear or badly initialised.<br><b>UKF:</b> propagate deterministically chosen <i>sigma points</i> through the true non-linear functions and recover mean/covariance; no Jacobians, usually more accurate at similar cost.<br><br>ROS example: <code>robot_localization</code> fuses wheel odometry + IMU (+ GNSS) with either.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Thrun, Burgard &amp; Fox, Probabilistic Robotics (2005) · 09 Perception & State Estimation"
+  },
+  {
+   "guid": "y+UtHyFf~B",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::09 Perception & State Estimation",
+   "tags": [
+    "robotics::09-perception-state-estimation"
+   ],
+   "front": "What is a particle filter, and what is Adaptive Monte Carlo Localization (AMCL)?",
+   "back": "Represent the belief by N weighted samples (particles): move each with the noisy motion model → weight by measurement likelihood → <b>resample</b> in proportion to weight.<br><br>+ Handles multi-modal, non-Gaussian beliefs → global localisation and the 'kidnapped robot' problem.<br>− Cost grows with state dimension.<br><br>AMCL: particle-filter localisation of a 2D LiDAR robot in a known occupancy map, adapting the particle count (KLD sampling). Default localiser in Nav2.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Thrun, Burgard &amp; Fox, Probabilistic Robotics (2005) · 09 Perception & State Estimation"
+  },
+  {
+   "guid": "L%l~tbf!Q,",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::09 Perception & State Estimation",
+   "tags": [
+    "robotics::09-perception-state-estimation"
+   ],
+   "front": "Define Simultaneous Localization and Mapping (SLAM) and say why it is hard.",
+   "back": "Estimating the robot's trajectory and a map of an unknown environment at the same time.<br><br>Chicken-and-egg: a map is needed to localise, and poses are needed to build a map. Both errors are correlated, odometry drifts, and <b>data association</b> (is this the same place/landmark?) can fail catastrophically.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Thrun, Burgard &amp; Fox, Probabilistic Robotics (2005) · 09 Perception & State Estimation"
+  },
+  {
+   "guid": "P2K<G.nvoh",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::09 Perception & State Estimation",
+   "tags": [
+    "robotics::09-perception-state-estimation"
+   ],
+   "front": "In modern graph-based SLAM, what do the front-end and back-end do, and what is loop closure?",
+   "back": "<b>Front-end:</b> turns raw sensor data into constraints — odometry / scan matching / visual feature tracking, and place recognition.<br><b>Back-end:</b> non-linear least-squares optimisation of a <b>pose graph</b> or factor graph (nodes = poses/landmarks, edges = relative measurements) — g2o, GTSAM, Ceres.<br><br><b>Loop closure:</b> recognising a previously visited place adds an edge that lets the optimiser cancel accumulated drift. False loop closures wreck the map → robust kernels and verification.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Thrun, Burgard &amp; Fox, Probabilistic Robotics (2005) · 09 Perception & State Estimation"
+  },
+  {
+   "guid": "zkPs?$)<M+",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::09 Perception & State Estimation",
+   "tags": [
+    "robotics::09-perception-state-estimation"
+   ],
+   "front": "What is an occupancy grid map?",
+   "back": "A 2D (or 3D voxel — OctoMap) grid in which each cell stores the probability of being occupied, updated per range beam with an inverse sensor model, usually in <b>log-odds</b> form so that updates are additions: l ← l + l<sub>meas</sub> − l<sub>0</sub>.<br><br>Assumes cells are independent and poses are known. It is the map format consumed by ROS 2 navigation (costmaps).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Thrun, Burgard &amp; Fox, Probabilistic Robotics (2005) · 09 Perception & State Estimation"
+  },
+  {
+   "guid": "DnvuO<2Kb<",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::09 Perception & State Estimation",
+   "tags": [
+    "robotics::09-perception-state-estimation"
+   ],
+   "front": "What is Iterative Closest Point (ICP)?",
+   "back": "Aligns two point clouds/scans: repeat {match each point to its nearest neighbour in the other cloud → solve the rigid transform minimising the distances (closed-form via SVD) → apply} until convergence.<br><br>Needs a good initial guess (local minima); point-to-plane and Generalized ICP converge better; Normal Distributions Transform (NDT) is a common alternative. Core of LiDAR odometry and scan matching; pre-process with voxel down-sampling and outlier removal (PCL, Open3D).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Thrun, Burgard &amp; Fox, Probabilistic Robotics (2005) · 09 Perception & State Estimation"
+  },
+  {
+   "guid": "Ke6wumqJ^}",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::09 Perception & State Estimation",
+   "tags": [
+    "robotics::09-perception-state-estimation"
+   ],
+   "front": "Visual Odometry (VO) and Visual-Inertial Odometry (VIO): what are they, and what is the monocular scale problem?",
+   "back": "VO estimates camera motion from image sequences (feature-based or direct). With a single camera, translation is recovered only <b>up to an unknown scale</b>, and the scale drifts.<br><br>VIO tightly fuses an IMU: metric scale and gravity direction become observable, and fast motions/short visual drop-outs are bridged. Examples: VINS-Fusion, OpenVINS, ORB-SLAM3 (mono/stereo/RGB-D + inertial, multi-map); the principle behind AR/VR headset and drone tracking.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Campos et al. 2021, ORB-SLAM3 — https://arxiv.org/abs/2007.11898 · 09 Perception & State Estimation"
+  },
+  {
+   "guid": "Ny]A)l,(&9",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::09 Perception & State Estimation",
+   "tags": [
+    "robotics::09-perception-state-estimation"
+   ],
+   "front": "Object detection vs. semantic segmentation vs. instance segmentation vs. 6D pose estimation.",
+   "back": "<b>Detection:</b> class + bounding box per object (e.g. YOLO family).<br><b>Semantic segmentation:</b> class label per pixel, no object identities.<br><b>Instance segmentation:</b> a separate mask per object (Mask R-CNN; promptable: Segment Anything).<br><b>6D pose estimation:</b> 3D position + 3D orientation of a known (or novel) object — what classical grasp planning needs (e.g. FoundationPose).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kawaharazuka et al. 2025, VLA Models for Robotics: A Review — https://arxiv.org/abs/2510.07077 · 09 Perception & State Estimation"
+  },
+  {
+   "guid": "yP:!`I(0yk",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::09 Perception & State Estimation",
+   "tags": [
+    "robotics::09-perception-state-estimation"
+   ],
+   "front": "How have vision foundation models changed robot perception?",
+   "back": "Pre-trained encoders replace task-specific training:<br>• <b>CLIP / SigLIP</b> — image–text aligned features → open-vocabulary recognition.<br>• <b>DINOv2</b> — self-supervised dense features with strong geometry/correspondence.<br>• <b>Segment Anything (SAM)</b>, Grounding DINO / OWL-ViT — promptable, open-vocabulary segmentation and detection.<br>• Monocular depth (Depth Anything).<br><br>SigLIP + DINOv2 is the most common vision front-end of Vision-Language-Action models (e.g. OpenVLA).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kawaharazuka et al. 2025, VLA Models for Robotics: A Review — https://arxiv.org/abs/2510.07077 · 09 Perception & State Estimation"
+  },
+  {
+   "guid": "Lx;^49kD5r",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::09 Perception & State Estimation",
+   "tags": [
+    "robotics::09-perception-state-estimation"
+   ],
+   "front": "What is Real-Time Kinematic (RTK) positioning?",
+   "back": "A Global Navigation Satellite System (GNSS) technique: a fixed base station at a known location (or a network service via NTRIP) streams carrier-phase corrections to the rover, which resolves the integer carrier ambiguities → <b>centimetre-level</b> position instead of metres.<br><br>Needs open sky and a correction link; heading requires motion or a dual-antenna set-up. Standard for agricultural robots, survey drones and outdoor ground robots.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Siegwart, Nourbakhsh &amp; Scaramuzza, Introduction to Autonomous Mobile Robots (2nd ed.) · 09 Perception & State Estimation"
+  },
+  {
+   "guid": "rue-UZB}]%",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::10 Motion Planning & Navigation",
+   "tags": [
+    "robotics::10-motion-planning-navigation"
+   ],
+   "front": "Path planning vs. trajectory planning vs. control.",
+   "back": "<b>Path:</b> a purely geometric curve q(s) from start to goal, collision-free.<br><b>Trajectory:</b> the path plus timing, q(t), respecting velocity/acceleration/jerk/torque limits.<br><b>Control:</b> tracking the trajectory with feedback despite disturbances.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "LaValle, Planning Algorithms — https://lavalle.pl/planning/ · 10 Motion Planning & Navigation"
+  },
+  {
+   "guid": "t3,;]0&5}v",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::10 Motion Planning & Navigation",
+   "tags": [
+    "robotics::10-motion-planning-navigation"
+   ],
+   "front": "Dijkstra vs. A* on a grid or graph.",
+   "back": "Dijkstra expands nodes in order of cost-so-far g(n) → optimal but explores in all directions.<br>A* orders by f(n) = g(n) + h(n), with h a heuristic estimate of the cost-to-go. If h is <b>admissible</b> (never overestimates — e.g. Euclidean distance) A* is optimal; if also consistent, no node is re-expanded. h = 0 reduces A* to Dijkstra.<br><br>Variants: Theta* (any-angle), D* Lite (re-planning), Hybrid-A* (car-like kinematics).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "LaValle, Planning Algorithms — https://lavalle.pl/planning/ · 10 Motion Planning & Navigation"
+  },
+  {
+   "guid": "i!q2&&]loX",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::10 Motion Planning & Navigation",
+   "tags": [
+    "robotics::10-motion-planning-navigation"
+   ],
+   "front": "Why do arm planners sample configuration space instead of searching a grid?",
+   "back": "A grid over an n-joint C-space has resolutionⁿ cells (curse of dimensionality), and C-space obstacles have no explicit description — only a collision <i>checker</i> is available.<br><br>Sampling-based planners just test random configurations for collision. They are <b>probabilistically complete</b>: the probability of finding an existing solution → 1 with more samples, but they cannot prove that none exists.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "LaValle, Planning Algorithms — https://lavalle.pl/planning/ · 10 Motion Planning & Navigation"
+  },
+  {
+   "guid": "H=W5(CxDAP",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::10 Motion Planning & Navigation",
+   "tags": [
+    "robotics::10-motion-planning-navigation"
+   ],
+   "front": "Probabilistic Roadmap (PRM) vs. Rapidly-exploring Random Tree (RRT).",
+   "back": "<b>PRM</b> — multi-query: sample many collision-free configurations, connect neighbours with collision-free local paths into a roadmap, then graph-search it. Good for static scenes.<br><b>RRT</b> — single-query: grow a tree from the start by steering the nearest node a step toward a random sample (with some goal bias); rapidly explores high-dimensional and kinodynamic spaces. RRT-Connect grows two trees.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "LaValle, Planning Algorithms — https://lavalle.pl/planning/ · 10 Motion Planning & Navigation"
+  },
+  {
+   "guid": "N<((Z;I9Z1",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::10 Motion Planning & Navigation",
+   "tags": [
+    "robotics::10-motion-planning-navigation"
+   ],
+   "front": "What does RRT* add to RRT?",
+   "back": "<b>Asymptotic optimality:</b> each new node chooses the lowest-cost parent within a shrinking radius and then <b>rewires</b> neighbours through itself when that is cheaper → path cost converges to the optimum as samples → ∞ (plain RRT almost surely does not). Informed RRT* and BIT* focus sampling to converge faster. In practice planners' paths are also shortcut/smoothed afterwards. Library: Open Motion Planning Library (OMPL).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "LaValle, Planning Algorithms — https://lavalle.pl/planning/ · 10 Motion Planning & Navigation"
+  },
+  {
+   "guid": "v]$~I}yz45",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::10 Motion Planning & Navigation",
+   "tags": [
+    "robotics::10-motion-planning-navigation"
+   ],
+   "front": "How is a geometric path turned into a smooth joint trajectory?",
+   "back": "Time-parameterisation under limits:<br>• <b>Trapezoidal velocity profile</b> — accelerate, cruise, decelerate (bang-coast-bang); S-curve adds jerk limits.<br>• <b>Polynomials</b> — cubic (match position + velocity), quintic (also acceleration) between way-points; splines through many.<br>• Time-optimal parameterisation along a fixed path (TOPP-RA; MoveIt ships Time-Optimal Trajectory Generation and the jerk-limited Ruckig).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Lynch &amp; Park, Modern Robotics (2017) — http://modernrobotics.org · 10 Motion Planning & Navigation"
+  },
+  {
+   "guid": "pjuNUsVT)T",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::10 Motion Planning & Navigation",
+   "tags": [
+    "robotics::10-motion-planning-navigation"
+   ],
+   "front": "Global planner, local planner (controller) and costmaps in mobile-robot navigation.",
+   "back": "<b>Global planner:</b> route over the whole map (A*, Dijkstra, Hybrid-A*/Smac), re-planned occasionally.<br><b>Local planner / controller:</b> at 10–20+ Hz turns the route plus live sensor data into velocity commands, avoiding dynamic obstacles.<br><b>Costmaps:</b> layered grids (static map, obstacle, <b>inflation</b> layer that pads obstacles by the robot radius with decaying cost) — one global, one rolling local window.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Nav2 documentation — https://docs.nav2.org/ · 10 Motion Planning & Navigation"
+  },
+  {
+   "guid": "y$n{Jk6J?:",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::10 Motion Planning & Navigation",
+   "tags": [
+    "robotics::10-motion-planning-navigation"
+   ],
+   "front": "Dynamic Window Approach (DWA) and Model Predictive Path Integral (MPPI) control: how do these local planners work?",
+   "back": "<b>DWA:</b> sample (v, ω) pairs reachable within one time-step given acceleration limits (the 'dynamic window'), forward-simulate each briefly, discard colliding ones, pick the best score (goal heading, clearance, speed).<br><b>MPPI:</b> sample thousands of noisy control <i>sequences</i> over a horizon, roll them out through the model, and average them weighted by exp(−cost) — a sampling-based MPC that handles non-convex costs; widely used in Nav2.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Nav2 documentation — https://docs.nav2.org/ · 10 Motion Planning & Navigation"
+  },
+  {
+   "guid": "jU=GrB[1<_",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::10 Motion Planning & Navigation",
+   "tags": [
+    "robotics::10-motion-planning-navigation"
+   ],
+   "front": "Pure pursuit path tracking.",
+   "back": "Pick a goal point on the path one <b>look-ahead distance</b> L<sub>d</sub> ahead; steer along the circular arc through it:<br>κ = 2·y / L<sub>d</sub>² (y = lateral offset of the goal point in the robot frame); ω = v·κ.<br><br>Short L<sub>d</sub> → accurate but oscillatory; long L<sub>d</sub> → smooth but cuts corners. Commonly scaled with speed (Nav2 Regulated Pure Pursuit). Stanley control is the front-axle alternative for cars.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Nav2 documentation — https://docs.nav2.org/ · 10 Motion Planning & Navigation"
+  },
+  {
+   "guid": "m]D,UAr?MK",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::10 Motion Planning & Navigation",
+   "tags": [
+    "robotics::10-motion-planning-navigation"
+   ],
+   "front": "Artificial potential fields: idea and fatal flaw.",
+   "back": "The goal exerts an attractive potential, obstacles a repulsive one; the robot follows the negative gradient. Reactive, cheap, smooth.<br><br>Flaw: <b>local minima</b> (e.g. U-shaped obstacles, goal behind a wall) and oscillation in narrow corridors. Hence used as a local reactive layer or replaced by navigation functions / planners with global information.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "LaValle, Planning Algorithms — https://lavalle.pl/planning/ · 10 Motion Planning & Navigation"
+  },
+  {
+   "guid": "AAQOT=1(eE",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::10 Motion Planning & Navigation",
+   "tags": [
+    "robotics::10-motion-planning-navigation"
+   ],
+   "front": "Why have Behavior Trees (BTs) displaced Finite State Machines for robot task logic?",
+   "back": "A BT is a tree <b>ticked</b> from the root at a fixed rate; every node returns SUCCESS, FAILURE or RUNNING.<br>• <b>Sequence</b> (→): run children in order until one fails.<br>• <b>Fallback/Selector</b> (?): try children until one succeeds → built-in recovery behaviours.<br>• Decorators, conditions, actions.<br><br>Versus FSMs: modular and reusable sub-trees, no transition explosion, inherently reactive (conditions re-checked every tick). Nav2's navigator is a BT (BehaviorTree.CPP, XML-defined).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Colledanchise &amp; Ögren, Behavior Trees in Robotics and AI — https://arxiv.org/abs/1709.00084 · 10 Motion Planning & Navigation"
+  },
+  {
+   "guid": "Jn!m}&(&Lh",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::10 Motion Planning & Navigation",
+   "tags": [
+    "robotics::10-motion-planning-navigation"
+   ],
+   "front": "Sampling-based planning vs. trajectory optimisation for manipulators.",
+   "back": "<b>Sampling-based</b> (RRT-Connect, PRM): global exploration, probabilistic completeness, jerky paths needing post-processing; handles narrow passages poorly but does not get stuck in local minima.<br><b>Trajectory optimisation</b> (CHOMP, STOMP, TrajOpt; GPU-parallel cuRobo): minimise smoothness + collision cost over the whole trajectory; fast and smooth, but local — depends on the initial guess.<br><br>Common combination: sample to find a seed, optimise to refine. Task and Motion Planning (TAMP) adds a symbolic layer above for long-horizon tasks.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "MoveIt 2 documentation — https://moveit.picknik.ai/ · 10 Motion Planning & Navigation"
+  },
+  {
+   "guid": "sk;{UZ|DvU",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::10 Motion Planning & Navigation",
+   "tags": [
+    "robotics::10-motion-planning-navigation"
+   ],
+   "front": "Classical grasp planning: what is force closure, and how do modern data-driven grasp planners differ?",
+   "back": "<b>Force closure:</b> the contact forces (within friction cones) can resist an arbitrary external wrench; for a parallel-jaw gripper this reduces to an <b>antipodal</b> grasp — contact normals roughly opposed and inside each other's friction cone. Needs an object model and pose.<br><br><b>Data-driven:</b> networks predict grasp poses and quality directly from a depth image or point cloud of unknown objects (Dex-Net, GraspNet, Contact-GraspNet) — no model required. End-to-end visuomotor policies go further and skip explicit grasp planning.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Lynch &amp; Park, Modern Robotics (2017) — http://modernrobotics.org · 10 Motion Planning & Navigation"
+  },
+  {
+   "guid": "G_#q7K~a/~",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::11 ROS 2 & Simulation",
+   "tags": [
+    "robotics::11-ros-2-simulation"
+   ],
+   "front": "What is the Robot Operating System (ROS), and what is the status of ROS 1?",
+   "back": "Not an operating system: open-source <b>middleware + tools + libraries</b> — message passing between processes, hardware drivers, visualisation (RViz), logging, build tooling, and packages for navigation, manipulation and perception.<br><br>ROS 1's final release, Noetic, reached end-of-life on 31 May 2025. New work uses ROS 2: no central master, built on DDS, real-time and multi-robot capable, security, lifecycle nodes, Windows/macOS support.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ROS 2 Documentation — https://docs.ros.org/ · 11 ROS 2 & Simulation"
+  },
+  {
+   "guid": "zGK:~cq2YA",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::11 ROS 2 & Simulation",
+   "tags": [
+    "robotics::11-ros-2-simulation"
+   ],
+   "front": "ROS 2 communication primitives: node, topic, service, action.",
+   "back": "<b>Node:</b> a process-level unit of computation.<br><b>Topic:</b> typed, anonymous publish/subscribe stream — many-to-many (sensor data, <code>cmd_vel</code>).<br><b>Service:</b> synchronous-style request/response for quick queries.<br><b>Action:</b> long-running, <b>pre-emptable</b> goal with periodic feedback and a final result (navigate to pose, follow joint trajectory).<br>Plus <b>parameters</b> for run-time configuration.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ROS 2 Documentation — https://docs.ros.org/ · 11 ROS 2 & Simulation"
+  },
+  {
+   "guid": "J~c!m?%AKW",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::11 ROS 2 & Simulation",
+   "tags": [
+    "robotics::11-ros-2-simulation",
+    "robotics::volatile"
+   ],
+   "front": "What is the Data Distribution Service (DDS) in ROS 2, and what is the RMW layer?",
+   "back": "DDS is an industrial publish/subscribe standard with automatic peer <b>discovery</b> (no ROS master), transported over UDP with the RTPS wire protocol, and rich Quality of Service.<br><br>The ROS Middleware (RMW) interface abstracts the vendor: Fast DDS, Cyclone DDS, RTI Connext — and, since recent distributions, the non-DDS <b>Zenoh</b> (<code>rmw_zenoh</code>), which behaves better over Wi-Fi and wide-area links. <code>ROS_DOMAIN_ID</code> isolates robots on a shared network.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ROS 2 Documentation — https://docs.ros.org/ · 11 ROS 2 & Simulation"
+  },
+  {
+   "guid": "uH+Ui#|]xS",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::11 ROS 2 & Simulation",
+   "tags": [
+    "robotics::11-ros-2-simulation"
+   ],
+   "front": "Which Quality of Service (QoS) settings matter most in ROS 2, and what is the classic pitfall?",
+   "back": "• <b>Reliability:</b> RELIABLE (retransmit) vs. BEST_EFFORT (drop; right for high-rate sensor data on lossy links).<br>• <b>Durability:</b> VOLATILE vs. TRANSIENT_LOCAL (late joiners receive the last message — used for maps, <code>/robot_description</code>).<br>• <b>History/depth:</b> queue size.<br>• Deadline, liveliness.<br><br>Pitfall: <b>incompatible QoS = silently no data</b> — e.g. a RELIABLE subscriber will not match a BEST_EFFORT publisher. Check with <code>ros2 topic info -v</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ROS 2 Documentation — https://docs.ros.org/ · 11 ROS 2 & Simulation"
+  },
+  {
+   "guid": "yc/{G.&Trn",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::11 ROS 2 & Simulation",
+   "tags": [
+    "robotics::11-ros-2-simulation",
+    "robotics::volatile"
+   ],
+   "front": "Which ROS 2 distributions are supported as of mid-2026, and which should a new project choose?",
+   "back": "• <b>Lyrical Luth</b> — released 22 May 2026, Long-Term Support (LTS) until May 2031.<br>• <b>Kilted Kaiju</b> — May 2025, non-LTS, end-of-life December 2026.<br>• <b>Jazzy Jalisco</b> — May 2024, LTS until May 2029 (Ubuntu 24.04).<br>• <b>Humble Hawksbill</b> — May 2022, LTS until May 2027 (Ubuntu 22.04).<br>• Rolling Ridley — continuous development branch.<br><br>Pattern: a release every May; even years are LTS tied to the Ubuntu LTS. New projects: the newest LTS that your drivers/dependencies already support.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ROS 2 distributions list — https://docs.ros.org/en/rolling/Releases.html · 11 ROS 2 & Simulation"
+  },
+  {
+   "guid": "v1;T{)EkC&",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::11 ROS 2 & Simulation",
+   "tags": [
+    "robotics::11-ros-2-simulation"
+   ],
+   "front": "tf2 and REP 105: what is the standard frame chain of a mobile robot and who publishes each link?",
+   "back": "<code>map → odom → base_link → (sensor frames)</code><br><br>• <b>odom → base_link:</b> from odometry/IMU fusion. Continuous and smooth, but drifts.<br>• <b>map → odom:</b> from localisation/SLAM (AMCL, SLAM Toolbox). Globally accurate, may <b>jump</b>.<br>• <b>base_link → sensors:</b> static transforms from the URDF via <code>robot_state_publisher</code>.<br><br>tf2 maintains this time-stamped tree (each frame has exactly one parent) and answers 'transform between any two frames at time t'. Conventions: x forward, y left, z up; SI units (REP 103).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "REP 105, Coordinate Frames for Mobile Platforms — https://www.ros.org/reps/rep-0105.html · 11 ROS 2 & Simulation"
+  },
+  {
+   "guid": "Kqi^x|9=uk",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::11 ROS 2 & Simulation",
+   "tags": [
+    "robotics::11-ros-2-simulation"
+   ],
+   "front": "What is a Unified Robot Description Format (URDF) file?",
+   "back": "An XML description of the robot as a tree of <b>links</b> (visual mesh, collision geometry, inertial properties) connected by <b>joints</b> (fixed, revolute, continuous, prismatic; axis, limits).<br><br>Consumers: <code>robot_state_publisher</code> (tf), RViz, MoveIt, ros2_control, simulators. <b>xacro</b> adds macros and parameters. Limitations: tree only (no closed kinematic loops), one robot — Gazebo's SDF and MuJoCo's MJCF are richer; OpenUSD is used in Isaac Sim.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ROS 2 Documentation — https://docs.ros.org/ · 11 ROS 2 & Simulation"
+  },
+  {
+   "guid": "Ic*}f[#7IY",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::11 ROS 2 & Simulation",
+   "tags": [
+    "robotics::11-ros-2-simulation"
+   ],
+   "front": "What is ros2_control?",
+   "back": "The real-time control framework of ROS 2:<br>• <b>Hardware interface</b> plugins expose <i>state</i> (position, velocity, effort) and <i>command</i> interfaces for real or simulated hardware.<br>• The <b>controller manager</b> runs a deterministic read → update → write loop.<br>• Swappable <b>controllers</b>: <code>joint_trajectory_controller</code>, <code>diff_drive_controller</code>, <code>joint_state_broadcaster</code>, admittance, PID …<br><br>The same controllers run on Gazebo, a mock system or the real robot — MoveIt and Nav2 sit on top.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ros2_control documentation — https://control.ros.org/ · 11 ROS 2 & Simulation"
+  },
+  {
+   "guid": "F$WAud{>+T",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::11 ROS 2 & Simulation",
+   "tags": [
+    "robotics::11-ros-2-simulation"
+   ],
+   "front": "Name the main components of the Nav2 navigation stack.",
+   "back": "• <b>BT Navigator</b> — a behaviour tree orchestrating the task.<br>• <b>Planner server</b> — global path (NavFn, Smac Hybrid-A*/lattice, Theta*).<br>• <b>Controller server</b> — path following (MPPI, Regulated Pure Pursuit, DWB).<br>• <b>Costmap 2D</b> — global and local layered costmaps.<br>• <b>Behaviour server</b> — recoveries (spin, back up, wait); smoother server; waypoint follower; collision monitor.<br>• Localisation: AMCL with a map server, or SLAM Toolbox.<br>• Lifecycle manager brings the managed nodes up in order.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Nav2 documentation — https://docs.nav2.org/ · 11 ROS 2 & Simulation"
+  },
+  {
+   "guid": "d/7$o:/?A]",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::11 ROS 2 & Simulation",
+   "tags": [
+    "robotics::11-ros-2-simulation"
+   ],
+   "front": "What does MoveIt 2 provide?",
+   "back": "The ROS 2 manipulation framework:<br>• <b>Planning scene</b> — world + robot model, collision checking (FCL/Bullet), attached objects, octomap from depth sensors.<br>• <b>Motion planning</b> plugins — OMPL (sampling), Pilz industrial planner (PTP/LIN/CIRC), STOMP/CHOMP.<br>• <b>IK</b> plugins — KDL, TRAC-IK, IKFast, pick_ik.<br>• Time parameterisation (TOTG, Ruckig), execution through ros2_control.<br>• <b>MoveIt Servo</b> for real-time Cartesian jogging/tele-operation; MoveIt Task Constructor for multi-stage pick-and-place.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "MoveIt 2 documentation — https://moveit.picknik.ai/ · 11 ROS 2 & Simulation"
+  },
+  {
+   "guid": "iC)X3:_H3.",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::11 ROS 2 & Simulation",
+   "tags": [
+    "robotics::11-ros-2-simulation"
+   ],
+   "front": "What is micro-ROS?",
+   "back": "ROS 2 for microcontrollers: a client library (rclc) on top of <b>Micro XRCE-DDS</b>, running on an RTOS (FreeRTOS, Zephyr, NuttX) or bare-metal Arduino-style targets — ESP32, STM32, Teensy, Raspberry Pi Pico.<br><br>The microcontroller connects over serial/USB/UDP/CAN to a <b>micro-ROS Agent</b> on the Linux host, which bridges it into the ROS 2 graph — so the motor controller becomes a first-class node with publishers, subscribers, services and parameters.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "micro-ROS — https://micro.ros.org/ · 11 ROS 2 & Simulation"
+  },
+  {
+   "guid": "xu`GG}feT~",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::11 ROS 2 & Simulation",
+   "tags": [
+    "robotics::11-ros-2-simulation"
+   ],
+   "front": "What is rosbag2 and why is it central to robotics development?",
+   "back": "Records and replays any set of topics with timestamps (<code>ros2 bag record -a</code>, <code>ros2 bag play</code>). Default storage format is <b>MCAP</b> (since Iron).<br><br>Uses: debug offline, tune perception/SLAM repeatably on identical data, regression-test algorithms, build datasets, replay with <code>use_sim_time</code>. Visualise with RViz, Foxglove or PlotJuggler.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ROS 2 Documentation — https://docs.ros.org/ · 11 ROS 2 & Simulation"
+  },
+  {
+   "guid": "xSE2EL<FhS",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::11 ROS 2 & Simulation",
+   "tags": [
+    "robotics::11-ros-2-simulation",
+    "robotics::volatile"
+   ],
+   "front": "Compare the main robotics simulators: Gazebo, MuJoCo, Isaac Sim / Isaac Lab, and Newton.",
+   "back": "<b>Gazebo</b> (modern 'gz'; Gazebo Classic reached end-of-life in January 2025): the ROS-integrated general simulator — sensors, worlds, ros2_control; full-system and navigation testing.<br><b>MuJoCo</b> (DeepMind, open-source since 2022): fast, accurate articulated-body and contact dynamics; the research standard for control and reinforcement learning; GPU variants MJX and MuJoCo Warp.<br><b>NVIDIA Isaac Sim / Isaac Lab:</b> GPU PhysX + ray-traced rendering on OpenUSD; thousands of parallel environments for reinforcement learning and synthetic data.<br><b>Newton:</b> open-source GPU physics engine built on NVIDIA Warp, co-developed by NVIDIA, Google DeepMind and Disney Research (announced 2025), differentiable and aimed at robot learning.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Gazebo https://gazebosim.org/ · MuJoCo https://mujoco.org/ · Isaac Lab https://isaac-sim.github.io/IsaacLab/ · Newton https://github.com/newton-physics/newton · 11 ROS 2 & Simulation"
+  },
+  {
+   "guid": "jyX=w+Z6&Q",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::12 Robot Learning Foundations",
+   "tags": [
+    "robotics::12-robot-learning-foundations"
+   ],
+   "front": "Define a Markov Decision Process (MDP) and say why real robots are actually POMDPs.",
+   "back": "MDP = (S, A, P, R, γ): states, actions, transition probabilities P(s′|s,a), reward, discount. Goal: a policy π(a|s) maximising the expected discounted return Σ γ<sup>t</sup>r<sub>t</sub>.<br><br>A robot never sees the true state — only camera images and joint readings — so it faces a <b>Partially Observable</b> MDP (POMDP). Practical answers: feed the policy a history of observations, a recurrent/transformer memory, or an estimated state.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Sutton &amp; Barto, Reinforcement Learning: An Introduction (2nd ed.) — http://incompleteideas.net/book/the-book-2nd.html · 12 Robot Learning Foundations"
+  },
+  {
+   "guid": "q6>q]rV88B",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::12 Robot Learning Foundations",
+   "tags": [
+    "robotics::12-robot-learning-foundations"
+   ],
+   "front": "Reinforcement Learning (RL) vs. Imitation Learning (IL) for robots: trade-offs.",
+   "back": "<b>RL:</b> learns from reward by trial and error. + Can exceed human skill, discovers recovery behaviour. − Sample-hungry, unsafe on hardware, reward design is hard → mostly done in simulation. Dominant for <b>locomotion</b>.<br><b>IL:</b> supervised learning from demonstrations. + No reward or simulator needed, works from real images. − Bounded by demonstration quality/coverage, data is costly. Dominant for <b>manipulation</b>.<br><br>Frontier practice combines them: pre-train by imitation, improve with RL.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Sutton &amp; Barto, Reinforcement Learning: An Introduction (2nd ed.) — http://incompleteideas.net/book/the-book-2nd.html · 12 Robot Learning Foundations"
+  },
+  {
+   "guid": "iSaV_fITMy",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::12 Robot Learning Foundations",
+   "tags": [
+    "robotics::12-robot-learning-foundations"
+   ],
+   "front": "What is Behaviour Cloning (BC) and what is its fundamental failure mode?",
+   "back": "BC = supervised regression from observation to the expert's action.<br><br>Failure mode: <b>covariate shift / compounding error</b>. Small mistakes take the robot to states the expert never visited; there the policy is worse, errors grow — for naive BC the expected error scales O(T²) with horizon T.<br><br>Mitigations: more diverse data including recoveries, DAgger-style corrections, action chunking, noise injection during demonstration, expressive (diffusion/flow) policies.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ross, Gordon &amp; Bagnell 2011, DAgger — https://arxiv.org/abs/1011.0686 · 12 Robot Learning Foundations"
+  },
+  {
+   "guid": "oMky|;[smZ",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::12 Robot Learning Foundations",
+   "tags": [
+    "robotics::12-robot-learning-foundations"
+   ],
+   "front": "How does Dataset Aggregation (DAgger) fix behaviour cloning's distribution shift?",
+   "back": "Iterate: (1) run the <i>current learner policy</i> to collect the states <i>it</i> visits; (2) ask the expert to label those states with the correct action; (3) add them to the dataset and retrain.<br><br>The training distribution converges to the learner's own state distribution → error grows linearly rather than quadratically with horizon. Robotics variants: human-gated interventions (HG-DAgger) — the operator takes over only when the robot is about to fail, and those corrections become training data.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ross, Gordon &amp; Bagnell 2011, DAgger — https://arxiv.org/abs/1011.0686 · 12 Robot Learning Foundations"
+  },
+  {
+   "guid": "M:Rq?426z|",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::12 Robot Learning Foundations",
+   "tags": [
+    "robotics::12-robot-learning-foundations"
+   ],
+   "front": "Proximal Policy Optimization (PPO) vs. Soft Actor-Critic (SAC): what are they and where is each used in robotics?",
+   "back": "<b>PPO</b> — on-policy policy gradient with a <b>clipped surrogate objective</b> that limits each update's policy change; stable, simple, scales across thousands of parallel simulated environments → the standard for sim-trained locomotion and whole-body control.<br><b>SAC</b> — off-policy actor-critic with a replay buffer and an <b>entropy bonus</b> (maximum-entropy RL); far more sample-efficient → preferred for learning directly on real robots.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Schulman et al. 2017, PPO — https://arxiv.org/abs/1707.06347 · Haarnoja et al. 2018, SAC — https://arxiv.org/abs/1801.01290 · 12 Robot Learning Foundations"
+  },
+  {
+   "guid": "jr5,|3$<.X",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::12 Robot Learning Foundations",
+   "tags": [
+    "robotics::12-robot-learning-foundations"
+   ],
+   "front": "What are reward shaping and reward hacking?",
+   "back": "<b>Shaping:</b> adding dense intermediate terms (distance to goal, velocity tracking, energy, smoothness penalties) because sparse success/failure rewards make exploration hopeless. Locomotion rewards typically have 10–20 weighted terms.<br><b>Hacking:</b> the agent maximises the written reward in an unintended way (vibrating forward, exploiting simulator bugs).<br><br>Alternatives: motion-imitation/tracking rewards from human or animal motion capture, learned reward models, or sparse reward + demonstrations.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Sutton &amp; Barto, Reinforcement Learning: An Introduction (2nd ed.) — http://incompleteideas.net/book/the-book-2nd.html · 12 Robot Learning Foundations"
+  },
+  {
+   "guid": "J#q@rB0%UP",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::12 Robot Learning Foundations",
+   "tags": [
+    "robotics::12-robot-learning-foundations"
+   ],
+   "front": "What is the sim-to-real gap and where does it come from?",
+   "back": "A policy that works in simulation fails on hardware because the simulator is wrong or incomplete about:<br>• <b>Dynamics:</b> mass/inertia, friction, contact and deformable objects.<br>• <b>Actuators:</b> torque limits, gear friction/backlash, bandwidth, <b>latency</b>.<br>• <b>Sensing:</b> noise, bias, delays, calibration.<br>• <b>Visuals:</b> rendering vs. real cameras, lighting, clutter.<br><br>Remedies: system identification, domain randomisation, learned actuator models, online adaptation, and real-world fine-tuning.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Tobin et al. 2017, Domain Randomization — https://arxiv.org/abs/1703.06907 · 12 Robot Learning Foundations"
+  },
+  {
+   "guid": "t>OcHXawB3",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::12 Robot Learning Foundations",
+   "tags": [
+    "robotics::12-robot-learning-foundations"
+   ],
+   "front": "What is domain randomisation?",
+   "back": "Train across a wide <i>distribution</i> of simulators instead of one: randomise physics (masses, friction, motor strength, delays, push disturbances) and/or visuals (textures, lighting, camera pose) every episode.<br><br>The real world then looks like just another sample, and the policy is forced to be robust or to adapt implicitly. Too little randomisation → no transfer; too much → over-conservative behaviour. It is the main reason RL locomotion policies transfer zero-shot.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Tobin et al. 2017, Domain Randomization — https://arxiv.org/abs/1703.06907 · 12 Robot Learning Foundations"
+  },
+  {
+   "guid": "v}1tbWJtw/",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::12 Robot Learning Foundations",
+   "tags": [
+    "robotics::12-robot-learning-foundations"
+   ],
+   "front": "What is an 'actuator network', and why did it matter for legged-robot RL?",
+   "back": "A small neural network trained on real hardware logs to predict the torque a joint actuator actually produces from its recent history of commanded and measured positions/velocities — capturing friction, compliance, controller dynamics and delay that analytic models miss.<br><br>Inserted into the simulator, it closed the sim-to-real gap for ANYmal (Hwangbo et al., Science Robotics 2019) and enabled zero-shot transfer of RL locomotion policies.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Hwangbo et al. 2019, Learning agile and dynamic motor skills for legged robots (Science Robotics) — https://arxiv.org/abs/1901.08652 · 12 Robot Learning Foundations"
+  },
+  {
+   "guid": "@>rV&|;/&",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::12 Robot Learning Foundations",
+   "tags": [
+    "robotics::12-robot-learning-foundations"
+   ],
+   "front": "Explain teacher–student (privileged) learning and Rapid Motor Adaptation (RMA).",
+   "back": "<b>Teacher:</b> trained with RL in simulation with <i>privileged</i> information the real robot lacks (terrain friction, height map, payload, contact states).<br><b>Student:</b> uses only on-board sensors; learns by supervised learning to imitate the teacher or to infer the privileged latent from a <b>history of proprioception</b>.<br><br>RMA: base policy conditioned on an 'extrinsics' latent + an adaptation module estimating that latent online from recent states/actions → adapts to new terrain and payloads within fractions of a second, with no real-world fine-tuning.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kumar et al. 2021, RMA: Rapid Motor Adaptation — https://arxiv.org/abs/2107.04034 · 12 Robot Learning Foundations"
+  },
+  {
+   "guid": "xjJYpE>?Oh",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::12 Robot Learning Foundations",
+   "tags": [
+    "robotics::12-robot-learning-foundations"
+   ],
+   "front": "Why did massively parallel GPU simulation change robot reinforcement learning?",
+   "back": "Physics and the neural network both run on the GPU, so <b>thousands of environments</b> step in parallel with no CPU–GPU transfer. Rudin et al. (2021) trained quadruped locomotion with ~4000 parallel robots in minutes (flat terrain) to ~20 minutes (rough terrain) on a single GPU; a terrain curriculum raises difficulty automatically.<br><br>Tools: Isaac Gym → Isaac Lab, MuJoCo MJX / MuJoCo Warp, Genesis, ManiSkill. Industrial example: Figure's Helix 02 low-level controller was trained across more than 200 000 parallel environments.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Rudin et al. 2021, Learning to Walk in Minutes — https://arxiv.org/abs/2109.11978 · 12 Robot Learning Foundations"
+  },
+  {
+   "guid": "IHe8uU{(L%",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::12 Robot Learning Foundations",
+   "tags": [
+    "robotics::12-robot-learning-foundations"
+   ],
+   "front": "What is action chunking, as used in Action Chunking with Transformers (ACT)?",
+   "back": "The policy predicts a <b>sequence of the next k actions</b> per inference (e.g. k ≈ 50–100 at 50 Hz) instead of one.<br><br>Why: shortens the effective decision horizon → less compounding error; copes with non-Markovian demonstration quirks such as pauses; yields smooth motion. ACT adds a conditional Variational Auto-Encoder (VAE) to model demonstration variability and <b>temporal ensembling</b> (average overlapping chunks). Introduced with the low-cost bimanual ALOHA system; chunking is now used by virtually all Vision-Language-Action models.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Zhao et al. 2023, ALOHA / Action Chunking with Transformers — https://arxiv.org/abs/2304.13705 · 12 Robot Learning Foundations"
+  },
+  {
+   "guid": "n*,K+b3s?d",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::12 Robot Learning Foundations",
+   "tags": [
+    "robotics::12-robot-learning-foundations"
+   ],
+   "front": "What is Diffusion Policy and which problem of behaviour cloning does it solve?",
+   "back": "The policy generates an action sequence by iteratively <b>denoising</b> Gaussian noise, conditioned on recent observations (conditional DDPM); part of the sequence is executed, then it re-plans (receding horizon).<br><br>Solves <b>multi-modality</b>: humans demonstrate the same task in different ways (pass left <i>or</i> right). A regression policy averages the modes — an invalid action; a diffusion model represents the full distribution and commits to one mode. Also trains stably and scales to high-dimensional action sequences.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Chi et al. 2023, Diffusion Policy — https://arxiv.org/abs/2303.04137 · 12 Robot Learning Foundations"
+  },
+  {
+   "guid": "O)H|~NA`,y",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::12 Robot Learning Foundations",
+   "tags": [
+    "robotics::12-robot-learning-foundations"
+   ],
+   "front": "How is demonstration data for manipulation policies collected?",
+   "back": "• <b>Leader–follower tele-operation:</b> the operator moves a kinematic replica arm; the robot mirrors it (ALOHA, GELLO, SO-101). Intuitive; joint-space data.<br>• <b>Virtual-reality / hand tracking</b> (Apple Vision Pro, Quest): maps hand poses to arms and dexterous hands; standard for humanoids.<br>• <b>Robot-free hand-held grippers</b> — Universal Manipulation Interface (UMI): instrumented gripper with a camera; trajectories recovered by visual SLAM; data collected anywhere.<br>• <b>Egocentric human video</b> (smart glasses): most scalable, but no action labels.<br>• Kinesthetic teaching; 3D mouse. Quality, diversity and recoveries matter more than sheer volume.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kawaharazuka et al. 2025, VLA Models for Robotics: A Review — https://arxiv.org/abs/2510.07077 · 12 Robot Learning Foundations"
+  },
+  {
+   "guid": "yby%/:M9UY",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::13 Physical AI & Robot Foundation Models",
+   "tags": [
+    "robotics::13-physical-ai-robot-foundation-models"
+   ],
+   "front": "What is meant by 'Physical AI' / 'embodied AI'?",
+   "back": "AI systems that <b>perceive, reason about and act in the physical world</b> through a body — robots, vehicles, drones — rather than only processing digital content. The defining requirement is closing the loop from raw sensors (pixels, touch, proprioception) to motor commands under real-world physics, real time and safety constraints.<br><br>Current paradigm: large pre-trained foundation models (vision-language-action models, world models) + simulation/synthetic data + fleet data, replacing hand-engineered perception–planning–control pipelines for unstructured tasks.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "NVIDIA 2025, Cosmos World Foundation Model Platform for Physical AI — https://arxiv.org/abs/2501.03575 · 13 Physical AI & Robot Foundation Models"
+  },
+  {
+   "guid": "h;fo}Cd]Lb",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::13 Physical AI & Robot Foundation Models",
+   "tags": [
+    "robotics::13-physical-ai-robot-foundation-models"
+   ],
+   "front": "State Moravec's paradox and its consequence for robotics.",
+   "back": "'It is comparatively easy to make computers exhibit adult-level performance on intelligence tests or playing checkers, and difficult or impossible to give them the skills of a one-year-old when it comes to perception and mobility.'<br><br>Sensorimotor skill is the product of hundreds of millions of years of evolution and is largely unconscious, so it is hard to specify — and unlike text, <b>no internet-scale dataset of robot actions exists</b>. This data gap is the central bottleneck of Physical AI.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Moravec 1988, Mind Children · 13 Physical AI & Robot Foundation Models"
+  },
+  {
+   "guid": "M=pAUrz~Z",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::13 Physical AI & Robot Foundation Models",
+   "tags": [
+    "robotics::13-physical-ai-robot-foundation-models"
+   ],
+   "front": "Define a Vision-Language-Action (VLA) model.",
+   "back": "A model that takes <b>visual observations and a natural-language instruction</b> as required inputs (optionally proprioception, depth, touch) and <b>directly outputs robot control commands</b>. Typically a pre-trained Vision-Language Model (VLM) backbone — bringing web-scale semantic knowledge — plus an action output mechanism (discrete action tokens, or a diffusion / flow-matching head).<br><br>Systems where a language model merely selects among pre-trained skills (e.g. SayCan) are <i>not</i> VLAs under this definition.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kawaharazuka et al. 2025, VLA Models for Robotics: A Review — https://arxiv.org/abs/2510.07077 · 13 Physical AI & Robot Foundation Models"
+  },
+  {
+   "guid": "IH[f_&2N<<",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::13 Physical AI & Robot Foundation Models",
+   "tags": [
+    "robotics::13-physical-ai-robot-foundation-models"
+   ],
+   "front": "RT-1 → RT-2: what was the key idea of Robotics Transformer 2?",
+   "back": "RT-1 (2022): a transformer trained from scratch on ~130 000 real demonstrations of 700+ tasks — a capable multi-task policy, but it only knows what is in the robot data.<br><br><b>RT-2</b> (2023): take a large web-pre-trained VLM (PaLI-X / PaLM-E), write robot actions as <b>text tokens</b>, and <b>co-fine-tune</b> on web vision-language data + robot data. Result: semantic generalisation absent from the robot data ('pick up the extinct animal', unseen objects) — web knowledge transfers to control. This coined the term VLA.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Brohan et al. 2023, RT-2 — https://arxiv.org/abs/2307.15818 (RT-1: https://arxiv.org/abs/2212.06817) · 13 Physical AI & Robot Foundation Models"
+  },
+  {
+   "guid": "vv1pGcse+Q",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::13 Physical AI & Robot Foundation Models",
+   "tags": [
+    "robotics::13-physical-ai-robot-foundation-models"
+   ],
+   "front": "How do autoregressive VLAs turn continuous actions into tokens, what is the drawback, and what does the FAST tokenizer change?",
+   "back": "<b>Binning:</b> each action dimension per time-step is discretised into 256 bins → one token each (RT-2, OpenVLA), trained with next-token cross-entropy.<br>Drawback: many highly correlated tokens at high control rates → slow inference and poor learning of dexterous, high-frequency tasks.<br><br><b>FAST</b> (Frequency-space Action Sequence Tokenization): apply a Discrete Cosine Transform (DCT) to each action <i>chunk</i>, quantise, then compress with Byte-Pair Encoding (BPE) → far fewer tokens; about 5× faster training and autoregressive VLAs that match diffusion-style models on dexterous tasks.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Pertsch et al. 2025, FAST action tokenizer — https://arxiv.org/abs/2501.09747 · 13 Physical AI & Robot Foundation Models"
+  },
+  {
+   "guid": "s!n|4/2]*A",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::13 Physical AI & Robot Foundation Models",
+   "tags": [
+    "robotics::13-physical-ai-robot-foundation-models"
+   ],
+   "front": "What is the Open X-Embodiment (OXE) dataset and what did it demonstrate?",
+   "back": "A pooled, standardised collection of 60 existing robot datasets from 21 institutions: <b>1M+ real trajectories, 22 robot embodiments</b>, 500+ skills (RLDS format).<br><br>Finding (RT-X models): a single policy trained on the mixture <b>outperforms</b> policies trained only on each lab's own data — positive transfer across embodiments. It became the default pre-training corpus for open generalist policies (Octo, OpenVLA). Open issue: differing action spaces, cameras and control rates make cross-embodiment learning hard.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Open X-Embodiment Collaboration 2023 — https://arxiv.org/abs/2310.08864 · 13 Physical AI & Robot Foundation Models"
+  },
+  {
+   "guid": "pF%xug1U^f",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::13 Physical AI & Robot Foundation Models",
+   "tags": [
+    "robotics::13-physical-ai-robot-foundation-models"
+   ],
+   "front": "OpenVLA: architecture and significance.",
+   "back": "7B-parameter open-source VLA (2024): Llama 2 language model + fused <b>SigLIP and DINOv2</b> vision encoders (Prismatic VLM), outputs 256-bin discrete action tokens; trained on 970 000 Open X-Embodiment episodes.<br><br>Outperformed the closed 55B RT-2-X with 7× fewer parameters, and showed practical adaptation with <b>Low-Rank Adaptation (LoRA)</b> fine-tuning and quantisation on consumer GPUs. Follow-up OpenVLA-OFT: parallel decoding of continuous action chunks for much higher speed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kim et al. 2024, OpenVLA — https://arxiv.org/abs/2406.09246 · 13 Physical AI & Robot Foundation Models"
+  },
+  {
+   "guid": "H?,}6(C+&P",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::13 Physical AI & Robot Foundation Models",
+   "tags": [
+    "robotics::13-physical-ai-robot-foundation-models"
+   ],
+   "front": "π0 (Physical Intelligence, 2024): what is the architecture?",
+   "back": "A pre-trained VLM (PaliGemma, ~3B) plus a separate ~300M-parameter <b>action expert</b> — a second set of transformer weights attending to the same sequence — that generates <b>continuous action chunks by flow matching</b>, enabling control at up to 50 Hz for dexterous tasks (laundry folding, box assembly, table bussing).<br><br>Recipe borrowed from language models: <b>pre-train</b> on large, diverse cross-embodiment data (~10 000 hours, several robot types), then <b>post-train</b> on smaller, high-quality task data. Weights are open-sourced (openpi).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Black et al. 2024, π0 — https://arxiv.org/abs/2410.24164 · 13 Physical AI & Robot Foundation Models"
+  },
+  {
+   "guid": "M!!jQJz.,-",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::13 Physical AI & Robot Foundation Models",
+   "tags": [
+    "robotics::13-physical-ai-robot-foundation-models"
+   ],
+   "front": "Flow matching vs. diffusion for action generation.",
+   "back": "Both map noise to data conditioned on observations. <b>Diffusion</b> learns to reverse a stochastic noising process over many denoising steps. <b>Flow matching</b> directly regresses a <b>velocity field</b> that transports noise samples to data along (near-)straight paths; at inference you integrate an ordinary differential equation.<br><br>Simpler training objective and good samples in ~5–10 integration steps → low latency, which matters for high-rate control. Used by π0, GR00T N1 and successors.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Lipman et al. 2022, Flow Matching — https://arxiv.org/abs/2210.02747 · 13 Physical AI & Robot Foundation Models"
+  },
+  {
+   "guid": "i)x9f4QzXs",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::13 Physical AI & Robot Foundation Models",
+   "tags": [
+    "robotics::13-physical-ai-robot-foundation-models",
+    "robotics::volatile"
+   ],
+   "front": "What is the 'System 1 / System 2' dual-system VLA architecture?",
+   "back": "Borrowing Kahneman's terms:<br><b>System 2</b> — a large VLM that reasons about the scene and the instruction, slowly (a few Hz), and emits a latent/semantic conditioning.<br><b>System 1</b> — a small, fast visuomotor policy that turns that conditioning + fresh observations into continuous actions at control rate.<br><br>Example: Figure Helix — S2 ≈ 7B parameters at 7–9 Hz; S1 ≈ 80M parameters at 200 Hz controlling a 35-DoF humanoid upper body, running asynchronously on on-board GPUs. NVIDIA GR00T N1 uses the same split (VLM + diffusion-transformer action module). It resolves the 'general but slow vs. fast but narrow' trade-off.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Figure AI, Helix — https://www.figure.ai/news/helix · 13 Physical AI & Robot Foundation Models"
+  },
+  {
+   "guid": "xdsE|-.X9e",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::13 Physical AI & Robot Foundation Models",
+   "tags": [
+    "robotics::13-physical-ai-robot-foundation-models",
+    "robotics::volatile"
+   ],
+   "front": "Helix 02 (Figure, January 2026): what is 'System 0'?",
+   "back": "Helix 02 extends the S1/S2 hierarchy to full-body autonomy with a third, lowest layer:<br><b>S0</b> — a ~10M-parameter network running at <b>1 kHz</b> that takes full-body joint state and base motion and outputs joint-level actuator commands, handling balance, contact and coordination. It is a learned whole-body controller trained to track human motion data, <b>entirely in simulation</b> (&gt;200 000 parallel environments, heavy domain randomisation).<br><b>S1</b> — 'all sensors in, all joints out' (head and palm cameras, fingertip tactile, proprioception) at 200 Hz.<br><b>S2</b> — slow semantic reasoning.<br><br>Pattern: pixels-to-torque hierarchy, each layer at its natural time-scale.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Figure AI, Helix 02 (Jan 2026) — https://www.figure.ai/news/helix-02 · 13 Physical AI & Robot Foundation Models"
+  },
+  {
+   "guid": "Mp&,m,LJ*C",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::13 Physical AI & Robot Foundation Models",
+   "tags": [
+    "robotics::13-physical-ai-robot-foundation-models",
+    "robotics::volatile"
+   ],
+   "front": "π0.5 (2025): what did it add over π0?",
+   "back": "<b>Open-world generalisation:</b> cleaning kitchens and bedrooms in homes never seen in training, on a mobile manipulator.<br><br>How: <b>co-training on heterogeneous data</b> — many robot types, web vision-language data, object detection, verbal instructions — and a <b>hierarchical inference</b> inside one model: first predict a high-level sub-task in language ('pick up the plate'), then generate the low-level action chunk by flow matching. Discrete FAST tokens are used in pre-training, the continuous flow action expert in post-training.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Physical Intelligence 2025, π0.5 — https://arxiv.org/abs/2504.16054 · 13 Physical AI & Robot Foundation Models"
+  },
+  {
+   "guid": "C~{j<T0-:*",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::13 Physical AI & Robot Foundation Models",
+   "tags": [
+    "robotics::13-physical-ai-robot-foundation-models",
+    "robotics::volatile"
+   ],
+   "front": "π0.7 (Physical Intelligence, April 2026): what is 'diverse context conditioning' and what does it buy?",
+   "back": "A ~5B VLA: Gemma 3 4B VLM backbone + video-history (memory) encoder + ~860M flow-matching action expert.<br><br>Key idea: during training the prompt contains not only <i>what</i> to do (language) but also <i>how</i>: <b>episode metadata</b> describing data quality and strategy, and <b>sub-goal images</b>. This disambiguates mixed-quality data, so the model can learn from demonstrations, sub-optimal autonomous roll-outs including failures, and non-robot data — then be <b>steered</b> at test time towards fast, high-quality behaviour.<br><br>Reported results: strong out-of-the-box performance without task-specific fine-tuning, matching RL-fine-tuned specialists on hard tasks; signs of <b>compositional generalisation</b>; zero-shot cross-embodiment transfer.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Physical Intelligence 2026, π0.7 — https://arxiv.org/abs/2604.15483 · https://www.pi.website/blog/pi07 · 13 Physical AI & Robot Foundation Models"
+  },
+  {
+   "guid": "I?Qr_yU^mZ",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::13 Physical AI & Robot Foundation Models",
+   "tags": [
+    "robotics::13-physical-ai-robot-foundation-models",
+    "robotics::volatile"
+   ],
+   "front": "NVIDIA Isaac GR00T N-series: what is it, and what changed by N1.7 (2026)?",
+   "back": "An <b>open</b> VLA foundation model family for humanoid / generalist robots. GR00T N1 (March 2025): dual-system — VLM 'System 2' + diffusion-transformer 'System 1' action head with flow matching; cross-embodiment; trained on a mix of real tele-operation, human video (via latent actions) and synthetic data; post-trainable per robot.<br><br><b>N1.7</b> (2026): new VLM backbone <b>Cosmos-Reason2-2B</b> (Qwen3-VL architecture, native-aspect-ratio images), larger state/action dimensions and action horizon, multi-dataset fine-tuning with mixture weights; commercially usable licence. Ecosystem: Isaac Sim/Lab, Cosmos world models, Jetson Thor on-board compute, and an open reference humanoid design.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "NVIDIA Isaac GR00T — https://github.com/NVIDIA/Isaac-GR00T · GR00T N1 paper https://arxiv.org/abs/2503.14734 · 13 Physical AI & Robot Foundation Models"
+  },
+  {
+   "guid": "q[wwD%k{M",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::13 Physical AI & Robot Foundation Models",
+   "tags": [
+    "robotics::13-physical-ai-robot-foundation-models",
+    "robotics::volatile"
+   ],
+   "front": "Gemini Robotics 1.5 (Google DeepMind): what are the two models and the three headline ideas?",
+   "back": "<b>Gemini Robotics-ER 1.5</b> — an Embodied Reasoning VLM: spatial understanding, pointing, task planning, progress/success estimation; it orchestrates (and can call tools such as search).<br><b>Gemini Robotics 1.5</b> — the VLA that executes each step.<br><br>Ideas: (1) <b>Motion Transfer</b> — an architecture/training recipe for learning from heterogeneous multi-embodiment data; skills shown on ALOHA transfer to a bi-arm Franka and the Apollo humanoid without robot-specific post-training. (2) <b>Thinking before acting</b> — the VLA interleaves natural-language reasoning with actions (embodied chain-of-thought): better multi-step performance and interpretability. (3) An <b>agentic</b> system combining both models, with semantic-safety evaluation (ASIMOV benchmark).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Gemini Robotics Team 2025, Gemini Robotics 1.5 — https://arxiv.org/abs/2510.03342 · 13 Physical AI & Robot Foundation Models"
+  },
+  {
+   "guid": "h[qf;2[aCQ",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::13 Physical AI & Robot Foundation Models",
+   "tags": [
+    "robotics::13-physical-ai-robot-foundation-models",
+    "robotics::volatile"
+   ],
+   "front": "What is a world (foundation) model in Physical AI, and what is it used for?",
+   "back": "A generative model that predicts <b>future observations</b> (usually video, sometimes latent states) given the current observation and, ideally, actions — a learned simulator of visual physics. Example platform: NVIDIA Cosmos (Predict, Transfer, Reason models; Cosmos 3 announced in 2026).<br><br>Uses: (1) <b>synthetic data</b> — multiply and re-style demonstrations, render sim data photoreal; (2) <b>policy evaluation</b> in imagination; (3) <b>planning / model-based control</b>; (4) pre-training representations for policies. Limitation: long-horizon physical and action-conditional consistency.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "NVIDIA 2025, Cosmos World Foundation Model Platform for Physical AI — https://arxiv.org/abs/2501.03575 · 13 Physical AI & Robot Foundation Models"
+  },
+  {
+   "guid": "vpzf9Mu}Q7",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::13 Physical AI & Robot Foundation Models",
+   "tags": [
+    "robotics::13-physical-ai-robot-foundation-models",
+    "robotics::volatile"
+   ],
+   "front": "What is the 2026 trend from VLAs towards 'world-action models' / video-model policies?",
+   "back": "Instead of bolting an action head onto a vision-<i>language</i> model, start from a pre-trained <b>video generation model</b> — which already encodes dynamics and physics — and train it to predict <b>future frames and actions jointly</b> (actions as an extra modality in the latent sequence, or decoded by an inverse-dynamics model from predicted video).<br><br>Motivation: video pre-training carries motion priors that static image–text pre-training lacks, and imagined futures enable planning and value estimation. Examples: Unified Video Action model, DreamGen, Cosmos Policy, DreamZero. Open question: inference cost at control rate.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Curated paper list: awesome-physical-ai — https://github.com/keon/awesome-physical-ai · 13 Physical AI & Robot Foundation Models"
+  },
+  {
+   "guid": "J|ep3iad.T",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::13 Physical AI & Robot Foundation Models",
+   "tags": [
+    "robotics::13-physical-ai-robot-foundation-models"
+   ],
+   "front": "What is the 'data pyramid' for training robot foundation models?",
+   "back": "From scarce-and-relevant to abundant-and-indirect:<br>1. <b>Real robot tele-operation</b> — best signal; costs a human-hour per robot-hour.<br>2. <b>Simulation / synthetic data</b> — unlimited, labelled; limited by the sim-to-real gap. NVIDIA reported generating 780 000 synthetic trajectories (≈6 500 hours) in 11 hours and a ~40 % gain for GR00T N1 when added to real data.<br>3. <b>Human video</b> (egocentric, web) — vast and diverse, but no action labels. Bridged by <b>latent action models</b> (LAPA: a VQ-VAE infers a discrete 'latent action' between frames; pre-train the policy on those, then swap in a real action head), hand-pose retargeting, or, as models scale, direct co-training.<br><br>Plus web image–text data inherited through the VLM backbone.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "NVIDIA newsroom, GR00T N1 announcement (GTC 2025) — https://nvidianews.nvidia.com/news/nvidia-isaac-gr00t-n1-open-humanoid-robot-foundation-model-simulation-frameworks · 13 Physical AI & Robot Foundation Models"
+  },
+  {
+   "guid": "G/?gdReVP:",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::13 Physical AI & Robot Foundation Models",
+   "tags": [
+    "robotics::13-physical-ai-robot-foundation-models",
+    "robotics::volatile"
+   ],
+   "front": "How is reinforcement learning being applied to large VLA models?",
+   "back": "Imitation alone plateaus below production-grade reliability and speed; RL lets the policy learn from its <b>own experience</b>.<br><br>• Fine-tune with task success as reward, often with human interventions/corrections mixed in (HIL-SERL-style).<br>• Advantage-conditioned training on autonomous roll-outs (Physical Intelligence's π*0.6 / RECAP) → large gains in throughput and failure rate on long real tasks.<br>• RL in the diffusion noise space (DSRL) or on a lightweight head/'RL token', leaving the big backbone frozen — avoids destabilising it.<br>• The other direction: a VLA issues high-level commands to a low-level RL locomotion/whole-body controller.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Physical Intelligence research blog — https://www.pi.website/ · 13 Physical AI & Robot Foundation Models"
+  },
+  {
+   "guid": "eKt-MaZkF?",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::13 Physical AI & Robot Foundation Models",
+   "tags": [
+    "robotics::13-physical-ai-robot-foundation-models"
+   ],
+   "front": "A VLA needs ~100 ms or more per inference, yet the robot must move smoothly at 50 Hz. How is that reconciled?",
+   "back": "• <b>Action chunking:</b> one inference yields ~1 s of actions.<br>• <b>Asynchronous inference:</b> compute the next chunk while the current one executes.<br>• <b>Real-Time Chunking (RTC):</b> treat the actions that will already have been executed by the time inference finishes as <i>frozen</i>, and 'inpaint' the rest of the new chunk to be consistent with them (soft masking) → no pauses or jerks at chunk boundaries despite latency.<br>• Few-step flow matching, smaller System-1 networks, quantisation/TensorRT, token caching and early exit.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kawaharazuka et al. 2025, VLA Models for Robotics: A Review — https://arxiv.org/abs/2510.07077 · 13 Physical AI & Robot Foundation Models"
+  },
+  {
+   "guid": "fq0#&C:!f-",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::13 Physical AI & Robot Foundation Models",
+   "tags": [
+    "robotics::13-physical-ai-robot-foundation-models",
+    "robotics::volatile"
+   ],
+   "front": "Why is evaluating generalist robot policies hard, and what benchmarks exist?",
+   "back": "Real-world trials are slow, noisy, hardware- and lab-specific, and not reproducible; success rates depend on unreported details.<br><br>• <b>Simulation:</b> LIBERO (language-conditioned manipulation suites — now near-saturated), CALVIN (long-horizon), SimplerEnv (sim proxies of real set-ups), RoboCasa, ManiSkill, RoboTwin (bimanual).<br>• <b>Real world:</b> RoboArena — distributed, crowd-sourced <b>pairwise</b> comparisons of policies on the standardised DROID platform across many labs, aggregated into a ranking.<br><br>Treat vendor launch-day claims with caution; check live leaderboards and independent replications.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kawaharazuka et al. 2025, VLA Models for Robotics: A Review — https://arxiv.org/abs/2510.07077 · 13 Physical AI & Robot Foundation Models"
+  },
+  {
+   "guid": "LO8)0<[w[,",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::13 Physical AI & Robot Foundation Models",
+   "tags": [
+    "robotics::13-physical-ai-robot-foundation-models",
+    "robotics::volatile"
+   ],
+   "front": "How can a hobbyist get hands-on with Physical AI for a few hundred euros?",
+   "back": "<b>Hugging Face LeRobot</b>: open-source PyTorch library with datasets, tele-operation/recording tools and policy implementations (ACT, Diffusion Policy, π0, SmolVLA …).<br><b>SO-101</b>: 3D-printable 6-DoF leader + follower arm pair driven by Feetech bus servos (~€100–250 in parts).<br><br>Workflow: tele-operate ~50 demonstrations with one or two cameras → dataset on the Hub → train ACT or fine-tune <b>SmolVLA</b> (~450M-parameter open VLA trained on community data, runs on a consumer GPU or laptop) → run the policy on the arm. The modern successor of the 'Arduino + servo arm' project.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Hugging Face LeRobot — https://github.com/huggingface/lerobot · SmolVLA https://arxiv.org/abs/2506.01844 · 13 Physical AI & Robot Foundation Models"
+  },
+  {
+   "guid": "xYi_];8$D~",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::13 Physical AI & Robot Foundation Models",
+   "tags": [
+    "robotics::13-physical-ai-robot-foundation-models",
+    "robotics::volatile"
+   ],
+   "front": "Why are so many companies building humanoids, and what are the counter-arguments?",
+   "back": "<b>For:</b> the world — stairs, doors, tools, workstations — is built for the human form, so one general body can take on many jobs; and human-shaped robots can exploit <b>human data</b> (tele-operation by retargeting, motion capture, egocentric video). Enablers: quasi-direct-drive actuators, sim-trained RL whole-body control, VLAs, on-board GPUs.<br><b>Against:</b> legs add cost, energy use and fall risk where wheels suffice; <b>dexterous hands</b> and tactile sensing remain the bottleneck; reliability is far from industrial requirements (99.9 %+); safety certification around people is unresolved.<br><br>Players (2026): Figure, Tesla Optimus, 1X, Agility Digit, Apptronik Apollo, Boston Dynamics Atlas, Unitree G1/H1, AgiBot, UBTech.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Figure AI, Helix 02 (Jan 2026) — https://www.figure.ai/news/helix-02 · 13 Physical AI & Robot Foundation Models"
+  },
+  {
+   "guid": "i4]vZ$^sG~",
+   "type": "basic",
+   "deck": "Robotics - Arduino to Physical AI::13 Physical AI & Robot Foundation Models",
+   "tags": [
+    "robotics::13-physical-ai-robot-foundation-models"
+   ],
+   "front": "What safety layers does a learned robot policy still need?",
+   "back": "A neural policy has no guarantees, so safety is enforced <b>around</b> it:<br>• <b>Hardware/low level:</b> emergency stop, torque/speed/workspace limits, collision detection, watchdogs and command time-outs — independent of the AI.<br>• <b>Standards:</b> ISO 10218 (industrial robots; revised 2025) and ISO/TS 15066 collaborative limits — power-and-force limiting, speed-and-separation monitoring; risk assessment per application.<br>• <b>Control level:</b> compliant/impedance control, control-barrier-function or MPC safety filters.<br>• <b>Semantic safety:</b> the model should reason about consequences (hot liquids, knives, people) — evaluated by benchmarks such as ASIMOV; plus human oversight, staged deployment and logging.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ISO 10218-1/-2:2025 and ISO/TS 15066 — https://www.iso.org/ · 13 Physical AI & Robot Foundation Models"
+  }
+ ]
+}

@@ -1,0 +1,920 @@
+{
+ "source_file": "bpmn_business_architecture.apkg",
+ "notes": [
+  {
+   "guid": "l6^^[e`PvI",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::BPMN",
+   "tags": [
+    "bpmn::core"
+   ],
+   "front": "What is BPMN (spelled out), and what does it standardize?",
+   "back": "Business Process Model and Notation (BPMN) &mdash; an Object Management Group (OMG) standard diagramming language for business process models. The graphical meaning of a diagram is the same regardless of which modeling tool created it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Core · Real-Life BPMN, 5th ed. — Freund &amp; Rücker (2025)"
+  },
+  {
+   "guid": "v]*]eEl5/.",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::BPMN",
+   "tags": [
+    "bpmn::core"
+   ],
+   "front": "What are the three core flow-object categories in BPMN?",
+   "back": "<ul><li><b>Events</b> &mdash; something that happens (circle)</li><li><b>Activities</b> &mdash; work that is performed (rounded rectangle)</li><li><b>Gateways</b> &mdash; routing/branching decisions (diamond)</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Core · Real-Life BPMN, 5th ed. — Freund &amp; Rücker (2025)"
+  },
+  {
+   "guid": "h/qvmRSSPG",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::BPMN",
+   "tags": [
+    "bpmn::core"
+   ],
+   "front": "What is the difference between sequence flow and message flow in BPMN?",
+   "back": "<b>Sequence flow</b> (solid arrow) shows the order activities are performed <i>within</i> one pool/participant. <b>Message flow</b> (dashed arrow with open arrowhead) shows communication <i>between</i> two different pools/participants, and can never cross into the same pool.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Core · Real-Life BPMN, 5th ed. — Freund &amp; Rücker (2025)"
+  },
+  {
+   "guid": "uo`@wJf:Cb",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::BPMN",
+   "tags": [
+    "bpmn::core"
+   ],
+   "front": "What do pools and lanes represent in a BPMN collaboration diagram?",
+   "back": "A <b>pool</b> represents a participant (an organization, system, or role) in the process. A <b>lane</b> is a sub-partition inside a pool, typically used to show which role/department/system performs each activity.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Core · Real-Life BPMN, 5th ed. — Freund &amp; Rücker (2025)"
+  },
+  {
+   "guid": "Kjr*UARna`",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::BPMN",
+   "tags": [
+    "bpmn::core"
+   ],
+   "front": "What is a black-box pool, and when is it used?",
+   "back": "A pool drawn without any internal detail (just the participant name), used to represent a process participant whose internal steps are irrelevant or unknown to the diagram's audience &mdash; only the message flow into/out of it matters.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Core · Real-Life BPMN, 5th ed. — Freund &amp; Rücker (2025)"
+  },
+  {
+   "guid": "yuvZ:QPz/A",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::BPMN",
+   "tags": [
+    "bpmn::core"
+   ],
+   "front": "What are BPMN artifacts, and name the two standard types?",
+   "back": "Artifacts add extra information without affecting sequence/message flow: <b>Annotations</b> (free-text notes attached to an element) and <b>Groups</b> (a dashed rounded rectangle used to visually group elements, e.g. by phase, with no formal semantics).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Core · Real-Life BPMN, 5th ed. — Freund &amp; Rücker (2025)"
+  },
+  {
+   "guid": "G-qMf1os4;",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::BPMN",
+   "tags": [
+    "bpmn::core"
+   ],
+   "front": "What is the difference between a data object and a data store in BPMN?",
+   "back": "A <b>data object</b> represents information flowing through the process (e.g. a document), scoped to the process. A <b>data store</b> represents a persistent repository (e.g. a database) that exists independent of any one process instance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Core · Real-Life BPMN, 5th ed. — Freund &amp; Rücker (2025)"
+  },
+  {
+   "guid": "yV,[sPwu,v",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::BPMN",
+   "tags": [
+    "bpmn::events"
+   ],
+   "front": "What are the three basic event types by position, and how are they drawn?",
+   "back": "<ul><li><b>Start event</b> &mdash; thin single-line circle</li><li><b>Intermediate event</b> &mdash; double-line circle</li><li><b>End event</b> &mdash; thick single-line circle</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Events · Real-Life BPMN, 5th ed. — Freund &amp; Rücker (2025)"
+  },
+  {
+   "guid": "x8?z=JGJm!",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::BPMN",
+   "tags": [
+    "bpmn::events"
+   ],
+   "front": "What is the difference between a catching and a throwing event in BPMN?",
+   "back": "A <b>catching</b> event (unfilled icon) waits for a trigger to happen, e.g. a message arriving. A <b>throwing</b> event (filled icon) actively fires/sends a trigger, e.g. sending a message. Start and intermediate events are usually catching; end events and some intermediates are throwing.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Events · Real-Life BPMN, 5th ed. — Freund &amp; Rücker (2025)"
+  },
+  {
+   "guid": "bPPwGUSnB.",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::BPMN",
+   "tags": [
+    "bpmn::events"
+   ],
+   "front": "List the main event trigger types available on BPMN events.",
+   "back": "<ul><li>Message</li><li>Timer</li><li>Error</li><li>Escalation</li><li>Signal</li><li>Conditional</li><li>Compensation</li><li>Link</li><li>Terminate (end only)</li><li>Multiple / Parallel Multiple</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Events · Real-Life BPMN, 5th ed. — Freund &amp; Rücker (2025)"
+  },
+  {
+   "guid": "y<*t~5=5R(",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::BPMN",
+   "tags": [
+    "bpmn::events"
+   ],
+   "front": "What is a message start/end event used for?",
+   "back": "A <b>message start event</b> begins a process instance when a message arrives (e.g. an order is received). A <b>message end event</b> sends a message as the process instance ends (e.g. a confirmation is sent). Depicted as an envelope icon.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Events · Real-Life BPMN, 5th ed. — Freund &amp; Rücker (2025)"
+  },
+  {
+   "guid": "CnW{@ita<(",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::BPMN",
+   "tags": [
+    "bpmn::events"
+   ],
+   "front": "What is the difference between an error end event and a terminate end event?",
+   "back": "An <b>error end event</b> ends the current path and throws a named error that can be caught elsewhere (e.g. by a boundary error event on a call activity), allowing structured exception handling. A <b>terminate end event</b> immediately ends the <i>entire</i> process instance, including all other active parallel paths, with no error propagated.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Events · Real-Life BPMN, 5th ed. — Freund &amp; Rücker (2025)"
+  },
+  {
+   "guid": "pzZbl)qtC/",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::BPMN",
+   "tags": [
+    "bpmn::events"
+   ],
+   "front": "What is a boundary event, and what is the difference between interrupting and non-interrupting?",
+   "back": "A boundary event is attached to the edge of an activity (usually a sub-process) and catches a trigger while that activity is active. An <b>interrupting</b> boundary event (solid circle) cancels the activity when triggered. A <b>non-interrupting</b> boundary event (dashed double circle) lets the activity continue while also starting a parallel path.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Events · Real-Life BPMN, 5th ed. — Freund &amp; Rücker (2025)"
+  },
+  {
+   "guid": "slIFFODVYg",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::BPMN",
+   "tags": [
+    "bpmn::events"
+   ],
+   "front": "What does a timer event represent, and what can it be configured with?",
+   "back": "A timer event fires based on time: a specific date/time, a duration (e.g. wait 3 days), or a recurring cycle. Used as a start event (scheduled trigger), intermediate event (wait/delay), or boundary event (deadline/escalation).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Events · Real-Life BPMN, 5th ed. — Freund &amp; Rücker (2025)"
+  },
+  {
+   "guid": "GG90|%=y|!",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::BPMN",
+   "tags": [
+    "bpmn::events"
+   ],
+   "front": "What is a signal event, and how does it differ from a message event?",
+   "back": "A signal is a broadcast trigger with no specific target &mdash; any number of catching signal events listening for that signal name can receive it. A message, by contrast, is addressed from one specific sender to one specific receiver.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Events · Real-Life BPMN, 5th ed. — Freund &amp; Rücker (2025)"
+  },
+  {
+   "guid": "d$rJ1<d#5_",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::BPMN",
+   "tags": [
+    "bpmn::events"
+   ],
+   "front": "What is a link event used for?",
+   "back": "A pair of throwing and catching link events act as an on-page connector, letting the modeler continue a sequence flow elsewhere on the same diagram (e.g. to a different page/section) without drawing a long crossing arrow.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Events · Real-Life BPMN, 5th ed. — Freund &amp; Rücker (2025)"
+  },
+  {
+   "guid": "fMi}FH)c{`",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::BPMN",
+   "tags": [
+    "bpmn::gateways"
+   ],
+   "front": "What does an exclusive (XOR) gateway do, and how is it drawn?",
+   "back": "Routes the flow down exactly <b>one</b> of several outgoing paths, based on conditions evaluated in order (or a default path). Drawn as an empty diamond, or a diamond with an 'X' inside.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Gateways · Real-Life BPMN, 5th ed. — Freund &amp; Rücker (2025)"
+  },
+  {
+   "guid": "OYsML^!WBQ",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::BPMN",
+   "tags": [
+    "bpmn::gateways"
+   ],
+   "front": "What does a parallel (AND) gateway do?",
+   "back": "As a split, it activates <b>all</b> outgoing paths simultaneously (no condition evaluation). As a join/merge, it waits for <b>all</b> incoming paths to arrive before continuing. Drawn as a diamond with a '+' inside.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Gateways · Real-Life BPMN, 5th ed. — Freund &amp; Rücker (2025)"
+  },
+  {
+   "guid": "fke*}^:,5d",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::BPMN",
+   "tags": [
+    "bpmn::gateways"
+   ],
+   "front": "What does an inclusive (OR) gateway do?",
+   "back": "As a split, it activates <b>one or more</b> outgoing paths whose conditions evaluate true (any combination). As a join, it waits for all the paths that were actually activated upstream to arrive &mdash; the trickiest gateway to model and implement correctly. Drawn as a diamond with an 'O' (circle) inside.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Gateways · Real-Life BPMN, 5th ed. — Freund &amp; Rücker (2025)"
+  },
+  {
+   "guid": "lkv#+@f6X>",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::BPMN",
+   "tags": [
+    "bpmn::gateways"
+   ],
+   "front": "What is an event-based gateway, and how does it differ from an exclusive gateway?",
+   "back": "It also routes to exactly one outgoing path, but the decision is made by whichever <b>event occurs first</b> (e.g. a message arrives vs. a timer expires) rather than by evaluating data conditions. Drawn as a diamond with a pentagon-in-circle marker.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Gateways · Real-Life BPMN, 5th ed. — Freund &amp; Rücker (2025)"
+  },
+  {
+   "guid": "n#rF?9(~}$",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::BPMN",
+   "tags": [
+    "bpmn::gateways"
+   ],
+   "front": "What is a complex gateway used for?",
+   "back": "A rarely-used gateway for routing logic that can't be expressed with the standard exclusive/parallel/inclusive semantics &mdash; e.g. \"continue when 3 of 5 incoming paths have arrived.\" The behavior must be described in free text/annotation since BPMN gives it no standard notation for the rule itself.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Gateways · Real-Life BPMN, 5th ed. — Freund &amp; Rücker (2025)"
+  },
+  {
+   "guid": "d#4!Q>dUD5",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::BPMN",
+   "tags": [
+    "bpmn::activities"
+   ],
+   "front": "List the main BPMN task types and what distinguishes them.",
+   "back": "<ul><li><b>User task</b> &mdash; performed by a human via an application/UI</li><li><b>Service task</b> &mdash; performed automatically by a system/service call</li><li><b>Script task</b> &mdash; executed automatically by a script within the process engine</li><li><b>Send / Receive task</b> &mdash; sends or waits for a message</li><li><b>Manual task</b> &mdash; performed by a human without any system support</li><li><b>Business rule task</b> &mdash; invokes a decision (often a DMN decision table)</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Activities · Real-Life BPMN, 5th ed. — Freund &amp; Rücker (2025)"
+  },
+  {
+   "guid": "wHIYQJo$g(",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::BPMN",
+   "tags": [
+    "bpmn::activities"
+   ],
+   "front": "What is the difference between an embedded sub-process and a call activity?",
+   "back": "An <b>embedded sub-process</b> is drawn inline inside its parent process and only exists in that context. A <b>call activity</b> invokes a separate, reusable process definition (like calling a function), which can be called from multiple places and versioned independently.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Activities · Real-Life BPMN, 5th ed. — Freund &amp; Rücker (2025)"
+  },
+  {
+   "guid": "e`}rcFR}Ha",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::BPMN",
+   "tags": [
+    "bpmn::activities"
+   ],
+   "front": "What is an event sub-process, and how does it get triggered?",
+   "back": "A sub-process defined inside a parent process but not connected by sequence flow &mdash; it starts only when its own start event trigger (e.g. an error, message, or timer) fires while the parent process is active, and can optionally interrupt the parent.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Activities · Real-Life BPMN, 5th ed. — Freund &amp; Rücker (2025)"
+  },
+  {
+   "guid": "B]:{b2_DN",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::BPMN",
+   "tags": [
+    "bpmn::activities"
+   ],
+   "front": "What is a transaction sub-process?",
+   "back": "A sub-process with all-or-nothing semantics: if it completes normally it commits; if it's cancelled it triggers compensation (undoing completed steps) across the whole transaction, similar to a database transaction rollback.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Activities · Real-Life BPMN, 5th ed. — Freund &amp; Rücker (2025)"
+  },
+  {
+   "guid": "FZ@KSI.UN9",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::BPMN",
+   "tags": [
+    "bpmn::activities"
+   ],
+   "front": "What does the multi-instance marker (three vertical or horizontal bars) on an activity mean?",
+   "back": "The activity is executed multiple times over a collection of items &mdash; in parallel (bars side by side) or sequentially (bars stacked), e.g. sending an approval task to every member of a list of approvers.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Activities · Real-Life BPMN, 5th ed. — Freund &amp; Rücker (2025)"
+  },
+  {
+   "guid": "I9K4l(:WIj",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::BPMN",
+   "tags": [
+    "bpmn::activities"
+   ],
+   "front": "What is an ad-hoc sub-process?",
+   "back": "A sub-process containing a set of activities with no fixed sequence flow between them; any of its inner activities can run in any order (or in parallel), controlled by a completion condition rather than explicit routing &mdash; used to model unstructured work.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Activities · Real-Life BPMN, 5th ed. — Freund &amp; Rücker (2025)"
+  },
+  {
+   "guid": "gOqgYVu?lR",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::BPMN",
+   "tags": [
+    "bpmn::method"
+   ],
+   "front": "According to Real-Life BPMN, who are 'the customers of a process model' and why does the idea matter?",
+   "back": "The people who will actually read and use the diagram (business stakeholders, developers, auditors, etc.), not the modeler. The book's central method advice is to design every diagram for its specific audience's needs rather than to maximize technical completeness for its own sake.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Method · Real-Life BPMN, 5th ed. — Freund &amp; Rücker (2025)"
+  },
+  {
+   "guid": "BX{x-hm{AP",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::BPMN",
+   "tags": [
+    "bpmn::method"
+   ],
+   "front": "What is a 'BPMN monolith,' and why do Freund &amp; Rücker warn against it?",
+   "back": "A single oversized, overly-detailed process diagram that tries to capture an entire end-to-end process (and every domain/system it touches) in one model. It becomes unreadable and hard to maintain; the recommended fix is to split models along clear domain boundaries and connect them via call activities or message flow.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Method · Real-Life BPMN, 5th ed. — Freund &amp; Rücker (2025)"
+  },
+  {
+   "guid": "M(&jrjo{gF",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::BPMN",
+   "tags": [
+    "bpmn::method"
+   ],
+   "front": "What is the difference between an executable and a descriptive BPMN process model?",
+   "back": "A <b>descriptive</b> model documents a process for human understanding/communication and is never run by software. An <b>executable</b> model is precise and complete enough to be deployed and run directly on a process engine (e.g. Camunda), automating the actual work.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Method · Real-Life BPMN, 5th ed. — Freund &amp; Rücker (2025)"
+  },
+  {
+   "guid": "d}b?^}MjI6",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::BPMN",
+   "tags": [
+    "bpmn::method"
+   ],
+   "front": "What is the difference between orchestration, choreography, and collaboration diagrams in BPMN?",
+   "back": "<b>Orchestration</b> &mdash; a single process diagram from the internal perspective of one participant. <b>Collaboration</b> &mdash; multiple pools/participants shown together, connected by message flow, without one central controller. <b>Choreography</b> &mdash; models the sequence of message exchanges between participants without showing either side's internal activities.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Method · Real-Life BPMN, 5th ed. — Freund &amp; Rücker (2025)"
+  },
+  {
+   "guid": "k4/ckIuW3i",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::BPMN",
+   "tags": [
+    "bpmn::dmn"
+   ],
+   "front": "What is DMN (spelled out), and what problem does it solve alongside BPMN?",
+   "back": "Decision Model and Notation (DMN) &mdash; an OMG standard for modeling and executing business decision logic separately from process flow, so that decision rules (e.g. eligibility, pricing) aren't buried inside gateway conditions and can be maintained independently.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DMN · Real-Life BPMN, 5th ed. — Freund &amp; Rücker (2025)"
+  },
+  {
+   "guid": "w;ag0Ge?`,",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::BPMN",
+   "tags": [
+    "bpmn::dmn"
+   ],
+   "front": "What are the two main diagram types in DMN?",
+   "back": "<ul><li><b>Decision Requirements Diagram (DRD)</b> &mdash; shows decisions, the sub-decisions/input data they depend on, and knowledge sources, as a dependency graph.</li><li><b>Decision table</b> &mdash; the actual rule logic for one decision, expressed as rows of input-condition &rarr; output-conclusion rules.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DMN · Real-Life BPMN, 5th ed. — Freund &amp; Rücker (2025)"
+  },
+  {
+   "guid": "qVYnK$XQ_#",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::BPMN",
+   "tags": [
+    "bpmn::dmn"
+   ],
+   "front": "What is a 'hit policy' in a DMN decision table?",
+   "back": "The rule that governs how multiple matching rows in a decision table are resolved &mdash; e.g. <b>Unique</b> (only one row may match), <b>First</b> (take the first matching row in order), <b>Collect</b> (return all matching outputs), <b>Priority</b> (return the highest-priority match).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DMN · Real-Life BPMN, 5th ed. — Freund &amp; Rücker (2025)"
+  },
+  {
+   "guid": "qb>>j61a/_",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::BPMN",
+   "tags": [
+    "bpmn::dmn"
+   ],
+   "front": "How does a business rule task connect a BPMN process to a DMN decision?",
+   "back": "A business rule task in the BPMN process references a DMN decision (by ID); at runtime the process engine passes input data to the decision table, evaluates it per its hit policy, and returns the result back into the process's data.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DMN · Real-Life BPMN, 5th ed. — Freund &amp; Rücker (2025)"
+  },
+  {
+   "guid": "H.8H<AU&&P",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::BPMN",
+   "tags": [
+    "bpmn::cmmn"
+   ],
+   "front": "What is CMMN (spelled out), and how does it relate to BPMN?",
+   "back": "Case Management Model and Notation (CMMN) &mdash; an OMG standard for modeling unstructured, knowledge-driven work (\"cases\") where the sequence of activities can't be predetermined, complementing BPMN's structured, sequence-flow-driven process models.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CMMN · Real-Life BPMN, 5th ed. — Freund &amp; Rücker (2025)"
+  },
+  {
+   "guid": "Fy1mos$2S2",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::Business Architecture",
+   "tags": [
+    "ba::domain"
+   ],
+   "front": "How does the BCS Business Architecture book define business architecture?",
+   "back": "The discipline that provides a formal, structured representation of an organisation's strategy, capabilities, value streams, and structure, used to align business direction with the design and delivery of change &mdash; the 'business' counterpart to the technology-focused domains of enterprise architecture.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Domain · Business Architecture — BCS (2025)"
+  },
+  {
+   "guid": "f=sqcPgrv{",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::Business Architecture",
+   "tags": [
+    "ba::domain"
+   ],
+   "front": "What is the stated rationale for using business architecture in an organisation?",
+   "back": "It gives leaders a shared, holistic view that connects strategy to execution &mdash; making it possible to assess the impact of change, remove duplication/inconsistency across initiatives, and ensure investment is directed at the capabilities that matter most to strategic goals.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Domain · Business Architecture — BCS (2025)"
+  },
+  {
+   "guid": "lE#wRX.qzM",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::Business Architecture",
+   "tags": [
+    "ba::domain"
+   ],
+   "front": "How does business architecture relate to the other architectural domains (data, application, technology)?",
+   "back": "Business architecture sits above and informs the other domains: it defines the business context, capabilities, and priorities that data, application, and technology architecture then have to support and enable, keeping IT investment traceable back to business need.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Domain · Business Architecture — BCS (2025)"
+  },
+  {
+   "guid": "t=nU!B---c",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::Business Architecture",
+   "tags": [
+    "ba::domain"
+   ],
+   "front": "What are typical impediments to adopting business architecture in an organisation?",
+   "back": "Lack of executive sponsorship, unclear ownership/mandate for the practice, difficulty demonstrating value in the short term, competing methodologies/terminology, and treating it as an IT-only concern rather than a business-led discipline.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Domain · Business Architecture — BCS (2025)"
+  },
+  {
+   "guid": "kqQx4$zb25",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::Business Architecture",
+   "tags": [
+    "ba::competence"
+   ],
+   "front": "What is the 'T-shaped' business architect, and why is the shape used as a metaphor?",
+   "back": "A professional with broad general knowledge across business, strategy, and architecture domains (the horizontal bar of the T) combined with deep specialist expertise in one or more specific areas (the vertical stroke), enabling them to both converse across disciplines and go deep where needed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Competence · Business Architecture — BCS (2025)"
+  },
+  {
+   "guid": "gW]F={%YIi",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::Business Architecture",
+   "tags": [
+    "ba::competence"
+   ],
+   "front": "What does 'maturity of the business architect role' refer to in this book's framework?",
+   "back": "How embedded and formalised business architecture practice is within an organisation, ranging from ad hoc/individual efforts with no consistent method, up to an institutionalised, governed practice that is proactively engaged in strategic planning and change decisions.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Competence · Business Architecture — BCS (2025)"
+  },
+  {
+   "guid": "dDAA5M]D6y",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::Business Architecture",
+   "tags": [
+    "ba::frameworks"
+   ],
+   "front": "What criteria does the book suggest for selecting a business/enterprise architecture framework?",
+   "back": "Fit with the organisation's size, sector, and change context; degree of prescriptiveness needed versus flexibility desired; existing tooling and skills; and whether the framework's artefacts map well onto the organisation's actual decision-making and governance processes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Frameworks · Business Architecture — BCS (2025)"
+  },
+  {
+   "guid": "Pn@[e{tLz1",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::Business Architecture",
+   "tags": [
+    "ba::frameworks"
+   ],
+   "front": "What is the difference between a business architecture 'view,' a 'blueprint,' and a 'tool' in this book's terminology?",
+   "back": "A <b>view</b> is a distinct perspective on the business (e.g. capability view, information view). A <b>blueprint</b> is a specific type of model/artefact produced within a view (e.g. a capability map). A <b>tool</b> is the technique or notation used to produce a blueprint (e.g. a specific modelling notation or software).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Frameworks · Business Architecture — BCS (2025)"
+  },
+  {
+   "guid": "iWTK4BWk@K",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::Business Architecture",
+   "tags": [
+    "ba::motivation"
+   ],
+   "front": "What does the 'motivation and organisational view' of business architecture analyse?",
+   "back": "The 'why' and 'who' of the organisation: its core purpose and values, business motivation (mission, vision, goals, objectives), business model, organisation structures, its wider ecosystem of partners/stakeholders, and organisational culture.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Motivation View · Business Architecture — BCS (2025)"
+  },
+  {
+   "guid": "qToodwT/Nz",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::Business Architecture",
+   "tags": [
+    "ba::motivation"
+   ],
+   "front": "What is the purpose of business motivation analysis, and what elements does it typically capture?",
+   "back": "To make explicit and traceable why the organisation exists and what it's trying to achieve, typically capturing mission, vision, strategic goals, objectives, and the strategies/tactics used to pursue them &mdash; so downstream architecture and change decisions can be justified against them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Motivation View · Business Architecture — BCS (2025)"
+  },
+  {
+   "guid": "pQrfG6gLj(",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::Business Architecture",
+   "tags": [
+    "ba::motivation"
+   ],
+   "front": "What does an 'ecosystem analysis' examine within the motivation and organisational view?",
+   "back": "The network of external parties the organisation depends on or interacts with &mdash; partners, suppliers, regulators, customers, competitors &mdash; and how value and influence flow between them, situating the organisation within its broader operating context.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Motivation View · Business Architecture — BCS (2025)"
+  },
+  {
+   "guid": "o%ZJYQWJcB",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::Business Architecture",
+   "tags": [
+    "ba::capability"
+   ],
+   "front": "What is a business capability, as distinct from a process?",
+   "back": "A capability is <b>what</b> an organisation is able to do (a stable ability, e.g. 'Customer Onboarding') &mdash; independent of how, by whom, or in what order it's performed. A process describes <b>how</b> that ability is enacted as a sequence of activities, and can change far more often than the capability itself.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Capability View · Business Architecture — BCS (2025)"
+  },
+  {
+   "guid": "CkjO}gXbUd",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::Business Architecture",
+   "tags": [
+    "ba::capability"
+   ],
+   "front": "What elements typically make up an individual business capability description?",
+   "back": "People (roles/skills), process, information, and technology needed to perform it &mdash; sometimes extended with governance and culture &mdash; giving a rounded picture of everything required to deliver that capability, not just the systems involved.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Capability View · Business Architecture — BCS (2025)"
+  },
+  {
+   "guid": "Q)@RMO*@oT",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::Business Architecture",
+   "tags": [
+    "ba::capability"
+   ],
+   "front": "What is a capability heat map used for in business capability analysis?",
+   "back": "Overlaying a business capability map with colour-coding (e.g. red/amber/green) against a chosen metric &mdash; such as strategic importance, current maturity, cost, or risk &mdash; to visually prioritise which capabilities most need investment or improvement.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Capability View · Business Architecture — BCS (2025)"
+  },
+  {
+   "guid": "zcWzcZwce/",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::Business Architecture",
+   "tags": [
+    "ba::process_service"
+   ],
+   "front": "How does the process/service view define a 'service' and its 'value proposition'?",
+   "back": "A service is a defined unit of value delivered by a provider to a consumer. Its value proposition is the explicit statement of the benefit that service delivers to that consumer &mdash; used to check that services are actually designed around consumer need rather than internal convenience.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Process/Service View · Business Architecture — BCS (2025)"
+  },
+  {
+   "guid": "C%mOlTg2JX",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::Business Architecture",
+   "tags": [
+    "ba::process_service"
+   ],
+   "front": "What is value stream analysis, and how does a value stream differ from a business process?",
+   "back": "Value stream analysis maps the end-to-end sequence of value-adding stages that deliver a specific outcome to a stakeholder (e.g. 'Idea to Product'). Unlike a business process, a value stream is stakeholder-outcome-centric and stays stable across organisational/process redesign, showing <i>what</i> value is delivered rather than the detailed <i>how</i>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Process/Service View · Business Architecture — BCS (2025)"
+  },
+  {
+   "guid": "E{K6{xPb$h",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::Business Architecture",
+   "tags": [
+    "ba::process_service"
+   ],
+   "front": "What does value network analysis examine, as distinct from a value stream?",
+   "back": "It maps the web of value exchanges (tangible and intangible &mdash; e.g. information, goodwill, revenue) between multiple roles/participants, rather than a single linear sequence of stages toward one outcome, revealing interdependencies a value stream view would miss.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Process/Service View · Business Architecture — BCS (2025)"
+  },
+  {
+   "guid": "A%>Z*It]H",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::Business Architecture",
+   "tags": [
+    "ba::information"
+   ],
+   "front": "How does the information view distinguish between data, information, and metadata?",
+   "back": "<b>Data</b> is raw, uninterpreted facts/values. <b>Information</b> is data given context and meaning for a business purpose. <b>Metadata</b> is data about data &mdash; describing its structure, source, ownership, and meaning &mdash; enabling data to be interpreted consistently as information.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Information View · Business Architecture — BCS (2025)"
+  },
+  {
+   "guid": "ocsE?YSr0,",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::Business Architecture",
+   "tags": [
+    "ba::information"
+   ],
+   "front": "What is business information modelling, and how does it typically link to other business architecture artefacts?",
+   "back": "Producing a conceptual model of the key business entities/concepts (e.g. Customer, Order) and their relationships, independent of any specific database or system design. It links to capabilities (which capabilities create/use which information) and to processes (which steps read/write which information).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Information View · Business Architecture — BCS (2025)"
+  },
+  {
+   "guid": "z]%hfK,CH&",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::Business Architecture",
+   "tags": [
+    "ba::people"
+   ],
+   "front": "What does the people/organisational competency view examine, and how does 'competency' differ from 'capability' here?",
+   "back": "It examines the skills, knowledge, and behaviours people need to perform the organisation's work. A <b>competency</b> is an attribute of people (what an individual/role can do), whereas a <b>capability</b> is an attribute of the organisation as a whole &mdash; a capability is realised in part through the competencies of the people delivering it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "People View · Business Architecture — BCS (2025)"
+  },
+  {
+   "guid": "q+>hvE^$EM",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::Business Architecture",
+   "tags": [
+    "ba::people"
+   ],
+   "front": "What is organisational competency analysis used for?",
+   "back": "Identifying gaps between the competencies an organisation currently has and those required to deliver its target capabilities/strategy &mdash; informing workforce planning, training, recruitment, and organisational design decisions.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "People View · Business Architecture — BCS (2025)"
+  },
+  {
+   "guid": "PYjLBXU`H.",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::Business Architecture",
+   "tags": [
+    "ba::ba_service"
+   ],
+   "front": "What is the core idea behind framing 'business architecture as a service'?",
+   "back": "Positioning the business architecture practice itself as a service function with its own value proposition to internal consumers (executives, change teams), rather than as a one-off documentation exercise &mdash; making its contribution to business change explicit and repeatable.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BA as a Service · Business Architecture — BCS (2025)"
+  },
+  {
+   "guid": "e@=G[4P=>:",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::Business Architecture",
+   "tags": [
+    "ba::ba_service"
+   ],
+   "front": "How does business architecture engage across the business change lifecycle, per this framework?",
+   "back": "It provides input at each stage of change &mdash; shaping strategy and investment decisions upfront, informing solution/process design during delivery, and validating that delivered change actually aligns with target capabilities and strategic intent afterward.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BA as a Service · Business Architecture — BCS (2025)"
+  },
+  {
+   "guid": "Of|ew}0E;3",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::Business Architecture",
+   "tags": [
+    "ba::change_ecosystem"
+   ],
+   "front": "How does business architecture relate to business analysis, according to this book?",
+   "back": "Business architecture provides the broader, strategic, cross-initiative context (target capabilities, structures) that individual business analysis efforts on a specific project or requirement should align to and draw from, rather than the two being separate/competing disciplines.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Change Ecosystem · Business Architecture — BCS (2025)"
+  },
+  {
+   "guid": "Q_4mpt887Z",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::Business Architecture",
+   "tags": [
+    "ba::change_ecosystem"
+   ],
+   "front": "How does business architecture relate to change management and project management in the business change ecosystem?",
+   "back": "It informs change management by clarifying what capabilities/structures are changing and why (supporting stakeholder communication and impact assessment), and informs project management by providing the target-state context and priorities that project scope and business cases should be traceable to.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Change Ecosystem · Business Architecture — BCS (2025)"
+  }
+ ]
+}

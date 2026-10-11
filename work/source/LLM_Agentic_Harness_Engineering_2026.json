@@ -1,0 +1,830 @@
+{
+ "source_file": "LLM_Agentic_Harness_Engineering_2026.apkg",
+ "notes": [
+  {
+   "guid": "mxiJ7U6>`/",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::01 LLM Architecture",
+   "tags": [
+    "llm_architecture"
+   ],
+   "front": "In modern Large Language Model (LLM) architecture, what does Mixture-of-Experts (MoE) do, and how does it change cost scaling?",
+   "back": "MoE routes each token through a small <b>subset of specialist feed-forward (expert) layers</b> via a router, instead of activating all layers. Compute then scales with <b>active</b> parameters, not total parameter count. As of 2026 it is mainstream/baseline (DeepSeek V3, Qwen3-Next, Mistral variants).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "i^M,iGk!T-",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::01 LLM Architecture",
+   "tags": [
+    "llm_architecture"
+   ],
+   "front": "Why is the Key-Value (KV) cache used during LLM inference, and what is its main cost?",
+   "back": "It stores the Key and Value matrices for already-processed tokens so attention does not recompute them each step, cutting latency. Cost: cache size grows <b>linearly with context length</b>. Above ~128K tokens the KV cache can exceed parameter memory (e.g. Llama 70B at 1M ctx ≈ 135 GB at FP16, more than its weights).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "k.23^&9$>a",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::01 LLM Architecture",
+   "tags": [
+    "llm_architecture"
+   ],
+   "front": "Compare Multi-Query Attention (MQA), Grouped-Query Attention (GQA), and Multi-head Latent Attention (MLA).",
+   "back": "<b>MQA</b>: all query heads share one Key/Value head — up to ~32× KV compression but ~1-3 pt quality regression.<br><b>GQA</b>: query heads share KV in groups — balance of efficiency/quality; default in Llama 3, Mistral.<br><b>MLA</b> (DeepSeek): stores a <b>low-rank latent projection</b> of K/V — ~7-14× KV compression, the 2026 efficiency endgame.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "wf`vk{WJfH",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::01 LLM Architecture",
+   "tags": [
+    "llm_architecture"
+   ],
+   "front": "What KV-cache (Key-Value cache) optimizations dominate production LLM serving in 2026?",
+   "back": "<b>PagedAttention</b> (vLLM memory management), <b>prefix caching</b> (vLLM / SGLang RadixAttention — reuse KV for shared prompt prefixes), <b>attention compression</b> (MQA/GQA/MLA), and <b>quantization</b> (INT8, FP8, NVFP4). Combined they cut long-context cost ~4-40×.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "%;a8S7ZIY",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::01 LLM Architecture",
+   "tags": [
+    "llm_architecture"
+   ],
+   "front": "What is the \"lost in the middle\" effect and why is it architectural, not a prompt-quality bug?",
+   "back": "Attention is distributed unevenly: tokens at the start (primacy) and end (recency) of the context get disproportionate attention, while information in the <b>middle</b> is underweighted (reports cite ~40% degradation at scale). It follows from how attention works, so you mitigate it by <b>ordering</b> critical content near the edges, not by rewriting it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "O*SI)MZ6eu",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::01 LLM Architecture",
+   "tags": [
+    "llm_architecture"
+   ],
+   "front": "Name production-ready million-token context windows as of late 2025 / 2026.",
+   "back": "Gemini 2.5 Pro (~2M tokens), Claude Sonnet 4 (~1M), open-source Qwen2.5-1M. Practical cost: ~15 GB KV cache per user at 1M tokens; prefill latency can exceed 2 minutes at max length.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "N=Y9,Fr(j)",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::01 LLM Architecture",
+   "tags": [
+    "llm_architecture"
+   ],
+   "front": "What did DeepSeek V4 (April 2026) demonstrate about LLM architecture direction?",
+   "back": "Not a single radical idea but <b>combining known techniques</b> (hybrid attention + compression) into one system: ~90% KV-cache memory reduction vs prior gen, with extreme context length. Signal: MoE, latent attention, sliding-window are now baseline expectations; the differentiator is execution/efficiency.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "gcfs|6-]fi",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::01 LLM Architecture",
+   "tags": [
+    "llm_architecture"
+   ],
+   "front": "What are RoPE and FlashAttention, briefly?",
+   "back": "<b>RoPE (Rotary Position Embedding)</b>: encodes token positions by rotating query/key vectors, giving good relative-position behaviour and length extrapolation.<br><b>FlashAttention</b>: an IO-aware exact-attention kernel that tiles computation to avoid materializing the full attention matrix in high-bandwidth memory, speeding up and reducing memory for long sequences.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "NI!V[%:E{",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::01 LLM Architecture",
+   "tags": [
+    "llm_architecture"
+   ],
+   "front": "What practical risk do MoE (Mixture-of-Experts) systems introduce in production serving?",
+   "back": "Routing imbalance: tokens routed unevenly to experts cause <b>hot experts</b>, uneven load, and latency spikes that only appear at scale. Hybrid attention/compression similarly makes some inputs hit more expensive compute paths, adding latency variability.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "vqrom%,gi_",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::02 Memory Architecture (focus)",
+   "tags": [
+    "memory_architecture"
+   ],
+   "front": "In Large Language Model (LLM) agent memory, distinguish short-term/working memory from long-term memory by scope.",
+   "back": "<b>Short-term / working memory</b>: single-session, within-trial decision context (limited capacity).<br><b>Long-term memory</b>: knowledge and experience retained <b>across sessions/tasks</b> (cross-trial), persisting beyond one context window.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "GyHTvt6u]`",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::02 Memory Architecture (focus)",
+   "tags": [
+    "memory_architecture"
+   ],
+   "front": "Break down long-term LLM memory into explicit vs implicit, then explicit into its two subtypes.",
+   "back": "<b>Explicit</b> (recallable facts/events): <b>episodic</b> = personal experiences/events (\"user prefers brand X\"); <b>semantic</b> = facts/knowledge about the world.<br><b>Implicit</b>: <b>procedural</b> memory — learned skills, strategies, action patterns that guide behaviour.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "o[`^8hw>cq",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::02 Memory Architecture (focus)",
+   "tags": [
+    "memory_architecture"
+   ],
+   "front": "List the memory <b>storage paradigms</b> seen across LLM agent systems.",
+   "back": "Cumulative (append full history), reflective/summarized (periodic compressed summaries), purely textual (natural language), <b>parametric</b> (baked into weights via fine-tune/knowledge editing), and <b>structured</b> (tables, triples, knowledge graphs).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "D>0adey>jZ",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::02 Memory Architecture (focus)",
+   "tags": [
+    "memory_architecture"
+   ],
+   "front": "What is MemGPT and what core idea does it borrow from operating systems?",
+   "back": "MemGPT treats the LLM like an operating system with <b>virtual memory</b>: hierarchical memory management that <b>pages</b> relevant snippets between short-term (in-context) and long-term (external) stores, using event-driven interrupts to stay coherent over long interactions. (Letta is its productized successor.)",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "oUYW*N9dsi",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::02 Memory Architecture (focus)",
+   "tags": [
+    "memory_architecture"
+   ],
+   "front": "How does Mem0 maintain long-term memory, and what is its graph variant?",
+   "back": "Two stages: <b>extraction</b> (LLM pulls key facts from new turns) then <b>update</b>, where a tool call issues <code>ADD</code>, <code>UPDATE</code>, <code>DELETE</code>, or <code>NOOP</code> to keep memory consistent. The graph variant (Mem0<sup>g</sup>) stores entity nodes + relationship edges for complex structure.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "P3fyl9^DlT",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::02 Memory Architecture (focus)",
+   "tags": [
+    "memory_architecture"
+   ],
+   "front": "What are the six memory types in MIRIX's multi-agent memory architecture?",
+   "back": "<b>Core, Episodic, Semantic, Procedural, Resource, Knowledge Vault</b> — each managed by a specialized agent, with a coordinator orchestrating updates and retrieval across them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "eUrVkC!Igx",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::02 Memory Architecture (focus)",
+   "tags": [
+    "memory_architecture"
+   ],
+   "front": "Name several current long-term memory frameworks for LLM agents (2025-2026).",
+   "back": "Mem0, Zep, Letta (ex-MemGPT), LangMem (LangChain), MemoryOS (OS-inspired short/mid/long tiers), MIRIX (multi-agent, 6 types), A-MEM (agentic memory), MemMachine. Providers (OpenAI, Google) also persist cross-session user memory.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "J(i*m9NLjQ",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::02 Memory Architecture (focus)",
+   "tags": [
+    "memory_architecture"
+   ],
+   "front": "Per the 2025 position paper (arXiv:2502.06975), what five properties must true episodic memory have?",
+   "back": "1) <b>Long-term storage</b> (persists past the session), 2) <b>explicit reasoning</b> over memory content, 3) <b>single-shot learning</b> (captured from one exposure, no gradient update), 4) <b>instance-specific</b> details, 5) <b>contextual</b> binding (who/when/where/why tied to content).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "vs4t5CelHg",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::02 Memory Architecture (focus)",
+   "tags": [
+    "memory_architecture"
+   ],
+   "front": "Why do LLM agents fail at temporal reasoning even when entity recall is good?",
+   "back": "Retrieval surfaces entities well but <b>chronological awareness</b> (tracking how an entity changes over time) is weak — even strong models score low (e.g. ~0.29 on the 2025 Episodic Memory Benchmark). Mitigation: structured writes tagged with actor/timestamp/entity/trigger/outcome so reads can reconstruct order.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "hP4=q54Ivj",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::02 Memory Architecture (focus)",
+   "tags": [
+    "memory_architecture"
+   ],
+   "front": "What is the practical downside of LLM-driven memory extraction (as in Mem0/Zep), and what alternative exists?",
+   "back": "Relying on the LLM to extract/update/delete adds <b>operational cost</b>, <b>probabilistic-extraction accuracy errors</b>, and <b>compounding error</b> over time. Alternatives (e.g. MemMachine) preserve ground-truth episodic logs and reduce reliance on probabilistic extraction.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "Idl`BNqVwQ",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::02 Memory Architecture (focus)",
+   "tags": [
+    "memory_architecture"
+   ],
+   "front": "How does \"memory\" relate to a multi-layer working/episodic/semantic decomposition for long dialogue?",
+   "back": "Separating <b>working, episodic, and semantic</b> layers (with adaptive retrieval gating + retention regularization) controls cross-session <b>drift</b> and false-memory rate while keeping context growth <b>bounded</b> — better retention than naive cumulative or pure-compression approaches.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "e|Rg=:vEAT",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::02 Memory Architecture (focus)",
+   "tags": [
+    "memory_architecture"
+   ],
+   "front": "In the harness view, what burden does the memory subsystem externalize?",
+   "back": "Memory externalizes <b>state across time</b>, so continuity no longer depends on ephemeral in-context tokens. (Skills externalize procedural expertise; protocols externalize interaction — together they offload burdens the model otherwise can't carry across a window.)",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "q?bw:fGtJ7",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::03 Agentic Engineering",
+   "tags": [
+    "agentic_engineering"
+   ],
+   "front": "Give Anthropic's 2025 working definition of an agent, and contrast it with a workflow.",
+   "back": "<b>Agent</b> = an LLM (Large Language Model) <b>autonomously using tools in a loop</b> — you own the goal and guardrails, the model picks the next tool call from environment feedback.<br><b>Workflow</b> = LLM/tool calls orchestrated through <b>predefined code</b> — you own the control flow.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "hA5lCkE}GB",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::03 Agentic Engineering",
+   "tags": [
+    "agentic_engineering"
+   ],
+   "front": "What is the key trade-off of choosing an agent over a workflow?",
+   "back": "Agents trade <b>predictability for flexibility</b>. Every extra autonomous turn adds latency, token cost, and the chance an early mistake propagates. Guidance: use the <b>simplest pattern that passes eval</b> — often a workflow or one well-tooled call — and reserve agents for paths you can't hardcode but <b>can still verify</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "QcOV0>L5[/",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::03 Agentic Engineering",
+   "tags": [
+    "agentic_engineering"
+   ],
+   "front": "List Anthropic's five workflow design patterns for agentic systems.",
+   "back": "1) <b>Prompt chaining</b>, 2) <b>Routing</b> (send input to a specialized path), 3) <b>Parallelization</b> (sectioning + voting), 4) <b>Orchestrator-Workers</b> (orchestrator decomposes + delegates), 5) <b>Evaluator-Optimizer</b> (one generates, one critiques/refines).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "xrh8)iAHVy",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::03 Agentic Engineering",
+   "tags": [
+    "agentic_engineering"
+   ],
+   "front": "When is the Orchestrator-Workers pattern the right choice?",
+   "back": "For tasks of <b>unpredictable complexity</b> where subtasks can't be predefined — e.g. coding agents resolving a GitHub issue across multiple files. An orchestrator dynamically breaks the task down and delegates to workers.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "O[@;EzWMDR",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::03 Agentic Engineering",
+   "tags": [
+    "agentic_engineering"
+   ],
+   "front": "Contrast pre-inference retrieval with \"just-in-time\" (JIT) context for agents.",
+   "back": "<b>Pre-inference retrieval</b>: embedding-based lookup that front-loads context before the model reasons.<br><b>Just-in-time</b>: the agent pulls context <b>during</b> the loop as it discovers what it needs. Modern agentic designs augment retrieval with JIT strategies rather than dumping everything up front.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "Om=>$A2R`E",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::03 Agentic Engineering",
+   "tags": [
+    "agentic_engineering"
+   ],
+   "front": "Why use sub-agents, and what context property do they provide?",
+   "back": "Sub-agents give <b>separation of concerns + context isolation</b>: detailed search/work context stays inside the sub-agent, while the lead agent keeps a clean window focused on synthesis. This keeps the lead context small and reduces pollution.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "Q>Qq4=mR1$",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::03 Agentic Engineering",
+   "tags": [
+    "agentic_engineering"
+   ],
+   "front": "Name three agentic antipatterns to avoid.",
+   "back": "<b>Monolithic agents</b> (one giant do-everything agent), <b>over-engineered planning</b> (elaborate planning layers that add cost without payoff), and <b>missing observability</b> (no tracing of steps/tool calls — you can't debug what you can't see).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "J@?g=g33sH",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::03 Agentic Engineering",
+   "tags": [
+    "agentic_engineering"
+   ],
+   "front": "What does \"reason inside the agent's context window\" mean as a design habit?",
+   "back": "Design from the agent's actual observations (~10-20k tokens/step), not your human priors. A computer-use agent may only get a screenshot + terse task. If that feels fragile, fix it with <b>richer observations</b> (resolution, suggested actions, guardrails), not more orchestration layers.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "e5aFGM%%-6",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::03 Agentic Engineering",
+   "tags": [
+    "agentic_engineering"
+   ],
+   "front": "What practical checks does Anthropic recommend for diagnosing agent failures?",
+   "back": "Paste the system prompt into the model and ask what's <b>ambiguous</b>; feed a failed <b>trajectory</b> back and ask why a step failed; run a full task while restricting yourself to <b>only the agent's observations</b> to feel its blind spots.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "Cs%m.!1t,X",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::03 Agentic Engineering",
+   "tags": [
+    "agentic_engineering"
+   ],
+   "front": "Why start with direct LLM APIs rather than an agent framework?",
+   "back": "Frameworks <b>hide the prompts</b> and encourage over-engineering. Starting from the raw API keeps the system prompt, tool definitions, and control flow transparent and debuggable; add structure only when evals justify it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "ptQ@vmd7G6",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::04 Harness Engineering (focus)",
+   "tags": [
+    "harness_engineering"
+   ],
+   "front": "Define an agent <b>harness</b> and state its core separation of responsibilities.",
+   "back": "The harness is the <b>deterministic runtime layer</b> wrapping the LLM (Large Language Model). <b>Model proposes</b> actions/tool calls; <b>harness disposes</b>: it validates the schema, checks permissions/budgets/safety, executes, logs, and injects the result back. Without it, agents leak tokens, run uncontrolled loops, and execute dangerous commands.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "qlLLX}!8UQ",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::04 Harness Engineering (focus)",
+   "tags": [
+    "harness_engineering"
+   ],
+   "front": "What is the cardinal rule about tool execution in harness engineering?",
+   "back": "<b>Never let the LLM call tools directly.</b> The model returns a <b>structured</b> tool call; the harness validates the schema, checks permissions, executes, and feeds the result back. The model is a stateless token predictor; the harness is the control plane.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "MXVBphKR5*",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::04 Harness Engineering (focus)",
+   "tags": [
+    "harness_engineering"
+   ],
+   "front": "List the core components of an agent harness.",
+   "back": "The <b>agent loop</b> (call model → parse → execute tools → feed back → decide to stop), <b>tool/function calling</b> (expose + route capabilities, incl. MCP servers), <b>context management</b> (system prompt, history, retrieved docs, compaction/summarization), <b>memory</b>, <b>guardrails</b>, and <b>tracing/observability</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "qjYKfX*@>@",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::04 Harness Engineering (focus)",
+   "tags": [
+    "harness_engineering"
+   ],
+   "front": "Describe the \"tool cliff\" and its practical implication.",
+   "back": "Agent performance degrades <b>non-linearly</b> as tool count grows (one cited pattern: ~10 tools fine, ~30 degrading, ~107 complete failure). Implication: keep the exposed toolset small and task-scoped; don't bolt on every MCP (Model Context Protocol) server \"just in case.\"",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "j_M?nwkpHW",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::04 Harness Engineering (focus)",
+   "tags": [
+    "harness_engineering"
+   ],
+   "front": "How much does the scaffold matter relative to the model, per recent benchmarks?",
+   "back": "A lot. The <b>same backbone model</b> shows large spreads by scaffold — e.g. SWE-bench Pro ~23% with a basic scaffold vs ~45%+ with an optimized multi-turn one. Scaffold design (orchestration, memory, tool abstractions) is a first-class performance lever, not an afterthought.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "If00bL)ttt",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::04 Harness Engineering (focus)",
+   "tags": [
+    "harness_engineering"
+   ],
+   "front": "What is the best practice for agent instruction files (e.g. CLAUDE.md / AGENT.md)?",
+   "back": "Keep them <b>tight and hand-written</b> (~under 60 lines): cover only the decisions the agent commonly gets wrong. LLM-generated instruction files restate the obvious and cost ~20%+ more tokens <b>per call</b>. These files are assembled as first-class \"user content\" alongside the dynamic system prompt.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "ghHUoi7sJ]",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::04 Harness Engineering (focus)",
+   "tags": [
+    "harness_engineering"
+   ],
+   "front": "What is \"context engineering\" and why did it eclipse prompt engineering?",
+   "back": "Context engineering = deliberately deciding <b>what goes into the context window and in what order</b> (system instructions → memory → tool definitions → history) plus compaction. Per Karpathy (June 2025) it's \"the new prompt engineering\": arrangement/quality of context drives agent performance more than any single prompt tweak.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "pGg$J&T*>J",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::04 Harness Engineering (focus)",
+   "tags": [
+    "harness_engineering"
+   ],
+   "front": "Name four context-engineering techniques a harness can apply to manage the window.",
+   "back": "<b>Context editing</b> (rule-based pruning), <b>context awareness</b> (tell the model its remaining capacity after each tool call), <b>memory tools</b> (persistent create/read/update/delete files across sessions), and <b>programmatic tool calling</b> (model writes code that calls tools, returning only the final result to the window).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "xd:vQeAGv_",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::04 Harness Engineering (focus)",
+   "tags": [
+    "harness_engineering"
+   ],
+   "front": "How does programmatic tool calling reduce context bloat?",
+   "back": "Instead of issuing many individual tool calls whose outputs all land in the window, the model submits <b>code</b> that invokes tools, consumes intermediate outputs inside the runtime, and returns <b>only the final processed result</b> to the context — cutting tokens on multi-step tool chains.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "g~Zae2]/z:",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::04 Harness Engineering (focus)",
+   "tags": [
+    "harness_engineering"
+   ],
+   "front": "For multi-window (long-horizon) tasks, what harness setup improves reliability?",
+   "back": "Use the first window to build a <b>framework</b>: write tests, create init/QoL scripts, and provide <b>verification tools</b> so the agent can check its own correctness without a human. Have it track progress in <b>structured files</b> and plan before acting.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "sG45H{6M0P",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::04 Harness Engineering (focus)",
+   "tags": [
+    "harness_engineering"
+   ],
+   "front": "What's the standard recommended ordering of the context window?",
+   "back": "<b>System instructions → relevant memory → tool definitions → conversation history.</b> System prompt should be structured: identity, capabilities, rules, output format — focused and free of contradictions.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "rgAR$6Endj",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::04 Harness Engineering (focus)",
+   "tags": [
+    "harness_engineering"
+   ],
+   "front": "What transport replaced HTTP+SSE for MCP (Model Context Protocol) servers, and why does it matter for harnesses?",
+   "back": "<b>Streamable HTTP</b> (2025-11-25 spec): client→server via HTTP POST, optional server→client SSE stream over GET. It lets MCP servers run as <b>remote multi-client services</b> rather than local processes — relevant to how a harness wires in and authenticates tools.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "G~h0.2?)Kt",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::05 Reliability & Evaluation (focus)",
+   "tags": [
+    "reliability"
+   ],
+   "front": "Why must you evaluate agent <b>trajectories</b>, not just final outputs?",
+   "back": "An agent is a multi-step distributed system; a right-looking final answer can hide bad steps. Score the whole trajectory: <b>tool-choice correctness, argument validity, step count, time/cost, and policy compliance</b>. Use deterministic tool mocks in CI; add judge-based scoring only with a rubric + auditing.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "n%&icp_$,c",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::05 Reliability & Evaluation (focus)",
+   "tags": [
+    "reliability"
+   ],
+   "front": "What concrete mechanisms prevent duplicate side effects when an agent retries?",
+   "back": "<b>Idempotency tokens + deduplication.</b> Classic failure: Agent A times out and retries, Agent B processes a payment twice → double charge despite \"correct\" per-agent retry logic. Make tool side effects <b>idempotent</b> and dedup at the boundary.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "vm&p+(u#%:",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::05 Reliability & Evaluation (focus)",
+   "tags": [
+    "reliability"
+   ],
+   "front": "How should a harness treat retrieved content (web pages, documents, tool output)?",
+   "back": "As <b>untrusted input</b>. Separate <b>data from instructions</b> (so retrieved text can't hijack the agent — prompt injection), restrict tool permissions, and require approvals for irreversible actions. Model-centric guardrails alone don't fix weak contracts.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "N#k<Wp1GvP",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::05 Reliability & Evaluation (focus)",
+   "tags": [
+    "reliability"
+   ],
+   "front": "Distinguish guardrails from evaluations in an LLM system.",
+   "back": "<b>Guardrails</b> act in <b>real time</b>, blocking unsafe/non-compliant behaviour <b>before</b> output reaches the user.<br><b>Evaluations</b> act in <b>batches</b>, measuring reliability/grounding/bias across many prompts or model versions <b>over time</b>. You need both.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "fJm}y]j{J.",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::05 Reliability & Evaluation (focus)",
+   "tags": [
+    "reliability"
+   ],
+   "front": "What recovery controls belong in a policy-first tool layer?",
+   "back": "Per-tool-class <b>retry with backoff</b>, <b>circuit breakers</b> (stop hammering a failing tool), <b>bounded retries</b> (never unbounded), risk-aware gating, redaction patterns, and explicit invariants/contracts. Most failures come from weak contracts, missing invariants, no idempotency, and unbounded retries — not the model.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "e5t%rWUx%#",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::05 Reliability & Evaluation (focus)",
+   "tags": [
+    "reliability"
+   ],
+   "front": "What did Datadog's 2026 data reveal about LLM call failures in production?",
+   "back": "In Feb 2026, ~5% of LLM call spans errored and ~60% of those were <b>rate-limit (HTTP 429)</b> errors; March 2026 saw ~8.4M rate-limit errors. Provider capacity ceilings now directly compromise agent reliability — mitigate with <b>budgeting + backpressure</b>, not just prompt tweaks.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "znR!7:1!`v",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::05 Reliability & Evaluation (focus)",
+   "tags": [
+    "reliability"
+   ],
+   "front": "Why is pass@1 a misleading reliability metric for long-horizon agents?",
+   "back": "Reliability degrades <b>super-linearly</b> with task complexity (duration × domain structure), and pass@1 on short atomic tasks hides this. Use variance-aware, duration-bucketed metrics like <b>pass<sup>k</sup></b> (τ-bench), ReliabilityBench, and METR task-completion horizons, with partial-credit scoring.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "usr4xN}NzY",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::05 Reliability & Evaluation (focus)",
+   "tags": [
+    "reliability"
+   ],
+   "front": "What does \"91% of ML systems degrade over time\" imply for agent operations?",
+   "back": "Reliability isn't a launch property — it decays (data drift, model/provider changes, dependency shifts). You need <b>continuous monitoring</b>, feedback loops, and proactive intervention, treating the agent like production software with ongoing evals, not a one-time deployment.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "f?!5%Ol`]E",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::05 Reliability & Evaluation (focus)",
+   "tags": [
+    "reliability"
+   ],
+   "front": "What must agent observability capture that traditional software observability doesn't?",
+   "back": "Because the <b>LLM itself drives control flow</b>, you must trace the model's decisions: per-request span tree with each tool call as a sub-span (tool name, latency, success flag, cost), guardrail verdicts, retrieval doc counts, and full trace IDs end-to-end — so non-deterministic paths are debuggable.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "IIyilF?J({",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::05 Reliability & Evaluation (focus)",
+   "tags": [
+    "reliability"
+   ],
+   "front": "In LLM-as-judge evaluation, why does the judge model's capability matter?",
+   "back": "Evaluator strength materially changes results: a strong judge (e.g. a 70B-class model) caught all known failures while smaller judges missed several cases. Weak judges give false confidence — budget for a capable evaluator (self-hosted is viable, ~sub-dollar per run in cited setups).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "t5zU?sMa&-",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::05 Reliability & Evaluation (focus)",
+   "tags": [
+    "reliability"
+   ],
+   "front": "What hybrid architecture is emerging in 2026 for balancing capability and reliability?",
+   "back": "A <b>guardrailed local model as the primary workhorse</b> for routine structured tasks, with a <b>frontier API as fallback</b> for deep reasoning or very long context. Heavy guardrailing can push small models from ~50% to ~99% on bounded agentic workflows; the frontier handles the hard tail.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "w=xO,w4X9K",
+   "type": "basic",
+   "deck": "LLM, Agentic & Harness Engineering (2026)::05 Reliability & Evaluation (focus)",
+   "tags": [
+    "reliability"
+   ],
+   "front": "Summarize the one-line reliability thesis for production agents.",
+   "back": "Models are strong; <b>reliability comes from architecture + guardrails</b>: strict tool contracts, deterministic/idempotent state transitions, trace-level observability, evals shipped in CI, and human approval for irreversible actions. Treat the agent as a distributed system where the LLM happens to be the planner/executor.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  }
+ ]
+}
