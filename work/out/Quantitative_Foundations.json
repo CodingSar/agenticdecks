@@ -286,7 +286,7 @@
    "back": "The sample mean converges to the true mean as n grows. It does not say deviations \"even out\" in the short run (gambler's fallacy), nor how fast convergence is for heavy-tailed data.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "A casino doesn't need to win tonight's hand; over millions of hands the house edge is all that's left.",
    "extra": "<b>Example:</b> After 10 heads in a row, the next flip is still 50/50. The average tends to 0.5 by drowning the 10 heads in thousands of later flips, not by producing extra tails.",
    "source": "Probability & Distributions",
    "reverse": false
@@ -430,7 +430,7 @@
    "back": "Tails decay polynomially, so extremes aren't rare: the sample mean is dominated by the largest observation and may not converge; variance can be infinite. Plan for the tail.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "Bill Gates walks into a bar: the mean wealth in the room jumps a thousandfold, the median doesn't move.",
    "extra": "<b>Example:</b> Cascading-failure cost, file sizes on a shared drive, follower counts. 'Average outage cost' is meaningless when one outage per decade dwarfs all others combined. Plan for the tail, not the mean.",
    "source": "Probability & Distributions",
    "reverse": false
@@ -542,7 +542,7 @@
    "back": "\\(H(X)=-\\sum p(x)\\log_2p(x)\\): the average surprise per outcome, i.e. how unpredictable the source is. Maximal for a uniform distribution, zero for a certain outcome.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "The average number of yes/no questions an optimal player of \"20 Questions\" needs to pin down the outcome.",
    "extra": "<b>Example:</b> Fair coin: 1 bit. Coin that lands heads 99% of the time: 0.08 bits—almost nothing to learn from each flip. A log line that is always 'OK' has zero entropy; a log with rich variety has high entropy.",
    "source": "Information Theory",
    "reverse": false
@@ -804,22 +804,6 @@
    "reverse": false
   },
   {
-   "guid": "l?;(7ch=Tm",
-   "type": "basic",
-   "deck": "Quantitative Foundations::10 Linear Algebra & Calculus",
-   "tags": [
-    "quant::linear_algebra"
-   ],
-   "front": "In ML papers, what is a <b>vector</b>?",
-   "back": "An ordered list of numbers representing a point or direction in n-dimensional space: an embedding, an image's pixels, a user's feature row, a model's parameters.",
-   "text": "",
-   "image": "",
-   "analogy": "",
-   "extra": "",
-   "source": "Linear Algebra & Calculus",
-   "reverse": false
-  },
-  {
    "guid": "tnU{@Z<cm<",
    "type": "basic",
    "deck": "Quantitative Foundations::10 Linear Algebra & Calculus",
@@ -942,7 +926,7 @@
    "back": "\\(Av=\\lambda v\\): directions the map only stretches (by λ), never rotates. They are the map's natural axes; eigenvalues say how much each axis is amplified or damped.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "A spinning globe: every point moves except those on the axis, which stay on the axis. The axis is an eigenvector of the rotation (with λ = 1).",
    "extra": "",
    "source": "Linear Algebra & Calculus",
    "reverse": false
@@ -1390,7 +1374,7 @@
    "back": "A slow item at the front of a FIFO queue delays everything behind it, even items that could be served instantly.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "A slow truck on a single-lane road: every car behind it crawls, even the fast ones.",
    "extra": "<b>Shows up in:</b> TCP (one lost packet stalls the stream), HTTP/1.1 pipelining, event loops, ordered Kafka partitions. Fix: per-key ordering with parallelism across keys, or move slow work off the critical path.",
    "source": "Queueing & Performance",
    "reverse": false
@@ -1406,7 +1390,7 @@
    "back": "Queued work still consumes resources, and clients time out and retry, so the effective service rate falls while load rises. Useful throughput drops below what moderate load achieved.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "A restaurant so packed that waiters can't move between tables: more customers means fewer meals served.",
    "extra": "",
    "source": "Queueing & Performance",
    "reverse": false
@@ -1550,7 +1534,7 @@
    "back": "Tightening the threshold for one loosens the other; only more data or a better test improves both.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "A smoke alarm: make it more sensitive and it goes off for toast (Type I); make it less sensitive and it sleeps through a real fire (Type II).",
    "extra": "<b>Example:</b> Paging threshold: alert on any latency bump → many false pages (Type I). Alert only on huge bumps → missed slow-burn degradations (Type II).",
    "source": "Statistical Inference",
    "reverse": false
@@ -1598,7 +1582,7 @@
    "back": "A procedure-level guarantee: across repeated experiments, 95% of intervals built this way contain the true value. Not a 95% probability that this particular interval does.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "Ring toss: your throwing technique rings the peg 95% of the time, but any single ring that has landed either circles the peg or it doesn't.",
    "extra": "<b>Example:</b> 'Error rate 0.4% (95% CI 0.1%–0.9%)' tells you the data is compatible with anything from 0.1% to 0.9%. A point estimate without an interval hides that the true value could be 9× higher.",
    "source": "Statistical Inference",
    "reverse": false
@@ -1630,7 +1614,7 @@
    "back": "Test enough hypotheses and ~5% of true nulls hit p &lt; 0.05 by chance. Spot it: many metrics, subgroups or time windows checked, and only the winners reported.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "Buy enough lottery tickets and one will win; that ticket was not special.",
    "extra": "<b>Example:</b> a dashboard with 40 metrics after a deploy: expect ~2 \"significant\" regressions with no real change.",
    "source": "Statistical Inference",
    "reverse": false
@@ -1678,7 +1662,7 @@
    "back": "Making analysis choices (outliers dropped, metric, stopping time) after seeing the data, so some path reaches significance. Each choice is defensible; the combination guarantees a \"finding\".",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "The Texas sharpshooter: fire at the barn first, then paint the target around the tightest cluster of holes.",
    "extra": "",
    "source": "Statistical Inference",
    "reverse": false
@@ -2846,7 +2830,7 @@
    "back": "Yes: it opens a spurious back-door path between X and Y.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "Ice-cream sales and drownings rise together because summer heat drives both; compare within the same temperature and the link disappears.",
    "extra": "",
    "source": "Causal Inference",
    "reverse": false
@@ -3582,7 +3566,7 @@
    "back": "",
    "text": "MCMC diagnostics: {{c1::\\(\\hat R\\)}} compares between- and within-chain variance (want &lt; 1.01); {{c2::effective sample size (ESS)}} counts equivalent independent draws; {{c3::divergences}} (HMC) mean estimates are biased, not merely noisy.",
    "image": "",
-   "analogy": "",
+   "analogy": "Search parties dropped at different spots: only when they all report the same territory do you trust the map.",
    "extra": "R-hat can only detect non-convergence, never prove convergence.",
    "source": "Bayesian Reasoning",
    "reverse": false
@@ -3678,7 +3662,7 @@
    "back": "\\(E_p[f]=E_q[f\\,p/q]\\): sample from q and reweight by \\(w=p/q\\). q needs heavier tails than p.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "Reweighting a biased survey: if young people were oversampled 2×, count each of their answers half.",
    "extra": "",
    "source": "Bayesian Reasoning",
    "reverse": false
@@ -3697,6 +3681,1926 @@
    "analogy": "",
    "extra": "",
    "source": "Bayesian Reasoning",
+   "reverse": false
+  },
+  {
+   "guid": "zp-.))MonZ",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "Why is a training loss only a proxy, and what goes wrong because of it?",
+   "back": "You optimise what is differentiable (cross-entropy, squared error), not the business goal; the gap between proxy and goal is where models game the objective.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Optimizing click-through rate as a proxy for 'user value' produces clickbait. Optimizing squared error on house prices lets a few mansions dominate the fit.",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "luhvJ}+:l&",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "What is the gradient-descent update, and what does the learning rate do?",
+   "back": "\\(w\\leftarrow w-\\eta\\nabla L(w)\\): step against the gradient. Too small η crawls; too large overshoots the valley and oscillates or diverges.",
+   "text": "",
+   "image": "",
+   "analogy": "Walking downhill in fog: tiny steps take forever, giant leaps land you on the opposite slope.",
+   "extra": "Learning-rate schedules start big to move fast, then shrink to settle.",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "pW%my<}Uch",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "Why use mini-batch (stochastic) gradients instead of the full-dataset gradient?",
+   "back": "A small random batch gives a noisy but unbiased estimate ~1,000× cheaper, so you take far more steps; the noise also helps escape sharp minima and saddle points.",
+   "text": "",
+   "image": "",
+   "analogy": "Polling 1,000 voters estimates the national mood at a fraction of the cost of asking everyone.",
+   "extra": "",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "j>DoV+*Pje",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "With a constant learning rate η and batch size B, where does SGD end up?",
+   "back": "Hovering in a noise ball of size ∝ η/B instead of converging; decaying η gives convergence. The noise biases it toward flat minima (implicit regularisation).",
+   "text": "",
+   "image": "",
+   "analogy": "A ball on a shaking landscape: it can't settle in narrow crevices but rests in wide basins. The \"temperature\" is η/B.",
+   "extra": "Linear scaling rule: keep η/B roughly constant when changing batch size.",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "CGfg-p3g)#",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "How does the <b>condition number</b> κ = L/μ control gradient-descent speed?",
+   "back": "In a long, narrow valley the gradient points mostly across it, so steps zigzag between the walls and crawl along the floor; the best fixed step converges at rate ≈ (κ−1)/(κ+1) per step.",
+   "text": "",
+   "image": "<img src=\"gd_zigzag.svg\">",
+   "analogy": "",
+   "extra": "Step size is limited by the steepest direction, progress by the flattest.",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "o?T@1,-m&f",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "How does <b>Newton's method</b> differ geometrically from gradient descent?",
+   "back": "\\(\\theta\\leftarrow\\theta-H^{-1}\\nabla L\\) rescales coordinates so the elliptical valley becomes round, then steps straight to the local quadratic's minimum. Quadratic convergence, but \\(O(d^3)\\) per step.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Affine-invariant; can be attracted to saddles. L-BFGS, Gauss–Newton and natural gradient approximate it. Preconditioning = choosing a ruler under which the landscape is isotropic.",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "z2}>,|?_3",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "What does <b>momentum</b> add to SGD?",
+   "back": "A running average of gradients: zigzag components across the valley cancel, components along the floor accumulate. Improves dependence on the condition number from κ to √κ.",
+   "text": "",
+   "image": "",
+   "analogy": "A heavy ball rolling down the valley rather than a hiker re-deciding every step.",
+   "extra": "",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "What does <b>Adam</b> add on top of momentum?",
+   "back": "Per-coordinate scaling by a running RMS of gradients: a cheap diagonal preconditioner, so step size is roughly scale-invariant per parameter. It can't fix valleys that run diagonally.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "Ho|nsVQr?U",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "Why are penalised and constrained forms of regularisation equivalent?",
+   "back": "Lagrangian duality: each λ ≥ 0 matches a budget t (\\(\\Omega(\\beta)\\le t\\)) with the same solution. At the optimum the loss contour is tangent to the constraint boundary, and λ is the exchange rate.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "MDQh0ZvY-y",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "What is the <b>natural gradient</b>?",
+   "back": "\\(F^{-1}\\nabla L\\), with F the Fisher information: steepest descent when step length is measured by KL between the model's distributions, not by parameter distance. Reparameterisation-invariant.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Relatives: Fisher scoring, K-FAC, TRPO; Adam is a crude diagonal approximation.",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "ljvgdHeUm=",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "What is <b>overfitting</b>, and how do you detect it?",
+   "back": "The model learns noise and quirks of the training data instead of the pattern: training error keeps falling while held-out error rises. Detect it with a validation set you never train on.",
+   "text": "",
+   "image": "",
+   "analogy": "A student who memorised last year's exam answers: 100% on that exam, fails a new one.",
+   "extra": "",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "p:gwVZlJCg",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "What is <b>underfitting</b>, and its signature?",
+   "back": "The model is too simple or under-trained to capture the real pattern: both training and validation error are high.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Fitting a straight line to seasonal traffic. The model cannot represent the weekly cycle no matter how much data you give it.",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "d}W`E2-`j4",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "Train / validation / test split: what is each for?",
+   "back": "<b>Train:</b> fit parameters. <b>Validation:</b> choose hyperparameters and model variants. <b>Test:</b> one final, untouched estimate of real-world performance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "Why is tuning on the test set the cardinal sin?",
+   "back": "Every decision made by looking at it leaks information. After trying 50 configurations, the best test score is the max of 50 noisy draws: optimistic, expect it to drop in production.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": ";kV_]Jc=b",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "What is <b>data leakage</b>?",
+   "back": "Information unavailable at prediction time (from the future, the label, or the test set) sneaking into training features. Suspiciously good results usually mean leakage.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> A churn model with feature 'number of support tickets in the 30 days after signup' when churn is measured at day 30. Or an incident predictor trained with a 'severity' field that is only set after the incident. Suspiciously good results usually mean leakage.",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Common forms of data leakage: {{c1::random splits of time-series data}}; {{c2::preprocessing (scaling, imputation, feature selection) fitted on all data before splitting}}; {{c3::features that are consequences of the label}}; {{c4::duplicates or the same subject across splits}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "qsmqfr^XvV",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "What does <b>nested cross-validation</b> prevent?",
+   "back": "Selection-induced optimism: the inner loop tunes hyperparameters, the outer loop evaluates the whole tuning procedure, so your choices never see the folds you report.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Everything that looked at the data, including your own choices, is part of the \"model\" and must sit inside the CV loop.",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "QTqI4`hP3O",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "State the <b>bias–variance decomposition</b> of expected squared error.",
+   "back": "Error = irreducible noise σ² + bias² (systematic miss of the model class) + variance (sensitivity to the particular training sample); expectation over training sets and noise.",
+   "text": "",
+   "image": "<img src=\"bias_variance.svg\">",
+   "analogy": "Archery: bias = arrows clustered tightly but off-centre; variance = arrows scattered around the bullseye.",
+   "extra": "<b>Formula:</b> \\(E[(y-\\hat f(x))^2]=\\sigma^2+(E\\hat f(x)-f(x))^2+\\mathrm{Var}(\\hat f(x))\\).",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "g0CnJB}+TF",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "How do model complexity and training-set size shift bias and variance?",
+   "back": "More complexity: lower bias, higher variance. More data: lower variance, which makes complex models safe. The same architecture can overfit 1k rows and underfit 1B.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "g{0_ba`QIB",
+   "type": "cloze",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Regularisation techniques: {{c1::L2 / weight decay}} shrinks weights; {{c2::L1}} sparsifies; {{c3::dropout}} randomly disables units; {{c4::data augmentation}} enlarges the effective dataset; {{c5::early stopping}} halts before memorisation.",
+   "image": "",
+   "analogy": "",
+   "extra": "All trade a little bias for less variance. Weight decay = MAP estimation with a Gaussian prior.",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "G2Wht1#}5D",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "How does <b>early stopping</b> work, and why is it regularisation?",
+   "back": "Stop when validation loss starts rising even though training loss still falls. Fewer steps keep the weights near initialisation, limiting how much noise they can fit.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "l@_K~_{ttS",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "What problem does <b>k-fold cross-validation</b> solve?",
+   "back": "A single validation split gives a noisy estimate on small data. Rotating k folds uses all data for both training and validation and shows the spread between folds.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> With 800 examples, a single 20% validation set is 160 examples—accuracy ±4% by chance alone. 5-fold CV averages over 5 such estimates and shows the variance between folds.",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "L@<0=Q5WN7",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "Why must you always compare against a <b>baseline</b>?",
+   "back": "Absolute metrics mean nothing without what a trivial model achieves: majority class, the mean, \"same as yesterday\", a linear model, a hand-written rule.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> 'Our outage predictor is 99.5% accurate.' Outages happen 0.4% of the time, so 'always predict no outage' is 99.6% accurate. The model is worse than nothing.",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "I=Jw+Bgn`d",
+   "type": "cloze",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "",
+   "back": "",
+   "text": "{{c1::Precision}} = of the items flagged, the fraction that were real. {{c2::Recall}} = of the real items, the fraction that were flagged.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "Raising a classifier's threshold trades what for what, and how do you choose?",
+   "back": "Higher threshold: more precision, less recall. Choose by the cost of each error: spam filters favour precision; intrusion detection and screening favour recall.",
+   "text": "",
+   "image": "",
+   "analogy": "A fishing net: precision is how much of your catch is actually fish; recall is how much of the lake's fish you caught. A finer net catches more fish and more junk.",
+   "extra": "F1 is the harmonic mean if you need one number.",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "tRF{J#&(JI",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "What does <b>ROC AUC</b> measure?",
+   "back": "The probability the model scores a random positive above a random negative: a pure ranking measure, invariant to class prevalence and monotone score transforms.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "ROC plots true-positive rate vs false-positive rate over all thresholds. AUC equals the Mann–Whitney U statistic.",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "xh`>4wB;TB",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "Why prefer precision–recall curves over ROC AUC on heavily imbalanced data?",
+   "back": "ROC's false-positive rate is a fraction of a huge negative class, so a tiny rate hides many false alarms; precision exposes them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> AUC 0.95 for a fraud model at 0.1% fraud can still mean 50 false alarms per fraud caught.",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "lYt_khpK|o",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "What does it mean for a probabilistic model to be <b>calibrated</b>?",
+   "back": "Among predictions of 70%, about 70% turn out positive. It matters whenever the probability feeds a decision, threshold or expected-value calculation.",
+   "text": "",
+   "image": "",
+   "analogy": "A good weather forecaster: on the days they say 70% rain, it rains on about 70% of them.",
+   "extra": "<b>Example:</b> A model says 'this deploy has a 5% rollback risk'. If historically 30% of its '5%' deploys were rolled back, the number is useless for risk budgeting. Check with a reliability diagram; fix with temperature scaling or isotonic regression.",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "OzFzX@&4:w",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "Calibration vs discrimination?",
+   "back": "<b>Discrimination:</b> ranking positives above negatives (AUC). <b>Calibration:</b> probabilities match frequencies. They are independent: a monotone remap of scores changes calibration but not AUC.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Post-hoc fixes: Platt scaling, isotonic regression, temperature scaling. Check with a reliability diagram.",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "What is a <b>proper scoring rule</b>?",
+   "back": "A score minimised in expectation by reporting the true probability: log loss, Brier score. Accuracy and AUC are not proper.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "iq4PS0+1gx",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "Why do production ML models silently rot?",
+   "back": "Distribution shift: production data drifts from training data (new users, new attacks, seasons, the model's own feedback loop), and the validation score stops applying, without any error.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> A fraud model trained pre-2020 sees a pandemic-era surge of first-time online shoppers and flags them all. Or a recommender changes what users see, which changes what they click, which changes the training data—feedback loop.",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "dGjVZQ^]xt",
+   "type": "cloze",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Shift types: {{c1::covariate shift}}: p(x) changes, p(y|x) fixed (fix: importance weighting); {{c2::label shift}}: p(y) changes, p(x|y) fixed (fix: re-weight class priors); {{c3::concept drift}}: p(y|x) itself changes (fix: new labels, retraining, monitoring).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "gMQz/d&:BM",
+   "type": "cloze",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Before trusting an ML result: is the {{c1::baseline}} fair and tuned? is the test set {{c2::truly held out}} (no leakage, no tuning on it)? is the gain bigger than {{c3::seed-to-seed or fold variance}}? how many {{c4::configurations were tried}}? does the test distribution {{c5::match deployment}}?",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> \"beats GPT-x by 3 points on benchmark Y\": was Y in the training data? same prompting effort? is 3 points above seed variance?",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "B-so?JasZ[",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "What is <b>double descent</b>?",
+   "back": "As model size grows, test error follows the classical U, spikes at the interpolation threshold (parameters ≈ samples), then falls again in the overparameterised regime, often below the classical minimum.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "mA(Ey]l)w@",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "Why does test error spike at the interpolation threshold and fall beyond it?",
+   "back": "At the threshold exactly one interpolator exists and its norm explodes to fit the noise. Beyond it, the optimiser picks the minimum-norm interpolator, which gets smoother as extra dimensions absorb the noise.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Explicit regularisation flattens the spike. Part of why \"bigger is better\" held empirically in deep learning.",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "zgl;yFZpLm",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "What is the practical reading of the <b>No-Free-Lunch</b> theorem?",
+   "back": "Averaged over all problems no learner wins. Every algorithm encodes an inductive bias, so choose models whose assumptions match the problem's structure.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Convolutional networks assume nearby pixels matter together and patterns can appear anywhere; superb for images, wrong for tabular data where gradient-boosted trees, which assume axis-aligned splits, usually win.",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "kEG[dt>n/e",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "What is <b>empirical risk minimisation</b>, and the generalisation gap?",
+   "back": "ERM picks \\(\\hat f=\\arg\\min_{f\\in\\mathcal F}\\hat R(f)\\) (average training loss). Gap = true risk − empirical risk of \\(\\hat f\\), controlled by the capacity of \\(\\mathcal F\\) relative to n.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "The minimiser of a noisy landscape is biased low (winner's curse); uniform convergence bounds the worst dip over the class.",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Excess risk = {{c1::approximation error}} (model class too small) + {{c2::estimation error}} (sample too small) + {{c3::optimisation error}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "I.><,bAe<i",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "What is the <b>VC dimension</b>, and its value for hyperplanes in \\(\\mathbb R^d\\)?",
+   "back": "The size of the largest point set the class can shatter (realise all labelings). Hyperplanes: d + 1. The generalisation gap scales like \\(O(\\sqrt{\\mathrm{VC}/n})\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "A line can shatter 3 points but not the XOR labeling of a square's corners. Capacity ≠ parameter count: \\(\\sin(\\omega x)\\) has one parameter and infinite VC dimension.",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "QX^Xp~i3uH",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "What does a <b>Support Vector Machine</b> optimise?",
+   "back": "It maximises the margin: minimise \\(\\tfrac12\\|w\\|^2\\) s.t. \\(y_i(w^\\top x_i+b)\\ge1\\) (margin width 2/‖w‖). Soft margin = hinge loss + L2 penalty.",
+   "text": "",
+   "image": "<img src=\"svm_margin.svg\">",
+   "analogy": "Find the widest street separating the two classes; the boundary is the centre line.",
+   "extra": "",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "What are <b>support vectors</b>?",
+   "back": "The points on or inside the margin. The solution depends only on them; removing any other point changes nothing.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "H5]sxZE2p>",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "What is the <b>kernel trick</b>?",
+   "back": "Algorithms that use data only through inner products can replace \\(x_i^\\top x_j\\) by \\(k(x_i,x_j)=\\langle\\phi(x_i),\\phi(x_j)\\rangle\\), working in a huge feature space without ever computing φ. Valid kernels are positive semidefinite.",
+   "text": "",
+   "image": "",
+   "analogy": "Points inside vs outside a circle can't be split by a line; lift them onto a paraboloid (add x₁² + x₂²) and a flat plane separates them.",
+   "extra": "",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "Numc+/5ah2",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "What does the <b>representer theorem</b> say?",
+   "back": "For losses regularised by an RKHS norm, the minimiser has the form \\(f^*(x)=\\sum_{i=1}^n\\alpha_ik(x_i,x)\\): an infinite-dimensional search reduces to n coefficients.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "Jk>Td7}WO0",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "What does <b>Principal Component Analysis (PCA)</b> find?",
+   "back": "Orthogonal directions of maximum variance: the eigenvectors of the covariance matrix, with eigenvalues = variance along each. The top k give the best k-dimensional linear approximation.",
+   "text": "",
+   "image": "",
+   "analogy": "Fit an ellipsoid to the data cloud; the principal components are its axes, longest first.",
+   "extra": "<b>Example:</b> 50 server metrics are collected, but most co-move with load. PCA might show 2 components explain 90% of the variance: 'overall load' and 'disk vs CPU bound'. Plot those 2 instead of 50 dashboards.",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "Ld_Q9Vi5$o",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "Why are \"maximise projected variance\" and \"minimise reconstruction error\" the same PCA problem?",
+   "back": "Pythagoras: for centred data, total squared length = projected + residual, and the total is fixed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Computationally: the right singular vectors of centred \\(X=UDV^\\top\\); variances are \\(d_j^2/(n-1)\\).",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "FeoyYGk5c1",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "How does a linear autoencoder relate to PCA?",
+   "back": "With a k-dimensional bottleneck and squared loss it learns the same subspace as the top-k principal components (not necessarily the same basis).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "nf#EeeN`C#",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "What does <b>k-means</b> minimise, and how does Lloyd's algorithm do it?",
+   "back": "Within-cluster sum of squared distances. Alternate: assign each point to its nearest centroid, then move each centroid to its points' mean. Converges to a local optimum (use k-means++ init).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "Why can't k-means find elongated or non-convex clusters?",
+   "back": "Its cluster regions are Voronoi cells: convex polytopes bounded by perpendicular bisectors between centroids. It is the hard-assignment, equal-spherical-variance limit of a Gaussian mixture.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "LFri&e;R&H",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "Gaussian mixture fitted by EM: what are the E- and M-steps?",
+   "back": "<b>E:</b> compute each point's responsibility per component (posterior membership). <b>M:</b> update weights, means and covariances as responsibility-weighted averages.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Pitfalls: likelihood unbounded when a component collapses onto one point; label switching; local optima. A \"soft Voronoi\".",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "j_1fz])|bV",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "What function class does a <b>decision tree</b> represent?",
+   "back": "Piecewise-constant on axis-aligned boxes, with splits chosen greedily by impurity reduction (Gini or entropy; variance for regression). Low bias, very high variance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "A diagonal boundary needs a staircase of cuts, so trees are inefficient for linear structure. Invariant to monotone feature transforms.",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "bzp-J,z41X",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "Why does <b>bagging</b> reduce variance, and what limits it?",
+   "back": "Averaging B predictors with variance σ² and correlation ρ gives \\(\\rho\\sigma^2+\\frac{1-\\rho}{B}\\sigma^2\\): more trees kill only the second term; ρσ² is a floor.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "What does a <b>random forest</b> add to bagging?",
+   "back": "Restricting each split to a random subset of features decorrelates the trees (lowers ρ), at a small cost in bias.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "s9VH%#gP9J",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "How does <b>gradient boosting</b> work?",
+   "back": "Additively fit shallow trees to pseudo-residuals (the negative loss gradient w.r.t. current predictions), adding each with shrinkage ν: gradient descent in function space.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "For squared loss the pseudo-residuals are ordinary residuals. Regularisers: shrinkage, subsampling, tree depth, early stopping.",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "Bagging vs boosting: which error does each mainly attack?",
+   "back": "<b>Bagging</b> averages independent high-variance models: attacks <b>variance</b>. <b>Boosting</b> sequentially fits the residuals of weak models: attacks <b>bias</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "cO?+z+bjqs",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "In k-nearest neighbours, what controls the bias–variance trade-off?",
+   "back": "k: k = 1 has zero training error and high variance; large k is smooth with high bias. Feature scaling is part of the model, since everything depends on the distance metric.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "1-NN decision regions are the Voronoi tessellation of the training set. In high dimensions the \"nearest\" neighbour is almost as far as the farthest.",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "z/*qb0YY8%",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "When does a Gaussian generative classifier give a <b>linear</b> boundary?",
+   "back": "When the classes share a covariance Σ (LDA): the log-odds are linear, with \\(w=\\Sigma^{-1}(\\mu_1-\\mu_0)\\). Different covariances give a quadratic boundary (QDA).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "LDA vs logistic regression?",
+   "back": "Same linear form. LDA fits the joint density (more efficient if the Gaussian assumption holds); logistic regression fits the conditional likelihood (more robust when it doesn't).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "H[mIzN{xvP",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "Why is cross-entropy the standard classification loss?",
+   "back": "It is the negative log-likelihood of a categorical model (so maximum likelihood = KL minimisation), and with softmax its gradient w.r.t. the logits is simply \\(p-y\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> true label \"cat\": predicting 0.9 costs −log₂ 0.9 ≈ 0.15 bits; predicting 0.1 costs −log₂ 0.1 ≈ 3.3 bits. Confident wrong answers are punished hardest.",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "cLr0`ta:>y",
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "What is the <b>manifold hypothesis</b>?",
+   "back": "Real high-dimensional data (images, text, audio) lies near a low-dimensional manifold, so the intrinsic dimension, not the ambient one, governs how much data learning needs.",
+   "text": "",
+   "image": "",
+   "analogy": "A crumpled sheet of paper in 3-D is still 2-D to an ant walking on it.",
+   "extra": "",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::06 Machine Learning",
+   "tags": [
+    "quant::ml"
+   ],
+   "front": "What can't you read from a t-SNE or UMAP plot?",
+   "back": "Cluster sizes, distances between clusters and apparent density: these methods preserve only local neighbourhoods, and results depend on perplexity/neighbour count and seed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Machine Learning",
+   "reverse": false
+  },
+  {
+   "guid": "qB&;cBY1Ib",
+   "type": "basic",
+   "deck": "Quantitative Foundations::07 Deep Learning",
+   "tags": [
+    "quant::deep_learning"
+   ],
+   "front": "What function does a ReLU network compute, geometrically?",
+   "back": "A continuous <b>piecewise-linear</b> function: each neuron's hyperplane splits input space, together tiling it into convex polytopes with one affine map on each.",
+   "text": "",
+   "image": "<img src=\"relu_pieces.svg\">",
+   "analogy": "Origami: each layer folds space along hyperplanes, and later cuts are replicated across all earlier folds, so linear regions can grow exponentially with depth.",
+   "extra": "",
+   "source": "Deep Learning",
+   "reverse": false
+  },
+  {
+   "guid": "pI[>cyKd&e",
+   "type": "basic",
+   "deck": "Quantitative Foundations::07 Deep Learning",
+   "tags": [
+    "quant::deep_learning"
+   ],
+   "front": "What does the <b>universal approximation theorem</b> say, and not say?",
+   "back": "One wide enough hidden layer can approximate any continuous function on a compact set. It says nothing about how many units, whether training finds the weights, or whether the fit generalises.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Deep Learning",
+   "reverse": false
+  },
+  {
+   "guid": "J%3~rzr;j5",
+   "type": "basic",
+   "deck": "Quantitative Foundations::07 Deep Learning",
+   "tags": [
+    "quant::deep_learning"
+   ],
+   "front": "What is <b>backpropagation</b>?",
+   "back": "Reverse-mode automatic differentiation: the forward pass stores activations; the backward pass propagates ∂L/∂node via vector-Jacobian products. The full gradient costs ≈ 2–3× a forward pass, whatever the parameter count.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Memory scales with depth (stored activations).",
+   "source": "Deep Learning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::07 Deep Learning",
+   "tags": [
+    "quant::deep_learning"
+   ],
+   "front": "Why reverse mode rather than forward mode for training networks?",
+   "back": "One scalar loss, millions of inputs: multiplying Jacobians from the output side keeps the running quantity a vector. Forward mode suits one input and many outputs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Deep Learning",
+   "reverse": false
+  },
+  {
+   "guid": "bahvCzB?Ic",
+   "type": "basic",
+   "deck": "Quantitative Foundations::07 Deep Learning",
+   "tags": [
+    "quant::deep_learning"
+   ],
+   "front": "Why do gradients vanish or explode in deep networks?",
+   "back": "The backpropagated gradient is a product of layer Jacobians: singular values typically &lt; 1 shrink it exponentially with depth; &gt; 1 blow it up.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Stable training needs Jacobians close to isometries (singular values near 1).",
+   "source": "Deep Learning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Quantitative Foundations::07 Deep Learning",
+   "tags": [
+    "quant::deep_learning"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Remedies for vanishing/exploding gradients: {{c1::variance-preserving initialisation}}, {{c2::non-saturating (ReLU-family) activations}}, {{c3::residual connections}}, {{c4::normalisation layers}}, {{c5::gradient clipping}}, and gating (LSTM/GRU).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Deep Learning",
+   "reverse": false
+  },
+  {
+   "guid": "k]:O%FEJWh",
+   "type": "basic",
+   "deck": "Quantitative Foundations::07 Deep Learning",
+   "tags": [
+    "quant::deep_learning"
+   ],
+   "front": "What is the principle behind <b>Xavier/Glorot</b> and <b>He</b> initialisation?",
+   "back": "Choose weight variance so activation (forward) and gradient (backward) variances are preserved across layers: Xavier \\(2/(n_{in}+n_{out})\\); He \\(2/n_{in}\\) for ReLU (× 2 because ReLU zeroes half the inputs).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Deep Learning",
+   "reverse": false
+  },
+  {
+   "guid": "I4U53V$m>+",
+   "type": "basic",
+   "deck": "Quantitative Foundations::07 Deep Learning",
+   "tags": [
+    "quant::deep_learning"
+   ],
+   "front": "<b>BatchNorm</b> vs <b>LayerNorm</b>?",
+   "back": "Both standardise activations, then apply a learned scale and shift. BatchNorm: statistics across the batch, per feature (train ≠ inference, weak with small batches). LayerNorm: across features, per example; standard in Transformers (often RMSNorm).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Effect: a smoother, better-conditioned loss landscape and larger usable learning rates.",
+   "source": "Deep Learning",
+   "reverse": false
+  },
+  {
+   "guid": "nsCa6-N2~j",
+   "type": "basic",
+   "deck": "Quantitative Foundations::07 Deep Learning",
+   "tags": [
+    "quant::deep_learning"
+   ],
+   "front": "How does <b>dropout</b> regularise?",
+   "back": "Training zeroes each unit with probability p (survivors scaled by 1/(1−p)), approximating an ensemble of weight-sharing subnetworks and preventing co-adaptation; all units are used at test time.",
+   "text": "",
+   "image": "",
+   "analogy": "A team where random members call in sick each day learns not to depend on any single person.",
+   "extra": "Keeping dropout on at test time gives Monte Carlo uncertainty estimates.",
+   "source": "Deep Learning",
+   "reverse": false
+  },
+  {
+   "guid": "Gtwe=?#lM]",
+   "type": "basic",
+   "deck": "Quantitative Foundations::07 Deep Learning",
+   "tags": [
+    "quant::deep_learning"
+   ],
+   "front": "Why does decoupled weight decay (<b>AdamW</b>) differ from L2 regularisation in Adam?",
+   "back": "In Adam an L2 gradient term is divided by \\(\\sqrt{\\hat v}\\), so parameters with large gradients get regularised <b>less</b>. AdamW applies \\(\\theta\\leftarrow\\theta-\\eta\\lambda\\theta\\) outside the adaptive rescaling: uniform decay.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "For plain SGD the two coincide.",
+   "source": "Deep Learning",
+   "reverse": false
+  },
+  {
+   "guid": "oi^Jn0#Qjc",
+   "type": "basic",
+   "deck": "Quantitative Foundations::07 Deep Learning",
+   "tags": [
+    "quant::deep_learning"
+   ],
+   "front": "Why do <b>residual connections</b> make very deep networks trainable?",
+   "back": "\\(x_{l+1}=x_l+f(x_l)\\) has Jacobian \\(I+\\partial f/\\partial x\\), so gradients flow through the identity path at any depth, and each block only learns a correction.",
+   "text": "",
+   "image": "",
+   "analogy": "Editing a draft instead of rewriting it from scratch at every layer: each block only adds a correction.",
+   "extra": "Like Euler steps of an ODE. In Transformers the residual stream is a shared bus that layers read from and write to.",
+   "source": "Deep Learning",
+   "reverse": false
+  },
+  {
+   "guid": "N-.^q#%cB?",
+   "type": "cloze",
+   "deck": "Quantitative Foundations::07 Deep Learning",
+   "tags": [
+    "quant::deep_learning"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Inductive biases of a convolutional layer: {{c1::locality}} (each output sees a small neighbourhood) and {{c2::weight sharing}} (the same filter everywhere), which give {{c3::translation equivariance}}; pooling adds approximate translation invariance.",
+   "image": "",
+   "analogy": "",
+   "extra": "A fully connected layer constrained to commute with translations is forced to be a convolution; generalises to other groups (graphs, rotations).",
+   "source": "Deep Learning",
+   "reverse": false
+  },
+  {
+   "guid": "EU.dwybKN&",
+   "type": "basic",
+   "deck": "Quantitative Foundations::07 Deep Learning",
+   "tags": [
+    "quant::deep_learning"
+   ],
+   "front": "How do learned embeddings represent meaning?",
+   "back": "Concepts correspond to <b>directions</b>; similarity is cosine; relations can appear as roughly constant offsets (king − man + woman ≈ queen).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Deep Learning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::07 Deep Learning",
+   "tags": [
+    "quant::deep_learning"
+   ],
+   "front": "How can a d-dimensional space hold far more than d features (<b>superposition</b>)?",
+   "back": "High dimensions allow exponentially many <i>nearly</i> orthogonal directions (Johnson–Lindenstrauss); if features are sparse, their interference is tolerable. Cost: polysemantic neurons.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Deep Learning",
+   "reverse": false
+  },
+  {
+   "guid": "PezGIghLhT",
+   "type": "basic",
+   "deck": "Quantitative Foundations::07 Deep Learning",
+   "tags": [
+    "quant::deep_learning"
+   ],
+   "front": "What does the loss landscape of a large neural network look like?",
+   "back": "High-loss critical points are overwhelmingly saddles, not local minima; minima have similar low loss and connect through low-loss valleys; flat minima tend to generalise better.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "For a minimum, all d Hessian eigenvalues must be positive; if signs were coin flips that is \\(2^{-d}\\). In a million dimensions some direction almost always leads downhill.",
+   "source": "Deep Learning",
+   "reverse": false
+  },
+  {
+   "guid": "Oiy#M/BvTG",
+   "type": "basic",
+   "deck": "Quantitative Foundations::07 Deep Learning",
+   "tags": [
+    "quant::deep_learning"
+   ],
+   "front": "What is the <b>implicit bias</b> of gradient descent?",
+   "back": "Among many zero-training-loss solutions it selects particular ones: the minimum-L2-norm interpolator for linear regression from zero init; the max-margin direction for logistic regression on separable data.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "The regulariser is the algorithm and its starting point, not a term in the loss.",
+   "source": "Deep Learning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::07 Deep Learning",
+   "tags": [
+    "quant::deep_learning"
+   ],
+   "front": "What is the <b>Neural Tangent Kernel</b> (\"lazy training\") regime?",
+   "back": "Infinitely wide networks trained with small learning rates behave like kernel regression with a fixed kernel. Real networks also learn features, which the NTK can't explain.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Deep Learning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::07 Deep Learning",
+   "tags": [
+    "quant::deep_learning"
+   ],
+   "front": "What does a <b>Variational Autoencoder</b> add to an autoencoder?",
+   "back": "A probabilistic encoder/decoder trained on the ELBO (reconstruction − KL to a Gaussian prior) with the reparameterisation trick \\(z=\\mu+\\sigma\\odot\\epsilon\\); the KL term fills latent space so you can sample from it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Deep Learning",
+   "reverse": false
+  },
+  {
+   "guid": "Jf?]5-dmbE",
+   "type": "basic",
+   "deck": "Quantitative Foundations::07 Deep Learning",
+   "tags": [
+    "quant::deep_learning"
+   ],
+   "front": "What game does a <b>GAN</b> play?",
+   "back": "A generator and a discriminator play a minimax game; with an optimal discriminator the generator minimises the Jensen–Shannon divergence to the data distribution.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Deep Learning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::07 Deep Learning",
+   "tags": [
+    "quant::deep_learning"
+   ],
+   "front": "GAN failure modes, and the Wasserstein fix?",
+   "back": "Mode collapse, oscillation, and vanishing generator gradients when D wins. Non-overlapping manifolds make JS flat; Wasserstein (earth-mover) distance still slopes toward the data.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Deep Learning",
+   "reverse": false
+  },
+  {
+   "guid": "kE+}9!^@sl",
+   "type": "basic",
+   "deck": "Quantitative Foundations::07 Deep Learning",
+   "tags": [
+    "quant::deep_learning"
+   ],
+   "front": "How do <b>diffusion models</b> generate data?",
+   "back": "Train a network to predict the Gaussian noise added to data at many noise levels; generate by starting from pure noise and denoising step by step.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Deep Learning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::07 Deep Learning",
+   "tags": [
+    "quant::deep_learning"
+   ],
+   "front": "What does a diffusion model's noise prediction actually estimate?",
+   "back": "The <b>score</b> \\(\\nabla_x\\log p_t(x)\\) (Tweedie / denoising score matching): a vector field pointing toward the data manifold, defined everywhere thanks to multi-scale noise.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Deep Learning",
+   "reverse": false
+  },
+  {
+   "guid": "f2`D~lz5H<",
+   "type": "basic",
+   "deck": "Quantitative Foundations::07 Deep Learning",
+   "tags": [
+    "quant::deep_learning"
+   ],
+   "front": "What does contrastive learning (<b>InfoNCE</b>) optimise?",
+   "back": "A softmax classification of which candidate is the anchor's true positive. On the unit hypersphere it pulls positive pairs together (alignment) and spreads everything else out (uniformity). Used in SimCLR, CLIP.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Deep Learning",
+   "reverse": false
+  },
+  {
+   "guid": "Ar7t802+[s",
+   "type": "basic",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "Define a <b>Markov Decision Process</b> and the Markov property.",
+   "back": "A tuple \\((\\mathcal S,\\mathcal A,P,R,\\gamma)\\): states, actions, transition kernel, reward, discount. Markov property: the future is conditionally independent of the past given the current state.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "The state is a sufficient statistic of history. If observations aren't Markov (one video frame has no velocity), enlarge the state.",
+   "source": "Reinforcement Learning",
+   "reverse": false
+  },
+  {
+   "guid": "hw8*-&U^0X",
+   "type": "basic",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "What is the <b>discounted return</b>, and what horizon does γ imply?",
+   "back": "\\(G_t=\\sum_{k\\ge0}\\gamma^kR_{t+k+1}\\); effective horizon ≈ \\(1/(1-\\gamma)\\) steps (γ = 0.99 → ~100, γ = 0.9 → ~10).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Reinforcement Learning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "Besides setting a horizon, what roles does the discount γ play?",
+   "back": "Makes infinite-horizon sums finite, equals a per-step termination probability 1 − γ, and trades lower variance of return estimates for myopia.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Reinforcement Learning",
+   "reverse": false
+  },
+  {
+   "guid": "qz3+V4H*U!",
+   "type": "basic",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "Define V, Q and the advantage A in RL.",
+   "back": "\\(V^\\pi(s)\\): expected return from s under π. \\(Q^\\pi(s,a)\\): expected return taking a first, then π. \\(A=Q-V\\): how much better a is than π's average action (\\(E_\\pi[A]=0\\)).",
+   "text": "",
+   "image": "",
+   "analogy": "V is a state's altitude on the landscape of future reward; Q is the altitude you reach with a specific first step; A strips out \"this state is just good\".",
+   "extra": "",
+   "source": "Reinforcement Learning",
+   "reverse": false
+  },
+  {
+   "guid": "c{Eg%X~Ne>",
+   "type": "basic",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "Bellman expectation equation in matrix form, and its solution?",
+   "back": "\\(V^\\pi=R^\\pi+\\gamma P^\\pi V^\\pi\\), so \\(V^\\pi=(I-\\gamma P^\\pi)^{-1}R^\\pi\\); invertible because \\(\\gamma P^\\pi\\) has spectral radius ≤ γ &lt; 1.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "A state's value = immediate reward + discounted average value of where it leads; values diffuse backward from the rewards.",
+   "source": "Reinforcement Learning",
+   "reverse": false
+  },
+  {
+   "guid": "c@OB+(:f4I",
+   "type": "basic",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "Why does <b>value iteration</b> converge?",
+   "back": "The Bellman optimality operator is a γ-contraction in the sup norm, so by Banach's fixed-point theorem it has a unique fixed point V*, and the error shrinks by γ each iteration.",
+   "text": "",
+   "image": "<img src=\"bellman_contraction.svg\">",
+   "analogy": "Repeatedly photocopying at 90%: every starting image collapses onto the same dot.",
+   "extra": "",
+   "source": "Reinforcement Learning",
+   "reverse": false
+  },
+  {
+   "guid": "zhw5-)-Ymo",
+   "type": "basic",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "How does <b>policy iteration</b> work, and why does it terminate?",
+   "back": "Alternate evaluating \\(V^\\pi\\) and acting greedily w.r.t. \\(Q^\\pi\\). Greedy improvement never lowers value anywhere (policy improvement theorem), so it reaches π* in finitely many, usually few, steps.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Reinforcement Learning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "What is <b>generalised policy iteration</b>?",
+   "back": "Any interleaving of partial evaluation and partial improvement; nearly every RL algorithm (e.g. actor-critic) is an instance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Reinforcement Learning",
+   "reverse": false
+  },
+  {
+   "guid": "nI9{Sze:eh",
+   "type": "basic",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "Monte Carlo vs TD(0) value estimation?",
+   "back": "<b>MC</b> targets the full observed return: unbiased, high variance, needs complete episodes. <b>TD(0)</b> targets \\(r+\\gamma V(s')\\): bootstraps from its own estimate, biased, low variance, online.",
+   "text": "",
+   "image": "",
+   "analogy": "MC waits until you arrive to judge the commute; TD revises the arrival estimate the moment you hit a traffic jam.",
+   "extra": "",
+   "source": "Reinforcement Learning",
+   "reverse": false
+  },
+  {
+   "guid": "MDHeH~2bBz",
+   "type": "basic",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "What is the <b>TD error</b>?",
+   "back": "\\(\\delta_t=r_{t+1}+\\gamma V(s_{t+1})-V(s_t)\\): a reward-prediction surprise (better or worse than expected). Update \\(V(s_t)\\leftarrow V(s_t)+\\alpha\\delta_t\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Dopamine neurons appear to encode this signal.",
+   "source": "Reinforcement Learning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "How do n-step returns and TD(λ) interpolate between TD and Monte Carlo?",
+   "back": "n-step: n real rewards, then bootstrap. The λ-return geometrically averages all n-step returns: λ = 0 is TD(0), λ = 1 is Monte Carlo. Eligibility traces implement it online.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Reinforcement Learning",
+   "reverse": false
+  },
+  {
+   "guid": "HXO.bWUx+W",
+   "type": "basic",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "<b>Q-learning</b> vs <b>SARSA</b>?",
+   "back": "Q-learning (off-policy) targets \\(\\max_{a'}Q(s',a')\\), learning Q* regardless of behaviour. SARSA (on-policy) targets the action actually taken, so it values the policy including its exploration.",
+   "text": "",
+   "image": "",
+   "analogy": "Cliff walking: Q-learning learns the edge path and keeps falling off while exploring; SARSA prices in its own missteps and walks inland. Q-learning evaluates the ideal you, SARSA the actual you.",
+   "extra": "",
+   "source": "Reinforcement Learning",
+   "reverse": false
+  },
+  {
+   "guid": "dv(bgR/x`O",
+   "type": "basic",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "Bandits: how does <b>ε-greedy</b> explore, and what regret does it get?",
+   "back": "Take a random action with probability ε: undirected exploration, linear regret for a fixed ε.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Reinforcement Learning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "Bandits: how does <b>UCB</b> choose an arm?",
+   "back": "Highest estimate plus uncertainty bonus, \\(\\hat\\mu_a+\\sqrt{2\\ln t/n_a}\\) (\"optimism in the face of uncertainty\"): an arm is tried because it looks good or because its error bar is wide. Logarithmic regret.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Reinforcement Learning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "Bandits: how does <b>Thompson sampling</b> choose an arm?",
+   "back": "Sample a model from the posterior and act greedily for it, so each arm is played with the probability that it is best. Logarithmic regret; usually the best in practice (e.g. adaptive A/B tests).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Lai–Robbins: O(log T) regret is the optimal rate.",
+   "source": "Reinforcement Learning",
+   "reverse": false
+  },
+  {
+   "guid": "FBmB>_6.No",
+   "type": "cloze",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "",
+   "back": "",
+   "text": "RL's \"deadly triad\": {{c1::function approximation}} + {{c2::bootstrapping}} (TD targets) + {{c3::off-policy training}}. Any two are safe; all three can diverge.",
+   "image": "<img src=\"projected_bellman.svg\">",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> the Bellman backup leaves the space of representable value functions and is projected back. On-policy that composition contracts; off-policy the weighting mismatches and it can expand.",
+   "source": "Reinforcement Learning",
+   "reverse": false
+  },
+  {
+   "guid": "t1p1ODx^[/",
+   "type": "basic",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "Which two tricks stabilise <b>Deep Q-Networks</b>, and why?",
+   "back": "<b>Experience replay</b>: random minibatches from a buffer break temporal correlation and reuse data. <b>Target network</b>: a slowly updated copy computes bootstrap targets so they don't move every step.",
+   "text": "",
+   "image": "",
+   "analogy": "Without a target network you regress onto a label that shifts with every update: a dog chasing its own tail.",
+   "extra": "",
+   "source": "Reinforcement Learning",
+   "reverse": false
+  },
+  {
+   "guid": "e:LH)s+Ifc",
+   "type": "basic",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "What is <b>maximisation bias</b> in Q-learning, and how does Double Q-learning fix it?",
+   "back": "Using the same noisy estimates to select and to evaluate the best action overestimates (E[max] ≥ max E). Double Q selects with one estimator and evaluates with another.",
+   "text": "",
+   "image": "",
+   "analogy": "Winner's curse: the highest of several noisy measurements is probably an overestimate; re-measure the winner with an independent instrument.",
+   "extra": "",
+   "source": "Reinforcement Learning",
+   "reverse": false
+  },
+  {
+   "guid": "MTYHHv:|(X",
+   "type": "basic",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "What does the <b>policy gradient theorem</b> say, and why is it remarkable?",
+   "back": "\\(\\nabla J=E[\\nabla_\\theta\\log\\pi_\\theta(a\\mid s)\\,Q^\\pi(s,a)]\\): no derivative of the dynamics or state distribution is needed, so it can be estimated from samples of a black-box environment.",
+   "text": "",
+   "image": "",
+   "analogy": "\"Do more of what worked, less of what didn't\": push up the log-probability of each action in proportion to how well it turned out.",
+   "extra": "REINFORCE uses the sampled return in place of Q.",
+   "source": "Reinforcement Learning",
+   "reverse": false
+  },
+  {
+   "guid": "m|)0kEo.A(",
+   "type": "basic",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "Why does subtracting a baseline in policy gradients keep the estimate unbiased but cut variance?",
+   "back": "\\(E_\\pi[\\nabla\\log\\pi(a\\mid s)\\,b(s)]=b(s)\\nabla\\sum_a\\pi(a\\mid s)=0\\), so b(s) adds no bias. With b = V the weight becomes the advantage, removing \"this state is just good\" noise.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Reinforcement Learning",
+   "reverse": false
+  },
+  {
+   "guid": "KBmohQWADw",
+   "type": "basic",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "What is an <b>actor-critic</b> method?",
+   "back": "The actor is a policy updated by policy gradient; the critic is a learned value function supplying low-variance advantage estimates in place of Monte Carlo returns.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Reinforcement Learning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "What does Generalised Advantage Estimation's λ trade off?",
+   "back": "\\(\\hat A_t=\\sum_l(\\gamma\\lambda)^l\\delta_{t+l}\\): λ = 0 is one-step TD (low variance, biased by critic error); λ = 1 is Monte Carlo (unbiased, high variance).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Reinforcement Learning",
+   "reverse": false
+  },
+  {
+   "guid": "cNp<(vPn8?",
+   "type": "basic",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "What problem do trust-region policy methods (TRPO, PPO) solve?",
+   "back": "A too-large policy step can collapse performance, and data from the old policy can't reveal it; equal parameter steps can mean very unequal behaviour changes. So limit the step in distribution (KL) space.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Reinforcement Learning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "<b>TRPO</b> vs <b>PPO</b>: how does each limit the step?",
+   "back": "TRPO maximises the importance-ratio surrogate subject to \\(\\mathrm{KL}(\\pi_{\\text{old}}\\|\\pi_\\theta)\\le\\delta\\) (a natural-gradient step). PPO clips the ratio to [1 − ε, 1 + ε] so there is no incentive to move far.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Reinforcement Learning",
+   "reverse": false
+  },
+  {
+   "guid": "L}=CZPs/$O",
+   "type": "basic",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "On-policy vs off-policy learning?",
+   "back": "<b>On-policy</b> learns about the policy generating the data (SARSA, PPO): stable, sample-hungry. <b>Off-policy</b> learns a target policy from another behaviour policy's data (Q-learning, DQN, SAC): enables replay buffers and learning from logs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Reinforcement Learning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "Why are importance-sampling corrections hard in off-policy RL?",
+   "back": "The product of per-step ratios π/μ has variance growing exponentially with the horizon; remedies truncate the ratios (Retrace, V-trace).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Reinforcement Learning",
+   "reverse": false
+  },
+  {
+   "guid": "C_=2&*IjI1",
+   "type": "basic",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "Promise and central difficulty of <b>model-based RL</b>?",
+   "back": "Learn the dynamics and plan (Dyna, MPC, MCTS as in AlphaZero/MuZero) for far better sample efficiency. But one-step errors compound over rollouts, and the planner actively exploits model errors.",
+   "text": "",
+   "image": "",
+   "analogy": "Planning on a map is free, but an optimiser hunting for shortcuts finds exactly the places where the cartographer made mistakes.",
+   "extra": "Mitigations: short rollouts, model ensembles with uncertainty penalties, replanning every step.",
+   "source": "Reinforcement Learning",
+   "reverse": false
+  },
+  {
+   "guid": "Lu!_96=*?b",
+   "type": "basic",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "How is a <b>POMDP</b> reduced to an MDP?",
+   "back": "Use the belief state b(s) = P(s | history), updated by Bayes filtering: it is a sufficient statistic, and the belief process is a continuous-state MDP.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "The optimal value over beliefs is piecewise linear and convex: certainty is valuable, which is why information-gathering actions can be optimal.",
+   "source": "Reinforcement Learning",
+   "reverse": false
+  },
+  {
+   "guid": "u@E1<@5+::",
+   "type": "basic",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "Which reward shaping is guaranteed to preserve the optimal policy?",
+   "back": "Potential-based shaping \\(F=\\gamma\\Phi(s')-\\Phi(s)\\): it telescopes along any trajectory, so it reshapes the hills without moving the summit.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Any non-conservative bonus creates cycles the agent can farm forever.",
+   "source": "Reinforcement Learning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "What is <b>reward hacking</b>?",
+   "back": "The agent maximises the literal reward in unintended ways (specification gaming; Goodhart's law).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Reinforcement Learning",
+   "reverse": false
+  },
+  {
+   "guid": "rorv[XB8{G",
+   "type": "basic",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "What is <b>maximum-entropy RL</b> (Soft Actor-Critic)?",
+   "back": "Maximise reward + α × policy entropy. The optimal policy is Boltzmann, \\(\\pi\\propto\\exp(Q_{\\text{soft}}/\\alpha)\\), and the Bellman max becomes a log-sum-exp. Gives principled exploration and robustness.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Reinforcement Learning",
+   "reverse": false
+  },
+  {
+   "guid": "d#v]F0XwBA",
+   "type": "basic",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "What is the core difficulty of <b>offline RL</b>?",
+   "back": "The backup's \\(\\max_{a'}Q(s',a')\\) queries actions never seen in the data; their values are unconstrained extrapolations, the max picks the most overestimated, and no new data ever corrects it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Reinforcement Learning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "Remedies in offline RL?",
+   "back": "Stay near the behaviour policy (behaviour-cloning regularisation), be pessimistic (CQL pushes Q down on unseen actions), or penalise uncertainty.",
+   "text": "",
+   "image": "",
+   "analogy": "The data covers a thin tube of state-action space; improve as much as possible while staying inside the tube.",
+   "extra": "",
+   "source": "Reinforcement Learning",
+   "reverse": false
+  },
+  {
+   "guid": "AmZ9G,2RtE",
+   "type": "basic",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "What is the occupancy-measure (linear programming) view of an MDP?",
+   "back": "Return is linear in the discounted state-action occupancy ρ, and valid occupancies form a polytope (flow-conservation constraints): solving the MDP is a linear programme whose dual variables are V(s).",
+   "text": "",
+   "image": "<img src=\"occupancy_polytope.svg\">",
+   "analogy": "",
+   "extra": "",
+   "source": "Reinforcement Learning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "Why does an optimal <b>deterministic</b> policy always exist (LP view)?",
+   "back": "A linear objective over a polytope is maximised at a vertex, and the vertices correspond to deterministic policies.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Reinforcement Learning",
+   "reverse": false
+  },
+  {
+   "guid": "n]}dJQ)pq(",
+   "type": "basic",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "What is the <b>credit assignment problem</b>?",
+   "back": "Working out which earlier actions caused a delayed outcome; with sparse, delayed reward the learning signal per decision is tiny and noisy.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Reinforcement Learning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::08 Reinforcement Learning",
+   "tags": [
+    "quant::rl"
+   ],
+   "front": "How do value functions address credit assignment?",
+   "back": "They act as a potential field that turns a distant reward into immediate TD errors (local slopes). Also: eligibility traces, advantages, discounting, shaping, hindsight relabelling, hierarchy.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Reinforcement Learning",
    "reverse": false
   }
  ]
