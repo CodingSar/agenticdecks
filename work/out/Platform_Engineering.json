@@ -1,0 +1,3879 @@
+{
+ "deck_name": "Platform Engineering",
+ "file": "Platform_Engineering.apkg",
+ "description": "Platform engineering for a cloud/Kubernetes platform architect: GitOps (Argo CD, Flux), Terraform/Ansible/Crossplane, Helm, operators, internal developer platforms, policy-as-code, supply-chain security, and fleet/multi-tenancy design.",
+ "notes": [
+  {
+   "guid": "qSQ7aa#{3*",
+   "type": "cloze",
+   "deck": "Platform Engineering::01 GitOps Principles",
+   "tags": [
+    "PlatformEngineering::GitOps"
+   ],
+   "front": "",
+   "back": "",
+   "text": "OpenGitOps principles: desired state is {{c1::declarative}}; it is {{c2::versioned and immutable}} (full history); it is {{c3::pulled automatically}} by agents from the source; it is {{c4::continuously reconciled}} against the actual state.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "GitOps · principles",
+   "reverse": false
+  },
+  {
+   "guid": "Q|~4N@1k|p",
+   "type": "basic",
+   "deck": "Platform Engineering::01 GitOps Principles",
+   "tags": [
+    "PlatformEngineering::GitOps"
+   ],
+   "front": "Push vs pull deployment: where do the <b>cluster credentials</b> live?",
+   "back": "<b>Push:</b> the CI pipeline holds cluster credentials and applies changes.<br><b>Pull:</b> an in-cluster agent pulls from Git/OCI; credentials never leave the cluster, it only needs read access to the source.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Bonus of pull:</b> the agent keeps correcting drift continuously.",
+   "source": "GitOps · principles",
+   "reverse": false
+  },
+  {
+   "guid": "oK@9gvd#,t",
+   "type": "basic",
+   "deck": "Platform Engineering::01 GitOps Principles",
+   "tags": [
+    "PlatformEngineering::GitOps"
+   ],
+   "front": "Why is \"manifests in Git + <code>kubectl apply</code> from CI\" not GitOps?",
+   "back": "Nothing reconciles continuously, so drift from manual changes is never detected or corrected. It is push-based CD.",
+   "text": "",
+   "image": "",
+   "analogy": "A thermostat keeps measuring and correcting the temperature; a CI apply sets the heater once and walks away.",
+   "extra": "",
+   "source": "GitOps · principles",
+   "reverse": false
+  },
+  {
+   "guid": "LZ$%UaPqy+",
+   "type": "basic",
+   "deck": "Platform Engineering::01 GitOps Principles",
+   "tags": [
+    "PlatformEngineering::GitOps"
+   ],
+   "front": "GitOps secrets: <b>encrypted-in-Git</b> vs <b>reference-in-Git</b> — examples of each?",
+   "back": "<b>Encrypted in Git:</b> Sealed Secrets, SOPS.<br><b>Reference in Git:</b> External Secrets Operator, Secrets Store CSI driver — Git holds only a pointer to Vault / cloud KMS.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "GitOps · principles",
+   "reverse": false
+  },
+  {
+   "guid": "iQd,JcNEeb",
+   "type": "basic",
+   "deck": "Platform Engineering::01 GitOps Principles",
+   "tags": [
+    "PlatformEngineering::GitOps"
+   ],
+   "front": "GitOps environment promotion: why prefer <b>directory-per-environment</b> over branch-per-environment?",
+   "back": "Env differences are visible as diffs on one branch; long-lived env branches drift apart through cherry-picks and merges.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "GitOps · principles",
+   "reverse": false
+  },
+  {
+   "guid": "m@FmBJkBb<",
+   "type": "cloze",
+   "deck": "Platform Engineering::02 Argo CD",
+   "tags": [
+    "PlatformEngineering::GitOps::ArgoCD"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Argo CD components: {{c1::argocd-repo-server}} clones repos and renders manifests (Helm/Kustomize/plugins); {{c2::argocd-application-controller}} compares live vs desired state and syncs; {{c3::argocd-server}} serves the API and UI.",
+   "image": "",
+   "analogy": "",
+   "extra": "Also: Redis (cache), Dex (SSO), ApplicationSet controller, notifications controller.",
+   "source": "Argo CD",
+   "reverse": false
+  },
+  {
+   "guid": "wA$5Qg#-xS",
+   "type": "basic",
+   "deck": "Platform Engineering::02 Argo CD",
+   "tags": [
+    "PlatformEngineering::GitOps::ArgoCD"
+   ],
+   "front": "Key fields of an Argo CD <code>Application</code> spec?",
+   "back": "<code>project</code>, <code>source</code>/<code>sources</code> (repoURL, targetRevision, path or chart), <code>destination</code> (cluster + namespace), <code>syncPolicy</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Argo CD",
+   "reverse": false
+  },
+  {
+   "guid": "k^Tn<8UP,b",
+   "type": "basic",
+   "deck": "Platform Engineering::02 Argo CD",
+   "tags": [
+    "PlatformEngineering::GitOps::ArgoCD"
+   ],
+   "front": "What does an Argo CD <code>AppProject</code> restrict?",
+   "back": "Allowed source repos, destination clusters/namespaces, and allowed/denied resource kinds (cluster-scoped and namespaced); it also carries project roles and sync windows.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Tenancy pattern:</b> one AppProject per tenant, SSO groups mapped to project roles, cluster-scoped kinds (e.g. ClusterRole) denied → tenants self-serve within guardrails.",
+   "source": "Argo CD",
+   "reverse": false
+  },
+  {
+   "guid": "P<]#aFm?Cy",
+   "type": "basic",
+   "deck": "Platform Engineering::02 Argo CD",
+   "tags": [
+    "PlatformEngineering::GitOps::ArgoCD"
+   ],
+   "front": "Argo CD: <b>sync status</b> vs <b>health status</b>?",
+   "back": "<b>Sync:</b> does live state match Git (Synced / OutOfSync)?<br><b>Health:</b> is the app actually working (Healthy, Progressing, Degraded, Missing...)?",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Health comes from built-in or custom Lua health checks.",
+   "source": "Argo CD",
+   "reverse": false
+  },
+  {
+   "guid": "vyrol0Vo_B",
+   "type": "cloze",
+   "deck": "Platform Engineering::02 Argo CD",
+   "tags": [
+    "PlatformEngineering::GitOps::ArgoCD"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Argo CD automated sync: {{c1::<code>prune: true</code>}} deletes resources removed from Git; {{c2::<code>selfHeal: true</code>}} reverts manual live changes without a new commit.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Pitfall:</b> both are off by default, even when automated sync is enabled.",
+   "source": "Argo CD",
+   "reverse": false
+  },
+  {
+   "guid": "i?9+PBV$mj",
+   "type": "basic",
+   "deck": "Platform Engineering::02 Argo CD",
+   "tags": [
+    "PlatformEngineering::GitOps::ArgoCD"
+   ],
+   "front": "Argo CD sync phases and sync waves: how do they order resources?",
+   "back": "Phases run PreSync → Sync → PostSync (SyncFail on failure). Within a phase, <code>argocd.argoproj.io/sync-wave</code> orders resources (lowest first, may be negative); Argo waits for health between waves.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Argo CD",
+   "reverse": false
+  },
+  {
+   "guid": "s%AoPSgTu,",
+   "type": "basic",
+   "deck": "Platform Engineering::02 Argo CD",
+   "tags": [
+    "PlatformEngineering::GitOps::ArgoCD"
+   ],
+   "front": "How are Argo CD hooks declared?",
+   "back": "<code>argocd.argoproj.io/hook: PreSync|Sync|PostSync|SyncFail|Skip</code> plus <code>argocd.argoproj.io/hook-delete-policy</code> (HookSucceeded, HookFailed, BeforeHookCreation).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Helm hook annotations are mapped to Argo hooks.",
+   "source": "Argo CD",
+   "reverse": false
+  },
+  {
+   "guid": "fCL4sult$b",
+   "type": "basic",
+   "deck": "Platform Engineering::02 Argo CD",
+   "tags": [
+    "PlatformEngineering::GitOps::ArgoCD"
+   ],
+   "front": "Is a Helm chart deployed by Argo CD a real Helm release?",
+   "back": "No. Argo renders it with <code>helm template</code> and applies the manifests itself: <code>helm ls</code> shows nothing, <code>lookup</code> returns empty, Argo owns the lifecycle.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Argo CD",
+   "reverse": false
+  },
+  {
+   "guid": "jyrj(n&(<p",
+   "type": "basic",
+   "deck": "Platform Engineering::02 Argo CD",
+   "tags": [
+    "PlatformEngineering::GitOps::ArgoCD"
+   ],
+   "front": "What is the Argo CD <b>App of Apps</b> pattern?",
+   "back": "A parent Application whose source contains Application manifests, bootstrapping a whole set of child apps from one entry point.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Argo CD",
+   "reverse": false
+  },
+  {
+   "guid": "MpR]]A*}gK",
+   "type": "cloze",
+   "deck": "Platform Engineering::02 Argo CD",
+   "tags": [
+    "PlatformEngineering::GitOps::ArgoCD"
+   ],
+   "front": "",
+   "back": "",
+   "text": "ApplicationSet generators: {{c1::List}} (fixed items); {{c2::Cluster}} (registered clusters, filtered by labels); {{c3::Git}} (directories or files in a repo); {{c4::Matrix / Merge}} (combine other generators).",
+   "image": "",
+   "analogy": "",
+   "extra": "Also: SCM Provider, Pull Request, Cluster Decision Resource, Plugin.",
+   "source": "Argo CD",
+   "reverse": false
+  },
+  {
+   "guid": "zVf7[z@kH[",
+   "type": "basic",
+   "deck": "Platform Engineering::02 Argo CD",
+   "tags": [
+    "PlatformEngineering::GitOps::ArgoCD"
+   ],
+   "front": "ApplicationSet for \"deploy add-ons to every cluster labelled <code>env=prod</code>\"?",
+   "back": "A Cluster generator with <code>selector.matchLabels: {env: prod}</code>, templating the cluster <code>name</code>/<code>server</code> into the Application; often combined (Matrix) with a Git directory generator.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Argo CD",
+   "reverse": false
+  },
+  {
+   "guid": "wi(TaawJ,.",
+   "type": "basic",
+   "deck": "Platform Engineering::02 Argo CD",
+   "tags": [
+    "PlatformEngineering::GitOps::ArgoCD"
+   ],
+   "front": "Why are ApplicationSets the backbone of multi-cluster GitOps?",
+   "back": "They generate one Application per target cluster, so registering and labelling a new cluster is enough for the golden stack and tenant apps to roll onto it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Flux equivalent:</b> per-cluster bootstrap from a shared repo layout (<code>clusters/&lt;name&gt;/</code> overlays).",
+   "source": "Argo CD · fleet",
+   "reverse": false
+  },
+  {
+   "guid": "k@up2H6U1p",
+   "type": "basic",
+   "deck": "Platform Engineering::02 Argo CD",
+   "tags": [
+    "PlatformEngineering::GitOps::ArgoCD"
+   ],
+   "front": "How do multi-source Applications help with Helm charts?",
+   "back": "<code>spec.sources</code> lets a chart from a Helm/OCI repo take values files from a separate Git repo via a <code>ref</code> source, e.g. <code>valueFiles: [$values/envs/prod.yaml]</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Argo CD",
+   "reverse": false
+  },
+  {
+   "guid": "Pt49>K8;(y",
+   "type": "basic",
+   "deck": "Platform Engineering::02 Argo CD",
+   "tags": [
+    "PlatformEngineering::GitOps::ArgoCD"
+   ],
+   "front": "How do you stop Argo CD flagging fields mutated by other controllers (e.g. HPA-managed <code>replicas</code>)?",
+   "back": "<code>ignoreDifferences</code> (jsonPointers, jqPathExpressions or managedFieldsManagers) plus sync option <code>RespectIgnoreDifferences=true</code> so syncs don't overwrite them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Argo CD",
+   "reverse": false
+  },
+  {
+   "guid": "pkV?wWd|GY",
+   "type": "cloze",
+   "deck": "Platform Engineering::02 Argo CD",
+   "tags": [
+    "PlatformEngineering::GitOps::ArgoCD"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Argo CD sync options: {{c1::<code>CreateNamespace=true</code>}} creates the destination namespace; {{c2::<code>ServerSideApply=true</code>}} applies via server-side apply (e.g. CRDs too large for the last-applied annotation); {{c3::<code>PruneLast=true</code>}} prunes only after everything else has synced.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Argo CD",
+   "reverse": false
+  },
+  {
+   "guid": "qPS!}rwNh%",
+   "type": "basic",
+   "deck": "Platform Engineering::02 Argo CD",
+   "tags": [
+    "PlatformEngineering::GitOps::ArgoCD"
+   ],
+   "front": "How does Argo CD track which resources belong to an app, and what changed in 3.0?",
+   "back": "Via a tracking method: the <code>argocd.argoproj.io/tracking-id</code> annotation (default since 3.0) or the <code>app.kubernetes.io/instance</code> label (old default, clashes with Helm's use of that label).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Argo CD",
+   "reverse": false
+  },
+  {
+   "guid": "O|e9!^2}=A",
+   "type": "basic",
+   "deck": "Platform Engineering::02 Argo CD",
+   "tags": [
+    "PlatformEngineering::GitOps::ArgoCD"
+   ],
+   "front": "How is a remote cluster registered in Argo CD?",
+   "back": "<code>argocd cluster add</code> creates a ServiceAccount + RBAC in the target and stores its credentials as a Secret labelled <code>argocd.argoproj.io/secret-type: cluster</code> in the Argo namespace.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "That Secret can also be declared directly (GitOps-managed cluster registration).",
+   "source": "Argo CD",
+   "reverse": false
+  },
+  {
+   "guid": "P`bt+cKxXU",
+   "type": "basic",
+   "deck": "Platform Engineering::02 Argo CD",
+   "tags": [
+    "PlatformEngineering::GitOps::ArgoCD"
+   ],
+   "front": "Argo CD topology: hub-and-spoke vs instance-per-cluster trade-off?",
+   "back": "<b>Hub:</b> single pane of glass and central RBAC, but needs network access + credentials for every cluster (blast radius, scale bottleneck).<br><b>Per-cluster:</b> isolation and pull-only networking, but N instances to run.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Argo CD",
+   "reverse": false
+  },
+  {
+   "guid": "PjL(U6c:e`",
+   "type": "basic",
+   "deck": "Platform Engineering::02 Argo CD",
+   "tags": [
+    "PlatformEngineering::GitOps::ArgoCD"
+   ],
+   "front": "How often does Argo CD poll Git, and how do you make it react immediately?",
+   "back": "About every 3 minutes (<code>timeout.reconciliation</code> = 180s plus jitter). Configure Git provider webhooks to <code>/api/webhook</code> for immediate refresh.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Argo CD",
+   "reverse": false
+  },
+  {
+   "guid": "vXH``XZJ6e",
+   "type": "basic",
+   "deck": "Platform Engineering::02 Argo CD",
+   "tags": [
+    "PlatformEngineering::GitOps::ArgoCD"
+   ],
+   "front": "Argo CD: refresh vs hard refresh?",
+   "back": "<b>Refresh:</b> re-compare using cached manifests (checks the Git revision).<br><b>Hard refresh:</b> invalidates the repo-server manifest cache and re-renders.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Argo CD",
+   "reverse": false
+  },
+  {
+   "guid": "h$X{H4E-Vb",
+   "type": "basic",
+   "deck": "Platform Engineering::02 Argo CD",
+   "tags": [
+    "PlatformEngineering::GitOps::ArgoCD"
+   ],
+   "front": "How do you scale the Argo CD application controller across many clusters?",
+   "back": "Run multiple replicas with sharding by cluster (legacy, round-robin or consistent-hashing), and tune <code>--status-processors</code> / <code>--operation-processors</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Argo CD",
+   "reverse": false
+  },
+  {
+   "guid": "vjI?~As;YW",
+   "type": "basic",
+   "deck": "Platform Engineering::02 Argo CD",
+   "tags": [
+    "PlatformEngineering::GitOps::ArgoCD"
+   ],
+   "front": "What are Argo CD Config Management Plugins (CMPs)?",
+   "back": "Custom manifest generators run as sidecars on the repo-server (a <code>ConfigManagementPlugin</code> in <code>plugin.yaml</code>), e.g. for cdk8s, Jsonnet variants, envsubst.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Argo CD",
+   "reverse": false
+  },
+  {
+   "guid": "lE$l=-vNGQ",
+   "type": "basic",
+   "deck": "Platform Engineering::02 Argo CD",
+   "tags": [
+    "PlatformEngineering::GitOps::ArgoCD"
+   ],
+   "front": "Where is Argo CD RBAC configured?",
+   "back": "In <code>argocd-rbac-cm</code> <code>policy.csv</code> (Casbin): <code>p, role:x, applications, sync, proj/*, allow</code> and <code>g, sso-group, role:x</code>; plus AppProject roles.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Argo CD",
+   "reverse": false
+  },
+  {
+   "guid": "C.h@!|_+O6",
+   "type": "basic",
+   "deck": "Platform Engineering::02 Argo CD",
+   "tags": [
+    "PlatformEngineering::GitOps::ArgoCD"
+   ],
+   "front": "Why do the Argo CD docs discourage manifest-injecting secret plugins (e.g. argocd-vault-plugin)?",
+   "back": "The secrets end up in rendered manifests cached in Redis/repo-server and visible to anyone who can view the app's manifests. Prefer operators that create Secrets in-cluster (External Secrets, Sealed Secrets).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Argo CD",
+   "reverse": false
+  },
+  {
+   "guid": "Gn,j,qYRVU",
+   "type": "basic",
+   "deck": "Platform Engineering::02 Argo CD",
+   "tags": [
+    "PlatformEngineering::GitOps::ArgoCD"
+   ],
+   "front": "What is Argo Rollouts?",
+   "back": "A separate controller with a <code>Rollout</code> CRD for blue-green and canary delivery: traffic shaping (Istio, NGINX, Gateway API...) plus automated analysis (AnalysisTemplates against Prometheus etc.).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Argo CD",
+   "reverse": false
+  },
+  {
+   "guid": "Fy89@ORm1j",
+   "type": "cloze",
+   "deck": "Platform Engineering::03 Flux",
+   "tags": [
+    "PlatformEngineering::GitOps::Flux"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Flux controllers: {{c1::source-controller}} fetches Git/OCI/Helm/Bucket sources into artifacts; {{c2::kustomize-controller}} applies Kustomizations; {{c3::helm-controller}} reconciles HelmReleases; {{c4::notification-controller}} sends alerts and receives inbound webhooks.",
+   "image": "",
+   "analogy": "",
+   "extra": "Image update automation: image-reflector-controller + image-automation-controller.",
+   "source": "Flux",
+   "reverse": false
+  },
+  {
+   "guid": "pGe*=[RkYa",
+   "type": "basic",
+   "deck": "Platform Engineering::03 Flux",
+   "tags": [
+    "PlatformEngineering::GitOps::Flux"
+   ],
+   "front": "Which Flux source kinds exist?",
+   "back": "<code>GitRepository</code>, <code>OCIRepository</code>, <code>HelmRepository</code> (HTTP or OCI), <code>HelmChart</code>, <code>Bucket</code> (S3-compatible).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Flux",
+   "reverse": false
+  },
+  {
+   "guid": "dB#Te1cn81",
+   "type": "basic",
+   "deck": "Platform Engineering::03 Flux",
+   "tags": [
+    "PlatformEngineering::GitOps::Flux"
+   ],
+   "front": "Flux <code>Kustomization</code> CR vs Kustomize's <code>kustomization.yaml</code>?",
+   "back": "<b>Flux Kustomization</b> (<code>kustomize.toolkit.fluxcd.io</code>): tells kustomize-controller which path from which source to build and apply, with interval, prune, health checks.<br><b>kustomization.yaml</b>: the Kustomize build config itself (Flux generates one if absent).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Flux",
+   "reverse": false
+  },
+  {
+   "guid": "z:4o$@fk%{",
+   "type": "basic",
+   "deck": "Platform Engineering::03 Flux",
+   "tags": [
+    "PlatformEngineering::GitOps::Flux"
+   ],
+   "front": "Does a Flux <code>HelmRelease</code> create a real Helm release?",
+   "back": "Yes. helm-controller uses the Helm SDK: the release shows in <code>helm ls</code>, hooks run natively, <code>lookup</code> works.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Contrast:</b> Argo CD only runs <code>helm template</code> and applies the output.",
+   "source": "Flux",
+   "reverse": false
+  },
+  {
+   "guid": "h(On;`zUT]",
+   "type": "basic",
+   "deck": "Platform Engineering::03 Flux",
+   "tags": [
+    "PlatformEngineering::GitOps::Flux"
+   ],
+   "front": "How does a Flux HelmRelease remediate failed installs/upgrades?",
+   "back": "<code>install.remediation.retries</code> / <code>upgrade.remediation.retries</code> with <code>strategy: rollback</code> or <code>uninstall</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Flux",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Platform Engineering::03 Flux",
+   "tags": [
+    "PlatformEngineering::GitOps::Flux"
+   ],
+   "front": "What does HelmRelease <code>driftDetection</code> do?",
+   "back": "Compares the live cluster with the Helm release manifest; <code>mode: enabled</code> corrects drift, <code>mode: warn</code> only reports it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Flux",
+   "reverse": false
+  },
+  {
+   "guid": "g$nYK?rG0X",
+   "type": "basic",
+   "deck": "Platform Engineering::03 Flux",
+   "tags": [
+    "PlatformEngineering::GitOps::Flux"
+   ],
+   "front": "How do you order Flux reconciliations (e.g. CRDs and infra before apps)?",
+   "back": "<code>spec.dependsOn</code> on Kustomizations/HelmReleases, combined with <code>wait: true</code> or <code>healthChecks</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Flux",
+   "reverse": false
+  },
+  {
+   "guid": "zDwwC|]>72",
+   "type": "cloze",
+   "deck": "Platform Engineering::03 Flux",
+   "tags": [
+    "PlatformEngineering::GitOps::Flux"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Flux Kustomization fields: {{c1::<code>interval</code>}} = reconcile period; {{c2::<code>retryInterval</code>}} = retry period after a failure; {{c3::<code>prune</code>}} = garbage-collect objects removed from the source; {{c4::<code>wait</code>}} = wait until all applied resources are ready.",
+   "image": "",
+   "analogy": "",
+   "extra": "<code>timeout</code> bounds apply + health checking.",
+   "source": "Flux",
+   "reverse": false
+  },
+  {
+   "guid": "C/_vKv~b^}",
+   "type": "basic",
+   "deck": "Platform Engineering::03 Flux",
+   "tags": [
+    "PlatformEngineering::GitOps::Flux"
+   ],
+   "front": "How does Flux decrypt SOPS-encrypted secrets?",
+   "back": "Natively in kustomize-controller: <code>spec.decryption: {provider: sops, secretRef: {name: sops-age}}</code> (age/PGP keys) or cloud KMS via workload identity.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Flux",
+   "reverse": false
+  },
+  {
+   "guid": "s5i1gs`kms",
+   "type": "basic",
+   "deck": "Platform Engineering::03 Flux",
+   "tags": [
+    "PlatformEngineering::GitOps::Flux"
+   ],
+   "front": "What are Flux post-build variable substitutions?",
+   "back": "<code>spec.postBuild.substitute</code> / <code>substituteFrom</code> (ConfigMaps/Secrets) replace <code>${VAR}</code> or <code>${VAR:=default}</code> after the kustomize build.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Opt an object out with annotation <code>kustomize.toolkit.fluxcd.io/substitute: disabled</code>.",
+   "source": "Flux",
+   "reverse": false
+  },
+  {
+   "guid": "i^j_,AYPQl",
+   "type": "basic",
+   "deck": "Platform Engineering::03 Flux",
+   "tags": [
+    "PlatformEngineering::GitOps::Flux"
+   ],
+   "front": "What does <code>flux bootstrap</code> do?",
+   "back": "Installs the Flux controllers, commits their manifests plus a <code>flux-system</code> GitRepository + Kustomization to the repo, and sets up deploy keys — so Flux manages its own installation from Git.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Flux",
+   "reverse": false
+  },
+  {
+   "guid": "wD}EcF/pe3",
+   "type": "basic",
+   "deck": "Platform Engineering::03 Flux",
+   "tags": [
+    "PlatformEngineering::GitOps::Flux"
+   ],
+   "front": "How does Flux enforce multi-tenancy?",
+   "back": "Per-object <code>spec.serviceAccountName</code> impersonation, controller flags <code>--no-cross-namespace-refs</code> and <code>--default-service-account</code>, and <code>spec.targetNamespace</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Flux",
+   "reverse": false
+  },
+  {
+   "guid": "qi]#q>Ur!l",
+   "type": "basic",
+   "deck": "Platform Engineering::03 Flux",
+   "tags": [
+    "PlatformEngineering::GitOps::Flux"
+   ],
+   "front": "How can Flux deploy to a remote cluster?",
+   "back": "<code>spec.kubeConfig.secretRef</code> on a Kustomization/HelmRelease (or configMapRef for workload-identity auth), so a hub cluster applies to spokes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Flux",
+   "reverse": false
+  },
+  {
+   "guid": "e?8L5*XmU6",
+   "type": "cloze",
+   "deck": "Platform Engineering::03 Flux",
+   "tags": [
+    "PlatformEngineering::GitOps::Flux"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Flux image automation: {{c1::<code>ImageRepository</code>}} scans registry tags; {{c2::<code>ImagePolicy</code>}} selects the tag (semver/alphabetical/numerical); {{c3::<code>ImageUpdateAutomation</code>}} commits the new tag back to Git.",
+   "image": "",
+   "analogy": "",
+   "extra": "Manifests are marked with <code># {\"$imagepolicy\": \"ns:policy\"}</code>.",
+   "source": "Flux",
+   "reverse": false
+  },
+  {
+   "guid": "lx]ML1&?aS",
+   "type": "cloze",
+   "deck": "Platform Engineering::03 Flux",
+   "tags": [
+    "PlatformEngineering::GitOps::Flux"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Flux notifications: a {{c1::<code>Provider</code>}} is a destination (Slack, Teams, GitHub commit status...); an {{c2::<code>Alert</code>}} routes selected events to a provider; a {{c3::<code>Receiver</code>}} is an inbound webhook that triggers reconciliation.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Flux",
+   "reverse": false
+  },
+  {
+   "guid": "PlV_]`^986",
+   "type": "basic",
+   "deck": "Platform Engineering::03 Flux",
+   "tags": [
+    "PlatformEngineering::GitOps::Flux"
+   ],
+   "front": "How do you force or pause a Flux reconciliation?",
+   "back": "Force: <code>flux reconcile kustomization x --with-source</code> (sets <code>reconcile.fluxcd.io/requestedAt</code>).<br>Pause: <code>flux suspend</code>/<code>resume</code> or <code>spec.suspend: true</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Flux",
+   "reverse": false
+  },
+  {
+   "guid": "O5~nu)Z[>C",
+   "type": "basic",
+   "deck": "Platform Engineering::03 Flux",
+   "tags": [
+    "PlatformEngineering::GitOps::Flux"
+   ],
+   "front": "How does Flux verify artifact authenticity?",
+   "back": "<code>spec.verify</code> on GitRepository (OpenPGP commit signatures) and OCIRepository (cosign or Notation signatures).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Flux",
+   "reverse": false
+  },
+  {
+   "guid": "xDvL`oU+E",
+   "type": "basic",
+   "deck": "Platform Engineering::03 Flux",
+   "tags": [
+    "PlatformEngineering::GitOps::Flux"
+   ],
+   "front": "What is the Flux-ecosystem equivalent of Argo Rollouts?",
+   "back": "<b>Flagger:</b> progressive delivery (canary, A/B, blue-green) with mesh/ingress traffic shifting and metric analysis.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Flux",
+   "reverse": false
+  },
+  {
+   "guid": "h(.0Wca=ZM",
+   "type": "basic",
+   "deck": "Platform Engineering::03 Flux",
+   "tags": [
+    "PlatformEngineering::GitOps::Flux"
+   ],
+   "front": "Argo CD vs Flux: architecture and UI?",
+   "back": "<b>Argo CD:</b> application-centric server with built-in UI, SSO and RBAC.<br><b>Flux:</b> a set of composable controllers, no built-in UI, tenancy via Kubernetes RBAC + impersonation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Both are CNCF-graduated; team familiarity and UI/SSO needs usually decide.",
+   "source": "GitOps · comparison",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Platform Engineering::03 Flux",
+   "tags": [
+    "PlatformEngineering::GitOps::Flux"
+   ],
+   "front": "Argo CD vs Flux: natural fleet topology?",
+   "back": "<b>Argo CD:</b> hub-and-spoke — one instance manages many clusters.<br><b>Flux:</b> per-cluster pull agents, each bootstrapped from a shared repo.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "GitOps · comparison",
+   "reverse": false
+  },
+  {
+   "guid": "d)v46QtlTp",
+   "type": "basic",
+   "deck": "Platform Engineering::04 Terraform & IaC",
+   "tags": [
+    "PlatformEngineering::IaC"
+   ],
+   "front": "Declarative vs imperative Infrastructure as Code?",
+   "back": "<b>Declarative:</b> describe the end state (Terraform, CloudFormation, Kubernetes manifests); the tool computes the diff.<br><b>Imperative:</b> describe the steps (shell scripts, SDK scripts, many Ansible playbooks).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IaC · fundamentals",
+   "reverse": false
+  },
+  {
+   "guid": "M&Z`Q>#VAH",
+   "type": "basic",
+   "deck": "Platform Engineering::04 Terraform & IaC",
+   "tags": [
+    "PlatformEngineering::IaC"
+   ],
+   "front": "What does idempotency mean in IaC, and why does it matter?",
+   "back": "Applying the same configuration N times gives the same result as applying it once. It makes retries, re-runs and continuous reconciliation safe.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In Ansible:</b> modules check current state and only act (report <code>changed</code>) when it differs from the desired state.",
+   "source": "IaC · fundamentals",
+   "reverse": false
+  },
+  {
+   "guid": "x/46/>H*sp",
+   "type": "basic",
+   "deck": "Platform Engineering::04 Terraform & IaC",
+   "tags": [
+    "PlatformEngineering::IaC"
+   ],
+   "front": "What is configuration drift, and how is it detected?",
+   "back": "Divergence between declared state and real infrastructure, usually from manual/out-of-band changes. Detected by <code>terraform plan</code> (refresh) or continuously by reconcilers (Crossplane, Argo CD, Flux).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IaC · fundamentals",
+   "reverse": false
+  },
+  {
+   "guid": "N=-S5[88qH",
+   "type": "basic",
+   "deck": "Platform Engineering::04 Terraform & IaC",
+   "tags": [
+    "PlatformEngineering::IaC"
+   ],
+   "front": "Mutable vs immutable infrastructure?",
+   "back": "<b>Mutable:</b> servers are patched in place → snowflakes and drift.<br><b>Immutable:</b> never modify; build a new image and replace instances → reproducible, easy rollback.",
+   "text": "",
+   "image": "",
+   "analogy": "Pets vs cattle: pets are nursed back to health in place; cattle are replaced with an identical new one.",
+   "extra": "",
+   "source": "IaC · fundamentals",
+   "reverse": false
+  },
+  {
+   "guid": "K(po^UN:]R",
+   "type": "basic",
+   "deck": "Platform Engineering::04 Terraform & IaC",
+   "tags": [
+    "PlatformEngineering::IaC"
+   ],
+   "front": "Where is the line between Terraform and GitOps in a Kubernetes platform?",
+   "back": "<b>Terraform:</b> cloud resources (networks, clusters, node pools, DBs, DNS, IAM) plus a one-time bootstrap of the GitOps agent.<br><b>GitOps (Argo/Flux + Helm):</b> everything inside the clusters.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IaC · GitOps boundary",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Platform Engineering::04 Terraform & IaC",
+   "tags": [
+    "PlatformEngineering::IaC"
+   ],
+   "front": "Why not manage Kubernetes workloads with Terraform?",
+   "back": "No continuous reconciliation, state fights with in-cluster controllers, slow monolithic applies and plan noise — and kubeconfig credentials land in state. Terraform hands off; controllers keep the truth.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IaC · GitOps boundary",
+   "reverse": false
+  },
+  {
+   "guid": "v)xv#oP>01",
+   "type": "cloze",
+   "deck": "Platform Engineering::04 Terraform & IaC",
+   "tags": [
+    "PlatformEngineering::IaC::Terraform"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Terraform core workflow: {{c1::<code>terraform init</code>}} (download providers/modules, configure backend) → {{c2::<code>terraform plan</code>}} (preview the diff) → {{c3::<code>terraform apply</code>}} (execute it).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Terraform",
+   "reverse": false
+  },
+  {
+   "guid": "kIrh:BbVbo",
+   "type": "cloze",
+   "deck": "Platform Engineering::04 Terraform & IaC",
+   "tags": [
+    "PlatformEngineering::IaC::Terraform"
+   ],
+   "front": "",
+   "back": "",
+   "text": "In Terraform, a {{c1::resource}} is an object Terraform creates/updates/deletes; a {{c2::data source}} is a read-only lookup; a {{c3::module}} is a reusable package of resources with inputs and outputs; a {{c4::provider}} is the plugin that turns resources into API calls for one platform.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Terraform",
+   "reverse": false
+  },
+  {
+   "guid": "Ep)+X[T]NF",
+   "type": "basic",
+   "deck": "Platform Engineering::04 Terraform & IaC",
+   "tags": [
+    "PlatformEngineering::IaC::Terraform"
+   ],
+   "front": "What is Terraform state, and why is it needed?",
+   "back": "A mapping from config resource addresses to real-world object IDs, plus cached attributes and dependency data. Needed to know what Terraform manages, compute diffs and order destroys.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Terraform",
+   "reverse": false
+  },
+  {
+   "guid": "B*g1ovz}R^",
+   "type": "basic",
+   "deck": "Platform Engineering::04 Terraform & IaC",
+   "tags": [
+    "PlatformEngineering::IaC::Terraform"
+   ],
+   "front": "Security concern with Terraform state?",
+   "back": "State stores attribute values in plaintext — including secrets, even ones marked <code>sensitive</code>. Use an encrypted remote backend with tight access control.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "OpenTofu supports client-side state encryption.",
+   "source": "Terraform",
+   "reverse": false
+  },
+  {
+   "guid": "vGah-P~DI|",
+   "type": "basic",
+   "deck": "Platform Engineering::04 Terraform & IaC",
+   "tags": [
+    "PlatformEngineering::IaC::Terraform"
+   ],
+   "front": "Why must remote Terraform state be locked?",
+   "back": "So two concurrent <code>apply</code> runs can't race and corrupt the state or make conflicting changes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Terraform",
+   "reverse": false
+  },
+  {
+   "guid": "g?Z?234I?3",
+   "type": "basic",
+   "deck": "Platform Engineering::04 Terraform & IaC",
+   "tags": [
+    "PlatformEngineering::IaC::Terraform"
+   ],
+   "front": "How is Terraform state locked on the S3 backend (Terraform ≥ 1.10)?",
+   "back": "Native lockfile in the bucket (<code>use_lockfile = true</code>, relies on S3 conditional writes); the legacy way is a DynamoDB lock table.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "azurerm: blob lease; gcs: lock object; HCP Terraform: built in.",
+   "source": "Terraform",
+   "reverse": false
+  },
+  {
+   "guid": "z{?p=5+7L|",
+   "type": "basic",
+   "deck": "Platform Engineering::04 Terraform & IaC",
+   "tags": [
+    "PlatformEngineering::IaC::Terraform"
+   ],
+   "front": "<code>count</code> vs <code>for_each</code>: why prefer <code>for_each</code> for collections?",
+   "back": "<code>count</code> addresses by index (<code>res[0]</code>): removing a middle element shifts indices and destroys/recreates resources. <code>for_each</code> addresses by stable key (<code>res[\"web\"]</code>).",
+   "text": "",
+   "image": "",
+   "analogy": "count is numbered seats — one person leaves and everyone shifts down; for_each is name tags.",
+   "extra": "",
+   "source": "Terraform",
+   "reverse": false
+  },
+  {
+   "guid": "vY{$xwX!1b",
+   "type": "cloze",
+   "deck": "Platform Engineering::04 Terraform & IaC",
+   "tags": [
+    "PlatformEngineering::IaC::Terraform"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Terraform <code>lifecycle</code>: {{c1::<code>create_before_destroy</code>}} avoids downtime on replacement; {{c2::<code>prevent_destroy</code>}} errors on any plan that destroys the resource; {{c3::<code>ignore_changes</code>}} ignores drift on listed attributes; {{c4::<code>replace_triggered_by</code>}} forces replacement when a referenced item changes.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Terraform",
+   "reverse": false
+  },
+  {
+   "guid": "kQv*i`rsFw",
+   "type": "basic",
+   "deck": "Platform Engineering::04 Terraform & IaC",
+   "tags": [
+    "PlatformEngineering::IaC::Terraform"
+   ],
+   "front": "How do you rename/move a resource in Terraform without destroying it?",
+   "back": "A <code>moved { from = ... to = ... }</code> block — declarative and reviewable in a PR.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Legacy: <code>terraform state mv</code>.",
+   "source": "Terraform",
+   "reverse": false
+  },
+  {
+   "guid": "Q=r.l~PpdG",
+   "type": "basic",
+   "deck": "Platform Engineering::04 Terraform & IaC",
+   "tags": [
+    "PlatformEngineering::IaC::Terraform"
+   ],
+   "front": "How do you bring an existing resource under Terraform management?",
+   "back": "An <code>import { to = aws_s3_bucket.b  id = \"name\" }</code> block, optionally with <code>terraform plan -generate-config-out=gen.tf</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Legacy: CLI <code>terraform import</code>.",
+   "source": "Terraform",
+   "reverse": false
+  },
+  {
+   "guid": "ifCX;m7)gk",
+   "type": "basic",
+   "deck": "Platform Engineering::04 Terraform & IaC",
+   "tags": [
+    "PlatformEngineering::IaC::Terraform"
+   ],
+   "front": "Why is <code>terraform apply -target</code> dangerous?",
+   "back": "It applies a partial graph: dependent changes are skipped and state ends up inconsistent with the config. Only for exceptional recovery.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Terraform",
+   "reverse": false
+  },
+  {
+   "guid": "I>qobf(jm^",
+   "type": "basic",
+   "deck": "Platform Engineering::04 Terraform & IaC",
+   "tags": [
+    "PlatformEngineering::IaC::Terraform"
+   ],
+   "front": "Purpose of <code>.terraform.lock.hcl</code>?",
+   "back": "Pins exact provider versions and checksums for reproducible <code>init</code>. Commit it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Pitfall:</b> it does not lock module versions.",
+   "source": "Terraform",
+   "reverse": false
+  },
+  {
+   "guid": "Ih3B*hy~t`",
+   "type": "basic",
+   "deck": "Platform Engineering::04 Terraform & IaC",
+   "tags": [
+    "PlatformEngineering::IaC::Terraform"
+   ],
+   "front": "When do you need an explicit <code>depends_on</code> in Terraform?",
+   "back": "Only for hidden dependencies not expressed via references (e.g. an IAM policy that must exist before an app uses it). Overuse makes plans less precise.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Terraform",
+   "reverse": false
+  },
+  {
+   "guid": "cUJ3wX.-w*",
+   "type": "basic",
+   "deck": "Platform Engineering::04 Terraform & IaC",
+   "tags": [
+    "PlatformEngineering::IaC::Terraform"
+   ],
+   "front": "What is <code>terraform plan -refresh-only</code> for?",
+   "back": "Shows drift and lets you accept it: updates state to match reality without proposing infrastructure changes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Replaces the deprecated <code>terraform refresh</code>.",
+   "source": "Terraform",
+   "reverse": false
+  },
+  {
+   "guid": "g~A]T@Q:+r",
+   "type": "basic",
+   "deck": "Platform Engineering::04 Terraform & IaC",
+   "tags": [
+    "PlatformEngineering::IaC::Terraform"
+   ],
+   "front": "Terraform CLI workspaces: what do they give you, and why do many teams avoid them for environments?",
+   "back": "Multiple state files for one configuration (<code>terraform.workspace</code>). All share one backend and credentials → weak isolation; teams prefer separate root modules per environment.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Terraform",
+   "reverse": false
+  },
+  {
+   "guid": "fj((&=2sOu",
+   "type": "basic",
+   "deck": "Platform Engineering::04 Terraform & IaC",
+   "tags": [
+    "PlatformEngineering::IaC::Terraform"
+   ],
+   "front": "Why does OpenTofu exist?",
+   "back": "HashiCorp moved Terraform to the Business Source License (BSL, restricts competing commercial use) in 2023; OpenTofu is the Linux Foundation fork that stays MPL 2.0 open source and largely drop-in compatible.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Adds features such as client-side state encryption.",
+   "source": "Terraform",
+   "reverse": false
+  },
+  {
+   "guid": "]gM$%`U0n",
+   "type": "basic",
+   "deck": "Platform Engineering::04 Terraform & IaC",
+   "tags": [
+    "PlatformEngineering::IaC::Terraform"
+   ],
+   "front": "Pulumi vs Terraform in one line?",
+   "back": "Same desired-state engine idea, but infrastructure is written in general-purpose languages (TypeScript, Python, Go...) instead of HCL.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Terraform",
+   "reverse": false
+  },
+  {
+   "guid": "e!1,/[6#mL",
+   "type": "basic",
+   "deck": "Platform Engineering::05 Ansible & Config Management",
+   "tags": [
+    "PlatformEngineering::IaC::Ansible"
+   ],
+   "front": "Provisioning vs configuration management?",
+   "back": "<b>Provisioning</b> creates infrastructure (Terraform, CloudFormation).<br><b>Configuration management</b> configures software on it (Ansible, Puppet, Chef).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Ansible is agentless and push-based; Puppet/Chef classically run agents that pull.",
+   "source": "IaC · fundamentals",
+   "reverse": false
+  },
+  {
+   "guid": "jxg_nDYZYf",
+   "type": "basic",
+   "deck": "Platform Engineering::05 Ansible & Config Management",
+   "tags": [
+    "PlatformEngineering::IaC::Ansible"
+   ],
+   "front": "What makes Ansible \"agentless\", and how does it reach targets?",
+   "back": "Nothing is installed on managed nodes: the control node pushes modules over <b>SSH</b> (Linux) or <b>WinRM</b> (Windows) and runs them there.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ansible",
+   "reverse": false
+  },
+  {
+   "guid": "NE0D,:@:^N",
+   "type": "cloze",
+   "deck": "Platform Engineering::05 Ansible & Config Management",
+   "tags": [
+    "PlatformEngineering::IaC::Ansible"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Ansible architecture: the {{c1::control node}} runs Ansible; {{c2::managed nodes}} are the agentless targets; the {{c3::inventory}} lists hosts and groups; {{c4::modules}} are units of work executed on managed nodes.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ansible",
+   "reverse": false
+  },
+  {
+   "guid": "IA85yUtA~z",
+   "type": "cloze",
+   "deck": "Platform Engineering::05 Ansible & Config Management",
+   "tags": [
+    "PlatformEngineering::IaC::Ansible"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Ansible structure: a playbook contains {{c1::plays}}; a play runs {{c2::tasks}} that invoke modules; {{c3::roles}} bundle tasks, handlers, variables and files for reuse.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ansible",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Platform Engineering::05 Ansible & Config Management",
+   "tags": [
+    "PlatformEngineering::IaC::Ansible"
+   ],
+   "front": "When does an Ansible <b>handler</b> run?",
+   "back": "Only when notified by a task that reported a change — once, at the end of the play (e.g. restart a service after its config changed).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ansible",
+   "reverse": false
+  },
+  {
+   "guid": "CtSH81Ob$p",
+   "type": "basic",
+   "deck": "Platform Engineering::05 Ansible & Config Management",
+   "tags": [
+    "PlatformEngineering::IaC::Ansible"
+   ],
+   "front": "Static vs dynamic inventory in Ansible?",
+   "back": "<b>Static:</b> a fixed INI/YAML file of hosts.<br><b>Dynamic:</b> generated at runtime by an inventory plugin querying a source (AWS EC2, Azure, Kubernetes...).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ansible",
+   "reverse": false
+  },
+  {
+   "guid": "oznah[+Evk",
+   "type": "basic",
+   "deck": "Platform Engineering::05 Ansible & Config Management",
+   "tags": [
+    "PlatformEngineering::IaC::Ansible"
+   ],
+   "front": "What does Ansible Vault protect, and when is it decrypted?",
+   "back": "Sensitive variables/files (passwords, keys) encrypted at rest in the repo; decrypted only at runtime with the vault password/key.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ansible",
+   "reverse": false
+  },
+  {
+   "guid": "K@)O6{4!ii",
+   "type": "basic",
+   "deck": "Platform Engineering::05 Ansible & Config Management",
+   "tags": [
+    "PlatformEngineering::IaC::Ansible"
+   ],
+   "front": "What is Ansible Galaxy?",
+   "back": "A public hub plus CLI (<code>ansible-galaxy</code>) for sharing and installing reusable roles and collections.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ansible",
+   "reverse": false
+  },
+  {
+   "guid": "877%?P5Q1",
+   "type": "cloze",
+   "deck": "Platform Engineering::05 Ansible & Config Management",
+   "tags": [
+    "PlatformEngineering::IaC::Ansible"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Red Hat Ansible Automation Platform adds {{c1::Automation Controller}} (web UI/API, RBAC, scheduling), {{c2::Execution Environments}} (containerized Ansible runtimes) and {{c3::Automation Hub}} (curated, certified content).",
+   "image": "",
+   "analogy": "",
+   "extra": "Automation Controller was formerly Ansible Tower; AWX is its upstream.",
+   "source": "Ansible",
+   "reverse": false
+  },
+  {
+   "guid": "o@uzU(m;q<",
+   "type": "basic",
+   "deck": "Platform Engineering::05 Ansible & Config Management",
+   "tags": [
+    "PlatformEngineering::IaC::Ansible"
+   ],
+   "front": "Ansible module vs plugin: where does each run?",
+   "back": "<b>Module:</b> runs on the managed node and does one unit of work (e.g. install a package).<br><b>Plugin:</b> extends Ansible itself on the control node (inventory, connection, filter plugins).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ansible",
+   "reverse": false
+  },
+  {
+   "guid": "t;):{)_BX#",
+   "type": "basic",
+   "deck": "Platform Engineering::05 Ansible & Config Management",
+   "tags": [
+    "PlatformEngineering::IaC::Ansible"
+   ],
+   "front": "What are Ansible facts?",
+   "back": "System information (OS, IPs, hardware...) gathered from managed nodes by the <code>setup</code> module and usable as variables.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ansible",
+   "reverse": false
+  },
+  {
+   "guid": "I$.(]U_lvp",
+   "type": "basic",
+   "deck": "Platform Engineering::06 Crossplane & Control Planes",
+   "tags": [
+    "PlatformEngineering::IaC::Crossplane"
+   ],
+   "front": "What is Crossplane?",
+   "back": "A Kubernetes extension that turns a cluster into a control plane for external infrastructure: cloud resources become Custom Resources that providers reconcile continuously.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Crossplane",
+   "reverse": false
+  },
+  {
+   "guid": "tG.sv1bw_5",
+   "type": "basic",
+   "deck": "Platform Engineering::06 Crossplane & Control Planes",
+   "tags": [
+    "PlatformEngineering::IaC::Crossplane"
+   ],
+   "front": "Crossplane vs Terraform: execution model and where state lives?",
+   "back": "<b>Terraform:</b> one-shot <code>plan</code>/<code>apply</code> runs triggered by a person or pipeline; state in a state file.<br><b>Crossplane:</b> controllers reconcile continuously; state in etcd; drift is auto-corrected.",
+   "text": "",
+   "image": "",
+   "analogy": "Terraform is a contractor who visits when called; Crossplane is a building manager who lives on site and fixes things as soon as they change.",
+   "extra": "",
+   "source": "Crossplane",
+   "reverse": false
+  },
+  {
+   "guid": "c]dVz44C=[",
+   "type": "basic",
+   "deck": "Platform Engineering::06 Crossplane & Control Planes",
+   "tags": [
+    "PlatformEngineering::IaC::Crossplane"
+   ],
+   "front": "What is a Crossplane Provider?",
+   "back": "A package that adds CRDs + controllers for one external system (e.g. <code>provider-aws</code>), so Crossplane can manage that system's resources.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Crossplane",
+   "reverse": false
+  },
+  {
+   "guid": "GZjscO%bFG",
+   "type": "basic",
+   "deck": "Platform Engineering::06 Crossplane & Control Planes",
+   "tags": [
+    "PlatformEngineering::IaC::Crossplane"
+   ],
+   "front": "What is a Crossplane Managed Resource (MR)?",
+   "back": "The lowest-level Crossplane resource: a Custom Resource that represents exactly one external resource (e.g. one S3 bucket).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Crossplane",
+   "reverse": false
+  },
+  {
+   "guid": "E48>UQEex;",
+   "type": "basic",
+   "deck": "Platform Engineering::06 Crossplane & Control Planes",
+   "tags": [
+    "PlatformEngineering::IaC::Crossplane"
+   ],
+   "front": "What is a Crossplane Composite Resource (XR)?",
+   "back": "A higher-level resource that bundles several MRs into one logical unit (e.g. a \"Database\" = network + instance + firewall rule).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Crossplane",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Platform Engineering::06 Crossplane & Control Planes",
+   "tags": [
+    "PlatformEngineering::IaC::Crossplane"
+   ],
+   "front": "What does a Crossplane CompositeResourceDefinition (XRD) define?",
+   "back": "The schema of a Composite Resource — the platform API consumers see.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Crossplane",
+   "reverse": false
+  },
+  {
+   "guid": "O*MBs(c}FY",
+   "type": "basic",
+   "deck": "Platform Engineering::06 Crossplane & Control Planes",
+   "tags": [
+    "PlatformEngineering::IaC::Crossplane"
+   ],
+   "front": "What is a Crossplane Composition?",
+   "back": "The implementation behind an XR's API: it defines which MRs an XR creates and how they are configured.",
+   "text": "",
+   "image": "",
+   "analogy": "The XRD is the interface, the Composition is the class implementing it — swap Compositions (AWS vs Azure) without changing the API.",
+   "extra": "",
+   "source": "Crossplane",
+   "reverse": false
+  },
+  {
+   "guid": "udX9z9;I4-",
+   "type": "basic",
+   "deck": "Platform Engineering::06 Crossplane & Control Planes",
+   "tags": [
+    "PlatformEngineering::IaC::Crossplane"
+   ],
+   "front": "What is a Crossplane Claim?",
+   "back": "A namespaced request object through which app teams self-serve a Composite Resource without cluster-scoped permissions.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Crossplane v2 lets XRs themselves be namespaced, making Claims a legacy feature.",
+   "source": "Crossplane",
+   "reverse": false
+  },
+  {
+   "guid": "^pmpvOyPp",
+   "type": "basic",
+   "deck": "Platform Engineering::06 Crossplane & Control Planes",
+   "tags": [
+    "PlatformEngineering::IaC::Crossplane"
+   ],
+   "front": "What is a Crossplane Package?",
+   "back": "An OCI image used to install and version Providers, Configurations and Functions, pulled from any OCI registry.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Crossplane",
+   "reverse": false
+  },
+  {
+   "guid": "HAI*=%B0[e",
+   "type": "basic",
+   "deck": "Platform Engineering::06 Crossplane & Control Planes",
+   "tags": [
+    "PlatformEngineering::IaC::Crossplane"
+   ],
+   "front": "What are Crossplane Composition Functions?",
+   "back": "Pipeline steps inside a Composition that compute the composed resources with real code (Go, Python, KCL...) instead of patch-and-transform YAML templates.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Crossplane",
+   "reverse": false
+  },
+  {
+   "guid": "H)t?NFe=e/",
+   "type": "basic",
+   "deck": "Platform Engineering::06 Crossplane & Control Planes",
+   "tags": [
+    "PlatformEngineering::IaC::Crossplane"
+   ],
+   "front": "What is the \"control plane abstraction\" pattern behind Crossplane and KRO (Kube Resource Orchestrator)?",
+   "back": "Using the Kubernetes API server — declarative reconciliation, RBAC, CRD extensibility — as a universal control plane for any resource (cloud infra, SaaS, other K8s objects), not just workloads.",
+   "text": "",
+   "image": "",
+   "analogy": "The API server becomes the organisation's single order desk: every request, whatever it is for, goes through the same forms, permissions and follow-up process.",
+   "extra": "",
+   "source": "Crossplane",
+   "reverse": false
+  },
+  {
+   "guid": "L?{#0GcSDe",
+   "type": "basic",
+   "deck": "Platform Engineering::06 Crossplane & Control Planes",
+   "tags": [
+    "PlatformEngineering::PolicyAsCode"
+   ],
+   "front": "Policy-as-code for IaC: which tool fits each job?",
+   "back": "<b>Conftest:</b> OPA Rego against config or plan JSON in CI.<br><b>Sentinel:</b> policy built into HCP Terraform/Enterprise.<br><b>Checkov / Trivy (ex-tfsec):</b> static misconfiguration scanners with built-in rules.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Policy as code · IaC",
+   "reverse": false
+  },
+  {
+   "guid": "M1Hz$#8[9J",
+   "type": "cloze",
+   "deck": "Platform Engineering::07 Helm",
+   "tags": [
+    "PlatformEngineering::Helm"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Helm terms: a {{c1::chart}} is a package of templates + default values; a {{c2::release}} is an installed instance of a chart in a namespace; a {{c3::revision}} is a numbered version of a release (each upgrade/rollback adds one); a {{c4::repository}} publishes charts (HTTP index or OCI registry).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Helm",
+   "reverse": false
+  },
+  {
+   "guid": "FMM~@P`ViF",
+   "type": "basic",
+   "deck": "Platform Engineering::07 Helm",
+   "tags": [
+    "PlatformEngineering::Helm"
+   ],
+   "front": "Why was Tiller removed in Helm 3?",
+   "back": "Tiller was an in-cluster server with broad privileges that bypassed per-user RBAC. Helm 3 is client-only and acts with the user's own kubeconfig permissions.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Helm 3 also brought three-way merge, namespace-scoped release names and <code>apiVersion: v2</code> charts.",
+   "source": "Helm",
+   "reverse": false
+  },
+  {
+   "guid": "mLo.+;hJWU",
+   "type": "basic",
+   "deck": "Platform Engineering::07 Helm",
+   "tags": [
+    "PlatformEngineering::Helm"
+   ],
+   "front": "Where does Helm 3 store release information?",
+   "back": "As Secrets in the release namespace (type <code>helm.sh/release.v1</code>, named <code>sh.helm.release.v1.&lt;name&gt;.v&lt;rev&gt;</code>) holding the gzipped manifest, values and chart.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Helm",
+   "reverse": false
+  },
+  {
+   "guid": "G/,@iH)F4R",
+   "type": "basic",
+   "deck": "Platform Engineering::07 Helm",
+   "tags": [
+    "PlatformEngineering::Helm"
+   ],
+   "front": "Helm values precedence: which wins — chart <code>values.yaml</code>, <code>-f</code> files or <code>--set</code>?",
+   "back": "<code>--set</code> beats <code>-f</code> files, which beat the chart's <code>values.yaml</code>. Among several <code>-f</code> files the last (rightmost) wins.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Parent chart values override a subchart's own defaults.",
+   "source": "Helm",
+   "reverse": false
+  },
+  {
+   "guid": "y2ymbu&T5)",
+   "type": "basic",
+   "deck": "Platform Engineering::07 Helm",
+   "tags": [
+    "PlatformEngineering::Helm"
+   ],
+   "front": "What does Helm 3's three-way merge compare on upgrade, and what is the effect?",
+   "back": "Old manifest, live state and new manifest. Manual live changes that conflict with the new chart are overwritten; unrelated live fields (e.g. injected sidecars) are preserved.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Helm",
+   "reverse": false
+  },
+  {
+   "guid": "PJsziRzQ=3",
+   "type": "basic",
+   "deck": "Platform Engineering::07 Helm",
+   "tags": [
+    "PlatformEngineering::Helm"
+   ],
+   "front": "Helm: <code>include</code> vs <code>template</code>?",
+   "back": "Both render a named template. <code>include</code> returns a string so it can be piped (<code>{{ include \"x\" . | nindent 4 }}</code>); <code>template</code> is an action and can't be piped.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Helm",
+   "reverse": false
+  },
+  {
+   "guid": "l028+H@B~A",
+   "type": "basic",
+   "deck": "Platform Engineering::07 Helm",
+   "tags": [
+    "PlatformEngineering::Helm"
+   ],
+   "front": "What goes in a chart's <code>_helpers.tpl</code>?",
+   "back": "Named templates (<code>define</code>) such as fullname, labels, selectorLabels. Files starting with <code>_</code> are not rendered as manifests.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Helm",
+   "reverse": false
+  },
+  {
+   "guid": "v8/3eH2oI",
+   "type": "basic",
+   "deck": "Platform Engineering::07 Helm",
+   "tags": [
+    "PlatformEngineering::Helm"
+   ],
+   "front": "How does Helm treat CRDs in the <code>crds/</code> directory?",
+   "back": "Installed on first install only — never templated, upgraded or deleted. CRD upgrades must happen out of band (or ship CRDs as templates / a separate chart).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Helm",
+   "reverse": false
+  },
+  {
+   "guid": "te&w`wlbG8",
+   "type": "basic",
+   "deck": "Platform Engineering::07 Helm",
+   "tags": [
+    "PlatformEngineering::Helm"
+   ],
+   "front": "Which three annotations control a Helm hook?",
+   "back": "<code>helm.sh/hook</code> (event, e.g. <code>pre-upgrade</code>), <code>helm.sh/hook-weight</code> (ordering), <code>helm.sh/hook-delete-policy</code> (<code>before-hook-creation</code>, <code>hook-succeeded</code>, <code>hook-failed</code>).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Helm",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Platform Engineering::07 Helm",
+   "tags": [
+    "PlatformEngineering::Helm"
+   ],
+   "front": "Pitfall: are Helm hook resources managed as part of the release?",
+   "back": "No. They are not tracked as release resources, so uninstall/upgrade won't clean them up unless a hook-delete-policy does.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Helm",
+   "reverse": false
+  },
+  {
+   "guid": "P<I2_&EOj:",
+   "type": "basic",
+   "deck": "Platform Engineering::07 Helm",
+   "tags": [
+    "PlatformEngineering::Helm"
+   ],
+   "front": "How do you force pods to roll when a ConfigMap rendered by the same chart changes?",
+   "back": "A checksum annotation on the pod template:<br><code>checksum/config: {{ include (print $.Template.BasePath \"/configmap.yaml\") . | sha256sum }}</code>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Helm",
+   "reverse": false
+  },
+  {
+   "guid": "kx=+RN-7:`",
+   "type": "basic",
+   "deck": "Platform Engineering::07 Helm",
+   "tags": [
+    "PlatformEngineering::Helm"
+   ],
+   "front": "What does <code>helm upgrade --install --atomic</code> do?",
+   "back": "Installs if the release is absent, else upgrades; waits for readiness and automatically rolls back on failure (<code>--atomic</code> implies <code>--wait</code>).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Helm 4 renames <code>--atomic</code> to <code>--rollback-on-failure</code>.",
+   "source": "Helm",
+   "reverse": false
+  },
+  {
+   "guid": "IfGE}F#>^@",
+   "type": "basic",
+   "deck": "Platform Engineering::07 Helm",
+   "tags": [
+    "PlatformEngineering::Helm"
+   ],
+   "front": "Does <code>helm rollback</code> restore the old revision number?",
+   "back": "No. It creates a <b>new</b> revision whose content equals the target revision.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Helm",
+   "reverse": false
+  },
+  {
+   "guid": "H=8^GjJ}O0",
+   "type": "basic",
+   "deck": "Platform Engineering::07 Helm",
+   "tags": [
+    "PlatformEngineering::Helm"
+   ],
+   "front": "How are Helm chart dependencies declared and fetched?",
+   "back": "<code>dependencies:</code> in <code>Chart.yaml</code> (name, version, repository, optional <code>condition</code>/<code>tags</code>/<code>alias</code>); <code>helm dependency update</code> fetches them into <code>charts/</code> and writes <code>Chart.lock</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Helm",
+   "reverse": false
+  },
+  {
+   "guid": "u(aZ[m7N{q",
+   "type": "basic",
+   "deck": "Platform Engineering::07 Helm",
+   "tags": [
+    "PlatformEngineering::Helm"
+   ],
+   "front": "How do a parent chart and its subcharts share values?",
+   "back": "The parent sets subchart values under the subchart's name key; <code>.Values.global</code> is visible to the parent and all subcharts.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Helm",
+   "reverse": false
+  },
+  {
+   "guid": "G5((4Z_;<i",
+   "type": "basic",
+   "deck": "Platform Engineering::07 Helm",
+   "tags": [
+    "PlatformEngineering::Helm"
+   ],
+   "front": "What is a Helm library chart?",
+   "back": "A chart with <code>type: library</code> that provides only named templates for reuse; it cannot be installed on its own.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Helm",
+   "reverse": false
+  },
+  {
+   "guid": "j_ZrG}!|?B",
+   "type": "basic",
+   "deck": "Platform Engineering::07 Helm",
+   "tags": [
+    "PlatformEngineering::Helm"
+   ],
+   "front": "How do you validate Helm chart values?",
+   "back": "<code>values.schema.json</code> (JSON Schema), checked on install/upgrade/lint/template; inside templates, <code>required</code> and <code>fail</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Helm",
+   "reverse": false
+  },
+  {
+   "guid": "pX}&KK_vQ9",
+   "type": "basic",
+   "deck": "Platform Engineering::07 Helm",
+   "tags": [
+    "PlatformEngineering::Helm"
+   ],
+   "front": "Pitfall of the Helm <code>lookup</code> function?",
+   "back": "It queries the live cluster, so it returns an empty map under <code>helm template</code>, client-side dry-run — and in Argo CD, which renders with <code>helm template</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Helm",
+   "reverse": false
+  },
+  {
+   "guid": "cukD~_D@yN",
+   "type": "basic",
+   "deck": "Platform Engineering::07 Helm",
+   "tags": [
+    "PlatformEngineering::Helm"
+   ],
+   "front": "What does the Helm <code>tpl</code> function do?",
+   "back": "Renders a string as a template, enabling templated values: <code>{{ tpl .Values.host . }}</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Helm",
+   "reverse": false
+  },
+  {
+   "guid": "u2I<0)K}wI",
+   "type": "basic",
+   "deck": "Platform Engineering::07 Helm",
+   "tags": [
+    "PlatformEngineering::Helm"
+   ],
+   "front": "How do you keep a resource when a Helm release is uninstalled?",
+   "back": "Annotation <code>helm.sh/resource-policy: keep</code> (common on PVCs and Secrets); the resource is left orphaned.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Helm",
+   "reverse": false
+  },
+  {
+   "guid": "i%11JtWz6!",
+   "type": "basic",
+   "deck": "Platform Engineering::07 Helm",
+   "tags": [
+    "PlatformEngineering::Helm"
+   ],
+   "front": "<code>helm template</code> vs <code>helm install --dry-run</code>?",
+   "back": "<code>template</code> renders locally with no cluster access (default capabilities, no <code>lookup</code>). <code>install --dry-run</code> contacts the cluster for validation but persists nothing.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<code>--dry-run=server</code> also enables <code>lookup</code>.",
+   "source": "Helm",
+   "reverse": false
+  },
+  {
+   "guid": "Gk2n)Y|l|H",
+   "type": "basic",
+   "deck": "Platform Engineering::07 Helm",
+   "tags": [
+    "PlatformEngineering::Helm"
+   ],
+   "front": "How are Helm charts distributed via OCI registries?",
+   "back": "<code>helm push chart.tgz oci://registry/ns</code> and <code>helm install x oci://registry/ns/chart --version 1.2.3</code> — no <code>helm repo add</code> needed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "GA since Helm 3.8.",
+   "source": "Helm",
+   "reverse": false
+  },
+  {
+   "guid": "o^}:qXK$k+",
+   "type": "basic",
+   "deck": "Platform Engineering::07 Helm",
+   "tags": [
+    "PlatformEngineering::Helm"
+   ],
+   "front": "What controls how many release revisions Helm keeps?",
+   "back": "<code>--history-max</code> on <code>helm upgrade</code> (default 10); older release Secrets are pruned.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Helm",
+   "reverse": false
+  },
+  {
+   "guid": "L;8+M]!*.C",
+   "type": "basic",
+   "deck": "Platform Engineering::07 Helm",
+   "tags": [
+    "PlatformEngineering::Helm"
+   ],
+   "front": "Headline changes in Helm 4?",
+   "back": "Server-side apply support, a WebAssembly-based plugin system and a modernised SDK/logging; Helm 3 charts (<code>apiVersion: v2</code>) still work.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Released November 2025.",
+   "source": "Helm",
+   "reverse": false
+  },
+  {
+   "guid": "eNO,27.`,K",
+   "type": "basic",
+   "deck": "Platform Engineering::08 Operators & Controllers",
+   "tags": [
+    "PlatformEngineering::Operators"
+   ],
+   "front": "What is a Kubernetes Operator?",
+   "back": "A custom controller plus CRDs that encodes human operational knowledge (install, upgrade, backup, failover) for one application in a reconciliation loop.",
+   "text": "",
+   "image": "",
+   "analogy": "A runbook turned into a robot SRE that watches the app around the clock and performs the steps itself.",
+   "extra": "",
+   "source": "Operators",
+   "reverse": false
+  },
+  {
+   "guid": "si6-9d?4*I",
+   "type": "basic",
+   "deck": "Platform Engineering::08 Operators & Controllers",
+   "tags": [
+    "PlatformEngineering::Operators"
+   ],
+   "front": "Level-triggered vs edge-triggered: which do Kubernetes controllers use, and why?",
+   "back": "Level-triggered: act on current observed vs desired state, not on individual events. A missed event is harmless because the next reconcile sees the full state.",
+   "text": "",
+   "image": "",
+   "analogy": "Edge-triggered answers the doorbell; level-triggered looks out of the window to see who is there — a missed ring doesn't matter.",
+   "extra": "",
+   "source": "Operators",
+   "reverse": false
+  },
+  {
+   "guid": "u^Mm+X[Le,",
+   "type": "basic",
+   "deck": "Platform Engineering::08 Operators & Controllers",
+   "tags": [
+    "PlatformEngineering::Operators"
+   ],
+   "front": "Why must <code>Reconcile()</code> be idempotent?",
+   "back": "It can run any number of times for the same object (resyncs, requeues, coalesced events) and must converge to the same result without duplicating side effects.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators",
+   "reverse": false
+  },
+  {
+   "guid": "m;]]xh1aee",
+   "type": "basic",
+   "deck": "Platform Engineering::08 Operators & Controllers",
+   "tags": [
+    "PlatformEngineering::Operators"
+   ],
+   "front": "Why does a controller receive only a namespace/name key, not the event diff?",
+   "back": "Level-triggered design: events are coalesced per key, and reconcile reads the current state from the cache.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators",
+   "reverse": false
+  },
+  {
+   "guid": "w45^i=?%)(",
+   "type": "basic",
+   "deck": "Platform Engineering::08 Operators & Controllers",
+   "tags": [
+    "PlatformEngineering::Operators"
+   ],
+   "front": "Custom resource <code>spec</code> vs <code>status</code>: who owns each?",
+   "back": "<code>spec</code> = desired state, written by the user. <code>status</code> = observed state, written by the controller.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Platform Engineering::08 Operators & Controllers",
+   "tags": [
+    "PlatformEngineering::Operators"
+   ],
+   "front": "What does enabling the <code>/status</code> subresource change on a CRD?",
+   "back": "Status is written through a separate endpoint and spec updates ignore status — so RBAC can separate them, and <code>generation</code> bumps only on spec changes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators",
+   "reverse": false
+  },
+  {
+   "guid": "K^s-hL<#LI",
+   "type": "basic",
+   "deck": "Platform Engineering::08 Operators & Controllers",
+   "tags": [
+    "PlatformEngineering::Operators"
+   ],
+   "front": "<code>metadata.generation</code> vs <code>resourceVersion</code>?",
+   "back": "<code>generation</code>: increments only on spec changes (with status subresource).<br><code>resourceVersion</code>: opaque, changes on every write; used for optimistic concurrency and watches.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators",
+   "reverse": false
+  },
+  {
+   "guid": "xB1rB%de;<",
+   "type": "basic",
+   "deck": "Platform Engineering::08 Operators & Controllers",
+   "tags": [
+    "PlatformEngineering::Operators"
+   ],
+   "front": "What is <code>status.observedGeneration</code> for?",
+   "back": "The controller records the <code>generation</code> it last reconciled, so clients can tell whether status reflects the latest spec.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators",
+   "reverse": false
+  },
+  {
+   "guid": "Ai}jhUzDU~",
+   "type": "basic",
+   "deck": "Platform Engineering::08 Operators & Controllers",
+   "tags": [
+    "PlatformEngineering::Operators"
+   ],
+   "front": "How does an Operator use finalizers to clean up external resources?",
+   "back": "A finalizer string blocks deletion: deleting sets <code>deletionTimestamp</code>, the controller does external cleanup (e.g. deletes the cloud DB), then removes its finalizer so the object goes away.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators",
+   "reverse": false
+  },
+  {
+   "guid": "QZ<5tN$1ZY",
+   "type": "basic",
+   "deck": "Platform Engineering::08 Operators & Controllers",
+   "tags": [
+    "PlatformEngineering::Operators"
+   ],
+   "front": "What do OwnerReferences enable, and what are their limits?",
+   "back": "The garbage collector deletes dependents when their owner is deleted. Owner must be in the same namespace (or cluster-scoped); for cross-namespace or external resources use finalizers.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators",
+   "reverse": false
+  },
+  {
+   "guid": "uL}KAmSS`r",
+   "type": "cloze",
+   "deck": "Platform Engineering::08 Operators & Controllers",
+   "tags": [
+    "PlatformEngineering::Operators"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Cascading deletion: {{c1::background}} (default) deletes the owner immediately and GC removes dependents afterwards; {{c2::foreground}} deletes dependents first; {{c3::orphan}} keeps dependents and strips their ownerReferences.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators",
+   "reverse": false
+  },
+  {
+   "guid": "H%rU>p,^kW",
+   "type": "basic",
+   "deck": "Platform Engineering::08 Operators & Controllers",
+   "tags": [
+    "PlatformEngineering::Operators"
+   ],
+   "front": "How do multiple Operator replicas avoid conflicting with each other?",
+   "back": "Leader election via a <code>coordination.k8s.io</code> Lease: only the leader runs the controllers.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators",
+   "reverse": false
+  },
+  {
+   "guid": "jG(4eJW)w@",
+   "type": "basic",
+   "deck": "Platform Engineering::08 Operators & Controllers",
+   "tags": [
+    "PlatformEngineering::Operators"
+   ],
+   "front": "How should a controller handle a 409 Conflict on update?",
+   "back": "It's optimistic concurrency on <code>resourceVersion</code>: re-fetch and retry, or use server-side apply / patches instead of full-object updates.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators",
+   "reverse": false
+  },
+  {
+   "guid": "iWb|daf[S6",
+   "type": "basic",
+   "deck": "Platform Engineering::08 Operators & Controllers",
+   "tags": [
+    "PlatformEngineering::Operators"
+   ],
+   "front": "Why is Server-Side Apply (SSA) useful for controllers?",
+   "back": "The API server merges declared fields and tracks ownership per field manager (<code>managedFields</code>), so a controller sends only the fields it owns and conflicts become explicit.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators",
+   "reverse": false
+  },
+  {
+   "guid": "D}~a<jB?K9",
+   "type": "basic",
+   "deck": "Platform Engineering::08 Operators & Controllers",
+   "tags": [
+    "PlatformEngineering::Operators"
+   ],
+   "front": "CRD versioning: served vs storage version?",
+   "back": "Many versions can be <code>served</code>; exactly one is the <code>storage</code> version. Non-trivial schema differences need a conversion webhook.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators",
+   "reverse": false
+  },
+  {
+   "guid": "nkk!3whq!f",
+   "type": "basic",
+   "deck": "Platform Engineering::08 Operators & Controllers",
+   "tags": [
+    "PlatformEngineering::Operators"
+   ],
+   "front": "Which Custom Resource validation option supports cross-field rules without running a webhook?",
+   "back": "CEL rules in the CRD schema (<code>x-kubernetes-validations</code>), evaluated in the API server.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Other options:</b> OpenAPI v3 schema; ValidatingAdmissionPolicy (cluster-wide CEL); validating/mutating admission webhooks.",
+   "source": "Operators",
+   "reverse": false
+  },
+  {
+   "guid": "d^701~C_U;",
+   "type": "cloze",
+   "deck": "Platform Engineering::08 Operators & Controllers",
+   "tags": [
+    "PlatformEngineering::Operators"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Operator tooling: {{c1::controller-runtime}} is the Go library (manager, client, cache); {{c2::Kubebuilder}} adds scaffolding and code generation on top; {{c3::Operator SDK}} builds on Kubebuilder and adds Helm/Ansible operators plus OLM bundle tooling.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators",
+   "reverse": false
+  },
+  {
+   "guid": "d9]-*%4!S^",
+   "type": "cloze",
+   "deck": "Platform Engineering::08 Operators & Controllers",
+   "tags": [
+    "PlatformEngineering::Operators"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Operator capability levels: 1 {{c1::Basic Install}} → 2 {{c2::Seamless Upgrades}} → 3 {{c3::Full Lifecycle}} (backup/restore, failure recovery) → 4 {{c4::Deep Insights}} (metrics, alerts) → 5 {{c5::Auto Pilot}} (auto-scaling, tuning, healing).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators",
+   "reverse": false
+  },
+  {
+   "guid": "I)y##_buDQ",
+   "type": "basic",
+   "deck": "Platform Engineering::08 Operators & Controllers",
+   "tags": [
+    "PlatformEngineering::Operators"
+   ],
+   "front": "What does the Operator Lifecycle Manager (OLM) do?",
+   "back": "Installs and upgrades Operators with their dependencies and RBAC, via CatalogSources, Subscriptions, InstallPlans and ClusterServiceVersions (CSVs). Default on OpenShift.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators",
+   "reverse": false
+  },
+  {
+   "guid": "A%,oQy>=!:",
+   "type": "basic",
+   "deck": "Platform Engineering::08 Operators & Controllers",
+   "tags": [
+    "PlatformEngineering::Operators"
+   ],
+   "front": "Fields of a conventional status <code>condition</code>?",
+   "back": "<code>type</code>, <code>status</code> (True/False/Unknown), <code>reason</code> (CamelCase), <code>message</code>, <code>lastTransitionTime</code>, <code>observedGeneration</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators",
+   "reverse": false
+  },
+  {
+   "guid": "OA2UD88Cte",
+   "type": "basic",
+   "deck": "Platform Engineering::08 Operators & Controllers",
+   "tags": [
+    "PlatformEngineering::Operators"
+   ],
+   "front": "Why shouldn't a controller write status on every reconcile unconditionally?",
+   "back": "Each write bumps <code>resourceVersion</code> → new watch event → another reconcile: a hot loop that loads the API server. Compare before writing.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "controller-runtime's <code>GenerationChangedPredicate</code> also filters out status-only update events.",
+   "source": "Operators",
+   "reverse": false
+  },
+  {
+   "guid": "m4wOg~@.0r",
+   "type": "basic",
+   "deck": "Platform Engineering::09 Platform as a Product",
+   "tags": [
+    "PlatformEngineering::IDP::PlatformAsProduct"
+   ],
+   "front": "What does treating a platform <b>as a product</b> mean?",
+   "back": "The platform team works like a product team: app teams are internal customers, and the roadmap is driven by discovery, feedback and adoption metrics rather than top-down mandate.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IDP · platform as a product",
+   "reverse": false
+  },
+  {
+   "guid": "CEg[>y`Al",
+   "type": "basic",
+   "deck": "Platform Engineering::09 Platform as a Product",
+   "tags": [
+    "PlatformEngineering::IDP::PlatformAsProduct"
+   ],
+   "front": "What does a platform team own, and how is its success measured?",
+   "back": "It owns the Internal Developer Platform as a product (not business features). Success = developer adoption, lead time and satisfaction — not story points delivered.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IDP · platform as a product",
+   "reverse": false
+  },
+  {
+   "guid": "lw<fPd//pJ",
+   "type": "cloze",
+   "deck": "Platform Engineering::09 Platform as a Product",
+   "tags": [
+    "PlatformEngineering::IDP::PlatformAsProduct"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Team Topologies cognitive load: {{c1::intrinsic}} (inherent difficulty of the task), {{c2::extraneous}} (friction from tooling/process — what a platform should remove), {{c3::germane}} (learning the business domain — where teams should spend their capacity).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IDP · platform as a product",
+   "reverse": false
+  },
+  {
+   "guid": "CNvc8d@N,;",
+   "type": "basic",
+   "deck": "Platform Engineering::09 Platform as a Product",
+   "tags": [
+    "PlatformEngineering::IDP::PlatformAsProduct"
+   ],
+   "front": "What is the <b>Thinnest Viable Platform (TVP)</b>?",
+   "back": "The smallest platform that solves developers' most painful problems, grown iteratively from real usage instead of built all-encompassing up front.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Can be as small as a wiki page of documented standards and services.",
+   "source": "IDP · platform as a product",
+   "reverse": false
+  },
+  {
+   "guid": "m:l&-P-4`H",
+   "type": "basic",
+   "deck": "Platform Engineering::09 Platform as a Product",
+   "tags": [
+    "PlatformEngineering::IDP::PlatformAsProduct"
+   ],
+   "front": "What does a platform product manager do?",
+   "back": "Runs discovery with developers as customers, prioritises the roadmap (e.g. which golden path next) and tracks adoption, DORA metrics and developer satisfaction.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IDP · platform as a product",
+   "reverse": false
+  },
+  {
+   "guid": "OW^AiNye@i",
+   "type": "basic",
+   "deck": "Platform Engineering::09 Platform as a Product",
+   "tags": [
+    "PlatformEngineering::IDP::PlatformAsProduct"
+   ],
+   "front": "What does \"X-as-a-Service\" mean in platform engineering?",
+   "back": "Capabilities (DB provisioning, CI templates, observability setup) exposed as self-service APIs/UI that developers consume directly instead of filing tickets.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IDP · platform as a product",
+   "reverse": false
+  },
+  {
+   "guid": "bZyT<2F+%-",
+   "type": "basic",
+   "deck": "Platform Engineering::09 Platform as a Product",
+   "tags": [
+    "PlatformEngineering::IDP::PlatformAsProduct"
+   ],
+   "front": "Main risk of building a platform without a product mindset?",
+   "back": "Low adoption: developers route around a mandated but unloved platform (shadow IT), undermining the standardisation it was built for.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IDP · platform as a product",
+   "reverse": false
+  },
+  {
+   "guid": "u4UGl*(+{I",
+   "type": "basic",
+   "deck": "Platform Engineering::09 Platform as a Product",
+   "tags": [
+    "PlatformEngineering::IDP::PlatformAsProduct"
+   ],
+   "front": "Define <b>golden path</b> in platform engineering.",
+   "back": "An opinionated, documented, platform-supported way to build, deploy and run a service for a common use case — the easiest path, not the only allowed one.",
+   "text": "",
+   "image": "",
+   "analogy": "A paved path through a park: most people walk on it because it's easiest, but the grass isn't fenced off.",
+   "extra": "",
+   "source": "IDP · golden paths",
+   "reverse": false
+  },
+  {
+   "guid": "hV@fV<[D/>",
+   "type": "basic",
+   "deck": "Platform Engineering::09 Platform as a Product",
+   "tags": [
+    "PlatformEngineering::IDP::PlatformAsProduct"
+   ],
+   "front": "Golden path vs <b>golden cage</b>?",
+   "back": "A golden path stays optional with supported escape hatches. It becomes a golden cage when it is the only allowed path — killing autonomy and creating bottlenecks and resentment.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IDP · golden paths",
+   "reverse": false
+  },
+  {
+   "guid": "A2/X,(.2VM",
+   "type": "basic",
+   "deck": "Platform Engineering::09 Platform as a Product",
+   "tags": [
+    "PlatformEngineering::IDP::PlatformAsProduct"
+   ],
+   "front": "How do golden paths reconcile standardisation with team autonomy?",
+   "back": "By making the compliant path the path of least resistance instead of a mandate.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IDP · golden paths",
+   "reverse": false
+  },
+  {
+   "guid": "vN$9FCE7H.",
+   "type": "basic",
+   "deck": "Platform Engineering::09 Platform as a Product",
+   "tags": [
+    "PlatformEngineering::IDP::PlatformAsProduct"
+   ],
+   "front": "What does a typical \"new microservice\" golden path bundle?",
+   "back": "Repo scaffold, wired CI/CD pipeline, baseline observability/logging, security scanning, standard base image and deployment manifest — delivered as one self-service template.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IDP · golden paths",
+   "reverse": false
+  },
+  {
+   "guid": "HI`X_WCzu$",
+   "type": "basic",
+   "deck": "Platform Engineering::09 Platform as a Product",
+   "tags": [
+    "PlatformEngineering::IDP::PlatformAsProduct"
+   ],
+   "front": "Which signals show a golden path is failing?",
+   "back": "Low opt-in, teams building unofficial parallel pipelines, frequent exception requests, and platform engineers having to intervene manually.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IDP · golden paths",
+   "reverse": false
+  },
+  {
+   "guid": "d4GhG_Lcr5",
+   "type": "basic",
+   "deck": "Platform Engineering::10 Developer Portals & Workload Specs",
+   "tags": [
+    "PlatformEngineering::IDP::Backstage"
+   ],
+   "front": "What is Backstage?",
+   "back": "A CNCF open-source framework (from Spotify) for building an internal developer portal: one UI for the software catalog, docs, CI/CD status and scaffolding templates.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IDP · Backstage",
+   "reverse": false
+  },
+  {
+   "guid": "Nj`+-to5Y.",
+   "type": "basic",
+   "deck": "Platform Engineering::10 Developer Portals & Workload Specs",
+   "tags": [
+    "PlatformEngineering::IDP::Backstage"
+   ],
+   "front": "Internal Developer <b>Platform</b> vs Internal Developer <b>Portal</b>?",
+   "back": "<b>Platform:</b> the underlying tools, APIs and infrastructure that provide self-service.<br><b>Portal:</b> the UI layer (often Backstage) through which developers discover and use it.",
+   "text": "",
+   "image": "",
+   "analogy": "The platform is the kitchen; the portal is the menu and ordering counter.",
+   "extra": "",
+   "source": "IDP · Backstage",
+   "reverse": false
+  },
+  {
+   "guid": "C0kv(trb_@",
+   "type": "basic",
+   "deck": "Platform Engineering::10 Developer Portals & Workload Specs",
+   "tags": [
+    "PlatformEngineering::IDP::Backstage"
+   ],
+   "front": "What is the Backstage Software Catalog?",
+   "back": "The system of record for the software estate: YAML entities tracking ownership, relationships and lifecycle of services, APIs, libraries and resources.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IDP · Backstage",
+   "reverse": false
+  },
+  {
+   "guid": "sKc-IS|U58",
+   "type": "basic",
+   "deck": "Platform Engineering::10 Developer Portals & Workload Specs",
+   "tags": [
+    "PlatformEngineering::IDP::Backstage"
+   ],
+   "front": "What is a Backstage entity descriptor made of?",
+   "back": "A YAML document with <code>apiVersion</code>, <code>kind</code>, <code>metadata</code> and <code>spec</code>, describing one real thing (service, API, team...).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IDP · Backstage",
+   "reverse": false
+  },
+  {
+   "guid": "r4RRA.VqGj",
+   "type": "cloze",
+   "deck": "Platform Engineering::10 Developer Portals & Workload Specs",
+   "tags": [
+    "PlatformEngineering::IDP::Backstage"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Backstage entity kinds: a {{c1::Component}} is a piece of software (service, website, library); an {{c2::API}} is an interface components provide or consume; a {{c3::Resource}} is infrastructure a component needs (database, bucket).",
+   "image": "",
+   "analogy": "",
+   "extra": "Other kinds: System, Domain, Group, User, Location, Template.",
+   "source": "IDP · Backstage",
+   "reverse": false
+  },
+  {
+   "guid": "j<p{{5gOQ(",
+   "type": "basic",
+   "deck": "Platform Engineering::10 Developer Portals & Workload Specs",
+   "tags": [
+    "PlatformEngineering::IDP::Backstage"
+   ],
+   "front": "Backstage: <b>System</b> vs <b>Domain</b>?",
+   "back": "A System groups Components/APIs/Resources that together deliver one capability (e.g. payments). A Domain groups related Systems into a business area (e.g. finance).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IDP · Backstage",
+   "reverse": false
+  },
+  {
+   "guid": "lgq<ZSY_Go",
+   "type": "basic",
+   "deck": "Platform Engineering::10 Developer Portals & Workload Specs",
+   "tags": [
+    "PlatformEngineering::IDP::Backstage"
+   ],
+   "front": "Why does a Backstage Component's <code>spec.owner</code> matter so much?",
+   "back": "It resolves to a Group/User (synced from GitHub teams, LDAP, Okta) and drives \"who do I ask\" and on-call/alert routing — a stale owner is worse than none.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IDP · Backstage",
+   "reverse": false
+  },
+  {
+   "guid": "Dk,rQ7|,Er",
+   "type": "basic",
+   "deck": "Platform Engineering::10 Developer Portals & Workload Specs",
+   "tags": [
+    "PlatformEngineering::IDP::Backstage"
+   ],
+   "front": "What is <code>catalog-info.yaml</code>, and where should it live?",
+   "back": "The per-repo descriptor for that repo's catalog entities; keep it next to the source code so ownership metadata stays current.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IDP · Backstage",
+   "reverse": false
+  },
+  {
+   "guid": "lmBpF1q&8r",
+   "type": "basic",
+   "deck": "Platform Engineering::10 Developer Portals & Workload Specs",
+   "tags": [
+    "PlatformEngineering::IDP::Backstage"
+   ],
+   "front": "How does Backstage keep the catalog populated automatically?",
+   "back": "Entity providers scan sources (GitHub orgs, S3...) on a schedule and ingest YAML definitions; processors validate and enrich each entity.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IDP · Backstage",
+   "reverse": false
+  },
+  {
+   "guid": "cp_hIz/h~x",
+   "type": "basic",
+   "deck": "Platform Engineering::10 Developer Portals & Workload Specs",
+   "tags": [
+    "PlatformEngineering::IDP::Backstage"
+   ],
+   "front": "What is TechDocs, and how is it linked to an entity?",
+   "back": "A Backstage plugin rendering Markdown docs kept with the code inside the entity page, wired via the <code>backstage.io/techdocs-ref</code> annotation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IDP · Backstage",
+   "reverse": false
+  },
+  {
+   "guid": "b;ntM|JEi_",
+   "type": "basic",
+   "deck": "Platform Engineering::10 Developer Portals & Workload Specs",
+   "tags": [
+    "PlatformEngineering::IDP::Backstage"
+   ],
+   "front": "What does Backstage's Scaffolder do, and which entity kind defines its templates?",
+   "back": "It generates new projects from parameterised software templates (kind <b>Template</b>): a form wizard plus steps that create a repo with the golden path pre-wired.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IDP · golden paths",
+   "reverse": false
+  },
+  {
+   "guid": "h$_.,<aOhT",
+   "type": "basic",
+   "deck": "Platform Engineering::10 Developer Portals & Workload Specs",
+   "tags": [
+    "PlatformEngineering::IDP::RHDH"
+   ],
+   "front": "What is Red Hat Developer Hub (RHDH), and why pick it over vanilla Backstage?",
+   "back": "Red Hat's supported Backstage distribution: enterprise RBAC, audit logging, a curated plugin catalog and commercial support out of the box instead of building that hardening yourself.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IDP · RHDH",
+   "reverse": false
+  },
+  {
+   "guid": "K+iW_lc3)G",
+   "type": "basic",
+   "deck": "Platform Engineering::10 Developer Portals & Workload Specs",
+   "tags": [
+    "PlatformEngineering::IDP::RHDH"
+   ],
+   "front": "How does RHDH load plugins differently from a classic Backstage build?",
+   "back": "As <b>dynamic plugins</b> enabled at startup via <code>dynamic-plugins.yaml</code>, instead of being compiled into the app — no rebuild to add a plugin.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IDP · RHDH",
+   "reverse": false
+  },
+  {
+   "guid": "dL2(v9knUN",
+   "type": "basic",
+   "deck": "Platform Engineering::10 Developer Portals & Workload Specs",
+   "tags": [
+    "PlatformEngineering::IDP::Score"
+   ],
+   "front": "What is Score?",
+   "back": "A CNCF Sandbox, platform-agnostic workload specification: a developer describes a workload's runtime needs once in <code>score.yaml</code>, independent of the target platform.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IDP · Score/Humanitec",
+   "reverse": false
+  },
+  {
+   "guid": "j%*,Ue[{k[",
+   "type": "basic",
+   "deck": "Platform Engineering::10 Developer Portals & Workload Specs",
+   "tags": [
+    "PlatformEngineering::IDP::Score"
+   ],
+   "front": "What problem does Score mainly solve?",
+   "back": "Config drift between environments (e.g. Docker Compose locally vs a Helm chart remotely): one source of truth that each Score implementation translates per target.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IDP · Score/Humanitec",
+   "reverse": false
+  },
+  {
+   "guid": "Eaxcsa!7iY",
+   "type": "cloze",
+   "deck": "Platform Engineering::10 Developer Portals & Workload Specs",
+   "tags": [
+    "PlatformEngineering::IDP::Score"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Score reference implementations: {{c1::score-compose}} targets Docker Compose (local dev); {{c2::score-k8s}} generates Kubernetes manifests.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IDP · Score/Humanitec",
+   "reverse": false
+  },
+  {
+   "guid": "lNZIC1hd3v",
+   "type": "basic",
+   "deck": "Platform Engineering::10 Developer Portals & Workload Specs",
+   "tags": [
+    "PlatformEngineering::IDP::Score"
+   ],
+   "front": "What is a Score <b>resource provisioner</b>?",
+   "back": "A pluggable translator from an abstract dependency in <code>score.yaml</code> (\"a postgres database\") to a concrete one per environment — a local container locally, a Terraform-provisioned instance in prod.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IDP · Score/Humanitec",
+   "reverse": false
+  },
+  {
+   "guid": "dvy[E]Uz-l",
+   "type": "basic",
+   "deck": "Platform Engineering::10 Developer Portals & Workload Specs",
+   "tags": [
+    "PlatformEngineering::IDP::Score"
+   ],
+   "front": "Which commercial product is Score built to feed?",
+   "back": "Humanitec's <b>Platform Orchestrator</b> (Humanitec created Score as its open workload spec).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IDP · Score/Humanitec",
+   "reverse": false
+  },
+  {
+   "guid": "F3NvZfD~^-",
+   "type": "cloze",
+   "deck": "Platform Engineering::10 Developer Portals & Workload Specs",
+   "tags": [
+    "PlatformEngineering::IDP::Score"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Humanitec Platform Orchestrator RMCD workflow: {{c1::Read}} the workload spec → {{c2::Match}} its dependencies to resource definitions → {{c3::Create}} the resources → {{c4::Deploy}} the workload.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IDP · Score/Humanitec",
+   "reverse": false
+  },
+  {
+   "guid": "zM$@;dYyj:",
+   "type": "basic",
+   "deck": "Platform Engineering::10 Developer Portals & Workload Specs",
+   "tags": [
+    "PlatformEngineering::IDP::Score"
+   ],
+   "front": "What is Dynamic Configuration Management (DCM) in the Humanitec model?",
+   "back": "Assembling a workload's environment-specific configuration on demand at deploy time, instead of maintaining static per-environment config files.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IDP · Score/Humanitec",
+   "reverse": false
+  },
+  {
+   "guid": "$-R~]8E(S",
+   "type": "basic",
+   "deck": "Platform Engineering::10 Developer Portals & Workload Specs",
+   "tags": [
+    "PlatformEngineering::IDP::Score"
+   ],
+   "front": "How does the Humanitec Orchestrator relate to Backstage and Argo CD?",
+   "back": "It's a backend decoupled from the portal layer: it pairs with Backstage (or its own portal) and existing tools like Argo CD and Terraform instead of replacing them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IDP · Score/Humanitec",
+   "reverse": false
+  },
+  {
+   "guid": "HQF`hfH&ZP",
+   "type": "basic",
+   "deck": "Platform Engineering::10 Developer Portals & Workload Specs",
+   "tags": [
+    "PlatformEngineering::IDP::Score"
+   ],
+   "front": "How do Score and a Backstage Scaffolder template complement each other?",
+   "back": "Score defines <i>what</i> a workload needs to run; the template defines <i>how</i> a new project is created. The template can emit a <code>score.yaml</code> as one of its outputs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IDP · Score/Humanitec",
+   "reverse": false
+  },
+  {
+   "guid": "z:xNPt}d},",
+   "type": "basic",
+   "deck": "Platform Engineering::11 Policy as Code",
+   "tags": [
+    "PlatformEngineering::PolicyAsCode::Kyverno"
+   ],
+   "front": "What is Kyverno?",
+   "back": "A Kubernetes-native policy engine running as an admission controller; policies are Kubernetes YAML resources, not a separate language like Rego.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Policy as code · Kyverno",
+   "reverse": false
+  },
+  {
+   "guid": "zHqh(~aj~z",
+   "type": "cloze",
+   "deck": "Platform Engineering::11 Policy as Code",
+   "tags": [
+    "PlatformEngineering::PolicyAsCode::Kyverno"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Kyverno rule types: {{c1::validate}} accepts/rejects resources; {{c2::mutate}} patches resources before they are persisted; {{c3::generate}} creates companion resources (e.g. a default NetworkPolicy per namespace).",
+   "image": "",
+   "analogy": "",
+   "extra": "Plus <code>verifyImages</code> for signature/attestation checks.",
+   "source": "Policy as code · Kyverno",
+   "reverse": false
+  },
+  {
+   "guid": "M(aa;E#K?s",
+   "type": "basic",
+   "deck": "Platform Engineering::11 Policy as Code",
+   "tags": [
+    "PlatformEngineering::PolicyAsCode::Kyverno"
+   ],
+   "front": "What does Kyverno's background scanning do?",
+   "back": "Periodically re-evaluates policies against resources already in the cluster, surfacing violations that predate the policy.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Policy as code · Kyverno",
+   "reverse": false
+  },
+  {
+   "guid": "jY^8hxE7a)",
+   "type": "basic",
+   "deck": "Platform Engineering::11 Policy as Code",
+   "tags": [
+    "PlatformEngineering::PolicyAsCode::Kyverno"
+   ],
+   "front": "What is Kyverno's <code>verifyImages</code> rule for?",
+   "back": "Verifying image signatures (Cosign/Sigstore) and attestations at admission, rejecting unsigned or tampered images.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Policy as code · Kyverno",
+   "reverse": false
+  },
+  {
+   "guid": "NsAmC#Hi}0",
+   "type": "basic",
+   "deck": "Platform Engineering::11 Policy as Code",
+   "tags": [
+    "PlatformEngineering::PolicyAsCode::Kyverno"
+   ],
+   "front": "What is Kyverno auto-gen for Pod controllers?",
+   "back": "A rule written against Pods is automatically expanded to Deployments, StatefulSets, Jobs etc., so you don't duplicate rules per controller kind.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Policy as code · Kyverno",
+   "reverse": false
+  },
+  {
+   "guid": "E=6yc-IjsC",
+   "type": "basic",
+   "deck": "Platform Engineering::11 Policy as Code",
+   "tags": [
+    "PlatformEngineering::PolicyAsCode::Kyverno"
+   ],
+   "front": "How do Kyverno and Gatekeeper hook into the Kubernetes admission chain?",
+   "back": "They register Validating/MutatingWebhookConfigurations, so the API server calls them on each matching request.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Policy as code · Kyverno",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Platform Engineering::11 Policy as Code",
+   "tags": [
+    "PlatformEngineering::PolicyAsCode::Kyverno"
+   ],
+   "front": "Policy webhooks (Kyverno/Gatekeeper) vs <b>ValidatingAdmissionPolicy</b>: key difference?",
+   "back": "ValidatingAdmissionPolicy runs CEL expressions inside the API server — no webhook to operate or time out. Webhook engines add mutation, generation, image verification and richer logic.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "ValidatingAdmissionPolicy is GA since Kubernetes 1.30.",
+   "source": "Policy as code · comparison",
+   "reverse": false
+  },
+  {
+   "guid": "gk(zuW,<w}",
+   "type": "basic",
+   "deck": "Platform Engineering::11 Policy as Code",
+   "tags": [
+    "PlatformEngineering::PolicyAsCode::OPA"
+   ],
+   "front": "What is Open Policy Agent (OPA)?",
+   "back": "A general-purpose policy engine: policies in Rego (a declarative query language) evaluated over any JSON input — not Kubernetes-specific.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Policy as code · OPA/Gatekeeper",
+   "reverse": false
+  },
+  {
+   "guid": "MIftFpQi(}",
+   "type": "basic",
+   "deck": "Platform Engineering::11 Policy as Code",
+   "tags": [
+    "PlatformEngineering::PolicyAsCode::OPA"
+   ],
+   "front": "How does Gatekeeper relate to OPA?",
+   "back": "Gatekeeper wraps OPA as a Kubernetes validating (and mutating) admission controller and adds CRDs on top of raw Rego.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Policy as code · OPA/Gatekeeper",
+   "reverse": false
+  },
+  {
+   "guid": "gKy`M`rmz_",
+   "type": "cloze",
+   "deck": "Platform Engineering::11 Policy as Code",
+   "tags": [
+    "PlatformEngineering::PolicyAsCode::OPA"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Gatekeeper: a {{c1::ConstraintTemplate}} defines reusable Rego logic plus a parameter schema; a {{c2::Constraint}} instantiates it with concrete parameters and a <code>match</code> scope.",
+   "image": "",
+   "analogy": "ConstraintTemplate is the class, Constraint is an object created from it.",
+   "extra": "",
+   "source": "Policy as code · OPA/Gatekeeper",
+   "reverse": false
+  },
+  {
+   "guid": "MsK=VKhFj;",
+   "type": "basic",
+   "deck": "Platform Engineering::11 Policy as Code",
+   "tags": [
+    "PlatformEngineering::PolicyAsCode::OPA"
+   ],
+   "front": "What does Gatekeeper's <code>Config</code> sync do?",
+   "back": "Replicates chosen cluster resources into OPA's cache so Rego can reference other objects (e.g. all Namespaces), not just the incoming request.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Policy as code · OPA/Gatekeeper",
+   "reverse": false
+  },
+  {
+   "guid": "EbEo&oVu:W",
+   "type": "basic",
+   "deck": "Platform Engineering::11 Policy as Code",
+   "tags": [
+    "PlatformEngineering::PolicyAsCode::OPA"
+   ],
+   "front": "What does Gatekeeper audit do?",
+   "back": "Periodically evaluates existing resources against active Constraints and records violations in their status (like Kyverno background scans).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Policy as code · OPA/Gatekeeper",
+   "reverse": false
+  },
+  {
+   "guid": "MfKrmsT]1w",
+   "type": "basic",
+   "deck": "Platform Engineering::11 Policy as Code",
+   "tags": [
+    "PlatformEngineering::PolicyAsCode::OPA"
+   ],
+   "front": "Kyverno vs OPA/Gatekeeper: when to choose which?",
+   "back": "<b>Kyverno:</b> YAML, Kubernetes-native, fastest for common K8s policies.<br><b>OPA/Gatekeeper:</b> Rego is more expressive and reusable beyond K8s (CI, APIs, Terraform), better for complex cross-resource logic.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Policy as code · comparison",
+   "reverse": false
+  },
+  {
+   "guid": "p<z#;QC?zx",
+   "type": "basic",
+   "deck": "Platform Engineering::12 Supply-Chain Security",
+   "tags": [
+    "PlatformEngineering::SupplyChain::Sigstore"
+   ],
+   "front": "What is Sigstore?",
+   "back": "Open-source infrastructure for signing, verifying and recording provenance of artifacts (images, binaries, SBOMs) without long-lived private keys.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Supply chain · Sigstore",
+   "reverse": false
+  },
+  {
+   "guid": "E^+76Be<VN",
+   "type": "basic",
+   "deck": "Platform Engineering::12 Supply-Chain Security",
+   "tags": [
+    "PlatformEngineering::SupplyChain::Sigstore"
+   ],
+   "front": "What is Cosign?",
+   "back": "Sigstore's client for signing and verifying OCI container images and other OCI artifacts.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Supply chain · Sigstore",
+   "reverse": false
+  },
+  {
+   "guid": "s^?@4RC6B",
+   "type": "basic",
+   "deck": "Platform Engineering::12 Supply-Chain Security",
+   "tags": [
+    "PlatformEngineering::SupplyChain::Sigstore"
+   ],
+   "front": "What is Sigstore <b>keyless signing</b>?",
+   "back": "Signing with a short-lived certificate from Fulcio bound to an OIDC identity (e.g. a GitHub Actions workflow), instead of a long-lived key the signer must guard.",
+   "text": "",
+   "image": "",
+   "analogy": "Like a visitor badge issued at reception after an ID check and valid for minutes; the reception logbook (Rekor) proves you held it when you signed.",
+   "extra": "",
+   "source": "Supply chain · Sigstore",
+   "reverse": false
+  },
+  {
+   "guid": "pjw},w7o=W",
+   "type": "basic",
+   "deck": "Platform Engineering::12 Supply-Chain Security",
+   "tags": [
+    "PlatformEngineering::SupplyChain::Sigstore"
+   ],
+   "front": "What is Fulcio?",
+   "back": "Sigstore's certificate authority: issues minutes-long X.509 signing certificates bound to a verified OIDC identity.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Supply chain · Sigstore",
+   "reverse": false
+  },
+  {
+   "guid": "La^yK~SLs/",
+   "type": "basic",
+   "deck": "Platform Engineering::12 Supply-Chain Security",
+   "tags": [
+    "PlatformEngineering::SupplyChain::Sigstore"
+   ],
+   "front": "What is Rekor?",
+   "back": "Sigstore's transparency log: an append-only, verifiable ledger of signing events, so anyone can audit when and by whom an artifact was signed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Supply chain · Sigstore",
+   "reverse": false
+  },
+  {
+   "guid": "M7hN6KXDu!",
+   "type": "basic",
+   "deck": "Platform Engineering::12 Supply-Chain Security",
+   "tags": [
+    "PlatformEngineering::SupplyChain::Sigstore"
+   ],
+   "front": "Why is Rekor needed when Fulcio certificates expire after minutes?",
+   "back": "Verifying later requires proof the signature was made <i>while</i> the cert was valid; Rekor's timestamped log entry provides that proof.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Supply chain · Sigstore",
+   "reverse": false
+  },
+  {
+   "guid": "h]_h(s.z4=",
+   "type": "basic",
+   "deck": "Platform Engineering::12 Supply-Chain Security",
+   "tags": [
+    "PlatformEngineering::SupplyChain::Sigstore"
+   ],
+   "front": "Where does Cosign store an image signature?",
+   "back": "As a separate OCI artifact in the same registry, tagged from the image digest — the image manifest itself is unchanged.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Supply chain · Sigstore",
+   "reverse": false
+  },
+  {
+   "guid": "s$^|8kD!`1",
+   "type": "basic",
+   "deck": "Platform Engineering::12 Supply-Chain Security",
+   "tags": [
+    "PlatformEngineering::SupplyChain::Sigstore"
+   ],
+   "front": "Cosign <b>attestation</b> vs plain signature?",
+   "back": "A signature asserts \"signed by X\". An attestation (<code>cosign attest</code>) is a signed in-toto statement carrying structured data about the artifact, e.g. an SBOM or SLSA provenance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Supply chain · Sigstore",
+   "reverse": false
+  },
+  {
+   "guid": "M4,nf}g]H2",
+   "type": "basic",
+   "deck": "Platform Engineering::12 Supply-Chain Security",
+   "tags": [
+    "PlatformEngineering::SupplyChain::SBOM"
+   ],
+   "front": "What is a Software Bill of Materials (SBOM)?",
+   "back": "A machine-readable inventory of the components and dependencies in a piece of software, with versions and ideally licenses.",
+   "text": "",
+   "image": "",
+   "analogy": "The ingredients label on food packaging: when a recall (CVE) hits, you can check instantly whether you're affected.",
+   "extra": "",
+   "source": "Supply chain · SBOM",
+   "reverse": false
+  },
+  {
+   "guid": "r],ba?A}d_",
+   "type": "basic",
+   "deck": "Platform Engineering::12 Supply-Chain Security",
+   "tags": [
+    "PlatformEngineering::SupplyChain::SBOM"
+   ],
+   "front": "What are the two dominant SBOM formats?",
+   "back": "<b>SPDX</b> (Linux Foundation, license-compliance roots, ISO standard) and <b>CycloneDX</b> (OWASP, security roots).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Supply chain · SBOM",
+   "reverse": false
+  },
+  {
+   "guid": "j1N*DpRiE9",
+   "type": "cloze",
+   "deck": "Platform Engineering::12 Supply-Chain Security",
+   "tags": [
+    "PlatformEngineering::SupplyChain::SBOM"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Anchore tools: {{c1::Syft}} generates an SBOM from an image, filesystem or archive; {{c2::Grype}} matches SBOM components against vulnerability databases to report CVEs.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Supply chain · SBOM",
+   "reverse": false
+  },
+  {
+   "guid": "N:{dbL_K6^",
+   "type": "basic",
+   "deck": "Platform Engineering::12 Supply-Chain Security",
+   "tags": [
+    "PlatformEngineering::SupplyChain::SBOM"
+   ],
+   "front": "How is an SBOM attached to an image for later verification?",
+   "back": "As a Cosign attestation (<code>cosign attest --predicate sbom.json</code>), signed and stored next to the image so consumers can verify authenticity and content.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Supply chain · SBOM",
+   "reverse": false
+  },
+  {
+   "guid": "p}JKvOc#ub",
+   "type": "basic",
+   "deck": "Platform Engineering::12 Supply-Chain Security",
+   "tags": [
+    "PlatformEngineering::SupplyChain::SLSA"
+   ],
+   "front": "What is SLSA, and what problem does it address?",
+   "back": "Supply-chain Levels for Software Artifacts: incremental requirements for hardening build/release pipelines against tampering, centred on verifiable provenance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Supply chain · SLSA",
+   "reverse": false
+  },
+  {
+   "guid": "s1RrVRm(NY",
+   "type": "basic",
+   "deck": "Platform Engineering::12 Supply-Chain Security",
+   "tags": [
+    "PlatformEngineering::SupplyChain::SLSA"
+   ],
+   "front": "What is SLSA <b>provenance</b>?",
+   "back": "A signed in-toto attestation describing how an artifact was built: source repo/commit, builder identity, build steps and inputs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Supply chain · SLSA",
+   "reverse": false
+  },
+  {
+   "guid": "b(*LG$K7}$",
+   "type": "basic",
+   "deck": "Platform Engineering::12 Supply-Chain Security",
+   "tags": [
+    "PlatformEngineering::SupplyChain::SLSA"
+   ],
+   "front": "What is a <b>hermetic</b> build?",
+   "back": "A build with no undeclared external inputs or network access, so every dependency is explicit and the output is reproducible from stated inputs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Supply chain · SLSA",
+   "reverse": false
+  },
+  {
+   "guid": "rcbpFWl;[c",
+   "type": "basic",
+   "deck": "Platform Engineering::12 Supply-Chain Security",
+   "tags": [
+    "PlatformEngineering::SupplyChain::SLSA"
+   ],
+   "front": "How do SLSA v1.0 Build Levels differ?",
+   "back": "From L1 (provenance exists) up to levels requiring a hardened, isolated build platform whose provenance the repo owner can't forge — rising trust in <i>how</i> provenance was produced.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Supply chain · SLSA",
+   "reverse": false
+  },
+  {
+   "guid": "q%a~>y:&,]",
+   "type": "basic",
+   "deck": "Platform Engineering::12 Supply-Chain Security",
+   "tags": [
+    "PlatformEngineering::SupplyChain::SLSA"
+   ],
+   "front": "Which format do SLSA provenance, SBOM attestations and scan results share?",
+   "back": "The <b>in-toto attestation</b> format (subject + predicate envelope), so all can be signed and verified the same way.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Supply chain · SLSA",
+   "reverse": false
+  },
+  {
+   "guid": "vY5yua??Sw",
+   "type": "cloze",
+   "deck": "Platform Engineering::12 Supply-Chain Security",
+   "tags": [
+    "PlatformEngineering::SupplyChain"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Supply-chain flow: the build emits an artifact plus {{c1::SLSA provenance}} → {{c2::Cosign}} signs it and attests provenance/SBOM, logged in {{c3::Rekor}} → at admission, a {{c4::Kyverno <code>verifyImages</code>}} rule (or Gatekeeper policy) checks signature and attestations before admitting the Pod.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Supply chain · end to end",
+   "reverse": false
+  },
+  {
+   "guid": "cr&,-6wY8?",
+   "type": "basic",
+   "deck": "Platform Engineering::12 Supply-Chain Security",
+   "tags": [
+    "PlatformEngineering::SupplyChain::ACS"
+   ],
+   "front": "What is Red Hat Advanced Cluster Security (ACS)?",
+   "back": "Red Hat's Kubernetes security platform, based on open-source StackRox: vulnerability management, config/compliance checks, network segmentation visibility and runtime threat detection.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Supply chain · Red Hat ACS",
+   "reverse": false
+  },
+  {
+   "guid": "N6gadV^0$;",
+   "type": "basic",
+   "deck": "Platform Engineering::12 Supply-Chain Security",
+   "tags": [
+    "PlatformEngineering::SupplyChain::ACS"
+   ],
+   "front": "How does ACS integrate with a CI/CD pipeline?",
+   "back": "<code>roxctl</code> (or a plugin step) scans images for vulnerabilities and policy violations and fails the build when policies are violated.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Supply chain · Red Hat ACS",
+   "reverse": false
+  },
+  {
+   "guid": "e44!u^Ax.6",
+   "type": "basic",
+   "deck": "Platform Engineering::12 Supply-Chain Security",
+   "tags": [
+    "PlatformEngineering::SupplyChain::ACS"
+   ],
+   "front": "What does the ACS network graph provide?",
+   "back": "A view of actually observed pod-to-pod traffic, used to generate or validate NetworkPolicies against real communication patterns.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Supply chain · Red Hat ACS",
+   "reverse": false
+  },
+  {
+   "guid": "q4.//zAEBE",
+   "type": "basic",
+   "deck": "Platform Engineering::12 Supply-Chain Security",
+   "tags": [
+    "PlatformEngineering::SupplyChain::ACS"
+   ],
+   "front": "How does ACS's scope differ from Kyverno/Gatekeeper?",
+   "back": "ACS spans build-time scanning, deploy-time admission (its own webhook) and runtime detection; Kyverno/Gatekeeper focus on admission-time policy. They complement the SLSA→Cosign→verify chain.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Supply chain · Red Hat ACS",
+   "reverse": false
+  },
+  {
+   "guid": "IP&D[{}k.s",
+   "type": "cloze",
+   "deck": "Platform Engineering::13 Fleet & Multi-Tenancy",
+   "tags": [
+    "PlatformEngineering::MultiTenancy"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Kubernetes multi-tenancy: {{c1::soft}} tenancy separates trusted tenants (internal teams) against accidents and noisy neighbours; {{c2::hard}} tenancy isolates mutually untrusted tenants against deliberate escape attempts.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Multi-tenancy",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Platform Engineering::13 Fleet & Multi-Tenancy",
+   "tags": [
+    "PlatformEngineering::MultiTenancy"
+   ],
+   "front": "Which question decides whether you need soft or hard multi-tenancy?",
+   "back": "\"What is the worst credible actor inside a tenant, and what must they never reach?\"",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Compliance zoning (classification levels, prod vs non-prod) often forces hard boundaries regardless of trust.",
+   "source": "Multi-tenancy",
+   "reverse": false
+  },
+  {
+   "guid": "G8t^2YpSSs",
+   "type": "cloze",
+   "deck": "Platform Engineering::13 Fleet & Multi-Tenancy",
+   "tags": [
+    "PlatformEngineering::MultiTenancy"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Namespace-per-tenant combines: {{c1::RBAC}} scoped to tenant namespaces; {{c2::ResourceQuota}} caps; {{c3::LimitRange}} defaults so quotas are enforceable; {{c4::NetworkPolicy}} default-deny between tenants; {{c5::admission policy}} (Pod Security, no hostPath/privileged); {{c6::PriorityClass / tainted node pools}} to protect system workloads.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Multi-tenancy",
+   "reverse": false
+  },
+  {
+   "guid": "ku-Y;:W-7P",
+   "type": "cloze",
+   "deck": "Platform Engineering::13 Fleet & Multi-Tenancy",
+   "tags": [
+    "PlatformEngineering::MultiTenancy"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Namespace isolation still shares: the {{c1::control plane}} (one API server + etcd — noisy tenants degrade all); {{c2::cluster-scoped resources}} (CRDs, webhooks, ClusterRoles — operator versions collide); {{c3::node kernels}} (a container escape lands next to other tenants); and {{c4::one Kubernetes version and upgrade window}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Multi-tenancy",
+   "reverse": false
+  },
+  {
+   "guid": "In#Q}QYD.f",
+   "type": "basic",
+   "deck": "Platform Engineering::13 Fleet & Multi-Tenancy",
+   "tags": [
+    "PlatformEngineering::MultiTenancy"
+   ],
+   "front": "What is <b>vCluster</b>?",
+   "back": "A virtual cluster: a real kube-apiserver + datastore running as pods inside a host namespace; a syncer schedules its pods onto the host's nodes.",
+   "text": "",
+   "image": "",
+   "analogy": "Apartments in one building: each tenant gets its own front door and keys (API server), but they share foundations and plumbing (nodes, kernel, network).",
+   "extra": "",
+   "source": "Multi-tenancy",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Platform Engineering::13 Fleet & Multi-Tenancy",
+   "tags": [
+    "PlatformEngineering::MultiTenancy"
+   ],
+   "front": "What does vCluster give tenants that namespaces don't?",
+   "back": "Their own API server: own CRDs, webhooks and versions without collisions, cluster-admin rights, fast and cheap creation (no cloud control-plane fee).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Multi-tenancy",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Platform Engineering::13 Fleet & Multi-Tenancy",
+   "tags": [
+    "PlatformEngineering::MultiTenancy"
+   ],
+   "front": "What does vCluster <b>not</b> isolate?",
+   "back": "Nodes/kernels (workloads share host nodes), network beyond host NetworkPolicy, and host-cluster outages.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Multi-tenancy",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Platform Engineering::13 Fleet & Multi-Tenancy",
+   "tags": [
+    "PlatformEngineering::MultiTenancy"
+   ],
+   "front": "Where is vCluster's sweet spot?",
+   "back": "Many dev/test tenants, self-service and ephemeral CI clusters on top of a few well-governed host clusters.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Multi-tenancy",
+   "reverse": false
+  },
+  {
+   "guid": "wPr<gm?V.X",
+   "type": "cloze",
+   "deck": "Platform Engineering::13 Fleet & Multi-Tenancy",
+   "tags": [
+    "PlatformEngineering::MultiTenancy"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Namespace-as-a-service tools: {{c1::Capsule}} groups namespaces into a Tenant CRD so tenant owners self-create namespaces within guardrails; {{c2::Hierarchical Namespace Controller (HNC)}} gives parent/child namespaces with policy propagation.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Value:</b> tenancy becomes self-service, with quotas, NetworkPolicies and RBAC templates propagated automatically.",
+   "source": "Multi-tenancy",
+   "reverse": false
+  },
+  {
+   "guid": "ryw)p3-|I*",
+   "type": "basic",
+   "deck": "Platform Engineering::13 Fleet & Multi-Tenancy",
+   "tags": [
+    "PlatformEngineering::MultiTenancy"
+   ],
+   "front": "Tenancy model for trusted internal teams with standard workloads?",
+   "back": "Namespaces + quotas + NetworkPolicy on a shared cluster — cheapest and densest.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Multi-tenancy · decision",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Platform Engineering::13 Fleet & Multi-Tenancy",
+   "tags": [
+    "PlatformEngineering::MultiTenancy"
+   ],
+   "front": "Tenancy model for teams that need their own CRDs, operators or cluster-admin?",
+   "back": "vCluster on shared host clusters.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Multi-tenancy · decision",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Platform Engineering::13 Fleet & Multi-Tenancy",
+   "tags": [
+    "PlatformEngineering::MultiTenancy"
+   ],
+   "front": "Tenancy model when one tenant has elevated data sensitivity and the rest are standard?",
+   "back": "Shared cluster plus a dedicated tainted node pool for that tenant, with stricter policies.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Multi-tenancy · decision",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Platform Engineering::13 Fleet & Multi-Tenancy",
+   "tags": [
+    "PlatformEngineering::MultiTenancy"
+   ],
+   "front": "Tenancy model for untrusted tenants or regulatory separation (prod/compliance zones)?",
+   "back": "Cluster-per-tenant (or per zone), in separate cloud projects/accounts.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Multi-tenancy · decision",
+   "reverse": false
+  },
+  {
+   "guid": "k,eI?_a`#G",
+   "type": "basic",
+   "deck": "Platform Engineering::13 Fleet & Multi-Tenancy",
+   "tags": [
+    "PlatformEngineering::MultiTenancy"
+   ],
+   "front": "Shared ingress controller vs per-tenant ingress controllers?",
+   "back": "<b>Shared</b> (+ IngressClass, hostname policy, rate limits): cheap, one load balancer.<br><b>Per-tenant:</b> config blast-radius isolation and independent tuning, at N× LB cost.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Multi-tenancy",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Platform Engineering::13 Fleet & Multi-Tenancy",
+   "tags": [
+    "PlatformEngineering::MultiTenancy"
+   ],
+   "front": "Multi-tenant monitoring: why prefer per-tenant agents feeding a multi-tenant backend over one shared Prometheus?",
+   "back": "In a shared Prometheus one tenant's cardinality explosion hurts everyone; per-tenant agents shipping to Mimir/Thanos (or per-tenant instances) scale and isolate cleanly.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Multi-tenancy",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Platform Engineering::13 Fleet & Multi-Tenancy",
+   "tags": [
+    "PlatformEngineering::MultiTenancy"
+   ],
+   "front": "Which tenant limits are usually forgotten next to CPU/memory quotas?",
+   "back": "Metric cardinality, log volume and ingress config size — set explicit limits for them too.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Multi-tenancy",
+   "reverse": false
+  },
+  {
+   "guid": "H`YSf%{0aB",
+   "type": "cloze",
+   "deck": "Platform Engineering::13 Fleet & Multi-Tenancy",
+   "tags": [
+    "PlatformEngineering::MultiCluster"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Reasons to run multiple clusters: {{c1::environment separation}} with independent upgrade cadence; {{c2::tenant/compliance isolation}}; {{c3::blast-radius control}} (bad rollout, poisoned CRD, control-plane outage stays local); {{c4::upgrade canarying}} in rings; {{c5::placement}} (on-prem + cloud).",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Anti-reason:</b> \"one cluster per microservice\" — cluster count must track automation maturity.",
+   "source": "Multi-cluster",
+   "reverse": false
+  },
+  {
+   "guid": "kgoKg9(XDz",
+   "type": "basic",
+   "deck": "Platform Engineering::13 Fleet & Multi-Tenancy",
+   "tags": [
+    "PlatformEngineering::MultiCluster"
+   ],
+   "front": "Management (hub) cluster + workload clusters: what runs where?",
+   "back": "<b>Hub:</b> small, hardened; runs fleet machinery (Argo CD/Flux, secrets tooling, backup orchestration, observability aggregation).<br><b>Workload clusters:</b> golden stack + tenant apps, all reconciled from Git.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Multi-cluster",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Platform Engineering::13 Fleet & Multi-Tenancy",
+   "tags": [
+    "PlatformEngineering::MultiCluster"
+   ],
+   "front": "Why should the management (hub) cluster host zero tenants?",
+   "back": "It holds credentials to every cluster — it's the crown jewel; any tenant workload there widens the attack surface on the whole fleet.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Multi-cluster",
+   "reverse": false
+  },
+  {
+   "guid": "]cdLhh8W4",
+   "type": "basic",
+   "deck": "Platform Engineering::13 Fleet & Multi-Tenancy",
+   "tags": [
+    "PlatformEngineering::MultiCluster"
+   ],
+   "front": "Fleet GitOps with a central (push) Argo CD: main drawbacks?",
+   "back": "The hub must reach every kube-apiserver, stores credentials for all clusters (crown-jewel target), and a hub outage stalls the whole fleet.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Multi-cluster",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Platform Engineering::13 Fleet & Multi-Tenancy",
+   "tags": [
+    "PlatformEngineering::MultiCluster"
+   ],
+   "front": "Fleet GitOps with per-cluster pull agents: strengths and costs?",
+   "back": "<b>+</b> outbound-only from clusters, keeps reconciling through hub/WAN outages, scales horizontally.<br><b>−</b> N installs to upgrade, fleet visibility needs aggregation, per-cluster bootstrap.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Multi-cluster",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Platform Engineering::13 Fleet & Multi-Tenancy",
+   "tags": [
+    "PlatformEngineering::MultiCluster"
+   ],
+   "front": "Why do hybrid (on-prem + cloud) fleets lean toward pull-based GitOps?",
+   "back": "The WAN link is the least reliable component; pull agents keep reconciling the last known state when it fails.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Multi-cluster",
+   "reverse": false
+  },
+  {
+   "guid": "I*,VI&vp*}",
+   "type": "basic",
+   "deck": "Platform Engineering::13 Fleet & Multi-Tenancy",
+   "tags": [
+    "PlatformEngineering::MultiCluster"
+   ],
+   "front": "How do you layer Helm values so 30 clusters don't become 30 snowflakes?",
+   "back": "One golden-stack repo with a narrowing values hierarchy: <code>global.yaml</code> → <code>env/prod.yaml</code> → <code>cluster/&lt;name&gt;.yaml</code> (last wins). Cluster files stay tiny — mostly names and IPs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Multi-cluster",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Platform Engineering::13 Fleet & Multi-Tenancy",
+   "tags": [
+    "PlatformEngineering::MultiCluster"
+   ],
+   "front": "Fleet config: when Helm, when Kustomize, and why use umbrella charts sparingly?",
+   "back": "Helm for parameterised third-party software; Kustomize overlays for your own manifests. Umbrella charts couple component versions together.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Multi-cluster",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Platform Engineering::13 Fleet & Multi-Tenancy",
+   "tags": [
+    "PlatformEngineering::MultiCluster"
+   ],
+   "front": "Fleet config rule: how must every per-cluster divergence be expressed?",
+   "back": "As a values/overlay line with a reviewable diff in Git — never a manual edit on the cluster; bots (e.g. Renovate) pin chart versions per ring.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Multi-cluster",
+   "reverse": false
+  },
+  {
+   "guid": "bkTa<Qttdg",
+   "type": "basic",
+   "deck": "Platform Engineering::13 Fleet & Multi-Tenancy",
+   "tags": [
+    "PlatformEngineering::MultiCluster"
+   ],
+   "front": "Default multi-cluster networking recommendation, and the rule for anything beyond it?",
+   "back": "Independent clusters + DNS/GSLB: cross-cluster calls go through normal ingress/LBs. Add cross-cluster networking only for a named requirement.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Multi-cluster",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Platform Engineering::13 Fleet & Multi-Tenancy",
+   "tags": [
+    "PlatformEngineering::MultiCluster"
+   ],
+   "front": "Cilium ClusterMesh: what does it need, and why is it risky on managed Kubernetes?",
+   "back": "Pod-to-pod routing across clusters; needs non-overlapping pod CIDRs, mutual reachability and control of the CNI — which a managed service usually doesn't give you.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Multi-cluster",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Platform Engineering::13 Fleet & Multi-Tenancy",
+   "tags": [
+    "PlatformEngineering::MultiCluster"
+   ],
+   "front": "Istio multi-cluster: benefit and cost?",
+   "back": "mTLS and locality failover across clusters via east-west gateways, without CNI coupling — but operationally heavy.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Multi-cluster",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Platform Engineering::13 Fleet & Multi-Tenancy",
+   "tags": [
+    "PlatformEngineering::MultiCluster"
+   ],
+   "front": "Submariner vs Skupper for connecting clusters?",
+   "back": "<b>Submariner:</b> L3 tunnels between cluster networks (CNI-adjacent constraints).<br><b>Skupper:</b> L7 application interconnect with no network coupling — good for selectively sharing a few services.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Multi-cluster",
+   "reverse": false
+  },
+  {
+   "guid": "zHl5M8e!P}",
+   "type": "basic",
+   "deck": "Platform Engineering::13 Fleet & Multi-Tenancy",
+   "tags": [
+    "PlatformEngineering::MultiCluster"
+   ],
+   "front": "Why is data gravity the real constraint in multi-cluster design?",
+   "back": "Stateless workloads move freely; data doesn't — block volumes are zone/cluster-local and databases replicate on their own terms.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Multi-cluster",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Platform Engineering::13 Fleet & Multi-Tenancy",
+   "tags": [
+    "PlatformEngineering::MultiCluster"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Answers to data gravity, in order of preference: {{c1::externalise state to managed services}} reachable from any cluster → {{c2::application-level replication}} between sites → {{c3::backup/restore}} as the fallback.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Anti-pattern:</b> stretching etcd, storage or synchronous replication across a WAN/VPN.",
+   "source": "Multi-cluster",
+   "reverse": false
+  },
+  {
+   "guid": "hiEnPu1|fl",
+   "type": "basic",
+   "deck": "Platform Engineering::13 Fleet & Multi-Tenancy",
+   "tags": [
+    "PlatformEngineering::MultiCluster"
+   ],
+   "front": "How do you roll changes out across a fleet safely?",
+   "back": "Upgrade <b>rings</b>: lab → dev → staging → prod-canary → prod-rest; promote Git changes ring by ring with soak time and automated verification.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "PodDisruptionBudgets + surge-capable node pools keep drains safe; Renovate turns version bumps into per-ring diffs.",
+   "source": "Multi-cluster",
+   "reverse": false
+  }
+ ]
+}

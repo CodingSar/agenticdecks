@@ -1,0 +1,2234 @@
+{
+ "deck_name": "AZ-305 Solutions Architect Expert",
+ "file": "AZ-305_Solutions_Architect_Expert.apkg",
+ "description": "Microsoft AZ-305 (Designing Microsoft Azure Infrastructure Solutions) exam prep, organised by the skill areas: identity, governance &amp; monitoring; data storage; business continuity; infrastructure. Scenario-style 'what do you recommend' cards for architects designing on Azure.",
+ "notes": [
+  {
+   "guid": "r58k(Q9KE+",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::01 Monitoring & Logging",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
+   ],
+   "front": "Azure Monitor Metrics vs Logs: when do you recommend each?",
+   "back": "<b>Metrics:</b> lightweight near-real-time numbers → dashboards and fast threshold alerts.<br><b>Logs:</b> event records in Log Analytics, queried with KQL → diagnosis and cross-resource correlation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "JPG3}w!wBq",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::01 Monitoring & Logging",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
+   ],
+   "front": "You need one query surface over logs from several subscriptions and on-prem servers. What do you recommend?",
+   "back": "A <b>central Log Analytics workspace</b>, fed by diagnostic settings (platform logs) and the Azure Monitor Agent (guest OS; on-prem via <b>Azure Arc</b>).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "vtilI%OZ@D",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::01 Monitoring & Logging",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
+   ],
+   "front": "When do you recommend <i>multiple</i> Log Analytics workspaces instead of one?",
+   "back": "Data residency per geography, different retention or access requirements, separate billing, or strict team isolation. Otherwise one workspace is simpler and cheaper (commitment tiers).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "mt6.T56wZf",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::01 Monitoring & Logging",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
+   ],
+   "front": "Log Analytics: workspace-context vs resource-context access?",
+   "back": "<b>Workspace-context:</b> read access to all data in the workspace.<br><b>Resource-context:</b> only logs of resources you have RBAC on, so teams can share one workspace safely.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "I`LJ,$<X}`",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::01 Monitoring & Logging",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
+   ],
+   "front": "Which agent should an AZ-305 design specify for VM guest telemetry, and what did it replace?",
+   "back": "The <b>Azure Monitor Agent (AMA)</b>. It replaced the legacy Log Analytics agent (MMA), retired in 2024.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "f@)6SDzZ8$",
+   "type": "cloze",
+   "deck": "AZ-305 Solutions Architect Expert::01 Monitoring & Logging",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
+   ],
+   "front": "",
+   "back": "",
+   "text": "With the Azure Monitor Agent, a {{c1::Data Collection Rule (DCR)}} defines what to collect, how to transform it and where to send it.",
+   "image": "",
+   "analogy": "",
+   "extra": "DCRs decouple configuration from the agent; associate them with machines manually or via Azure Policy.",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "DRMoDWeZeh",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::01 Monitoring & Logging",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
+   ],
+   "front": "Route the Activity Log and resource logs to a third-party SIEM outside Azure: what do you configure?",
+   "back": "<b>Diagnostic settings</b> streaming to an <b>Event Hub</b>, which the SIEM consumes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "tF$0d;{5C_",
+   "type": "cloze",
+   "deck": "AZ-305 Solutions Architect Expert::01 Monitoring & Logging",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Diagnostic setting destinations: {{c1::Log Analytics workspace}}, {{c2::Storage account}}, {{c3::Event Hubs}}, or a partner solution.",
+   "image": "",
+   "analogy": "",
+   "extra": "Workspace = query/alert; Storage = cheap archive; Event Hubs = stream to external tools.",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "K3I+i(iHd[",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::01 Monitoring & Logging",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
+   ],
+   "front": "Metric alert vs log alert: latency and cost?",
+   "back": "<b>Metric alert:</b> near-real-time (~1 min), cheap to run often.<br><b>Log alert:</b> scheduled KQL query, richer logic but higher latency and query cost.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "NXI{|D~4bj",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::01 Monitoring & Logging",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
+   ],
+   "front": "Which Azure Monitor component holds the notification/automation logic (email, SMS, webhook, Function, ITSM) so many alert rules can reuse it?",
+   "back": "An <b>Action Group</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "An alert rule is the smoke detector; the action group is the phone tree it triggers.",
+   "extra": "",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "l`$;IW]px:",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::01 Monitoring & Logging",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
+   ],
+   "front": "What is Application Insights, and where does its data live?",
+   "back": "Azure Monitor's <b>APM</b> feature: requests, response times, dependencies, exceptions. Workspace-based App Insights stores data in Log Analytics, queried with KQL.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "v}j>&O?fMh",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::01 Monitoring & Logging",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
+   ],
+   "front": "Security logs must be kept 7+ years, rarely queried, at low cost. What Log Analytics feature do you recommend?",
+   "back": "<b>Long-term retention (archive)</b> beyond interactive retention; query it on demand with <b>search jobs</b> or <b>restore</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "u(+6!HNjNT",
+   "type": "cloze",
+   "deck": "AZ-305 Solutions Architect Expert::01 Monitoring & Logging",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Log Analytics default interactive retention is {{c1::30}} days, extendable to {{c2::2 years}}, with long-term (archive) retention beyond that.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "L~+zuqp!T2",
+   "type": "cloze",
+   "deck": "AZ-305 Solutions Architect Expert::01 Monitoring & Logging",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
+   ],
+   "front": "",
+   "back": "",
+   "text": "For predictable high-volume Log Analytics ingestion, {{c1::commitment tiers}} (e.g. 100 GB/day) lower the per-GB price in exchange for a fixed daily minimum.",
+   "image": "",
+   "analogy": "",
+   "extra": "Low or unpredictable volume: stay on pay-as-you-go.",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "JF>JekEY:I",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::01 Monitoring & Logging",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
+   ],
+   "front": "Which Azure service gives IP flow verify, next-hop analysis, packet capture and NSG/VNet flow logs?",
+   "back": "<b>Network Watcher</b> (regional).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "QR,m%(!iPC",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::01 Monitoring & Logging",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
+   ],
+   "front": "What do you recommend for interactive, parameterized reports combining logs, metrics and Resource Graph data (e.g. post-incident reviews)?",
+   "back": "<b>Azure Monitor Workbooks.</b> They can be versioned as ARM templates.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "Q.95KQX7B.",
+   "type": "cloze",
+   "deck": "AZ-305 Solutions Architect Expert::02 Identity & Access",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Azure Active Directory is now called {{c1::Microsoft Entra ID}}; tenant and directory concepts are unchanged.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "MhB|~/NEjV",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::02 Identity & Access",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
+   ],
+   "front": "Name two phishing-resistant passwordless methods Entra ID supports.",
+   "back": "<b>Windows Hello for Business</b> and <b>FIDO2 security keys</b> (also passkeys). Both use device-bound public-key crypto, so there is no shared secret to phish.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "SMS and voice codes are <b>not</b> phishing-resistant.",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "snu`zRc35.",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::02 Identity & Access",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
+   ],
+   "front": "Which Entra ID feature enforces 'require MFA from untrusted networks' or 'block legacy authentication'?",
+   "back": "<b>Conditional Access:</b> evaluates signals (user, location, device, app, risk) at sign-in and applies grant/session controls.",
+   "text": "",
+   "image": "",
+   "analogy": "A bouncer who checks not just your ID but where you came from, what you're wearing and who you're with.",
+   "extra": "",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "y(cq4k?AI~",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::02 Identity & Access",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
+   ],
+   "front": "Entra Connect: which hybrid sign-in method authenticates entirely in the cloud and is the recommended default?",
+   "back": "<b>Password Hash Synchronization (PHS):</b> a hash of the password hash is synced. Simplest and keeps working if on-prem is down.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Also enables leaked-credential detection in Entra ID Protection.",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::02 Identity & Access",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
+   ],
+   "front": "Entra Connect: when do you choose Pass-through Authentication (PTA) over PHS, and what is the cost?",
+   "back": "When passwords (even hashed) must not leave on-prem. Agents validate against AD in real time, so sign-in <b>depends on on-prem</b> availability.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::02 Identity & Access",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
+   ],
+   "front": "Entra hybrid identity: when is federation (AD FS) still justified?",
+   "back": "Only for requirements the cloud can't meet, e.g. on-prem smart-card/certificate auth or a third-party on-prem MFA at sign-in. Most complex option.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "LRXpK,ZZd,",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::02 Identity & Access",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
+   ],
+   "front": "Entra B2B vs External ID (B2C)?",
+   "back": "<b>B2B:</b> partner users access <i>your</i> resources as guests with their home credentials.<br><b>External ID / B2C:</b> customers sign up to <i>your apps</i> with social or local accounts.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "g(k&r8F2!8",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::02 Identity & Access",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
+   ],
+   "front": "Why recommend a managed identity instead of a connection string or secret?",
+   "back": "No credential to store, rotate or leak: Entra ID issues tokens to the resource, and access is granted via RBAC.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "s:?x:/g.eq",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::02 Identity & Access",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
+   ],
+   "front": "System-assigned vs user-assigned managed identity: when do you use each?",
+   "back": "<b>System-assigned:</b> lives and dies with one resource.<br><b>User-assigned:</b> standalone resource, shareable across many resources, pre-provisionable.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Example: a VM scale set whose instances all need the same Key Vault access → user-assigned.",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "y%iC>05Ua",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::02 Identity & Access",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
+   ],
+   "front": "No built-in role fits ('restart VMs and read logs, but not create or delete'). What do you recommend?",
+   "back": "A <b>custom role</b> (Actions / NotActions / DataActions) assigned at the narrowest scope: least privilege.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "I$ElDUP<No",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::02 Identity & Access",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
+   ],
+   "front": "Key Vault: which permission model do you recommend for new deployments, and why?",
+   "back": "<b>Azure RBAC</b> (over legacy vault access policies): fine-grained per-secret scope, standard role assignments, PIM and audit integration.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Key Vault stores secrets, keys and TLS certificates.",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "lOSWLVV]IW",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::02 Identity & Access",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
+   ],
+   "front": "Regulation demands single-tenant, FIPS 140-2 Level 3 HSMs for keys. What do you recommend?",
+   "back": "<b>Azure Key Vault Managed HSM</b> (dedicated HSM pool, customer has full control).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Key Vault Premium uses multi-tenant HSMs.",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "Pd4vUJQ8!b",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::02 Identity & Access",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
+   ],
+   "front": "Which Entra feature replaces standing admin access with just-in-time, time-bound role elevation?",
+   "back": "<b>Privileged Identity Management (PIM):</b> eligible assignments must be <b>activated</b> (justification, approval, MFA) for a limited window.",
+   "text": "",
+   "image": "",
+   "analogy": "A hotel key card that opens the server room only for the hour you booked.",
+   "extra": "",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "tA5-m#9T5x",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::02 Identity & Access",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
+   ],
+   "front": "Legacy apps in Azure need Kerberos/NTLM/LDAP, but you don't want to extend on-prem AD DS. What do you recommend?",
+   "back": "<b>Microsoft Entra Domain Services:</b> managed domain controllers synced from Entra ID; no DCs to deploy or patch.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "ipILz`.J9{",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::02 Identity & Access",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Governance"
+   ],
+   "front": "An external auditor needs time-limited read-only access to a subscription. What do you recommend?",
+   "back": "Invite as an <b>Entra B2B guest</b> and give a <b>PIM eligible Reader</b> assignment with an expiry: no standing access.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "dW,.V%rg!g",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::03 Governance",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Governance"
+   ],
+   "front": "Azure scopes: which level is the billing and quota boundary, and which groups resources by shared lifecycle?",
+   "back": "<b>Subscription:</b> billing and scale/quota boundary.<br><b>Resource group:</b> resources deployed and deleted together.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Management groups sit above subscriptions to apply policy and RBAC at scale.",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "r~;Z?I&`75",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::03 Governance",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Governance"
+   ],
+   "front": "Besides billing, what drives subscription boundaries in a large enterprise?",
+   "back": "Environment separation (prod vs non-prod blast radius), per-subscription limits/quotas, and differing compliance needs per business unit.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "The landing-zone pattern: one subscription per workload/environment.",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "BQod%W~LAf",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::03 Governance",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Authentication_Authorization",
+    "AZ305::Identity_Governance_Monitoring::Governance"
+   ],
+   "front": "Azure RBAC vs Azure Policy?",
+   "back": "<b>RBAC:</b> <i>who</i> can do <i>what</i> (e.g. restart this VM).<br><b>Policy:</b> what resources may <i>look like</i>, regardless of who deploys (e.g. only approved VM SKUs).",
+   "text": "",
+   "image": "",
+   "analogy": "RBAC is who gets a key to the building; Policy is the building code every renovation must pass.",
+   "extra": "Allowed SKUs/images: Policy with <code>deny</code>, enforced before creation.",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "JN(egF{5l)",
+   "type": "cloze",
+   "deck": "AZ-305 Solutions Architect Expert::03 Governance",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Governance"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Azure Policy effects: {{c1::deny}} blocks a non-compliant create/update; {{c2::audit}} allows it but flags non-compliance; {{c3::deployIfNotExists}} deploys a missing related resource (e.g. diagnostic settings).",
+   "image": "",
+   "analogy": "",
+   "extra": "<code>modify</code> adds or changes properties such as tags; existing resources need a remediation task.",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "LjCUG.da>f",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::03 Governance",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Governance"
+   ],
+   "front": "Every resource must carry a CostCenter tag. How do you enforce it?",
+   "back": "<b>Azure Policy</b>: <code>deny</code> if missing, or <code>modify</code> to add or inherit it automatically (remediation for existing resources).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "C9u.d(n.st",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::03 Governance",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Governance"
+   ],
+   "front": "Name two governance uses of a tagging strategy beyond documentation.",
+   "back": "<b>Cost allocation/chargeback</b> in Cost Management, and <b>scoping automation or policy</b> (e.g. auto-shutdown for <code>Environment=dev</code>).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "sh35v-nThZ",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::03 Governance",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Governance"
+   ],
+   "front": "Why assign a policy <b>initiative</b> rather than many single policies?",
+   "back": "It bundles related definitions (e.g. a regulatory benchmark) into one assignment that is simpler to manage, version and report on.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "KW.s,A5q$V",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::03 Governance",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Governance"
+   ],
+   "front": "Why assign an org-wide rule (e.g. 'no public IPs on VMs') at management-group scope?",
+   "back": "Assignments <b>inherit downward</b>, so one assignment covers every current and future subscription. Use narrower scopes for workload-specific rules or exemptions.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "jXBOSIw,b-",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::03 Governance",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Governance"
+   ],
+   "front": "Azure Blueprints is retiring. What replaces it?",
+   "back": "<b>Template Specs</b> (versioned ARM/Bicep templates) and <b>Deployment Stacks</b> (grouping, lifecycle and deny-assignment locking).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Blueprints retirement: phased out from mid-2026, gone by January 2027.",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "ufdvoJ%Qs|",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::03 Governance",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Governance"
+   ],
+   "front": "Prevent accidental deletion of a critical resource even by Owners. What do you recommend?",
+   "back": "A <b>resource lock</b> (<code>CanNotDelete</code> or <code>ReadOnly</code>) at resource, RG or subscription scope. It overrides RBAC for everyone until removed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Pitfall:</b> ReadOnly can break operations that use POST (e.g. listing storage keys).",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "k$NTlG2D-=",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::03 Governance",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Governance"
+   ],
+   "front": "Which service shows compliance against regulatory standards with a secure score and recommended actions?",
+   "back": "<b>Microsoft Defender for Cloud</b> (regulatory compliance dashboard). Purview Compliance Manager covers broader Microsoft 365 + Azure compliance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "cXV!kl2K>&",
+   "type": "cloze",
+   "deck": "AZ-305 Solutions Architect Expert::03 Governance",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Governance"
+   ],
+   "front": "",
+   "back": "",
+   "text": "{{c1::Microsoft Entra ID Governance}} combines entitlement management (access packages), access reviews and PIM to automate the identity access lifecycle.",
+   "image": "",
+   "analogy": "",
+   "extra": "An <b>access package</b> bundles groups, apps and sites that users request, with approval and expiry.",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "OTA?9IcOK)",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::03 Governance",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
+   ],
+   "front": "Which Entra feature periodically re-confirms that guest users or group memberships are still needed?",
+   "back": "<b>Access Reviews</b> (part of Entra ID Governance).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "g(=T*r[w%P",
+   "type": "cloze",
+   "deck": "AZ-305 Solutions Architect Expert::03 Governance",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Governance"
+   ],
+   "front": "",
+   "back": "",
+   "text": "The Azure Well-Architected Framework has five pillars: {{c1::Reliability}}, {{c2::Security}}, {{c3::Cost Optimization}}, {{c4::Operational Excellence}}, {{c5::Performance Efficiency}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "AZ-305 scenarios test whether your recommendation balances these pillars against the stated requirements.",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "Hf!9D0$J!/",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::03 Governance",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Governance"
+   ],
+   "front": "Cloud Adoption Framework vs Well-Architected Framework: difference in scope?",
+   "back": "<b>CAF:</b> the organization's whole cloud journey (strategy → manage).<br><b>WAF:</b> the design quality of an individual workload.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "wRT_e18CUb",
+   "type": "cloze",
+   "deck": "AZ-305 Solutions Architect Expert::04 Relational Data",
+   "tags": [
+    "AZ305::Data_Storage::Relational"
+   ],
+   "front": "",
+   "back": "",
+   "text": "{{c1::Azure SQL Database}}: database-scoped PaaS, least management.<br>{{c2::Azure SQL Managed Instance}}: PaaS with instance features (SQL Agent, cross-database queries), for lift-and-shift.<br>{{c3::SQL Server on an Azure VM}}: IaaS, full OS control, you patch everything.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
+   "guid": "CmhZf1r1(v",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::04 Relational Data",
+   "tags": [
+    "AZ305::Data_Storage::Relational"
+   ],
+   "front": "Azure SQL Database: DTU vs vCore purchasing model?",
+   "back": "<b>DTU:</b> one bundled compute/memory/IO unit, simple.<br><b>vCore:</b> choose compute and storage separately, supports <b>Azure Hybrid Benefit</b>; recommended for production.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
+   "guid": "v4qZ?(ks8K",
+   "type": "cloze",
+   "deck": "AZ-305 Solutions Architect Expert::04 Relational Data",
+   "tags": [
+    "AZ305::Data_Storage::Relational"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Azure SQL Database vCore tiers: {{c1::General Purpose}} (remote storage, most workloads), {{c2::Business Critical}} (local SSD, built-in replicas, low latency), {{c3::Hyperscale}} (independently scaling storage to 100+ TB, fast restores).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
+   "guid": "M~UWFNy0$X",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::04 Relational Data",
+   "tags": [
+    "AZ305::Data_Storage::Relational"
+   ],
+   "front": "A SaaS provider has hundreds of small tenant databases with unpredictable, non-overlapping spikes. How do you control cost?",
+   "back": "An <b>elastic pool</b>: databases share pooled compute, so one tenant's peak uses capacity others aren't using.",
+   "text": "",
+   "image": "",
+   "analogy": "A shared office printer: nobody prints all day, so one machine serves the whole floor.",
+   "extra": "",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
+   "guid": "EC`W.d@.cO",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::04 Relational Data",
+   "tags": [
+    "AZ305::Data_Storage::Relational"
+   ],
+   "front": "How do you offload read-heavy reporting from a primary Azure SQL Database?",
+   "back": "Point reports at a <b>read replica</b>: the built-in read scale-out replica (Business Critical/Premium, Hyperscale) or a geo-secondary, via <code>ApplicationIntent=ReadOnly</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
+   "guid": "g0!Fk1_k{-",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::04 Relational Data",
+   "tags": [
+    "AZ305::Data_Storage::Relational"
+   ],
+   "front": "What does an auto-failover group add beyond active geo-replication?",
+   "back": "A <b>stable listener endpoint</b> and orchestrated (automatic or manual) failover of a group of databases, so apps don't change connection strings.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Replication is asynchronous: an unplanned failover can lose recent writes.",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
+   "guid": "~|??eV?|5",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::04 Relational Data",
+   "tags": [
+    "AZ305::Data_Storage::Relational"
+   ],
+   "front": "Azure SQL backups: Point-in-Time Restore vs Long-Term Retention?",
+   "back": "<b>PITR:</b> restore to any moment in a short window, for mistakes and corruption.<br><b>LTR:</b> weekly/monthly/yearly full backups kept up to 10 years, for compliance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
+   "guid": "M]7ELVD>cB",
+   "type": "cloze",
+   "deck": "AZ-305 Solutions Architect Expert::04 Relational Data",
+   "tags": [
+    "AZ305::Data_Storage::Relational"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Azure SQL Database PITR retention defaults to {{c1::7}} days, configurable up to {{c2::35}} days.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
+   "guid": "d(2NStjuDB",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::04 Relational Data",
+   "tags": [
+    "AZ305::Data_Storage::Relational"
+   ],
+   "front": "When do you recommend Azure Database for PostgreSQL/MySQL Flexible Server over Azure SQL Database?",
+   "back": "When the app depends on the <b>open-source engine</b> (PostgreSQL/MySQL code, extensions, tooling) and you still want managed PaaS with zone-redundant HA.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
+   "guid": "I;Gnc]HL7}",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::04 Relational Data",
+   "tags": [
+    "AZ305::Data_Storage::Relational"
+   ],
+   "front": "What is on by default for every new Azure SQL database, and what threat does it address?",
+   "back": "<b>Transparent Data Encryption (TDE):</b> encrypts data files, logs and backups at rest, protecting against stolen media or raw storage access.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
+   "guid": "wb4-kf0)#D",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::04 Relational Data",
+   "tags": [
+    "AZ305::Data_Storage::Relational"
+   ],
+   "front": "A regulated customer must control (and be able to revoke) the keys protecting their Azure SQL data. What do you recommend?",
+   "back": "<b>TDE with customer-managed keys</b> (BYOK) stored in Key Vault. Revoking key access makes the database inaccessible.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
+   "guid": "l7y*`{pw:N",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::04 Relational Data",
+   "tags": [
+    "AZ305::Data_Storage::Relational"
+   ],
+   "front": "What detects SQL injection and anomalous access on Azure SQL and alerts admins?",
+   "back": "<b>Microsoft Defender for SQL</b> (Defender for Cloud): vulnerability assessment + advanced threat protection.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
+   "guid": "yfdq{Cg7Z&",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::04 Relational Data",
+   "tags": [
+    "AZ305::Data_Storage::Relational"
+   ],
+   "front": "One Azure SQL database has hit its tier's write ceiling. How do you scale writes further?",
+   "back": "<b>Sharding:</b> partition data across many databases by a shard key (Elastic Database tools or app logic). Vertical scaling has a hard limit.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
+   "guid": "A1)1Oa!@?x",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::05 Non-relational Data & Storage",
+   "tags": [
+    "AZ305::Data_Storage::Semi_Unstructured"
+   ],
+   "front": "What is Cosmos DB's key differentiator vs a relational database for global apps?",
+   "back": "Turnkey <b>global distribution</b> (multi-region reads/writes with single-digit-ms SLAs), elastic horizontal scale and tunable consistency, for schema-flexible apps.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
+   "guid": "L@qyR$;rBY",
+   "type": "cloze",
+   "deck": "AZ-305 Solutions Architect Expert::05 Non-relational Data & Storage",
+   "tags": [
+    "AZ305::Data_Storage::Semi_Unstructured"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Cosmos DB consistency, strongest → weakest: {{c1::Strong}} → {{c2::Bounded Staleness}} → {{c3::Session}} (default) → {{c4::Consistent Prefix}} → {{c5::Eventual}}.",
+   "image": "",
+   "analogy": "A dial from 'everyone sees the same newspaper instantly' to 'everyone gets the news eventually, in any order'.",
+   "extra": "<b>Session</b> = read-your-own-writes per client; the usual right answer. Bounded staleness = lag capped by K versions or T time.",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
+   "guid": "M%=hit%gaX",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::05 Non-relational Data & Storage",
+   "tags": [
+    "AZ305::Data_Storage::Semi_Unstructured"
+   ],
+   "front": "Migrate a MongoDB app to Azure with minimal code change. What do you recommend?",
+   "back": "<b>Azure Cosmos DB for MongoDB</b>: existing MongoDB drivers connect unchanged.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
+   "guid": "b#}X/by,Nh",
+   "type": "cloze",
+   "deck": "AZ-305 Solutions Architect Expert::05 Non-relational Data & Storage",
+   "tags": [
+    "AZ305::Data_Storage::Semi_Unstructured"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Azure Storage account services: {{c1::Blob}} (objects, data lake), {{c2::Files}} (managed SMB/NFS shares), {{c3::Queue}} (simple async messages), {{c4::Table}} (NoSQL key-value).",
+   "image": "",
+   "analogy": "",
+   "extra": "New key-value designs usually pick Cosmos DB for Table.",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
+   "guid": "LZ{`_#Cp`J",
+   "type": "cloze",
+   "deck": "AZ-305 Solutions Architect Expert::05 Non-relational Data & Storage",
+   "tags": [
+    "AZ305::Data_Storage::Semi_Unstructured"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Blob access tiers and minimum retention: Hot (none) → Cool ({{c1::30}} days) → Cold ({{c2::90}} days) → Archive ({{c3::180}} days, offline: hours of {{c4::rehydration}}).",
+   "image": "",
+   "analogy": "",
+   "extra": "Colder = cheaper storage, more expensive access. Early deletion is charged for the remaining days.",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
+   "guid": "LmF!viwUgS",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::05 Non-relational Data & Storage",
+   "tags": [
+    "AZ305::Data_Storage::Semi_Unstructured"
+   ],
+   "front": "What does LRS protect against, and when is it still an acceptable choice?",
+   "back": "3 synchronous copies in <b>one datacenter</b>: survives disk/rack failure, not a datacenter loss. Fine for reproducible data, cost-driven cases, or apps that replicate themselves.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
+   "guid": "O$v_G^,JOy",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::05 Non-relational Data & Storage",
+   "tags": [
+    "AZ305::Data_Storage::Semi_Unstructured"
+   ],
+   "front": "HA within a region, surviving a datacenter failure, no cross-region replication. Which redundancy?",
+   "back": "<b>ZRS:</b> synchronous copies across <b>three availability zones</b> in the region.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
+   "guid": "u-m|f;XVdP",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::05 Non-relational Data & Storage",
+   "tags": [
+    "AZ305::Data_Storage::Semi_Unstructured",
+    "AZ305::Business_Continuity::High_Availability"
+   ],
+   "front": "GRS vs RA-GRS?",
+   "back": "Both replicate asynchronously to the paired region. <b>GRS:</b> secondary readable only after failover. <b>RA-GRS:</b> a read-only secondary endpoint is always available.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Same distinction for GZRS vs RA-GZRS.",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
+   "guid": "Gkgm)^+Gf*",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::05 Non-relational Data & Storage",
+   "tags": [
+    "AZ305::Business_Continuity::High_Availability"
+   ],
+   "front": "GZRS vs GRS?",
+   "back": "Both copy to a secondary region. In the primary, <b>GZRS</b> keeps 3 copies across zones (ZRS), while GRS keeps 3 copies in one datacenter (LRS).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "GZRS = highest durability and availability: zone failure and regional disaster covered.",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
+   "guid": "wSj]{w{HS!",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::05 Non-relational Data & Storage",
+   "tags": [
+    "AZ305::Data_Storage::Semi_Unstructured"
+   ],
+   "front": "Foundation for a big-data platform needing a hierarchical namespace, POSIX ACLs and HDFS compatibility?",
+   "back": "<b>Azure Data Lake Storage Gen2</b>: Blob Storage with hierarchical namespace enabled.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
+   "guid": "FJ%nLd?<@i",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::05 Non-relational Data & Storage",
+   "tags": [
+    "AZ305::Data_Storage::Semi_Unstructured"
+   ],
+   "front": "Lift-and-shift a file server used by Windows (SMB) and Linux (NFS) clients. What do you recommend?",
+   "back": "<b>Azure Files</b> (Premium for performance), with identity via on-prem AD DS or Entra Kerberos to keep share permissions.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Azure File Sync can keep an on-prem cache.",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
+   "guid": "2?5{]?&-:",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::05 Non-relational Data & Storage",
+   "tags": [
+    "AZ305::Data_Storage::Semi_Unstructured"
+   ],
+   "front": "SAP HANA or HPC needs sub-millisecond, high-throughput shared file storage. What do you recommend?",
+   "back": "<b>Azure NetApp Files</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
+   "guid": "Q!|,*A+U{,",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::05 Non-relational Data & Storage",
+   "tags": [
+    "AZ305::Data_Storage::Semi_Unstructured"
+   ],
+   "front": "Compliance requires blob data to be write-once-read-many (WORM). What do you recommend?",
+   "back": "<b>Immutable storage</b> policies: time-based retention or legal hold on the container or blob version.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
+   "guid": "c;|*8@cI6=",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::06 Data Integration & Analytics",
+   "tags": [
+    "AZ305::Data_Storage::Integration"
+   ],
+   "front": "What orchestrates scheduled ETL/ELT pipelines across on-prem and cloud sources?",
+   "back": "<b>Azure Data Factory</b> (Synapse/Fabric pipelines use the same engine): connectors, visual designer, integration runtimes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
+   "guid": "M.sn7Hn+yB",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::06 Data Integration & Analytics",
+   "tags": [
+    "AZ305::Data_Storage::Integration"
+   ],
+   "front": "Data Factory must read an on-prem Oracle database not reachable from the internet. Which component?",
+   "back": "A <b>Self-Hosted Integration Runtime</b> installed on-prem (or in a VNet). It connects outbound, so no inbound firewall ports are needed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
+   "guid": "E&`_4<7:27",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::06 Data Integration & Analytics",
+   "tags": [
+    "AZ305::Data_Storage::Integration"
+   ],
+   "front": "Synapse dedicated vs serverless SQL pool?",
+   "back": "<b>Dedicated:</b> provisioned compute billed hourly, for predictable warehouse loads.<br><b>Serverless:</b> pay per TB scanned, for ad hoc queries over data-lake files.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
+   "guid": "MDCa=P_E@#",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::06 Data Integration & Analytics",
+   "tags": [
+    "AZ305::Data_Storage::Integration"
+   ],
+   "front": "When do you recommend Azure Databricks over Synapse?",
+   "back": "Code-first Spark engineering and ML: notebooks, Python/Scala transformations, <b>Delta Lake</b> ACID tables. Synapse fits SQL-centric warehousing.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
+   "guid": "eMG(Oc_s7m",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::06 Data Integration & Analytics",
+   "tags": [
+    "AZ305::Data_Storage::Integration"
+   ],
+   "front": "Detect anomalies in streaming sensor telemetry as it arrives, using SQL-like queries. What do you recommend?",
+   "back": "<b>Azure Stream Analytics</b>: serverless windowed SQL over Event Hubs / IoT Hub, writing to Power BI, Storage, Cosmos DB, etc.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
+   "guid": "fTLcex|xNE",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::06 Data Integration & Analytics",
+   "tags": [
+    "AZ305::Data_Storage::Integration"
+   ],
+   "front": "Fast ad hoc exploration over huge volumes of time-series and log data?",
+   "back": "<b>Azure Data Explorer</b> (KQL; the same engine as Log Analytics).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
+   "guid": "zgjS4K.FLx",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::07 Backup & Disaster Recovery",
+   "tags": [
+    "AZ305::Business_Continuity::Backup_DR"
+   ],
+   "front": "RPO vs RTO: what does each one drive in a design?",
+   "back": "<b>RPO</b> (max data loss, in time) drives backup/replication <b>frequency</b>.<br><b>RTO</b> (max downtime) drives <b>failover automation</b> and standby capacity (cold/warm/hot).",
+   "text": "",
+   "image": "",
+   "analogy": "RPO: how far back is your last save point? RTO: how long until you're playing again?",
+   "extra": "",
+   "source": "AZ-305 · Business continuity",
+   "reverse": false
+  },
+  {
+   "guid": "rF&l>;&06~",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::07 Backup & Disaster Recovery",
+   "tags": [
+    "AZ305::Business_Continuity::Backup_DR"
+   ],
+   "front": "What do you recommend for policy-based, application-consistent backup of Azure VMs, on-prem servers and SQL/SAP HANA in VMs?",
+   "back": "<b>Azure Backup</b> with a Recovery Services vault (MARS agent for on-prem files).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Business continuity",
+   "reverse": false
+  },
+  {
+   "guid": "LD~bB9c=T`",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::07 Backup & Disaster Recovery",
+   "tags": [
+    "AZ305::Business_Continuity::Backup_DR"
+   ],
+   "front": "Azure Backup vs Azure Site Recovery?",
+   "back": "<b>Backup:</b> point-in-time copies → 'can I get my data back?'<br><b>Site Recovery:</b> continuous replication + orchestrated failover → 'can the app keep running?' (far lower RTO).",
+   "text": "",
+   "image": "",
+   "analogy": "Backup is a photo album of your house; Site Recovery is a furnished second house you can move into tonight.",
+   "extra": "",
+   "source": "AZ-305 · Business continuity",
+   "reverse": false
+  },
+  {
+   "guid": "i>}k=4-6R&",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::07 Backup & Disaster Recovery",
+   "tags": [
+    "AZ305::Business_Continuity::Backup_DR"
+   ],
+   "front": "Azure-to-Azure VM replication with Site Recovery: what RPO is typical, and why?",
+   "back": "<b>~30 seconds to a few minutes</b>, because disk writes replicate continuously; no backup schedule can match that.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Business continuity",
+   "reverse": false
+  },
+  {
+   "guid": "jvK&4/SJ)?",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::07 Backup & Disaster Recovery",
+   "tags": [
+    "AZ305::Business_Continuity::Backup_DR"
+   ],
+   "front": "Which vault redundancy protects the backups themselves against a regional disaster?",
+   "back": "<b>GRS</b> on the Recovery Services vault (vs cheaper LRS/ZRS). Set it before protecting items.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Business continuity",
+   "reverse": false
+  },
+  {
+   "guid": "bc=>EE688&",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::07 Backup & Disaster Recovery",
+   "tags": [
+    "AZ305::Business_Continuity::Backup_DR"
+   ],
+   "front": "Restore an Azure VM backup in the paired region for compliance testing, without a real outage. Which capability?",
+   "back": "<b>Cross Region Restore</b>, available when the vault uses GRS.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Business continuity",
+   "reverse": false
+  },
+  {
+   "guid": "EQadTn:1[S",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::07 Backup & Disaster Recovery",
+   "tags": [
+    "AZ305::Business_Continuity::Backup_DR"
+   ],
+   "front": "Ransomware with a stolen admin account tries to delete backups. Which Azure Backup features stop it?",
+   "back": "<b>Soft delete</b> (deleted backups kept ~14+ days) plus <b>Multi-User Authorization</b> via Resource Guard (second approver for critical operations).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Immutable vaults add a lock so retention can't be shortened.",
+   "source": "AZ-305 · Business continuity",
+   "reverse": false
+  },
+  {
+   "guid": "C63_{!y;8o",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::07 Backup & Disaster Recovery",
+   "tags": [
+    "AZ305::Business_Continuity::Backup_DR"
+   ],
+   "front": "Cross-region DR: Azure SQL Database vs SQL Server on an Azure VM?",
+   "back": "<b>Azure SQL Database:</b> auto-failover groups.<br><b>SQL Server on VM:</b> Always On availability groups across regions, or Site Recovery for the whole VM.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Business continuity",
+   "reverse": false
+  },
+  {
+   "guid": "mv$AC9sd}9",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::07 Backup & Disaster Recovery",
+   "tags": [
+    "AZ305::Business_Continuity::Backup_DR"
+   ],
+   "front": "Why doesn't GRS/ZRS protect blobs against accidental deletion, and what does?",
+   "back": "Redundancy <b>replicates the mistake</b>. Use <b>blob soft delete, container soft delete and versioning</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "Photocopying a letter doesn't help if you shred all copies at once, or if the typo is on every copy.",
+   "extra": "",
+   "source": "AZ-305 · Business continuity",
+   "reverse": false
+  },
+  {
+   "guid": "wMJ1oF]tNU",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::07 Backup & Disaster Recovery",
+   "tags": [
+    "AZ305::Business_Continuity::Backup_DR"
+   ],
+   "front": "Design backup retention for both 'restore yesterday's delete' and a 7-year regulation.",
+   "back": "One policy with <b>daily backups kept ~30 days</b> plus <b>long-term retention</b> of monthly/yearly points for 7+ years.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Business continuity",
+   "reverse": false
+  },
+  {
+   "guid": "dgp!p.pcNH",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::08 High Availability",
+   "tags": [
+    "AZ305::Business_Continuity::High_Availability"
+   ],
+   "front": "Availability set vs availability zones for VMs?",
+   "back": "<b>Availability set:</b> fault and update domains inside <b>one datacenter</b> → rack failures.<br><b>Zones:</b> separate datacenters in the region → datacenter failure.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Business continuity",
+   "reverse": false
+  },
+  {
+   "guid": "HDWG<d:tbn",
+   "type": "cloze",
+   "deck": "AZ-305 Solutions Architect Expert::08 High Availability",
+   "tags": [
+    "AZ305::Business_Continuity::High_Availability"
+   ],
+   "front": "",
+   "back": "",
+   "text": "VM SLA: two or more VMs across availability zones {{c1::99.99%}}; in an availability set {{c2::99.95%}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Business continuity",
+   "reverse": false
+  },
+  {
+   "guid": "o^!h(a]P@4",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::08 High Availability",
+   "tags": [
+    "AZ305::Business_Continuity::High_Availability"
+   ],
+   "front": "What do you recommend for a stateless web tier that autoscales and spreads across zones?",
+   "back": "A zone-redundant <b>Virtual Machine Scale Set</b> with autoscale rules (CPU, queue length), behind a Load Balancer or Application Gateway.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Business continuity",
+   "reverse": false
+  },
+  {
+   "guid": "wQ:+Ur?Z%U",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::08 High Availability",
+   "tags": [
+    "AZ305::Business_Continuity::High_Availability"
+   ],
+   "front": "VMSS uniform vs flexible orchestration?",
+   "back": "<b>Uniform:</b> identical instances from one model, large stateless fleets.<br><b>Flexible:</b> mixed sizes and Spot/regular, standard VMs spread across zones/fault domains; recommended for new deployments.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Business continuity",
+   "reverse": false
+  },
+  {
+   "guid": "FptFUU<eqX",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::08 High Availability",
+   "tags": [
+    "AZ305::Business_Continuity::High_Availability"
+   ],
+   "front": "What HA does Azure SQL Business Critical give with no extra setup?",
+   "back": "An Always On-style replica set (zone-redundant if enabled) with fast automatic failover and a free <b>readable secondary</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Business continuity",
+   "reverse": false
+  },
+  {
+   "guid": "g{vN~VDw[:",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::08 High Availability",
+   "tags": [
+    "AZ305::Business_Continuity::High_Availability"
+   ],
+   "front": "How does Cosmos DB give global users HA and low latency?",
+   "back": "<b>Multi-region replication</b> near users, automatic failover by region priority, and optional <b>multi-region writes</b> so every region accepts writes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Business continuity",
+   "reverse": false
+  },
+  {
+   "guid": "F!~g,;mozP",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::08 High Availability",
+   "tags": [
+    "AZ305::Business_Continuity::High_Availability"
+   ],
+   "front": "What are Azure region pairs for in a BCDR design?",
+   "back": "Paired regions in one geography get <b>sequential platform updates</b> and recovery priority; GRS and many geo-replication defaults use the pair as DR target.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Newer regions may have no pair; design your own secondary there.",
+   "source": "AZ-305 · Business continuity",
+   "reverse": false
+  },
+  {
+   "guid": "pezXY=KUu8",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::08 High Availability",
+   "tags": [
+    "AZ305::Business_Continuity::High_Availability"
+   ],
+   "front": "Global HTTP app: route users to the closest healthy region. What do you recommend?",
+   "back": "<b>Azure Front Door</b>: global L7 with health-probe failover and latency routing, plus WAF and caching.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Business continuity",
+   "reverse": false
+  },
+  {
+   "guid": "EOAg[Eul|b",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::08 High Availability",
+   "tags": [
+    "AZ305::Business_Continuity::High_Availability"
+   ],
+   "front": "Single region, compute across zones, needs L7 routing, TLS termination and WAF. What do you recommend?",
+   "back": "Zone-redundant <b>Application Gateway v2 with WAF</b> (regional L7).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Business continuity",
+   "reverse": false
+  },
+  {
+   "guid": "n-F?sm}Pu{",
+   "type": "cloze",
+   "deck": "AZ-305 Solutions Architect Expert::09 Compute",
+   "tags": [
+    "AZ305::Infrastructure::Compute"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Azure VM series: {{c1::B}} burstable · {{c2::D}} general purpose · {{c3::E}} memory-optimized · {{c4::F}} compute-optimized",
+   "image": "",
+   "analogy": "",
+   "extra": "Also: N = GPU, L = storage (local NVMe), M = very large memory (SAP HANA).",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "Pa|.tq#(2G",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::09 Compute",
+   "tags": [
+    "AZ305::Infrastructure::Compute"
+   ],
+   "front": "When do you recommend AKS over Azure Container Apps?",
+   "back": "When the team needs Kubernetes primitives directly (custom controllers/operators, complex networking, StatefulSets) and has K8s skills. Container Apps = containers without running Kubernetes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "NMr5vsYh5P",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::09 Compute",
+   "tags": [
+    "AZ305::Infrastructure::Compute"
+   ],
+   "front": "Azure Container Instances vs Container Apps?",
+   "back": "<b>ACI:</b> run a container (group) on demand, no orchestration.<br><b>Container Apps:</b> managed serverless microservices platform with revisions, ingress, KEDA scaling and scale-to-zero.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "k$42:<OvXx",
+   "type": "cloze",
+   "deck": "AZ-305 Solutions Architect Expert::09 Compute",
+   "tags": [
+    "AZ305::Infrastructure::Compute"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Azure Functions plans: {{c1::Consumption / Flex Consumption}} pay per execution, scales to zero, cold starts · {{c2::Premium}} pre-warmed instances, VNet integration, long runs · {{c3::Dedicated (App Service plan)}} runs on capacity you already pay for.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "bgcf{cD9Oa",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::09 Compute",
+   "tags": [
+    "AZ305::Infrastructure::Compute"
+   ],
+   "front": "Code-defined stateful workflow (chaining, fan-out/fan-in, retries, human approval waits)?",
+   "back": "<b>Durable Functions</b>: checkpoints orchestration state so long-running workflows survive restarts.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Visual, connector-heavy workflows → Logic Apps.",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "GBPyNZa#pm",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::09 Compute",
+   "tags": [
+    "AZ305::Infrastructure::Compute"
+   ],
+   "front": "Nightly job on hundreds of parallel nodes, interruptible, cost-minimized. What do you recommend?",
+   "back": "<b>Azure Batch</b> with a pool of Spot (low-priority) VMs that scales away when done.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "czE~P2j(EM",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::09 Compute",
+   "tags": [
+    "AZ305::Infrastructure::Compute"
+   ],
+   "front": "Pricing choice: steady 24/7 baseline for 3 years vs interruptible batch work?",
+   "back": "Baseline → <b>Reservations</b> (or a <b>Savings Plan</b> for flexibility).<br>Interruptible → <b>Spot VMs</b> (evictable, deepest discount).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Cross-cloud discount and eviction details: Cloud Architecture deck.",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "D}$4Z8>Ur@",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::09 Compute",
+   "tags": [
+    "AZ305::Infrastructure::Compute"
+   ],
+   "front": "Compliance needs dedicated physical servers, or licensing is per physical core. What do you recommend?",
+   "back": "<b>Azure Dedicated Host.</b>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "BD*lZw{0w]",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::09 Compute",
+   "tags": [
+    "AZ305::Infrastructure::Compute"
+   ],
+   "front": "App Service vs VMs for a classic web app: who handles what?",
+   "back": "<b>App Service:</b> Microsoft runs OS, patching and runtime; you deploy code/containers. <b>VM:</b> you own all of that; choose it only when App Service can't host the app.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "n~L5KT~4=%",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::09 Compute",
+   "tags": [
+    "AZ305::Infrastructure::Compute"
+   ],
+   "front": "Zero-downtime App Service releases with instant rollback?",
+   "back": "<b>Deployment slots:</b> deploy to staging, warm up, <b>swap</b> into production; swap back to roll back.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": ".vuy,b,25",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::09 Compute",
+   "tags": [
+    "AZ305::Infrastructure::Compute"
+   ],
+   "front": "Bursty, unpredictable GPU inference load. What compute do you recommend, and why not a fixed VM?",
+   "back": "<b>Azure ML managed online endpoints</b>, or AKS / Container Apps with GPU workload profiles and autoscaling. A fixed GPU VM bills while idle.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "M7,LUwe=o0",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::10 Application Architecture",
+   "tags": [
+    "AZ305::Infrastructure::Application_Architecture"
+   ],
+   "front": "Expose many backend microservices behind one secured, versioned API with rate limits and keys?",
+   "back": "<b>Azure API Management</b>: gateway with policies (quotas, JWT validation, transforms) and a developer portal.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "w(jT_i1g0e",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::10 Application Architecture",
+   "tags": [
+    "AZ305::Infrastructure::Application_Architecture"
+   ],
+   "front": "Expose a legacy SOAP backend to REST/JSON clients without rewriting it?",
+   "back": "<b>API Management</b> transformation policies (REST ↔ SOAP translation).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "t?C?m@HXtn",
+   "type": "cloze",
+   "deck": "AZ-305 Solutions Architect Expert::10 Application Architecture",
+   "tags": [
+    "AZ305::Data_Storage::Integration",
+    "AZ305::Infrastructure::Application_Architecture"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Azure messaging: {{c1::Service Bus}} = reliable ordered business messages (queues, topics, sessions, transactions) · {{c2::Event Grid}} = push-based reactive event routing to many subscribers · {{c3::Event Hubs}} = high-throughput telemetry streaming",
+   "image": "",
+   "analogy": "",
+   "extra": "Rule of thumb: a message is a command someone must process; an event is a notice that something happened.",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "s~=h-?A>#;",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::10 Application Architecture",
+   "tags": [
+    "AZ305::Infrastructure::Application_Architecture"
+   ],
+   "front": "Service Bus queue vs topic?",
+   "back": "<b>Queue:</b> each message to <b>one</b> consumer (competing consumers).<br><b>Topic:</b> a copy to <b>every</b> matching subscription (pub/sub).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "x$95~5t!Al",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::10 Application Architecture",
+   "tags": [
+    "AZ305::Infrastructure::Application_Architecture"
+   ],
+   "front": "Why put a queue between components instead of synchronous HTTP calls?",
+   "back": "The buffer absorbs slow or down consumers (<b>queue-based load leveling</b>): no message loss, no cascading failure, and each side scales independently.",
+   "text": "",
+   "image": "",
+   "analogy": "A restaurant's order rail: waiters keep pinning tickets even when the kitchen is slammed.",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "Fc*j>qk2bm",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::10 Application Architecture",
+   "tags": [
+    "AZ305::Infrastructure::Application_Architecture"
+   ],
+   "front": "IoT telemetry plus device identity, cloud-to-device commands and device twins?",
+   "back": "<b>Azure IoT Hub</b>. Event Hubs only ingests; it has no device registry or bi-directional control.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "KBi<%17}^N",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::10 Application Architecture",
+   "tags": [
+    "AZ305::Infrastructure::Application_Architecture"
+   ],
+   "front": "Cut database load for frequently read, rarely changed data?",
+   "back": "<b>Azure Cache for Redis</b> as a cache-aside layer (also session state).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "nPK^>!Tk>B",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::10 Application Architecture",
+   "tags": [
+    "AZ305::Infrastructure::Application_Architecture"
+   ],
+   "front": "Central feature flags and non-secret config across microservices?",
+   "back": "<b>Azure App Configuration</b>, referencing secrets that stay in Key Vault.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "Q|Cy7%s:,Z",
+   "type": "cloze",
+   "deck": "AZ-305 Solutions Architect Expert::11 Migration",
+   "tags": [
+    "AZ305::Infrastructure::Migration"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Cloud Adoption Framework phases: {{c1::Strategy}} → {{c2::Plan}} → {{c3::Ready}} → {{c4::Adopt}} (migrate / innovate), with Govern and Manage running throughout.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "b02:BqtK2h",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::11 Migration",
+   "tags": [
+    "AZ305::Infrastructure::Migration"
+   ],
+   "front": "What is a landing zone, and why build it before migrating at scale?",
+   "back": "The pre-built, governed environment (subscriptions, network, identity, policy, monitoring) workloads land in, so every migrated workload inherits controls from day one.",
+   "text": "",
+   "image": "",
+   "analogy": "Laying roads, water and power before houses go up, instead of digging up every garden later.",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "r4pr%kf+^Q",
+   "type": "cloze",
+   "deck": "AZ-305 Solutions Architect Expert::11 Migration",
+   "tags": [
+    "AZ305::Infrastructure::Migration"
+   ],
+   "front": "",
+   "back": "",
+   "text": "CAF migration strategies: {{c1::Rehost}} (lift and shift) · {{c2::Refactor}} (small changes to fit PaaS) · {{c3::Rearchitect}} (redesign for cloud-native) · {{c4::Rebuild}} (rewrite) · {{c5::Replace}} (switch to SaaS)",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "K/`s_u(!Jm",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::11 Migration",
+   "tags": [
+    "AZ305::Infrastructure::Migration"
+   ],
+   "front": "Discover and assess on-prem servers (readiness, right-sizing, cost) before migration?",
+   "back": "<b>Azure Migrate</b> (appliance-based discovery and assessment, hands off to migration tools).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "O^e7.2:|0_",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::11 Migration",
+   "tags": [
+    "AZ305::Infrastructure::Migration"
+   ],
+   "front": "Check an on-prem SQL Server for compatibility blockers before moving to Azure SQL?",
+   "back": "An assessment tool: classically <b>Data Migration Assistant (DMA)</b>; Microsoft now steers to Azure Migrate / Arc-based SQL assessments.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Exam answers may still name DMA for assessment and DMS for the move.",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "GT-7}/f{.&",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::11 Migration",
+   "tags": [
+    "AZ305::Infrastructure::Migration"
+   ],
+   "front": "Which service performs online (minimal-downtime) database migration into Azure SQL, Managed Instance or Cosmos DB?",
+   "back": "<b>Azure Database Migration Service (DMS)</b>: offline cutover or online continuous sync.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "J)2HQ{O&mX",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::11 Migration",
+   "tags": [
+    "AZ305::Infrastructure::Migration"
+   ],
+   "front": "Petabytes of data to Blob Storage and the network is the bottleneck?",
+   "back": "<b>Azure Data Box</b> (or Data Box Heavy): ship a physical appliance.",
+   "text": "",
+   "image": "",
+   "analogy": "Never underestimate the bandwidth of a truck full of disks.",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "q(|kPHP6(3",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::11 Migration",
+   "tags": [
+    "AZ305::Infrastructure::Migration"
+   ],
+   "front": "Scripted, repeatable file transfers to Blob/Files in a pipeline?",
+   "back": "<b>AzCopy.</b>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "jE1ir0S:qp",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::11 Migration",
+   "tags": [
+    "AZ305::Infrastructure::Migration"
+   ],
+   "front": "Migrate Windows file servers preserving ACLs, with a cutover that takes over the old server name?",
+   "back": "<b>Storage Migration Service</b> (Windows Admin Center).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "p=G_Mh22M-",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::12 Networking",
+   "tags": [
+    "AZ305::Infrastructure::Network"
+   ],
+   "front": "VPN Gateway vs ExpressRoute for hybrid connectivity?",
+   "back": "<b>VPN:</b> IPsec over the internet; cheap, variable latency.<br><b>ExpressRoute:</b> private circuit via a provider (or ExpressRoute Direct); higher bandwidth, predictable latency, SLA.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "J0@7vJK]-8",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::12 Networking",
+   "tags": [
+    "AZ305::Infrastructure::Network"
+   ],
+   "front": "What do you recommend as a backup path for an ExpressRoute circuit?",
+   "back": "A <b>site-to-site VPN</b> as failover: the circuit is still one physical path.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "An5QnFz*q@",
+   "type": "cloze",
+   "deck": "AZ-305 Solutions Architect Expert::12 Networking",
+   "tags": [
+    "AZ305::Infrastructure::Network"
+   ],
+   "front": "",
+   "back": "",
+   "text": "VNet peering is {{c1::non-transitive}}: if A peers with B and B with C, A cannot reach C through B.",
+   "image": "",
+   "analogy": "",
+   "extra": "Full mesh grows as n(n−1)/2 links, so at scale use hub-spoke or Virtual WAN.",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "f8a[.WHpDw",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::12 Networking",
+   "tags": [
+    "AZ305::Infrastructure::Network"
+   ],
+   "front": "Hub-spoke topology: what lives in the hub, and what is the benefit?",
+   "back": "Shared services (VPN/ExpressRoute gateways, Azure Firewall, DNS) in the hub; workloads in peered spokes. Central inspection and no duplicated gateways.",
+   "text": "",
+   "image": "",
+   "analogy": "An airline hub: spokes fly through one airport where security screening happens once.",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "mb|A4@{~#q",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::12 Networking",
+   "tags": [
+    "AZ305::Infrastructure::Network"
+   ],
+   "front": "Dozens of branches and VNets need any-to-any connectivity without hand-building hub-spoke. What do you recommend?",
+   "back": "<b>Azure Virtual WAN</b>: managed hubs, SD-WAN branch integration, transitive routing.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "A}n/VEh4x{",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::12 Networking",
+   "tags": [
+    "AZ305::Infrastructure::Network"
+   ],
+   "front": "Force all spoke internet egress through Azure Firewall in the hub. How?",
+   "back": "A <b>UDR</b> on each spoke subnet: <code>0.0.0.0/0</code> → next hop = firewall's private IP, overriding the default internet route.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "pIQ7F;[1if",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::12 Networking",
+   "tags": [
+    "AZ305::Infrastructure::Network"
+   ],
+   "front": "NSG vs Azure Firewall?",
+   "back": "<b>NSG:</b> free, distributed L3/L4 filter on a subnet/NIC.<br><b>Azure Firewall:</b> central managed L3–L7 firewall (FQDN filtering, threat intel), usually in the hub. Complementary.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "N]o2/v2~0I",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::12 Networking",
+   "tags": [
+    "AZ305::Infrastructure::Network"
+   ],
+   "front": "Protect a public web app from SQL injection and XSS. What do you recommend?",
+   "back": "A <b>Web Application Firewall</b> on Application Gateway (regional) or Front Door (global), using OWASP rule sets.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "tEqOPF^um6",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::12 Networking",
+   "tags": [
+    "AZ305::Infrastructure::Network"
+   ],
+   "front": "When do you recommend paid Azure DDoS Protection over the free infrastructure protection?",
+   "back": "Internet-facing production apps needing <b>adaptive tuning</b> per app, attack telemetry, <b>cost protection</b> and the DDoS Rapid Response team.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "fu@#nKi)NE",
+   "type": "cloze",
+   "deck": "AZ-305 Solutions Architect Expert::12 Networking",
+   "tags": [
+    "AZ305::Infrastructure::Network"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Azure load balancing: {{c1::Load Balancer}} = L4, regional · {{c2::Application Gateway}} = L7, regional (WAF, TLS offload, path routing) · {{c3::Front Door}} = L7, global edge (WAF, caching) · {{c4::Traffic Manager}} = DNS-based, global, any protocol",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "o/y^E5p,wT",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::12 Networking",
+   "tags": [
+    "AZ305::Infrastructure::Network"
+   ],
+   "front": "Why choose Traffic Manager over Front Door for global failover?",
+   "back": "It works at the <b>DNS level</b>, so it handles <b>non-HTTP</b> protocols (game servers, custom TCP). Front Door only proxies HTTP(S).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "u!Pb!sD4QG",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::12 Networking",
+   "tags": [
+    "AZ305::Infrastructure::Network"
+   ],
+   "front": "Service endpoint vs private endpoint for reaching a PaaS service from a VNet?",
+   "back": "<b>Service endpoint:</b> PaaS firewall trusts your subnet, but the service keeps its public endpoint.<br><b>Private endpoint:</b> private IP inside your VNet, reachable from on-prem too. Preferred.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "RdMh~-@e]t",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::12 Networking",
+   "tags": [
+    "AZ305::Infrastructure::Network"
+   ],
+   "front": "What must accompany a private endpoint so clients resolve the PaaS name to the private IP?",
+   "back": "A <b>Private DNS zone</b> (e.g. <code>privatelink.blob.core.windows.net</code>) linked to the VNet. Otherwise names resolve to the public IP.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "On-prem clients need a DNS forwarder / Private Resolver pointing at it.",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "s:xycPW6Bt",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::12 Networking",
+   "tags": [
+    "AZ305::Infrastructure::Network"
+   ],
+   "front": "Chatty VM-to-VM traffic needs lower latency and less CPU overhead. What do you enable?",
+   "back": "<b>Accelerated Networking</b> (SR-IOV): bypasses the host virtual switch.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  }
+ ]
+}

@@ -1,0 +1,1975 @@
+{
+ "deck_name": "Software Architecture & DDD",
+ "file": "Software_Architecture_and_DDD.apkg",
+ "description": "Software architecture fundamentals (characteristics, modularity, styles, ADRs) merged with Domain-Driven Design strategic and tactical patterns. For a platform/enterprise architect who designs and reviews systems.",
+ "notes": [
+  {
+   "guid": "Mi8|^{WT:o",
+   "type": "cloze",
+   "deck": "Software Architecture & DDD::01 Architectural Thinking",
+   "tags": [
+    "SoftwareArchitecture::Thinking"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Richards &amp; Ford define software architecture by four dimensions: {{c1::structure}} (the style), {{c2::architecture characteristics}} (the \"-ilities\"), {{c3::architecture decisions}} (hard rules) and {{c4::design principles}} (guidelines).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Foundations",
+   "reverse": false
+  },
+  {
+   "guid": "As^G2ddo#4",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::01 Architectural Thinking",
+   "tags": [
+    "SoftwareArchitecture::Thinking"
+   ],
+   "front": "First Law of Software Architecture?",
+   "back": "“Everything in software architecture is a <b>tradeoff</b>.”",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Corollary:</b> if you think you found something that isn't a tradeoff, you haven't identified the tradeoff yet. Hence: \"no right or wrong answers, only expensive ones.\"",
+   "source": "FoSA · Foundations",
+   "reverse": false
+  },
+  {
+   "guid": "cX}W4Oi0jy",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::01 Architectural Thinking",
+   "tags": [
+    "SoftwareArchitecture::Thinking"
+   ],
+   "front": "Second Law of Software Architecture?",
+   "back": "“<b>Why</b> is more important than <b>how</b>.”",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "The rationale outlives the implementation; this is why ADRs record context and consequences.",
+   "source": "FoSA · Foundations",
+   "reverse": false
+  },
+  {
+   "guid": "r9SBQ8;BBz",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::01 Architectural Thinking",
+   "tags": [
+    "SoftwareArchitecture::Thinking"
+   ],
+   "front": "Architecture <b>decision</b> vs design <b>principle</b>: key difference?",
+   "back": "A <b>decision</b> is a hard rule that must be followed; a <b>principle</b> is a guideline that leaves implementation latitude.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Decision:</b> \"all calls go through the business layer.\"<br><b>Principle:</b> \"prefer async messaging where practical.\"",
+   "source": "FoSA · Foundations",
+   "reverse": false
+  },
+  {
+   "guid": "uj/rJsz}._",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::01 Architectural Thinking",
+   "tags": [
+    "SoftwareArchitecture::Thinking"
+   ],
+   "front": "Why should an architect favour technical <b>breadth</b> over depth?",
+   "back": "Decisions require knowing that many options exist (a large \"know you don't know\" zone); deep expertise in one stack narrows the options you can weigh.",
+   "text": "",
+   "image": "",
+   "analogy": "A GP who knows which specialist to call beats a brilliant specialist who sees every problem through one organ.",
+   "extra": "",
+   "source": "FoSA · Foundations",
+   "reverse": false
+  },
+  {
+   "guid": "OvYF{w1oeD",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::01 Architectural Thinking",
+   "tags": [
+    "SoftwareArchitecture::Thinking"
+   ],
+   "front": "<b>Frozen Caveman</b> antipattern?",
+   "back": "An architect who reverts to one past bad experience as a worst-case worry on every decision, instead of assessing risk realistically per situation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Foundations",
+   "reverse": false
+  },
+  {
+   "guid": "b`u:QExFpi",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::01 Architectural Thinking",
+   "tags": [
+    "SoftwareArchitecture::Thinking"
+   ],
+   "front": "Is the architecture/design boundary a line? How do you tell them apart?",
+   "back": "A <b>spectrum</b>: strategic, hard-to-change, high-effort decisions lean architectural; tactical, easy-to-change ones lean design.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Implication: architects and developers collaborate continuously rather than throwing decisions over the wall.",
+   "source": "FoSA · Foundations",
+   "reverse": false
+  },
+  {
+   "guid": "QfA|(|>A$C",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::01 Architectural Thinking",
+   "tags": [
+    "SoftwareArchitecture::Thinking"
+   ],
+   "front": "What does <b>evolutionary architecture</b> mean?",
+   "back": "Architecture is refined incrementally as understanding grows, with automated <b>fitness functions</b> guarding the important characteristics as it changes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Foundations",
+   "reverse": false
+  },
+  {
+   "guid": "eTck*_(dO|",
+   "type": "cloze",
+   "deck": "Software Architecture & DDD::02 Architecture Characteristics",
+   "tags": [
+    "SoftwareArchitecture::Characteristics"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Something is an <b>architecture characteristic</b> if it (1) specifies a {{c1::non-domain}} design consideration, (2) influences a {{c2::structural}} aspect of the design, and (3) is {{c3::critical or important}} to the application's success.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Characteristics",
+   "reverse": false
+  },
+  {
+   "guid": "gcep,+Bh4y",
+   "type": "cloze",
+   "deck": "Software Architecture & DDD::02 Architecture Characteristics",
+   "tags": [
+    "SoftwareArchitecture::Characteristics"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Architecture characteristic categories: {{c1::operational}} (availability, performance, scalability), {{c2::structural}} (modularity, maintainability, extensibility), {{c3::cross-cutting}} (security, accessibility, privacy).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Characteristics",
+   "reverse": false
+  },
+  {
+   "guid": "I77(<UHUt_",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::02 Architecture Characteristics",
+   "tags": [
+    "SoftwareArchitecture::Characteristics"
+   ],
+   "front": "<b>Implicit</b> vs <b>explicit</b> architecture characteristics?",
+   "back": "<b>Implicit</b>: rarely written in requirements but almost always needed (availability, security). <b>Explicit</b>: stated directly in the requirements.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Pitfall:</b> implicit ones get missed; ask about them in every requirements conversation.",
+   "source": "FoSA · Characteristics",
+   "reverse": false
+  },
+  {
+   "guid": "v<J:YP5Vdc",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::02 Architecture Characteristics",
+   "tags": [
+    "SoftwareArchitecture::Characteristics"
+   ],
+   "front": "Why deliberately limit the number of architecture characteristics you optimise for?",
+   "back": "Each one adds complexity and many conflict; chasing all yields a generic, over-engineered design. Aim for the <b>least worst</b> architecture, not the best.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Characteristics",
+   "reverse": false
+  },
+  {
+   "guid": "C/H:!d;aUp",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::02 Architecture Characteristics",
+   "tags": [
+    "SoftwareArchitecture::Characteristics"
+   ],
+   "front": "Why can't you maximise all architecture characteristics? Give an example.",
+   "back": "Improving one often degrades another, so you balance. E.g. more security checks and encryption usually cost <b>performance</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "Like a car: tuning for top speed costs fuel economy and comfort.",
+   "extra": "",
+   "source": "FoSA · Characteristics",
+   "reverse": false
+  },
+  {
+   "guid": "D4>mOVV^@(",
+   "type": "cloze",
+   "deck": "Software Architecture & DDD::02 Architecture Characteristics",
+   "tags": [
+    "SoftwareArchitecture::Characteristics"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Architecture characteristics can be measured as {{c1::operational}} measures (response time, throughput), {{c2::structural}} measures (cyclomatic complexity, coupling) and {{c3::process}} measures (deployability, testability).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Characteristics",
+   "reverse": false
+  },
+  {
+   "guid": "OT6:qciljP",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::02 Architecture Characteristics",
+   "tags": [
+    "SoftwareArchitecture::Characteristics"
+   ],
+   "front": "<b>Fitness function</b> (architecture governance)?",
+   "back": "An objective, automatable check of whether the architecture still meets a desired characteristic, e.g. a test that fails on forbidden layer dependencies.",
+   "text": "",
+   "image": "",
+   "analogy": "A unit test for an architecture quality instead of for a function.",
+   "extra": "Runs in CI, turning governance from review meetings into continuous feedback.",
+   "source": "FoSA · Characteristics",
+   "reverse": false
+  },
+  {
+   "guid": "y3gSm|%aQp",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::03 Modularity & Coupling",
+   "tags": [
+    "SoftwareArchitecture::Modularity"
+   ],
+   "front": "<b>Cohesion</b>?",
+   "back": "How strongly the parts of a module belong together (related, focused responsibilities). High cohesion is desirable.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Modularity",
+   "reverse": false
+  },
+  {
+   "guid": "ruuzH#8PPL",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::03 Modularity & Coupling",
+   "tags": [
+    "SoftwareArchitecture::Modularity"
+   ],
+   "front": "<b>Afferent</b> vs <b>efferent</b> coupling?",
+   "back": "<b>Afferent</b> (C<sub>a</sub>): incoming, how many components depend on this one. <b>Efferent</b> (C<sub>e</sub>): outgoing, how many it depends on.",
+   "text": "",
+   "image": "",
+   "analogy": "Mnemonic: <b>A</b>fferent = <b>A</b>rrives, <b>E</b>fferent = <b>E</b>xits.",
+   "extra": "",
+   "source": "FoSA · Modularity",
+   "reverse": false
+  },
+  {
+   "guid": "pI5>XwMiA:",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::03 Modularity & Coupling",
+   "tags": [
+    "SoftwareArchitecture::Modularity"
+   ],
+   "front": "Formula for <b>instability</b> \\(I\\), and what does a high value mean?",
+   "back": "\\(I = \\frac{C_e}{C_e + C_a}\\). Near 1: depends on much, little depends on it, so it's easy (and likely) to change.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Modularity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Software Architecture & DDD::03 Modularity & Coupling",
+   "tags": [
+    "SoftwareArchitecture::Modularity"
+   ],
+   "front": "Formula for <b>distance from the main sequence</b> \\(D\\)?",
+   "back": "\\(D = |A + I - 1|\\), where \\(A\\) = abstractness (abstract / total elements). Near 0 = healthy balance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Modularity",
+   "reverse": false
+  },
+  {
+   "guid": "zia_hG+bC^",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::03 Modularity & Coupling",
+   "tags": [
+    "SoftwareArchitecture::Modularity"
+   ],
+   "front": "<b>Zone of pain</b> vs <b>zone of uselessness</b>?",
+   "back": "<b>Pain</b>: highly concrete <i>and</i> stable (much depends on it), so it's rigid and hard to change. <b>Uselessness</b>: highly abstract <i>and</i> unstable, abstractions nobody uses.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Healthy components sit near the main sequence line between them.",
+   "source": "FoSA · Modularity",
+   "reverse": false
+  },
+  {
+   "guid": "H@if0PZ{R9",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::03 Modularity & Coupling",
+   "tags": [
+    "SoftwareArchitecture::Modularity"
+   ],
+   "front": "<b>Connascence</b>?",
+   "back": "Two components are connascent if changing one requires changing the other to keep the system correct.",
+   "text": "",
+   "image": "",
+   "analogy": "Like a three-legged race: if one runner changes stride, the other must too.",
+   "extra": "",
+   "source": "FoSA · Modularity",
+   "reverse": false
+  },
+  {
+   "guid": "Nv%s)pAw1F",
+   "type": "cloze",
+   "deck": "Software Architecture & DDD::03 Modularity & Coupling",
+   "tags": [
+    "SoftwareArchitecture::Modularity"
+   ],
+   "front": "",
+   "back": "",
+   "text": "<b>Static</b> connascence (visible in source): connascence of {{c1::Name}}, {{c2::Type}}, {{c3::Meaning}} (convention, e.g. magic values), {{c4::Position}} (argument order) and {{c5::Algorithm}} (e.g. same hash on both sides).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Modularity",
+   "reverse": false
+  },
+  {
+   "guid": "Bea*amTJ2)",
+   "type": "cloze",
+   "deck": "Software Architecture & DDD::03 Modularity & Coupling",
+   "tags": [
+    "SoftwareArchitecture::Modularity"
+   ],
+   "front": "",
+   "back": "",
+   "text": "<b>Dynamic</b> connascence (visible only at runtime): connascence of {{c1::Execution}} (order), {{c2::Timing}}, {{c3::Values}} (values that must change together) and {{c4::Identity}} (same entity referenced).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Modularity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Software Architecture & DDD::03 Modularity & Coupling",
+   "tags": [
+    "SoftwareArchitecture::Modularity"
+   ],
+   "front": "Why is <b>dynamic</b> connascence generally worse than static?",
+   "back": "Static tools and compilers can't detect it, so breakages surface only at runtime.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Modularity",
+   "reverse": false
+  },
+  {
+   "guid": "I3;x*<sU1>",
+   "type": "cloze",
+   "deck": "Software Architecture & DDD::03 Modularity & Coupling",
+   "tags": [
+    "SoftwareArchitecture::Modularity"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Connascence is evaluated by {{c1::strength}} (how hard to refactor), {{c2::locality}} (how close the elements are) and {{c3::degree}} (how many elements are affected).",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Rule:</b> the further apart two elements are, the weaker the connascence between them should be.",
+   "source": "FoSA · Modularity",
+   "reverse": false
+  },
+  {
+   "guid": "tD;zqZMcbd",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::03 Modularity & Coupling",
+   "tags": [
+    "SoftwareArchitecture::Modularity"
+   ],
+   "front": "What is a <b>component</b> in architecture terms?",
+   "back": "The main modular building block (library, package, service, layer); the lowest level an architect usually manipulates directly.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Components",
+   "reverse": false
+  },
+  {
+   "guid": "o}G,4eeqcw",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::03 Modularity & Coupling",
+   "tags": [
+    "SoftwareArchitecture::Modularity"
+   ],
+   "front": "<b>Architecture quantum</b>?",
+   "back": "An <b>independently deployable</b> unit with high functional cohesion and synchronous connascence inside it. A monolith is one quantum; microservices are many.",
+   "text": "",
+   "image": "",
+   "analogy": "A fleet vs one big ship: each microservice can sail (deploy) on its own; a monolith leaves port all at once.",
+   "extra": "Characteristics can differ per quantum, which is a key reason to split a system.",
+   "source": "FoSA · Components",
+   "reverse": false
+  },
+  {
+   "guid": "b;L|1{tb_4",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::03 Modularity & Coupling",
+   "tags": [
+    "SoftwareArchitecture::Modularity"
+   ],
+   "front": "<b>Static</b> vs <b>dynamic</b> coupling (architecture quantum)?",
+   "back": "<b>Static</b>: how parts are wired (dependencies, contracts, infrastructure needed to run). <b>Dynamic</b>: how parts communicate at runtime (sync vs async).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Components",
+   "reverse": false
+  },
+  {
+   "guid": "igl;c7Yet_",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::04 Architecture Styles",
+   "tags": [
+    "SoftwareArchitecture::Styles"
+   ],
+   "front": "<b>Monolithic</b> vs <b>distributed</b> architecture styles: which are which?",
+   "back": "<b>Monolithic</b> (one deployment unit): layered, pipeline, microkernel. <b>Distributed</b>: service-based, event-driven, space-based, SOA, microservices.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Architecture Styles",
+   "reverse": false
+  },
+  {
+   "guid": "i}T_k%^EVB",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::04 Architecture Styles",
+   "tags": [
+    "SoftwareArchitecture::Styles"
+   ],
+   "front": "Which characteristics push you from a monolith to a <b>distributed</b> style, and at what price?",
+   "back": "Scalability/elasticity, fault isolation, independent deployability, evolvability. Price: cost, operational complexity, network latency.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Architecture Styles",
+   "reverse": false
+  },
+  {
+   "guid": "ud,=A}Qyyg",
+   "type": "cloze",
+   "deck": "Software Architecture & DDD::04 Architecture Styles",
+   "tags": [
+    "SoftwareArchitecture::Styles"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Fallacies of distributed computing: the network is {{c1::reliable}}; latency is {{c2::zero}}; bandwidth is {{c3::infinite}}; the network is {{c4::secure}}; topology {{c5::never changes}}; there is {{c6::one administrator}}; transport cost is {{c7::zero}}; the network is {{c8::homogeneous}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Architecture Styles",
+   "reverse": false
+  },
+  {
+   "guid": "GdzKfKO</p",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::04 Architecture Styles",
+   "tags": [
+    "SoftwareArchitecture::Styles"
+   ],
+   "front": "<b>Big Ball of Mud</b>?",
+   "back": "No discernible architecture: tangled, highly coupled code, usually from unmanaged organic growth.",
+   "text": "",
+   "image": "",
+   "analogy": "A house extended room by room with no plan, where every pipe runs through every wall.",
+   "extra": "",
+   "source": "FoSA · Architecture Styles",
+   "reverse": false
+  },
+  {
+   "guid": "s5xO([DCm6",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::04 Architecture Styles",
+   "tags": [
+    "SoftwareArchitecture::Styles"
+   ],
+   "front": "<b>Layered (n-tier)</b> architecture: structure?",
+   "back": "Horizontal layers (presentation → business → persistence → database), each usually <b>closed</b>.",
+   "text": "",
+   "image": "<img src=\"layered.png\">",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Architecture Styles",
+   "reverse": true
+  },
+  {
+   "guid": "d&8sh;+D~!",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::04 Architecture Styles",
+   "tags": [
+    "SoftwareArchitecture::Styles"
+   ],
+   "front": "Layered style: <b>closed</b> vs <b>open</b> layer?",
+   "back": "A <b>closed</b> layer must be passed through by requests going down; an <b>open</b> layer may be bypassed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Closed layers give <b>layers of isolation</b>: a change in one layer doesn't ripple into the others.",
+   "source": "FoSA · Architecture Styles",
+   "reverse": false
+  },
+  {
+   "guid": "u|/ML+BP$~",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::04 Architecture Styles",
+   "tags": [
+    "SoftwareArchitecture::Styles"
+   ],
+   "front": "<b>Architecture sinkhole</b> antipattern?",
+   "back": "Requests pass through layers that do nothing but forward them, adding overhead without value.",
+   "text": "",
+   "image": "",
+   "analogy": "A chain of managers who just forward the email.",
+   "extra": "Rule of thumb: ~20% pass-through is fine; if most requests are, consider opening layers or another style.",
+   "source": "FoSA · Architecture Styles",
+   "reverse": false
+  },
+  {
+   "guid": "uS&p+fpmXN",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::04 Architecture Styles",
+   "tags": [
+    "SoftwareArchitecture::Styles"
+   ],
+   "front": "When is the <b>layered</b> style a sensible choice?",
+   "back": "Small/simple apps, tight budgets, or as a starting point when the right style is unclear: it's simple, cheap and familiar.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Architecture Styles",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Software Architecture & DDD::04 Architecture Styles",
+   "tags": [
+    "SoftwareArchitecture::Styles"
+   ],
+   "front": "Main weaknesses of the <b>layered</b> style?",
+   "back": "Monolithic: poor scalability, elasticity, fault tolerance and deployability; prone to the sinkhole antipattern.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Architecture Styles",
+   "reverse": false
+  },
+  {
+   "guid": "DVPerBl2H<",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::04 Architecture Styles",
+   "tags": [
+    "SoftwareArchitecture::Styles"
+   ],
+   "front": "<b>Pipeline (pipes and filters)</b> architecture: structure?",
+   "back": "Self-contained, stateless <b>filters</b> connected by one-way <b>pipes</b>.",
+   "text": "",
+   "image": "<img src=\"pipeline.png\">",
+   "analogy": "An assembly line: each station does one job and passes the part on.",
+   "extra": "",
+   "source": "FoSA · Architecture Styles",
+   "reverse": true
+  },
+  {
+   "guid": "Hs-I=}(64J",
+   "type": "cloze",
+   "deck": "Software Architecture & DDD::04 Architecture Styles",
+   "tags": [
+    "SoftwareArchitecture::Styles"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Pipeline filter types: {{c1::producer}} (source), {{c2::transformer}} (changes data), {{c3::tester}} (filters/branches on a condition), {{c4::consumer}} (sink).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Architecture Styles",
+   "reverse": false
+  },
+  {
+   "guid": "Q@vq#3$Xbg",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::04 Architecture Styles",
+   "tags": [
+    "SoftwareArchitecture::Styles"
+   ],
+   "front": "<b>Microkernel (plug-in)</b> architecture: structure?",
+   "back": "A minimal <b>core system</b> plus independent <b>plug-in</b> components, found via a registry and connected by contracts.",
+   "text": "",
+   "image": "<img src=\"microkernel.png\">",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Architecture Styles",
+   "reverse": true
+  },
+  {
+   "guid": "CmrF[(twno",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::04 Architecture Styles",
+   "tags": [
+    "SoftwareArchitecture::Styles"
+   ],
+   "front": "When does the <b>microkernel</b> style fit?",
+   "back": "Product-type software where volatile or customer-specific logic can be isolated in plug-ins: IDEs, browsers, rules/claims engines.",
+   "text": "",
+   "image": "",
+   "analogy": "A browser and its extensions.",
+   "extra": "",
+   "source": "FoSA · Architecture Styles",
+   "reverse": false
+  },
+  {
+   "guid": "QFL%Wzn9>F",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::04 Architecture Styles",
+   "tags": [
+    "SoftwareArchitecture::Styles"
+   ],
+   "front": "<b>Service-based</b> architecture: structure?",
+   "back": "A UI calling a few (≈4–12) coarse-grained, separately deployed <b>domain services</b>, usually over a <b>shared database</b>.",
+   "text": "",
+   "image": "<img src=\"service_based.png\">",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Architecture Styles",
+   "reverse": true
+  },
+  {
+   "guid": "LseImE1DMy",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::04 Architecture Styles",
+   "tags": [
+    "SoftwareArchitecture::Styles"
+   ],
+   "front": "Why is service-based called the most <b>pragmatic</b> distributed style?",
+   "back": "It gets much of microservices' benefit (deployability, fault isolation, evolvability) with far less complexity, since services are few and share a database.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Architecture Styles",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Software Architecture & DDD::04 Architecture Styles",
+   "tags": [
+    "SoftwareArchitecture::Styles"
+   ],
+   "front": "<b>Service-based</b> vs <b>microservices</b>: key differences?",
+   "back": "Service-based: few coarse domain services, usually one shared DB. Microservices: many fine-grained services, each owning its data.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Architecture Styles",
+   "reverse": false
+  },
+  {
+   "guid": "x}dh*HhsXE",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::04 Architecture Styles",
+   "tags": [
+    "SoftwareArchitecture::Styles"
+   ],
+   "front": "<b>Event-driven</b> architecture: structure?",
+   "back": "Decoupled event processors reacting to events asynchronously, in a <b>broker</b> or <b>mediator</b> topology.",
+   "text": "",
+   "image": "<img src=\"event_driven.png\">",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Architecture Styles",
+   "reverse": true
+  },
+  {
+   "guid": "F{1dRP.Ab!",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::04 Architecture Styles",
+   "tags": [
+    "SoftwareArchitecture::Styles"
+   ],
+   "front": "Event-driven: <b>broker</b> vs <b>mediator</b> topology?",
+   "back": "<b>Broker</b>: no coordinator; processors react and emit events. Decoupled and fast, but workflow and errors are hard. <b>Mediator</b>: a central mediator orchestrates steps. Better error handling, more coupling.",
+   "text": "",
+   "image": "",
+   "analogy": "Broker = a relay of gossip; mediator = a conductor cueing each section.",
+   "extra": "",
+   "source": "FoSA · Architecture Styles",
+   "reverse": false
+  },
+  {
+   "guid": "E|dI!D%>L^",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::04 Architecture Styles",
+   "tags": [
+    "SoftwareArchitecture::Styles"
+   ],
+   "front": "Main weaknesses of <b>event-driven</b> architecture?",
+   "back": "Low simplicity and testability, complex error handling, non-deterministic flows and eventual consistency.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Strengths:</b> performance, scalability, elasticity, fault tolerance, responsiveness.",
+   "source": "FoSA · Architecture Styles",
+   "reverse": false
+  },
+  {
+   "guid": "B<4WgC^DU6",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::04 Architecture Styles",
+   "tags": [
+    "SoftwareArchitecture::Styles"
+   ],
+   "front": "<b>Space-based</b> architecture: structure?",
+   "back": "Processing units with replicated <b>in-memory data grids</b>, virtualized middleware, and async data pumps to the database.",
+   "text": "",
+   "image": "<img src=\"space_based.png\">",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Architecture Styles",
+   "reverse": true
+  },
+  {
+   "guid": "k|[IzTMCI-",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::04 Architecture Styles",
+   "tags": [
+    "SoftwareArchitecture::Styles"
+   ],
+   "front": "How does space-based architecture remove the database bottleneck?",
+   "back": "Processing units work on <b>replicated in-memory data</b>; the database is updated <b>asynchronously</b> via data pumps and writers, off the request path.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Architecture Styles",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Software Architecture & DDD::04 Architecture Styles",
+   "tags": [
+    "SoftwareArchitecture::Styles"
+   ],
+   "front": "When should you choose <b>space-based</b> architecture?",
+   "back": "High, spiky, unpredictable load needing extreme elasticity (ticketing, auctions, flash sales), accepting complexity and cost.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Architecture Styles",
+   "reverse": false
+  },
+  {
+   "guid": "z>y^nA#/&K",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::04 Architecture Styles",
+   "tags": [
+    "SoftwareArchitecture::Styles"
+   ],
+   "front": "<b>Orchestration-driven SOA</b>: structure?",
+   "back": "A hierarchical service taxonomy (business, enterprise, application, infrastructure services) mediated by a central orchestration engine / ESB.",
+   "text": "",
+   "image": "<img src=\"soa.png\">",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Architecture Styles",
+   "reverse": true
+  },
+  {
+   "guid": "N[yGr&1E9b",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::04 Architecture Styles",
+   "tags": [
+    "SoftwareArchitecture::Styles"
+   ],
+   "front": "Why did orchestration-driven SOA fall out of favour?",
+   "back": "Maximising <b>reuse</b> plus central ESB mediation coupled everything: one change rippled widely, killing evolvability and deployability.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Architecture Styles",
+   "reverse": false
+  },
+  {
+   "guid": "E-BX143,K=",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::04 Architecture Styles",
+   "tags": [
+    "SoftwareArchitecture::Styles"
+   ],
+   "front": "<b>Microservices</b> architecture: structure?",
+   "back": "Fine-grained, single-purpose services, each <b>owning its data</b>, deployed independently, often behind an API gateway.",
+   "text": "",
+   "image": "<img src=\"microservices.png\">",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Architecture Styles",
+   "reverse": true
+  },
+  {
+   "guid": "u>(r<6|ES=",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::04 Architecture Styles",
+   "tags": [
+    "SoftwareArchitecture::Styles"
+   ],
+   "front": "Why do microservices map one service per <b>bounded context</b>?",
+   "back": "Each service owns one model and its data, so there's no shared-schema coupling and each can change and deploy independently.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Architecture Styles",
+   "reverse": false
+  },
+  {
+   "guid": "b_d^dJ%BCG",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::04 Architecture Styles",
+   "tags": [
+    "SoftwareArchitecture::Styles"
+   ],
+   "front": "Why do microservices prefer <b>duplication over coupling</b>?",
+   "back": "Shared code or data couples deployments; duplicating small things keeps services independently changeable. The opposite of SOA's reuse goal.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Architecture Styles",
+   "reverse": false
+  },
+  {
+   "guid": "FP!|*Ovj^s",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::04 Architecture Styles",
+   "tags": [
+    "SoftwareArchitecture::Styles"
+   ],
+   "front": "Why do microservices score poorly on <b>performance</b>?",
+   "back": "Each request crosses many network hops, with serialization and per-call security checks, and may need distributed transactions.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Architecture Styles",
+   "reverse": false
+  },
+  {
+   "guid": "o0OCj.s?Ju",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::04 Architecture Styles",
+   "tags": [
+    "SoftwareArchitecture::Styles"
+   ],
+   "front": "Why is <b>simplicity</b> rated high for layered/microkernel but low for microservices?",
+   "back": "Monoliths have no network, no distributed data and few deployment units; microservices add all of these plus heavy operational tooling.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Architecture Styles",
+   "reverse": false
+  },
+  {
+   "guid": "mkY2.zyPw?",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::04 Architecture Styles",
+   "tags": [
+    "SoftwareArchitecture::Styles"
+   ],
+   "front": "Microservices: <b>choreography</b> vs <b>orchestration</b>?",
+   "back": "<b>Choreography</b>: services react to events, no coordinator. Better decoupling. <b>Orchestration</b>: a coordinator drives the workflow. Easier error handling, more coupling.",
+   "text": "",
+   "image": "",
+   "analogy": "Choreography = dancers who know their cues; orchestration = musicians following a conductor.",
+   "extra": "Same tradeoff as event-driven broker vs mediator.",
+   "source": "FoSA · Architecture Styles",
+   "reverse": false
+  },
+  {
+   "guid": "FMoGLs<|*8",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::04 Architecture Styles",
+   "tags": [
+    "SoftwareArchitecture::Styles"
+   ],
+   "front": "<b>Sidecar</b> and <b>service mesh</b>: what problem do they solve in microservices?",
+   "back": "Cross-cutting operational concerns (telemetry, discovery, mTLS) live in a sidecar beside each service; together the sidecars form a mesh. Business code stays free of them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Architecture Styles",
+   "reverse": false
+  },
+  {
+   "guid": "G!.hi8o?vf",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::04 Architecture Styles",
+   "tags": [
+    "SoftwareArchitecture::Styles"
+   ],
+   "front": "<b>Saga</b> pattern?",
+   "back": "Keeps data consistent across services without distributed ACID transactions: a sequence of local transactions, with <b>compensating</b> transactions to undo work on failure.",
+   "text": "",
+   "image": "",
+   "analogy": "Booking a trip: if the hotel fails, you cancel the flight you already booked.",
+   "extra": "",
+   "source": "FoSA · Architecture Styles",
+   "reverse": false
+  },
+  {
+   "guid": "lbD`p:qhrH",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::05 Decisions, Risk & Communication",
+   "tags": [
+    "SoftwareArchitecture::Decisions"
+   ],
+   "front": "<b>Architecture Decision Record (ADR)</b>: what and why?",
+   "back": "A short document recording <b>one</b> architecture decision, preserving the \"why\" (Second Law) as a durable, reviewable history.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Techniques & Soft Skills",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Software Architecture & DDD::05 Decisions, Risk & Communication",
+   "tags": [
+    "SoftwareArchitecture::Decisions"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Typical ADR sections: title, {{c1::status}}, {{c2::context}}, {{c3::decision}}, {{c4::consequences}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Status</b> values: proposed, accepted, superseded (link to the replacing ADR, never delete).",
+   "source": "FoSA · Techniques & Soft Skills",
+   "reverse": false
+  },
+  {
+   "guid": "fI5N3v{^#n",
+   "type": "cloze",
+   "deck": "Software Architecture & DDD::05 Decisions, Risk & Communication",
+   "tags": [
+    "SoftwareArchitecture::Decisions"
+   ],
+   "front": "",
+   "back": "",
+   "text": "C4 model zoom levels: {{c1::Context}} → {{c2::Container}} → {{c3::Component}} → {{c4::Code}}.",
+   "image": "",
+   "analogy": "Like zooming a map from country to city to street to building.",
+   "extra": "Use consistent notation, a legend and labelled lines.",
+   "source": "FoSA · Techniques & Soft Skills",
+   "reverse": false
+  },
+  {
+   "guid": "P*1g&~fQOJ",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::05 Decisions, Risk & Communication",
+   "tags": [
+    "SoftwareArchitecture::Decisions"
+   ],
+   "front": "Architecture <b>risk matrix</b>?",
+   "back": "Rate each risk by <b>likelihood</b> × <b>impact</b> (low/medium/high, 1–3); the product ranks which risks need attention first.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Techniques & Soft Skills",
+   "reverse": false
+  },
+  {
+   "guid": "u%IY1iIK67",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::05 Decisions, Risk & Communication",
+   "tags": [
+    "SoftwareArchitecture::Decisions"
+   ],
+   "front": "<b>Risk storming</b>: why identify risks individually first?",
+   "back": "Participants mark risks on the diagram <b>independently</b>, then converge, so the group finds risks one architect would miss without groupthink.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Techniques & Soft Skills",
+   "reverse": false
+  },
+  {
+   "guid": "ufrz??3i_+",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::06 DDD Model & Language",
+   "tags": [
+    "DDD::Model"
+   ],
+   "front": "<b>Domain model</b> in DDD: what is it, and what is it not?",
+   "back": "A selective, agreed <b>abstraction</b> of domain knowledge, expressed in code, language and diagrams together. Not a diagram, not a copy of reality.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Domain Model",
+   "reverse": false
+  },
+  {
+   "guid": "O]];d5k$~I",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::06 DDD Model & Language",
+   "tags": [
+    "DDD::Model"
+   ],
+   "front": "<b>Knowledge crunching</b>?",
+   "back": "Developers and domain experts iteratively distil domain information into a sharp model by testing it against concrete scenarios. Modeling is ongoing learning.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Domain Model",
+   "reverse": false
+  },
+  {
+   "guid": "QYgKE{F7s@",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::06 DDD Model & Language",
+   "tags": [
+    "DDD::Model"
+   ],
+   "front": "<b>Ubiquitous Language</b>?",
+   "back": "One shared language built on the domain model, used by developers <b>and</b> domain experts in speech, diagrams and code, so nothing needs translating.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Domain Model",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Software Architecture & DDD::06 DDD Model & Language",
+   "tags": [
+    "DDD::Model"
+   ],
+   "front": "In DDD, what does it signal when a domain term is awkward to use in code?",
+   "back": "A flaw or missing concept in the <b>model</b>: refine the model and language together, don't paper over it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Domain Model",
+   "reverse": false
+  },
+  {
+   "guid": "jXJBRuH{(&",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::06 DDD Model & Language",
+   "tags": [
+    "DDD::Model"
+   ],
+   "front": "<b>Model-Driven Design</b>?",
+   "back": "The code is a direct expression of the model, so changing one changes the other. No separate analysis model that drifts away.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Domain Model",
+   "reverse": false
+  },
+  {
+   "guid": "J*ZGnIR3uF",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::06 DDD Model & Language",
+   "tags": [
+    "DDD::Model"
+   ],
+   "front": "<b>Hands-On Modelers</b>: why must modelers touch the code?",
+   "back": "Splitting modeling from implementation breaks the feedback loop; models made by non-coders don't survive contact with the code.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Domain Model",
+   "reverse": false
+  },
+  {
+   "guid": "E_cy1.NTh.",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::06 DDD Model & Language",
+   "tags": [
+    "DDD::Model"
+   ],
+   "front": "DDD: \"make implicit concepts explicit\"?",
+   "back": "Promote a concept hidden in comments, procedures or tangled conditionals into an explicit model object. Expert language and design awkwardness reveal them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Deeper Insight",
+   "reverse": false
+  },
+  {
+   "guid": "t+5SMv%gY^",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::06 DDD Model & Language",
+   "tags": [
+    "DDD::Model"
+   ],
+   "front": "DDD <b>breakthrough</b>: what enables it?",
+   "back": "A sudden leap to a much deeper model after sustained incremental refactoring toward insight. It can't be scheduled, only enabled.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Deeper Insight",
+   "reverse": false
+  },
+  {
+   "guid": "LzT[d,@nsy",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::06 DDD Model & Language",
+   "tags": [
+    "DDD::Model"
+   ],
+   "front": "Why does DDD isolate the <b>domain layer</b> (UI / Application / Domain / Infrastructure)?",
+   "back": "Without isolation, business logic smears across UI and persistence code and becomes invisible and untestable.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Building Blocks",
+   "reverse": false
+  },
+  {
+   "guid": "tQ5}/8A-b~",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::06 DDD Model & Language",
+   "tags": [
+    "DDD::Model"
+   ],
+   "front": "DDD: <b>Application layer</b> vs <b>Domain layer</b>?",
+   "back": "<b>Application</b>: thin, coordinates tasks and directs domain objects, no business rules. <b>Domain</b>: the business concepts, rules and state.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Building Blocks",
+   "reverse": false
+  },
+  {
+   "guid": "q_{h?I-anK",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::06 DDD Model & Language",
+   "tags": [
+    "DDD::Model"
+   ],
+   "front": "<b>Smart UI</b> anti-pattern: when is it actually fine?",
+   "back": "All logic in the UI (event handlers, form procedures). Fine for simple apps needing quick delivery; it gives up any domain model, so it can't grow.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Building Blocks",
+   "reverse": false
+  },
+  {
+   "guid": "hMV`kKw5oo",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::07 DDD Tactical Building Blocks",
+   "tags": [
+    "DDD::Tactical"
+   ],
+   "front": "DDD <b>Entity</b>?",
+   "back": "An object defined by a <b>continuous identity</b> over time, not by its attributes. All attributes may change, it stays the same thing.",
+   "text": "",
+   "image": "",
+   "analogy": "A person: name and address change, the passport number tracks the same human.",
+   "extra": "",
+   "source": "DDD · Building Blocks",
+   "reverse": false
+  },
+  {
+   "guid": "Q)wE^%}5f?",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::07 DDD Tactical Building Blocks",
+   "tags": [
+    "DDD::Tactical"
+   ],
+   "front": "DDD <b>Value Object</b>?",
+   "back": "An object defined only by its <b>attributes</b>, with no identity (Money, Address). Immutable, interchangeable and freely shareable.",
+   "text": "",
+   "image": "",
+   "analogy": "A €10 note: you don't care which one you get, only its value.",
+   "extra": "",
+   "source": "DDD · Building Blocks",
+   "reverse": false
+  },
+  {
+   "guid": "lr0Tu=^L%;",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::07 DDD Tactical Building Blocks",
+   "tags": [
+    "DDD::Tactical"
+   ],
+   "front": "Entity or Value Object: how do you decide?",
+   "back": "Ask: do we need to track <b>which one</b> this is over time? Yes → Entity. Only the values matter → Value Object (the default).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Building Blocks",
+   "reverse": false
+  },
+  {
+   "guid": "Ftp,X![y3E",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::07 DDD Tactical Building Blocks",
+   "tags": [
+    "DDD::Tactical"
+   ],
+   "front": "DDD <b>Domain Service</b>: when do you use one?",
+   "back": "For a stateless domain operation that doesn't belong to any one Entity or Value Object (e.g. transfer funds between accounts). Named as a verb.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Pitfall:</b> overuse strips behaviour out of entities, giving an anemic model.",
+   "source": "DDD · Building Blocks",
+   "reverse": false
+  },
+  {
+   "guid": "C2,zW/;p7s",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::07 DDD Tactical Building Blocks",
+   "tags": [
+    "DDD::Tactical"
+   ],
+   "front": "DDD <b>Module</b>: how should modules be cut?",
+   "back": "By cohesive <b>domain concepts</b>, named in the Ubiquitous Language, not by technical type (\"controllers\", \"utils\").",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Building Blocks",
+   "reverse": false
+  },
+  {
+   "guid": "bI#3Z&IuVd",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::07 DDD Tactical Building Blocks",
+   "tags": [
+    "DDD::Tactical"
+   ],
+   "front": "DDD <b>Aggregate</b>?",
+   "back": "A cluster of Entities and Value Objects treated as one unit for data changes: the <b>consistency boundary</b> that enforces its invariants.",
+   "text": "",
+   "image": "",
+   "analogy": "An order with its order lines: you change lines only through the order, which keeps the total valid.",
+   "extra": "",
+   "source": "DDD · Aggregates",
+   "reverse": false
+  },
+  {
+   "guid": "fh|eIzds@f",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::07 DDD Tactical Building Blocks",
+   "tags": [
+    "DDD::Tactical"
+   ],
+   "front": "<b>Aggregate Root</b>: access rules?",
+   "back": "Outsiders may hold references only to the <b>root</b>; the root controls all access to internal members and guarantees the invariants.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Aggregates",
+   "reverse": false
+  },
+  {
+   "guid": "w[%1e:IS$[",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::07 DDD Tactical Building Blocks",
+   "tags": [
+    "DDD::Tactical"
+   ],
+   "front": "Why should a transaction not span multiple aggregates?",
+   "back": "Invariants are kept inside one aggregate, so one local transaction can enforce them; rules across aggregates can be <b>eventually consistent</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "Keep the rules that must always hold inside one vault, so one lock protects them.",
+   "extra": "Large multi-aggregate transactions cause lock contention and don't survive distribution.",
+   "source": "DDD · Aggregates",
+   "reverse": false
+  },
+  {
+   "guid": "we%T1du^!T",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::07 DDD Tactical Building Blocks",
+   "tags": [
+    "DDD::Tactical"
+   ],
+   "front": "DDD <b>Factory</b>: why use one?",
+   "back": "To encapsulate complex creation of objects/aggregates so they are born in a valid state with all invariants met.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Lifecycle",
+   "reverse": false
+  },
+  {
+   "guid": "eGPIn)4VFf",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::07 DDD Tactical Building Blocks",
+   "tags": [
+    "DDD::Tactical"
+   ],
+   "front": "DDD <b>Repository</b>?",
+   "back": "An abstraction giving the illusion of an <b>in-memory collection</b> of aggregate roots, hiding persistence and queries. One per aggregate root.",
+   "text": "",
+   "image": "",
+   "analogy": "A library desk: you ask for a book by title; you don't care where the stacks are.",
+   "extra": "",
+   "source": "DDD · Lifecycle",
+   "reverse": false
+  },
+  {
+   "guid": "Q,.wWz,4/R",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::07 DDD Tactical Building Blocks",
+   "tags": [
+    "DDD::Tactical"
+   ],
+   "front": "DDD <b>Factory</b> vs <b>Repository</b>?",
+   "back": "Factory <b>creates new</b> objects; Repository <b>finds and stores existing</b> ones (it may use a factory to reconstitute them).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Lifecycle",
+   "reverse": false
+  },
+  {
+   "guid": "EbAP`e/]|B",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::07 DDD Tactical Building Blocks",
+   "tags": [
+    "DDD::Tactical"
+   ],
+   "front": "DDD <b>Specification</b> pattern?",
+   "back": "A predicate object stating a business rule (\"does this candidate satisfy X?\"), used for validation, selection and build-to-order; combinable with and/or/not.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Deeper Insight",
+   "reverse": false
+  },
+  {
+   "guid": "Dg/<DFL6ZU",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::08 DDD Supple Design",
+   "tags": [
+    "DDD::Supple"
+   ],
+   "front": "<b>Intention-Revealing Interface</b>?",
+   "back": "Name classes and operations after their <b>effect and purpose</b>, not their mechanism. If you must read the implementation to use it, it fails.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Supple Design",
+   "reverse": false
+  },
+  {
+   "guid": "j_kyV#.Y$H",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::08 DDD Supple Design",
+   "tags": [
+    "DDD::Supple"
+   ],
+   "front": "<b>Side-Effect-Free Functions</b>: why push logic into them?",
+   "back": "Functions that return results without changing state are safe to combine and test; keep state-changing commands small and separate (cf. CQS).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Supple Design",
+   "reverse": false
+  },
+  {
+   "guid": "x#C4w=t,M1",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::08 DDD Supple Design",
+   "tags": [
+    "DDD::Supple"
+   ],
+   "front": "Role of <b>Assertions</b> in supple design?",
+   "back": "Make post-conditions and invariants explicit (in code or tests) so clients know what an operation guarantees without reading its code.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Supple Design",
+   "reverse": false
+  },
+  {
+   "guid": "I}6bd7?6&S",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::08 DDD Supple Design",
+   "tags": [
+    "DDD::Supple"
+   ],
+   "front": "<b>Conceptual Contours</b>?",
+   "back": "Cut the design along the domain's natural seams, so changes stay local instead of rippling across arbitrary boundaries.",
+   "text": "",
+   "image": "",
+   "analogy": "Like carving a chicken at the joints rather than hacking through bone.",
+   "extra": "",
+   "source": "DDD · Supple Design",
+   "reverse": false
+  },
+  {
+   "guid": "IMvT-09=*=",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::08 DDD Supple Design",
+   "tags": [
+    "DDD::Supple"
+   ],
+   "front": "<b>Closure of Operations</b>?",
+   "back": "An operation whose return type equals its argument type (like integer addition), so operations combine without new dependencies. Common on Value Objects.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Supple Design",
+   "reverse": false
+  },
+  {
+   "guid": "h/V2{3k,Yy",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::08 DDD Supple Design",
+   "tags": [
+    "DDD::Supple"
+   ],
+   "front": "<b>Standalone Class</b>: why aim for it?",
+   "back": "A class with minimal dependencies can be understood in isolation, cutting the mental load of every change.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Supple Design",
+   "reverse": false
+  },
+  {
+   "guid": "F1nmIfPjZU",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::08 DDD Supple Design",
+   "tags": [
+    "DDD::Supple"
+   ],
+   "front": "<b>Declarative Design</b> in DDD?",
+   "back": "Express rules as precise, executable descriptions of <b>what</b> (e.g. composed Specifications) rather than step-by-step procedures.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Supple Design",
+   "reverse": false
+  },
+  {
+   "guid": "Mz,X_.pPEL",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::09 DDD Bounded Contexts & Context Maps",
+   "tags": [
+    "DDD::Strategic"
+   ],
+   "front": "<b>Bounded Context</b>?",
+   "back": "An explicit boundary (subsystem, codebase, team) within which one model applies and each term has a <b>single meaning</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "\"Account\" means one thing to the bank's ledger team and another to its login team; each gets its own context.",
+   "extra": "",
+   "source": "DDD · Strategic Design",
+   "reverse": false
+  },
+  {
+   "guid": "k+Gu5Bv?XM",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::09 DDD Bounded Contexts & Context Maps",
+   "tags": [
+    "DDD::Strategic"
+   ],
+   "front": "Why is one unified model for a large system a mistake?",
+   "back": "Teams fight over meanings and the model bloats into ambiguity. Split into Bounded Contexts and manage their relationships explicitly.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Strategic Design",
+   "reverse": false
+  },
+  {
+   "guid": "v9ApwCqeDY",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::09 DDD Bounded Contexts & Context Maps",
+   "tags": [
+    "DDD::Strategic"
+   ],
+   "front": "<b>Continuous Integration</b> in DDD's model-integrity sense?",
+   "back": "Frequently merging code and model changes <b>within one Bounded Context</b>, with automated tests, so the model doesn't splinter.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Strategic Design",
+   "reverse": false
+  },
+  {
+   "guid": "g$;>{Jq`-5",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::09 DDD Bounded Contexts & Context Maps",
+   "tags": [
+    "DDD::ContextMap"
+   ],
+   "front": "<b>Context Map</b>?",
+   "back": "A map naming each Bounded Context and the relationships and translation points between them, giving everyone the global view.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Context Mapping",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Software Architecture & DDD::09 DDD Bounded Contexts & Context Maps",
+   "tags": [
+    "DDD::ContextMap"
+   ],
+   "front": "Context mapping: <b>upstream</b> vs <b>downstream</b>?",
+   "back": "Upstream's changes affect downstream, not the reverse. The power balance decides the pattern: Customer/Supplier, Conformist or ACL.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Context Mapping",
+   "reverse": false
+  },
+  {
+   "guid": "N1WOV`G#38",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::09 DDD Bounded Contexts & Context Maps",
+   "tags": [
+    "DDD::ContextMap"
+   ],
+   "front": "<b>Shared Kernel</b>: benefit and cost?",
+   "back": "Two teams share a subset of the model and code. Less duplication, but every kernel change needs both teams to agree.",
+   "text": "",
+   "image": "",
+   "analogy": "A shared kitchen between two flatmates: less to buy, but every change to it needs both to agree.",
+   "extra": "",
+   "source": "DDD · Context Mapping",
+   "reverse": false
+  },
+  {
+   "guid": "lS7Q`yYe{9",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::09 DDD Bounded Contexts & Context Maps",
+   "tags": [
+    "DDD::ContextMap"
+   ],
+   "front": "<b>Customer/Supplier</b> relationship?",
+   "back": "Downstream (customer) needs enter the upstream (supplier) backlog; interface tests stop the supplier from breaking the customer.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Context Mapping",
+   "reverse": false
+  },
+  {
+   "guid": "e^n;|g^tCJ",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::09 DDD Bounded Contexts & Context Maps",
+   "tags": [
+    "DDD::ContextMap"
+   ],
+   "front": "<b>Conformist</b>?",
+   "back": "A downstream with no leverage adopts the upstream model as-is. No translation cost, but it inherits upstream's flaws.",
+   "text": "",
+   "image": "",
+   "analogy": "A small supplier who just uses the big retailer's order forms as-is, quirks included.",
+   "extra": "",
+   "source": "DDD · Context Mapping",
+   "reverse": false
+  },
+  {
+   "guid": "zb?m%5]F_W",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::09 DDD Bounded Contexts & Context Maps",
+   "tags": [
+    "DDD::ContextMap"
+   ],
+   "front": "<b>Anticorruption Layer (ACL)</b>?",
+   "back": "A translation layer (facades, adapters) that keeps a foreign or legacy model from leaking into and corrupting your model.",
+   "text": "",
+   "image": "",
+   "analogy": "An interpreter at a border: each side keeps speaking its own language.",
+   "extra": "",
+   "source": "DDD · Context Mapping",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Software Architecture & DDD::09 DDD Bounded Contexts & Context Maps",
+   "tags": [
+    "DDD::ContextMap"
+   ],
+   "front": "<b>Conformist</b> vs <b>Anticorruption Layer</b>: when choose which?",
+   "back": "Conform when the upstream model is good enough and translation isn't worth it. Build an ACL when the upstream model would distort your core model.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Context Mapping",
+   "reverse": false
+  },
+  {
+   "guid": "t?O<i{sE_c",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::09 DDD Bounded Contexts & Context Maps",
+   "tags": [
+    "DDD::ContextMap"
+   ],
+   "front": "<b>Separate Ways</b>?",
+   "back": "Declare no integration between two contexts when integration costs more than it gains; each team goes its own way.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Context Mapping",
+   "reverse": false
+  },
+  {
+   "guid": "GGi{|n+M$J",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::09 DDD Bounded Contexts & Context Maps",
+   "tags": [
+    "DDD::ContextMap"
+   ],
+   "front": "<b>Open Host Service</b>?",
+   "back": "Expose a context through one formal, shared protocol/API for all consumers instead of a bespoke translator per consumer.",
+   "text": "",
+   "image": "",
+   "analogy": "A power socket standard: every appliance plugs into the same interface instead of custom wiring.",
+   "extra": "",
+   "source": "DDD · Context Mapping",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Software Architecture & DDD::09 DDD Bounded Contexts & Context Maps",
+   "tags": [
+    "DDD::ContextMap"
+   ],
+   "front": "<b>Published Language</b>?",
+   "back": "A well-documented shared language (e.g. a standard schema) used as the common medium between contexts, often paired with an Open Host Service.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Context Mapping",
+   "reverse": false
+  },
+  {
+   "guid": "rJM:.:a4^P",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::10 DDD Distillation & Large-Scale Structure",
+   "tags": [
+    "DDD::Distillation"
+   ],
+   "front": "<b>Core Domain</b>: what is it and how do you treat it?",
+   "back": "The most valuable, differentiating part of the model, why the system exists. Put your best people and most refinement there.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Distillation",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Software Architecture & DDD::10 DDD Distillation & Large-Scale Structure",
+   "tags": [
+    "DDD::Distillation"
+   ],
+   "front": "<b>Distillation</b> in DDD?",
+   "back": "Separating the model's vital essence (Core Domain) from the supporting bulk, so effort goes where it differentiates.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Distillation",
+   "reverse": false
+  },
+  {
+   "guid": "g&`p=S$]70",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::10 DDD Distillation & Large-Scale Structure",
+   "tags": [
+    "DDD::Distillation"
+   ],
+   "front": "<b>Generic Subdomain</b>: how should you handle it?",
+   "back": "Necessary but not differentiating (time, ledgers, identity). Isolate it from the core; buy, reuse or outsource rather than craft.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Distillation",
+   "reverse": false
+  },
+  {
+   "guid": "GkO|*)9$?)",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::10 DDD Distillation & Large-Scale Structure",
+   "tags": [
+    "DDD::Distillation"
+   ],
+   "front": "<b>Domain Vision Statement</b>?",
+   "back": "A short (≈1 page) description of the Core Domain and its value, written early to align the team on what matters most.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Distillation",
+   "reverse": false
+  },
+  {
+   "guid": "Q:eWubZ@-r",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::10 DDD Distillation & Large-Scale Structure",
+   "tags": [
+    "DDD::Distillation"
+   ],
+   "front": "<b>Highlighted Core</b>?",
+   "back": "Make the Core Domain visible (a distillation document, or flags in the code) so developers know what's central, without restructuring.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Distillation",
+   "reverse": false
+  },
+  {
+   "guid": "rn$W2g.rGU",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::10 DDD Distillation & Large-Scale Structure",
+   "tags": [
+    "DDD::Distillation"
+   ],
+   "front": "<b>Cohesive Mechanism</b> vs <b>Generic Subdomain</b>?",
+   "back": "A mechanism is a complex computation (the \"how\", e.g. a solver) factored behind a clean interface; a generic subdomain is a part of the model itself.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Distillation",
+   "reverse": false
+  },
+  {
+   "guid": "ze%vsuY8~<",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::10 DDD Distillation & Large-Scale Structure",
+   "tags": [
+    "DDD::Distillation"
+   ],
+   "front": "<b>Segregated Core</b>?",
+   "back": "Refactor so the Core Domain lives in its own modules, physically separated from supporting code, to strengthen its cohesion.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Distillation",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Software Architecture & DDD::10 DDD Distillation & Large-Scale Structure",
+   "tags": [
+    "DDD::Distillation"
+   ],
+   "front": "<b>Abstract Core</b>?",
+   "back": "Pull the most fundamental concepts and interactions into an abstract model, decoupled from specific implementations.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Distillation",
+   "reverse": false
+  },
+  {
+   "guid": "E$^;Vq(9mi",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::10 DDD Distillation & Large-Scale Structure",
+   "tags": [
+    "DDD::LargeScale"
+   ],
+   "front": "What problem does a <b>large-scale structure</b> solve?",
+   "back": "Even with good contexts, a big system lacks an overall sense of where things belong; a system-wide set of rules/roles lets people navigate it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Large-Scale Structure",
+   "reverse": false
+  },
+  {
+   "guid": "c`U@w-2[a/",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::10 DDD Distillation & Large-Scale Structure",
+   "tags": [
+    "DDD::LargeScale"
+   ],
+   "front": "<b>Evolving Order</b>?",
+   "back": "Let the large-scale structure grow with understanding, staying minimal; a rigid upfront structure fights the developers.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Large-Scale Structure",
+   "reverse": false
+  },
+  {
+   "guid": "t(hFogsMpd",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::10 DDD Distillation & Large-Scale Structure",
+   "tags": [
+    "DDD::LargeScale"
+   ],
+   "front": "<b>Responsibility Layers</b>?",
+   "back": "Assign each part of the model to a layer of responsibility (e.g. Operations, Capability, Policy) that follows natural domain dependencies.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Large-Scale Structure",
+   "reverse": false
+  },
+  {
+   "guid": "DPV!)#-Lmr",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::10 DDD Distillation & Large-Scale Structure",
+   "tags": [
+    "DDD::LargeScale"
+   ],
+   "front": "<b>Knowledge Level</b> pattern?",
+   "back": "A \"model of the model\": objects that describe and constrain the operational objects, so users can configure rules without code changes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Large-Scale Structure",
+   "reverse": false
+  },
+  {
+   "guid": "i#0i7yu#Ow",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::10 DDD Distillation & Large-Scale Structure",
+   "tags": [
+    "DDD::LargeScale"
+   ],
+   "front": "<b>Pluggable Component Framework</b>?",
+   "back": "Components interoperate through a shared set of abstract interfaces (an abstract core), so implementations can be swapped. Suits mature models.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Large-Scale Structure",
+   "reverse": false
+  },
+  {
+   "guid": "eT,gG3(gM3",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::10 DDD Distillation & Large-Scale Structure",
+   "tags": [
+    "DDD::LargeScale"
+   ],
+   "front": "<b>System Metaphor</b>: when to use it?",
+   "back": "A shared analogy for how the whole system works (from XP). Use it only if it genuinely fits; a forced metaphor misleads.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Large-Scale Structure",
+   "reverse": false
+  },
+  {
+   "guid": "m7Llq{$Hj3",
+   "type": "cloze",
+   "deck": "Software Architecture & DDD::10 DDD Distillation & Large-Scale Structure",
+   "tags": [
+    "DDD::Strategic"
+   ],
+   "front": "",
+   "back": "",
+   "text": "DDD's three strategic tools: {{c1::Bounded Context}} keeps each model consistent, {{c2::Distillation}} focuses effort on the core, {{c3::Large-Scale Structure}} gives system-wide orientation.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Strategic Design",
+   "reverse": false
+  }
+ ]
+}
