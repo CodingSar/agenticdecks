@@ -1,0 +1,1479 @@
+{
+ "deck_name": "Quantitative Foundations",
+ "file": "Quantitative_Foundations.apkg",
+ "description": "<b>Quantitative Foundations</b>: probability, statistical inference, regression and GLMs, causal inference, Bayesian methods, machine learning, deep learning, reinforcement learning, queueing, linear algebra and information theory, with geometric intuitions. For an engineer/architect who reads papers, sizes systems and judges evidence.",
+ "notes": [
+  {
+   "guid": "eT|(E|K(FU",
+   "type": "basic",
+   "deck": "Quantitative Foundations::01 Probability & Distributions",
+   "tags": [
+    "quant::probability"
+   ],
+   "front": "What is the classic confusion with conditional probability \\(P(A\\mid B)\\)?",
+   "back": "Treating \\(P(A\\mid B)\\) as if it were \\(P(B\\mid A)\\) (the <b>prosecutor\\'s fallacy</b>).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> P(error log contains 'timeout' | database is down) may be 95%. P(database is down | log contains 'timeout') may be 5%, because timeouts have many other causes.",
+   "source": "Probability & Distributions",
+   "reverse": false
+  },
+  {
+   "guid": "zN:%n0o|=/",
+   "type": "basic",
+   "deck": "Quantitative Foundations::01 Probability & Distributions",
+   "tags": [
+    "quant::probability"
+   ],
+   "front": "What does it mean for events A and B to be <b>independent</b>?",
+   "back": "\\(P(A\\cap B)=P(A)\\,P(B)\\): knowing one tells you nothing about the other.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Probability & Distributions",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::01 Probability & Distributions",
+   "tags": [
+    "quant::probability"
+   ],
+   "front": "Why does wrongly assuming independent failures break reliability math?",
+   "back": "Shared causes (power supply, firmware, rack) correlate failures, so \"multiply the small probabilities\" is wildly optimistic.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> two disks each fail 1%/year. Independent: both fail ≈ 0.01%. Sharing a power supply or firmware bug: closer to 1%. RAID math assumes independence that rarely holds.",
+   "source": "Probability & Distributions",
+   "reverse": false
+  },
+  {
+   "guid": "r5oZ=!K>aP",
+   "type": "basic",
+   "deck": "Quantitative Foundations::01 Probability & Distributions",
+   "tags": [
+    "quant::probability"
+   ],
+   "front": "Why can <b>expected value</b> mislead?",
+   "back": "\\(E[X]=\\sum x\\,P(x)\\) is a long-run average per trial, not a typical outcome; rare huge values dominate it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> A lottery ticket costs €2 and has expected value €1. Playing once, you almost surely lose €2. A service with mean latency 50 ms can have most requests at 10 ms and a few at 5 s.",
+   "source": "Probability & Distributions",
+   "reverse": false
+  },
+  {
+   "guid": "gb9Fd^cdQW",
+   "type": "basic",
+   "deck": "Quantitative Foundations::01 Probability & Distributions",
+   "tags": [
+    "quant::probability"
+   ],
+   "front": "Why report the <b>standard deviation</b> rather than the variance?",
+   "back": "\\(\\sigma=\\sqrt{\\mathrm{Var}}\\) is in the same units as X, so it is interpretable; the variance \\(E[(X-\\mu)^2]\\) is in squared units.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Two API endpoints both average 100 ms. One has σ = 5 ms (predictable), the other σ = 200 ms (a lottery). Same mean, completely different user experience and capacity needs.",
+   "source": "Probability & Distributions",
+   "reverse": false
+  },
+  {
+   "guid": "df%5`],RIi",
+   "type": "cloze",
+   "deck": "Quantitative Foundations::01 Probability & Distributions",
+   "tags": [
+    "quant::probability"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Finite-variance random variables form the Hilbert space \\(L^2\\) with \\(\\langle X,Y\\rangle=E[XY]\\). For centred variables: length = {{c1::standard deviation}}, inner product = {{c2::covariance}}, orthogonal = {{c3::uncorrelated}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Every second-moment fact in statistics is Euclidean geometry in this space: lengths are standard deviations, angles are correlations, &quot;best predictor&quot; means &quot;orthogonal projection&quot;. Most of regression is Pythagoras in disguise.",
+   "source": "Probability & Distributions",
+   "reverse": false
+  },
+  {
+   "guid": "J%fPu:SR5V",
+   "type": "basic",
+   "deck": "Quantitative Foundations::01 Probability & Distributions",
+   "tags": [
+    "quant::probability"
+   ],
+   "front": "What is the geometric meaning of the Pearson correlation \\(\\rho(X,Y)\\)?",
+   "back": "\\(\\rho=\\cos\\theta\\): the cosine of the angle between the centred variables (in a sample, between the centred data vectors in \\(\\mathbb{R}^n\\)).",
+   "text": "",
+   "image": "<img src=\"corr_cosine.svg\">",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> \\(\\rho=1\\): parallel. \\(\\rho=0\\): perpendicular. \\(\\rho=-1\\): anti-parallel. This is why \\(|\\rho|\\le 1\\) is just Cauchy-Schwarz, and why correlation is not transitive: A can be at 45° to B and B at 45° to C while A is at 90° to C.",
+   "source": "Probability & Distributions",
+   "reverse": false
+  },
+  {
+   "guid": "PDI4rBp:cJ",
+   "type": "basic",
+   "deck": "Quantitative Foundations::01 Probability & Distributions",
+   "tags": [
+    "quant::probability"
+   ],
+   "front": "\\(\\mathrm{Var}(X+Y)=\\mathrm{Var}(X)+\\mathrm{Var}(Y)+2\\,\\mathrm{Cov}(X,Y)\\) is which geometric theorem?",
+   "back": "The <b>law of cosines</b>; for uncorrelated variables (90° apart) it reduces to <b>Pythagoras</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "Standard deviations add like the sides of a triangle, not like numbers.",
+   "extra": "",
+   "source": "Probability & Distributions",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::01 Probability & Distributions",
+   "tags": [
+    "quant::probability"
+   ],
+   "front": "Geometrically, why does the standard error of a mean shrink as \\(1/\\sqrt{n}\\)?",
+   "back": "Independent errors add at right angles: n errors of size σ sum to length \\(\\sigma\\sqrt n\\) (the diagonal of an n-dimensional box). Dividing by n gives \\(\\sigma/\\sqrt n\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Probability & Distributions",
+   "reverse": false
+  },
+  {
+   "guid": "i+%9U|hfhV",
+   "type": "basic",
+   "deck": "Quantitative Foundations::01 Probability & Distributions",
+   "tags": [
+    "quant::probability"
+   ],
+   "front": "Geometrically, what is the conditional expectation \\(E[Y\\mid X]\\)?",
+   "back": "The <b>orthogonal projection</b> of Y onto the subspace of all (square-integrable) functions of X: it minimises \\(E[(Y-g(X))^2]\\), and the error is orthogonal to every function of X.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Linear regression projects onto the small subspace spanned by linear functions of \\(X\\); conditional expectation projects onto the much larger subspace of all functions of \\(X\\). The tower property \\(E[E[Y|X,Z]\\,|\\,X]=E[Y|X]\\) is just &quot;projecting onto a subspace of a subspace in two steps equals projecting once&quot;.",
+   "source": "Probability & Distributions",
+   "reverse": false
+  },
+  {
+   "guid": "A>!tL^)1X$",
+   "type": "cloze",
+   "deck": "Quantitative Foundations::01 Probability & Distributions",
+   "tags": [
+    "quant::probability"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Law of total variance: \\(\\mathrm{Var}(Y)=\\) {{c1::\\(\\mathrm{Var}(E[Y\\mid X])\\)}} (explained) + {{c2::\\(E[\\mathrm{Var}(Y\\mid X)]\\)}} (unexplained).",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Pythagoras. \\(Y - E[Y]\\) is the hypotenuse; the projection \\(E[Y|X]-E[Y]\\) and the residual \\(Y-E[Y|X]\\) are the perpendicular legs. \\(R^2\\) and Analysis of Variance (ANOVA) are both this single right triangle.",
+   "source": "Probability & Distributions",
+   "reverse": false
+  },
+  {
+   "guid": "P*JUoU$a[Z",
+   "type": "basic",
+   "deck": "Quantitative Foundations::01 Probability & Distributions",
+   "tags": [
+    "quant::probability"
+   ],
+   "front": "What shape does a covariance matrix \\(\\Sigma\\) describe, and what do its eigenvectors and eigenvalues mean?",
+   "back": "Its level sets are <b>ellipsoids</b>. Eigenvectors are the principal axes; \\(\\sqrt{\\lambda_i}\\) are the semi-axis lengths (standard deviations along those axes).",
+   "text": "",
+   "image": "<img src=\"cov_ellipse.svg\">",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> \\(\\Sigma^{1/2}\\) is the linear map that turns the unit sphere (white noise) into this ellipsoid. Every multivariate Gaussian is a rotated, stretched, shifted spherical Gaussian.",
+   "source": "Probability & Distributions",
+   "reverse": false
+  },
+  {
+   "guid": "yhC{)biBlQ",
+   "type": "basic",
+   "deck": "Quantitative Foundations::01 Probability & Distributions",
+   "tags": [
+    "quant::probability"
+   ],
+   "front": "What does the <b>Mahalanobis distance</b> measure?",
+   "back": "\\(\\sqrt{(x-\\mu)^\\top\\Sigma^{-1}(x-\\mu)}\\): Euclidean distance after <b>whitening</b>, i.e. distance in standard deviations along each principal axis.",
+   "text": "",
+   "image": "",
+   "analogy": "Squash the covariance ellipse back into a circle, then use an ordinary ruler: a point far out along the long axis is less surprising than one equally far along the short axis.",
+   "extra": "<b>In practice:</b> a natural multivariate anomaly score.",
+   "source": "Probability & Distributions",
+   "reverse": false
+  },
+  {
+   "guid": "LwAT>I|EI7",
+   "type": "basic",
+   "deck": "Quantitative Foundations::01 Probability & Distributions",
+   "tags": [
+    "quant::probability"
+   ],
+   "front": "For a joint Gaussian \\((x_1,x_2)\\), what is \\(E[x_1\\mid x_2]\\)?",
+   "back": "\\(\\mu_1+\\Sigma_{12}\\Sigma_{22}^{-1}(x_2-\\mu_2)\\): <b>linear</b> in \\(x_2\\), exactly the regression formula.",
+   "text": "",
+   "image": "<img src=\"gauss_condition.svg\">",
+   "analogy": "",
+   "extra": "",
+   "source": "Probability & Distributions",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::01 Probability & Distributions",
+   "tags": [
+    "quant::probability"
+   ],
+   "front": "For a joint Gaussian, what is remarkable about \\(\\mathrm{Cov}[x_1\\mid x_2]\\)?",
+   "back": "It is the Schur complement \\(\\Sigma_{11}-\\Sigma_{12}\\Sigma_{22}^{-1}\\Sigma_{21}\\), which <b>does not depend on the observed value</b> \\(x_2\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Conditioning = slicing the ellipsoid with a plane \\(x_2 = \\text{const}\\). Every parallel slice of an ellipsoid is the same ellipse shape, just shifted along a straight line: hence constant covariance and linear mean.",
+   "source": "Probability & Distributions",
+   "reverse": false
+  },
+  {
+   "guid": "lC;P/:CcN-",
+   "type": "basic",
+   "deck": "Quantitative Foundations::01 Probability & Distributions",
+   "tags": [
+    "quant::probability"
+   ],
+   "front": "Geometrically, how do <b>marginalising</b> and <b>conditioning</b> a multivariate Gaussian differ?",
+   "back": "Marginalising = projecting (a shadow): drop rows/columns of \\(\\Sigma\\). Conditioning = slicing: drop rows/columns of the precision \\(\\Lambda=\\Sigma^{-1}\\). A shadow is wider than any slice.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Probability & Distributions",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::01 Probability & Distributions",
+   "tags": [
+    "quant::probability"
+   ],
+   "front": "In a Gaussian, what does a zero in \\(\\Sigma\\) mean vs a zero in the precision matrix \\(\\Lambda\\)?",
+   "back": "Zero in \\(\\Sigma\\): <b>marginal</b> independence. Zero in \\(\\Lambda\\): <b>conditional</b> independence given the rest (the basis of Gaussian graphical models).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Probability & Distributions",
+   "reverse": false
+  },
+  {
+   "guid": "jP<Yb2=Q}|",
+   "type": "basic",
+   "deck": "Quantitative Foundations::01 Probability & Distributions",
+   "tags": [
+    "quant::probability"
+   ],
+   "front": "What does the <b>Law of Large Numbers</b> say, and what does it not say?",
+   "back": "The sample mean converges to the true mean as n grows. It does not say deviations \"even out\" in the short run (gambler's fallacy), nor how fast convergence is for heavy-tailed data.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> After 10 heads in a row, the next flip is still 50/50. The average tends to 0.5 by drowning the 10 heads in thousands of later flips, not by producing extra tails.",
+   "source": "Probability & Distributions",
+   "reverse": false
+  },
+  {
+   "guid": "uMrM^(NCw>",
+   "type": "basic",
+   "deck": "Quantitative Foundations::01 Probability & Distributions",
+   "tags": [
+    "quant::probability"
+   ],
+   "front": "What does the <b>Central Limit Theorem</b> state?",
+   "back": "For i.i.d. variables with mean μ and finite variance σ², \\(\\sqrt n(\\bar X_n-\\mu)\\xrightarrow{d}N(0,\\sigma^2)\\): sums and means are approximately normal whatever the individual distribution.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Probability & Distributions",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::01 Probability & Distributions",
+   "tags": [
+    "quant::probability"
+   ],
+   "front": "What is the practical consequence of the CLT, and when does it fail?",
+   "back": "Error bars on averages work even for skewed data (e.g. daily mean latency over a million requests). It needs finite variance, so it silently fails for power-law data.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Probability & Distributions",
+   "reverse": false
+  },
+  {
+   "guid": "d[8{zByM+l",
+   "type": "basic",
+   "deck": "Quantitative Foundations::01 Probability & Distributions",
+   "tags": [
+    "quant::probability"
+   ],
+   "front": "Why is the Gaussian the limit in the CLT?",
+   "back": "Adding independent variables <b>convolves</b> their densities; the Gaussian is the fixed point of \"convolve and rescale\" and the maximum-entropy distribution for a given variance.",
+   "text": "",
+   "image": "",
+   "analogy": "Convolution is repeated blurring: blur any shape often enough and all detail except location and width is erased.",
+   "extra": "",
+   "source": "Probability & Distributions",
+   "reverse": false
+  },
+  {
+   "guid": "s_Bl<QkJ^z",
+   "type": "basic",
+   "deck": "Quantitative Foundations::01 Probability & Distributions",
+   "tags": [
+    "quant::probability"
+   ],
+   "front": "<b>Bernoulli</b> vs <b>Binomial</b> distribution?",
+   "back": "Bernoulli: one yes/no trial with success probability p. Binomial(n, p): number of successes in n independent trials; mean np, variance np(1−p).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Each of 500 hosts has a 2% chance of failing a health check. Failures ~ Binomial(500, 0.02): mean 10, σ ≈ 3.1. Seeing 25 failures is ~5σ—something systemic is happening.",
+   "source": "Probability & Distributions",
+   "reverse": false
+  },
+  {
+   "guid": "kG-37Y|[3<",
+   "type": "basic",
+   "deck": "Quantitative Foundations::01 Probability & Distributions",
+   "tags": [
+    "quant::probability"
+   ],
+   "front": "What does the <b>Poisson</b> distribution model, and what is its key property?",
+   "back": "Counts of independent events in a fixed interval at a constant average rate λ. Mean = variance = λ.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> A service gets 100 requests/s on average. In any given second, P(≥130 requests) ≈ 0.2%—so a fixed capacity of 130 rps will be exceeded in roughly 1 second out of every 500, even with no traffic spike. Good default for arrivals, errors and defects.",
+   "source": "Probability & Distributions",
+   "reverse": false
+  },
+  {
+   "guid": "P0A)gs^8Fw",
+   "type": "basic",
+   "deck": "Quantitative Foundations::01 Probability & Distributions",
+   "tags": [
+    "quant::probability"
+   ],
+   "front": "What does the <b>exponential</b> distribution model, and what is memorylessness?",
+   "back": "Waiting time between Poisson events (mean 1/λ). Memoryless: \\(P(T>s+t\\mid T>s)=P(T>t)\\): time already waited tells you nothing.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> If bus arrivals were truly Poisson, having waited 20 minutes already would not make the bus 'due'. Real buses are scheduled, so they are not memoryless; radioactive decay and many failure processes are.",
+   "source": "Probability & Distributions",
+   "reverse": false
+  },
+  {
+   "guid": "l]KfExM_P7",
+   "type": "basic",
+   "deck": "Quantitative Foundations::01 Probability & Distributions",
+   "tags": [
+    "quant::probability"
+   ],
+   "front": "When is a <b>normal</b> model reasonable, and when is it a trap?",
+   "back": "Reasonable for sums of many small independent effects (measurement noise, sample means). A trap for quantities bounded at zero, multiplicative, or driven by rare large events: latency, file sizes, outage cost.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Modeling latency as normal with mean 100 ms and σ 50 ms implies negative latencies and a p99.9 of ~250 ms. Real p99.9 might be 3 s.",
+   "source": "Probability & Distributions",
+   "reverse": false
+  },
+  {
+   "guid": "IdzL]#,J8/",
+   "type": "basic",
+   "deck": "Quantitative Foundations::01 Probability & Distributions",
+   "tags": [
+    "quant::probability"
+   ],
+   "front": "What generates a <b>log-normal</b> distribution, and how do you recognise it?",
+   "back": "A product of many positive random factors (its log is a sum, hence normal). Right-skewed with a long tail; looks normal on a log axis. Common for latency and response sizes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Request latency = network × queueing × DB × serialization, each a multiplicative slowdown. The result is log-normal-ish: median 40 ms, mean 70 ms, p99 500 ms.",
+   "source": "Probability & Distributions",
+   "reverse": false
+  },
+  {
+   "guid": "hChHVCeRZ;",
+   "type": "basic",
+   "deck": "Quantitative Foundations::01 Probability & Distributions",
+   "tags": [
+    "quant::probability"
+   ],
+   "front": "Why is the mean useless for <b>heavy-tailed (power-law)</b> data?",
+   "back": "Tails decay polynomially, so extremes aren't rare: the sample mean is dominated by the largest observation and may not converge; variance can be infinite. Plan for the tail.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Cascading-failure cost, file sizes on a shared drive, follower counts. 'Average outage cost' is meaningless when one outage per decade dwarfs all others combined. Plan for the tail, not the mean.",
+   "source": "Probability & Distributions",
+   "reverse": false
+  },
+  {
+   "guid": "IB.f9]N}@[",
+   "type": "basic",
+   "deck": "Quantitative Foundations::01 Probability & Distributions",
+   "tags": [
+    "quant::probability"
+   ],
+   "front": "Why report percentiles (p50, p99) rather than the mean for latency?",
+   "back": "Percentiles describe the distribution's shape, including the tail; the mean hides tails and can be dominated by a few huge values.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Probability & Distributions",
+   "reverse": false
+  },
+  {
+   "guid": "QwqzALg$5<",
+   "type": "basic",
+   "deck": "Quantitative Foundations::01 Probability & Distributions",
+   "tags": [
+    "quant::probability"
+   ],
+   "front": "State <b>Jensen's inequality</b> and its picture.",
+   "back": "For convex f: \\(f(E[X])\\le E[f(X)]\\). Picture: a chord of a convex function lies above the curve.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Underlies:</b> KL ≥ 0, the ELBO, \\(E[X^2]\\ge E[X]^2\\), and why the log of an average exceeds the average of logs.",
+   "source": "Probability & Distributions",
+   "reverse": false
+  },
+  {
+   "guid": "EOsrj:+g9g",
+   "type": "basic",
+   "deck": "Quantitative Foundations::01 Probability & Distributions",
+   "tags": [
+    "quant::probability"
+   ],
+   "front": "Where does the probability mass of a d-dimensional standard Gaussian live when d is large?",
+   "back": "In a thin shell of radius ≈ \\(\\sqrt d\\), not near the mode at the origin, even though density is highest there.",
+   "text": "",
+   "image": "<img src=\"typical_set.svg\">",
+   "analogy": "A high-dimensional Gaussian is a soap bubble, not a ball.",
+   "extra": "<b>Geometry:</b> mass = density × volume. Density falls as \\(e^{-r^2/2}\\) but shell volume grows as \\(r^{d-1}\\); the product peaks sharply at \\(r\\approx\\sqrt{d-1}\\). This shell is the \"typical set\".",
+   "source": "Probability & Distributions",
+   "reverse": false
+  },
+  {
+   "guid": "H^22Y$9x8>",
+   "type": "cloze",
+   "deck": "Quantitative Foundations::01 Probability & Distributions",
+   "tags": [
+    "quant::probability"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Curse of dimensionality: {{c1::volume concentrates near the surface}} (the outer ε-shell holds \\(1-(1-\\epsilon)^d\\to1\\)); {{c2::distances concentrate}} (nearest ≈ farthest neighbour); {{c3::random vectors are nearly orthogonal}} (\\(\\cos\\theta\\sim N(0,1/d)\\)).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Probability & Distributions",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::01 Probability & Distributions",
+   "tags": [
+    "quant::probability"
+   ],
+   "front": "Why do \"local\" methods (kNN, kernel smoothing) break down in high dimensions?",
+   "back": "To capture 10% of a unit hypercube in 10-D, a sub-cube needs side \\(0.1^{1/10}\\approx0.8\\): \"local\" spans 80% of every axis. Keeping neighbourhoods local needs data exponential in d.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>The rescue:</b> real data lies near low-dimensional manifolds.",
+   "source": "Probability & Distributions",
+   "reverse": false
+  },
+  {
+   "guid": "K3Yzg&&cVw",
+   "type": "basic",
+   "deck": "Quantitative Foundations::11 Information Theory",
+   "tags": [
+    "quant::information_theory"
+   ],
+   "front": "What is one <b>bit</b> of information, in Shannon's sense?",
+   "back": "The information that halves your uncertainty: the answer to one fair yes/no question. An event of probability p carries \\(-\\log_2 p\\) bits of surprise.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Learning a fair coin landed heads: 1 bit. Learning a die showed 4: log₂ 6 ≈ 2.58 bits. Learning the sun rose: ≈ 0 bits, you already knew. A 1-in-a-million event: ~20 bits.",
+   "source": "Information Theory",
+   "reverse": false
+  },
+  {
+   "guid": "j:&=r5J&,+",
+   "type": "basic",
+   "deck": "Quantitative Foundations::11 Information Theory",
+   "tags": [
+    "quant::information_theory"
+   ],
+   "front": "Define <b>entropy</b> H(X) and give its intuition.",
+   "back": "\\(H(X)=-\\sum p(x)\\log_2p(x)\\): the average surprise per outcome, i.e. how unpredictable the source is. Maximal for a uniform distribution, zero for a certain outcome.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Fair coin: 1 bit. Coin that lands heads 99% of the time: 0.08 bits—almost nothing to learn from each flip. A log line that is always 'OK' has zero entropy; a log with rich variety has high entropy.",
+   "source": "Information Theory",
+   "reverse": false
+  },
+  {
+   "guid": "CVcZniqe6#",
+   "type": "basic",
+   "deck": "Quantitative Foundations::11 Information Theory",
+   "tags": [
+    "quant::information_theory"
+   ],
+   "front": "What does Shannon's <b>source-coding theorem</b> say?",
+   "back": "Entropy is the minimum average number of bits per symbol for any lossless code: you can approach it but never beat it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> English text has ~1–1.5 bits of entropy per character but is stored at 8 bits/char. That ~6× redundancy is what gzip exploits. A file of random bytes has 8 bits/byte entropy: gzip cannot shrink it, and 'compressing' it makes it slightly larger.",
+   "source": "Information Theory",
+   "reverse": false
+  },
+  {
+   "guid": "pHvwyGLg(B",
+   "type": "basic",
+   "deck": "Quantitative Foundations::11 Information Theory",
+   "tags": [
+    "quant::information_theory"
+   ],
+   "front": "What is the idea of <b>Huffman coding</b>?",
+   "back": "Repeatedly merge the two least-probable symbols into a tree, so frequent symbols get short codes; optimal code length ≈ \\(-\\log_2p(x)\\).",
+   "text": "",
+   "image": "",
+   "analogy": "Morse code by hand: the commonest letter \"E\" is a single dot, rare \"Q\" is dash-dash-dot-dash.",
+   "extra": "",
+   "source": "Information Theory",
+   "reverse": false
+  },
+  {
+   "guid": "iz$<4@imh=",
+   "type": "basic",
+   "deck": "Quantitative Foundations::11 Information Theory",
+   "tags": [
+    "quant::information_theory"
+   ],
+   "front": "Define <b>cross-entropy</b> \\(H(p,q)\\).",
+   "back": "\\(-\\sum p(x)\\log q(x)\\): the average bits needed to encode data from the true distribution p using a code optimised for q. Minimised when q = p.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Information Theory",
+   "reverse": false
+  },
+  {
+   "guid": "Al*]]Z5P!4",
+   "type": "basic",
+   "deck": "Quantitative Foundations::11 Information Theory",
+   "tags": [
+    "quant::information_theory"
+   ],
+   "front": "How do cross-entropy, entropy and KL divergence relate?",
+   "back": "\\(H(p,q)=H(p)+\\mathrm{KL}(p\\,\\|\\,q)\\). H(p) doesn\\'t depend on the model, so <b>minimising cross-entropy = minimising KL = maximising likelihood</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "H(p) is the irreducible length of the trip over the terrain; KL is the detour caused by a wrong map. Training can only shrink the detour.",
+   "extra": "",
+   "source": "Information Theory",
+   "reverse": false
+  },
+  {
+   "guid": "gpjtX5Na0,",
+   "type": "basic",
+   "deck": "Quantitative Foundations::11 Information Theory",
+   "tags": [
+    "quant::information_theory"
+   ],
+   "front": "Define <b>KL divergence</b> and what it measures.",
+   "back": "\\(\\mathrm{KL}(p\\,\\|\\,q)=E_p[\\log(p/q)]\\ge0\\): the extra bits (log-loss) wasted by using model q when the truth is p.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> RLHF keeps a KL penalty between the tuned and base model: improve the reward without drifting far from what you were.",
+   "source": "Information Theory",
+   "reverse": false
+  },
+  {
+   "guid": "jTRBl7gblI",
+   "type": "basic",
+   "deck": "Quantitative Foundations::11 Information Theory",
+   "tags": [
+    "quant::information_theory"
+   ],
+   "front": "Why isn't KL divergence a true distance?",
+   "back": "It is asymmetric (\\(\\mathrm{KL}(p\\|q)\\ne\\mathrm{KL}(q\\|p)\\)) and violates the triangle inequality.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Locally it behaves like a squared distance: \\(\\mathrm{KL}(p_\\theta\\|p_{\\theta+d\\theta}) \\approx \\tfrac12\\, d\\theta^\\top I(\\theta)\\, d\\theta\\) with \\(I\\) the Fisher information. So the Fisher information is the metric tensor of the curved &quot;statistical manifold&quot; and KL is its (asymmetric) squared-length surrogate.",
+   "source": "Information Theory",
+   "reverse": false
+  },
+  {
+   "guid": "o`/b=o+Md>",
+   "type": "basic",
+   "deck": "Quantitative Foundations::11 Information Theory",
+   "tags": [
+    "quant::information_theory"
+   ],
+   "front": "What does <b>mutual information</b> I(X;Y) measure, and why is it better than correlation?",
+   "back": "\\(H(X)-H(X\\mid Y)\\): how many bits Y tells you about X; zero iff independent. Unlike correlation it captures any dependence (nonlinear, non-monotonic, categorical).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Y = X² for X in [−1, 1] has correlation 0 but high mutual information. Feature selection by mutual information catches features correlation-based filters miss.",
+   "source": "Information Theory",
+   "reverse": false
+  },
+  {
+   "guid": "g)9#)s2lGl",
+   "type": "basic",
+   "deck": "Quantitative Foundations::11 Information Theory",
+   "tags": [
+    "quant::information_theory"
+   ],
+   "front": "What is <b>perplexity</b>, and how do you read it?",
+   "back": "\\(2^{\\text{cross-entropy (bits)}}\\): the effective number of equally likely tokens the model is choosing between. Perplexity 20 = as uncertain as a uniform pick among 20.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Information Theory",
+   "reverse": false
+  },
+  {
+   "guid": "Fgf!_-`$zb",
+   "type": "basic",
+   "deck": "Quantitative Foundations::11 Information Theory",
+   "tags": [
+    "quant::information_theory"
+   ],
+   "front": "Why is \"<b>compression is prediction</b>\" literally true?",
+   "back": "A predictor assigning probability q(x) can encode x in \\(-\\log_2q(x)\\) bits (arithmetic coding), and any compressor implies a predictor. An LLM\\'s cross-entropy loss is its compression rate.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> A trained LLM compresses text far better than gzip because it 'knows' that after 'the capital of France is' the next token is nearly certain. Its loss in bits/token is exactly its compression rate.",
+   "source": "Information Theory",
+   "reverse": false
+  },
+  {
+   "guid": "fv3Yz^SF_;",
+   "type": "basic",
+   "deck": "Quantitative Foundations::11 Information Theory",
+   "tags": [
+    "quant::information_theory"
+   ],
+   "front": "Why is randomness incompressible, and what does that let you detect?",
+   "back": "A truly random sequence has no description shorter than itself (Kolmogorov complexity ≈ length). So compressibility tests for structure: if gzip shrinks \"random\" session IDs, the generator is flawed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> a 1 GB file gzip can't shrink is already compressed, encrypted, or noise.",
+   "source": "Information Theory",
+   "reverse": false
+  },
+  {
+   "guid": "jj*]i~9&G&",
+   "type": "basic",
+   "deck": "Quantitative Foundations::11 Information Theory",
+   "tags": [
+    "quant::information_theory"
+   ],
+   "front": "What does the <b>noisy-channel coding theorem</b> say?",
+   "back": "Every noisy channel has a capacity C. Below C you can transmit with arbitrarily low error using clever error-correcting codes; above C you cannot.",
+   "text": "",
+   "image": "",
+   "analogy": "Reliability comes from cleverly structured redundancy, not from shouting louder.",
+   "extra": "",
+   "source": "Information Theory",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::11 Information Theory",
+   "tags": [
+    "quant::information_theory"
+   ],
+   "front": "Shannon–Hartley: why does Wi-Fi get faster with wider channels rather than more power?",
+   "back": "\\(C=B\\log_2(1+\\mathrm{SNR})\\): capacity is linear in bandwidth B but only logarithmic in signal power. Doubling power adds only ~1 bit/s per Hz.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Information Theory",
+   "reverse": false
+  },
+  {
+   "guid": "j9sTF+h@4Z",
+   "type": "basic",
+   "deck": "Quantitative Foundations::11 Information Theory",
+   "tags": [
+    "quant::information_theory"
+   ],
+   "front": "What does the <b>maximum-entropy principle</b> say?",
+   "back": "Among all distributions consistent with your constraints, pick the one with the highest entropy: it assumes nothing extra.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> if all you know about latency is its mean, the least-assuming model is exponential; a Gaussian smuggles in symmetry and thin tails.",
+   "source": "Information Theory",
+   "reverse": false
+  },
+  {
+   "guid": "B@pFF<zcW;",
+   "type": "cloze",
+   "deck": "Quantitative Foundations::11 Information Theory",
+   "tags": [
+    "quant::information_theory"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Maximum-entropy distributions: fixed support [a,b] only → {{c1::uniform}}; fixed mean on \\([0,\\infty)\\) → {{c2::exponential}}; fixed mean and variance on ℝ → {{c3::Gaussian}}; constraints on \\(E[T(x)]\\) in general → the {{c4::exponential family}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> maximum entropy = the flattest, least committal distribution compatible with what you know; the constraints' Lagrange multipliers become the natural parameters.",
+   "source": "Information Theory",
+   "reverse": false
+  },
+  {
+   "guid": "BKr&$mw-U$",
+   "type": "basic",
+   "deck": "Quantitative Foundations::11 Information Theory",
+   "tags": [
+    "quant::information_theory"
+   ],
+   "front": "How do you compute password or key entropy, and what is the trap?",
+   "back": "\\(\\log_2\\)(number of equally likely possibilities the attacker must search). Trap: entropy belongs to the <b>generating process</b>, not the string; human \"complex\" passwords come from a small, predictable set.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> 4 random words from a 7,776-word list ≈ 51.7 bits. \"P@ssw0rd2024!\" is in every cracking dictionary. A 128-bit key: \\(2^{128}\\approx3.4\\times10^{38}\\) tries.",
+   "source": "Information Theory",
+   "reverse": false
+  },
+  {
+   "guid": ":z^nP#Q.u",
+   "type": "basic",
+   "deck": "Quantitative Foundations::11 Information Theory",
+   "tags": [
+    "quant::information_theory"
+   ],
+   "front": "What does <b>Minimum Description Length (MDL)</b> say?",
+   "back": "The best model minimises (bits to describe the model) + (bits to describe the data given the model). A perfect but enormous fit has explained nothing.",
+   "text": "",
+   "image": "",
+   "analogy": "Occam's razor priced in bits.",
+   "extra": "<b>Example:</b> A 200-parameter polynomial through 200 points has zero error but costs 200 numbers to state: it has memorized, not compressed. A line with small noise costs 2 numbers plus cheap residuals—that is the real pattern.",
+   "source": "Information Theory",
+   "reverse": false
+  },
+  {
+   "guid": "l?;(7ch=Tm",
+   "type": "basic",
+   "deck": "Quantitative Foundations::10 Linear Algebra & Calculus",
+   "tags": [
+    "quant::linear_algebra"
+   ],
+   "front": "In ML papers, what is a <b>vector</b>?",
+   "back": "An ordered list of numbers representing a point or direction in n-dimensional space: an embedding, an image's pixels, a user's feature row, a model's parameters.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Linear Algebra & Calculus",
+   "reverse": false
+  },
+  {
+   "guid": "tnU{@Z<cm<",
+   "type": "basic",
+   "deck": "Quantitative Foundations::10 Linear Algebra & Calculus",
+   "tags": [
+    "quant::linear_algebra"
+   ],
+   "front": "What does the <b>dot product</b> measure geometrically?",
+   "back": "\\(a\\cdot b=\\sum a_ib_i=|a||b|\\cos\\theta\\): alignment. Large when pointing the same way, zero when orthogonal, negative when opposed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Linear Algebra & Calculus",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::10 Linear Algebra & Calculus",
+   "tags": [
+    "quant::linear_algebra"
+   ],
+   "front": "Why is the dot product everywhere in ML?",
+   "back": "Every neuron computes inputs · weights; attention scores are query · key; cosine similarity (dot product of unit vectors) powers semantic search.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Linear Algebra & Calculus",
+   "reverse": false
+  },
+  {
+   "guid": "I/-Du%%3pI",
+   "type": "basic",
+   "deck": "Quantitative Foundations::10 Linear Algebra & Calculus",
+   "tags": [
+    "quant::linear_algebra"
+   ],
+   "front": "What does multiplying a vector by a matrix do?",
+   "back": "Applies a <b>linear map</b>: rotate, scale, shear or project, never bend. \\(Ax\\) combines A\\'s columns using x\\'s entries as weights.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Linear Algebra & Calculus",
+   "reverse": false
+  },
+  {
+   "guid": "x[~w>13^Mk",
+   "type": "basic",
+   "deck": "Quantitative Foundations::10 Linear Algebra & Calculus",
+   "tags": [
+    "quant::linear_algebra"
+   ],
+   "front": "Why is matrix multiplication defined the way it is?",
+   "back": "AB is the composition \"apply B, then A\", defined so that \\((AB)x=A(Bx)\\). Inner dimensions must match, and order matters (rotate-then-stretch ≠ stretch-then-rotate).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Linear Algebra & Calculus",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::10 Linear Algebra & Calculus",
+   "tags": [
+    "quant::linear_algebra"
+   ],
+   "front": "Why is a deep network without nonlinearities no better than a single layer?",
+   "back": "\\(W_3W_2W_1x\\) collapses to one matrix \\(W=W_3W_2W_1\\). Nonlinear activations between layers are what make depth matter.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Linear Algebra & Calculus",
+   "reverse": false
+  },
+  {
+   "guid": "xZWbhr!f*;",
+   "type": "basic",
+   "deck": "Quantitative Foundations::10 Linear Algebra & Calculus",
+   "tags": [
+    "quant::linear_algebra"
+   ],
+   "front": "When does a matrix inverse \\(A^{-1}\\) exist, intuitively?",
+   "back": "Only if A loses no information: square and full rank. A projection onto a plane has no inverse, because the flattened dimension is gone.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Solving \\(Ax=b\\) is \"undo A\", which is why a singular A means no unique solution. (\\(A^\\top\\) swaps rows and columns; \\(x^\\top y\\) is the dot product.)",
+   "source": "Linear Algebra & Calculus",
+   "reverse": false
+  },
+  {
+   "guid": "Hmp.h:zi$3",
+   "type": "basic",
+   "deck": "Quantitative Foundations::10 Linear Algebra & Calculus",
+   "tags": [
+    "quant::linear_algebra"
+   ],
+   "front": "What is the <b>rank</b> of a matrix intuitively, and what does \"low-rank\" mean?",
+   "back": "Rank = number of independent directions the output can span = the map's true dimensionality. Low-rank: mostly redundant, writable as a product of two thin matrices.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> LoRA learns \\(\\Delta W=AB\\) with A d×8 and B 8×d instead of a full d×d update, betting that the needed change is low-rank.",
+   "source": "Linear Algebra & Calculus",
+   "reverse": false
+  },
+  {
+   "guid": "fl)m<VEL(7",
+   "type": "basic",
+   "deck": "Quantitative Foundations::10 Linear Algebra & Calculus",
+   "tags": [
+    "quant::linear_algebra"
+   ],
+   "front": "What are <b>eigenvectors</b> and <b>eigenvalues</b>, intuitively?",
+   "back": "\\(Av=\\lambda v\\): directions the map only stretches (by λ), never rotates. They are the map\\'s natural axes; eigenvalues say how much each axis is amplified or damped.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Linear Algebra & Calculus",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::10 Linear Algebra & Calculus",
+   "tags": [
+    "quant::linear_algebra"
+   ],
+   "front": "What happens when you apply the same matrix to a vector over and over?",
+   "back": "The eigen-direction with the largest |λ| is amplified until it dominates: <b>power iteration</b>, which is how PageRank (the leading eigenvector of the link matrix) is computed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Linear Algebra & Calculus",
+   "reverse": false
+  },
+  {
+   "guid": "f3px<8t}Q9",
+   "type": "basic",
+   "deck": "Quantitative Foundations::10 Linear Algebra & Calculus",
+   "tags": [
+    "quant::linear_algebra"
+   ],
+   "front": "What does the <b>SVD</b> \\(A=U\\Sigma V^\\top\\) say geometrically?",
+   "back": "Every linear map = rotate/reflect (\\(V^\\top\\)), stretch along the axes (Σ), rotate/reflect (U). The unit sphere maps to an ellipsoid with semi-axes \\(\\sigma_iu_i\\). Works for non-square matrices.",
+   "text": "",
+   "image": "<img src=\"svd_map.svg\">",
+   "analogy": "",
+   "extra": "",
+   "source": "Linear Algebra & Calculus",
+   "reverse": false
+  },
+  {
+   "guid": "e`R>v[#OB6",
+   "type": "basic",
+   "deck": "Quantitative Foundations::10 Linear Algebra & Calculus",
+   "tags": [
+    "quant::linear_algebra"
+   ],
+   "front": "What do the <b>singular values</b> of a matrix tell you?",
+   "back": "Rank = number of non-zero \\(\\sigma_i\\); condition number = \\(\\sigma_{\\max}/\\sigma_{\\min}\\); truncating the small ones gives the best low-rank approximation (Eckart–Young).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> keep the top 50 singular values of a sparse users × items rating matrix: every user and item becomes a 50-dim vector whose dot product predicts ratings (a recommender). Near-zero singular values cause ill-conditioning in regression.",
+   "source": "Linear Algebra & Calculus",
+   "reverse": false
+  },
+  {
+   "guid": "L3$.6<m,0O",
+   "type": "basic",
+   "deck": "Quantitative Foundations::10 Linear Algebra & Calculus",
+   "tags": [
+    "quant::linear_algebra"
+   ],
+   "front": "L1 vs L2 norm: definitions and the shapes of their unit balls?",
+   "back": "L2 (Euclidean) \\(\\sqrt{\\sum x_i^2}\\): a round ball. L1 (Manhattan) \\(\\sum|x_i|\\): a diamond with corners on the axes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Linear Algebra & Calculus",
+   "reverse": false
+  },
+  {
+   "guid": "bk_}J{Jb^p",
+   "type": "basic",
+   "deck": "Quantitative Foundations::10 Linear Algebra & Calculus",
+   "tags": [
+    "quant::linear_algebra"
+   ],
+   "front": "What does <b>softmax</b> do?",
+   "back": "\\(\\mathrm{softmax}(z)_i=e^{z_i}/\\sum_je^{z_j}\\) turns arbitrary scores into a probability distribution, exaggerating differences so the largest score takes most of the mass.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> logits [2, 1, 0] → [0.67, 0.24, 0.09]. Adding a constant to all logits changes nothing.",
+   "source": "Linear Algebra & Calculus",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::10 Linear Algebra & Calculus",
+   "tags": [
+    "quant::linear_algebra"
+   ],
+   "front": "What does dividing logits by a <b>temperature</b> T do to a softmax?",
+   "back": "T → 0 sharpens toward argmax (one-hot); T → ∞ flattens toward uniform. LLM sampling temperature is exactly this knob.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> softmax maps logits onto the probability simplex; low T pushes toward a vertex, high T toward the centroid.",
+   "source": "Linear Algebra & Calculus",
+   "reverse": false
+  },
+  {
+   "guid": "m3P5ERZ~cB",
+   "type": "basic",
+   "deck": "Quantitative Foundations::10 Linear Algebra & Calculus",
+   "tags": [
+    "quant::linear_algebra"
+   ],
+   "front": "What does a derivative dy/dx tell you, in plain language?",
+   "back": "Sensitivity: nudge x by ε and y moves by about (dy/dx)·ε. It is the slope of the local linear approximation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> d(loss)/dw = −3 means increasing w slightly lowers the loss, so move w up. That sentence is gradient descent.",
+   "source": "Linear Algebra & Calculus",
+   "reverse": false
+  },
+  {
+   "guid": "zSe]A|Bnse",
+   "type": "basic",
+   "deck": "Quantitative Foundations::10 Linear Algebra & Calculus",
+   "tags": [
+    "quant::linear_algebra"
+   ],
+   "front": "What is the key geometric fact about the <b>gradient</b> ∇f?",
+   "back": "It points in the direction of steepest ascent, with magnitude = the slope in that direction, and is perpendicular to level sets. −∇f is steepest descent.",
+   "text": "",
+   "image": "",
+   "analogy": "Standing blindfolded on a hillside: the gradient is the direction your feet feel the ground rising fastest.",
+   "extra": "",
+   "source": "Linear Algebra & Calculus",
+   "reverse": false
+  },
+  {
+   "guid": "spf&A@.c^(",
+   "type": "basic",
+   "deck": "Quantitative Foundations::10 Linear Algebra & Calculus",
+   "tags": [
+    "quant::linear_algebra"
+   ],
+   "front": "Why is the <b>chain rule</b> the whole of backpropagation?",
+   "back": "\\(\\frac{d}{dx}f(g(x))=f\\'(g(x))\\,g\\'(x)\\): sensitivities multiply along a chain. A network is a long chain of functions, so any weight\\'s gradient is a product of local derivatives from that weight to the loss.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Linear Algebra & Calculus",
+   "reverse": false
+  },
+  {
+   "guid": "=!y{wI%p`",
+   "type": "basic",
+   "deck": "Quantitative Foundations::10 Linear Algebra & Calculus",
+   "tags": [
+    "quant::linear_algebra"
+   ],
+   "front": "What is a <b>Jacobian</b>, and where do you meet it?",
+   "back": "The matrix of all first partial derivatives of a vector-valued \\(f:\\mathbb R^n\\to\\mathbb R^m\\), its best linear approximation. Backpropagation multiplies Jacobians.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Linear Algebra & Calculus",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::10 Linear Algebra & Calculus",
+   "tags": [
+    "quant::linear_algebra"
+   ],
+   "front": "What is a <b>Hessian</b>, and what do its eigenvalues tell you at a critical point?",
+   "back": "The matrix of second partials of a scalar function (its curvature). All eigenvalues positive: minimum; all negative: maximum; mixed signs: saddle.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Second-order optimisers (Newton) use it. A \"sharp\" minimum has large eigenvalues and is said to generalise worse than a flat one.",
+   "source": "Linear Algebra & Calculus",
+   "reverse": false
+  },
+  {
+   "guid": "jP$0rxc`Q(",
+   "type": "basic",
+   "deck": "Quantitative Foundations::10 Linear Algebra & Calculus",
+   "tags": [
+    "quant::linear_algebra"
+   ],
+   "front": "What is a <b>convex</b> function, and why does it matter for optimisation?",
+   "back": "Its graph lies below every chord (bowl-shaped), so every local minimum is global and a zero gradient certifies the optimum.",
+   "text": "",
+   "image": "",
+   "analogy": "A convex loss is one valley: a ball rolled from anywhere ends at the bottom. A non-convex loss is a mountain range: where you start decides which valley you reach (why random seeds change deep-learning results).",
+   "extra": "Least squares, logistic and hinge losses (with L1/L2 penalties) are convex; deep networks are not.",
+   "source": "Linear Algebra & Calculus",
+   "reverse": false
+  },
+  {
+   "guid": "o=$9%%THFQ",
+   "type": "basic",
+   "deck": "Quantitative Foundations::10 Linear Algebra & Calculus",
+   "tags": [
+    "quant::linear_algebra"
+   ],
+   "front": "Two equivalent tests for convexity of a smooth function?",
+   "back": "Tangent planes lie below the graph, \\(f(y)\\ge f(x)+\\nabla f(x)^\\top(y-x)\\); or (twice differentiable) the Hessian is positive semidefinite everywhere.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> because a tangent plane is a global lower bound, a zero gradient certifies a global minimum.",
+   "source": "Linear Algebra & Calculus",
+   "reverse": false
+  },
+  {
+   "guid": "dMx.&b<be{",
+   "type": "basic",
+   "deck": "Quantitative Foundations::10 Linear Algebra & Calculus",
+   "tags": [
+    "quant::linear_algebra"
+   ],
+   "front": "How do integrals show up in probability?",
+   "back": "Integrating a density over a region gives probability, \\(P(a<X<b)=\\int_a^bp(x)\\,dx\\); integrating value × density gives an average, \\(E[g(X)]=\\int g(x)p(x)\\,dx\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> the marginal likelihood \\(P(E)=\\int P(E\\mid\\theta)P(\\theta)\\,d\\theta\\) sums over all parameter values, weighted by plausibility.",
+   "source": "Linear Algebra & Calculus",
+   "reverse": false
+  },
+  {
+   "guid": "deZp`a?d&~",
+   "type": "basic",
+   "deck": "Quantitative Foundations::10 Linear Algebra & Calculus",
+   "tags": [
+    "quant::linear_algebra"
+   ],
+   "front": "Why does the <b>Taylor expansion</b> appear in optimisation?",
+   "back": "\\(f(x+\\delta)\\approx f(x)+f\\'(x)\\delta+\\tfrac12f\\'\\'(x)\\delta^2\\). The first-order term justifies gradient descent; the second-order (Hessian) term justifies Newton\\'s method.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Linear Algebra & Calculus",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::10 Linear Algebra & Calculus",
+   "tags": [
+    "quant::linear_algebra"
+   ],
+   "front": "Via Taylor, why does too high a learning rate make the loss go up?",
+   "back": "If the step \\(\\delta=-\\eta g\\) is so large that the curvature term \\(\\tfrac12\\delta^\\top H\\delta\\) outweighs the linear gain \\(g\\cdot\\delta\\), the loss increases: divergence.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Linear Algebra & Calculus",
+   "reverse": false
+  },
+  {
+   "guid": "yV=ylo]G}a",
+   "type": "basic",
+   "deck": "Quantitative Foundations::09 Queueing & Performance",
+   "tags": [
+    "quant::queueing"
+   ],
+   "front": "State <b>Little's Law</b>.",
+   "back": "\\(L=\\lambda W\\): average items in the system = arrival (throughput) rate × average time in the system. Holds for any stable system, whatever the arrival or service distributions.",
+   "text": "",
+   "image": "",
+   "analogy": "A coffee shop serving 60 customers/hour, each staying 10 minutes, has on average 60 × 1/6 = 10 customers inside.",
+   "extra": "",
+   "source": "Queueing & Performance",
+   "reverse": false
+  },
+  {
+   "guid": "j!VsU+,8$V",
+   "type": "basic",
+   "deck": "Quantitative Foundations::09 Queueing & Performance",
+   "tags": [
+    "quant::queueing"
+   ],
+   "front": "Little's Law: size the connection pool for 1,000 requests/s at 50 ms average latency.",
+   "back": "Concurrency = λW = 1,000 × 0.05 = <b>50</b> requests in flight. A pool of 40 will queue; 500 wastes memory.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Queueing & Performance",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::09 Queueing & Performance",
+   "tags": [
+    "quant::queueing"
+   ],
+   "front": "Why do connection pools exhaust in cascades when a dependency slows down?",
+   "back": "Needed concurrency = throughput × latency: if latency doubles at the same throughput, the required pool size doubles too.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Queueing & Performance",
+   "reverse": false
+  },
+  {
+   "guid": "xcF@8K[B/4",
+   "type": "basic",
+   "deck": "Quantitative Foundations::09 Queueing & Performance",
+   "tags": [
+    "quant::queueing"
+   ],
+   "front": "A Kafka consumer group has a stable backlog of 200,000 messages and processes 5,000 msg/s. How long does each message wait?",
+   "back": "\\(W=L/\\lambda=200{,}000/5{,}000=\\) <b>40 s</b>, with no timestamps needed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Same trick: 30 open tickets, 5 closed per week → 6 weeks average cycle time.",
+   "source": "Queueing & Performance",
+   "reverse": false
+  },
+  {
+   "guid": "E%u+/K4o$`",
+   "type": "basic",
+   "deck": "Quantitative Foundations::09 Queueing & Performance",
+   "tags": [
+    "quant::queueing"
+   ],
+   "front": "How does queueing delay grow with utilisation ρ = λ/μ?",
+   "back": "Roughly as ρ/(1−ρ): flat at low load, explosive near 1. 50% → 90% multiplies the wait ~9×; 90% → 99% another ~10×.",
+   "text": "",
+   "image": "",
+   "analogy": "A motorway: fine at half capacity, stop-and-go at 90%, gridlock just below 100%, with no visible change in the road.",
+   "extra": "<b>Example:</b> a CPU at 95% looks \"efficiently used\" on a dashboard; each request waits behind ~19 others.",
+   "source": "Queueing & Performance",
+   "reverse": false
+  },
+  {
+   "guid": "wi>l,g^fm_",
+   "type": "basic",
+   "deck": "Quantitative Foundations::09 Queueing & Performance",
+   "tags": [
+    "quant::queueing"
+   ],
+   "front": "For an <b>M/M/1</b> queue, what are the average time and number in the system?",
+   "back": "\\(W=\\dfrac{1}{\\mu-\\lambda}=\\dfrac{S}{1-\\rho}\\) and \\(L=\\dfrac{\\rho}{1-\\rho}\\), with service time \\(S=1/\\mu\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> S = 10 ms, 80 arrivals/s → ρ = 0.8, W = 50 ms. At 95/s → W = 200 ms: +19% load, 4× latency.",
+   "source": "Queueing & Performance",
+   "reverse": false
+  },
+  {
+   "guid": "wVuOLkua>|",
+   "type": "cloze",
+   "deck": "Quantitative Foundations::09 Queueing & Performance",
+   "tags": [
+    "quant::queueing"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Kendall notation A/S/c: A = {{c1::arrival process}}, S = {{c2::service-time distribution}}, c = {{c3::number of servers}}. Letters: M = Markovian (Poisson/exponential), G = general, D = deterministic.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> a single-threaded worker with Poisson arrivals and wildly varying job sizes is M/G/1, and the \"G\" is where the pain lives.",
+   "source": "Queueing & Performance",
+   "reverse": false
+  },
+  {
+   "guid": "cuHlGa8z`T",
+   "type": "basic",
+   "deck": "Quantitative Foundations::09 Queueing & Performance",
+   "tags": [
+    "quant::queueing"
+   ],
+   "front": "What does <b>Kingman's formula</b> say about variability and queueing delay?",
+   "back": "\\(W_q\\approx\\frac{\\rho}{1-\\rho}\\cdot\\frac{c_a^2+c_s^2}{2}\\cdot S\\): delay scales with the squared coefficients of variation of inter-arrival and service times, so burstiness and uneven job sizes hurt as much as load.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Queueing & Performance",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::09 Queueing & Performance",
+   "tags": [
+    "quant::queueing"
+   ],
+   "front": "How can you cut queueing delay without adding capacity?",
+   "back": "Reduce variability: split big jobs or isolate them in their own queue (lower \\(c_s\\)), and smooth bursty arrivals (lower \\(c_a\\)).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> at 80% utilisation, uniform 10 ms jobs queue far less than a mix of 1 ms and 500 ms jobs.",
+   "source": "Queueing & Performance",
+   "reverse": false
+  },
+  {
+   "guid": "LzIk85o%,)",
+   "type": "basic",
+   "deck": "Quantitative Foundations::09 Queueing & Performance",
+   "tags": [
+    "quant::queueing"
+   ],
+   "front": "Why are bursts inevitable with Poisson arrivals, even at constant average load?",
+   "back": "Per-interval counts have variance λ, so intervals well above the average occur routinely. Capacity planned at the average queues constantly; headroom absorbs normal randomness, not just \"spikes\".",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Queueing & Performance",
+   "reverse": false
+  },
+  {
+   "guid": "z:[=mBaVCy",
+   "type": "basic",
+   "deck": "Quantitative Foundations::09 Queueing & Performance",
+   "tags": [
+    "quant::queueing"
+   ],
+   "front": "One shared queue feeding k servers vs a separate queue per server: which is better, and why?",
+   "back": "The shared queue: no server idles while another has a backlog, and one slow job blocks one server, not a whole line.",
+   "text": "",
+   "image": "",
+   "analogy": "One snake line feeding six supermarket tills beats six separate lines.",
+   "extra": "Same reason a single work queue with a worker pool beats per-worker queues, and least-loaded routing beats round-robin to fixed per-instance queues.",
+   "source": "Queueing & Performance",
+   "reverse": false
+  },
+  {
+   "guid": "DDDYyt^@:N",
+   "type": "basic",
+   "deck": "Quantitative Foundations::09 Queueing & Performance",
+   "tags": [
+    "quant::queueing"
+   ],
+   "front": "What is <b>head-of-line blocking</b>?",
+   "back": "A slow item at the front of a FIFO queue delays everything behind it, even items that could be served instantly.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Shows up in:</b> TCP (one lost packet stalls the stream), HTTP/1.1 pipelining, event loops, ordered Kafka partitions. Fix: per-key ordering with parallelism across keys, or move slow work off the critical path.",
+   "source": "Queueing & Performance",
+   "reverse": false
+  },
+  {
+   "guid": "FG&#zOw#~2",
+   "type": "basic",
+   "deck": "Quantitative Foundations::09 Queueing & Performance",
+   "tags": [
+    "quant::queueing"
+   ],
+   "front": "Why does an overloaded system's throughput often <b>collapse</b> rather than plateau?",
+   "back": "Queued work still consumes resources, and clients time out and retry, so the effective service rate falls while load rises. Useful throughput drops below what moderate load achieved.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Queueing & Performance",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::09 Queueing & Performance",
+   "tags": [
+    "quant::queueing"
+   ],
+   "front": "How do you prevent congestion collapse?",
+   "back": "Load shedding, backpressure, bounded queues and retry budgets: drop work early so the rest completes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Queueing & Performance",
+   "reverse": false
+  },
+  {
+   "guid": "vGvwon=i`!",
+   "type": "basic",
+   "deck": "Quantitative Foundations::09 Queueing & Performance",
+   "tags": [
+    "quant::queueing"
+   ],
+   "front": "What does the <b>Universal Scalability Law</b> add to Amdahl's Law?",
+   "back": "\\(X(N)=\\frac{N}{1+\\alpha(N-1)+\\beta N(N-1)}\\): besides contention α (the serial part, Amdahl) it adds a coherency cost β (cross-node coordination), so throughput peaks and then <b>falls</b> as N grows.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> adding replicas to a strongly consistent database: the 12th node makes everything slower.",
+   "source": "Queueing & Performance",
+   "reverse": false
+  },
+  {
+   "guid": "ml{<^^mE/|",
+   "type": "basic",
+   "deck": "Quantitative Foundations::09 Queueing & Performance",
+   "tags": [
+    "quant::queueing"
+   ],
+   "front": "Fan-out: a page calls 100 backends, each slow 1% of the time. How often is the page slow?",
+   "back": "\\(1-(1-p)^N=1-0.99^{100}\\approx\\) <b>63%</b>. The backend p99 becomes the user\\'s p37.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Queueing & Performance",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::09 Queueing & Performance",
+   "tags": [
+    "quant::queueing"
+   ],
+   "front": "How do you mitigate tail latency under fan-out?",
+   "back": "Hedged requests (send a duplicate after ~p95 delay), tied requests, limiting fan-out, deadline propagation, and reducing backend <b>variance</b> rather than the mean.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Queueing & Performance",
+   "reverse": false
+  }
+ ]
+}
