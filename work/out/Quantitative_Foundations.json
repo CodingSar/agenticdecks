@@ -11,7 +11,7 @@
     "quant::probability"
    ],
    "front": "What is the classic confusion with conditional probability \\(P(A\\mid B)\\)?",
-   "back": "Treating \\(P(A\\mid B)\\) as if it were \\(P(B\\mid A)\\) (the <b>prosecutor\\'s fallacy</b>).",
+   "back": "Treating \\(P(A\\mid B)\\) as if it were \\(P(B\\mid A)\\) (the <b>prosecutor's fallacy</b>).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -603,7 +603,7 @@
     "quant::information_theory"
    ],
    "front": "How do cross-entropy, entropy and KL divergence relate?",
-   "back": "\\(H(p,q)=H(p)+\\mathrm{KL}(p\\,\\|\\,q)\\). H(p) doesn\\'t depend on the model, so <b>minimising cross-entropy = minimising KL = maximising likelihood</b>.",
+   "back": "\\(H(p,q)=H(p)+\\mathrm{KL}(p\\,\\|\\,q)\\). H(p) doesn't depend on the model, so <b>minimising cross-entropy = minimising KL = maximising likelihood</b>.",
    "text": "",
    "image": "",
    "analogy": "H(p) is the irreducible length of the trip over the terrain; KL is the detour caused by a wrong map. Training can only shrink the detour.",
@@ -683,7 +683,7 @@
     "quant::information_theory"
    ],
    "front": "Why is \"<b>compression is prediction</b>\" literally true?",
-   "back": "A predictor assigning probability q(x) can encode x in \\(-\\log_2q(x)\\) bits (arithmetic coding), and any compressor implies a predictor. An LLM\\'s cross-entropy loss is its compression rate.",
+   "back": "A predictor assigning probability q(x) can encode x in \\(-\\log_2q(x)\\) bits (arithmetic coding), and any compressor implies a predictor. An LLM's cross-entropy loss is its compression rate.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -859,7 +859,7 @@
     "quant::linear_algebra"
    ],
    "front": "What does multiplying a vector by a matrix do?",
-   "back": "Applies a <b>linear map</b>: rotate, scale, shear or project, never bend. \\(Ax\\) combines A\\'s columns using x\\'s entries as weights.",
+   "back": "Applies a <b>linear map</b>: rotate, scale, shear or project, never bend. \\(Ax\\) combines A's columns using x's entries as weights.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -939,7 +939,7 @@
     "quant::linear_algebra"
    ],
    "front": "What are <b>eigenvectors</b> and <b>eigenvalues</b>, intuitively?",
-   "back": "\\(Av=\\lambda v\\): directions the map only stretches (by λ), never rotates. They are the map\\'s natural axes; eigenvalues say how much each axis is amplified or damped.",
+   "back": "\\(Av=\\lambda v\\): directions the map only stretches (by λ), never rotates. They are the map's natural axes; eigenvalues say how much each axis is amplified or damped.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1083,7 +1083,7 @@
     "quant::linear_algebra"
    ],
    "front": "Why is the <b>chain rule</b> the whole of backpropagation?",
-   "back": "\\(\\frac{d}{dx}f(g(x))=f\\'(g(x))\\,g\\'(x)\\): sensitivities multiply along a chain. A network is a long chain of functions, so any weight\\'s gradient is a product of local derivatives from that weight to the loss.",
+   "back": "\\(\\frac{d}{dx}f(g(x))=f'(g(x))\\,g'(x)\\): sensitivities multiply along a chain. A network is a long chain of functions, so any weight's gradient is a product of local derivatives from that weight to the loss.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1179,7 +1179,7 @@
     "quant::linear_algebra"
    ],
    "front": "Why does the <b>Taylor expansion</b> appear in optimisation?",
-   "back": "\\(f(x+\\delta)\\approx f(x)+f\\'(x)\\delta+\\tfrac12f\\'\\'(x)\\delta^2\\). The first-order term justifies gradient descent; the second-order (Hessian) term justifies Newton\\'s method.",
+   "back": "\\(f(x+\\delta)\\approx f(x)+f'(x)\\delta+\\tfrac12f''(x)\\delta^2\\). The first-order term justifies gradient descent; the second-order (Hessian) term justifies Newton's method.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1451,7 +1451,7 @@
     "quant::queueing"
    ],
    "front": "Fan-out: a page calls 100 backends, each slow 1% of the time. How often is the page slow?",
-   "back": "\\(1-(1-p)^N=1-0.99^{100}\\approx\\) <b>63%</b>. The backend p99 becomes the user\\'s p37.",
+   "back": "\\(1-(1-p)^N=1-0.99^{100}\\approx\\) <b>63%</b>. The backend p99 becomes the user's p37.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1473,6 +1473,2230 @@
    "analogy": "",
    "extra": "",
    "source": "Queueing & Performance",
+   "reverse": false
+  },
+  {
+   "guid": "OKD6fs6xR~",
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "What does a hypothesis test actually do?",
+   "back": "It assumes H₀ (\"nothing interesting is happening\") and asks how surprising data this extreme would be. It can reject H₀ or fail to reject it, never prove it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> A/B test: H₀ = new checkout flow converts the same as old. You observe +2%. The test asks how often random noise alone would produce +2% or more.",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": "GweC+oFH:V",
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "Define the <b>p-value</b> precisely.",
+   "back": "\\(p=P(\\text{statistic at least this extreme}\\mid H_0)\\). Under H₀, p-values are uniformly distributed on [0, 1].",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> p = 0.03 for 'new caching layer reduced latency'. It means: if caching did nothing, a gap this large would appear by chance 3% of the time. Whether caching really helps also depends on the prior plausibility and effect size.",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": "N^kjoTR4,s",
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "Name three things a p-value is <b>not</b>.",
+   "back": "Not \\(P(H_0\\mid\\text{data})\\); not \"the probability the result is due to chance\" (1 − p is not the chance the effect is real); not a measure of effect size or importance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Converting to P(H₀ | data) needs a prior and the alternative's likelihood: p = 0.05 often corresponds to a 20–50% posterior probability of the null.",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": "Qiq8[on+#D",
+   "type": "cloze",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Type I error = {{c1::false positive: rejecting a true H₀}}. Type II error = {{c2::false negative: failing to reject a false H₀}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "Why can't you reduce Type I and Type II errors at the same time for free?",
+   "back": "Tightening the threshold for one loosens the other; only more data or a better test improves both.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Paging threshold: alert on any latency bump → many false pages (Type I). Alert only on huge bumps → missed slow-burn degradations (Type II).",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": "NNV,k=Tyt3",
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "What goes wrong when you ignore <b>statistical power</b>?",
+   "back": "Underpowered studies miss most real effects, and the \"significant\" effects they do find are inflated (the <b>winner's curse</b>).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> an A/B test with 200 users to detect a 1% lift has ~5% power: a null result means nothing and a \"win\" is almost certainly an exaggerated fluke.",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": "L(ZhX}F-J-",
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "What determines statistical power, and how does the required sample size scale with effect size?",
+   "back": "Power rises with effect size δ, sample size n and α, and falls with noise σ. Required \\(n\\propto\\sigma^2/\\delta^2\\): halving the detectable effect costs 4× the data.",
+   "text": "",
+   "image": "",
+   "analogy": "Two bell curves (estimate under null and alternative) δ apart: more data doesn't move them, it makes them thinner (width \\(\\sigma/\\sqrt n\\)) until they stop overlapping.",
+   "extra": "",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": "p;kaY}<pf7",
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "What does a 95% <b>confidence interval</b> guarantee?",
+   "back": "A procedure-level guarantee: across repeated experiments, 95% of intervals built this way contain the true value. Not a 95% probability that this particular interval does.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> 'Error rate 0.4% (95% CI 0.1%–0.9%)' tells you the data is compatible with anything from 0.1% to 0.9%. A point estimate without an interval hides that the true value could be 9× higher.",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": "nz!=P&7N{K",
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "95% confidence interval vs 95% <b>credible</b> interval?",
+   "back": "Confidence: a random interval from a procedure that covers the fixed parameter 95% of the time. Credible: a fixed interval holding 95% posterior probability for the parameter, given this data and prior.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "They coincide for flat priors and asymptotically (Bernstein–von Mises), so the misreading usually goes unpunished; they diverge with strong priors, small samples or optional stopping.",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": "E)x.j/dex6",
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "What is the <b>multiple-comparisons problem</b>, and how do you spot it?",
+   "back": "Test enough hypotheses and ~5% of true nulls hit p &lt; 0.05 by chance. Spot it: many metrics, subgroups or time windows checked, and only the winners reported.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> a dashboard with 40 metrics after a deploy: expect ~2 \"significant\" regressions with no real change.",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": "Ng(t7!|OX{",
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "FWER vs FDR control: what does each limit?",
+   "back": "<b>FWER</b>: P(at least one false rejection), e.g. Bonferroni (test at α/m); strict, power collapses as m grows. <b>FDR</b>: the expected fraction of rejections that are false, e.g. Benjamini–Hochberg.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "How does the <b>Benjamini–Hochberg</b> procedure work?",
+   "back": "Sort the m p-values and reject all up to the largest k with \\(p_{(k)}\\le\\frac{k}{m}\\alpha\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> null p-values are uniform and hug the diagonal of sorted p vs rank; BH rejects the early p-values that dip too far below a line of slope α/m.",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": "lJUsuf}5O3",
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "What is <b>p-hacking</b> (the garden of forking paths)?",
+   "back": "Making analysis choices (outliers dropped, metric, stopping time) after seeing the data, so some path reaches significance. Each choice is defensible; the combination guarantees a \"finding\".",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "Why is \"peeking\" at an A/B test and stopping once p &lt; 0.05 harmful?",
+   "back": "Repeated looks give noise many chances to cross the threshold, inflating the false-positive rate to roughly 20–30%.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": "xov*ycKGPU",
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "Statistical significance vs practical significance?",
+   "back": "With enough data, trivially small effects become significant. Ask how big the effect is, with what interval, and whether that size matters.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> A change improves p50 latency by 0.3 ms, p &lt; 0.0001, measured on 50 million requests. Significant and irrelevant.",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": "Q258TaBBfm",
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "What does <b>regression to the mean</b> fool people into believing?",
+   "back": "That whatever intervention followed an extreme measurement caused the return toward average. Extremes are partly luck and regress even if nothing changed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> You fix the three worst-performing services after a bad week. Next week they improve. Regression to the mean predicts most of that improvement with no fix at all.",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": "beB;z#ZF@A",
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "Statistically, why does regression to the mean happen?",
+   "back": "In standardised units the regression slope is r with |r| &lt; 1, so a value z SDs from the mean predicts only rz SDs: a property of imperfect correlation, not a causal force.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "Where does the regression line of y on x sit relative to the data ellipse?",
+   "back": "Through the points where the ellipse has vertical tangents (midpoints of vertical slices), so it is flatter than the major axis. Regressing x on y gives a steeper line.",
+   "text": "",
+   "image": "<img src=\"cov_ellipse.svg\">",
+   "analogy": "",
+   "extra": "",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": "CKKHB,pC#-",
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "Why does the sample variance divide by n − 1? (geometric answer)",
+   "back": "The residual vector \\(x-\\bar x\\mathbf 1\\) lies in the (n−1)-dimensional hyperplane orthogonal to \\(\\mathbf 1\\), so noise has only n−1 free coordinates: \\(E\\|x-\\bar x\\mathbf 1\\|^2=(n-1)\\sigma^2\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Degrees of freedom = {{c1::the dimension of the subspace the (residual) vector lives in}}. Fitting p parameters leaves {{c2::n − p}} residual degrees of freedom.",
+   "image": "",
+   "analogy": "",
+   "extra": "Isotropic noise puts σ² of expected squared length into each dimension.",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": "A0Vm:A!4TC",
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "What is the \\(\\chi^2_k\\) distribution geometrically?",
+   "back": "The squared length of a standard Gaussian vector in k dimensions, \\(\\sum_{i=1}^kZ_i^2\\); mean k, variance 2k.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "Why does \\(\\chi^2\\) appear everywhere in testing?",
+   "back": "Test statistics are squared lengths of projections of (roughly) Gaussian noise onto subspaces, and by rotational symmetry only the subspace dimension matters.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Cochran's theorem</b> = Pythagoras for Gaussians: projections onto orthogonal subspaces give independent χ² with df = dimensions.",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": "ni1B<|?z2U",
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "Geometric reading of the <b>F-statistic</b> (e.g. for nested linear models)?",
+   "back": "\\(F=\\dfrac{\\|P_{\\text{signal}}y\\|^2/q}{\\|P_{\\text{resid}}y\\|^2/(n-p)}\\): squared length per dimension in the extra \"signal\" subspace vs the residual subspace. Under H₀ both get ≈σ² per dimension, so F ≈ 1.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "For nested models the signal subspace is \\(V_1\\ominus V_0\\) (dimension q). \\(t^2=F\\) when q = 1. A large F: y leans into the extra dimensions more than isotropic noise would.",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": "i#JD&`qMR]",
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "What does the <b>delta method</b> give?",
+   "back": "If \\(\\sqrt n(\\hat\\theta-\\theta)\\to N(0,\\Sigma)\\) and g is differentiable: \\(\\sqrt n\\,(g(\\hat\\theta)-g(\\theta))\\to N(0,\\nabla g^\\top\\Sigma\\nabla g)\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> at scale 1/√n, g looks like its tangent plane, and a linear map of a Gaussian is Gaussian. Fails when ∇g = 0.",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": "A~5(5O}aL4",
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "Why is maximum likelihood estimation a <b>KL projection</b>?",
+   "back": "Average log-likelihood → \\(-H(p^*)-\\mathrm{KL}(p^*\\|p_\\theta)\\), so maximising likelihood minimises KL from the data distribution to the model: the KL-closest point on the model manifold.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "If the truth is off the model surface (misspecification), MLE converges to the KL-nearest point rather than to nonsense.",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": "nzdi]=ViI]",
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "What are the mean and covariance of the <b>score</b> \\(\\nabla_\\theta\\log p(x\\mid\\theta)\\) at the true parameter?",
+   "back": "Mean 0; covariance = the <b>Fisher information</b> \\(I(\\theta)\\).",
+   "text": "",
+   "image": "",
+   "analogy": "The score is the slope of the log-likelihood hill. At the truth, observations push uphill and downhill with equal expected force; the size of the pushes says how loudly the data speaks about θ.",
+   "extra": "",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": "fBEy(Grolz",
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "Two equivalent definitions of <b>Fisher information</b>?",
+   "back": "\\(I(\\theta)=E[ss^\\top]=-E[\\nabla^2_\\theta\\log p(x\\mid\\theta)]\\): variance of the score = expected curvature of the log-likelihood. Independent observations add: \\(I_n=nI_1\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> a sharply peaked log-likelihood pins θ down; a flat ridge does not. Fisher information is also the Riemannian metric on the model manifold.",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": "IzFccTROHU",
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "What does the <b>Cramér–Rao bound</b> say?",
+   "back": "Any unbiased estimator has \\(\\mathrm{Cov}(\\hat\\theta)\\succeq I_n(\\theta)^{-1}\\) (scalar: \\(\\mathrm{Var}\\ge1/(nI_1)\\)): variance ≥ inverse curvature. The MLE attains it asymptotically.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": "sPAxiiNUBm",
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "What is the asymptotic distribution of the MLE?",
+   "back": "\\(\\sqrt n(\\hat\\theta-\\theta_0)\\xrightarrow{d}N\\big(0,I(\\theta_0)^{-1}\\big)\\), under regularity conditions.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "Core idea of the proof that the MLE is asymptotically normal?",
+   "back": "Taylor-expand the score at \\(\\theta_0\\): the score is a sum (CLT → Gaussian), the Hessian an average (LLN → nI). So \\(\\hat\\theta-\\theta_0\\approx\\) noise / curvature.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> with lots of data the log-likelihood near its peak is a paraboloid of curvature nI, and a paraboloid log-density is a Gaussian.",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": "g)|`_lX8Ek",
+   "type": "cloze",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Likelihood-based tests of \\(H_0:\\theta=\\theta_0\\): {{c1::Wald}} uses the horizontal distance \\(\\hat\\theta-\\theta_0\\) scaled by curvature; {{c2::likelihood ratio}} uses the vertical drop \\(2[\\ell(\\hat\\theta)-\\ell(\\theta_0)]\\); {{c3::score (Lagrange multiplier)}} uses the slope at \\(\\theta_0\\).",
+   "image": "<img src=\"trinity_tests.svg\">",
+   "analogy": "",
+   "extra": "All asymptotically χ² and equivalent; they diverge when the log-likelihood isn't quadratic. Wald isn't reparameterisation-invariant (LR is); the score test needs only the null model fitted.",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": "IRt4Q}qN34",
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "What does <b>Wilks' theorem</b> say, and when does it fail?",
+   "back": "For nested regular models, \\(2[\\ell(\\hat\\theta_{\\text{full}})-\\ell(\\hat\\theta_{\\text{null}})]\\to\\chi^2_q\\) under H₀ (q = constrained parameters). Fails when the null is on the parameter-space boundary (variance = 0, mixture weight = 0).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": "u2=_c~^xwt",
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "What is a <b>sufficient statistic</b>, and the factorisation criterion?",
+   "back": "T(x) is sufficient for θ if x given T(x) doesn't depend on θ. Criterion: \\(p(x\\mid\\theta)=g(T(x),\\theta)\\,h(x)\\).",
+   "text": "",
+   "image": "",
+   "analogy": "Lossless compression for inference: which contour of T you land on carries all the information about θ; where you sit within it is pure noise.",
+   "extra": "",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": "B}sUR|eTM,",
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "In an exponential family \\(p(x\\mid\\eta)=h(x)\\exp(\\eta^\\top T(x)-A(\\eta))\\), what do the derivatives of \\(A\\) give?",
+   "back": "\\(\\nabla A=E[T(x)]\\) and \\(\\nabla^2A=\\mathrm{Cov}[T(x)]\\). So A is convex, the log-likelihood is concave, and the MLE is <b>moment matching</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": "zK`0YZ+20$",
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "What is the <b>bootstrap</b> principle?",
+   "back": "Approximate the population by the empirical distribution and resample the data with replacement; the spread of \\(\\hat\\theta^*\\) around \\(\\hat\\theta\\) mimics the spread of \\(\\hat\\theta\\) around θ.",
+   "text": "",
+   "image": "",
+   "analogy": "We can't rerun \"population → sample\", so we rerun \"sample → resample\", which we fully control, and transfer the error distribution back.",
+   "extra": "",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "When does the bootstrap fail?",
+   "back": "For extremes (max/min), parameters on a boundary, infinite-variance heavy tails, and dependent data unless you resample blocks.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": "cF?LrG:rpC",
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "What does the <b>Neyman–Pearson lemma</b> say?",
+   "back": "For simple H₀ vs simple H₁, the most powerful level-α test rejects when the likelihood ratio \\(p_1(x)/p_0(x)\\) exceeds a threshold.",
+   "text": "",
+   "image": "",
+   "analogy": "A budget of α null-probability to spend on a rejection region: spend it on the points that buy the most alternative probability per unit of null probability (a fractional knapsack).",
+   "extra": "",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": "fooz@uR?A$",
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "Under model misspecification, what does the MLE converge to, and with what covariance?",
+   "back": "To the KL-closest (\"pseudo-true\") parameter, with the <b>sandwich</b> covariance \\(A^{-1}BA^{-1}/n\\) (A = curvature, B = score variance), which collapses to \\(I^{-1}/n\\) when the model is correct.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": "jGTtl}K2Hb",
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "What is the <b>James–Stein</b> phenomenon?",
+   "back": "For \\(x\\sim N(\\theta,I_d)\\) with d ≥ 3, shrinking x toward a common point gives lower total mean squared error than the MLE x, for <b>every</b> θ.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "Geometrically, why does James–Stein shrinkage help?",
+   "back": "\\(E\\|x\\|^2=\\|\\theta\\|^2+d\\): high-dimensional noise is nearly orthogonal to θ, so the observation is the hypotenuse of a right triangle, systematically too long. Shrinking corrects the length.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "The root of ridge regression, hierarchical models and empirical Bayes.",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": "n</7d`*Fcn",
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "How does the <b>EM algorithm</b> work, viewed as a lower bound?",
+   "back": "\\(\\log p(x\\mid\\theta)=\\mathcal L(q,\\theta)+\\mathrm{KL}(q\\|p(z\\mid x,\\theta))\\). E-step: set q to the posterior over latents so the bound touches; M-step: maximise the bound over θ. Likelihood never decreases.",
+   "text": "",
+   "image": "",
+   "analogy": "Minorise-maximise: fit a smooth surrogate that lies under the hard curve and touches it, jump to the surrogate's top, repeat.",
+   "extra": "",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": "O8p?>v*vup",
+   "type": "basic",
+   "deck": "Quantitative Foundations::02 Statistical Inference",
+   "tags": [
+    "quant::inference"
+   ],
+   "front": "<b>AIC vs BIC</b>: what does each target?",
+   "back": "AIC \\(=-2\\ell+2k\\) targets prediction (≈ leave-one-out CV; tends to overfit slightly). BIC \\(=-2\\ell+k\\log n\\) targets identifying the true model (consistent if it is among the candidates).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Statistical Inference",
+   "reverse": false
+  },
+  {
+   "guid": "BCRA1;je[,",
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "Describe Ordinary Least Squares (OLS) geometrically.",
+   "back": "\\(\\hat y=X\\hat\\beta\\) is the <b>orthogonal projection</b> of y onto the column space of X: minimising squared error = dropping a perpendicular to that plane.",
+   "text": "",
+   "image": "<img src=\"ols_projection.svg\">",
+   "analogy": "y floats above the plane spanned by the predictors; the fit is its shadow under a light shining straight down.",
+   "extra": "",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "What do the OLS <b>normal equations</b> say geometrically?",
+   "back": "\\(X^\\top(y-X\\hat\\beta)=0\\): the residual is perpendicular to every column of X. Solving gives \\(\\hat\\beta=(X^\\top X)^{-1}X^\\top y\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": "Eq4Aoex~;s",
+   "type": "cloze",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Hat matrix \\(H=X(X^\\top X)^{-1}X^\\top\\) (\\(\\hat y=Hy\\)): {{c1::symmetric}} (an orthogonal, not oblique, projection), {{c2::idempotent}} (\\(H^2=H\\)), and its trace = {{c3::rank(X) = p}}, the model degrees of freedom.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> a projection's eigenvalues are only 1 (kept directions) and 0 (killed); the trace counts the ones. I − H projects onto the (n − p)-dimensional residual space.",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": "lsqYeRoI/(",
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "What is R² geometrically?",
+   "back": "\\(\\cos^2\\theta\\), with θ the angle between the centred response and the centred fitted vector: explained / total squared length in the right triangle.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "Why does R² never decrease when you add a predictor?",
+   "back": "A bigger column space can only bring the projection closer to y, even for pure noise (a random column captures ~1/(n−1) of the residual). Adjusted R² corrects for this.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": "gwV2Oczk`u",
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "Regression's two dual pictures: row picture vs column picture?",
+   "back": "<b>Row:</b> n points in \\(\\mathbb R^{p+1}\\); fit a hyperplane (good for outliers, leverage, nonlinearity). <b>Column:</b> p predictor vectors and y in \\(\\mathbb R^n\\); project y onto their span (where inference lives).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": "E?$DZ;_Ziw",
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "What does the <b>Frisch–Waugh–Lovell</b> theorem say a multiple-regression coefficient means?",
+   "back": "\\(\\hat\\beta_j\\) = the slope from regressing y-residuals on \\(x_j\\)-residuals (both after removing the other predictors): it uses only the part of \\(x_j\\) orthogonal to them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "\"Controlling for Z\" literally means projecting Z out of x and y. If x_j is nearly in the span of the others, the leftover sliver is tiny and the estimate noisy.",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": "nRbj?:27Q>",
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "What is <b>multicollinearity</b> geometrically, and what does it damage?",
+   "back": "Nearly parallel predictor columns. The fitted \\(\\hat y\\) stays stable, but the coefficients (coordinates in that skewed basis) swing wildly.",
+   "text": "",
+   "image": "",
+   "analogy": "Locating a point with two nearly parallel rulers: a tiny wobble of the point produces huge, offsetting changes in both readings.",
+   "extra": "",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "Define the <b>Variance Inflation Factor (VIF)</b>.",
+   "back": "\\(\\mathrm{VIF}_j=1/(1-R_j^2)\\), with \\(R_j^2\\) from regressing \\(x_j\\) on the other predictors; it multiplies \\(\\mathrm{Var}(\\hat\\beta_j)\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": "izL!!3BaJ-",
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "What does the <b>Gauss–Markov</b> theorem say, and what does it not require?",
+   "back": "If \\(E[\\varepsilon]=0\\) and \\(\\mathrm{Cov}(\\varepsilon)=\\sigma^2I\\), OLS is BLUE: minimum variance among linear unbiased estimators. Normality is <b>not</b> required.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "The class is narrow: biased estimators such as ridge can beat OLS in mean squared error.",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": "IZNfCR)|^:",
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "What is \\(\\mathrm{Cov}(\\hat\\beta)\\) for OLS, and what shape is the confidence region?",
+   "back": "\\(\\sigma^2(X^\\top X)^{-1}\\): the confidence ellipsoid is the inverse of the data cloud's shape, long where the predictors have little spread.",
+   "text": "",
+   "image": "",
+   "analogy": "A plank on widely spaced supports is stable; on supports bunched together it wobbles.",
+   "extra": "",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": "femTi@g@H%",
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "Under what noise model is OLS the MLE, and what do other noise models give?",
+   "back": "Gaussian noise → squared loss → OLS. Laplace noise → absolute loss (median regression); Student-t → robust regression that downweights outliers.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Rule:</b> the loss is the negative log of the noise density. Squared loss believes in thin tails, so a 10σ outlier is \"impossible\" and the fit contorts to explain it.",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": "BiNa&]D1fy",
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "What does <b>ridge regression</b> do in the SVD basis of X?",
+   "back": "\\(\\hat\\beta=(X^\\top X+\\lambda I)^{-1}X^\\top y\\) scales the fit along each \\(u_j\\) by \\(d_j^2/(d_j^2+\\lambda)\\): high-variance directions barely change, thin (noisy) directions shrink toward 0.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "A soft version of principal-component regression, which uses a hard 0/1 cutoff.",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": "AVuH<4O(xg",
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "Why does the lasso (L1) produce exactly-zero coefficients while ridge (L2) does not?",
+   "back": "The solution is where the elliptical loss contours first touch the constraint ball. The L1 diamond's corners lie on the axes and stick out, so contours usually hit them (coordinates = 0); the round L2 ball has no corners.",
+   "text": "",
+   "image": "<img src=\"ridge_lasso.svg\">",
+   "analogy": "",
+   "extra": "",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": "B%UZA-NL-P",
+   "type": "cloze",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "",
+   "back": "",
+   "text": "As MAP estimates under Gaussian noise: ridge = a {{c1::Gaussian}} prior on β; lasso = a {{c2::Laplace (double-exponential)}} prior; λ is a {{c3::noise-to-signal ratio}} (\\(\\sigma^2/\\tau^2\\) for ridge).",
+   "image": "",
+   "analogy": "",
+   "extra": "Penalty = negative log prior. The lasso's zeros are a property of the MAP point only; truly sparse Bayesian answers need spike-and-slab or horseshoe priors.",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": "Pi^lD){>*#",
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "Effective degrees of freedom of a linear smoother, and its value for ridge?",
+   "back": "\\(\\mathrm{df}=\\mathrm{tr}(S)\\); for ridge \\(\\sum_jd_j^2/(d_j^2+\\lambda)\\), falling from p at λ = 0 to 0 as λ → ∞.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": "DlC=gO*n=d",
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "What is <b>leverage</b> \\(h_{ii}\\)?",
+   "back": "The i-th diagonal of the hat matrix (\\(\\partial\\hat y_i/\\partial y_i\\)): between 0 and 1, averaging p/n. It depends only on how far \\(x_i\\) is from the centre of the predictor cloud.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "What makes a data point <b>influential</b> (Cook's distance)?",
+   "back": "Large residual × high leverage: \\(D_i\\propto r_i^2\\,h_{ii}/(1-h_{ii})\\). A high-leverage point can pull the line onto itself and hide its residual.",
+   "text": "",
+   "image": "",
+   "analogy": "A seesaw: a point far out on the plank tilts the line a lot; an outlier near the fulcrum barely moves it.",
+   "extra": "",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": "MY~,[?D*>p",
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "What breaks under <b>heteroskedasticity</b>?",
+   "back": "OLS stays unbiased and consistent but is no longer efficient, and the usual standard errors are wrong.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "Two standard fixes for heteroskedasticity?",
+   "back": "Keep OLS with robust \"sandwich\" standard errors, or use GLS: OLS after whitening the noise, so precise observations get more weight.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": "k5[D^8!^^u",
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "How does the OLS line differ from the first principal component of 2-D data?",
+   "back": "OLS minimises <b>vertical</b> distances (asymmetric in x and y); PCA minimises <b>perpendicular</b> distances (symmetric; the ellipse's major axis). The OLS line is always flatter.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "What is <b>attenuation bias</b>?",
+   "back": "Measurement error in x flattens the OLS slope by the reliability ratio \\(\\sigma_x^2/(\\sigma_x^2+\\sigma_{\\text{err}}^2)\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": "u)MeqkXS-E",
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "When p &gt; n, which interpolating solution do the pseudoinverse and gradient descent from zero pick?",
+   "back": "The <b>minimum-L2-norm</b> interpolator \\(X^+y\\). It lies in the row space of X, where gradient descent started at 0 stays forever, since every gradient lies there.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "\"Ridgeless\" regression (λ → 0⁺): the basic mechanism of implicit regularisation.",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": "N=75e7[vn_",
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "What is the leave-one-out CV shortcut for linear smoothers \\(\\hat y=Sy\\)?",
+   "back": "\\(e_{(i)}=(y_i-\\hat y_i)/(1-S_{ii})\\): one fit gives all n leave-one-out residuals. GCV replaces \\(S_{ii}\\) by tr(S)/n.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Removing a point inflates its residual by exactly the factor that undoes its self-influence; high-leverage points flatter themselves most.",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": "AJ+DoNAYt@",
+   "type": "cloze",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Generalized Linear Model components: {{c1::random component}} (y from an exponential family: Gaussian, Bernoulli, Poisson, Gamma), {{c2::linear predictor}} \\(\\eta=X\\beta\\), and {{c3::link function}} \\(g(\\mu)=\\eta\\).",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> the flat plane lives in a warped coordinate system (log-odds, log-rate) chosen so it can never predict an impossible mean.",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": "Q0w(,c#uX8",
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "What is special about the <b>canonical link</b> in a GLM?",
+   "back": "Natural parameter = linear predictor (logit for Bernoulli, log for Poisson, identity for Gaussian). Score equations become \\(X^\\top(y-\\hat\\mu)=0\\) and the likelihood is concave: residual ⊥ predictors, as in OLS.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": "qa=T}sw]%Z",
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "In logistic regression, what is the geometry of the decision boundary and of w?",
+   "back": "The boundary p = 0.5 is the hyperplane \\(w^\\top x+b=0\\); w is its normal vector, and ‖w‖ sets how steeply the probability changes away from it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "How do you read a logistic-regression coefficient \\(w_j\\)?",
+   "back": "\\(e^{w_j}\\) is the <b>odds ratio</b> per unit increase in \\(x_j\\) (the log-odds change by \\(w_j\\)).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": "QN{V607KSL",
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "What happens to logistic regression under <b>perfect separation</b>?",
+   "back": "The MLE doesn't exist: scaling w up always raises the likelihood, so ‖w‖ → ∞ (huge coefficients and SEs, convergence warnings). Fix: L1/L2 penalty, Firth correction, weakly informative priors.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": "x~]SaaDtPV",
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "How is a GLM fitted?",
+   "back": "<b>Iteratively Reweighted Least Squares</b>: Newton/Fisher scoring where each step solves a weighted least-squares problem on a working response, re-linearising around the current fit.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "\\(\\beta^{\\text{new}}=(X^\\top WX)^{-1}X^\\top Wz\\), \\(z=\\eta+(y-\\mu)g'(\\mu)\\), \\(W=1/(V(\\mu)g'(\\mu)^2)\\).",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": "HLECc9JRc.",
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "What is <b>deviance</b> in a GLM?",
+   "back": "\\(D=2[\\ell_{\\text{saturated}}-\\ell_{\\text{fitted}}]\\): the GLM's analogue of the residual sum of squares (RSS/σ² for Gaussian). Deviance differences between nested models are LR statistics, ≈ χ².",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": "q*zKt+3+iD",
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "What is <b>overdispersion</b> in count models, and its symptom?",
+   "back": "Real counts have Var(y) &gt; μ, which Poisson forbids. Coefficients stay roughly fine but standard errors are too small. Diagnostic: residual deviance / df ≫ 1.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "Fixes for overdispersion?",
+   "back": "Quasi-Poisson (estimate a dispersion factor), Negative Binomial (\\(\\mathrm{Var}=\\mu+\\mu^2/k\\)), or observation-level random effects.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "The Negative Binomial is a Poisson with a Gamma-distributed rate; mixing always adds variance (law of total variance).",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": "dg4oby}0vo",
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "What is <b>partial pooling</b> in a hierarchical (mixed-effects) model?",
+   "back": "Group effects are drawn from a common distribution, so each group's estimate is a precision-weighted compromise between its own mean and the grand mean; small or noisy groups shrink most.",
+   "text": "",
+   "image": "",
+   "analogy": "A slider between \"no pooling\" (each group alone: high variance) and \"complete pooling\" (one mean for all: high bias); the data set the slider.",
+   "extra": "",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "Shrinkage formula for a group mean in a hierarchical model?",
+   "back": "\\(\\hat\\alpha_j=\\lambda_j\\bar y_j+(1-\\lambda_j)\\hat\\mu\\), with \\(\\lambda_j=\\dfrac{\\tau^2}{\\tau^2+\\sigma^2/n_j}\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "It is James–Stein with the amount of shrinkage learned from the data.",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": "uW%97J$U#b",
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "How do smoothing splines / GAMs fit nonlinear functions while remaining linear models?",
+   "back": "Expand x in a basis (B-splines) and penalise roughness \\(\\lambda\\int f''(x)^2dx=\\lambda\\beta^\\top\\Omega\\beta\\): generalised ridge regression, with λ chosen by CV or REML.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> the straight-line part is untouched; wigglier basis directions are shrunk progressively harder, like a low-pass filter.",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": "D:2|>/~ojI",
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "In kernel / local regression, what does the bandwidth h control?",
+   "back": "The bias–variance trade-off: small h → wiggly fit (low bias, high variance); large h → flat fit (high bias, low variance).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "How does the best achievable kernel-regression error rate degrade with dimension?",
+   "back": "From \\(n^{-4/5}\\) in 1-D to \\(n^{-4/(4+d)}\\) in d dimensions: the curse of dimensionality stated as a theorem.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": "N7(}KFhRpk",
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "In survival analysis, what is the <b>hazard</b> function?",
+   "back": "The instantaneous failure rate among survivors: \\(h(t)=\\lim_{dt\\to0}P(t\\le T<t+dt\\mid T\\ge t)/dt\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "How does the <b>Cox model</b> handle censoring without specifying a baseline hazard?",
+   "back": "Partial likelihood: at each event time, a softmax of \\(e^{x^\\top\\beta}\\) over the current risk set, so \\(h_0(t)\\) cancels. Censored subjects count in risk sets until they drop out.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": "Bj}dNYkiR.",
+   "type": "basic",
+   "deck": "Quantitative Foundations::03 Regression & GLMs",
+   "tags": [
+    "quant::regression"
+   ],
+   "front": "What loss does <b>quantile regression</b> minimise, and why does it give a quantile?",
+   "back": "The pinball loss: under-predictions cost τ per unit, over-predictions 1 − τ. At the minimum a fraction τ of the data lies below the prediction (τ = 0.5 → median).",
+   "text": "",
+   "image": "",
+   "analogy": "A tilted V: squared loss balances like a centre of mass (mean), absolute loss by head-count (median); tilting the V moves the balance point to any quantile, e.g. a p99 latency model.",
+   "extra": "",
+   "source": "Regression & GLMs",
+   "reverse": false
+  },
+  {
+   "guid": "ttj-OB?I5E",
+   "type": "cloze",
+   "deck": "Quantitative Foundations::04 Causal Inference",
+   "tags": [
+    "quant::causal"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Explanations for an observed correlation between X and Y: {{c1::X causes Y}}; {{c2::Y causes X (reverse causation)}}; {{c3::a third variable Z causes both (confounding)}}; plus chance and selection effects.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Services with more monitoring have more incidents. Monitoring causes incidents? No: important services get both more monitoring and more scrutiny (confounder), and incidents lead to more monitoring (reverse).",
+   "source": "Causal Inference",
+   "reverse": false
+  },
+  {
+   "guid": "lR{-ZUXk5l",
+   "type": "basic",
+   "deck": "Quantitative Foundations::04 Causal Inference",
+   "tags": [
+    "quant::causal"
+   ],
+   "front": "How does randomisation deal with confounders?",
+   "back": "Random assignment breaks any link between confounders and treatment, so the remaining outcome difference is causal (in expectation).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Users who enable dark mode retain better. Confounder: engaged power users both enable dark mode and retain. Randomly forcing dark mode on for half of new users removes that link.",
+   "source": "Causal Inference",
+   "reverse": false
+  },
+  {
+   "guid": "OU[I0hr9[}",
+   "type": "basic",
+   "deck": "Quantitative Foundations::04 Causal Inference",
+   "tags": [
+    "quant::causal"
+   ],
+   "front": "Causal adjustment: should you adjust for a <b>confounder</b> \\(X\\leftarrow Z\\rightarrow Y\\)?",
+   "back": "Yes: it opens a spurious back-door path between X and Y.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Causal Inference",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::04 Causal Inference",
+   "tags": [
+    "quant::causal"
+   ],
+   "front": "Should you adjust for a <b>mediator</b> \\(X\\rightarrow M\\rightarrow Y\\)?",
+   "back": "Not if you want the total effect: adjusting blocks the part of the effect that flows through M.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Causal Inference",
+   "reverse": false
+  },
+  {
+   "guid": "d7:?3=@da)",
+   "type": "basic",
+   "deck": "Quantitative Foundations::04 Causal Inference",
+   "tags": [
+    "quant::causal"
+   ],
+   "front": "What is a <b>collider</b> (\\(X\\rightarrow C\\leftarrow Y\\)), and why must you not condition on it?",
+   "back": "A variable caused by both X and Y. Conditioning or selecting on it <b>creates</b> a spurious X–Y association (Berkson's paradox).",
+   "text": "",
+   "image": "",
+   "analogy": "Talent and looks are unrelated in the population, but among people who became actors (talent + looks above a bar) they look negatively correlated.",
+   "extra": "<b>Example:</b> Among hired candidates, coding-test score and interview charm are negatively correlated—because hiring required being strong in at least one. In the applicant pool they are unrelated.",
+   "source": "Causal Inference",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::04 Causal Inference",
+   "tags": [
+    "quant::causal"
+   ],
+   "front": "Confounder vs collider: what does adjusting for each do to a spurious association?",
+   "back": "Adjusting for a confounder <b>removes</b> a spurious association; adjusting for a collider <b>creates</b> one.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Causal Inference",
+   "reverse": false
+  },
+  {
+   "guid": "K~N!zQ86t~",
+   "type": "basic",
+   "deck": "Quantitative Foundations::04 Causal Inference",
+   "tags": [
+    "quant::causal"
+   ],
+   "front": "Selection bias vs survivorship bias?",
+   "back": "<b>Selection bias:</b> the sample is unrepresentative because of how it was chosen. <b>Survivorship bias:</b> you only see cases that made it through some filter.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> WWII bombers returned with bullet holes on wings and fuselage; the fix was to armor the engines—the places with no holes, because planes hit there never came back. Postmortems only cover incidents that got noticed.",
+   "source": "Causal Inference",
+   "reverse": false
+  },
+  {
+   "guid": "B`?J,&*wg3",
+   "type": "basic",
+   "deck": "Quantitative Foundations::04 Causal Inference",
+   "tags": [
+    "quant::causal"
+   ],
+   "front": "What is <b>Simpson's paradox</b>?",
+   "back": "A trend in every subgroup reverses when groups are pooled, because group membership is associated with both x and y (e.g. group sizes differ across the comparison).",
+   "text": "",
+   "image": "",
+   "analogy": "Several small clouds each tilting upward, stacked in a staircase that goes down: the pooled fit follows the staircase.",
+   "extra": "<b>Example:</b> Cluster A has a lower error rate than cluster B for both small requests and large requests. Yet A's overall error rate is higher, because A handles mostly large (error-prone) requests. Aggregates without stratification lie. Which slope is \"right\" is a causal question (confounder or collider?), not a statistical one.",
+   "source": "Causal Inference",
+   "reverse": false
+  },
+  {
+   "guid": "t.VYh>A#P-",
+   "type": "basic",
+   "deck": "Quantitative Foundations::04 Causal Inference",
+   "tags": [
+    "quant::causal"
+   ],
+   "front": "What is the counterfactual definition of a causal effect, and why is it unobservable?",
+   "back": "Effect on unit i = \\(Y_i(1)-Y_i(0)\\). Only one of the two outcomes ever happens: the <b>fundamental problem of causal inference</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Did the migration reduce cost? The counterfactual is the cost this quarter had you not migrated—which you never observe. Comparing to last quarter assumes nothing else changed.",
+   "source": "Causal Inference",
+   "reverse": false
+  },
+  {
+   "guid": "v;3w5GtwEF",
+   "type": "basic",
+   "deck": "Quantitative Foundations::04 Causal Inference",
+   "tags": [
+    "quant::causal"
+   ],
+   "front": "The naive treated-vs-control difference = ATE + what?",
+   "back": "Selection bias: \\(E[Y(0)\\mid T=1]-E[Y(0)\\mid T=0]\\). Randomisation makes treatment independent of potential outcomes, so this term is zero.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Causal Inference",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::04 Causal Inference",
+   "tags": [
+    "quant::causal"
+   ],
+   "front": "What must hold to identify the ATE from observational data?",
+   "back": "<b>Conditional ignorability</b> \\(T\\perp Y(t)\\mid X\\) (no unmeasured confounders) and <b>overlap</b> \\(0<P(T=1\\mid X)<1\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Causal Inference",
+   "reverse": false
+  },
+  {
+   "guid": "XN?Y=^?<",
+   "type": "basic",
+   "deck": "Quantitative Foundations::04 Causal Inference",
+   "tags": [
+    "quant::causal"
+   ],
+   "front": "What is a <b>propensity score</b>, and why is adjusting for it alone enough?",
+   "back": "\\(e(x)=P(T=1\\mid X=x)\\). If treatment is ignorable given X, it is ignorable given e(X): within a propensity stratum, treatment is as good as a coin flip.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Causal Inference",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::04 Causal Inference",
+   "tags": [
+    "quant::causal"
+   ],
+   "front": "How does inverse probability weighting use the propensity score, and where does it break?",
+   "back": "Weight treated units by 1/e and controls by 1/(1 − e). Weights explode near e = 0 or 1: regions without overlap, where the data can't speak.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Causal Inference",
+   "reverse": false
+  },
+  {
+   "guid": "l1uXu{>W7u",
+   "type": "basic",
+   "deck": "Quantitative Foundations::04 Causal Inference",
+   "tags": [
+    "quant::causal"
+   ],
+   "front": "<b>Difference-in-differences</b>: what assumption does it rely on?",
+   "back": "<b>Parallel trends</b>: absent treatment, treated and control groups would have moved in parallel.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Diff-in-diff: region EU got the new autoscaler, US did not. Compare EU's before/after change to US's before/after change, which nets out the global traffic trend.",
+   "source": "Causal Inference",
+   "reverse": false
+  },
+  {
+   "guid": "MSAQA]@d:@",
+   "type": "basic",
+   "deck": "Quantitative Foundations::04 Causal Inference",
+   "tags": [
+    "quant::causal"
+   ],
+   "front": "What problem do <b>instrumental variables</b> solve, and what must an instrument satisfy?",
+   "back": "A regressor correlated with the error (confounding, reverse causation, measurement error) makes OLS inconsistent. The instrument must be <b>relevant</b> (moves x) and <b>excluded</b> (affects y only through x).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Causal Inference",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::04 Causal Inference",
+   "tags": [
+    "quant::causal"
+   ],
+   "front": "What does Two-Stage Least Squares do geometrically?",
+   "back": "Projects x onto the instrument's span (the clean part, orthogonal to the error), then regresses y on that projection. A weak instrument leaves a tiny sliver: noisy and biased toward OLS.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Causal Inference",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::04 Causal Inference",
+   "tags": [
+    "quant::causal"
+   ],
+   "front": "<b>Regression discontinuity</b>: what assumption does it rely on?",
+   "back": "Units just above and just below a cutoff are comparable, so the jump in outcome at the cutoff is the causal effect.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Causal Inference",
+   "reverse": false
+  },
+  {
+   "guid": "n{E_9!.Q#q",
+   "type": "basic",
+   "deck": "Quantitative Foundations::04 Causal Inference",
+   "tags": [
+    "quant::causal"
+   ],
+   "front": "Why does \"we changed X and metric Y improved\" prove little?",
+   "back": "Before/after comparisons are confounded by everything else that changed (traffic, other deploys, seasonality) and by regression to the mean.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Causal Inference",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::04 Causal Inference",
+   "tags": [
+    "quant::causal"
+   ],
+   "front": "How can you strengthen a before/after causal claim?",
+   "back": "A concurrent control or randomisation, a dose–response pattern, or a reversal test: turn the change off on half the fleet and see whether Y degrades.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Latency improved after the JVM flag change—during the weekend traffic dip. Turn the flag off on half the fleet on Monday and compare.",
+   "source": "Causal Inference",
+   "reverse": false
+  },
+  {
+   "guid": "yA~8j6]CVl",
+   "type": "basic",
+   "deck": "Quantitative Foundations::04 Causal Inference",
+   "tags": [
+    "quant::causal"
+   ],
+   "front": "State the <b>omitted variable bias</b> formula and what bias requires.",
+   "back": "\\(E[\\hat\\beta_{\\text{short}}]=\\beta+\\gamma\\delta\\). Bias needs <b>both</b>: z affects y (γ ≠ 0) and z correlates with x (δ ≠ 0).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> the part of z parallel to x gets projected onto x and credited to it; only a z perpendicular to x falls harmlessly into the residual.",
+   "source": "Causal Inference",
+   "reverse": false
+  },
+  {
+   "guid": "QHgX^OO^oA",
+   "type": "cloze",
+   "deck": "Quantitative Foundations::05 Bayesian Reasoning",
+   "tags": [
+    "quant::bayes"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Bayes' theorem \\(P(H\\mid E)=\\dfrac{P(E\\mid H)\\,P(H)}{P(E)}\\): \\(P(H)\\) is the {{c1::prior}} (belief before evidence); \\(P(E\\mid H)\\) the {{c2::likelihood}} (how expected E is if H is true); \\(P(E)\\) the {{c3::evidence / marginal}} (how expected E is overall); \\(P(H\\mid E)\\) the {{c4::posterior}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> An alert fires (E). How likely is a real outage (H)? Depends on how often outages happen (prior), how reliably the alert fires during outages (likelihood), and how often the alert fires at all, including false alarms (evidence).",
+   "source": "Bayesian Reasoning",
+   "reverse": false
+  },
+  {
+   "guid": "s9Dj$kyv7d",
+   "type": "basic",
+   "deck": "Quantitative Foundations::05 Bayesian Reasoning",
+   "tags": [
+    "quant::bayes"
+   ],
+   "front": "Base-rate neglect: a 99%-accurate test for a disease 1 in 10,000 people have. You test positive. Roughly how likely is it you have it?",
+   "back": "About <b>1%</b>. Per million people: ~99 true positives vs ~9,999 false positives. An extreme prior dominates.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> An anomaly detector with a 1% false-positive rate on 100,000 daily requests produces ~1,000 false alarms a day. Even if it catches every real attack, most alerts are noise when real attacks are rare.",
+   "source": "Bayesian Reasoning",
+   "reverse": false
+  },
+  {
+   "guid": "zO{t[2bPd_",
+   "type": "basic",
+   "deck": "Quantitative Foundations::05 Bayesian Reasoning",
+   "tags": [
+    "quant::bayes"
+   ],
+   "front": "What is a <b>likelihood ratio</b>, and the odds form of Bayes?",
+   "back": "\\(LR=P(E\\mid H)/P(E\\mid\\neg H)\\); posterior odds = prior odds × LR. Evidence with LR ≈ 1 is uninformative, however dramatic it feels.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> 'The service was deployed yesterday' as evidence for 'the deploy caused the incident': if deploys happen daily, P(deployed yesterday) is ~1 under both hypotheses, so LR ≈ 1 and it barely moves you.",
+   "source": "Bayesian Reasoning",
+   "reverse": false
+  },
+  {
+   "guid": "L(KXVFL(o,",
+   "type": "basic",
+   "deck": "Quantitative Foundations::05 Bayesian Reasoning",
+   "tags": [
+    "quant::bayes"
+   ],
+   "front": "Why is \"extraordinary claims require extraordinary evidence\" just Bayes?",
+   "back": "A tiny prior needs a huge likelihood ratio to reach a high posterior; ordinary evidence (LR 2–10) can't lift a 1-in-a-million prior to credible.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> A paper claims a 10× speedup from a trivial config change. Prior: such free wins are rare. You need strong, reproducible evidence, not one benchmark chart.",
+   "source": "Bayesian Reasoning",
+   "reverse": false
+  },
+  {
+   "guid": "j6)!%{u&Pr",
+   "type": "basic",
+   "deck": "Quantitative Foundations::05 Bayesian Reasoning",
+   "tags": [
+    "quant::bayes"
+   ],
+   "front": "Geometrically, what does a Bayesian update do?",
+   "back": "Multiplies prior and likelihood pointwise over parameter space and renormalises: the posterior is high only where both are high (log-posterior = log-likelihood + log-prior + const).",
+   "text": "",
+   "image": "<img src=\"bayes_update.svg\">",
+   "analogy": "",
+   "extra": "",
+   "source": "Bayesian Reasoning",
+   "reverse": false
+  },
+  {
+   "guid": "sQVBXvLA./",
+   "type": "basic",
+   "deck": "Quantitative Foundations::05 Bayesian Reasoning",
+   "tags": [
+    "quant::bayes"
+   ],
+   "front": "Normal prior, normal likelihood (known variance): what are the posterior precision and mean?",
+   "back": "Precisions add: \\(1/\\tau_n^2=1/\\tau_0^2+n/\\sigma^2\\). The mean is the precision-weighted average of the prior mean \\(\\mu_0\\) and the data mean \\(\\bar x\\), nearer the sharper one.",
+   "text": "",
+   "image": "",
+   "analogy": "A centre of mass: weights at the prior mean and the data mean, with masses equal to their precisions. As n grows the data's mass dominates and the prior is forgotten.",
+   "extra": "",
+   "source": "Bayesian Reasoning",
+   "reverse": false
+  },
+  {
+   "guid": "NfW6_~dH&_",
+   "type": "basic",
+   "deck": "Quantitative Foundations::05 Bayesian Reasoning",
+   "tags": [
+    "quant::bayes"
+   ],
+   "front": "What is a <b>conjugate prior</b>? Give the Beta-Binomial update.",
+   "back": "A prior family closed under the likelihood's update. Beta(a, b) + k successes in n trials → Beta(a + k, b + n − k).",
+   "text": "",
+   "image": "",
+   "analogy": "The hyperparameters are pseudo-counts: the prior acts like a + b imaginary earlier trials.",
+   "extra": "",
+   "source": "Bayesian Reasoning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::05 Bayesian Reasoning",
+   "tags": [
+    "quant::bayes"
+   ],
+   "front": "Beta-Binomial: why is the posterior mean a compromise?",
+   "back": "\\(\\frac{a+k}{a+b+n}\\) is a weighted average of the prior mean \\(\\frac{a}{a+b}\\) and the sample proportion \\(\\frac kn\\), with weights a + b and n.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Bayesian Reasoning",
+   "reverse": false
+  },
+  {
+   "guid": "rUd.:JF;Lc",
+   "type": "basic",
+   "deck": "Quantitative Foundations::05 Bayesian Reasoning",
+   "tags": [
+    "quant::bayes"
+   ],
+   "front": "Posterior predictive vs plug-in prediction?",
+   "back": "\\(p(\\tilde x\\mid x)=\\int p(\\tilde x\\mid\\theta)\\,p(\\theta\\mid x)\\,d\\theta\\) averages over parameter uncertainty, so it is wider than plugging in \\(\\hat\\theta\\) (Normal: variance \\(\\sigma^2+\\tau_n^2\\)).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Aleatoric noise plus epistemic (parameter) uncertainty; only the second shrinks with data.",
+   "source": "Bayesian Reasoning",
+   "reverse": false
+  },
+  {
+   "guid": "k8~Z4>s<1G",
+   "type": "basic",
+   "deck": "Quantitative Foundations::05 Bayesian Reasoning",
+   "tags": [
+    "quant::bayes"
+   ],
+   "front": "How does the <b>marginal likelihood</b> (evidence) implement an automatic Occam's razor?",
+   "back": "\\(p(x\\mid M)\\) is the probability the model gave the data before seeing it. A flexible model spreads its mass over many possible datasets; a simple model that fits concentrates its mass and wins.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Laplace view: evidence ≈ best-fit likelihood × (posterior volume / prior volume); the second factor is the Occam penalty.",
+   "source": "Bayesian Reasoning",
+   "reverse": false
+  },
+  {
+   "guid": "HkE|<eS1As",
+   "type": "basic",
+   "deck": "Quantitative Foundations::05 Bayesian Reasoning",
+   "tags": [
+    "quant::bayes"
+   ],
+   "front": "What is a <b>Bayes factor</b>?",
+   "back": "\\(BF_{10}=p(x\\mid M_1)/p(x\\mid M_0)\\); posterior odds = Bayes factor × prior odds.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Bayesian Reasoning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::05 Bayesian Reasoning",
+   "tags": [
+    "quant::bayes"
+   ],
+   "front": "What is the <b>Jeffreys–Lindley paradox</b>?",
+   "back": "With a point null and a diffuse prior under the alternative, a small p-value can coexist with a Bayes factor strongly favouring the null, increasingly so as n grows or the prior widens.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "A very wide prior wastes its mass far from the data. Unlike posteriors, Bayes factors never forget the prior.",
+   "source": "Bayesian Reasoning",
+   "reverse": false
+  },
+  {
+   "guid": "c?)8jIR/K.",
+   "type": "basic",
+   "deck": "Quantitative Foundations::05 Bayesian Reasoning",
+   "tags": [
+    "quant::bayes"
+   ],
+   "front": "What does the <b>Bernstein–von Mises</b> theorem say?",
+   "back": "Under regularity (fixed dimension, prior positive at the truth, correct model) the posterior → \\(N(\\hat\\theta_{MLE},I(\\theta_0)^{-1}/n)\\): the prior washes out and credible sets become valid confidence sets.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Fails when dimension grows with n, in nonparametric models, at boundaries, and under misspecification.",
+   "source": "Bayesian Reasoning",
+   "reverse": false
+  },
+  {
+   "guid": "d5Vv5ZNm(Q",
+   "type": "cloze",
+   "deck": "Quantitative Foundations::05 Bayesian Reasoning",
+   "tags": [
+    "quant::bayes"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Bayes point estimates: the posterior mean minimises {{c1::squared error}}; the median minimises {{c2::absolute error}}; the mode (MAP) minimises {{c3::0–1 loss}} (in the limit).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Bayesian Reasoning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::05 Bayesian Reasoning",
+   "tags": [
+    "quant::bayes"
+   ],
+   "front": "What is the conceptual weakness of the MAP estimate?",
+   "back": "It is not invariant to reparameterisation (densities transform with a Jacobian, so the peak moves when you change coordinates), and it ignores posterior mass.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Mass is real; height is a coordinate artefact. In high dimensions the mode can sit where there is negligible mass.",
+   "source": "Bayesian Reasoning",
+   "reverse": false
+  },
+  {
+   "guid": "r+HIz,OgBh",
+   "type": "basic",
+   "deck": "Quantitative Foundations::05 Bayesian Reasoning",
+   "tags": [
+    "quant::bayes"
+   ],
+   "front": "What is the <b>Jeffreys prior</b>, and its key property?",
+   "back": "\\(p(\\theta)\\propto\\sqrt{\\det I(\\theta)}\\): invariant under reparameterisation, i.e. uniform on the statistical manifold measured with the Fisher metric. Bernoulli → Beta(½, ½).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Bayesian Reasoning",
+   "reverse": false
+  },
+  {
+   "guid": "Ill@fRF+<-",
+   "type": "basic",
+   "deck": "Quantitative Foundations::05 Bayesian Reasoning",
+   "tags": [
+    "quant::bayes"
+   ],
+   "front": "What does <b>de Finetti's theorem</b> say?",
+   "back": "An infinite exchangeable (order-invariant) sequence is a mixture of i.i.d. sequences: if order doesn't matter to you, you are acting as if there is an unknown parameter with a prior.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Bayesian Reasoning",
+   "reverse": false
+  },
+  {
+   "guid": "kdwZEB[t>O",
+   "type": "basic",
+   "deck": "Quantitative Foundations::05 Bayesian Reasoning",
+   "tags": [
+    "quant::bayes"
+   ],
+   "front": "What is <b>empirical Bayes</b>?",
+   "back": "Estimate the prior's hyperparameters from the data by maximising the marginal likelihood, then compute posteriors as usual. Units borrow strength from each other; it understates uncertainty.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "James–Stein is empirical Bayes for the Normal-means problem.",
+   "source": "Bayesian Reasoning",
+   "reverse": false
+  },
+  {
+   "guid": "D^sVEhvgIr",
+   "type": "basic",
+   "deck": "Quantitative Foundations::05 Bayesian Reasoning",
+   "tags": [
+    "quant::bayes"
+   ],
+   "front": "What is the <b>Bayes-optimal decision</b>?",
+   "back": "The action minimising posterior expected loss \\(\\int L(\\theta,a)\\,p(\\theta\\mid x)\\,d\\theta\\). Inference and decision separate: one posterior serves any loss.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "With asymmetric loss (overstock cheap, stockout costly) the optimal action is a quantile, not the mean.",
+   "source": "Bayesian Reasoning",
+   "reverse": false
+  },
+  {
+   "guid": "B/}?~Sxj)n",
+   "type": "basic",
+   "deck": "Quantitative Foundations::05 Bayesian Reasoning",
+   "tags": [
+    "quant::bayes"
+   ],
+   "front": "Prior vs posterior predictive checks?",
+   "back": "<b>Prior predictive:</b> simulate data from the prior alone to catch priors implying absurd observables. <b>Posterior predictive:</b> simulate replicated data from the fit and compare a test statistic with the observed one to reveal misfit.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Bayesian Reasoning",
+   "reverse": false
+  },
+  {
+   "guid": "MvSQV^K!1M",
+   "type": "basic",
+   "deck": "Quantitative Foundations::05 Bayesian Reasoning",
+   "tags": [
+    "quant::bayes"
+   ],
+   "front": "Why does the <b>typical set</b> matter for Bayesian computation?",
+   "back": "In high dimensions almost all posterior mass lies in a thin shell away from the mode, so expectations come from that shell: MAP optimisation finds an atypical point, and samplers must explore the shell.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Bayesian Reasoning",
+   "reverse": false
+  },
+  {
+   "guid": "rsbi;fy.2r",
+   "type": "basic",
+   "deck": "Quantitative Foundations::05 Bayesian Reasoning",
+   "tags": [
+    "quant::bayes"
+   ],
+   "front": "What is the <b>Laplace approximation</b>?",
+   "back": "A Gaussian at the MAP with covariance = inverse Hessian of the negative log-posterior: \\(N(\\hat\\theta_{MAP},H^{-1})\\). Purely local; poor for skewed, multimodal or boundary posteriors.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Bayesian Reasoning",
+   "reverse": false
+  },
+  {
+   "guid": "sewVJ2uYKO",
+   "type": "basic",
+   "deck": "Quantitative Foundations::05 Bayesian Reasoning",
+   "tags": [
+    "quant::bayes"
+   ],
+   "front": "How does <b>Metropolis–Hastings</b> work?",
+   "back": "Propose θ′ from q; accept with probability \\(\\min\\!\\big(1,\\frac{p(\\theta')q(\\theta\\mid\\theta')}{p(\\theta)q(\\theta'\\mid\\theta)}\\big)\\), else stay. Only density ratios are needed, so the normaliser cancels.",
+   "text": "",
+   "image": "",
+   "analogy": "A hiker who always takes uphill steps and takes downhill steps with probability equal to the height ratio: time spent at each spot becomes proportional to its height.",
+   "extra": "",
+   "source": "Bayesian Reasoning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::05 Bayesian Reasoning",
+   "tags": [
+    "quant::bayes"
+   ],
+   "front": "Why does Metropolis–Hastings target the right distribution?",
+   "back": "The acceptance rule enforces <b>detailed balance</b> \\(p(\\theta)T(\\theta\\to\\theta')=p(\\theta')T(\\theta'\\to\\theta)\\), which makes p the stationary distribution.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Bayesian Reasoning",
+   "reverse": false
+  },
+  {
+   "guid": "pb`m1SUuhd",
+   "type": "basic",
+   "deck": "Quantitative Foundations::05 Bayesian Reasoning",
+   "tags": [
+    "quant::bayes"
+   ],
+   "front": "What is <b>Gibbs sampling</b>, and when does it mix badly?",
+   "back": "Draw each coordinate (or block) from its full conditional in turn: Metropolis–Hastings with acceptance 1. Mixes badly when parameters are strongly correlated: axis-aligned steps crawl along a diagonal ridge.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Bayesian Reasoning",
+   "reverse": false
+  },
+  {
+   "guid": "hR?X(+vU$-",
+   "type": "basic",
+   "deck": "Quantitative Foundations::05 Bayesian Reasoning",
+   "tags": [
+    "quant::bayes"
+   ],
+   "front": "How does <b>Hamiltonian Monte Carlo</b> work, and why does it scale?",
+   "back": "Add a momentum variable, simulate Hamiltonian dynamics with the leapfrog integrator (using \\(\\nabla\\log p\\)), then Metropolis-accept. Energy is nearly conserved, so distant proposals are accepted.",
+   "text": "",
+   "image": "",
+   "analogy": "A frictionless puck flicked across the negative-log-posterior surface: it glides along the valley's contours instead of stumbling randomly.",
+   "extra": "Cost per independent draw ~d^(5/4) vs d² for random walk. NUTS picks trajectory length automatically.",
+   "source": "Bayesian Reasoning",
+   "reverse": false
+  },
+  {
+   "guid": "GRJ=PYkiHt",
+   "type": "basic",
+   "deck": "Quantitative Foundations::05 Bayesian Reasoning",
+   "tags": [
+    "quant::bayes"
+   ],
+   "front": "What is <b>Neal's funnel</b>?",
+   "back": "In hierarchical models (\\(\\alpha_j\\sim N(\\mu,\\tau)\\)), small τ squeezes the α's together and large τ frees them: curvature varies by orders of magnitude, no single step size works, and HMC reports divergences.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Bayesian Reasoning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::05 Bayesian Reasoning",
+   "tags": [
+    "quant::bayes"
+   ],
+   "front": "How does the <b>non-centred</b> parameterisation fix the funnel, and when should you use it?",
+   "back": "Sample \\(z_j\\sim N(0,1)\\) and set \\(\\alpha_j=\\mu+\\tau z_j\\): the funnel straightens into a near-isotropic blob. Use it when data per group is weak.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Bayesian Reasoning",
+   "reverse": false
+  },
+  {
+   "guid": "MEXU@UR}?m",
+   "type": "cloze",
+   "deck": "Quantitative Foundations::05 Bayesian Reasoning",
+   "tags": [
+    "quant::bayes"
+   ],
+   "front": "",
+   "back": "",
+   "text": "MCMC diagnostics: {{c1::\\(\\hat R\\)}} compares between- and within-chain variance (want &lt; 1.01); {{c2::effective sample size (ESS)}} counts equivalent independent draws; {{c3::divergences}} (HMC) mean estimates are biased, not merely noisy.",
+   "image": "",
+   "analogy": "",
+   "extra": "R-hat can only detect non-convergence, never prove convergence.",
+   "source": "Bayesian Reasoning",
+   "reverse": false
+  },
+  {
+   "guid": "yyr%1$Pg4U",
+   "type": "basic",
+   "deck": "Quantitative Foundations::05 Bayesian Reasoning",
+   "tags": [
+    "quant::bayes"
+   ],
+   "front": "What does <b>variational inference</b> optimise?",
+   "back": "It picks q from a tractable family to minimise \\(\\mathrm{KL}(q\\|p(\\theta\\mid x))\\), by maximising the ELBO, since \\(\\log p(x)=\\mathrm{ELBO}(q)+\\mathrm{KL}(q\\|p(\\theta\\mid x))\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Fast and scalable, but biased by the family's shape; mean-field typically underestimates variance.",
+   "source": "Bayesian Reasoning",
+   "reverse": false
+  },
+  {
+   "guid": "JB{Y28Ql%q",
+   "type": "basic",
+   "deck": "Quantitative Foundations::05 Bayesian Reasoning",
+   "tags": [
+    "quant::bayes"
+   ],
+   "front": "Reverse KL(q‖p) vs forward KL(p‖q) when fitting a unimodal q to a multimodal p?",
+   "back": "<b>Reverse</b> (variational inference): mode-seeking, locks onto one mode, too narrow. <b>Forward</b> (maximum likelihood, EP): mass-covering, straddles all modes and puts mass in the empty valley between them.",
+   "text": "",
+   "image": "<img src=\"kl_modes.svg\">",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> the expectation is under the first argument. Under q you never look where q is zero, so ignoring a mode is free; under p you are inspected everywhere p lives.",
+   "source": "Bayesian Reasoning",
+   "reverse": false
+  },
+  {
+   "guid": "dJyoB7K{<Y",
+   "type": "basic",
+   "deck": "Quantitative Foundations::05 Bayesian Reasoning",
+   "tags": [
+    "quant::bayes"
+   ],
+   "front": "What is a <b>Gaussian Process</b>?",
+   "back": "A distribution over functions in which any finite set of function values is jointly Gaussian, specified by a mean function and a kernel \\(k(x,x')\\) that says how strongly nearby values are tied.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Bayesian Reasoning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::05 Bayesian Reasoning",
+   "tags": [
+    "quant::bayes"
+   ],
+   "front": "How does GP regression predict, and what does it cost?",
+   "back": "By Gaussian conditioning on the observed points: mean \\(k_*^\\top(K+\\sigma^2I)^{-1}y\\); the variance pinches near the data and returns to the prior far away. Cost \\(O(n^3)\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Bayesian Reasoning",
+   "reverse": false
+  },
+  {
+   "guid": "Ns}};3QPqb",
+   "type": "basic",
+   "deck": "Quantitative Foundations::05 Bayesian Reasoning",
+   "tags": [
+    "quant::bayes"
+   ],
+   "front": "How are Bayesian linear regression, ridge, kernel ridge and GP regression related?",
+   "back": "Bayesian linear regression with prior \\(N(0,\\tau^2I)\\) has posterior mean = ridge (λ = σ²/τ²). Swapping x for features φ(x) induces a kernel; the GP posterior mean = kernel ridge, plus a predictive variance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Bayesian Reasoning",
+   "reverse": false
+  },
+  {
+   "guid": "tonT>l:f(!",
+   "type": "basic",
+   "deck": "Quantitative Foundations::05 Bayesian Reasoning",
+   "tags": [
+    "quant::bayes"
+   ],
+   "front": "How does <b>importance sampling</b> work?",
+   "back": "\\(E_p[f]=E_q[f\\,p/q]\\): sample from q and reweight by \\(w=p/q\\). q needs heavier tails than p.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Bayesian Reasoning",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Quantitative Foundations::05 Bayesian Reasoning",
+   "tags": [
+    "quant::bayes"
+   ],
+   "front": "Why does importance sampling break down in high dimensions?",
+   "back": "Weight variance grows exponentially with d: the typical sets of p and q barely overlap, so one sample carries nearly all the weight.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Bayesian Reasoning",
    "reverse": false
   }
  ]
