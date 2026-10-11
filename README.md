@@ -13,7 +13,7 @@ Anki decks for a cloud / Kubernetes platform and enterprise architect, consolida
 | Decks | 44 | 32 |
 | Notes | 4,506 | 4,728 |
 | Cards | 4,684 | 6,089 |
-| Notes with an analogy | ~70 | 800 |
+| Notes with an analogy | 126 | 800 |
 | Answers > 60 words | many (avg. note 300–950 chars) | 0 (validator-enforced) |
 
 There are more cards because long, multi-part cards were split into atomic ones (minimum information principle). Each card now takes seconds to review instead of a paragraph.
