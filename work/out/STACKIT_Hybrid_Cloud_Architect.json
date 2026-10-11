@@ -454,7 +454,7 @@
    "back": "A scheduled shutdown of the cluster (control plane and workers scaled to zero), e.g. dev/test clusters off nights and weekends.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "Switching off office lights and heating at weekends: big savings, but Monday morning needs a moment to warm up.",
    "extra": "",
    "source": "ske · cost",
    "reverse": false
@@ -559,7 +559,7 @@
    "back": "Client-certificate based, valid up to 180 days, with coarse revocation: rotating credentials invalidates <i>all</i> admin kubeconfigs and ServiceAccount tokens. Store it offline.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "A master key without per-copy revocation: change the lock and every copy — plus every ServiceAccount key — stops working.",
    "extra": "",
    "source": "ske · identity · tradeoff",
    "reverse": false
@@ -685,7 +685,7 @@
    "back": "Enable <b>PROXY protocol v2</b> via the <code>lb.stackit.cloud/...</code> annotation (the backend must speak it).",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "A forwarding envelope that keeps the original sender's return address on the letter.",
    "extra": "Source-IP session persistence is also available by annotation.",
    "source": "ske · networking · hybrid",
    "reverse": false
@@ -883,7 +883,7 @@
    "back": "",
    "text": "Managed SKE still leaves you the day-2 stack: {{c1::ingress controller, cert-manager, external-dns}}; {{c2::GitOps agent and policy engine}}; {{c3::External Secrets Operator}}; {{c4::observability agents (Alloy/OTel) and Velero}}; plus registry credentials, image-signing policy, NetworkPolicies and quotas.",
    "image": "",
-   "analogy": "",
+   "analogy": "SKE hands you a serviced building shell; furniture, alarm system and locks are still your job.",
    "extra": "",
    "source": "ske · platform · fleet",
    "reverse": false
@@ -1352,7 +1352,7 @@
    "back": "<b>+</b> HA plans, automated backups/patching, survives cluster rebuilds.<br><b>−</b> version/extension lag, less tuning control, per-instance cost, network hop from pods.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "A serviced apartment vs owning a house: less control, but someone else fixes the boiler.",
    "extra": "",
    "source": "data · tradeoff · ske",
    "reverse": false
@@ -1441,7 +1441,7 @@
    "back": "No. It validates the JWT signature locally against the issuer's published keys (JWKS).",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "A bouncer checking the hologram on an ID card instead of phoning the issuing office for every guest.",
    "extra": "",
    "source": "identity · oidc · pingfederate",
    "reverse": false
@@ -1605,7 +1605,7 @@
    "back": "A sealed <b>admin kubeconfig</b> per cluster (≤ 180-day cert) in an offline/escrowed store with dual control and calendared renewal — or STACKIT CLI login by a platform owner (depends on STACKIT IAM, not AD).",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "A fire axe behind glass: always there when the normal doors (SSO) fail, and it sets off an alarm when used.",
    "extra": "",
    "source": "identity · operations · security",
    "reverse": false
@@ -1769,7 +1769,7 @@
    "back": "Existing Secrets persist, but <b>rotation and new secrets stall</b>. Set sane refresh intervals and alert on sync failures.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "A pantry: when the supermarket (Vault) is closed you still eat from stock, but nothing new comes in.",
    "extra": "",
    "source": "secrets · multicluster · operations",
    "reverse": false
@@ -2225,7 +2225,7 @@
    "back": "STACKIT VPN does <b>no NAT</b>, so ranges must not overlap — and renumbering later is brutal.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "Two cities merging their street maps: if both have a \"Main Street 1\", mail can't be delivered without renaming streets.",
    "extra": "",
    "source": "hybrid · networking · ipam",
    "reverse": false
@@ -2278,7 +2278,7 @@
    "back": "",
    "text": "Hybrid split-horizon DNS: {{c1::corporate zones}} stay authoritative on on-prem AD DNS; {{c2::cloud zones}} live in STACKIT DNS, fed by external-dns; clusters resolve corp names via {{c3::CoreDNS stub-domain forwarders}} over the VPN; on-prem resolves cloud-internal names via {{c4::conditional forwarders}} on AD DNS.",
    "image": "",
-   "analogy": "",
+   "analogy": "An internal company phonebook and a public directory: the answer depends on who is asking.",
    "extra": "",
    "source": "hybrid · dns",
    "reverse": false
@@ -2423,7 +2423,7 @@
    "back": "Harbor <b>push-replication</b> to an in-region registry (STACKIT Container Registry or a Harbor in STACKIT); clusters pull locally; link outages only delay <i>new</i> images.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "Stocking a local warehouse instead of shipping every order from headquarters.",
    "extra": "Always pin digests, pre-pull critical images, scan at the source and enforce signatures in-cluster.",
    "source": "hybrid · registry · tradeoff · harbor",
    "reverse": false
@@ -2606,7 +2606,7 @@
    "back": "Per-cluster agents (Grafana Alloy / OTel Collector) <b>remote-write outbound</b> — no inbound scraping across the WAN.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "Branch offices mail their reports to HQ instead of HQ phoning every branch.",
    "extra": "",
    "source": "hybrid · observability · tradeoff",
    "reverse": false
@@ -2714,7 +2714,7 @@
    "back": "<b>+</b> single inspection/policy point, SIEM-friendly.<br><b>−</b> eats VPN bandwidth, adds latency, and the proxy becomes a fleet-wide SPOF.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "Routing every delivery van through headquarters' inspection gate, even when the customer is next door.",
    "extra": "",
    "source": "hybrid · security · tradeoff",
    "reverse": false
@@ -2804,7 +2804,7 @@
    "back": "The rebuild-from-scratch time: desired state from Git + secrets store + backups.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "A house rebuilt from blueprints (Git), a key safe (secrets) and stored furniture (backups): the rebuild time is your real recovery time.",
    "extra": "",
    "source": "hybrid · dr · backup",
    "reverse": false

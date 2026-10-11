@@ -30,7 +30,7 @@
    "back": "<b>Push:</b> the CI pipeline holds cluster credentials and applies changes.<br><b>Pull:</b> an in-cluster agent pulls from Git/OCI; credentials never leave the cluster, it only needs read access to the source.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "Push hands a courier the keys to your house; pull means you collect parcels yourself, so nobody else holds a key.",
    "extra": "<b>Bonus of pull:</b> the agent keeps correcting drift continuously.",
    "source": "GitOps · principles",
    "reverse": false
@@ -62,7 +62,7 @@
    "back": "<b>Encrypted in Git:</b> Sealed Secrets, SOPS.<br><b>Reference in Git:</b> External Secrets Operator, Secrets Store CSI driver — Git holds only a pointer to Vault / cloud KMS.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "Encrypted-in-Git is a locked safe kept in the repo; reference-in-Git is a claim ticket pointing to a safe kept elsewhere.",
    "extra": "",
    "source": "GitOps · principles",
    "reverse": false
@@ -142,7 +142,7 @@
    "back": "<b>Sync:</b> does live state match Git (Synced / OutOfSync)?<br><b>Health:</b> is the app actually working (Healthy, Progressing, Degraded, Missing...)?",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "Sync asks \"is the furniture where the floor plan says?\"; health asks \"do the lights and water actually work?\"",
    "extra": "Health comes from built-in or custom Lua health checks.",
    "source": "Argo CD",
    "reverse": false
@@ -174,7 +174,7 @@
    "back": "Phases run PreSync → Sync → PostSync (SyncFail on failure). Within a phase, <code>argocd.argoproj.io/sync-wave</code> orders resources (lowest first, may be negative); Argo waits for health between waves.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "A stage crew: set up (PreSync), perform (Sync), clean up (PostSync); waves are the order crews go on stage, each waiting until the previous one is ready.",
    "extra": "",
    "source": "Argo CD",
    "reverse": false
@@ -366,7 +366,7 @@
    "back": "<b>Hub:</b> single pane of glass and central RBAC, but needs network access + credentials for every cluster (blast radius, scale bottleneck).<br><b>Per-cluster:</b> isolation and pull-only networking, but N instances to run.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "One central air-traffic tower for many airports vs a tower at every airport.",
    "extra": "",
    "source": "Argo CD",
    "reverse": false
@@ -398,7 +398,7 @@
    "back": "<b>Refresh:</b> re-compare using cached manifests (checks the Git revision).<br><b>Hard refresh:</b> invalidates the repo-server manifest cache and re-renders.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "Refresh re-checks the cached printout against the latest version; hard refresh throws the printout away and reprints.",
    "extra": "",
    "source": "Argo CD",
    "reverse": false
@@ -526,7 +526,7 @@
    "back": "<b>Flux Kustomization</b> (<code>kustomize.toolkit.fluxcd.io</code>): tells kustomize-controller which path from which source to build and apply, with interval, prune, health checks.<br><b>kustomization.yaml</b>: the Kustomize build config itself (Flux generates one if absent).",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "kustomization.yaml is the recipe; the Flux Kustomization is the kitchen order saying which recipe to cook, how often, and to clear away leftovers.",
    "extra": "",
    "source": "Flux",
    "reverse": false
@@ -814,7 +814,7 @@
    "back": "<b>Declarative:</b> describe the end state (Terraform, CloudFormation, Kubernetes manifests); the tool computes the diff.<br><b>Imperative:</b> describe the steps (shell scripts, SDK scripts, many Ansible playbooks).",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "Declarative gives the taxi driver the address; imperative gives turn-by-turn directions.",
    "extra": "",
    "source": "IaC · fundamentals",
    "reverse": false
@@ -830,7 +830,7 @@
    "back": "Applying the same configuration N times gives the same result as applying it once. It makes retries, re-runs and continuous reconciliation safe.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "An elevator call button: pressing it five times still calls one elevator.",
    "extra": "<b>In Ansible:</b> modules check current state and only act (report <code>changed</code>) when it differs from the desired state.",
    "source": "IaC · fundamentals",
    "reverse": false
@@ -942,7 +942,7 @@
    "back": "A mapping from config resource addresses to real-world object IDs, plus cached attributes and dependency data. Needed to know what Terraform manages, compute diffs and order destroys.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "Terraform's inventory ledger: without it Terraform can't tell the objects it built from ones that merely look similar.",
    "extra": "",
    "source": "Terraform",
    "reverse": false
@@ -974,7 +974,7 @@
    "back": "So two concurrent <code>apply</code> runs can't race and corrupt the state or make conflicting changes.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "A \"room occupied\" sign: only one apply may be inside editing the ledger at a time.",
    "extra": "",
    "source": "Terraform",
    "reverse": false
@@ -1070,7 +1070,7 @@
    "back": "It applies a partial graph: dependent changes are skipped and state ends up inconsistent with the config. Only for exceptional recovery.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "Renovating one wall without checking the structural plan: the building record no longer matches the building.",
    "extra": "",
    "source": "Terraform",
    "reverse": false
@@ -1182,7 +1182,7 @@
    "back": "<b>Provisioning</b> creates infrastructure (Terraform, CloudFormation).<br><b>Configuration management</b> configures software on it (Ansible, Puppet, Chef).",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "Provisioning builds the house; configuration management furnishes and maintains it.",
    "extra": "Ansible is agentless and push-based; Puppet/Chef classically run agents that pull.",
    "source": "IaC · fundamentals",
    "reverse": false
@@ -1246,7 +1246,7 @@
    "back": "Only when notified by a task that reported a change — once, at the end of the play (e.g. restart a service after its config changed).",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "A \"restart required\" flag: any change can raise it, and it is acted on once at the end.",
    "extra": "",
    "source": "Ansible",
    "reverse": false
@@ -1550,7 +1550,7 @@
    "back": "",
    "text": "Helm terms: a {{c1::chart}} is a package of templates + default values; a {{c2::release}} is an installed instance of a chart in a namespace; a {{c3::revision}} is a numbered version of a release (each upgrade/rollback adds one); a {{c4::repository}} publishes charts (HTTP index or OCI registry).",
    "image": "",
-   "analogy": "",
+   "analogy": "Chart = recipe; release = a dish cooked from it in one kitchen (namespace); revision = each re-cook with changes.",
    "extra": "",
    "source": "Helm",
    "reverse": false
@@ -1614,7 +1614,7 @@
    "back": "Old manifest, live state and new manifest. Manual live changes that conflict with the new chart are overwritten; unrelated live fields (e.g. injected sidecars) are preserved.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "An editor merging your redline into a document someone else also annotated: your changes win where they clash; untouched annotations survive.",
    "extra": "",
    "source": "Helm",
    "reverse": false
@@ -1742,7 +1742,7 @@
    "back": "No. It creates a <b>new</b> revision whose content equals the target revision.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "Like <code>git revert</code>: history moves forward with a new commit that restores old content.",
    "extra": "",
    "source": "Helm",
    "reverse": false
@@ -1790,7 +1790,7 @@
    "back": "A chart with <code>type: library</code> that provides only named templates for reuse; it cannot be installed on its own.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "A header file: shared definitions you include, never run on their own.",
    "extra": "",
    "source": "Helm",
    "reverse": false
@@ -2030,7 +2030,7 @@
    "back": "<code>generation</code>: increments only on spec changes (with status subresource).<br><code>resourceVersion</code>: opaque, changes on every write; used for optimistic concurrency and watches.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "generation is the edition number of the order form (changes only when the order changes); resourceVersion is a timestamp stamped on every touch, even a sticky note.",
    "extra": "",
    "source": "Operators",
    "reverse": false
@@ -2062,7 +2062,7 @@
    "back": "A finalizer string blocks deletion: deleting sets <code>deletionTimestamp</code>, the controller does external cleanup (e.g. deletes the cloud DB), then removes its finalizer so the object goes away.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "A \"do not discard until signed off\" sticker: the object can't be thrown away until the controller removes its sticker after cleanup.",
    "extra": "",
    "source": "Operators",
    "reverse": false
@@ -2078,7 +2078,7 @@
    "back": "The garbage collector deletes dependents when their owner is deleted. Owner must be in the same namespace (or cluster-scoped); for cross-namespace or external resources use finalizers.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "Delete the parent folder and the garbage collector clears out everything filed inside it.",
    "extra": "",
    "source": "Operators",
    "reverse": false
@@ -2110,7 +2110,7 @@
    "back": "Leader election via a <code>coordination.k8s.io</code> Lease: only the leader runs the controllers.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "A talking stick: only the Lease holder reconciles; the others grab it if the holder disappears.",
    "extra": "",
    "source": "Operators",
    "reverse": false
@@ -2318,7 +2318,7 @@
    "back": "The smallest platform that solves developers' most painful problems, grown iteratively from real usage instead of built all-encompassing up front.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "A minimum viable product for internal customers: ship the smallest thing that removes the biggest pain, then grow it.",
    "extra": "Can be as small as a wiki page of documented standards and services.",
    "source": "IDP · platform as a product",
    "reverse": false
@@ -2494,7 +2494,7 @@
    "back": "The system of record for the software estate: YAML entities tracking ownership, relationships and lifecycle of services, APIs, libraries and resources.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "A phone book plus org chart for software: who owns what, and what depends on what.",
    "extra": "",
    "source": "IDP · Backstage",
    "reverse": false
@@ -2670,7 +2670,7 @@
    "back": "A CNCF Sandbox, platform-agnostic workload specification: a developer describes a workload's runtime needs once in <code>score.yaml</code>, independent of the target platform.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "A universal plug spec: the workload declares the plug it needs, and each environment supplies a matching socket.",
    "extra": "",
    "source": "IDP · Score/Humanitec",
    "reverse": false
@@ -2830,7 +2830,7 @@
    "back": "",
    "text": "Kyverno rule types: {{c1::validate}} accepts/rejects resources; {{c2::mutate}} patches resources before they are persisted; {{c3::generate}} creates companion resources (e.g. a default NetworkPolicy per namespace).",
    "image": "",
-   "analogy": "",
+   "analogy": "validate is the bouncer, mutate the tailor adjusting your outfit at the door, generate the concierge handing out a welcome pack.",
    "extra": "Plus <code>verifyImages</code> for signature/attestation checks.",
    "source": "Policy as code · Kyverno",
    "reverse": false
@@ -3086,7 +3086,7 @@
    "back": "Sigstore's transparency log: an append-only, verifiable ledger of signing events, so anyone can audit when and by whom an artifact was signed.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "A public notary's logbook: entries can't be erased, so anyone can check when something was signed and by whom.",
    "extra": "",
    "source": "Supply chain · Sigstore",
    "reverse": false
@@ -3230,7 +3230,7 @@
    "back": "A signed in-toto attestation describing how an artifact was built: source repo/commit, builder identity, build steps and inputs.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "A certificate of origin for software: where, from what, and by whom it was built.",
    "extra": "",
    "source": "Supply chain · SLSA",
    "reverse": false
@@ -3246,7 +3246,7 @@
    "back": "A build with no undeclared external inputs or network access, so every dependency is explicit and the output is reproducible from stated inputs.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "Cooking in a sealed kitchen with only the listed ingredients, so the dish can be reproduced exactly.",
    "extra": "",
    "source": "Supply chain · SLSA",
    "reverse": false
@@ -3374,7 +3374,7 @@
    "back": "",
    "text": "Kubernetes multi-tenancy: {{c1::soft}} tenancy separates trusted tenants (internal teams) against accidents and noisy neighbours; {{c2::hard}} tenancy isolates mutually untrusted tenants against deliberate escape attempts.",
    "image": "",
-   "analogy": "",
+   "analogy": "Soft tenancy is roommates locking doors against accidents; hard tenancy is separate apartments built to stop burglars.",
    "extra": "",
    "source": "Multi-tenancy",
    "reverse": false
@@ -3422,7 +3422,7 @@
    "back": "",
    "text": "Namespace isolation still shares: the {{c1::control plane}} (one API server + etcd — noisy tenants degrade all); {{c2::cluster-scoped resources}} (CRDs, webhooks, ClusterRoles — operator versions collide); {{c3::node kernels}} (a container escape lands next to other tenants); and {{c4::one Kubernetes version and upgrade window}}.",
    "image": "",
-   "analogy": "",
+   "analogy": "Namespaces are office cubicles: your own desk, but shared air conditioning, lifts and one building maintenance schedule.",
    "extra": "",
    "source": "Multi-tenancy",
    "reverse": false
@@ -3662,7 +3662,7 @@
    "back": "It holds credentials to every cluster — it's the crown jewel; any tenant workload there widens the attack surface on the whole fleet.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "Don't open a café inside the bank vault.",
    "extra": "",
    "source": "Multi-cluster",
    "reverse": false
@@ -3838,7 +3838,7 @@
    "back": "Stateless workloads move freely; data doesn't — block volumes are zone/cluster-local and databases replicate on their own terms.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "Stateless apps travel like suitcases; databases are the heavy furniture that needs a moving truck and a plan.",
    "extra": "",
    "source": "Multi-cluster",
    "reverse": false
@@ -3870,7 +3870,7 @@
    "back": "Upgrade <b>rings</b>: lab → dev → staging → prod-canary → prod-rest; promote Git changes ring by ring with soak time and automated verification.",
    "text": "",
    "image": "",
-   "analogy": "",
+   "analogy": "A restaurant chain trying a new dish in one branch, then a region, before every branch.",
    "extra": "PodDisruptionBudgets + surge-capable node pools keep drains safe; Renovate turns version bumps into per-ring diffs.",
    "source": "Multi-cluster",
    "reverse": false
