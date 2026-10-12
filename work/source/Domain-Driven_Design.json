@@ -1,0 +1,785 @@
+{
+ "source_file": "Domain-Driven_Design.apkg",
+ "notes": [
+  {
+   "guid": "ufrz??3i_+",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::foundations"
+   ],
+   "front": "What is a <b>domain model</b> in DDD, and what is it not?",
+   "back": "A rigorously organized, selective <b>abstraction</b> of the knowledge in a domain that the team agrees on — not a diagram and not a copy of reality. It's the structure of the developers' and experts' shared understanding, expressed in code, diagrams, and language together.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part I · Domain Model"
+  },
+  {
+   "guid": "O]];d5k$~I",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::foundations"
+   ],
+   "front": "What is <b>knowledge crunching</b>?",
+   "back": "The collaborative, iterative process where developers and domain experts distill a flood of domain information into a sharp, useful model — proposing scenarios, testing the model against them, and refining concepts together. Modeling is ongoing learning, not an upfront phase.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part I · Domain Model"
+  },
+  {
+   "guid": "QYgKE{F7s@",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::language"
+   ],
+   "front": "What is the <b>Ubiquitous Language</b>?",
+   "back": "A single shared language, structured around the domain model, used by <b>everyone</b> (developers and domain experts) in speech, diagrams, and code. Eliminates translation between 'business talk' and 'tech talk'; if a term is awkward in code, that signals a flaw in the model.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part I · Domain Model"
+  },
+  {
+   "guid": "jXJBRuH{(&",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::language"
+   ],
+   "front": "What is <b>Model-Driven Design</b>?",
+   "back": "Binding the model and the implementation tightly: the code <b>is</b> an expression of the model, so a change to one reflects the other. Avoids the analysis-model / design-model split where insights get lost in translation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part I · Domain Model"
+  },
+  {
+   "guid": "J*ZGnIR3uF",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::language"
+   ],
+   "front": "What does <b>Hands-On Modelers</b> argue?",
+   "back": "The people who write the code must participate in modeling, and modelers must touch the code. Separating modeling from implementation breaks the feedback loop and produces models that don't survive contact with the code.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part I · Domain Model"
+  },
+  {
+   "guid": "LzT[d,@nsy",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::architecture"
+   ],
+   "front": "What is the <b>Layered Architecture</b> and why isolate the domain?",
+   "back": "Separate concerns into layers — typically User Interface, Application, Domain, Infrastructure — so the <b>domain layer</b> holds business logic in isolation, free of UI/persistence concerns. Without isolation, domain logic smears across the UI and database code and becomes invisible.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part II · Building Blocks"
+  },
+  {
+   "guid": "tQ5}/8A-b~",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::architecture"
+   ],
+   "front": "What does the Application layer do vs the Domain layer?",
+   "back": "The <b>Application layer</b> is thin: it coordinates tasks, directs domain objects, and holds no business rules or domain state. The <b>Domain layer</b> holds the model — the business concepts, rules, and state. Don't let business logic leak into the application layer.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part II · Building Blocks"
+  },
+  {
+   "guid": "q_{h?I-anK",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::architecture"
+   ],
+   "front": "What is the <b>Smart UI</b> anti-pattern?",
+   "back": "Putting all business logic directly into the UI (e.g. event handlers, stored procedures behind forms). Fine for simple apps and quick delivery, but it forfeits a domain model entirely — logic is duplicated and can't grow. DDD is the wrong investment if a Smart UI is genuinely sufficient.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part II · Building Blocks"
+  },
+  {
+   "guid": "hMV`kKw5oo",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::tactical"
+   ],
+   "front": "What is an <b>Entity</b> (Reference Object)?",
+   "back": "An object defined by a <b>continuous identity</b> through time, not its attributes. Two entities with identical attributes are still different; the same entity may change all its attributes yet remain the same thing. Identity must be explicitly defined and preserved (e.g. a unique ID).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part II · Building Blocks"
+  },
+  {
+   "guid": "Q)wE^%}5f?",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::tactical"
+   ],
+   "front": "What is a <b>Value Object</b>?",
+   "back": "An object defined entirely by its <b>attributes</b>, with no conceptual identity (e.g. a Money amount, a Color, an Address). It's interchangeable, should be treated as <b>immutable</b>, and can be freely shared/copied. Prefer value objects — they're simpler and side-effect-free.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part II · Building Blocks"
+  },
+  {
+   "guid": "lr0Tu=^L%;",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::tactical"
+   ],
+   "front": "Entity vs Value Object — how do you decide?",
+   "back": "Ask whether you care about <b>which one</b> it is over time (do you need to track and distinguish this specific instance?). If identity matters → Entity. If only the values matter and instances are interchangeable → Value Object. Model as a value object unless identity is genuinely needed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part II · Building Blocks"
+  },
+  {
+   "guid": "Ftp,X![y3E",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::tactical"
+   ],
+   "front": "What is a <b>Domain Service</b>, and when do you use one?",
+   "back": "A stateless operation that's a meaningful domain concept but doesn't naturally belong to any single Entity or Value Object (e.g. a funds-transfer between two accounts). Named with the Ubiquitous Language as a <b>verb/activity</b>. Use sparingly — don't strip behavior out of entities to make anemic services.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part II · Building Blocks"
+  },
+  {
+   "guid": "C2,zW/;p7s",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::tactical"
+   ],
+   "front": "What is a <b>Module</b> (Package) in DDD terms?",
+   "back": "A named division of the model that should reflect a <b>cohesive concept</b> in the domain, with low coupling to other modules and high internal cohesion. Module names are part of the Ubiquitous Language; modules should tell the story of the domain, not just group code technically.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part II · Building Blocks"
+  },
+  {
+   "guid": "bI#3Z&IuVd",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::aggregates"
+   ],
+   "front": "What is an <b>Aggregate</b>?",
+   "back": "A cluster of associated Entities and Value Objects treated as a <b>single unit</b> for data changes, with defined boundaries. It enforces invariants and is the consistency boundary — transactions should not cross aggregate boundaries.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part II · Aggregates"
+  },
+  {
+   "guid": "fh|eIzds@f",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::aggregates"
+   ],
+   "front": "What is an <b>Aggregate Root</b> and what rules govern access?",
+   "back": "The single Entity that is the aggregate's entry point. Rules: external objects may only hold references to the <b>root</b>; the root controls access to internal members; internal objects may reference each other but outsiders can't reach them directly. The root guarantees the aggregate's invariants.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part II · Aggregates"
+  },
+  {
+   "guid": "w[%1e:IS$[",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::aggregates"
+   ],
+   "front": "Why do aggregate boundaries map to invariants and transactions?",
+   "back": "An aggregate is the unit within which <b>invariants must hold</b> after every transaction. Keeping invariants inside one aggregate means a single transaction can enforce them locally; relationships across aggregates can be eventually consistent rather than enforced atomically.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part II · Aggregates"
+  },
+  {
+   "guid": "we%T1du^!T",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::lifecycle"
+   ],
+   "front": "What is a <b>Factory</b> and why use one?",
+   "back": "An object/method that encapsulates the <b>creation</b> of complex objects and aggregates, ensuring they're produced in a valid state with all invariants satisfied. Moves messy construction out of the domain objects themselves and keeps creation as an atomic, intention-revealing operation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part II · Lifecycle"
+  },
+  {
+   "guid": "eGPIn)4VFf",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::lifecycle"
+   ],
+   "front": "What is a <b>Repository</b>?",
+   "back": "An abstraction that provides the <b>illusion of an in-memory collection</b> of aggregate roots, hiding persistence/query details behind a domain-meaningful interface. Clients ask for objects by criteria; the repository handles storage. Provide repositories only for aggregate roots.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part II · Lifecycle"
+  },
+  {
+   "guid": "Q,.wWz,4/R",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::lifecycle"
+   ],
+   "front": "Factory vs Repository — what's the distinction?",
+   "back": "A <b>Factory</b> creates <b>new</b> objects; a <b>Repository</b> retrieves <b>existing</b> ones (and persists them). A repository may delegate to a factory to reconstitute objects from storage, but conceptually 'make new' vs 'find existing' are kept separate.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part II · Lifecycle"
+  },
+  {
+   "guid": "E_cy1.NTh.",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::insight"
+   ],
+   "front": "What does 'make implicit concepts explicit' mean?",
+   "back": "When an important domain concept is only implied (hidden in a comment, a procedure, or tangled conditionals), promote it to an explicit object in the model. Listen to domain experts' language and to awkwardness in the design — these reveal missing concepts.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part III · Deeper Insight"
+  },
+  {
+   "guid": "EbAP`e/]|B",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::insight"
+   ],
+   "front": "What is a <b>Specification</b> (pattern)?",
+   "back": "A predicate-like object that states a <b>business rule</b> ('does this candidate satisfy these criteria?') as a first-class domain object. Used for validation, selection/querying, and building-to-order. Specifications can be combined with and/or/not (closure of operations).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part III · Deeper Insight"
+  },
+  {
+   "guid": "t+5SMv%gY^",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::insight"
+   ],
+   "front": "What is a <b>Breakthrough</b>, and why does it follow refactoring?",
+   "back": "A sudden leap to a much deeper, clearer model after a stretch of incremental refinement. Continuous refactoring toward insight builds up understanding until the model reorganizes around a far better abstraction — breakthroughs can't be scheduled but are enabled by sustained crunching.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part III · Deeper Insight"
+  },
+  {
+   "guid": "Dg/<DFL6ZU",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::supple"
+   ],
+   "front": "What is an <b>Intention-Revealing Interface</b>?",
+   "back": "Naming classes and operations after their <b>effect and purpose</b> (in the Ubiquitous Language), not their implementation, so clients can use them without understanding internals. If you must read the implementation to use it, the interface isn't intention-revealing.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part III · Supple Design"
+  },
+  {
+   "guid": "j_kyV#.Y$H",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::supple"
+   ],
+   "front": "What are <b>Side-Effect-Free Functions</b>?",
+   "back": "Operations that return results without changing observable state. Push complex logic into such functions (favoring Value Objects), and isolate state-changing <b>commands</b> into simple, separate methods. This makes behavior safe to combine and reason about (cf. command-query separation).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part III · Supple Design"
+  },
+  {
+   "guid": "x#C4w=t,M1",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::supple"
+   ],
+   "front": "What role do <b>Assertions</b> play in supple design?",
+   "back": "They make the <b>post-conditions</b> of operations and <b>invariants</b> of classes explicit, so behavior is defined independently of implementation. Where the language can't enforce them, state them in tests and documentation — clients shouldn't need to read code to know what an operation guarantees.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part III · Supple Design"
+  },
+  {
+   "guid": "I}6bd7?6&S",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::supple"
+   ],
+   "front": "What are <b>Conceptual Contours</b>?",
+   "back": "Decompose the design along the domain's <b>natural seams/underlying consistency</b>, so the model's components are stable, recombinable units. When boundaries match real conceptual joints, changes stay local; arbitrary boundaries cause ripple effects.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part III · Supple Design"
+  },
+  {
+   "guid": "IMvT-09=*=",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::supple"
+   ],
+   "front": "What is <b>Closure of Operations</b>?",
+   "back": "Defining an operation whose return type is the <b>same type</b> as its argument(s), so it's 'closed' under that type (like integer addition returning an integer). Lets you combine operations fluently without dragging in other concepts — common for Value Objects.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part III · Supple Design"
+  },
+  {
+   "guid": "h/V2{3k,Yy",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::supple"
+   ],
+   "front": "What is a <b>Standalone Class</b> and why aim for it?",
+   "back": "A class with minimal dependencies, understandable in (near) isolation. Low coupling reduces the mental load of understanding any one part. Even within a Module, strive to make key classes standalone to manage complexity.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part III · Supple Design"
+  },
+  {
+   "guid": "F1nmIfPjZU",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::supple"
+   ],
+   "front": "What is <b>Declarative Design</b> (and a Declarative style)?",
+   "back": "A style where you specify <b>what</b> the program should do via precise, executable descriptions (e.g. composing Specifications) rather than procedural step-by-step code. Supple design with intention-revealing, closed, side-effect-free operations enables expressing rules declaratively.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part III · Supple Design"
+  },
+  {
+   "guid": "Mz,X_.pPEL",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::strategic"
+   ],
+   "front": "What is a <b>Bounded Context</b>?",
+   "back": "An explicit boundary (a subsystem, team, or codebase) within which a particular model applies and its terms have a <b>single, consistent meaning</b>. The same word can mean different things in different contexts; a model is only unified <i>within</i> its bounded context.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part IV · Strategic Design"
+  },
+  {
+   "guid": "k+Gu5Bv?XM",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::strategic"
+   ],
+   "front": "Why is one giant unified model across a large system a mistake?",
+   "back": "Forcing all teams onto one model creates constant conflict and a bloated, ambiguous model that satisfies no one. DDD instead <b>divides</b> the system into Bounded Contexts, each internally consistent, and manages their relationships explicitly via a Context Map.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part IV · Strategic Design"
+  },
+  {
+   "guid": "v9ApwCqeDY",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::strategic"
+   ],
+   "front": "What is <b>Continuous Integration</b> in the DDD (model-integrity) sense?",
+   "back": "Within a single Bounded Context, frequently merging all code and model changes and validating with automated tests, so the model stays unified and conceptual splintering is caught early. It's about keeping <b>one model coherent</b>, not just a CI server.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part IV · Strategic Design"
+  },
+  {
+   "guid": "g$;>{Jq`-5",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::contextmap"
+   ],
+   "front": "What is a <b>Context Map</b>?",
+   "back": "A document/diagram naming each Bounded Context and describing the <b>relationships and integration points</b> between them (and where translation happens). It gives the team a shared global view; without it, contexts collide invisibly at the boundaries.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part IV · Context Mapping"
+  },
+  {
+   "guid": "N1WOV`G#38",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::contextmap"
+   ],
+   "front": "What is a <b>Shared Kernel</b>?",
+   "back": "A relationship where two teams agree to <b>share a subset</b> of the model + code as a common kernel, kept consistent by both. Reduces duplication but requires tight coordination — changes to the kernel need consultation between both teams.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part IV · Context Mapping"
+  },
+  {
+   "guid": "lS7Q`yYe{9",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::contextmap"
+   ],
+   "front": "Describe the <b>Customer/Supplier</b> relationship.",
+   "back": "Two contexts where the downstream (customer) depends on the upstream (supplier). They establish a clear customer/supplier relationship: the customer's needs become part of the supplier's backlog/priorities, and interface tests guard the supplier against breaking the customer.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part IV · Context Mapping"
+  },
+  {
+   "guid": "e^n;|g^tCJ",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::contextmap"
+   ],
+   "front": "What is a <b>Conformist</b>?",
+   "back": "A downstream context that has no leverage over an upstream one, so it simply <b>adopts the upstream model as-is</b>, conforming to it rather than translating. Eliminates translation complexity but inherits the upstream model's flaws.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part IV · Context Mapping"
+  },
+  {
+   "guid": "zb?m%5]F_W",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::contextmap"
+   ],
+   "front": "What is an <b>Anticorruption Layer</b>?",
+   "back": "A translation layer that <b>isolates</b> your model from an external/legacy system's model, converting between them so the foreign model's concepts don't leak in and corrupt yours. Typically built with facades and adapters speaking your Ubiquitous Language inward.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part IV · Context Mapping"
+  },
+  {
+   "guid": "t?O<i{sE_c",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::contextmap"
+   ],
+   "front": "What is the <b>Separate Ways</b> pattern?",
+   "back": "Declaring that two contexts have <b>no connection</b> at all, letting each team go its own way independently. Appropriate when integration costs outweigh benefits — sometimes the best integration is none.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part IV · Context Mapping"
+  },
+  {
+   "guid": "GGi{|n+M$J",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::contextmap"
+   ],
+   "front": "What are <b>Open Host Service</b> and <b>Published Language</b>?",
+   "back": "<b>Open Host Service</b> — define a context's integration as a formal, shared <b>protocol/API</b> that many other contexts can use, instead of bespoke translators for each. <b>Published Language</b> — a well-documented shared language (e.g. a standard schema) used as the common medium of translation between contexts.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part IV · Context Mapping"
+  },
+  {
+   "guid": "rJM:.:a4^P",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::distillation"
+   ],
+   "front": "What is <b>Distillation</b> and the <b>Core Domain</b>?",
+   "back": "Distillation = separating the model's vital essence from the supporting bulk. The <b>Core Domain</b> is the part that's most valuable and differentiating — where the system justifies its existence. Put your best people and most refinement there, not on generic plumbing.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part IV · Distillation"
+  },
+  {
+   "guid": "g&`p=S$]70",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::distillation"
+   ],
+   "front": "What are <b>Generic Subdomains</b>?",
+   "back": "Cohesive parts of the model that are necessary but <b>not differentiating</b> (e.g. money/time, generic ledgers). Isolate them from the Core, and consider off-the-shelf solutions, published models, or outsourcing — don't lavish your best modeling effort here.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part IV · Distillation"
+  },
+  {
+   "guid": "GkO|*)9$?)",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::distillation"
+   ],
+   "front": "What is a <b>Domain Vision Statement</b>?",
+   "back": "A short (≈one-page) description of the Core Domain and the value it brings — written early and shared — to align the team on what matters most. A lightweight distillation tool that keeps focus on the core.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part IV · Distillation"
+  },
+  {
+   "guid": "Q:eWubZ@-r",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::distillation"
+   ],
+   "front": "What is the <b>Highlighted Core</b>?",
+   "back": "Making the Core Domain easy to see — e.g. a 'distillation document' flagging the core elements, or flagging them in the code/repo — so developers know which parts are central and treat them with extra care, without restructuring the whole model.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part IV · Distillation"
+  },
+  {
+   "guid": "rn$W2g.rGU",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::distillation"
+   ],
+   "front": "What is a <b>Cohesive Mechanism</b>?",
+   "back": "A complex, formalizable computation (often algorithmic) factored out into a separate, intention-revealing framework/component with a clean interface, so it doesn't clutter the Core. Distinct from a Generic Subdomain: a mechanism is the 'how' (a solver), a subdomain is part of the model itself.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part IV · Distillation"
+  },
+  {
+   "guid": "ze%vsuY8~<",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::distillation"
+   ],
+   "front": "What are <b>Segregated Core</b> and <b>Abstract Core</b>?",
+   "back": "<b>Segregated Core</b> — refactor to physically separate the Core Domain from supporting code into its own module(s), strengthening its cohesion. <b>Abstract Core</b> — pull the most fundamental concepts and interactions into an abstract model that captures the essence and decouples the specifics.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part IV · Distillation"
+  },
+  {
+   "guid": "E$^;Vq(9mi",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::largescale"
+   ],
+   "front": "What problem does <b>Large-Scale Structure</b> address?",
+   "back": "Even with good Bounded Contexts, a large system can lack an overall sense of where things belong. A large-scale structure is a high-level set of <b>rules/roles</b> (a pattern spanning contexts) that lets people understand and navigate the whole without studying every part.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part IV · Large-Scale Structure"
+  },
+  {
+   "guid": "c`U@w-2[a/",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::largescale"
+   ],
+   "front": "What is <b>Evolving Order</b>?",
+   "back": "Don't impose a rigid, detailed structure upfront — let the large-scale structure <b>evolve</b> with the application, staying minimal and conceptual. An over-constraining structure fights the developers; structure should grow from understanding, not precede it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part IV · Large-Scale Structure"
+  },
+  {
+   "guid": "t(hFogsMpd",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::largescale"
+   ],
+   "front": "What are <b>Responsibility Layers</b>?",
+   "back": "A large-scale structure that assigns each part of the model to a <b>layer of responsibility</b> (e.g. Operations, Capability, Policy) reflecting natural domain dependencies, so the organization of responsibilities is consistent and visible across the system.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part IV · Large-Scale Structure"
+  },
+  {
+   "guid": "DPV!)#-Lmr",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::largescale"
+   ],
+   "front": "What is the <b>Knowledge Level</b> pattern?",
+   "back": "A 'model of the model': a distinct set of objects that describes and constrains the structure/behavior of the operational objects, lettings users configure the rules without code changes (a meta-level). Useful when domain rules themselves must be customizable.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part IV · Large-Scale Structure"
+  },
+  {
+   "guid": "i#0i7yu#Ow",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::largescale"
+   ],
+   "front": "What is a <b>Pluggable Component Framework</b>?",
+   "back": "A large-scale structure where diverse components interoperate through a shared set of <b>abstract interfaces</b> (the abstract core), so implementations can be plugged in interchangeably. Suits mature models with multiple implementations of common concepts.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part IV · Large-Scale Structure"
+  },
+  {
+   "guid": "eT,gG3(gM3",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::largescale"
+   ],
+   "front": "What is a <b>System Metaphor</b>?",
+   "back": "A loose, shared analogy (borrowed from XP) that gives the whole team an intuitive, communicable image of how the system works, guiding design conversations. Use only if it genuinely fits — a forced metaphor misleads more than it helps.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part IV · Large-Scale Structure"
+  },
+  {
+   "guid": "m7Llq{$Hj3",
+   "type": "basic",
+   "deck": "Domain-Driven Design",
+   "tags": [
+    "DDD::strategic"
+   ],
+   "front": "How do the four 'concentric' DDD strategies (Bounded Context, Distillation, Large-Scale Structure) relate?",
+   "back": "They're complementary axes for taming large models: <b>Bounded Context</b> keeps each model internally consistent, <b>Distillation</b> focuses effort on the Core, and <b>Large-Scale Structure</b> gives system-wide orientation. None is mandatory; apply the ones that pay off for your situation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Part IV · Strategic Design"
+  }
+ ]
+}

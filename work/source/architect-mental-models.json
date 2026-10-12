@@ -1,0 +1,1804 @@
+{
+ "source_file": "architect-mental-models.apkg",
+ "notes": [
+  {
+   "guid": "On+Jz95$U#",
+   "type": "basic",
+   "deck": "Architect Mental Models::1 Cognitive Biases & Decision Theory",
+   "tags": [
+    "biases"
+   ],
+   "front": "What is the difference between System 1 and System 2 thinking?",
+   "back": "System 1: fast, automatic, associative, effortless, always on. System 2: slow, deliberate, effortful, lazy — it endorses System 1's suggestions unless forced to engage.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> A Chief Technology Officer (CTO) hearing 'we should move to Kubernetes' reacts with System 1 pattern-matching to the last vendor pitch. If you want a System 2 decision, hand them a one-page options memo with numbers before the meeting so the deliberate work is cheap.",
+   "source": "Kahneman, <i>Thinking, Fast and Slow</i>"
+  },
+  {
+   "guid": "x_%sS@n!t{",
+   "type": "basic",
+   "deck": "Architect Mental Models::1 Cognitive Biases & Decision Theory",
+   "tags": [
+    "biases"
+   ],
+   "front": "What is the anchoring effect, and what is the defence against it?",
+   "back": "Estimates are pulled toward whatever number was seen first, even an irrelevant one. Defence: form your own estimate before hearing others', and deliberately consider a counter-anchor.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> If a vendor quotes €400k for a migration first, every later figure is judged relative to €400k. When you present options to the Chief Financial Officer (CFO), state your recommended number first — you set the anchor, not the vendor.",
+   "source": "Kahneman; Tversky & Kahneman (1974)"
+  },
+  {
+   "guid": "NX=Wh{NtZ%",
+   "type": "basic",
+   "deck": "Architect Mental Models::1 Cognitive Biases & Decision Theory",
+   "tags": [
+    "biases"
+   ],
+   "front": "What is the availability heuristic?",
+   "back": "Judging frequency or probability by how easily examples come to mind. Recent, vivid, or emotionally charged events feel more likely than they are.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> After one public cloud outage, a board overweights cloud risk while ignoring the on-prem storage array that has failed twice a year. Counter it with base rates: 'Here are our last 24 months of incidents by cause.'",
+   "source": "Kahneman"
+  },
+  {
+   "guid": "f<>/G<%QMj",
+   "type": "basic",
+   "deck": "Architect Mental Models::1 Cognitive Biases & Decision Theory",
+   "tags": [
+    "biases"
+   ],
+   "front": "What is the planning fallacy, and what is the outside view?",
+   "back": "Planning fallacy: systematically underestimating time, cost, and risk of plans while overestimating benefits, because we build a story from the inside. Outside view: ignore the specifics and ask what happened to similar projects (a reference class).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Inside view: 'Our platform migration is 6 months.' Outside view: 'Of the last five migrations of this size in this company, median was 14 months.' Executives trust the second framing more, and it protects you when the date slips.",
+   "source": "Kahneman & Lovallo; Flyvbjerg (reference class forecasting)"
+  },
+  {
+   "guid": "FkIhF82TJD",
+   "type": "cloze",
+   "deck": "Architect Mental Models::1 Cognitive Biases & Decision Theory",
+   "tags": [
+    "biases"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Reference class forecasting has three steps: (1) identify a {{c1::reference class of comparable past projects}}, (2) establish the {{c2::distribution of outcomes}} in that class, (3) place the current project within that distribution and {{c3::adjust only for specific, defensible differences}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Use it for cloud cost estimates: gather actual-vs-forecast ratios from prior migrations, then present a range ('P50 €1.2M, P90 €1.9M') instead of a single number.",
+   "source": "Flyvbjerg; Kahneman"
+  },
+  {
+   "guid": "F[D-_.Y-yY",
+   "type": "basic",
+   "deck": "Architect Mental Models::1 Cognitive Biases & Decision Theory",
+   "tags": [
+    "biases"
+   ],
+   "front": "What is the sunk cost fallacy?",
+   "back": "Continuing an endeavour because of resources already invested, even though only future costs and benefits should matter.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> 'We have spent €2M on the in-house orchestration layer, we cannot drop it now.' Reframe for the C-suite: 'The €2M is gone either way. The question is whether the next €500k is better spent maintaining it or replacing it.'",
+   "source": "Arkes & Blumer (1985); Kahneman"
+  },
+  {
+   "guid": "D(3hg8)No%",
+   "type": "basic",
+   "deck": "Architect Mental Models::1 Cognitive Biases & Decision Theory",
+   "tags": [
+    "biases"
+   ],
+   "front": "What is loss aversion, and roughly how strong is it?",
+   "back": "Losses loom larger than equivalent gains — roughly 2:1 in most experiments. People will take risks to avoid a loss they would not take to secure a gain.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> 'This platform could save €300k' lands weaker than 'we are currently losing €300k a year in duplicated infrastructure.' Same fact, different frame; the loss frame moves executives.",
+   "source": "Kahneman & Tversky, prospect theory"
+  },
+  {
+   "guid": "m{>5<~#@F<",
+   "type": "basic",
+   "deck": "Architect Mental Models::1 Cognitive Biases & Decision Theory",
+   "tags": [
+    "biases"
+   ],
+   "front": "What is the framing effect?",
+   "back": "Logically equivalent descriptions produce different decisions depending on presentation (gain vs loss, percentage vs frequency, relative vs absolute).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> '99.5% availability' sounds excellent. '44 hours of downtime per year' triggers a different conversation. Choose the frame consciously and be able to defend it if challenged — executives dislike discovering they were framed.",
+   "source": "Tversky & Kahneman (1981)"
+  },
+  {
+   "guid": "D#ue1jpyp#",
+   "type": "basic",
+   "deck": "Architect Mental Models::1 Cognitive Biases & Decision Theory",
+   "tags": [
+    "biases"
+   ],
+   "front": "What is calibration, and how is it measured?",
+   "back": "Calibration: when you say 70%, you are right about 70% of the time. Measured by comparing stated confidence to realised frequency across many predictions; scored with the Brier score.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Engineers are typically overconfident on timelines and underconfident on outages. Keep a prediction log ('80% this release ships by 1 Oct'). After 50 entries you know your own bias and can correct estimates before they reach the steering committee.",
+   "source": "Tetlock & Gardner, <i>Superforecasting</i>"
+  },
+  {
+   "guid": "g=@oY#W#=o",
+   "type": "cloze",
+   "deck": "Architect Mental Models::1 Cognitive Biases & Decision Theory",
+   "tags": [
+    "biases"
+   ],
+   "front": "",
+   "back": "",
+   "text": "The Brier score for a binary event is {{c1::(forecast probability − outcome)²}}, where outcome is 1 or 0. Lower is better; always predicting 50% scores {{c2::0.25}}; a perfect forecaster scores {{c3::0}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Score your architecture bets: 'P(vendor X still supported in 3 years) = 0.9.' Over time the score tells you whether you should hedge more.",
+   "source": "Brier (1950); Tetlock"
+  },
+  {
+   "guid": "Ms|@1ju;,%",
+   "type": "basic",
+   "deck": "Architect Mental Models::1 Cognitive Biases & Decision Theory",
+   "tags": [
+    "biases"
+   ],
+   "front": "Why is calibration rare in engineering, and why does it matter for a Solutions Architect?",
+   "back": "Engineers rarely get scored feedback on probabilistic claims; estimates are single numbers, and outcomes are attributed to circumstances. Uncalibrated confidence destroys credibility with executives after the first missed date.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Say 'I am 70% confident this fits in Q4; the main risk is the identity integration' instead of 'Q4.' When you are right at the stated rate, executives learn to trust your numbers.",
+   "source": "Tetlock"
+  },
+  {
+   "guid": "M}e<r:-2L[",
+   "type": "basic",
+   "deck": "Architect Mental Models::1 Cognitive Biases & Decision Theory",
+   "tags": [
+    "biases"
+   ],
+   "front": "What distinguishes superforecasters from ordinary forecasters (Tetlock)?",
+   "back": "They think in probabilities (granular, e.g. 63% not 'likely'), update frequently in small increments, break problems into parts, take the outside view first, seek disconfirming evidence, and treat beliefs as hypotheses. Foxes, not hedgehogs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Applied to a build-vs-buy decision: decompose into 'P(in-house team retains key people)', 'P(vendor raises price >30%)', etc., assign numbers, and revise as facts arrive rather than defending an initial position.",
+   "source": "Tetlock & Gardner"
+  },
+  {
+   "guid": "R`sfX`RNU",
+   "type": "basic",
+   "deck": "Architect Mental Models::1 Cognitive Biases & Decision Theory",
+   "tags": [
+    "biases"
+   ],
+   "front": "Foxes vs hedgehogs (Tetlock): which forecast better, and why?",
+   "back": "Hedgehogs know one big thing and fit the world to it; foxes know many small things and aggregate diverse sources. Foxes forecast markedly better; hedgehogs are more quotable and more confident.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> The architect who explains every problem as 'microservices' or 'monolith' is a hedgehog. When advising the C-suite, present the competing lenses and where each breaks.",
+   "source": "Tetlock, <i>Expert Political Judgment</i>"
+  },
+  {
+   "guid": "s(<g)`{)oK",
+   "type": "basic",
+   "deck": "Architect Mental Models::1 Cognitive Biases & Decision Theory",
+   "tags": [
+    "biases"
+   ],
+   "front": "What is Fermi decomposition, and why does it improve estimates?",
+   "back": "Breaking an unknown quantity into sub-quantities you can estimate, then multiplying. Errors in the parts tend to partially cancel, and it exposes which assumption dominates.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Cloud egress cost: users × sessions/day × MB/session × €/GB. Presenting the decomposition lets a CFO challenge one assumption instead of rejecting the whole number.",
+   "source": "Fermi; Tetlock"
+  },
+  {
+   "guid": "F:2{vuy$g|",
+   "type": "basic",
+   "deck": "Architect Mental Models::1 Cognitive Biases & Decision Theory",
+   "tags": [
+    "biases"
+   ],
+   "front": "What is base rate neglect?",
+   "back": "Ignoring the prior probability of an outcome in favour of case-specific details that feel diagnostic.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> 'This startup vendor has a great demo.' Base rate: most infrastructure startups are acquired or fold within 5 years. Ask for the base rate before evaluating the demo.",
+   "source": "Kahneman & Tversky"
+  },
+  {
+   "guid": "zcmFt[q/Ip",
+   "type": "basic",
+   "deck": "Architect Mental Models::1 Cognitive Biases & Decision Theory",
+   "tags": [
+    "biases"
+   ],
+   "front": "What is confirmation bias, and what is a structural counter-measure?",
+   "back": "Seeking and interpreting evidence to support existing beliefs. Counter-measure: define disconfirming evidence in advance, and assign someone to argue the opposite (red team).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> A Proof of Concept (PoC) run by the team that chose the tool will 'succeed'. Set pass/fail criteria before the PoC starts and have a different team evaluate it.",
+   "source": "Nickerson (1998)"
+  },
+  {
+   "guid": "vNWDSUmTJ>",
+   "type": "basic",
+   "deck": "Architect Mental Models::1 Cognitive Biases & Decision Theory",
+   "tags": [
+    "biases"
+   ],
+   "front": "What is a premortem, and why does it beat a normal risk review?",
+   "back": "Before committing, assume the project has failed and have each person write why. Legitimises dissent, surfaces risks people would not raise as objections, and counters overconfidence.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Run one before a platform launch with the steering committee present: 'It is 12 months from now and adoption is 10%. Why?' Executives hear risks framed as foresight, not negativity.",
+   "source": "Gary Klein; popularised by Kahneman"
+  },
+  {
+   "guid": "csCJK>5_Ui",
+   "type": "basic",
+   "deck": "Architect Mental Models::1 Cognitive Biases & Decision Theory",
+   "tags": [
+    "biases"
+   ],
+   "front": "What is hindsight bias, and how does it damage post-incident reviews?",
+   "back": "Once an outcome is known it seems to have been predictable. In reviews this turns reasonable decisions under uncertainty into 'obvious mistakes' and drives blame.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> In a post-incident review, reconstruct what was known at each decision point. Tell leadership: 'Given the information at 14:02, the rollback decision was correct.'",
+   "source": "Fischhoff (1975)"
+  },
+  {
+   "guid": "G]el8{S|hV",
+   "type": "basic",
+   "deck": "Architect Mental Models::1 Cognitive Biases & Decision Theory",
+   "tags": [
+    "biases"
+   ],
+   "front": "What does WYSIATI stand for and what does it describe?",
+   "back": "'What You See Is All There Is' (WYSIATI): System 1 builds a coherent story from available information and does not account for what is missing. Confidence depends on story coherence, not evidence quality.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> A slide deck with three tidy options looks complete. Ask yourself and the room: 'What option is not on this slide, and why?'",
+   "source": "Kahneman"
+  },
+  {
+   "guid": "gDNB=}=-0O",
+   "type": "basic",
+   "deck": "Architect Mental Models::1 Cognitive Biases & Decision Theory",
+   "tags": [
+    "biases"
+   ],
+   "front": "What is the substitution heuristic?",
+   "back": "When faced with a hard question, System 1 silently answers an easier related one. 'Is this vendor reliable?' becomes 'Do I like their sales engineer?'",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> 'Should we adopt this platform?' often gets substituted with 'Do I trust the person proposing it?' Make the real question explicit with decision criteria on paper.",
+   "source": "Kahneman"
+  },
+  {
+   "guid": "D,30yhd:h!",
+   "type": "basic",
+   "deck": "Architect Mental Models::1 Cognitive Biases & Decision Theory",
+   "tags": [
+    "biases"
+   ],
+   "front": "What is the halo effect?",
+   "back": "One positive attribute (polish, reputation, likeability) colours judgement of unrelated attributes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> A vendor with an excellent conference talk is assumed to have excellent support. Separate the evaluation dimensions and score each independently.",
+   "source": "Thorndike (1920); Kahneman"
+  },
+  {
+   "guid": "DZc|akLNC",
+   "type": "basic",
+   "deck": "Architect Mental Models::1 Cognitive Biases & Decision Theory",
+   "tags": [
+    "biases"
+   ],
+   "front": "What is status quo bias, and how does it interact with loss aversion?",
+   "back": "Preference for the current state because change is perceived as a loss; the default wins unless the alternative is clearly better. Any change is evaluated as gains and losses relative to now.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Migration proposals lose by default. Reframe the status quo as an active choice with its own costs: 'Staying means €X/yr and a hard end-of-support date in 2028.'",
+   "source": "Samuelson & Zeckhauser (1988)"
+  },
+  {
+   "guid": "n0IE2awzC(",
+   "type": "basic",
+   "deck": "Architect Mental Models::1 Cognitive Biases & Decision Theory",
+   "tags": [
+    "biases"
+   ],
+   "front": "What is noise (as distinct from bias) in judgement?",
+   "back": "Bias is systematic error in one direction; noise is unwanted variability — the same question gets different answers from different people or the same person on different days.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Five architects estimate the same migration at 4 to 18 months. Reduce noise with structured estimation: independent estimates first, then aggregation, then discussion.",
+   "source": "Kahneman, Sibony & Sunstein, <i>Noise</i>"
+  },
+  {
+   "guid": "yf^b[>6~Bq",
+   "type": "basic",
+   "deck": "Architect Mental Models::1 Cognitive Biases & Decision Theory",
+   "tags": [
+    "biases"
+   ],
+   "front": "What is regression to the mean, and why does it mislead managers?",
+   "back": "Extreme measurements tend to be followed by less extreme ones by chance alone. Managers credit interventions (or punishments) for improvements that would have happened anyway.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> After a terrible quarter for incidents, any change 'works'. Before claiming a platform change reduced incidents, compare against the long-run average, not the worst quarter.",
+   "source": "Kahneman"
+  },
+  {
+   "guid": "C.MSmALRPr",
+   "type": "basic",
+   "deck": "Architect Mental Models::1 Cognitive Biases & Decision Theory",
+   "tags": [
+    "biases"
+   ],
+   "front": "What is expected value, and how do you present it to executives without hiding the tails?",
+   "back": "Sum of (probability × outcome) over scenarios. Present as a distribution or scenarios (best/expected/worst with probabilities), because executives care about the downside, not just the mean.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> 'Expected saving €800k, but 15% chance we spend €300k extra due to data-residency rework.' This is more credible than a single Return on Investment (ROI) number.",
+   "source": "Decision theory; Tetlock"
+  },
+  {
+   "guid": "dPo=VUWikl",
+   "type": "basic",
+   "deck": "Architect Mental Models::1 Cognitive Biases & Decision Theory",
+   "tags": [
+    "biases"
+   ],
+   "front": "What is the difference between a good decision and a good outcome?",
+   "back": "A good decision is the best choice given information and probabilities at the time; outcomes also depend on luck. Judging decisions only by outcomes teaches the wrong lessons.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Tell leadership after a failed vendor: 'The selection process was sound; the acquisition was a 10% event. Here is what we would change in the process anyway.'",
+   "source": "Annie Duke, <i>Thinking in Bets</i>"
+  },
+  {
+   "guid": "ng2_$Q3[x!",
+   "type": "basic",
+   "deck": "Architect Mental Models::1 Cognitive Biases & Decision Theory",
+   "tags": [
+    "biases"
+   ],
+   "front": "What is 'resulting'?",
+   "back": "Judging the quality of a decision by its outcome. A poker term popularised by Annie Duke.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> A risky cut-over that succeeded is not evidence the risk was acceptable. Keep decision logs with the stated probabilities so reviews assess the reasoning.",
+   "source": "Annie Duke"
+  },
+  {
+   "guid": "sz[e+:NxlS",
+   "type": "basic",
+   "deck": "Architect Mental Models::1 Cognitive Biases & Decision Theory",
+   "tags": [
+    "biases"
+   ],
+   "front": "What is the overconfidence effect, and where is it strongest?",
+   "back": "Subjective confidence exceeds objective accuracy. Strongest for hard questions, experts in their own domain, and when a coherent story is available.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Ask for 90% confidence intervals on estimates; most engineers' intervals contain the true value under 50% of the time. Widen intervals before they go to the board.",
+   "source": "Alpert & Raiffa; Kahneman"
+  },
+  {
+   "guid": "yt7c,m_nK!",
+   "type": "basic",
+   "deck": "Architect Mental Models::1 Cognitive Biases & Decision Theory",
+   "tags": [
+    "biases"
+   ],
+   "front": "What is the affect heuristic?",
+   "back": "Decisions driven by how something feels; things we like are judged low-risk and high-benefit, things we dislike the reverse.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Executives who 'hate' a legacy system overrate every risk of keeping it. Present risk and benefit as separate scored dimensions.",
+   "source": "Slovic et al."
+  },
+  {
+   "guid": "zu^7q,@ZM!",
+   "type": "basic",
+   "deck": "Architect Mental Models::1 Cognitive Biases & Decision Theory",
+   "tags": [
+    "biases"
+   ],
+   "front": "What is the narrative fallacy?",
+   "back": "Our tendency to weave facts into a causal story, then believe the story more than the facts warrant.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> 'Adoption failed because the docs were bad' is a story. Check whether teams with good docs also failed to adopt before acting on the narrative.",
+   "source": "Taleb, <i>The Black Swan</i>"
+  },
+  {
+   "guid": "e]AN~16R>B",
+   "type": "basic",
+   "deck": "Architect Mental Models::1 Cognitive Biases & Decision Theory",
+   "tags": [
+    "biases"
+   ],
+   "front": "What is the 'dragonfly eye' in Tetlock's work?",
+   "back": "Synthesising many perspectives (like a compound eye) rather than one dominant view — aggregate diverse, independent sources before forming a judgement.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Before a platform decision, collect independent views from security, finance, a product team, and operations; only then converge.",
+   "source": "Tetlock & Gardner"
+  },
+  {
+   "guid": "QgO>UwcoCC",
+   "type": "basic",
+   "deck": "Architect Mental Models::1 Cognitive Biases & Decision Theory",
+   "tags": [
+    "biases"
+   ],
+   "front": "How should you communicate uncertainty to the C-suite without sounding weak?",
+   "back": "Give a point estimate, a range, the main driver of the range, and what would narrow it. Uncertainty stated with structure signals competence; vague hedging signals the opposite.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> 'We expect €1.4M, range €1.1–2.0M. The range is driven by the number of legacy integrations. Two weeks of discovery would narrow it to ±15%.'",
+   "source": "Tetlock; Douglas Hubbard, <i>How to Measure Anything</i>"
+  },
+  {
+   "guid": "s`(|eG1E*~",
+   "type": "basic",
+   "deck": "Architect Mental Models::2 Organisational Behaviour & Systems Thinking",
+   "tags": [
+    "org",
+    "systems"
+   ],
+   "front": "State Conway's Law.",
+   "back": "Organisations design systems whose structures mirror their communication structures.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Four product teams who never talk produce four incompatible authentication implementations. If you want a shared platform, the organisation must first have a shared communication path to it.",
+   "source": "Conway (1968)"
+  },
+  {
+   "guid": "CvIt-0*@5o",
+   "type": "basic",
+   "deck": "Architect Mental Models::2 Organisational Behaviour & Systems Thinking",
+   "tags": [
+    "org",
+    "systems"
+   ],
+   "front": "What is the Inverse Conway Manoeuvre?",
+   "back": "Deliberately restructure teams and their communication paths to produce the architecture you want, instead of fighting the architecture the current org produces.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Tell the Chief Information Officer (CIO): 'The target architecture will not happen while the platform team reports into infrastructure ops and product teams report into business units. Change the reporting line first.'",
+   "source": "Thoughtworks; Skelton & Pais, <i>Team Topologies</i>"
+  },
+  {
+   "guid": "x@^ut#_:8I",
+   "type": "cloze",
+   "deck": "Architect Mental Models::2 Organisational Behaviour & Systems Thinking",
+   "tags": [
+    "org",
+    "systems"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Team Topologies defines four fundamental team types: {{c1::stream-aligned}}, {{c2::platform}}, {{c3::enabling}}, and {{c4::complicated-subsystem}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Platform adoption usually stalls when there is no enabling team to help stream-aligned teams onboard. Executives think of platform as 'the tool'; you must sell the enabling capacity too.",
+   "source": "Skelton & Pais"
+  },
+  {
+   "guid": "e-QDshL0H,",
+   "type": "basic",
+   "deck": "Architect Mental Models::2 Organisational Behaviour & Systems Thinking",
+   "tags": [
+    "org",
+    "systems"
+   ],
+   "front": "What is 'team cognitive load' and why is it the core argument for an internal platform?",
+   "back": "The total mental effort a team must spend (intrinsic, extraneous, germane). A platform exists to remove extraneous load (infrastructure, compliance, plumbing) so teams can spend capacity on product.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Frame the business case to the C-suite as capacity, not technology: 'Each product team currently spends ~30% of engineering time on infrastructure. The platform returns that to feature work.'",
+   "source": "Skelton & Pais; Sweller"
+  },
+  {
+   "guid": "Fxgq`Rs|x#",
+   "type": "basic",
+   "deck": "Architect Mental Models::2 Organisational Behaviour & Systems Thinking",
+   "tags": [
+    "org",
+    "systems"
+   ],
+   "front": "What is the Thinnest Viable Platform (TVP)?",
+   "back": "The smallest platform that still reduces cognitive load for its consumers — could be a wiki page of conventions. Grow only as demand proves out.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Counter the executive expectation of a 'big bang' platform: launch with three golden paths that cover 80% of teams, then expand based on measured adoption.",
+   "source": "Skelton & Pais"
+  },
+  {
+   "guid": "GY}Oh~[>h0",
+   "type": "basic",
+   "deck": "Architect Mental Models::2 Organisational Behaviour & Systems Thinking",
+   "tags": [
+    "org",
+    "systems"
+   ],
+   "front": "In systems thinking, what are stocks and flows?",
+   "back": "A stock is an accumulation (things you can count at a moment); flows are rates that increase or decrease it. Stocks change slowly and create delays; you cannot change a stock instantly, only its flows.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> 'Teams on the platform' is a stock. Onboarding rate and churn are flows. If leadership wants 50 teams in a year, ask what onboarding rate that requires and whether the enabling team can sustain it.",
+   "source": "Meadows, <i>Thinking in Systems</i>"
+  },
+  {
+   "guid": "y~5HI.1[Xe",
+   "type": "basic",
+   "deck": "Architect Mental Models::2 Organisational Behaviour & Systems Thinking",
+   "tags": [
+    "org",
+    "systems"
+   ],
+   "front": "Reinforcing vs balancing feedback loops: define both and give a platform example.",
+   "back": "Reinforcing: change amplifies itself (growth or collapse). Balancing: the system pushes back toward a goal or limit. Reinforcing example: more teams on the platform → better docs and features → more teams. Balancing example: more teams → support queue grows → onboarding slows.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Show executives both loops explicitly. Adoption plans that only show the reinforcing loop fail when the balancing loop (support capacity) kicks in.",
+   "source": "Meadows"
+  },
+  {
+   "guid": "c]/#9gBn/&",
+   "type": "basic",
+   "deck": "Architect Mental Models::2 Organisational Behaviour & Systems Thinking",
+   "tags": [
+    "org",
+    "systems"
+   ],
+   "front": "Why do delays in feedback loops cause oscillation and overshoot?",
+   "back": "When the effect of an action is seen late, actors keep pushing (or keep waiting) past the right point, then overcorrect.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Hiring for the platform team based on last quarter's ticket backlog: by the time hires are productive, the backlog has changed. Present leading indicators, not lagging ones.",
+   "source": "Meadows; Sterman"
+  },
+  {
+   "guid": "L%J,q]hpkJ",
+   "type": "cloze",
+   "deck": "Architect Mental Models::2 Organisational Behaviour & Systems Thinking",
+   "tags": [
+    "org",
+    "systems"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Meadows' leverage points, from weakest to strongest (selected): {{c1::parameters (numbers, subsidies, budgets)}} &lt; buffers &lt; feedback loop strength &lt; information flows &lt; {{c2::rules of the system}} &lt; self-organisation &lt; {{c3::goals of the system}} &lt; {{c4::paradigm / mindset}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Increasing the platform budget (a parameter) is weak. Changing the rule 'every new service must have a named owner and use the golden path' is far stronger. Changing the goal from 'ship features' to 'ship features safely at low marginal cost' is stronger still — that is a C-suite conversation.",
+   "source": "Meadows, <i>Leverage Points</i> (1999)"
+  },
+  {
+   "guid": "GYhk|*]j#j",
+   "type": "basic",
+   "deck": "Architect Mental Models::2 Organisational Behaviour & Systems Thinking",
+   "tags": [
+    "org",
+    "systems"
+   ],
+   "front": "What is policy resistance?",
+   "back": "When multiple actors with different goals each push the system toward their goal, any policy change is counteracted by the others, and the system stays stuck.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Mandating the platform while product teams are measured on feature velocity and ops is measured on stability produces quiet non-compliance. Align the incentives (goals) of all actors before mandating.",
+   "source": "Meadows"
+  },
+  {
+   "guid": "H7S-B-As2u",
+   "type": "basic",
+   "deck": "Architect Mental Models::2 Organisational Behaviour & Systems Thinking",
+   "tags": [
+    "org",
+    "systems"
+   ],
+   "front": "Describe the 'fixes that fail' archetype.",
+   "back": "A quick fix relieves a symptom but produces an unintended consequence that worsens the underlying problem over time, requiring more of the fix.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Granting teams cluster-admin to 'unblock' them removes short-term friction and creates long-term security debt that later blocks everyone. Say this to leadership before the exception is granted, not after.",
+   "source": "Senge, <i>The Fifth Discipline</i>"
+  },
+  {
+   "guid": "MJ.>;%Kr{T",
+   "type": "basic",
+   "deck": "Architect Mental Models::2 Organisational Behaviour & Systems Thinking",
+   "tags": [
+    "org",
+    "systems"
+   ],
+   "front": "Describe the 'shifting the burden' archetype.",
+   "back": "A symptomatic solution is used instead of a fundamental one; the symptomatic solution weakens the capacity to apply the fundamental one, creating dependency.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> A central team does deployments for product teams instead of building self-service. Product teams never learn, the central team becomes a bottleneck, and the platform never gets built.",
+   "source": "Senge"
+  },
+  {
+   "guid": "jcAv;T_Iir",
+   "type": "basic",
+   "deck": "Architect Mental Models::2 Organisational Behaviour & Systems Thinking",
+   "tags": [
+    "org",
+    "systems"
+   ],
+   "front": "Describe the 'tragedy of the commons' archetype in a shared-infrastructure context.",
+   "back": "Individuals use a shared resource according to their own benefit, the total load exceeds capacity, and everyone loses.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> A shared cluster without quotas or showback: each team over-provisions rationally. Fix at the rules level (quotas, chargeback), not by asking teams to be considerate.",
+   "source": "Hardin (1968); Senge"
+  },
+  {
+   "guid": "sYSMk6chaz",
+   "type": "basic",
+   "deck": "Architect Mental Models::2 Organisational Behaviour & Systems Thinking",
+   "tags": [
+    "org",
+    "systems"
+   ],
+   "front": "Describe the 'limits to growth' archetype.",
+   "back": "A reinforcing growth loop eventually runs into a balancing constraint; pushing harder on growth does not help — you must remove the constraint.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Platform adoption grows until onboarding support saturates. Marketing the platform harder at that point increases frustration. Present the constraint and its removal cost to leadership as the actual bottleneck.",
+   "source": "Senge; Meadows"
+  },
+  {
+   "guid": "QeDI^lroxd",
+   "type": "basic",
+   "deck": "Architect Mental Models::2 Organisational Behaviour & Systems Thinking",
+   "tags": [
+    "org",
+    "systems"
+   ],
+   "front": "What does 'sociotechnical system' mean, and what is its core claim?",
+   "back": "A system where technical and social subsystems are interdependent and must be designed jointly. Optimising either alone degrades the whole.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> A technically perfect platform with no ownership model, no funding model, and no incentive alignment will not be adopted. Present the operating model in the same slide as the architecture.",
+   "source": "Trist & Emery (Tavistock Institute)"
+  },
+  {
+   "guid": "PkthgwEbd",
+   "type": "basic",
+   "deck": "Architect Mental Models::2 Organisational Behaviour & Systems Thinking",
+   "tags": [
+    "org",
+    "systems"
+   ],
+   "front": "State Goodhart's Law and give an adoption-metric example.",
+   "back": "When a measure becomes a target, it ceases to be a good measure.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Target 'number of services on the platform' and teams register empty services. Prefer outcome measures: lead time, deployment frequency, change failure rate, time-to-first-deploy for a new team.",
+   "source": "Goodhart (1975); Strathern's phrasing"
+  },
+  {
+   "guid": "hpV@vgaz%9",
+   "type": "cloze",
+   "deck": "Architect Mental Models::2 Organisational Behaviour & Systems Thinking",
+   "tags": [
+    "org",
+    "systems"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Westrum's three organisational cultures: {{c1::pathological}} (power-oriented, information hoarded), {{c2::bureaucratic}} (rule-oriented, information may be ignored), {{c3::generative}} (performance-oriented, information actively sought). The DevOps Research and Assessment (DORA) research links generative culture to higher software delivery performance.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> If executives ask why platform adoption works at company X and not here, culture type is often the answer. Bringing this vocabulary to the C-suite makes 'culture' discussable rather than vague.",
+   "source": "Westrum (2004); Forsgren, Humble & Kim, <i>Accelerate</i>"
+  },
+  {
+   "guid": "rMC@y=UPaA",
+   "type": "basic",
+   "deck": "Architect Mental Models::2 Organisational Behaviour & Systems Thinking",
+   "tags": [
+    "org",
+    "systems"
+   ],
+   "front": "What is bounded rationality, and what is satisficing?",
+   "back": "Decision-makers have limited information, time, and cognitive capacity, so they satisfice — choose the first option that is good enough — rather than optimise.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Executives will not read a 40-page comparison. Give them a decision that is good enough on their criteria in one page; save the appendix for those who ask.",
+   "source": "Herbert Simon"
+  },
+  {
+   "guid": "Ph&31YUM8A",
+   "type": "cloze",
+   "deck": "Architect Mental Models::2 Organisational Behaviour & Systems Thinking",
+   "tags": [
+    "org",
+    "systems"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Rogers' diffusion of innovations adopter categories: {{c1::innovators (~2.5%)}}, {{c2::early adopters (~13.5%)}}, {{c3::early majority (~34%)}}, {{c4::late majority (~34%)}}, {{c5::laggards (~16%)}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Your first three platform teams are innovators. Their needs (flexibility, power) differ from the early majority (reliability, docs, examples). Do not extrapolate innovator enthusiasm to the whole company in a board update.",
+   "source": "Rogers (1962)"
+  },
+  {
+   "guid": "u+}z@%#^hX",
+   "type": "basic",
+   "deck": "Architect Mental Models::2 Organisational Behaviour & Systems Thinking",
+   "tags": [
+    "org",
+    "systems"
+   ],
+   "front": "What is 'the chasm' (Moore), and what does it mean for internal platform adoption?",
+   "back": "The gap between early adopters, who buy the vision, and the early majority, who want a proven whole product with references. Most innovations die in the chasm.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Adoption stalls at 15% because the next teams want case studies, migration support, and guarantees. Ask leadership for enabling-team budget precisely at this point, with the chasm diagram.",
+   "source": "Geoffrey Moore, <i>Crossing the Chasm</i>"
+  },
+  {
+   "guid": "H-Gin.jkP;",
+   "type": "basic",
+   "deck": "Architect Mental Models::2 Organisational Behaviour & Systems Thinking",
+   "tags": [
+    "org",
+    "systems"
+   ],
+   "front": "Which five attributes of an innovation predict adoption rate (Rogers)?",
+   "back": "Relative advantage, compatibility (with existing values and workflows), complexity (lower is better), trialability, observability.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Score your platform on each. Low trialability (needs a two-week onboarding) and low observability (nobody sees other teams' wins) are common, cheap-to-fix adoption killers.",
+   "source": "Rogers"
+  },
+  {
+   "guid": "oy)tHo%+`a",
+   "type": "basic",
+   "deck": "Architect Mental Models::2 Organisational Behaviour & Systems Thinking",
+   "tags": [
+    "org",
+    "systems"
+   ],
+   "front": "State Larman's Laws of Organisational Behaviour (first two).",
+   "back": "1. Organisations are implicitly optimised to avoid changing the status quo of middle- and first-level manager and specialist positions and power structures. 2. As a corollary, any change initiative will be reduced to redefining or overloading the new terminology to mean basically the same as the status quo.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> 'We already do platform engineering' — the ops team was renamed. Point this out to leadership by defining the observable behaviours that would be different, not the labels.",
+   "source": "Craig Larman"
+  },
+  {
+   "guid": "D<vN[A4,4g",
+   "type": "basic",
+   "deck": "Architect Mental Models::2 Organisational Behaviour & Systems Thinking",
+   "tags": [
+    "org",
+    "systems"
+   ],
+   "front": "What is the Theory of Constraints' core rule about local optimisation?",
+   "back": "Improving anything other than the constraint does not improve system throughput; it may worsen it by increasing work-in-progress in front of the bottleneck.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Faster CI/CD (Continuous Integration / Continuous Delivery) pipelines do nothing if every change waits three weeks for a Change Advisory Board (CAB). Show the CIO the value stream with the queue times.",
+   "source": "Goldratt, <i>The Goal</i>"
+  },
+  {
+   "guid": "ronTq{0VU?",
+   "type": "basic",
+   "deck": "Architect Mental Models::2 Organisational Behaviour & Systems Thinking",
+   "tags": [
+    "org",
+    "systems"
+   ],
+   "front": "State Brooks's Law.",
+   "back": "Adding manpower to a late software project makes it later — because of ramp-up time and combinatorial growth of communication paths.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> When an executive proposes doubling the platform team to hit a date, present n(n−1)/2 communication paths and the onboarding cost, and offer scope reduction instead.",
+   "source": "Brooks, <i>The Mythical Man-Month</i>"
+  },
+  {
+   "guid": "CxFSsLgGbz",
+   "type": "basic",
+   "deck": "Architect Mental Models::2 Organisational Behaviour & Systems Thinking",
+   "tags": [
+    "org",
+    "systems"
+   ],
+   "front": "What is a 'golden path' (paved road), and why does it work as a systems intervention?",
+   "back": "An opinionated, supported, default way of doing something. It works by making the desired behaviour the path of least resistance (rule/default level) rather than by mandate.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Present it to leadership as: 'Teams can go off-road, but then they own compliance, on-call, and cost. On the paved road, the platform owns it.' That is an incentive structure, not a policy document.",
+   "source": "Spotify / Netflix engineering; Meadows (rules as leverage)"
+  },
+  {
+   "guid": "dMz~69v_Hs",
+   "type": "basic",
+   "deck": "Architect Mental Models::2 Organisational Behaviour & Systems Thinking",
+   "tags": [
+    "org",
+    "systems"
+   ],
+   "front": "Why is 'platform as a product' more than a slogan?",
+   "back": "It implies a product owner, user research, a roadmap driven by consumer demand, adoption metrics, and the possibility of being ignored. Without those, a platform is a mandated shared service that teams route around.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Ask the C-suite for a product owner and a funding model, not just headcount. Adoption is voluntary in practice even if mandatory on paper.",
+   "source": "Skelton & Pais; Evan Bottcher"
+  },
+  {
+   "guid": "I|>?G`Ipj[",
+   "type": "basic",
+   "deck": "Architect Mental Models::2 Organisational Behaviour & Systems Thinking",
+   "tags": [
+    "org",
+    "systems"
+   ],
+   "front": "What is Wardley mapping used for in an architecture decision?",
+   "back": "Placing components on a value chain (visibility to user) against evolution (genesis → custom → product → commodity) to see what should be built, bought, or outsourced, and where competitors will move.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Show the board that Kubernetes and identity are commodities (buy/consume), while your domain orchestration layer is custom (build). It ends arguments about 'building a cloud'.",
+   "source": "Simon Wardley"
+  },
+  {
+   "guid": "j:!n[3}EKa",
+   "type": "basic",
+   "deck": "Architect Mental Models::2 Organisational Behaviour & Systems Thinking",
+   "tags": [
+    "org",
+    "systems"
+   ],
+   "front": "What is a mental model in Senge's sense, and why does it matter for platform adoption?",
+   "back": "Deeply held internal images of how the world works that shape how we act. Change fails when it conflicts with unexamined mental models.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> If ops believes 'developers cannot be trusted with production', no amount of tooling produces self-service. Surface the model explicitly in leadership conversations before proposing tools.",
+   "source": "Senge"
+  },
+  {
+   "guid": "BZ4y}K:T%;",
+   "type": "basic",
+   "deck": "Architect Mental Models::2 Organisational Behaviour & Systems Thinking",
+   "tags": [
+    "org",
+    "systems"
+   ],
+   "front": "Why is platform adoption a sociotechnical problem before a technical one?",
+   "back": "Because adoption depends on incentives, team boundaries, funding, trust, and communication paths. A platform nobody is rewarded for using, or that crosses a hostile organisational boundary, fails regardless of quality.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Order of operations for a C-suite proposal: (1) who owns it and how it is funded, (2) what changes in team incentives, (3) which teams pilot and why, (4) then the technology.",
+   "source": "Synthesis: Conway; Meadows; Skelton & Pais"
+  },
+  {
+   "guid": "uDZJ+$|Bef",
+   "type": "cloze",
+   "deck": "Architect Mental Models::3 Persuasion, Influence & Negotiation",
+   "tags": [
+    "persuasion"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Cialdini's seven principles of influence: {{c1::reciprocity}}, {{c2::commitment and consistency}}, {{c3::social proof}}, {{c4::authority}}, {{c5::liking}}, {{c6::scarcity}}, {{c7::unity}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Map each to your platform pitch before a steering committee. Most architects rely on authority (expertise) alone, which is the weakest lever with executives who have their own experts.",
+   "source": "Cialdini, <i>Influence</i>"
+  },
+  {
+   "guid": "yM4Wi~.pI2",
+   "type": "basic",
+   "deck": "Architect Mental Models::3 Persuasion, Influence & Negotiation",
+   "tags": [
+    "persuasion"
+   ],
+   "front": "How does reciprocity work as an influence principle, and how does an architect use it ethically?",
+   "back": "People feel obliged to return favours, concessions, and information. Ethical use: give real value first — a useful analysis, an early warning, help with a problem that is not yours.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Solve a product team's deployment pain before asking them to pilot the platform. Send the CFO a cost breakdown they did not ask for and can use in their own reporting.",
+   "source": "Cialdini"
+  },
+  {
+   "guid": "ON0T96{XTZ",
+   "type": "basic",
+   "deck": "Architect Mental Models::3 Persuasion, Influence & Negotiation",
+   "tags": [
+    "persuasion"
+   ],
+   "front": "How does commitment and consistency work, and how do you use it in a decision process?",
+   "back": "People act consistently with prior public commitments, especially written and voluntary ones. Get small, explicit agreements early and build on them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Get the steering committee to agree in writing to decision criteria before presenting options. Later, the option that meets the criteria they set is hard to reject.",
+   "source": "Cialdini"
+  },
+  {
+   "guid": "r:?S-`;Hh@",
+   "type": "basic",
+   "deck": "Architect Mental Models::3 Persuasion, Influence & Negotiation",
+   "tags": [
+    "persuasion"
+   ],
+   "front": "How does social proof work, and what is the key condition for it to be effective?",
+   "back": "People copy the behaviour of others, especially similar others, under uncertainty. Similarity is the key condition.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> 'Three companies in our sector, including our main competitor, run this pattern' persuades a Chief Executive Officer (CEO) more than any benchmark. Internally, 'Team X halved their release time' persuades peer teams.",
+   "source": "Cialdini"
+  },
+  {
+   "guid": "hS%O/S9{uu",
+   "type": "basic",
+   "deck": "Architect Mental Models::3 Persuasion, Influence & Negotiation",
+   "tags": [
+    "persuasion"
+   ],
+   "front": "What is the authority principle, and what is its weakness with executives?",
+   "back": "People defer to credible expertise and credentials. Weakness: executives are surrounded by experts with conflicting views; unbacked authority is discounted, and it can trigger reactance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Borrow authority selectively: cite external analysts, auditors, or regulators for claims executives cannot evaluate, and let your track record (calibration) carry the rest.",
+   "source": "Cialdini"
+  },
+  {
+   "guid": "tC{x1dx(h&",
+   "type": "basic",
+   "deck": "Architect Mental Models::3 Persuasion, Influence & Negotiation",
+   "tags": [
+    "persuasion"
+   ],
+   "front": "How does scarcity work, and how do you use it without manipulation?",
+   "back": "Perceived limited availability or a deadline increases perceived value. Honest use: real end-of-support dates, real budget windows, real regulatory deadlines.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> 'The vendor's end-of-life is Q2 2028; after that every month costs us extended support at €40k.' Never invent urgency — executives remember.",
+   "source": "Cialdini"
+  },
+  {
+   "guid": "eXrCcNw.ke",
+   "type": "basic",
+   "deck": "Architect Mental Models::3 Persuasion, Influence & Negotiation",
+   "tags": [
+    "persuasion"
+   ],
+   "front": "What is the unity principle (Cialdini's seventh)?",
+   "back": "Shared identity — 'we' rather than 'us and them' — increases influence far beyond mere liking. Family, region, profession, or a shared enemy.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Frame the platform as 'our engineering organisation's capability' rather than 'the platform team's product'. Co-author the proposal with a product leader.",
+   "source": "Cialdini, <i>Pre-Suasion</i>"
+  },
+  {
+   "guid": "J+D%zSOs{5",
+   "type": "basic",
+   "deck": "Architect Mental Models::3 Persuasion, Influence & Negotiation",
+   "tags": [
+    "persuasion"
+   ],
+   "front": "What is pre-suasion?",
+   "back": "Arranging attention and context before the message so that the audience is already receptive — what is salient at the moment of decision shapes the decision.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Open the board update with the incident cost trend before presenting the reliability platform investment. The number you show first determines which lens they use for the ask.",
+   "source": "Cialdini, <i>Pre-Suasion</i>"
+  },
+  {
+   "guid": "y<jibOKOw(",
+   "type": "basic",
+   "deck": "Architect Mental Models::3 Persuasion, Influence & Negotiation",
+   "tags": [
+    "persuasion"
+   ],
+   "front": "What is tactical empathy (Voss)?",
+   "back": "Deliberately understanding and articulating the counterpart's perspective and emotions so they feel understood — the precondition for them to hear you.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Before pushing back on a CFO's cost cut: 'It sounds like you are under real pressure to show a lower run-rate this year.' Only then present the trade-off.",
+   "source": "Chris Voss, <i>Never Split the Difference</i>"
+  },
+  {
+   "guid": "nv7D6,k7x6",
+   "type": "basic",
+   "deck": "Architect Mental Models::3 Persuasion, Influence & Negotiation",
+   "tags": [
+    "persuasion"
+   ],
+   "front": "What is labelling, and what is its format?",
+   "back": "Naming the other side's emotion or position: 'It seems like…', 'It sounds like…', 'It looks like…'. Never 'I think you feel…'. Then be silent.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> 'It seems like there is concern that this platform becomes another shelfware project.' The executive either confirms (now you can address it) or corrects you (now you know the real concern).",
+   "source": "Voss"
+  },
+  {
+   "guid": "jpPMzUNK7q",
+   "type": "basic",
+   "deck": "Architect Mental Models::3 Persuasion, Influence & Negotiation",
+   "tags": [
+    "persuasion"
+   ],
+   "front": "What is an accusation audit?",
+   "back": "Listing every negative thing the other side could think about you or your proposal up front, before they say it. Defuses objections and demonstrates you understand them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> 'You are probably thinking: this is the third platform initiative in five years, the last two failed, and the team asking for money is the same one.' Then explain what is different.",
+   "source": "Voss"
+  },
+  {
+   "guid": "j?;1SN8T*M",
+   "type": "basic",
+   "deck": "Architect Mental Models::3 Persuasion, Influence & Negotiation",
+   "tags": [
+    "persuasion"
+   ],
+   "front": "What is a calibrated question, and why does it work?",
+   "back": "An open question starting with 'how' or 'what' that makes the other side solve your problem and feel in control. 'How am I supposed to do that?' 'What about this does not work for you?'",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> When a CIO sets an impossible date: 'How do you see us doing this with the current compliance process?' They discover the constraint themselves instead of hearing you say no.",
+   "source": "Voss"
+  },
+  {
+   "guid": "gDA5Nxc3>x",
+   "type": "basic",
+   "deck": "Architect Mental Models::3 Persuasion, Influence & Negotiation",
+   "tags": [
+    "persuasion"
+   ],
+   "front": "Why does Voss prefer 'no'-oriented questions to 'yes'-oriented ones?",
+   "back": "Saying 'no' makes people feel safe and in control; a 'yes' extracted early feels like a trap. 'Is it a bad idea to…?' invites engagement without commitment.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> 'Would it be a mistake to pilot with just two teams first?' is easier for an executive to engage with than 'Can we pilot with two teams?'",
+   "source": "Voss"
+  },
+  {
+   "guid": "dW6;RsJT?3",
+   "type": "basic",
+   "deck": "Architect Mental Models::3 Persuasion, Influence & Negotiation",
+   "tags": [
+    "persuasion"
+   ],
+   "front": "'That's right' vs 'you're right' — what is the difference and why does it matter?",
+   "back": "'That's right' means the other person feels fully understood and has internalised the summary — a breakthrough. 'You're right' is how people end a conversation they want out of.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Summarise the executive's position until they say 'that's right'. If they say 'you're right, go ahead', you do not have buy-in, you have dismissal.",
+   "source": "Voss"
+  },
+  {
+   "guid": "N^Rt,_!P@o",
+   "type": "basic",
+   "deck": "Architect Mental Models::3 Persuasion, Influence & Negotiation",
+   "tags": [
+    "persuasion"
+   ],
+   "front": "What is mirroring (Voss)?",
+   "back": "Repeating the last one to three words the other person said, as a question, then staying silent. Prompts elaboration and signals attention.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Executive: 'We cannot afford another failed platform.' You: 'Another failed platform?' They then tell you exactly what failure looked like last time.",
+   "source": "Voss"
+  },
+  {
+   "guid": "cl~(/fyo/P",
+   "type": "basic",
+   "deck": "Architect Mental Models::3 Persuasion, Influence & Negotiation",
+   "tags": [
+    "persuasion"
+   ],
+   "front": "What does Voss mean by 'black swans' in negotiation?",
+   "back": "Unknown unknowns — pieces of information that, once discovered, change the negotiation entirely. Found by listening, not pitching.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> The real reason a CFO blocks the cloud budget may be a lease commitment on the datacenter you know nothing about. Ask before pitching.",
+   "source": "Voss"
+  },
+  {
+   "guid": "wV1MHTjZ8,",
+   "type": "basic",
+   "deck": "Architect Mental Models::3 Persuasion, Influence & Negotiation",
+   "tags": [
+    "persuasion"
+   ],
+   "front": "What is the Ackerman bargaining method?",
+   "back": "Set a target; open at 65% of it, then concede to 85%, 95%, 100% in decreasing increments; use empathy and 'no' questions between offers; end on a precise non-round number.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Vendor licence negotiations. Decreasing concessions signal you are near your limit; a final figure like €387,400 signals calculation rather than haggling.",
+   "source": "Voss"
+  },
+  {
+   "guid": "fI$,S*J)vi",
+   "type": "basic",
+   "deck": "Architect Mental Models::3 Persuasion, Influence & Negotiation",
+   "tags": [
+    "persuasion"
+   ],
+   "front": "Fisher & Ury: what does 'separate the people from the problem' mean?",
+   "back": "Address relationship and emotion issues directly and separately from the substantive issue; be soft on the people, hard on the problem.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> The ops lead who blocks self-service is protecting their team's relevance. Address that (role in the new model) as its own conversation, not as a technical objection to refute.",
+   "source": "Fisher & Ury, <i>Getting to Yes</i>"
+  },
+  {
+   "guid": "fcwsFXI{{t",
+   "type": "basic",
+   "deck": "Architect Mental Models::3 Persuasion, Influence & Negotiation",
+   "tags": [
+    "persuasion"
+   ],
+   "front": "What is the difference between positions and interests?",
+   "back": "A position is what someone says they want; an interest is why they want it. Positions conflict; interests often can be reconciled.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Position: 'Security must approve every deployment.' Interest: auditability and no unreviewed changes. Automated policy-as-code with audit trail satisfies the interest without the position.",
+   "source": "Fisher & Ury"
+  },
+  {
+   "guid": "AE*L,BkSLx",
+   "type": "basic",
+   "deck": "Architect Mental Models::3 Persuasion, Influence & Negotiation",
+   "tags": [
+    "persuasion"
+   ],
+   "front": "What does BATNA stand for and why does it determine negotiating power?",
+   "back": "Best Alternative To a Negotiated Agreement (BATNA): what you do if no deal is reached. Power in negotiation comes from having a good BATNA and knowing the other side's.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Before a vendor renewal, have a credible migration plan to an alternative, even if you never use it. Before asking the C-suite for platform funding, know what happens if they say no — and say it.",
+   "source": "Fisher & Ury"
+  },
+  {
+   "guid": "eP]q;tv<S.",
+   "type": "basic",
+   "deck": "Architect Mental Models::3 Persuasion, Influence & Negotiation",
+   "tags": [
+    "persuasion"
+   ],
+   "front": "What does 'insist on objective criteria' mean in principled negotiation?",
+   "back": "Base agreement on independent standards (market rates, benchmarks, regulations, precedent) rather than on will or pressure.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> 'Gartner benchmarks put comparable platform teams at 1 engineer per 8–12 product teams; we have 1 per 25.' The number argues for you so you do not have to.",
+   "source": "Fisher & Ury"
+  },
+  {
+   "guid": "O}M>)Zo3&A",
+   "type": "basic",
+   "deck": "Architect Mental Models::3 Persuasion, Influence & Negotiation",
+   "tags": [
+    "persuasion"
+   ],
+   "front": "What does 'invent options for mutual gain' mean?",
+   "back": "Separate inventing from deciding; generate many options before choosing; look for shared and differing interests that allow trades.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> CFO wants lower capex; you want flexibility. Option: consumption-based pricing with a committed-use discount — both interests served, neither position held.",
+   "source": "Fisher & Ury"
+  },
+  {
+   "guid": "kGLo`r]NFf",
+   "type": "cloze",
+   "deck": "Architect Mental Models::3 Persuasion, Influence & Negotiation",
+   "tags": [
+    "persuasion"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Aristotle's three modes of persuasion: {{c1::ethos (credibility of the speaker)}}, {{c2::pathos (emotion of the audience)}}, {{c3::logos (logic of the argument)}}. Engineers overinvest in {{c4::logos}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> A board deck that is 100% logos loses to a competitor's 30-second story about a customer outage. Lead with the story, support with the numbers.",
+   "source": "Aristotle, <i>Rhetoric</i>"
+  },
+  {
+   "guid": "z2UVyi}f9R",
+   "type": "basic",
+   "deck": "Architect Mental Models::3 Persuasion, Influence & Negotiation",
+   "tags": [
+    "persuasion"
+   ],
+   "front": "What is the Pyramid Principle (Minto), and why does it fit executive communication?",
+   "back": "Answer first, then the grouped supporting arguments, then the data. Executives can stop reading at any level and still have the conclusion.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Slide 1: 'Recommendation: adopt managed Kubernetes on provider X; cost €1.2M over 3 years; decision needed by 30 Oct.' Everything after that is support.",
+   "source": "Barbara Minto"
+  },
+  {
+   "guid": "e<Rh8oR^5+",
+   "type": "basic",
+   "deck": "Architect Mental Models::3 Persuasion, Influence & Negotiation",
+   "tags": [
+    "persuasion"
+   ],
+   "front": "What is 'pre-wiring' a decision?",
+   "back": "Meeting each decision-maker individually before the group meeting to hear objections, adapt, and secure support, so the meeting ratifies rather than debates.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Never let a steering committee see the platform proposal for the first time in the steering committee. The CFO's objection should be answered in the deck because you heard it last week.",
+   "source": "Common executive practice; McKinsey"
+  },
+  {
+   "guid": "h=z@P}n_Ve",
+   "type": "basic",
+   "deck": "Architect Mental Models::3 Persuasion, Influence & Negotiation",
+   "tags": [
+    "persuasion"
+   ],
+   "front": "How should a Solutions Architect structure a decision memo for the C-suite?",
+   "back": "One page: decision requested; recommendation; 2–3 options with cost, risk, and time; why the recommendation; what happens if we do nothing; what you need from them. Appendix for detail.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Executives decide between options, they do not design solutions. Always include 'do nothing' as a priced option — it stops the status quo being free.",
+   "source": "Minto; Amazon narrative memos"
+  },
+  {
+   "guid": "uEcSYnb_@k",
+   "type": "basic",
+   "deck": "Architect Mental Models::3 Persuasion, Influence & Negotiation",
+   "tags": [
+    "persuasion"
+   ],
+   "front": "What is the 'so what' test?",
+   "back": "For every fact in an executive communication, ask what it implies for the decision. If there is no implication, cut it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> 'The cluster runs 1.31' — so what? 'The cluster version reaches end-of-support in March, after which our cyber-insurance excludes it' — decision-relevant.",
+   "source": "Minto; consulting practice"
+  },
+  {
+   "guid": "I,0pw{Lc$W",
+   "type": "basic",
+   "deck": "Architect Mental Models::3 Persuasion, Influence & Negotiation",
+   "tags": [
+    "persuasion"
+   ],
+   "front": "What is 'disagree and commit', and when should an architect use it?",
+   "back": "Argue your position fully, then, once a decision is made, support it without relitigating. Use it when you have been heard and the decision is reversible or not catastrophic.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> After losing the build-vs-buy debate, tell the CTO: 'I still think X, and I will make Y work. Here is how we will know by Q2 if I was right.' Preserves credibility for the next decision.",
+   "source": "Amazon leadership principles; Grove"
+  },
+  {
+   "guid": "fUoz[}`L,>",
+   "type": "basic",
+   "deck": "Architect Mental Models::3 Persuasion, Influence & Negotiation",
+   "tags": [
+    "persuasion"
+   ],
+   "front": "What is steelmanning, and why does it persuade executives?",
+   "back": "Presenting the strongest version of the opposing view before rebutting it. Signals you understand the trade-offs and are not selling.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> 'The strongest case for staying on-prem is data residency and the sunk lease. Here is why I still recommend moving, and here is what would change my mind.'",
+   "source": "Rapoport's rules; Dennett"
+  },
+  {
+   "guid": "K[pof.@<a9",
+   "type": "basic",
+   "deck": "Architect Mental Models::3 Persuasion, Influence & Negotiation",
+   "tags": [
+    "persuasion"
+   ],
+   "front": "Why is 'architecture is 60% getting people to agree' true, and what follows from it?",
+   "back": "An architecture that is not adopted does not exist. Decisions are made by people with interests, incentives, and cognitive biases. It follows that persuasion, stakeholder mapping, and negotiation are core architecture skills, not soft extras.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Allocate architecture time explicitly: stakeholder interviews, pre-wiring, one-page memos, and objection handling are on the plan, not done in the gaps.",
+   "source": "Synthesis; Gregor Hohpe, <i>The Software Architect Elevator</i>"
+  },
+  {
+   "guid": "tnNQO6M,9Z",
+   "type": "basic",
+   "deck": "Architect Mental Models::3 Persuasion, Influence & Negotiation",
+   "tags": [
+    "persuasion"
+   ],
+   "front": "What is the 'architect elevator' (Hohpe)?",
+   "back": "The architect's role is to ride between the penthouse (strategy, C-suite) and the engine room (implementation), translating in both directions, because otherwise the two disconnect.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Translate 'we need service mesh' into 'we reduce the cost of each security audit by €X and the time to add a new partner integration from weeks to days.'",
+   "source": "Gregor Hohpe"
+  },
+  {
+   "guid": "N~LcBlQa$m",
+   "type": "basic",
+   "deck": "Architect Mental Models::3 Persuasion, Influence & Negotiation",
+   "tags": [
+    "persuasion"
+   ],
+   "front": "How do you handle a hostile question from an executive in a meeting?",
+   "back": "Pause; label ('It sounds like the concern is …'); confirm you understood; answer the concern, not the phrasing; if you do not know, say so and commit to a date for the answer.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> CFO: 'Why would we trust this team with another €2M?' Label: 'It sounds like the last initiative's outcome is the real question.' Then address that directly with what changed.",
+   "source": "Voss; general practice"
+  },
+  {
+   "guid": "jg_*G]cP]<",
+   "type": "basic",
+   "deck": "Architect Mental Models::3 Persuasion, Influence & Negotiation",
+   "tags": [
+    "persuasion"
+   ],
+   "front": "What is the difference between a stakeholder's stated risk appetite and their revealed risk appetite?",
+   "back": "Stated: what they say in strategy documents ('innovative', 'cloud-first'). Revealed: what they actually approve and punish. Revealed appetite governs decisions.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> If every exception request in the last year was denied, do not propose a plan that relies on exceptions, regardless of the 'cloud-first' strategy slide.",
+   "source": "Revealed preference (Samuelson); organisational practice"
+  },
+  {
+   "guid": "Qg]^88K,Yy",
+   "type": "basic",
+   "deck": "Architect Mental Models::4 Learning Science",
+   "tags": [
+    "learning"
+   ],
+   "front": "What is the spacing effect?",
+   "back": "Learning is more durable when study is spread over time rather than massed. Each review at the edge of forgetting strengthens the memory more than a review while it is fresh.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Do not re-read the cloud provider's architecture guide the night before the certification. Reviewing it in spaced sessions over a month produces retention that survives to the client meeting.",
+   "source": "Ebbinghaus (1885); Cepeda et al. (2006)"
+  },
+  {
+   "guid": "y3TpVKl1qE",
+   "type": "basic",
+   "deck": "Architect Mental Models::4 Learning Science",
+   "tags": [
+    "learning"
+   ],
+   "front": "What is the testing effect (retrieval practice)?",
+   "back": "Actively retrieving information from memory strengthens it more than re-studying it, even when retrieval fails and feedback is given.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Before opening the runbook, try to reconstruct the incident procedure from memory. Before a design review, write the trade-offs from memory, then check.",
+   "source": "Roediger & Karpicke (2006)"
+  },
+  {
+   "guid": "IdW_V?hn!G",
+   "type": "basic",
+   "deck": "Architect Mental Models::4 Learning Science",
+   "tags": [
+    "learning"
+   ],
+   "front": "What are 'desirable difficulties'?",
+   "back": "Conditions that make learning feel harder and slower but produce better long-term retention and transfer: spacing, interleaving, retrieval, generation, varying conditions.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Learning three cloud providers' networking models in parallel feels confusing; it produces better transferable understanding than mastering one at a time.",
+   "source": "Bjork & Bjork"
+  },
+  {
+   "guid": "t:rcf7B(V|",
+   "type": "basic",
+   "deck": "Architect Mental Models::4 Learning Science",
+   "tags": [
+    "learning"
+   ],
+   "front": "What is interleaving, and why does it beat blocked practice?",
+   "back": "Mixing different problem types in one session instead of practising one type at a time. Forces discrimination — choosing which approach applies — which is what real problems require.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Mix architecture katas across domains (payments, IoT, batch) rather than doing five payment systems in a row. Real client engagements never come pre-labelled.",
+   "source": "Rohrer & Taylor (2007)"
+  },
+  {
+   "guid": "M%IH`Z}g4a",
+   "type": "cloze",
+   "deck": "Architect Mental Models::4 Learning Science",
+   "tags": [
+    "learning"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Deliberate practice (Ericsson) requires: a {{c1::well-defined specific goal}}, {{c2::full concentration}}, {{c3::immediate informative feedback}}, {{c4::repetition with refinement}}, and working {{c5::just beyond current ability}}. Mere experience does not qualify.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Twenty years of 'experience' presenting to executives is not practice. Recording one presentation a month, scoring it against a rubric, and fixing one thing is.",
+   "source": "Ericsson, Krampe & Tesch-Römer (1993); <i>Peak</i>"
+  },
+  {
+   "guid": "Jpc+UA0qwa",
+   "type": "basic",
+   "deck": "Architect Mental Models::4 Learning Science",
+   "tags": [
+    "learning"
+   ],
+   "front": "Why does experience alone often fail to produce expertise?",
+   "back": "Without feedback loops and deliberate stretch, performance plateaus at 'acceptable' and becomes automatic. In domains with noisy or delayed feedback, experience can even entrench wrong beliefs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Architecture decisions have feedback delays of years. Substitute fast feedback: predictions logged and scored, design reviews by peers, post-implementation reviews at 6 and 12 months.",
+   "source": "Ericsson; Kahneman & Klein, <i>Conditions for Intuitive Expertise</i>"
+  },
+  {
+   "guid": "fZd&n?%P5k",
+   "type": "basic",
+   "deck": "Architect Mental Models::4 Learning Science",
+   "tags": [
+    "learning"
+   ],
+   "front": "Kahneman & Klein: when can expert intuition be trusted?",
+   "back": "Only when the environment is sufficiently regular (valid cues exist) and the expert has had prolonged practice with rapid, clear feedback. Otherwise intuition is confident but uninformative.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Trust a senior Site Reliability Engineer's (SRE's) gut on an outage (regular environment, fast feedback). Distrust anyone's gut on 5-year technology bets (irregular, slow feedback) — use the outside view.",
+   "source": "Kahneman & Klein (2009)"
+  },
+  {
+   "guid": "xg/hJ0G$GA",
+   "type": "basic",
+   "deck": "Architect Mental Models::4 Learning Science",
+   "tags": [
+    "learning"
+   ],
+   "front": "What is the difference between near and far transfer?",
+   "back": "Near transfer: applying learning to closely similar situations. Far transfer: applying it to different domains or surface features. Far transfer is rare and requires learning the underlying principle, not the surface case.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Knowing that a Kubernetes control loop is a balancing feedback loop lets you recognise the same structure in a hiring pipeline. Learning Kubernetes alone does not.",
+   "source": "Barnett & Ceci (2002); Perkins & Salomon"
+  },
+  {
+   "guid": "yoO-v`h;{h",
+   "type": "basic",
+   "deck": "Architect Mental Models::4 Learning Science",
+   "tags": [
+    "learning"
+   ],
+   "front": "What conditions promote transfer of learning?",
+   "back": "Learning the abstract principle explicitly; multiple varied examples; comparing cases to extract the common structure; practising retrieval in new contexts; understanding why, not just how.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Study anchoring with a vendor-pricing example, a timeline example, and a salary example, then state the rule. One example produces a fact; three plus a rule produce a tool.",
+   "source": "Gick & Holyoak (1983)"
+  },
+  {
+   "guid": "Q.r/A2x%F4",
+   "type": "basic",
+   "deck": "Architect Mental Models::4 Learning Science",
+   "tags": [
+    "learning"
+   ],
+   "front": "What is elaboration as a learning strategy?",
+   "back": "Explaining and connecting new material to what you already know — asking how and why, generating your own examples.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> For every principle in this deck, write one example from your own last quarter. The self-generated example is remembered far better than the supplied one.",
+   "source": "Dunlosky et al. (2013)"
+  },
+  {
+   "guid": "el1R9H.}>6",
+   "type": "basic",
+   "deck": "Architect Mental Models::4 Learning Science",
+   "tags": [
+    "learning"
+   ],
+   "front": "What is the generation effect?",
+   "back": "Information you produce yourself (answers, examples, solutions) is retained better than information you read or are given.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Before reading a reference architecture, sketch your own. Even when yours is wrong, the correction sticks.",
+   "source": "Slamecka & Graf (1978)"
+  },
+  {
+   "guid": "t>u21x;6|.",
+   "type": "cloze",
+   "deck": "Architect Mental Models::4 Learning Science",
+   "tags": [
+    "learning"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Cognitive load theory distinguishes {{c1::intrinsic}} load (complexity inherent to the material), {{c2::extraneous}} load (caused by poor presentation), and {{c3::germane}} load (effort building schemas). Instruction should minimise {{c4::extraneous}} load.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> A 60-box architecture diagram in a C-suite deck is almost entirely extraneous load. Three boxes and one arrow per decision point.",
+   "source": "Sweller (1988)"
+  },
+  {
+   "guid": "mIDSt(YRJd",
+   "type": "basic",
+   "deck": "Architect Mental Models::4 Learning Science",
+   "tags": [
+    "learning"
+   ],
+   "front": "What is the expertise reversal effect?",
+   "back": "Instructional support that helps novices (worked examples, guidance) becomes redundant or harmful for experts, who learn better from problem-solving.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> The same onboarding guide cannot serve a junior developer and a principal engineer. Platform documentation needs a 'first deploy in 10 minutes' path and a reference path.",
+   "source": "Kalyuga et al. (2003)"
+  },
+  {
+   "guid": "sh:iF1g.T_",
+   "type": "basic",
+   "deck": "Architect Mental Models::4 Learning Science",
+   "tags": [
+    "learning"
+   ],
+   "front": "What is chunking, and how does it explain expertise?",
+   "back": "Grouping units of information into larger meaningful patterns held as one item in working memory. Experts see chunks (patterns) where novices see pieces.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> A senior architect sees 'CQRS with an outbox' where a junior sees twelve services. Learning patterns by name is building chunks, and it is why shared vocabulary speeds design reviews.",
+   "source": "Miller (1956); Chase & Simon (1973)"
+  },
+  {
+   "guid": "JW^cWQ=SQG",
+   "type": "basic",
+   "deck": "Architect Mental Models::4 Learning Science",
+   "tags": [
+    "learning"
+   ],
+   "front": "What is the illusion of competence (fluency illusion)?",
+   "back": "Mistaking ease of processing (re-reading, highlighting, watching a demo) for understanding. Familiarity feels like knowledge.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Watching a conference talk on event sourcing produces a feeling of understanding that evaporates when you must design one. Test yourself before claiming the skill in a proposal.",
+   "source": "Koriat & Bjork; Brown, Roediger & McDaniel, <i>Make It Stick</i>"
+  },
+  {
+   "guid": "v]g.An6&P$",
+   "type": "basic",
+   "deck": "Architect Mental Models::4 Learning Science",
+   "tags": [
+    "learning"
+   ],
+   "front": "What is the Feynman technique?",
+   "back": "Explain the concept in plain language as if to a novice; notice where you stall or use jargon; go back to the source for exactly that gap; simplify again.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Explaining zero-trust networking to a CFO in plain language is both a persuasion exercise and the most reliable test of whether you understand it.",
+   "source": "Attributed to Richard Feynman"
+  },
+  {
+   "guid": "z$sbkh*/sQ",
+   "type": "basic",
+   "deck": "Architect Mental Models::4 Learning Science",
+   "tags": [
+    "learning"
+   ],
+   "front": "What is metacognition, and why does calibration of learning matter?",
+   "back": "Monitoring and controlling your own thinking and learning — knowing what you know. Calibrated learners allocate study time to what they do not know; uncalibrated learners re-study what feels fluent.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Rate your confidence before each card in this deck. Cards where you were confident and wrong are where the study time goes.",
+   "source": "Flavell (1979); Dunlosky"
+  },
+  {
+   "guid": "KxC_CVOc4?",
+   "type": "basic",
+   "deck": "Architect Mental Models::4 Learning Science",
+   "tags": [
+    "learning"
+   ],
+   "front": "What is the minimum information principle for flashcards?",
+   "back": "Each card should test one atomic fact or relation. Complex cards are forgotten as a whole and cannot be scheduled efficiently.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> 'Explain Cialdini' is a bad card. 'What is the key condition for social proof to work?' is a good card.",
+   "source": "Piotr Wozniak (SuperMemo), <i>20 Rules of Formulating Knowledge</i>"
+  },
+  {
+   "guid": "OS}j:@V-km",
+   "type": "basic",
+   "deck": "Architect Mental Models::4 Learning Science",
+   "tags": [
+    "learning"
+   ],
+   "front": "How do spaced repetition algorithms decide the next review interval?",
+   "back": "They model the forgetting curve per item and schedule review just before predicted recall drops below a target (e.g. 90%). Successful recall lengthens the interval; failure resets or shortens it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> The same principle applies to knowledge maintenance in a team: the runbook you have not exercised in 18 months is one you no longer know. Schedule game days at the edge of forgetting.",
+   "source": "Ebbinghaus; Wozniak; FSRS"
+  },
+  {
+   "guid": "bWLBIYrgGl",
+   "type": "basic",
+   "deck": "Architect Mental Models::4 Learning Science",
+   "tags": [
+    "learning"
+   ],
+   "front": "Why is learning science the meta-skill that accelerates the other three areas?",
+   "back": "Biases, systems thinking, and persuasion are all pattern-recognition skills that must transfer to novel situations under time pressure. Only spaced retrieval, deliberate practice, and explicit abstraction convert reading into usable patterns.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Reading Kahneman once produces the illusion of competence. Logging predictions weekly, scoring them, and reviewing bias cards for six months produces calibration you can demonstrate to a board.",
+   "source": "Synthesis"
+  },
+  {
+   "guid": "fG]#S8sIbH",
+   "type": "basic",
+   "deck": "Architect Mental Models::4 Learning Science",
+   "tags": [
+    "learning"
+   ],
+   "front": "What is a prediction log, and how does it combine deliberate practice with calibration training?",
+   "back": "A record of specific, dated, probabilistic predictions with resolution dates and outcomes. Provides the fast, unambiguous feedback that architecture work normally lacks.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Entry: '2026-09-13 — 75% that the identity migration passes security review by 30 Nov.' Review monthly. After 30–50 entries, compute your Brier score and adjust how you present confidence to executives.",
+   "source": "Tetlock; Ericsson"
+  },
+  {
+   "guid": "rd?Y;hQtbD",
+   "type": "basic",
+   "deck": "Architect Mental Models::4 Learning Science",
+   "tags": [
+    "learning"
+   ],
+   "front": "What is the difference between a schema and a fact, and why does it matter for what you memorise?",
+   "back": "A fact is an isolated item; a schema is an organised structure of related concepts that lets you interpret new situations. Facts are useful only as anchors for schemas.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Memorising 'loss aversion ≈ 2:1' is a fact. Memorising 'reframe gains as avoided losses when presenting to the C-suite' with three examples is a schema you will actually use.",
+   "source": "Bartlett (1932); Sweller"
+  },
+  {
+   "guid": "l3T.`+K1}Q",
+   "type": "basic",
+   "deck": "Architect Mental Models::4 Learning Science",
+   "tags": [
+    "learning"
+   ],
+   "front": "What is dual coding?",
+   "back": "Combining verbal and visual representations of the same idea improves retention because they are stored and retrieved through partly independent channels.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Pair each systems archetype with its causal-loop diagram. When explaining 'limits to growth' to a CIO, draw the loop rather than describe it.",
+   "source": "Paivio (1971)"
+  },
+  {
+   "guid": "A<+yfHAq/:",
+   "type": "basic",
+   "deck": "Architect Mental Models::4 Learning Science",
+   "tags": [
+    "learning"
+   ],
+   "front": "What is the 10,000-hour rule, and what did Ericsson actually claim?",
+   "back": "The 10,000-hour figure was a popularisation (Gladwell); Ericsson claimed that the quantity of deliberate practice, not hours of experience, predicts expert performance, and the number varies by domain.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> Do not tell a CTO 'we need experienced engineers' — specify what deliberate practice the role requires and how the team will get feedback.",
+   "source": "Ericsson; Gladwell, <i>Outliers</i>"
+  }
+ ]
+}

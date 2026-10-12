@@ -1,0 +1,590 @@
+{
+ "source_file": "policy_as_code_supply_chain_security.apkg",
+ "notes": [
+  {
+   "guid": "z:xNPt}d},",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::Kyverno"
+   ],
+   "front": "What is Kyverno?",
+   "back": "A Kubernetes (K8s) native policy engine that runs as an admission controller. Policies are written as K8s resources (YAML), not a separate DSL like Rego.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "zHqh(~aj~z",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::Kyverno"
+   ],
+   "front": "What are the three rule types a Kyverno <code>ClusterPolicy</code> can define?",
+   "back": "<code>validate</code> (accept/reject resources), <code>mutate</code> (patch resources before persistence), and <code>generate</code> (create auxiliary resources, e.g. default NetworkPolicies).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "M(aa;E#K?s",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::Kyverno"
+   ],
+   "front": "What does Kyverno's <code>background</code> scan mode do?",
+   "back": "Periodically re-evaluates policies against existing resources already in the cluster (not just at admission time), surfacing violations that predate the policy.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "jY^8hxE7a)",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::Kyverno"
+   ],
+   "front": "What is Kyverno's <code>verifyImages</code> rule used for?",
+   "back": "Verifying container image signatures (e.g. Cosign/Sigstore signatures) and attestations at admission time, rejecting unsigned or tampered images.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "NsAmC#Hi}0",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::Kyverno"
+   ],
+   "front": "What is Kyverno policy \"autogen\" for Pod controllers?",
+   "back": "Kyverno automatically generates equivalent rules for higher-level controllers (Deployment, StatefulSet, Job, etc.) from a rule written only against Pod, so you don't have to duplicate rules per controller kind.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "E=6yc-IjsC",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::Kyverno"
+   ],
+   "front": "How does Kyverno enforce policy at admission time technically?",
+   "back": "It registers as a ValidatingWebhookConfiguration / MutatingWebhookConfiguration, so the K8s API server calls out to Kyverno during the admission chain.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "gk(zuW,<w}",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::OPA-Gatekeeper"
+   ],
+   "front": "What is Open Policy Agent (OPA)?",
+   "back": "A general-purpose, domain-agnostic policy engine. Policies are written in Rego, a declarative query language, and can evaluate any structured JSON input — not K8s-specific.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "MIftFpQi(}",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::OPA-Gatekeeper"
+   ],
+   "front": "What is Gatekeeper's relationship to OPA?",
+   "back": "Gatekeeper is a K8s-specific project that wraps OPA as a validating (and mutating) admission controller, adding K8s CRDs (Custom Resource Definitions) on top of raw Rego.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "gKy`M`rmz_",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::OPA-Gatekeeper"
+   ],
+   "front": "What is a Gatekeeper <code>ConstraintTemplate</code>?",
+   "back": "A CRD (Custom Resource Definition) that defines reusable Rego logic plus a schema for parameters — essentially a policy \"class\" that can be parameterized.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "D!:`OM$#nn",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::OPA-Gatekeeper"
+   ],
+   "front": "What is a Gatekeeper <code>Constraint</code>?",
+   "back": "An instance of a ConstraintTemplate: it supplies concrete parameters and specifies which resources (via <code>match</code>) the policy applies to.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "MsK=VKhFj;",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::OPA-Gatekeeper"
+   ],
+   "front": "What does the Gatekeeper <code>Config</code> resource's sync feature do?",
+   "back": "Replicates specified cluster resources into OPA's in-memory cache so Rego rules can reference other objects (e.g. all Namespaces) during evaluation, not just the incoming request.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "EbEo&oVu:W",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::OPA-Gatekeeper"
+   ],
+   "front": "What is Gatekeeper's audit function?",
+   "back": "A periodic background process that evaluates existing cluster resources against active Constraints and records violations in their status, similar in purpose to Kyverno's background scan.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "MfKrmsT]1w",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::OPA-Gatekeeper"
+   ],
+   "front": "Why might a team choose Kyverno over OPA/Gatekeeper, or vice versa?",
+   "back": "Kyverno: lower barrier to entry (YAML, K8s-native), faster for common K8s cases. OPA/Gatekeeper: more expressive (Rego), reusable beyond K8s (CI pipelines, APIs, Terraform), better for complex cross-resource logic.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "p<z#;QC?zx",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::Cosign-Sigstore"
+   ],
+   "front": "What is Sigstore?",
+   "back": "An open-source project providing infrastructure for signing, verifying, and recording provenance of software artifacts (container images, binaries, SBOMs) without requiring long-lived private keys.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "E^+76Be<VN",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::Cosign-Sigstore"
+   ],
+   "front": "What is Cosign?",
+   "back": "The signing/verification client tool within Sigstore, most commonly used to sign and verify OCI (Open Container Initiative) container images and other OCI artifacts.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "s^?@4RC6B",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::Cosign-Sigstore"
+   ],
+   "front": "What is Sigstore \"keyless signing\"?",
+   "back": "Signing using a short-lived certificate issued by Fulcio, bound to an OIDC (OpenID Connect) identity (e.g. a GitHub Actions workflow identity), instead of a long-lived private key the signer must manage.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "pjw},w7o=W",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::Cosign-Sigstore"
+   ],
+   "front": "What is Fulcio?",
+   "back": "Sigstore's certificate authority that issues short-lived (minutes-long) X.509 signing certificates bound to a verified OIDC identity.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "La^yK~SLs/",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::Cosign-Sigstore"
+   ],
+   "front": "What is Rekor?",
+   "back": "Sigstore's transparency log — an append-only, cryptographically verifiable ledger recording signing events, enabling public auditability of when and by whom an artifact was signed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "h]_h(s.z4=",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::Cosign-Sigstore"
+   ],
+   "front": "Where does Cosign store a signature for a container image?",
+   "back": "As a separate OCI artifact in the same registry, tagged by a hash derived from the image digest — the image manifest itself is not modified.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "s$^|8kD!`1",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::Cosign-Sigstore"
+   ],
+   "front": "What is a Cosign \"attestation\" (<code>cosign attest</code>) as opposed to a plain signature?",
+   "back": "A signed statement (in in-toto format) that attaches structured predicate data to an artifact — e.g. an SBOM (Software Bill of Materials) or SLSA (Supply-chain Levels for Software Artifacts) provenance — rather than just asserting \"this was signed by X\".",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "M4,nf}g]H2",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::SBOM"
+   ],
+   "front": "What is a Software Bill of Materials (SBOM)?",
+   "back": "A structured, machine-readable inventory of the components, libraries, and dependencies that make up a piece of software, including versions and (ideally) licenses.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "r],ba?A}d_",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::SBOM"
+   ],
+   "front": "What are the two dominant SBOM formats?",
+   "back": "SPDX (Software Package Data Exchange), originally license-compliance focused and now an ISO standard; and CycloneDX, originally security-focused and developed by OWASP.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "j1N*DpRiE9",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::SBOM"
+   ],
+   "front": "What does Syft do?",
+   "back": "Generates an SBOM from a container image, filesystem, or archive by scanning for known package manifests and installed packages.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "wEtlT6%$6v",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::SBOM"
+   ],
+   "front": "What does Grype do?",
+   "back": "Consumes an SBOM (or scans an image directly) and matches its components against vulnerability databases to report known CVEs (Common Vulnerabilities and Exposures).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "N:{dbL_K6^",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::SBOM"
+   ],
+   "front": "How does an SBOM typically get attached to a container image for later verification?",
+   "back": "As a Cosign attestation (<code>cosign attest --predicate sbom.json</code>), signed and stored alongside the image so downstream tooling can verify both authenticity and content.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "cr&,-6wY8?",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::ACS-StackRox"
+   ],
+   "front": "What is Red Hat Advanced Cluster Security (ACS)?",
+   "back": "Red Hat's Kubernetes-native security platform (based on the open-source StackRox project) covering vulnerability management, configuration/compliance checks, network segmentation visibility, and runtime threat detection.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "N6gadV^0$;",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::ACS-StackRox"
+   ],
+   "front": "How does ACS/StackRox typically integrate with a CI/CD pipeline?",
+   "back": "Via a CLI (<code>roxctl</code>) or plugin step that scans images for vulnerabilities and policy violations before deployment, failing the build if defined policies are violated.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "e44!u^Ax.6",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::ACS-StackRox"
+   ],
+   "front": "What does ACS's \"network graph\" feature provide?",
+   "back": "A visualization and enforcement mechanism showing actual observed pod-to-pod traffic, which can be used to generate or validate NetworkPolicies against real communication patterns.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "B.<1X0qthI",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::ACS-StackRox"
+   ],
+   "front": "How does ACS enforce policy at admission time?",
+   "back": "It can deploy its own admission controller webhook, similar in mechanism to Kyverno/Gatekeeper, to block non-compliant workloads before they're scheduled.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "q4.//zAEBE",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::ACS-StackRox"
+   ],
+   "front": "What distinguishes ACS/StackRox's scope from Kyverno or Gatekeeper alone?",
+   "back": "It's a broader platform spanning build-time scanning, deploy-time admission policy, and runtime detection (process/network anomaly detection), whereas Kyverno/Gatekeeper are focused specifically on admission-time policy enforcement.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "p}JKvOc#ub",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::SLSA"
+   ],
+   "front": "What does SLSA stand for and what problem does it address?",
+   "back": "Supply-chain Levels for Software Artifacts — a framework of incremental requirements for securing the software build/release pipeline against tampering, aimed at establishing verifiable provenance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "s1RrVRm(NY",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::SLSA"
+   ],
+   "front": "What is SLSA \"provenance\"?",
+   "back": "A signed, structured attestation (using the in-toto format) describing how an artifact was built: source repo/commit, builder identity, build steps, and materials used.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "b(*LG$K7}$",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::SLSA"
+   ],
+   "front": "What is a \"hermetic\" build in SLSA terms?",
+   "back": "A build executed with no unlisted/uncontrolled external network access or inputs, so all dependencies are explicitly declared and the output is reproducible from stated inputs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "rcbpFWl;[c",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::SLSA"
+   ],
+   "front": "Broadly, how do SLSA Build Levels differ (v1.0 model)?",
+   "back": "They range from Level 1 (provenance exists, best-effort) up through levels requiring a hardened, isolated build platform whose provenance can't be forged by the source repo owner — increasing trust in *how* the provenance was produced, not just that it exists.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "q%a~>y:&,]",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::SLSA"
+   ],
+   "front": "What format does SLSA provenance share with Cosign attestations and SBOM attestations?",
+   "back": "in-toto attestation format — a common statement envelope (predicate + subject) that lets provenance, SBOMs, and vulnerability scan results all be signed and verified the same way.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "vY5yua??Sw",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::CrossCutting"
+   ],
+   "front": "Describe the end-to-end chain linking SLSA, Cosign/Sigstore, SBOM, and Kyverno/Gatekeeper.",
+   "back": "Build system produces an artifact + SLSA provenance → Cosign signs the artifact and attests provenance/SBOM, recording the signing event in Rekor → at deploy time, Kyverno or Gatekeeper's <code>verifyImages</code>/Rego policy checks the signature and attestations before admitting the workload.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "P;F.H7*6)P",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::CrossCutting"
+   ],
+   "front": "Where does Red Hat ACS/StackRox typically sit relative to the SLSA→Cosign→Kyverno chain?",
+   "back": "Complementary rather than overlapping: it can scan for vulnerabilities pre-deploy (build/CI stage) and enforce/monitor at runtime (post-deploy), while SLSA/Cosign/Kyverno cover provenance integrity and admission-time signature verification.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "M7hN6KXDu!",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::CrossCutting"
+   ],
+   "front": "Why is a transparency log (Rekor) important even when signatures already use short-lived Fulcio certificates?",
+   "back": "Because the certificate is only valid for minutes, verifying a signature later requires proof it was made *while the cert was valid* — Rekor's timestamped, publicly auditable log provides that proof independent of the expired certificate.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "n2dGl4l}D=",
+   "type": "basic",
+   "deck": "Policy-as-Code & Supply Chain Security",
+   "tags": [
+    "Security::SupplyChain::CrossCutting"
+   ],
+   "front": "What single admission-time check unifies enforcement of Cosign signatures, SLSA provenance, and SBOM attestations in a K8s cluster?",
+   "back": "A Kyverno <code>verifyImages</code> rule (or an equivalent Gatekeeper/Rego constraint) configured to check the image's Cosign signature and required attestation predicates before allowing the Pod to be admitted.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  }
+ ]
+}

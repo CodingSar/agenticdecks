@@ -1,0 +1,590 @@
+{
+ "source_file": "idp_platform_engineering.apkg",
+ "notes": [
+  {
+   "guid": "m4wOg~@.0r",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::paap"
+   ],
+   "front": "What does it mean to treat a platform as a product (Platform-as-a-Product)?",
+   "back": "Applying product management discipline to an internal platform: the platform team acts as a product team, application teams are treated as internal customers, and the roadmap is driven by discovery, feedback, and adoption metrics rather than mandated top-down.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Platform-as-a-Product · concept"
+  },
+  {
+   "guid": "CEg[>y`Al",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::paap"
+   ],
+   "front": "What is a Platform Team responsible for, and how is it usually measured?",
+   "back": "Owning and evolving the Internal Developer Platform (IDP) itself as a product — not features of the business application. Success is measured by developer adoption, lead time, and satisfaction, not story points delivered.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Platform-as-a-Product · platform team"
+  },
+  {
+   "guid": "lw<fPd//pJ",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::paap"
+   ],
+   "front": "From Team Topologies, what three types of cognitive load exist, and which does platform engineering primarily target?",
+   "back": "Intrinsic (inherent task difficulty), extraneous (friction from tooling/process), and germane (learning that builds real understanding). Platform engineering mainly targets reducing extraneous load.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Platform-as-a-Product · cognitive load"
+  },
+  {
+   "guid": "CNvc8d@N,;",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::paap"
+   ],
+   "front": "What is the \"Thinnest Viable Platform (TVP)\"?",
+   "back": "Start by shipping the smallest platform that solves the most painful developer problems, then iterate based on real usage feedback — instead of building an all-encompassing platform up front.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Platform-as-a-Product · TVP"
+  },
+  {
+   "guid": "m:l&-P-4`H",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::paap"
+   ],
+   "front": "What does a Platform Product Manager actually do day to day?",
+   "back": "Runs discovery interviews with internal developers as \"customers,\" defines and prioritizes the platform roadmap (including which golden paths to build next), and tracks adoption metrics such as DORA metrics and developer satisfaction surveys.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Platform-as-a-Product · role"
+  },
+  {
+   "guid": "OW^AiNye@i",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::paap"
+   ],
+   "front": "What does \"X-as-a-Service\" mean in the platform engineering context?",
+   "back": "Platform capabilities — database provisioning, CI templates, observability setup — exposed as self-service APIs or UI that developers consume directly, instead of filing tickets to an Ops team.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Platform-as-a-Product · self-service"
+  },
+  {
+   "guid": "bZyT<2F+%-",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::paap"
+   ],
+   "front": "What is the main risk of building a platform without a product mindset?",
+   "back": "Low adoption: developers route around a mandated but unloved platform (shadow IT), because it was built to a top-down spec rather than around actual pain points — undermining the standardization it was meant to provide.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Platform-as-a-Product · adoption risk"
+  },
+  {
+   "guid": "u4UGl*(+{I",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::golden-paths"
+   ],
+   "front": "Define \"Golden Path\" in platform engineering.",
+   "back": "An opinionated, well-documented, platform-team-supported way to build, deploy, and operate a service for a common use case. It is the easiest path, not the only allowed path.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Golden Paths · definition"
+  },
+  {
+   "guid": "hV@fV<[D/>",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::golden-paths"
+   ],
+   "front": "How does a \"Golden Path\" differ from a \"Golden Cage\"?",
+   "back": "A Golden Path stays optional, with supported escape hatches for edge cases. A Golden Cage happens when that paved road becomes the ONLY allowed path, stripping developer autonomy and creating bottlenecks and resentment.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Golden Paths · vs golden cage"
+  },
+  {
+   "guid": "A2/X,(.2VM",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::golden-paths"
+   ],
+   "front": "What core tension are golden paths trying to balance?",
+   "back": "The platform team's need for standardization, security, and operability against each dev team's need for flexibility — by making the compliant path the path of least resistance rather than a mandate.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Golden Paths · tension"
+  },
+  {
+   "guid": "vN$9FCE7H.",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::golden-paths"
+   ],
+   "front": "What does a typical golden path bundle for spinning up a new microservice?",
+   "back": "A templated repo scaffold, a wired-up Continuous Integration/Continuous Delivery (CI/CD) pipeline, baseline observability and logging config, security scanning, a standard base image, and a deployment manifest — usually delivered as one self-service template.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Golden Paths · example bundle"
+  },
+  {
+   "guid": "O<Ww:r<=v3",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::golden-paths"
+   ],
+   "front": "How does Backstage's Scaffolder plugin operationalize a golden path?",
+   "back": "It turns the paved road into a self-service \"software template\": the developer fills out a form wizard, and the Scaffolder runs the template's steps to generate a new repo with the golden path already wired in.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Golden Paths · Scaffolder link"
+  },
+  {
+   "guid": "HI`X_WCzu$",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::golden-paths"
+   ],
+   "front": "What signals indicate a golden path is failing in practice?",
+   "back": "Low opt-in, teams quietly building parallel unofficial pipelines, frequent one-off \"exception\" requests, or the platform team having to manually intervene instead of the path staying fully self-service.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Golden Paths · failure signals"
+  },
+  {
+   "guid": "d4GhG_Lcr5",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::backstage"
+   ],
+   "front": "What is Backstage?",
+   "back": "An open-source framework, originally built at Spotify and now under the Cloud Native Computing Foundation (CNCF), for building an Internal Developer Portal (IDP): one UI unifying a software catalog, documentation, Continuous Integration/Continuous Delivery (CI/CD) status, and scaffolding templates.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Backstage · overview"
+  },
+  {
+   "guid": "Nj`+-to5Y.",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::backstage"
+   ],
+   "front": "\"Internal Developer Platform\" and \"Internal Developer Portal\" are both abbreviated IDP. What's the distinction?",
+   "back": "Platform = the full underlying set of tools, APIs, and infrastructure providing self-service (CI, provisioning, secrets, observability). Portal = the UI layer — often Backstage — that developers use to discover and interact with that platform.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Backstage · platform vs portal"
+  },
+  {
+   "guid": "C0kv(trb_@",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::backstage"
+   ],
+   "front": "What is the Backstage Software Catalog?",
+   "back": "The system of record modeling an organization's software ecosystem as structured YAML metadata (Entities): tracks ownership, relationships, and lifecycle for services, Application Programming Interfaces (APIs), libraries, and infrastructure resources.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Backstage · catalog"
+  },
+  {
+   "guid": "sKc-IS|U58",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::backstage"
+   ],
+   "front": "What is a Backstage \"Entity\"?",
+   "back": "A single object registered in the catalog, described by a YAML descriptor with <code>apiVersion</code>, <code>kind</code>, <code>metadata</code>, and <code>spec</code> fields — representing something real like a service, API, or team.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Backstage · entity"
+  },
+  {
+   "guid": "r4RRA.VqGj",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::backstage"
+   ],
+   "front": "Name the core built-in Entity kinds in Backstage's catalog model.",
+   "back": "<b>Component</b>, <b>API</b>, <b>Resource</b>, <b>System</b>, <b>Domain</b>, <b>Group</b>, <b>User</b>, <b>Location</b>, and <b>Template</b> (added by the scaffolder module).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Backstage · entity kinds"
+  },
+  {
+   "guid": "j<p{{5gOQ(",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::backstage"
+   ],
+   "front": "What does the \"System\" entity kind represent, and how does it relate to \"Domain\"?",
+   "back": "A System groups related Components/APIs/Resources that together deliver a capability (e.g. \"payments\"). A Domain groups related Systems into a higher-level business area (e.g. \"finance\").",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Backstage · System vs Domain"
+  },
+  {
+   "guid": "lgq<ZSY_Go",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::backstage"
+   ],
+   "front": "Where does a Component entity's <code>spec.owner</code> field usually resolve to, and why does it matter so much?",
+   "back": "It resolves to a Group or User, typically synced from GitHub teams, Lightweight Directory Access Protocol (LDAP), or Okta. An owner pointing at a defunct team is considered worse than no owner, since it drives \"who do I ask\" lookups and on-call/alert routing.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Backstage · ownership"
+  },
+  {
+   "guid": "Dk,rQ7|,Er",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::backstage"
+   ],
+   "front": "What is <code>catalog-info.yaml</code>, and where should it live?",
+   "back": "The per-repo descriptor file defining that repo's catalog Entity/Entities. Best practice is to colocate it with the source code so ownership metadata stays close to what it describes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Backstage · catalog-info.yaml"
+  },
+  {
+   "guid": "lmBpF1q&8r",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::backstage"
+   ],
+   "front": "How does Backstage keep the catalog populated automatically?",
+   "back": "Entity Providers scan configured sources (GitHub orgs, S3, etc.) on a schedule and bulk-ingest YAML definitions; Processors then validate and enrich each entity as it's ingested.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Backstage · ingestion"
+  },
+  {
+   "guid": "cp_hIz/h~x",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::backstage"
+   ],
+   "front": "What is TechDocs, and how does an entity page link to it?",
+   "back": "A Backstage plugin that renders Markdown documentation kept alongside the source code directly inside the entity's catalog page, wired up via the <code>backstage.io/techdocs-ref</code> annotation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Backstage · TechDocs"
+  },
+  {
+   "guid": "b;ntM|JEi_",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::backstage"
+   ],
+   "front": "What does the Scaffolder plugin do, and which Entity kind backs it?",
+   "back": "Lets developers generate new projects from parameterized \"software templates\" (the <b>Template</b> entity kind), which define both the form wizard shown to the user and the steps executed to scaffold the code — the main mechanism for delivering golden paths self-service.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Backstage · Scaffolder"
+  },
+  {
+   "guid": "h$_.,<aOhT",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::rhdh"
+   ],
+   "front": "What is Red Hat Developer Hub (RHDH)?",
+   "back": "Red Hat's enterprise, commercially supported distribution of Backstage, adding hardened Role-Based Access Control (RBAC), audit logging, a curated/verified plugin marketplace, and support on top of upstream Backstage.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "RHDH · overview"
+  },
+  {
+   "guid": "K+iW_lc3)G",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::rhdh"
+   ],
+   "front": "What is RHDH's key architectural difference from a stock Backstage install with respect to plugins?",
+   "back": "RHDH was the first Backstage distribution to support <b>dynamic plugins</b>: plugins are installed and enabled at startup via a <code>dynamic-plugins.yaml</code> config, rather than being statically compiled into the app as in upstream Backstage.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "RHDH · dynamic plugins"
+  },
+  {
+   "guid": "IaPBd2^Y+",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::rhdh"
+   ],
+   "front": "What three plugin categories does RHDH's Extension marketplace offer?",
+   "back": "Red Hat-supported plugins, Certified plugins (enterprise partner-supported and RHDH-compatible), and popular community-supported plugins.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "RHDH · plugin marketplace"
+  },
+  {
+   "guid": "qdssE2ztt5",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::rhdh"
+   ],
+   "front": "What is Red Hat Developer Lightspeed?",
+   "back": "An AI assistant embedded in RHDH that answers developer questions, helps draft test plans, and assists with technical documentation directly inside the developer portal.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "RHDH · Lightspeed"
+  },
+  {
+   "guid": "Q6>>Y.,Z=Y",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::rhdh"
+   ],
+   "front": "Why would an enterprise pick RHDH over vanilla open-source Backstage?",
+   "back": "To get built-in enterprise Role-Based Access Control (RBAC), compliance controls, audit logging, multi-cloud scalability, and commercial support out of the box, instead of having to build and maintain those hardening layers on top of the OSS project themselves.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "RHDH · why choose"
+  },
+  {
+   "guid": "dL2(v9knUN",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::score-humanitec"
+   ],
+   "front": "What is Score?",
+   "back": "An open-source, platform-agnostic, container-based workload specification — a Cloud Native Computing Foundation (CNCF) Sandbox project since July 2024 — that lets a developer describe a workload's runtime requirements once, in a <code>score.yaml</code>, independent of the target platform.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Score/Humanitec · what is Score"
+  },
+  {
+   "guid": "j%*,Ue[{k[",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::score-humanitec"
+   ],
+   "front": "What problem is Score primarily solving?",
+   "back": "Configuration drift between environments — e.g. keeping a Docker Compose setup and a Kubernetes Helm chart in sync for local vs. remote deployment. Score provides one source of truth that a Score implementation translates per target.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Score/Humanitec · problem solved"
+  },
+  {
+   "guid": "Eaxcsa!7iY",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::score-humanitec"
+   ],
+   "front": "What are the two official Score reference implementations, and what does each target?",
+   "back": "<b>score-compose</b> (Docker Compose, mainly local dev) and <b>score-k8s</b> (converts <code>score.yaml</code> into Kubernetes manifests deployable via <code>kubectl apply</code>).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Score/Humanitec · reference implementations"
+  },
+  {
+   "guid": "lNZIC1hd3v",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::score-humanitec"
+   ],
+   "front": "What is a Score \"resource provisioner\"?",
+   "back": "A pluggable component that translates an abstract resource dependency declared in <code>score.yaml</code> (e.g. \"a postgres database\") into the concrete implementation for a given environment — a local container image locally, a Terraform-provisioned instance in production.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Score/Humanitec · resource provisioner"
+  },
+  {
+   "guid": "dvy[E]Uz-l",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::score-humanitec"
+   ],
+   "front": "Who created Score, and what is that company's flagship commercial product?",
+   "back": "Humanitec, an Internal Developer Platform (IDP) vendor. Their commercial product is the <b>Platform Orchestrator</b>, built to consume Score as its open-source workload spec.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Score/Humanitec · origin"
+  },
+  {
+   "guid": "F3NvZfD~^-",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::score-humanitec"
+   ],
+   "front": "What does the Humanitec Platform Orchestrator's \"RMCD\" workflow stand for?",
+   "back": "<b>R</b>ead, <b>M</b>atch, <b>C</b>reate, <b>D</b>eploy — it reads the workload spec, matches declared dependencies to available resource definitions, creates the resources, then deploys the workload.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Score/Humanitec · RMCD"
+  },
+  {
+   "guid": "zM$@;dYyj:",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::score-humanitec"
+   ],
+   "front": "What is Dynamic Configuration Management (DCM) in the Humanitec model?",
+   "back": "The methodology the Platform Orchestrator uses to assemble a workload's final environment configuration on demand at deploy time, rather than from static, hand-maintained per-environment config files.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Score/Humanitec · DCM"
+  },
+  {
+   "guid": "$-R~]8E(S",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::score-humanitec"
+   ],
+   "front": "What is the Humanitec Portal, and how does it relate to Backstage?",
+   "back": "A web UI on top of the Platform Orchestrator for self-service deployments and environment management. Humanitec explicitly supports pairing it with — or substituting it for — other portals like Backstage, since the Orchestrator and the portal layer are decoupled.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Score/Humanitec · Portal vs Backstage"
+  },
+  {
+   "guid": "HQF`hfH&ZP",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::score-humanitec"
+   ],
+   "front": "Conceptually, how do Score and Backstage's Scaffolder complement each other?",
+   "back": "Score defines *what* a workload needs to run (the runtime spec); a golden path template defines *how a new project gets created*. A scaffolder template can generate a <code>score.yaml</code> as one of its outputs, feeding it straight into a Score implementation for deployment.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Score/Humanitec · Score + Scaffolder"
+  },
+  {
+   "guid": "zHLD==NqHu",
+   "type": "basic",
+   "deck": "Platform Engineering & Developer Experience (IDP)",
+   "tags": [
+    "IDP::score-humanitec"
+   ],
+   "front": "What is Humanitec's stated \"Integrate and embrace\" product principle?",
+   "back": "Rather than replacing existing tools, Humanitec works alongside developer portals like Backstage, deployment tools like ArgoCD, and existing Continuous Integration (CI) / Infrastructure-as-Code (IaC) setups such as Terraform, to fit brownfield enterprise environments.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Score/Humanitec · integrate and embrace"
+  }
+ ]
+}

@@ -1,0 +1,885 @@
+{
+ "source_file": "architect_skills_k8s.apkg",
+ "notes": [
+  {
+   "guid": "smxIl=1viS",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::1 Structured Writing",
+   "tags": [
+    "architect-skills",
+    "writing"
+   ],
+   "front": "What are the canonical sections of an Architecture Decision Record (ADR) in the Nygard format?",
+   "back": "<b>Title · Status · Context · Decision · Consequences.</b><br>Status is one of proposed / accepted / deprecated / superseded. One to two pages, prose, no implementation detail.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> <code>ADR-014: Use Cilium as the Container Network Interface (CNI) for all production clusters</code> — Status: Accepted 2026-03-02.",
+   "source": ""
+  },
+  {
+   "guid": "bjCqUtrFIB",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::1 Structured Writing",
+   "tags": [
+    "architect-skills",
+    "writing"
+   ],
+   "front": "What belongs in the <i>Context</i> section of an ADR — and what does not?",
+   "back": "Forces, constraints, and facts that would be true regardless of which option wins. No opinions, no solution language. A reader should be able to reconstruct the world before the decision.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> ADR \"Adopt Gateway API instead of Ingress NGINX\": the Ingress API is frozen; 40 tenant namespaces carry 200+ vendor annotations; cross-namespace routing is needed; ownership of Transport Layer Security (TLS) termination is disputed between platform and app teams. <i>Not</i>: \"Gateway API is clearly better.\"",
+   "source": ""
+  },
+  {
+   "guid": "o5_.vG6hn(",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::1 Structured Writing",
+   "tags": [
+    "architect-skills",
+    "writing"
+   ],
+   "front": "How do the <i>Decision</i> and <i>Consequences</i> sections of an ADR differ?",
+   "back": "<b>Decision</b>: one imperative sentence, \"We will …\".<br><b>Consequences</b>: every result, positive <i>and</i> negative, including new work created. If the consequences list has no downside, it is marketing, not an ADR.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Decision: \"We will run one cluster per environment per region, not one cluster per team.\"<br>Consequences: stronger blast-radius isolation; higher per-cluster overhead; we now need a fleet manager (Cluster API + Argo CD ApplicationSets); tenant teams lose cluster-admin.",
+   "source": ""
+  },
+  {
+   "guid": "JqpBY1`x(2",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::1 Structured Writing",
+   "tags": [
+    "architect-skills",
+    "writing"
+   ],
+   "front": "Why record <i>rejected alternatives</i> in an ADR?",
+   "back": "It stops the decision being relitigated every time a new person joins or a vendor visits. The rejection reasons are often more valuable than the choice itself.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> \"We considered Calico, Cilium and the cloud provider CNI. Rejected the cloud CNI because per-pod IP allocation exhausts our /24 subnets at ~200 pods per node.\" Six months later, \"why not just use the default CNI?\" has an answer in Git.",
+   "source": ""
+  },
+  {
+   "guid": "u^oL^}v|H6",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::1 Structured Writing",
+   "tags": [
+    "architect-skills",
+    "writing"
+   ],
+   "front": "When is an ADR status <i>Superseded</i> rather than <i>Deprecated</i>?",
+   "back": "<b>Superseded</b>: a newer ADR replaces it — link both ways.<br><b>Deprecated</b>: the decision is no longer relevant and nothing replaces it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Superseded: \"ADR-007 Helm-only deployments → superseded by ADR-031 Kustomize + Argo CD.\"<br>Deprecated: \"ADR-009 Run Jenkins controllers on the cluster\" after Continuous Integration (CI) moved out of platform scope entirely.",
+   "source": ""
+  },
+  {
+   "guid": "MDU._GC3PJ",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::1 Structured Writing",
+   "tags": [
+    "architect-skills",
+    "writing"
+   ],
+   "front": "Why are accepted ADRs treated as immutable?",
+   "back": "The record must show what was known and believed at the time. Editing history destroys the reason the document exists. Changes come from a new ADR that supersedes the old one.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Rewriting \"we chose etcd on local NVMe\" into \"we chose managed control planes\" erases the 2026 reasoning about latency and cost that a 2028 reader needs to judge whether the constraints still hold.",
+   "source": ""
+  },
+  {
+   "guid": "bgUv{vbnM#",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::1 Structured Writing",
+   "tags": [
+    "architect-skills",
+    "writing"
+   ],
+   "front": "What is the sign an ADR is too long or in the wrong place?",
+   "back": "It contains implementation detail — Helm values, YAML, runbook steps. Those belong in the repo or runbook; the ADR links to them. Target: readable in five minutes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> The Cilium ADR explains why eBPF datapath, Hubble observability and identity-based policy matter. It does <i>not</i> paste the <code>CiliumNetworkPolicy</code> schema or the <code>values.yaml</code>.",
+   "source": ""
+  },
+  {
+   "guid": "uMIP0w@QG(",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::1 Structured Writing",
+   "tags": [
+    "architect-skills",
+    "writing"
+   ],
+   "front": "What is the structure of a one-page memo?",
+   "back": "<ol><li>Bottom Line Up Front (BLUF): the recommendation and its cost</li><li>The decision you need from the reader, by when</li><li>Three supporting points with evidence</li><li>Risks, and what you are <i>not</i> proposing</li><li>Next steps with owner and date</li></ol>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> BLUF: \"Stop offering shared clusters to new tenants from Q2. Per-tenant clusters cut on-call pages by an estimated 40% (based on the 6 tenants already migrated) at +€9k/month.\"",
+   "source": ""
+  },
+  {
+   "guid": "wkd9r.En]E",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::1 Structured Writing",
+   "tags": [
+    "architect-skills",
+    "writing"
+   ],
+   "front": "What does Bottom Line Up Front (BLUF) require, and what is a bad platform-team BLUF?",
+   "back": "First sentence = the recommendation, the cost, and ideally the number. The reader should be able to stop after one sentence and know what you want.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Bad: \"This memo explores options for improving our cluster upgrade process.\"<br>Good: \"Recommend automated weekly minor-version upgrades for all non-prod clusters, staffed at 0.5 FTE, starting March; this removes the 3-week prod lag we had on 1.31.\"",
+   "source": ""
+  },
+  {
+   "guid": "J20bRW~((z",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::1 Structured Writing",
+   "tags": [
+    "architect-skills",
+    "writing"
+   ],
+   "front": "What are the typical sections of an Amazon-style narrative (six-pager) and how is it read?",
+   "back": "Prose, no slides. Typical: Introduction &amp; goal · Tenets · Current state · Lessons learned · Proposal &amp; strategic priorities · FAQ · Appendices. The meeting opens with 20–30 minutes of silent reading, then discussion.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> A six-pager arguing for an Internal Developer Platform (IDP) layer on top of k8s. The FAQ pre-answers \"Why not just give teams <code>kubectl</code> and Role-Based Access Control (RBAC)?\" so the meeting isn't spent there.",
+   "source": ""
+  },
+  {
+   "guid": "C>L?V}WEn-",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::1 Structured Writing",
+   "tags": [
+    "architect-skills",
+    "writing"
+   ],
+   "front": "What is the job of the FAQ section in an Amazon-style narrative?",
+   "back": "To state the hardest objections in the author's own words, sharper than the critics would, and answer them. It signals you have already stress-tested the proposal and moves the meeting past the obvious.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> \"Q: Doesn't namespace multi-tenancy give us 90% of the isolation? A: Not for the payments workload: shared kernel, shared etcd, and API-server noisy-neighbour effects we measured at 1.2s p99 during a tenant's mass rollout.\"",
+   "source": ""
+  },
+  {
+   "guid": "C.WC{FPou`",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::1 Structured Writing",
+   "tags": [
+    "architect-skills",
+    "writing"
+   ],
+   "front": "What are <i>tenets</i> in an Amazon narrative? Give one for a k8s platform.",
+   "back": "Non-negotiable principles, stated up front, used to resolve trade-offs later in the document and in the meeting. They are the tie-breakers.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> \"Paved road, not walled garden: tenants may leave the golden path, but they own on-call for what they build off it.\"<br>\"No tenant-facing API ships without a deprecation policy.\"",
+   "source": ""
+  },
+  {
+   "guid": "vz6c#Hn$b;",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::1 Structured Writing",
+   "tags": [
+    "architect-skills",
+    "writing"
+   ],
+   "front": "Rewrite: \"Various options exist for secrets management and we think External Secrets Operator might be a reasonable direction.\"",
+   "back": "\"We will use External Secrets Operator (ESO) backed by HashiCorp Vault for all tenant secrets. Sealed Secrets and SOPS were rejected because both store ciphertext in Git and cannot rotate credentials.\"<br>Decision first, imperative voice, rejections with reasons.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Test each sentence: could a reader act on it? \"Might be a reasonable direction\" gives them nothing to accept or reject.",
+   "source": ""
+  },
+  {
+   "guid": "o[2iT-v8@v",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::1 Structured Writing",
+   "tags": [
+    "architect-skills",
+    "writing"
+   ],
+   "front": "Why is structured writing called the most underrated marketability lever for architects?",
+   "back": "Writing is asynchronous proof of thinking. A memo or ADR travels to people you will never meet — executives, auditors, future hires — and it persists. Verbal influence evaporates after the meeting; a document can be cited in reviews, interviews and audits years later.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> The engineer who wrote the cluster-topology ADR is still \"the person who thought about multi-cluster\" two years on, even after the meetings are forgotten. It is also the artefact you show in a Solutions Architect interview.",
+   "source": ""
+  },
+  {
+   "guid": "gnDwHu|{>%",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::1 Structured Writing",
+   "tags": [
+    "architect-skills",
+    "writing"
+   ],
+   "front": "Which platform decisions deserve an ADR, and which don't?",
+   "back": "ADR when: hard to reverse, cross-team impact, or you'll be asked \"why\" in a year. Not for: reversible config, one-team choices, routine upgrades.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> ADR: CNI choice, cluster topology, GitOps tool, secrets backend, Pod Security Standards level, ingress model.<br>No ADR: bumping the Horizontal Pod Autoscaler (HPA) default target from 70% to 75%.",
+   "source": ""
+  },
+  {
+   "guid": "f0&`5[E55J",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::2 Public Speaking & Teaching",
+   "tags": [
+    "architect-skills",
+    "speaking"
+   ],
+   "front": "\"Explaining a hard thing simply is the visible proof of understanding.\" Why <i>visible</i>?",
+   "back": "Nobody can inspect your understanding directly. Simplification <i>without loss</i> is the only external signal that you hold the whole model, not just the vocabulary.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> \"The scheduler is a loop: find pending pods, filter nodes that can't host them, score the rest, bind.\" One sentence that survives every follow-up question proves more than reciting all the scheduling plugins.",
+   "source": ""
+  },
+  {
+   "guid": "k`!T;O-b)J",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::2 Public Speaking & Teaching",
+   "tags": [
+    "architect-skills",
+    "speaking"
+   ],
+   "front": "What is the Feynman technique, applied to a platform topic?",
+   "back": "<ol><li>Pick a concept</li><li>Explain it in plain language to a non-expert</li><li>Notice where you reach for jargon — that's the gap</li><li>Go back to the source, then simplify again</li></ol>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Explaining how a <code>ClusterIP</code> Service routes traffic. You say \"kube-proxy programs iptables\" — stop. Can you explain what that rule does to a packet? If not, that is where you read the code or docs.",
+   "source": ""
+  },
+  {
+   "guid": "x9Op_9olBt",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::2 Public Speaking & Teaching",
+   "tags": [
+    "architect-skills",
+    "speaking"
+   ],
+   "front": "What is the <i>ladder of abstraction</i>, and how do you use it in a talk about GitOps?",
+   "back": "Move deliberately between concrete and abstract. Start concrete, rise to the principle, descend again to a different concrete case that the principle now explains.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Concrete: a developer changes <code>replicas: 3 → 5</code> in a pull request; Argo CD syncs.<br>Abstract: desired state lives in Git; a controller reconciles continuously.<br>Concrete again: someone <code>kubectl edit</code>s the Deployment — drift is detected and reverted. The principle predicts it.",
+   "source": ""
+  },
+  {
+   "guid": "n1Lt{V}*x]",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::2 Public Speaking & Teaching",
+   "tags": [
+    "architect-skills",
+    "speaking"
+   ],
+   "front": "Structure for a ten-minute teaching talk.",
+   "back": "Hook (a pain the audience felt) → one core idea → three examples → a diagram or live demo → one thing they can do on Monday. Don't <i>cover</i> a topic; <i>uncover</i> one idea.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Hook: \"Your pods got evicted at 03:00 during the 1.30 upgrade.\" Core idea: node drains respect PodDisruptionBudgets (PDBs), and nothing else. Monday action: add a PDB with <code>maxUnavailable: 1</code> to every Deployment with more than one replica.",
+   "source": ""
+  },
+  {
+   "guid": "bG+%&q)bpf",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::2 Public Speaking & Teaching",
+   "tags": [
+    "architect-skills",
+    "speaking"
+   ],
+   "front": "What is the <i>curse of knowledge</i>? Platform example and fix.",
+   "back": "Once you know something you cannot imagine not knowing it, so you skip the steps the audience needs. Fix: start from the symptom the audience experiences, not the mechanism you know.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Platform engineer to app team: \"Just add a PodDisruptionBudget.\" The team doesn't know what a drain is. Start with: \"Here is why your pods disappeared in pairs at 03:00.\"",
+   "source": ""
+  },
+  {
+   "guid": "Mvcjd7&UfM",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::2 Public Speaking & Teaching",
+   "tags": [
+    "architect-skills",
+    "speaking"
+   ],
+   "front": "Analogy vs model when teaching — how do you use both?",
+   "back": "Analogy gets the listener started, then breaks. Give the analogy, show <i>exactly</i> where it breaks, then give the real model. Never leave them with only the analogy.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> \"Namespaces are like folders\" → breaks: folders don't carry ResourceQuotas, RBAC scope or NetworkPolicy selectors → model: \"a namespace is a scope for names plus a boundary for quota, access control and policy.\"",
+   "source": ""
+  },
+  {
+   "guid": "Aobj9e)sRZ",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::2 Public Speaking & Teaching",
+   "tags": [
+    "architect-skills",
+    "speaking"
+   ],
+   "front": "How do you explain to finance and executives why you want fewer, larger clusters?",
+   "back": "Translate into their currency: cost, risk, speed. Give the number, then the trade-off you are asking them to accept. No tool names.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> \"Each cluster costs three control-plane nodes plus ~4 engineer-hours a month; 60 clusters is 240 hours. Consolidating to 12 frees ~1.5 FTE but concentrates blast radius, so we'd spend that capacity on tenant isolation.\" Not: \"we'll use vCluster and hierarchical namespaces.\"",
+   "source": ""
+  },
+  {
+   "guid": "rgVW8g91nv",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::2 Public Speaking & Teaching",
+   "tags": [
+    "architect-skills",
+    "speaking"
+   ],
+   "front": "What is the <i>one-sentence test</i> before preparing a talk?",
+   "back": "If you cannot state the talk as one sentence a listener could repeat to a colleague, you don't have a talk yet — you have a topic.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Passes: \"Tenants should never need to know what a node is; that is the whole job of the platform.\"<br>Fails: \"An overview of our scheduling and autoscaling improvements.\"",
+   "source": ""
+  },
+  {
+   "guid": "n<|^,:LSRq",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::2 Public Speaking & Teaching",
+   "tags": [
+    "architect-skills",
+    "speaking"
+   ],
+   "front": "How do you handle a hostile question during a talk, e.g. \"Why didn't you just use Nomad?\"",
+   "back": "Restate neutrally → answer the actual question in two sentences → concede the valid part → offer to continue afterwards. Never defend your ego, defend the reasoning.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> \"Fair — orchestrator choice. We chose Kubernetes for the ecosystem: operators, policy engines, hiring pool. Nomad would have been simpler for our first ten services; it wouldn't be for the next two hundred. Happy to go deeper after.\"",
+   "source": ""
+  },
+  {
+   "guid": "b!yWS|-rxD",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::2 Public Speaking & Teaching",
+   "tags": [
+    "architect-skills",
+    "speaking"
+   ],
+   "front": "Why prefer a hand-drawn request-path diagram over slides full of YAML?",
+   "back": "An audience can read or listen, not both. YAML on screen means they stop listening. Draw the path as you narrate so the drawing and the words arrive together; put the YAML in an appendix or repo link.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Draw live: client → Gateway → HTTPRoute → Service → EndpointSlice → Pod, adding each hop as you explain it. The <code>HTTPRoute</code> manifest goes in the linked repo.",
+   "source": ""
+  },
+  {
+   "guid": "KgPfrc2>5^",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::2 Public Speaking & Teaching",
+   "tags": [
+    "architect-skills",
+    "speaking"
+   ],
+   "front": "Teaching pitfall: showing only the happy path. Why and example.",
+   "back": "People understand a system through its failure modes; the happy path teaches syntax, not the model.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Teaching the Horizontal Pod Autoscaler (HPA): show what happens when the metric is missing, when <code>resources.requests</code> are unset (utilisation can't be computed), and when it fights a Vertical Pod Autoscaler (VPA) on the same Deployment.",
+   "source": ""
+  },
+  {
+   "guid": "K0bLg6QjoO",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::2 Public Speaking & Teaching",
+   "tags": [
+    "architect-skills",
+    "speaking"
+   ],
+   "front": "Why is an internal brown-bag session a cheap career lever?",
+   "back": "Repeatable visibility at near-zero cost: thirty minutes reaches forty engineers, leaves a recording and a document, and makes you the person people ask. Visibility compounds when the artefact is linkable.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> \"How our cluster upgrade actually works\" — record it, publish the doc, link it from the upgrade runbook. Every incident review that touches upgrades now points at your name.",
+   "source": ""
+  },
+  {
+   "guid": "C=STvo-YH}",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::2 Public Speaking & Teaching",
+   "tags": [
+    "architect-skills",
+    "speaking"
+   ],
+   "front": "How do you calibrate depth for a mixed audience (developers, security, management) in one talk?",
+   "back": "Layer it: first two minutes everyone understands, middle for the practitioners, last section explicitly flagged as \"for those who run this.\" Signpost the transitions so people know when to tune in.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Talk on image signing: (1) \"we now refuse unsigned images in prod\" — everyone; (2) how Sigstore/cosign signatures attach in CI — developers; (3) admission controller policy and key rotation — platform and security.",
+   "source": ""
+  },
+  {
+   "guid": "rDFwiu[l&F",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::3 Facilitation & Stakeholder Mgmt",
+   "tags": [
+    "architect-skills",
+    "facil"
+   ],
+   "front": "What makes a decision meeting actually decide?",
+   "back": "<ul><li>Pre-read sent ≥48h ahead, with options written out</li><li>The decision phrased as a question with options</li><li>A named decider (not a vote)</li><li>Explicit criteria</li><li>A timebox</li><li>Decision, owner and date written down before anyone leaves</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> \"Decide: do tenant teams get <code>cluster-admin</code> on dev clusters? Options A/B/C in the doc. Decider: Head of Platform. 30 minutes. Criteria: blast radius, support load, developer velocity.\"",
+   "source": ""
+  },
+  {
+   "guid": "hXzz>cONqc",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::3 Facilitation & Stakeholder Mgmt",
+   "tags": [
+    "architect-skills",
+    "facil"
+   ],
+   "front": "What are decision rights (decide / consult / input / inform) and why state them at the start?",
+   "back": "If you don't, everyone assumes they hold a veto. Naming the roles up front turns objections into input instead of blockers.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Enforcing Pod Security Standards <i>restricted</i> by default: security is <b>consulted</b>, app tech leads give <b>input</b>, the platform lead <b>decides</b>, the CTO is <b>informed</b>. Say this in the first minute.",
+   "source": ""
+  },
+  {
+   "guid": "K+C0azGWOv",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::3 Facilitation & Stakeholder Mgmt",
+   "tags": [
+    "architect-skills",
+    "facil"
+   ],
+   "front": "How do you run a <i>disagree and commit</i> close?",
+   "back": "After the decider decides, ask each dissenter explicitly: \"Can you commit to executing this even though you'd have chosen otherwise?\" Record the answer. Commitment is to execution, not to agreement.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Network team preferred Calico; decision is Cilium. Their commitment: own the migration runbook and the first two cluster cut-overs. Written in the decision record.",
+   "source": ""
+  },
+  {
+   "guid": "gR_@YSe#xP",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::3 Facilitation & Stakeholder Mgmt",
+   "tags": [
+    "architect-skills",
+    "facil"
+   ],
+   "front": "Decision record vs meeting notes — what's the difference?",
+   "back": "Notes: what was said. Decision record: what was decided, by whom, why, which alternatives were rejected, and <b>what would reopen it</b>. The record feeds the ADR; the notes are disposable.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> \"Reopen if Cilium enterprise pricing exceeds €X/node/year, or if we need Windows node pools.\" Without a reopen clause, every pricing rumour becomes a new argument.",
+   "source": ""
+  },
+  {
+   "guid": "i}gDRWvO6A",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::3 Facilitation & Stakeholder Mgmt",
+   "tags": [
+    "architect-skills",
+    "facil"
+   ],
+   "front": "Anti-pattern: the status meeting disguised as a decision meeting. How do you fix it?",
+   "back": "If nobody has to choose between options with real trade-offs, cancel it or make it asynchronous. Convert every agenda item into a question with options, or drop it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> \"Review the upgrade plan\" → \"Decide: upgrade prod during business hours using canary clusters (A) or in a weekend window (B).\" If the answer is obvious, it's an email, not a meeting.",
+   "source": ""
+  },
+  {
+   "guid": "f`u2?7[X7U",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::3 Facilitation & Stakeholder Mgmt",
+   "tags": [
+    "architect-skills",
+    "facil"
+   ],
+   "front": "A stakeholder keeps blocking a platform change. How do you surface the real objection?",
+   "back": "Ask about consequences, not positions: \"What would have to be true for this to work for you?\" The real objection is usually operational or political, not the technical argument you've been having.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> App team refuses the new Gateway API ingress. Real reason after one question: they have no routing tests and a two-person on-call. Solution: platform writes the migration smoke test and moves them during their quiet week. The CNI debate was irrelevant.",
+   "source": ""
+  },
+  {
+   "guid": "dUA1N*El:~",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::3 Facilitation & Stakeholder Mgmt",
+   "tags": [
+    "architect-skills",
+    "facil"
+   ],
+   "front": "Stakeholder map for a k8s platform team: four groups and what each wants.",
+   "back": "<ul><li><b>Tenant developers</b>: speed, fewer YAML foot-guns</li><li><b>App tech leads</b>: predictability, control over their runtime</li><li><b>Security / compliance</b>: evidence, enforced policy</li><li><b>Leadership / finance</b>: cost, risk, headcount</li></ul>The same decision needs four different one-liners.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Enforcing image signing via admission control: devs — \"one extra CI step, template provided\"; tech leads — \"no surprise blocks, dry-run for 30 days\"; security — \"audit log of every rejected image\"; leadership — \"closes finding 4 from the last audit at zero extra headcount.\"",
+   "source": ""
+  },
+  {
+   "guid": "ecGWNio$%4",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::3 Facilitation & Stakeholder Mgmt",
+   "tags": [
+    "architect-skills",
+    "facil"
+   ],
+   "front": "What is a pre-mortem and how do you run one for a cluster migration?",
+   "back": "Before deciding, assume it is six months later and the project failed. Everyone silently writes why for five minutes; cluster the answers; the top three become mitigations or explicit decision criteria.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Typical outputs: \"stateful workloads on local persistent volumes couldn't move\", \"DNS cut-over broke external clients\", \"tenant teams weren't staffed for the change window.\" Each becomes a line in the plan with an owner.",
+   "source": ""
+  },
+  {
+   "guid": "za_4e1]JjV",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::3 Facilitation & Stakeholder Mgmt",
+   "tags": [
+    "architect-skills",
+    "facil"
+   ],
+   "front": "How do you stop the loudest engineer deciding by volume?",
+   "back": "Silent writing first (everyone writes their option and reasoning before any discussion), round-robin reading, decider speaks last. Put the options on the board so the argument is about artefacts, not people.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Choosing a GitOps tool: five people write \"Argo CD / Flux / neither, and why\" on cards before anyone talks. The strongest argument for Flux came from the quietest person in the room.",
+   "source": ""
+  },
+  {
+   "guid": "r`UfWxt_!Q",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::3 Facilitation & Stakeholder Mgmt",
+   "tags": [
+    "architect-skills",
+    "facil"
+   ],
+   "front": "What does a well-done escalation look like?",
+   "back": "Both parties escalate <i>together</i> with a shared one-pager: agreed facts · the disagreement in one sentence · each option with the trade-off the <i>other</i> side cares about · the specific decision needed. The escalation target decides, not re-investigates.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> \"Security wants NetworkPolicy default-deny on day one; platform wants a 90-day observe-only phase. Agreed: both end in default-deny. Decide the phase-in length.\"",
+   "source": ""
+  },
+  {
+   "guid": "I/Iqp7`80j",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::3 Facilitation & Stakeholder Mgmt",
+   "tags": [
+    "architect-skills",
+    "facil"
+   ],
+   "front": "What do you say in the last two minutes of every decision meeting?",
+   "back": "\"We decided X. Owner is Y. It's recorded at Z. Anyone who can't commit?\" Then send the record within the hour, before memories diverge.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> \"We decided: Gateway API only for new services from 1 May. Owner: Saran. Record: ADR-036. Anyone who can't commit?\" Silence is recorded as commitment.",
+   "source": ""
+  },
+  {
+   "guid": "Q^8?{<#Eo$",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::3 Facilitation & Stakeholder Mgmt",
+   "tags": [
+    "architect-skills",
+    "facil"
+   ],
+   "front": "A stakeholder agreed in the meeting but undermines the decision afterwards. What do you do?",
+   "back": "Go direct and private. Refer to the recorded commitment. Ask what changed. If something material changed, reopen formally with a new ADR; if not, ask them to stop. Never tolerate silent drift — it teaches everyone that decisions are optional.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> After the \"Gateway API only\" decision a team keeps creating <code>LoadBalancer</code> Services. Conversation, not a policy: \"You committed in ADR-036; what's blocking you?\" Then, if needed, an admission policy with a dated exception.",
+   "source": ""
+  },
+  {
+   "guid": "==td:F+<H",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::3 Facilitation & Stakeholder Mgmt",
+   "tags": [
+    "architect-skills",
+    "facil"
+   ],
+   "front": "How do you handle a decision where the decider isn't in the room?",
+   "back": "Don't fake it. Produce the decision package instead: options, recommendation, dissent recorded, deadline for the decider. A recommendation with recorded dissent is a decision-ready artefact; a meeting that ends in \"we'll check with X\" is not.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Head of Platform is out. The team produces: \"Recommend option B (canary clusters). Network lead prefers A. Needs decision by Friday to hit the 1.31 window.\" Emailed as a one-pager.",
+   "source": ""
+  },
+  {
+   "guid": "p_b3@j2SMy",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::4 Product Thinking",
+   "tags": [
+    "architect-skills",
+    "product"
+   ],
+   "front": "\"What problem is this platform actually solving?\" — bad vs good answer for a k8s platform.",
+   "back": "Bad: names the technology. Good: names the users, the pain, the measurable outcome. Kubernetes is the implementation; it is never the product.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Bad: \"Providing Kubernetes to the organisation.\"<br>Good: \"Cutting time from merged code to production for 30 product teams from days to under an hour, with security controls applied by default so teams don't need a per-deploy security review.\"",
+   "source": ""
+  },
+  {
+   "guid": "NNv|CSq@/:",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::4 Product Thinking",
+   "tags": [
+    "architect-skills",
+    "product"
+   ],
+   "front": "What is a Job To Be Done (JTBD) for a platform user? Template and example.",
+   "back": "\"When [situation], I want to [motivation], so that [outcome].\" It describes the user's goal, never a platform feature. The JTBD tells you which roadmap item matters.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> \"When I have a new service, I want it running in staging with logs, metrics and a URL, so I can demo it on Thursday.\" Not: \"I want a namespace.\" This is why the onboarding template matters more than the CNI.",
+   "source": ""
+  },
+  {
+   "guid": "j|W)OoQ]9.",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::4 Product Thinking",
+   "tags": [
+    "architect-skills",
+    "product"
+   ],
+   "front": "Cheap user-research methods for a platform team.",
+   "back": "<ul><li>Contextual inquiry: watch a developer onboard a service, without helping</li><li>Five to eight 30-minute interviews: \"walk me through the last time you deployed\"</li><li>Mine support tickets and the Slack help channel</li><li>Measure time-to-first-deploy</li></ul>Five interviews surface most of the problems.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Watching one developer onboard revealed that the four-ticket process (namespace, RBAC, secrets, DNS) had a fifth hidden step: asking in Slack which Helm chart version to use. No ticket recorded it.",
+   "source": ""
+  },
+  {
+   "guid": "p/7cxC1<l,",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::4 Product Thinking",
+   "tags": [
+    "architect-skills",
+    "product"
+   ],
+   "front": "Platform as a <i>product</i> vs platform as a <i>mandate</i> — how do you tell which one you have?",
+   "back": "Product: teams adopt because it's better; adoption is a tracked metric; the roadmap is driven by user need. Mandate: teams use it because they must; the platform optimises for its own operability.<br>Signal: do teams ask you for features, or route around you?",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> A team quietly running its own Elastic Kubernetes Service (EKS) cluster is the loudest possible user-research finding.",
+   "source": ""
+  },
+  {
+   "guid": "GB|hMS&1!5",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::4 Product Thinking",
+   "tags": [
+    "architect-skills",
+    "product"
+   ],
+   "front": "Roadmap trade-off: multi-cluster service mesh vs self-service namespace onboarding. How do you decide?",
+   "back": "Against the problem statement and evidence, not against which is more interesting. Write down what you are <i>not</i> doing and the condition under which you'd revisit.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> 20 teams wait three days for a namespace; two teams need cross-cluster mutual TLS. Onboarding wins. Recorded: \"Mesh deferred to Q4; revisit if a third team needs cross-cluster mTLS or if the payments workload's compliance deadline moves.\"",
+   "source": ""
+  },
+  {
+   "guid": "wtW%0M!H`%",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::4 Product Thinking",
+   "tags": [
+    "architect-skills",
+    "product"
+   ],
+   "front": "What is a golden path (paved road) and what is the product decision behind it?",
+   "back": "An opinionated, fully supported default: template repo, Helm chart or Backstage template, CI pipeline, observability wired in. The decision: which 80% of use cases you make excellent, and that the other 20% get \"you can, but you own it.\"",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Golden path = stateless HTTP service, Deployment + HTTPRoute + ServiceMonitor + PDB, one <code>values.yaml</code>. Off-path (StatefulSets with local storage, Windows) is allowed and unsupported.",
+   "source": ""
+  },
+  {
+   "guid": "J$Z1x@;w(^",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::4 Product Thinking",
+   "tags": [
+    "architect-skills",
+    "product"
+   ],
+   "front": "Which metrics measure the platform as a <i>product</i>, as opposed to cluster operations?",
+   "back": "Time-to-first-deploy for a new service · deploy frequency and lead time (DORA metrics) · % of workloads on the golden path · tickets per deploy · developer satisfaction · share of the platform team's time on unplanned work.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Node CPU utilisation and etcd latency are operations metrics — necessary, but they say nothing about whether tenants are better off. Report both, but lead with the product ones.",
+   "source": ""
+  },
+  {
+   "guid": "y+6WC5]bu_",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::4 Product Thinking",
+   "tags": [
+    "architect-skills",
+    "product"
+   ],
+   "front": "How do you say no to a feature request product-style? Example: a team wants Windows nodes.",
+   "back": "Understand the underlying job → quantify demand → name the full cost → offer an alternative → record it so the next request starts from evidence.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Job: one legacy .NET Framework service. Demand: one team. Cost: separate node pool, separate image pipeline, half the ecosystem (CNI features, policy engines) unsupported. Alternative: port to .NET 8 on Linux, or run it outside the platform with a documented exception.",
+   "source": ""
+  },
+  {
+   "guid": "zagjM|O$6,",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::4 Product Thinking",
+   "tags": [
+    "architect-skills",
+    "product"
+   ],
+   "front": "What is the <i>internal customer</i> trap?",
+   "back": "Treating tenants as captive, so value is never validated and the platform team gets no honest feedback. Counter it by acting as if they could leave.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Publish a Service Level Objective (SLO), a roadmap and a deprecation policy; hold weekly office hours; show teams what it costs to run outside the platform. If they still stay, that's evidence.",
+   "source": ""
+  },
+  {
+   "guid": "dr{&;Cuc>b",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::4 Product Thinking",
+   "tags": [
+    "architect-skills",
+    "product"
+   ],
+   "front": "What does a good deprecation look like on a platform?",
+   "back": "Announce with a date (at least two release cycles out) · provide a migration path and tooling · show each tenant exactly what of theirs is affected · warn in-cluster · then enforce. Silence until enforcement is the failure mode.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Removing Ingress NGINX annotations in favour of Gateway API <code>HTTPRoute</code>: dashboard from admission-webhook telemetry listing affected Ingresses per namespace, a conversion script, <code>kubectl apply</code> warnings for 60 days, then rejection.",
+   "source": ""
+  },
+  {
+   "guid": "36{rh]$;z",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::4 Product Thinking",
+   "tags": [
+    "architect-skills",
+    "product"
+   ],
+   "front": "How do you make the opportunity cost of platform hygiene visible on the roadmap?",
+   "back": "Every quarter spent on upgrades and CVE patching is a quarter not spent on what tenants asked for. Reserve a fixed capacity for hygiene and put the rest on the roadmap so the split is a decision, not a default.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> \"30% of capacity is reserved for upgrades, patching and toil reduction; the remaining 70% is on the public roadmap. When 1.31 slipped, that came out of the 30%, not out of self-service onboarding.\"",
+   "source": ""
+  },
+  {
+   "guid": "NKm0&?KP:;",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::4 Product Thinking",
+   "tags": [
+    "architect-skills",
+    "product"
+   ],
+   "front": "How do you write a problem statement before proposing a solution?",
+   "back": "Who · what pain · evidence · what it costs · what \"solved\" looks like. Only after that name a tool.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> \"New services take four days to reach staging (measured across 11 onboardings in Q1) because namespace, RBAC, secrets and DNS are four separate tickets. Solved means under one hour, self-service, zero tickets.\" Only now discuss Crossplane or a Backstage template.",
+   "source": ""
+  },
+  {
+   "guid": "nVP_iW>FVb",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::4 Product Thinking",
+   "tags": [
+    "architect-skills",
+    "product"
+   ],
+   "front": "What is the difference between a <i>feature request</i> and a <i>problem report</i>, and why does it matter for the roadmap?",
+   "back": "A feature request is the user's proposed solution; a problem report is the pain. Log the pain, not the solution, or the roadmap becomes a list of other people's designs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Request: \"Give us <code>cluster-admin</code> on dev.\" Problem: \"We can't install CustomResourceDefinitions (CRDs) for the operator we're evaluating.\" Solution that fits: a self-service, namespaced operator catalogue — not cluster-admin.",
+   "source": ""
+  },
+  {
+   "guid": "i*0o0-LhkT",
+   "type": "basic",
+   "deck": "Architect Skills (k8s platform)::4 Product Thinking",
+   "tags": [
+    "architect-skills",
+    "product"
+   ],
+   "front": "How do the four skills combine in one platform initiative?",
+   "back": "Product thinking finds the problem worth solving → structured writing turns it into a memo or ADR → facilitation gets the decision made and committed to → speaking and teaching drive adoption. Skipping any one is where platform initiatives usually die.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Self-service onboarding: interviews showed the 4-day wait (product) → one-page memo with BLUF and cost (writing) → decision meeting with named decider, network team commits (facilitation) → brown-bag and template walkthrough for tenants (teaching).",
+   "source": ""
+  }
+ ]
+}

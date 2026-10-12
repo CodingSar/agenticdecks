@@ -1,0 +1,2023 @@
+{
+ "deck_name": "LLMs & Agentic Engineering",
+ "file": "LLMs_and_Agentic_Engineering.apkg",
+ "description": "<b>LLMs &amp; Agentic Engineering</b>: how transformer LLMs work (tokens, attention, inference, training), RAG and context engineering, agent memory, agentic patterns, harness engineering and evaluation. For an architect who designs, buys and operates LLM-based systems.",
+ "notes": [
+  {
+   "guid": "rN|x}G1/Qr",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::01 Tokens & Embeddings",
+   "tags": [
+    "llm::tokens"
+   ],
+   "front": "In an LLM, what is a <b>token</b>?",
+   "back": "A chunk of text (usually a subword) mapped to an ID in a fixed vocabulary of ~50k–250k entries. The model reads and writes only token IDs, never letters or words.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> \"unbelievable\" → <code>un</code> <code>believ</code> <code>able</code> (3 tokens).",
+   "source": "Tokens & Embeddings",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::01 Tokens & Embeddings",
+   "tags": [
+    "llm::tokens"
+   ],
+   "front": "Rule of thumb: how many tokens is English text?",
+   "back": "1 token ≈ ¾ of a word ≈ 4 characters. A dense 500-word page ≈ 650–700 tokens.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Tokens & Embeddings",
+   "reverse": false
+  },
+  {
+   "guid": "l^`GsX5KPh",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::01 Tokens & Embeddings",
+   "tags": [
+    "llm::tokens"
+   ],
+   "front": "Why do LLMs miscount the letters in \"strawberry\"?",
+   "back": "They never see letters: the word arrives as 1–2 tokens (e.g. <code>str</code> <code>awberry</code>), so counting relies on a half-memorised spelling of each token.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Same root cause:</b> weak anagrams, string reversal, rhyming.<br><b>Workaround:</b> ask it to spell the word letter by letter first; each letter then becomes its own token.",
+   "source": "Tokens & Embeddings",
+   "reverse": false
+  },
+  {
+   "guid": "zrDxI7-9Hi",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::01 Tokens & Embeddings",
+   "tags": [
+    "llm::tokens"
+   ],
+   "front": "How does <b>Byte-Pair Encoding (BPE)</b> build a tokenizer vocabulary?",
+   "back": "Start from single bytes/characters and repeatedly merge the most frequent adjacent pair into a new token, until the target vocabulary size is reached.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> <code>t</code>+<code>h</code>→<code>th</code>, then <code>th</code>+<code>e</code>→<code>the</code>; a rare surname stays 4–5 fragments.<br><b>Consequence:</b> the tokenizer is frozen at training time and encodes what was common in <i>that</i> corpus.",
+   "source": "Tokens & Embeddings",
+   "reverse": false
+  },
+  {
+   "guid": "F[sU|cle]_",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::01 Tokens & Embeddings",
+   "tags": [
+    "llm::tokens"
+   ],
+   "front": "Why does the same sentence cost more tokens in Dutch, Thai or JSON than in English?",
+   "back": "The tokenizer was trained mostly on English, so other text fragments into more, smaller tokens: higher cost, slower generation and less effective context.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Typical:</b> Dutch 1.3–2× the English token count; Thai/Hindi 3–5×; JSON quotes and braces also inflate.<br><b>Marketing check:</b> \"Supports 100 languages\" — ask: at what token efficiency and at what benchmark quality per language? Support ≠ parity.",
+   "source": "Tokens & Embeddings",
+   "reverse": false
+  },
+  {
+   "guid": "hO;=rqlM}^",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::01 Tokens & Embeddings",
+   "tags": [
+    "llm::tokens"
+   ],
+   "front": "Why might an LLM claim 9.11 &gt; 9.9?",
+   "back": "Numbers are tokenized arbitrarily (<code>9</code> <code>.</code> <code>11</code>), so there is no numeric representation, only token patterns; \"9.11\" also resembles versions and dates that come after 9.9.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Newer tokenizers split digits individually, but arithmetic is still learned behaviour, not computation. For real math, give the model a calculator or code tool.",
+   "source": "Tokens & Embeddings",
+   "reverse": false
+  },
+  {
+   "guid": "uU^YA}KqeL",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::01 Tokens & Embeddings",
+   "tags": [
+    "llm::tokens"
+   ],
+   "front": "What is an <b>embedding</b>, intuitively?",
+   "back": "A fixed-length vector (e.g. 1,024 numbers), produced by a separate model, that encodes a text's meaning. Similar meanings land close together, measured by cosine similarity.",
+   "text": "",
+   "image": "",
+   "analogy": "GPS coordinates for meaning: two texts can share no words yet sit next to each other on the map.",
+   "extra": "<b>Example:</b> \"How do I reset my password?\" and \"forgot login credentials\" are far apart as strings but close as embeddings.",
+   "source": "Tokens & Embeddings",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::01 Tokens & Embeddings",
+   "tags": [
+    "llm::tokens"
+   ],
+   "front": "Why do serious retrieval systems combine vector search with keyword search (BM25)?",
+   "back": "Embeddings blur exact identifiers: \"INC-48213\" and \"INC-48231\" look almost identical as vectors. Keyword search catches exact tokens; <b>hybrid search</b> gets both.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Tokens & Embeddings",
+   "reverse": false
+  },
+  {
+   "guid": "K[ZL+k8GBO",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
+   "tags": [
+    "llm::architecture"
+   ],
+   "front": "What problem does <b>attention</b> solve in a transformer?",
+   "back": "For each position it asks which other tokens matter for interpreting this one, and pulls in their information weighted by relevance, replacing fixed-window or sequential bottlenecks.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> \"The animal didn't cross the street because <b>it</b> was too tired\": <i>it</i> attends to <i>animal</i>. \"…because it was too wide\": <i>it</i> attends to <i>street</i>.",
+   "source": "Transformer Architecture",
+   "reverse": false
+  },
+  {
+   "guid": "psB3!Ptzr*",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
+   "tags": [
+    "llm::architecture"
+   ],
+   "front": "In attention, what do the <b>Query</b>, <b>Key</b> and <b>Value</b> vectors of a token represent?",
+   "back": "<b>Query</b>: what I am looking for.<br><b>Key</b>: what I advertise about myself.<br><b>Value</b>: what I hand over if selected.",
+   "text": "",
+   "image": "",
+   "analogy": "A library: you arrive with a question (query), scan the spine labels (keys), and take the contents (values) of the best-matching books, blended by how well each label matched.",
+   "extra": "",
+   "source": "Transformer Architecture",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
+   "tags": [
+    "llm::architecture"
+   ],
+   "front": "How is one token's attention output computed from Q, K and V?",
+   "back": "Its query is dot-producted with every key → scores → softmax → weights. Output = the weighted sum of the value vectors.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Transformer Architecture",
+   "reverse": false
+  },
+  {
+   "guid": "e{:2&9b&#b",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
+   "tags": [
+    "llm::architecture"
+   ],
+   "front": "In scaled dot-product attention \\(\\mathrm{softmax}(QK^\\top/\\sqrt{d_k})\\,V\\), why divide by \\(\\sqrt{d_k}\\)?",
+   "back": "For random unit-variance vectors, \\(q^\\top k\\) has variance \\(d_k\\). Without rescaling, large scores saturate the softmax and gradients vanish.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Transformer Architecture",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
+   "tags": [
+    "llm::architecture"
+   ],
+   "front": "Geometrically, where does an attention output lie relative to the value vectors?",
+   "back": "Inside their <b>convex hull</b>: it is a convex combination (weights ≥ 0, summing to 1). Attention interpolates; the following MLP layers and residuals extrapolate.",
+   "text": "",
+   "image": "<img src=\"attention_hull.svg\">",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> attention is a soft, differentiable dictionary lookup; multiple heads look up in several subspaces at once.",
+   "source": "Transformer Architecture",
+   "reverse": false
+  },
+  {
+   "guid": "DHV00G,3uL",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
+   "tags": [
+    "llm::architecture"
+   ],
+   "front": "Why do transformers use <b>multiple attention heads</b>?",
+   "back": "Each head has its own Q/K/V projections, so each can learn a different relationship (pronoun→referent, closing→opening bracket, previous token). Outputs are concatenated.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Transformer Architecture",
+   "reverse": false
+  },
+  {
+   "guid": "I$Fv|KZ=Of",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
+   "tags": [
+    "llm::architecture"
+   ],
+   "front": "Why is attention cost <b>quadratic</b> in sequence length?",
+   "back": "Every token scores against every other: n tokens → n² scores. Doubling the input quadruples attention compute and score memory.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> 8k → 128k context is 16× the length but 256× the attention work. Hence pricier long-context calls, tricks for 1M context (sparse/linear attention, sliding windows), and seconds of prefill before the first token.",
+   "source": "Transformer Architecture",
+   "reverse": false
+  },
+  {
+   "guid": "GP;a[I!Dl_",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
+   "tags": [
+    "llm::architecture"
+   ],
+   "front": "What are the two sub-blocks of a transformer layer, and what does each do?",
+   "back": "<b>Attention</b> moves information <i>between</i> positions. The <b>MLP / feed-forward</b> block processes each position independently and holds most parameters (much of the factual recall).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Models stack dozens of layers (32–120). The last layer's representation of the final token predicts the next token.",
+   "source": "Transformer Architecture",
+   "reverse": false
+  },
+  {
+   "guid": "mxiJ7U6>`/",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
+   "tags": [
+    "llm::architecture"
+   ],
+   "front": "What does <b>Mixture-of-Experts (MoE)</b> do in an LLM?",
+   "back": "A router sends each token through a small subset of expert feed-forward layers instead of all of them.",
+   "text": "",
+   "image": "",
+   "analogy": "Hospital triage: each patient sees two relevant specialists, not every doctor in the building, yet the whole staff must still be on the payroll.",
+   "extra": "MoE is now mainstream (DeepSeek V3, Qwen3, Mistral variants).",
+   "source": "Transformer Architecture",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
+   "tags": [
+    "llm::architecture"
+   ],
+   "front": "In an MoE model, what do <b>compute</b> cost and <b>memory</b> cost scale with?",
+   "back": "Compute scales with the <b>active</b> parameters per token; memory with the <b>total</b> parameters, since all experts must be loaded.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> \"400B total parameters\" may use ~20B active per token: compute like a 20B model, memory like a 400B model.",
+   "source": "Transformer Architecture",
+   "reverse": false
+  },
+  {
+   "guid": "NI!V[%:E{",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
+   "tags": [
+    "llm::architecture"
+   ],
+   "front": "What production risk does MoE introduce in serving?",
+   "back": "<b>Routing imbalance</b>: \"hot\" experts receive uneven load, causing latency spikes that only appear at scale.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Transformer Architecture",
+   "reverse": false
+  },
+  {
+   "guid": "wPJfyt!die",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
+   "tags": [
+    "llm::architecture"
+   ],
+   "front": "Attention is order-blind. How does a transformer know word order?",
+   "back": "<b>Positional encodings</b>: originally added to embeddings; today usually <b>RoPE</b> (Rotary Position Embedding), which rotates Q/K vectors by position and gives relative-position behaviour.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Without them \"dog bites man\" and \"man bites dog\" would look identical.",
+   "source": "Transformer Architecture",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
+   "tags": [
+    "llm::architecture"
+   ],
+   "front": "Why doesn't a model trained at 8k context automatically work at 128k?",
+   "back": "Positional behaviour is learned within the trained range. Extending it needs retraining or interpolation tricks (e.g. YaRN), and quality often degrades at the far end.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Transformer Architecture",
+   "reverse": false
+  },
+  {
+   "guid": "gcfs|6-]fi",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
+   "tags": [
+    "llm::architecture"
+   ],
+   "front": "What does <b>FlashAttention</b> do?",
+   "back": "An IO-aware <b>exact</b> attention kernel that tiles the computation so the full n×n attention matrix is never materialised in GPU memory: faster and less memory for long sequences, same result.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Transformer Architecture",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
+   "tags": [
+    "llm::architecture"
+   ],
+   "front": "Attention variants: what do MHA, MQA, GQA and MLA have in common as a design goal?",
+   "back": "Shrinking the <b>KV cache</b>: they trade how many separate Key/Value heads are stored against quality.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Transformer Architecture",
+   "reverse": false
+  },
+  {
+   "guid": "k.23^&9$>a",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
+   "tags": [
+    "llm::architecture"
+   ],
+   "front": "<b>Multi-Query Attention (MQA)</b>: what is shared, and what is the trade-off?",
+   "back": "All query heads share one Key/Value head: up to ~32× smaller KV cache, at a ~1–3 point quality loss.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Transformer Architecture",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
+   "tags": [
+    "llm::architecture"
+   ],
+   "front": "<b>Grouped-Query Attention (GQA)</b>: what is shared?",
+   "back": "Query heads share K/V within groups: a balance between full multi-head quality and MQA efficiency. Default in Llama 3 and Mistral.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Transformer Architecture",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
+   "tags": [
+    "llm::architecture"
+   ],
+   "front": "<b>Multi-head Latent Attention (MLA)</b> (DeepSeek): what does it cache?",
+   "back": "A low-rank latent projection of K/V instead of the full K/V: ~7–14× KV-cache compression with little quality loss.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Transformer Architecture",
+   "reverse": false
+  },
+  {
+   "guid": "plK0){h^KF",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
+   "tags": [
+    "llm::architecture"
+   ],
+   "front": "What does <b>autoregressive</b> generation mean?",
+   "back": "The model emits one token at a time; each token is appended to the input and the model runs again. No plan or draft, just the next token, repeatedly.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Transformer Architecture",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
+   "tags": [
+    "llm::architecture"
+   ],
+   "front": "Why are output tokens priced higher than input tokens?",
+   "back": "Each output token needs its own sequential forward pass (memory-bound decode), whereas the input is processed in parallel in one prefill.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Typically 3–5× the price; hosted models generate ~30–150 tokens/s. A 500-token answer = 500 forward passes.",
+   "source": "Transformer Architecture",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
+   "tags": [
+    "llm::architecture"
+   ],
+   "front": "Mechanically, why does \"think step by step\" help an LLM?",
+   "back": "Generating intermediate tokens gives the model more forward passes, i.e. more compute, per problem.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Transformer Architecture",
+   "reverse": false
+  },
+  {
+   "guid": "Cp=2[TBAj!",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::03 Inference & Serving",
+   "tags": [
+    "llm::inference"
+   ],
+   "front": "What is the <b>KV cache</b> and why is it used?",
+   "back": "The stored Keys and Values of all previous tokens, so each new token attends to them without recomputing them. It keeps per-token decode cost low.",
+   "text": "",
+   "image": "",
+   "analogy": "Memoisation: like a build cache, work already done for earlier tokens is stored and reused instead of being recomputed on every step.",
+   "extra": "",
+   "source": "Inference & Serving",
+   "reverse": false
+  },
+  {
+   "guid": "i^M,iGk!T-",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::03 Inference & Serving",
+   "tags": [
+    "llm::inference"
+   ],
+   "front": "What is the main cost of the KV cache, and how does it scale?",
+   "back": "GPU memory, growing <b>linearly with context length</b> (and batch size). Above ~128k tokens it can exceed the weights themselves.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Llama 70B at 1M context ≈ 135 GB of KV cache at FP16, more than its weights. A 100k prompt on a 70B model can need tens of GB per request.",
+   "source": "Inference & Serving",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::03 Inference & Serving",
+   "tags": [
+    "llm::inference"
+   ],
+   "front": "Why is the first token slow and the rest fast?",
+   "back": "<b>Prefill</b> processes the whole prompt at once (compute-heavy; sets time-to-first-token). <b>Decode</b> then generates each token against the KV cache (cheap per token, memory-bound).",
+   "text": "",
+   "image": "",
+   "analogy": "Reading a whole letter before replying (prefill) versus then speaking your answer one word at a time (decode).",
+   "extra": "",
+   "source": "Inference & Serving",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::03 Inference & Serving",
+   "tags": [
+    "llm::inference"
+   ],
+   "front": "Why can providers discount <b>prompt caching</b>?",
+   "back": "An identical prompt prefix lets them reuse its stored KV cache and skip the prefill compute for that part.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Inference & Serving",
+   "reverse": false
+  },
+  {
+   "guid": "wf`vk{WJfH",
+   "type": "cloze",
+   "deck": "LLMs & Agentic Engineering::03 Inference & Serving",
+   "tags": [
+    "llm::inference"
+   ],
+   "front": "",
+   "back": "",
+   "text": "KV-cache optimisations in production serving: {{c1::PagedAttention}} (paged KV memory management, vLLM), {{c2::prefix caching}} (reuse KV for shared prompt prefixes), {{c3::attention compression}} (MQA/GQA/MLA) and {{c4::quantization}} (INT8, FP8, FP4).",
+   "image": "",
+   "analogy": "PagedAttention is OS virtual memory for the KV cache: fixed-size pages allocated on demand instead of one big contiguous reservation per request.",
+   "extra": "Combined they cut long-context cost ~4–40×.",
+   "source": "Inference & Serving",
+   "reverse": false
+  },
+  {
+   "guid": "CA]cns0o5<",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::03 Inference & Serving",
+   "tags": [
+    "llm::inference"
+   ],
+   "front": "What does sampling <b>temperature</b> do?",
+   "back": "Rescales the next-token probabilities before sampling: low sharpens toward the top token, high flattens toward randomness. T=0 = greedy (always the most likely token).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> \"The capital of France is\" → 98% \"Paris\". At T=0 you get Paris every time; at T=1.5 sometimes \"a city…\".",
+   "source": "Inference & Serving",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::03 Inference & Serving",
+   "tags": [
+    "llm::inference"
+   ],
+   "front": "Is temperature 0 a \"deterministic reasoning mode\"?",
+   "back": "No. It only removes sampling noise and can lock in a wrong first token. Hosted models at T=0 still aren't bit-for-bit reproducible (batching, floating-point nondeterminism).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Inference & Serving",
+   "reverse": false
+  },
+  {
+   "guid": "PL^2Q)HvI<",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::03 Inference & Serving",
+   "tags": [
+    "llm::inference"
+   ],
+   "front": "What does \"70B parameters\" imply for serving memory?",
+   "back": "70 billion weights; at 16-bit (2 bytes each) ≈ 140 GB just to load them, hence multi-GPU serving.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Inference & Serving",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::03 Inference & Serving",
+   "tags": [
+    "llm::inference"
+   ],
+   "front": "Why is parameter count a weak proxy for model quality?",
+   "back": "It sets a capacity ceiling, but data quality, training tokens and post-training decide capability: a well-trained 8B model can beat a 70B model from three years earlier.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Marketing check:</b> \"our 1-trillion-parameter model\" tells you about hosting cost, not capability.",
+   "source": "Inference & Serving",
+   "reverse": false
+  },
+  {
+   "guid": "dWfvp1V#|L",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::03 Inference & Serving",
+   "tags": [
+    "llm::inference"
+   ],
+   "front": "What is <b>quantization</b>, and what is the trade-off?",
+   "back": "Storing weights in fewer bits (16 → 8 → 4) to cut memory and speed up inference. 8-bit: negligible loss; 4-bit: small but measurable loss, worse on math, code and long reasoning.",
+   "text": "",
+   "image": "",
+   "analogy": "JPEG for weights: fewer bits per number, a much smaller file, and a quality loss that is invisible at 8-bit but starts to show at 4-bit.",
+   "extra": "A 70B model at 4-bit fits in ~40 GB instead of ~140 GB.<br><b>Marketing check:</b> a cheap API \"running Model X\" may serve a heavily quantized version; ask what precision they serve.",
+   "source": "Inference & Serving",
+   "reverse": false
+  },
+  {
+   "guid": "dvShcTL|G5",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::03 Inference & Serving",
+   "tags": [
+    "llm::inference"
+   ],
+   "front": "What is a <b>reasoning</b> (\"thinking\") model, mechanically?",
+   "back": "The same transformer, post-trained with RL on verifiable tasks (math, code) to generate a long chain of intermediate tokens before answering: <b>test-time compute scaling</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> 8,000 tokens of working instead of 200 catch an error mid-way. You pay for all 8,000 tokens and wait ~30 s.",
+   "source": "Inference & Serving",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::03 Inference & Serving",
+   "tags": [
+    "llm::inference"
+   ],
+   "front": "When do reasoning modes hurt rather than help?",
+   "back": "On simple extraction, chat or writing: more latency and token cost for little or no quality gain. They pay off on multi-step, verifiable problems.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Inference & Serving",
+   "reverse": false
+  },
+  {
+   "guid": "eMVN,gRu+T",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::04 Training & Adaptation",
+   "tags": [
+    "llm::training"
+   ],
+   "front": "What is <b>pretraining</b>, and why is a base model not a chatbot?",
+   "back": "Next-token prediction over trillions of tokens. The result is a very good autocomplete with no notion of answering or helping; nearly all capability comes from this stage.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> asked \"What is the capital of France?\", a base model may continue \"What is the capital of Germany?…\", because quiz pages look like that.",
+   "source": "Training & Adaptation",
+   "reverse": false
+  },
+  {
+   "guid": "kPx%J?3_D&",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::04 Training & Adaptation",
+   "tags": [
+    "llm::training"
+   ],
+   "front": "What does <b>Supervised Fine-Tuning (SFT)</b> add to a base model?",
+   "back": "Training on curated prompt → ideal-answer pairs teaches the assistant format: answer the question, stop, follow the chat template.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Training & Adaptation",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::04 Training & Adaptation",
+   "tags": [
+    "llm::training"
+   ],
+   "front": "What does <b>RLHF</b> (Reinforcement Learning from Human Feedback) add, and what side effects come with it?",
+   "back": "It optimises the model toward answers humans prefer: the source of helpfulness, tone and refusals, and also of sycophancy and verbosity.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "The same base model can become a terse coding assistant or a chatty companion. \"Aligned\" is a training artefact, not extra knowledge.",
+   "source": "Training & Adaptation",
+   "reverse": false
+  },
+  {
+   "guid": "sO2nC$AW1M",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::04 Training & Adaptation",
+   "tags": [
+    "llm::training"
+   ],
+   "front": "In RLHF, how is the <b>reward model</b> fitted?",
+   "back": "On pairwise human preferences, using the <b>Bradley–Terry</b> model: \\(P(y_w\\succ y_l)=\\sigma\\big(r(x,y_w)-r(x,y_l)\\big)\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Training & Adaptation",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::04 Training & Adaptation",
+   "tags": [
+    "llm::training"
+   ],
+   "front": "What objective does the RLHF policy step optimise, and why the KL term?",
+   "back": "\\(\\max_\\pi E[r(x,y)]-\\beta\\,\\mathrm{KL}(\\pi\\,\\|\\,\\pi_{\\text{ref}})\\), usually with PPO. The KL term keeps the policy near the data where the learned reward is trustworthy, preventing reward hacking.",
+   "text": "",
+   "image": "",
+   "analogy": "A leash to the reference model: improve on the reward, but don't drift more than a few bits per token from what you were.",
+   "extra": "",
+   "source": "Training & Adaptation",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::04 Training & Adaptation",
+   "tags": [
+    "llm::training"
+   ],
+   "front": "How does <b>Direct Preference Optimisation (DPO)</b> simplify RLHF?",
+   "back": "The KL-regularised optimum is \\(\\pi^*\\propto\\pi_{\\text{ref}}\\,e^{r/\\beta}\\). DPO inverts it to express the reward via policy log-ratios and trains directly with a logistic loss on preference pairs: no reward model, no sampling loop.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Training & Adaptation",
+   "reverse": false
+  },
+  {
+   "guid": "qc;{hbLR,k",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::04 Training & Adaptation",
+   "tags": [
+    "llm::training"
+   ],
+   "front": "What is fine-tuning genuinely good for?",
+   "back": "Changing <b>how</b> the model behaves on a narrow, repeated task: exact output format, consistent house style, or letting a small cheap model do a big model's classification job.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Typical dataset: hundreds to low thousands of high-quality examples. Payoff: shorter prompts, lower latency, cheaper model.",
+   "source": "Training & Adaptation",
+   "reverse": false
+  },
+  {
+   "guid": "i!=VsSt(H)",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::04 Training & Adaptation",
+   "tags": [
+    "llm::training"
+   ],
+   "front": "Why is \"fine-tune the model on our docs so it knows our product\" usually the wrong plan?",
+   "back": "Fine-tuning changes behaviour far better than it adds facts: injected knowledge is fuzzy, hallucinated at the edges, and needs retraining on every change. With RAG you just replace the document.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Fine-tune on your API docs → the model learns your <em>naming style</em> and produces plausible-looking endpoints, including ones that don't exist. Change a parameter next month → retrain, re-evaluate, redeploy. With RAG you just replace the document.<br><b>Marketing check:</b> \"Trained on your data\" — ask: fine-tuned or retrieved? How do updates propagate? Is my data isolated from other tenants' weights?",
+   "source": "Training & Adaptation",
+   "reverse": false
+  },
+  {
+   "guid": "k:[s0hZW|$",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::04 Training & Adaptation",
+   "tags": [
+    "llm::training"
+   ],
+   "front": "What is <b>LoRA</b> (Low-Rank Adaptation)?",
+   "back": "Freeze the base model and train small low-rank adapter matrices in each layer (&lt;1% of parameters). Adapters are a few hundred MB and can be swapped per customer.",
+   "text": "",
+   "image": "",
+   "analogy": "A clip-on lens: the camera body (base model) stays the same, and you swap a small lens per customer to change the picture.",
+   "extra": "<b>Example:</b> one 70B base model serving 50 tenants, each with its own 200 MB adapter: how \"a custom model per tenant\" is usually built. Same limits as full fine-tuning: good for behaviour, poor for facts.",
+   "source": "Training & Adaptation",
+   "reverse": false
+  },
+  {
+   "guid": "sm*Q#[hqgv",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::04 Training & Adaptation",
+   "tags": [
+    "llm::training"
+   ],
+   "front": "What is <b>distillation</b>?",
+   "back": "Training a small \"student\" model on a large \"teacher\" model's outputs (or output distributions) so it imitates the teacher on a target domain.",
+   "text": "",
+   "image": "",
+   "analogy": "An apprentice copying a master on one trade: good at that trade, nowhere near the master outside it.",
+   "extra": "Works for narrow tasks at a fraction of the cost; the student won't match the teacher out of distribution. Much \"small model beats big model\" news is distillation on the benchmark's domain.",
+   "source": "Training & Adaptation",
+   "reverse": false
+  },
+  {
+   "guid": "Ihz6yy^<g|",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::04 Training & Adaptation",
+   "tags": [
+    "llm::training"
+   ],
+   "front": "What do <b>neural scaling laws</b> state?",
+   "back": "Test loss falls as a <b>power law</b> in parameters N, data D and compute C over many orders of magnitude (straight lines on log-log axes) down to an irreducible floor.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Form:</b> \\(L(N,D)\\approx E+A/N^\\alpha+B/D^\\beta\\), with E the irreducible entropy of the data.",
+   "source": "Training & Adaptation",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::04 Training & Adaptation",
+   "tags": [
+    "llm::training"
+   ],
+   "front": "What was the <b>Chinchilla</b> compute-optimal finding?",
+   "back": "For a fixed compute budget \\(C\\approx6ND\\), scale parameters and data in equal proportion (about 20 training tokens per parameter). Earlier large models were undertrained.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Training & Adaptation",
+   "reverse": false
+  },
+  {
+   "guid": "JLs<}o:f<,",
+   "type": "cloze",
+   "deck": "LLMs & Agentic Engineering::04 Training & Adaptation",
+   "tags": [
+    "llm::training"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Decision rule: start with {{c1::prompting}} (system prompt + a few examples); use {{c2::RAG}} when the model needs facts it lacks or that change; use {{c3::fine-tuning}} when it must behave differently at scale (format, style, a cheaper model) and you have examples plus an eval set.",
+   "image": "",
+   "analogy": "",
+   "extra": "They combine: RAG for <i>what</i>, fine-tuning for <i>how</i>. Neither replaces an eval set.",
+   "source": "Training & Adaptation",
+   "reverse": false
+  },
+  {
+   "guid": "E9)#RTCw|d",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::05 RAG & Context Engineering",
+   "tags": [
+    "llm::rag_context"
+   ],
+   "front": "What is inside the <b>context window</b> on a single API call?",
+   "back": "One flat token sequence: system prompt + tool definitions + prior messages + pasted or retrieved documents + tokens generated so far. The window caps that total.",
+   "text": "",
+   "image": "",
+   "analogy": "A desk: everything the model can use must be on the desk at once, and the desk has a fixed size.",
+   "extra": "<b>Example:</b> 128k model − 3k system prompt − 8k for 40 tool definitions − 100k PDF leaves ~17k for conversation and answer. Overflow fails the call or the client silently drops old messages.",
+   "source": "RAG & Context Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "pD(wp:@<Oe",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::05 RAG & Context Engineering",
+   "tags": [
+    "llm::rag_context"
+   ],
+   "front": "Does a chatbot <b>remember</b> the conversation between turns?",
+   "back": "No, the model is stateless: the client resends the whole transcript every turn. \"Memory\" features are software that stores notes and re-injects them into the prompt.",
+   "text": "",
+   "image": "",
+   "analogy": "A goldfish handed the full diary at every turn: it rereads everything from scratch, and the diary keeps getting longer.",
+   "extra": "<b>Vendor phrase:</b> \"learns from every interaction\" usually means logs re-injected into prompts; the weights don't change.",
+   "source": "RAG & Context Engineering",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::05 RAG & Context Engineering",
+   "tags": [
+    "llm::rag_context"
+   ],
+   "front": "Why do long chats get slower and pricier per message?",
+   "back": "Every turn re-sends and re-processes the entire growing transcript (turn 20 may cost ~15k tokens vs 500 for turn 1), and old details can fall out of the window.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "RAG & Context Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "A3x?BbeHVC",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::05 RAG & Context Engineering",
+   "tags": [
+    "llm::rag_context"
+   ],
+   "front": "What is the <b>lost-in-the-middle</b> effect?",
+   "back": "Models use facts at the start (primacy) and end (recency) of a long context more reliably than facts buried in the middle.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "RAG & Context Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "%;a8S7ZIY",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::05 RAG & Context Engineering",
+   "tags": [
+    "llm::rag_context"
+   ],
+   "front": "Why do you mitigate lost-in-the-middle by <b>ordering</b> content rather than rewording it?",
+   "back": "It follows from how attention distributes weight, not from prompt quality. Put critical material near the start or end, and rank or summarise instead of dumping.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "RAG & Context Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "d]dnpGnK&0",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::05 RAG & Context Engineering",
+   "tags": [
+    "llm::rag_context"
+   ],
+   "front": "What does a <b>needle-in-a-haystack</b> test show, and what doesn't it?",
+   "back": "It shows the model can retrieve one planted fact from any position. It doesn't show reasoning over the whole window (combining scattered facts, spotting contradictions), which degrades much earlier.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Marketing check:</b> \"99% needle accuracy at 1M tokens\" is the weakest possible long-context claim. Ask for multi-needle, aggregation, or real-task results at that length.",
+   "source": "RAG & Context Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "hNO%fe$jh$",
+   "type": "cloze",
+   "deck": "LLMs & Agentic Engineering::05 RAG & Context Engineering",
+   "tags": [
+    "llm::rag_context"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Checking a \"1M-token context\" claim: ask the {{c1::effective length}} where task accuracy starts dropping, the {{c2::cost and time-to-first-token}} of a full call, and whether the length is {{c3::native or extended post hoc}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "Also ask whether output limits scale (1M in / 8k out?) and whether it holds on your content. Rule of thumb: assume solid quality at ⅓–½ of the advertised window and verify beyond.",
+   "source": "RAG & Context Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "Fh9j<E,JqZ",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::05 RAG & Context Engineering",
+   "tags": [
+    "llm::rag_context"
+   ],
+   "front": "With a 200k context window, why still build RAG instead of pasting all the documents?",
+   "back": "Cost per question, prefill latency, diluted attention (more hallucination), corpora that never fit, and freshness. Stuffing wins only for small, stable corpora.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> one 40-page handbook → stuff it in (with prompt caching). A 50 GB SharePoint → retrieve.",
+   "source": "RAG & Context Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "Q5tpLH^V(;",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::05 RAG & Context Engineering",
+   "tags": [
+    "llm::rag_context"
+   ],
+   "front": "What is <b>Retrieval-Augmented Generation (RAG)</b>?",
+   "back": "At question time, retrieve the most relevant chunks of your own documents and paste them into the prompt, so the model answers from that text rather than training memory. Nothing is learned.",
+   "text": "",
+   "image": "",
+   "analogy": "An open-book exam: the student (model) doesn't study your handbook, they just get the right pages handed to them for each question.",
+   "extra": "",
+   "source": "RAG & Context Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "B(%<{NZW_X",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::05 RAG & Context Engineering",
+   "tags": [
+    "llm::rag_context"
+   ],
+   "front": "What are the offline and online steps of a standard RAG pipeline?",
+   "back": "<b>Offline:</b> chunk documents → embed each chunk → store in a vector index.<br><b>Online:</b> embed the question → fetch the top-k similar chunks → put them in the prompt → generate.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "RAG & Context Engineering",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::05 RAG & Context Engineering",
+   "tags": [
+    "llm::rag_context"
+   ],
+   "front": "When a RAG answer is wrong, what should you check first, and why?",
+   "back": "What was retrieved: most failures (~80%) happen before generation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Typical causes:</b> bad chunking (table split in half, heading separated from content); retrieval misses (question wording ≠ document wording, answer spans 3 chunks); stale or duplicate documents.",
+   "source": "RAG & Context Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "g2lVb$h]3U",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::05 RAG & Context Engineering",
+   "tags": [
+    "llm::rag_context"
+   ],
+   "front": "Why does RAG reduce hallucination but not eliminate it?",
+   "back": "The model still generates freely; retrieved text only raises the odds of grounded output. It may answer from memory when nothing relevant is found, blend in invented details, misread negations, or fabricate citations.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Fix:</b> retrieval-confidence threshold + \"say you don't know\" instruction + an eval for that behaviour; enforce citations structurally (only given chunk IDs).",
+   "source": "RAG & Context Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "O[@;EzWMDR",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::05 RAG & Context Engineering",
+   "tags": [
+    "llm::rag_context"
+   ],
+   "front": "Pre-inference retrieval vs <b>just-in-time (JIT)</b> context for agents?",
+   "back": "<b>Pre-inference:</b> an embedding lookup front-loads context before the model reasons.<br><b>JIT:</b> the agent pulls context during the loop as it discovers what it needs. Modern agents combine both.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "RAG & Context Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "ghHUoi7sJ]",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::05 RAG & Context Engineering",
+   "tags": [
+    "llm::rag_context"
+   ],
+   "front": "What is <b>context engineering</b>?",
+   "back": "Deliberately deciding what goes into the context window, in what order, and when to compact it. For agents it matters more than any single prompt tweak.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Karpathy (2025) called it \"the new prompt engineering\".",
+   "source": "RAG & Context Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "sG45H{6M0P",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::05 RAG & Context Engineering",
+   "tags": [
+    "llm::rag_context"
+   ],
+   "front": "What is the standard ordering of an agent's context window?",
+   "back": "<b>System instructions → relevant memory → tool definitions → conversation history.</b>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Structure the system prompt as identity, capabilities, rules, output format: focused and free of contradictions.",
+   "source": "RAG & Context Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "pGg$J&T*>J",
+   "type": "cloze",
+   "deck": "LLMs & Agentic Engineering::05 RAG & Context Engineering",
+   "tags": [
+    "llm::rag_context"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Context-engineering techniques: {{c1::context editing}} (rule-based pruning), {{c2::context awareness}} (tell the model its remaining capacity after each tool call), {{c3::memory tools}} (persistent files across sessions), {{c4::programmatic tool calling}} (code calls tools; only the result enters the window).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "RAG & Context Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "xd:vQeAGv_",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::05 RAG & Context Engineering",
+   "tags": [
+    "llm::rag_context"
+   ],
+   "front": "How does <b>programmatic tool calling</b> reduce context bloat?",
+   "back": "The model submits code that calls the tools and consumes intermediate outputs inside the runtime; only the final processed result returns to the context window.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "RAG & Context Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "vqrom%,gi_",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::06 Agent Memory",
+   "tags": [
+    "llm::memory"
+   ],
+   "front": "In LLM agents, short-term (working) memory vs long-term memory?",
+   "back": "<b>Working:</b> the current session's decision context, bounded by the window.<br><b>Long-term:</b> knowledge and experience kept across sessions and tasks, stored outside the window.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Agent Memory",
+   "reverse": false
+  },
+  {
+   "guid": "GyHTvt6u]`",
+   "type": "cloze",
+   "deck": "LLMs & Agentic Engineering::06 Agent Memory",
+   "tags": [
+    "llm::memory"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Long-term agent memory types: {{c1::episodic}} = specific past events (\"user prefers brand X\"); {{c2::semantic}} = general facts about the world; {{c3::procedural}} (implicit) = learned skills, strategies and action patterns.",
+   "image": "",
+   "analogy": "Like human memory: a diary (episodic), an encyclopedia (semantic), and knowing how to ride a bike (procedural).",
+   "extra": "",
+   "source": "Agent Memory",
+   "reverse": false
+  },
+  {
+   "guid": "o[`^8hw>cq",
+   "type": "cloze",
+   "deck": "LLMs & Agentic Engineering::06 Agent Memory",
+   "tags": [
+    "llm::memory"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Agent memory storage paradigms: {{c1::cumulative}} (append full history), {{c2::reflective}} (periodic compressed summaries), plain textual notes, {{c3::parametric}} (baked into weights via fine-tuning or knowledge editing), {{c4::structured}} (tables, triples, knowledge graphs).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Agent Memory",
+   "reverse": false
+  },
+  {
+   "guid": "D>0adey>jZ",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::06 Agent Memory",
+   "tags": [
+    "llm::memory"
+   ],
+   "front": "What idea does <b>MemGPT</b> (now Letta) borrow from operating systems?",
+   "back": "<b>Virtual memory</b>: it pages relevant snippets between the context window (small, fast) and external storage (large), driven by events/interrupts.",
+   "text": "",
+   "image": "",
+   "analogy": "Context window = RAM, external store = disk; the model acts as its own memory manager, swapping pages in and out.",
+   "extra": "",
+   "source": "Agent Memory",
+   "reverse": false
+  },
+  {
+   "guid": "oUYW*N9dsi",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::06 Agent Memory",
+   "tags": [
+    "llm::memory"
+   ],
+   "front": "How does <b>Mem0</b> keep long-term memory consistent?",
+   "back": "Two stages: an LLM extracts key facts from new turns, then an update step issues <code>ADD</code>, <code>UPDATE</code>, <code>DELETE</code> or <code>NOOP</code> against existing memories.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "A graph variant (Mem0<sup>g</sup>) stores entity nodes and relationship edges.",
+   "source": "Agent Memory",
+   "reverse": false
+  },
+  {
+   "guid": "J(i*m9NLjQ",
+   "type": "cloze",
+   "deck": "LLMs & Agentic Engineering::06 Agent Memory",
+   "tags": [
+    "llm::memory"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Properties of true episodic memory for agents: {{c1::long-term storage}}, {{c2::explicit reasoning}} over its contents, {{c3::single-shot learning}} (one exposure, no gradient update), {{c4::instance-specific}} detail, and {{c5::contextual binding}} (who/when/where/why).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Agent Memory · episodic-memory position paper (2025)",
+   "reverse": false
+  },
+  {
+   "guid": "vs4t5CelHg",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::06 Agent Memory",
+   "tags": [
+    "llm::memory"
+   ],
+   "front": "Why do agents fail at temporal reasoning even when entity recall is good?",
+   "back": "Retrieval surfaces entities but not how they changed over time. Fix: write structured memories tagged with actor, timestamp, entity, trigger and outcome so the order can be reconstructed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Agent Memory",
+   "reverse": false
+  },
+  {
+   "guid": "hP4=q54Ivj",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::06 Agent Memory",
+   "tags": [
+    "llm::memory"
+   ],
+   "front": "Downside of LLM-driven memory extraction (Mem0, Zep), and the alternative?",
+   "back": "Extra cost, probabilistic extraction errors, and errors that compound over time. Alternative: keep ground-truth episodic logs and derive views from them (e.g. MemMachine).",
+   "text": "",
+   "image": "",
+   "analogy": "Event sourcing: keep the append-only log as the source of truth and rebuild projections, instead of mutating a summary in place.",
+   "extra": "",
+   "source": "Agent Memory",
+   "reverse": false
+  },
+  {
+   "guid": "e|Rg=:vEAT",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::06 Agent Memory",
+   "tags": [
+    "llm::memory"
+   ],
+   "front": "In the harness view, what burden does the memory subsystem externalise?",
+   "back": "<b>State across time</b>, so continuity no longer depends on ephemeral in-context tokens.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Likewise, skills externalise procedural expertise and protocols externalise interaction.",
+   "source": "Agent Memory",
+   "reverse": false
+  },
+  {
+   "guid": "q?bw:fGtJ7",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::07 Agentic Patterns",
+   "tags": [
+    "llm::agentic_patterns"
+   ],
+   "front": "Agent vs workflow (Anthropic, 2025)?",
+   "back": "<b>Agent:</b> an LLM autonomously using tools in a loop, choosing the next call from environment feedback.<br><b>Workflow:</b> LLM and tool calls orchestrated by predefined code; you own the control flow.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Agentic Patterns",
+   "reverse": false
+  },
+  {
+   "guid": "JSRv=wn#hC",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::07 Agentic Patterns",
+   "tags": [
+    "llm::agentic_patterns"
+   ],
+   "front": "Mechanically, what is an LLM agent loop?",
+   "back": "Model emits a structured tool call → harness executes it → the result goes back into the context → model picks the next step, until done. The model never runs anything itself.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example call:</b> <code>search_tickets(status=\"open\")</code>",
+   "source": "Agentic Patterns",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::07 Agentic Patterns",
+   "tags": [
+    "llm::agentic_patterns"
+   ],
+   "front": "Why do agent demos look better than agent products?",
+   "back": "Per-step errors compound: at 95% per step, a 10-step task succeeds ~60% (\\(0.95^{10}\\)) and a 30-step task ~21%. Demos show the happy path once.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Marketing check:</b> Ask: success rate over N runs on real tasks, how failures are detected, what needs human approval, and what the cost per completed task is.",
+   "source": "Agentic Patterns",
+   "reverse": false
+  },
+  {
+   "guid": "hA5lCkE}GB",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::07 Agentic Patterns",
+   "tags": [
+    "llm::agentic_patterns"
+   ],
+   "front": "What is the key trade-off of choosing an agent over a workflow?",
+   "back": "Predictability for flexibility: each autonomous turn adds latency, cost and error propagation. Use the simplest pattern that passes eval; reserve agents for paths you can't hardcode but can verify.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Agentic Patterns",
+   "reverse": false
+  },
+  {
+   "guid": "QcOV0>L5[/",
+   "type": "cloze",
+   "deck": "LLMs & Agentic Engineering::07 Agentic Patterns",
+   "tags": [
+    "llm::agentic_patterns"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Anthropic's workflow patterns: {{c1::prompt chaining}} (fixed sequence of LLM steps), {{c2::routing}} (classify input, send to a specialised path), {{c3::parallelization}} (sectioning or voting), {{c4::orchestrator-workers}} (dynamic decomposition and delegation), {{c5::evaluator-optimizer}} (one generates, another critiques).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Agentic Patterns",
+   "reverse": false
+  },
+  {
+   "guid": "xrh8)iAHVy",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::07 Agentic Patterns",
+   "tags": [
+    "llm::agentic_patterns"
+   ],
+   "front": "When is the <b>orchestrator-workers</b> pattern the right choice?",
+   "back": "When subtasks can't be predefined (unpredictable complexity), e.g. a coding agent resolving an issue across many files: the orchestrator decomposes the task at run time and delegates.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Agentic Patterns",
+   "reverse": false
+  },
+  {
+   "guid": "Om=>$A2R`E",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::07 Agentic Patterns",
+   "tags": [
+    "llm::agentic_patterns"
+   ],
+   "front": "Why use <b>sub-agents</b>?",
+   "back": "<b>Context isolation:</b> detailed search and work context stays inside the sub-agent, while the lead agent keeps a small, clean window focused on synthesis.",
+   "text": "",
+   "image": "",
+   "analogy": "A manager who gets a one-page brief from each analyst instead of reading all their notes.",
+   "extra": "",
+   "source": "Agentic Patterns",
+   "reverse": false
+  },
+  {
+   "guid": "Q>Qq4=mR1$",
+   "type": "cloze",
+   "deck": "LLMs & Agentic Engineering::07 Agentic Patterns",
+   "tags": [
+    "llm::agentic_patterns"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Agentic antipatterns: {{c1::monolithic agents}} (one do-everything agent), {{c2::over-engineered planning}} layers that add cost without payoff, and {{c3::missing observability}} (no tracing of steps and tool calls).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Agentic Patterns",
+   "reverse": false
+  },
+  {
+   "guid": "J@?g=g33sH",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::07 Agentic Patterns",
+   "tags": [
+    "llm::agentic_patterns"
+   ],
+   "front": "What does \"reason inside the agent's context window\" mean as a design habit?",
+   "back": "Design from what the agent actually observes per step (~10–20k tokens), not your human priors. If it seems fragile, give richer observations rather than adding orchestration layers.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> a computer-use agent gets a screenshot and a terse task; improve resolution, suggested actions and guardrails.",
+   "source": "Agentic Patterns",
+   "reverse": false
+  },
+  {
+   "guid": "e5aFGM%%-6",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::07 Agentic Patterns",
+   "tags": [
+    "llm::agentic_patterns"
+   ],
+   "front": "How does Anthropic suggest diagnosing agent failures?",
+   "back": "Ask the model what is ambiguous in the system prompt; feed it a failed trajectory and ask why a step failed; attempt the task yourself using only the agent's observations.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Agentic Patterns",
+   "reverse": false
+  },
+  {
+   "guid": "Cs%m.!1t,X",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::07 Agentic Patterns",
+   "tags": [
+    "llm::agentic_patterns"
+   ],
+   "front": "Why start with raw LLM APIs rather than an agent framework?",
+   "back": "Frameworks hide prompts and invite over-engineering; raw APIs keep the system prompt, tool definitions and control flow visible and debuggable. Add structure only when evals justify it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Agentic Patterns",
+   "reverse": false
+  },
+  {
+   "guid": "ptQ@vmd7G6",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::08 Harness Engineering",
+   "tags": [
+    "llm::harness"
+   ],
+   "front": "What is an agent <b>harness</b>?",
+   "back": "The deterministic runtime around the LLM. <b>The model proposes</b> a structured tool call; <b>the harness disposes</b>: validates the schema, checks permissions and budgets, executes, logs and feeds the result back.",
+   "text": "",
+   "image": "",
+   "analogy": "Like a Kubernetes API server with admission control: clients submit desired actions, but validation, authorisation and execution happen in the control plane, never in the client.",
+   "extra": "",
+   "source": "Harness Engineering",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::08 Harness Engineering",
+   "tags": [
+    "llm::harness"
+   ],
+   "front": "What goes wrong when an agent runs without a harness enforcing its tool calls?",
+   "back": "Token budgets leak, loops run unbounded, and dangerous commands execute unchecked.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Harness Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "MXVBphKR5*",
+   "type": "cloze",
+   "deck": "LLMs & Agentic Engineering::08 Harness Engineering",
+   "tags": [
+    "llm::harness"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Agent harness components: the {{c1::agent loop}} (call → parse → execute → feed back → decide to stop), {{c2::tool calling}} (incl. MCP servers), {{c3::context management}} (history, retrieval, compaction), plus memory, guardrails and {{c4::tracing/observability}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Harness Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "qjYKfX*@>@",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::08 Harness Engineering",
+   "tags": [
+    "llm::harness"
+   ],
+   "front": "What is the <b>tool cliff</b>?",
+   "back": "Agent performance degrades non-linearly as tool count grows (one report: ~10 fine, ~30 degrading, ~100+ failing). Keep the exposed toolset small and task-scoped.",
+   "text": "",
+   "image": "",
+   "analogy": "A Swiss Army knife with 100 blades: past a point, finding the right tool costs more than the tools add.",
+   "extra": "Don't bolt on every MCP server \"just in case\"; tool definitions also eat context.",
+   "source": "Harness Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "j_M?nwkpHW",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::08 Harness Engineering",
+   "tags": [
+    "llm::harness"
+   ],
+   "front": "How much does the scaffold matter relative to the model?",
+   "back": "A lot: the same model scored ~23% on SWE-bench Pro with a basic scaffold vs ~45%+ with an optimised one. Scaffold design is a first-class performance lever.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Harness Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "If00bL)ttt",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::08 Harness Engineering",
+   "tags": [
+    "llm::harness"
+   ],
+   "front": "Best practice for agent instruction files (<code>CLAUDE.md</code>, <code>AGENTS.md</code>)?",
+   "back": "Short and hand-written (roughly under 60 lines), covering only what the agent commonly gets wrong. Generated files restate the obvious and add ~20% tokens to every call.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Harness Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "g~Zae2]/z:",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::08 Harness Engineering",
+   "tags": [
+    "llm::harness"
+   ],
+   "front": "For long-horizon (multi-window) tasks, what harness setup improves reliability?",
+   "back": "Use the first window to build scaffolding: tests, init scripts and verification tools so the agent can check itself; track progress in structured files and plan before acting.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Harness Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "rgAR$6Endj",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::08 Harness Engineering",
+   "tags": [
+    "llm::harness"
+   ],
+   "front": "Which transport replaced HTTP+SSE in <b>MCP</b>, and why does it matter for harnesses?",
+   "back": "<b>Streamable HTTP</b>: client→server via POST, optional server→client SSE stream. MCP servers can run as remote multi-client services, so the harness must handle their wiring and auth.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Harness Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "fZ78Eoh9r7",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::08 Harness Engineering",
+   "tags": [
+    "llm::harness"
+   ],
+   "front": "What is <b>prompt injection</b>, and why can't the model simply ignore it?",
+   "back": "Instructions planted in data (web page, document, email) that the model then follows. Everything in the context is just tokens, so it can't reliably tell instructions from data.",
+   "text": "",
+   "image": "",
+   "analogy": "SQL injection for LLMs: untrusted data gets interpreted as commands because data and instructions travel in the same channel, except here there is no reliable escaping.",
+   "extra": "<b>Example:</b> A RAG bot over a shared wiki: anyone who can edit a wiki page can plant instructions for the bot. An email-reading agent: a malicious email can steer it. The more tools an agent has, the more damage an injection can do.",
+   "source": "Harness Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "vm&p+(u#%:",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::08 Harness Engineering",
+   "tags": [
+    "llm::harness"
+   ],
+   "front": "How should a harness treat retrieved content and tool output?",
+   "back": "As <b>untrusted input</b>: separate data from instructions, give tools least privilege, and require human approval for irreversible actions.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Marketing check:</b> \"Our model is immune to prompt injection\" — no model is. Ask what the system does architecturally: least-privilege tools, human approval for side effects, separating trusted from untrusted content.",
+   "source": "Harness Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "n%&icp_$,c",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::08 Harness Engineering",
+   "tags": [
+    "llm::harness"
+   ],
+   "front": "What prevents duplicate side effects when an agent retries?",
+   "back": "<b>Idempotency tokens plus deduplication</b> at the tool boundary.",
+   "text": "",
+   "image": "",
+   "analogy": "An elevator call button: pressing it twice still brings one elevator, because the request is idempotent.",
+   "extra": "<b>Classic failure:</b> agent A times out and retries while agent B processes the payment: double charge despite \"correct\" retry logic.",
+   "source": "Harness Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "fJm}y]j{J.",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::08 Harness Engineering",
+   "tags": [
+    "llm::harness"
+   ],
+   "front": "What recovery controls belong in a policy-first tool layer?",
+   "back": "Per-tool retry with backoff, <b>bounded</b> retries, circuit breakers for failing tools, risk-aware gating, and explicit contracts and invariants.",
+   "text": "",
+   "image": "",
+   "analogy": "A circuit breaker in your fuse box: after repeated faults it trips and stops current flowing, instead of letting the wiring burn.",
+   "extra": "Most failures come from weak contracts, missing invariants, no idempotency and unbounded retries, not from the model.",
+   "source": "Harness Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "e5t%rWUx%#",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::08 Harness Engineering",
+   "tags": [
+    "llm::harness"
+   ],
+   "front": "In production LLM traffic, what dominates call failures, and how do you mitigate it?",
+   "back": "<b>Rate limits (HTTP 429)</b>. Mitigate with token budgeting and backpressure, not prompt tweaks.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Data point:</b> Datadog, Feb 2026: ~5% of LLM call spans errored, ~60% of those were 429s.",
+   "source": "Harness Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "t5zU?sMa&-",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::08 Harness Engineering",
+   "tags": [
+    "llm::harness"
+   ],
+   "front": "What hybrid architecture balances capability and reliability?",
+   "back": "A guardrailed local/small model as the workhorse for routine structured tasks, with a frontier API as fallback for hard reasoning or very long context.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Heavy guardrailing reportedly lifts small models from ~50% to ~99% on bounded workflows.",
+   "source": "Harness Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "w=xO,w4X9K",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::08 Harness Engineering",
+   "tags": [
+    "llm::harness"
+   ],
+   "front": "Where does production agent reliability come from?",
+   "back": "Architecture, not the model: strict tool contracts, idempotent state transitions, trace-level observability, evals in CI, and human approval for irreversible actions.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Treat the agent as a distributed system in which the LLM happens to be the planner.",
+   "source": "Harness Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "da.),N[?5J",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::09 Evaluation & Reliability",
+   "tags": [
+    "llm::evaluation"
+   ],
+   "front": "What minimum evaluation setup should precede deploying an LLM feature?",
+   "back": "A <b>golden set</b>: 50–300 real inputs with expected outputs or rubrics, in version control, run automatically on every prompt, model or pipeline change.",
+   "text": "",
+   "image": "",
+   "analogy": "A regression test suite for behaviour: no release ships until it runs green against the golden set.",
+   "extra": "<b>Example:</b> 150 real tickets + approved answers; score correct/partial/wrong and \"said I-don't-know when it should\". Run it before switching to a vendor's v2.",
+   "source": "Evaluation & Reliability",
+   "reverse": false
+  },
+  {
+   "guid": "sd})h8veZ8",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::09 Evaluation & Reliability",
+   "tags": [
+    "llm::evaluation"
+   ],
+   "front": "What is <b>MMLU</b>, and why is it a weak signal now?",
+   "back": "~14k multiple-choice questions over 57 subjects. Weaknesses: contamination (questions leak into training data), saturation (top models within noise), format mismatch with real tasks, label errors.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Evaluation & Reliability",
+   "reverse": false
+  },
+  {
+   "guid": "hv=`ezm&N=",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::09 Evaluation & Reliability",
+   "tags": [
+    "llm::evaluation"
+   ],
+   "front": "Why is \"beats model X on benchmarks\" weak evidence for your use case?",
+   "back": "<b>Goodhart's law</b>: labs tune toward public benchmarks, and vendor tables cherry-pick benchmarks, prompting setup and attempts. Fresh or private benchmarks resist this.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Evaluation & Reliability",
+   "reverse": false
+  },
+  {
+   "guid": "r:*J8I_Wpl",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::09 Evaluation & Reliability",
+   "tags": [
+    "llm::evaluation"
+   ],
+   "front": "What does <b>pass@k</b> mean?",
+   "back": "The probability that at least one of k attempts passes the tests. pass@1 = the first try works.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Evaluation & Reliability",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::09 Evaluation & Reliability",
+   "tags": [
+    "llm::evaluation"
+   ],
+   "front": "How can pass@k inflate a headline coding score?",
+   "back": "40% pass@1 may be 75% pass@10. A headline that is secretly pass@10 with voting and extra tools describes a different product than a single user call.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Marketing check:</b> Always ask: how many attempts, with what tools, and was the score verified by a third party?",
+   "source": "Evaluation & Reliability",
+   "reverse": false
+  },
+  {
+   "guid": "znR!7:1!`v",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::09 Evaluation & Reliability",
+   "tags": [
+    "llm::evaluation"
+   ],
+   "front": "pass@k vs <b>pass^k</b>: what's the difference, and which suits production agents?",
+   "back": "<b>pass@k</b>: at least one of k tries succeeds (optimistic). <b>pass^k</b> (τ-bench): all k tries succeed, measuring consistency, which is what a production agent needs.",
+   "text": "",
+   "image": "",
+   "analogy": "pass@k is \"made at least one of k free throws\"; pass^k is \"made all k\". A production agent has to be the second kind of player.",
+   "extra": "",
+   "source": "Evaluation & Reliability",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::09 Evaluation & Reliability",
+   "tags": [
+    "llm::evaluation"
+   ],
+   "front": "Why is pass@1 on short tasks misleading for long-horizon agents?",
+   "back": "Reliability degrades super-linearly with task length and complexity. Use duration-bucketed, variance-aware metrics (pass^k, METR time horizons) with partial credit.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Evaluation & Reliability",
+   "reverse": false
+  },
+  {
+   "guid": "pP<6|f:fo2",
+   "type": "cloze",
+   "deck": "LLMs & Agentic Engineering::09 Evaluation & Reliability",
+   "tags": [
+    "llm::evaluation"
+   ],
+   "front": "",
+   "back": "",
+   "text": "LLM-as-a-judge biases: {{c1::length}} (longer looks better), {{c2::position}} (first of two answers wins), {{c3::self-preference}} (rates its own model family higher), {{c4::style over substance}} (confident, formatted wrong answers score well).",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Mitigations:</b> swap answer order and average; give a rubric and reference answer; spot-check 5–10% with humans.",
+   "source": "Evaluation & Reliability",
+   "reverse": false
+  },
+  {
+   "guid": "IIyilF?J({",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::09 Evaluation & Reliability",
+   "tags": [
+    "llm::evaluation"
+   ],
+   "front": "In LLM-as-a-judge evaluation, why does the judge model's capability matter?",
+   "back": "Weak judges miss failures and give false confidence. In one comparison a 70B-class judge caught all known failures while smaller judges missed several.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Evaluation & Reliability",
+   "reverse": false
+  },
+  {
+   "guid": "Dz*;z5tpCB",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::09 Evaluation & Reliability",
+   "tags": [
+    "llm::evaluation"
+   ],
+   "front": "What do human-preference arenas (Elo leaderboards) measure?",
+   "back": "Which of two anonymous chat answers people prefer, on prompts they happen to type. Not correctness, long tasks, tool use or your domain; chatty, confident styles gain Elo.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Marketing check:</b> Top of an arena ≈ \"pleasant chat model\", not \"most accurate model\". Vendors have tested many private variants and published only the best.",
+   "source": "Evaluation & Reliability",
+   "reverse": false
+  },
+  {
+   "guid": "LY^@E,NnlY",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::09 Evaluation & Reliability",
+   "tags": [
+    "llm::evaluation"
+   ],
+   "front": "How do you evaluate a RAG system in two layers?",
+   "back": "<b>Retrieval:</b> did the right chunks reach the top-k (recall@k, precision@k, MRR; no LLM needed)?<br><b>Generation:</b> given those chunks, is the answer faithful, relevant and complete?",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Evaluation & Reliability",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::09 Evaluation & Reliability",
+   "tags": [
+    "llm::evaluation"
+   ],
+   "front": "Retrieval recall@5 is 60%. Why won't prompt engineering fix it?",
+   "back": "For 40% of questions the answer never reached the prompt. Fix chunking, embeddings or hybrid search first, then tune the prompt.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Evaluation & Reliability",
+   "reverse": false
+  },
+  {
+   "guid": "k08d9e,/X5",
+   "type": "cloze",
+   "deck": "LLMs & Agentic Engineering::09 Evaluation & Reliability",
+   "tags": [
+    "llm::evaluation"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Follow-ups for a \"99% accuracy\" claim: on {{c1::which task and dataset}}? measured by {{c2::whom}} (vendor or third party)? on how many examples ({{c3::N}})? what counts as {{c4::correct}}? under what {{c5::conditions}} (attempts, tools, latency, cost)?",
+   "image": "",
+   "analogy": "",
+   "extra": "99% of 100 examples is one error; the confidence interval is wide. A number without these answers is a slogan.",
+   "source": "Evaluation & Reliability",
+   "reverse": false
+  },
+  {
+   "guid": "G~h0.2?)Kt",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::09 Evaluation & Reliability",
+   "tags": [
+    "llm::evaluation"
+   ],
+   "front": "Why evaluate agent <b>trajectories</b>, not just final outputs?",
+   "back": "A right-looking answer can hide bad steps. Score tool choice, argument validity, step count, time/cost and policy compliance; use deterministic tool mocks in CI.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Add judge-based scoring only with a rubric and auditing.",
+   "source": "Evaluation & Reliability",
+   "reverse": false
+  },
+  {
+   "guid": "N#k<Wp1GvP",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::09 Evaluation & Reliability",
+   "tags": [
+    "llm::evaluation"
+   ],
+   "front": "<b>Guardrails</b> vs <b>evaluations</b> in an LLM system?",
+   "back": "<b>Guardrails</b> act in real time, blocking unsafe output before it reaches the user. <b>Evaluations</b> run in batches, measuring quality across prompts or versions over time. You need both.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Evaluation & Reliability",
+   "reverse": false
+  },
+  {
+   "guid": "f?!5%Ol`]E",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::09 Evaluation & Reliability",
+   "tags": [
+    "llm::evaluation"
+   ],
+   "front": "What must agent observability capture beyond traditional tracing?",
+   "back": "The model's decisions, because the LLM drives control flow: a span per tool call (name, latency, success, cost), guardrail verdicts, retrieval counts, and end-to-end trace IDs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Evaluation & Reliability",
+   "reverse": false
+  },
+  {
+   "guid": "usr4xN}NzY",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::09 Evaluation & Reliability",
+   "tags": [
+    "llm::evaluation"
+   ],
+   "front": "Why is agent reliability not a launch property?",
+   "back": "It decays: data drift, provider model updates and dependency changes. Run agents like production software with continuous monitoring and ongoing evals.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Often-cited figure: \"91% of ML systems degrade over time\".",
+   "source": "Evaluation & Reliability",
+   "reverse": false
+  },
+  {
+   "guid": "e=NxU,/Dkp",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::09 Evaluation & Reliability",
+   "tags": [
+    "llm::evaluation"
+   ],
+   "front": "Why do LLMs <b>hallucinate</b>?",
+   "back": "They produce the most plausible continuation; nothing checks claims against a fact store, so a fluent wrong answer and a fluent right one come from the same mechanism.",
+   "text": "",
+   "image": "",
+   "analogy": "A confident improv actor: trained to always keep the scene going plausibly, never to stop and check the facts.",
+   "extra": "<b>Example:</b> Ask for a citation on an obscure topic → the model produces a real-looking author, journal, year, and DOI that don't exist, because that <em>pattern</em> is what citations look like.",
+   "source": "Evaluation & Reliability",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::09 Evaluation & Reliability",
+   "tags": [
+    "llm::evaluation"
+   ],
+   "front": "Why can't a model reliably \"just say I don't know\"?",
+   "back": "Uncertainty isn't an explicit answer; it shows up as a flatter probability distribution, which sampling hides. Mitigations are external: grounding, verifying tools, cite-only-given-IDs, evals that punish confident errors.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Evaluation & Reliability",
+   "reverse": false
+  },
+  {
+   "guid": "Z/.ZW[)[n",
+   "type": "cloze",
+   "deck": "LLMs & Agentic Engineering::09 Evaluation & Reliability",
+   "tags": [
+    "llm::evaluation"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Vendor phrases decoded: \"trained on your data\" → usually {{c1::RAG over your documents}} (occasionally a LoRA adapter); \"understands your business\" → {{c2::a system prompt plus retrieval}}; \"proprietary model\" → often {{c3::an open-weights fine-tune or a wrapped frontier API}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "\"Agentic\" → an LLM loop with tools: ask the success rate. \"Hallucination-free\" → not a thing: ask what is verified and how.",
+   "source": "Evaluation & Reliability",
+   "reverse": false
+  }
+ ]
+}

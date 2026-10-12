@@ -1,0 +1,3601 @@
+{
+ "deck_name": "Distributed Systems & Data",
+ "file": "Distributed_Systems_and_Data.apkg",
+ "description": "Concept-first deck on <b>distributed systems and data-intensive design</b>: storage engines, replication, partitioning, transactions, consistency/CAP, consensus (Raft/Paxos), failure and time, streams, plus AWS/Azure/Kubernetes case studies. For cloud and platform architects.",
+ "notes": [
+  {
+   "guid": "sAo<:_Z<RL",
+   "type": "cloze",
+   "deck": "Distributed Systems & Data::01 Foundations",
+   "tags": [
+    "DistSys::foundations"
+   ],
+   "front": "",
+   "back": "",
+   "text": "DDIA frames data systems by three concerns: {{c1::reliability}} (works correctly despite faults), {{c2::scalability}} (reasonable ways to cope with growing load) and {{c3::maintainability}} (people can keep working on it productively).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 1",
+   "reverse": false
+  },
+  {
+   "guid": "yV-n{3Z%:<",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::01 Foundations",
+   "tags": [
+    "DistSys::foundations"
+   ],
+   "front": "<b>Fault</b> vs <b>failure</b>: what's the difference?",
+   "back": "A <b>fault</b> is one component deviating from spec. A <b>failure</b> is the whole system no longer serving users. Fault tolerance = stopping faults from becoming failures.",
+   "text": "",
+   "image": "",
+   "analogy": "A flat tyre is a fault; being stranded on the motorway is a failure. A spare tyre is fault tolerance.",
+   "extra": "",
+   "source": "DDIA · Ch 1",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::01 Foundations",
+   "tags": [
+    "DistSys::foundations"
+   ],
+   "front": "What is <b>tail latency amplification</b>?",
+   "back": "When one user request fans out to many backend calls, it is as slow as the slowest call, so even rare slow backends make many user requests slow.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> 100 parallel calls each with 1% chance of being slow → ~63% of requests hit at least one slow call.",
+   "source": "DDIA · Ch 1",
+   "reverse": false
+  },
+  {
+   "guid": "Bqp5Z_/1.c",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::01 Foundations",
+   "tags": [
+    "DistSys::foundations"
+   ],
+   "front": "What are <b>load parameters</b>, and why do they matter for scalability?",
+   "back": "Numbers that describe your load: requests/sec, read/write ratio, cache hit rate, fan-out. There's no generically 'scalable' system; you design for a specific load profile.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 1",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::01 Foundations",
+   "tags": [
+    "DistSys::foundations"
+   ],
+   "front": "Scaling up vs scaling out?",
+   "back": "<b>Scaling up</b>: a bigger machine (vertical). <b>Scaling out</b>: more machines sharing the load, shared-nothing (horizontal).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 1",
+   "reverse": false
+  },
+  {
+   "guid": "M_i$^.#2k>",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::02 Data Models & Storage Engines",
+   "tags": [
+    "DistSys::storage"
+   ],
+   "front": "What is the <b>object-relational impedance mismatch</b>?",
+   "back": "The awkward translation between relational tables/rows and nested application objects. Document models (e.g. a résumé as one JSON tree) reduce it for self-contained, one-to-many data.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 2–3",
+   "reverse": false
+  },
+  {
+   "guid": "y&qi>|dPte",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::02 Data Models & Storage Engines",
+   "tags": [
+    "DistSys::storage"
+   ],
+   "front": "When do document models struggle and relational models win?",
+   "back": "When data has many <b>many-to-many</b> relationships or needs joins. Weak join support pushes join logic into app code; relational models handle it with foreign keys and joins.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 2–3",
+   "reverse": false
+  },
+  {
+   "guid": "hu;rqzG/)>",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::02 Data Models & Storage Engines",
+   "tags": [
+    "DistSys::storage"
+   ],
+   "front": "Schema-on-write vs schema-on-read?",
+   "back": "<b>Schema-on-write</b> (relational): structure enforced when data is written. <b>Schema-on-read</b> (document): structure is implicit and interpreted by the reader; flexible, but readers carry the burden.",
+   "text": "",
+   "image": "",
+   "analogy": "Static vs dynamic typing: checked up front by the compiler, or discovered at run time by whoever uses the value.",
+   "extra": "",
+   "source": "DDIA · Ch 2–3",
+   "reverse": false
+  },
+  {
+   "guid": "xI.*$b50vg",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::02 Data Models & Storage Engines",
+   "tags": [
+    "DistSys::storage"
+   ],
+   "front": "Why does it matter that SQL is <b>declarative</b>?",
+   "back": "You say <b>what</b> you want, not <b>how</b>. The optimizer can change strategy (new indexes, parallel execution) without anyone rewriting queries.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 2–3",
+   "reverse": false
+  },
+  {
+   "guid": "E$dNXg$Vxu",
+   "type": "cloze",
+   "deck": "Distributed Systems & Data::02 Data Models & Storage Engines",
+   "tags": [
+    "DistSys::storage"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Graph data models: the {{c1::property graph}} (vertices and edges with properties, queried with Cypher/Gremlin) and the {{c2::triple store}} (subject–predicate–object, queried with SPARQL). Both shine when many-to-many traversals dominate.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 2–3",
+   "reverse": false
+  },
+  {
+   "guid": "ur$;mysp33",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::02 Data Models & Storage Engines",
+   "tags": [
+    "DistSys::storage"
+   ],
+   "front": "How does an <b>LSM-tree</b> storage engine handle a write?",
+   "back": "Append to a WAL, insert into an in-memory sorted <b>memtable</b>; when full, flush it as an immutable sorted file (<b>SSTable</b>). Background <b>compaction</b> merges SSTables, dropping overwritten/deleted keys.",
+   "text": "",
+   "image": "",
+   "analogy": "Like tossing notes into an inbox and filing them into sorted folders later, instead of finding the right page every time.",
+   "extra": "<b>Examples:</b> RocksDB, Cassandra, ScyllaDB, HBase; Kafka Streams state stores use RocksDB.",
+   "source": "DDIA · Ch 2–3",
+   "reverse": false
+  },
+  {
+   "guid": "nd_V^O,QK7",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::02 Data Models & Storage Engines",
+   "tags": [
+    "DistSys::storage"
+   ],
+   "front": "How does an LSM-tree answer a point read, and why can it be slow?",
+   "back": "Check the memtable, then SSTables newest to oldest. A key may need several files checked (read amplification); Bloom filters and sparse indexes skip most of them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Data Eng · Storage engines",
+   "reverse": false
+  },
+  {
+   "guid": "zLR/C9!xWv",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::02 Data Models & Storage Engines",
+   "tags": [
+    "DistSys::storage"
+   ],
+   "front": "What is an <b>SSTable</b>, and why is the sorting useful?",
+   "back": "A <b>Sorted String Table</b>: key-value pairs sorted by key. Sorting allows mergesort-style compaction, a sparse in-memory index and efficient range scans.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 2–3",
+   "reverse": false
+  },
+  {
+   "guid": "nYPK]Gvi_=",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::02 Data Models & Storage Engines",
+   "tags": [
+    "DistSys::storage"
+   ],
+   "front": "Structurally, how do B-trees differ from LSM-trees?",
+   "back": "B-trees update fixed-size pages <b>in place</b> in a balanced tree. LSM-trees only <b>append</b> and later merge.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 2–3",
+   "reverse": false
+  },
+  {
+   "guid": "hZ;i>DyTHR",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::02 Data Models & Storage Engines",
+   "tags": [
+    "DistSys::storage"
+   ],
+   "front": "When does an <b>LSM-tree</b> beat a B-tree, and what does it cost?",
+   "back": "Write-heavy, time-series or wide-column workloads: sequential writes, higher throughput, better compression. Cost: compaction competes for I/O and reads/space amplify.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 2–3",
+   "reverse": false
+  },
+  {
+   "guid": "k.4tsJ6I_J",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::02 Data Models & Storage Engines",
+   "tags": [
+    "DistSys::storage"
+   ],
+   "front": "When does a <b>B-tree</b> beat an LSM-tree?",
+   "back": "Read-dominated, transactional workloads: predictable point/range reads, and each key lives in exactly one place, which makes locking simple (PostgreSQL, MySQL InnoDB).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Data Eng · Storage engines",
+   "reverse": false
+  },
+  {
+   "guid": "~_/s9``pU",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::02 Data Models & Storage Engines",
+   "tags": [
+    "DistSys::storage"
+   ],
+   "front": "What is <b>write amplification</b>?",
+   "back": "Bytes physically written ÷ bytes logically written: one write triggers several disk writes (WAL, B-tree page splits, compaction rewrites). It limits write throughput and wears SSDs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 2–3",
+   "reverse": false
+  },
+  {
+   "guid": "niK?WfLt.:",
+   "type": "cloze",
+   "deck": "Distributed Systems & Data::02 Data Models & Storage Engines",
+   "tags": [
+    "DistSys::storage"
+   ],
+   "front": "",
+   "back": "",
+   "text": "{{c1::Read amplification}}: disk reads (files/levels) needed per logical read. {{c2::Space amplification}}: bytes on disk ÷ bytes of live data (stale versions waiting for compaction).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Data Eng · Storage engines",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::02 Data Models & Storage Engines",
+   "tags": [
+    "DistSys::storage"
+   ],
+   "front": "What does the <b>RUM conjecture</b> say about storage engines?",
+   "back": "No engine can minimize <b>R</b>ead, <b>U</b>pdate (write) and <b>M</b>emory/space overhead at once. Tuning (e.g. compaction strategy) moves you around that triangle.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Data Eng · Storage engines",
+   "reverse": false
+  },
+  {
+   "guid": "F&sjWx_<%7",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::02 Data Models & Storage Engines",
+   "tags": [
+    "DistSys::storage"
+   ],
+   "front": "What does a <b>Bloom filter</b> do in an LSM store?",
+   "back": "A per-SSTable probabilistic set: 'definitely not here' or 'maybe here'. Point lookups skip files that can't hold the key. False positives possible, false negatives never.",
+   "text": "",
+   "image": "",
+   "analogy": "A bouncer with a guest list that sometimes waves in a stranger but never turns away an invited guest.",
+   "extra": "Costs a few bits per key of memory.",
+   "source": "Data Eng · Storage engines",
+   "reverse": false
+  },
+  {
+   "guid": "N5v{!z2NhY",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::02 Data Models & Storage Engines",
+   "tags": [
+    "DistSys::storage"
+   ],
+   "front": "Why does almost every database keep a <b>write-ahead log (WAL)</b>?",
+   "back": "Durability: the change is appended and fsync'd to the log <i>before</i> the data structure is modified, so a crash can be recovered by replaying the log.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Cloud ops:</b> WAL latency = commit latency, so put it on low-latency block storage (io2, Premium SSD v2), never object storage.",
+   "source": "Data Eng · Storage engines",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Distributed Systems & Data::02 Data Models & Storage Engines",
+   "tags": [
+    "DistSys::storage"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Besides crash recovery, the WAL feeds {{c1::physical replication}} (PostgreSQL streaming replication, MySQL binlog) and {{c2::change data capture}} tools such as Debezium.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Data Eng · Storage engines",
+   "reverse": false
+  },
+  {
+   "guid": "fxah!Qr7{8",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::02 Data Models & Storage Engines",
+   "tags": [
+    "DistSys::storage"
+   ],
+   "front": "OLTP vs OLAP workloads?",
+   "back": "<b>OLTP</b>: many small key-based reads/writes, latency-sensitive, user-facing, row-oriented. <b>OLAP</b>: few big queries scanning many rows but few columns, throughput-oriented, column-oriented warehouses.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 2–3",
+   "reverse": false
+  },
+  {
+   "guid": "LBd}&R<b$P",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::02 Data Models & Storage Engines",
+   "tags": [
+    "DistSys::storage"
+   ],
+   "front": "Why is <b>column-oriented</b> storage good for analytics?",
+   "back": "Queries touch a few columns across millions of rows. Storing each column contiguously means reading only those columns, and similar adjacent values compress very well (bitmap, run-length).",
+   "text": "",
+   "image": "",
+   "analogy": "Reading only the 'price' column of a spreadsheet instead of every full row.",
+   "extra": "",
+   "source": "DDIA · Ch 2–3",
+   "reverse": false
+  },
+  {
+   "guid": "LgC~S44[<0",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::02 Data Models & Storage Engines",
+   "tags": [
+    "DistSys::storage"
+   ],
+   "front": "Why are writes expensive in a column store, and how do engines cope?",
+   "back": "One row insert touches every column file. Engines buffer writes (often in a row-oriented in-memory store) and append them in large sorted batches.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Data Eng · Storage engines",
+   "reverse": false
+  },
+  {
+   "guid": "bjM=n]^nfm",
+   "type": "cloze",
+   "deck": "Distributed Systems & Data::03 Encoding & Schema Evolution",
+   "tags": [
+    "DistSys::encoding"
+   ],
+   "front": "",
+   "back": "",
+   "text": "{{c1::Backward}} compatibility: new code can read data written by old code. {{c2::Forward}} compatibility: old code can read data written by new code.",
+   "image": "",
+   "analogy": "",
+   "extra": "Rolling upgrades need both. Forward is harder: old code must ignore unknown fields.",
+   "source": "DDIA · Ch 4",
+   "reverse": false
+  },
+  {
+   "guid": "xVc8&Rryu?",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::03 Encoding & Schema Evolution",
+   "tags": [
+    "DistSys::encoding"
+   ],
+   "front": "How do Protocol Buffers / Thrift keep schemas evolvable?",
+   "back": "Every field has a <b>tag number</b>. Add fields with new tags (old readers skip unknown tags); make new fields optional/defaulted (new readers handle old data). Never reuse a tag.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 4",
+   "reverse": false
+  },
+  {
+   "guid": "Mjfey~]^If",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::03 Encoding & Schema Evolution",
+   "tags": [
+    "DistSys::encoding"
+   ],
+   "front": "How does <b>Avro</b> schema evolution differ from Protobuf/Thrift?",
+   "back": "No field tags. The <b>writer's schema</b> and <b>reader's schema</b> are resolved by field name at read time; only add/remove fields that have defaults.",
+   "text": "",
+   "image": "",
+   "analogy": "Two people with different forms for the same data line up the boxes by label, not by box number.",
+   "extra": "Good for generated schemas (e.g. from a DB table) and big files where the schema is stored once.",
+   "source": "DDIA · Ch 4",
+   "reverse": false
+  },
+  {
+   "guid": "rdK+G%>$:A",
+   "type": "cloze",
+   "deck": "Distributed Systems & Data::04 Replication & Quorums",
+   "tags": [
+    "DistSys::replication"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Replication approaches: {{c1::single-leader}} (all writes go to one leader, followers copy), {{c2::multi-leader}} (several nodes accept writes, e.g. one per datacenter), {{c3::leaderless}} (clients write to several replicas directly, Dynamo-style).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 5",
+   "reverse": false
+  },
+  {
+   "guid": "tXE68%Lj70",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::04 Replication & Quorums",
+   "tags": [
+    "DistSys::replication"
+   ],
+   "front": "Synchronous vs asynchronous replication: the trade-off?",
+   "back": "<b>Sync</b>: follower confirms before ack → guaranteed up-to-date copy, but a down follower blocks writes. <b>Async</b>: leader acks at once → fast and available, but a leader failure can lose recent writes.",
+   "text": "",
+   "image": "",
+   "analogy": "Sync is waiting for the signed delivery receipt; async is dropping the letter in the postbox and walking away.",
+   "extra": "",
+   "source": "DDIA · Ch 5",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Distributed Systems & Data::04 Replication & Quorums",
+   "tags": [
+    "DistSys::replication"
+   ],
+   "front": "",
+   "back": "",
+   "text": "{{c1::Semi-synchronous}} replication: one follower is synchronous and the rest async, so at least two nodes always have every acknowledged write.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 5",
+   "reverse": false
+  },
+  {
+   "guid": "K-~4YUEjOF",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::04 Replication & Quorums",
+   "tags": [
+    "DistSys::replication"
+   ],
+   "front": "What is <b>replication lag</b>, and what anomaly does it cause?",
+   "back": "The delay before an async follower catches up with the leader. Reads from that follower return <b>stale data</b>, which looks to users like lost or reordered writes.",
+   "text": "",
+   "image": "",
+   "analogy": "Like newspaper editions: a reader holding the morning print hasn't seen the afternoon correction yet.",
+   "extra": "",
+   "source": "DDIA · Ch 5",
+   "reverse": false
+  },
+  {
+   "guid": "PWoeb@;LV)",
+   "type": "cloze",
+   "deck": "Distributed Systems & Data::04 Replication & Quorums",
+   "tags": [
+    "DistSys::replication"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Session guarantees: {{c1::read-your-writes}} (you see your own writes), {{c2::monotonic reads}} (you never see time go backward), {{c3::monotonic writes}} (your writes apply in order), {{c4::writes-follow-reads}} (your write is ordered after what you read).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consistency",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::04 Replication & Quorums",
+   "tags": [
+    "DistSys::replication"
+   ],
+   "front": "What do the four session guarantees add up to, and why are they worth providing?",
+   "back": "Causal consistency for a single client. They're cheap to provide, and most user-visible anomalies come from missing them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>K8s:</b> passing <code>resourceVersion</code> gives writes-follow-reads.",
+   "source": "Dist Sys · Consistency",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Distributed Systems & Data::04 Replication & Quorums",
+   "tags": [
+    "DistSys::replication"
+   ],
+   "front": "",
+   "back": "",
+   "text": "{{c1::Consistent prefix reads}}: if writes happen in a certain order, anyone reading them sees them in that order (no answer before its question).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 5",
+   "reverse": false
+  },
+  {
+   "guid": "nG4%f:+I&6",
+   "type": "cloze",
+   "deck": "Distributed Systems & Data::04 Replication & Quorums",
+   "tags": [
+    "DistSys::replication"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Read-your-writes on an eventually consistent store: route reads to the {{c1::leader}}, carry a {{c2::version/session token}} the replica must have reached, or use {{c3::sticky routing}} to the replica you wrote to.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Costs:</b> leader load, client complexity, lost load balancing. <b>Examples:</b> DynamoDB strongly consistent reads; Cosmos DB session token.",
+   "source": "Dist Sys · Consistency",
+   "reverse": false
+  },
+  {
+   "guid": "CD,`4LaD]Q",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::04 Replication & Quorums",
+   "tags": [
+    "DistSys::replication"
+   ],
+   "front": "In leaderless replication, what does <code>w + r &gt; n</code> guarantee?",
+   "back": "The write set and read set overlap in at least one node, so a read sees at least one copy of the latest write.",
+   "text": "",
+   "image": "",
+   "analogy": "If 3 of 5 people heard the news and you ask any 3 of the 5, at least one of them heard it.",
+   "extra": "<b>Pitfalls:</b> sloppy quorums and concurrent writes can still break it.",
+   "source": "DDIA · Ch 5",
+   "reverse": false
+  },
+  {
+   "guid": "L)P.b.f8^c",
+   "type": "cloze",
+   "deck": "Distributed Systems & Data::04 Replication & Quorums",
+   "tags": [
+    "DistSys::replication"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Leaderless repair: {{c1::read repair}} writes the fresh value back when a read sees a stale replica; {{c2::anti-entropy}} is a background process that compares and syncs replicas.",
+   "image": "",
+   "analogy": "",
+   "extra": "Read repair only fixes data that gets read; anti-entropy covers the rest.",
+   "source": "DDIA · Ch 5",
+   "reverse": false
+  },
+  {
+   "guid": "FVw?Kkh(?N",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::04 Replication & Quorums",
+   "tags": [
+    "DistSys::replication"
+   ],
+   "front": "What is a <b>sloppy quorum</b>, and what does it cost?",
+   "back": "During a partition, writes are accepted on reachable nodes that aren't the key's 'home' nodes. Higher write availability, but <code>w + r &gt; n</code> no longer guarantees reading the latest value.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 5",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::04 Replication & Quorums",
+   "tags": [
+    "DistSys::replication"
+   ],
+   "front": "What is <b>hinted handoff</b>?",
+   "back": "After a sloppy-quorum write, the stand-in node forwards the write to the home node once it's reachable again.",
+   "text": "",
+   "image": "",
+   "analogy": "A neighbour takes in your parcel while you're away and hands it over when you're back.",
+   "extra": "",
+   "source": "DDIA · Ch 5",
+   "reverse": false
+  },
+  {
+   "guid": "m;#&LQB[|(",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::04 Replication & Quorums",
+   "tags": [
+    "DistSys::replication"
+   ],
+   "front": "Leaderless concurrent writes: why prefer <b>version vectors</b> over last-write-wins?",
+   "back": "LWW picks the highest timestamp and silently discards the other write. Version vectors tell concurrent from causally ordered writes and keep both 'siblings' for the application to merge.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 5",
+   "reverse": false
+  },
+  {
+   "guid": "KIX>cQ@#3?",
+   "type": "cloze",
+   "deck": "Distributed Systems & Data::04 Replication & Quorums",
+   "tags": [
+    "DistSys::replication"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Last-writer-wins converges trivially but has two failure modes: {{c1::silent data loss}} (one of two concurrent updates vanishes) and {{c2::clock dependence}} (a node with a fast clock wins even when its write is older).",
+   "image": "",
+   "analogy": "",
+   "extra": "Default in DynamoDB Global Tables and Cosmos DB multi-region writes. Use only where concurrent writes don't happen or don't matter.",
+   "source": "Dist Sys · Consistency",
+   "reverse": false
+  },
+  {
+   "guid": "p8V@0EZ6TJ",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::05 Partitioning",
+   "tags": [
+    "DistSys::partitioning"
+   ],
+   "front": "Why partition (shard) data?",
+   "back": "To scale past one machine: spread data and query load over many shared-nothing nodes. Usually combined with replication, so each partition has copies on several nodes.",
+   "text": "",
+   "image": "",
+   "analogy": "Splitting a phone book into volumes A–F, G–M, … so several people can look things up at the same time.",
+   "extra": "",
+   "source": "DDIA · Ch 6",
+   "reverse": false
+  },
+  {
+   "guid": "cia=x+JUmx",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::05 Partitioning",
+   "tags": [
+    "DistSys::partitioning"
+   ],
+   "front": "Partition by key range vs by hash of key?",
+   "back": "<b>Key range</b>: keeps order, cheap range scans, but skewed access (e.g. timestamps) creates hot spots. <b>Hash</b>: spreads load evenly, but range queries must hit every partition.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 6",
+   "reverse": false
+  },
+  {
+   "guid": "F3JNe~ThZP",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::05 Partitioning",
+   "tags": [
+    "DistSys::partitioning"
+   ],
+   "front": "Local vs global secondary indexes in a partitioned database?",
+   "back": "<b>Local</b>: each partition indexes its own rows; cheap writes, but reads scatter/gather to all partitions. <b>Global</b>: index partitioned by term; reads hit one partition, writes update remote index partitions (often async).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 6",
+   "reverse": false
+  },
+  {
+   "guid": "L2OhZpykbK",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::05 Partitioning",
+   "tags": [
+    "DistSys::partitioning"
+   ],
+   "front": "Why avoid <code>hash(key) mod N</code> to assign partitions to nodes?",
+   "back": "Changing N moves almost every key. Instead use many fixed partitions spread over nodes, dynamic split/merge, or consistent hashing, so rebalancing moves only a fraction.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 6",
+   "reverse": false
+  },
+  {
+   "guid": "f;FZod&6Tj",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::05 Partitioning",
+   "tags": [
+    "DistSys::partitioning",
+    "AWS",
+    "Azure"
+   ],
+   "front": "Why can one hot key throttle a DynamoDB/Cosmos DB table that has spare total capacity?",
+   "back": "Throughput is capped <b>per physical partition</b>, and one key always maps to one partition. A low-cardinality or time-clustered key concentrates load there.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Limits:</b> DynamoDB ≈ 3,000 RCU / 1,000 WCU per partition; Cosmos DB 10,000 RU/s per physical partition, 20 GB per logical partition.",
+   "source": "Dist Sys · AWS/Azure",
+   "reverse": false
+  },
+  {
+   "guid": "eJTV><c)~p",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::05 Partitioning",
+   "tags": [
+    "DistSys::partitioning",
+    "AWS",
+    "Azure"
+   ],
+   "front": "How do you fix a hot partition key?",
+   "back": "Choose a high-cardinality key, or <b>write-shard</b> it: add a random/hash suffix and scatter-gather on read. Also: pre-aggregate, cache (DAX), Cosmos DB hierarchical partition keys.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Same skill applies to Kafka partition keys.",
+   "source": "Dist Sys · AWS/Azure",
+   "reverse": false
+  },
+  {
+   "guid": "q!:huasGdk",
+   "type": "cloze",
+   "deck": "Distributed Systems & Data::06 Transactions & Isolation",
+   "tags": [
+    "DistSys::transactions"
+   ],
+   "front": "",
+   "back": "",
+   "text": "ACID: {{c1::Atomicity}} (all-or-nothing), {{c2::Consistency}} (invariants preserved), {{c3::Isolation}} (concurrent transactions don't interfere), {{c4::Durability}} (committed data survives crashes).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 7",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::06 Transactions & Isolation",
+   "tags": [
+    "DistSys::transactions"
+   ],
+   "front": "Which ACID property is mostly the application's job, and why?",
+   "back": "<b>Consistency</b>: the invariants are defined by your application. The database only provides atomicity and isolation so you can keep them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 7",
+   "reverse": false
+  },
+  {
+   "guid": "C:u<HEtB|C",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::06 Transactions & Isolation",
+   "tags": [
+    "DistSys::transactions"
+   ],
+   "front": "What does <b>read committed</b> prevent, and what does it still allow?",
+   "back": "Prevents dirty reads (seeing uncommitted data) and dirty writes (overwriting uncommitted data). Still allows <b>non-repeatable reads</b>: re-reading a row can return a newer committed value.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 7",
+   "reverse": false
+  },
+  {
+   "guid": "K=$X/}V6WZ",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::06 Transactions & Isolation",
+   "tags": [
+    "DistSys::transactions"
+   ],
+   "front": "What is <b>snapshot isolation</b>, and how is it implemented?",
+   "back": "Each transaction reads a consistent snapshot as of its start. Implemented with <b>MVCC</b>: keep several committed versions per row. Prevents non-repeatable reads.",
+   "text": "",
+   "image": "",
+   "analogy": "Each transaction reads from a photo of the database taken when it started, while others keep editing the real thing.",
+   "extra": "Often sold as 'repeatable read'.",
+   "source": "DDIA · Ch 7",
+   "reverse": false
+  },
+  {
+   "guid": "iFp;{|s;tN",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::06 Transactions & Isolation",
+   "tags": [
+    "DistSys::transactions"
+   ],
+   "front": "What does MVCC cost operationally?",
+   "back": "Old row versions pile up until garbage collection (PostgreSQL <code>VACUUM</code>, InnoDB purge). Long-running transactions block cleanup → table bloat.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Managed services (Aurora, Azure Database for PostgreSQL) behave the same.",
+   "source": "Data Eng · Storage engines",
+   "reverse": false
+  },
+  {
+   "guid": "F5G~7_O@LM",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::06 Transactions & Isolation",
+   "tags": [
+    "DistSys::transactions"
+   ],
+   "front": "<b>Lost update</b> vs <b>write skew</b>?",
+   "back": "<b>Lost update</b>: two read-modify-write cycles on the <b>same</b> object; one overwrites the other. <b>Write skew</b>: two transactions read overlapping data, then update <b>different</b> objects, together breaking an invariant.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Snapshot isolation can prevent lost updates, but not write skew.",
+   "source": "DDIA · Ch 7",
+   "reverse": false
+  },
+  {
+   "guid": "IB6zFB^fwx",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::06 Transactions & Isolation",
+   "tags": [
+    "DistSys::transactions"
+   ],
+   "front": "Give the canonical <b>write skew</b> example and the fixes.",
+   "back": "Two on-call doctors each see 2 on call and sign off concurrently; no row conflict, both commit → 0 on call. Fix: SERIALIZABLE (e.g. PostgreSQL SSI), <code>SELECT … FOR UPDATE</code>, or materialize the constraint as a row.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consistency",
+   "reverse": false
+  },
+  {
+   "guid": "jy0MAyNALG",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::06 Transactions & Isolation",
+   "tags": [
+    "DistSys::transactions"
+   ],
+   "front": "What is a <b>phantom</b>?",
+   "back": "A write in one transaction changes the result of a <b>search query</b> in another (rows appear/disappear). Row locks can't stop it; you need predicate or index-range locks.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 7",
+   "reverse": false
+  },
+  {
+   "guid": "rK[)Mb^91_",
+   "type": "cloze",
+   "deck": "Distributed Systems & Data::06 Transactions & Isolation",
+   "tags": [
+    "DistSys::transactions"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Serializable isolation implementations: {{c1::actual serial execution}} (one thread, in memory, e.g. Redis, VoltDB); {{c2::two-phase locking (2PL)}} (readers and writers block each other; deadlocks); {{c3::serializable snapshot isolation (SSI)}} (optimistic, aborts conflicting transactions at commit).",
+   "image": "",
+   "analogy": "",
+   "extra": "2PL is pessimistic (wait); SSI is optimistic (proceed, maybe abort).",
+   "source": "DDIA · Ch 7",
+   "reverse": false
+  },
+  {
+   "guid": "rsX6n)kDY=",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::07 Consistency Models & CAP",
+   "tags": [
+    "DistSys::consistency"
+   ],
+   "front": "Define <b>linearizability</b>.",
+   "back": "Every operation appears to take effect atomically at one instant between its invocation and response, in an order that respects real time. The system behaves like a single up-to-date copy.",
+   "text": "",
+   "image": "",
+   "analogy": "One shared whiteboard: once anyone has seen the new value, nobody can see the old one again.",
+   "extra": "",
+   "source": "DDIA · Ch 9",
+   "reverse": false
+  },
+  {
+   "guid": "xG^UHFl$eC",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::07 Consistency Models & CAP",
+   "tags": [
+    "DistSys::consistency"
+   ],
+   "front": "What scope does linearizability cover?",
+   "back": "A <b>single object</b> (one key, one register, one lock). It says nothing about multi-object transactions.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consistency",
+   "reverse": false
+  },
+  {
+   "guid": "mc/T]dBkDx",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::07 Consistency Models & CAP",
+   "tags": [
+    "DistSys::consistency"
+   ],
+   "front": "Serializability vs linearizability?",
+   "back": "<b>Serializability</b>: multi-object <i>transactions</i> appear in some serial order, with no real-time constraint (may serve an old snapshot). <b>Linearizability</b>: single-object, real-time order.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "'Strongly consistent' in cloud docs usually means linearizable per key, not across keys.",
+   "source": "Dist Sys · Consistency",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Distributed Systems & Data::07 Consistency Models & CAP",
+   "tags": [
+    "DistSys::consistency"
+   ],
+   "front": "",
+   "back": "",
+   "text": "{{c1::Strict serializability}} = serializability + real-time order. Google Spanner calls it {{c2::external consistency}} and gets it from TrueTime commit-wait.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consistency",
+   "reverse": false
+  },
+  {
+   "guid": "iJ|5LANfW?",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::07 Consistency Models & CAP",
+   "tags": [
+    "DistSys::consistency"
+   ],
+   "front": "Sequential consistency vs linearizability?",
+   "back": "Sequential: all clients see one total order that respects each client's program order, but <b>not real time</b>. A read may be stale, but never goes backwards.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consistency",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::07 Consistency Models & CAP",
+   "tags": [
+    "DistSys::consistency"
+   ],
+   "front": "How does <b>ZooKeeper</b> give sequential rather than linearizable reads, and how do you upgrade a read?",
+   "back": "Writes go through the leader (linearizable); reads are served locally by any follower, so they can lag. Call <code>sync()</code> before the read to make it current.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "The Kubernetes apiserver watch cache has the same shape.",
+   "source": "Dist Sys · Consistency",
+   "reverse": false
+  },
+  {
+   "guid": "dWR7R9Mrg#",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::07 Consistency Models & CAP",
+   "tags": [
+    "DistSys::consistency"
+   ],
+   "front": "Causal order vs total order?",
+   "back": "<b>Causal</b> is a partial order: only events that could have influenced each other are ordered; concurrent ones aren't. <b>Linearizability</b> imposes a total order on everything.",
+   "text": "",
+   "image": "",
+   "analogy": "Nobody should see a reply before the question it answers, but two unrelated posts may appear in either order.",
+   "extra": "",
+   "source": "DDIA · Ch 9",
+   "reverse": false
+  },
+  {
+   "guid": "F#lkb@(e.{",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::07 Consistency Models & CAP",
+   "tags": [
+    "DistSys::consistency"
+   ],
+   "front": "Why is <b>causal consistency</b> the strongest model that stays available under partition?",
+   "back": "Causal dependencies can be tracked locally (vector clocks, dependency metadata). Ordering <i>concurrent</i> writes would need both sides of the partition to communicate.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consistency",
+   "reverse": false
+  },
+  {
+   "guid": "x(9/u?0LK*",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::07 Consistency Models & CAP",
+   "tags": [
+    "DistSys::consistency"
+   ],
+   "front": "What does <b>eventual consistency</b> promise, and what does it not?",
+   "back": "Only that replicas converge if writes stop. It doesn't say when, what a read returns before then, that reads are monotonic, or which write wins.",
+   "text": "",
+   "image": "",
+   "analogy": "Village gossip: everyone eventually hears the same story, but at any moment people may tell different versions.",
+   "extra": "",
+   "source": "Dist Sys · Consistency",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::07 Consistency Models & CAP",
+   "tags": [
+    "DistSys::consistency"
+   ],
+   "front": "What does eventual consistency need in order to actually converge?",
+   "back": "A deterministic merge rule: last-writer-wins, CRDTs, or version vectors plus an application merge. Without one you get <b>divergence</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consistency",
+   "reverse": false
+  },
+  {
+   "guid": "ux@:$l9pnN",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::07 Consistency Models & CAP",
+   "tags": [
+    "DistSys::consistency"
+   ],
+   "front": "State the <b>CAP theorem</b> precisely.",
+   "back": "During a network partition, a system cannot be both <b>linearizable</b> (C) and <b>available</b> (every non-failed node returns a non-error response) (A).",
+   "text": "",
+   "image": "",
+   "analogy": "Two bank branches with the phone line cut: refuse withdrawals (consistent) or allow them and risk an overdraft (available).",
+   "extra": "Says nothing about the no-partition case; PACELC fills that gap.",
+   "source": "DDIA · Ch 9",
+   "reverse": false
+  },
+  {
+   "guid": "MpXbhw<(*N",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::07 Consistency Models & CAP",
+   "tags": [
+    "DistSys::consistency"
+   ],
+   "front": "Why is 'CAP: pick two of three' a misreading?",
+   "back": "Partitions aren't optional; they happen. The only choice is C vs A <i>while partitioned</i>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consistency",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::07 Consistency Models & CAP",
+   "tags": [
+    "DistSys::consistency"
+   ],
+   "front": "In CAP, what does the 'C' mean, and why does that matter?",
+   "back": "<b>Linearizability</b> specifically, not ACID consistency or 'any consistency'. A system can be causally consistent and still available.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consistency",
+   "reverse": false
+  },
+  {
+   "guid": "LijmHZzDST",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::07 Consistency Models & CAP",
+   "tags": [
+    "DistSys::consistency"
+   ],
+   "front": "What does <b>PACELC</b> add to CAP?",
+   "back": "If <b>P</b>artitioned: <b>A</b> vs <b>C</b>; <b>E</b>lse: <b>L</b>atency vs <b>C</b>onsistency. Strong consistency costs latency even when nothing is broken.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consistency",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Distributed Systems & Data::07 Consistency Models & CAP",
+   "tags": [
+    "DistSys::consistency",
+    "AWS",
+    "Azure",
+    "K8s"
+   ],
+   "front": "",
+   "back": "",
+   "text": "PACELC classes: etcd, ZooKeeper and Spanner are {{c1::PC/EC}}; DynamoDB (default) and Cassandra are {{c2::PA/EL}}; MongoDB with default concerns is {{c3::PA/EC}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "Cosmos DB is configurable: strong/bounded ≈ PC/EC, session/eventual ≈ PA/EL.",
+   "source": "Dist Sys · Consistency",
+   "reverse": false
+  },
+  {
+   "guid": "yy@L~FM>/m",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::07 Consistency Models & CAP",
+   "tags": [
+    "DistSys::consistency",
+    "AWS",
+    "Azure"
+   ],
+   "front": "Why does strong consistency cost latency on a healthy network?",
+   "back": "A linearizable write must reach a majority before acking, and a linearizable read must confirm leadership or go to the leader: round trips on every request.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Numbers:</b> cross-AZ RTT ~1–2 ms → quorum write ≈ 2–4 ms; cross-region 50–150 ms → Cosmos DB strong ≈ 2× RTT to farthest region.",
+   "source": "Dist Sys · Consistency",
+   "reverse": false
+  },
+  {
+   "guid": "Pq}hC1A%/Y",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::07 Consistency Models & CAP",
+   "tags": [
+    "DistSys::consistency"
+   ],
+   "front": "Heuristic: how do you decide CP vs AP for a piece of data?",
+   "back": "Ask: <b>'If two clients disagree about this value for a few seconds, what breaks?'</b> Nothing (likes, presence, caches) → AP. Money, uniqueness, inventory, leadership → CP, or make the invariant monotonic.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Most systems mix a CP core (etcd, a ledger) with an AP periphery.",
+   "source": "Dist Sys · Consistency",
+   "reverse": false
+  },
+  {
+   "guid": "G[MK7sqM2.",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::07 Consistency Models & CAP",
+   "tags": [
+    "DistSys::consistency"
+   ],
+   "front": "<b>Harvest</b> vs <b>yield</b> (Fox &amp; Brewer)?",
+   "back": "<b>Yield</b>: fraction of requests answered. <b>Harvest</b>: fraction of the data reflected in an answer. Under partial failure you choose which to degrade, e.g. answer from 9 of 10 shards.",
+   "text": "",
+   "image": "",
+   "analogy": "A search page that says 'some results may be missing' kept its yield by giving up some harvest.",
+   "extra": "",
+   "source": "Dist Sys · Consistency",
+   "reverse": false
+  },
+  {
+   "guid": "cHnFqCjg)2",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::07 Consistency Models & CAP",
+   "tags": [
+    "DistSys::consistency",
+    "AWS",
+    "Azure"
+   ],
+   "front": "Why replace 'eventually consistent' with a <b>number</b>?",
+   "back": "Then the business can check whether it tolerates that staleness. E.g. DynamoDB eventual reads ≈ 1 s; Aurora replicas tens of ms; Azure GRS RPO &lt; 15 min.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consistency",
+   "reverse": false
+  },
+  {
+   "guid": "Kn,IWdlOes",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::07 Consistency Models & CAP",
+   "tags": [
+    "DistSys::consistency",
+    "AWS",
+    "K8s"
+   ],
+   "front": "Order by coordination needed: Raft write, CRDT increment, K8s pod creation, DynamoDB eventual read, S3 PUT.",
+   "back": "CRDT increment (none) → DynamoDB eventual read → S3 PUT (per-key metadata) → Raft write (majority + fsync) → pod creation (many sequential consensus writes).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Latency and availability ceilings follow this order.",
+   "source": "Dist Sys · Consistency",
+   "reverse": false
+  },
+  {
+   "guid": "D3Ab6)G5SH",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::07 Consistency Models & CAP",
+   "tags": [
+    "DistSys::consistency"
+   ],
+   "front": "What does the <b>CALM theorem</b> say?",
+   "back": "Consistency As Logical Monotonicity: a program can be coordination-free and eventually consistent <b>if and only if it is monotonic</b> (outputs only grow: union, append, max).",
+   "text": "",
+   "image": "",
+   "analogy": "A guest list you can only add to: any order of additions gives the same final list, so nobody needs to coordinate.",
+   "extra": "",
+   "source": "Dist Sys · Consistency",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::07 Consistency Models & CAP",
+   "tags": [
+    "DistSys::consistency"
+   ],
+   "front": "How do you use CALM as a design lever?",
+   "back": "Reformulate operations as monotonic (tombstones, CRDT counters, append-only logs) and reserve consensus for the remaining non-monotonic core (deletes, 'is this the only one?').",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consistency",
+   "reverse": false
+  },
+  {
+   "guid": "fD`A=XbRPE",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::07 Consistency Models & CAP",
+   "tags": [
+    "DistSys::consistency"
+   ],
+   "front": "What does <b>Jepsen</b> test, and what's the recurring lesson?",
+   "back": "It runs concurrent clients against a real cluster while injecting partitions, clock skew and pauses, then checks the history. Lesson: 'strongly consistent' claims often fail only under partitions or leader changes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consistency",
+   "reverse": false
+  },
+  {
+   "guid": "i,Hkg[HLj%",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus"
+   ],
+   "front": "What problem does <b>consensus</b> solve?",
+   "back": "Getting N processes to agree on one value, or one ordered log, despite crashes and message delays.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus"
+   ],
+   "front": "Why is consensus fundamentally hard?",
+   "back": "A slow node looks exactly like a dead one. A protocol must risk either waiting forever or acting on a false suspicion and deciding twice.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": "u[abqK?V#U",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus"
+   ],
+   "front": "What does the <b>FLP result</b> say?",
+   "back": "In a fully asynchronous system where even one node may crash, no deterministic consensus algorithm can guarantee it always terminates.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 9",
+   "reverse": false
+  },
+  {
+   "guid": "g-`iV9MP-l",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus"
+   ],
+   "front": "How do Raft and Paxos coexist with FLP?",
+   "back": "They guarantee <b>safety</b> unconditionally, but <b>liveness</b> only under partial synchrony (timeouts eventually hold). Randomized timeouts make livelock improbable, not impossible.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": "w;b7mW,-AG",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus"
+   ],
+   "front": "Why does tolerating <b>f</b> crash failures need <b>2f+1</b> nodes?",
+   "back": "Any two majorities of 2f+1 overlap in at least one node, which carries decisions across leader changes. With f down, f+1 (a majority) remain to make progress.",
+   "text": "",
+   "image": "",
+   "analogy": "Two majorities of the same committee always share at least one member, who remembers what the first one decided.",
+   "extra": "",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus"
+   ],
+   "front": "Why does Byzantine fault tolerance need <b>3f+1</b> nodes?",
+   "back": "The overlapping nodes might lie, so quorums must overlap in f+1 nodes to guarantee at least one honest node in the intersection.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": "MoD80$|E^R",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus"
+   ],
+   "front": "Why is a quorum of 'any 2 of 5' unsafe for consensus?",
+   "back": "Two disjoint 2-node sets exist, so two leaders could commit different values at the same log index. Every write quorum must intersect every other.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": "u]j#S^@u+)",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus"
+   ],
+   "front": "<b>Flexible Paxos</b>: which quorums must intersect, and what does that buy?",
+   "back": "Only phase-1 (election) and phase-2 (replication) quorums: <code>|Q1| + |Q2| &gt; N</code>. Small Q2 gives fast steady-state commits; the bigger Q1 is paid only on leader change.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Same reasoning behind Aurora's 4/6 write, 3/6 read quorums.",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": "H?h$tF18`I",
+   "type": "cloze",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus",
+    "Raft"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Raft splits consensus into {{c1::leader election}}, {{c2::log replication}} and {{c3::safety}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus",
+    "Raft"
+   ],
+   "front": "What is Raft's <b>State Machine Safety</b> property?",
+   "back": "If any server has applied the entry at index <i>i</i>, no server will ever apply a different entry at <i>i</i>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": "j[EG{CT{Bf",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus",
+    "Raft"
+   ],
+   "front": "What is a Raft <b>term</b>, and what does it solve without clocks?",
+   "back": "A monotonically increasing number with at most one leader per term. Every message carries it; higher term → step down, stale term → reject. Obsolete leaders are detected from message content alone.",
+   "text": "",
+   "image": "",
+   "analogy": "Like a dynasty number: an order sealed in a previous reign is void once a new ruler is crowned.",
+   "extra": "",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": "Cpw|L[N+Qd",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus",
+    "Raft"
+   ],
+   "front": "Walk through a Raft <b>leader election</b>.",
+   "back": "A follower hears nothing for an election timeout → becomes candidate, increments term, votes for itself, sends RequestVote. Majority → leader, starts heartbeats. A valid leader's AppendEntries makes it step back.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus",
+    "Raft"
+   ],
+   "front": "Why are Raft election timeouts <b>randomized</b>?",
+   "back": "So candidates rarely time out together; split votes resolve quickly. This is Raft's practical answer to FLP livelock.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Raft paper: 150–300 ms.",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": "jp#D2_HX.7",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus",
+    "Raft"
+   ],
+   "front": "Raft's <b>election restriction</b>: how is 'more up-to-date log' defined?",
+   "back": "Compare the last entries: higher <b>term</b> wins; same term → longer log wins. A voter refuses candidates less up-to-date than itself.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus",
+    "Raft",
+    "Paxos"
+   ],
+   "front": "What does Raft's election restriction guarantee, and how does that differ from Paxos?",
+   "back": "<b>Leader Completeness</b>: every committed entry is already in each new leader's log, so data only flows leader → follower. A new Paxos leader must first learn previously chosen values.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": "Ab5J2{+3Yv",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus",
+    "Raft"
+   ],
+   "front": "State Raft's <b>Log Matching Property</b>.",
+   "back": "If two logs have an entry with the same index and term, the entries are identical and so are all entries before them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus",
+    "Raft"
+   ],
+   "front": "How does AppendEntries enforce Log Matching?",
+   "back": "Each RPC carries <code>prevLogIndex</code>/<code>prevLogTerm</code>. A follower rejects on mismatch; the leader backs up <code>nextIndex</code> until they agree, then overwrites the follower's divergent suffix.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": "qB69oG7R3T",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus",
+    "Raft"
+   ],
+   "front": "Why can't a Raft leader commit an old-term entry just by seeing it on a majority (Figure 8)?",
+   "back": "A later candidate whose last entry has a higher term can still win without that entry and overwrite it. Counting replicas is only safe for <b>current-term</b> entries.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus",
+    "Raft"
+   ],
+   "front": "Why does a new Raft leader immediately append a <b>no-op</b> entry?",
+   "back": "Committing a current-term entry commits all earlier entries transitively, so the no-op makes previous-term entries committable at once.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": "Izy|1gcy^~",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus",
+    "Raft"
+   ],
+   "front": "Why can't Raft switch membership straight from C<sub>old</sub> to C<sub>new</sub>?",
+   "back": "Servers adopt the change at different times, so a majority of C<sub>old</sub> and a majority of C<sub>new</sub> could form <b>two disjoint quorums</b> in the same term.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus",
+    "Raft"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Safe Raft membership changes: {{c1::joint consensus}} (a transitional config needing majorities of both old and new) or {{c2::single-server changes}} (one at a time, so consecutive majorities always overlap; etcd's approach).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": "AlYH<og:O%",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus",
+    "Raft",
+    "K8s"
+   ],
+   "front": "Why does etcd add new members as <b>learners</b> (non-voting) first?",
+   "back": "A fresh voter immediately enlarges the quorum while its log is empty, so 3→4 temporarily makes the cluster <i>less</i> available. Learners catch up first, then get promoted.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": "eWv_[JZph#",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus",
+    "Raft"
+   ],
+   "front": "Raft linearizable reads: <b>ReadIndex</b> vs <b>lease-based</b>?",
+   "back": "<b>ReadIndex</b>: confirm leadership with one heartbeat round, then serve once applied up to the commit index; costs a round trip, no clocks. <b>Lease</b>: no round trip, but correctness depends on bounded clock drift.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "etcd defaults to ReadIndex.",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus",
+    "Raft"
+   ],
+   "front": "Without ReadIndex or leases, why can a Raft leader serve stale reads?",
+   "back": "A deposed leader cut off by a partition doesn't know a new leader exists and keeps answering from its old state.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": "Q-_DM6v*uc",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus"
+   ],
+   "front": "What are <b>partial</b> and <b>asymmetric</b> network partitions?",
+   "back": "<b>Partial</b>: A↔B and B↔C work but A↔C doesn't. <b>Asymmetric</b>: A can send to B but not receive from it. Real partitions are rarely a clean split.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Failure",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus",
+    "Raft"
+   ],
+   "front": "How does a partial partition make a Raft follower <b>disruptive</b>?",
+   "back": "It can't hear the leader, so it keeps starting elections with ever-higher terms. When it reconnects, its high term forces the healthy leader to step down, over and over.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": "Ow5lO(*Ov#",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus",
+    "Raft",
+    "K8s"
+   ],
+   "front": "What does Raft <b>PreVote</b> do?",
+   "back": "Before an election, the candidate asks 'would you vote for me?' without bumping its term, and only proceeds if a majority agree. Stops cut-off followers from inflating terms.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus",
+    "Raft",
+    "K8s"
+   ],
+   "front": "What does Raft <b>CheckQuorum</b> do?",
+   "back": "A leader that can't reach a majority within an election timeout steps down, so a partitioned leader stops serving (lease) reads.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": "z$_W&Z>^nJ",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus",
+    "Raft"
+   ],
+   "front": "How does Raft log compaction (snapshotting) work?",
+   "back": "Each server snapshots its state machine up to a committed index and discards that log prefix, keeping the last included index/term and the membership config.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus",
+    "Raft",
+    "K8s"
+   ],
+   "front": "What does a Raft leader do when a follower needs entries it already compacted?",
+   "back": "Sends <b>InstallSnapshot</b>. etcd also bootstraps new members this way.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": "I&4myoO&`4",
+   "type": "cloze",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus",
+    "Paxos"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Paxos roles: the {{c1::proposer}} drives a ballot; the {{c2::acceptor}} votes and keeps the safety-critical state on stable storage; the {{c3::learner}} finds out which value was chosen.",
+   "image": "",
+   "analogy": "",
+   "extra": "In practice one process plays all three roles.",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": "nfnOoN_9#@",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus",
+    "Paxos"
+   ],
+   "front": "Single-decree Paxos <b>phase 1 (Prepare/Promise)</b>: what happens?",
+   "back": "The proposer sends Prepare(n) with a unique ballot n. Each acceptor promises to ignore ballots &lt; n and returns the highest-ballot value it has already accepted, if any.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus",
+    "Paxos"
+   ],
+   "front": "Single-decree Paxos <b>phase 2 (Accept)</b>: what happens?",
+   "back": "With a majority of promises, the proposer sends Accept(n, v), where v is the highest-ballot value returned (or its own if none). Accepted by a majority ⇒ chosen.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": "Mf{|Lq+!IA",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus",
+    "Paxos"
+   ],
+   "front": "Why must a Paxos proposer adopt the highest-ballot value returned in phase 1?",
+   "back": "Once v is chosen by majority M, any later phase-1 majority overlaps M and reports v, so every later ballot re-proposes v. <b>Chosen values are sticky</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": "b%.2J%]`~&",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus",
+    "Paxos"
+   ],
+   "front": "How does <b>Multi-Paxos</b> amortize the protocol?",
+   "back": "Run phase 1 once to establish a stable leader over many log slots; each slot then needs only phase 2 (one round trip), the same steady-state cost as Raft.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus",
+    "Paxos",
+    "Raft"
+   ],
+   "front": "Multi-Paxos vs Raft: how do their logs differ?",
+   "back": "Paxos allows <b>holes</b> and out-of-order acceptance; a new leader must recover uncertain slots. Raft forces a contiguous log. Paxos is more flexible; Raft is easier to get right.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": "_EFP6AET^",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus",
+    "Paxos"
+   ],
+   "front": "What is the Paxos <b>dueling proposers</b> problem, and the fix?",
+   "back": "Two proposers keep issuing higher ballots, each invalidating the other's Accept → livelock. Fix: a distinguished leader and/or randomized backoff. A wrong leader guess costs liveness, never safety.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": "mdr_T|Et@L",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus",
+    "AWS",
+    "Paxos"
+   ],
+   "front": "What pattern do AWS's production Paxos uses (DynamoDB leader election, EBS, Route 53 ARC) share?",
+   "back": "Paxos guards a <b>small, critical metadata/leadership</b> plane; bulk data is replicated more cheaply (chain or quorum replication) under the elected leader.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": "iVpN6ZvUBq",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus"
+   ],
+   "front": "What is <b>total order broadcast</b>?",
+   "back": "Delivering messages reliably to all nodes in the <b>same order</b>. It's equivalent to consensus and underlies state machine replication: same ops, same order → same state.",
+   "text": "",
+   "image": "",
+   "analogy": "Every replica follows the same recipe card by card, so every kitchen ends up with the same dish.",
+   "extra": "",
+   "source": "DDIA · Ch 9",
+   "reverse": false
+  },
+  {
+   "guid": "McTQ0J3>^n",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus"
+   ],
+   "front": "Why is <b>two-phase commit (2PC)</b> blocking?",
+   "back": "A participant that voted 'yes' must hold locks until the coordinator decides. If the coordinator crashes after prepare, participants are stuck: aborting alone is unsafe since it may have logged commit.",
+   "text": "",
+   "image": "",
+   "analogy": "An officiant asks both partners 'I do?', hears two yeses, then faints: the couple can neither leave nor call it off until he wakes.",
+   "extra": "",
+   "source": "DDIA · Ch 9",
+   "reverse": false
+  },
+  {
+   "guid": "QP@[^q#*At",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus"
+   ],
+   "front": "How does Spanner-style <b>Paxos commit</b> remove 2PC's blocking?",
+   "back": "The coordinator's decision is itself a consensus-replicated value (each participant group runs Paxos), so a crashed coordinator is replaced by its majority instead of waited for.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": "Og.[y?>V={",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus"
+   ],
+   "front": "How do Raft, Paxos and Zab avoid 2PC's single-coordinator blocking?",
+   "back": "Decisions need only a <b>majority</b>, and term/epoch numbers let a new leader supersede a failed one. Progress continues while a majority is up.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 9",
+   "reverse": false
+  },
+  {
+   "guid": "uzDWc;S4M6",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus"
+   ],
+   "front": "What does a coordination service like ZooKeeper or etcd give applications?",
+   "back": "Consensus-backed primitives: leader election and locks with fencing tokens, failure detection, membership, small replicated metadata. Don't reimplement consensus yourself.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 9",
+   "reverse": false
+  },
+  {
+   "guid": "b9Zs_W(CLL",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::09 Failure, Time & Fencing",
+   "tags": [
+    "DistSys::failure"
+   ],
+   "front": "Why can't you tell whether a remote node is down?",
+   "back": "A missing reply could mean the request was lost, the node crashed or is slow, or the reply was lost. Timeouts are all you have: short ones cause false positives, long ones slow detection.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 8",
+   "reverse": false
+  },
+  {
+   "guid": "P2siT6Vr]s",
+   "type": "cloze",
+   "deck": "Distributed Systems & Data::09 Failure, Time & Fencing",
+   "tags": [
+    "DistSys::failure"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Failure models, mildest to worst: {{c1::crash-stop}} (halts forever), {{c2::crash-recovery}} (returns with stable storage intact), {{c3::omission}} (drops messages), {{c4::timing}} (responds too late), {{c5::Byzantine}} (arbitrary or malicious).",
+   "image": "",
+   "analogy": "",
+   "extra": "Raft/Paxos assume crash-recovery + omission with reliable disks.",
+   "source": "Dist Sys · Failure",
+   "reverse": false
+  },
+  {
+   "guid": "Dv2zVP2Lk~",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::09 Failure, Time & Fencing",
+   "tags": [
+    "DistSys::failure"
+   ],
+   "front": "What is a <b>Byzantine fault</b>, and do datacenter systems usually tolerate it?",
+   "back": "A node behaving arbitrarily or maliciously (lying, contradictory messages). Tolerating it is expensive (PBFT, 3f+1), so most systems assume nodes may crash or be slow but are honest.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 8",
+   "reverse": false
+  },
+  {
+   "guid": "y^{h[iUp8t",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::09 Failure, Time & Fencing",
+   "tags": [
+    "DistSys::failure"
+   ],
+   "front": "Why are time-of-day clocks dangerous for ordering events across nodes?",
+   "back": "NTP-synced clocks drift and can jump backward; skew between nodes can exceed the gaps you measure. Ordering by them (e.g. LWW) silently loses data.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 8",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::09 Failure, Time & Fencing",
+   "tags": [
+    "DistSys::failure"
+   ],
+   "front": "Monotonic clock vs time-of-day clock: when do you use which?",
+   "back": "<b>Monotonic</b>: measuring durations/timeouts on one node; never jumps back, but meaningless across nodes. <b>Time-of-day</b>: wall-clock timestamps; comparable-ish across nodes but can jump.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 8",
+   "reverse": false
+  },
+  {
+   "guid": "n#7.#(n]](",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::09 Failure, Time & Fencing",
+   "tags": [
+    "DistSys::failure"
+   ],
+   "front": "What do <b>Lamport timestamps</b> give you, and what can't they do?",
+   "back": "A (counter, node-ID) total order consistent with causality. They can't tell concurrent events from causally related ones, and the order is only known after the fact.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "So they can't enforce uniqueness on the spot; that needs total order broadcast.",
+   "source": "DDIA · Ch 9",
+   "reverse": false
+  },
+  {
+   "guid": "sa)DA%[mXr",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::09 Failure, Time & Fencing",
+   "tags": [
+    "DistSys::failure"
+   ],
+   "front": "What can <b>vector clocks</b> detect that Lamport clocks can't?",
+   "back": "That two events are <b>concurrent</b> (neither vector ≤ the other), so conflicts can be surfaced instead of silently dropped (Dynamo). Cost: one counter per node.",
+   "text": "",
+   "image": "",
+   "analogy": "Each node keeps a scorecard of events seen from everyone; if neither scorecard dominates the other, the events happened independently.",
+   "extra": "",
+   "source": "Dist Sys · Failure",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::09 Failure, Time & Fencing",
+   "tags": [
+    "DistSys::failure"
+   ],
+   "front": "What is a <b>hybrid logical clock (HLC)</b>?",
+   "back": "Physical time plus a logical counter: causally consistent like Lamport clocks but close to wall-clock time. Used by CockroachDB and YugabyteDB.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Failure",
+   "reverse": false
+  },
+  {
+   "guid": "wH9JE3=k:d",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::09 Failure, Time & Fencing",
+   "tags": [
+    "DistSys::failure"
+   ],
+   "front": "Fixed-timeout failure detector vs <b>φ-accrual</b> (Cassandra, Akka)?",
+   "back": "A fixed timeout picks one detection-speed/false-positive point for all conditions. φ-accrual learns heartbeat intervals and outputs a suspicion level; callers choose thresholds and it adapts to network latency.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Failure",
+   "reverse": false
+  },
+  {
+   "guid": "QO$Rh]g)i]",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::09 Failure, Time & Fencing",
+   "tags": [
+    "DistSys::failure",
+    "K8s"
+   ],
+   "front": "What is a <b>fencing token</b>?",
+   "back": "A monotonically increasing number issued with each lock/lease grant. The protected resource rejects any request carrying a lower token than the highest it has seen.",
+   "text": "",
+   "image": "",
+   "analogy": "A deli ticket counter: once ticket 34 has been served, the clerk won't serve someone waving ticket 33.",
+   "extra": "",
+   "source": "Dist Sys · Failure",
+   "reverse": false
+  },
+  {
+   "guid": "Q`r*bJHMk:",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::09 Failure, Time & Fencing",
+   "tags": [
+    "DistSys::failure"
+   ],
+   "front": "A service holds a lease, hits a 30 s stop-the-world GC pause, and resumes. What goes wrong?",
+   "back": "No heartbeats during the pause → lease expires → another instance takes it and writes. The first wakes, unaware time passed, and keeps writing → <b>two writers</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Failure",
+   "reverse": false
+  },
+  {
+   "guid": "G#)Y~-C,#l",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::09 Failure, Time & Fencing",
+   "tags": [
+    "DistSys::failure"
+   ],
+   "front": "Why doesn't checking 'is the lock still mine?' right before writing make a lease safe?",
+   "back": "The pause can happen between the check and the write. Only a <b>fencing token checked by the resource</b> is sound, or operations that are harmless when run concurrently.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 8",
+   "reverse": false
+  },
+  {
+   "guid": "xuUnP-bRA4",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::09 Failure, Time & Fencing",
+   "tags": [
+    "DistSys::failure"
+   ],
+   "front": "Why are leases vulnerable to clock drift and process pauses?",
+   "back": "A lease says 'leader until T'. A slow clock or a paused process (GC, VM migration, swap) makes local time say the lease is still valid while everyone else has moved on.",
+   "text": "",
+   "image": "",
+   "analogy": "A parking ticket 'valid until 15:00' only protects you if your watch agrees with the warden's.",
+   "extra": "",
+   "source": "Dist Sys · Failure",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::09 Failure, Time & Fencing",
+   "tags": [
+    "DistSys::failure"
+   ],
+   "front": "How does Google Spanner's <b>TrueTime</b> deal with clock uncertainty?",
+   "back": "It returns an interval [earliest, latest] with bounded uncertainty (GPS/atomic clocks). A commit <b>waits</b> until 'latest' has passed, so timestamps are globally ordered.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Failure",
+   "reverse": false
+  },
+  {
+   "guid": "q`Tr!63v<-",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::09 Failure, Time & Fencing",
+   "tags": [
+    "DistSys::failure"
+   ],
+   "front": "What is <b>split brain</b>?",
+   "back": "Two nodes each believe they're the sole primary and both accept writes, producing divergent histories.",
+   "text": "",
+   "image": "",
+   "analogy": "Two captains on one ship, each giving orders after the radio between them failed.",
+   "extra": "Moving a virtual IP without fencing is the classic cause.",
+   "source": "Dist Sys · Failure",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Distributed Systems & Data::09 Failure, Time & Fencing",
+   "tags": [
+    "DistSys::failure"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Preventing split brain: {{c1::quorum}} (only the majority side may act) plus {{c2::fencing}} (the old primary is blocked from writing, via fencing tokens or STONITH, 'shoot the other node in the head').",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Failure",
+   "reverse": false
+  },
+  {
+   "guid": "uh#ln0v4pL",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::09 Failure, Time & Fencing",
+   "tags": [
+    "DistSys::failure"
+   ],
+   "front": "'fsyncgate': what did PostgreSQL learn about fsync, and what's the lesson for consensus?",
+   "back": "After a failed fsync, Linux may clear the dirty flag, so a retry 'succeeds' though data never hit disk. 'Persisted' can be silently false; on fsync failure, <b>crash</b> and recover.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "PostgreSQL and etcd now panic on fsync errors.",
+   "source": "Dist Sys · Failure",
+   "reverse": false
+  },
+  {
+   "guid": "kd|9%kEt,d",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::10 Resilience Patterns",
+   "tags": [
+    "DistSys::resilience"
+   ],
+   "front": "What is a <b>gray failure</b>?",
+   "back": "A component is degraded (slow, dropping some requests) yet passes its own health checks: the monitor and the clients see different things (<i>differential observability</i>).",
+   "text": "",
+   "image": "",
+   "analogy": "An employee who answers 'fine' at every check-in but quietly drops half their tickets.",
+   "extra": "",
+   "source": "Dist Sys · Failure",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::10 Resilience Patterns",
+   "tags": [
+    "DistSys::resilience"
+   ],
+   "front": "How do you detect gray failures?",
+   "back": "From the client's side: end-to-end canaries, load-balancer outlier ejection (Envoy, Istio), comparing each node's errors/latency with its peers. Health checks must exercise the real path.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Failure",
+   "reverse": false
+  },
+  {
+   "guid": "pII-vb~4(P",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::10 Resilience Patterns",
+   "tags": [
+    "DistSys::resilience"
+   ],
+   "front": "Why do naive retries turn a slow dependency into an outage?",
+   "back": "The dependency slows → callers time out and retry → load multiplies (3 retries = 4×) just when capacity is lowest. With retries at N layers, amplification is exponential.",
+   "text": "",
+   "image": "",
+   "analogy": "Everyone redialing a jammed phone line at once keeps it jammed.",
+   "extra": "",
+   "source": "Dist Sys · Failure",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Distributed Systems & Data::10 Resilience Patterns",
+   "tags": [
+    "DistSys::resilience",
+    "AWS"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Taming retries: {{c1::exponential backoff with full jitter}}, {{c2::retry budgets}} (e.g. retries ≤ 10% of successful calls), and retrying at {{c3::only one layer}}, plus circuit breakers and load shedding.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Failure",
+   "reverse": false
+  },
+  {
+   "guid": "bT?%kb@:q*",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::10 Resilience Patterns",
+   "tags": [
+    "DistSys::resilience"
+   ],
+   "front": "What is a <b>metastable failure</b>, and why doesn't removing the trigger fix it?",
+   "back": "A brief trigger pushes the system into a self-sustaining overload (retries ↑ → latency ↑ → retries ↑). The loop keeps going on its own; recovery needs <b>actively shedding load</b> below capacity.",
+   "text": "",
+   "image": "",
+   "analogy": "A traffic jam that persists long after the accident that caused it has been cleared.",
+   "extra": "",
+   "source": "Dist Sys · Failure",
+   "reverse": false
+  },
+  {
+   "guid": "I6ZGDt46ei",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::10 Resilience Patterns",
+   "tags": [
+    "DistSys::resilience"
+   ],
+   "front": "What is a <b>thundering herd</b> on cache expiry?",
+   "back": "A hot key expires and thousands of concurrent requests all miss and hit an origin sized only for cache-hit traffic.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Failure",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Distributed Systems & Data::10 Resilience Patterns",
+   "tags": [
+    "DistSys::resilience"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Thundering-herd mitigations: {{c1::request coalescing}} (singleflight: one origin fetch per key), {{c2::jittered TTLs / probabilistic early refresh}}, and {{c3::serve-stale-while-revalidate}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Failure",
+   "reverse": false
+  },
+  {
+   "guid": "cl$F%B1V]<",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::10 Resilience Patterns",
+   "tags": [
+    "DistSys::resilience",
+    "AWS",
+    "K8s"
+   ],
+   "front": "What is <b>static stability</b> (AWS)?",
+   "back": "A system keeps working when a dependency, usually a control plane, fails, because it doesn't need to <i>call</i> it during the failure; it runs on state it already has.",
+   "text": "",
+   "image": "",
+   "analogy": "A ship that keeps sailing on its last heading when radio contact with shore is lost.",
+   "extra": "",
+   "source": "Dist Sys · Failure",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::10 Resilience Patterns",
+   "tags": [
+    "DistSys::resilience",
+    "AWS",
+    "K8s"
+   ],
+   "front": "Give examples of static stability in AWS and Kubernetes.",
+   "back": "EC2 instances keep running when the EC2 API is impaired; pre-provisioned capacity in each AZ avoids launching instances during an AZ outage; K8s pods and Services keep working when etcd is down.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Failure",
+   "reverse": false
+  },
+  {
+   "guid": "h|@4B>:5^8",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::10 Resilience Patterns",
+   "tags": [
+    "DistSys::resilience",
+    "AWS"
+   ],
+   "front": "What design principle does Route 53 ARC (Paxos across 5 regions) illustrate?",
+   "back": "<b>The failover mechanism must be more available than what it fails over.</b> Never put the failover switch in the failing region's control plane.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "5 regions, majority of 3 needed, so one regional outage can't block failing out of it.",
+   "source": "Dist Sys · Failure",
+   "reverse": false
+  },
+  {
+   "guid": "smVJ$:f?,f",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::10 Resilience Patterns",
+   "tags": [
+    "DistSys::resilience",
+    "AWS"
+   ],
+   "front": "What is <b>shuffle sharding</b>, and what does it buy?",
+   "back": "Give each customer a random subset of k of N nodes. Full overlap between two customers is rare, so one customer's poison requests hurt only a tiny fraction of others.",
+   "text": "",
+   "image": "",
+   "analogy": "Like dealing each player a random hand: two players almost never hold exactly the same cards.",
+   "extra": "8 nodes, k=2: only 1 in 28 customer pairs share both nodes.",
+   "source": "Dist Sys · Failure",
+   "reverse": false
+  },
+  {
+   "guid": "A~pvP4xzA=",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::10 Resilience Patterns",
+   "tags": [
+    "DistSys::resilience",
+    "AWS"
+   ],
+   "front": "What is a <b>cell-based architecture</b>, and why does it sidestep CAP-style trade-offs?",
+   "back": "Many independent, fixed-size full-stack cells sharing no state, with a thin router mapping customers to cells. No cross-cell coordination; failures stay inside one cell.",
+   "text": "",
+   "image": "",
+   "analogy": "Watertight compartments in a ship's hull: a breach floods one compartment, not the ship.",
+   "extra": "<b>Hard parts:</b> the routing layer and moving customers between cells.",
+   "source": "Dist Sys · Failure",
+   "reverse": false
+  },
+  {
+   "guid": "pqf)o}2dr`",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::10 Resilience Patterns",
+   "tags": [
+    "DistSys::resilience",
+    "AWS",
+    "Azure"
+   ],
+   "front": "Why do AWS and Azure roll changes out one AZ/region at a time?",
+   "back": "Bad deploys and config pushes are <b>correlated failures</b>, the top cause of big outages, hitting everything at once. Waves with bake time turn them into bounded, reversible ones.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>K8s analogue:</b> <code>maxUnavailable</code>, progressive delivery.",
+   "source": "Dist Sys · Failure",
+   "reverse": false
+  },
+  {
+   "guid": "IM4.<o8fc(",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::11 Messaging, Streams & Batch",
+   "tags": [
+    "DistSys::streams"
+   ],
+   "front": "<b>Two Generals</b>: why is exactly-once <i>delivery</i> impossible over a lossy network?",
+   "back": "Every acknowledgement can be lost too, so neither side can ever be sure the other knows. Real systems do at-least-once delivery + idempotent processing and call that 'exactly-once'.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Messaging",
+   "reverse": false
+  },
+  {
+   "guid": "d<rp``9h;%",
+   "type": "cloze",
+   "deck": "Distributed Systems & Data::11 Messaging, Streams & Batch",
+   "tags": [
+    "DistSys::streams"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Delivery semantics: {{c1::at-most-once}} (send once, never retry: may lose); {{c2::at-least-once}} (retry until acked: may duplicate); 'exactly-once processing' = at-least-once + {{c3::an idempotent or deduplicating consumer}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Messaging",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::11 Messaging, Streams & Batch",
+   "tags": [
+    "DistSys::streams"
+   ],
+   "front": "Where must deduplication live for exactly-once effects?",
+   "back": "At the <b>consumer / state owner</b>, keyed by a client-chosen ID, with the dedup record committed atomically with the effect.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Messaging",
+   "reverse": false
+  },
+  {
+   "guid": "go8o8]F4jA",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::11 Messaging, Streams & Batch",
+   "tags": [
+    "DistSys::streams"
+   ],
+   "front": "Why is <b>idempotence</b> central to reliable data pipelines?",
+   "back": "Failures cause retries, so operations must be safe to apply twice. Idempotence plus dedup (operation ID, offset) gives exactly-once effects on at-least-once delivery.",
+   "text": "",
+   "image": "",
+   "analogy": "Pressing a lift call button five times still calls one lift.",
+   "extra": "",
+   "source": "DDIA · Ch 10–12",
+   "reverse": false
+  },
+  {
+   "guid": "fP=k{Nik*Y",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::11 Messaging, Streams & Batch",
+   "tags": [
+    "DistSys::streams",
+    "AWS"
+   ],
+   "front": "How do idempotency tokens (EC2 <code>ClientToken</code>, Stripe keys) work?",
+   "back": "The client sends the same unique token on every retry; the service stores token → result and returns the stored result for duplicates.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Messaging",
+   "reverse": false
+  },
+  {
+   "guid": "hIaZAhnd&d",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::11 Messaging, Streams & Batch",
+   "tags": [
+    "DistSys::streams"
+   ],
+   "front": "What is the <b>end-to-end argument</b> for correctness?",
+   "back": "Some guarantees (e.g. true duplicate suppression) can only be done at the application endpoints. TCP retransmits or DB transactions alone can't; you need end-to-end operation IDs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 10–12",
+   "reverse": false
+  },
+  {
+   "guid": "w;8R8iQK7x",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::11 Messaging, Streams & Batch",
+   "tags": [
+    "DistSys::streams",
+    "AWS"
+   ],
+   "front": "Amazon SQS Standard vs FIFO?",
+   "back": "<b>Standard</b>: at-least-once, best-effort order, near-unlimited throughput. <b>FIFO</b>: order per <code>MessageGroupId</code>; 'exactly-once' = dedup by ID within a 5-minute window.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Consumers must still be idempotent beyond the window or after mid-processing crashes.",
+   "source": "Dist Sys · Messaging",
+   "reverse": false
+  },
+  {
+   "guid": "kSl>Y6f*`7",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::11 Messaging, Streams & Batch",
+   "tags": [
+    "DistSys::streams"
+   ],
+   "front": "AMQP/JMS-style brokers vs log-based brokers (Kafka)?",
+   "back": "<b>AMQP/JMS</b>: messages deleted once acked; good task queues, hard to replay. <b>Log-based</b>: durable partitioned log; consumers track an offset, so they can replay and read independently.",
+   "text": "",
+   "image": "",
+   "analogy": "A to-do list where items are crossed off vs a diary that each reader works through with their own bookmark.",
+   "extra": "",
+   "source": "DDIA · Ch 10–12",
+   "reverse": false
+  },
+  {
+   "guid": "Cs;HdK1XW9",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::11 Messaging, Streams & Batch",
+   "tags": [
+    "DistSys::streams"
+   ],
+   "front": "What is <b>change data capture (CDC)</b>?",
+   "back": "Turning a database's stream of writes into an event feed for other systems (search, caches, warehouses). The DB stays the system of record; downstream stores are derived.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 10–12",
+   "reverse": false
+  },
+  {
+   "guid": "Dl-Bt@qiyE",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::11 Messaging, Streams & Batch",
+   "tags": [
+    "DistSys::streams"
+   ],
+   "front": "Event sourcing vs CDC?",
+   "back": "<b>Event sourcing</b>: the app stores immutable <b>domain events</b> as the source of truth and derives state by replay. <b>CDC</b>: extracts low-level row changes from a normal database.",
+   "text": "",
+   "image": "",
+   "analogy": "A bank statement listing every transaction vs only the balance: you can always recompute the balance from the statement.",
+   "extra": "",
+   "source": "DDIA · Ch 10–12",
+   "reverse": false
+  },
+  {
+   "guid": "cs`a.d83wq",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::11 Messaging, Streams & Batch",
+   "tags": [
+    "DistSys::streams"
+   ],
+   "front": "Event time vs processing time: why does it matter?",
+   "back": "<b>Event time</b>: when it happened. <b>Processing time</b>: when the engine sees it. Delays and out-of-order arrival make them diverge, so windowing by processing time gives wrong results.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 10–12",
+   "reverse": false
+  },
+  {
+   "guid": "k$Y49PfQ55",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::11 Messaging, Streams & Batch",
+   "tags": [
+    "DistSys::streams"
+   ],
+   "front": "What is a <b>watermark</b> in stream processing?",
+   "back": "The engine's claim that no events older than T will still arrive, letting windows close and emit. Events later than the allowed lateness are dropped or sent to a side output.",
+   "text": "",
+   "image": "",
+   "analogy": "A teacher announcing 'no more exam papers after this', accepting that a rare latecomer will be turned away.",
+   "extra": "",
+   "source": "Data Eng · Streaming",
+   "reverse": false
+  },
+  {
+   "guid": "Pg@!YbtVR]",
+   "type": "cloze",
+   "deck": "Distributed Systems & Data::11 Messaging, Streams & Batch",
+   "tags": [
+    "DistSys::streams"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Stream windows: {{c1::tumbling}} (fixed size, non-overlapping), {{c2::hopping}} (fixed size, overlapping by a step), {{c3::sliding}} (all events within an interval of each other), {{c4::session}} (closed by a gap of inactivity).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 10–12",
+   "reverse": false
+  },
+  {
+   "guid": "y3bc!C>X*B",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::11 Messaging, Streams & Batch",
+   "tags": [
+    "DistSys::streams"
+   ],
+   "front": "How do stream processors get exactly-once <i>effects</i>?",
+   "back": "Checkpoint operator state (Flink) or microbatch (Spark Streaming), combined with idempotent or transactional output, so replayed messages don't double-apply.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 10–12",
+   "reverse": false
+  },
+  {
+   "guid": "hBs5f7OX,K",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::11 Messaging, Streams & Batch",
+   "tags": [
+    "DistSys::streams"
+   ],
+   "front": "What is the MapReduce model?",
+   "back": "<b>Map</b> each record to key-value pairs → the framework sorts and groups by key (<b>shuffle</b>) → <b>reduce</b> all values per key. Inputs and outputs are immutable files on a distributed FS.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 10–12",
+   "reverse": false
+  },
+  {
+   "guid": "uc+lGZP6][",
+   "type": "cloze",
+   "deck": "Distributed Systems & Data::11 Messaging, Streams & Batch",
+   "tags": [
+    "DistSys::streams"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Batch joins: {{c1::sort-merge join}} (both sides sorted by key, merged in the reducer); {{c2::broadcast hash join}} (small side loaded into memory on every mapper); {{c3::partitioned hash join}} (both sides partitioned the same way, joined per partition).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 10–12",
+   "reverse": false
+  },
+  {
+   "guid": "g5A%?r=Z)f",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::11 Messaging, Streams & Batch",
+   "tags": [
+    "DistSys::streams"
+   ],
+   "front": "Why are dataflow engines (Spark, Flink) faster than MapReduce for multi-stage jobs?",
+   "back": "They plan the whole job as one graph, so they <b>pipeline</b> operators instead of writing every intermediate step to disk, keep data in memory, and skip unnecessary sorts.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 10–12",
+   "reverse": false
+  },
+  {
+   "guid": "kR5X3oq!/L",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::11 Messaging, Streams & Batch",
+   "tags": [
+    "DistSys::streams"
+   ],
+   "front": "Why is the immutable-input design of batch jobs valuable?",
+   "back": "Inputs never change, so jobs are deterministic and <b>retryable</b>: re-run to debug, keep old output to roll back, experiment safely. Derived data becomes reproducible.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 10–12",
+   "reverse": false
+  },
+  {
+   "guid": "k_{VZQG&|J",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::11 Messaging, Streams & Batch",
+   "tags": [
+    "DistSys::streams"
+   ],
+   "front": "What does 'unbundling the database' mean?",
+   "back": "Compose specialized systems (storage, indexes, caches, search, stream processors) connected by logs instead of one monolithic DB. The log keeps all derived views consistent.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 10–12",
+   "reverse": false
+  },
+  {
+   "guid": "uG1y|p`aR6",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::11 Messaging, Streams & Batch",
+   "tags": [
+    "DistSys::streams"
+   ],
+   "front": "What is the <b>lambda architecture</b>?",
+   "back": "A batch layer for accurate, reprocessable results plus a stream layer for fast approximate results, merged at read time.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 10–12",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::11 Messaging, Streams & Batch",
+   "tags": [
+    "DistSys::streams"
+   ],
+   "front": "What's the main critique of the lambda architecture, and the alternative?",
+   "back": "The same logic lives in two systems, which is costly and error-prone. A stream processor that can reprocess history (Kafka + Flink, 'kappa') does both.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 10–12",
+   "reverse": false
+  },
+  {
+   "guid": "HghB46b@r3",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::11 Messaging, Streams & Batch",
+   "tags": [
+    "DistSys::streams"
+   ],
+   "front": "What is <b>CQRS</b> in DDIA's framing?",
+   "back": "Separate the write path (commands/events appended to a log) from the read path (query-optimized views derived from it). You can rebuild or add views by replaying the log.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 10–12",
+   "reverse": false
+  },
+  {
+   "guid": "diIT+ZZK`j",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "K8s"
+   ],
+   "front": "What is etcd's role in Kubernetes, and which protocol does it run?",
+   "back": "etcd runs <b>Raft</b> and is the only stateful control-plane component: every object is a key under <code>/registry/</code>. kube-apiserver is a stateless front end over it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · K8s",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "K8s"
+   ],
+   "front": "What does the Kubernetes control plane inherit from etcd's Raft?",
+   "back": "CP behaviour, majority-quorum availability, and write latency of at least one fsync plus one majority round trip.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · K8s",
+   "reverse": false
+  },
+  {
+   "guid": "pc.!W;RRrU",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "K8s"
+   ],
+   "front": "Why run etcd with 3 or 5 members, never 4 or 6?",
+   "back": "Fault tolerance = ⌊(N−1)/2⌋. Four tolerates 1 failure like three, but has a bigger quorum (slower writes) and one more machine that can fail. Five tolerates 2.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · K8s",
+   "reverse": false
+  },
+  {
+   "guid": "F2{o96kT3(",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "K8s"
+   ],
+   "front": "A 3-member etcd cluster across 2 AZs (2+1) vs 3 AZs (1+1+1)?",
+   "back": "3 AZs: any one AZ loss leaves 2/3, quorum intact. 2 AZs: losing the AZ with 2 members leaves 1/3, no quorum. Rule: no single failure domain may hold a majority.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · K8s",
+   "reverse": false
+  },
+  {
+   "guid": "RgvhWV9E0R",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "K8s"
+   ],
+   "front": "Why is etcd write latency bounded below by <b>disk fsync</b>?",
+   "back": "Each Raft entry must be fsynced to the WAL on a majority before the ack, or a crash could lose a 'committed' entry.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · K8s",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "K8s"
+   ],
+   "front": "How do slow disks show up in etcd, and what do you monitor?",
+   "back": "As leader elections and apiserver timeouts, not disk errors. Use dedicated low-latency SSDs; keep <code>wal_fsync_duration_seconds</code> p99 under ~10 ms.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · K8s",
+   "reverse": false
+  },
+  {
+   "guid": "la%W_y}-6s",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "K8s"
+   ],
+   "front": "etcd <b>linearizable</b> vs <b>serializable</b> reads?",
+   "back": "<b>Linearizable</b> (default): goes through ReadIndex; reflects every write committed before the read. <b>Serializable</b>: served from the local member; can be stale on a partitioned member.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · K8s",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "K8s"
+   ],
+   "front": "How can kube-apiserver serve consistent reads from its watch cache?",
+   "back": "It uses etcd progress notifications to confirm the cache has reached the current revision before answering: ReadIndex at the cache layer.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · K8s",
+   "reverse": false
+  },
+  {
+   "guid": "oDcVW9a=fk",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "K8s"
+   ],
+   "front": "How does the Kubernetes API do <b>optimistic concurrency</b>?",
+   "back": "Each object carries <code>metadata.resourceVersion</code> (etcd revision). Updates must send the version they read; the apiserver compare-and-swaps and returns <b>409 Conflict</b> if it changed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · K8s",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "K8s"
+   ],
+   "front": "What does the lack of cross-object transactions in the K8s API force controllers to do?",
+   "back": "Re-read and retry on conflict (<code>RetryOnConflict</code>) and make every multi-step operation idempotent and reconciled, never assumed atomic.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · K8s",
+   "reverse": false
+  },
+  {
+   "guid": "nhH{GKCLIL",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "K8s"
+   ],
+   "front": "In Kubernetes, how do you do 'create A, then B, roll back if B fails'?",
+   "back": "You don't roll back, you <b>reconcile</b>: write desired state and let a controller converge idempotently. Use <code>ownerReferences</code> for GC, finalizers for teardown, <code>status.conditions</code> for progress.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · K8s",
+   "reverse": false
+  },
+  {
+   "guid": "D8mQ5[xp?b",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "K8s"
+   ],
+   "front": "Why are Kubernetes controllers <b>level-triggered</b> rather than edge-triggered?",
+   "back": "Acting on each event breaks permanently if one is missed (watch drop, restart, 410 Gone). Comparing current with desired state converges from any starting point; watches are just a latency optimization.",
+   "text": "",
+   "image": "",
+   "analogy": "A thermostat reads the current temperature rather than counting how often the door was opened.",
+   "extra": "",
+   "source": "Dist Sys · K8s",
+   "reverse": false
+  },
+  {
+   "guid": "4aMGi(rdI",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "K8s"
+   ],
+   "front": "How do kube-scheduler / controller-manager replicas elect a leader?",
+   "back": "Compare-and-swap on a <code>Lease</code> object (<code>coordination.k8s.io</code>). Defaults: leaseDuration 15 s, renewDeadline 10 s, retryPeriod 2 s.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · K8s",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "K8s"
+   ],
+   "front": "Why is Kubernetes Lease-based leader election <b>not</b> consensus?",
+   "back": "Leadership is time-based: a paused leader may still act after its lease expired and a new leader started. It's safe only for actions that are idempotent or guarded by resourceVersion.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · K8s",
+   "reverse": false
+  },
+  {
+   "guid": "o,mf`A_VXK",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "K8s"
+   ],
+   "front": "Why does Kubernetes wait minutes before evicting pods from an unreachable node?",
+   "back": "Timeout-based detection can't tell a partitioned kubelet from a dead one. Acting slowly trades availability for not running workloads twice.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Node NotReady after ~40–50 s without Lease renewal; eviction after <code>tolerationSeconds</code> (300 s).",
+   "source": "Dist Sys · K8s",
+   "reverse": false
+  },
+  {
+   "guid": "Qx(@|L;.~|",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "K8s"
+   ],
+   "front": "Why won't a StatefulSet recreate a pod from an unreachable node until the old one is confirmed deleted?",
+   "back": "It promises <b>at most one</b> pod per identity. The old pod may still be running and writing; a second pod-0 would be split brain on the same volume.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · K8s",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "K8s"
+   ],
+   "front": "What does force-deleting a StatefulSet pod (<code>--grace-period=0 --force</code>) mean in distributed-systems terms?",
+   "back": "A human acting as the <b>fence</b>: asserting the node is really dead. Cloud providers automate it by deleting the Node when the instance is terminated.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · K8s",
+   "reverse": false
+  },
+  {
+   "guid": "Pg!L*v#DbP",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "K8s"
+   ],
+   "front": "What does a <code>410 Gone</code> on an etcd watch mean, and what's the lesson?",
+   "back": "The requested revision was compacted (apiserver compacts every 5 min), so the client must <b>relist</b>. Any replicated log gets truncated; consumers must be able to rebuild from a snapshot.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · K8s",
+   "reverse": false
+  },
+  {
+   "guid": "tC9WHXo{8H",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "K8s"
+   ],
+   "front": "What happens to Kubernetes when etcd hits its space quota?",
+   "back": "A <code>NOSPACE</code> alarm makes etcd read-only: all writes fail, pods keep running but nothing can be scheduled or changed. Fix: compact → defrag → disarm alarm.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Default quota 2 GB, max recommended 8 GB. Causes: Events/Jobs/CR growth, missing compaction.",
+   "source": "Dist Sys · K8s",
+   "reverse": false
+  },
+  {
+   "guid": "b~TqiUx+:k",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "K8s"
+   ],
+   "front": "What happens to a Kubernetes cluster when etcd loses quorum?",
+   "back": "The control plane stops (no scheduling, scaling, rollouts, Lease renewals), but the <b>data plane stays up</b>: running pods, Service routing and DNS keep working.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · K8s",
+   "reverse": false
+  },
+  {
+   "guid": "vvEi)R,f&W",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "K8s"
+   ],
+   "front": "How should a PodDisruptionBudget be set for etcd, ZooKeeper or Kafka KRaft, and what doesn't it cover?",
+   "back": "<code>maxUnavailable: 1</code> (or minAvailable = quorum) so drains never drop below majority. PDBs cover only <i>voluntary</i> evictions; add topology spread for AZ outages.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · K8s",
+   "reverse": false
+  },
+  {
+   "guid": "lVK9o[=>Z8",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "AWS"
+   ],
+   "front": "How is a single DynamoDB partition replicated?",
+   "back": "Three replicas in three AZs; a Paxos-elected leader takes writes and acks once 2 of 3 have persisted.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · AWS",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "AWS"
+   ],
+   "front": "DynamoDB eventually consistent vs strongly consistent reads?",
+   "back": "<b>Eventual</b> (default, half the RCU): any replica, may miss a just-committed write. <b>Strong</b>: served by the leader, sees all prior writes. Not available on GSIs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · AWS",
+   "reverse": false
+  },
+  {
+   "guid": "JmhvdDHIZ.",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "AWS"
+   ],
+   "front": "DynamoDB Global Tables (default): consistency model and conflict resolution?",
+   "back": "Multi-active, <b>asynchronous</b> cross-region replication (~1 s), conflicts resolved by last-writer-wins: concurrent writes in two regions silently drop one. PA/EL.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · AWS",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "AWS"
+   ],
+   "front": "What do DynamoDB multi-Region strong consistency tables trade?",
+   "back": "Writes go through a cross-region quorum: linearizability at the cost of cross-region write latency. PACELC as a per-table choice.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · AWS",
+   "reverse": false
+  },
+  {
+   "guid": "D%daiY@Z32",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "AWS"
+   ],
+   "front": "How does DynamoDB <code>TransactWriteItems</code> get atomicity across partitions, and at what cost?",
+   "back": "A durable coordinator runs <b>2PC</b> across partition leaders. Cost: 2× WCU per item, more latency, and <code>TransactionConflict</code> rejections. Use only where needed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · AWS",
+   "reverse": false
+  },
+  {
+   "guid": "y>hPm4Et!H",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "AWS"
+   ],
+   "front": "What consistency does Amazon S3 give since December 2020, and how?",
+   "back": "Strong read-after-write for all GETs and LISTs, including overwrites and deletes, at no extra cost. The metadata cache layer was made coherently versioned, so stale entries are detected.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · AWS",
+   "reverse": false
+  },
+  {
+   "guid": "w)EQ&q)a65",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "AWS"
+   ],
+   "front": "Amazon Aurora storage quorums: what are they, and why 6 copies?",
+   "back": "6 copies over 3 AZs; write 4/6, read 3/6. Survives an AZ loss with writes intact (4 left) and AZ + 1 more failure with reads intact (3 left).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · AWS",
+   "reverse": false
+  },
+  {
+   "guid": "x3Y8C$d*Ql",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "AWS",
+    "Azure"
+   ],
+   "front": "Why is Aurora's storage layer described as 'the log is the database'?",
+   "back": "The engine ships only <b>redo log records</b> to storage nodes, which materialize pages themselves: far less replication traffic, fast failover, replicas sharing one volume.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Azure analogue:</b> Azure SQL Hyperscale (page servers + log service).",
+   "source": "Data Eng · OLTP",
+   "reverse": false
+  },
+  {
+   "guid": "mkemeV[sM*",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "AWS"
+   ],
+   "front": "Aurora Multi-AZ vs Aurora Global Database on CAP/PACELC?",
+   "back": "In-region: synchronous 4/6 quorum, CP. Global: <i>async</i> storage replication (&lt;1 s), stale secondary reads (EL); failover loses up to the lag, so RPO = staleness.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Always ask: consistent within which boundary?",
+   "source": "Dist Sys · AWS",
+   "reverse": false
+  },
+  {
+   "guid": "zX[L`:(b69",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "AWS"
+   ],
+   "front": "RDS Multi-AZ fails over by flipping DNS. What client-side failure does that cause?",
+   "back": "Clients with cached DNS (JVM defaults) or long-lived pooled connections keep talking to the old primary or hang. Fix: honour TTL, cap connection lifetime, or use RDS Proxy.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "A failover that requires clients to notice is only half a failover.",
+   "source": "Dist Sys · AWS",
+   "reverse": false
+  },
+  {
+   "guid": "PBa(G5gSUV",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "AWS"
+   ],
+   "front": "How can Route 53 offer a 100% availability SLA without breaking CAP?",
+   "back": "The SLA covers the <b>data plane</b> (answering queries): massively replicated, possibly stale, AP. Changing records is a separate, eventually propagated control plane.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · AWS",
+   "reverse": false
+  },
+  {
+   "guid": "mN!0~tfR1v",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "Azure"
+   ],
+   "front": "What does Cosmos DB <b>bounded staleness</b> guarantee?",
+   "back": "Reads lag writes by at most <b>K versions or T time</b>, whichever comes first: quantified staleness instead of a strong/eventual binary. Single-region, it behaves like strong.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Azure",
+   "reverse": false
+  },
+  {
+   "guid": "xmyexavOj3",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "Azure"
+   ],
+   "front": "How is Cosmos DB <b>session</b> consistency implemented?",
+   "back": "The SDK carries a <b>session token</b> (per-partition sequence numbers); a replica serves the read only once it has caught up to that token.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Azure",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "Azure"
+   ],
+   "front": "What silently breaks Cosmos DB session consistency?",
+   "back": "Not passing the session token along: multiple service instances, a function per request, or a web tier that doesn't return it to the browser. Read-your-writes becomes eventual.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Azure",
+   "reverse": false
+  },
+  {
+   "guid": "ll&WQMC:Da",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "Azure"
+   ],
+   "front": "Cosmos DB strong consistency across regions: what does a write cost, and what's incompatible?",
+   "back": "Synchronous commit to a majority of regions, ≈ 2× RTT to the farthest region. Incompatible with <b>multi-region writes</b>: no linearizability with independent concurrent writers.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Azure",
+   "reverse": false
+  },
+  {
+   "guid": "AcK4tei#>z",
+   "type": "cloze",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "Azure"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Cosmos DB multi-region write conflict policies: {{c1::last-writer-wins}} (default, on <code>_ts</code>), {{c2::custom stored procedure}} (server-side merge), {{c3::manual}} (conflicts feed for the app).",
+   "image": "",
+   "analogy": "",
+   "extra": "If losing a write is unacceptable, model updates to commute (counters, sets) or use single-region writes.",
+   "source": "Dist Sys · Azure",
+   "reverse": false
+  },
+  {
+   "guid": "scL<y6QrI2",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "Azure"
+   ],
+   "front": "How does Cosmos DB replicate inside a region?",
+   "back": "Each physical partition is a 4-replica set; a write is durable at a majority (3/4). Strong/bounded reads use a majority; session/eventual read a single replica.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Azure",
+   "reverse": false
+  },
+  {
+   "guid": "Fh@`c{)l}p",
+   "type": "cloze",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "Azure"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Azure Storage redundancy: {{c1::LRS}} = 3 sync copies in one datacenter; {{c2::ZRS}} = 3 sync copies across 3 AZs; {{c3::GRS}} = LRS + async copy to the paired region; {{c4::RA-GRS}} = GRS with readable (stale) secondary.",
+   "image": "",
+   "analogy": "",
+   "extra": "Geo-failover loses writes not yet replicated (RPO typically &lt; 15 min).",
+   "source": "Dist Sys · Azure",
+   "reverse": false
+  },
+  {
+   "guid": "bQ*/gpsYrs",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "Azure"
+   ],
+   "front": "Why is Azure Storage strongly consistent within a region?",
+   "back": "Each key range is served by one partition server; the stream layer replicates extents synchronously in a chain (acked when all 3 persist), with Paxos for extent metadata.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Exposes ETags for optimistic concurrency.",
+   "source": "Dist Sys · Azure",
+   "reverse": false
+  },
+  {
+   "guid": "p-(jm>/aZ~",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "Azure"
+   ],
+   "front": "Azure Service Fabric stateful services: what is <b>quorum loss</b>?",
+   "back": "When fewer than a majority of a partition's replicas are up, writes are refused (reads may continue) until replicas return or an operator forces a possibly lossy recovery.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Azure",
+   "reverse": false
+  },
+  {
+   "guid": "xQ)R9y[3A5",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "Azure"
+   ],
+   "front": "Using Azure Blob leases for leader election: failure mode and fix?",
+   "back": "The holder pauses, the lease expires, another instance takes over, the old one resumes as 'leader'. Fix: fence writes with conditional ETag (<code>If-Match</code>) or an epoch.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Azure",
+   "reverse": false
+  },
+  {
+   "guid": "Q&wVCWOC3^",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "Azure"
+   ],
+   "front": "Azure SQL failover groups: replication mode, and what must the app handle?",
+   "back": "Async geo-replication: an unplanned failover can lose recent commits. Apps must use the listener endpoint, retry transient errors, and accept stale reads from the secondary.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Azure",
+   "reverse": false
+  }
+ ]
+}

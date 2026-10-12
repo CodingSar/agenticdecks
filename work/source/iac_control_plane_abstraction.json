@@ -1,0 +1,455 @@
+{
+ "source_file": "iac_control_plane_abstraction.apkg",
+ "notes": [
+  {
+   "guid": "jxg_nDYZYf",
+   "type": "basic",
+   "deck": "Infrastructure as Code & Control Plane Abstraction",
+   "tags": [
+    "IaC::Ansible"
+   ],
+   "front": "What is Ansible (Automation Platform)?",
+   "back": "An agentless IT automation tool that configures systems, deploys software, and orchestrates tasks over <b>SSH</b> (Linux) or <b>WinRM</b> (Windows), using declarative <b>YAML</b> playbooks.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "NE0D,:@:^N",
+   "type": "basic",
+   "deck": "Infrastructure as Code & Control Plane Abstraction",
+   "tags": [
+    "IaC::Ansible"
+   ],
+   "front": "What are the core components of Ansible's architecture?",
+   "back": "<b>Control node</b> (runs Ansible), <b>managed nodes</b> (targets, no agent required), <b>inventory</b> (list of hosts), and <b>modules</b> (units of work executed on managed nodes).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "IY:>kwR8Ls",
+   "type": "basic",
+   "deck": "Infrastructure as Code & Control Plane Abstraction",
+   "tags": [
+    "IaC::Ansible"
+   ],
+   "front": "What does idempotency mean in the context of Ansible playbooks?",
+   "back": "Running a playbook multiple times produces the same end state without unintended side effects — Ansible only makes changes when the actual state differs from the desired state.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "IA85yUtA~z",
+   "type": "basic",
+   "deck": "Infrastructure as Code & Control Plane Abstraction",
+   "tags": [
+    "IaC::Ansible"
+   ],
+   "front": "What is the structural hierarchy of an Ansible Playbook?",
+   "back": "<b>Playbook</b> → contains one or more <b>plays</b> → each play contains <b>tasks</b> → tasks invoke <b>modules</b>. <b>Roles</b> bundle tasks, handlers, variables, and files for reuse. <b>Handlers</b> run only when notified (e.g., restart a service after a config change).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "CtSH81Ob$p",
+   "type": "basic",
+   "deck": "Infrastructure as Code & Control Plane Abstraction",
+   "tags": [
+    "IaC::Ansible"
+   ],
+   "front": "What is the difference between static and dynamic inventory in Ansible?",
+   "back": "<b>Static inventory</b> is a fixed file (INI/YAML) listing hosts. <b>Dynamic inventory</b> is generated at runtime by querying an external source (e.g., AWS EC2, Azure, K8s) via an inventory plugin/script.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "oznah[+Evk",
+   "type": "basic",
+   "deck": "Infrastructure as Code & Control Plane Abstraction",
+   "tags": [
+    "IaC::Ansible"
+   ],
+   "front": "What is Ansible Vault?",
+   "back": "A feature for encrypting sensitive data (passwords, keys, variables) at rest within playbooks or files, decrypted only at runtime with a vault password/key.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "K@)O6{4!ii",
+   "type": "basic",
+   "deck": "Infrastructure as Code & Control Plane Abstraction",
+   "tags": [
+    "IaC::Ansible"
+   ],
+   "front": "What is Ansible Galaxy?",
+   "back": "A public hub (and CLI) for finding, sharing, and installing reusable Ansible <b>roles</b> and <b>collections</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "877%?P5Q1",
+   "type": "basic",
+   "deck": "Infrastructure as Code & Control Plane Abstraction",
+   "tags": [
+    "IaC::Ansible"
+   ],
+   "front": "What is Ansible Automation Platform (AAP)?",
+   "back": "Red Hat's enterprise product built around Ansible, adding centralized management via <b>Automation Controller</b> (web UI/API, RBAC, scheduling), isolated <b>Execution Environments</b> (containerized runtimes), and an <b>Automation Hub</b> for curated content.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "o@uzU(m;q<",
+   "type": "basic",
+   "deck": "Infrastructure as Code & Control Plane Abstraction",
+   "tags": [
+    "IaC::Ansible"
+   ],
+   "front": "What is the difference between an Ansible module and an Ansible plugin?",
+   "back": "A <b>module</b> is executed on the target/managed node to perform a discrete unit of work (e.g., install a package). A <b>plugin</b> extends Ansible's core behavior and runs on the control node (e.g., inventory plugins, connection plugins, filter plugins).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "t;):{)_BX#",
+   "type": "basic",
+   "deck": "Infrastructure as Code & Control Plane Abstraction",
+   "tags": [
+    "IaC::Ansible"
+   ],
+   "front": "What are Ansible facts?",
+   "back": "System information (OS, IP addresses, hardware, etc.) automatically gathered from managed nodes via the built-in <code>setup</code> module, usable as variables in playbooks.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "rRm6;^h_5E",
+   "type": "basic",
+   "deck": "Infrastructure as Code & Control Plane Abstraction",
+   "tags": [
+    "IaC::Terraform"
+   ],
+   "front": "What is Terraform?",
+   "back": "A declarative Infrastructure as Code (IaC) tool by HashiCorp that provisions and manages cloud/on-prem infrastructure using the <b>HashiCorp Configuration Language (HCL)</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "n^4v;RTE&I",
+   "type": "basic",
+   "deck": "Infrastructure as Code & Control Plane Abstraction",
+   "tags": [
+    "IaC::Terraform"
+   ],
+   "front": "What is the Terraform state file and why is it sensitive?",
+   "back": "A file (<code>terraform.tfstate</code>) that maps declared resources to real-world infrastructure IDs. It's sensitive because it may contain secrets in plaintext and must be stored in a <b>remote backend</b> with <b>locking</b> to prevent corruption from concurrent runs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "v)xv#oP>01",
+   "type": "basic",
+   "deck": "Infrastructure as Code & Control Plane Abstraction",
+   "tags": [
+    "IaC::Terraform"
+   ],
+   "front": "What is the standard Terraform workflow?",
+   "back": "<code>terraform plan</code> (preview changes) → <code>terraform apply</code> (execute changes) → <code>terraform destroy</code> (tear down managed resources).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "NN@ar@B.uQ",
+   "type": "basic",
+   "deck": "Infrastructure as Code & Control Plane Abstraction",
+   "tags": [
+    "IaC::Terraform"
+   ],
+   "front": "What is a Terraform provider?",
+   "back": "A plugin that translates HCL resource definitions into API calls for a specific platform (e.g., AWS, Azure, Kubernetes), implementing CRUD operations for that platform's resources.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "AG7aR3fQ{7",
+   "type": "basic",
+   "deck": "Infrastructure as Code & Control Plane Abstraction",
+   "tags": [
+    "IaC::Terraform"
+   ],
+   "front": "What is a Terraform module?",
+   "back": "A reusable, self-contained package of Terraform configuration (resources, variables, outputs) that can be called with different inputs to avoid duplication.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "zD!+jP!5/(",
+   "type": "basic",
+   "deck": "Infrastructure as Code & Control Plane Abstraction",
+   "tags": [
+    "IaC::Terraform"
+   ],
+   "front": "What are Terraform workspaces used for?",
+   "back": "Managing multiple distinct state files (e.g., dev/staging/prod) from the same configuration without duplicating code.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "ce4gwlVG8L",
+   "type": "basic",
+   "deck": "Infrastructure as Code & Control Plane Abstraction",
+   "tags": [
+    "IaC::Terraform"
+   ],
+   "front": "What is OpenTofu?",
+   "back": "An open-source fork of Terraform created in 2023 after HashiCorp relicensed Terraform under the <b>Business Source License (BSL)</b>; OpenTofu is governed by the Linux Foundation and remains under the open-source Mozilla Public License (MPL).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "N.?%hd9Ixo",
+   "type": "basic",
+   "deck": "Infrastructure as Code & Control Plane Abstraction",
+   "tags": [
+    "IaC::Terraform"
+   ],
+   "front": "What licensing difference distinguishes Terraform from OpenTofu?",
+   "back": "Terraform (post-v1.6) uses HashiCorp's <b>Business Source License (BSL)</b>, which restricts competing commercial use. OpenTofu retained the original <b>Mozilla Public License (MPL) 2.0</b>, remaining fully open source.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "g?Z?234I?3",
+   "type": "basic",
+   "deck": "Infrastructure as Code & Control Plane Abstraction",
+   "tags": [
+    "IaC::Terraform"
+   ],
+   "front": "What is Terraform state locking and why does it matter?",
+   "back": "A mechanism (e.g., via <b>DynamoDB</b> alongside an S3 backend) that prevents two <code>terraform apply</code> runs from modifying state concurrently, avoiding state file corruption or conflicting changes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "r,=gG6[c:H",
+   "type": "basic",
+   "deck": "Infrastructure as Code & Control Plane Abstraction",
+   "tags": [
+    "IaC::Terraform"
+   ],
+   "front": "What is 'drift' in Terraform terminology?",
+   "back": "A divergence between the actual state of infrastructure and what's recorded in the Terraform state file, typically caused by manual/out-of-band changes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "I$.(]U_lvp",
+   "type": "basic",
+   "deck": "Infrastructure as Code & Control Plane Abstraction",
+   "tags": [
+    "IaC::Crossplane"
+   ],
+   "front": "What is Crossplane?",
+   "back": "An open-source Kubernetes (K8s) extension that turns a K8s cluster into a universal <b>control plane</b>, provisioning and managing external infrastructure (cloud resources, databases, etc.) as native K8s objects via Custom Resource Definitions (CRDs).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "c]dVz44C=[",
+   "type": "basic",
+   "deck": "Infrastructure as Code & Control Plane Abstraction",
+   "tags": [
+    "IaC::Crossplane"
+   ],
+   "front": "What is a Crossplane Provider?",
+   "back": "An installable package that extends the K8s API with CRDs and controllers for a specific external system (e.g., <code>provider-aws</code>, <code>provider-azure</code>), enabling Crossplane to manage that system's resources.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "GZjscO%bFG",
+   "type": "basic",
+   "deck": "Infrastructure as Code & Control Plane Abstraction",
+   "tags": [
+    "IaC::Crossplane"
+   ],
+   "front": "What is a Crossplane Managed Resource (MR)?",
+   "back": "The lowest-level Crossplane resource type — a K8s Custom Resource (CR) that represents and directly manages a single external infrastructure resource (e.g., an S3 bucket).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "E48>UQEex;",
+   "type": "basic",
+   "deck": "Infrastructure as Code & Control Plane Abstraction",
+   "tags": [
+    "IaC::Crossplane"
+   ],
+   "front": "What is a Crossplane Composite Resource (XR)?",
+   "back": "A higher-level abstraction that combines multiple Managed Resources (MRs) into a single logical unit (e.g., a 'Database' XR composed of a network, instance, and firewall rule).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "O*MBs(c}FY",
+   "type": "basic",
+   "deck": "Infrastructure as Code & Control Plane Abstraction",
+   "tags": [
+    "IaC::Crossplane"
+   ],
+   "front": "What is a Crossplane Composition?",
+   "back": "A template that defines how a Composite Resource (XR) maps to and configures its underlying Managed Resources (MRs) — essentially the 'implementation' behind an XR's abstract API.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "udX9z9;I4-",
+   "type": "basic",
+   "deck": "Infrastructure as Code & Control Plane Abstraction",
+   "tags": [
+    "IaC::Crossplane"
+   ],
+   "front": "What is a Crossplane Claim?",
+   "back": "A namespaced request object used by application teams to consume a Composite Resource (XR) in a self-service manner, without needing cluster-scoped permissions.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "kPu^hKU+cV",
+   "type": "basic",
+   "deck": "Infrastructure as Code & Control Plane Abstraction",
+   "tags": [
+    "IaC::Crossplane"
+   ],
+   "front": "How does Crossplane's reconciliation model differ from Terraform's execution model?",
+   "back": "Crossplane uses continuous <b>control-loop reconciliation</b> (K8s controllers constantly drive actual state toward desired state), whereas Terraform performs discrete, one-shot <code>plan</code>/<code>apply</code> runs that must be manually or pipeline-triggered.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "^pmpvOyPp",
+   "type": "basic",
+   "deck": "Infrastructure as Code & Control Plane Abstraction",
+   "tags": [
+    "IaC::Crossplane"
+   ],
+   "front": "What is a Crossplane Package?",
+   "back": "An OCI-image-based distribution format used to install and version Providers, Configurations, and Functions into a cluster, pulled from any OCI-compatible registry.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "HAI*=%B0[e",
+   "type": "basic",
+   "deck": "Infrastructure as Code & Control Plane Abstraction",
+   "tags": [
+    "IaC::Crossplane"
+   ],
+   "front": "What are Crossplane Composition Functions?",
+   "back": "Programmable units (run as pipeline steps within a Composition) that let you use general-purpose code (e.g., Go, Python, or KCL) instead of purely templated YAML to determine how an XR composes its Managed Resources (MRs).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "H)t?NFe=e/",
+   "type": "basic",
+   "deck": "Infrastructure as Code & Control Plane Abstraction",
+   "tags": [
+    "IaC::Crossplane"
+   ],
+   "front": "What is the 'control plane abstraction' pattern that Crossplane and tools like Kubernetes Resource Orchestrator (KRO) represent?",
+   "back": "Using the K8s API server (with its declarative reconciliation, RBAC, and extensibility via CRDs) as a universal control plane for provisioning and governing heterogeneous resources — cloud infra, SaaS, or other K8s objects — rather than K8s managing only workloads.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": ""
+  }
+ ]
+}

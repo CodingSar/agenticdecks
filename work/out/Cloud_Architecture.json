@@ -1,0 +1,1995 @@
+{
+ "deck_name": "Cloud Architecture",
+ "file": "Cloud_Architecture.apkg",
+ "description": "Cross-provider cloud architecture (AWS / Azure / GCP service mapping, identity, networking, storage, cost trade-offs) plus the hardware under it: CPUs, GPUs/TPUs, AI cluster networking and datacenters. For platform and enterprise architects who design on more than one cloud.",
+ "notes": [
+  {
+   "guid": "Pdq#1(Y_-F",
+   "type": "basic",
+   "deck": "Cloud Architecture::01 Cloud Models, Regions & Trade-offs",
+   "tags": [
+    "cloud",
+    "security",
+    "iam-governance"
+   ],
+   "front": "Shared responsibility model: what does the provider secure, and what does the customer secure?",
+   "back": "Provider: security <b><i>of</i></b> the cloud (facilities, hardware, hypervisor).<br>Customer: security <b><i>in</i></b> the cloud (data, identities, configuration, workloads).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Shift:</b> the line moves toward the provider as you go IaaS → PaaS → SaaS/serverless. Same principle on all three clouds.",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "d:;d9kAQuf",
+   "type": "basic",
+   "deck": "Cloud Architecture::01 Cloud Models, Regions & Trade-offs",
+   "tags": [
+    "cloud",
+    "tradeoffs"
+   ],
+   "front": "Managed (PaaS/serverless) vs self-run (IaaS): what do you gain and what do you pay?",
+   "back": "<b>Gain:</b> less ops, built-in scaling/patching/HA, faster delivery.<br><b>Pay:</b> higher unit cost, less control, tighter lock-in.",
+   "text": "",
+   "image": "",
+   "analogy": "Renting a furnished, serviced flat vs owning a house: someone else fixes the boiler, but you can't knock down walls and the rent is higher.",
+   "extra": "<b>In practice:</b> the decision rarely hinges on compute price; it hinges on the engineering time the managed service removes.",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "x5V^wo>fqc",
+   "type": "basic",
+   "deck": "Cloud Architecture::01 Cloud Models, Regions & Trade-offs",
+   "tags": [
+    "cloud",
+    "tradeoffs"
+   ],
+   "front": "What primarily drives cloud vendor lock-in (not compute)?",
+   "back": "The <b>differentiated managed services</b> you build on (DynamoDB, Cosmos DB, BigQuery, IAM, eventing) and <b>data gravity</b>: egress fees make moving large datasets expensive.",
+   "text": "",
+   "image": "",
+   "analogy": "Data gravity: a large dataset is like a planet; services, apps and more data fall into its orbit, and escaping costs energy (egress).",
+   "extra": "<b>Mitigations, each with a cost:</b> open formats (Parquet/Delta), containers + Kubernetes, Terraform, provider SDKs behind interfaces.",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "OWd=?A#`DC",
+   "type": "basic",
+   "deck": "Cloud Architecture::01 Cloud Models, Regions & Trade-offs",
+   "tags": [
+    "cloud",
+    "tradeoffs"
+   ],
+   "front": "Multi-cloud: when does it actually pay off?",
+   "back": "Regulatory/sovereignty mandates, negotiating leverage, a best-of-breed service on another cloud (e.g. BigQuery next to an AWS app), and M&amp;A reality.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Pragmatic default:</b> one primary cloud; stay portable at the boundaries (containers, Terraform, open formats).",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Cloud Architecture::01 Cloud Models, Regions & Trade-offs",
+   "tags": [
+    "cloud",
+    "tradeoffs"
+   ],
+   "front": "Multi-cloud: what are its main hidden costs?",
+   "back": "Doubled ops and skills, lowest-common-denominator architecture, cross-cloud egress, weaker volume discounts, and a larger security surface.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "H?kbd%,~q@",
+   "type": "basic",
+   "deck": "Cloud Architecture::01 Cloud Models, Regions & Trade-offs",
+   "tags": [
+    "cloud",
+    "kubernetes",
+    "tradeoffs"
+   ],
+   "front": "Kubernetes as a portability layer: what does it equalize across EKS/AKS/GKE?",
+   "back": "Scheduling, the deployment model and in-cluster service networking. Workloads defined as manifests move fairly cleanly.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Cloud Architecture::01 Cloud Models, Regions & Trade-offs",
+   "tags": [
+    "cloud",
+    "kubernetes",
+    "tradeoffs"
+   ],
+   "front": "Kubernetes as a portability layer: where does portability leak?",
+   "back": "At every cloud integration: <b>storage</b> (CSI drivers), <b>load balancers/ingress</b>, <b>IAM / workload identity</b>, and the managed databases and queues the apps depend on.",
+   "text": "",
+   "image": "",
+   "analogy": "Kubernetes is a universal power adapter: the plug fits every country, but the voltage (storage, IAM, LBs) still differs behind the wall.",
+   "extra": "",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "g=j!Mja79J",
+   "type": "basic",
+   "deck": "Cloud Architecture::01 Cloud Models, Regions & Trade-offs",
+   "tags": [
+    "cloud",
+    "reliability-regions",
+    "Cloud",
+    "cloud::ai-infra"
+   ],
+   "front": "Region vs Availability Zone: what failure does spreading across each protect against?",
+   "back": "<b>Across AZs</b> (separate datacenters with own power/cooling/network, low-latency linked): a datacenter failure → HA.<br><b>Across regions</b> (separate geographies): a regional disaster → DR, plus data residency.",
+   "text": "",
+   "image": "",
+   "analogy": "AZs are separate buildings on one campus; regions are separate cities.",
+   "extra": "GCP calls AZs <i>zones</i>. HA default: ≥ 2–3 AZs in one region.",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "lPN6f~d[C*",
+   "type": "basic",
+   "deck": "Cloud Architecture::01 Cloud Models, Regions & Trade-offs",
+   "tags": [
+    "cloud",
+    "reliability-regions",
+    "tradeoffs"
+   ],
+   "front": "Which cloud leans most 'global' in its resource model, and what are examples?",
+   "back": "<b>GCP:</b> global VPC, one global anycast IP for Cloud Load Balancing, multi-region buckets. AWS/Azure stay mostly regional (AWS exceptions: IAM, Route 53, CloudFront).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Trade-off:</b> global resources simplify multi-region but widen the blast radius and complicate data-residency control.",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "wp0n.jdJSV",
+   "type": "basic",
+   "deck": "Cloud Architecture::01 Cloud Models, Regions & Trade-offs",
+   "tags": [
+    "cloud",
+    "compute",
+    "reliability-regions",
+    "tradeoffs"
+   ],
+   "front": "What does GCP VM live migration do that AWS/Azure typically don't?",
+   "back": "Moves a running VM to another host during host maintenance with <b>no reboot</b>. AWS/Azure often need a scheduled reboot or stop/start for some maintenance events.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Effect:</b> fewer maintenance interruptions for long-running stateful VMs on GCP.",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "usyd$qM6Us",
+   "type": "cloze",
+   "deck": "Cloud Architecture::02 Identity & Governance",
+   "tags": [
+    "cloud",
+    "service-mapping",
+    "iam-governance"
+   ],
+   "front": "",
+   "back": "",
+   "text": "<b>Identity &amp; access management</b><br>AWS: {{c1::IAM}}<br>Azure: {{c2::Microsoft Entra ID (identity) + Azure RBAC (authorization)}}<br>GCP: {{c3::Cloud IAM}}",
+   "image": "",
+   "analogy": "",
+   "extra": "Azure splits identity (Entra ID: users, groups, apps) from authorization (RBAC role assignments on scopes).",
+   "source": "Cloud · Service mapping",
+   "reverse": false
+  },
+  {
+   "guid": "u2hf-q%hYZ",
+   "type": "basic",
+   "deck": "Cloud Architecture::02 Identity & Governance",
+   "tags": [
+    "cloud",
+    "iam-governance",
+    "tradeoffs"
+   ],
+   "front": "Which cloud's IAM does <i>not</i> inherit permissions down a resource hierarchy, and what does it use for org-wide limits instead?",
+   "back": "<b>AWS.</b> Policies attach to users, roles or resources only; Organizations <b>SCPs</b> act as guardrails.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Azure RBAC and GCP IAM both inherit down management group/subscription/RG or org/folder/project.",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Cloud Architecture::02 Identity & Governance",
+   "tags": [
+    "cloud",
+    "iam-governance",
+    "tradeoffs"
+   ],
+   "front": "In AWS IAM policy evaluation, what wins when an Allow and a Deny both match?",
+   "back": "The <b>explicit Deny</b>. Default is implicit deny; an Allow only applies if no Deny matches.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Cloud Architecture::02 Identity & Governance",
+   "tags": [
+    "cloud",
+    "iam-governance",
+    "tradeoffs"
+   ],
+   "front": "What is a GCP IAM binding, and how far does it reach?",
+   "back": "A role granted to a principal <b>on a node of the resource hierarchy</b> (org, folder, project, resource). It is inherited by everything below that node.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "DLb,-Jcnqs",
+   "type": "cloze",
+   "deck": "Cloud Architecture::02 Identity & Governance",
+   "tags": [
+    "cloud",
+    "iam-governance",
+    "tradeoffs"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Primary isolation and billing boundary: AWS {{c1::Account}} · Azure {{c2::Subscription}} · GCP {{c3::Project}}",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Best practice everywhere:</b> many small boundaries (per team/env), grouped by AWS Organizations / Azure Management Groups / GCP Folders.",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "v?jq}@14OU",
+   "type": "cloze",
+   "deck": "Cloud Architecture::02 Identity & Governance",
+   "tags": [
+    "cloud",
+    "iam-governance",
+    "tradeoffs"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Resource hierarchy, top to bottom:<br>AWS: {{c1::Organization → OU → Account → Resource}}<br>Azure: {{c2::Management Group → Subscription → Resource Group → Resource}}<br>GCP: {{c3::Organization → Folder → Project → Resource}}",
+   "image": "",
+   "analogy": "",
+   "extra": "Azure's <b>Resource Group</b> is mandatory (every resource lives in exactly one) and has no AWS/GCP equivalent.",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "Pa0NB6|x>p",
+   "type": "cloze",
+   "deck": "Cloud Architecture::02 Identity & Governance",
+   "tags": [
+    "cloud",
+    "iam-governance"
+   ],
+   "front": "",
+   "back": "",
+   "text": "<b>Org-wide permission guardrails</b><br>AWS: {{c1::Service Control Policies (SCPs)}}<br>Azure: {{c2::Azure Policy + RBAC deny assignments}}<br>GCP: {{c3::Organization Policy constraints}}",
+   "image": "",
+   "analogy": "",
+   "extra": "SCPs set the <b>maximum</b> permissions: they never grant, only bound.",
+   "source": "Cloud · Service mapping",
+   "reverse": false
+  },
+  {
+   "guid": "oNzE{:7g:9",
+   "type": "cloze",
+   "deck": "Cloud Architecture::02 Identity & Governance",
+   "tags": [
+    "cloud",
+    "iam-governance",
+    "security",
+    "kubernetes"
+   ],
+   "front": "",
+   "back": "",
+   "text": "<b>Workload identity without static keys</b><br>AWS: {{c1::IAM roles (IRSA / EKS Pod Identity on EKS)}}<br>Azure: {{c2::Managed Identities / Workload Identity}}<br>GCP: {{c3::Service accounts + Workload Identity}}",
+   "image": "",
+   "analogy": "",
+   "extra": "All three let pods/VMs assume an identity from the platform instead of embedding long-lived credentials.",
+   "source": "Cloud · Service mapping",
+   "reverse": false
+  },
+  {
+   "guid": "c5pv-RozE-",
+   "type": "cloze",
+   "deck": "Cloud Architecture::02 Identity & Governance",
+   "tags": [
+    "cloud",
+    "service-mapping",
+    "security"
+   ],
+   "front": "",
+   "back": "",
+   "text": "<b>Secrets management</b><br>AWS: {{c1::Secrets Manager (+ Parameter Store)}}<br>Azure: {{c2::Key Vault}}<br>GCP: {{c3::Secret Manager}}",
+   "image": "",
+   "analogy": "",
+   "extra": "Key Vault also holds keys and certificates; AWS keeps keys separately in KMS.",
+   "source": "Cloud · Service mapping",
+   "reverse": false
+  },
+  {
+   "guid": "GLp]SJ8==",
+   "type": "basic",
+   "deck": "Cloud Architecture::02 Identity & Governance",
+   "tags": [
+    "cloud",
+    "security"
+   ],
+   "front": "Encryption at rest: what is the default on all three clouds, and what does a customer-managed key (CMK) add?",
+   "back": "Default: encrypted with <b>platform-managed keys</b>. CMK (AWS KMS / Key Vault / Cloud KMS) adds control, revocation and audit.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Pitfall:</b> with CMK, key availability = data availability. Delete or lose access to the key and the data is gone.",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "yDx%5~UpU@",
+   "type": "cloze",
+   "deck": "Cloud Architecture::02 Identity & Governance",
+   "tags": [
+    "cloud",
+    "security"
+   ],
+   "front": "",
+   "back": "",
+   "text": "<b>Confidential computing (data encrypted in use)</b><br>AWS: {{c1::Nitro Enclaves}}<br>Azure: {{c2::Confidential VMs / confidential containers}}<br>GCP: {{c3::Confidential VMs (AMD SEV / Intel TDX)}}",
+   "image": "",
+   "analogy": "",
+   "extra": "Protects memory even from the hypervisor and host operator.",
+   "source": "Cloud · Service mapping",
+   "reverse": false
+  },
+  {
+   "guid": "c0MDX9(V9L",
+   "type": "basic",
+   "deck": "Cloud Architecture::03 Networking",
+   "tags": [
+    "cloud",
+    "networking",
+    "tradeoffs",
+    "service-mapping"
+   ],
+   "front": "AWS VPC / Azure VNet vs GCP VPC: what is the scope difference, and why does it matter?",
+   "back": "AWS VPC and Azure VNet are <b>regional</b>; a GCP VPC is <b>global</b> (subnets regional). Multi-region on AWS/Azure needs peering or a transit hub; on GCP it is one network.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Trade-off:</b> simpler global topology vs a single larger fault and policy domain. Stitching tools: AWS Transit Gateway, Azure Virtual WAN.",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "htI|w%9DYE",
+   "type": "basic",
+   "deck": "Cloud Architecture::03 Networking",
+   "tags": [
+    "cloud",
+    "networking",
+    "tradeoffs"
+   ],
+   "front": "Cloud firewall primitives: which cloud adds a second, <i>stateless</i> layer, and what is it?",
+   "back": "<b>AWS:</b> Network ACLs at subnet level, on top of stateful Security Groups. Azure NSGs and GCP VPC firewall rules are stateful only.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Stateless = you must allow return traffic explicitly. GCP firewall rules target network tags or service accounts, not NICs.",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "b%`cTHTAOb",
+   "type": "cloze",
+   "deck": "Cloud Architecture::03 Networking",
+   "tags": [
+    "cloud",
+    "networking"
+   ],
+   "front": "",
+   "back": "",
+   "text": "<b>Private service connectivity (service as private endpoint in your network)</b><br>AWS: {{c1::PrivateLink}}<br>Azure: {{c2::Private Link}}<br>GCP: {{c3::Private Service Connect}}",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · Service mapping",
+   "reverse": false
+  },
+  {
+   "guid": "yC3,Hx{ql$",
+   "type": "cloze",
+   "deck": "Cloud Architecture::03 Networking",
+   "tags": [
+    "cloud",
+    "networking"
+   ],
+   "front": "",
+   "back": "",
+   "text": "<b>Dedicated private line to on-prem</b><br>AWS: {{c1::Direct Connect}}<br>Azure: {{c2::ExpressRoute}}<br>GCP: {{c3::Cloud Interconnect}}",
+   "image": "",
+   "analogy": "",
+   "extra": "Bypasses the public internet for bandwidth, predictable latency and compliance.",
+   "source": "Cloud · Service mapping",
+   "reverse": false
+  },
+  {
+   "guid": "H.AY|!TDs(",
+   "type": "cloze",
+   "deck": "Cloud Architecture::03 Networking",
+   "tags": [
+    "cloud",
+    "networking",
+    "reliability-regions"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Load balancers:<br>AWS: {{c1::ALB (L7), NLB (L4)}}<br>Azure: {{c2::Application Gateway (L7, regional), Load Balancer (L4), Front Door (L7, global)}}<br>GCP: {{c3::Cloud Load Balancing, one product, global or regional, L4/L7}}",
+   "image": "",
+   "analogy": "",
+   "extra": "GCP's global L7 LB behind a single anycast IP is its distinctive feature.",
+   "source": "Cloud · Service mapping",
+   "reverse": false
+  },
+  {
+   "guid": "Tkk@C7jX@",
+   "type": "cloze",
+   "deck": "Cloud Architecture::03 Networking",
+   "tags": [
+    "cloud",
+    "service-mapping",
+    "networking"
+   ],
+   "front": "",
+   "back": "",
+   "text": "<b>CDN</b><br>AWS: {{c1::CloudFront}}<br>Azure: {{c2::Front Door (also global L7 LB + WAF)}}<br>GCP: {{c3::Cloud CDN}}",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · Service mapping",
+   "reverse": false
+  },
+  {
+   "guid": "E.Yk^*~nY@",
+   "type": "cloze",
+   "deck": "Cloud Architecture::03 Networking",
+   "tags": [
+    "cloud",
+    "service-mapping",
+    "networking"
+   ],
+   "front": "",
+   "back": "",
+   "text": "<b>Managed DNS</b><br>AWS: {{c1::Route 53}}<br>Azure: {{c2::Azure DNS (+ Traffic Manager for routing)}}<br>GCP: {{c3::Cloud DNS}}",
+   "image": "",
+   "analogy": "",
+   "extra": "Route 53 combines DNS with health-checked routing policies in one service.",
+   "source": "Cloud · Service mapping",
+   "reverse": false
+  },
+  {
+   "guid": "fB>}FE(_E~",
+   "type": "basic",
+   "deck": "Cloud Architecture::03 Networking",
+   "tags": [
+    "cloud",
+    "security",
+    "kubernetes",
+    "networking",
+    "tradeoffs"
+   ],
+   "front": "Managed service mesh in 2026: what replaced AWS App Mesh and Azure Open Service Mesh?",
+   "back": "<b>AWS:</b> App Mesh reached end of support (Sept 2026) → VPC Lattice or ECS Service Connect.<br><b>Azure:</b> OSM retired → Istio-based AKS add-on.<br>GCP: Cloud Service Mesh (managed Istio).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Lesson: managed meshes churn; Istio is the converging standard underneath.",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "p!8>6l,F3V",
+   "type": "cloze",
+   "deck": "Cloud Architecture::04 Compute, Virtualization & Containers",
+   "tags": [
+    "cloud",
+    "service-mapping",
+    "compute"
+   ],
+   "front": "",
+   "back": "",
+   "text": "<b>IaaS virtual machines</b><br>AWS: {{c1::EC2}}<br>Azure: {{c2::Virtual Machines}}<br>GCP: {{c3::Compute Engine}}",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · Service mapping",
+   "reverse": false
+  },
+  {
+   "guid": "Q+,8]TUkt`",
+   "type": "cloze",
+   "deck": "Cloud Architecture::04 Compute, Virtualization & Containers",
+   "tags": [
+    "cloud",
+    "service-mapping",
+    "compute"
+   ],
+   "front": "",
+   "back": "",
+   "text": "<b>Functions as a Service</b><br>AWS: {{c1::Lambda}}<br>Azure: {{c2::Azure Functions}}<br>GCP: {{c3::Cloud Run functions (formerly Cloud Functions)}}",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · Service mapping",
+   "reverse": false
+  },
+  {
+   "guid": "Qa]5OEM<BR",
+   "type": "cloze",
+   "deck": "Cloud Architecture::04 Compute, Virtualization & Containers",
+   "tags": [
+    "cloud",
+    "compute",
+    "kubernetes"
+   ],
+   "front": "",
+   "back": "",
+   "text": "<b>Serverless containers (no node management)</b><br>AWS: {{c1::Fargate (ECS or EKS)}}<br>Azure: {{c2::Container Apps / Container Instances}}<br>GCP: {{c3::Cloud Run}}",
+   "image": "",
+   "analogy": "",
+   "extra": "Cloud Run is request-driven containers with scale-to-zero, a middle ground between FaaS and full orchestration.",
+   "source": "Cloud · Service mapping",
+   "reverse": false
+  },
+  {
+   "guid": "J){WiFlawN",
+   "type": "cloze",
+   "deck": "Cloud Architecture::04 Compute, Virtualization & Containers",
+   "tags": [
+    "cloud",
+    "service-mapping",
+    "kubernetes"
+   ],
+   "front": "",
+   "back": "",
+   "text": "<b>Managed Kubernetes</b><br>AWS: {{c1::EKS}}<br>Azure: {{c2::AKS}}<br>GCP: {{c3::GKE}}",
+   "image": "",
+   "analogy": "",
+   "extra": "GKE is generally seen as the most mature (Kubernetes came from Google).",
+   "source": "Cloud · Service mapping",
+   "reverse": false
+  },
+  {
+   "guid": "L13LHJ*,wP",
+   "type": "basic",
+   "deck": "Cloud Architecture::04 Compute, Virtualization & Containers",
+   "tags": [
+    "cloud",
+    "kubernetes",
+    "compute",
+    "pricing",
+    "tradeoffs"
+   ],
+   "front": "Managed Kubernetes cost: which of EKS / AKS / GKE does <i>not</i> charge for the control plane by default?",
+   "back": "<b>AKS</b> (Free tier; the paid Standard tier adds an uptime SLA). EKS bills ~$0.10 per cluster-hour; GKE charges a cluster management fee (free-tier credit covers one cluster).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Exact rates drift; the structure is the durable fact.",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "B2-mKru$kg",
+   "type": "basic",
+   "deck": "Cloud Architecture::04 Compute, Virtualization & Containers",
+   "tags": [
+    "cloud",
+    "kubernetes",
+    "compute",
+    "tradeoffs"
+   ],
+   "front": "GKE Autopilot vs Standard: what do you give up for not managing nodes?",
+   "back": "Autopilot: Google runs the nodes, you pay per <b>pod resource request</b>. You lose node-level freedom (privileged pods, some DaemonSets, custom node config).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "EKS/AKS analogs: Fargate profiles, AKS Automatic / virtual nodes (ACI).",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "Jhb<|=4V=B",
+   "type": "cloze",
+   "deck": "Cloud Architecture::04 Compute, Virtualization & Containers",
+   "tags": [
+    "cloud",
+    "service-mapping"
+   ],
+   "front": "",
+   "back": "",
+   "text": "<b>Container registry</b><br>AWS: {{c1::ECR}}<br>Azure: {{c2::Azure Container Registry}}<br>GCP: {{c3::Artifact Registry}}",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · Service mapping",
+   "reverse": false
+  },
+  {
+   "guid": "GSW{)aI&t;",
+   "type": "cloze",
+   "deck": "Cloud Architecture::04 Compute, Virtualization & Containers",
+   "tags": [
+    "cloud",
+    "service-mapping"
+   ],
+   "front": "",
+   "back": "",
+   "text": "<b>Native infrastructure as code</b><br>AWS: {{c1::CloudFormation (+ CDK)}}<br>Azure: {{c2::ARM templates → Bicep}}<br>GCP: {{c3::Infrastructure Manager (Terraform-based)}}",
+   "image": "",
+   "analogy": "",
+   "extra": "Terraform/OpenTofu is the cross-cloud default regardless.",
+   "source": "Cloud · Service mapping",
+   "reverse": false
+  },
+  {
+   "guid": "m<G;RjHmC)",
+   "type": "cloze",
+   "deck": "Cloud Architecture::04 Compute, Virtualization & Containers",
+   "tags": [
+    "cloud",
+    "service-mapping"
+   ],
+   "front": "",
+   "back": "",
+   "text": "<b>Metrics &amp; logs</b><br>AWS: {{c1::CloudWatch}}<br>Azure: {{c2::Azure Monitor (Log Analytics + Application Insights)}}<br>GCP: {{c3::Cloud Monitoring / Cloud Logging (formerly Stackdriver)}}",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · Service mapping",
+   "reverse": false
+  },
+  {
+   "guid": "rFR5_5I;eY",
+   "type": "basic",
+   "deck": "Cloud Architecture::04 Compute, Virtualization & Containers",
+   "tags": [
+    "Cloud",
+    "cloud::ai-infra"
+   ],
+   "front": "Type 1 vs Type 2 hypervisor?",
+   "back": "<b>Type 1</b> (bare-metal: KVM, ESXi, Hyper-V) runs directly on hardware; <b>Type 2</b> runs as an app on a host OS (VirtualBox). Clouds use Type 1.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "E_t-~L.@sm",
+   "type": "cloze",
+   "deck": "Cloud Architecture::04 Compute, Virtualization & Containers",
+   "tags": [
+    "Cloud",
+    "cloud::ai-infra"
+   ],
+   "front": "",
+   "back": "",
+   "text": "{{c1::KVM}} is a Linux kernel module that turns Linux into a Type 1 hypervisor; it underpins OpenStack and most public clouds.",
+   "image": "",
+   "analogy": "",
+   "extra": "AWS Nitro and GCP both run KVM-derived hypervisors.",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "L8X@6F~C^r",
+   "type": "basic",
+   "deck": "Cloud Architecture::04 Compute, Virtualization & Containers",
+   "tags": [
+    "Cloud",
+    "cloud::ai-infra"
+   ],
+   "front": "When do you pick a bare-metal instance over a virtualized one?",
+   "back": "When you need the whole server without hypervisor overhead or limits: GPU-heavy AI, licensing tied to physical cores, nested virtualization, or hardware features (perf counters).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "PNFY/2o.4*",
+   "type": "basic",
+   "deck": "Cloud Architecture::04 Compute, Virtualization & Containers",
+   "tags": [
+    "Cloud",
+    "cloud::ai-infra"
+   ],
+   "front": "Why do clouds oversubscribe CPU and network, and what is the symptom when the bet fails?",
+   "back": "They sell more virtual capacity than exists, betting tenants rarely peak together. When they do: <b>noisy neighbors</b> (CPU steal time, jitter).",
+   "text": "",
+   "image": "",
+   "analogy": "Airline overbooking: profitable because some passengers never show, painful on the day everyone does.",
+   "extra": "Burstable instances (AWS T, Azure B) are oversubscription with a credit system.",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "JI`U$}&_t<",
+   "type": "basic",
+   "deck": "Cloud Architecture::04 Compute, Virtualization & Containers",
+   "tags": [
+    "Cloud",
+    "cloud::ai-infra"
+   ],
+   "front": "What is bin packing in cluster scheduling, and what does it trade against?",
+   "back": "Placing workloads onto hosts to maximize utilization within CPU/memory/GPU/affinity constraints. It trades against spreading for resilience: tighter packing = bigger blast radius per node.",
+   "text": "",
+   "image": "",
+   "analogy": "Packing a moving van: Tetris-tight saves trips, but one dropped box takes more with it.",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "n{R0$~3+)r",
+   "type": "cloze",
+   "deck": "Cloud Architecture::05 Storage",
+   "tags": [
+    "Storage",
+    "cloud::ai-infra"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Storage models:<br>{{c1::Block}}: raw addressable blocks, a virtual disk for one host (EBS)<br>{{c2::Object}}: immutable objects + metadata over an HTTP API (S3)<br>{{c3::File}}: shared hierarchical filesystem over the network (NFS/SMB)",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "LHcAynmBT-",
+   "type": "cloze",
+   "deck": "Cloud Architecture::05 Storage",
+   "tags": [
+    "cloud",
+    "service-mapping"
+   ],
+   "front": "",
+   "back": "",
+   "text": "<b>Object storage</b><br>AWS: {{c1::S3}}<br>Azure: {{c2::Blob Storage}}<br>GCP: {{c3::Cloud Storage (GCS)}}",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · Service mapping",
+   "reverse": false
+  },
+  {
+   "guid": "jQnklP[k1u",
+   "type": "cloze",
+   "deck": "Cloud Architecture::05 Storage",
+   "tags": [
+    "cloud",
+    "service-mapping",
+    "storage"
+   ],
+   "front": "",
+   "back": "",
+   "text": "<b>Block storage for VMs</b><br>AWS: {{c1::EBS}}<br>Azure: {{c2::Managed Disks}}<br>GCP: {{c3::Persistent Disk / Hyperdisk}}",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · Service mapping",
+   "reverse": false
+  },
+  {
+   "guid": "prrvg)N8Ta",
+   "type": "cloze",
+   "deck": "Cloud Architecture::05 Storage",
+   "tags": [
+    "cloud",
+    "storage",
+    "pricing",
+    "tradeoffs"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Object storage tiers (hot → archive):<br>AWS S3: {{c1::Standard → Standard-IA / One Zone-IA → Glacier tiers}}<br>Azure Blob: {{c2::Hot → Cool → Cold → Archive}}<br>GCS: {{c3::Standard → Nearline → Coldline → Archive}}",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · Service mapping",
+   "reverse": false
+  },
+  {
+   "guid": "n)~6IdFI}{",
+   "type": "basic",
+   "deck": "Cloud Architecture::05 Storage",
+   "tags": [
+    "Storage",
+    "cloud::ai-infra"
+   ],
+   "front": "Storage tiering: what do you pay for moving data to a colder tier?",
+   "back": "Cheaper per-GB storage in exchange for <b>retrieval fees</b>, <b>higher latency</b> (archive: hours) and <b>minimum storage durations</b> (early-delete charges).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Lifecycle policies automate moves by age or last access.",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "JyKgR1du4c",
+   "type": "basic",
+   "deck": "Cloud Architecture::05 Storage",
+   "tags": [
+    "cloud",
+    "storage",
+    "databases"
+   ],
+   "front": "Is S3 eventually consistent?",
+   "back": "No longer. Since <b>December 2020</b> S3 is <b>strongly read-after-write consistent</b> for all operations. Azure Blob and GCS are strongly consistent too.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Old interview answers calling S3 eventually consistent are outdated.",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "oc2<2]losD",
+   "type": "basic",
+   "deck": "Cloud Architecture::05 Storage",
+   "tags": [
+    "Storage",
+    "cloud::ai-infra"
+   ],
+   "front": "HDD vs SSD: what is the physical difference and its main consequence?",
+   "back": "HDD: spinning platters + moving head → milliseconds of seek per random I/O. SSD: flash, no moving parts → microsecond latency and far higher random IOPS.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "MXv~SD*XUm",
+   "type": "basic",
+   "deck": "Cloud Architecture::05 Storage",
+   "tags": [
+    "Storage",
+    "cloud::ai-infra"
+   ],
+   "front": "Why is NVMe so much faster than SATA for SSDs?",
+   "back": "SATA/AHCI was designed for spinning disks (one queue, 32 commands). <b>NVMe</b> runs over PCIe lanes with up to 64K queues, giving far higher IOPS and lower latency.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "ptuxX]:7.(",
+   "type": "basic",
+   "deck": "Cloud Architecture::05 Storage",
+   "tags": [
+    "Storage",
+    "cloud::ai-infra"
+   ],
+   "front": "What does IOPS measure?",
+   "back": "Input/output operations per second: how many reads/writes a device or volume handles per second.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Cloud Architecture::05 Storage",
+   "tags": [
+    "cloud::ai-infra",
+    "Storage"
+   ],
+   "front": "IOPS vs throughput: which limit hits a database and which hits a backup or ML data loader?",
+   "back": "Databases do small random I/O → <b>IOPS</b>-bound. Backups and data loaders stream large sequential reads → <b>throughput</b> (MB/s)-bound.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Cloud volumes cap both separately (e.g. EBS gp3 provisions IOPS and MB/s independently).",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "n7GC:5]M?e",
+   "type": "basic",
+   "deck": "Cloud Architecture::05 Storage",
+   "tags": [
+    "Storage",
+    "cloud::ai-infra"
+   ],
+   "front": "Why do distributed object stores use erasure coding instead of 3× replication or RAID?",
+   "back": "Erasure coding (e.g. 6 data + 3 parity) survives several lost fragments at ~1.5× overhead vs 3× for replication, and spans nodes/zones, not one server's disks like RAID.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Cost:</b> more CPU and network for reads during failures and for rebuilds. RAID 5 survives only one disk and has risky rebuild windows on large drives.",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "rTAA3h$u$,",
+   "type": "basic",
+   "deck": "Cloud Architecture::05 Storage",
+   "tags": [
+    "Storage",
+    "cloud::ai-infra"
+   ],
+   "front": "SAN vs NAS?",
+   "back": "<b>SAN:</b> dedicated network giving servers <b>block</b> access (Fibre Channel, iSCSI).<br><b>NAS:</b> <b>file</b>-level access over the normal network (NFS, SMB); simpler, usually slower.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "l5~r+erjhI",
+   "type": "basic",
+   "deck": "Cloud Architecture::05 Storage",
+   "tags": [
+    "Storage",
+    "cloud::ai-infra"
+   ],
+   "front": "What is Ceph, and where do you meet it?",
+   "back": "Open-source distributed storage offering <b>object, block and file</b> from one cluster. Common backend for OpenStack and on-prem Kubernetes (Rook).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "LUyrQu^ORz",
+   "type": "basic",
+   "deck": "Cloud Architecture::05 Storage",
+   "tags": [
+    "Storage",
+    "cloud::ai-infra"
+   ],
+   "front": "Why is storage often the bottleneck in AI training?",
+   "back": "GPUs consume data faster than storage can feed it, so they idle. Fixes: parallel filesystems (Lustre, GPFS), local NVMe caching, sharded datasets with prefetch.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "O+p05)7l|Z",
+   "type": "cloze",
+   "deck": "Cloud Architecture::06 Databases & Analytics",
+   "tags": [
+    "cloud",
+    "service-mapping",
+    "databases"
+   ],
+   "front": "",
+   "back": "",
+   "text": "<b>Managed relational database</b><br>AWS: {{c1::RDS + Aurora}}<br>Azure: {{c2::Azure SQL Database, Azure Database for PostgreSQL/MySQL}}<br>GCP: {{c3::Cloud SQL + AlloyDB}}",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · Service mapping",
+   "reverse": false
+  },
+  {
+   "guid": "bKNZn/WBPf",
+   "type": "cloze",
+   "deck": "Cloud Architecture::06 Databases & Analytics",
+   "tags": [
+    "cloud",
+    "service-mapping",
+    "databases"
+   ],
+   "front": "",
+   "back": "",
+   "text": "<b>Managed NoSQL key-value / document</b><br>AWS: {{c1::DynamoDB}}<br>Azure: {{c2::Cosmos DB}}<br>GCP: {{c3::Firestore (document), Bigtable (wide-column)}}",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · Service mapping",
+   "reverse": false
+  },
+  {
+   "guid": "weV@dxV$Om",
+   "type": "cloze",
+   "deck": "Cloud Architecture::06 Databases & Analytics",
+   "tags": [
+    "cloud",
+    "service-mapping",
+    "databases"
+   ],
+   "front": "",
+   "back": "",
+   "text": "<b>Cloud data warehouse</b><br>AWS: {{c1::Redshift}}<br>Azure: {{c2::Microsoft Fabric (successor to Synapse)}}<br>GCP: {{c3::BigQuery}}",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · Service mapping",
+   "reverse": false
+  },
+  {
+   "guid": "d4XQgd;WN|",
+   "type": "cloze",
+   "deck": "Cloud Architecture::06 Databases & Analytics",
+   "tags": [
+    "cloud",
+    "service-mapping"
+   ],
+   "front": "",
+   "back": "",
+   "text": "<b>Point-to-point message queue</b><br>AWS: {{c1::SQS}}<br>Azure: {{c2::Service Bus}}<br>GCP: {{c3::Pub/Sub (+ Cloud Tasks)}}",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · Service mapping",
+   "reverse": false
+  },
+  {
+   "guid": "FAM89l}jd@",
+   "type": "cloze",
+   "deck": "Cloud Architecture::06 Databases & Analytics",
+   "tags": [
+    "cloud",
+    "service-mapping"
+   ],
+   "front": "",
+   "back": "",
+   "text": "<b>High-throughput event stream</b><br>AWS: {{c1::Kinesis Data Streams}}<br>Azure: {{c2::Event Hubs (Kafka-compatible)}}<br>GCP: {{c3::Pub/Sub}}",
+   "image": "",
+   "analogy": "",
+   "extra": "GCP uses Pub/Sub for both queueing and streaming.",
+   "source": "Cloud · Service mapping",
+   "reverse": false
+  },
+  {
+   "guid": "x36k=z@#+W",
+   "type": "basic",
+   "deck": "Cloud Architecture::06 Databases & Analytics",
+   "tags": [
+    "cloud",
+    "databases"
+   ],
+   "front": "What do Aurora and AlloyDB change compared with vanilla managed Postgres (RDS / Cloud SQL)?",
+   "back": "They split compute from a <b>purpose-built distributed storage layer</b> (Aurora: 6 copies across 3 AZs), giving faster failover and cheap read replicas. AlloyDB adds columnar acceleration.",
+   "text": "",
+   "image": "",
+   "analogy": "Instead of each server carrying its own filing cabinet, all servers share one replicated archive; replacing a server no longer means copying the cabinet.",
+   "extra": "",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "f!!s;Fm[N1",
+   "type": "basic",
+   "deck": "Cloud Architecture::06 Databases & Analytics",
+   "tags": [
+    "cloud",
+    "databases",
+    "tradeoffs"
+   ],
+   "front": "DynamoDB vs Cosmos DB: how does each go multi-region, and how much consistency choice do you get?",
+   "back": "<b>DynamoDB:</b> regional; Global Tables add multi-active replication (last-writer-wins). Reads: eventual or strong.<br><b>Cosmos DB:</b> turnkey global distribution with <b>five</b> tunable consistency levels.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Consistency-level details live in the Distributed Systems &amp; Data and AZ-305 decks.",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "w_JRS+OBte",
+   "type": "basic",
+   "deck": "Cloud Architecture::06 Databases & Analytics",
+   "tags": [
+    "cloud",
+    "databases",
+    "tradeoffs"
+   ],
+   "front": "BigQuery vs Redshift: core architectural difference?",
+   "back": "<b>BigQuery:</b> serverless, storage and compute fully separated, pay per bytes scanned or slots.<br><b>Redshift:</b> started as provisioned clusters you size; Redshift Serverless now exists.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "BigQuery is the reference no-cluster warehouse.",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "A-T86AG]{u",
+   "type": "basic",
+   "deck": "Cloud Architecture::07 Cost & Capacity",
+   "tags": [
+    "cloud",
+    "pricing",
+    "tradeoffs"
+   ],
+   "front": "Why is data egress the classic cloud cost trap?",
+   "back": "Ingress is free but <b>egress to the internet</b> is billed per GB, and <b>cross-region</b> and even <b>cross-AZ</b> traffic is charged. Chatty, multi-region designs leak money invisibly.",
+   "text": "",
+   "image": "",
+   "analogy": "Hotel minibar pricing: checking in is free, everything you take out is billed.",
+   "extra": "Rough order: internet > cross-region > cross-AZ > same-AZ (often free). Keep traffic local.",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "L?9d.>xTEw",
+   "type": "cloze",
+   "deck": "Cloud Architecture::07 Cost & Capacity",
+   "tags": [
+    "cloud",
+    "pricing",
+    "compute",
+    "tradeoffs"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Spot capacity eviction notice: AWS Spot {{c1::2 minutes}} · Azure Spot VMs {{c2::30 seconds}} · GCP Spot VMs {{c3::30 seconds}}",
+   "image": "",
+   "analogy": "",
+   "extra": "Up to ~60–90% off. Good for batch and fault-tolerant work; bad for stateful single instances. GCP Spot replaced Preemptible (which had a 24-h cap).",
+   "source": "Cloud · Service mapping",
+   "reverse": false
+  },
+  {
+   "guid": "KiQcWY98E.",
+   "type": "cloze",
+   "deck": "Cloud Architecture::07 Cost & Capacity",
+   "tags": [
+    "cloud",
+    "pricing",
+    "tradeoffs"
+   ],
+   "front": "",
+   "back": "",
+   "text": "<b>Commitment discounts (1–3 yr)</b><br>AWS: {{c1::Reserved Instances + Savings Plans}}<br>Azure: {{c2::Reservations + Savings Plans}}<br>GCP: {{c3::Committed Use Discounts (CUDs)}}",
+   "image": "",
+   "analogy": "",
+   "extra": "Savings Plans commit to $/hour of spend, not a specific instance type, so they survive re-sizing.",
+   "source": "Cloud · Service mapping",
+   "reverse": false
+  },
+  {
+   "guid": "kpp[PS^/4H",
+   "type": "basic",
+   "deck": "Cloud Architecture::07 Cost & Capacity",
+   "tags": [
+    "cloud",
+    "pricing",
+    "tradeoffs"
+   ],
+   "front": "Which automatic, no-commitment discount is unique to GCP?",
+   "back": "<b>Sustained Use Discounts:</b> Compute Engine VMs that run for a large share of the month get cheaper automatically.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "AWS/Azure need an explicit reservation or savings plan for comparable discounts.",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "Me3l.2o#9L",
+   "type": "cloze",
+   "deck": "Cloud Architecture::07 Cost & Capacity",
+   "tags": [
+    "cloud",
+    "compute",
+    "pricing"
+   ],
+   "front": "",
+   "back": "",
+   "text": "<b>Custom ARM server CPUs</b><br>AWS: {{c1::Graviton}}<br>Azure: {{c2::Cobalt}}<br>GCP: {{c3::Axion}}",
+   "image": "",
+   "analogy": "",
+   "extra": "Typically ~20–40% better price-performance for compatible scale-out workloads.",
+   "source": "Cloud · Service mapping",
+   "reverse": false
+  },
+  {
+   "guid": "Admv>.fcm@",
+   "type": "basic",
+   "deck": "Cloud Architecture::07 Cost & Capacity",
+   "tags": [
+    "Cloud",
+    "cloud::ai-infra"
+   ],
+   "front": "Why compare total cost of ownership (TCO) rather than server or GPU price?",
+   "back": "Purchase price is a fraction of lifetime cost: power, cooling, network, space, staff and maintenance often dominate.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Cloud vs on-prem comparisons go wrong when one side counts only hardware.",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "GMC/}K!NR^",
+   "type": "basic",
+   "deck": "Cloud Architecture::07 Cost & Capacity",
+   "tags": [
+    "Cloud",
+    "cloud::ai-infra"
+   ],
+   "front": "Why does capacity planning matter more for GPUs than for general compute?",
+   "back": "Lead times for GPUs, power and datacenter space run to months, so demand must be forecast and capacity reserved ahead of need.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "C8S7*Zb=`Q",
+   "type": "basic",
+   "deck": "Cloud Architecture::08 CPU & Server Hardware",
+   "tags": [
+    "CPU",
+    "cloud::ai-infra"
+   ],
+   "front": "Core vs SMT hardware thread (Hyper-Threading): what is shared, and what speedup do you get?",
+   "back": "A <b>core</b> has its own execution units. <b>SMT</b> runs 2 threads on one core sharing those units: better utilization, typically ~10–30% gain, not 2×.",
+   "text": "",
+   "image": "",
+   "analogy": "One chef with two order tickets: while one dish simmers, he chops for the other, but he is still one chef.",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "po=6S1/]jj",
+   "type": "basic",
+   "deck": "Cloud Architecture::08 CPU & Server Hardware",
+   "tags": [
+    "CPU",
+    "cloud::ai-infra"
+   ],
+   "front": "What is a vCPU on most x86 cloud instances, and what is the exception?",
+   "back": "Usually <b>one hyperthread</b>, so 2 vCPU = 1 physical core. On AWS Graviton (no SMT) 1 vCPU = 1 full core.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Matters when comparing instance prices or setting K8s CPU requests.",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "f-+F*[Zg?E",
+   "type": "cloze",
+   "deck": "Cloud Architecture::08 CPU & Server Hardware",
+   "tags": [
+    "CPU",
+    "cloud::ai-infra"
+   ],
+   "front": "",
+   "back": "",
+   "text": "CPU caches: {{c1::L1}} is smallest and fastest, per core; {{c2::L3}} is largest and slowest, usually shared across cores.",
+   "image": "",
+   "analogy": "L1 is the tools on your desk, L2 the drawer, L3 the shared cupboard, RAM the warehouse down the street.",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "I@FCBC}3J.",
+   "type": "basic",
+   "deck": "Cloud Architecture::08 CPU & Server Hardware",
+   "tags": [
+    "CPU",
+    "cloud::ai-infra"
+   ],
+   "front": "What is NUMA?",
+   "back": "In multi-socket servers each CPU has <b>local memory</b> it reaches fast; memory attached to another socket is <b>remote</b> and slower (crosses UPI / Infinity Fabric).",
+   "text": "",
+   "image": "",
+   "analogy": "Each socket has its own fridge; you can raid the neighbor's, but it means walking down the hall.",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "QW8oW_m*;t",
+   "type": "basic",
+   "deck": "Cloud Architecture::08 CPU & Server Hardware",
+   "tags": [
+    "CPU",
+    "cloud::ai-infra"
+   ],
+   "front": "Why pin a process to a NUMA node?",
+   "back": "Keeping threads on the node that holds their memory avoids cross-socket traffic and latency spikes, important for databases, DPDK and large VMs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Kubernetes: Topology Manager + CPU Manager <code>static</code> policy.",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "MGJRU^/V,&",
+   "type": "basic",
+   "deck": "Cloud Architecture::08 CPU & Server Hardware",
+   "tags": [
+    "CPU",
+    "cloud::ai-infra"
+   ],
+   "front": "x86-64 and ARM are two instruction set architectures (ISAs). Why is ARM spreading in the cloud?",
+   "back": "ARM (RISC) gives better <b>performance per watt</b> and lets providers design their own chips (Graviton, Cobalt, Axion). x86-64 (Intel/AMD) still dominates legacy software.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Pitfall:</b> multi-arch container images are needed before moving workloads.",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "f8A&O;:=Mg",
+   "type": "basic",
+   "deck": "Cloud Architecture::08 CPU & Server Hardware",
+   "tags": [
+    "CPU",
+    "cloud::ai-infra"
+   ],
+   "front": "What is TDP, and why do architects care?",
+   "back": "<b>Thermal Design Power:</b> the sustained heat (watts) a chip is rated to dissipate. It sizes power and cooling per server and rack, and caps sustained clock speed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "g~}xNPuulS",
+   "type": "basic",
+   "deck": "Cloud Architecture::08 CPU & Server Hardware",
+   "tags": [
+    "CPU",
+    "cloud::ai-infra"
+   ],
+   "front": "Why does a branch misprediction cost so much?",
+   "back": "CPUs <b>pipeline</b> instructions (fetch, decode, execute overlap). On a wrong guess the speculatively executed work is flushed and the pipeline refills: ~15–20 wasted cycles.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Speculative execution is also what Spectre-class side channels exploit, hence the hypervisor mitigations in multi-tenant clouds.",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "kEu&s5Q2hC",
+   "type": "basic",
+   "deck": "Cloud Architecture::09 AI Accelerators",
+   "tags": [
+    "GPU",
+    "cloud::ai-infra"
+   ],
+   "front": "Why are GPUs a good fit for neural networks?",
+   "back": "Thousands of simple cores run the <b>same instruction over many data elements</b>, matching the dense matrix math of neural networks.",
+   "text": "",
+   "image": "",
+   "analogy": "A CPU is a few master craftsmen; a GPU is a stadium of people each doing the same simple sum at once.",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "hdmuu5_MOa",
+   "type": "cloze",
+   "deck": "Cloud Architecture::09 AI Accelerators",
+   "tags": [
+    "GPU",
+    "cloud::ai-infra"
+   ],
+   "front": "",
+   "back": "",
+   "text": "NVIDIA's execution model, where a {{c1::warp}} of 32 threads executes the same instruction in lockstep on different data, is called {{c2::SIMT (single instruction, multiple threads)}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "Divergent branches inside a warp serialize, which is why GPU code avoids per-thread branching.",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "p5_wiaUdT!",
+   "type": "cloze",
+   "deck": "Cloud Architecture::09 AI Accelerators",
+   "tags": [
+    "GPU",
+    "cloud::ai-infra"
+   ],
+   "front": "",
+   "back": "",
+   "text": "The repeated building block of an NVIDIA GPU, holding CUDA cores, Tensor Cores, registers and shared memory, is the {{c1::Streaming Multiprocessor (SM)}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "h}yaq1EXf0",
+   "type": "basic",
+   "deck": "Cloud Architecture::09 AI Accelerators",
+   "tags": [
+    "GPU",
+    "cloud::ai-infra"
+   ],
+   "front": "CUDA cores vs Tensor Cores?",
+   "back": "<b>CUDA cores:</b> general scalar FP/INT arithmetic.<br><b>Tensor Cores:</b> dedicated matrix multiply-accumulate units at low precision (FP16/BF16/FP8/INT8), where most AI FLOPS come from.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "qAYdvVZ+]0",
+   "type": "basic",
+   "deck": "Cloud Architecture::09 AI Accelerators",
+   "tags": [
+    "GPU",
+    "cloud::ai-infra"
+   ],
+   "front": "What has to fit in GPU memory (VRAM) during training, and why does it decide the GPU count?",
+   "back": "Weights, gradients, optimizer state and activations. If they don't fit on one GPU, you must shard the model across several.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Rule of thumb: mixed-precision Adam training needs ~16 bytes per parameter before activations.",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "AdaRAOmJs2",
+   "type": "basic",
+   "deck": "Cloud Architecture::09 AI Accelerators",
+   "tags": [
+    "GPU",
+    "cloud::ai-infra"
+   ],
+   "front": "What is HBM, and why do datacenter GPUs use it?",
+   "back": "<b>High Bandwidth Memory:</b> stacked DRAM placed next to the GPU die on an interposer, giving TB/s bandwidth (H100 ≈ 3.35 TB/s) that GDDR can't match.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "xh0[*(WQ**",
+   "type": "basic",
+   "deck": "Cloud Architecture::09 AI Accelerators",
+   "tags": [
+    "GPU",
+    "cloud::ai-infra"
+   ],
+   "front": "Why does memory bandwidth often matter more than raw FLOPS for AI (especially LLM inference)?",
+   "back": "Many steps are <b>memory-bound</b>: each weight is read for little compute, so the cores idle waiting for data. Bandwidth sets the speed.",
+   "text": "",
+   "image": "",
+   "analogy": "A fast cook with a slow waiter: dishes per hour is set by the waiter.",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "TJ06F$[t",
+   "type": "basic",
+   "deck": "Cloud Architecture::09 AI Accelerators",
+   "tags": [
+    "GPU",
+    "cloud::ai-infra"
+   ],
+   "front": "PCIe vs NVLink for multi-GPU work?",
+   "back": "<b>PCIe</b> is the general bus to the CPU (Gen5 x16 ≈ 64 GB/s each way). <b>NVLink</b> is a direct GPU-to-GPU link with many times that (H100: 900 GB/s total).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "D{dhfa#%&u",
+   "type": "basic",
+   "deck": "Cloud Architecture::09 AI Accelerators",
+   "tags": [
+    "GPU",
+    "cloud::ai-infra"
+   ],
+   "front": "What does NVSwitch add beyond NVLink?",
+   "back": "A switch chip giving <b>all-to-all</b> NVLink connectivity, so every GPU in the node (or NVL rack) talks to every other at full NVLink bandwidth.",
+   "text": "",
+   "image": "",
+   "analogy": "NVLink is a private road between two houses; NVSwitch is a roundabout connecting every house on the street.",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "ry]gk!Yw;1",
+   "type": "basic",
+   "deck": "Cloud Architecture::09 AI Accelerators",
+   "tags": [
+    "GPU",
+    "cloud::ai-infra"
+   ],
+   "front": "What is model parallelism, and when is it required?",
+   "back": "Splitting a model's layers or tensors across GPUs. Required when the model doesn't fit in one GPU's memory; it costs inter-GPU communication on every step.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Cloud Architecture::09 AI Accelerators",
+   "tags": [
+    "cloud::ai-infra",
+    "GPU"
+   ],
+   "front": "Data parallelism vs model parallelism?",
+   "back": "<b>Data:</b> each GPU holds a full model copy, processes different batches, then all-reduces gradients.<br><b>Model</b> (tensor/pipeline): each GPU holds part of the model.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Large-model training combines both (plus sharded optimizer state, e.g. ZeRO/FSDP).",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "D[jP&p+WVE",
+   "type": "basic",
+   "deck": "Cloud Architecture::09 AI Accelerators",
+   "tags": [
+    "GPU",
+    "cloud::ai-infra"
+   ],
+   "front": "What is mixed-precision training, and why keep some parts in FP32?",
+   "back": "Most math runs in FP16/BF16/FP8 for speed and memory; master weights and sensitive reductions stay in FP32 to keep training numerically stable.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "wovd:0=Mro",
+   "type": "basic",
+   "deck": "Cloud Architecture::09 AI Accelerators",
+   "tags": [
+    "GPU",
+    "cloud::ai-infra"
+   ],
+   "front": "BF16 vs FP16: why is BF16 preferred for training?",
+   "back": "BF16 keeps FP32's <b>8-bit exponent</b> (same range) with fewer mantissa bits, so gradients rarely overflow/underflow and no loss scaling is needed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "BGUWM>wNCB",
+   "type": "basic",
+   "deck": "Cloud Architecture::09 AI Accelerators",
+   "tags": [
+    "Cloud",
+    "cloud::ai-infra"
+   ],
+   "front": "What is NVIDIA Multi-Instance GPU (MIG)?",
+   "back": "Hardware partitioning of one GPU (A100/H100) into up to 7 <b>isolated</b> instances, each with dedicated memory and compute slices.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "In Kubernetes each MIG slice appears as its own schedulable resource.",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "cD+n]/@u)`",
+   "type": "basic",
+   "deck": "Cloud Architecture::09 AI Accelerators",
+   "tags": [
+    "GPU",
+    "cloud::ai-infra"
+   ],
+   "front": "GPU passthrough vs vGPU vs MIG?",
+   "back": "<b>Passthrough:</b> whole GPU to one VM.<br><b>vGPU:</b> time-sliced share across VMs.<br><b>MIG:</b> hardware-isolated partitions with dedicated memory.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Time-slicing has no memory isolation; MIG does.",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "kwiMkg?[Wl",
+   "type": "cloze",
+   "deck": "Cloud Architecture::09 AI Accelerators",
+   "tags": [
+    "GPU",
+    "cloud::ai-infra"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Datacenter AI accelerators: NVIDIA {{c1::H100 / H200}} (Hopper) and {{c2::B200}} (Blackwell); AMD {{c3::MI300X}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "Generations churn yearly; know the current flagship names and their memory sizes when sizing.",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "xfS=.n~wm5",
+   "type": "basic",
+   "deck": "Cloud Architecture::09 AI Accelerators",
+   "tags": [
+    "GPU",
+    "cloud::ai-infra"
+   ],
+   "front": "What is a GPU SuperPOD-style cluster?",
+   "back": "Many GPU servers tightly coupled with NVLink/NVSwitch inside nodes and <b>InfiniBand</b> (or RoCE) between them, built to train one model across thousands of GPUs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "k_iL08<F~r",
+   "type": "basic",
+   "deck": "Cloud Architecture::09 AI Accelerators",
+   "tags": [
+    "TPU",
+    "cloud::ai-infra"
+   ],
+   "front": "TPU vs GPU: key design difference?",
+   "back": "A <b>TPU</b> is Google's ASIC built around systolic arrays for matrix math: more efficient on ML, less flexible. A <b>GPU</b> is a general-purpose parallel processor.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "A.hDWlThTY",
+   "type": "basic",
+   "deck": "Cloud Architecture::09 AI Accelerators",
+   "tags": [
+    "TPU",
+    "cloud::ai-infra"
+   ],
+   "front": "What is a systolic array, and why is it efficient for matrix multiply?",
+   "back": "A grid of processing elements that pass operands to neighbors each clock. Each value is reused many times while flowing through, so memory traffic is minimal.",
+   "text": "",
+   "image": "",
+   "analogy": "A bucket brigade: water moves hand to hand instead of everyone running back to the well.",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "xu,$j+{C>.",
+   "type": "basic",
+   "deck": "Cloud Architecture::09 AI Accelerators",
+   "tags": [
+    "TPU",
+    "cloud::ai-infra"
+   ],
+   "front": "What is a TPU Pod, and what links its chips?",
+   "back": "Thousands of TPU chips acting as one accelerator, linked by Google's <b>Inter-Chip Interconnect (ICI)</b>, a direct torus/mesh network that bypasses host CPUs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "Hy<<c^^!R,",
+   "type": "basic",
+   "deck": "Cloud Architecture::09 AI Accelerators",
+   "tags": [
+    "TPU",
+    "cloud::ai-infra"
+   ],
+   "front": "Why choose a custom AI ASIC (TPU, Trainium) over GPUs, and what do you lose?",
+   "back": "<b>Gain:</b> better cost and power efficiency for a known workload at scale.<br><b>Lose:</b> flexibility and the CUDA ecosystem.",
+   "text": "",
+   "image": "",
+   "analogy": "A purpose-built espresso machine vs a full kitchen: better coffee per euro, but it only makes coffee.",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "f`+*Ma/x`",
+   "type": "cloze",
+   "deck": "Cloud Architecture::09 AI Accelerators",
+   "tags": [
+    "TPU",
+    "cloud::ai-infra"
+   ],
+   "front": "",
+   "back": "",
+   "text": "AWS custom AI chips: {{c1::Trainium}} for training, {{c2::Inferentia}} for inference.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "JCId)]~+_@",
+   "type": "basic",
+   "deck": "Cloud Architecture::09 AI Accelerators",
+   "tags": [
+    "Cloud",
+    "cloud::ai-infra"
+   ],
+   "front": "Where does an FPGA fit between CPUs and ASICs in the cloud?",
+   "back": "A chip whose logic can be <b>reprogrammed</b> after manufacture: custom acceleration (networking, video, some inference) where an ASIC isn't worth building.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Examples: AWS F-instances, Azure's FPGA-based SmartNICs (Accelerated Networking).",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "zr|0zI:UPX",
+   "type": "basic",
+   "deck": "Cloud Architecture::10 AI Cluster Networking & Datacenter",
+   "tags": [
+    "Networking",
+    "cloud::ai-infra"
+   ],
+   "front": "Why do large AI training clusters need specialized networking?",
+   "back": "Every step synchronizes gradients across all nodes (all-reduce). Network latency and bandwidth then cap scaling efficiency: the slowest link stalls every GPU.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "t-S2kx:L5n",
+   "type": "basic",
+   "deck": "Cloud Architecture::10 AI Cluster Networking & Datacenter",
+   "tags": [
+    "Networking",
+    "cloud::ai-infra"
+   ],
+   "front": "What is all-reduce?",
+   "back": "A collective where every node contributes values, they are combined (e.g. summed), and <b>every node receives the result</b>. Used to sync gradients in data-parallel training.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Ring and tree algorithms (NCCL) keep per-node traffic roughly constant as nodes grow.",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "sp&PuNc2sJ",
+   "type": "basic",
+   "deck": "Cloud Architecture::10 AI Cluster Networking & Datacenter",
+   "tags": [
+    "Networking",
+    "cloud::ai-infra"
+   ],
+   "front": "What is RDMA, and why does it lower latency?",
+   "back": "Remote Direct Memory Access: a NIC reads/writes another machine's memory directly, <b>bypassing the CPU and OS kernel</b> on both ends.",
+   "text": "",
+   "image": "",
+   "analogy": "Passing a note straight into a colleague's in-tray instead of handing it through two receptionists.",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "tZftZ>,n=4",
+   "type": "basic",
+   "deck": "Cloud Architecture::10 AI Cluster Networking & Datacenter",
+   "tags": [
+    "Networking",
+    "cloud::ai-infra"
+   ],
+   "front": "What is InfiniBand?",
+   "back": "A low-latency, high-throughput network fabric with native RDMA, standard in HPC and large GPU training clusters.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "j|j!bwCSto",
+   "type": "basic",
+   "deck": "Cloud Architecture::10 AI Cluster Networking & Datacenter",
+   "tags": [
+    "Networking",
+    "cloud::ai-infra"
+   ],
+   "front": "RoCE vs InfiniBand?",
+   "back": "<b>RoCE</b> runs RDMA over standard Ethernet; InfiniBand is a separate fabric. RoCE reuses Ethernet gear and skills but needs a tuned, near-lossless network (PFC/ECN).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "Tlsn,,I17",
+   "type": "basic",
+   "deck": "Cloud Architecture::10 AI Cluster Networking & Datacenter",
+   "tags": [
+    "Networking",
+    "cloud::ai-infra"
+   ],
+   "front": "What is spine-leaf topology, and why is it used in datacenters?",
+   "back": "Every <b>leaf</b> (top-of-rack switch) connects to every <b>spine</b>. Any two racks are the same number of hops apart, giving predictable latency and easy horizontal scaling.",
+   "text": "",
+   "image": "",
+   "analogy": "Every neighborhood road joins every highway: any trip is local road, highway, local road.",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "fNKRu+PZ{S",
+   "type": "basic",
+   "deck": "Cloud Architecture::10 AI Cluster Networking & Datacenter",
+   "tags": [
+    "Networking",
+    "cloud::ai-infra"
+   ],
+   "front": "What is bisection bandwidth, and why does it matter for distributed training?",
+   "back": "The bandwidth across the worst cut splitting the network into two equal halves. All-reduce stresses exactly that cut, so it limits training throughput.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "Q}8#/je::D",
+   "type": "basic",
+   "deck": "Cloud Architecture::10 AI Cluster Networking & Datacenter",
+   "tags": [
+    "Networking",
+    "cloud::ai-infra"
+   ],
+   "front": "What does a DPU / SmartNIC do?",
+   "back": "A programmable processor on the NIC that offloads networking, storage and security (encryption, virtual switching) from the host CPU, e.g. NVIDIA BlueField, AWS Nitro cards.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "j>8g;v7?9[",
+   "type": "basic",
+   "deck": "Cloud Architecture::10 AI Cluster Networking & Datacenter",
+   "tags": [
+    "Datacenter",
+    "cloud::ai-infra"
+   ],
+   "front": "Direct-to-chip vs immersion liquid cooling?",
+   "back": "<b>Direct-to-chip:</b> coolant runs through cold plates on CPUs/GPUs.<br><b>Immersion:</b> whole servers sit in dielectric fluid. Immersion handles higher density but changes hardware handling.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "NS5vO.^=!o",
+   "type": "basic",
+   "deck": "Cloud Architecture::10 AI Cluster Networking & Datacenter",
+   "tags": [
+    "Datacenter",
+    "cloud::ai-infra"
+   ],
+   "front": "Why lay racks out in hot aisles and cold aisles?",
+   "back": "Rack fronts face a cold aisle and backs a hot aisle, so intake and exhaust air don't mix. Containment of one aisle improves it further.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "QJ_|V-j3P>",
+   "type": "basic",
+   "deck": "Cloud Architecture::10 AI Cluster Networking & Datacenter",
+   "tags": [
+    "Datacenter",
+    "cloud::ai-infra"
+   ],
+   "front": "Uptime Institute Tier III vs Tier IV datacenter?",
+   "back": "<b>Tier III:</b> concurrently maintainable (N+1, any part serviced without downtime).<br><b>Tier IV:</b> fault tolerant (2N, survives any single failure).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "UPS batteries bridge outages until generators start; both tiers assume that path is redundant.",
+   "source": "Cloud · AI infrastructure",
+   "reverse": false
+  }
+ ]
+}

@@ -1,0 +1,980 @@
+{
+ "source_file": "Designing_Data-Intensive_Applications.apkg",
+ "notes": [
+  {
+   "guid": "sAo<:_Z<RL",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::reliability"
+   ],
+   "front": "Define the three concerns the book uses to frame data systems.",
+   "back": "<ul><li><b>Reliability</b> — keeps working correctly (right behavior, right performance) even when faults occur.</li><li><b>Scalability</b> — reasonable ways to cope with growing load.</li><li><b>Maintainability</b> — different people can work on it productively over time.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 1 · Foundations"
+  },
+  {
+   "guid": "yV-n{3Z%:<",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::reliability"
+   ],
+   "front": "Distinguish a <b>fault</b> from a <b>failure</b>.",
+   "back": "A <b>fault</b> is one component deviating from spec. A <b>failure</b> is the system as a whole stopping to provide service to the user. The goal is fault-tolerance: prevent faults from causing failures.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 1 · Foundations"
+  },
+  {
+   "guid": "K*Hj/P[p%P",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::reliability"
+   ],
+   "front": "Why prefer percentiles (e.g. p95, p99) over the mean for response times?",
+   "back": "The mean hides the tail. Percentiles tell you how bad the slow requests are — and tail latencies matter because the slowest requests often hit your most valuable, highest-activity users. <b>Tail latency amplification</b>: one slow backend can slow a whole request that fans out to many.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 1 · Foundations"
+  },
+  {
+   "guid": "Bqp5Z_/1.c",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::reliability"
+   ],
+   "front": "What's the difference between <b>load parameters</b> and scaling strategy?",
+   "back": "Load parameters describe load (requests/sec, read/write ratio, cache hit rate, fan-out). Scaling means coping as they grow — <b>scaling up</b> (bigger machine) vs <b>scaling out</b> (more machines / shared-nothing). There's no magic 'scalable' system; you design for a specific load profile.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 1 · Foundations"
+  },
+  {
+   "guid": "M_i$^.#2k>",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::datamodels"
+   ],
+   "front": "What is the object-relational impedance mismatch?",
+   "back": "The awkward translation layer between the relational model (tables/rows) and application objects (often nested, hierarchical). Document models (e.g. storing a résumé as one JSON tree) reduce it for self-contained, one-to-many data.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 2 · Data Models"
+  },
+  {
+   "guid": "y&qi>|dPte",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::datamodels"
+   ],
+   "front": "When do document models struggle, and relational models win?",
+   "back": "When data has many <b>many-to-many</b> relationships or needs joins. Document DBs have weak join support, so you end up emulating joins in app code. Relational models handle many-to-one and many-to-many naturally via foreign keys/joins.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 2 · Data Models"
+  },
+  {
+   "guid": "hu;rqzG/)>",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::datamodels"
+   ],
+   "front": "Schema-on-read vs schema-on-write?",
+   "back": "<ul><li><b>Schema-on-write</b> (relational) — schema enforced when data is written; explicit and validated.</li><li><b>Schema-on-read</b> (document) — structure is implicit and interpreted on read; more flexible, but the burden moves to readers. Analogous to dynamic vs static typing.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 2 · Data Models"
+  },
+  {
+   "guid": "xI.*$b50vg",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::datamodels"
+   ],
+   "front": "Declarative vs imperative query languages — why does SQL being declarative matter?",
+   "back": "You specify <b>what</b> you want, not <b>how</b> to get it. This lets the query optimizer and storage engine change strategies (indexes, parallel execution) without rewriting queries, and enables automatic parallelization.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 2 · Data Models"
+  },
+  {
+   "guid": "E$dNXg$Vxu",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::datamodels"
+   ],
+   "front": "Name the main approaches for modeling graph-like data.",
+   "back": "<ul><li><b>Property graph</b> (vertices + edges with properties) — queried with Cypher / Gremlin.</li><li><b>Triple-store</b> (subject–predicate–object) — queried with SPARQL.</li><li><b>Datalog</b> — a logic-based predecessor that composes rules.</li></ul>Graph models shine when many-to-many relationships and traversals dominate.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 2 · Data Models"
+  },
+  {
+   "guid": "ur$;mysp33",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::storage"
+   ],
+   "front": "How does a log-structured (LSM) storage engine work?",
+   "back": "Writes append to an in-memory sorted structure (memtable); when full it's flushed to a sorted-on-disk file (SSTable). Background <b>compaction</b> merges SSTables, discarding overwritten/deleted keys. Reads check memtable then SSTables (newest first), aided by Bloom filters.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 3 · Storage & Retrieval"
+  },
+  {
+   "guid": "zLR/C9!xWv",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::storage"
+   ],
+   "front": "What is an SSTable and why is sorting useful?",
+   "back": "A <b>Sorted String Table</b>: a file of key-value pairs sorted by key. Sorting enables efficient merge (like mergesort) during compaction, a sparse in-memory index (you don't need every key), and range scans.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 3 · Storage & Retrieval"
+  },
+  {
+   "guid": "nYPK]Gvi_=",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::storage"
+   ],
+   "front": "How do B-trees differ from LSM-trees structurally?",
+   "back": "B-trees update data <b>in place</b> in fixed-size pages arranged in a balanced tree, overwriting on disk. LSM-trees only <b>append</b> and merge. B-trees are the standard for most relational DBs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 3 · Storage & Retrieval"
+  },
+  {
+   "guid": "hZ;i>DyTHR",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::storage"
+   ],
+   "front": "Trade-offs: LSM-trees vs B-trees.",
+   "back": "<ul><li><b>LSM</b> — higher write throughput, better compression, lower write amplification typically; but compaction can interfere with reads and consume I/O unpredictably.</li><li><b>B-tree</b> — faster, more predictable reads; each key exists in exactly one place (good for transactional locking); higher write amplification.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 3 · Storage & Retrieval"
+  },
+  {
+   "guid": "~_/s9``pU",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::storage"
+   ],
+   "front": "What is write amplification?",
+   "back": "When one logical write causes multiple physical writes to disk (e.g. compaction rewriting data, or B-tree page splits / WAL). It wears out SSDs and limits write throughput.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 3 · Storage & Retrieval"
+  },
+  {
+   "guid": "fxah!Qr7{8",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::storage"
+   ],
+   "front": "Contrast Online Transaction Processing (OLTP) with Online Analytical Processing (OLAP).",
+   "back": "<ul><li><b>OLTP</b> — many small reads/writes by key, latency-sensitive, user-facing; row-oriented.</li><li><b>OLAP</b> — few large analytical queries scanning many rows over few columns; throughput-oriented; served by data warehouses, often column-oriented.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 3 · Storage & Retrieval"
+  },
+  {
+   "guid": "LBd}&R<b$P",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::storage"
+   ],
+   "front": "Why is column-oriented storage good for analytics?",
+   "back": "Analytical queries touch a few columns across millions of rows. Storing each column contiguously means you read only the needed columns, and similar values compress extremely well (e.g. <b>bitmap encoding</b>, run-length encoding), drastically cutting I/O.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 3 · Storage & Retrieval"
+  },
+  {
+   "guid": "bjM=n]^nfm",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::encoding"
+   ],
+   "front": "Define backward vs forward compatibility.",
+   "back": "<ul><li><b>Backward compatibility</b> — new code can read data written by old code.</li><li><b>Forward compatibility</b> — old code can read data written by new code (harder; old code must ignore unknown fields).</li></ul>Both are needed for rolling upgrades.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 4 · Encoding & Evolution"
+  },
+  {
+   "guid": "xVc8&Rryu?",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::encoding"
+   ],
+   "front": "How do Thrift and Protocol Buffers achieve schema evolution?",
+   "back": "Each field has a <b>tag number</b> and type annotation. You can add new fields with new tags (old readers skip unknown tags → forward compat) and you must make new fields optional / give defaults so old data is still readable (backward compat). Never reuse a tag number.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 4 · Encoding & Evolution"
+  },
+  {
+   "guid": "Mjfey~]^If",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::encoding"
+   ],
+   "front": "How does Avro's schema evolution differ from Protocol Buffers / Thrift?",
+   "back": "Avro has <b>no field tags</b>. It uses a <b>writer's schema</b> and a <b>reader's schema</b> resolved at read time by field name. Compatibility is maintained by only adding/removing fields that have defaults. Great for dynamically generated schemas and large files (schema stored once).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 4 · Encoding & Evolution"
+  },
+  {
+   "guid": "DDR4w)f5Gy",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::encoding"
+   ],
+   "front": "Name the three modes of dataflow the chapter analyzes.",
+   "back": "<ul><li><b>Via databases</b> — the writing process encodes, the reading process decodes (possibly much later).</li><li><b>Via service calls (REST / RPC)</b> — request/response between processes.</li><li><b>Via asynchronous message passing</b> — message brokers decouple sender and receiver.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 4 · Encoding & Evolution"
+  },
+  {
+   "guid": "rdK+G%>$:A",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::replication"
+   ],
+   "front": "Name the three approaches to replication.",
+   "back": "<ul><li><b>Single-leader</b> — all writes go to one leader, replicated to followers.</li><li><b>Multi-leader</b> — multiple nodes accept writes (e.g. multi-datacenter).</li><li><b>Leaderless</b> — clients write to several nodes directly (Dynamo-style).</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 5 · Replication"
+  },
+  {
+   "guid": "tXE68%Lj70",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::replication"
+   ],
+   "front": "Synchronous vs asynchronous replication trade-off.",
+   "back": "<b>Sync</b>: follower confirms before the write is acknowledged — guarantees an up-to-date copy but blocks if the follower is down. <b>Async</b>: leader acks immediately — fast and available, but recent writes can be lost on leader failure. Often <b>semi-synchronous</b>: one sync follower, rest async.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 5 · Replication"
+  },
+  {
+   "guid": "K-~4YUEjOF",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::replication"
+   ],
+   "front": "What is replication lag and what reading anomalies does it cause?",
+   "back": "The delay before a follower catches up to the leader (async). Anomalies: reading stale data. Needed guarantees: <ul><li><b>Read-your-writes</b> — see your own writes.</li><li><b>Monotonic reads</b> — don't go backward in time across reads.</li><li><b>Consistent prefix reads</b> — see writes in causal order.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 5 · Replication"
+  },
+  {
+   "guid": "CD,`4LaD]Q",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::replication"
+   ],
+   "front": "In leaderless replication, what does the quorum condition <code>w + r > n</code> guarantee?",
+   "back": "With <code>n</code> replicas, writing to <code>w</code> and reading from <code>r</code> such that <code>w + r &gt; n</code> means the read and write sets overlap by at least one node, so a read sees at least one copy of the latest write. (Edge cases — sloppy quorums, concurrent writes — can still break this.)",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 5 · Replication"
+  },
+  {
+   "guid": "L)P.b.f8^c",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::replication"
+   ],
+   "front": "What are read repair and anti-entropy?",
+   "back": "Two mechanisms to fix stale replicas in leaderless systems. <b>Read repair</b>: when a read sees a stale value, write the fresh one back. <b>Anti-entropy</b>: a background process continuously compares and syncs replicas. Read repair only fixes data that's read.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 5 · Replication"
+  },
+  {
+   "guid": "FVw?Kkh(?N",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::replication"
+   ],
+   "front": "What are sloppy quorums and hinted handoff?",
+   "back": "<b>Sloppy quorum</b>: during a partition, accept writes on reachable nodes that aren't the 'home' nodes, to stay available. <b>Hinted handoff</b>: once the home nodes recover, those temporary nodes forward the writes back. Improves availability but weakens the quorum guarantee.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 5 · Replication"
+  },
+  {
+   "guid": "m;#&LQB[|(",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::replication"
+   ],
+   "front": "How are concurrent writes detected and resolved in leaderless systems?",
+   "back": "<b>Last-write-wins (LWW)</b> picks by timestamp but silently discards data. Better: <b>version vectors</b> (per-replica version numbers) detect concurrency vs causality, surfacing genuine conflicts (siblings) for the application to merge.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 5 · Replication"
+  },
+  {
+   "guid": "p8V@0EZ6TJ",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::partitioning"
+   ],
+   "front": "Why partition (shard) data?",
+   "back": "To scale beyond a single machine: spread data and query load across many nodes (shared-nothing). Usually combined with replication so each partition has copies on several nodes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 6 · Partitioning"
+  },
+  {
+   "guid": "cia=x+JUmx",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::partitioning"
+   ],
+   "front": "Partition by key range vs partition by hash of key.",
+   "back": "<ul><li><b>Key range</b> — keeps order, enables efficient range scans, but risks <b>hot spots</b> if access is skewed (e.g. timestamps).</li><li><b>Hash of key</b> — spreads load evenly, but destroys ordering so range queries hit all partitions.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 6 · Partitioning"
+  },
+  {
+   "guid": "F3JNe~ThZP",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::partitioning"
+   ],
+   "front": "Local (document-partitioned) vs global (term-partitioned) secondary indexes.",
+   "back": "<ul><li><b>Local</b> — each partition indexes only its own documents; writes are cheap, but reads must <b>scatter/gather</b> across all partitions.</li><li><b>Global</b> — the index itself is partitioned by term; reads hit one partition, but writes must update remote index partitions (often async).</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 6 · Partitioning"
+  },
+  {
+   "guid": "L2OhZpykbK",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::partitioning"
+   ],
+   "front": "Why avoid <code>hash mod N</code> for assigning keys to partitions?",
+   "back": "Changing the number of nodes N reshuffles almost all keys. Better strategies: a <b>fixed (large) number of partitions</b> spread over nodes, dynamic partitioning (split/merge by size), or consistent hashing — so rebalancing moves only a fraction of data.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 6 · Partitioning"
+  },
+  {
+   "guid": "q!:huasGdk",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::transactions"
+   ],
+   "front": "What does ACID stand for, and which letter is the application's job?",
+   "back": "<b>Atomicity</b> (all-or-nothing), <b>Consistency</b> (preserves invariants), <b>Isolation</b> (concurrent txns don't interfere), <b>Durability</b> (committed data survives). <b>Consistency</b> is largely the application's responsibility — the DB can't guarantee your invariants.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 7 · Transactions"
+  },
+  {
+   "guid": "C:u<HEtB|C",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::transactions"
+   ],
+   "front": "What anomaly does <b>read committed</b> prevent vs allow?",
+   "back": "Prevents <b>dirty reads</b> (seeing uncommitted writes) and <b>dirty writes</b> (overwriting uncommitted writes). Still allows non-repeatable reads — re-reading a row mid-transaction can return different committed values.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 7 · Transactions"
+  },
+  {
+   "guid": "K=$X/}V6WZ",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::transactions"
+   ],
+   "front": "What is snapshot isolation and how is it implemented?",
+   "back": "Each transaction reads from a consistent <b>snapshot</b> taken at its start, so it sees the database frozen in time. Implemented with <b>Multi-Version Concurrency Control (MVCC)</b>: keep multiple committed versions per object. Prevents non-repeatable reads. (Often called 'repeatable read'.)",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 7 · Transactions"
+  },
+  {
+   "guid": "F5G~7_O@LM",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::transactions"
+   ],
+   "front": "Lost update vs write skew.",
+   "back": "<ul><li><b>Lost update</b> — two read-modify-write cycles on the <b>same</b> object clobber each other.</li><li><b>Write skew</b> — two txns read an overlapping set, then update <b>different</b> objects, each violating an invariant the other relied on (e.g. both doctors going off-call). Snapshot isolation prevents lost updates with care, but not write skew.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 7 · Transactions"
+  },
+  {
+   "guid": "jy0MAyNALG",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::transactions"
+   ],
+   "front": "What is a phantom, in the transaction sense?",
+   "back": "A write in one transaction changes the <b>result of a search query</b> in another (rows appearing/disappearing). Phantoms cause write skew and aren't stopped by row locks; they require predicate locks or index-range locks (or materializing conflicts).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 7 · Transactions"
+  },
+  {
+   "guid": "rK[)Mb^91_",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::transactions"
+   ],
+   "front": "Name the three ways to implement serializable isolation.",
+   "back": "<ul><li><b>Actual serial execution</b> — one thread, in memory (e.g. Redis, VoltDB).</li><li><b>Two-Phase Locking (2PL)</b> — shared/exclusive locks; readers block writers and vice versa; can deadlock and is slow.</li><li><b>Serializable Snapshot Isolation (SSI)</b> — optimistic; detect serialization conflicts at commit and abort offenders.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 7 · Transactions"
+  },
+  {
+   "guid": "b9Zs_W(CLL",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::distributed"
+   ],
+   "front": "Why can't you tell whether a remote node is down?",
+   "back": "Networks are asynchronous and unreliable: a missing response could mean the request was lost, the node crashed, the node is slow, or the reply was lost. You only have <b>timeouts</b> — and choosing one trades false positives (declaring live nodes dead) against slow failure detection.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 8 · Distributed Troubles"
+  },
+  {
+   "guid": "y^{h[iUp8t",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::distributed"
+   ],
+   "front": "Why are time-of-day clocks dangerous in distributed systems?",
+   "back": "They're synced by NTP, can jump backward, and drift; clock skew between nodes can be larger than the intervals you measure. Relying on them for ordering (e.g. LWW) silently loses data. Use <b>monotonic clocks</b> for durations and treat timestamps as having confidence intervals.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 8 · Distributed Troubles"
+  },
+  {
+   "guid": "G#)Y~-C,#l",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::distributed"
+   ],
+   "front": "What problem do process pauses (e.g. GC) cause, and what's the fix?",
+   "back": "A node can pause arbitrarily long (stop-the-world GC, VM suspension) and resume believing it still holds a lease/lock — corrupting data. Fix: <b>fencing tokens</b> — a monotonically increasing number issued with each lock grant; the resource rejects writes carrying an old token.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 8 · Distributed Troubles"
+  },
+  {
+   "guid": "Dv2zVP2Lk~",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::distributed"
+   ],
+   "front": "What is a Byzantine fault?",
+   "back": "A node behaving arbitrarily or maliciously — lying, sending corrupted/contradictory messages. <b>Byzantine fault tolerance</b> handles this but is expensive; most datacenter systems assume non-Byzantine (nodes may crash/be slow but are honest).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 8 · Distributed Troubles"
+  },
+  {
+   "guid": "rsX6n)kDY=",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::consensus"
+   ],
+   "front": "What is linearizability?",
+   "back": "A recency guarantee: the system behaves as if there's a <b>single copy</b> of the data, and every operation appears to take effect atomically at some point between its start and end. Once a read sees a new value, all later reads see it too. (a.k.a. 'atomic consistency'.)",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 9 · Consistency & Consensus"
+  },
+  {
+   "guid": "ux@:$l9pnN",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::consensus"
+   ],
+   "front": "State the CAP theorem precisely (per Kleppmann).",
+   "back": "When a network <b>Partition</b> occurs, a system must choose between <b>Consistency</b> (linearizability) and <b>Availability</b>. It's really 'either Consistent or Available when Partitioned'. CAP says nothing about the no-partition case and is otherwise a fairly limited result.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 9 · Consistency & Consensus"
+  },
+  {
+   "guid": "dWR7R9Mrg#",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::consensus"
+   ],
+   "front": "Causality vs total ordering — and why linearizability is stronger.",
+   "back": "<b>Causal order</b> is a partial order (only causally related events are ordered; concurrent ones aren't). <b>Linearizability</b> imposes a total order. Causal consistency is the strongest model that stays available under partitions; you often don't need full linearizability.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 9 · Consistency & Consensus"
+  },
+  {
+   "guid": "n#7.#(n]](",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::consensus"
+   ],
+   "front": "What are Lamport timestamps and their limitation?",
+   "back": "A (counter, node-ID) pair giving a <b>total order</b> consistent with causality. Limitation: the total order is only known after the fact — you can't tell in real time whether an operation is final, so they alone don't solve things like enforcing uniqueness immediately. That needs total order broadcast.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 9 · Consistency & Consensus"
+  },
+  {
+   "guid": "iVpN6ZvUBq",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::consensus"
+   ],
+   "front": "What is total order broadcast (atomic broadcast)?",
+   "back": "A protocol delivering messages to all nodes <b>reliably</b> and in the <b>same total order</b>. It's equivalent to consensus and underlies state machine replication: apply the same operations in the same order on every replica → identical state.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 9 · Consistency & Consensus"
+  },
+  {
+   "guid": "McTQ0J3>^n",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::consensus"
+   ],
+   "front": "Why is two-phase commit (2PC) fragile?",
+   "back": "It uses a <b>coordinator</b>: prepare phase (everyone votes), then commit phase. Once a participant votes 'yes' it must wait for the coordinator's decision — if the coordinator crashes after prepare, participants are <b>blocked</b> holding locks until it recovers. It's a single point of failure.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 9 · Consistency & Consensus"
+  },
+  {
+   "guid": "Og.[y?>V={",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::consensus"
+   ],
+   "front": "How do fault-tolerant consensus algorithms (Raft, Paxos, Zab) avoid 2PC's blocking?",
+   "back": "They use a quorum of nodes and <b>epoch / term numbering</b> with leader election: each decision needs a majority vote, and a new epoch can supersede a failed leader. No single coordinator blocks progress as long as a majority is up.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 9 · Consistency & Consensus"
+  },
+  {
+   "guid": "u[abqK?V#U",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::consensus"
+   ],
+   "front": "What does the FLP result say?",
+   "back": "In a fully <b>asynchronous</b> system (no clocks, no timeouts) where even one node may crash, no deterministic consensus algorithm can guarantee termination. In practice systems use timeouts (partial synchrony) to make progress, sidestepping the impossibility.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 9 · Consistency & Consensus"
+  },
+  {
+   "guid": "uzDWc;S4M6",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::consensus"
+   ],
+   "front": "What does a coordination service like ZooKeeper provide?",
+   "back": "Consensus-backed primitives: leader election / locks with <b>fencing tokens</b>, failure detection, membership, and a small amount of slowly-changing metadata reliably replicated. Apps outsource hard distributed coordination to it rather than reimplementing consensus.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 9 · Consistency & Consensus"
+  },
+  {
+   "guid": "hBs5f7OX,K",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::batch"
+   ],
+   "front": "What is the MapReduce programming model?",
+   "back": "<ul><li><b>Map</b> — process each input record, emit key-value pairs.</li><li>Framework groups and <b>sorts</b> by key (the shuffle).</li><li><b>Reduce</b> — process all values for each key.</li></ul>Inputs/outputs are immutable files on a distributed filesystem (e.g. HDFS); jobs are chained.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 10 · Batch Processing"
+  },
+  {
+   "guid": "uc+lGZP6][",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::batch"
+   ],
+   "front": "Name the join algorithms used in batch processing.",
+   "back": "<ul><li><b>Sort-merge join</b> — map both inputs by join key, sort, merge in the reducer.</li><li><b>Broadcast hash join</b> — small side loaded into a hash table in memory on every mapper.</li><li><b>Partitioned hash join</b> — both sides partitioned the same way, join per partition.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 10 · Batch Processing"
+  },
+  {
+   "guid": "g5A%?r=Z)f",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::batch"
+   ],
+   "front": "What advantages do dataflow engines (Spark, Flink, Tez) have over MapReduce?",
+   "back": "They model the whole job as a dataflow graph, so they can <b>pipeline</b> operators (avoid writing intermediate state to disk between every step), reuse in-memory data, schedule work to keep data local, and avoid unnecessary sorts — making multi-stage jobs much faster.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 10 · Batch Processing"
+  },
+  {
+   "guid": "kR5X3oq!/L",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::batch"
+   ],
+   "front": "Why is the immutable-input / Unix-philosophy design of batch jobs valuable?",
+   "back": "Inputs are never mutated, so jobs are <b>retryable</b> and deterministic, you can debug by re-running, easily roll back (keep old output), and experiment without risk. Failures just re-run tasks. This is the foundation for treating derived data as reproducible.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 10 · Batch Processing"
+  },
+  {
+   "guid": "kSl>Y6f*`7",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::streams"
+   ],
+   "front": "Contrast AMQP/JMS-style message brokers with log-based brokers (Kafka).",
+   "back": "<ul><li><b>AMQP/JMS</b> — messages deleted once acknowledged; good for task queues; hard to replay.</li><li><b>Log-based</b> — messages appended to a partitioned, durable log and retained; consumers track an offset, so they can <b>replay</b> from any point and multiple consumers read independently.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 11 · Stream Processing"
+  },
+  {
+   "guid": "Cs;HdK1XW9",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::streams"
+   ],
+   "front": "What is Change Data Capture (CDC)?",
+   "back": "Capturing the stream of changes (inserts/updates/deletes) written to a database and making it available to other systems (search indexes, caches, warehouses). The database is the system of record; everything downstream is a derived consumer of its change log.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 11 · Stream Processing"
+  },
+  {
+   "guid": "Dl-Bt@qiyE",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::streams"
+   ],
+   "front": "What is event sourcing, and how does it relate to CDC?",
+   "back": "Event sourcing stores all changes as an immutable, append-only log of <b>application-level events</b> (the events are the source of truth; current state is derived by replaying them). CDC captures low-level DB changes; event sourcing captures meaningful domain events. Both treat an append-only log as primary.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 11 · Stream Processing"
+  },
+  {
+   "guid": "cs`a.d83wq",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::streams"
+   ],
+   "front": "Event time vs processing time — why does it matter?",
+   "back": "<b>Event time</b> = when the event actually happened; <b>processing time</b> = when the stream processor handles it. They diverge due to delays/buffering, so windowing by processing time gives wrong results. You need to handle <b>stragglers</b> (late events) — e.g. trigger on watermarks and correct later.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 11 · Stream Processing"
+  },
+  {
+   "guid": "Pg@!YbtVR]",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::streams"
+   ],
+   "front": "Name the window types used in stream processing.",
+   "back": "<ul><li><b>Tumbling</b> — fixed-size, non-overlapping.</li><li><b>Hopping</b> — fixed-size, overlapping (slides by a step).</li><li><b>Sliding</b> — contains all events within an interval of each other.</li><li><b>Session</b> — grouped by activity, ended by a gap of inactivity.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 11 · Stream Processing"
+  },
+  {
+   "guid": "y3bc!C>X*B",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::streams"
+   ],
+   "front": "How do stream processors achieve fault tolerance / exactly-once effects?",
+   "back": "Via <b>microbatching</b> (Spark Streaming) or <b>checkpointing</b> (Flink) of operator state, combined with <b>idempotent</b> writes or atomic transactional output. The effect is exactly-once <i>processing semantics</i> even though messages may be retried.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 11 · Stream Processing"
+  },
+  {
+   "guid": "k_{VZQG&|J",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::future"
+   ],
+   "front": "What does 'unbundling the database' mean?",
+   "back": "Composing specialized systems (storage engines, indexes, caches, search, stream processors) connected by streams/logs, rather than one monolithic database. The log becomes the integration point that keeps all the derived views consistent — the dataflow is the 'database' spread across tools.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 12 · Future of Data Systems"
+  },
+  {
+   "guid": "uG1y|p`aR6",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::future"
+   ],
+   "front": "Summarize the lambda architecture and its main critique.",
+   "back": "Run a <b>batch</b> system for accurate, reprocessable results plus a <b>stream</b> system for fast approximate results, merging them at read time. Critique: maintaining the same logic in two systems is complex and error-prone; modern stream processors that can reprocess history (e.g. Kafka + Flink) can do both, making it often unnecessary.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 12 · Future of Data Systems"
+  },
+  {
+   "guid": "HghB46b@r3",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::future"
+   ],
+   "front": "What is Command Query Responsibility Segregation (CQRS), in DDIA's framing?",
+   "back": "Separating the write path (commands/events appended to a log) from the read path (one or more derived, query-optimized views built from that log). It follows naturally from event sourcing: you can build many specialized read views from the same event stream and rebuild them by replaying.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 12 · Future of Data Systems"
+  },
+  {
+   "guid": "go8o8]F4jA",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::future"
+   ],
+   "front": "Why is idempotence central to building reliable derived data systems?",
+   "back": "Because messages get retried after failures, an operation must be safe to apply more than once (same result). Combined with deduplication (e.g. via a unique operation ID / offset), idempotence lets you build <b>exactly-once</b> effects on top of at-least-once delivery.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 12 · Future of Data Systems"
+  },
+  {
+   "guid": "hIaZAhnd&d",
+   "type": "basic",
+   "deck": "Designing Data-Intensive Applications",
+   "tags": [
+    "DDIA::future"
+   ],
+   "front": "What is the end-to-end argument as applied to correctness?",
+   "back": "Certain correctness guarantees (e.g. true duplicate suppression) can only be fully implemented with knowledge at the <b>application endpoints</b> — low-level mechanisms like TCP retransmission or DB transactions aren't enough on their own. So things like end-to-end operation IDs are needed for real exactly-once semantics.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ch 12 · Future of Data Systems"
+  }
+ ]
+}

@@ -1,0 +1,1085 @@
+{
+ "source_file": "Economics_for_Architects.apkg",
+ "notes": [
+  {
+   "guid": "g{m}|aO(V&",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "microeconomics"
+   ],
+   "front": "What is <b>marginal cost</b>, and why should platform decisions be made on it rather than average cost?",
+   "back": "The cost of producing one additional unit. Average cost spreads fixed costs over all units and hides where the real cost step-changes are. Decisions at the margin (one more tenant, one more region) should use marginal cost.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Once a Kubernetes cluster is running, the marginal cost of one more namespace is near zero. The marginal cost of the <i>first</i> cluster in a new region is large (control plane, networking, on-call). Pricing internal tenants by average cost overcharges small teams and underprices the region expansion.<br><br><b>Investor lens:</b> Buffett distinguishes businesses that grow with little incremental capital (See's Candies) from those where every unit of growth needs a proportional unit of investment (airlines, utilities). Marginal capital need is the question, not revenue.",
+   "source": ""
+  },
+  {
+   "guid": "o>Xmqu5q<m",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "microeconomics"
+   ],
+   "front": "What is <b>opportunity cost</b>?",
+   "back": "The value of the best alternative you gave up. The real cost of a choice is not what you paid, but what you could otherwise have done with the same resources.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Three platform engineers spend six months building an in-house Continuous Integration (CI) system. The cost is not just their salaries (which are paid either way); it is the migrations, onboarding or reliability work that did not happen.<br><br><b>Investor lens:</b> Buffett evaluates every investment against his next-best alternative, historically the yield on long-term government bonds or simply buying more of what he already owns. If a deal cannot beat the alternative, it is not cheap regardless of price.",
+   "source": ""
+  },
+  {
+   "guid": "I{gzJz9-J/",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "microeconomics"
+   ],
+   "front": "What is the <b>sunk cost fallacy</b> and how does it show up in platform work?",
+   "back": "Continuing a course of action because of resources already spent, even though those costs are unrecoverable and irrelevant to the decision. Only future costs and benefits should count.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> \"We have invested two million euro in this platform, we cannot abandon it now.\" The correct question: if we started from zero today with what we know now, would we choose this? If not, the two million is gone either way.<br><br><b>Investor lens:</b> Munger lists deprival-superreaction (over-weighting what you would lose) among the causes of misjudgment. Buffett's rule: when you find yourself in a hole, stop digging. His exit from Berkshire's original textile business was a sunk-cost decision done late.",
+   "source": ""
+  },
+  {
+   "guid": "q_U7V<wmV_",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "microeconomics"
+   ],
+   "front": "What is the <b>principal-agent problem</b>?",
+   "back": "A principal delegates work to an agent whose incentives and information differ from the principal's. The agent acts in their own interest where the two diverge, and the principal cannot fully observe it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> A Chief Information Officer (CIO) wants cost-efficient delivery; a team lead wants headcount, interesting technology and a strong CV. A vendor's solutions architect is an agent for the vendor, not for you. Every recommendation should be read with \"who pays this person and for what\" in mind.<br><br><b>Investor lens:</b> Munger: \"Show me the incentive and I will show you the outcome.\" Buffett structures Berkshire so managers own stock and are paid on returns on capital, not on size, so growth for its own sake is not rewarded.",
+   "source": ""
+  },
+  {
+   "guid": "Oyf`icW5eE",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "microeconomics"
+   ],
+   "front": "Why do organisations seem to behave <b>irrationally</b> around internal platforms (refusing to adopt something that would save money)?",
+   "back": "They usually are not irrational; individuals are responding rationally to their incentives. Migration cost and risk land on the product team; savings land on a central budget nobody on the team is measured on. No individual's Key Performance Indicator (KPI) improves by adopting.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> A platform that would cut infrastructure cost 30% sits unused because product teams are measured on feature delivery dates and the migration eats a sprint. Fix the incentive (chargeback, migration funded centrally, adoption in team OKRs) before blaming the culture.<br><br><b>Investor lens:</b> Munger's incentive-caused bias: never think about anything else before considering what the incentives are. Most \"irrational\" behaviour is a rational response to a badly designed incentive.",
+   "source": ""
+  },
+  {
+   "guid": "miZ_mksQ~K",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "microeconomics"
+   ],
+   "front": "What is <b>incentive-caused bias</b>?",
+   "back": "People sincerely come to believe what it is in their interest to believe. It is not conscious dishonesty; the bias operates below awareness.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> A consultancy that resells a specific cloud platform will, in good faith, conclude that platform is the best fit. A managed-service vendor will genuinely believe self-hosting is reckless. Discount advice in proportion to the advisor's stake.<br><br><b>Investor lens:</b> Munger's first item in the psychology of human misjudgment. His example: a surgeon who removed healthy gall bladders sincerely believed he was helping. Buffett refuses to ask investment bankers whether a deal is a good idea, because their fee depends on the answer.",
+   "source": ""
+  },
+  {
+   "guid": "n=X-8(+]}P",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "microeconomics"
+   ],
+   "front": "What is <b>moral hazard</b>?",
+   "back": "A party takes more risk (or consumes more) because someone else bears the cost of the outcome.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Teams over-provision compute because the central IT budget pays the bill. Nobody rightsizes a database they are not charged for. Chargeback or showback exists mostly to remove this hazard.<br><br><b>Investor lens:</b> Buffett on the 2008 crisis: institutions took risks knowing losses would be socialised. He insists Berkshire's insurance managers are personally accountable for underwriting losses so that the hazard is closed.",
+   "source": ""
+  },
+  {
+   "guid": "Gyr]q[6jVy",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "microeconomics"
+   ],
+   "front": "What is <b>diminishing marginal returns</b>?",
+   "back": "Each additional unit of input produces less additional output than the previous one, holding other inputs fixed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Going from 99% to 99.9% availability is cheap; 99.99% to 99.999% can cost more than everything before it combined. Adding a sixth engineer to an onboarding effort adds less than the second did. Ask where on the curve you are before adding more.<br><br><b>Investor lens:</b> Buffett notes that size is the enemy of returns: Berkshire's capital is now so large that ideas which would have moved the needle in 1970 are irrelevant. Returns diminish with scale for investors too.",
+   "source": ""
+  },
+  {
+   "guid": "ojm,*`&*5A",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "microeconomics"
+   ],
+   "front": "Why does making an internal service <b>free</b> cause demand to explode?",
+   "back": "Price elasticity. At a price of zero, demand is limited only by effort, not by value. Any positive price, even small, forces a comparison between value and cost and changes behaviour sharply.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Storage that costs teams nothing grows without bound: no one deletes old snapshots or dev environments. A modest internal price per gigabyte-month typically halves growth because it makes cleanup someone's rational choice.<br><br><b>Investor lens:</b> Lynch's retail analysis looked at whether customers responded to price; a business whose demand collapses at small price increases has no pricing power and no moat. The same test applies to your platform: if adoption only survives at zero price, it is not yet delivering value.",
+   "source": ""
+  },
+  {
+   "guid": "K5wJv+TOSu",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "microeconomics"
+   ],
+   "front": "What is <b>information asymmetry</b> and the <b>market for lemons</b>?",
+   "back": "One side of a transaction knows more than the other (Akerlof). When buyers cannot tell good from bad, they pay an average price, sellers of good products leave, and quality collapses. Signals and guarantees exist to fix this.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> A vendor knows its product's failure modes; you do not. Reference calls, Proof of Concept (PoC) work, and exit clauses are how you buy information. A vendor that refuses a PoC is signalling.<br><br><b>Investor lens:</b> Buffett's circle of competence: only buy where you can close the information gap yourself. Lynch: invest in what you know, because your day-to-day knowledge is an informational edge that professionals lack.",
+   "source": ""
+  },
+  {
+   "guid": "J2H4,>o;:B",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "microeconomics"
+   ],
+   "front": "What is the <b>tragedy of the commons</b> and where does it appear in shared infrastructure?",
+   "back": "A shared resource with no ownership or price gets over-consumed and under-maintained because each user gains the full benefit of use while the cost is spread over everyone.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> A shared cluster with no quotas: one team's batch job starves everyone else. A shared internal library nobody upgrades because the work benefits all teams equally and none specifically. Fixes: quotas (a price), an owner, or a funded maintainer.<br><br><b>Investor lens:</b> Munger on the same mechanism in corporate life: whatever is nobody's responsibility gets nobody's attention. Assign ownership before assigning blame.",
+   "source": ""
+  },
+  {
+   "guid": "pfqN2,Q$|l",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "microeconomics"
+   ],
+   "front": "What did <b>Coase</b> say about why firms exist, and how does it apply to build-versus-buy?",
+   "back": "Firms exist because using the market has transaction costs: searching, contracting, monitoring, enforcing. A firm does internally whatever is cheaper to coordinate internally than through contracts.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Build-versus-buy is a Coase question. Buying a managed database removes internal coordination cost but adds contract, integration and vendor-management cost. Neither answer is right in general; compare the two coordination costs for your organisation.<br><br><b>Investor lens:</b> Buffett's decentralised Berkshire is a Coase argument: the head office coordinates capital, which markets do badly, and leaves operations to subsidiaries, where central coordination would add cost without value.",
+   "source": ""
+  },
+  {
+   "guid": "F3Ej&S=t9e",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "microeconomics"
+   ],
+   "front": "What is <b>Goodhart's law</b>?",
+   "back": "When a measure becomes a target, it stops being a good measure. People optimise the metric rather than the outcome it was meant to track.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Target \"deployments per day\" and teams split deploys into trivial pieces. Target \"tickets closed\" and tickets get closed without being solved. Target cloud cost alone and teams delay work that would need infrastructure. Pair any metric with the outcome it stands for.<br><br><b>Investor lens:</b> Munger warned about management incentive systems for exactly this reason: pay for earnings per share and you get share buybacks funded by debt. Buffett refused to give Wall Street quarterly guidance so that no one at Berkshire would be tempted to hit it.",
+   "source": ""
+  },
+  {
+   "guid": "h&b%uLO!Y9",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "microeconomics"
+   ],
+   "front": "What are <b>switching costs</b> and why do they matter in both directions?",
+   "back": "The cost a customer bears to change suppliers: migration, retraining, integration, risk. High switching costs give the supplier pricing power over existing customers.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Your own platform's value to the company partly depends on switching costs being <i>low</i> for product teams (easy to adopt) and the vendor's leverage over you depends on switching costs being <i>high</i>. Estimate the exit cost before signing, and keep it visible in the architecture.<br><br><b>Investor lens:</b> Buffett explicitly hunts businesses with high customer switching costs (Moody's, American Express) because they can raise prices without losing customers. When you are the customer, you are on the other side of the moat.",
+   "source": ""
+  },
+  {
+   "guid": "z@`yr?P(4g",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "finops"
+   ],
+   "front": "What are <b>unit economics</b>?",
+   "back": "Revenue and cost expressed per fundamental unit of the business: per customer, per transaction, per request, per gigabyte stored. Total figures hide whether growth is profitable; unit figures reveal it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Cost per thousand Application Programming Interface (API) requests, cost per active tenant per month, cost per deployment. A total cloud bill rising 40% is fine if requests rose 80%; a flat bill with falling traffic is a problem.<br><br><b>Investor lens:</b> Lynch analysed retailers store by store: if a single store's economics were good, expansion would work; if not, growth only multiplied losses. Same-store sales was his unit metric.",
+   "source": ""
+  },
+  {
+   "guid": "Gp0(^Zabqi",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "finops"
+   ],
+   "front": "What usually separates an <b>architect</b> from a <b>senior architect</b> in financial terms?",
+   "back": "Whether they can put a defensible number on a decision: \"this design costs roughly X per month at current load, scales at Y per additional 10,000 users, and the alternative costs Z.\" The number does not need to be precise; it needs to be honest about its assumptions.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Two proposals: \"event-driven is more scalable\" versus \"event-driven adds about 4,000 euro per month in queue and function cost but removes the need for a second database replica at 9,000 per month; break-even is immediate at current traffic.\" The second one gets funded.<br><br><b>Investor lens:</b> Buffett: better to be approximately right than precisely wrong. He will not invest in a business whose cash flows he cannot estimate, but the estimate is always a range, never a spreadsheet to two decimals.",
+   "source": ""
+  },
+  {
+   "guid": "IEP/FH]`Ss",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "finops"
+   ],
+   "front": "What is the difference between <b>fixed</b> and <b>variable</b> cost in cloud, and what is <b>operating leverage</b>?",
+   "back": "Fixed costs do not change with volume (reserved instances, committed-use discounts, platform team salaries). Variable costs scale with usage (on-demand compute, per-request pricing, egress). Operating leverage is the ratio: high fixed cost means profit swings strongly with volume, up and down.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> A three-year commitment converts variable cost into fixed cost. That is cheaper at steady load and expensive if traffic halves. Startups with uncertain demand should stay variable; a stable enterprise workload should commit.<br><br><b>Investor lens:</b> Buffett avoided airlines for decades because of extreme operating leverage: high fixed costs, volatile demand. He likes businesses with low fixed capital needs, where a bad year does not turn into a crisis.",
+   "source": ""
+  },
+  {
+   "guid": "qb+/@2LBo!",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "finops"
+   ],
+   "front": "How do you calculate the <b>break-even utilisation</b> for a reserved or committed-use discount?",
+   "back": "Break-even utilisation = reserved hourly price / on-demand hourly price. If you expect utilisation above that fraction over the term, commit; below it, stay on-demand.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> A one-year reservation priced 35% below on-demand costs 0.65 of the on-demand rate. If the instance runs more than 65% of the hours in the year, the reservation wins. Verify with actual utilisation data over the past three months before committing, not with forecasts.<br><br><b>Investor lens:</b> Buffett's margin of safety applied to commitments: do not commit at 66% expected utilisation to beat a 65% break-even. Commit where the decision survives being wrong by a wide margin.",
+   "source": ""
+  },
+  {
+   "guid": "OU.q([IhS,",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "finops"
+   ],
+   "front": "What are the three phases of the <b>Financial Operations (FinOps)</b> lifecycle?",
+   "back": "<b>Inform</b> (visibility, allocation, tagging, benchmarking), <b>Optimise</b> (rightsizing, commitments, architectural changes), <b>Operate</b> (governance, budgets, continuous improvement). It is a cycle, not a project.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Most organisations start Optimise before Inform is done: they buy reservations without knowing which team owns the workload, then cannot tell who benefited. Tagging and allocation first.<br><br><b>Investor lens:</b> Lynch's first step was always to understand what a company actually owns and earns before deciding what to do with it. Inform before Optimise is the same discipline.",
+   "source": ""
+  },
+  {
+   "guid": "K%2-%EAIF]",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "finops"
+   ],
+   "front": "What is the difference between <b>showback</b> and <b>chargeback</b>?",
+   "back": "Showback: teams see their consumption cost; no budget transfer. Chargeback: costs are actually transferred to the consuming team's budget. Showback informs; chargeback changes incentives.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Showback rarely changes behaviour on its own because the number has no consequence. Chargeback creates friction (arguments over allocation) but makes rightsizing a rational choice for the consuming team. Start with showback to get allocation right, then move to chargeback.<br><br><b>Investor lens:</b> Berkshire subsidiaries are charged for the capital they use; that is the mechanism that makes managers care about returns on capital rather than growth. Chargeback is the corporate version.",
+   "source": ""
+  },
+  {
+   "guid": "Az4FBS]FqM",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "finops"
+   ],
+   "front": "Why are <b>data egress</b> fees priced the way they are?",
+   "back": "Egress (data leaving the provider) is priced high relative to its cost because it is a switching-cost mechanism. Ingress is free because it increases lock-in; egress is expensive because it reduces it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Moving 500 terabytes out of a provider at typical egress rates can cost tens of thousands of euro, which quietly raises the exit cost of every architecture that stores data there. Model exit cost explicitly in the design review, even if you never intend to leave.<br><br><b>Investor lens:</b> Buffett looks for businesses whose customers find it painful to leave. Egress pricing is that moat, engineered deliberately. Knowing you are inside someone's moat is the first step to negotiating from inside it.",
+   "source": ""
+  },
+  {
+   "guid": "sH(})!I7ne",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "finops"
+   ],
+   "front": "How does <b>utilisation</b> change the effective price of a resource?",
+   "back": "Effective cost per unit of useful work = list price / utilisation. A resource at 20% utilisation costs five times its list price per unit of work actually done.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> A virtual machine at 100 euro per month running at 15% average CPU is effectively 667 euro per month of useful compute. Rightsizing it to a quarter of the size costs 25 euro and delivers the same work. Enterprise data centres historically ran at 10 to 20% utilisation, which is why cloud economics worked at all.<br><br><b>Investor lens:</b> Lynch checked how efficiently a company used its assets (inventory turns, sales per square foot). Idle assets that appear on the balance sheet at cost are a warning sign.",
+   "source": ""
+  },
+  {
+   "guid": "d5[Nrs:t+:",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "finops"
+   ],
+   "front": "What is the most common <b>FinOps trap</b> involving engineering time?",
+   "back": "Spending expensive engineering time to save cheap infrastructure. A fully loaded engineer costs roughly 8,000 to 12,000 euro per month; two weeks of their time is several thousand euro. Optimising 300 euro per month of spend is a negative-return project.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Prioritise by (monthly saving x expected lifetime) / engineering cost. A day of work that removes 2,000 euro per month of idle capacity pays back in hours. A month of work that shaves 5% off a 3,000 euro bill never pays back.<br><br><b>Investor lens:</b> Buffett's hurdle rate applied to cost savings: a saving is an investment of engineering time, and it has to clear the same return bar as any other use of that time.",
+   "source": ""
+  },
+  {
+   "guid": "fB^}.L;/-g",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "finops"
+   ],
+   "front": "What is <b>owner earnings</b> and what is the platform analogue?",
+   "back": "Buffett's measure of what a business really produces: reported earnings, plus depreciation and other non-cash charges, <i>minus</i> the capital spending required just to maintain the business's competitive position.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> A platform's real value is not the features it delivered this quarter; it is value delivered minus the maintenance work needed simply to keep it running (upgrades, patching, certificate rotation, deprecation handling). A platform whose maintenance cost equals its delivered value has zero owner earnings.<br><br><b>Investor lens:</b> Buffett introduced the concept in the 1986 shareholder letter precisely because reported earnings ignored the capital a business had to keep reinvesting to stand still.",
+   "source": ""
+  },
+  {
+   "guid": "ryL0d1lXZD",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "finops"
+   ],
+   "front": "Why does the <b>marginal cost of an additional tenant</b> determine whether you have a software business or a services business?",
+   "back": "If adding a tenant costs close to zero, cost stays flat while value scales: software economics. If each tenant requires roughly proportional infrastructure and human effort, cost scales with value: services economics, with structurally lower margins.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> A shared multi-tenant platform (namespaces, quotas, shared control plane) has near-zero marginal tenant cost. A cluster-per-tenant model has linear marginal cost. The second is sometimes right for isolation reasons, but it should be a conscious choice because it caps how much value the platform team can create.<br><br><b>Investor lens:</b> Buffett prefers businesses with near-zero marginal cost and pricing power (Coca-Cola's syrup) over businesses where growth needs proportional capital. The distinction is the same one.",
+   "source": ""
+  },
+  {
+   "guid": "pT>uTg-r[]",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "finops"
+   ],
+   "front": "How do you produce a fast <b>order-of-magnitude cost estimate</b> for a design?",
+   "back": "Fermi estimation: identify the billing dimension, estimate volume, multiply by unit price, and state the assumptions. Aim for the right power of ten, then refine only where the decision is sensitive.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> \"About 50 million requests per day, roughly 0.20 euro per million on the function tier, so about 300 euro per month for compute; the database will dominate at around 2,000 per month.\" Takes five minutes and is good enough to compare against an alternative.<br><br><b>Investor lens:</b> Buffett's approximately-right principle again: he decided on major acquisitions with a few numbers on a single page. Precision beyond what the decision needs is wasted effort and false confidence.",
+   "source": ""
+  },
+  {
+   "guid": "e+(IpWrCu9",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "finops"
+   ],
+   "front": "Why must an architect know the <b>billing dimension</b> of every managed service before designing with it?",
+   "back": "The billing dimension (per request, per gigabyte-month, per vCPU-hour, per provisioned capacity unit, per egress gigabyte) shapes which architectures are cheap. The same workload can differ in cost by an order of magnitude depending on which dimension it hits.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> A function-as-a-service pricing per invocation and per millisecond is cheap for bursty, short work and expensive for a steady 24/7 loop. A streaming service billed per provisioned shard is cheap at steady load and expensive when idle. Match the workload's shape to the pricing shape.<br><br><b>Investor lens:</b> Munger: understand how the other side makes money before you deal with them. A provider's pricing dimensions tell you which behaviours it profits from.",
+   "source": ""
+  },
+  {
+   "guid": "Jz3C,K|)u7",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "corporate-finance"
+   ],
+   "front": "What is <b>Net Present Value (NPV)</b> and how is it calculated?",
+   "back": "The sum of all future cash flows, each discounted to today's value, minus the initial investment. NPV = &Sigma; CF<sub>t</sub> / (1 + r)<sup>t</sup> &minus; initial cost. Positive NPV creates value; negative destroys it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> A migration costs 600,000 euro up front and saves 200,000 per year for five years. At a 10% discount rate the five-year annuity factor is 3.79, so the savings are worth about 758,000 today. NPV is about +158,000 euro. Same numbers at a 20% discount rate: annuity factor 2.99, savings worth 598,000, NPV about &minus;2,000. The discount rate decides the outcome.<br><br><b>Investor lens:</b> Buffett defines intrinsic value as exactly this: the discounted value of the cash that can be taken out of a business over its remaining life. Every valuation is an NPV, whether or not the spreadsheet is written down.",
+   "source": ""
+  },
+  {
+   "guid": "gba4m$6@9E",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "corporate-finance"
+   ],
+   "front": "What does the <b>discount rate</b> represent, and how do you pick one for an internal business case?",
+   "back": "The rate at which future money is worth less than present money. It reflects the cost of capital plus a premium for risk and uncertainty. Internally it is usually set by finance as a hurdle rate (often 8 to 15%); ask rather than invent one.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> If finance uses a 12% hurdle rate, a project must return more than 12% per year on the capital it consumes to be worth doing. Present the case at their rate, and show what happens at a higher one.<br><br><b>Investor lens:</b> Buffett uses a low discount rate (roughly the long-term government bond yield) and then demands a large margin of safety on price, rather than inflating the discount rate to express risk. Either way the risk gets priced; he prefers it to be visible in the purchase price.",
+   "source": ""
+  },
+  {
+   "guid": "F^u3`su4};",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "corporate-finance"
+   ],
+   "front": "What is <b>Total Cost of Ownership (TCO)</b> and what do people usually leave out?",
+   "back": "All costs of a solution over its life: acquisition, licensing, infrastructure, operations, people, training, integration, migration in, upgrades, security and compliance work, and decommissioning or migration out. Commonly omitted: people, migration out, and the cost of the internal team's time.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> \"Free\" open-source self-hosted software versus a managed service: the licence line is zero but the TCO includes an engineer's share of time for upgrades, on-call, and security patches. If that share is 0.3 of a full-time engineer, the \"free\" option costs roughly 30,000 euro per year before hardware.<br><br><b>Investor lens:</b> Munger on hidden costs: the costs that are not on the invoice are the ones that get you. Buffett's owner earnings is TCO from the owner's side: what does it cost to keep this thing running competitively?",
+   "source": ""
+  },
+  {
+   "guid": "H}dT{aDg5.",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "corporate-finance"
+   ],
+   "front": "What is the difference between <b>capital expenditure (CapEx)</b> and <b>operating expenditure (OpEx)</b>, and why does the Chief Financial Officer (CFO) care?",
+   "back": "CapEx buys an asset that sits on the balance sheet and is depreciated over years; only the depreciation hits the profit-and-loss statement each year. OpEx is expensed immediately and reduces this year's profit in full. Cloud converts CapEx (servers) into OpEx (subscriptions).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> A 1.2 million euro on-premises hardware refresh depreciated over four years shows as 300,000 per year of expense and a 1.2 million asset. The equivalent cloud spend of 350,000 per year is pure OpEx: no asset, and the full amount reduces reported profit every year. Some CFOs prefer CapEx for exactly this reason, especially where earnings metrics matter.<br><br><b>Investor lens:</b> Munger dismissed Earnings Before Interest, Taxes, Depreciation and Amortisation (EBITDA) because depreciation is a real cost: the hardware really does wear out. The accounting choice does not change the economics, only the timing of when the cost is visible.",
+   "source": ""
+  },
+  {
+   "guid": "p)XoYE.>)U",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "corporate-finance"
+   ],
+   "front": "Why does cloud spending hurt <b>EBITDA</b> and why does that matter politically?",
+   "back": "EBITDA excludes depreciation, so CapEx-funded infrastructure barely touches it, while cloud OpEx reduces it fully. Companies valued or bonused on EBITDA have a structural bias toward owning hardware even when cloud is cheaper on an NPV basis.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> A private-equity-owned company valued at a multiple of EBITDA may reject a cloud migration that saves money in cash terms, because it lowers the metric the owners are paid on. This is not stupidity; it is the principal-agent problem in accounting form. Know which metric your CFO is measured on.<br><br><b>Investor lens:</b> Munger's view that EBITDA is misleading and Buffett's preference for owner earnings both exist because the metric invites exactly this distortion.",
+   "source": ""
+  },
+  {
+   "guid": "Frs9Y@TDvr",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "corporate-finance"
+   ],
+   "front": "What is <b>payback period</b> and why is it often the most persuasive number?",
+   "back": "The time until cumulative savings equal the initial investment. Crude (ignores time value and everything after payback) but immediately intuitive and hard to argue with.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> 600,000 euro migration saving 200,000 per year: payback is three years. Most executives have an implicit maximum (often 18 to 36 months). If your payback is inside it, the NPV argument rarely needs to be made; if outside, NPV alone will not save you.<br><br><b>Investor lens:</b> Lynch favoured simple, explainable investment theses: if you cannot explain why you own something in a couple of sentences, you probably should not own it. Payback is the two-sentence version of a business case.",
+   "source": ""
+  },
+  {
+   "guid": "L?BFAG0k-L",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "corporate-finance"
+   ],
+   "front": "What is the <b>Internal Rate of Return (IRR)</b>?",
+   "back": "The discount rate at which the NPV of a project is exactly zero. If IRR exceeds the hurdle rate, the project creates value. It lets you compare projects of different sizes on a single percentage.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> The 600,000 euro migration with 200,000 annual savings for five years has an IRR of about 20%. Against a 12% hurdle it is attractive; against a 25% hurdle it is not. IRR misleads for projects with irregular cash flows or when comparing very different scales, so pair it with NPV.<br><br><b>Investor lens:</b> Buffett rarely quotes IRR; he compares expected return to what a risk-free bond would pay and asks whether the gap is worth the uncertainty. That is the hurdle-rate comparison in plain language.",
+   "source": ""
+  },
+  {
+   "guid": "rc,ae:VWEY",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "corporate-finance"
+   ],
+   "front": "How do <b>budgets</b> actually get approved in a large organisation?",
+   "back": "Through an annual cycle: departments submit requests months before the fiscal year starts, finance consolidates, leadership trades off, and the result is locked. Mid-year requests compete for whatever contingency remains. A proposal needs a sponsor with budget authority, a business case in finance's format, and to arrive before the window closes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> If the fiscal year starts in January, planning typically closes in September or October. A great platform proposal in November waits a year, or has to displace something already approved (which creates an enemy). Find out the cycle dates first, then find the sponsor, then write the case.<br><br><b>Investor lens:</b> Buffett's advice to managers: know how your customer makes decisions. The internal customer for a business case is the budget process, and it has a timetable, a format, and a set of questions it always asks: what does it cost, what do we get, when, what if we do nothing, what is the risk.",
+   "source": ""
+  },
+  {
+   "guid": "hT?;N^%_-L",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "corporate-finance"
+   ],
+   "front": "What is a <b>margin of safety</b> in a business case?",
+   "back": "Building the case on conservative assumptions rather than best-case ones, so the decision remains correct even if the estimates are significantly wrong.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> If the migration only makes sense if savings hit 200,000 per year and you have estimated 210,000, do not propose it. If it still clears the hurdle at 140,000, propose it and say so. Show the sceptic's version of the numbers before the sceptic does.<br><br><b>Investor lens:</b> Graham's central concept, adopted by Buffett: buy at a price so far below estimated value that the estimate can be wrong and you still do fine. Buffett's two rules (do not lose money; see rule one) are about surviving errors, not avoiding them.",
+   "source": ""
+  },
+  {
+   "guid": "Q1~n4e$5]L",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "corporate-finance"
+   ],
+   "front": "Why does every business case need a <b>cost-of-doing-nothing</b> baseline?",
+   "back": "The alternative to your proposal is not zero cost. The status quo has its own trajectory: hardware ageing, licence renewals, growing operational load, security exposure, lost opportunities. Without pricing it, your proposal is compared against an imaginary free option.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> \"Do nothing\" for an end-of-life platform means an emergency migration in two years under worse conditions, support contract price increases, and rising incident cost. Put a number on it. The comparison is proposal versus that, not proposal versus zero.<br><br><b>Investor lens:</b> Buffett's opportunity-cost discipline: the question is never \"is this good\" but \"is this better than the alternative\", and the alternative is never nothing.",
+   "source": ""
+  },
+  {
+   "guid": "LAZSZ-.~{l",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "corporate-finance"
+   ],
+   "front": "Why does fully depreciated on-premises hardware look <b>free</b>, and why is that misleading?",
+   "back": "After the depreciation period the asset has zero book value, so it appears to cost nothing on the profit-and-loss statement. But it still costs power, space, support, staff time, and it carries rising failure risk and an opportunity cost (the capacity could be replaced by something better).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> A five-year-old storage array has no depreciation charge, so cloud storage looks expensive by comparison. Add the extended support contract, the power, the two engineers who know how to operate it, and the risk of a failure with no spare parts. The \"free\" array is usually not free.<br><br><b>Investor lens:</b> Munger: accounting is a language, not the reality. Buffett spent years explaining to shareholders that Berkshire's book value understated or overstated real value depending on the asset.",
+   "source": ""
+  },
+  {
+   "guid": "A]+EuIf5sw",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "corporate-finance"
+   ],
+   "front": "What is <b>Return on Invested Capital (ROIC)</b> and what is the platform version?",
+   "back": "Operating profit after tax divided by the capital invested in the business. It measures how much value a business generates per unit of capital, independent of how large it is.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> For a platform team: value delivered (cost avoided, delivery time saved, incidents prevented, quantified) divided by the team's total cost plus infrastructure. A platform team of twelve people that avoids 400,000 euro of cost per year on a 1.5 million budget has a poor return; the same result from four people is excellent.<br><br><b>Investor lens:</b> Buffett's preferred measure of business quality. He would rather own a small business returning 30% on capital than a large one returning 8%, because the first can compound and the second cannot.",
+   "source": ""
+  },
+  {
+   "guid": "xa{,ZcN{k{",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "corporate-finance"
+   ],
+   "front": "What is <b>sensitivity analysis</b> and how much of it does a business case need?",
+   "back": "Varying the key assumptions one at a time (typically by 20 to 30% in each direction) to see which ones change the decision. Most assumptions will not matter; one or two will. Those are the ones to defend.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> The migration case depends on projected traffic growth, engineering effort, and cloud unit price. Vary each. If only the effort estimate can flip the result, spend your credibility on defending that one, and propose a phased approach that reduces its uncertainty.<br><br><b>Investor lens:</b> Buffett does not run Monte Carlo simulations; he asks what has to be true for the investment to work and whether he is confident in those few things. Sensitivity analysis done by hand is the same discipline.",
+   "source": ""
+  },
+  {
+   "guid": "nA@!3`k.B8",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "corporate-finance"
+   ],
+   "front": "Why are <b>long-horizon savings</b> in a Discounted Cash Flow (DCF) untrustworthy?",
+   "back": "Discounting reduces distant cash flows, but not enough to offset how little you know about them. Year-eight savings in a technology business case are guesses dressed as numbers, and a terminal value can dominate the whole NPV.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> A ten-year platform TCO comparison is fiction beyond year four: the vendors, prices, workloads and team will all have changed. Present three to five years, be explicit that the rest is unknowable, and prefer options that keep future choices open.<br><br><b>Investor lens:</b> Buffett distrusts DCFs with precise terminal values and prefers businesses whose next ten years are predictable enough that the estimate barely needs one. If most of the value is in the terminal value, you do not understand the business.",
+   "source": ""
+  },
+  {
+   "guid": "o|;_#Bs{|w",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "corporate-finance"
+   ],
+   "front": "What is the difference between <b>profit</b> and <b>cash</b>, and where does it bite in cloud contracts?",
+   "back": "Profit is an accounting result over a period; cash is what is actually in the bank. A profitable decision can still be a cash problem if payment timing is wrong.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> A three-year all-upfront reservation minimises total cost but consumes cash now. A company managing tight working capital may rationally prefer monthly on-demand pricing at higher total cost. Ask finance which constraint binds: cost or cash.<br><br><b>Investor lens:</b> Lynch always checked the cash position and debt of a company before its earnings; a company that cannot pay its bills does not survive to report profit. Buffett keeps large cash reserves at Berkshire so no decision is ever forced by timing.",
+   "source": ""
+  },
+  {
+   "guid": "w^ef,HH$3^",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "macroeconomics"
+   ],
+   "front": "How do <b>interest rates</b> affect technology valuations and, through them, your employer's behaviour?",
+   "back": "Higher rates raise the discount rate on future cash flows, so businesses whose value is mostly in the distant future (growth technology) lose value most. Lower rates do the reverse. Valuation changes flow into hiring, budgets and risk appetite with a lag of months.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> 2020 to 2021 near-zero rates: unlimited hiring, \"growth at any cost\", cloud spend unquestioned. 2022 rate rises: valuations fell, layoffs followed, and FinOps became a board topic. Same companies, same engineers; the discount rate changed.<br><br><b>Investor lens:</b> Buffett: interest rates act on asset prices the way gravity acts on matter. Everything is valued relative to what a risk-free bond pays; when that changes, every price changes.",
+   "source": ""
+  },
+  {
+   "guid": "C,3MuUQ=Xa",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "macroeconomics"
+   ],
+   "front": "What are the phases of the <b>business cycle</b> and what does each mean for a career in infrastructure?",
+   "back": "Expansion (growth, hiring, easy budgets), peak (over-hiring, over-building, valuations stretched), contraction (layoffs, budget freezes, cost focus), trough (consolidation, cheap assets, the start of the next cycle). Cycles do not repeat exactly but they rhyme.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Expansion: get funding for platform build-out, negotiate contracts (vendors are flexible). Contraction: cost-reduction skills are worth the most; migrations that save money get approved fast; vendors are desperate to keep logos. Know which phase you are in before choosing what to propose.<br><br><b>Investor lens:</b> Buffett's advice on cycles: be fearful when others are greedy and greedy when others are fearful. In career terms, build skills and reserves during expansion, deploy them during contraction.",
+   "source": ""
+  },
+  {
+   "guid": "uT9a&kcI={",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "macroeconomics"
+   ],
+   "front": "What are the stages of a <b>bubble</b> (Kindleberger and Minsky)?",
+   "back": "Displacement (a genuine new opportunity), boom (credit and enthusiasm expand), euphoria (prices detach from fundamentals, \"this time is different\"), profit-taking (insiders sell), panic (prices collapse, credit vanishes).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Dot-com 1995 to 2001: the internet was real; telecom overbuilt fibre by an order of magnitude; the crash bankrupted the builders; survivors like Amazon then ran on cheap infrastructure for a decade. Watch capital expenditure in data centres and chips for the same pattern.<br><br><b>Investor lens:</b> Buffett's 1999 Sun Valley speech warned that internet valuations could not be justified by any plausible earnings, and he was mocked for missing out. He was early by a year and right by a decade. Lynch's \"cocktail party\" test: when strangers are giving you stock tips, the top is near.",
+   "source": ""
+  },
+  {
+   "guid": "O+l`~/;*bO",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "macroeconomics"
+   ],
+   "front": "Why did the <b>zero-interest-rate</b> decade (2010 to 2021) shape engineering culture the way it did?",
+   "back": "Capital was nearly free, so the cost of an engineer or a cloud bill was compared against a near-zero hurdle rate. Growth was worth almost any cost, efficiency was a low priority, and companies could run unprofitable for years. When rates rose, the hurdle rate rose and the same behaviour became unaffordable.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Products built during that period often carry architectural decisions that only made sense with free capital: over-provisioned everything, many redundant tools, no cost allocation. Much of today's FinOps work is unwinding those decisions.<br><br><b>Investor lens:</b> Buffett on cheap money: it makes everything look like a good investment because the alternative pays nothing. Munger observed that easy money produces the worst behaviour in otherwise sane people.",
+   "source": ""
+  },
+  {
+   "guid": "jer1}JX0Hm",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "macroeconomics"
+   ],
+   "front": "What is the difference between <b>nominal</b> and <b>real</b> figures, and why does it matter for salaries and contracts?",
+   "back": "Nominal is the number in currency; real is adjusted for inflation. A 3% salary rise in a year of 6% inflation is a 3% pay cut in real terms. A multi-year fixed-price contract is a real-terms discount to the buyer if inflation rises, and vice versa.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Cloud providers rarely cut list prices in nominal terms but the same instance gets cheaper in real terms each year. Vendor contracts with annual escalators of 5 to 8% are real-terms increases in a 2% inflation environment; negotiate the escalator, not just the base price.<br><br><b>Investor lens:</b> Buffett wrote in 1977 that inflation is a tax on capital that is worse than any tax the government levies. Businesses with pricing power (able to raise prices with inflation) survive it; those without do not.",
+   "source": ""
+  },
+  {
+   "guid": "O;R!q&E?HX",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "macroeconomics"
+   ],
+   "front": "What is an <b>inverted yield curve</b> and why do people watch it?",
+   "back": "Normally long-term interest rates exceed short-term ones. When short rates exceed long rates the curve is inverted, which historically has preceded most recessions by roughly six to eighteen months, because it signals markets expect rates to fall due to weakness.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> An inversion is not a reason to change architecture, but it is a reason to expect budget tightening within a year or two: finish funded work, avoid starting long unfunded programmes, and prepare the cost-reduction proposals you will be asked for.<br><br><b>Investor lens:</b> Lynch argued that spending time forecasting the economy is mostly wasted and that he would rather study companies. The useful middle ground: do not predict, but recognise the phase you are in.",
+   "source": ""
+  },
+  {
+   "guid": "pS0AZ%R;vZ",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "macroeconomics"
+   ],
+   "front": "What is <b>compounding</b> and what did Buffett tell his own trustee to do with his estate?",
+   "back": "Growth on growth: returns are reinvested and themselves earn returns, so the curve is exponential, not linear. Time matters more than rate: 7% for 40 years multiplies capital roughly fifteen times.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Career version: skills and reputation compound. A year spent learning finance early in an architecture career pays out on every business case for the following twenty years.<br><br><b>Investor lens:</b> Buffett instructed that the cash left to his wife be invested 90% in a low-cost S&amp;P 500 index fund and 10% in short-term government bonds. The most successful stock picker alive tells ordinary investors not to pick stocks. Munger: the first rule of compounding is never to interrupt it unnecessarily.",
+   "source": ""
+  },
+  {
+   "guid": "CYmp,l?s8T",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "macroeconomics"
+   ],
+   "front": "What is Peter Lynch's <b>invest in what you know</b> principle and what is its common misreading?",
+   "back": "Lynch argued that ordinary people have an informational edge in industries they work in or products they use daily, and can spot winners before analysts. The misreading: liking a product is enough. Lynch insisted you still had to check the balance sheet, the growth, and the price.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> An infrastructure engineer notices that every team is adopting a particular observability vendor, months before it shows in the vendor's public numbers. That is a Lynch-style edge. It is a starting point for research, not a buy signal.<br><br><b>Investor lens:</b> Lynch's ten-baggers (stocks that rose tenfold) mostly came from unglamorous, understandable businesses he could explain in a few sentences. His rule: know what you own and why you own it.",
+   "source": ""
+  },
+  {
+   "guid": "mRYi)Hl<KM",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "macroeconomics"
+   ],
+   "front": "What is <b>Mr. Market</b>?",
+   "back": "Graham's metaphor, adopted by Buffett: the market is a manic-depressive business partner who offers you a price every day, sometimes euphoric and sometimes despairing. You are free to ignore him or to take advantage of him, but never to be guided by his mood.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Vendor and technology sentiment behaves the same way. A technology being declared dead in a downturn (on-premises, monoliths, relational databases) is a Mr. Market mood, not an analysis. Decide on fundamentals; use the mood for negotiating leverage.<br><br><b>Investor lens:</b> Buffett has said that Chapter 8 of Graham's <i>The Intelligent Investor</i> (Mr. Market) and Chapter 20 (margin of safety) are all the investing philosophy anyone needs.",
+   "source": ""
+  },
+  {
+   "guid": "O8yF/(/gBm",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "macroeconomics"
+   ],
+   "front": "What is <b>creative destruction</b> and why did Buffett avoid technology for so long?",
+   "back": "Schumpeter's term for how innovation destroys existing businesses while creating new ones. Industries with fast creative destruction have unstable moats: the leader of one generation is often the casualty of the next.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Mainframe to client-server to virtualisation to cloud to serverless: each wave stranded skills, vendors and architectures. An architecture decision is a bet on which layer stays stable; the ones that lasted (TCP/IP, SQL, POSIX, HTTP) were standards, not products.<br><br><b>Investor lens:</b> Buffett avoided technology because he could not predict which company would still have its moat in ten years. He bought Apple in 2016 only after concluding it was a consumer brand with switching costs, not a technology bet. The lesson is not \"avoid tech\" but \"know what your moat is\".",
+   "source": ""
+  },
+  {
+   "guid": "Ka{TK1dLa5",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "macroeconomics"
+   ],
+   "front": "What did the <b>dot-com crash</b> leave behind, and what is the lesson for the current infrastructure build-out?",
+   "back": "The bubble financed a massive over-build of fibre and data centres. The companies that built it mostly went bankrupt; the capacity survived and was bought cheaply, which made the next decade of internet growth possible. Bubbles destroy investors and leave infrastructure.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> The current wave of data-centre and accelerator spending will follow some version of the pattern: some builders will not earn a return, but the capacity will exist. For an architect: expect the price of compute to fall sharply at some point; design for portability so you can benefit when it does.<br><br><b>Investor lens:</b> Buffett's observation on the automobile and aviation industries: transformative technologies that were terrible investments because almost every company in them failed. The technology winning and the investors winning are different questions.",
+   "source": ""
+  },
+  {
+   "guid": "Nd.EX4.a7I",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "macroeconomics"
+   ],
+   "front": "What is the difference between <b>monetary</b> and <b>fiscal</b> policy?",
+   "back": "Monetary policy is the central bank (European Central Bank (ECB), Federal Reserve) setting interest rates and controlling money supply. Fiscal policy is the government's taxation and spending. Both move demand; monetary acts faster on asset prices, fiscal acts more directly on specific sectors.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Public-sector infrastructure budgets follow fiscal policy and political cycles; private-sector cloud spend follows monetary conditions. If you work in or sell to government, the budget cycle is the fiscal calendar, not the interest-rate cycle.<br><br><b>Investor lens:</b> Buffett largely ignores both in decisions, on the grounds that he cannot predict them and that a good business survives any plausible policy. He does hold enough cash that a policy shock never forces him to sell.",
+   "source": ""
+  },
+  {
+   "guid": "JQwV|Rp,/U",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "macroeconomics"
+   ],
+   "front": "What is <b>reflexivity</b> and how does it explain why bubbles overshoot?",
+   "back": "Soros's idea that prices do not just reflect fundamentals; they change them. Rising prices make credit easier, which funds growth, which justifies the prices, until the loop reverses. Munger's \"lollapalooza\" is the same mechanism: several biases and incentives reinforcing each other at once.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> A hot technology gets funding, which pays for marketing and hiring, which produces adoption, which attracts more funding. The adoption is real but partly caused by the money, not the technology. Judge a tool by what it does when the funding stops.<br><br><b>Investor lens:</b> Munger's lollapalooza effect: extreme outcomes come from multiple forces acting in the same direction. He cites Coca-Cola's success and the Tupperware party as examples; the same combination produces manias.",
+   "source": ""
+  },
+  {
+   "guid": "q61Z|n_{yK",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "game-theory"
+   ],
+   "front": "What is the <b>prisoner's dilemma</b> and where does it appear between teams?",
+   "back": "Two parties each do better by cooperating, but each does individually better by defecting regardless of what the other does, so both defect and both lose. The structure, not stupidity, produces the bad outcome.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Two product teams would both benefit from a shared platform, but whoever migrates first bears the cost and risk while the other waits. Both wait. Fix by changing the payoffs: central funding for the first mover, or leadership mandate, or make cooperation cheaper than defection.<br><br><b>Investor lens:</b> Munger: understanding the structure of a game is worth more than understanding the players. Buffett's insurance operations avoid price wars by refusing to write unprofitable business even if it means losing share: he declines to play the dilemma.",
+   "source": ""
+  },
+  {
+   "guid": "q-UswF|p2r",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "game-theory"
+   ],
+   "front": "What is a <b>Nash equilibrium</b>?",
+   "back": "A set of strategies where no player can improve their outcome by changing their own strategy alone, given what the others are doing. It is stable, but not necessarily good for anyone.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Every team running its own CI system, monitoring stack and deployment tooling is often a Nash equilibrium: no single team gains by switching to a shared one alone. Escaping it requires a coordinated move or an outside actor changing the payoffs, which is the actual job of a platform team.<br><br><b>Investor lens:</b> Buffett describes the institutional imperative: companies imitate each other's behaviour regardless of merit, because deviating alone is risky for the manager. That is a Nash equilibrium of executives.",
+   "source": ""
+  },
+  {
+   "guid": "r{0uM.kgP{",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "game-theory"
+   ],
+   "front": "What did Axelrod's tournament show about <b>repeated games</b>, and what does it mean for vendor relationships?",
+   "back": "In repeated prisoner's dilemmas, the winning strategy was tit-for-tat: cooperate first, retaliate once when the other side defects, forgive when they return to cooperating, and be transparent. Reputation makes cooperation rational when the game continues.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> A vendor relationship is a repeated game over years. Burning a vendor in one negotiation (extracting a price they lose money on) gets you a worse engineer on the account and no favours at the next incident. Be firm, be clear, retaliate proportionally, and forgive.<br><br><b>Investor lens:</b> Buffett's reputation for closing deals quickly, at the agreed price, without renegotiation is a deliberate repeated-game strategy: sellers come to him first and accept lower prices in exchange for certainty.",
+   "source": ""
+  },
+  {
+   "guid": "t_aoCPAavp",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "game-theory"
+   ],
+   "front": "What is a <b>BATNA</b> and why is it the real source of negotiating power?",
+   "back": "Best Alternative To a Negotiated Agreement: what you will do if talks fail. Your power in a negotiation is the strength of your alternative, not your arguments. The side with the better walk-away option gets the better deal.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> A cloud contract renewal where you have no realistic alternative gives the vendor all the leverage. A credible, costed migration plan to a second provider, even one you would rather not execute, changes the price you are quoted. Build the BATNA before the negotiation starts, not during it.<br><br><b>Investor lens:</b> Buffett does not negotiate: he states a price and walks if it is not accepted. He can do that because his alternative (keep the cash, buy something else) is always acceptable to him. That is a maximally strong BATNA.",
+   "source": ""
+  },
+  {
+   "guid": "bDV_wWmI;U",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "game-theory"
+   ],
+   "front": "How should you think about <b>vendor lock-in</b>?",
+   "back": "Lock-in is a switching cost. It is not inherently bad; it is a price. The mistake is accepting it unknowingly. Estimate the exit cost, decide whether the benefits justify it, and keep the estimate current so the vendor cannot raise prices beyond it at renewal.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Using a provider's proprietary database gives real productivity gains. Using it without a documented exit cost means that at renewal the vendor prices right up to the migration cost, because they can estimate it too. Deliberate lock-in with a known price is a valid architecture decision; accidental lock-in is not.<br><br><b>Investor lens:</b> Buffett deliberately buys businesses whose customers are locked in, because such businesses can raise prices. When you are the customer, his reasoning tells you exactly what the vendor is planning to do and when.",
+   "source": ""
+  },
+  {
+   "guid": "rD7fL`d==7",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "game-theory"
+   ],
+   "front": "Why do <b>standards</b> win or lose, in game-theory terms?",
+   "back": "Standards adoption is a coordination game: everyone prefers to be on the same standard as everyone else, more than they care which one. Early expectations become self-fulfilling. Network effects then lock the winner in.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Kubernetes won the orchestration war not because it was technically best on every axis but because Google's backing plus early cloud-provider support made everyone expect it to win, so everyone chose it, so it won. Betting on the standard with momentum is usually right even if a rival is better.<br><br><b>Investor lens:</b> Buffett's Visa, Mastercard and American Express holdings are bets on coordination-game winners: every merchant accepts them because every customer carries them. Munger: the winner of a coordination game gets a moat for free.",
+   "source": ""
+  },
+  {
+   "guid": "iKur90wAoA",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "game-theory"
+   ],
+   "front": "What is a <b>credible commitment</b> and how do you use one in negotiation?",
+   "back": "A commitment that visibly removes your own ability to back down, which makes threats and promises believable. Burning bridges, public announcements, and signed alternative contracts are commitment devices.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Telling a vendor you will migrate if the price is not reduced is cheap talk. Showing them a signed pilot agreement with a competitor, or a board-approved migration budget, is a commitment. Vendors price cheap talk at zero.<br><br><b>Investor lens:</b> Buffett's announced policy of never renegotiating an agreed price is a commitment device: sellers know that once he says yes, the price will not fall, so they do not waste time trying.",
+   "source": ""
+  },
+  {
+   "guid": "uhgU/sVNY4",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "game-theory"
+   ],
+   "front": "What is the difference between <b>zero-sum</b> and <b>positive-sum</b> negotiations, and which is a vendor deal?",
+   "back": "Zero-sum: every gain to one side is a loss to the other (dividing a fixed pie). Positive-sum: the parties can enlarge the pie by trading things they value differently. Most multi-year vendor deals are positive-sum; treating them as zero-sum leaves value on the table.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> You value flexibility and support responsiveness; the vendor values committed revenue and a reference customer. Trade a longer commitment for a lower rate plus named support engineers plus a public case study. Both sides gain relative to fighting over the unit price alone.<br><br><b>Investor lens:</b> Munger on deal-making: look for the arrangement where both sides win, because the other kind does not last. Buffett's acquisitions are famously positive-sum for sellers (they keep running the business) which is why he sees deals others never do.",
+   "source": ""
+  },
+  {
+   "guid": "vxxO%b(Lm#",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "game-theory"
+   ],
+   "front": "What is <b>anchoring</b> and how is it used against you in pricing?",
+   "back": "The first number in a negotiation disproportionately shapes the outcome, even when it is arbitrary. Vendor list prices exist mainly as anchors; enterprise discounts of a large fraction off list are routine.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> A vendor opens at list price. If you negotiate from there you end up at 25% off and feel successful. If you open with a benchmark from a peer organisation or a competing quote, the anchor moves and the same vendor ends at 50% off. Set the anchor yourself.<br><br><b>Investor lens:</b> Munger lists anchoring among the standard causes of misjudgment. Buffett refuses to look at a stock's price history before valuing a business, precisely to avoid being anchored by it.",
+   "source": ""
+  },
+  {
+   "guid": "A:P$Jr.zbJ",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "game-theory"
+   ],
+   "front": "What is a <b>chicken game</b> and how does it explain standards wars?",
+   "back": "Two parties each want the other to give way; if neither does, both lose badly. The winner is the one who can credibly appear unable to swerve. Format wars are chicken games between platform owners with users caught in the middle.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Blu-ray versus HD DVD: Sony committed by building Blu-ray into every PlayStation 3, creating an installed base it could not walk away from. Studios then coordinated on Blu-ray. In your own organisation, two competing internal platforms are a chicken game that leadership has to end, because neither team can swerve without losing face.<br><br><b>Investor lens:</b> Buffett on avoiding chicken games: the way to win is not to play. He has stated Berkshire will not participate in bidding wars for acquisitions because the winner of a bidding war usually overpays.",
+   "source": ""
+  },
+  {
+   "guid": "h<;bJ6x3jO",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "game-theory"
+   ],
+   "front": "What is the <b>winner's curse</b>?",
+   "back": "In an auction where the item's value is uncertain, the winner is the bidder who most overestimated it. Winning is therefore evidence you paid too much.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> The vendor that wins a Request for Proposal (RFP) on price is usually the one that underestimated the work. Expect change orders, scope disputes, or a weak team on the account. A suspiciously low bid should lower your confidence, not raise it.<br><br><b>Investor lens:</b> Buffett: in a competitive auction for a business, the most optimistic bidder wins, and optimism is not a valuation method. He prefers negotiated deals where he is the only buyer.",
+   "source": ""
+  },
+  {
+   "guid": "m`<&UGYK0^",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "game-theory"
+   ],
+   "front": "What is <b>signalling</b> and where does it appear in architecture work?",
+   "back": "Communicating private information through costly actions that would not be worth taking if the information were false (Spence). Cheap signals are ignored; expensive ones are believed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Certifications, reference architectures and public case studies are signals a vendor sends to you. Your own signal to leadership is a costed business case: writing one is expensive, which is exactly why it is credible. A one-line request for budget is cheap talk.<br><br><b>Investor lens:</b> Buffett's annual letters are a signal: writing candidly about mistakes is costly, and doing it for decades makes his claims credible. Lynch trusted managers who bought their own company's stock with their own money, a costly signal, over managers who merely praised it.",
+   "source": ""
+  },
+  {
+   "guid": "Qv3-M_w32|",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "game-theory"
+   ],
+   "front": "What is <b>mechanism design</b> and why is it the real job of a platform team?",
+   "back": "Designing the rules of a game so that participants pursuing their own interests produce the outcome you want. Instead of asking people to behave well, make good behaviour the dominant strategy.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> A golden path (a well-supported default deployment pipeline) works because it is easier than the alternative, not because it is mandated. Chargeback makes rightsizing rational. Quotas make fairness automatic. If adoption requires constant persuasion, the mechanism is wrong.<br><br><b>Investor lens:</b> Munger's advice to managers is essentially mechanism design: get the incentives right and most other management problems disappear. Buffett's compensation structures at Berkshire are designed so that the manager's best strategy is the shareholder's best outcome.",
+   "source": ""
+  },
+  {
+   "guid": "D%MCS/7C2P",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "game-theory"
+   ],
+   "front": "What is <b>backward induction</b> and how does it apply to contract renewals?",
+   "back": "Solving a game by reasoning from the final move backwards: decide what will happen at the end, then what each party will do before that knowing the end, and so on to the present.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Sign a three-year deal on a proprietary service. At renewal the vendor knows your migration cost and will price just below it. Reason backwards: to have a good renewal in year three, you need a real alternative built by year two, which means portability decisions in year one. The renewal is decided at signing.<br><br><b>Investor lens:</b> Buffett reasons backwards from the exit: he asks what the business will look like in ten years and whether he will want to own it then, before asking what it costs today.",
+   "source": ""
+  },
+  {
+   "guid": "h$-9IwXX&q",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "game-theory"
+   ],
+   "front": "What is Munger's <b>inversion</b> principle and how does it apply to negotiations and designs?",
+   "back": "\"Invert, always invert\": instead of asking how to succeed, ask what would guarantee failure and avoid that. Problems are often easier to solve backwards.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Before a vendor negotiation: list what would make it a bad deal for you (no exit clause, uncapped escalators, unclear support obligations, data ownership ambiguity) and negotiate those out first. Before a design review: list how the system will fail rather than how it will work.<br><br><b>Investor lens:</b> Munger borrowed the phrase from the mathematician Jacobi. Buffett's version: avoiding stupidity is easier and more reliable than seeking brilliance.",
+   "source": ""
+  },
+  {
+   "guid": "x7k&/v:G;4",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "game-theory"
+   ],
+   "front": "What is a <b>Schelling point</b> (focal point)?",
+   "back": "An option people converge on without communicating, because it is somehow obvious or salient. In coordination games without a coordinator, the focal point wins.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> Open standards like the Open Container Initiative (OCI) image format or OpenTelemetry win because they are the obvious neutral choice when several vendors have to agree without any of them winning. Inside an organisation, the tool the most visible team uses becomes the focal point whether or not it is best.<br><br><b>Investor lens:</b> Buffett on why Berkshire keeps a plain annual meeting and a plain letter: they became focal points for a certain kind of investor, and the consistency is what makes them work.",
+   "source": ""
+  },
+  {
+   "guid": "q/L5w0NUH<",
+   "type": "basic",
+   "deck": "Economics for Architects",
+   "tags": [
+    "game-theory"
+   ],
+   "front": "How should you value a <b>concession</b> a vendor offers in negotiation?",
+   "back": "By its cost to them and its value to you, not by how it is presented. Concessions that cost the vendor nothing (extra licences you will not use, \"free\" training) are anchoring devices, not value. Concessions that cost them something (price, contract terms, named engineers) are real.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> \"We can add 20% more storage at no charge\" costs the vendor little if you will not use it, and it makes the price feel lower. \"We will cap the annual escalator at 3%\" costs them real money over three years. Take the second, thank them for the first, and do not let it move the price.<br><br><b>Investor lens:</b> Munger: whenever someone offers you something for free, ask what it does for them. Buffett reads every contract for the term that seems generous and asks why it is there.",
+   "source": ""
+  }
+ ]
+}

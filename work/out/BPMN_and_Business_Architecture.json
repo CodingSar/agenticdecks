@@ -1,0 +1,1034 @@
+{
+ "deck_name": "BPMN & Business Architecture",
+ "file": "BPMN_and_Business_Architecture.apkg",
+ "description": "Process and decision modelling (BPMN 2.0, DMN, CMMN) plus business architecture views (capabilities, value streams, information, people). For architects who model processes or connect strategy to change.",
+ "notes": [
+  {
+   "guid": "l6^^[e`PvI",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::01 BPMN Core Elements",
+   "tags": [
+    "bpmn::core"
+   ],
+   "front": "What is <b>BPMN</b> and what does it standardise?",
+   "back": "<b>Business Process Model and Notation</b>: an OMG standard notation whose diagrams mean the same regardless of modelling tool.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BPMN · Core",
+   "reverse": false
+  },
+  {
+   "guid": "v]*]eEl5/.",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::01 BPMN Core Elements",
+   "tags": [
+    "bpmn::core"
+   ],
+   "front": "What are the three core flow-object categories in BPMN?",
+   "back": "<b>Events</b> (circle) — something happens<br><b>Activities</b> (rounded rectangle) — work is done<br><b>Gateways</b> (diamond) — flow branches/merges",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BPMN · Core",
+   "reverse": false
+  },
+  {
+   "guid": "h/qvmRSSPG",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::01 BPMN Core Elements",
+   "tags": [
+    "bpmn::core"
+   ],
+   "front": "BPMN: <b>sequence flow</b> vs <b>message flow</b>?",
+   "back": "Sequence flow (solid arrow): order of steps <i>within</i> one pool. Message flow (dashed, open arrowhead): communication <i>between</i> pools — never inside one.",
+   "text": "",
+   "image": "",
+   "analogy": "Sequence flow is passing a folder to a colleague's desk; message flow is posting a letter to another company.",
+   "extra": "",
+   "source": "BPMN · Core",
+   "reverse": false
+  },
+  {
+   "guid": "uo`@wJf:Cb",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::01 BPMN Core Elements",
+   "tags": [
+    "bpmn::core"
+   ],
+   "front": "What do <b>pools</b> and <b>lanes</b> represent in BPMN?",
+   "back": "Pool: a participant (organisation, system). Lane: a sub-partition of a pool showing which role/department/system does each step.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BPMN · Core",
+   "reverse": false
+  },
+  {
+   "guid": "Kjr*UARna`",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::01 BPMN Core Elements",
+   "tags": [
+    "bpmn::core"
+   ],
+   "front": "What is a <b>black-box pool</b> and when do you use one?",
+   "back": "A pool with no internal detail, for a participant whose internal steps are irrelevant or unknown — only its message flows matter.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BPMN · Core",
+   "reverse": false
+  },
+  {
+   "guid": "yuvZ:QPz/A",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::01 BPMN Core Elements",
+   "tags": [
+    "bpmn::core"
+   ],
+   "front": "What are BPMN <b>artifacts</b>?",
+   "back": "Elements that add information without affecting flow: <b>annotations</b> (text notes) and <b>groups</b> (dashed box, no formal semantics).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BPMN · Core",
+   "reverse": false
+  },
+  {
+   "guid": "G-qMf1os4;",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::01 BPMN Core Elements",
+   "tags": [
+    "bpmn::core"
+   ],
+   "front": "BPMN: <b>data object</b> vs <b>data store</b>?",
+   "back": "Data object: information flowing through one process instance (e.g. a document). Data store: persistent repository (e.g. a database) that outlives instances.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BPMN · Core",
+   "reverse": false
+  },
+  {
+   "guid": "yV,[sPwu,v",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::02 BPMN Events",
+   "tags": [
+    "bpmn::events"
+   ],
+   "front": "How are BPMN start, intermediate and end events drawn?",
+   "back": "Start: <b>thin</b> single circle<br>Intermediate: <b>double</b> circle<br>End: <b>thick</b> single circle",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BPMN · Events",
+   "reverse": false
+  },
+  {
+   "guid": "x8?z=JGJm!",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::02 BPMN Events",
+   "tags": [
+    "bpmn::events"
+   ],
+   "front": "BPMN: <b>catching</b> vs <b>throwing</b> event?",
+   "back": "Catching (unfilled icon) waits for a trigger, e.g. a message arriving. Throwing (filled icon) fires one, e.g. sending a message.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Start events catch; end events throw; intermediates can be either.",
+   "source": "BPMN · Events",
+   "reverse": false
+  },
+  {
+   "guid": "bPPwGUSnB.",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::02 BPMN Events",
+   "tags": [
+    "bpmn::events"
+   ],
+   "front": "BPMN: <b>error</b> vs <b>escalation</b> event?",
+   "back": "Error: a critical failure — a caught error <b>interrupts</b> the activity. Escalation: a non-critical heads-up to a higher level — can be <b>non-interrupting</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "Error = the machine broke, stop the line. Escalation = tell the manager we're running late, keep working.",
+   "extra": "Other triggers: message, timer, signal, conditional, compensation, link, terminate, multiple.",
+   "source": "BPMN · Events",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::02 BPMN Events",
+   "tags": [
+    "bpmn::events"
+   ],
+   "front": "What does a BPMN <b>compensation</b> event do?",
+   "back": "Triggers the undo (compensation) activities of steps that already completed — e.g. refund a payment when a booking is cancelled.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BPMN · Events",
+   "reverse": false
+  },
+  {
+   "guid": "y<*t~5=5R(",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::02 BPMN Events",
+   "tags": [
+    "bpmn::events"
+   ],
+   "front": "What are message start and end events used for?",
+   "back": "Message start: begins an instance when a message arrives (e.g. order received). Message end: sends a message as the instance ends (e.g. confirmation).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BPMN · Events",
+   "reverse": false
+  },
+  {
+   "guid": "CnW{@ita<(",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::02 BPMN Events",
+   "tags": [
+    "bpmn::events"
+   ],
+   "front": "BPMN: <b>error end event</b> vs <b>terminate end event</b>?",
+   "back": "Error end: ends the path and throws a named error to be caught elsewhere. Terminate end: immediately kills the <b>whole</b> instance, all parallel paths, no error.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BPMN · Events",
+   "reverse": false
+  },
+  {
+   "guid": "pzZbl)qtC/",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::02 BPMN Events",
+   "tags": [
+    "bpmn::events"
+   ],
+   "front": "What is a BPMN <b>boundary event</b>?",
+   "back": "An event attached to an activity's edge that catches a trigger <b>while that activity is running</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BPMN · Events",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::02 BPMN Events",
+   "tags": [
+    "bpmn::events",
+    "contrast"
+   ],
+   "front": "Boundary events: <b>interrupting</b> vs <b>non-interrupting</b>?",
+   "back": "Interrupting (solid double circle): cancels the activity. Non-interrupting (dashed double circle): activity continues while a parallel path starts.",
+   "text": "",
+   "image": "",
+   "analogy": "Interrupting: the fire alarm ends the meeting. Non-interrupting: a reminder ping you deal with while the meeting goes on.",
+   "extra": "",
+   "source": "BPMN · Events",
+   "reverse": false
+  },
+  {
+   "guid": "slIFFODVYg",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::02 BPMN Events",
+   "tags": [
+    "bpmn::events"
+   ],
+   "front": "What can a BPMN <b>timer</b> event be configured with?",
+   "back": "A specific <b>date/time</b>, a <b>duration</b> (wait 3 days) or a recurring <b>cycle</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "As start: scheduled trigger. Intermediate: delay. Boundary: deadline.",
+   "source": "BPMN · Events",
+   "reverse": false
+  },
+  {
+   "guid": "GG90|%=y|!",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::02 BPMN Events",
+   "tags": [
+    "bpmn::events"
+   ],
+   "front": "BPMN: <b>signal</b> vs <b>message</b> event?",
+   "back": "Signal: <b>broadcast</b>, no specific target — every listener catches it. Message: addressed from one sender to one receiver.",
+   "text": "",
+   "image": "",
+   "analogy": "Signal = a radio broadcast; message = a registered letter.",
+   "extra": "",
+   "source": "BPMN · Events",
+   "reverse": false
+  },
+  {
+   "guid": "d$rJ1<d#5_",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::02 BPMN Events",
+   "tags": [
+    "bpmn::events"
+   ],
+   "front": "What is a BPMN <b>link event</b> for?",
+   "back": "A throw/catch pair acting as an on-page connector, continuing a sequence flow elsewhere without long crossing arrows.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BPMN · Events",
+   "reverse": false
+  },
+  {
+   "guid": "fMi}FH)c{`",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::03 BPMN Gateways",
+   "tags": [
+    "bpmn::gateways"
+   ],
+   "front": "What does an <b>exclusive (XOR)</b> gateway do?",
+   "back": "Routes to exactly <b>one</b> outgoing path based on conditions (or a default). Diamond, empty or with 'X'.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BPMN · Gateways",
+   "reverse": false
+  },
+  {
+   "guid": "OYsML^!WBQ",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::03 BPMN Gateways",
+   "tags": [
+    "bpmn::gateways"
+   ],
+   "front": "What does a <b>parallel (AND)</b> gateway do?",
+   "back": "Split: activates <b>all</b> paths, no conditions. Join: waits for <b>all</b> incoming paths. Diamond with '+'.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BPMN · Gateways",
+   "reverse": false
+  },
+  {
+   "guid": "fke*}^:,5d",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::03 BPMN Gateways",
+   "tags": [
+    "bpmn::gateways"
+   ],
+   "front": "What does an <b>inclusive (OR)</b> gateway do?",
+   "back": "Split: activates <b>one or more</b> paths whose conditions are true. Join: waits for all paths that were actually activated. Diamond with 'O'.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Pitfall:</b> the trickiest gateway to model and implement correctly.",
+   "source": "BPMN · Gateways",
+   "reverse": false
+  },
+  {
+   "guid": "lkv#+@f6X>",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::03 BPMN Gateways",
+   "tags": [
+    "bpmn::gateways"
+   ],
+   "front": "<b>Event-based</b> gateway vs exclusive gateway?",
+   "back": "Both pick one path, but event-based decides by <b>which event happens first</b> (message vs timer), not by data conditions.",
+   "text": "",
+   "image": "",
+   "analogy": "Waiting at the door for either the courier or a 30-minute timeout — whichever comes first decides what you do next.",
+   "extra": "",
+   "source": "BPMN · Gateways",
+   "reverse": false
+  },
+  {
+   "guid": "n#rF?9(~}$",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::03 BPMN Gateways",
+   "tags": [
+    "bpmn::gateways"
+   ],
+   "front": "When is a <b>complex gateway</b> used?",
+   "back": "For routing rules the standard gateways can't express, e.g. 'continue when 3 of 5 paths arrive'; the rule is described in text.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BPMN · Gateways",
+   "reverse": false
+  },
+  {
+   "guid": "d#4!Q>dUD5",
+   "type": "cloze",
+   "deck": "BPMN & Business Architecture::04 BPMN Activities & Sub-processes",
+   "tags": [
+    "bpmn::activities"
+   ],
+   "front": "",
+   "back": "",
+   "text": "BPMN task types:<br>{{c1::User task}}: a human, via an application UI<br>{{c2::Manual task}}: a human, without system support<br>{{c3::Service task}}: automatic system/service call<br>{{c4::Script task}}: script run by the process engine<br>{{c5::Business rule task}}: invokes a decision (often DMN)<br>{{c6::Send / Receive task}}: sends or waits for a message",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BPMN · Activities",
+   "reverse": false
+  },
+  {
+   "guid": "wHIYQJo$g(",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::04 BPMN Activities & Sub-processes",
+   "tags": [
+    "bpmn::activities"
+   ],
+   "front": "<b>Embedded sub-process</b> vs <b>call activity</b>?",
+   "back": "Embedded: drawn inline, exists only in its parent. Call activity: invokes a separate, reusable, independently versioned process.",
+   "text": "",
+   "image": "",
+   "analogy": "Inline code vs calling a library function.",
+   "extra": "",
+   "source": "BPMN · Activities",
+   "reverse": false
+  },
+  {
+   "guid": "e`}rcFR}Ha",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::04 BPMN Activities & Sub-processes",
+   "tags": [
+    "bpmn::activities"
+   ],
+   "front": "What is an <b>event sub-process</b>?",
+   "back": "A sub-process inside a parent but not connected by sequence flow; it starts when its own start trigger fires while the parent runs, optionally interrupting it.",
+   "text": "",
+   "image": "",
+   "analogy": "Like an office fire drill procedure: not part of the normal workflow, but it can start at any moment during the day.",
+   "extra": "",
+   "source": "BPMN · Activities",
+   "reverse": false
+  },
+  {
+   "guid": "B]:{b2_DN",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::04 BPMN Activities & Sub-processes",
+   "tags": [
+    "bpmn::activities"
+   ],
+   "front": "What is a <b>transaction sub-process</b>?",
+   "back": "All-or-nothing: on normal completion it commits; on cancel it triggers compensation of the completed steps.",
+   "text": "",
+   "image": "",
+   "analogy": "Like a database transaction rollback, but done by business undo steps (refund, cancel) rather than the DB.",
+   "extra": "",
+   "source": "BPMN · Activities",
+   "reverse": false
+  },
+  {
+   "guid": "FZ@KSI.UN9",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::04 BPMN Activities & Sub-processes",
+   "tags": [
+    "bpmn::activities"
+   ],
+   "front": "What does the <b>multi-instance</b> marker on an activity mean?",
+   "back": "The activity runs once per item in a collection — <b>parallel</b> (three vertical bars) or <b>sequential</b> (three horizontal bars).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> one approval task per approver.",
+   "source": "BPMN · Activities",
+   "reverse": false
+  },
+  {
+   "guid": "I9K4l(:WIj",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::04 BPMN Activities & Sub-processes",
+   "tags": [
+    "bpmn::activities"
+   ],
+   "front": "What is an <b>ad-hoc sub-process</b>?",
+   "back": "Activities without fixed sequence flow, run in any order until a completion condition — for unstructured work.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BPMN · Activities",
+   "reverse": false
+  },
+  {
+   "guid": "gOqgYVu?lR",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::05 Modeling Method",
+   "tags": [
+    "bpmn::method"
+   ],
+   "front": "Real-Life BPMN: who are 'the customers of a process model', and why does it matter?",
+   "back": "The people who read and use the diagram (business, developers, auditors). Design each diagram for <b>its audience</b>, not for maximal completeness.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BPMN · Method",
+   "reverse": false
+  },
+  {
+   "guid": "BX{x-hm{AP",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::05 Modeling Method",
+   "tags": [
+    "bpmn::method"
+   ],
+   "front": "What is a <b>BPMN monolith</b> and how do you fix it?",
+   "back": "One oversized diagram for a whole end-to-end process. Split models along domain boundaries, connected via call activities or message flow.",
+   "text": "",
+   "image": "",
+   "analogy": "Like a single 5,000-line function: technically complete, practically unreadable — split it into modules.",
+   "extra": "",
+   "source": "BPMN · Method",
+   "reverse": false
+  },
+  {
+   "guid": "M(&jrjo{gF",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::05 Modeling Method",
+   "tags": [
+    "bpmn::method"
+   ],
+   "front": "<b>Descriptive</b> vs <b>executable</b> BPMN models?",
+   "back": "Descriptive: for human understanding, never run. Executable: precise enough to deploy on a process engine (e.g. Camunda).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BPMN · Method",
+   "reverse": false
+  },
+  {
+   "guid": "d}b?^}MjI6",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::05 Modeling Method",
+   "tags": [
+    "bpmn::method"
+   ],
+   "front": "BPMN: <b>orchestration</b>, <b>collaboration</b>, <b>choreography</b> diagrams?",
+   "back": "Orchestration: one participant's process. Collaboration: several pools linked by message flow. Choreography: only the message exchanges, no internal steps.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BPMN · Method",
+   "reverse": false
+  },
+  {
+   "guid": "k4/ckIuW3i",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::06 DMN & CMMN",
+   "tags": [
+    "bpmn::dmn"
+   ],
+   "front": "What is <b>DMN</b> and what problem does it solve?",
+   "back": "<b>Decision Model and Notation</b> (OMG): models decision logic separately, so rules don't get buried in gateway conditions.",
+   "text": "",
+   "image": "",
+   "analogy": "The process is the assembly line; DMN is the tax table it consults — change the table without rebuilding the line.",
+   "extra": "",
+   "source": "BPMN · DMN",
+   "reverse": false
+  },
+  {
+   "guid": "w;ag0Ge?`,",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::06 DMN & CMMN",
+   "tags": [
+    "bpmn::dmn"
+   ],
+   "front": "What are the two main DMN diagram types?",
+   "back": "<b>Decision Requirements Diagram (DRD)</b>: decisions and their dependencies.<br><b>Decision table</b>: the rule rows for one decision.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BPMN · DMN",
+   "reverse": false
+  },
+  {
+   "guid": "qVYnK$XQ_#",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::06 DMN & CMMN",
+   "tags": [
+    "bpmn::dmn"
+   ],
+   "front": "What is a DMN <b>hit policy</b>?",
+   "back": "How multiple matching rows are resolved, e.g. <b>Unique</b>, <b>First</b>, <b>Collect</b>, <b>Priority</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BPMN · DMN",
+   "reverse": false
+  },
+  {
+   "guid": "qb>>j61a/_",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::06 DMN & CMMN",
+   "tags": [
+    "bpmn::dmn"
+   ],
+   "front": "How does a BPMN process call a DMN decision?",
+   "back": "A <b>business rule task</b> references the decision; the engine passes inputs, evaluates the table and returns the result to the process.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BPMN · DMN",
+   "reverse": false
+  },
+  {
+   "guid": "H.8H<AU&&P",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::06 DMN & CMMN",
+   "tags": [
+    "bpmn::cmmn"
+   ],
+   "front": "What is <b>CMMN</b>?",
+   "back": "<b>Case Management Model and Notation</b> (OMG): for unstructured, knowledge-driven work where the sequence can't be predetermined.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BPMN · CMMN",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::06 DMN & CMMN",
+   "tags": [
+    "bpmn::dmn",
+    "bpmn::cmmn",
+    "contrast"
+   ],
+   "front": "Which OMG standard fits: (a) a predictable flow of steps, (b) eligibility rules, (c) an investigation whose steps depend on what's found?",
+   "back": "(a) <b>BPMN</b>; (b) <b>DMN</b>; (c) <b>CMMN</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BPMN · DMN · CMMN",
+   "reverse": false
+  },
+  {
+   "guid": "Fy1mos$2S2",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::07 Business Architecture Foundations",
+   "tags": [
+    "bizarch::domain"
+   ],
+   "front": "What is <b>business architecture</b> (BCS)?",
+   "back": "A structured representation of an organisation's strategy, capabilities, value streams and structure, used to align business direction with change.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BCS Business Architecture · Domain",
+   "reverse": false
+  },
+  {
+   "guid": "f=sqcPgrv{",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::07 Business Architecture Foundations",
+   "tags": [
+    "bizarch::domain"
+   ],
+   "front": "Why use business architecture?",
+   "back": "It connects strategy to execution: assess change impact, remove duplicated effort, direct investment to the capabilities that matter most.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BCS Business Architecture · Domain",
+   "reverse": false
+  },
+  {
+   "guid": "lE#wRX.qzM",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::07 Business Architecture Foundations",
+   "tags": [
+    "bizarch::domain"
+   ],
+   "front": "How does business architecture relate to data, application and technology architecture?",
+   "back": "It sets the business context and priorities they must support, keeping IT investment traceable to business need.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BCS Business Architecture · Domain",
+   "reverse": false
+  },
+  {
+   "guid": "t=nU!B---c",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::07 Business Architecture Foundations",
+   "tags": [
+    "bizarch::domain"
+   ],
+   "front": "Typical impediments to adopting business architecture?",
+   "back": "No executive sponsor, unclear mandate, hard-to-show short-term value, and treating it as an IT-only concern.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BCS Business Architecture · Domain",
+   "reverse": false
+  },
+  {
+   "guid": "kqQx4$zb25",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::07 Business Architecture Foundations",
+   "tags": [
+    "bizarch::competence"
+   ],
+   "front": "What is a <b>T-shaped</b> business architect?",
+   "back": "Broad knowledge across business, strategy and architecture (the bar) plus deep expertise in one area (the stem).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BCS Business Architecture · Competence",
+   "reverse": false
+  },
+  {
+   "guid": "gW]F={%YIi",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::07 Business Architecture Foundations",
+   "tags": [
+    "bizarch::competence"
+   ],
+   "front": "What does <b>maturity of the business architecture practice</b> range over?",
+   "back": "From ad hoc individual efforts with no method to an institutionalised, governed practice engaged in strategy and change decisions.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BCS Business Architecture · Competence",
+   "reverse": false
+  },
+  {
+   "guid": "dDAA5M]D6y",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::07 Business Architecture Foundations",
+   "tags": [
+    "bizarch::frameworks"
+   ],
+   "front": "Criteria for choosing a business/enterprise architecture framework?",
+   "back": "Fit with size, sector and change context; how prescriptive it needs to be; existing tools/skills; how well its artefacts map to real decision-making.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BCS Business Architecture · Frameworks",
+   "reverse": false
+  },
+  {
+   "guid": "Pn@[e{tLz1",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::07 Business Architecture Foundations",
+   "tags": [
+    "bizarch::frameworks"
+   ],
+   "front": "BCS business architecture: <b>view</b> vs <b>blueprint</b> vs <b>tool</b>?",
+   "back": "View: a perspective (e.g. capability view). Blueprint: an artefact within a view (e.g. capability map). Tool: the technique/notation used to make it.",
+   "text": "",
+   "image": "",
+   "analogy": "View = the kitchen; blueprint = the recipe card; tool = the knife.",
+   "extra": "",
+   "source": "BCS Business Architecture · Frameworks",
+   "reverse": false
+  },
+  {
+   "guid": "PYjLBXU`H.",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::07 Business Architecture Foundations",
+   "tags": [
+    "bizarch::ba_service"
+   ],
+   "front": "What is 'business architecture <b>as a service</b>'?",
+   "back": "Running the practice as an internal service with its own value proposition to executives and change teams, not a one-off documentation exercise.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BCS Business Architecture · BA as a Service",
+   "reverse": false
+  },
+  {
+   "guid": "e@=G[4P=>:",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::07 Business Architecture Foundations",
+   "tags": [
+    "bizarch::ba_service"
+   ],
+   "front": "How does business architecture engage across the change lifecycle?",
+   "back": "Upfront: shapes strategy and investment. During delivery: informs design. Afterwards: checks change matches target capabilities.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BCS Business Architecture · BA as a Service",
+   "reverse": false
+  },
+  {
+   "guid": "Of|ew}0E;3",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::07 Business Architecture Foundations",
+   "tags": [
+    "bizarch::change_ecosystem"
+   ],
+   "front": "Business architecture vs <b>business analysis</b>?",
+   "back": "Business architecture gives the strategic, cross-initiative context (target capabilities); business analysis works within one project and should align to it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BCS Business Architecture · Change Ecosystem",
+   "reverse": false
+  },
+  {
+   "guid": "Q_4mpt887Z",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::07 Business Architecture Foundations",
+   "tags": [
+    "bizarch::change_ecosystem"
+   ],
+   "front": "How does business architecture help change and project management?",
+   "back": "Change management: clarifies what changes and why. Project management: target state and priorities to trace scope and business cases to.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BCS Business Architecture · Change Ecosystem",
+   "reverse": false
+  },
+  {
+   "guid": "iWTK4BWk@K",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::08 Business Architecture Views",
+   "tags": [
+    "bizarch::motivation"
+   ],
+   "front": "What does the <b>motivation and organisational view</b> analyse?",
+   "back": "The 'why' and 'who': purpose and values, mission/vision/goals, business model, structures, ecosystem and culture.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BCS Business Architecture · Motivation View",
+   "reverse": false
+  },
+  {
+   "guid": "qToodwT/Nz",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::08 Business Architecture Views",
+   "tags": [
+    "bizarch::motivation"
+   ],
+   "front": "Why do <b>business motivation analysis</b>?",
+   "back": "To make explicit why the organisation exists and what it aims for (mission, vision, goals, objectives, strategies), so later decisions can be justified against it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BCS Business Architecture · Motivation View",
+   "reverse": false
+  },
+  {
+   "guid": "pQrfG6gLj(",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::08 Business Architecture Views",
+   "tags": [
+    "bizarch::motivation"
+   ],
+   "front": "What does an <b>ecosystem analysis</b> examine?",
+   "back": "External parties (partners, suppliers, regulators, customers, competitors) and how value and influence flow between them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BCS Business Architecture · Motivation View",
+   "reverse": false
+  },
+  {
+   "guid": "o%ZJYQWJcB",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::08 Business Architecture Views",
+   "tags": [
+    "bizarch::capability"
+   ],
+   "front": "Business <b>capability</b> vs <b>process</b>?",
+   "back": "Capability: <b>what</b> the organisation can do — stable, independent of how or who. Process: <b>how</b> it's done — a sequence of steps that changes far more often.",
+   "text": "",
+   "image": "",
+   "analogy": "'Can cook' is a capability; today's recipe is a process.",
+   "extra": "",
+   "source": "BCS Business Architecture · Capability View",
+   "reverse": false
+  },
+  {
+   "guid": "CkjO}gXbUd",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::08 Business Architecture Views",
+   "tags": [
+    "bizarch::capability"
+   ],
+   "front": "What makes up a business capability description?",
+   "back": "The <b>people, process, information and technology</b> needed to perform it (sometimes governance and culture too).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BCS Business Architecture · Capability View",
+   "reverse": false
+  },
+  {
+   "guid": "Q)@RMO*@oT",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::08 Business Architecture Views",
+   "tags": [
+    "bizarch::capability"
+   ],
+   "front": "What is a <b>capability heat map</b> for?",
+   "back": "Colour-coding a capability map by a metric (importance, maturity, cost, risk) to show where investment is most needed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BCS Business Architecture · Capability View",
+   "reverse": false
+  },
+  {
+   "guid": "zcWzcZwce/",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::08 Business Architecture Views",
+   "tags": [
+    "bizarch::process_service"
+   ],
+   "front": "In the process/service view, what is a service's <b>value proposition</b>?",
+   "back": "An explicit statement of the benefit the service delivers to its consumer — a check that it's designed around consumer need.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BCS Business Architecture · Process/Service View",
+   "reverse": false
+  },
+  {
+   "guid": "C%mOlTg2JX",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::08 Business Architecture Views",
+   "tags": [
+    "bizarch::process_service"
+   ],
+   "front": "<b>Value stream</b> vs business process?",
+   "back": "A value stream maps end-to-end value-adding stages toward a stakeholder outcome; it's outcome-centric and stable across redesigns. A process details <i>how</i>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BCS Business Architecture · Process/Service View",
+   "reverse": false
+  },
+  {
+   "guid": "E{K6{xPb$h",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::08 Business Architecture Views",
+   "tags": [
+    "bizarch::process_service"
+   ],
+   "front": "<b>Value network</b> vs value stream?",
+   "back": "A value network maps the web of value exchanges (revenue, information, goodwill) among many roles, not one linear sequence to one outcome.",
+   "text": "",
+   "image": "",
+   "analogy": "A value stream is a relay race; a value network is a marketplace.",
+   "extra": "",
+   "source": "BCS Business Architecture · Process/Service View",
+   "reverse": false
+  },
+  {
+   "guid": "A%>Z*It]H",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::08 Business Architecture Views",
+   "tags": [
+    "bizarch::information"
+   ],
+   "front": "Information view: data vs information vs metadata?",
+   "back": "<b>Data</b>: raw facts. <b>Information</b>: data with context and meaning. <b>Metadata</b>: data about data (structure, source, owner, meaning).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BCS Business Architecture · Information View",
+   "reverse": false
+  },
+  {
+   "guid": "ocsE?YSr0,",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::08 Business Architecture Views",
+   "tags": [
+    "bizarch::information"
+   ],
+   "front": "What is <b>business information modelling</b>?",
+   "back": "A conceptual model of key business entities (Customer, Order) and relationships, independent of system design; linked to capabilities and processes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BCS Business Architecture · Information View",
+   "reverse": false
+  },
+  {
+   "guid": "z]%hfK,CH&",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::08 Business Architecture Views",
+   "tags": [
+    "bizarch::people"
+   ],
+   "front": "<b>Competency</b> vs <b>capability</b> in business architecture?",
+   "back": "Competency: an attribute of <b>people</b> (what a person/role can do). Capability: an attribute of the <b>organisation</b>, partly realised through competencies.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "The people view examines skills, knowledge and behaviours.",
+   "source": "BCS Business Architecture · People View",
+   "reverse": false
+  },
+  {
+   "guid": "q+>hvE^$EM",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::08 Business Architecture Views",
+   "tags": [
+    "bizarch::people"
+   ],
+   "front": "What is <b>organisational competency analysis</b> used for?",
+   "back": "Finding gaps between current and required competencies, to inform workforce planning, training, hiring and org design.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BCS Business Architecture · People View",
+   "reverse": false
+  }
+ ]
+}

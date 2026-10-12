@@ -1,0 +1,44 @@
+# Platform Engineering — changelog
+
+**Notes in:** 224 from platform_gitops (116), iac_control_plane_abstraction (30), idp_platform_engineering (39), policy_as_code_supply_chain_security (39), plus 18 generic GitOps/fleet/tenancy notes moved in from STACKIT_Hybrid_Cloud_Architect (16 kept, 2 merged). Total 242 in.
+**Notes out:** 242 (216 keep an original guid, 26 new with `guid: null`).
+**Subdecks (13):** 01 GitOps Principles · 02 Argo CD · 03 Flux · 04 Terraform & IaC · 05 Ansible & Config Management · 06 Crossplane & Control Planes · 07 Helm · 08 Operators & Controllers · 09 Platform as a Product · 10 Developer Portals & Workload Specs · 11 Policy as Code · 12 Supply-Chain Security · 13 Fleet & Multi-Tenancy.
+
+## Merges (20 notes folded into another)
+- Ansible idempotency `IY:>kwR8Ls` → IaC idempotency `M&Z`Q>#VAH` (Ansible point moved to extra)
+- "What is Terraform state file / why sensitive" `n^4v;RTE&I` → state security `B*g1ovz}R^`
+- Terraform provider `NN@ar@B.uQ` + module `AG7aR3fQ{7` → resource/data source/module/provider cloze `kIrh:BbVbo`
+- Terraform workspaces `zD!+jP!5/(` → workspaces + caveat `g~A]T@Q:+r`
+- OpenTofu `ce4gwlVG8L` + BSL vs MPL licensing `N.?%hd9Ixo` → "Why does OpenTofu exist?" `fj((&=2sOu`
+- Terraform drift `r,=gG6[c:H` → configuration drift `x/46/>H*sp`
+- Crossplane vs Terraform reconciliation `kPu^hKU+cV` → Crossplane vs Terraform `tG.sv1bw_5`
+- GenerationChangedPredicate `Qe$Qa)]A{&` → "don't write status unconditionally" `OA2UD88Cte` (extra)
+- Scaffolder & golden paths `O<Ww:r<=v3` → Scaffolder `b;ntM|JEi_`
+- Why RHDH over Backstage `Q6>>Y.,Z=Y` → RHDH `h$_.,<aOhT`
+- Humanitec "integrate and embrace" `zHLD==NqHu` → Humanitec Orchestrator vs Backstage/Argo `$-R~]8E(S`
+- Gatekeeper Constraint `D!:`OM$#nn` → ConstraintTemplate/Constraint cloze `gKy`M`rmz_`
+- Grype `wEtlT6%$6v` → Syft/Grype cloze `j1N*DpRiE9`
+- ACS admission `B.<1X0qthI` + ACS vs SLSA chain `P;F.H7*6)P` → ACS scope `q4.//zAEBE`
+- "Single admission check unifying signatures/attestations" `n2dGl4l}D=` → end-to-end supply-chain cloze `vY5yua??Sw`
+- STACKIT Argo CD multitenancy `pk:v*k@ERi` → AppProject `k^Tn<8UP,b` (tenancy pattern in extra)
+- STACKIT Argo CD vs Flux `Q@mOM@H/ca` → Argo CD vs Flux `h(.0Wca=ZM`
+- Terraform state locking (iac) `g?Z?234I?3` kept as the S3-locking half of the split locking card.
+
+## Moved in from STACKIT (generic, no STACKIT specifics)
+Soft vs hard tenancy, namespace-per-tenant mechanisms, what namespaces don't isolate, vCluster, Capsule/HNC, tenancy decision matrix, shared ingress/monitoring tenancy, reasons for multiple clusters, hub/management cluster, push vs pull fleet GitOps, Helm/Kustomize layering, multi-cluster networking options, data gravity, upgrade rings (→ 13 Fleet & Multi-Tenancy); Terraform vs GitOps boundary (→ 04); ApplicationSets for fleets (→ 02).
+
+## Deletions (6)
+- `rRm6;^h_5E` "What is Terraform?" — trivial definition, covered by the Terraform cards.
+- `w)|AJq1G?/` informers/cache/workqueue — client-go implementation detail, owned by the Go deck.
+- `h@~;z;l0y.` controller-runtime Reconcile return values — Go implementation detail (Go deck).
+- `N|*E?uL~Us` For/Owns/Watches builder — controller-runtime code (Go deck).
+- `IaPBd2^Y+` RHDH marketplace's three plugin categories — vendor taxonomy, no work impact.
+- `qdssE2ztt5` Red Hat Developer Lightspeed — product marketing.
+
+## Splits
+16 notes split into 25 additional cards (e.g. Terraform locking → why/how; Helm hooks → annotations/pitfall; HelmRelease remediation/drift; spec-status/status subresource; vCluster → what/gives/doesn't/sweet spot; tenancy decision matrix → 4 cards; push vs pull fleet → 3; multi-cluster networking → 4). 1 new contrast card: Kyverno/Gatekeeper webhooks vs ValidatingAdmissionPolicy.
+Enumerations turned into clozes (33 cloze notes): OpenGitOps principles, lifecycle meta-args, Helm terms, Flux/Argo components, operator capability levels, Ansible architecture, Backstage kinds, etc.
+
+## Other
+- Analogies: 48 notes, all new (sources had none), ~20%.
+- Removed abbreviation-expansion noise, trimmed version trivia into `extra` (e.g. Helm 3.8 OCI GA, Helm 4 release date), added Helm 4 `--atomic` → `--rollback-on-failure` note, Crossplane v2 Claims note.

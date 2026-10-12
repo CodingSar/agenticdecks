@@ -1,0 +1,2900 @@
+{
+ "source_file": "Linux_OS_Internals_for_K8s_Security.apkg",
+ "notes": [
+  {
+   "guid": "F$[PkRJHy;",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::process"
+   ],
+   "front": "What is a process?",
+   "back": "A running instance of a program: its own virtual address space, at least one thread of execution, a process ID (PID), open file descriptors, and other kernel-tracked state.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Process & Scheduling"
+  },
+  {
+   "guid": "yp3yzSz>JX",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::process"
+   ],
+   "front": "What does fork() do?",
+   "back": "Creates a new process (the child) as a near-exact copy of the calling process. Both continue executing from the instruction after fork(); it returns 0 in the child and the child's PID in the parent.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Process & Scheduling"
+  },
+  {
+   "guid": "L1snYj?Q7L",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::process"
+   ],
+   "front": "What does the exec() family of calls do?",
+   "back": "Replaces the calling process's memory image (code, data, stack) with a new program, keeping the same PID. Commonly paired with fork() as the fork+exec pattern to launch a new program.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Process & Scheduling"
+  },
+  {
+   "guid": "AIc@L<55uv",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::process"
+   ],
+   "front": "Why does fork() not copy the parent's memory immediately?",
+   "back": "It relies on copy-on-write (COW): the child's page tables initially point to the same physical pages as the parent, marked read-only. A page is only duplicated when either process writes to it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Process & Scheduling"
+  },
+  {
+   "guid": "k8Vgqor6UV",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::process"
+   ],
+   "front": "What is a zombie process?",
+   "back": "A process that has terminated but whose exit status has not yet been collected by its parent via wait()/waitpid(). Its PID and exit code linger in the process table until reaped.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Process & Scheduling"
+  },
+  {
+   "guid": "p2|R$Rb|md",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::process"
+   ],
+   "front": "What is an orphan process, and what happens to it?",
+   "back": "A process whose parent has terminated before it. It gets re-parented, typically to PID 1 (init or a container's init process), which is responsible for eventually reaping it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Process & Scheduling"
+  },
+  {
+   "guid": "smCjt5TaLg",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::process"
+   ],
+   "front": "List the main Linux process states.",
+   "back": "<ul><li>Running / runnable</li><li>Interruptible sleep (waiting, can be woken by a signal)</li><li>Uninterruptible sleep (usually waiting on I/O; ignores signals)</li><li>Stopped (e.g. via SIGSTOP)</li><li>Zombie (terminated, not yet reaped)</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Process & Scheduling"
+  },
+  {
+   "guid": "bS39Ww<#XI",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::process"
+   ],
+   "front": "Why does PID 1 have special responsibilities, and why does this matter in a container?",
+   "back": "PID 1 must reap orphaned/zombie children and does not get default signal handling (it must explicitly handle signals like SIGTERM). A container's main process runs as PID 1 inside its PID namespace, so if it is a normal application rather than an init system, zombies can accumulate and signals may be ignored -- a common reason to run a minimal init (tini, dumb-init) as PID 1 in a container.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Process & Scheduling"
+  },
+  {
+   "guid": "c*+v8+`.X%",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::process"
+   ],
+   "front": "What is the Completely Fair Scheduler (CFS)?",
+   "back": "The Linux process scheduler used as the default for the SCHED_OTHER class for many years, which orders runnable tasks in a red-black tree keyed by virtual runtime (vruntime) and always picks the leftmost (least-served) task to run next.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Process & Scheduling"
+  },
+  {
+   "guid": "lxA.TU^Pz$",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::process"
+   ],
+   "front": "What replaced CFS as Linux's default scheduler, and when?",
+   "back": "EEVDF (Earliest Eligible Virtual Deadline First), merged as the default scheduling class in kernel 6.6 (2023). It refines CFS's fairness model with explicit eligibility and virtual deadlines to reduce latency for interactive tasks. (Treat as accurate for modern kernels; older references, including Linux Kernel Development, describe CFS.)",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Process & Scheduling"
+  },
+  {
+   "guid": "b/x}(fe/yr",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::process"
+   ],
+   "front": "What is the difference between a process and a thread?",
+   "back": "Threads within the same process share the address space, open file descriptors, and other resources, but each has its own stack, registers, and thread ID (TID). A process has at least one thread and its own isolated address space.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Process & Scheduling"
+  },
+  {
+   "guid": "eH5w;W,fUu",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::process"
+   ],
+   "front": "What syscall underlies both fork() and thread creation on Linux?",
+   "back": "clone(). Flags passed to clone() (such as CLONE_VM, CLONE_FILES, CLONE_THREAD) control which resources -- address space, file descriptors, etc. -- are shared with the parent versus duplicated. The same syscall, with different flags, also underlies namespace creation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Process & Scheduling"
+  },
+  {
+   "guid": "N]Y]Cz~g3A",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::process"
+   ],
+   "front": "What does a process's nice value control?",
+   "back": "Its scheduling priority under CFS/EEVDF's fair-share model, ranging from -20 (highest priority, most CPU share) to 19 (lowest). Only privileged processes (CAP_SYS_NICE) can lower their nice value below the default.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Process & Scheduling"
+  },
+  {
+   "guid": "hOi0+D4Kgt",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::process"
+   ],
+   "front": "What is a context switch?",
+   "back": "The kernel saving the full CPU state (registers, program counter, stack pointer) of the currently running task and restoring the state of a different task, so execution can switch between processes or threads.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Process & Scheduling"
+  },
+  {
+   "guid": "xl|jE0Ri[q",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::memory"
+   ],
+   "front": "What is virtual memory?",
+   "back": "An abstraction that gives every process its own private address space, mapped by the kernel to physical memory (and sometimes disk). It provides isolation between processes and lets the kernel manage physical memory independently of how programs address it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Memory Management"
+  },
+  {
+   "guid": "G1{gvXq2c6",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::memory"
+   ],
+   "front": "What is a page?",
+   "back": "A fixed-size chunk of virtual (and physical) memory used as the unit of memory management -- typically 4 KB on x86-64. Larger 'huge pages' (e.g. 2 MB, 1 GB) exist to reduce translation overhead for large allocations.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Memory Management"
+  },
+  {
+   "guid": "v(3#TT/VID",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::memory"
+   ],
+   "front": "What is a page table?",
+   "back": "A per-process kernel data structure that maps virtual page numbers to physical frame numbers, consulted by the memory management unit (MMU) on every memory access.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Memory Management"
+  },
+  {
+   "guid": "v>`^U@;?;k",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::memory"
+   ],
+   "front": "What is the Translation Lookaside Buffer (TLB)?",
+   "back": "A small, fast CPU cache of recent virtual-to-physical address translations, used to avoid walking the full page table on every memory access. A TLB miss forces a page table walk.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Memory Management"
+  },
+  {
+   "guid": "G$##xn*#=2",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::memory"
+   ],
+   "front": "What is a page fault?",
+   "back": "A CPU trap raised when a memory access can't be satisfied by the current page table mapping. A minor fault is resolved without disk I/O (e.g. the page exists but isn't mapped yet, as with copy-on-write); a major fault requires reading the page in from disk.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Memory Management"
+  },
+  {
+   "guid": "Os~e.ULh$P",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::memory"
+   ],
+   "front": "What is the OOM killer?",
+   "back": "A kernel mechanism that selects and kills a process when the system is critically low on memory and can't reclaim enough by other means. It ranks candidates using a badness score influenced by /proc/[pid]/oom_score_adj.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Memory Management"
+  },
+  {
+   "guid": "r}A65D+~*8",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::memory"
+   ],
+   "front": "How does a Kubernetes pod memory limit result in an OOM kill?",
+   "back": "The limit is set as the cgroup's memory.max. When the container's cgroup tries to exceed that ceiling and the kernel can't reclaim enough memory, the kernel's OOM killer kills a process in that cgroup -- this is a hard, immediate kill, not a graceful signal.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Memory Management"
+  },
+  {
+   "guid": "pU+d%b^v>q",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::memory"
+   ],
+   "front": "What is memory overcommit?",
+   "back": "The kernel's default policy of allowing more virtual memory to be allocated (e.g. via malloc()) than physically exists, on the assumption that not all allocated pages will actually be touched. Controlled via /proc/sys/vm/overcommit_memory.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Memory Management"
+  },
+  {
+   "guid": "v^fN*4{Vr&",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::memory"
+   ],
+   "front": "What is a Virtual Memory Area (VMA)?",
+   "back": "The kernel's record of one contiguous region of a process's virtual address space with uniform properties (permissions, backing file or anonymous memory). A process's full VMA list is visible in /proc/[pid]/maps.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Memory Management"
+  },
+  {
+   "guid": "eRWwt^fJpo",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::memory"
+   ],
+   "front": "What does the mmap() syscall do?",
+   "back": "Maps a file (or anonymous memory) directly into a process's virtual address space, allowing file access via ordinary memory reads/writes, or allocation of large anonymous regions without going through the heap allocator.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Memory Management"
+  },
+  {
+   "guid": "mX+BK+*B|L",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::memory"
+   ],
+   "front": "What is the practical difference between heap and stack memory?",
+   "back": "The stack holds function call frames (local variables, return addresses), grows and shrinks automatically, and is per-thread. The heap holds dynamically allocated memory (malloc/free or new/delete), is shared within a process, and must be managed explicitly or by a garbage collector.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Memory Management"
+  },
+  {
+   "guid": "cFg&3OMhVb",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::memory"
+   ],
+   "front": "What does 'available' memory mean in tools like free -h, as opposed to 'free'?",
+   "back": "'Free' is memory not used for anything. 'Available' additionally counts memory currently used for the page cache/buffers that the kernel can reclaim on demand -- so a system showing little 'free' but high 'available' memory is typically healthy, not under memory pressure.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Memory Management"
+  },
+  {
+   "guid": "A*g4]iqDg~",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::memory"
+   ],
+   "front": "What is the difference between memory.max and memory.high in the cgroup v2 memory controller?",
+   "back": "memory.max is a hard ceiling: exceeding it triggers the OOM killer within that cgroup. memory.high is a soft throttling point: exceeding it causes the kernel to aggressively reclaim and throttle the cgroup's processes without killing them, giving a chance to back off before hitting memory.max.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Memory Management"
+  },
+  {
+   "guid": "o)__=LprqJ",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::namespaces"
+   ],
+   "front": "What is a Linux namespace?",
+   "back": "A kernel feature that partitions a global system resource (like the process ID space, network stack, or mount table) so that a process sees its own isolated instance of that resource, distinct from other namespaces. Namespaces are the primary isolation mechanism containers are built on.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Namespaces"
+  },
+  {
+   "guid": "D&-);ClRl[",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::namespaces"
+   ],
+   "front": "List the 8 Linux namespace types.",
+   "back": "<ul><li>PID -- process IDs</li><li>Network (net) -- network stack</li><li>Mount (mnt) -- filesystem mount table</li><li>UTS -- hostname and NIS domain name</li><li>IPC -- System V IPC objects and POSIX message queues</li><li>User -- UID/GID mappings</li><li>Cgroup -- view of the cgroup hierarchy</li><li>Time -- per-namespace offsets for certain clocks</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Namespaces"
+  },
+  {
+   "guid": "p4-hI-uinY",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::namespaces"
+   ],
+   "front": "What does a PID namespace isolate?",
+   "back": "The process ID space: processes inside the namespace see only processes within it (and descendant namespaces), numbered starting from 1. The first process created in a new PID namespace becomes that namespace's PID 1.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Namespaces"
+  },
+  {
+   "guid": "Le0xJhi?Ab",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::namespaces"
+   ],
+   "front": "What does a network namespace isolate?",
+   "back": "An entire network stack: its own network interfaces (other than ones explicitly moved in), routing tables, firewall/netfilter rules, and port space. Two processes in different network namespaces can both bind to port 80 without conflict.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Namespaces"
+  },
+  {
+   "guid": "uU.>FuIj6R",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::namespaces"
+   ],
+   "front": "What does a mount namespace isolate?",
+   "back": "The set of filesystem mounts visible to a process -- effectively its own view of the directory tree. Mount/unmount operations inside the namespace don't affect other namespaces (unless mount propagation is explicitly configured).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Namespaces"
+  },
+  {
+   "guid": "vYlC^k<y~T",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::namespaces"
+   ],
+   "front": "What does a UTS namespace isolate?",
+   "back": "The hostname and NIS domain name, returned by uname(). It lets a container have its own hostname independent of the host's.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Namespaces"
+  },
+  {
+   "guid": "Dqbs=D`~]3",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::namespaces"
+   ],
+   "front": "What does an IPC namespace isolate?",
+   "back": "System V inter-process communication (IPC) objects -- message queues, semaphores, shared memory segments -- and POSIX message queues, so processes in different IPC namespaces can't see or interfere with each other's IPC objects.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Namespaces"
+  },
+  {
+   "guid": "L$+ON8mnR/",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::namespaces"
+   ],
+   "front": "What does a user namespace isolate, and why is it central to rootless containers?",
+   "back": "It provides a private mapping of UIDs/GIDs: a process can appear to be UID 0 (root) inside the namespace while actually running as an unprivileged UID on the host. This lets an unprivileged host user run what looks like a fully-privileged container without holding any real host root privilege.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Namespaces"
+  },
+  {
+   "guid": "lBFl|Zx:Y5",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::namespaces"
+   ],
+   "front": "What does a cgroup namespace isolate?",
+   "back": "The view of the cgroup hierarchy: a process inside the namespace sees its own cgroup as the root ('/') rather than its full path on the host, hiding host cgroup structure from containerized processes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Namespaces"
+  },
+  {
+   "guid": "G>eFRmz/aP",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::namespaces"
+   ],
+   "front": "What is the time namespace, and what problem does it solve?",
+   "back": "Added in Linux 5.6, it lets a namespace have its own offsets for CLOCK_MONOTONIC and CLOCK_BOOTTIME. This matters for container checkpoint/restore (e.g. CRIU) so a restored or migrated container's monotonic clock stays consistent rather than jumping.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Namespaces"
+  },
+  {
+   "guid": "wEOhT{>319",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::namespaces"
+   ],
+   "front": "What do unshare() and setns() do?",
+   "back": "unshare() moves the calling process into new namespace(s), detaching it from the ones it currently shares with its parent. setns() joins an already-existing namespace, given a file descriptor referencing it (commonly one of the /proc/[pid]/ns/* symlinks).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Namespaces"
+  },
+  {
+   "guid": "i,GCAv:4<L",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::namespaces"
+   ],
+   "front": "What does nsenter do, and when would a Kubernetes admin use it?",
+   "back": "A command-line tool that runs a program inside the namespaces of another (target) process, using setns() under the hood. Useful for debugging a running container from the host -- e.g. entering its network namespace to run tcpdump, without needing tools installed inside the container image.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Namespaces"
+  },
+  {
+   "guid": "hvD;j.w/Ym",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::namespaces"
+   ],
+   "front": "What is /proc/[pid]/ns/ for?",
+   "back": "A directory of symlinks, one per namespace type, that identify which namespace instance a process belongs to. Two processes with the same inode number for, say, net, are in the same network namespace.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Namespaces"
+  },
+  {
+   "guid": "Ln?%|f::$r",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::namespaces"
+   ],
+   "front": "How does a container differ from a normal process, purely in namespace terms?",
+   "back": "It is an ordinary Linux process that has been placed into its own PID, network, mount, UTS, and IPC namespaces (and usually cgroup and user namespaces), giving it an isolated view of the system while still running on the host's single shared kernel.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Namespaces"
+  },
+  {
+   "guid": "GwnoLMZ~>P",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::namespaces"
+   ],
+   "front": "Why are namespaces alone not a complete security boundary?",
+   "back": "Namespaces control visibility, not resource consumption or privilege -- without cgroups a namespaced process can still exhaust host CPU/memory, and without capability dropping it can still hold powerful privileges. Some kernel resources (like the kernel keyring, historically) were also not namespaced, so isolation gaps existed even with all namespace types in use. The kernel itself is also still shared and is the ultimate trust boundary.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Namespaces"
+  },
+  {
+   "guid": "Hy%|Sr0^%x",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::namespaces"
+   ],
+   "front": "What is the practical difference between a namespace-based container and chroot?",
+   "back": "chroot() only changes a process's apparent filesystem root, with no isolation of processes, network, or IPC -- and is well known to be escapable by a privileged process. Namespaces isolate multiple independent resource types and, combined with cgroups and capability dropping, form the actual basis of container isolation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Namespaces"
+  },
+  {
+   "guid": "mv2mo$E,`i",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::namespaces"
+   ],
+   "front": "What does hostNetwork: true do to a Kubernetes pod, at the namespace level?",
+   "back": "The pod's containers run in the host's network namespace instead of getting their own -- they see the node's real network interfaces and can bind to the node's actual ports, removing network isolation from the host.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Namespaces"
+  },
+  {
+   "guid": "rAE8G1P9Ig",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::namespaces"
+   ],
+   "front": "What does hostPID: true do to a Kubernetes pod, at the namespace level?",
+   "back": "The pod's containers share the host's PID namespace, so they can see (and, with sufficient capabilities, signal or ptrace) every process running on the node, not just their own.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Namespaces"
+  },
+  {
+   "guid": "L>#eV*C>K1",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::namespaces"
+   ],
+   "front": "Why does Kubernetes' hostUsers field exist, and what does hostUsers: false do?",
+   "back": "It controls whether a pod gets its own user namespace. Setting hostUsers: false gives the pod its own user namespace with UID/GID remapping, so a process that is 'root' inside the container maps to an unprivileged UID on the host node -- meaningfully reducing the impact of a container-to-host breakout.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Namespaces"
+  },
+  {
+   "guid": "qc{M7pN{(^",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::namespaces"
+   ],
+   "front": "What happens to the other namespaced processes in a container when PID 1 of that PID namespace exits?",
+   "back": "The kernel sends SIGKILL to every other process in that PID namespace and the namespace is torn down once empty -- which is why a container's main process exiting terminates the whole container, even if it spawned background children.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Namespaces"
+  },
+  {
+   "guid": "ce`7mmlbX-",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::cgroups"
+   ],
+   "front": "What is a cgroup (control group)?",
+   "back": "A kernel mechanism for grouping processes and limiting, accounting for, and isolating their usage of resources such as CPU, memory, disk I/O, and process count. Where namespaces control what a process can see, cgroups control what it can use.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cgroups"
+  },
+  {
+   "guid": "p8E[fGSO/3",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::cgroups"
+   ],
+   "front": "What is the key structural difference between cgroup v1 and cgroup v2?",
+   "back": "cgroup v1 has a separate hierarchy (tree) per resource controller (CPU, memory, etc.), so a process could belong to different positions in different trees. cgroup v2 uses one unified hierarchy where all controllers apply to the same tree of cgroups.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cgroups"
+  },
+  {
+   "guid": "lcuk,G}Ylk",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::cgroups"
+   ],
+   "front": "Which cgroup version is the default on modern Linux distributions and Kubernetes today?",
+   "back": "cgroup v2 is now the default on modern distributions (RHEL 9+, Ubuntu 21.10+, Fedora 31+) and is the version Kubernetes recommends/expects on current nodes; cgroup v1 is legacy at this point. (Treat as accurate as of mid-2026.)",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cgroups"
+  },
+  {
+   "guid": "G]cTS4VK^~",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::cgroups"
+   ],
+   "front": "What does the cgroup v2 memory controller's memory.max file do?",
+   "back": "Sets a hard ceiling on the cgroup's memory usage. Exceeding it triggers the kernel's OOM killer to kill a process within that cgroup -- this is how a Kubernetes container memory limit is actually enforced.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cgroups"
+  },
+  {
+   "guid": "KX$/j/WfZ^",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::cgroups"
+   ],
+   "front": "What does the cgroup v2 CPU controller's cpu.max file control?",
+   "back": "A quota/period pair limiting how much CPU time the cgroup may use per period (e.g. '50000 100000' means 50ms of CPU time per 100ms period, i.e. 0.5 CPU). Exceeding the quota throttles the cgroup rather than killing it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cgroups"
+  },
+  {
+   "guid": "gu=}pO1QeR",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::cgroups"
+   ],
+   "front": "What does the pids controller in cgroups protect against?",
+   "back": "It caps the number of processes/threads a cgroup may create (pids.max), directly preventing fork bombs from a single container from exhausting the host's process table.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cgroups"
+  },
+  {
+   "guid": "t2=pX/c0G:",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::cgroups"
+   ],
+   "front": "What is the difference between a CPU 'request' and a CPU 'limit' in terms of what they configure at the cgroup level?",
+   "back": "A request maps to the relative share/weight used for fair scheduling among cgroups when the CPU is contended (cpu.weight in cgroup v2) -- it doesn't cap usage. A limit maps to a hard quota (cpu.max) that throttles the cgroup once it's exceeded, regardless of contention.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cgroups"
+  },
+  {
+   "guid": "ANhYBD3&*L",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::cgroups"
+   ],
+   "front": "What happens when a process exceeds its cgroup CPU quota (cpu.max)?",
+   "back": "It is throttled -- prevented from running further until the next period -- rather than killed. This is different from exceeding a memory limit, which triggers an OOM kill.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cgroups"
+  },
+  {
+   "guid": "BQy9oo0:ff",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::cgroups"
+   ],
+   "front": "How does systemd relate to cgroups on a modern Linux system?",
+   "back": "systemd manages the cgroup v2 hierarchy directly, organizing it into slices, scopes, and per-unit cgroups for every service it starts, and delegates sub-trees to other cgroup-aware managers (like container runtimes) rather than letting them manage cgroups independently.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cgroups"
+  },
+  {
+   "guid": "Rd@]cvF:5n",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::cgroups"
+   ],
+   "front": "What is cgroup delegation?",
+   "back": "Granting a specific subtree of the cgroup hierarchy to be managed by a less-privileged process (e.g. a rootless container runtime), so it can create and configure its own child cgroups within that subtree without needing full host root.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cgroups"
+  },
+  {
+   "guid": "tn~LJG4JX,",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::cgroups"
+   ],
+   "front": "What do the cgroup.procs and cgroup.threads files contain?",
+   "back": "The list of process IDs (cgroup.procs) or thread IDs (cgroup.threads) that are currently members of that cgroup -- writing a PID to cgroup.procs moves that process into the cgroup.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cgroups"
+  },
+  {
+   "guid": "OD+,QfU`45",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::cgroups"
+   ],
+   "front": "What does the cgroup v2 io controller limit?",
+   "back": "Block I/O bandwidth and/or IOPS per device for a cgroup, via io.max, preventing one container's disk activity from starving others on the same node.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cgroups"
+  },
+  {
+   "guid": "C/C#NnLOpZ",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::cgroups"
+   ],
+   "front": "Historically, how did the cgroup v1 release_agent mechanism become a well-known container escape technique?",
+   "back": "cgroup v1 allowed a per-hierarchy release_agent script/binary to be configured, which the kernel would execute (as root, on the host) whenever a cgroup became empty. A container with CAP_SYS_ADMIN and write access to a v1 cgroup hierarchy could set release_agent to a script of its choosing and trigger it, achieving host code execution. Modern defaults and cgroup v2 largely close this off, but it remains a canonical teaching example of why capabilities and mount access matter as much as namespaces.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cgroups"
+  },
+  {
+   "guid": "y1g5^EEp,U",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::capabilities"
+   ],
+   "front": "What is a Linux capability?",
+   "back": "A discrete unit of privilege that traditionally belonged only to root. Capabilities split root's all-or-nothing power into ~40 separate permissions (like binding low ports, or loading kernel modules) that can be granted independently, enabling least-privilege processes that aren't full root but aren't fully unprivileged either.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Capabilities"
+  },
+  {
+   "guid": "K7t5bm(90L",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::capabilities"
+   ],
+   "front": "What does the CAP_SYS_ADMIN capability grant, and why is it considered dangerous?",
+   "back": "A large, poorly-scoped grab-bag of privileged operations, including mounting filesystems and manipulating namespaces. Because of its breadth, holding CAP_SYS_ADMIN inside a container is functionally close to holding root on the host and is one of the most common paths to a container escape.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Capabilities"
+  },
+  {
+   "guid": "I{$<@[bRGZ",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::capabilities"
+   ],
+   "front": "What does CAP_NET_ADMIN grant?",
+   "back": "Broad network configuration privileges: modifying routing tables, interfaces, firewall rules, and other network stack state.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Capabilities"
+  },
+  {
+   "guid": "H?r,}MjUb6",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::capabilities"
+   ],
+   "front": "What does CAP_NET_RAW grant, and why does it matter for security?",
+   "back": "The ability to create raw and packet sockets, enabling packet sniffing and the crafting of arbitrary (including spoofed-source) packets. It's needed for tools like ping and tcpdump, but is a meaningful capability to drop from containers that don't need it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Capabilities"
+  },
+  {
+   "guid": "r)f+ly+VMH",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::capabilities"
+   ],
+   "front": "What does CAP_NET_BIND_SERVICE grant?",
+   "back": "The ability to bind to network ports below 1024 (the traditional 'privileged ports' range) without needing full root.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Capabilities"
+  },
+  {
+   "guid": "F$szg+8:I5",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::capabilities"
+   ],
+   "front": "What does CAP_SYS_PTRACE grant, and why is it risky in a container with hostPID enabled?",
+   "back": "The ability to trace and inspect other processes via ptrace() (as used by strace, gdb, etc.). Combined with hostPID: true, a container holding this capability can potentially attach to and manipulate processes running on the host itself.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Capabilities"
+  },
+  {
+   "guid": "p<3;Svf{?P",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::capabilities"
+   ],
+   "front": "What does CAP_DAC_OVERRIDE grant?",
+   "back": "The ability to bypass file read/write/execute permission checks (Discretionary Access Control) that would otherwise apply based on file mode bits and ownership.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Capabilities"
+  },
+  {
+   "guid": "xE%nKvh~-N",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::capabilities"
+   ],
+   "front": "What does CAP_SYS_MODULE grant, and why is it especially dangerous?",
+   "back": "The ability to load and unload kernel modules. Since kernel modules run as part of the kernel itself, this capability is effectively equivalent to full host compromise -- a process holding it can load arbitrary code into kernel space.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Capabilities"
+  },
+  {
+   "guid": "gV,t~?dX[4",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::capabilities"
+   ],
+   "front": "What are the main Linux capability sets a process has?",
+   "back": "<ul><li>Permitted -- capabilities the process is allowed to use</li><li>Effective -- capabilities currently active and checked by the kernel</li><li>Inheritable -- capabilities preserved across execve() under specific conditions</li><li>Bounding -- an upper bound limiting what the process (and its children) can ever acquire</li><li>Ambient -- capabilities preserved across execve() of a non-setuid program without needing file capabilities</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Capabilities"
+  },
+  {
+   "guid": "IC|iKIss`#",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::capabilities"
+   ],
+   "front": "What does Docker's/Kubernetes' default capability set look like for a container running as UID 0?",
+   "back": "Even running 'as root' (UID 0), a default container does not get the full root capability set -- container runtimes drop a substantial subset of capabilities (like CAP_SYS_ADMIN, CAP_SYS_MODULE, CAP_NET_ADMIN) by default, leaving only a smaller safer set (e.g. CAP_CHOWN, CAP_NET_BIND_SERVICE) unless explicitly added back.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Capabilities"
+  },
+  {
+   "guid": "s;hAcFejw1",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::capabilities"
+   ],
+   "front": "What does the --privileged flag do in Docker, in terms of capabilities and beyond?",
+   "back": "It grants the container all capabilities, disables the default seccomp and AppArmor/SELinux confinement, and gives access to host devices -- effectively removing the kernel-level security boundary that namespaces/capabilities/seccomp normally provide.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Capabilities"
+  },
+  {
+   "guid": "w5J#?Xe!9X",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::capabilities"
+   ],
+   "front": "What do getcap and setcap do?",
+   "back": "getcap inspects the file capabilities attached to a binary; setcap assigns capabilities directly to a binary's extended attributes, letting it run with specific privileges without being setuid-root -- a more granular alternative to the traditional setuid bit.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Capabilities"
+  },
+  {
+   "guid": "uB0qiab0k%",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::capabilities"
+   ],
+   "front": "What is the difference between a file capability and a process capability?",
+   "back": "A file capability is stored as an extended attribute on an executable and is applied when that file is exec'd, similarly to how the setuid bit works. A process capability is the runtime capability state (permitted/effective/etc. sets) of an already-running process, which can change across fork()/exec() according to inheritance rules.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Capabilities"
+  },
+  {
+   "guid": "F|iADZIH.L",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::capabilities"
+   ],
+   "front": "What Kubernetes securityContext setting corresponds to 'drop every capability, then add back only what's needed'?",
+   "back": "capabilities.drop: [\"ALL\"], optionally followed by a short capabilities.add list for the specific capabilities the container actually requires -- the standard least-privilege pattern for container security contexts.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Capabilities"
+  },
+  {
+   "guid": "y-%;9AniMZ",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::capabilities"
+   ],
+   "front": "Why aren't Linux capabilities, by themselves, a complete privilege sandbox?",
+   "back": "Several individual capabilities (most notably CAP_SYS_ADMIN, and CAP_SYS_MODULE) are broad enough to enable a full escape or privilege escalation on their own, so capability dropping is necessary but not sufficient -- it needs to be combined with namespaces, cgroups, and seccomp/LSM confinement for defense in depth.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Capabilities"
+  },
+  {
+   "guid": "r54K;rMpg2",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::capabilities"
+   ],
+   "front": "What does allowPrivilegeEscalation: false control in a Kubernetes securityContext?",
+   "back": "It sets the no_new_privs process flag, preventing the container's process (and anything it execve()s) from gaining more privileges than it started with -- for example, via a setuid binary or file capabilities on a binary inside the image.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Capabilities"
+  },
+  {
+   "guid": "jr7!P6^m6y",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::lsm"
+   ],
+   "front": "What is the Linux Security Module (LSM) framework?",
+   "back": "A kernel API that inserts hook points at security-relevant operations (opening a file, creating a socket, etc.), allowing pluggable Mandatory Access Control (MAC) implementations -- such as SELinux, AppArmor, or a BPF program -- to decide whether to allow the operation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "LSM: SELinux & AppArmor"
+  },
+  {
+   "guid": "Swl;!nWH[",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::lsm"
+   ],
+   "front": "What is the difference between Discretionary Access Control (DAC) and Mandatory Access Control (MAC)?",
+   "back": "DAC (traditional Unix file permissions, UID/GID-based) lets the resource owner decide access -- e.g. a file's owner can chmod it open to everyone. MAC enforces a system-wide policy that the resource owner cannot override, layered on top of DAC via an LSM like SELinux or AppArmor.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "LSM: SELinux & AppArmor"
+  },
+  {
+   "guid": "N*$7N([I.+",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::lsm"
+   ],
+   "front": "How does SELinux decide whether to allow an operation?",
+   "back": "By comparing security context labels (in the form user:role:type:level) attached to both the subject (process) and object (file, socket, etc.) against a loaded policy -- primarily using 'type enforcement', which governs interactions based on the type component of the label rather than identity.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "LSM: SELinux & AppArmor"
+  },
+  {
+   "guid": "c?uPhqh}3B",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::lsm"
+   ],
+   "front": "What are SELinux's three operating modes?",
+   "back": "<ul><li>Enforcing -- policy violations are blocked and logged</li><li>Permissive -- violations are only logged, not blocked (useful for policy development/debugging)</li><li>Disabled -- SELinux is off entirely</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "LSM: SELinux & AppArmor"
+  },
+  {
+   "guid": "d`19}K69#,",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::lsm"
+   ],
+   "front": "How does AppArmor's approach to confinement differ from SELinux's?",
+   "back": "AppArmor is path-based: profiles are attached to specific program paths and list the files/capabilities/network access that program may use. SELinux is label-based: every process and object carries a security context, and policy governs interactions between labels regardless of file path.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "LSM: SELinux & AppArmor"
+  },
+  {
+   "guid": "Q=y/l+^vk(",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::lsm"
+   ],
+   "front": "Which Linux distributions default to SELinux vs AppArmor?",
+   "back": "RHEL, Fedora, and CentOS default to SELinux. Debian and Ubuntu default to AppArmor. Both are LSM-framework implementations of Mandatory Access Control, just with different policy models.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "LSM: SELinux & AppArmor"
+  },
+  {
+   "guid": "qEF^jk>^n6",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::lsm"
+   ],
+   "front": "What is MCS (Multi-Category Security) used for in a container context?",
+   "back": "It adds category labels on top of SELinux type enforcement so that containers sharing the same SELinux type can still be isolated from each other -- each container instance gets a distinct category set, preventing one container from accessing another's files even though both use the same base type.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "LSM: SELinux & AppArmor"
+  },
+  {
+   "guid": "k2*h!?4=+:",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::lsm"
+   ],
+   "front": "What Kubernetes securityContext field maps to SELinux labeling?",
+   "back": "seLinuxOptions, which lets you set the user/role/type/level components of the security context applied to a pod or container's processes (and, via fsGroup-like propagation, some of its volumes).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "LSM: SELinux & AppArmor"
+  },
+  {
+   "guid": "dwil!1^ml^",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::lsm"
+   ],
+   "front": "What is BPF LSM?",
+   "back": "An LSM backend (added in Linux 5.7) that lets eBPF programs implement the LSM hooks directly, instead of relying on a separate policy language like SELinux's or AppArmor's -- allowing custom, programmable security policy written as eBPF.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "LSM: SELinux & AppArmor"
+  },
+  {
+   "guid": "B1W52J$iQm",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::lsm"
+   ],
+   "front": "Can SELinux, AppArmor, seccomp, and BPF LSM all be active on the same system at once?",
+   "back": "Seccomp (a distinct, non-LSM mechanism filtering syscalls) can run alongside any LSM. Since Linux 5.1, certain LSMs can also be 'stacked' together (LSM stacking), though SELinux and AppArmor are still typically mutually exclusive as the primary MAC implementation on a given system.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "LSM: SELinux & AppArmor"
+  },
+  {
+   "guid": "J>]g0wCUpf",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::lsm"
+   ],
+   "front": "What do sestatus and aa-status show?",
+   "back": "sestatus reports SELinux's current mode (enforcing/permissive/disabled) and loaded policy. aa-status reports which AppArmor profiles are loaded and whether each is in enforce or complain mode.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "LSM: SELinux & AppArmor"
+  },
+  {
+   "guid": "RjUDnX@i?Q",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::lsm"
+   ],
+   "front": "What is AppArmor's 'complain mode' equivalent to in SELinux terms?",
+   "back": "It's the AppArmor analogue of SELinux's permissive mode: violations of the profile are logged but not blocked, useful for building or debugging a profile before enforcing it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "LSM: SELinux & AppArmor"
+  },
+  {
+   "guid": "l<m.WcBQ@p",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::seccomp"
+   ],
+   "front": "What is seccomp (secure computing mode)?",
+   "back": "A kernel facility that restricts the set of system calls a process is allowed to make, shrinking the kernel attack surface available to a compromised or malicious process.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Seccomp"
+  },
+  {
+   "guid": "iMlzT>qfG@",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::seccomp"
+   ],
+   "front": "What are seccomp's two modes?",
+   "back": "Strict mode (the original, very limited: only read, write, exit, and sigreturn are allowed) and seccomp-bpf / filter mode, which uses a small BPF program to make an allow/deny decision per syscall based on the syscall number and its arguments.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Seccomp"
+  },
+  {
+   "guid": "CV$ytG;Fr(",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::seccomp"
+   ],
+   "front": "What does a seccomp-bpf filter actually inspect to make its decision?",
+   "back": "The syscall number and its raw arguments, evaluated by a classic BPF program the kernel runs before executing the syscall. Typical actions include: allow, kill the process, return an error (errno) to the caller, or log the call.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Seccomp"
+  },
+  {
+   "guid": "e0}$2z#Q!{",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::seccomp"
+   ],
+   "front": "What does the container runtime's default seccomp profile generally do?",
+   "back": "It allows a broad but curated set of common syscalls (several hundred) while explicitly blocking a smaller set of dangerous or rarely-needed ones -- e.g. kernel module loading, mount(), reboot(), and kernel keyring operations -- as a sensible default without needing an app-specific profile.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Seccomp"
+  },
+  {
+   "guid": "MjfMBMBr+T",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::seccomp"
+   ],
+   "front": "What are the three seccompProfile types in a Kubernetes securityContext?",
+   "back": "<ul><li>RuntimeDefault -- use the container runtime's built-in default profile</li><li>Unconfined -- no seccomp filtering at all</li><li>Localhost -- use a custom profile file present on the node</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Seccomp"
+  },
+  {
+   "guid": "ENhoVD|ZA5",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::seccomp"
+   ],
+   "front": "Why does seccomp filter on the raw syscall number rather than the libc function name?",
+   "back": "The syscall interface (numbered entry points into the kernel) is the actual security boundary between user space and the kernel. libc function names are a user-space convenience layer above that boundary and don't exist at the point where seccomp's BPF program runs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Seccomp"
+  },
+  {
+   "guid": "F/}G;M.Ai|",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::seccomp"
+   ],
+   "front": "What is the practical difference between the seccomp actions SCMP_ACT_KILL and SCMP_ACT_ERRNO?",
+   "back": "SCMP_ACT_KILL immediately terminates the process on a disallowed syscall. SCMP_ACT_ERRNO instead lets the syscall fail gracefully by returning a specified error code to the calling process, which may let the program handle the restriction without crashing.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Seccomp"
+  },
+  {
+   "guid": "D-Zf;+Gz{E",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::seccomp"
+   ],
+   "front": "Why is io_uring a notable challenge for seccomp-based security?",
+   "back": "Many io_uring operations are submitted and completed via shared ring buffers rather than one syscall per operation, so a chain of I/O actions can execute with far less per-operation syscall-boundary inspection than the traditional model -- letting it bypass some of what a seccomp filter is designed to catch. This is an actively discussed concern, and some managed platforms restrict or disable io_uring for exactly this reason.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Seccomp"
+  },
+  {
+   "guid": "t;5a;nIhoI",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::seccomp"
+   ],
+   "front": "What flag must typically be set for an unprivileged process to install its own seccomp filter?",
+   "back": "PR_SET_NO_NEW_PRIVS (no_new_privs) must be set first, preventing the process from subsequently gaining privileges (e.g. via a setuid binary) that could otherwise be used to install a seccomp filter that then can't be un-done by a more privileged path.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Seccomp"
+  },
+  {
+   "guid": "GA{?D*8nN+",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::ebpf"
+   ],
+   "front": "What is eBPF (extended Berkeley Packet Filter)?",
+   "back": "A kernel technology that lets sandboxed, verified programs run inside the kernel at specific hook points, dynamically extending kernel behavior for observability, networking, and security -- without writing a kernel module or changing kernel source.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "eBPF"
+  },
+  {
+   "guid": "xz:,/v%A@9",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::ebpf"
+   ],
+   "front": "What is the eBPF verifier, and why does it exist?",
+   "back": "A static analysis pass the kernel runs on every eBPF program before loading it, checking things like bounded execution (no unbounded loops, historically), valid memory accesses, and pointer safety -- so that untrusted or buggy eBPF code can't crash or exploit the kernel.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "eBPF"
+  },
+  {
+   "guid": "E}HPSc?-s5",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::ebpf"
+   ],
+   "front": "What is a BPF map?",
+   "back": "A key-value data structure (hash table, array, ring buffer, and other variants) that eBPF programs use to store state and to exchange data with user-space applications.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "eBPF"
+  },
+  {
+   "guid": "HnO_>w<f7H",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::ebpf"
+   ],
+   "front": "Name several types of eBPF attachment/hook points.",
+   "back": "<ul><li>kprobes / uprobes -- dynamic hooks on (almost) any kernel or user-space function</li><li>tracepoints -- static, stable kernel instrumentation points</li><li>XDP -- earliest point in the network receive path</li><li>TC (traffic control) -- later network hook, both ingress and egress</li><li>LSM hooks -- security decision points (BPF LSM)</li><li>cgroup hooks -- events scoped to a cgroup</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "eBPF"
+  },
+  {
+   "guid": "M2ZRJ~M2eu",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::ebpf"
+   ],
+   "front": "What is XDP (eXpress Data Path)?",
+   "back": "An eBPF hook at the earliest possible point in the network receive path -- before the kernel even allocates its usual packet buffer structure -- enabling very high-performance packet processing such as filtering, load balancing, and DDoS mitigation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "eBPF"
+  },
+  {
+   "guid": "oodmsv.I9,",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::ebpf"
+   ],
+   "front": "How does a TC (traffic control) eBPF hook differ from XDP?",
+   "back": "TC hooks run later in the network stack, after the kernel has built its normal packet structures, giving the program more context to work with (and the ability to act on egress traffic), at some cost to the raw performance XDP offers.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "eBPF"
+  },
+  {
+   "guid": "OQSx*|kK%l",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::ebpf"
+   ],
+   "front": "How does Cilium use eBPF instead of iptables/nftables for Kubernetes networking?",
+   "back": "Cilium implements Service load balancing, network policy enforcement, and packet forwarding directly with eBPF programs and BPF maps attached at points like XDP and TC, giving near-constant-time Service-to-endpoint lookups and bypassing the separate iptables/nftables rule-processing pipeline entirely.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "eBPF"
+  },
+  {
+   "guid": "OB&p=>.fu?",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::ebpf"
+   ],
+   "front": "What is CO-RE (Compile Once -- Run Everywhere) in the eBPF ecosystem?",
+   "back": "An approach that lets a single compiled eBPF program run correctly across different kernel versions/configurations, using BPF Type Format (BTF) metadata to adjust memory-layout-dependent accesses at load time instead of needing to recompile per kernel.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "eBPF"
+  },
+  {
+   "guid": "J~#WG0h<&R",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::ebpf"
+   ],
+   "front": "What does bpftool do?",
+   "back": "A command-line utility for inspecting and managing eBPF objects loaded into the running kernel -- listing loaded programs and maps, dumping map contents, and showing which hooks programs are attached to.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "eBPF"
+  },
+  {
+   "guid": "gyA1#g$q1=",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::ebpf"
+   ],
+   "front": "What is CAP_BPF, and why was it introduced?",
+   "back": "A dedicated capability (added in Linux 5.8) for loading and managing most eBPF programs, introduced specifically so that eBPF tooling no longer needs the far broader and more dangerous CAP_SYS_ADMIN just to use eBPF.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "eBPF"
+  },
+  {
+   "guid": "orOTu(m-qO",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::ebpf"
+   ],
+   "front": "What is Cilium Tetragon?",
+   "back": "An eBPF-based runtime security and observability tool that hooks process execution, file access, and network activity at the kernel level to detect and optionally block security-relevant behavior in real time, with far lower overhead than traditional syscall-tracing approaches.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "eBPF"
+  },
+  {
+   "guid": "nSd1I+4%z1",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::ebpf"
+   ],
+   "front": "Why couldn't early eBPF programs contain unbounded loops?",
+   "back": "The verifier needed to prove a program terminates and stays within safe bounds using static analysis, and an unbounded loop can't generally be proven to terminate. Bounded loop support was later added, letting the verifier accept loops it can prove have a finite iteration count.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "eBPF"
+  },
+  {
+   "guid": "K&]Grf1wOz",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::ebpf"
+   ],
+   "front": "What is a BPF ring buffer used for?",
+   "back": "An efficient, memory-mapped mechanism for an eBPF program to stream events to user space, replacing the older, less efficient perf buffer approach for many use cases.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "eBPF"
+  },
+  {
+   "guid": "smmsyJ@.!C",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::ebpf"
+   ],
+   "front": "What is bpftrace?",
+   "back": "A high-level tracing language and tool that compiles concise scripts into eBPF programs, letting an operator instrument kernel and user-space functions (via kprobes/uprobes/tracepoints) without writing raw eBPF/C.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "eBPF"
+  },
+  {
+   "guid": "CyF^[a{[}n",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::filesystems"
+   ],
+   "front": "What is the Virtual File System (VFS)?",
+   "back": "A kernel abstraction layer that presents a uniform interface (open, read, write, etc.) to user space regardless of the underlying filesystem type (ext4, XFS, overlayfs, tmpfs, ...), letting different filesystem implementations plug in underneath it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Filesystems & VFS"
+  },
+  {
+   "guid": "k:MYpe/@|O",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::filesystems"
+   ],
+   "front": "What is an inode?",
+   "back": "A data structure holding a file's metadata -- size, permissions, timestamps, and pointers to its data blocks -- but notably not its filename, which is stored separately in a directory entry mapping names to inode numbers.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Filesystems & VFS"
+  },
+  {
+   "guid": "JGBd|9aREF",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::filesystems"
+   ],
+   "front": "What is the difference between a hard link and a symbolic link?",
+   "back": "A hard link is a second directory entry pointing to the same inode -- the file has no single 'original' and persists until every hard link is removed. A symbolic link is a separate file containing a path string, which can point across filesystems and breaks if the target is removed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Filesystems & VFS"
+  },
+  {
+   "guid": "OeO$,/^HUg",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::filesystems"
+   ],
+   "front": "What is OverlayFS, and why do container images use it?",
+   "back": "A union filesystem that presents a merged view combining one or more read-only 'lowerdir' layers with a writable 'upperdir'. Container images are stored as stacked read-only layers, and each running container gets a thin writable upperdir on top -- so many containers can share the same base image layers on disk.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Filesystems & VFS"
+  },
+  {
+   "guid": "z].&L_Y7oL",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::filesystems"
+   ],
+   "front": "How does copy-on-write behave in OverlayFS?",
+   "back": "Reading a file transparently falls through to whichever layer has it. Writing to a file that only exists in a lower (read-only) layer triggers a 'copy-up': the file is copied into the upperdir first, and the write happens there, leaving the original lower layer untouched.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Filesystems & VFS"
+  },
+  {
+   "guid": "JJ&]}pl,|^",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::filesystems"
+   ],
+   "front": "What is a bind mount?",
+   "back": "A mount that makes a directory (or file) visible at a second location in the filesystem tree, without copying data -- both paths refer to the same underlying inode(s). Kubernetes hostPath volumes are implemented as bind mounts.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Filesystems & VFS"
+  },
+  {
+   "guid": "t$#rY~B:>J",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::filesystems"
+   ],
+   "front": "What is the purpose of journaling in filesystems like ext4 and XFS?",
+   "back": "It records pending metadata (and optionally data) changes to a log before committing them, so that after a crash or power loss the filesystem can replay or roll back incomplete operations quickly, rather than needing a full consistency scan.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Filesystems & VFS"
+  },
+  {
+   "guid": "Ehe%A|gb.=",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::filesystems"
+   ],
+   "front": "What is tmpfs?",
+   "back": "A filesystem type backed by RAM (and swap, if needed) rather than persistent storage -- contents disappear on unmount/reboot. Kubernetes emptyDir volumes with medium: Memory, and /dev/shm, are typically tmpfs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Filesystems & VFS"
+  },
+  {
+   "guid": "y)Un/?1v~K",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::filesystems"
+   ],
+   "front": "What is the /proc filesystem?",
+   "back": "A virtual (in-memory, kernel-generated) filesystem that exposes process and kernel state as if it were files -- e.g. /proc/[pid]/status, /proc/[pid]/maps, /proc/cpuinfo -- rather than reading actual disk data.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Filesystems & VFS"
+  },
+  {
+   "guid": "DqvW#~/Cxs",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::filesystems"
+   ],
+   "front": "What is the /sys filesystem (sysfs)?",
+   "back": "A virtual filesystem exposing kernel objects such as devices, drivers, and (via cgroupfs, typically mounted under /sys/fs/cgroup) the cgroup control interface, structured to mirror the kernel's internal device/driver model.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Filesystems & VFS"
+  },
+  {
+   "guid": "pN-+^i*~B6",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::filesystems"
+   ],
+   "front": "What is a file descriptor?",
+   "back": "A small non-negative integer, private to a process, that the kernel uses as a handle to an open file, socket, pipe, or other I/O resource -- the basis of the Unix 'everything is a file' interface.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Filesystems & VFS"
+  },
+  {
+   "guid": "L/=G9qc~+8",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::filesystems"
+   ],
+   "front": "What is the difference between what df and du report?",
+   "back": "df reports filesystem-level space usage (as seen by the kernel for a whole mounted filesystem). du walks a directory tree and sums file sizes as recorded, which can diverge from df's number due to things like sparse files, deleted-but-open files, or files on a different mount inside the tree being walked.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Filesystems & VFS"
+  },
+  {
+   "guid": "c&UH6(YEtP",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::networking"
+   ],
+   "front": "Concretely, what does a network namespace isolate?",
+   "back": "Its own set of network interfaces, IP addresses, routing table, firewall/netfilter rules, socket port space, and /proc/net -- essentially a private instance of the entire Linux network stack.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Networking Internals"
+  },
+  {
+   "guid": "PBpX-<k9L-",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::networking"
+   ],
+   "front": "What is a veth (virtual Ethernet) pair?",
+   "back": "Two virtual network interfaces created together and directly connected, like a virtual patch cable -- a packet sent into one end emerges from the other. This is the standard way to connect a container's network namespace to the host or to a bridge.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Networking Internals"
+  },
+  {
+   "guid": "L&W3hFb;Lu",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::networking"
+   ],
+   "front": "What is a Linux bridge, and how is it typically used with containers?",
+   "back": "A kernel-level virtual switch that forwards frames between the interfaces attached to it at Layer 2. Container networking commonly attaches one end of each container's veth pair to a bridge (e.g. docker0), letting containers on the same host reach each other and, via NAT, the outside network.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Networking Internals"
+  },
+  {
+   "guid": "OFG~J[CAeZ",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::networking"
+   ],
+   "front": "At a high level, how does a CNI plugin typically wire up a new Kubernetes pod's networking?",
+   "back": "It creates a veth pair, moves one end into the pod's network namespace (becoming eth0 inside the pod) and keeps the other end on the host, attaches the host end to a bridge or otherwise routes it, and assigns the pod an IP -- all invoked by the container runtime via the CNI (Container Network Interface) specification.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Networking Internals"
+  },
+  {
+   "guid": "w|if=y1?6g",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::networking"
+   ],
+   "front": "What is netfilter?",
+   "back": "The in-kernel framework of hook points throughout the network stack (e.g. at prerouting, input, forward, output, postrouting) that packet-filtering tools like iptables and nftables register rules against.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Networking Internals"
+  },
+  {
+   "guid": "B+T?(mk*J>",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::networking"
+   ],
+   "front": "What is nftables, and how does it relate to iptables?",
+   "back": "nftables is the successor packet-filtering framework to iptables, offering a unified syntax across IPv4/IPv6/ARP/bridging, atomic incremental rule updates (versus iptables needing to reload the whole ruleset), and better performance at scale. Modern iptables binaries on most distributions actually translate to the nftables kernel API under the hood (the iptables-nft compatibility layer).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Networking Internals"
+  },
+  {
+   "guid": "m`+#T!xB_u",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::networking"
+   ],
+   "front": "What is conntrack?",
+   "back": "The kernel's connection-tracking subsystem, which records the state of network flows (e.g. TCP connections) so that netfilter/NAT rules can make stateful decisions -- such as allowing return traffic for an established connection, or performing NAT consistently for the life of a flow.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Networking Internals"
+  },
+  {
+   "guid": "Dj(kJP|#Z8",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::networking"
+   ],
+   "front": "What are the three kube-proxy backend modes, and what is each one's status?",
+   "back": "iptables (the long-standing default, now considered legacy/maintenance-mode upstream), IPVS (deprecated in Kubernetes 1.35), and nftables (went stable in Kubernetes 1.33 and is now the recommended mode on nodes with kernel 5.13+, though iptables remains the out-of-the-box default for compatibility). Treat these specifics as accurate for mid-2026; the migration is ongoing.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Networking Internals"
+  },
+  {
+   "guid": "Iyc{o1hDE*",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::networking"
+   ],
+   "front": "Why was iptables mode for kube-proxy a scaling problem for large clusters?",
+   "back": "Adding a single iptables rule requires downloading the entire ruleset, modifying it, and re-uploading it as one atomic operation -- so both the rule set's size and the update time grow with the number of Services and endpoints, becoming slow at scale (tens of thousands of Services).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Networking Internals"
+  },
+  {
+   "guid": "mZ[gxU3SDI",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::networking"
+   ],
+   "front": "How does nftables mode improve on iptables mode for kube-proxy?",
+   "back": "It supports incremental, targeted updates instead of whole-ruleset reloads, uses O(1)-ish set lookups instead of linear rule traversal, and avoids the global lock contention iptables has between independent components -- at the cost of requiring a newer kernel (5.13+) and still-maturing ecosystem support.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Networking Internals"
+  },
+  {
+   "guid": "Gr*q:seyP4",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::networking"
+   ],
+   "front": "How does Cilium's eBPF-based kube-proxy replacement avoid iptables/nftables entirely?",
+   "back": "It stores the Service-to-endpoint mapping in BPF maps and performs the lookup and forwarding decision directly in eBPF programs attached to the network path, giving constant-time lookups without generating or traversing any netfilter rule chains at all.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Networking Internals"
+  },
+  {
+   "guid": "s]?+2LD?k>",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::networking"
+   ],
+   "front": "Why does an overlay network (e.g. VXLAN) reduce usable MTU, and why does that matter operationally?",
+   "back": "Encapsulating each pod packet inside an outer VXLAN packet adds extra header bytes, so the effective payload that fits under the physical network's MTU (often 1500 bytes) is smaller. If pod interfaces aren't configured with a correspondingly lower MTU, packets can be fragmented or dropped.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Networking Internals"
+  },
+  {
+   "guid": "w4f&,HY4GK",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::syscalls"
+   ],
+   "front": "What is a system call (syscall)?",
+   "back": "A controlled, well-defined entry point that lets a user-space process request a service from the kernel -- such as opening a file, sending data over a socket, or creating a process -- crossing the user/kernel privilege boundary safely.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Syscalls & Kernel Interface"
+  },
+  {
+   "guid": "u:mP:CMH[Q",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::syscalls"
+   ],
+   "front": "How does control transfer from user mode to kernel mode on x86-64 Linux today?",
+   "back": "Via the dedicated syscall / sysret instruction pair, which is faster than the older software-interrupt mechanism (int 0x80) used on 32-bit x86 and in older documentation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Syscalls & Kernel Interface"
+  },
+  {
+   "guid": "dz9sXNTRU{",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::syscalls"
+   ],
+   "front": "What is the VDSO (virtual dynamic shared object)?",
+   "back": "A small piece of kernel-provided code mapped read-only into every process's address space, letting certain 'syscalls' (like gettimeofday() or clock_gettime()) execute entirely in user space, avoiding the overhead of a full kernel transition for very frequent, cheap operations.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Syscalls & Kernel Interface"
+  },
+  {
+   "guid": "s]2gQs_mC*",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::syscalls"
+   ],
+   "front": "What does strace do, and roughly how does it work?",
+   "back": "It traces and prints every syscall a process makes (with arguments and return values) as it runs, implemented on top of the ptrace() syscall, which lets one process observe and intercept another's execution at each syscall boundary.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Syscalls & Kernel Interface"
+  },
+  {
+   "guid": "D,w&Uf{~#Y",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::syscalls"
+   ],
+   "front": "How does ltrace differ from strace?",
+   "back": "strace traces syscalls (kernel entry points). ltrace traces calls to shared library functions instead -- a different, higher, layer of the stack.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Syscalls & Kernel Interface"
+  },
+  {
+   "guid": "k/@j*[ITa!",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::syscalls"
+   ],
+   "front": "What does the yama LSM's ptrace_scope setting control?",
+   "back": "How restrictively ptrace() attachment is allowed between unrelated processes -- e.g. restricting a process to only ptrace its own direct children, which mitigates some classes of local attack that abuse ptrace to inject into other processes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Syscalls & Kernel Interface"
+  },
+  {
+   "guid": "N=$Q_Ip[,l",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::syscalls"
+   ],
+   "front": "How do syscalls typically report errors to the calling process?",
+   "back": "By returning -1 (for calls that otherwise return a non-negative value) and setting the global errno variable to a code identifying the specific error, which library wrappers (like perror() or strerror()) can translate into a human-readable message.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Syscalls & Kernel Interface"
+  },
+  {
+   "guid": "b2hY,#tyWR",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::syscalls"
+   ],
+   "front": "What do man page sections 2, 3, and 7 cover, respectively?",
+   "back": "Section 2: system calls. Section 3: C library functions. Section 7: overviews, conventions, and miscellaneous topics (such as capabilities(7), namespaces(7), or cgroups(7)) -- often the best starting point for understanding a kernel subsystem as a whole.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Syscalls & Kernel Interface"
+  },
+  {
+   "guid": "wa[1td?{at",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::syscalls"
+   ],
+   "front": "What is /proc/[pid]/maps used for?",
+   "back": "It lists the process's virtual memory mappings (VMAs) -- address ranges, permissions, and the backing file (or 'anonymous') for each -- useful for debugging memory layout, ASLR behavior, or verifying what a process has mapped.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Syscalls & Kernel Interface"
+  },
+  {
+   "guid": "un+{!kv^fc",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::syscalls"
+   ],
+   "front": "What is /proc/[pid]/status used for?",
+   "back": "A human-readable summary of a process's state: its PID/PPID, UID/GID, memory usage, signal masks, and capability sets (CapInh/CapPrm/CapEff/CapBnd), among other fields -- often faster to check than parsing several other /proc files individually.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Syscalls & Kernel Interface"
+  },
+  {
+   "guid": "dGMONJ8/zz",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::syscalls"
+   ],
+   "front": "At a high level, what does perf do?",
+   "back": "A Linux profiling and tracing toolkit built on the kernel's performance-monitoring counters and tracepoints, used for CPU profiling (perf record/report), hot-path analysis (perf top), and low-level event counting.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Syscalls & Kernel Interface"
+  },
+  {
+   "guid": "oZMA)j/4i(",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::ipc"
+   ],
+   "front": "What is a signal?",
+   "back": "An asynchronous notification delivered to a process, either from the kernel (e.g. on a fault) or from another process, that interrupts normal execution to run a handler (or a default action such as terminate, ignore, or stop).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency & IPC"
+  },
+  {
+   "guid": "bX|P`t9B(C",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::ipc"
+   ],
+   "front": "What is the difference between SIGTERM and SIGKILL?",
+   "back": "SIGTERM is a polite termination request that a process can catch, handle, and use to clean up before exiting. SIGKILL cannot be caught, blocked, or ignored -- the kernel terminates the process immediately and unconditionally.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency & IPC"
+  },
+  {
+   "guid": "htwIft-vY>",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::ipc"
+   ],
+   "front": "Why does Kubernetes send SIGTERM and then SIGKILL, rather than just SIGKILL, when terminating a pod?",
+   "back": "SIGTERM gives the container's process a chance to shut down gracefully (close connections, flush data) within the pod's terminationGracePeriodSeconds. If the process hasn't exited by the end of that grace period, Kubernetes sends SIGKILL to force termination.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency & IPC"
+  },
+  {
+   "guid": "OCq=xLiG3]",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::ipc"
+   ],
+   "front": "What is a race condition?",
+   "back": "A bug where the correctness of a program's behavior depends on the relative timing or interleaving of concurrent operations, typically because shared state is accessed without adequate synchronization.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency & IPC"
+  },
+  {
+   "guid": "dWjx[Bpbah",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::ipc"
+   ],
+   "front": "What is the difference between a mutex and a semaphore?",
+   "back": "A mutex enforces mutual exclusion for a single resource and has a notion of ownership (only the thread that locked it should unlock it). A semaphore maintains a count and can allow up to N concurrent holders, with no inherent ownership -- suited to signaling between threads/processes as well as limiting concurrent access.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency & IPC"
+  },
+  {
+   "guid": "h$jS]y)q5b",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::ipc"
+   ],
+   "front": "What are the four Coffman conditions required for deadlock?",
+   "back": "<ul><li>Mutual exclusion -- a resource can only be held by one holder at a time</li><li>Hold and wait -- a holder keeps its resource(s) while waiting for another</li><li>No preemption -- a resource can't be forcibly taken from its holder</li><li>Circular wait -- a cycle of holders each waiting on the next</li></ul> All four must hold simultaneously for deadlock to occur; breaking any one prevents it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency & IPC"
+  },
+  {
+   "guid": "D=F@v@c,2/",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::ipc"
+   ],
+   "front": "What is the difference between a pipe and a named pipe (FIFO)?",
+   "back": "An anonymous pipe only exists as file descriptors shared between related processes (e.g. parent and child after fork()) and has no filesystem presence. A named pipe (FIFO) has an entry in the filesystem, so unrelated processes can open it by path to communicate.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency & IPC"
+  },
+  {
+   "guid": "c0*J-*ys`@",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::ipc"
+   ],
+   "front": "What is a Unix domain socket, and how does it compare to a POSIX message queue for local IPC?",
+   "back": "A Unix domain socket provides a stream or datagram communication channel between processes on the same host, addressed by a filesystem path, and supports the same socket API used for network sockets. A POSIX message queue is a separate, simpler IPC primitive built specifically for exchanging discrete, priority-ordered messages, with its own dedicated API.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency & IPC"
+  },
+  {
+   "guid": "F{E<xR8C?x",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::ipc"
+   ],
+   "front": "What is the practical difference between synchronous and asynchronous I/O?",
+   "back": "Synchronous I/O blocks the calling thread until the operation completes. Asynchronous I/O lets the caller continue executing and be notified (via callback, event, or polling a completion queue) once the operation finishes, avoiding a dedicated blocked thread per in-flight operation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency & IPC"
+  },
+  {
+   "guid": "nvIaKR/py}",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::ipc"
+   ],
+   "front": "Why does epoll scale better than select()/poll() for large numbers of file descriptors?",
+   "back": "select() and poll() require re-scanning the entire set of watched file descriptors on every call, which is O(n) in the number of descriptors. epoll maintains its interest list inside the kernel across calls and only returns the descriptors that actually became ready, making repeated waits far cheaper for large fd counts.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency & IPC"
+  },
+  {
+   "guid": "kEyv*r%GD{",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::runtime"
+   ],
+   "front": "What does the Open Container Initiative (OCI) define?",
+   "back": "Two key specifications: the Image Spec (the standard, layered format container images are packaged in) and the Runtime Spec (how a compliant runtime should set up and run a container's environment from an on-disk bundle).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Container Runtime"
+  },
+  {
+   "guid": "EjVY<dmYd-",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::runtime"
+   ],
+   "front": "What is runc?",
+   "back": "The reference implementation of the OCI Runtime Spec -- a low-level CLI tool that does the actual work of creating a container's namespaces and cgroups, applying capabilities and seccomp/LSM confinement, and execve()-ing the container's entrypoint process.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Container Runtime"
+  },
+  {
+   "guid": "g`dUEFwR<T",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::runtime"
+   ],
+   "front": "What is containerd, and how does it relate to runc?",
+   "back": "A higher-level container runtime daemon that manages the full container lifecycle -- pulling and storing images, managing snapshots, and coordinating execution -- and calls out to a low-level runtime (typically runc) to actually launch each container.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Container Runtime"
+  },
+  {
+   "guid": "B]f^TD`w@L",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::runtime"
+   ],
+   "front": "What is the Container Runtime Interface (CRI)?",
+   "back": "A gRPC API that lets the Kubernetes kubelet manage containers and pods through any compliant runtime (containerd, CRI-O, etc.) without Kubernetes needing runtime-specific code. Docker's own runtime was never CRI-compliant; the dockershim compatibility layer was removed from Kubernetes in version 1.24 (2022), meaning Docker Engine itself is no longer a supported Kubernetes runtime.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Container Runtime"
+  },
+  {
+   "guid": "LIMUZ,|`Up",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::runtime"
+   ],
+   "front": "What is a container 'shim' process, and why does it exist?",
+   "back": "A small long-lived process (e.g. containerd-shim) that sits between the container runtime daemon and the actual container process, keeping the container running and reporting its exit status even if the parent daemon (containerd) restarts or crashes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Container Runtime"
+  },
+  {
+   "guid": "DkY;ysze9B",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::runtime"
+   ],
+   "front": "At a simplified OS level, what actually happens when you start a container (e.g. via docker run or a kubelet-initiated pod)?",
+   "back": "Roughly: the high-level daemon (dockerd/containerd) asks a shim to launch the container; the shim invokes the low-level runtime (runc), which calls clone() with namespace flags to create the container's namespaces, sets up its cgroup, applies capabilities and seccomp/LSM restrictions, and finally execve()s the container's entrypoint inside that new environment.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Container Runtime"
+  },
+  {
+   "guid": "KD0eJD@rF~",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::runtime"
+   ],
+   "front": "What is gVisor, and how does its isolation model differ from runc?",
+   "back": "A sandboxed container runtime that intercepts a container's syscalls in user space and reimplements a large part of the Linux kernel interface itself (a 'user-space kernel'), passing through only a small, tightly controlled set of actual syscalls to the host kernel -- reducing the host kernel's exposed attack surface compared to namespaces/cgroups/seccomp alone.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Container Runtime"
+  },
+  {
+   "guid": "EqfxE;jt^q",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::runtime"
+   ],
+   "front": "What is Kata Containers, and how does its isolation model differ from runc?",
+   "back": "A runtime that runs each container (or pod) inside a lightweight virtual machine with its own minimal kernel, using hardware virtualization for isolation rather than relying solely on the host kernel's namespace/cgroup boundaries -- trading some overhead and startup latency for a stronger isolation boundary.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Container Runtime"
+  },
+  {
+   "guid": "mHa;+CJOsu",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::runtime"
+   ],
+   "front": "Given that namespaces, cgroups, and capabilities already isolate containers, why do sandboxed runtimes like gVisor and Kata exist?",
+   "back": "Because all standard containers still share one host kernel -- a single kernel vulnerability can potentially escape any namespace/cgroup/capability configuration. Sandboxed runtimes add an extra boundary (a user-space kernel emulation layer, or a real hardware-virtualized micro-VM) specifically to contain that risk for higher-trust or multi-tenant workloads.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Container Runtime"
+  },
+  {
+   "guid": "fhmquRP}C?",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::privesc"
+   ],
+   "front": "Why is a --privileged Docker container (or privileged: true in Kubernetes) roughly equivalent to root on the host?",
+   "back": "It grants every capability, disables seccomp and AppArmor/SELinux confinement, and gives access to host devices -- removing essentially all of the kernel-level barriers that would otherwise separate the container from the host, even though it may still technically sit in its own namespaces.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Privilege Escalation & Breakouts"
+  },
+  {
+   "guid": "Bn1KFf|6$8",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::privesc"
+   ],
+   "front": "How can mounting the Docker socket (/var/run/docker.sock) into a container lead to a host breakout?",
+   "back": "The Docker socket is a full control interface to the host's Docker daemon. A container with it mounted in can simply ask the daemon (which runs with host root privileges) to start a new container with, say, the host's root filesystem bind-mounted in -- achieving host code execution without needing any kernel exploit.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Privilege Escalation & Breakouts"
+  },
+  {
+   "guid": "b1%ya,h-}i",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::privesc"
+   ],
+   "front": "Why is a hostPath volume mounting a sensitive host path (like / or /etc) a serious risk?",
+   "back": "It gives the container direct read/write access to arbitrary host files through the ordinary filesystem interface -- no exploit needed, just file writes to, for example, a cron directory, an SSH authorized_keys file, or a systemd unit file that will later execute as the host.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Privilege Escalation & Breakouts"
+  },
+  {
+   "guid": "yEU*tpiowr",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::privesc"
+   ],
+   "front": "Why does holding CAP_SYS_ADMIN inside a container frequently lead to an escape?",
+   "back": "It's broad enough to permit operations like mounting the host's filesystem devices, manipulating mount namespaces, or other host-level manipulation that isn't otherwise namespaced away -- making it one of the single most sought-after capabilities in real-world container breakout techniques.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Privilege Escalation & Breakouts"
+  },
+  {
+   "guid": "A6}+Ba:/K|",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::privesc"
+   ],
+   "front": "Why isn't running as UID 0 inside a container automatically equivalent to full host root?",
+   "back": "As long as the container's capability set is dropped down from full root, and (increasingly) a user namespace remaps UID 0 inside the container to an unprivileged UID on the host, 'root' inside the container is constrained on both axes -- privilege (capabilities) and identity (UID mapping) -- even though the numeric UID displayed is 0.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Privilege Escalation & Breakouts"
+  },
+  {
+   "guid": "xnDh6MXvMz",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::privesc"
+   ],
+   "front": "How do rootless containers let an unprivileged host user run what looks like a root-owned container?",
+   "back": "By using a user namespace: the unprivileged host user's UID is mapped to UID 0 inside the container's namespace, so the containerized process appears to be root and has root-like capabilities within that namespace's scope, without the host ever granting it real root privilege outside that namespace.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Privilege Escalation & Breakouts"
+  },
+  {
+   "guid": "Gxip6!rJX<",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::privesc"
+   ],
+   "front": "Why does hostPID: true increase breakout/lateral-movement risk even without hostNetwork or hostPath?",
+   "back": "It lets the container's process see every process on the host, and -- if it also holds CAP_SYS_PTRACE -- potentially attach to and manipulate those host processes directly, independent of any filesystem or network access.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Privilege Escalation & Breakouts"
+  },
+  {
+   "guid": "jJuNl^3Lio",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::privesc"
+   ],
+   "front": "At minimum, what does a genuine container-to-host escape typically require?",
+   "back": "Some combination of: an overly broad capability (most often CAP_SYS_ADMIN), a sensitive host resource exposed via mount or a shared namespace (hostPath/hostPID/hostNetwork, or the Docker/container-runtime socket), a misconfiguration in cgroup/mount handling, or a kernel vulnerability that bypasses namespace isolation entirely.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Privilege Escalation & Breakouts"
+  },
+  {
+   "guid": "byz*svbR,w",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::privesc"
+   ],
+   "front": "Why is 'the kernel is the trust boundary' the core mental model for container security?",
+   "back": "Every container on a node shares one physical kernel -- namespaces, cgroups, capabilities, seccomp, and LSMs are all mediated by that single kernel's code. A kernel vulnerability (a Local Privilege Escalation, or LPE) can undermine all of those isolation mechanisms simultaneously, regardless of how carefully a specific container is configured -- which is exactly the risk sandboxed runtimes like gVisor/Kata are designed to reduce.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Privilege Escalation & Breakouts"
+  },
+  {
+   "guid": "c4@JwQ6uNJ",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::privesc"
+   ],
+   "front": "Why does base image provenance matter as a security control, not just a compliance checkbox?",
+   "back": "Every layer in a container image can introduce vulnerable packages, malicious binaries, or backdoored dependencies that inherit whatever capabilities and access the running container is granted -- image scanning, signed images, and trusted base images shrink the attack surface before the container ever starts.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Privilege Escalation & Breakouts"
+  },
+  {
+   "guid": "G1I<ik3oD4",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::privesc"
+   ],
+   "front": "Why is dropping all capabilities and adding back only what's required considered more effective than only setting runAsNonRoot?",
+   "back": "runAsNonRoot only changes the numeric UID, not the capability set -- a non-root UID can still hold dangerous capabilities like CAP_NET_RAW or CAP_SYS_PTRACE if they aren't explicitly dropped, so capability minimization addresses a different (and often more exploitable) axis of privilege than the UID alone.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Privilege Escalation & Breakouts"
+  },
+  {
+   "guid": "m^<.jr:BjU",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::privesc"
+   ],
+   "front": "Why is a compromised sidecar or init container in the same pod a meaningful lateral-movement path?",
+   "back": "Containers within the same pod share the pod's network namespace (and, depending on configuration, may share process or volume access) by design, so a compromised container with weaker hardening can be used as a foothold to reach a more sensitive container's exposed services within that same pod.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Privilege Escalation & Breakouts"
+  },
+  {
+   "guid": "x8($3P=8(A",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::systemd"
+   ],
+   "front": "What two responsibilities make PID 1 special compared to any other process?",
+   "back": "It must reap every orphaned/zombie process that gets re-parented to it, and it does not receive the kernel's default signal actions -- it must explicitly register handlers, or signals like SIGTERM will simply be ignored rather than causing termination.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "systemd & Init"
+  },
+  {
+   "guid": "I+]S5lb#j5",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::systemd"
+   ],
+   "front": "Name the main systemd unit types.",
+   "back": "<ul><li>service -- a long-running or one-shot process</li><li>socket -- a listening socket that can activate a service on first connection</li><li>target -- a synchronization point grouping other units (replacing SysV runlevels)</li><li>mount / automount -- filesystem mount points</li><li>timer -- scheduled/periodic activation, cron's systemd equivalent</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "systemd & Init"
+  },
+  {
+   "guid": "O32;S!e@&S",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::systemd"
+   ],
+   "front": "How does a systemd target differ from an old-style SysV runlevel?",
+   "back": "A runlevel was a single numbered state the whole system was in. A systemd target is just a named grouping of units with dependency relationships to other units/targets -- more flexible, since targets can be composed and depended on individually rather than the system having one global numeric state.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "systemd & Init"
+  },
+  {
+   "guid": "nRSTgqK}6Z",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::systemd"
+   ],
+   "front": "What is journald, and how does it relate to systemd?",
+   "back": "systemd's logging component, which captures stdout/stderr and structured metadata from every systemd-managed service into a centralized, indexed, binary log store, queryable with journalctl.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "systemd & Init"
+  },
+  {
+   "guid": "D>x5QP0T:)",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::systemd"
+   ],
+   "front": "What is the practical difference between systemctl start and systemctl enable for a service?",
+   "back": "start activates the unit immediately for the current boot only. enable creates the symlinks that make the unit start automatically on future boots, but does not start it right now -- the two are independent and often used together (enable --now).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "systemd & Init"
+  },
+  {
+   "guid": "A^Hht*JB{d",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::systemd"
+   ],
+   "front": "Why do many container base images run a minimal init process (like tini or dumb-init) as PID 1 instead of the application directly?",
+   "back": "Because PID 1's special responsibilities -- reaping zombies and handling signals correctly -- are easy for an ordinary application to get wrong. A minimal init forwards signals to the real application and reaps any zombie processes, while the application itself runs as a normal child, not PID 1.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "systemd & Init"
+  },
+  {
+   "guid": "N;EQn1gNh%",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::systemd"
+   ],
+   "front": "What does systemd-cgtop show?",
+   "back": "A live, top-like view of resource usage (CPU, memory, I/O, task count) broken down by systemd cgroup/slice, useful for seeing which systemd-managed service or user slice is consuming resources on a host.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "systemd & Init"
+  },
+  {
+   "guid": "zPR[Dck)L[",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::tools"
+   ],
+   "front": "What does the -f flag do when running strace -f -p <pid>?",
+   "back": "It tells strace to also follow (trace) any child processes created by the traced process via fork()/clone(), rather than only tracing the single originally-attached PID.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Observability & Forensics Tools"
+  },
+  {
+   "guid": "M)BzwCPFVk",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::tools"
+   ],
+   "front": "How does tcpdump capture packets at the OS level?",
+   "back": "It uses an AF_PACKET (packet socket) to receive a copy of raw frames directly from a network interface, typically via the kernel's BPF-based packet filtering to select which packets to hand up to user space -- the same filtering lineage eBPF descended from.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Observability & Forensics Tools"
+  },
+  {
+   "guid": "HV_&G,Z?y&",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::tools"
+   ],
+   "front": "What does lsof show, and why is 'everything is a file' relevant to it?",
+   "back": "It lists open file descriptors for processes on the system. Because Unix represents not just regular files but also sockets, pipes, and devices as file descriptors, lsof can also reveal open network connections and IPC endpoints, not just files on disk.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Observability & Forensics Tools"
+  },
+  {
+   "guid": "r#NeDyybHi",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::tools"
+   ],
+   "front": "What is auditd, and what is it typically used for in a security/compliance context?",
+   "back": "The user-space daemon for the Linux kernel's audit subsystem, which logs security-relevant events (specific syscalls, file accesses, authentication events) matching configured rules -- commonly deployed to satisfy compliance frameworks (e.g. CIS benchmarks, PCI-DSS) and to support post-incident forensics.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Observability & Forensics Tools"
+  },
+  {
+   "guid": "Nx-anjD.(M",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::tools"
+   ],
+   "front": "How would you use nsenter to debug a running container's networking directly from the host?",
+   "back": "Find the container's main process PID, then run something like nsenter -t <pid> -n <command> to execute a command (e.g. tcpdump or ip addr) inside that process's network namespace -- without needing any networking tools installed inside the container image itself.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Observability & Forensics Tools"
+  },
+  {
+   "guid": "bGI<jJguPM",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::tools"
+   ],
+   "front": "What is crictl, and why would a Kubernetes admin use it over the docker CLI?",
+   "back": "A CLI for directly inspecting and debugging containers, pods, and images through any CRI-compliant runtime (containerd, CRI-O). Since Kubernetes no longer uses Docker Engine as a runtime, crictl (not the docker CLI) is the correct low-level tool for debugging containers on a modern Kubernetes node.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Observability & Forensics Tools"
+  },
+  {
+   "guid": "O#9IV]E`-A",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::tools"
+   ],
+   "front": "What is Falco, and what does it detect?",
+   "back": "A CNCF runtime security tool that captures syscall-level activity (originally via a kernel module, now commonly via eBPF) and evaluates it against a rules engine to detect suspicious behavior in real time -- such as a shell spawned inside a container, unexpected outbound connections, or writes to sensitive paths.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Observability & Forensics Tools"
+  },
+  {
+   "guid": "x@Gq0yG2:#",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::tools"
+   ],
+   "front": "What's the difference between perf top and perf record/report?",
+   "back": "perf top gives a live, continuously-updating view of which functions are consuming the most CPU right now. perf record captures profiling data over a period to a file, which perf report then lets you analyze afterward in more detail.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Observability & Forensics Tools"
+  },
+  {
+   "guid": "o~&`$V!gdB",
+   "type": "basic",
+   "deck": "Linux/OS Internals for Kubernetes & Security",
+   "tags": [
+    "LOS::tools"
+   ],
+   "front": "What is dmesg used for?",
+   "back": "Printing the kernel ring buffer -- boot messages and kernel-level log lines (hardware events, driver messages, OOM killer activity, and similar) that don't go through the normal syslog/journald application logging path in the same way.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Observability & Forensics Tools"
+  }
+ ]
+}

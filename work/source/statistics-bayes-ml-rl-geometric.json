@@ -1,0 +1,2997 @@
+{
+ "source_file": "statistics-bayes-ml-rl-geometric.apkg",
+ "notes": [
+  {
+   "guid": "df%5`],RIi",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::01 Probability & Geometric Foundations",
+   "tags": [
+    "stats",
+    "stats::foundations",
+    "stats::foundations::hilbert"
+   ],
+   "front": "In what sense are finite-variance random variables &quot;vectors&quot;? Give the inner product, the norm, and what orthogonality means.",
+   "back": "They form the Hilbert space \\(L^2\\) with inner product \\(\\langle X,Y\\rangle = E[XY]\\).<br>\nFor centered variables: \\(\\|X\\|^2 = \\mathrm{Var}(X)\\), so <strong>length = standard deviation</strong>, \\(\\langle X,Y\\rangle = \\mathrm{Cov}(X,Y)\\), and <strong>orthogonal = uncorrelated</strong>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Every second-moment fact in statistics is Euclidean geometry in this space: lengths are standard deviations, angles are correlations, &quot;best predictor&quot; means &quot;orthogonal projection&quot;. Most of regression is Pythagoras in disguise.",
+   "source": "Probability & Geometric Foundations"
+  },
+  {
+   "guid": "J%fPu:SR5V",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::01 Probability & Geometric Foundations",
+   "tags": [
+    "stats",
+    "stats::foundations",
+    "stats::foundations::hilbert"
+   ],
+   "front": "What is the geometric meaning of the Pearson correlation \\(\\rho(X,Y)\\)?",
+   "back": "\\(\\rho = \\dfrac{\\mathrm{Cov}(X,Y)}{\\sigma_X\\sigma_Y} = \\dfrac{\\langle X,Y\\rangle}{\\|X\\|\\,\\|Y\\|} = \\cos\\theta\\), the cosine of the angle between the centered variables (or, in a sample, between the centered data vectors in \\(\\mathbb{R}^n\\)).",
+   "text": "",
+   "image": "<img src=\"corr_cosine.svg\">",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> \\(\\rho=1\\): parallel. \\(\\rho=0\\): perpendicular. \\(\\rho=-1\\): anti-parallel. This is why \\(|\\rho|\\le 1\\) is just Cauchy-Schwarz, and why correlation is not transitive: A can be at 45° to B and B at 45° to C while A is at 90° to C.",
+   "source": "Probability & Geometric Foundations"
+  },
+  {
+   "guid": "PDI4rBp:cJ",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::01 Probability & Geometric Foundations",
+   "tags": [
+    "stats",
+    "stats::foundations",
+    "stats::foundations::hilbert"
+   ],
+   "front": "State \\(\\mathrm{Var}(X+Y)\\) and identify the geometric theorem it corresponds to.",
+   "back": "\\(\\mathrm{Var}(X+Y) = \\mathrm{Var}(X) + \\mathrm{Var}(Y) + 2\\,\\mathrm{Cov}(X,Y)\\).<br>\nIt is the <strong>law of cosines</strong>: \\(\\|x+y\\|^2 = \\|x\\|^2+\\|y\\|^2+2\\|x\\|\\|y\\|\\cos\\theta\\). When uncorrelated (\\(\\theta = 90^\\circ\\)) it reduces to <strong>Pythagoras</strong>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Standard deviations add like sides of a triangle, not like numbers. Independent errors add at right angles, which is why the standard error of a mean shrinks as \\(1/\\sqrt{n}\\): the diagonal of an n-dimensional box with side \\(\\sigma\\) is \\(\\sigma\\sqrt{n}\\), then divide by n.",
+   "source": "Probability & Geometric Foundations"
+  },
+  {
+   "guid": "i+%9U|hfhV",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::01 Probability & Geometric Foundations",
+   "tags": [
+    "stats",
+    "stats::foundations",
+    "stats::foundations::hilbert"
+   ],
+   "front": "What is the conditional expectation \\(E[Y\\mid X]\\) geometrically?",
+   "back": "The <strong>orthogonal projection</strong> of \\(Y\\) onto the closed subspace of all (square-integrable) functions of \\(X\\). Equivalently it minimises \\(E[(Y-g(X))^2]\\) over all \\(g\\), and the error \\(Y - E[Y\\mid X]\\) is orthogonal to every function of \\(X\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Linear regression projects onto the small subspace spanned by linear functions of \\(X\\); conditional expectation projects onto the much larger subspace of all functions of \\(X\\). The tower property \\(E[E[Y|X,Z]\\,|\\,X]=E[Y|X]\\) is just &quot;projecting onto a subspace of a subspace in two steps equals projecting once&quot;.",
+   "source": "Probability & Geometric Foundations"
+  },
+  {
+   "guid": "A>!tL^)1X$",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::01 Probability & Geometric Foundations",
+   "tags": [
+    "stats",
+    "stats::foundations",
+    "stats::foundations::hilbert"
+   ],
+   "front": "State the law of total variance and its geometric interpretation.",
+   "back": "\\(\\mathrm{Var}(Y) = \\mathrm{Var}(E[Y\\mid X]) + E[\\mathrm{Var}(Y\\mid X)]\\)<br>\n= explained variance + unexplained variance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Pythagoras. \\(Y - E[Y]\\) is the hypotenuse; the projection \\(E[Y|X]-E[Y]\\) and the residual \\(Y-E[Y|X]\\) are the perpendicular legs. \\(R^2\\) and Analysis of Variance (ANOVA) are both this single right triangle.",
+   "source": "Probability & Geometric Foundations"
+  },
+  {
+   "guid": "P*JUoU$a[Z",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::01 Probability & Geometric Foundations",
+   "tags": [
+    "stats",
+    "stats::foundations",
+    "stats::foundations::gaussian"
+   ],
+   "front": "What shape does a covariance matrix \\(\\Sigma\\) describe, and what do its eigenvectors and eigenvalues mean?",
+   "back": "The level sets \\(x^\\top\\Sigma^{-1}x = c\\) are <strong>ellipsoids</strong>. Eigenvectors of \\(\\Sigma\\) are the principal axes; the semi-axis lengths are \\(\\sqrt{\\lambda_i}\\) (standard deviations along those axes). \\(\\det\\Sigma\\) is proportional to the squared volume.",
+   "text": "",
+   "image": "<img src=\"cov_ellipse.svg\">",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> \\(\\Sigma^{1/2}\\) is the linear map that turns the unit sphere (white noise) into this ellipsoid. Every multivariate Gaussian is a rotated, stretched, shifted spherical Gaussian.",
+   "source": "Probability & Geometric Foundations"
+  },
+  {
+   "guid": "yhC{)biBlQ",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::01 Probability & Geometric Foundations",
+   "tags": [
+    "stats",
+    "stats::foundations",
+    "stats::foundations::gaussian"
+   ],
+   "front": "Define the Mahalanobis distance and explain what it measures.",
+   "back": "\\(d_M(x,\\mu) = \\sqrt{(x-\\mu)^\\top\\Sigma^{-1}(x-\\mu)}\\).<br>\nIt is the Euclidean distance <strong>after whitening</strong> the data with \\(z = \\Sigma^{-1/2}(x-\\mu)\\): distance measured in units of standard deviation along each principal axis.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Squash the covariance ellipsoid back into a unit sphere, then use an ordinary ruler. A point far away along a long axis of the ellipse is less surprising than a point the same Euclidean distance away along a short axis.",
+   "source": "Probability & Geometric Foundations"
+  },
+  {
+   "guid": "LwAT>I|EI7",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::01 Probability & Geometric Foundations",
+   "tags": [
+    "stats",
+    "stats::foundations",
+    "stats::foundations::gaussian"
+   ],
+   "front": "For a joint Gaussian \\((x_1,x_2)\\), give the conditional distribution \\(x_1\\mid x_2\\). What is remarkable about the conditional covariance?",
+   "back": "\\(E[x_1\\mid x_2] = \\mu_1 + \\Sigma_{12}\\Sigma_{22}^{-1}(x_2-\\mu_2)\\)<br>\n\\(\\mathrm{Cov}[x_1\\mid x_2] = \\Sigma_{11} - \\Sigma_{12}\\Sigma_{22}^{-1}\\Sigma_{21}\\) (the Schur complement).<br>\nThe mean is <strong>linear</strong> in \\(x_2\\) (this is exactly the regression formula) and the covariance <strong>does not depend on the observed value</strong>.",
+   "text": "",
+   "image": "<img src=\"gauss_condition.svg\">",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Conditioning = slicing the ellipsoid with a plane \\(x_2 = \\text{const}\\). Every parallel slice of an ellipsoid is the same ellipse shape, just shifted along a straight line: hence constant covariance and linear mean.",
+   "source": "Probability & Geometric Foundations"
+  },
+  {
+   "guid": "lC;P/:CcN-",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::01 Probability & Geometric Foundations",
+   "tags": [
+    "stats",
+    "stats::foundations",
+    "stats::foundations::gaussian"
+   ],
+   "front": "Geometrically, how do marginalising and conditioning a multivariate Gaussian differ?",
+   "back": "<strong>Marginalising</strong> = projecting (casting a shadow): just drop rows/columns of \\(\\mu\\) and \\(\\Sigma\\).<br>\n<strong>Conditioning</strong> = slicing: simple in the precision matrix \\(\\Lambda=\\Sigma^{-1}\\) (drop rows/columns of \\(\\Lambda\\)), but needs a Schur complement in \\(\\Sigma\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Shadow of an ellipsoid is wider than any slice through it. Hence marginal variance \\(\\ge\\) conditional variance. Covariance is the natural language of shadows, precision is the natural language of slices. Zeros in \\(\\Sigma\\) mean marginal independence; zeros in \\(\\Lambda\\) mean conditional independence (graphical models).",
+   "source": "Probability & Geometric Foundations"
+  },
+  {
+   "guid": "d[8{zByM+l",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::01 Probability & Geometric Foundations",
+   "tags": [
+    "stats",
+    "stats::foundations",
+    "stats::foundations::limits"
+   ],
+   "front": "State the Central Limit Theorem (CLT) and give an intuition for why the Gaussian is the limit.",
+   "back": "For independent, identically distributed variables with mean \\(\\mu\\) and finite variance \\(\\sigma^2\\): \\(\\sqrt{n}(\\bar X_n-\\mu) \\xrightarrow{d} N(0,\\sigma^2)\\).<br>\nWhy Gaussian: adding independent variables <strong>convolves</strong> densities; the Gaussian is the fixed point of &quot;convolve and rescale&quot;, and it is the <strong>maximum-entropy</strong> distribution for a given variance, so repeated mixing that preserves only variance ends there.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Convolution is repeated blurring. Blur any shape often enough and all detail except location and width is erased, leaving the blur kernel&#x27;s universal shape. In Fourier space: the characteristic function near 0 is \\(1 - \\sigma^2t^2/2\\); raising it to the n-th power gives \\(e^{-\\sigma^2 t^2/2}\\).",
+   "source": "Probability & Geometric Foundations"
+  },
+  {
+   "guid": "CKKHB,pC#-",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::01 Probability & Geometric Foundations",
+   "tags": [
+    "stats",
+    "stats::foundations",
+    "stats::foundations::dof"
+   ],
+   "front": "Why does a sample variance divide by \\(n-1\\)? Answer geometrically.",
+   "back": "The residual vector \\(x - \\bar x\\mathbf{1}\\) is the projection of \\(x\\) onto the hyperplane orthogonal to \\(\\mathbf{1}=(1,\\dots,1)\\). That hyperplane has dimension \\(n-1\\), so the noise only has \\(n-1\\) free coordinates: \\(E\\|x-\\bar x\\mathbf{1}\\|^2 = (n-1)\\sigma^2\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> <strong>Degrees of freedom = dimension of the subspace the vector lives in.</strong> Isotropic noise puts \\(\\sigma^2\\) of expected squared length into each dimension. Fitting p parameters removes p dimensions from the residual, leaving \\(n-p\\).",
+   "source": "Probability & Geometric Foundations"
+  },
+  {
+   "guid": "A0Vm:A!4TC",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::01 Probability & Geometric Foundations",
+   "tags": [
+    "stats",
+    "stats::foundations",
+    "stats::foundations::dof"
+   ],
+   "front": "What is the \\(\\chi^2_k\\) distribution geometrically, and why does it appear everywhere in testing?",
+   "back": "It is the distribution of the <strong>squared length</strong> of a standard Gaussian vector in \\(k\\) dimensions: \\(\\sum_{i=1}^k Z_i^2\\). Mean \\(k\\), variance \\(2k\\).<br>\nIt appears because test statistics are squared lengths of projections of (approximately) Gaussian noise onto subspaces; by rotational symmetry only the subspace dimension matters.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Cochran&#x27;s theorem is Pythagoras for Gaussians: split \\(\\mathbb{R}^n\\) into orthogonal subspaces, and the squared lengths of the projections are independent \\(\\chi^2\\) variables with degrees of freedom equal to the dimensions.",
+   "source": "Probability & Geometric Foundations"
+  },
+  {
+   "guid": "ni1B<|?z2U",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::01 Probability & Geometric Foundations",
+   "tags": [
+    "stats",
+    "stats::foundations",
+    "stats::foundations::dof"
+   ],
+   "front": "Give the geometric reading of the t-statistic and the F-statistic.",
+   "back": "Both compare <strong>squared length per dimension</strong> in a &quot;signal&quot; subspace with squared length per dimension in the orthogonal &quot;noise&quot; (residual) subspace.<br>\n\\(F = \\dfrac{\\|P_{\\text{signal}}\\,y\\|^2/q}{\\|P_{\\text{resid}}\\,y\\|^2/(n-p)}\\), and \\(t^2 = F\\) when \\(q=1\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Under the null, y is pure isotropic noise and points in a random direction, so each dimension gets its fair share and \\(F\\approx 1\\). A large F means y leans toward the signal subspace far more than a random direction would. t is essentially the cotangent of the angle between y and the noise subspace, scaled by \\(\\sqrt{n-p}\\).",
+   "source": "Probability & Geometric Foundations"
+  },
+  {
+   "guid": "EOsrj:+g9g",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::01 Probability & Geometric Foundations",
+   "tags": [
+    "stats",
+    "stats::foundations",
+    "stats::foundations::highdim"
+   ],
+   "front": "Where does the probability mass of a standard Gaussian in \\(d\\) dimensions live when \\(d\\) is large?",
+   "back": "In a thin shell of radius \\(\\approx\\sqrt{d}\\) and thickness \\(O(1)\\). Almost no mass is near the mode at the origin, even though the density is highest there.",
+   "text": "",
+   "image": "<img src=\"typical_set.svg\">",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Mass = density × volume. Density falls as \\(e^{-r^2/2}\\) but the volume of a shell grows as \\(r^{d-1}\\); their product peaks sharply at \\(r=\\sqrt{d-1}\\). A high-dimensional Gaussian looks like a soap bubble, not a ball. This is the &quot;typical set&quot; and is why the mode is unrepresentative in Bayesian computation.",
+   "source": "Probability & Geometric Foundations"
+  },
+  {
+   "guid": "H^22Y$9x8>",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::01 Probability & Geometric Foundations",
+   "tags": [
+    "stats",
+    "stats::foundations",
+    "stats::foundations::highdim"
+   ],
+   "front": "Name three geometric facts behind the &quot;curse of dimensionality&quot;.",
+   "back": "1. Volume concentrates near the surface: a fraction \\(1-(1-\\epsilon)^d \\to 1\\) of a ball lies in its outer \\(\\epsilon\\)-shell.<br>\n2. Distances concentrate: nearest and farthest neighbour become nearly equidistant.<br>\n3. Random vectors are nearly orthogonal: \\(\\cos\\theta \\sim N(0, 1/d)\\).<br>\nConsequence: local methods need \\(n\\) exponential in \\(d\\) to keep neighbourhoods local.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> To capture 10% of a unit hypercube&#x27;s volume in 10 dimensions, a sub-cube needs side length \\(0.1^{1/10}\\approx 0.8\\). &quot;Local&quot; neighbourhoods span 80% of every axis. The rescue is that real data lies near low-dimensional manifolds.",
+   "source": "Probability & Geometric Foundations"
+  },
+  {
+   "guid": "QwqzALg$5<",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::01 Probability & Geometric Foundations",
+   "tags": [
+    "stats",
+    "stats::foundations",
+    "stats::foundations::information"
+   ],
+   "front": "State Jensen&#x27;s inequality and its picture.",
+   "back": "For convex \\(f\\): \\(f(E[X]) \\le E[f(X)]\\). Equality iff \\(f\\) is linear on the support of \\(X\\) (or \\(X\\) is constant).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> A chord of a convex function lies above the curve. \\(E[f(X)]\\) is a weighted average of points on the curve, so it sits on or above the curve evaluated at the average x. Underlies: KL divergence \\(\\ge 0\\), the Evidence Lower Bound (ELBO), \\(E[X^2]\\ge E[X]^2\\), and why the log of an average exceeds the average of logs.",
+   "source": "Probability & Geometric Foundations"
+  },
+  {
+   "guid": "jTRBl7gblI",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::01 Probability & Geometric Foundations",
+   "tags": [
+    "stats",
+    "stats::foundations",
+    "stats::foundations::information"
+   ],
+   "front": "Define the Kullback-Leibler (KL) divergence. What does it measure and why is it not a distance?",
+   "back": "\\(\\mathrm{KL}(p\\,\\|\\,q) = E_p\\!\\left[\\log\\dfrac{p(x)}{q(x)}\\right] \\ge 0\\).<br>\nIt is the expected <strong>extra log-loss</strong> (extra code length) from using model \\(q\\) when the truth is \\(p\\). It is asymmetric and violates the triangle inequality.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Locally it behaves like a squared distance: \\(\\mathrm{KL}(p_\\theta\\|p_{\\theta+d\\theta}) \\approx \\tfrac12\\, d\\theta^\\top I(\\theta)\\, d\\theta\\) with \\(I\\) the Fisher information. So the Fisher information is the metric tensor of the curved &quot;statistical manifold&quot; and KL is its (asymmetric) squared-length surrogate.",
+   "source": "Probability & Geometric Foundations"
+  },
+  {
+   "guid": "Al*]]Z5P!4",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::01 Probability & Geometric Foundations",
+   "tags": [
+    "stats",
+    "stats::foundations",
+    "stats::foundations::information"
+   ],
+   "front": "Relate entropy, cross-entropy and Kullback-Leibler (KL) divergence.",
+   "back": "\\(H(p,q) = H(p) + \\mathrm{KL}(p\\,\\|\\,q)\\), where \\(H(p,q) = -E_p[\\log q]\\).<br>\nSince \\(H(p)\\) does not depend on the model, <strong>minimising cross-entropy = minimising KL = maximising likelihood</strong>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> \\(H(p)\\) is the irreducible cost of the terrain; KL is the detour caused by a wrong map. Training can only shrink the detour.",
+   "source": "Probability & Geometric Foundations"
+  },
+  {
+   "guid": "B@pFF<zcW;",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::01 Probability & Geometric Foundations",
+   "tags": [
+    "stats",
+    "stats::foundations",
+    "stats::foundations::information"
+   ],
+   "front": "Which distributions are maximum-entropy under which constraints? (three classics)",
+   "back": "Fixed support \\([a,b]\\) only: <strong>uniform</strong>.<br>\nFixed mean on \\([0,\\infty)\\): <strong>exponential</strong>.<br>\nFixed mean and variance on \\(\\mathbb{R}\\): <strong>Gaussian</strong>.<br>\nIn general, constraining \\(E[T(x)]\\) yields the <strong>exponential family</strong> \\(p(x)\\propto \\exp(\\eta^\\top T(x))\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Maximum entropy = the flattest, least committal distribution compatible with what you know. The Lagrange multipliers of the constraints become the natural parameters \\(\\eta\\). This is why exponential families are the &quot;default&quot; models.",
+   "source": "Probability & Geometric Foundations"
+  },
+  {
+   "guid": "i#JD&`qMR]",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::01 Probability & Geometric Foundations",
+   "tags": [
+    "stats",
+    "stats::foundations",
+    "stats::foundations::limits"
+   ],
+   "front": "State the delta method and its geometric content.",
+   "back": "If \\(\\sqrt{n}(\\hat\\theta-\\theta)\\to N(0,\\Sigma)\\) and \\(g\\) is differentiable, then<br>\n\\(\\sqrt{n}\\,(g(\\hat\\theta)-g(\\theta)) \\to N\\!\\left(0,\\ \\nabla g^\\top \\Sigma\\, \\nabla g\\right)\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> At scale \\(1/\\sqrt{n}\\) the estimator&#x27;s cloud is so small that \\(g\\) looks like its tangent plane. A linear map of a Gaussian is Gaussian, and the variance is scaled by the squared slope. Fails when the gradient is zero (then you need the second-order term and get a \\(\\chi^2\\)-type limit).",
+   "source": "Probability & Geometric Foundations"
+  },
+  {
+   "guid": "BCRA1;je[,",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::02 Linear Regression",
+   "tags": [
+    "stats",
+    "stats::regression",
+    "stats::regression::projection"
+   ],
+   "front": "Describe Ordinary Least Squares (OLS) as a geometric operation. What do the normal equations say?",
+   "back": "\\(\\hat y = X\\hat\\beta\\) is the <strong>orthogonal projection</strong> of \\(y\\in\\mathbb{R}^n\\) onto the column space of \\(X\\). The normal equations \\(X^\\top(y - X\\hat\\beta)=0\\) state that the residual is perpendicular to every column of \\(X\\). Solving gives \\(\\hat\\beta=(X^\\top X)^{-1}X^\\top y\\).",
+   "text": "",
+   "image": "<img src=\"ols_projection.svg\">",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> The columns of X span a p-dimensional plane inside n-dimensional observation space. y floats above that plane; the fitted vector is its shadow under a light shining straight down. Minimising squared error = finding the closest point in the plane = dropping a perpendicular.",
+   "source": "Linear Regression"
+  },
+  {
+   "guid": "Eq4Aoex~;s",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::02 Linear Regression",
+   "tags": [
+    "stats",
+    "stats::regression",
+    "stats::regression::projection"
+   ],
+   "front": "What is the hat matrix \\(H\\), and what are its three defining properties?",
+   "back": "\\(H = X(X^\\top X)^{-1}X^\\top\\), so \\(\\hat y = Hy\\).<br>\n1. Symmetric: \\(H^\\top=H\\) (orthogonal, not oblique, projection).<br>\n2. Idempotent: \\(H^2=H\\) (projecting twice changes nothing).<br>\n3. \\(\\mathrm{tr}(H)=\\mathrm{rank}(X)=p\\) (dimension of the subspace).<br>\n\\(I-H\\) projects onto the residual space of dimension \\(n-p\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Eigenvalues of a projection are only 1 (directions inside the plane, kept) and 0 (directions perpendicular, killed). The trace counts the ones: model degrees of freedom.",
+   "source": "Linear Regression"
+  },
+  {
+   "guid": "lsqYeRoI/(",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::02 Linear Regression",
+   "tags": [
+    "stats",
+    "stats::regression",
+    "stats::regression::projection"
+   ],
+   "front": "What is \\(R^2\\) geometrically?",
+   "back": "\\(R^2 = \\cos^2\\theta\\), where \\(\\theta\\) is the angle between the centered response \\(y-\\bar y\\mathbf 1\\) and the centered fitted vector \\(\\hat y - \\bar y\\mathbf 1\\).<br>\nEquivalently \\(R^2 = \\|\\hat y-\\bar y\\|^2/\\|y-\\bar y\\|^2\\) from the right triangle total = explained + residual.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Adding any column to X can only enlarge the subspace, so the projection can only get closer to y: \\(R^2\\) never decreases, even for pure-noise predictors. A random extra direction captures on average \\(1/(n-1)\\) of the remaining squared length, which is what adjusted \\(R^2\\) corrects for.",
+   "source": "Linear Regression"
+  },
+  {
+   "guid": "gwV2Oczk`u",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::02 Linear Regression",
+   "tags": [
+    "stats",
+    "stats::regression",
+    "stats::regression::projection"
+   ],
+   "front": "Regression has two dual pictures. What are the &quot;row picture&quot; and the &quot;column picture&quot;?",
+   "back": "<strong>Row picture</strong> (scatterplot): \\(n\\) points in \\(\\mathbb{R}^{p+1}\\); fit a hyperplane minimising vertical distances.<br>\n<strong>Column picture</strong>: \\(p\\) predictor vectors and one response vector in \\(\\mathbb{R}^n\\); project \\(y\\) onto their span.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> The row picture is good for intuition about outliers, leverage and nonlinearity. The column picture is where inference lives: orthogonality, degrees of freedom, collinearity, and F-tests are all statements about subspaces of \\(\\mathbb{R}^n\\).",
+   "source": "Linear Regression"
+  },
+  {
+   "guid": "E?$DZ;_Ziw",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::02 Linear Regression",
+   "tags": [
+    "stats",
+    "stats::regression",
+    "stats::regression::projection"
+   ],
+   "front": "State the Frisch-Waugh-Lovell (FWL) theorem. What does it say about the meaning of a multiple-regression coefficient?",
+   "back": "The coefficient on \\(x_j\\) in a multiple regression equals the coefficient from regressing (residual of \\(y\\) on the other predictors) on (residual of \\(x_j\\) on the other predictors).<br>\nSo \\(\\hat\\beta_j\\) uses only the part of \\(x_j\\) that is <strong>orthogonal to all other predictors</strong>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> &quot;Controlling for Z&quot; literally means projecting Z out of both x and y, then doing simple regression in the leftover space. If \\(x_j\\) is almost inside the span of the others, the leftover sliver is tiny and the estimate is noisy.",
+   "source": "Linear Regression"
+  },
+  {
+   "guid": "nRbj?:27Q>",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::02 Linear Regression",
+   "tags": [
+    "stats",
+    "stats::regression",
+    "stats::regression::collinearity"
+   ],
+   "front": "What is multicollinearity geometrically, and what is the Variance Inflation Factor (VIF)?",
+   "back": "Predictor columns are nearly linearly dependent (nearly parallel). The projection \\(\\hat y\\) is still stable, but its <strong>coordinates</strong> \\(\\hat\\beta\\) in that skewed basis are not.<br>\n\\(\\mathrm{VIF}_j = \\dfrac{1}{1-R_j^2}\\), where \\(R_j^2\\) is from regressing \\(x_j\\) on the other predictors; \\(\\mathrm{Var}(\\hat\\beta_j)\\) is multiplied by it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Locating a point using two nearly parallel rulers: a tiny wobble of the point produces huge, offsetting changes in both readings. Predictions stay fine; individual coefficients become meaningless. By the Frisch-Waugh-Lovell view, \\(1-R_j^2\\) is the squared sine of the angle between \\(x_j\\) and the span of the rest.",
+   "source": "Linear Regression"
+  },
+  {
+   "guid": "izL!!3BaJ-",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::02 Linear Regression",
+   "tags": [
+    "stats",
+    "stats::regression",
+    "stats::regression::inference"
+   ],
+   "front": "State the Gauss-Markov theorem and its assumptions.",
+   "back": "If \\(y=X\\beta+\\varepsilon\\) with \\(E[\\varepsilon]=0\\) and \\(\\mathrm{Cov}(\\varepsilon)=\\sigma^2 I\\) (uncorrelated, homoskedastic; <strong>normality not needed</strong>), then Ordinary Least Squares (OLS) is the Best Linear Unbiased Estimator (BLUE): minimum variance among all linear unbiased estimators.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Every linear unbiased estimator is a projection onto col(X), possibly an oblique one. With spherical noise, the perpendicular projection is the one that lets through the least noise; any slanted projection drags in extra noise from the residual space. Note the class is narrow: biased estimators (ridge) can beat OLS in mean squared error.",
+   "source": "Linear Regression"
+  },
+  {
+   "guid": "IZNfCR)|^:",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::02 Linear Regression",
+   "tags": [
+    "stats",
+    "stats::regression",
+    "stats::regression::inference"
+   ],
+   "front": "Give \\(\\mathrm{Cov}(\\hat\\beta)\\) for Ordinary Least Squares (OLS) and interpret the shape of the confidence region.",
+   "back": "\\(\\mathrm{Cov}(\\hat\\beta) = \\sigma^2 (X^\\top X)^{-1}\\).<br>\nThe confidence ellipsoid for \\(\\beta\\) is the <strong>inverse</strong> of the data cloud&#x27;s shape: long where the predictors have little spread, short where they have much spread.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> A plank resting on widely spaced supports is stable; on supports bunched together it wobbles. Spread in X pins the hyperplane down in that direction. Collinear predictors give a data cloud that is thin in one direction, hence a confidence ellipsoid that is long in that direction (typically along \\(\\beta_1+\\beta_2=\\) const: the sum is known, the split is not).",
+   "source": "Linear Regression"
+  },
+  {
+   "guid": "femTi@g@H%",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::02 Linear Regression",
+   "tags": [
+    "stats",
+    "stats::regression",
+    "stats::regression::inference"
+   ],
+   "front": "Under what model is Ordinary Least Squares (OLS) the Maximum Likelihood Estimator (MLE)? What changes with other noise models?",
+   "back": "With \\(\\varepsilon\\sim N(0,\\sigma^2I)\\) the negative log-likelihood is \\(\\tfrac{1}{2\\sigma^2}\\|y-X\\beta\\|^2 + \\text{const}\\), so MLE = OLS.<br>\nLaplace noise gives least absolute deviations (median regression); Student-t noise gives robust regression that downweights outliers.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> The loss function is the negative log of the noise density. Squared loss means you believe in thin Gaussian tails, so an outlier 10 standard deviations away is &quot;impossible&quot; and the fit contorts itself to explain it.",
+   "source": "Linear Regression"
+  },
+  {
+   "guid": "yA~8j6]CVl",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::02 Linear Regression",
+   "tags": [
+    "stats",
+    "stats::regression",
+    "stats::regression::causal"
+   ],
+   "front": "State the omitted variable bias formula.",
+   "back": "True model \\(y = x\\beta + z\\gamma + \\varepsilon\\); regressing on \\(x\\) alone gives<br>\n\\(E[\\hat\\beta_{\\text{short}}] = \\beta + \\gamma\\,\\delta\\), where \\(\\delta\\) is the coefficient from regressing \\(z\\) on \\(x\\).<br>\nBias needs <strong>both</strong>: \\(z\\) affects \\(y\\) (\\(\\gamma\\ne 0\\)) <strong>and</strong> \\(z\\) correlates with \\(x\\) (\\(\\delta\\ne 0\\)).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> If z is left out, its effect does not vanish: the part of z that is parallel to x gets projected onto x and credited to it. Only when z is perpendicular to x does its contribution fall harmlessly into the residual.",
+   "source": "Linear Regression"
+  },
+  {
+   "guid": "BiNa&]D1fy",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::02 Linear Regression",
+   "tags": [
+    "stats",
+    "stats::regression",
+    "stats::regression::regularization"
+   ],
+   "front": "Give the ridge regression estimator and describe what it does in the Singular Value Decomposition (SVD) basis of \\(X\\).",
+   "back": "\\(\\hat\\beta_{\\text{ridge}} = (X^\\top X+\\lambda I)^{-1}X^\\top y\\).<br>\nWith \\(X=UDV^\\top\\): each component of the fit along \\(u_j\\) is multiplied by the shrinkage factor \\(\\dfrac{d_j^2}{d_j^2+\\lambda}\\).<br>\nHigh-variance directions (\\(d_j^2\\gg\\lambda\\)) are barely touched; low-variance directions are shrunk toward zero.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Ridge distrusts exactly the directions where the data is thin and the OLS coefficient is therefore noisy. It is a &quot;soft&quot; version of principal component regression, which uses a hard 0/1 cutoff instead of a smooth factor.",
+   "source": "Linear Regression"
+  },
+  {
+   "guid": "AVuH<4O(xg",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::02 Linear Regression",
+   "tags": [
+    "stats",
+    "stats::regression",
+    "stats::regression::regularization"
+   ],
+   "front": "Why does the lasso (L1 penalty) produce exactly-zero coefficients while ridge (L2 penalty) does not?",
+   "back": "Penalised form is equivalent to minimising the residual sum of squares subject to \\(\\|\\beta\\|_1\\le t\\) (lasso) or \\(\\|\\beta\\|_2\\le t\\) (ridge). The solution is where the elliptical loss contours first touch the constraint region.<br>\nThe L1 ball is a <strong>diamond with corners on the axes</strong>; contours generically hit a corner or edge, where some coordinates are exactly 0. The L2 ball is smooth, so the touching point is generic (no zeros).",
+   "text": "",
+   "image": "<img src=\"ridge_lasso.svg\">",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> In d dimensions the L1 ball is a cross-polytope whose corners, edges and low-dimensional faces all lie in coordinate subspaces, and they &quot;stick out&quot; so they are hit first. Analytically: the L1 subgradient at 0 is the whole interval [-λ, λ], so a coefficient stays at 0 until its correlation with the residual exceeds λ.",
+   "source": "Linear Regression"
+  },
+  {
+   "guid": "B%UZA-NL-P",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::02 Linear Regression",
+   "tags": [
+    "stats",
+    "stats::regression",
+    "stats::regression::regularization"
+   ],
+   "front": "What Bayesian priors correspond to ridge and lasso, and what is \\(\\lambda\\) in those terms?",
+   "back": "Both are Maximum A Posteriori (MAP) estimates under Gaussian noise:<br>\nRidge: Gaussian prior \\(\\beta_j\\sim N(0,\\tau^2)\\), with \\(\\lambda=\\sigma^2/\\tau^2\\).<br>\nLasso: Laplace (double-exponential) prior, \\(\\lambda \\propto \\sigma^2/b\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Penalty = negative log prior. λ is a noise-to-signal ratio: noisy data or a tight prior means more shrinkage. Caveat: the lasso&#x27;s sparsity is a property of the MAP point only; the full Laplace posterior puts zero mass on exact zeros. Truly sparse Bayesian answers need spike-and-slab or horseshoe priors.",
+   "source": "Linear Regression"
+  },
+  {
+   "guid": "Pi^lD){>*#",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::02 Linear Regression",
+   "tags": [
+    "stats",
+    "stats::regression",
+    "stats::regression::regularization"
+   ],
+   "front": "Define effective degrees of freedom for a linear smoother \\(\\hat y = S y\\), and give its value for ridge regression.",
+   "back": "\\(\\mathrm{df} = \\mathrm{tr}(S) = \\sum_i \\partial\\hat y_i/\\partial y_i\\) (how much the fit chases each observation).<br>\nRidge: \\(\\mathrm{df}(\\lambda) = \\sum_j \\dfrac{d_j^2}{d_j^2+\\lambda}\\), falling from \\(p\\) at \\(\\lambda=0\\) to \\(0\\) as \\(\\lambda\\to\\infty\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> For a true projection the trace counts dimensions (eigenvalues 1). A smoother has eigenvalues between 0 and 1: it uses each direction only fractionally, so the &quot;dimension&quot; of the model becomes a continuous dial.",
+   "source": "Linear Regression"
+  },
+  {
+   "guid": "v2byDb@-hY",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::02 Linear Regression",
+   "tags": [
+    "stats",
+    "stats::regression",
+    "stats::regression::regularization"
+   ],
+   "front": "State the bias-variance decomposition of expected squared prediction error at a point \\(x\\).",
+   "back": "\\(E[(y-\\hat f(x))^2] = \\underbrace{\\sigma^2}_{\\text{irreducible}} + \\underbrace{(E\\hat f(x)-f(x))^2}_{\\text{bias}^2} + \\underbrace{\\mathrm{Var}(\\hat f(x))}_{\\text{variance}}\\)<br>\nThe expectation is over training sets and noise.",
+   "text": "",
+   "image": "<img src=\"bias_variance.svg\">",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Picture the model class as a surface in function space. Bias = distance from the truth to the nearest point on the surface. Variance = how much your estimate scatters around on the surface as the training sample changes. A bigger surface gets closer to the truth but gives the estimate more room to wander.",
+   "source": "Linear Regression"
+  },
+  {
+   "guid": "DlC=gO*n=d",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::02 Linear Regression",
+   "tags": [
+    "stats",
+    "stats::regression",
+    "stats::regression::diagnostics"
+   ],
+   "front": "What is leverage \\(h_{ii}\\) and how does it combine with the residual to give influence (Cook&#x27;s distance)?",
+   "back": "\\(h_{ii}\\) is the i-th diagonal of the hat matrix: \\(\\partial\\hat y_i/\\partial y_i\\), between 0 and 1, averaging \\(p/n\\). It depends only on X: how far \\(x_i\\) is from the centre of the predictor cloud (a Mahalanobis distance).<br>\nCook&#x27;s distance \\(D_i \\propto r_i^2\\,\\dfrac{h_{ii}}{1-h_{ii}}\\): <strong>influence = large residual × high leverage</strong>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> A seesaw. A point far out on the plank (high leverage) can tilt the line massively, and because it pulls the line toward itself it may show a small residual. An outlier near the fulcrum barely tilts anything.",
+   "source": "Linear Regression"
+  },
+  {
+   "guid": "MY~,[?D*>p",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::02 Linear Regression",
+   "tags": [
+    "stats",
+    "stats::regression",
+    "stats::regression::diagnostics"
+   ],
+   "front": "What breaks under heteroskedasticity, and what are the two standard fixes?",
+   "back": "Ordinary Least Squares (OLS) stays <strong>unbiased and consistent</strong> but is no longer efficient, and the usual standard errors are <strong>wrong</strong>.<br>\nFix 1: keep OLS, use heteroskedasticity-robust &quot;sandwich&quot; standard errors \\((X^\\top X)^{-1}X^\\top\\hat\\Omega X(X^\\top X)^{-1}\\).<br>\nFix 2: Generalized Least Squares (GLS), \\(\\hat\\beta=(X^\\top\\Omega^{-1}X)^{-1}X^\\top\\Omega^{-1}y\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> GLS is OLS after whitening the noise: a perpendicular projection in the metric defined by \\(\\Omega^{-1}\\). When noise is an ellipsoid rather than a sphere, &quot;perpendicular&quot; must be measured with the Mahalanobis ruler; precise observations get more say.",
+   "source": "Linear Regression"
+  },
+  {
+   "guid": "beB;z#ZF@A",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::02 Linear Regression",
+   "tags": [
+    "stats",
+    "stats::regression",
+    "stats::regression::projection"
+   ],
+   "front": "Why does regression to the mean occur, and where is the regression line relative to the data ellipse?",
+   "back": "In standardised units the regression slope is \\(r\\), with \\(|r|&lt;1\\): a predictor value \\(z\\) standard deviations from the mean predicts a response only \\(r z\\) standard deviations from its mean. It is a property of imperfect correlation, not a causal force.<br>\nThe regression line of y on x passes through the points where the ellipse has <strong>vertical tangents</strong>; it is flatter than the ellipse&#x27;s major axis.",
+   "text": "",
+   "image": "<img src=\"cov_ellipse.svg\">",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Slice the ellipse vertically at a given x; the conditional mean is the midpoint of that slice. Those midpoints trace a line that is shallower than the major axis. Regressing x on y instead gives a different line (through the horizontal tangents), steeper than the major axis.",
+   "source": "Linear Regression"
+  },
+  {
+   "guid": "k5[D^8!^^u",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::02 Linear Regression",
+   "tags": [
+    "stats",
+    "stats::regression",
+    "stats::regression::projection"
+   ],
+   "front": "How does the Ordinary Least Squares (OLS) line differ from the first principal component of the same 2-D data?",
+   "back": "OLS minimises <strong>vertical</strong> squared distances (error only in y; asymmetric in x and y).<br>\nPrincipal Component Analysis (PCA) minimises <strong>perpendicular</strong> squared distances (total least squares; symmetric) and gives the major axis of the data ellipse.<br>\nThe OLS line is always flatter (attenuated toward zero slope) than the PCA axis.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> If x is itself measured with error, OLS suffers &quot;attenuation bias&quot;: the slope shrinks by the reliability ratio \\(\\sigma_x^2/(\\sigma_x^2+\\sigma_{\\text{error}}^2)\\). Noise in x stretches the cloud horizontally, flattening the vertical-slice midpoints.",
+   "source": "Linear Regression"
+  },
+  {
+   "guid": "n]f{nB~TVa",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::02 Linear Regression",
+   "tags": [
+    "stats",
+    "stats::regression",
+    "stats::regression::inference"
+   ],
+   "front": "What does the F-test for nested linear models measure geometrically?",
+   "back": "Small model space \\(V_0\\subset V_1\\) big model space. Decompose \\(y\\) into three orthogonal pieces: projection on \\(V_0\\), projection on \\(V_1\\ominus V_0\\) (dimension \\(q\\)), and residual (dimension \\(n-p\\)).<br>\n\\(F = \\dfrac{\\|P_{V_1\\ominus V_0}\\,y\\|^2/q}{\\|(I-P_{V_1})\\,y\\|^2/(n-p)}\\)",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Does y lean into the extra q dimensions more than isotropic noise would by chance? Under the null each dimension receives about \\(\\sigma^2\\) of squared length, so the ratio hovers around 1.",
+   "source": "Linear Regression"
+  },
+  {
+   "guid": "u)MeqkXS-E",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::02 Linear Regression",
+   "tags": [
+    "stats",
+    "stats::regression",
+    "stats::regression::regularization"
+   ],
+   "front": "When \\(p&gt;n\\), which solution does the pseudoinverse (and gradient descent from zero) pick among the infinitely many interpolating solutions?",
+   "back": "The <strong>minimum L2-norm</strong> interpolator \\(\\hat\\beta = X^{+}y = X^\\top(XX^\\top)^{-1}y\\). It lies in the row space of \\(X\\), which is also where gradient descent started at 0 stays forever, since every gradient \\(X^\\top(\\cdot)\\) lies in the row space.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> The interpolating solutions form an affine subspace (a flat sheet not through the origin). The minimum-norm one is the foot of the perpendicular from the origin to that sheet. This is &quot;ridgeless&quot; regression, the \\(\\lambda\\to0^+\\) limit of ridge, and the basic mechanism of implicit regularisation.",
+   "source": "Linear Regression"
+  },
+  {
+   "guid": "MSAQA]@d:@",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::02 Linear Regression",
+   "tags": [
+    "stats",
+    "stats::regression",
+    "stats::regression::causal"
+   ],
+   "front": "What problem do Instrumental Variables (IV) solve, and what is Two-Stage Least Squares (2SLS) geometrically?",
+   "back": "When a regressor \\(x\\) is correlated with the error (confounding, reverse causation, measurement error), Ordinary Least Squares (OLS) is inconsistent. An instrument \\(z\\) must be (1) relevant: correlated with \\(x\\); (2) excluded/exogenous: affects \\(y\\) only through \\(x\\).<br>\n2SLS: project \\(x\\) onto the span of \\(z\\), then regress \\(y\\) on that projection: \\(\\hat\\beta=(X^\\top P_Z X)^{-1}X^\\top P_Z y\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Split x into a clean part (lying in the instrument&#x27;s direction, orthogonal to the error) and a contaminated part. IV keeps only the clean sliver. If the instrument is weak the sliver is tiny, and the estimate is noisy and biased toward OLS.",
+   "source": "Linear Regression"
+  },
+  {
+   "guid": "A~5(5O}aL4",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::03 Likelihood & Frequentist Inference",
+   "tags": [
+    "stats",
+    "stats::inference",
+    "stats::inference::likelihood"
+   ],
+   "front": "Show that Maximum Likelihood Estimation (MLE) is a Kullback-Leibler (KL) projection.",
+   "back": "\\(\\frac1n\\sum_i\\log p_\\theta(x_i) \\to E_{p^*}[\\log p_\\theta] = -H(p^*) - \\mathrm{KL}(p^*\\,\\|\\,p_\\theta)\\).<br>\nSo maximising likelihood = minimising \\(\\mathrm{KL}(\\hat p_{\\text{data}}\\,\\|\\,p_\\theta)\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> The model family is a curved surface (manifold) inside the space of all distributions. The empirical distribution is a point off that surface. MLE finds the closest point on the surface, with KL as the notion of &quot;closest&quot;. If the truth is not on the surface (misspecification), MLE converges to the KL-nearest point rather than to nonsense.",
+   "source": "Likelihood & Frequentist Inference"
+  },
+  {
+   "guid": "nzdi]=ViI]",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::03 Likelihood & Frequentist Inference",
+   "tags": [
+    "stats",
+    "stats::inference",
+    "stats::inference::likelihood"
+   ],
+   "front": "Define the score function. What are its mean and variance at the true parameter?",
+   "back": "\\(s(\\theta) = \\nabla_\\theta \\log p(x\\mid\\theta)\\).<br>\n\\(E_\\theta[s(\\theta)] = 0\\) and \\(\\mathrm{Cov}_\\theta[s(\\theta)] = I(\\theta)\\), the <strong>Fisher information</strong>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> The score is the slope of the log-likelihood hill. At the true parameter, individual observations push up- and downhill with equal expected force, so the pushes cancel on average. The size of those pushes (their variance) tells you how loudly the data speaks about θ.",
+   "source": "Likelihood & Frequentist Inference"
+  },
+  {
+   "guid": "fBEy(Grolz",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::03 Likelihood & Frequentist Inference",
+   "tags": [
+    "stats",
+    "stats::inference",
+    "stats::inference::likelihood"
+   ],
+   "front": "Give the two equivalent definitions of Fisher information and its geometric meaning.",
+   "back": "\\(I(\\theta) = E\\!\\left[s\\,s^\\top\\right] = -E\\!\\left[\\nabla^2_\\theta \\log p(x\\mid\\theta)\\right]\\)<br>\n(variance of the score = expected <strong>curvature</strong> of the log-likelihood). Information from independent observations adds: \\(I_n = nI_1\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> A sharply peaked log-likelihood (high curvature) pins the parameter down; a flat ridge does not. Fisher information is also the Riemannian metric on the model manifold: it converts parameter steps into &quot;how distinguishable are the two distributions&quot;.",
+   "source": "Likelihood & Frequentist Inference"
+  },
+  {
+   "guid": "IzFccTROHU",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::03 Likelihood & Frequentist Inference",
+   "tags": [
+    "stats",
+    "stats::inference",
+    "stats::inference::likelihood"
+   ],
+   "front": "State the Cramér-Rao lower bound.",
+   "back": "For any unbiased estimator \\(\\hat\\theta\\): \\(\\mathrm{Cov}(\\hat\\theta) \\succeq I_n(\\theta)^{-1}\\) (scalar case: \\(\\mathrm{Var}(\\hat\\theta)\\ge 1/(nI_1(\\theta))\\)).<br>\nThe Maximum Likelihood Estimator (MLE) attains it asymptotically.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Variance bound = inverse curvature. It is Cauchy-Schwarz in the Hilbert space of random variables: an unbiased estimator must have covariance exactly 1 with the score, and for fixed inner product the norm is minimised by being parallel to the score.",
+   "source": "Likelihood & Frequentist Inference"
+  },
+  {
+   "guid": "sPAxiiNUBm",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::03 Likelihood & Frequentist Inference",
+   "tags": [
+    "stats",
+    "stats::inference",
+    "stats::inference::likelihood"
+   ],
+   "front": "State the asymptotic distribution of the Maximum Likelihood Estimator (MLE) and the core idea of the proof.",
+   "back": "\\(\\sqrt{n}(\\hat\\theta-\\theta_0) \\xrightarrow{d} N\\!\\left(0,\\ I(\\theta_0)^{-1}\\right)\\) under regularity conditions.<br>\nProof idea: Taylor-expand the score around \\(\\theta_0\\): \\(0 = s_n(\\hat\\theta)\\approx s_n(\\theta_0) - nI\\,(\\hat\\theta-\\theta_0)\\). The score is a sum (Central Limit Theorem), the Hessian is an average (Law of Large Numbers).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> With lots of data, the log-likelihood near its peak becomes an exact downward paraboloid whose curvature is \\(nI\\). A paraboloid log-density is a Gaussian. The noisy score shifts the paraboloid&#x27;s peak sideways by (noise)/(curvature).",
+   "source": "Likelihood & Frequentist Inference"
+  },
+  {
+   "guid": "g)|`_lX8Ek",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::03 Likelihood & Frequentist Inference",
+   "tags": [
+    "stats",
+    "stats::inference",
+    "stats::inference::testing"
+   ],
+   "front": "Name the three classical likelihood-based tests and what each measures on the log-likelihood curve.",
+   "back": "Testing \\(H_0:\\theta=\\theta_0\\):<br>\n<strong>Wald</strong>: horizontal distance \\(\\hat\\theta-\\theta_0\\), scaled by curvature at \\(\\hat\\theta\\).<br>\n<strong>Likelihood Ratio (LR)</strong>: vertical drop \\(2[\\ell(\\hat\\theta)-\\ell(\\theta_0)]\\).<br>\n<strong>Score (Lagrange multiplier)</strong>: slope at \\(\\theta_0\\), scaled by curvature at \\(\\theta_0\\).<br>\nAll three are asymptotically \\(\\chi^2\\) and equivalent.",
+   "text": "",
+   "image": "<img src=\"trinity_tests.svg\">",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> On an exact parabola, horizontal distance, vertical drop and slope carry identical information, so the tests agree. They diverge in finite samples precisely to the extent the log-likelihood is not quadratic. Wald is not invariant to reparameterisation; LR is. Score needs only the null model to be fitted.",
+   "source": "Likelihood & Frequentist Inference"
+  },
+  {
+   "guid": "IRt4Q}qN34",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::03 Likelihood & Frequentist Inference",
+   "tags": [
+    "stats",
+    "stats::inference",
+    "stats::inference::testing"
+   ],
+   "front": "State Wilks&#x27; theorem.",
+   "back": "For nested regular models, under \\(H_0\\): \\(2\\left[\\ell(\\hat\\theta_{\\text{full}}) - \\ell(\\hat\\theta_{\\text{null}})\\right] \\xrightarrow{d} \\chi^2_q\\), with \\(q\\) the number of constrained parameters.<br>\nFails when the null is on the <strong>boundary</strong> of the parameter space (e.g. variance component = 0, mixture weight = 0) or parameters are unidentified under the null.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Near the peak the log-likelihood is a paraboloid; the drop from the unconstrained peak to the constrained peak is the squared length (in Fisher metric) of a Gaussian vector&#x27;s component in the q forbidden directions: a \\(\\chi^2_q\\). Generalises the linear-model F-test.",
+   "source": "Likelihood & Frequentist Inference"
+  },
+  {
+   "guid": "N^kjoTR4,s",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::03 Likelihood & Frequentist Inference",
+   "tags": [
+    "stats",
+    "stats::inference",
+    "stats::inference::testing"
+   ],
+   "front": "What exactly is a p-value, and name three things it is not.",
+   "back": "\\(p = P(\\text{test statistic at least this extreme}\\mid H_0)\\). It is computed assuming the null, and under the null it is uniformly distributed on [0,1].<br>\nIt is <strong>not</strong>: (1) \\(P(H_0\\mid\\text{data})\\); (2) the probability the result is due to chance; (3) a measure of effect size or importance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> It is a tail area under the null&#x27;s sampling distribution. Converting to \\(P(H_0\\mid\\text{data})\\) requires a prior and the alternative&#x27;s likelihood: \\(p=0.05\\) often corresponds to a posterior null probability of 20-50% for plausible priors.",
+   "source": "Likelihood & Frequentist Inference"
+  },
+  {
+   "guid": "nz!=P&7N{K",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::03 Likelihood & Frequentist Inference",
+   "tags": [
+    "stats",
+    "stats::inference",
+    "stats::inference::testing"
+   ],
+   "front": "Distinguish a 95% confidence interval from a 95% credible interval.",
+   "back": "<strong>Confidence interval</strong>: a random interval produced by a procedure that covers the fixed true parameter in 95% of repeated samples. The probability statement is about the procedure.<br>\n<strong>Credible interval</strong>: a fixed interval containing 95% of the posterior mass of the (random) parameter given this dataset and prior.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> They coincide numerically for location problems with flat priors and asymptotically (Bernstein-von Mises), which is why the misreading usually goes unpunished. They diverge with strong priors, small samples, boundaries, or optional stopping.",
+   "source": "Likelihood & Frequentist Inference"
+  },
+  {
+   "guid": "u2=_c~^xwt",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::03 Likelihood & Frequentist Inference",
+   "tags": [
+    "stats",
+    "stats::inference",
+    "stats::inference::likelihood"
+   ],
+   "front": "Define a sufficient statistic and state the Fisher-Neyman factorisation criterion.",
+   "back": "\\(T(x)\\) is sufficient for \\(\\theta\\) if the distribution of \\(x\\) given \\(T(x)\\) does not depend on \\(\\theta\\).<br>\nCriterion: \\(p(x\\mid\\theta) = g(T(x),\\theta)\\,h(x)\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> The level sets of T partition sample space into contours. Which contour you land on carries all the information about θ; where you are within the contour is pure noise. Lossless data compression for inference. Fixed-dimension sufficient statistics for all n exist essentially only in exponential families (Pitman-Koopman-Darmois).",
+   "source": "Likelihood & Frequentist Inference"
+  },
+  {
+   "guid": "B}sUR|eTM,",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::03 Likelihood & Frequentist Inference",
+   "tags": [
+    "stats",
+    "stats::inference",
+    "stats::inference::likelihood"
+   ],
+   "front": "Write the exponential family form and state what the derivatives of the log-partition function give.",
+   "back": "\\(p(x\\mid\\eta) = h(x)\\exp\\!\\left(\\eta^\\top T(x) - A(\\eta)\\right)\\).<br>\n\\(\\nabla A(\\eta) = E[T(x)]\\), \\(\\nabla^2 A(\\eta) = \\mathrm{Cov}[T(x)] = I(\\eta)\\).<br>\nSo \\(A\\) is <strong>convex</strong>, the log-likelihood is <strong>concave</strong> in \\(\\eta\\), and the Maximum Likelihood Estimator (MLE) is <strong>moment matching</strong>: \\(E_{\\hat\\eta}[T] = \\frac1n\\sum T(x_i)\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Two coordinate systems on the same manifold: natural parameters η and mean parameters μ = ∇A(η), linked by a Legendre transform (convex duality). The manifold is &quot;flat&quot; in each. This dual flatness is the core of information geometry.",
+   "source": "Likelihood & Frequentist Inference"
+  },
+  {
+   "guid": "zK`0YZ+20$",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::03 Likelihood & Frequentist Inference",
+   "tags": [
+    "stats",
+    "stats::inference",
+    "stats::inference::resampling"
+   ],
+   "front": "What is the bootstrap principle? When does it fail?",
+   "back": "Plug-in principle: approximate the unknown distribution \\(F\\) by the empirical \\(\\hat F\\), and approximate &quot;sampling from \\(F\\)&quot; by resampling with replacement from the data. The variability of \\(\\hat\\theta^*\\) around \\(\\hat\\theta\\) mimics the variability of \\(\\hat\\theta\\) around \\(\\theta\\).<br>\nFails for: extremes (max/min), parameters on a boundary, heavy tails with infinite variance, dependent data unless blocks are resampled.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Analogy of worlds: real world (population → sample) is to bootstrap world (sample → resample). We cannot rerun the first arrow, so we rerun the second, which we fully control, and transfer the error distribution back.",
+   "source": "Likelihood & Frequentist Inference"
+  },
+  {
+   "guid": "Ng(t7!|OX{",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::03 Likelihood & Frequentist Inference",
+   "tags": [
+    "stats",
+    "stats::inference",
+    "stats::inference::testing"
+   ],
+   "front": "Contrast Family-Wise Error Rate (FWER) control with False Discovery Rate (FDR) control.",
+   "back": "<strong>FWER</strong> = P(at least one false rejection). Bonferroni: test each at \\(\\alpha/m\\). Strict; power collapses as \\(m\\) grows.<br>\n<strong>FDR</strong> = E[false rejections / total rejections]. Benjamini-Hochberg: sort p-values, reject all up to the largest \\(k\\) with \\(p_{(k)}\\le \\frac{k}{m}\\alpha\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Plot sorted p-values against rank. Null p-values are uniform, so they hug the diagonal of slope 1/m. Benjamini-Hochberg draws a line of slope α/m from the origin and rejects everything before the last point below the line: the early p-values that dip too far under the uniform diagonal to be nulls.",
+   "source": "Likelihood & Frequentist Inference"
+  },
+  {
+   "guid": "cF?LrG:rpC",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::03 Likelihood & Frequentist Inference",
+   "tags": [
+    "stats",
+    "stats::inference",
+    "stats::inference::testing"
+   ],
+   "front": "State the Neyman-Pearson lemma.",
+   "back": "For testing simple \\(H_0: p_0\\) vs simple \\(H_1: p_1\\), the most powerful test at level \\(\\alpha\\) rejects when the likelihood ratio \\(\\Lambda(x)=p_1(x)/p_0(x)\\) exceeds a threshold \\(k\\) chosen to give size \\(\\alpha\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> You have a budget of α of null probability to spend on a rejection region. Spend it where you get the most alternative probability per unit of null probability: &quot;best bang for the buck&quot; is points ranked by \\(p_1/p_0\\). A fractional knapsack problem.",
+   "source": "Likelihood & Frequentist Inference"
+  },
+  {
+   "guid": "L(ZhX}F-J-",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::03 Likelihood & Frequentist Inference",
+   "tags": [
+    "stats",
+    "stats::inference",
+    "stats::inference::testing"
+   ],
+   "front": "What determines statistical power, and how does sample size enter?",
+   "back": "Power = P(reject \\(H_0\\mid H_1\\) true). It increases with effect size \\(\\delta\\), sample size \\(n\\), and level \\(\\alpha\\); it decreases with noise \\(\\sigma\\).<br>\nFor a z-test: power \\(\\approx \\Phi\\!\\left(\\dfrac{\\delta\\sqrt n}{\\sigma} - z_{1-\\alpha}\\right)\\). Required \\(n \\propto \\sigma^2/\\delta^2\\): halving the detectable effect costs 4× the data.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Two bell curves (sampling distributions of the estimate under null and alternative) with centres δ apart and widths \\(\\sigma/\\sqrt{n}\\). More data does not move them; it makes them thinner until they stop overlapping.",
+   "source": "Likelihood & Frequentist Inference"
+  },
+  {
+   "guid": "fooz@uR?A$",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::03 Likelihood & Frequentist Inference",
+   "tags": [
+    "stats",
+    "stats::inference",
+    "stats::inference::likelihood"
+   ],
+   "front": "What does the Maximum Likelihood Estimator (MLE) converge to under model misspecification, and what is its asymptotic covariance?",
+   "back": "To the pseudo-true parameter \\(\\theta^* = \\arg\\min_\\theta \\mathrm{KL}(p_{\\text{true}}\\,\\|\\,p_\\theta)\\).<br>\nCovariance is the <strong>sandwich</strong> \\(A^{-1}BA^{-1}/n\\), with \\(A = -E[\\nabla^2\\log p_\\theta]\\) (curvature) and \\(B = E[s\\,s^\\top]\\) (score variance).<br>\nWhen the model is correct, \\(A=B=I(\\theta)\\) and the sandwich collapses to \\(I^{-1}/n\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> The information equality (curvature = score variance) is a signature of a correct model. When it fails, curvature alone misjudges the uncertainty; you must measure the actual spread of the score pushes (the &quot;meat&quot;) and convert via the curvature (the &quot;bread&quot;).",
+   "source": "Likelihood & Frequentist Inference"
+  },
+  {
+   "guid": "jGTtl}K2Hb",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::03 Likelihood & Frequentist Inference",
+   "tags": [
+    "stats",
+    "stats::inference",
+    "stats::inference::shrinkage"
+   ],
+   "front": "What is the James-Stein phenomenon, and what is its geometric explanation?",
+   "back": "For \\(x\\sim N(\\theta, I_d)\\) with \\(d\\ge3\\), the estimator \\(\\hat\\theta_{JS} = \\left(1-\\dfrac{d-2}{\\|x\\|^2}\\right)x\\) has strictly lower total mean squared error than the Maximum Likelihood Estimator \\(x\\), for <strong>every</strong> \\(\\theta\\). Shrinking unrelated means toward a common point helps.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> \\(E\\|x\\|^2 = \\|\\theta\\|^2 + d\\). The noise is almost surely nearly orthogonal to θ in high dimensions, so the observed vector is the hypotenuse of a right triangle: systematically <strong>too long</strong>. Shrinking it corrects the length. This is the root of ridge, hierarchical models and empirical Bayes.",
+   "source": "Likelihood & Frequentist Inference"
+  },
+  {
+   "guid": "n</7d`*Fcn",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::03 Likelihood & Frequentist Inference",
+   "tags": [
+    "stats",
+    "stats::inference",
+    "stats::inference::latent"
+   ],
+   "front": "Explain the Expectation-Maximisation (EM) algorithm via a lower bound.",
+   "back": "For any distribution \\(q(z)\\) over latent variables:<br>\n\\(\\log p(x\\mid\\theta) = \\underbrace{E_q\\!\\left[\\log\\tfrac{p(x,z\\mid\\theta)}{q(z)}\\right]}_{\\text{lower bound } \\mathcal{L}(q,\\theta)} + \\mathrm{KL}\\!\\left(q\\,\\|\\,p(z\\mid x,\\theta)\\right)\\)<br>\n<strong>E-step</strong>: set \\(q = p(z\\mid x,\\theta_{\\text{old}})\\) so the bound touches the log-likelihood.<br>\n<strong>M-step</strong>: maximise \\(\\mathcal L\\) over \\(\\theta\\). The likelihood never decreases.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Coordinate ascent on \\(\\mathcal L(q,\\theta)\\). Picture a hard-to-climb curve; at the current point fit a smooth surrogate that lies under it and touches it, jump to the surrogate&#x27;s top, repeat (minorise-maximise). Variational inference is the same picture with q restricted to a tractable family so the bound never quite touches.",
+   "source": "Likelihood & Frequentist Inference"
+  },
+  {
+   "guid": "O8p?>v*vup",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::03 Likelihood & Frequentist Inference",
+   "tags": [
+    "stats",
+    "stats::inference",
+    "stats::inference::model_selection"
+   ],
+   "front": "Contrast the Akaike Information Criterion (AIC) and the Bayesian Information Criterion (BIC).",
+   "back": "\\(\\mathrm{AIC} = -2\\ell + 2k\\): estimates expected out-of-sample Kullback-Leibler (KL) divergence; targets <strong>prediction</strong>; asymptotically equivalent to leave-one-out cross-validation; tends to overfit slightly.<br>\n\\(\\mathrm{BIC} = -2\\ell + k\\log n\\): Laplace approximation to \\(-2\\log\\) marginal likelihood; targets <strong>identifying the true model</strong>; consistent if the truth is among the candidates.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> The &quot;+2k&quot; is an optimism correction: each fitted parameter lets the in-sample likelihood climb by about 1 unit (half a \\(\\chi^2_1\\)) by fitting noise, and out of sample you lose the same again. BIC&#x27;s log n grows because the Occam penalty of a prior volume collapsing to a posterior volume scales as \\(n^{-k/2}\\).",
+   "source": "Likelihood & Frequentist Inference"
+  },
+  {
+   "guid": "N=75e7[vn_",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::03 Likelihood & Frequentist Inference",
+   "tags": [
+    "stats",
+    "stats::inference",
+    "stats::inference::model_selection"
+   ],
+   "front": "What is the leave-one-out cross-validation shortcut for linear smoothers?",
+   "back": "For \\(\\hat y = Sy\\) (Ordinary Least Squares, ridge, splines, kernel ridge): the leave-one-out residual is<br>\n\\(e_{(i)} = \\dfrac{y_i - \\hat y_i}{1 - S_{ii}}\\).<br>\nSo leave-one-out error needs one fit, not \\(n\\). Generalised Cross-Validation (GCV) replaces \\(S_{ii}\\) by the average \\(\\mathrm{tr}(S)/n\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> \\(S_{ii}\\) is the self-influence (leverage) of point i: the fraction of its own fitted value that it supplies. Removing the point inflates its residual by exactly the factor that undoes this self-help. High-leverage points flatter themselves most.",
+   "source": "Likelihood & Frequentist Inference"
+  },
+  {
+   "guid": "AJ+DoNAYt@",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::04 GLMs, Hierarchical & Causal",
+   "tags": [
+    "stats",
+    "stats::glm_causal",
+    "stats::glm_causal::glm"
+   ],
+   "front": "What are the three components of a Generalized Linear Model (GLM)?",
+   "back": "1. <strong>Random component</strong>: \\(y\\) from an exponential-family distribution (Gaussian, Bernoulli, Poisson, Gamma).<br>\n2. <strong>Linear predictor</strong>: \\(\\eta = X\\beta\\).<br>\n3. <strong>Link function</strong>: \\(g(\\mu)=\\eta\\), where \\(\\mu=E[y\\mid x]\\).<br>\nThe model is linear on the link scale, not on the scale of the data.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Linear regression lets a flat plane live in data space. A GLM keeps the flat plane but puts it in a warped coordinate system (log-odds, log-rate) chosen so that the plane can never predict an impossible mean (a probability of 1.3, a negative count).",
+   "source": "GLMs, Hierarchical & Causal"
+  },
+  {
+   "guid": "Q0w(,c#uX8",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::04 GLMs, Hierarchical & Causal",
+   "tags": [
+    "stats",
+    "stats::glm_causal",
+    "stats::glm_causal::glm"
+   ],
+   "front": "What is special about the canonical link in a Generalized Linear Model (GLM)? Give the score equations.",
+   "back": "The canonical link sets the natural parameter equal to the linear predictor (\\(\\theta=\\eta\\)): logit for Bernoulli, log for Poisson, identity for Gaussian.<br>\nThen the score equations are \\(X^\\top(y-\\hat\\mu)=0\\), the log-likelihood is concave, and \\(X^\\top y\\) is sufficient.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Same orthogonality condition as Ordinary Least Squares: <strong>the residual is perpendicular to every predictor column</strong>. The only difference is that \\(\\hat\\mu\\) lives on a curved surface \\(\\{g^{-1}(X\\beta)\\}\\) rather than a flat subspace, so the &quot;projection&quot; must be found iteratively.",
+   "source": "GLMs, Hierarchical & Causal"
+  },
+  {
+   "guid": "qa=T}sw]%Z",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::04 GLMs, Hierarchical & Causal",
+   "tags": [
+    "stats",
+    "stats::glm_causal",
+    "stats::glm_causal::glm"
+   ],
+   "front": "In logistic regression, what is the geometry of the decision boundary and of the coefficient vector?",
+   "back": "\\(\\log\\dfrac{p}{1-p} = w^\\top x + b\\). The boundary \\(p=0.5\\) is the hyperplane \\(w^\\top x+b=0\\).<br>\n\\(w\\) is the <strong>normal vector</strong> to that hyperplane; \\(\\|w\\|\\) sets how fast the probability changes as you move away from it. \\(e^{w_j}\\) is the odds ratio per unit of \\(x_j\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> The probability surface is a sigmoid ramp extruded along the hyperplane. The signed distance to the boundary is \\((w^\\top x+b)/\\|w\\|\\); multiply by \\(\\|w\\|\\) to get log-odds. Large \\(\\|w\\|\\): a cliff. Small \\(\\|w\\|\\): a gentle slope.",
+   "source": "GLMs, Hierarchical & Causal"
+  },
+  {
+   "guid": "QN{V607KSL",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::04 GLMs, Hierarchical & Causal",
+   "tags": [
+    "stats",
+    "stats::glm_causal",
+    "stats::glm_causal::glm"
+   ],
+   "front": "What happens to the logistic regression Maximum Likelihood Estimator (MLE) under perfect separation, and why?",
+   "back": "It does not exist: \\(\\|\\hat w\\|\\to\\infty\\). If a hyperplane separates the classes, scaling \\(w\\) up always increases the likelihood, pushing all fitted probabilities toward 0 or 1. Symptoms: huge coefficients, huge standard errors, convergence warnings.<br>\nFixes: L2/L1 penalty, Firth&#x27;s bias-reduced likelihood, weakly informative priors.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> The direction of w converges (interestingly, to the maximum-margin separator when trained by gradient descent) while its length diverges: the sigmoid ramp steepens into a step function.",
+   "source": "GLMs, Hierarchical & Causal"
+  },
+  {
+   "guid": "x~]SaaDtPV",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::04 GLMs, Hierarchical & Causal",
+   "tags": [
+    "stats",
+    "stats::glm_causal",
+    "stats::glm_causal::glm"
+   ],
+   "front": "How is a Generalized Linear Model (GLM) fitted? Describe Iteratively Reweighted Least Squares (IRLS).",
+   "back": "IRLS is Newton-Raphson / Fisher scoring on the log-likelihood. Each step solves a <strong>weighted least squares</strong> problem<br>\n\\(\\beta^{\\text{new}} = (X^\\top WX)^{-1}X^\\top Wz\\)<br>\nwith working response \\(z = \\eta + (y-\\mu)\\,g&#x27;(\\mu)\\) and weights \\(W = 1/(V(\\mu)\\,g&#x27;(\\mu)^2)\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Approximate the curved mean surface by its tangent plane at the current fit, project onto that plane (with a metric that weights observations by their local precision), move, re-linearise. A sequence of ordinary projections that converges to the curved one.",
+   "source": "GLMs, Hierarchical & Causal"
+  },
+  {
+   "guid": "HLECc9JRc.",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::04 GLMs, Hierarchical & Causal",
+   "tags": [
+    "stats",
+    "stats::glm_causal",
+    "stats::glm_causal::glm"
+   ],
+   "front": "What is deviance in a Generalized Linear Model (GLM)?",
+   "back": "\\(D = 2\\left[\\ell(\\text{saturated model}) - \\ell(\\text{fitted model})\\right]\\).<br>\nFor Gaussian errors it equals the Residual Sum of Squares (RSS)/\\(\\sigma^2\\). Differences in deviance between nested models are likelihood-ratio statistics, asymptotically \\(\\chi^2\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Deviance is twice the Kullback-Leibler (KL) divergence from the data (saturated fit) to the model fit: the GLM&#x27;s replacement for squared Euclidean distance. For Gaussians, KL between two means <strong>is</strong> squared distance, which is why RSS is a special case.",
+   "source": "GLMs, Hierarchical & Causal"
+  },
+  {
+   "guid": "q*zKt+3+iD",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::04 GLMs, Hierarchical & Causal",
+   "tags": [
+    "stats",
+    "stats::glm_causal",
+    "stats::glm_causal::glm"
+   ],
+   "front": "What is overdispersion in count models and how do you handle it?",
+   "back": "Poisson forces \\(\\mathrm{Var}(y)=\\mu\\). Real counts usually have \\(\\mathrm{Var}(y)&gt;\\mu\\) (unobserved heterogeneity, clustering). Coefficients remain roughly fine but standard errors are <strong>too small</strong>.<br>\nFixes: quasi-Poisson (estimate a dispersion factor \\(\\phi\\)), Negative Binomial (\\(\\mathrm{Var}=\\mu+\\mu^2/k\\)), observation-level random effects.<br>\nDiagnostic: residual deviance / degrees of freedom \\(\\gg 1\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> The Negative Binomial is a Poisson whose rate is itself Gamma-distributed: a mixture. Mixing always adds variance (law of total variance: variance of the conditional mean is piled on top).",
+   "source": "GLMs, Hierarchical & Causal"
+  },
+  {
+   "guid": "dg4oby}0vo",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::04 GLMs, Hierarchical & Causal",
+   "tags": [
+    "stats",
+    "stats::glm_causal",
+    "stats::glm_causal::hierarchical"
+   ],
+   "front": "What is partial pooling in a hierarchical (mixed-effects) model? Give the shrinkage formula for a group mean.",
+   "back": "Group effects are modelled as draws from a common distribution, \\(\\alpha_j\\sim N(\\mu,\\tau^2)\\). The estimate for group \\(j\\) is a precision-weighted compromise:<br>\n\\(\\hat\\alpha_j = \\lambda_j\\,\\bar y_j + (1-\\lambda_j)\\,\\hat\\mu,\\qquad \\lambda_j = \\dfrac{\\tau^2}{\\tau^2+\\sigma^2/n_j}\\).<br>\nSmall or noisy groups are shrunk strongly toward the grand mean.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Between &quot;no pooling&quot; (each group alone: high variance) and &quot;complete pooling&quot; (one mean for all: high bias) lies a continuum; the data choose the position through \\(\\tau^2\\). Each estimate slides along the segment from its own mean toward the grand mean. It is James-Stein with the shrinkage amount learned.",
+   "source": "GLMs, Hierarchical & Causal"
+  },
+  {
+   "guid": "uW%97J$U#b",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::04 GLMs, Hierarchical & Causal",
+   "tags": [
+    "stats",
+    "stats::glm_causal",
+    "stats::glm_causal::nonparametric"
+   ],
+   "front": "How do smoothing splines / Generalized Additive Models (GAMs) fit nonlinear functions while remaining &quot;linear models&quot;?",
+   "back": "Expand each predictor in a basis \\(f(x)=\\sum_k\\beta_k b_k(x)\\) (B-splines), then penalise roughness:<br>\nminimise \\(\\|y-B\\beta\\|^2 + \\lambda\\int f&#x27;&#x27;(x)^2dx = \\|y-B\\beta\\|^2+\\lambda\\,\\beta^\\top\\Omega\\beta\\).<br>\nThis is generalised ridge regression; \\(\\lambda\\) chosen by cross-validation or Restricted Maximum Likelihood (REML).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Still a projection-like linear smoother \\(\\hat y = S_\\lambda y\\) in a richer column space. The penalty leaves the straight-line component untouched (zero curvature) and shrinks wigglier basis directions progressively harder: a low-pass filter.",
+   "source": "GLMs, Hierarchical & Causal"
+  },
+  {
+   "guid": "D:2|>/~ojI",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::04 GLMs, Hierarchical & Causal",
+   "tags": [
+    "stats",
+    "stats::glm_causal",
+    "stats::glm_causal::nonparametric"
+   ],
+   "front": "In kernel / local regression, what role does the bandwidth \\(h\\) play?",
+   "back": "The estimate at \\(x_0\\) is a locally weighted average (Nadaraya-Watson) or local linear fit with weights \\(K((x_i-x_0)/h)\\).<br>\nSmall \\(h\\): low bias, high variance (wiggly). Large \\(h\\): high bias, low variance (flat).<br>\nOptimal \\(h\\propto n^{-1/5}\\) in 1-D, giving error rate \\(n^{-4/5}\\); in \\(d\\) dimensions the rate degrades to \\(n^{-4/(4+d)}\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> A sliding window. Bias comes from curvature of the truth inside the window; variance from how few points the window contains. The d-dimensional rate is the curse of dimensionality stated as a theorem.",
+   "source": "GLMs, Hierarchical & Causal"
+  },
+  {
+   "guid": "N7(}KFhRpk",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::04 GLMs, Hierarchical & Causal",
+   "tags": [
+    "stats",
+    "stats::glm_causal",
+    "stats::glm_causal::survival"
+   ],
+   "front": "In survival analysis, define the hazard function and explain how the Cox model handles censoring without specifying a baseline.",
+   "back": "Hazard \\(h(t) = \\lim_{dt\\to0} P(t\\le T&lt;t+dt\\mid T\\ge t)/dt\\), the instantaneous failure rate among survivors.<br>\nCox: \\(h(t\\mid x) = h_0(t)\\exp(x^\\top\\beta)\\). The <strong>partial likelihood</strong> multiplies, over event times, \\(\\dfrac{\\exp(x_i^\\top\\beta)}{\\sum_{j\\in\\text{risk set}}\\exp(x_j^\\top\\beta)}\\); \\(h_0\\) cancels. Censored subjects contribute to risk sets until they drop out.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> At each event time, ask: &quot;of everyone still at risk, how surprising is it that this person failed?&quot; That is a softmax over the risk set. Only the ordering of events matters, not the clock times.",
+   "source": "GLMs, Hierarchical & Causal"
+  },
+  {
+   "guid": "Bj}dNYkiR.",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::04 GLMs, Hierarchical & Causal",
+   "tags": [
+    "stats",
+    "stats::glm_causal",
+    "stats::glm_causal::nonparametric"
+   ],
+   "front": "What loss does quantile regression minimise, and why does it yield a quantile?",
+   "back": "The pinball (check) loss \\(\\rho_\\tau(u) = u\\,(\\tau - \\mathbb 1[u&lt;0])\\): under-predictions cost \\(\\tau\\) per unit, over-predictions cost \\(1-\\tau\\).<br>\nAt the minimum the subgradients balance: a fraction \\(\\tau\\) of the mass lies below the prediction. \\(\\tau=0.5\\) gives the median (absolute loss).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> A tilted V. Squared loss balances like a centre of mass (mean); absolute loss balances by head-count (median); tilting the V moves the head-count balance point to any quantile.",
+   "source": "GLMs, Hierarchical & Causal"
+  },
+  {
+   "guid": "nUnG_csb6g",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::04 GLMs, Hierarchical & Causal",
+   "tags": [
+    "stats",
+    "stats::glm_causal",
+    "stats::glm_causal::causal"
+   ],
+   "front": "Explain Simpson&#x27;s paradox geometrically.",
+   "back": "A trend that holds within every subgroup reverses when groups are pooled, because group membership is associated with both \\(x\\) and \\(y\\).<br>\nPooled slope = a weighted mix of the <strong>within-group</strong> slopes and the <strong>between-group</strong> slope (the slope through the group centroids), and the two can have opposite signs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Several small clouds each tilting upward, but arranged in a staircase going downward. The pooled fit follows the staircase. Which slope is &quot;right&quot; is a causal question (is the group variable a confounder or a mediator/collider?), not a statistical one.",
+   "source": "GLMs, Hierarchical & Causal"
+  },
+  {
+   "guid": "OU[I0hr9[}",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::04 GLMs, Hierarchical & Causal",
+   "tags": [
+    "stats",
+    "stats::glm_causal",
+    "stats::glm_causal::causal"
+   ],
+   "front": "For causal adjustment, how do you treat a confounder, a mediator and a collider?",
+   "back": "<strong>Confounder</strong> (\\(X\\leftarrow Z\\rightarrow Y\\)): adjust for it; it opens a spurious back-door path.<br>\n<strong>Mediator</strong> (\\(X\\rightarrow M\\rightarrow Y\\)): do not adjust if you want the total effect.<br>\n<strong>Collider</strong> (\\(X\\rightarrow C\\leftarrow Y\\)): do <strong>not</strong> adjust; conditioning on it (or selecting on it) <strong>creates</strong> a spurious association.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Collider bias as slicing: talent and looks are independent in the population (a round cloud). Condition on &quot;became an actor&quot; = talent + looks above a threshold: you keep only the upper-right corner beyond a diagonal line, and inside that slice the two are negatively correlated.",
+   "source": "GLMs, Hierarchical & Causal"
+  },
+  {
+   "guid": "v;3w5GtwEF",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::04 GLMs, Hierarchical & Causal",
+   "tags": [
+    "stats",
+    "stats::glm_causal",
+    "stats::glm_causal::causal"
+   ],
+   "front": "State the potential-outcomes definition of the Average Treatment Effect (ATE) and why randomisation identifies it.",
+   "back": "Each unit has \\(Y_i(1)\\) and \\(Y_i(0)\\); only one is observed. \\(\\mathrm{ATE}=E[Y(1)-Y(0)]\\).<br>\nNaive difference = ATE + selection bias: \\(E[Y(0)\\mid T=1]-E[Y(0)\\mid T=0]\\).<br>\nRandomisation makes \\(T\\perp (Y(0),Y(1))\\), so selection bias is zero. Observational studies need <strong>conditional ignorability</strong> \\(T\\perp Y(t)\\mid X\\) plus <strong>overlap</strong> \\(0&lt;P(T=1\\mid X)&lt;1\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> A missing-data problem: half of every row of the potential-outcomes table is blank. Randomisation guarantees the blanks are missing completely at random.",
+   "source": "GLMs, Hierarchical & Causal"
+  },
+  {
+   "guid": "XN?Y=^?<",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::04 GLMs, Hierarchical & Causal",
+   "tags": [
+    "stats",
+    "stats::glm_causal",
+    "stats::glm_causal::causal"
+   ],
+   "front": "What is a propensity score and why is it enough to adjust for it alone?",
+   "back": "\\(e(x)=P(T=1\\mid X=x)\\). Rosenbaum-Rubin: if treatment is ignorable given \\(X\\), it is ignorable given the scalar \\(e(X)\\); \\(e(X)\\) is a <strong>balancing score</strong> (\\(X\\perp T\\mid e(X)\\)).<br>\nUsed for matching, stratification, or Inverse Probability Weighting (IPW): weight treated by \\(1/e\\), controls by \\(1/(1-e)\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Collapses a high-dimensional covariate space to one axis along which treatment assignment varies. Within a slice of constant propensity, treatment is as good as a coin flip. Weights explode when e is near 0 or 1: those are regions with no overlap, where the data cannot speak.",
+   "source": "GLMs, Hierarchical & Causal"
+  },
+  {
+   "guid": "j6)!%{u&Pr",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::05 Bayesian Statistics",
+   "tags": [
+    "stats",
+    "stats::bayes",
+    "stats::bayes::basics"
+   ],
+   "front": "State Bayes&#x27; theorem for parameters and describe the update geometrically.",
+   "back": "\\(p(\\theta\\mid x) = \\dfrac{p(x\\mid\\theta)\\,p(\\theta)}{p(x)} \\propto \\text{likelihood}\\times\\text{prior}\\).<br>\nIn log space: log-posterior = log-likelihood + log-prior + const.",
+   "text": "",
+   "image": "<img src=\"bayes_update.svg\">",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Pointwise multiplication of two surfaces over parameter space, then renormalising. The posterior is high only where <strong>both</strong> are high. For Gaussians, adding two downward parabolas gives a parabola whose curvature is the sum: <strong>precisions add</strong>, and the peak lands between the two peaks, nearer the sharper one.",
+   "source": "Bayesian Statistics"
+  },
+  {
+   "guid": "NfW6_~dH&_",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::05 Bayesian Statistics",
+   "tags": [
+    "stats",
+    "stats::bayes",
+    "stats::bayes::basics"
+   ],
+   "front": "What is a conjugate prior? Work the Beta-Binomial case.",
+   "back": "A prior family that is closed under the likelihood&#x27;s update, so the posterior has the same form.<br>\nPrior \\(\\mathrm{Beta}(a,b)\\), data \\(k\\) successes in \\(n\\) trials, posterior \\(\\mathrm{Beta}(a+k,\\ b+n-k)\\).<br>\nPosterior mean \\(\\dfrac{a+k}{a+b+n}\\): a weighted average of the prior mean and the sample proportion.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> The hyperparameters are <strong>pseudo-counts</strong>: the prior behaves like a+b imaginary earlier trials. Conjugacy exists exactly for exponential families: the prior is shaped like a likelihood from fictitious data, so updating just adds sufficient statistics.",
+   "source": "Bayesian Statistics"
+  },
+  {
+   "guid": "sQVBXvLA./",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::05 Bayesian Statistics",
+   "tags": [
+    "stats",
+    "stats::bayes",
+    "stats::bayes::basics"
+   ],
+   "front": "Normal likelihood with known variance and Normal prior: give the posterior mean and precision.",
+   "back": "Prior \\(N(\\mu_0,\\tau_0^2)\\), data mean \\(\\bar x\\) from \\(n\\) observations with variance \\(\\sigma^2\\).<br>\nPosterior precision: \\(\\dfrac{1}{\\tau_n^2} = \\dfrac{1}{\\tau_0^2}+\\dfrac{n}{\\sigma^2}\\).<br>\nPosterior mean: \\(\\mu_n = \\dfrac{\\mu_0/\\tau_0^2 + n\\bar x/\\sigma^2}{1/\\tau_0^2+n/\\sigma^2}\\), a <strong>precision-weighted average</strong>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> The posterior mean is the centre of mass of two weights placed at the prior mean and at the data mean, with masses equal to their precisions. As n grows the data&#x27;s mass dominates and the prior is forgotten.",
+   "source": "Bayesian Statistics"
+  },
+  {
+   "guid": "rUd.:JF;Lc",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::05 Bayesian Statistics",
+   "tags": [
+    "stats",
+    "stats::bayes",
+    "stats::bayes::basics"
+   ],
+   "front": "What is the posterior predictive distribution and how does it differ from a plug-in prediction?",
+   "back": "\\(p(\\tilde x\\mid x) = \\int p(\\tilde x\\mid\\theta)\\,p(\\theta\\mid x)\\,d\\theta\\).<br>\nIt averages predictions over parameter uncertainty, so it is <strong>wider</strong> than \\(p(\\tilde x\\mid\\hat\\theta)\\). Normal example: predictive variance \\(=\\sigma^2+\\tau_n^2\\) (noise + parameter uncertainty).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> A plug-in forecast is one curve; the posterior predictive is a blurred bundle of curves. Law of total variance: aleatoric (within-model noise) plus epistemic (which model). Only the second shrinks with data.",
+   "source": "Bayesian Statistics"
+  },
+  {
+   "guid": "k8~Z4>s<1G",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::05 Bayesian Statistics",
+   "tags": [
+    "stats",
+    "stats::bayes",
+    "stats::bayes::model_comparison"
+   ],
+   "front": "What is the marginal likelihood (evidence) and how does it implement an automatic Occam&#x27;s razor?",
+   "back": "\\(p(x\\mid M)=\\int p(x\\mid\\theta,M)\\,p(\\theta\\mid M)\\,d\\theta\\): the prior-weighted average fit, i.e. the probability the model assigned to the observed data <strong>before seeing it</strong>.<br>\nA flexible model must spread its unit of probability mass over many possible datasets, so it assigns less to any particular one. A simple model that happens to fit concentrates its mass and wins.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Laplace approximation: evidence ≈ best-fit likelihood × (posterior volume / prior volume). The second factor is the Occam penalty: how much of the prior&#x27;s parameter space had to be thrown away to fit the data.",
+   "source": "Bayesian Statistics"
+  },
+  {
+   "guid": "HkE|<eS1As",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::05 Bayesian Statistics",
+   "tags": [
+    "stats",
+    "stats::bayes",
+    "stats::bayes::model_comparison"
+   ],
+   "front": "What is a Bayes factor, and what is the Jeffreys-Lindley paradox?",
+   "back": "\\(BF_{10}=\\dfrac{p(x\\mid M_1)}{p(x\\mid M_0)}\\); posterior odds = Bayes factor × prior odds.<br>\nParadox: with a point null and a <strong>diffuse</strong> prior under the alternative, a result can be &quot;significant&quot; (small p-value) while the Bayes factor strongly favours the null, increasingly so as \\(n\\to\\infty\\) or the prior widens.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> A very wide prior under the alternative wastes almost all its mass on parameter values far from the data, so the alternative predicted the data poorly. Unlike posteriors, Bayes factors <strong>never forget the prior</strong>; improper priors make them undefined.",
+   "source": "Bayesian Statistics"
+  },
+  {
+   "guid": "c?)8jIR/K.",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::05 Bayesian Statistics",
+   "tags": [
+    "stats",
+    "stats::bayes",
+    "stats::bayes::asymptotics"
+   ],
+   "front": "State the Bernstein-von Mises theorem.",
+   "back": "Under regularity conditions (fixed finite dimension, prior with positive density at the truth, correct model), the posterior converges to<br>\n\\(N\\!\\left(\\hat\\theta_{MLE},\\ I(\\theta_0)^{-1}/n\\right)\\).<br>\nThe prior washes out, and Bayesian credible sets become asymptotically valid frequentist confidence sets.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> The log-likelihood paraboloid sharpens at rate n while the log-prior stays fixed: eventually the prior looks flat on the scale of the likelihood peak. Fails when the dimension grows with n, in nonparametric models, at boundaries, and under misspecification (the posterior then has the wrong width: no sandwich correction).",
+   "source": "Bayesian Statistics"
+  },
+  {
+   "guid": "d5Vv5ZNm(Q",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::05 Bayesian Statistics",
+   "tags": [
+    "stats",
+    "stats::bayes",
+    "stats::bayes::decision"
+   ],
+   "front": "Posterior mean, median and mode each minimise which expected loss? What is the conceptual weakness of the Maximum A Posteriori (MAP) estimate?",
+   "back": "Mean: squared error. Median: absolute error. Mode (MAP): 0-1 loss in the limit of a vanishing tolerance window.<br>\nMAP is <strong>not invariant to reparameterisation</strong>: a density transforms with a Jacobian, so the peak moves when you change coordinates. It also ignores posterior mass.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> A density is &quot;probability per unit volume&quot;, and what counts as a unit volume depends on the coordinate system. Mass is real; height is a coordinate artefact. In high dimensions the mode can sit in a region with negligible mass.",
+   "source": "Bayesian Statistics"
+  },
+  {
+   "guid": "r+HIz,OgBh",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::05 Bayesian Statistics",
+   "tags": [
+    "stats",
+    "stats::bayes",
+    "stats::bayes::priors"
+   ],
+   "front": "What is the Jeffreys prior and what is its geometric meaning?",
+   "back": "\\(p(\\theta)\\propto\\sqrt{\\det I(\\theta)}\\) with \\(I\\) the Fisher information. It is <strong>invariant under reparameterisation</strong>.<br>\nExamples: Bernoulli gives \\(\\mathrm{Beta}(\\tfrac12,\\tfrac12)\\); Normal scale gives \\(p(\\sigma)\\propto1/\\sigma\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> \\(\\sqrt{\\det(\\text{metric})}\\) is the Riemannian volume element. The Jeffreys prior is the <strong>uniform distribution on the statistical manifold</strong> measured with the Fisher metric: equal prior mass to equal numbers of distinguishable distributions, regardless of how you label them.",
+   "source": "Bayesian Statistics"
+  },
+  {
+   "guid": "GRJ=PYkiHt",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::05 Bayesian Statistics",
+   "tags": [
+    "stats",
+    "stats::bayes",
+    "stats::bayes::computation"
+   ],
+   "front": "What is Neal&#x27;s funnel in hierarchical models and how does the non-centred parameterisation fix it?",
+   "back": "With \\(\\alpha_j\\sim N(\\mu,\\tau)\\), when \\(\\tau\\) is small the \\(\\alpha_j\\) are squeezed into a tiny neighbourhood; when \\(\\tau\\) is large they are free. The joint posterior is a <strong>funnel</strong> whose curvature varies by orders of magnitude; no single sampler step size works, producing divergences.<br>\nNon-centred: sample \\(z_j\\sim N(0,1)\\) and set \\(\\alpha_j=\\mu+\\tau z_j\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> The reparameterisation is a change of coordinates that straightens the funnel into something close to an isotropic blob: the prior dependence between τ and α is moved out of the geometry and into a deterministic transform. Use it when data per group is weak; centred is better when data is strong.",
+   "source": "Bayesian Statistics"
+  },
+  {
+   "guid": "sewVJ2uYKO",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::05 Bayesian Statistics",
+   "tags": [
+    "stats",
+    "stats::bayes",
+    "stats::bayes::computation"
+   ],
+   "front": "Describe the Metropolis-Hastings algorithm and why it targets the right distribution.",
+   "back": "From \\(\\theta\\), propose \\(\\theta&#x27;\\sim q(\\theta&#x27;\\mid\\theta)\\); accept with probability<br>\n\\(\\min\\!\\left(1,\\ \\dfrac{p(\\theta&#x27;)\\,q(\\theta\\mid\\theta&#x27;)}{p(\\theta)\\,q(\\theta&#x27;\\mid\\theta)}\\right)\\), else stay.<br>\nOnly density <strong>ratios</strong> are needed, so the normalising constant \\(p(x)\\) cancels. The rule enforces <strong>detailed balance</strong> \\(p(\\theta)T(\\theta\\to\\theta&#x27;)=p(\\theta&#x27;)T(\\theta&#x27;\\to\\theta)\\), which makes \\(p\\) stationary.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> A hiker who always accepts uphill steps and accepts downhill steps with probability equal to the height ratio. Time spent at each location becomes proportional to height. Random-walk proposals diffuse: distance covered grows only as \\(\\sqrt{\\text{steps}}\\), which is hopeless in high dimensions.",
+   "source": "Bayesian Statistics"
+  },
+  {
+   "guid": "pb`m1SUuhd",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::05 Bayesian Statistics",
+   "tags": [
+    "stats",
+    "stats::bayes",
+    "stats::bayes::computation"
+   ],
+   "front": "What is Gibbs sampling, and when does it mix badly?",
+   "back": "Cycle through coordinates (or blocks), drawing each from its full conditional \\(p(\\theta_j\\mid\\theta_{-j},x)\\). A Metropolis-Hastings scheme with acceptance probability 1. Needs tractable conditionals (conjugacy).<br>\nMixes badly when parameters are <strong>strongly correlated</strong> in the posterior.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Moves are axis-aligned. In a narrow diagonal valley each axis-parallel step can only be as long as the valley is wide, so the sampler takes a tiny staircase along the ridge. Fixes: reparameterise/rotate, block correlated parameters, or use gradients.",
+   "source": "Bayesian Statistics"
+  },
+  {
+   "guid": "hR?X(+vU$-",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::05 Bayesian Statistics",
+   "tags": [
+    "stats",
+    "stats::bayes",
+    "stats::bayes::computation"
+   ],
+   "front": "How does Hamiltonian Monte Carlo (HMC) work, and why does it scale to high dimensions?",
+   "back": "Augment \\(\\theta\\) with momentum \\(r\\sim N(0,M)\\). Define the Hamiltonian \\(H=-\\log p(\\theta\\mid x)+\\tfrac12r^\\top M^{-1}r\\). Simulate Hamiltonian dynamics with the leapfrog integrator (uses \\(\\nabla\\log p\\)), then Metropolis-accept to correct integration error.<br>\nEnergy is nearly conserved, so distant proposals are accepted with high probability.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> A frictionless puck on the surface of negative log-posterior, flicked in a random direction. It glides along level sets of energy, following the valley&#x27;s contours instead of stumbling randomly. Cost to get an independent draw scales like \\(d^{5/4}\\) versus \\(d^2\\) for random walk. The No-U-Turn Sampler (NUTS) chooses trajectory length automatically.",
+   "source": "Bayesian Statistics"
+  },
+  {
+   "guid": "MvSQV^K!1M",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::05 Bayesian Statistics",
+   "tags": [
+    "stats",
+    "stats::bayes",
+    "stats::bayes::computation"
+   ],
+   "front": "What is the &quot;typical set&quot; and why does it matter for Bayesian computation?",
+   "back": "The region that contains almost all posterior <strong>mass</strong>. In high dimensions it is a thin shell away from the mode: mass = density × volume, and volume grows explosively with distance from the mode.<br>\nConsequences: expectations are determined by the typical set; optimisation (Maximum A Posteriori) finds an atypical point; samplers must explore the shell.",
+   "text": "",
+   "image": "<img src=\"typical_set.svg\">",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> For a d-dimensional standard Gaussian the shell sits at radius \\(\\sqrt d\\). The mode is the top of a needle-thin peak: highest, but with essentially no ground around it. A divergent sampler transition signals a region of the shell with curvature too high to be explored.",
+   "source": "Bayesian Statistics"
+  },
+  {
+   "guid": "MEXU@UR}?m",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::05 Bayesian Statistics",
+   "tags": [
+    "stats",
+    "stats::bayes",
+    "stats::bayes::computation"
+   ],
+   "front": "Name the key Markov Chain Monte Carlo (MCMC) convergence diagnostics.",
+   "back": "\\(\\hat R\\) (potential scale reduction): compares between-chain to within-chain variance; want \\(&lt;1.01\\).<br>\nEffective Sample Size (ESS): \\(n/(1+2\\sum_k\\rho_k)\\), the number of independent draws equivalent to the autocorrelated chain; check bulk and tail.<br>\nDivergences (Hamiltonian Monte Carlo): integrator failed in high-curvature regions, so estimates are <strong>biased</strong>, not merely noisy.<br>\nAlso: trace plots, energy diagnostics.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> \\(\\hat R\\) is a one-way Analysis of Variance (ANOVA) across chains: if chains started in different places still disagree about where the mass is, none of them can be trusted. It can only detect non-convergence, never prove convergence.",
+   "source": "Bayesian Statistics"
+  },
+  {
+   "guid": "yyr%1$Pg4U",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::05 Bayesian Statistics",
+   "tags": [
+    "stats",
+    "stats::bayes",
+    "stats::bayes::computation"
+   ],
+   "front": "What does Variational Inference (VI) optimise? State the Evidence Lower Bound (ELBO) identity.",
+   "back": "Choose \\(q\\in\\mathcal Q\\) (tractable family) to minimise \\(\\mathrm{KL}(q\\,\\|\\,p(\\theta\\mid x))\\). Identity:<br>\n\\(\\log p(x) = \\underbrace{E_q[\\log p(x,\\theta)] - E_q[\\log q(\\theta)]}_{\\mathrm{ELBO}(q)} + \\mathrm{KL}(q\\,\\|\\,p(\\theta\\mid x))\\).<br>\nMaximising the ELBO = minimising the KL, without needing \\(p(x)\\). ELBO = expected log-likelihood − KL(q‖prior).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Inference turned into optimisation: project the true posterior onto the manifold of tractable distributions. Fast and scalable, but the answer is biased by the family&#x27;s shape, typically <strong>underestimating variance</strong> (mean-field ignores correlations).",
+   "source": "Bayesian Statistics"
+  },
+  {
+   "guid": "JB{Y28Ql%q",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::05 Bayesian Statistics",
+   "tags": [
+    "stats",
+    "stats::bayes",
+    "stats::bayes::computation"
+   ],
+   "front": "Contrast reverse \\(\\mathrm{KL}(q\\|p)\\) with forward \\(\\mathrm{KL}(p\\|q)\\) when fitting a unimodal \\(q\\) to a multimodal \\(p\\).",
+   "back": "<strong>Reverse KL(q‖p)</strong> (Variational Inference): penalises \\(q\\) having mass where \\(p\\) has none. <strong>Zero-forcing, mode-seeking</strong>: locks onto one mode, too narrow.<br>\n<strong>Forward KL(p‖q)</strong> (maximum likelihood, Expectation Propagation): penalises \\(q\\) missing mass where \\(p\\) has some. <strong>Mass-covering, moment-matching</strong>: straddles all modes, placing mass in the empty valley between them.",
+   "text": "",
+   "image": "<img src=\"kl_modes.svg\">",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> The expectation is taken under the first argument, and that argument decides where mistakes are noticed. Under q you never look where q is zero, so ignoring a mode is free. Under p you are inspected everywhere p lives, so you must cover it all.",
+   "source": "Bayesian Statistics"
+  },
+  {
+   "guid": "rsbi;fy.2r",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::05 Bayesian Statistics",
+   "tags": [
+    "stats",
+    "stats::bayes",
+    "stats::bayes::computation"
+   ],
+   "front": "What is the Laplace approximation?",
+   "back": "Approximate the posterior by a Gaussian centred at the Maximum A Posteriori (MAP) estimate with covariance equal to the inverse Hessian of the negative log-posterior there:<br>\n\\(p(\\theta\\mid x)\\approx N(\\hat\\theta_{MAP},\\ H^{-1})\\).<br>\nAlso gives evidence: \\(\\log p(x)\\approx\\log p(x,\\hat\\theta)+\\tfrac d2\\log2\\pi-\\tfrac12\\log\\det H\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Fit the osculating paraboloid to the log-posterior at its peak. Exact when the posterior is Gaussian, good when Bernstein-von Mises has kicked in, poor for skewed, multimodal or boundary posteriors. It is a purely local approximation; it knows nothing beyond the curvature at one point.",
+   "source": "Bayesian Statistics"
+  },
+  {
+   "guid": "dJyoB7K{<Y",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::05 Bayesian Statistics",
+   "tags": [
+    "stats",
+    "stats::bayes",
+    "stats::bayes::gp"
+   ],
+   "front": "What is a Gaussian Process (GP), and how does GP regression make predictions?",
+   "back": "A distribution over functions such that any finite set of function values is jointly Gaussian, specified by mean \\(m(x)\\) and kernel \\(k(x,x&#x27;)\\).<br>\nPrediction is <strong>Gaussian conditioning</strong>: with \\(K=k(X,X)\\), \\(k_*=k(X,x_*)\\):<br>\nmean \\(=k_*^\\top(K+\\sigma^2I)^{-1}y\\), variance \\(=k(x_*,x_*)-k_*^\\top(K+\\sigma^2I)^{-1}k_*\\).<br>\nCost \\(O(n^3)\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> An infinite-dimensional Gaussian ellipsoid over function space, sliced by the hyperplanes &quot;function passes through these data points&quot;. The kernel says how strongly nearby function values are tied together; the predictive variance pinches to the noise level at data points and balloons back to the prior far from them.",
+   "source": "Bayesian Statistics"
+  },
+  {
+   "guid": "Ns}};3QPqb",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::05 Bayesian Statistics",
+   "tags": [
+    "stats",
+    "stats::bayes",
+    "stats::bayes::gp"
+   ],
+   "front": "How are Bayesian linear regression, ridge regression, kernel ridge regression and Gaussian Process (GP) regression related?",
+   "back": "Bayesian linear regression with prior \\(\\beta\\sim N(0,\\tau^2I)\\): posterior mean = ridge with \\(\\lambda=\\sigma^2/\\tau^2\\).<br>\nReplace \\(x\\) by features \\(\\phi(x)\\): the induced kernel is \\(k(x,x&#x27;)=\\tau^2\\phi(x)^\\top\\phi(x&#x27;)\\).<br>\nGP posterior mean = kernel ridge regression solution. The GP additionally supplies the predictive variance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> <strong>Weight-space view</strong>: a Gaussian blob over coefficient vectors. <strong>Function-space view</strong>: the same blob pushed through the feature map becomes a Gaussian over functions. The kernel trick lets you work in function space even when the weight space is infinite-dimensional.",
+   "source": "Bayesian Statistics"
+  },
+  {
+   "guid": "Ill@fRF+<-",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::05 Bayesian Statistics",
+   "tags": [
+    "stats",
+    "stats::bayes",
+    "stats::bayes::basics"
+   ],
+   "front": "What is exchangeability and what does de Finetti&#x27;s theorem say?",
+   "back": "A sequence is exchangeable if its joint distribution is invariant under permutation. Weaker than independent and identically distributed (i.i.d.).<br>\nde Finetti: an infinite exchangeable sequence is a <strong>mixture of i.i.d. sequences</strong>:<br>\n\\(p(x_1,\\dots,x_n)=\\int\\prod_i p(x_i\\mid\\theta)\\,\\pi(\\theta)\\,d\\theta\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> If order does not matter to you, you are behaving <strong>as if</strong> there is an unknown parameter with a prior, and the data are i.i.d. given it. Parameters and priors are not metaphysical assumptions; they are a representation theorem for symmetric beliefs. Also the justification for hierarchical models (exchangeable groups).",
+   "source": "Bayesian Statistics"
+  },
+  {
+   "guid": "kdwZEB[t>O",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::05 Bayesian Statistics",
+   "tags": [
+    "stats",
+    "stats::bayes",
+    "stats::bayes::hierarchical"
+   ],
+   "front": "What is empirical Bayes?",
+   "back": "Estimate the prior&#x27;s hyperparameters from the data by maximising the marginal likelihood \\(p(x\\mid\\eta)=\\int p(x\\mid\\theta)p(\\theta\\mid\\eta)d\\theta\\), then plug them in and compute posteriors as usual.<br>\nA point-estimate approximation to a full hierarchical Bayes model. James-Stein is empirical Bayes for the Normal means problem with the prior variance estimated from \\(\\|x\\|^2\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> With many parallel problems (genes, schools, players), the ensemble of noisy estimates reveals the shape of the prior. Each unit then borrows strength from all the others. Understates uncertainty, since hyperparameter uncertainty is ignored.",
+   "source": "Bayesian Statistics"
+  },
+  {
+   "guid": "tonT>l:f(!",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::05 Bayesian Statistics",
+   "tags": [
+    "stats",
+    "stats::bayes",
+    "stats::bayes::computation"
+   ],
+   "front": "How does importance sampling work and why does it break down in high dimensions?",
+   "back": "\\(E_p[f]=E_q\\!\\left[f\\,\\dfrac{p}{q}\\right]\\approx\\dfrac{\\sum_i w_if(x_i)}{\\sum_i w_i}\\), with \\(x_i\\sim q\\), \\(w_i=p(x_i)/q(x_i)\\).<br>\nNeeds \\(q\\) to have heavier tails than \\(p\\). Effective Sample Size (ESS) \\(=(\\sum w_i)^2/\\sum w_i^2\\).<br>\nIn high dimensions the weight variance grows <strong>exponentially</strong> in \\(d\\): one sample carries nearly all the weight.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Two thin shells (the typical sets of p and q) in high-dimensional space barely overlap unless p and q are almost identical. Samples from q almost never land where p&#x27;s mass is.",
+   "source": "Bayesian Statistics"
+  },
+  {
+   "guid": "B/}?~Sxj)n",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::05 Bayesian Statistics",
+   "tags": [
+    "stats",
+    "stats::bayes",
+    "stats::bayes::workflow"
+   ],
+   "front": "What are prior predictive and posterior predictive checks?",
+   "back": "<strong>Prior predictive check</strong>: simulate datasets from the prior alone; do they look like plausible data? Catches priors that imply absurd outcomes on the observable scale.<br>\n<strong>Posterior predictive check</strong>: simulate replicated datasets from the fitted model and compare a test quantity \\(T(y^{rep})\\) with \\(T(y)\\). Systematic discrepancy reveals misfit.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Priors on parameters are hard to judge in parameter space; push them forward into data space, where you have intuition. A posterior predictive check asks whether the observed data would be a typical member of the cloud of datasets the fitted model generates. It uses the data twice, so it is conservative.",
+   "source": "Bayesian Statistics"
+  },
+  {
+   "guid": "D^sVEhvgIr",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::05 Bayesian Statistics",
+   "tags": [
+    "stats",
+    "stats::bayes",
+    "stats::bayes::decision"
+   ],
+   "front": "What is the Bayes-optimal decision under a loss function?",
+   "back": "Choose the action minimising <strong>posterior expected loss</strong>:<br>\n\\(a^*=\\arg\\min_a\\int L(\\theta,a)\\,p(\\theta\\mid x)\\,d\\theta\\).<br>\nInference (the posterior) and decision (the loss) are separated: the same posterior serves any loss. Bayes rules are admissible, and (complete class theorem) essentially every admissible rule is a Bayes rule or a limit of them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> The posterior is a map of where the truth might be; the loss says how much each kind of miss hurts. With asymmetric loss (overstocking cheap, stockout costly) the optimal action is a quantile, not the mean.",
+   "source": "Bayesian Statistics"
+  },
+  {
+   "guid": "kEG[dt>n/e",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::06 Machine Learning Core",
+   "tags": [
+    "stats",
+    "stats::ml",
+    "stats::ml::theory"
+   ],
+   "front": "What is Empirical Risk Minimisation (ERM) and what is the generalisation gap?",
+   "back": "True risk \\(R(f)=E[L(f(x),y)]\\); empirical risk \\(\\hat R(f)=\\frac1n\\sum_iL(f(x_i),y_i)\\). ERM picks \\(\\hat f=\\arg\\min_{f\\in\\mathcal F}\\hat R(f)\\).<br>\nGeneralisation gap \\(=R(\\hat f)-\\hat R(\\hat f)\\), controlled by the capacity of \\(\\mathcal F\\) relative to \\(n\\).<br>\nExcess risk = approximation error (class too small) + estimation error (sample too small) + optimisation error.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> \\(\\hat R\\) is a noisy copy of the landscape R. Minimising over a big class means searching many places, and somewhere the noise will dip low by chance: the minimiser of a noisy function is biased downward (winner&#x27;s curse). Uniform convergence bounds the worst dip over the class.",
+   "source": "Machine Learning Core"
+  },
+  {
+   "guid": "I.><,bAe<i",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::06 Machine Learning Core",
+   "tags": [
+    "stats",
+    "stats::ml",
+    "stats::ml::theory"
+   ],
+   "front": "What is the Vapnik-Chervonenkis (VC) dimension? Give the value for linear classifiers.",
+   "back": "The size of the largest point set that the hypothesis class can <strong>shatter</strong> (realise all \\(2^m\\) labelings). Hyperplanes in \\(\\mathbb R^d\\) have VC dimension \\(d+1\\).<br>\nGeneralisation gap is bounded by roughly \\(O\\!\\left(\\sqrt{\\mathrm{VC}/n}\\right)\\). Finite VC dimension is equivalent to (distribution-free) learnability.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> A line in the plane can shatter 3 points in general position but no set of 4: the XOR labeling of a square&#x27;s corners cannot be split by a line. Capacity is measured by what labelings you can draw, not by counting parameters: \\(\\sin(\\omega x)\\) has one parameter and infinite VC dimension.",
+   "source": "Machine Learning Core"
+  },
+  {
+   "guid": "mA(Ey]l)w@",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::06 Machine Learning Core",
+   "tags": [
+    "stats",
+    "stats::ml",
+    "stats::ml::theory"
+   ],
+   "front": "What is double descent?",
+   "back": "Test error versus model size follows the classical U-shape up to the <strong>interpolation threshold</strong> (parameters ≈ samples), where it spikes; beyond it, error <strong>falls again</strong>, often below the classical minimum.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> At the threshold exactly one interpolating solution exists and it must contort to fit the noise; its norm explodes (the design matrix is nearly singular). Past the threshold there are infinitely many interpolators and the optimiser picks the minimum-norm one, which gets smoother as more dimensions become available to absorb the noise. Variance peaks at the threshold, then declines. Explicit regularisation flattens the spike.",
+   "source": "Machine Learning Core"
+  },
+  {
+   "guid": "Ho|nsVQr?U",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::06 Machine Learning Core",
+   "tags": [
+    "stats",
+    "stats::ml",
+    "stats::ml::optimization"
+   ],
+   "front": "Why are penalised and constrained forms of regularisation equivalent?",
+   "back": "Lagrangian duality: for each \\(\\lambda\\ge0\\) there is a \\(t\\) such that<br>\n\\(\\min_\\beta L(\\beta)+\\lambda\\Omega(\\beta)\\) and \\(\\min_\\beta L(\\beta)\\ \\text{s.t.}\\ \\Omega(\\beta)\\le t\\)<br>\nhave the same solution (convex case). Larger \\(\\lambda\\) corresponds to smaller \\(t\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> At the solution the loss contour is tangent to the constraint boundary: gradients are anti-parallel, \\(\\nabla L=-\\lambda\\nabla\\Omega\\). λ is the exchange rate between the two: how much loss you would save per unit relaxation of the budget.",
+   "source": "Machine Learning Core"
+  },
+  {
+   "guid": "CGfg-p3g)#",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::06 Machine Learning Core",
+   "tags": [
+    "stats",
+    "stats::ml",
+    "stats::ml::optimization"
+   ],
+   "front": "What is the geometry of gradient descent, and how does the condition number control its speed?",
+   "back": "The gradient is perpendicular to level sets and points in the direction of steepest ascent (in the Euclidean metric). For a quadratic with Hessian eigenvalues between \\(\\mu\\) and \\(L\\), the best fixed step converges at rate \\(\\left(\\dfrac{\\kappa-1}{\\kappa+1}\\right)\\) per step, with \\(\\kappa=L/\\mu\\) the condition number.",
+   "text": "",
+   "image": "<img src=\"gd_zigzag.svg\">",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> In a round bowl the gradient points at the minimum. In a long narrow valley it points mostly across the valley: the iterate <strong>zigzags</strong> between the walls and crawls along the floor. The step size is limited by the steepest direction, the progress by the flattest.",
+   "source": "Machine Learning Core"
+  },
+  {
+   "guid": "o?T@1,-m&f",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::06 Machine Learning Core",
+   "tags": [
+    "stats",
+    "stats::ml",
+    "stats::ml::optimization"
+   ],
+   "front": "How does Newton&#x27;s method differ geometrically from gradient descent?",
+   "back": "Update \\(\\theta\\leftarrow\\theta-H^{-1}\\nabla L\\). It minimises the local quadratic model exactly, converges quadratically near the optimum, and is <strong>invariant to affine reparameterisation</strong>.<br>\nCost \\(O(d^3)\\) per step; can be attracted to saddles in non-convex problems. Quasi-Newton (L-BFGS), Gauss-Newton and natural gradient approximate it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Multiplying by \\(H^{-1}\\) is a change of coordinates that makes the elliptical valley round, after which the gradient points straight at the minimum. Preconditioning in general = choosing a ruler under which the landscape is isotropic.",
+   "source": "Machine Learning Core"
+  },
+  {
+   "guid": "j>DoV+*Pje",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::06 Machine Learning Core",
+   "tags": [
+    "stats",
+    "stats::ml",
+    "stats::ml::optimization"
+   ],
+   "front": "What does the noise in Stochastic Gradient Descent (SGD) do?",
+   "back": "Minibatch gradients are unbiased estimates with variance \\(\\propto1/B\\). With a constant learning rate \\(\\eta\\) the iterate does not converge; it hovers in a noise ball of size \\(\\propto\\eta/B\\). Decaying \\(\\eta\\) gives convergence.<br>\nThe noise acts as <strong>implicit regularisation</strong>: it helps escape sharp minima and saddles and biases toward flat regions. Linear scaling rule: keep \\(\\eta/B\\) roughly constant.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> A ball rolling on a shaking landscape. It cannot settle in narrow crevices (the shaking bounces it out) but rests happily in wide basins. The effective &quot;temperature&quot; is \\(\\eta/B\\).",
+   "source": "Machine Learning Core"
+  },
+  {
+   "guid": "z2}>,|?_3",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::06 Machine Learning Core",
+   "tags": [
+    "stats",
+    "stats::ml",
+    "stats::ml::optimization"
+   ],
+   "front": "What do momentum and Adam each add to Stochastic Gradient Descent (SGD)?",
+   "back": "<strong>Momentum</strong>: \\(v\\leftarrow\\beta v+g,\\ \\theta\\leftarrow\\theta-\\eta v\\). Averages gradients over time; improves dependence on condition number from \\(\\kappa\\) to \\(\\sqrt\\kappa\\).<br>\n<strong>Adam</strong>: momentum plus per-coordinate scaling by a running root-mean-square of gradients: \\(\\theta\\leftarrow\\theta-\\eta\\,\\hat m/(\\sqrt{\\hat v}+\\epsilon)\\). Step size is roughly scale-invariant per parameter.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Momentum is a heavy ball: across the valley the zigzag components cancel; along the valley floor they accumulate. Adam is a cheap diagonal preconditioner: it rescales each axis separately to make the valley rounder, but cannot fix valleys that run diagonally.",
+   "source": "Machine Learning Core"
+  },
+  {
+   "guid": "o=$9%%THFQ",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::06 Machine Learning Core",
+   "tags": [
+    "stats",
+    "stats::ml",
+    "stats::ml::optimization"
+   ],
+   "front": "Define convexity of a function and state why it matters for optimisation.",
+   "back": "\\(f(\\lambda x+(1-\\lambda)y)\\le\\lambda f(x)+(1-\\lambda)f(y)\\).<br>\nEquivalent (differentiable): \\(f(y)\\ge f(x)+\\nabla f(x)^\\top(y-x)\\); (twice differentiable): Hessian positive semidefinite.<br>\nEvery local minimum is global; the set of minimisers is convex. Convex losses: least squares, logistic, hinge, with L1/L2 penalties.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Chords lie above the graph; tangent planes lie below it. A tangent plane is therefore a global lower bound, so a zero gradient certifies a global minimum. The landscape is a single bowl with no false valleys.",
+   "source": "Machine Learning Core"
+  },
+  {
+   "guid": "QX^Xp~i3uH",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::06 Machine Learning Core",
+   "tags": [
+    "stats",
+    "stats::ml",
+    "stats::ml::kernels"
+   ],
+   "front": "What does a Support Vector Machine (SVM) optimise? What are support vectors?",
+   "back": "Hard margin: minimise \\(\\tfrac12\\|w\\|^2\\) subject to \\(y_i(w^\\top x_i+b)\\ge1\\). The margin width is \\(2/\\|w\\|\\), so this <strong>maximises the margin</strong>.<br>\nSoft margin = hinge loss \\(\\max(0,1-y_if(x_i))\\) + L2 penalty.<br>\nSupport vectors are the points on or inside the margin; the solution \\(w=\\sum_i\\alpha_iy_ix_i\\) depends only on them.",
+   "text": "",
+   "image": "<img src=\"svm_margin.svg\">",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Find the <strong>widest street</strong> separating the two classes; the boundary is the centre line and the support vectors are the points touching the kerbs. Equivalently, the perpendicular bisector of the shortest segment between the two classes&#x27; convex hulls. Remove any non-support point and nothing changes.",
+   "source": "Machine Learning Core"
+  },
+  {
+   "guid": "H5]sxZE2p>",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::06 Machine Learning Core",
+   "tags": [
+    "stats",
+    "stats::ml",
+    "stats::ml::kernels"
+   ],
+   "front": "What is the kernel trick?",
+   "back": "Many algorithms use data only through inner products \\(x_i^\\top x_j\\). Replace them by \\(k(x_i,x_j)=\\langle\\phi(x_i),\\phi(x_j)\\rangle\\) for an implicit, possibly infinite-dimensional feature map \\(\\phi\\), never computing \\(\\phi\\) itself. Valid kernels are the positive semidefinite ones (Mercer).<br>\nRadial Basis Function (RBF): \\(k=\\exp(-\\|x-x&#x27;\\|^2/2\\ell^2)\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Points inside a circle versus outside are not linearly separable in the plane. Lift with \\(\\phi(x)=(x_1,x_2,x_1^2+x_2^2)\\) onto a paraboloid: a horizontal plane now separates them. A linear method in the lifted space is a nonlinear method in the original space.",
+   "source": "Machine Learning Core"
+  },
+  {
+   "guid": "Numc+/5ah2",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::06 Machine Learning Core",
+   "tags": [
+    "stats",
+    "stats::ml",
+    "stats::ml::kernels"
+   ],
+   "front": "State the representer theorem.",
+   "back": "For a regularised problem over a Reproducing Kernel Hilbert Space (RKHS),<br>\n\\(\\min_f\\sum_iL(y_i,f(x_i))+\\lambda\\|f\\|_{\\mathcal H}^2\\),<br>\nthe minimiser has the form \\(f^*(x)=\\sum_{i=1}^n\\alpha_ik(x_i,x)\\).<br>\nAn infinite-dimensional search reduces to \\(n\\) coefficients.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Decompose any candidate f into a part inside the span of the kernel functions at the data points and a part perpendicular to it. The perpendicular part does not change any fitted value \\(f(x_i)\\) (reproducing property) but adds to the norm. So it is pure cost: drop it. Same argument as minimum-norm interpolation.",
+   "source": "Machine Learning Core"
+  },
+  {
+   "guid": "Ld_Q9Vi5$o",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::06 Machine Learning Core",
+   "tags": [
+    "stats",
+    "stats::ml",
+    "stats::ml::unsupervised"
+   ],
+   "front": "Give three equivalent characterisations of Principal Component Analysis (PCA).",
+   "back": "1. Directions of <strong>maximum variance</strong>: top eigenvectors of the covariance matrix.<br>\n2. <strong>Best rank-\\(k\\) approximation</strong> of the centred data (Eckart-Young): minimises squared perpendicular reconstruction error.<br>\n3. The right singular vectors of centred \\(X=UDV^\\top\\); variances are \\(d_j^2/(n-1)\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Fit an ellipsoid to the data cloud; the principal components are its axes, longest first. Maximising projected variance and minimising perpendicular residual are the same problem by Pythagoras: total squared length = projected + residual, and the total is fixed.",
+   "source": "Machine Learning Core"
+  },
+  {
+   "guid": "e`R>v[#OB6",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::06 Machine Learning Core",
+   "tags": [
+    "stats",
+    "stats::ml",
+    "stats::ml::unsupervised"
+   ],
+   "front": "What does the Singular Value Decomposition (SVD) \\(A=U\\Sigma V^\\top\\) say geometrically?",
+   "back": "Every linear map is <strong>rotate/reflect (\\(V^\\top\\)), stretch along axes (\\(\\Sigma\\)), rotate/reflect (\\(U\\))</strong>.<br>\nThe unit sphere maps to an ellipsoid whose semi-axes are \\(\\sigma_iu_i\\). Rank = number of non-zero \\(\\sigma_i\\); condition number \\(=\\sigma_{\\max}/\\sigma_{\\min}\\); truncating gives the best low-rank approximation.",
+   "text": "",
+   "image": "<img src=\"svd_map.svg\">",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> \\(V\\) picks the special orthogonal input directions that remain orthogonal after the map; \\(\\Sigma\\) says by how much each is stretched. The pseudoinverse inverts the stretches it can and zeroes the rest. Near-zero singular values are the source of all ill-conditioning in regression.",
+   "source": "Machine Learning Core"
+  },
+  {
+   "guid": "nf#EeeN`C#",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::06 Machine Learning Core",
+   "tags": [
+    "stats",
+    "stats::ml",
+    "stats::ml::unsupervised"
+   ],
+   "front": "Describe k-means: objective, algorithm, geometry, and relation to Gaussian mixtures.",
+   "back": "Minimise within-cluster sum of squares \\(\\sum_i\\|x_i-\\mu_{c(i)}\\|^2\\). Lloyd&#x27;s algorithm alternates (1) assign each point to the nearest centroid, (2) move each centroid to the mean of its points. Each step lowers the objective; converges to a local optimum (use k-means++ initialisation).<br>\nIt is the hard-assignment, zero-variance limit of Expectation-Maximisation (EM) for a spherical equal-variance Gaussian mixture.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Cluster regions are <strong>Voronoi cells</strong>: convex polytopes bounded by perpendicular bisectors between centroids. So k-means cannot find non-convex, elongated or very unequal-sized clusters.",
+   "source": "Machine Learning Core"
+  },
+  {
+   "guid": "LFri&e;R&H",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::06 Machine Learning Core",
+   "tags": [
+    "stats",
+    "stats::ml",
+    "stats::ml::unsupervised"
+   ],
+   "front": "In a Gaussian Mixture Model (GMM) fitted by Expectation-Maximisation (EM), what are the two steps?",
+   "back": "<strong>E-step</strong>: responsibilities \\(r_{ik}=\\dfrac{\\pi_kN(x_i\\mid\\mu_k,\\Sigma_k)}{\\sum_j\\pi_jN(x_i\\mid\\mu_j,\\Sigma_j)}\\).<br>\n<strong>M-step</strong>: responsibility-weighted updates: \\(\\pi_k=\\frac1n\\sum_ir_{ik}\\), \\(\\mu_k\\) = weighted mean, \\(\\Sigma_k\\) = weighted covariance.<br>\nPitfalls: likelihood unbounded when a component collapses onto a single point; label switching; local optima.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Soft Voronoi: each point is shared among ellipsoids in proportion to how well each explains it. Each ellipsoid then re-fits itself to the points it partially owns. Boundaries between components are quadrics rather than flat faces.",
+   "source": "Machine Learning Core"
+  },
+  {
+   "guid": "j_1fz])|bV",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::06 Machine Learning Core",
+   "tags": [
+    "stats",
+    "stats::ml",
+    "stats::ml::ensembles"
+   ],
+   "front": "What function class does a decision tree represent, and how are splits chosen?",
+   "back": "A piecewise-constant function on a partition of feature space into <strong>axis-aligned boxes</strong>. Splits are chosen greedily to maximise impurity reduction: Gini \\(\\sum_kp_k(1-p_k)\\) or entropy for classification, variance for regression.<br>\nLow bias, very high variance; invariant to monotone feature transforms; handles interactions natively.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Recursive guillotine cuts of a sheet of paper, each parallel to an axis. A diagonal boundary has to be approximated by a staircase, which is why trees are inefficient for linear structure and unstable to rotations of the features.",
+   "source": "Machine Learning Core"
+  },
+  {
+   "guid": "bzp-J,z41X",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::06 Machine Learning Core",
+   "tags": [
+    "stats",
+    "stats::ml",
+    "stats::ml::ensembles"
+   ],
+   "front": "Why does bagging reduce variance, and what does the random forest add?",
+   "back": "For \\(B\\) identically distributed predictors with variance \\(\\sigma^2\\) and pairwise correlation \\(\\rho\\):<br>\n\\(\\mathrm{Var}(\\text{average})=\\rho\\sigma^2+\\dfrac{1-\\rho}{B}\\sigma^2\\).<br>\nMore trees kill the second term only; \\(\\rho\\sigma^2\\) is a floor. Random forests <strong>decorrelate</strong> trees by restricting each split to a random subset of features, lowering \\(\\rho\\) at a small cost in bias.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Vectors of equal length: if they all point the same way, their average is just as long; if they are mutually orthogonal, the average shrinks as \\(1/\\sqrt B\\). Diversity among ensemble members is the resource being exploited.",
+   "source": "Machine Learning Core"
+  },
+  {
+   "guid": "s9VH%#gP9J",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::06 Machine Learning Core",
+   "tags": [
+    "stats",
+    "stats::ml",
+    "stats::ml::ensembles"
+   ],
+   "front": "Explain gradient boosting as optimisation.",
+   "back": "Build an additive model \\(F_m=F_{m-1}+\\nu h_m\\). At each stage compute pseudo-residuals \\(r_i=-\\partial L(y_i,F(x_i))/\\partial F(x_i)\\) and fit a weak learner \\(h_m\\) (shallow tree) to them. For squared loss the pseudo-residuals are the ordinary residuals.<br>\nRegularisers: shrinkage \\(\\nu\\), subsampling, tree depth, early stopping.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> <strong>Gradient descent in function space.</strong> The &quot;parameter vector&quot; is the vector of predictions \\((F(x_1),\\dots,F(x_n))\\); the negative gradient says how each prediction should move; the tree is the closest representable direction to that gradient (a projection onto the weak learner class). Bagging attacks variance; boosting attacks bias.",
+   "source": "Machine Learning Core"
+  },
+  {
+   "guid": "cO?+z+bjqs",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::06 Machine Learning Core",
+   "tags": [
+    "stats",
+    "stats::ml",
+    "stats::ml::nonparametric"
+   ],
+   "front": "k-Nearest Neighbours (kNN): what controls the bias-variance trade-off and why does it suffer in high dimensions?",
+   "back": "Predict by majority vote / average of the \\(k\\) nearest training points. \\(k=1\\): zero training error, high variance (asymptotic error at most twice the Bayes error). Large \\(k\\): smooth, high bias.<br>\nIn high dimensions neighbours are not near: distance concentration makes the &quot;nearest&quot; neighbour almost as far as the farthest.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> The 1-NN decision regions are the Voronoi tessellation of the training set. Increasing k blurs the tessellation. All distance-based methods are hostage to the choice of metric, so scaling features is part of the model.",
+   "source": "Machine Learning Core"
+  },
+  {
+   "guid": "z/*qb0YY8%",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::06 Machine Learning Core",
+   "tags": [
+    "stats",
+    "stats::ml",
+    "stats::ml::classification"
+   ],
+   "front": "When does a generative Gaussian classifier give a linear boundary? Compare Linear Discriminant Analysis (LDA) with logistic regression.",
+   "back": "Gaussian classes with a <strong>shared covariance</strong> \\(\\Sigma\\): the log posterior odds are linear in \\(x\\), with \\(w=\\Sigma^{-1}(\\mu_1-\\mu_0)\\). Different covariances give a quadratic boundary (Quadratic Discriminant Analysis).<br>\nLDA and logistic regression have the same functional form; LDA fits it via the joint density (more efficient if the Gaussian assumption holds), logistic via the conditional likelihood (more robust).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Whiten the space with \\(\\Sigma^{-1/2}\\) so both classes become spheres; then classify to the <strong>nearest centroid</strong>. The boundary is the perpendicular bisector in whitened space, which looks tilted back in the original space.",
+   "source": "Machine Learning Core"
+  },
+  {
+   "guid": "H[mIzN{xvP",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::06 Machine Learning Core",
+   "tags": [
+    "stats",
+    "stats::ml",
+    "stats::ml::classification"
+   ],
+   "front": "Why is cross-entropy the standard classification loss, and what does softmax temperature do?",
+   "back": "Cross-entropy \\(-\\sum_ky_k\\log p_k\\) is the negative log-likelihood of a categorical model: minimising it is maximum likelihood / Kullback-Leibler (KL) minimisation. With softmax \\(p_k=e^{z_k/T}/\\sum_je^{z_j/T}\\) the gradient with respect to the logits is simply \\(p-y\\).<br>\nTemperature \\(T\\to0\\): argmax (one-hot). \\(T\\to\\infty\\): uniform.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Softmax maps logit space onto the probability simplex; adding a constant to all logits changes nothing (one redundant direction). Temperature scales distance from the simplex centre: low T pushes toward a vertex, high T pulls toward the centroid.",
+   "source": "Machine Learning Core"
+  },
+  {
+   "guid": "xh`>4wB;TB",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::06 Machine Learning Core",
+   "tags": [
+    "stats",
+    "stats::ml",
+    "stats::ml::evaluation"
+   ],
+   "front": "What does the Area Under the Receiver Operating Characteristic curve (AUC) measure, and when should you prefer precision-recall?",
+   "back": "The ROC curve plots true positive rate against false positive rate over all thresholds. AUC \\(=P(\\text{score of random positive}&gt;\\text{score of random negative})\\): a pure <strong>ranking</strong> measure, invariant to class prevalence and to monotone score transforms.<br>\nWith heavy class imbalance, prefer precision-recall: precision depends on prevalence and exposes the flood of false positives that a tiny false positive rate hides.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Two score histograms (positives, negatives); the threshold is a vertical line sweeping across. ROC traces the two tail areas against each other. AUC measures how little the histograms overlap, and is equivalent to the Mann-Whitney U statistic.",
+   "source": "Machine Learning Core"
+  },
+  {
+   "guid": "OzFzX@&4:w",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::06 Machine Learning Core",
+   "tags": [
+    "stats",
+    "stats::ml",
+    "stats::ml::evaluation"
+   ],
+   "front": "Distinguish calibration from discrimination. What is a proper scoring rule?",
+   "back": "<strong>Discrimination</strong>: ranks positives above negatives (AUC). <strong>Calibration</strong>: among cases given probability \\(p\\), a fraction \\(p\\) are positive. A model can have either without the other.<br>\nA <strong>proper scoring rule</strong> is minimised in expectation by reporting the true probability: log loss, Brier score. Accuracy and AUC are not proper.<br>\nPost-hoc fixes: Platt scaling, isotonic regression, temperature scaling.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Reliability diagram: predicted probability versus observed frequency; calibration = hugging the diagonal. Any monotone remapping of scores leaves AUC unchanged but can repair calibration, so the two are orthogonal properties.",
+   "source": "Machine Learning Core"
+  },
+  {
+   "guid": "MDQh0ZvY-y",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::06 Machine Learning Core",
+   "tags": [
+    "stats",
+    "stats::ml",
+    "stats::ml::optimization"
+   ],
+   "front": "What is the natural gradient?",
+   "back": "\\(\\tilde\\nabla L=F^{-1}\\nabla L\\), with \\(F\\) the Fisher information matrix. It is the steepest-descent direction when step length is measured by <strong>Kullback-Leibler (KL) divergence between the distributions</strong>, not by Euclidean distance between parameters. Invariant to reparameterisation.<br>\nRelatives: Fisher scoring, Gauss-Newton, K-FAC, Trust Region Policy Optimisation (TRPO). Adam is a crude diagonal approximation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> &quot;Steepest&quot; depends on what counts as a unit step. The Euclidean gradient assumes parameter space is flat with an arbitrary coordinate grid. The natural gradient uses the intrinsic ruler of the statistical manifold, under which equal-length steps change the model&#x27;s predictions by equal amounts.",
+   "source": "Machine Learning Core"
+  },
+  {
+   "guid": "cLr0`ta:>y",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::06 Machine Learning Core",
+   "tags": [
+    "stats",
+    "stats::ml",
+    "stats::ml::unsupervised"
+   ],
+   "front": "What is the manifold hypothesis, and what are the cautions when reading t-SNE / UMAP plots?",
+   "back": "Real high-dimensional data (images, text, audio) concentrates near a <strong>low-dimensional manifold</strong>; learning is feasible because the intrinsic dimension, not the ambient one, governs sample complexity.<br>\nt-distributed Stochastic Neighbour Embedding (t-SNE) and Uniform Manifold Approximation and Projection (UMAP) preserve local neighbourhoods only: cluster <strong>sizes</strong>, <strong>distances between clusters</strong>, and apparent density are not meaningful, and results depend on perplexity / neighbour count and seed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> A crumpled sheet of paper in 3-D is still 2-D to an ant walking on it. Representation learning un-crumples the sheet so that straight lines in the new coordinates follow the sheet.",
+   "source": "Machine Learning Core"
+  },
+  {
+   "guid": "qsmqfr^XvV",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::06 Machine Learning Core",
+   "tags": [
+    "stats",
+    "stats::ml",
+    "stats::ml::evaluation"
+   ],
+   "front": "What is data leakage and how does nested cross-validation prevent selection-induced optimism?",
+   "back": "Leakage: information unavailable at prediction time (or from the test set) enters training. Typical: preprocessing/feature selection fitted on all data before splitting, duplicates or the same subject across folds, future information in time series, target proxies.<br>\nTuning hyperparameters on the same folds you report makes the score optimistic. <strong>Nested CV</strong>: inner loop selects, outer loop evaluates the whole selection procedure.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> The minimum of several noisy estimates is biased low (winner&#x27;s curse). Everything that looked at the data, including your own choices, is part of the &quot;model&quot; and must sit inside the cross-validation loop.",
+   "source": "Machine Learning Core"
+  },
+  {
+   "guid": "dGjVZQ^]xt",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::06 Machine Learning Core",
+   "tags": [
+    "stats",
+    "stats::ml",
+    "stats::ml::evaluation"
+   ],
+   "front": "Distinguish covariate shift, label shift and concept drift.",
+   "back": "With \\(p(x,y)=p(y\\mid x)p(x)=p(x\\mid y)p(y)\\):<br>\n<strong>Covariate shift</strong>: \\(p(x)\\) changes, \\(p(y\\mid x)\\) fixed. Fix: importance weighting by \\(p_{\\text{test}}(x)/p_{\\text{train}}(x)\\).<br>\n<strong>Label (prior) shift</strong>: \\(p(y)\\) changes, \\(p(x\\mid y)\\) fixed. Fix: re-weight class priors.<br>\n<strong>Concept drift</strong>: \\(p(y\\mid x)\\) itself changes. Fix: new labels, retraining, monitoring.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Covariate shift moves the spotlight to a different part of the same function. Harmless for a correctly specified model, harmful for a misspecified one, because the best approximation (the KL projection) depends on where you look.",
+   "source": "Machine Learning Core"
+  },
+  {
+   "guid": "qB&;cBY1Ib",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::07 Deep Learning",
+   "tags": [
+    "stats",
+    "stats::deep",
+    "stats::deep::architecture"
+   ],
+   "front": "What function does a Rectified Linear Unit (ReLU) network compute, geometrically?",
+   "back": "A composition of affine maps and \\(\\max(0,\\cdot)\\): a <strong>continuous piecewise-linear function</strong>. Each neuron defines a hyperplane; on one side it is off, on the other it is linear. The hyperplanes of all neurons tile input space into convex polytopes, and on each polytope the network is a single affine map.",
+   "text": "",
+   "image": "<img src=\"relu_pieces.svg\">",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Origami. Each layer folds space along hyperplanes. Depth matters because folds compose: folding an already folded sheet replicates every later cut across all earlier layers. The number of linear regions can grow exponentially with depth but only polynomially with width.",
+   "source": "Deep Learning"
+  },
+  {
+   "guid": "pI[>cyKd&e",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::07 Deep Learning",
+   "tags": [
+    "stats",
+    "stats::deep",
+    "stats::deep::architecture"
+   ],
+   "front": "What does the universal approximation theorem say, and what does it not say?",
+   "back": "A single hidden layer with enough units and a non-polynomial activation can approximate any continuous function on a compact set to arbitrary accuracy.<br>\nIt says nothing about: how many units (possibly exponential), whether gradient descent finds the weights, or whether the fit generalises.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Sums of shifted ramps or bumps can build any shape, like a Riemann sum or a Fourier series. Existence of a representation is cheap; the questions that matter are efficiency (depth) and learnability.",
+   "source": "Deep Learning"
+  },
+  {
+   "guid": "J%3~rzr;j5",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::07 Deep Learning",
+   "tags": [
+    "stats",
+    "stats::deep",
+    "stats::deep::training"
+   ],
+   "front": "What is backpropagation?",
+   "back": "Reverse-mode automatic differentiation on the computation graph. Forward pass stores activations; backward pass propagates \\(\\partial L/\\partial(\\text{node})\\) from output to input by the chain rule, as a sequence of <strong>vector-Jacobian products</strong>.<br>\nCost of the full gradient ≈ 2-3× one forward pass, independent of the number of parameters. Memory scales with depth (stored activations).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> For a scalar loss, the derivative is a row vector multiplied through a chain of Jacobians. Multiplying from the output side keeps the running quantity a vector; multiplying from the input side would carry full matrices. Reverse mode wins for many inputs to one output; forward mode for one input to many outputs.",
+   "source": "Deep Learning"
+  },
+  {
+   "guid": "bahvCzB?Ic",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::07 Deep Learning",
+   "tags": [
+    "stats",
+    "stats::deep",
+    "stats::deep::training"
+   ],
+   "front": "Why do gradients vanish or explode in deep networks, and what are the remedies?",
+   "back": "The backpropagated gradient is a product of layer Jacobians. If their singular values are typically \\(&lt;1\\) the product shrinks exponentially with depth; if \\(&gt;1\\) it blows up.<br>\nRemedies: variance-preserving initialisation, non-saturating activations (ReLU family), <strong>residual connections</strong>, normalisation layers, gradient clipping, gating (LSTM/GRU).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Repeatedly applying a linear map stretches along some directions and squashes along others; after many applications only the extreme directions survive. Stable training needs layer Jacobians that are close to isometries (singular values near 1: &quot;dynamical isometry&quot;).",
+   "source": "Deep Learning"
+  },
+  {
+   "guid": "k]:O%FEJWh",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::07 Deep Learning",
+   "tags": [
+    "stats",
+    "stats::deep",
+    "stats::deep::training"
+   ],
+   "front": "What is the principle behind Xavier/Glorot and He initialisation?",
+   "back": "Choose weight variance so that activation variance (forward) and gradient variance (backward) are <strong>preserved across layers</strong>.<br>\nXavier: \\(\\mathrm{Var}(w)=2/(n_{\\text{in}}+n_{\\text{out}})\\) for tanh/linear.<br>\nHe: \\(\\mathrm{Var}(w)=2/n_{\\text{in}}\\) for ReLU (the factor 2 compensates for ReLU zeroing half the inputs).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> A sum of \\(n\\) independent terms has variance \\(n\\) times that of each term, so weights need variance ∝ 1/n for the pre-activation to stay order one. Makes each random layer approximately length-preserving at the start of training.",
+   "source": "Deep Learning"
+  },
+  {
+   "guid": "I4U53V$m>+",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::07 Deep Learning",
+   "tags": [
+    "stats",
+    "stats::deep",
+    "stats::deep::training"
+   ],
+   "front": "What do Batch Normalisation and Layer Normalisation do, and how do they differ?",
+   "back": "Both standardise activations to zero mean and unit variance, then apply a learned scale and shift.<br>\n<strong>BatchNorm</strong>: statistics across the batch, per feature; train/inference behaviour differs; weak with small batches.<br>\n<strong>LayerNorm</strong>: statistics across features, per example; batch-independent; standard in Transformers (often as RMSNorm, without centring).<br>\nEffect: smoother, better-conditioned loss landscape; larger learning rates.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> LayerNorm projects each activation vector onto the hyperplane perpendicular to \\((1,\\dots,1)\\) and then onto a sphere of radius \\(\\sqrt d\\): only the <strong>direction</strong> survives. It also makes the loss invariant to the scale of the preceding weights, so weight norm only affects the effective learning rate.",
+   "source": "Deep Learning"
+  },
+  {
+   "guid": "nsCa6-N2~j",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::07 Deep Learning",
+   "tags": [
+    "stats",
+    "stats::deep",
+    "stats::deep::regularization"
+   ],
+   "front": "How does dropout regularise?",
+   "back": "During training each unit is zeroed independently with probability \\(p\\) (survivors scaled by \\(1/(1-p)\\)); at test time all units are used.<br>\nInterpretations: (1) approximate averaging over an exponential ensemble of weight-sharing subnetworks; (2) multiplicative noise that prevents co-adaptation of features; (3) for linear models, an adaptive L2 penalty. Keeping dropout on at test time gives Monte Carlo uncertainty estimates.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Each training step projects the hidden representation onto a random coordinate subspace. A solution that survives all such projections cannot depend on any single coordinate: information must be spread redundantly.",
+   "source": "Deep Learning"
+  },
+  {
+   "guid": "Gtwe=?#lM]",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::07 Deep Learning",
+   "tags": [
+    "stats",
+    "stats::deep",
+    "stats::deep::regularization"
+   ],
+   "front": "Why is decoupled weight decay (AdamW) different from L2 regularisation in Adam?",
+   "back": "For plain Stochastic Gradient Descent (SGD) they coincide: \\(\\theta\\leftarrow(1-\\eta\\lambda)\\theta-\\eta g\\).<br>\nIn Adam, an L2 term added to the gradient gets divided by \\(\\sqrt{\\hat v}\\), so parameters with large gradient history are regularised <strong>less</strong>. AdamW applies the shrinkage \\(\\theta\\leftarrow\\theta-\\eta\\lambda\\theta\\) <strong>outside</strong> the adaptive rescaling, giving uniform decay.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> L2-in-the-loss pulls toward the origin in Adam&#x27;s warped per-coordinate metric; decoupled decay pulls toward the origin in plain Euclidean space.",
+   "source": "Deep Learning"
+  },
+  {
+   "guid": "oi^Jn0#Qjc",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::07 Deep Learning",
+   "tags": [
+    "stats",
+    "stats::deep",
+    "stats::deep::architecture"
+   ],
+   "front": "Why do residual connections make very deep networks trainable?",
+   "back": "A block computes \\(x_{l+1}=x_l+f_l(x_l)\\). The Jacobian is \\(I+\\partial f_l/\\partial x_l\\), so the identity path carries gradients unattenuated across any depth. Blocks only need to learn a <strong>correction</strong> to the identity, and the network starts close to the identity map.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> An Euler discretisation of an ordinary differential equation \\(\\dot x=f(x,t)\\): the representation flows through space in small steps rather than being replaced wholesale at each layer. Also behaves like an ensemble of paths of many different lengths. In Transformers the residual stream is a shared communication bus that layers read from and write to.",
+   "source": "Deep Learning"
+  },
+  {
+   "guid": "N-.^q#%cB?",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::07 Deep Learning",
+   "tags": [
+    "stats",
+    "stats::deep",
+    "stats::deep::architecture"
+   ],
+   "front": "What inductive biases does a convolutional layer encode?",
+   "back": "<strong>Locality</strong> (each output depends on a small neighbourhood), <strong>weight sharing</strong> (the same filter everywhere), giving <strong>translation equivariance</strong>: shifting the input shifts the output. Pooling adds approximate translation invariance. Parameter count is independent of image size.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Sliding one template across the image and recording the match (inner product) at each location. It is a fully connected layer constrained by symmetry: requiring that the linear map commutes with translations forces it to be a convolution. Generalises to other groups (rotations, permutations giving graph networks).",
+   "source": "Deep Learning"
+  },
+  {
+   "guid": "e{:2&9b&#b",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::07 Deep Learning",
+   "tags": [
+    "stats",
+    "stats::deep",
+    "stats::deep::architecture"
+   ],
+   "front": "Write scaled dot-product attention and explain each geometric ingredient, including the \\(\\sqrt{d_k}\\).",
+   "back": "\\(\\mathrm{Attention}(Q,K,V)=\\mathrm{softmax}\\!\\left(\\dfrac{QK^\\top}{\\sqrt{d_k}}\\right)V\\).<br>\n\\(q^\\top k\\): alignment between a query and each key. Softmax: converts alignments to non-negative weights summing to 1. Output: weighted average of the value vectors.<br>\n\\(\\sqrt{d_k}\\): for random unit-variance vectors \\(q^\\top k\\) has variance \\(d_k\\); without rescaling, softmax saturates and gradients vanish.",
+   "text": "",
+   "image": "<img src=\"attention_hull.svg\">",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Each token&#x27;s output is a <strong>convex combination</strong> of value vectors, so it lies inside their convex hull: attention interpolates, it cannot extrapolate (the following linear layers and residuals do that). It is a soft, differentiable dictionary lookup; multiple heads look up in several subspaces simultaneously.",
+   "source": "Deep Learning"
+  },
+  {
+   "guid": "EU.dwybKN&",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::07 Deep Learning",
+   "tags": [
+    "stats",
+    "stats::deep",
+    "stats::deep::representation"
+   ],
+   "front": "How do learned embeddings represent meaning, and how can a \\(d\\)-dimensional space hold far more than \\(d\\) features?",
+   "back": "Concepts correspond to <strong>directions</strong>; similarity is cosine; relations can appear as roughly constant offsets (king − man + woman ≈ queen).<br>\n<strong>Superposition</strong>: in high dimensions one can pack exponentially many <strong>nearly</strong> orthogonal directions (Johnson-Lindenstrauss). If features are sparse (rarely active together), interference between them is tolerable.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Random unit vectors in d dimensions have cosine of order \\(1/\\sqrt d\\): almost everything is almost perpendicular to almost everything else. The price is that individual neurons respond to many unrelated features (polysemanticity).",
+   "source": "Deep Learning"
+  },
+  {
+   "guid": "PezGIghLhT",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::07 Deep Learning",
+   "tags": [
+    "stats",
+    "stats::deep",
+    "stats::deep::training"
+   ],
+   "front": "What does the loss landscape of a large neural network look like?",
+   "back": "Non-convex, but: critical points with high loss are overwhelmingly <strong>saddles</strong>, not local minima; local minima tend to have similar, low loss; minima form connected low-loss valleys (mode connectivity). <strong>Flat</strong> minima tend to generalise better than sharp ones, though flatness is not reparameterisation-invariant.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> For a critical point to be a minimum, all d Hessian eigenvalues must be positive. If signs were coin flips, that probability is \\(2^{-d}\\). In a million dimensions there is almost always some direction that leads downhill. Flat minimum: a wide basin, where a small shift between the training and test landscapes changes the loss little.",
+   "source": "Deep Learning"
+  },
+  {
+   "guid": "Oiy#M/BvTG",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::07 Deep Learning",
+   "tags": [
+    "stats",
+    "stats::deep",
+    "stats::deep::theory"
+   ],
+   "front": "Why do heavily overparameterised networks generalise? What is the implicit bias of gradient descent?",
+   "back": "Among the infinitely many zero-training-loss solutions, the optimiser selects a particular one. Known cases: linear regression from zero initialisation gives the <strong>minimum L2-norm</strong> interpolator; logistic regression on separable data converges in direction to the <strong>maximum-margin</strong> separator.<br>\nNeural Tangent Kernel (NTK) regime: infinitely wide networks trained with small learning rate behave as kernel regression with a fixed kernel (&quot;lazy training&quot;); real networks also learn features, which the NTK cannot explain.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> The set of interpolating solutions is a huge manifold; gradient descent from a small initialisation lands near the point of that manifold closest to where it started. The regulariser is the algorithm and its starting point, not a term in the loss.",
+   "source": "Deep Learning"
+  },
+  {
+   "guid": "FeoyYGk5c1",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::07 Deep Learning",
+   "tags": [
+    "stats",
+    "stats::deep",
+    "stats::deep::generative"
+   ],
+   "front": "How does a linear autoencoder relate to Principal Component Analysis (PCA)? What does a Variational Autoencoder (VAE) add?",
+   "back": "A linear autoencoder with a \\(k\\)-dimensional bottleneck and squared loss learns the <strong>same subspace</strong> as the top-\\(k\\) principal components (not necessarily the same basis).<br>\nVAE: probabilistic encoder \\(q_\\phi(z\\mid x)\\) and decoder \\(p_\\theta(x\\mid z)\\), trained on the Evidence Lower Bound (ELBO) = \\(E_q[\\log p_\\theta(x\\mid z)]-\\mathrm{KL}(q_\\phi(z\\mid x)\\,\\|\\,p(z))\\). The <strong>reparameterisation trick</strong> \\(z=\\mu+\\sigma\\odot\\epsilon\\) makes sampling differentiable.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> A nonlinear autoencoder fits a curved k-dimensional manifold instead of a flat subspace. The VAE&#x27;s KL term forces the codes to fill a standard Gaussian blob without holes, so that every point in latent space decodes to something sensible and you can sample.",
+   "source": "Deep Learning"
+  },
+  {
+   "guid": "Jf?]5-dmbE",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::07 Deep Learning",
+   "tags": [
+    "stats",
+    "stats::deep",
+    "stats::deep::generative"
+   ],
+   "front": "What game does a Generative Adversarial Network (GAN) play, and what are its failure modes?",
+   "back": "\\(\\min_G\\max_D\\ E_{x\\sim p_{\\text{data}}}[\\log D(x)]+E_z[\\log(1-D(G(z)))]\\).<br>\nWith an optimal discriminator, the generator minimises the <strong>Jensen-Shannon divergence</strong> between \\(p_{\\text{data}}\\) and \\(p_G\\).<br>\nFailure modes: mode collapse, oscillation / non-convergence, vanishing generator gradient when \\(D\\) is too good. Wasserstein GANs replace the divergence by earth-mover distance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Data and generator distributions live on thin low-dimensional manifolds that initially do not overlap; Jensen-Shannon is then constant and gives no gradient. Wasserstein distance measures how far mass must be moved, so it still slopes toward the data.",
+   "source": "Deep Learning"
+  },
+  {
+   "guid": "kE+}9!^@sl",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::07 Deep Learning",
+   "tags": [
+    "stats",
+    "stats::deep",
+    "stats::deep::generative"
+   ],
+   "front": "How do diffusion models generate data?",
+   "back": "<strong>Forward process</strong>: gradually add Gaussian noise until the data becomes \\(N(0,I)\\). <strong>Reverse process</strong>: a network learns to denoise step by step. Training is simple regression: predict the added noise \\(\\epsilon\\) from the noised sample, \\(\\|\\epsilon-\\epsilon_\\theta(x_t,t)\\|^2\\).<br>\nPredicting the noise is equivalent to estimating the <strong>score</strong> \\(\\nabla_x\\log p_t(x)\\) (Tweedie&#x27;s formula / denoising score matching).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> The score is a vector field that points uphill in density, toward the data manifold. Noise at many scales blurs the manifold so the field is defined everywhere, even far away. Sampling follows the field from pure noise back to the manifold, with the noise level annealed from coarse to fine.",
+   "source": "Deep Learning"
+  },
+  {
+   "guid": "f2`D~lz5H<",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::07 Deep Learning",
+   "tags": [
+    "stats",
+    "stats::deep",
+    "stats::deep::representation"
+   ],
+   "front": "What does contrastive learning (InfoNCE loss) optimise?",
+   "back": "For an anchor, one positive and many negatives:<br>\n\\(L=-\\log\\dfrac{\\exp(\\mathrm{sim}(z,z^+)/\\tau)}{\\sum_j\\exp(\\mathrm{sim}(z,z_j)/\\tau)}\\).<br>\nA softmax classification of &quot;which candidate is the true positive&quot;; it lower-bounds mutual information between views. Used in SimCLR and CLIP.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Embeddings are normalised to the unit hypersphere. The loss decomposes into <strong>alignment</strong> (pull positive pairs together) and <strong>uniformity</strong> (spread everything else evenly over the sphere). Temperature τ sets how strongly hard negatives are emphasised.",
+   "source": "Deep Learning"
+  },
+  {
+   "guid": "Ihz6yy^<g|",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::07 Deep Learning",
+   "tags": [
+    "stats",
+    "stats::deep",
+    "stats::deep::theory"
+   ],
+   "front": "What do neural scaling laws state, and what was the compute-optimal (Chinchilla) finding?",
+   "back": "Test loss falls as a <strong>power law</strong> in parameters \\(N\\), data \\(D\\) and compute \\(C\\) over many orders of magnitude:<br>\n\\(L(N,D)\\approx E+\\dfrac{A}{N^\\alpha}+\\dfrac{B}{D^\\beta}\\), with \\(E\\) the irreducible entropy.<br>\nChinchilla: for a fixed compute budget \\(C\\approx6ND\\), scale \\(N\\) and \\(D\\) <strong>in equal proportion</strong> (about 20 tokens per parameter); earlier large models were undertrained.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Straight lines on log-log axes. One proposed origin: the network resolves a data manifold of intrinsic dimension d, and approximation error in d dimensions falls as (number of pieces)\\(^{-c/d}\\).",
+   "source": "Deep Learning"
+  },
+  {
+   "guid": "Ar7t802+[s",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::08 Reinforcement Learning",
+   "tags": [
+    "stats",
+    "stats::rl",
+    "stats::rl::foundations"
+   ],
+   "front": "Define a Markov Decision Process (MDP) and the Markov property.",
+   "back": "A tuple \\((\\mathcal S,\\mathcal A,P,R,\\gamma)\\): states, actions, transition kernel \\(P(s&#x27;\\mid s,a)\\), reward \\(R(s,a)\\), discount \\(\\gamma\\in[0,1)\\). A policy \\(\\pi(a\\mid s)\\) maps states to action distributions.<br>\nMarkov property: the future is conditionally independent of the past given the current state.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> The state is a <strong>sufficient statistic of history</strong> for predicting the future. If what you observe is not Markov (one video frame has no velocity), enlarge the state (stack frames, use a recurrent memory, or a belief state).",
+   "source": "Reinforcement Learning"
+  },
+  {
+   "guid": "hw8*-&U^0X",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::08 Reinforcement Learning",
+   "tags": [
+    "stats",
+    "stats::rl",
+    "stats::rl::foundations"
+   ],
+   "front": "Define the discounted return. What are the roles of \\(\\gamma\\)?",
+   "back": "\\(G_t=\\sum_{k\\ge0}\\gamma^kR_{t+k+1}\\).<br>\nRoles of \\(\\gamma\\): (1) makes infinite-horizon sums finite; (2) sets an <strong>effective horizon</strong> of about \\(1/(1-\\gamma)\\) steps; (3) equivalent to a per-step termination probability \\(1-\\gamma\\); (4) a bias-variance knob: smaller \\(\\gamma\\) lowers the variance of return estimates at the cost of myopia.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> An exponentially decaying window over the future. \\(\\gamma=0.99\\) sees about 100 steps ahead, \\(\\gamma=0.9\\) about 10.",
+   "source": "Reinforcement Learning"
+  },
+  {
+   "guid": "qz3+V4H*U!",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::08 Reinforcement Learning",
+   "tags": [
+    "stats",
+    "stats::rl",
+    "stats::rl::foundations"
+   ],
+   "front": "Define the state value \\(V^\\pi\\), action value \\(Q^\\pi\\) and advantage \\(A^\\pi\\).",
+   "back": "\\(V^\\pi(s)=E_\\pi[G_t\\mid s_t=s]\\)<br>\n\\(Q^\\pi(s,a)=E_\\pi[G_t\\mid s_t=s,a_t=a]\\)<br>\n\\(A^\\pi(s,a)=Q^\\pi(s,a)-V^\\pi(s)\\), with \\(E_{a\\sim\\pi}[A^\\pi(s,a)]=0\\).<br>\n\\(V^\\pi(s)=\\sum_a\\pi(a\\mid s)Q^\\pi(s,a)\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> V is the altitude of a state on the landscape of expected future reward. Q is the altitude you would reach by taking a specific first step. Advantage is how much better that step is than your average step from there: it strips out the &quot;this state is just good&quot; component and leaves only what the action contributed.",
+   "source": "Reinforcement Learning"
+  },
+  {
+   "guid": "c{Eg%X~Ne>",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::08 Reinforcement Learning",
+   "tags": [
+    "stats",
+    "stats::rl",
+    "stats::rl::dynamic_programming"
+   ],
+   "front": "Write the Bellman expectation equation and its closed-form solution for a finite Markov Decision Process (MDP).",
+   "back": "\\(V^\\pi(s)=\\sum_a\\pi(a\\mid s)\\left[R(s,a)+\\gamma\\sum_{s&#x27;}P(s&#x27;\\mid s,a)V^\\pi(s&#x27;)\\right]\\).<br>\nIn matrix form \\(V^\\pi=R^\\pi+\\gamma P^\\pi V^\\pi\\), so<br>\n\\(V^\\pi=(I-\\gamma P^\\pi)^{-1}R^\\pi=\\sum_{k\\ge0}\\gamma^k(P^\\pi)^kR^\\pi\\).<br>\nThe inverse exists because the spectral radius of \\(\\gamma P^\\pi\\) is at most \\(\\gamma&lt;1\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> A self-consistency condition: a state&#x27;s value = immediate reward + discounted average value of the neighbours it leads to. The Neumann series reads: reward now, plus reward one step out, plus two steps out. Values diffuse backward along the transition graph from where the rewards are.",
+   "source": "Reinforcement Learning"
+  },
+  {
+   "guid": "c@OB+(:f4I",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::08 Reinforcement Learning",
+   "tags": [
+    "stats",
+    "stats::rl",
+    "stats::rl::dynamic_programming"
+   ],
+   "front": "Why does value iteration converge?",
+   "back": "The Bellman optimality operator \\((TV)(s)=\\max_a\\left[R(s,a)+\\gamma\\sum_{s&#x27;}P(s&#x27;\\mid s,a)V(s&#x27;)\\right]\\) is a <strong>\\(\\gamma\\)-contraction in the sup norm</strong>: \\(\\|TV-TU\\|_\\infty\\le\\gamma\\|V-U\\|_\\infty\\).<br>\nBy the Banach fixed-point theorem it has a unique fixed point \\(V^*\\), and \\(\\|V_k-V^*\\|_\\infty\\le\\gamma^k\\|V_0-V^*\\|_\\infty\\).",
+   "text": "",
+   "image": "<img src=\"bellman_contraction.svg\">",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Every application of T shrinks all distances by at least a factor γ, so any two starting guesses are pulled together, and both are pulled to the single point that T leaves fixed. Like repeatedly photocopying at 90%: every image collapses onto the same dot.",
+   "source": "Reinforcement Learning"
+  },
+  {
+   "guid": "zhw5-)-Ymo",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::08 Reinforcement Learning",
+   "tags": [
+    "stats",
+    "stats::rl",
+    "stats::rl::dynamic_programming"
+   ],
+   "front": "Describe policy iteration and state the policy improvement theorem.",
+   "back": "Alternate (1) <strong>evaluation</strong>: compute \\(V^\\pi\\); (2) <strong>improvement</strong>: \\(\\pi&#x27;(s)=\\arg\\max_aQ^\\pi(s,a)\\).<br>\nTheorem: if \\(Q^\\pi(s,\\pi&#x27;(s))\\ge V^\\pi(s)\\) for all \\(s\\), then \\(V^{\\pi&#x27;}\\ge V^\\pi\\) everywhere. With finitely many deterministic policies, convergence to \\(\\pi^*\\) is finite, typically in very few iterations.<br>\n<strong>Generalised policy iteration</strong>: any interleaving of partial evaluation and partial improvement; nearly all reinforcement learning algorithms are instances.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> The set of achievable value functions forms a polytope whose vertices are deterministic policies. Policy iteration hops from vertex to a better vertex, reaching the top corner \\(V^*\\) that dominates all others. It behaves like Newton&#x27;s method on the Bellman equation, whereas value iteration is a fixed-point iteration.",
+   "source": "Reinforcement Learning"
+  },
+  {
+   "guid": "nI9{Sze:eh",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::08 Reinforcement Learning",
+   "tags": [
+    "stats",
+    "stats::rl",
+    "stats::rl::td_learning"
+   ],
+   "front": "Contrast Monte Carlo and Temporal Difference (TD) value estimation.",
+   "back": "<strong>Monte Carlo</strong>: target = full observed return \\(G_t\\). Unbiased, high variance, needs complete episodes, does not exploit the Markov property.<br>\n<strong>TD(0)</strong>: target = \\(r+\\gamma V(s&#x27;)\\). <strong>Bootstraps</strong> from the current estimate: biased, low variance, online, exploits Markov structure.<br>\nOn a fixed batch: Monte Carlo minimises squared error to the observed returns; TD converges to the value function of the <strong>maximum-likelihood Markov model</strong> of the data.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Monte Carlo waits to see how the whole trip turns out. TD updates a guess from a later guess: on your commute, as soon as you hit a traffic jam you revise the arrival estimate without waiting to arrive.",
+   "source": "Reinforcement Learning"
+  },
+  {
+   "guid": "MDHeH~2bBz",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::08 Reinforcement Learning",
+   "tags": [
+    "stats",
+    "stats::rl",
+    "stats::rl::td_learning"
+   ],
+   "front": "Define the Temporal Difference (TD) error. How do n-step returns and TD(\\(\\lambda\\)) interpolate between TD and Monte Carlo?",
+   "back": "\\(\\delta_t=r_{t+1}+\\gamma V(s_{t+1})-V(s_t)\\); update \\(V(s_t)\\leftarrow V(s_t)+\\alpha\\delta_t\\).<br>\nn-step return: \\(n\\) real rewards then bootstrap. The \\(\\lambda\\)-return is a geometric average of all n-step returns with weights \\((1-\\lambda)\\lambda^{n-1}\\): \\(\\lambda=0\\) is TD(0), \\(\\lambda=1\\) is Monte Carlo.<br>\n<strong>Eligibility traces</strong> implement this online: each state keeps a decaying memory, and every TD error updates all recently visited states in proportion.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> δ is a <strong>surprise signal</strong>: things went better or worse than expected. It is the reward prediction error that dopamine neurons appear to encode. λ is a slider for how far back in time a surprise assigns credit.",
+   "source": "Reinforcement Learning"
+  },
+  {
+   "guid": "HXO.bWUx+W",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::08 Reinforcement Learning",
+   "tags": [
+    "stats",
+    "stats::rl",
+    "stats::rl::td_learning"
+   ],
+   "front": "Compare Q-learning and SARSA.",
+   "back": "<strong>Q-learning</strong> (off-policy): \\(Q(s,a)\\leftarrow Q(s,a)+\\alpha\\left[r+\\gamma\\max_{a&#x27;}Q(s&#x27;,a&#x27;)-Q(s,a)\\right]\\). Learns \\(Q^*\\) regardless of the behaviour policy.<br>\n<strong>SARSA</strong> (on-policy): target \\(r+\\gamma Q(s&#x27;,a&#x27;)\\) with \\(a&#x27;\\) the action actually taken. Learns the value of the policy being followed, <strong>including its exploration</strong>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Cliff-walking: Q-learning learns the optimal path along the cliff edge and keeps falling off during epsilon-greedy exploration; SARSA learns the safer inland path because it prices in its own random missteps. Q-learning evaluates the ideal you, SARSA the actual you.",
+   "source": "Reinforcement Learning"
+  },
+  {
+   "guid": "dv(bgR/x`O",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::08 Reinforcement Learning",
+   "tags": [
+    "stats",
+    "stats::rl",
+    "stats::rl::exploration"
+   ],
+   "front": "Name three strategies for the exploration-exploitation trade-off in bandits and their regret.",
+   "back": "<strong>\\(\\epsilon\\)-greedy</strong>: random action with probability \\(\\epsilon\\). Undirected; linear regret for fixed \\(\\epsilon\\).<br>\n<strong>Upper Confidence Bound (UCB)</strong>: choose \\(\\arg\\max_a\\hat\\mu_a+\\sqrt{2\\ln t/n_a}\\): &quot;optimism in the face of uncertainty&quot;. Logarithmic regret.<br>\n<strong>Thompson sampling</strong>: sample a model from the posterior, act greedily for it. Logarithmic regret; usually the best in practice.<br>\nLai-Robbins: \\(O(\\log T)\\) regret is the optimal rate.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Each arm has an estimate with an error bar. UCB ranks arms by the <strong>top</strong> of the bar: an arm is tried either because it looks good or because its bar is wide, and trying it shrinks the bar. Thompson sampling picks each arm with exactly the probability that it is the best one.",
+   "source": "Reinforcement Learning"
+  },
+  {
+   "guid": "FBmB>_6.No",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::08 Reinforcement Learning",
+   "tags": [
+    "stats",
+    "stats::rl",
+    "stats::rl::function_approx"
+   ],
+   "front": "What is the &quot;deadly triad&quot; in reinforcement learning?",
+   "back": "Instability or divergence can occur when all three are combined:<br>\n1. <strong>Function approximation</strong><br>\n2. <strong>Bootstrapping</strong> (Temporal Difference targets)<br>\n3. <strong>Off-policy</strong> training<br>\nAny two are safe. Deep Q-Networks (DQN) use all three and rely on stabilisers.",
+   "text": "",
+   "image": "<img src=\"projected_bellman.svg\">",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> The Bellman operator T is a contraction in the sup norm, but applying it takes you <strong>out of</strong> the subspace of representable value functions; you then project back with Π. Π is a non-expansion in a <strong>weighted L2</strong> norm. On-policy, the weighting is the stationary distribution, under which T is also a contraction, so ΠT contracts. Off-policy, the weighting mismatches and the composition ΠT can <strong>expand</strong>: each step lands further away.",
+   "source": "Reinforcement Learning"
+  },
+  {
+   "guid": "t1p1ODx^[/",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::08 Reinforcement Learning",
+   "tags": [
+    "stats",
+    "stats::rl",
+    "stats::rl::function_approx"
+   ],
+   "front": "What two tricks stabilise Deep Q-Networks (DQN) and why?",
+   "back": "<strong>Experience replay</strong>: store transitions in a buffer and train on random minibatches. Breaks the temporal correlation of consecutive samples (restores approximately independent data) and reuses experience.<br>\n<strong>Target network</strong>: compute the bootstrap target \\(r+\\gamma\\max_{a&#x27;}Q_{\\theta^-}(s&#x27;,a&#x27;)\\) with a slowly updated copy \\(\\theta^-\\). Stops the target from moving with every gradient step.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Without a target network you are regressing onto a label that shifts whenever you update: a dog chasing its own tail. Freezing the target turns each phase into an ordinary supervised regression problem (fitted Q-iteration).",
+   "source": "Reinforcement Learning"
+  },
+  {
+   "guid": "e:LH)s+Ifc",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::08 Reinforcement Learning",
+   "tags": [
+    "stats",
+    "stats::rl",
+    "stats::rl::function_approx"
+   ],
+   "front": "What is maximisation bias in Q-learning and how does Double Q-learning fix it?",
+   "back": "\\(E[\\max_a\\hat Q(s,a)]\\ge\\max_aE[\\hat Q(s,a)]\\) (Jensen: max is convex). Using the same noisy estimates both to <strong>select</strong> and to <strong>evaluate</strong> the best action yields systematic overestimation, which bootstrapping then propagates.<br>\nDouble Q-learning: select with one estimator, evaluate with another: \\(r+\\gamma Q_B(s&#x27;,\\arg\\max_{a&#x27;}Q_A(s&#x27;,a&#x27;))\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Winner&#x27;s curse: the highest of several noisy measurements is probably an overestimate, because it was chosen for being high. Re-measure the winner with an independent instrument to get an unbiased reading. Same logic as using held-out data after model selection.",
+   "source": "Reinforcement Learning"
+  },
+  {
+   "guid": "MTYHHv:|(X",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::08 Reinforcement Learning",
+   "tags": [
+    "stats",
+    "stats::rl",
+    "stats::rl::policy_gradient"
+   ],
+   "front": "State the policy gradient theorem. Why is it remarkable?",
+   "back": "\\(\\nabla_\\theta J(\\theta)=E_{s\\sim d^\\pi,\\,a\\sim\\pi_\\theta}\\left[\\nabla_\\theta\\log\\pi_\\theta(a\\mid s)\\,Q^\\pi(s,a)\\right]\\).<br>\nThe gradient does not involve the derivative of the state distribution or of the environment dynamics, so it can be estimated from sampled trajectories of an unknown, non-differentiable environment. REINFORCE uses the sampled return \\(G_t\\) in place of \\(Q^\\pi\\).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> The score-function (log-derivative) trick: \\(\\nabla E_p[f]=E_p[f\\nabla\\log p]\\). \\(\\nabla\\log\\pi(a\\mid s)\\) is the direction in parameter space that makes action a more probable; weight it by how good the action turned out. &quot;Do more of what worked, less of what did not&quot;, with the environment as a black box.",
+   "source": "Reinforcement Learning"
+  },
+  {
+   "guid": "m|)0kEo.A(",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::08 Reinforcement Learning",
+   "tags": [
+    "stats",
+    "stats::rl",
+    "stats::rl::policy_gradient"
+   ],
+   "front": "Why does subtracting a baseline in policy gradients leave the gradient unbiased while reducing variance?",
+   "back": "For any \\(b(s)\\) not depending on the action:<br>\n\\(E_{a\\sim\\pi}[\\nabla_\\theta\\log\\pi_\\theta(a\\mid s)\\,b(s)]=b(s)\\nabla_\\theta\\sum_a\\pi_\\theta(a\\mid s)=b(s)\\nabla_\\theta1=0\\).<br>\nSo \\(Q^\\pi\\) may be replaced by \\(Q^\\pi-b\\). Choosing \\(b=V^\\pi\\) gives the <strong>advantage</strong> and large variance reduction.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> The expected score is zero, so the baseline is a <strong>control variate</strong>: a zero-mean term correlated with the noise. If every reward is around +100, raw REINFORCE pushes up every sampled action and relies on tiny differences; centring asks the right question: better or worse than average?",
+   "source": "Reinforcement Learning"
+  },
+  {
+   "guid": "KBmohQWADw",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::08 Reinforcement Learning",
+   "tags": [
+    "stats",
+    "stats::rl",
+    "stats::rl::policy_gradient"
+   ],
+   "front": "What is an actor-critic method, and what does Generalised Advantage Estimation (GAE) do?",
+   "back": "<strong>Actor</strong>: the policy \\(\\pi_\\theta\\), updated by policy gradient. <strong>Critic</strong>: a learned \\(V_\\phi\\) that supplies low-variance advantage estimates in place of Monte Carlo returns.<br>\nGAE: \\(\\hat A_t=\\sum_{l\\ge0}(\\gamma\\lambda)^l\\delta_{t+l}\\), an exponentially weighted sum of Temporal Difference (TD) errors. \\(\\lambda=0\\): one-step TD (low variance, biased by critic error); \\(\\lambda=1\\): Monte Carlo (unbiased, high variance).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Generalised policy iteration with function approximators: the critic is approximate policy evaluation, the actor approximate policy improvement. λ dials how much you trust the critic versus the actual observed rewards.",
+   "source": "Reinforcement Learning"
+  },
+  {
+   "guid": "cNp<(vPn8?",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::08 Reinforcement Learning",
+   "tags": [
+    "stats",
+    "stats::rl",
+    "stats::rl::policy_gradient"
+   ],
+   "front": "What problem do trust-region methods (TRPO, PPO) solve, and how?",
+   "back": "A policy-gradient step that is too large collapses performance, and the data was collected under the old policy, so it cannot reveal this. Equal steps in parameter space can mean wildly unequal changes in behaviour.<br>\nTrust Region Policy Optimisation (TRPO): maximise the surrogate \\(E\\!\\left[\\dfrac{\\pi_\\theta}{\\pi_{\\text{old}}}\\hat A\\right]\\) subject to \\(\\mathrm{KL}(\\pi_{\\text{old}}\\|\\pi_\\theta)\\le\\delta\\) (a natural-gradient step).<br>\nProximal Policy Optimisation (PPO): clip the ratio to \\([1-\\epsilon,1+\\epsilon]\\) so there is no incentive to move far.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Measure step size in <strong>distribution space</strong> (a KL ball around the current policy), not in parameter space. The surrogate objective is only a trustworthy local map near the old policy; the trust region is the area where the map is still accurate.",
+   "source": "Reinforcement Learning"
+  },
+  {
+   "guid": "L}=CZPs/$O",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::08 Reinforcement Learning",
+   "tags": [
+    "stats",
+    "stats::rl",
+    "stats::rl::off_policy"
+   ],
+   "front": "On-policy versus off-policy learning: definitions and the role of importance sampling.",
+   "back": "<strong>On-policy</strong>: learn about the policy that generated the data (SARSA, PPO). Stable, sample-hungry.<br>\n<strong>Off-policy</strong>: learn about a target policy \\(\\pi\\) from data generated by a behaviour policy \\(\\mu\\) (Q-learning, DQN, SAC). Enables replay buffers and learning from logs.<br>\nCorrection by importance ratios \\(\\prod_t\\pi(a_t\\mid s_t)/\\mu(a_t\\mid s_t)\\): unbiased, but the variance grows <strong>exponentially with the horizon</strong>. Remedies: truncated ratios (Retrace, V-trace), per-decision weighting.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> A product of many ratios is a random walk in log space; after T steps a few trajectories carry all the weight. One-step Q-learning avoids the ratios because its target conditions on the action and takes the max itself.",
+   "source": "Reinforcement Learning"
+  },
+  {
+   "guid": "C_=2&*IjI1",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::08 Reinforcement Learning",
+   "tags": [
+    "stats",
+    "stats::rl",
+    "stats::rl::model_based"
+   ],
+   "front": "What are the promise and the central difficulty of model-based reinforcement learning?",
+   "back": "Learn \\(\\hat P,\\hat R\\), then <strong>plan</strong>: Dyna (augment real data with simulated rollouts), Model Predictive Control (MPC), Monte Carlo Tree Search (AlphaZero, MuZero). Far more sample-efficient.<br>\nDifficulty: <strong>compounding model error</strong>: one-step errors accumulate over a rollout, and the planner actively <strong>exploits</strong> model inaccuracies, steering toward regions where the model is optimistically wrong.<br>\nMitigations: short rollouts, model ensembles with uncertainty penalties, replanning each step, value-equivalent latent models.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> A map versus walking the territory. Planning on the map is free, but errors grow with route length, and an optimiser searching the map for shortcuts will find exactly the places where the cartographer made a mistake.",
+   "source": "Reinforcement Learning"
+  },
+  {
+   "guid": "Lu!_96=*?b",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::08 Reinforcement Learning",
+   "tags": [
+    "stats",
+    "stats::rl",
+    "stats::rl::foundations"
+   ],
+   "front": "What is a Partially Observable Markov Decision Process (POMDP) and how is it reduced to an MDP?",
+   "back": "The agent receives observations \\(o\\sim O(\\cdot\\mid s)\\), not states. The <strong>belief state</strong> \\(b(s)=P(s\\mid\\text{history})\\), updated by Bayes filtering, is a sufficient statistic for the history, and the belief-state process is a (continuous-state) MDP.<br>\nThe optimal finite-horizon value function over beliefs is <strong>piecewise linear and convex</strong>. Exact solution is intractable; practice uses recurrent policies or frame stacking.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> The belief is a point in the <strong>probability simplex</strong> over states. Value = upper envelope of hyperplanes (one per conditional plan). Convexity means certainty is valuable: corners of the simplex are worth more than the centre, which is why information-gathering actions can be optimal despite yielding no reward.",
+   "source": "Reinforcement Learning"
+  },
+  {
+   "guid": "u@E1<@5+::",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::08 Reinforcement Learning",
+   "tags": [
+    "stats",
+    "stats::rl",
+    "stats::rl::reward"
+   ],
+   "front": "Which reward transformations preserve the optimal policy? What is reward hacking?",
+   "back": "<strong>Potential-based shaping</strong> \\(F(s,a,s&#x27;)=\\gamma\\Phi(s&#x27;)-\\Phi(s)\\) preserves optimal policies for any potential \\(\\Phi\\) (Ng, Harada, Russell 1999), and is essentially the only additive form that does so. A good choice is \\(\\Phi\\approx V^*\\).<br>\n<strong>Reward hacking</strong> (specification gaming): the agent maximises the literal reward in unintended ways (Goodhart&#x27;s law).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> Shaping terms telescope along any trajectory: the total added reward depends only on the endpoints, like a conservative force field. It reshapes the hills to make them easier to climb without moving the summit. Any non-conservative bonus creates cycles the agent can farm forever.",
+   "source": "Reinforcement Learning"
+  },
+  {
+   "guid": "rorv[XB8{G",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::08 Reinforcement Learning",
+   "tags": [
+    "stats",
+    "stats::rl",
+    "stats::rl::policy_gradient"
+   ],
+   "front": "What is maximum-entropy reinforcement learning (Soft Actor-Critic, soft Q-learning)?",
+   "back": "Objective: \\(J(\\pi)=E\\left[\\sum_t r_t+\\alpha\\,\\mathcal H(\\pi(\\cdot\\mid s_t))\\right]\\).<br>\nOptimal policy is a Boltzmann distribution \\(\\pi^*(a\\mid s)\\propto\\exp(Q_{\\text{soft}}(s,a)/\\alpha)\\), and the hard max in the Bellman backup becomes a <strong>log-sum-exp</strong> (soft max).<br>\nBenefits: principled exploration, robustness, keeps multiple good behaviours alive.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> &quot;Control as inference&quot;: condition a graphical model on optimality and the posterior over trajectories is this policy; it is Kullback-Leibler (KL)-regularised reinforcement learning toward a uniform prior. The temperature α melts the argmax vertex of the simplex into a smooth interior point; α → 0 recovers standard reinforcement learning.",
+   "source": "Reinforcement Learning"
+  },
+  {
+   "guid": "d#v]F0XwBA",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::08 Reinforcement Learning",
+   "tags": [
+    "stats",
+    "stats::rl",
+    "stats::rl::off_policy"
+   ],
+   "front": "What is the core difficulty of offline (batch) reinforcement learning?",
+   "back": "Learning from a fixed dataset without further interaction. The backup \\(\\max_{a&#x27;}Q(s&#x27;,a&#x27;)\\) queries actions <strong>never seen in the data</strong>; their Q-values are unconstrained extrapolations, the max selects the most overestimated ones, bootstrapping propagates the error, and no new data ever corrects it.<br>\nRemedies: keep the policy near the behaviour policy (behaviour-cloning regularisation, BCQ), <strong>pessimism</strong> (Conservative Q-Learning (CQL) pushes Q down on unseen actions), uncertainty penalties.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> The data covers only a thin tube of state-action space. Outside the tube the Q-function is unconstrained fantasy, and an optimiser is drawn to fantasy. Offline reinforcement learning is constrained optimisation: improve as much as possible <strong>while staying inside the tube</strong>.",
+   "source": "Reinforcement Learning"
+  },
+  {
+   "guid": "sO2nC$AW1M",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::08 Reinforcement Learning",
+   "tags": [
+    "stats",
+    "stats::rl",
+    "stats::rl::reward"
+   ],
+   "front": "How does Reinforcement Learning from Human Feedback (RLHF) work, and how does Direct Preference Optimisation (DPO) simplify it?",
+   "back": "1. Collect pairwise preferences; fit a reward model under <strong>Bradley-Terry</strong>: \\(P(y_w\\succ y_l)=\\sigma(r(x,y_w)-r(x,y_l))\\).<br>\n2. Optimise the policy: \\(\\max_\\pi E[r(x,y)]-\\beta\\,\\mathrm{KL}(\\pi\\,\\|\\,\\pi_{\\text{ref}})\\), typically with Proximal Policy Optimisation (PPO).<br>\nThe KL-regularised optimum has closed form \\(\\pi^*\\propto\\pi_{\\text{ref}}\\exp(r/\\beta)\\). DPO inverts this, \\(r=\\beta\\log(\\pi/\\pi_{\\text{ref}})+\\text{const}\\), substitutes into the Bradley-Terry likelihood, and trains the policy directly with a logistic loss: no reward model, no sampling loop.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> The KL term is a leash to the reference model: the learned reward is only trustworthy near the data it was trained on, and an unleashed optimiser would find its blind spots (reward hacking). Same trust-region logic as TRPO and offline reinforcement learning.",
+   "source": "Reinforcement Learning"
+  },
+  {
+   "guid": "AmZ9G,2RtE",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::08 Reinforcement Learning",
+   "tags": [
+    "stats",
+    "stats::rl",
+    "stats::rl::dynamic_programming"
+   ],
+   "front": "What is the occupancy-measure (linear programming) view of a Markov Decision Process (MDP)?",
+   "back": "Define the discounted occupancy \\(\\rho^\\pi(s,a)=\\sum_t\\gamma^tP(s_t=s,a_t=a)\\). Then \\(J(\\pi)=\\sum_{s,a}\\rho^\\pi(s,a)R(s,a)\\) is <strong>linear</strong> in \\(\\rho\\). The valid occupancies are those satisfying linear flow-conservation constraints<br>\n\\(\\sum_a\\rho(s&#x27;,a)=\\mu_0(s&#x27;)+\\gamma\\sum_{s,a}P(s&#x27;\\mid s,a)\\rho(s,a)\\),<br>\na convex polytope. Solving the MDP is a linear programme; its dual variables are the values \\(V(s)\\).",
+   "text": "",
+   "image": "<img src=\"occupancy_polytope.svg\">",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> A linear objective over a polytope is maximised at a <strong>vertex</strong>, and vertices correspond to deterministic policies: this is why an optimal deterministic policy always exists. Reward is a direction in occupancy space; the optimal policy is the corner of the polytope furthest along it. \\(J\\) is non-convex in policy parameters, but linear in the right coordinates.",
+   "source": "Reinforcement Learning"
+  },
+  {
+   "guid": "n]}dJQ)pq(",
+   "type": "basic",
+   "deck": "Statistics, Bayes, ML & RL (geometric)::08 Reinforcement Learning",
+   "tags": [
+    "stats",
+    "stats::rl",
+    "stats::rl::foundations"
+   ],
+   "front": "What is the credit assignment problem, and which mechanisms address it?",
+   "back": "Determining which earlier actions were responsible for a delayed outcome. With sparse, delayed reward the learning signal per decision is tiny and noisy.<br>\nMechanisms: value functions (turn delayed reward into immediate Temporal Difference errors), eligibility traces / n-step returns, advantage baselines (remove what was not the action&#x27;s doing), discounting (assume nearer actions matter more), reward shaping, hindsight relabelling, hierarchy / options.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Geometry:</b> A value function is a <strong>potential field</strong> over states that turns a distant goal into a local slope. Once V is accurate, acting well is just climbing the local gradient, and the long-horizon problem has been compiled into a one-step one.",
+   "source": "Reinforcement Learning"
+  }
+ ]
+}

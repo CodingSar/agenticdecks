@@ -1,0 +1,1927 @@
+{
+ "deck_name": "Software Testing",
+ "file": "Software_Testing.apkg",
+ "description": "Software testing principles, test types, TDD/BDD, test design and edge-case techniques, and verification practices for coding agents. For an engineer/architect who sets testing strategy and works with AI agents.",
+ "notes": [
+  {
+   "guid": "E3dU)0|5es",
+   "type": "basic",
+   "deck": "Software Testing::01 Foundations & Principles",
+   "tags": [
+    "testing::fundamentals"
+   ],
+   "front": "Dijkstra's limit on testing, and its practical lesson?",
+   "back": "\"Testing can show the presence of bugs, but never their absence.\" A green suite is evidence, not proof.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Same as ISTQB principle 1; motivates formal methods, property tests and humility about coverage.",
+   "source": "Dijkstra, 1970",
+   "reverse": false
+  },
+  {
+   "guid": "ryAE(Gqlq*",
+   "type": "basic",
+   "deck": "Software Testing::01 Foundations & Principles",
+   "tags": [
+    "testing::fundamentals"
+   ],
+   "front": "<b>Testing</b> vs <b>debugging</b>?",
+   "back": "<b>Debugging</b>: find and fix the cause of a known failure (make it run). <b>Testing</b>: check that it solves the problem and find unknown failures.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "HRfK=bn9nj",
+   "type": "basic",
+   "deck": "Software Testing::01 Foundations & Principles",
+   "tags": [
+    "testing::fundamentals"
+   ],
+   "front": "Why did Myers define a <b>successful</b> test as one that finds a bug?",
+   "back": "Testers aiming to show software works pick inputs that pass; aiming to break it finds the defects.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Definition:</b> testing is executing a program with the intent of finding errors (<i>The Art of Software Testing</i>).",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "N&5kfOv/n~",
+   "type": "basic",
+   "deck": "Software Testing::01 Foundations & Principles",
+   "tags": [
+    "testing::fundamentals"
+   ],
+   "front": "<b>Verification</b> vs <b>validation</b>?",
+   "back": "<b>Verification</b>: building the product <b>right</b> (meets spec)? <b>Validation</b>: building the <b>right product</b> (meets user needs)?",
+   "text": "",
+   "image": "",
+   "analogy": "Verification checks the house matches the blueprint; validation checks the family actually wants to live in it.",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "g]@_L_3$)S",
+   "type": "cloze",
+   "deck": "Software Testing::01 Foundations & Principles",
+   "tags": [
+    "testing::fundamentals"
+   ],
+   "front": "",
+   "back": "",
+   "text": "A human {{c1::error}} (mistake) introduces a {{c2::fault}} (defect/bug) in the code, which causes a {{c3::failure}} (observable wrong behaviour) only when executed under the right conditions.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "l/$5bKSkqc",
+   "type": "basic",
+   "deck": "Software Testing::01 Foundations & Principles",
+   "tags": [
+    "testing::fundamentals"
+   ],
+   "front": "<b>Test oracle problem</b>?",
+   "back": "Knowing what the correct output is. Without an oracle a test can only check \"didn't crash\".",
+   "text": "",
+   "image": "",
+   "analogy": "Grading an exam with no answer key: you can only check the student wrote something.",
+   "extra": "<b>Mitigations:</b> properties/invariants, differential testing, metamorphic relations, golden files, human review.",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "^a7a9Q|j_",
+   "type": "cloze",
+   "deck": "Software Testing::01 Foundations & Principles",
+   "tags": [
+    "testing::fundamentals"
+   ],
+   "front": "",
+   "back": "",
+   "text": "ISTQB's seven testing principles: testing shows {{c1::presence, not absence}} of defects; {{c2::exhaustive testing}} is impossible; {{c3::early testing}} saves time and money; defects {{c4::cluster together}}; tests wear out (the {{c5::pesticide paradox}}); testing is {{c6::context dependent}}; the {{c7::absence-of-defects}} fallacy.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ISTQB Foundation",
+   "reverse": false
+  },
+  {
+   "guid": "H|](mF`SN8",
+   "type": "basic",
+   "deck": "Software Testing::01 Foundations & Principles",
+   "tags": [
+    "testing::fundamentals"
+   ],
+   "front": "<b>Pesticide paradox</b>?",
+   "back": "Re-running the same tests stops finding new bugs: they only probe the paths they were written for. Refresh suites and add new techniques.",
+   "text": "",
+   "image": "",
+   "analogy": "Spraying the same field the same way: the pests that survive are exactly the ones the spray never reaches.",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "D^%#|pUAob",
+   "type": "basic",
+   "deck": "Software Testing::01 Foundations & Principles",
+   "tags": [
+    "testing::fundamentals"
+   ],
+   "front": "<b>Absence-of-defects fallacy</b>?",
+   "back": "A system with no known bugs can still be useless if it doesn't meet user needs: validation matters as much as verification.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "Ar^*7#:^zn",
+   "type": "basic",
+   "deck": "Software Testing::01 Foundations & Principles",
+   "tags": [
+    "testing::fundamentals"
+   ],
+   "front": "<b>Shift-left</b> vs <b>shift-right</b> testing?",
+   "back": "<b>Shift-left</b>: test earlier (requirements, design, CI), where defects are cheaper. <b>Shift-right</b>: test and observe in production (canaries, flags, chaos).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "A%u3{^{JtA",
+   "type": "basic",
+   "deck": "Software Testing::02 Test Types & Levels",
+   "tags": [
+    "testing::types"
+   ],
+   "front": "Black-box vs white-box vs grey-box testing?",
+   "back": "<b>Black</b>: from the spec, no internals. <b>White</b>: from code structure (branches, paths). <b>Grey</b>: partial knowledge (schema, architecture).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "x3!G%_lo)h",
+   "type": "basic",
+   "deck": "Software Testing::02 Test Types & Levels",
+   "tags": [
+    "testing::types"
+   ],
+   "front": "<b>Static</b> vs <b>dynamic</b> testing?",
+   "back": "<b>Static</b>: examine without executing (reviews, linters, type checks, SAST). <b>Dynamic</b>: execute the code.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "k=:E[7Gi>N",
+   "type": "basic",
+   "deck": "Software Testing::02 Test Types & Levels",
+   "tags": [
+    "testing::types"
+   ],
+   "front": "<b>Functional</b> vs <b>non-functional</b> testing?",
+   "back": "<b>Functional</b>: does it do the right thing (features, rules)? <b>Non-functional</b>: how well (performance, security, usability, reliability)?",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "mYOMlg{~Qx",
+   "type": "basic",
+   "deck": "Software Testing::02 Test Types & Levels",
+   "tags": [
+    "testing::types"
+   ],
+   "front": "<b>Unit test</b>, and why does \"unit\" vary?",
+   "back": "A fast, deterministic test of a small unit in isolation. Classicists mean a unit of <b>behaviour</b> (possibly several classes), not one class.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "bd%&XB{eI`",
+   "type": "basic",
+   "deck": "Software Testing::02 Test Types & Levels",
+   "tags": [
+    "testing::types"
+   ],
+   "front": "<b>Integration test</b>: narrow vs broad?",
+   "back": "Checks components work together. <b>Narrow</b>: one boundary (service + real DB via Testcontainers). <b>Broad</b>: many live services at once.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "x!}nOFhouF",
+   "type": "basic",
+   "deck": "Software Testing::02 Test Types & Levels",
+   "tags": [
+    "testing::types"
+   ],
+   "front": "<b>Consumer-driven contract test</b>?",
+   "back": "The consumer records its expectations of a provider's API as a contract; the provider verifies it in its own CI. Catches breaking changes without full E2E. Tool: Pact.",
+   "text": "",
+   "image": "",
+   "analogy": "The consumer hands the provider a checklist; the provider ticks it off before every release.",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "d54,5s~r:x",
+   "type": "basic",
+   "deck": "Software Testing::02 Test Types & Levels",
+   "tags": [
+    "testing::types"
+   ],
+   "front": "<b>End-to-end (E2E) test</b>: tradeoff?",
+   "back": "Full user journey through the deployed stack. Highest confidence per test, but slowest, flakiest and costliest: keep few, on critical paths.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Tools:</b> Playwright, Cypress.",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "qpketX#[Fq",
+   "type": "basic",
+   "deck": "Software Testing::02 Test Types & Levels",
+   "tags": [
+    "testing::types"
+   ],
+   "front": "<b>System</b> vs <b>acceptance</b> testing?",
+   "back": "<b>System</b>: the whole integrated system against its requirements. <b>Acceptance</b> (UAT): does it meet business/user acceptance criteria, often owned by business.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "J4am~ece@D",
+   "type": "basic",
+   "deck": "Software Testing::02 Test Types & Levels",
+   "tags": [
+    "testing::types"
+   ],
+   "front": "<b>Smoke</b> vs <b>sanity</b> test?",
+   "back": "<b>Smoke</b>: shallow, broad check that a build is alive before deeper testing. <b>Sanity</b>: narrow, quick check that a specific fix works.",
+   "text": "",
+   "image": "",
+   "analogy": "Smoke test: switch the device on and see whether smoke comes out.",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "B|}:y0N;];",
+   "type": "basic",
+   "deck": "Software Testing::02 Test Types & Levels",
+   "tags": [
+    "testing::types"
+   ],
+   "front": "<b>Regression testing</b>?",
+   "back": "Re-running tests to check that changes didn't break existing behaviour.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "r?@qsP097V",
+   "type": "cloze",
+   "deck": "Software Testing::02 Test Types & Levels",
+   "tags": [
+    "testing::types"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Performance tests: {{c1::load}} = expected peak traffic; {{c2::stress}} = beyond capacity to find the breaking point and failure mode; {{c3::soak}} = sustained load for hours/days (leaks, exhaustion); {{c4::spike}} = sudden bursts.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Tools:</b> k6, Gatling, JMeter, Locust.",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "n$zS;_a*,b",
+   "type": "basic",
+   "deck": "Software Testing::02 Test Types & Levels",
+   "tags": [
+    "testing::types"
+   ],
+   "front": "<b>SAST</b> vs <b>DAST</b>?",
+   "back": "<b>SAST</b>: analyse source without running it (Semgrep, CodeQL). <b>DAST</b>: attack the running app from outside (ZAP, Burp).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Add SCA for vulnerable dependencies and human pen testing.",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "Hf$!`hA)O=",
+   "type": "basic",
+   "deck": "Software Testing::02 Test Types & Levels",
+   "tags": [
+    "testing::types"
+   ],
+   "front": "<b>Fuzz testing</b>, and what makes modern fuzzers effective?",
+   "back": "Feed huge volumes of random/mutated input to find crashes, hangs and memory bugs. <b>Coverage-guided</b> fuzzers (AFL, libFuzzer, Go fuzzing) evolve inputs that reach new code.",
+   "text": "",
+   "image": "",
+   "analogy": "Shaking a vending machine in every way possible to see what makes it jam.",
+   "extra": "<b>Why it works:</b> early experiments crashed or hung roughly a quarter to a third of UNIX utilities with random input.",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "pHC>5D]2xC",
+   "type": "basic",
+   "deck": "Software Testing::02 Test Types & Levels",
+   "tags": [
+    "testing::types"
+   ],
+   "front": "<b>Property-based testing</b>?",
+   "back": "State a property that must hold for all inputs; the framework generates many inputs and <b>shrinks</b> any failure to a minimal counterexample.",
+   "text": "",
+   "image": "",
+   "analogy": "Instead of testing a few chosen keys, you state \"every key must open only its own lock\" and let a machine try thousands.",
+   "extra": "<b>Tools:</b> QuickCheck (Haskell), Hypothesis (Python), fast-check (JS), jqwik (Java), proptest (Rust).",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "uy<B~L7v^K",
+   "type": "basic",
+   "deck": "Software Testing::02 Test Types & Levels",
+   "tags": [
+    "testing::types"
+   ],
+   "front": "<b>Mutation testing</b>?",
+   "back": "A tool injects small faults (<code>&gt;</code>→<code>&gt;=</code>, drop a call) and reruns the suite. A surviving mutant reveals a gap in assertions.",
+   "text": "",
+   "image": "",
+   "analogy": "A fire drill for your test suite: start small fires and see whether the alarms go off.",
+   "extra": "<b>Score</b> = killed / total. <b>Tools:</b> PIT, Stryker, mutmut, cargo-mutants.",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "r.7cTOjtR<",
+   "type": "basic",
+   "deck": "Software Testing::02 Test Types & Levels",
+   "tags": [
+    "testing::types"
+   ],
+   "front": "Why does mutation testing work? (two hypotheses)",
+   "back": "<b>Competent programmer</b>: real faults are small deviations from correct code. <b>Coupling effect</b>: tests that catch simple faults also catch most complex ones.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "H!NS<`_MiB",
+   "type": "basic",
+   "deck": "Software Testing::02 Test Types & Levels",
+   "tags": [
+    "testing::types"
+   ],
+   "front": "<b>Exploratory testing</b>?",
+   "back": "Skilled, unscripted testing where learning, design and execution happen together, guided by a <b>charter</b> and time-boxed sessions.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example charter:</b> \"explore checkout with expired cards to discover pricing errors\". Finds bugs scripts didn't imagine.",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "J%8VThEv!=",
+   "type": "basic",
+   "deck": "Software Testing::02 Test Types & Levels",
+   "tags": [
+    "testing::types"
+   ],
+   "front": "<b>Visual regression testing</b>: main pitfall?",
+   "back": "Screenshot diffs against baselines catch layout changes, but need stable rendering (fonts, animations, data) or they drown in noise.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "tk=,GN?|pn",
+   "type": "basic",
+   "deck": "Software Testing::02 Test Types & Levels",
+   "tags": [
+    "testing::types"
+   ],
+   "front": "Why can't accessibility testing be fully automated?",
+   "back": "Automated scanners (axe) catch only about a third of WCAG issues; the rest need keyboard-only and screen-reader testing.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "lI9xpoqX<D",
+   "type": "basic",
+   "deck": "Software Testing::02 Test Types & Levels",
+   "tags": [
+    "testing::types"
+   ],
+   "front": "Testing-in-production techniques, and the prerequisite?",
+   "back": "Canaries, feature flags, dark launches/shadow traffic, A/B tests, synthetic monitoring, chaos experiments. Requires good observability and fast rollback.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "b?^Eq1uAr#",
+   "type": "basic",
+   "deck": "Software Testing::02 Test Types & Levels",
+   "tags": [
+    "testing::types"
+   ],
+   "front": "<b>Chaos engineering</b>?",
+   "back": "Deliberately injecting failures (killed instances, latency, outages) into production-like systems to verify resilience before real incidents do.",
+   "text": "",
+   "image": "",
+   "analogy": "A vaccine for systems: a controlled dose of failure builds resilience before the real infection.",
+   "extra": "Popularised by Netflix's Chaos Monkey.",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "i2okICQQo1",
+   "type": "basic",
+   "deck": "Software Testing::02 Test Types & Levels",
+   "tags": [
+    "testing::types"
+   ],
+   "front": "<b>Alpha</b> vs <b>beta</b> testing?",
+   "back": "<b>Alpha</b>: internal users in a controlled environment. <b>Beta</b>: real external users in real environments before GA.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "HY2fpm_B!:",
+   "type": "cloze",
+   "deck": "Software Testing::03 Unit Tests, Doubles & TDD",
+   "tags": [
+    "testing::unit"
+   ],
+   "front": "",
+   "back": "",
+   "text": "FIRST properties of good unit tests: {{c1::Fast}}, {{c2::Independent}}, {{c3::Repeatable}}, {{c4::Self-validating}} (pass/fail without human judgement), {{c5::Timely}} (written with the code).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "O?1_i)ssdn",
+   "type": "basic",
+   "deck": "Software Testing::03 Unit Tests, Doubles & TDD",
+   "tags": [
+    "testing::unit"
+   ],
+   "front": "<b>Arrange-Act-Assert</b>, and its Gherkin equivalent?",
+   "back": "Set up state, perform <b>one</b> action, check the outcome. Maps 1:1 to Given / When / Then.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "l3I[Ue~o3Z",
+   "type": "basic",
+   "deck": "Software Testing::03 Unit Tests, Doubles & TDD",
+   "tags": [
+    "testing::unit"
+   ],
+   "front": "Why test behaviour, not implementation?",
+   "back": "Tests coupled to internals (private methods, call order, exact mock calls) break on harmless refactors. Test through public interfaces and observable outcomes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "rS!H5?O9;3",
+   "type": "cloze",
+   "deck": "Software Testing::03 Unit Tests, Doubles & TDD",
+   "tags": [
+    "testing::unit"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Test doubles: a {{c1::dummy}} is passed but never used; a {{c2::stub}} returns canned answers; a {{c3::spy}} is a stub that also records calls; a {{c4::mock}} is pre-programmed with expectations and verifies interactions; a {{c5::fake}} is a working lightweight implementation (in-memory DB).",
+   "image": "",
+   "analogy": "",
+   "extra": "Terms from Meszaros, <i>xUnit Test Patterns</i>.",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Software Testing::03 Unit Tests, Doubles & TDD",
+   "tags": [
+    "testing::unit"
+   ],
+   "front": "<b>Mock</b> vs <b>stub</b>: key difference?",
+   "back": "A stub only <b>feeds</b> answers (you then assert on state); a mock <b>verifies</b> that the expected calls happened (behaviour verification).",
+   "text": "",
+   "image": "",
+   "analogy": "A stub is a cardboard cut-out receptionist; a mock is an inspector checking you signed in correctly.",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "OzP$JC)<_p",
+   "type": "basic",
+   "deck": "Software Testing::03 Unit Tests, Doubles & TDD",
+   "tags": [
+    "testing::unit"
+   ],
+   "front": "Why \"don't mock what you don't own\"?",
+   "back": "A mock of a third-party API encodes your possibly wrong <b>assumptions</b>. Wrap it in your own adapter, mock the adapter, and integration-test the adapter for real.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "dbn0I1A<r]",
+   "type": "basic",
+   "deck": "Software Testing::03 Unit Tests, Doubles & TDD",
+   "tags": [
+    "testing::unit"
+   ],
+   "front": "<b>Classicist</b> (Detroit) vs <b>mockist</b> (London) TDD?",
+   "back": "<b>Classicist</b>: real collaborators where cheap, verify state. <b>Mockist</b>: outside-in, mock collaborators, verify interactions; shapes interfaces early but couples tests to implementation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "cJr0&[nq#!",
+   "type": "basic",
+   "deck": "Software Testing::03 Unit Tests, Doubles & TDD",
+   "tags": [
+    "testing::unit"
+   ],
+   "front": "The TDD cycle?",
+   "back": "<b>Red</b>: write a small failing test. <b>Green</b>: simplest code to pass. <b>Refactor</b>: clean up with tests green. Repeat in small steps.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "z!=Tj^<,[4",
+   "type": "basic",
+   "deck": "Software Testing::03 Unit Tests, Doubles & TDD",
+   "tags": [
+    "testing::unit"
+   ],
+   "front": "Why must you see a new test <b>fail</b> first?",
+   "back": "A test that passes before the code exists may not exercise it (wrong target, missing assertion). Red proves it can detect the missing behaviour.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "sykCW#+}M4",
+   "type": "basic",
+   "deck": "Software Testing::03 Unit Tests, Doubles & TDD",
+   "tags": [
+    "testing::unit"
+   ],
+   "front": "<b>Approval / snapshot / golden-master</b> testing: use and risk?",
+   "back": "Capture output once, have a human approve it, diff future runs against it. Great for complex output and legacy code; risk: blind re-approval of diffs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "L*[}=zbF69",
+   "type": "basic",
+   "deck": "Software Testing::03 Unit Tests, Doubles & TDD",
+   "tags": [
+    "testing::unit"
+   ],
+   "front": "<b>Characterization test</b>?",
+   "back": "A test that pins down what legacy code <b>currently</b> does (right or wrong) so you can change it safely.",
+   "text": "",
+   "image": "",
+   "analogy": "Photograph the room before renovating, so you can tell what you changed.",
+   "extra": "From Feathers, <i>Working Effectively with Legacy Code</i>.",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "lTX!elfCqe",
+   "type": "basic",
+   "deck": "Software Testing::04 Test Strategy & Portfolio",
+   "tags": [
+    "testing::strategy"
+   ],
+   "front": "<b>Test pyramid</b>, and its anti-pattern?",
+   "back": "Many fast unit tests, fewer integration/service tests, very few UI/E2E tests. Inverted = the <b>ice-cream cone</b> (slow, flaky, expensive).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Mike Cohn.",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "FmsAF,0H&U",
+   "type": "basic",
+   "deck": "Software Testing::04 Test Strategy & Portfolio",
+   "tags": [
+    "testing::strategy"
+   ],
+   "front": "<b>Testing trophy</b>: how does it differ from the pyramid, and why?",
+   "back": "Static analysis base, thin unit layer, <b>large integration layer</b>, small E2E top. For typical web apps, integration tests give the best confidence per cost.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Kent C. Dodds.",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "KY1bA7CEeq",
+   "type": "cloze",
+   "deck": "Software Testing::04 Test Strategy & Portfolio",
+   "tags": [
+    "testing::strategy"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Agile Testing Quadrants: Q1 {{c1::technology-facing, supports the team}} (unit, component); Q2 {{c2::business-facing, supports the team}} (functional, story/example tests); Q3 {{c3::business-facing, critiques the product}} (exploratory, usability, UAT); Q4 {{c4::technology-facing, critiques the product}} (performance, security, \"-ilities\").",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Marick; Crispin &amp; Gregory",
+   "reverse": false
+  },
+  {
+   "guid": "I48`rKH1b4",
+   "type": "basic",
+   "deck": "Software Testing::04 Test Strategy & Portfolio",
+   "tags": [
+    "testing::strategy"
+   ],
+   "front": "What does a healthy test portfolio look like?",
+   "back": "Fast deterministic tests at the bottom, a solid integration layer, contract tests between services, few critical-path E2E, then exploratory testing and production monitoring.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Pyramid vs trophy depends on the architecture.",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "J-14x:-9[+",
+   "type": "cloze",
+   "deck": "Software Testing::04 Test Strategy & Portfolio",
+   "tags": [
+    "testing::strategy"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Coverage criteria, weakest to strongest: {{c1::statement/line}} → {{c2::branch/decision}} → condition → {{c3::MC/DC}} (required for top-level avionics software, DO-178C) → {{c4::path}} (usually infeasible).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "C6d-^9(voj",
+   "type": "basic",
+   "deck": "Software Testing::04 Test Strategy & Portfolio",
+   "tags": [
+    "testing::strategy"
+   ],
+   "front": "Why is code coverage a poor <b>target</b>?",
+   "back": "It proves a line <b>ran</b>, not that anything was asserted (Goodhart's law). Use it to find untested code; mutation score is the stronger signal.",
+   "text": "",
+   "image": "",
+   "analogy": "Counting the rooms a security guard walked through, not whether he checked any locks.",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "vR[PU)-oi~",
+   "type": "basic",
+   "deck": "Software Testing::04 Test Strategy & Portfolio",
+   "tags": [
+    "testing::strategy"
+   ],
+   "front": "<b>Flaky test</b>, and why must it be fixed fast?",
+   "back": "A test that passes and fails without code changes. Flakiness destroys trust: people start ignoring red builds. Quarantine and fix.",
+   "text": "",
+   "image": "",
+   "analogy": "A smoke alarm that goes off at random: soon everyone pulls the battery, and then the real fire goes unnoticed.",
+   "extra": "<b>Causes:</b> sleeps/timing, order dependence, shared state, network, unseeded randomness, clocks/time zones, concurrency.",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "E<YPm>]=gz",
+   "type": "basic",
+   "deck": "Software Testing::04 Test Strategy & Portfolio",
+   "tags": [
+    "testing::strategy"
+   ],
+   "front": "<b>Hermetic test</b>?",
+   "back": "A test whose dependencies are all contained and controlled (no real network, shared DB or wall clock), so results depend only on the code under test.",
+   "text": "",
+   "image": "",
+   "analogy": "A sealed lab experiment: no outside air, so any change in the result comes from what you changed.",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "e9ttF/EtBz",
+   "type": "basic",
+   "deck": "Software Testing::04 Test Strategy & Portfolio",
+   "tags": [
+    "testing::strategy"
+   ],
+   "front": "Google test sizes: what defines small / medium / large?",
+   "back": "<b>Resource limits</b>, not scope. Small: one process, no I/O or sleeps. Medium: one machine, localhost network. Large: multiple machines/real systems.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Software Engineering at Google",
+   "reverse": false
+  },
+  {
+   "guid": "xr!f]fHcs5",
+   "type": "basic",
+   "deck": "Software Testing::04 Test Strategy & Portfolio",
+   "tags": [
+    "testing::strategy"
+   ],
+   "front": "The <b>Beyoncé Rule</b>?",
+   "back": "\"If you liked it, you should have put a test on it\": if an infra change breaks behaviour you didn't test, that's on you.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Software Engineering at Google",
+   "reverse": false
+  },
+  {
+   "guid": "O.k{Rv5(e>",
+   "type": "basic",
+   "deck": "Software Testing::04 Test Strategy & Portfolio",
+   "tags": [
+    "testing::strategy"
+   ],
+   "front": "How do you keep a test suite fast?",
+   "back": "Push most tests to small/unit level, fake slow dependencies, parallelise, poll instead of sleep, and run slow suites (mutation, soak, full E2E) nightly.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "M&O9}:>8*z",
+   "type": "basic",
+   "deck": "Software Testing::04 Test Strategy & Portfolio",
+   "tags": [
+    "testing::strategy"
+   ],
+   "front": "Where should mutation testing run in a pipeline?",
+   "back": "Nightly or post-merge, or incrementally on changed code only; full runs are too slow for every merge request.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "MWY+rZK[.k",
+   "type": "basic",
+   "deck": "Software Testing::05 BDD & Gherkin",
+   "tags": [
+    "testing::bdd"
+   ],
+   "front": "<b>BDD</b> at its core?",
+   "back": "A collaboration practice: discover behaviour through conversations and concrete examples, formulate them as scenarios, then automate them. The conversation is the main value.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "K[W_b]MB3R",
+   "type": "basic",
+   "deck": "Software Testing::05 BDD & Gherkin",
+   "tags": [
+    "testing::bdd"
+   ],
+   "front": "Why did BDD replace \"test\" with \"behaviour\" / \"should\"?",
+   "back": "People learning TDD got stuck on test vocabulary (what to test, where to start, what to call it); describing behaviour answered those questions.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Dan North, \"Introducing BDD\".",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "hOl!6c]-s/",
+   "type": "cloze",
+   "deck": "Software Testing::05 BDD & Gherkin",
+   "tags": [
+    "testing::bdd"
+   ],
+   "front": "",
+   "back": "",
+   "text": "The three BDD practices: {{c1::Discovery}} (collaborative conversations, e.g. Example Mapping) → {{c2::Formulation}} (examples written as Gherkin scenarios) → {{c3::Automation}} (step definitions make them executable).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "Qy=kNRC|_j",
+   "type": "basic",
+   "deck": "Software Testing::05 BDD & Gherkin",
+   "tags": [
+    "testing::bdd"
+   ],
+   "front": "The <b>Three Amigos</b>?",
+   "back": "Business, development and testing perspectives meeting before implementation to examine a story and agree on examples and acceptance criteria.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "Qv7+KyM2>i",
+   "type": "cloze",
+   "deck": "Software Testing::05 BDD & Gherkin",
+   "tags": [
+    "testing::bdd"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Example Mapping cards: {{c1::yellow}} = story, {{c2::blue}} = rules (acceptance criteria), {{c3::green}} = examples, {{c4::red}} = open questions.",
+   "image": "",
+   "analogy": "",
+   "extra": "Many reds → story not ready; many blues → story too big.",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "w){/df6#|O",
+   "type": "basic",
+   "deck": "Software Testing::05 BDD & Gherkin",
+   "tags": [
+    "testing::bdd"
+   ],
+   "front": "<b>Specification by Example</b>?",
+   "back": "Concrete, collaboratively refined examples as the single source of truth for requirements, tests and docs (\"living documentation\").",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "Hw0c2SG:hE",
+   "type": "basic",
+   "deck": "Software Testing::05 BDD & Gherkin",
+   "tags": [
+    "testing::bdd"
+   ],
+   "front": "Roles of <b>Given</b> / <b>When</b> / <b>Then</b>?",
+   "back": "Given = context/precondition. When = the single action or event. Then = observable outcome. One When per scenario.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "}$!:x|3qQ",
+   "type": "basic",
+   "deck": "Software Testing::05 BDD & Gherkin",
+   "tags": [
+    "testing::bdd"
+   ],
+   "front": "Gherkin: which construct runs one scenario over a table of variations?",
+   "back": "<b>Scenario Outline</b> (Scenario Template) with an <b>Examples</b> table.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Use only for genuinely tabular variations of one rule.",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "Hrtc1r33#X",
+   "type": "basic",
+   "deck": "Software Testing::05 BDD & Gherkin",
+   "tags": [
+    "testing::bdd"
+   ],
+   "front": "<b>Declarative</b> vs <b>imperative</b> Gherkin: which and why?",
+   "back": "Declarative: say <i>what</i> the user achieves (\"When Sam logs in\"), not clicks. UI detail lives in step definitions, so scenarios survive UI changes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "wv#i49,_9h",
+   "type": "basic",
+   "deck": "Software Testing::05 BDD & Gherkin",
+   "tags": [
+    "testing::bdd"
+   ],
+   "front": "Why \"one scenario, one behaviour\"?",
+   "back": "Multi-rule scenarios are long, hard to name, fail for ambiguous reasons and hide which rule broke. Split by rule.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "Ax9y,V{-PT",
+   "type": "cloze",
+   "deck": "Software Testing::05 BDD & Gherkin",
+   "tags": [
+    "testing::bdd"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Gherkin smells besides imperative steps: {{c1::incidental details}} (irrelevant IDs, timestamps), {{c2::vague scenarios without concrete data}}, and {{c3::generic actors}} (\"the user\") instead of personas.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "LXv|&F)Zfk",
+   "type": "basic",
+   "deck": "Software Testing::05 BDD & Gherkin",
+   "tags": [
+    "testing::bdd"
+   ],
+   "front": "Why must scenarios be independent?",
+   "back": "Chained scenarios fail in cascades, can't run in parallel or alone, and hide the real cause. Each scenario sets up its own Given.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "kad])dLINO",
+   "type": "basic",
+   "deck": "Software Testing::05 BDD & Gherkin",
+   "tags": [
+    "testing::bdd"
+   ],
+   "front": "Gherkin <b>Background</b>: purpose and pitfall?",
+   "back": "Shared Givens run before every scenario in a feature. Pitfall: a long Background hides context the reader needs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "gR0N[Tcnd[",
+   "type": "basic",
+   "deck": "Software Testing::05 BDD & Gherkin",
+   "tags": [
+    "testing::bdd"
+   ],
+   "front": "Does BDD require Cucumber or UI tests?",
+   "back": "No. Scenarios can be automated at any layer; most teams run them against the domain/API and only a few through the UI.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "onwSmNY5t#",
+   "type": "basic",
+   "deck": "Software Testing::05 BDD & Gherkin",
+   "tags": [
+    "testing::bdd"
+   ],
+   "front": "How do BDD and TDD fit together?",
+   "back": "<b>Double loop</b>: an outer failing acceptance scenario drives inner red-green-refactor unit cycles until it passes.",
+   "text": "",
+   "image": "",
+   "analogy": "The outer loop is the destination on the map; the inner loops are each turn of the steering wheel.",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "p|]`pJPt^a",
+   "type": "basic",
+   "deck": "Software Testing::06 Test Design & Edge Cases",
+   "tags": [
+    "testing::edge_cases"
+   ],
+   "front": "<b>Equivalence partitioning</b>?",
+   "back": "Split inputs into classes the program should treat the same; test one representative per class, including invalid ones.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Age:</b> &lt;0, 0–17, 18–64, ≥65, non-numeric.",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "Nh7];dc;VP",
+   "type": "basic",
+   "deck": "Software Testing::06 Test Design & Edge Cases",
+   "tags": [
+    "testing::edge_cases"
+   ],
+   "front": "<b>Boundary value analysis</b>?",
+   "back": "Bugs cluster at partition edges (off-by-one, <code>&lt;</code> vs <code>&lt;=</code>): test at, just below and just above each boundary.",
+   "text": "",
+   "image": "",
+   "analogy": "Fence posts: the mistakes happen at the ends of the fence, not in the middle.",
+   "extra": "For 18–64: test 17, 18, 19, 63, 64, 65.",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "tPHFpB#r8g",
+   "type": "basic",
+   "deck": "Software Testing::06 Test Design & Edge Cases",
+   "tags": [
+    "testing::edge_cases"
+   ],
+   "front": "<b>Decision table testing</b>: what does it reveal?",
+   "back": "Each combination of conditions → expected action becomes a test; gaps and contradictions in business rules become visible.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "Kz7`dJRIW5",
+   "type": "basic",
+   "deck": "Software Testing::06 Test Design & Edge Cases",
+   "tags": [
+    "testing::edge_cases"
+   ],
+   "front": "<b>State transition testing</b>?",
+   "back": "Model states and events; test valid transitions, <b>invalid</b> ones (ship a cancelled order), sequences and loops. Missing arrows are often bugs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "z0k}-2{xD_",
+   "type": "basic",
+   "deck": "Software Testing::06 Test Design & Edge Cases",
+   "tags": [
+    "testing::edge_cases"
+   ],
+   "front": "<b>Pairwise testing</b>: why does it work?",
+   "back": "Most interaction bugs involve just two parameters, so covering every <b>pair</b> of values catches them with far fewer tests (3<sup>10</sup> combos → ~15–20).",
+   "text": "",
+   "image": "",
+   "analogy": "Seating plan for a dinner: make sure every pair of guests has met once, rather than trying every seating arrangement.",
+   "extra": "<b>Tools:</b> PICT, AllPairs.",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "Lu@!wFXJoy",
+   "type": "basic",
+   "deck": "Software Testing::06 Test Design & Edge Cases",
+   "tags": [
+    "testing::edge_cases"
+   ],
+   "front": "<b>Error guessing</b>, and how do past incidents feed it?",
+   "back": "Use known fault patterns (null, empty, duplicates, concurrency, encoding) to predict defects. Mine incidents for recurring categories and add them to a team checklist.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "bN/s*g)HJ~",
+   "type": "cloze",
+   "deck": "Software Testing::06 Test Design & Edge Cases",
+   "tags": [
+    "testing::edge_cases"
+   ],
+   "front": "",
+   "back": "",
+   "text": "ZOMBIES order for test-driving: {{c1::Zero}}, {{c2::One}}, {{c3::Many}}, {{c4::Boundaries}}, {{c5::Interface}}, {{c6::Exceptions}}, {{c7::Simple}} scenarios/solutions.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "N5!py4LDI=",
+   "type": "cloze",
+   "deck": "Software Testing::06 Test Design & Edge Cases",
+   "tags": [
+    "testing::edge_cases"
+   ],
+   "front": "",
+   "back": "",
+   "text": "CORRECT boundary checklist: {{c1::Conformance}} (format), {{c2::Ordering}}, {{c3::Range}}, {{c4::Reference}} (external dependencies), {{c5::Existence}} (null/empty), {{c6::Cardinality}} (0, 1, many), {{c7::Time}} (order, timeouts, zones).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Pragmatic Unit Testing",
+   "reverse": false
+  },
+  {
+   "guid": "MB0T&OxYQQ",
+   "type": "cloze",
+   "deck": "Software Testing::06 Test Design & Edge Cases",
+   "tags": [
+    "testing::edge_cases"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Right-BICEP: are the results {{c1::Right}}? {{c2::Boundary}} conditions, {{c3::Inverse}} relationships, {{c4::Cross-check}} by other means, force {{c5::Error}} conditions, {{c6::Performance}} within bounds.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Pragmatic Unit Testing",
+   "reverse": false
+  },
+  {
+   "guid": "g,%VpXR5L+",
+   "type": "cloze",
+   "deck": "Software Testing::06 Test Design & Edge Cases",
+   "tags": [
+    "testing::edge_cases"
+   ],
+   "front": "",
+   "back": "",
+   "text": "String edge cases: empty and whitespace-only, very long, {{c1::Unicode}} (emoji, combining and zero-width chars, RTL), {{c2::normalization}} (é as one vs two code points), {{c3::case folding}} (Turkish İ), injection characters, null bytes.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "Erv5N^)3$#",
+   "type": "cloze",
+   "deck": "Software Testing::06 Test Design & Edge Cases",
+   "tags": [
+    "testing::edge_cases"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Numeric edge cases: 0, ±1, {{c1::min/max and overflow}}, {{c2::NaN, ±Infinity, -0.0}}, floating-point rounding (0.1+0.2), {{c3::money in floats}} (use decimals/minor units), division by zero.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "xx{z|]o2WZ",
+   "type": "cloze",
+   "deck": "Software Testing::06 Test Design & Edge Cases",
+   "tags": [
+    "testing::edge_cases"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Date/time edge cases: {{c1::DST gaps and overlaps}}, half-hour UTC offsets, {{c2::leap years}} (2100 isn't one), {{c3::month-end arithmetic}} (Jan 31 + 1 month), 2038 epoch overflow, clock skew.",
+   "image": "",
+   "analogy": "",
+   "extra": "Inject a clock; never call \"now\" directly.",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "qzv#]dVPO^",
+   "type": "cloze",
+   "deck": "Software Testing::06 Test Design & Edge Cases",
+   "tags": [
+    "testing::edge_cases"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Collection edge cases: empty, {{c1::one element}}, duplicates, already/reverse sorted, nulls, {{c2::mutation during iteration}}, {{c3::pagination boundaries}} (exactly page size, page size + 1).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "qwV<!lMOoP",
+   "type": "cloze",
+   "deck": "Software Testing::06 Test Design & Edge Cases",
+   "tags": [
+    "testing::edge_cases"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Distributed-system edge cases: timeouts and {{c1::retries without idempotency}} (duplicate delivery), {{c2::out-of-order messages}}, partial failure and partitions, {{c3::slow (not dead) dependencies}}, races, clock skew, stale caches.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "GY]LX7x:F,",
+   "type": "cloze",
+   "deck": "Software Testing::06 Test Design & Edge Cases",
+   "tags": [
+    "testing::edge_cases"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Security edge cases: {{c1::IDOR}} (another tenant's ID), unauthenticated calls, {{c2::expired or forged tokens}}, oversized payloads, {{c3::path traversal}} (<code>../</code>), injection, rate limits.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "HJW_FC4?x;",
+   "type": "cloze",
+   "deck": "Software Testing::06 Test Design & Edge Cases",
+   "tags": [
+    "testing::edge_cases"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Property-based test patterns: {{c1::round-trip}} (<code>decode(encode(x)) == x</code>), {{c2::invariants}} (sort keeps length), {{c3::idempotence}} (<code>f(f(x)) == f(x)</code>), {{c4::oracle/differential}} (compare to a simple reference), \"hard to compute, easy to verify\".",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Wlaschin",
+   "reverse": false
+  },
+  {
+   "guid": "zMgF:6iPh.",
+   "type": "basic",
+   "deck": "Software Testing::06 Test Design & Edge Cases",
+   "tags": [
+    "testing::edge_cases"
+   ],
+   "front": "<b>Metamorphic testing</b>?",
+   "back": "When there's no oracle, check relations between outputs of related inputs: results for \"A AND B\" ⊆ results for \"A\".",
+   "text": "",
+   "image": "",
+   "analogy": "You can't know the true weight of a parcel, but you know adding a brick must make it heavier.",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "O8uLed4=YY",
+   "type": "basic",
+   "deck": "Software Testing::06 Test Design & Edge Cases",
+   "tags": [
+    "testing::edge_cases"
+   ],
+   "front": "<b>Shrinking</b> in property-based testing: why does it matter?",
+   "back": "The framework reduces a failing input to a minimal case (<code>[0, -1]</code> instead of 300 elements), making the root cause obvious.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "wGb)1MN*9d",
+   "type": "basic",
+   "deck": "Software Testing::07 Test Suite Quality",
+   "tags": [
+    "testing::best_practices"
+   ],
+   "front": "What makes a good test or scenario name?",
+   "back": "It states the behaviour and expected outcome (\"expired card is declined at checkout\"); a failure name alone tells you what broke.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "A feature's scenario names should read like a specification.",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "tBh0^RSXej",
+   "type": "basic",
+   "deck": "Software Testing::07 Test Suite Quality",
+   "tags": [
+    "testing::best_practices"
+   ],
+   "front": "Why one logical assertion (behaviour) per test?",
+   "back": "Failures point to one behaviour and tests stay short. Several asserts on one outcome are fine; several behaviours are not.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "QX]8ey,@Wq",
+   "type": "basic",
+   "deck": "Software Testing::07 Test Suite Quality",
+   "tags": [
+    "testing::best_practices"
+   ],
+   "front": "<b>DAMP</b> vs <b>DRY</b> in tests?",
+   "back": "Tests favour DAMP (Descriptive And Meaningful Phrases): some duplication is fine if each test reads standalone. Extract helpers for noise, not logic.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "HZNp*UsO*C",
+   "type": "basic",
+   "deck": "Software Testing::07 Test Suite Quality",
+   "tags": [
+    "testing::best_practices"
+   ],
+   "front": "Why avoid loops and conditionals in tests?",
+   "back": "Test logic can have bugs and often mirrors the implementation, so both share the mistake. Use literal expected values or parameterised cases.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "n2`y?e%Q|H",
+   "type": "basic",
+   "deck": "Software Testing::07 Test Suite Quality",
+   "tags": [
+    "testing::best_practices"
+   ],
+   "front": "<b>Tautological test</b>?",
+   "back": "Expected value computed the same way as the code (or asserting what a mock was told to return): it can never fail for a real bug.",
+   "text": "",
+   "image": "",
+   "analogy": "Copying the answer key from your own answers, then marking yourself 100%.",
+   "extra": "Very common in AI-generated tests.",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "BC|i,-1Xg8",
+   "type": "basic",
+   "deck": "Software Testing::07 Test Suite Quality",
+   "tags": [
+    "testing::best_practices"
+   ],
+   "front": "<b>Test data builders</b> / object mothers: why?",
+   "back": "Factories with sensible defaults so each test sets only relevant fields (<code>anOrder().withExpiredCard().build()</code>), keeping incidental detail out.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "q%~I`FPn-%",
+   "type": "basic",
+   "deck": "Software Testing::07 Test Suite Quality",
+   "tags": [
+    "testing::best_practices"
+   ],
+   "front": "Every bug fix should start with…?",
+   "back": "A failing test that reproduces the bug: it proves you understood it, verifies the fix and becomes a regression test.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "bDFe|RG!O5",
+   "type": "basic",
+   "deck": "Software Testing::07 Test Suite Quality",
+   "tags": [
+    "testing::best_practices"
+   ],
+   "front": "How do you make time and randomness testable?",
+   "back": "Inject a clock and a seeded random source instead of global <code>now()</code>/<code>random()</code>; log seeds on failure.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "k9PFgwgIe;",
+   "type": "basic",
+   "deck": "Software Testing::08 Testing with Coding Agents",
+   "tags": [
+    "testing::agentic"
+   ],
+   "front": "Single most important practice when working with coding agents?",
+   "back": "Give the agent a pass/fail way to <b>verify its own work</b> (tests, build, linter, screenshot diff). Otherwise \"looks done\" is the stopping signal and you are the verifier.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Claude Code best practices",
+   "reverse": false
+  },
+  {
+   "guid": "P?@<.S@6&+",
+   "type": "basic",
+   "deck": "Software Testing::08 Testing with Coding Agents",
+   "tags": [
+    "testing::agentic"
+   ],
+   "front": "What does \"use red/green TDD\" mean as an agent prompt, and why is the red step crucial?",
+   "back": "Write tests first, run them and <b>confirm they fail</b>, then implement. Agents readily write tests that already pass, a false green.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Simon Willison",
+   "reverse": false
+  },
+  {
+   "guid": "v?mL3<r@k3",
+   "type": "basic",
+   "deck": "Software Testing::08 Testing with Coding Agents",
+   "tags": [
+    "testing::agentic"
+   ],
+   "front": "How should you prompt an agent to fix a bug?",
+   "back": "Give symptom, likely location and what \"fixed\" means; have it write a failing reproducing test, fix the root cause (not suppress it), and show passing output.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Claude Code best practices",
+   "reverse": false
+  },
+  {
+   "guid": "wVrTAF<~ZG",
+   "type": "cloze",
+   "deck": "Software Testing::08 Testing with Coding Agents",
+   "tags": [
+    "testing::agentic"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Gating an agent's \"done\", soft to hard: {{c1::instruction in the prompt}} (\"run tests and iterate\") → evaluator re-checks a session goal → {{c2::deterministic hook}} (e.g. Stop hook blocks until the script passes) → {{c3::verification subagent}} that tries to refute the result.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Claude Code best practices",
+   "reverse": false
+  },
+  {
+   "guid": "pIi;-8aYKj",
+   "type": "basic",
+   "deck": "Software Testing::08 Testing with Coding Agents",
+   "tags": [
+    "testing::agentic"
+   ],
+   "front": "Why are hooks better than CLAUDE.md instructions for test discipline?",
+   "back": "Instructions are advisory and get lost in long context; hooks run <b>deterministically</b> every time.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Claude Code best practices",
+   "reverse": false
+  },
+  {
+   "guid": "HhHM4YM)9]",
+   "type": "basic",
+   "deck": "Software Testing::08 Testing with Coding Agents",
+   "tags": [
+    "testing::agentic"
+   ],
+   "front": "<b>Verification subagent</b>?",
+   "back": "A separate model instance with its own context and limited tools whose only job is to check (and try to refute) the main agent's result, so the worker isn't grading itself.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Claude Code best practices",
+   "reverse": false
+  },
+  {
+   "guid": "r{w)/j8:p]",
+   "type": "basic",
+   "deck": "Software Testing::08 Testing with Coding Agents",
+   "tags": [
+    "testing::agentic"
+   ],
+   "front": "Why should a different agent/session review or test the implementation?",
+   "back": "A fresh context sees only the diff and criteria, not the reasoning behind them, so it's less biased toward the code.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Patterns:</b> writer/reviewer sessions; one instance writes tests, another the code.",
+   "source": "Claude Code best practices",
+   "reverse": false
+  },
+  {
+   "guid": "xJH0{?~]_:",
+   "type": "basic",
+   "deck": "Software Testing::08 Testing with Coding Agents",
+   "tags": [
+    "testing::agentic"
+   ],
+   "front": "Danger of adversarial review subagents?",
+   "back": "Asked for gaps, they report some even for sound work; chasing all causes over-engineering. Restrict findings to correctness and stated requirements.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Claude Code best practices",
+   "reverse": false
+  },
+  {
+   "guid": "o<oWBsi0@R",
+   "type": "basic",
+   "deck": "Software Testing::08 Testing with Coding Agents",
+   "tags": [
+    "testing::agentic"
+   ],
+   "front": "Key rule to stop agents gaming the tests?",
+   "back": "Don't let one agent modify both the tests and the code under test in the same task; human-approved tests are the spec.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "tp-nC&E7M{",
+   "type": "cloze",
+   "deck": "Software Testing::08 Testing with Coding Agents",
+   "tags": [
+    "testing::agentic"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Agents reward-hack test suites by {{c1::deleting or skipping failing tests}}, {{c2::weakening assertions}}, {{c3::special-casing test inputs / hardcoding outputs}}, swallowing exceptions, or mocking away the thing under test.",
+   "image": "",
+   "analogy": "",
+   "extra": "Review test diffs as carefully as code diffs.",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "LjoNbR)az2",
+   "type": "basic",
+   "deck": "Software Testing::08 Testing with Coding Agents",
+   "tags": [
+    "testing::agentic"
+   ],
+   "front": "Why is coverage especially misleading for AI-generated tests?",
+   "back": "Agents quickly produce high-coverage all-green suites whose assertions catch nothing; only mutation testing shows the suite would notice a regression.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "p0q-u=8R!a",
+   "type": "basic",
+   "deck": "Software Testing::08 Testing with Coding Agents",
+   "tags": [
+    "testing::agentic"
+   ],
+   "front": "Rule: \"no generated test enters the suite without…\"",
+   "back": "…proving it can fail: mutate the code under test (by hand or tool) and check the test goes red.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "N#uv``nY%F",
+   "type": "basic",
+   "deck": "Software Testing::08 Testing with Coding Agents",
+   "tags": [
+    "testing::agentic"
+   ],
+   "front": "<b>Test homogenization trap</b>?",
+   "back": "Tests generated by the model that wrote the code share its blind spots, so they confirm rather than challenge it.",
+   "text": "",
+   "image": "",
+   "analogy": "Letting a student write and mark their own exam.",
+   "extra": "<b>Mitigate:</b> human examples, property tests, mutation testing, independent reviewers.",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "AD$eUOQa%H",
+   "type": "basic",
+   "deck": "Software Testing::08 Testing with Coding Agents",
+   "tags": [
+    "testing::agentic"
+   ],
+   "front": "<b>Agentic manual testing</b>?",
+   "back": "The agent exercises the code like a human would (<code>python -c</code>, curl a dev server, browser automation); often reveals what tests missed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Simon Willison",
+   "reverse": false
+  },
+  {
+   "guid": "qSkeAT7FDC",
+   "type": "basic",
+   "deck": "Software Testing::08 Testing with Coding Agents",
+   "tags": [
+    "testing::agentic"
+   ],
+   "front": "Why ask agents for evidence rather than claims of success?",
+   "back": "\"Tests pass\" is a claim; the command and its output or a screenshot is evidence, faster to review and usable for unattended runs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Claude Code best practices",
+   "reverse": false
+  },
+  {
+   "guid": "js%zbm`Z*i",
+   "type": "basic",
+   "deck": "Software Testing::08 Testing with Coding Agents",
+   "tags": [
+    "testing::agentic"
+   ],
+   "front": "How do you prepare a large agentic task for verification?",
+   "back": "Have the agent interview you on edge cases, write a self-contained SPEC (files, interfaces, out of scope, an end-to-end check), then implement in a fresh session.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Claude Code best practices",
+   "reverse": false
+  },
+  {
+   "guid": "El!KjuNS,,",
+   "type": "basic",
+   "deck": "Software Testing::08 Testing with Coding Agents",
+   "tags": [
+    "testing::agentic"
+   ],
+   "front": "Why agree on \"what red looks like\" in the plan before an agent codes?",
+   "back": "Naming the failing tests up front captures most of TDD's value before any code exists, and catches misunderstandings cheaply.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "PPCw|=V:%b",
+   "type": "basic",
+   "deck": "Software Testing::08 Testing with Coding Agents",
+   "tags": [
+    "testing::agentic"
+   ],
+   "front": "How does a unit test act as a prompt for an agent?",
+   "back": "A behaviour-named test plus examples is a precise, checkable spec; one behaviour at a time keeps the model on narrow goals.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "v0akzyCf2N",
+   "type": "basic",
+   "deck": "Software Testing::08 Testing with Coding Agents",
+   "tags": [
+    "testing::agentic"
+   ],
+   "front": "Why are BDD scenarios good prompts for coding agents?",
+   "back": "They are natural-language, executable acceptance criteria: intent plus a pass/fail check. Humans own the scenarios; the agent implements.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "dLcV^0I]ve",
+   "type": "basic",
+   "deck": "Software Testing::08 Testing with Coding Agents",
+   "tags": [
+    "testing::agentic"
+   ],
+   "front": "What test content belongs in CLAUDE.md / AGENTS.md?",
+   "back": "Exact test commands (incl. single test), runners, test-first rule, what \"done\" means, conventions. Keep it short; enforce must-always rules with hooks.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "JS}_]EWN*E",
+   "type": "basic",
+   "deck": "Software Testing::08 Testing with Coding Agents",
+   "tags": [
+    "testing::agentic"
+   ],
+   "front": "Why write characterization tests before an agent refactors legacy code?",
+   "back": "They lock in current behaviour so the refactor can be verified mechanically; otherwise there's no oracle and changes go unnoticed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "hT3H$[kcY(",
+   "type": "basic",
+   "deck": "Software Testing::08 Testing with Coding Agents",
+   "tags": [
+    "testing::agentic"
+   ],
+   "front": "SWE-bench: <b>FAIL_TO_PASS</b> vs <b>PASS_TO_PASS</b>?",
+   "back": "FAIL_TO_PASS: failed before, must pass after (the fix works). PASS_TO_PASS: passed before, must still pass (no regressions).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "A good acceptance model for any agent task.",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "nBI~@^aFar",
+   "type": "basic",
+   "deck": "Software Testing::08 Testing with Coding Agents",
+   "tags": [
+    "testing::agentic"
+   ],
+   "front": "How do you test features that call an LLM?",
+   "back": "<b>Evals</b>: curated inputs with expected properties, deterministic checks where possible, calibrated LLM-as-judge rubrics, repeated runs, tracked like a regression suite.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "wB0Wk^tG1d",
+   "type": "basic",
+   "deck": "Software Testing::08 Testing with Coding Agents",
+   "tags": [
+    "testing::agentic"
+   ],
+   "front": "Does AI-assisted development reduce the need for testing discipline?",
+   "back": "No, AI <b>amplifies</b> existing practices: strong test feedback lets agents iterate autonomously; weak suites let them ship plausible wrong code faster.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DORA 2025",
+   "reverse": false
+  }
+ ]
+}

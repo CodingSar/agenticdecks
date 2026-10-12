@@ -1,0 +1,1109 @@
+{
+ "source_file": "networking-below-cni.apkg",
+ "notes": [
+  {
+   "guid": "e.{kcZ6vij",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::foundations",
+    "below-cni"
+   ],
+   "front": "What does a Container Network Interface (CNI) plugin actually do when a pod starts?",
+   "back": "Creates a virtual ethernet (veth) pair, moves one end into the pod's network namespace as <code>eth0</code>, asks IP Address Management (IPAM) for an address, and installs routes on the host so the pod IP is reachable. Everything below that — how the host reaches other nodes — is not CNI's business.",
+   "text": "",
+   "image": "",
+   "analogy": "A hotel technician runs a cable from a new room to the hallway patch panel, gives the room a number, and tells the front desk how to reach it. How the hotel connects to the city is someone else's job.",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "HX0ZpS!%6]",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::foundations",
+    "below-cni"
+   ],
+   "front": "Layer 2 vs Layer 3 vs Layer 4 — what does each identify?",
+   "back": "L2: Media Access Control (MAC) address, reachable only on the same segment. L3: Internet Protocol (IP) address, routed across networks. L4: port number, identifies the process on the host (Transmission Control Protocol (TCP)/User Datagram Protocol (UDP)).",
+   "text": "",
+   "image": "",
+   "analogy": "L2 is the house number on your street (only neighbours use it), L3 is the full postal address (anyone in the world can use it), L4 is the name on the mailbox inside the building.",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "IA+Zah5zTw",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::foundations",
+    "below-cni"
+   ],
+   "front": "What is a Linux network namespace?",
+   "back": "An isolated copy of the network stack: its own interfaces, routing table, iptables rules, and sockets. Every pod gets one; the pod believes it owns <code>eth0</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "Each apartment has its own plumbing and fuse box. The tenant thinks the building's pipes are theirs; actually they end at the wall.",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "rXcb-,d}dr",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::foundations",
+    "below-cni"
+   ],
+   "front": "What is a veth pair?",
+   "back": "Two virtual interfaces joined back-to-back. A frame sent into one end appears on the other. One end lives in the pod namespace, the other on the host (usually plugged into a bridge or routed directly).",
+   "text": "",
+   "image": "",
+   "analogy": "A patch cable: whatever you push in one end comes out the other. Cut either end and the pod goes silent.",
+   "extra": "<b>Incident:</b> Pod has an IP but zero connectivity → check the host-side veth exists and is UP (<code>ip link</code>).",
+   "source": ""
+  },
+  {
+   "guid": "wfaBr6^R16",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::foundations",
+    "below-cni"
+   ],
+   "front": "What does Address Resolution Protocol (ARP) do?",
+   "back": "Maps an IP address to a MAC address on the local segment by broadcasting \"who has 10.0.0.5?\" and caching the reply.",
+   "text": "",
+   "image": "",
+   "analogy": "Shouting across an office: \"Who is Sam?\" — a hand goes up. You remember the face for a while so you don't have to shout again.",
+   "extra": "<b>Incident:</b> Stale ARP cache after a pod IP is reused by another pod → traffic goes to the old MAC. Gratuitous ARP fixes this; some CNIs send it, some don't.",
+   "source": ""
+  },
+  {
+   "guid": "M&omqnD4-|",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::foundations",
+    "below-cni"
+   ],
+   "front": "Why do overlay networks cause Maximum Transmission Unit (MTU) problems?",
+   "back": "Encapsulation (Virtual Extensible LAN (VXLAN), Generic Routing Encapsulation (GRE), WireGuard) adds 50–80 bytes of headers. If the pod interface still advertises 1500, packets exceed the physical link and are dropped or fragmented. Path MTU Discovery relies on Internet Control Message Protocol (ICMP) \"fragmentation needed\" replies; firewalls that block ICMP create a black hole.",
+   "text": "",
+   "image": "",
+   "analogy": "Putting a letter inside a second envelope. The mailbox slot is fixed size, so the inner letter must be smaller. A black hole is a mail room that silently bins oversized envelopes instead of returning them.",
+   "extra": "<b>Incident:</b> Small requests work, large ones hang (TLS handshake completes, first big response never arrives). Test with <code>ping -M do -s 1400</code> between pods and lower the CNI MTU.",
+   "source": ""
+  },
+  {
+   "guid": "xWFPvy|A6>",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::foundations",
+    "below-cni"
+   ],
+   "front": "What is conntrack and why does it fill up?",
+   "back": "The Netfilter connection tracking table records every flow (5-tuple + state) so Network Address Translation (NAT) and stateful rules work. Each entry lives until timeout (TCP established default 5 days!). Limit is <code>nf_conntrack_max</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "A bouncer's clipboard listing everyone inside the club. When the clipboard is full, new guests are refused even though the club is empty — the clipboard is the bottleneck.",
+   "extra": "<b>Incident:</b> <code>nf_conntrack: table full, dropping packet</code> in dmesg → random connection failures under load. Raise the limit or shorten timeouts; check for UDP floods (DNS!) creating entries.",
+   "source": ""
+  },
+  {
+   "guid": "e3nbQp|eda",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::foundations",
+    "below-cni"
+   ],
+   "front": "How does kube-proxy in iptables mode implement a ClusterIP Service?",
+   "back": "Destination NAT (DNAT): rules in the <code>nat</code> table rewrite the destination from ClusterIP:port to one pod IP:targetPort, chosen with <code>statistic mode random</code>. conntrack remembers the choice so replies are un-NATed.",
+   "text": "",
+   "image": "",
+   "analogy": "A PO Box at the post office. Letters addressed to the box are re-stamped with a real street address before delivery; the clerk notes which house got it so replies can be traced back.",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "vOlTe9h1,6",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::foundations",
+    "below-cni"
+   ],
+   "front": "What does VXLAN encapsulation look like on the wire?",
+   "back": "Original L2 frame (pod → pod) wrapped in: VXLAN header (with VNI) → UDP (dst 4789) → outer IP (node → node) → outer Ethernet. The physical network only sees node-to-node UDP.",
+   "text": "",
+   "image": "",
+   "analogy": "A shipping container. Your parcel keeps its own label, but the container is addressed dock-to-dock. The port only cares about containers.",
+   "extra": "<b>Incident:</b> Firewall between nodes blocks UDP 4789 → pods on different nodes can't talk, pods on the same node can.",
+   "source": ""
+  },
+  {
+   "guid": "dR)Rj9)nNL",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::foundations",
+    "below-cni"
+   ],
+   "front": "What is reverse path filtering (<code>rp_filter</code>) and how does it break things?",
+   "back": "The kernel drops a packet if the route back to its source IP would not go out the interface it arrived on (strict mode = 1). Asymmetric routing, multi-homed nodes and some CNIs trip it.",
+   "text": "",
+   "image": "",
+   "analogy": "A doorman refusing a delivery because the return address doesn't match the door it came through — even though the parcel is legitimate.",
+   "extra": "<b>Incident:</b> Traffic arrives (tcpdump shows it) but the application never sees it → check <code>sysctl net.ipv4.conf.all.rp_filter</code>, set to 2 (loose) or 0.",
+   "source": ""
+  },
+  {
+   "guid": "vw1WIGNRs=",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::foundations",
+    "below-cni"
+   ],
+   "front": "What is hairpin traffic in Kubernetes?",
+   "back": "A pod sends to a Service IP that load-balances back to itself. The packet goes out the veth, is DNATed to the pod's own IP, and must come back in through the same bridge port. Needs hairpin mode on the bridge or SNAT (masquerade) so the pod doesn't reject its own packet.",
+   "text": "",
+   "image": "",
+   "analogy": "Calling your own phone number from your own phone and expecting it to ring. The switchboard has to be told that's allowed.",
+   "extra": "<b>Incident:</b> A pod can reach every replica of a Service except itself → hairpin/masquerade misconfiguration.",
+   "source": ""
+  },
+  {
+   "guid": "qZMrb3AiXA",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::foundations",
+    "below-cni"
+   ],
+   "front": "What is longest prefix match?",
+   "back": "When several routes cover a destination, the one with the most specific (longest) prefix wins. <code>10.0.0.0/8</code> loses to <code>10.1.0.0/16</code> loses to <code>10.1.2.0/24</code>. The default route <code>0.0.0.0/0</code> only wins when nothing else matches.",
+   "text": "",
+   "image": "",
+   "analogy": "Reading an address label: \"Netherlands\" is a hint, \"Utrecht\" narrows it, \"Oudegracht 12\" decides it. The postal worker uses the most specific line.",
+   "extra": "<b>Incident:</b> Pod CIDR overlaps the corporate network → the more specific route hijacks traffic, and \"the intranet is unreachable from pods\".",
+   "source": ""
+  },
+  {
+   "guid": "E1hxH4DYx{",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::bgp",
+    "below-cni"
+   ],
+   "front": "What is Border Gateway Protocol (BGP) in one sentence?",
+   "back": "A path-vector routing protocol in which routers (peers) tell each other which IP prefixes they can reach and via which sequence of Autonomous Systems (AS), so each side can install routes. It runs over TCP port 179.",
+   "text": "",
+   "image": "",
+   "analogy": "Word-of-mouth directions between neighbourhoods: \"I can get you to Maple Street — go through me, then Bob's area.\" You don't know the map, only what your neighbours tell you.",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "pRv<ImG(,.",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::bgp",
+    "below-cni"
+   ],
+   "front": "What is an Autonomous System Number (ASN) and why does the cluster need one?",
+   "back": "An AS is a set of routers under one administrative policy, identified by a number (private range 64512–65534 / 4200000000+). Calico, Cilium and MetalLB peer with the top-of-rack switches as their own AS (or share the fabric's AS in iBGP setups).",
+   "text": "",
+   "image": "",
+   "analogy": "A neighbourhood with one town hall setting the rules. To exchange directions with the next neighbourhood you need to be a recognised town.",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "y$2-Iv@toP",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::bgp",
+    "below-cni"
+   ],
+   "front": "External BGP (eBGP) vs internal BGP (iBGP) — what's the practical difference?",
+   "back": "eBGP: peers in different ASes, routes re-advertised freely, AS_PATH prepended. iBGP: same AS, and a router will <b>not</b> re-advertise a route it learned via iBGP to another iBGP peer. So iBGP needs a full mesh or a route reflector.",
+   "text": "",
+   "image": "",
+   "analogy": "Gossip rule: you happily repeat what an outsider told you, but you never repeat what a fellow-townsperson told you. So either everyone hears the outsider directly, or you appoint a town crier.",
+   "extra": "<b>Incident:</b> Added a node, its pods unreachable from the fabric → in an iBGP full-mesh design the new node isn't peered with every other node (or with the reflector).",
+   "source": ""
+  },
+  {
+   "guid": "b?,WKO9QUt",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::bgp",
+    "below-cni"
+   ],
+   "front": "What is a route reflector?",
+   "back": "An iBGP router permitted to re-advertise iBGP-learned routes to its clients, removing the full-mesh requirement. Calico's default is a full mesh; at ~50+ nodes you switch to reflectors (often the ToR switches).",
+   "text": "",
+   "image": "",
+   "analogy": "The town crier: every household tells the crier, the crier tells everyone. No need for every household to visit every other.",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "reM53tnnHR",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::bgp",
+    "below-cni"
+   ],
+   "front": "Why do CNIs and MetalLB use BGP instead of an overlay?",
+   "back": "To advertise pod CIDRs and Service IPs directly to the physical network. No encapsulation → no MTU loss, native speed, and external clients reach pods without a NAT hop. Cost: the network team must accept your peers.",
+   "text": "",
+   "image": "",
+   "analogy": "Instead of stuffing every letter inside a second envelope addressed to a sorting hub, you register your street with the city so the postal service delivers to your door directly.",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "Ob=k{zHKE7",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::bgp",
+    "below-cni"
+   ],
+   "front": "In what order does BGP pick the best path (the parts that matter on-prem)?",
+   "back": "Highest Weight (Cisco-local) → highest LOCAL_PREF → locally originated → shortest AS_PATH → lowest origin → lowest Multi-Exit Discriminator (MED) → eBGP over iBGP → lowest IGP metric → oldest / lowest router ID.",
+   "text": "",
+   "image": "",
+   "analogy": "Choosing a flight: company policy first (LOCAL_PREF), then fewest connections (AS_PATH), then the airline's own preference (MED), then cheapest ground transport (IGP metric).",
+   "extra": "<b>Incident:</b> Traffic to a Service takes a strange path → someone's AS_PATH prepending or LOCAL_PREF policy is steering it; check <code>show ip bgp &lt;prefix&gt;</code> on the ToR.",
+   "source": ""
+  },
+  {
+   "guid": "G46eqsYF0k",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::bgp",
+    "below-cni"
+   ],
+   "front": "What are the BGP finite-state-machine states and which one is a bad sign?",
+   "back": "Idle → Connect → Active → OpenSent → OpenConfirm → Established. <b>Active</b> sounds healthy but means \"still trying to open the TCP connection\" — the peer is unreachable, wrong IP, or TCP 179 filtered.",
+   "text": "",
+   "image": "",
+   "analogy": "A phone call: dialling (Connect), still dialling after no answer (Active), someone picked up and said hello (OpenSent/OpenConfirm), talking (Established). \"Active\" is you re-dialling.",
+   "extra": "<b>Incident:</b> <code>calicoctl node status</code> or <code>cilium bgp peers</code> stuck in Active → firewall on 179, wrong peer IP, or the switch config lacks your neighbour statement.",
+   "source": ""
+  },
+  {
+   "guid": "?{PnB.7x~",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::bgp",
+    "below-cni"
+   ],
+   "front": "What are the BGP keepalive and hold timers and what happens when hold expires?",
+   "back": "Keepalive default 60 s, hold time 90 s (negotiated to the lower of both sides). If no keepalive/update within hold time, the session drops and <b>all routes from that peer are withdrawn</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "A phone line where 90 seconds of silence means \"hang up and forget everything they ever told you.\" One bad minute wipes out the whole map.",
+   "extra": "<b>Incident:</b> Node under CPU pressure delays its BGP daemon → hold timer expires → pod CIDR vanishes from the fabric → 90 s partial outage that self-heals. Look for flapping sessions in switch logs.",
+   "source": ""
+  },
+  {
+   "guid": "hc{]ljr=RK",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::bgp",
+    "below-cni"
+   ],
+   "front": "What is Bidirectional Forwarding Detection (BFD) and why pair it with BGP?",
+   "back": "A lightweight hello protocol (typically 300 ms intervals, 3 misses) that detects link/peer failure in under a second and signals BGP to tear down the session, instead of waiting 90 s for the hold timer.",
+   "text": "",
+   "image": "",
+   "analogy": "A heart-rate monitor next to the patient instead of a nurse who checks every 90 seconds.",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "Du#|^NZ~W!",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::bgp",
+    "below-cni"
+   ],
+   "front": "How does Equal-Cost Multi-Path (ECMP) work with BGP-advertised Service IPs?",
+   "back": "Several nodes advertise the same /32. The switch installs all next-hops and hashes each flow's 5-tuple to pick one, giving per-flow load balancing. Adding/removing a node re-hashes many flows (unless the switch supports resilient hashing).",
+   "text": "",
+   "image": "",
+   "analogy": "Four equally short roads to the stadium; each car is assigned a road by hashing its licence plate. Close one road and the assignment table reshuffles — many cars take a new road mid-trip.",
+   "extra": "<b>Incident:</b> Rolling restart of MetalLB speakers causes connection resets for long-lived TCP → ECMP rehash; mitigate with resilient hashing or fewer advertising nodes.",
+   "source": ""
+  },
+  {
+   "guid": "JI7gp-$k!.",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::bgp",
+    "below-cni"
+   ],
+   "front": "What is a BGP community?",
+   "back": "A 32-bit tag (e.g. <code>65000:100</code>) attached to a route so other routers can apply policy: don't-export, prefer, blackhole. Well-known: <code>no-export</code>, <code>no-advertise</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "A sticky note on a parcel: \"do not forward outside the building\", \"priority\", \"return to sender\".",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "b!i?Dy{$iP",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::bgp",
+    "below-cni"
+   ],
+   "front": "What is route flapping and route dampening?",
+   "back": "A prefix repeatedly advertised and withdrawn (flapping) makes every peer recompute. Dampening penalises flapping prefixes and suppresses them for a period — so a briefly unstable node can be ignored for minutes even after it's healthy.",
+   "text": "",
+   "image": "",
+   "analogy": "Someone who keeps changing their RSVP; eventually the host stops updating the seating chart for them for a while, even after they finally commit.",
+   "extra": "<b>Incident:</b> Node recovered but its pod CIDR still unreachable for ~15 min → dampening on the switch; <code>clear ip bgp dampening</code>.",
+   "source": ""
+  },
+  {
+   "guid": "uz`T/u,H!t",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::bgp",
+    "below-cni"
+   ],
+   "front": "What do you check first when one node's pods are unreachable from outside the cluster but pod-to-pod on that node works?",
+   "back": "The node's BGP session: is it Established, is its pod CIDR in the peer's table, did the ToR accept it (prefix-list / max-prefix limit)? Local traffic doesn't need BGP at all.",
+   "text": "",
+   "image": "",
+   "analogy": "The town's internal streets work fine but it's been erased from the regional map — the town crier's report never reached the neighbours.",
+   "extra": "<b>Incident:</b> Max-prefix limit on the switch hit after adding nodes → session torn down for the newest peer only.",
+   "source": ""
+  },
+  {
+   "guid": "g`tEe5l@_5",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::bgp",
+    "below-cni"
+   ],
+   "front": "What is the difference between advertising a Service IP with BGP and using Address Resolution Protocol (ARP)/Layer-2 mode (MetalLB)?",
+   "back": "L2 mode: one node answers ARP for the IP; all traffic hits that node, failover takes seconds (ARP timeout), no load spreading. BGP mode: multiple nodes advertise, ECMP spreads traffic, failover on session drop, but requires switch cooperation.",
+   "text": "",
+   "image": "",
+   "analogy": "L2: one receptionist holds the company phone; if she's away, calls fail until someone notices. BGP: the exchange knows several extensions and rings any of them.",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "t};q_Ux^Z4",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::tls",
+    "below-cni"
+   ],
+   "front": "Describe the Transport Layer Security (TLS) 1.3 handshake in one round trip.",
+   "back": "Client → ClientHello (supported ciphers, key share, Server Name Indication (SNI), Application-Layer Protocol Negotiation (ALPN)). Server → ServerHello (chosen cipher, key share), then already-encrypted: Certificate, CertificateVerify, Finished. Client → Finished. Application data flows. 1-RTT (TLS 1.2 needed 2).",
+   "text": "",
+   "image": "",
+   "analogy": "Two strangers each mail a padlock and a half of a secret in the same envelope; after one exchange both can build the same key. Everything after is locked with that key.",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "b53MEjpTa@",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::tls",
+    "below-cni"
+   ],
+   "front": "Asymmetric vs symmetric cryptography — what is each used for in TLS?",
+   "back": "Asymmetric (Rivest–Shamir–Adleman (RSA), Elliptic Curve Diffie–Hellman (ECDH)): identity and key agreement during the handshake — slow. Symmetric (Advanced Encryption Standard (AES)-GCM, ChaCha20): bulk encryption of the actual data — fast.",
+   "text": "",
+   "image": "",
+   "analogy": "A padlock anyone can snap shut but only the owner can open (asymmetric) is used once to agree on a shared house key (symmetric) that both then use for every door.",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "oHeY-w`|{&",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::tls",
+    "below-cni"
+   ],
+   "front": "What is a certificate chain and what does the client need in its trust store?",
+   "back": "Leaf (server) cert → signed by intermediate Certificate Authority (CA) → signed by root CA. The server should send leaf + intermediates. The client only needs the <b>root</b> in its trust store; it verifies the chain link by link.",
+   "text": "",
+   "image": "",
+   "analogy": "A passport (leaf) issued by a municipality (intermediate) authorised by the state (root). The border guard recognises states, not municipalities — so the traveller must carry the municipality's letter of authority.",
+   "extra": "<b>Incident:</b> <code>x509: certificate signed by unknown authority</code> → either the server omitted the intermediate (check with <code>openssl s_client -showcerts</code>) or the client image lacks the root (corporate CA not in the container's ca-certificates).",
+   "source": ""
+  },
+  {
+   "guid": "eWyYo#*G,M",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::tls",
+    "below-cni"
+   ],
+   "front": "What is Server Name Indication (SNI) and why does it matter for ingress?",
+   "back": "The hostname sent in plaintext in ClientHello so a server holding many certs on one IP can pick the right one. Ingress controllers and L4 proxies route on SNI. Encrypted Client Hello (ECH) hides it.",
+   "text": "",
+   "image": "",
+   "analogy": "Telling the receptionist which company you're visiting before they hand you a badge — the building has 50 tenants on one street address.",
+   "extra": "<b>Incident:</b> Wrong certificate served to some clients → client didn't send SNI (old libraries, IP-based access, some health checkers) so the default cert was returned.",
+   "source": ""
+  },
+  {
+   "guid": "OIFol(0P]`",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::tls",
+    "below-cni"
+   ],
+   "front": "What is mutual TLS (mTLS)?",
+   "back": "Both sides present certificates and verify each other. Service meshes (Istio, Linkerd) and Cilium do this per-pod with short-lived certs from an internal CA, giving workload identity independent of IP.",
+   "text": "",
+   "image": "",
+   "analogy": "Both parties show passports, not just the visitor. Identity is who you are, not which door you walked through.",
+   "extra": "<b>Incident:</b> Mesh-wide 503s at the same minute every N hours → mTLS cert rotation failing (CA unreachable, clock skew).",
+   "source": ""
+  },
+  {
+   "guid": "fds}<#):h~",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::tls",
+    "below-cni"
+   ],
+   "front": "TLS termination vs TLS passthrough at the load balancer — trade-offs?",
+   "back": "Termination: LB decrypts, can route on HTTP path/headers, retry, add headers; backends see plaintext (or re-encrypt). Passthrough: LB forwards the encrypted stream, routes only on SNI, can't inspect or retry; end-to-end encryption preserved.",
+   "text": "",
+   "image": "",
+   "analogy": "Customs opening the parcel to sort by contents (termination) vs forwarding the sealed parcel and only reading the outside label (passthrough).",
+   "extra": "<b>Incident:</b> Path-based ingress rules \"ignored\" → the route is passthrough; HTTP is invisible to the LB.",
+   "source": ""
+  },
+  {
+   "guid": "v&q{DFs2nt",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::tls",
+    "below-cni"
+   ],
+   "front": "What is the single most common TLS-related outage?",
+   "back": "Certificate expiry. Nothing checks validity until a handshake happens, so a cert that expired at 00:00 causes a hard failure the moment the first client connects. Include intermediates and the internal CA root in the expiry watch, not just leaves.",
+   "text": "",
+   "image": "",
+   "analogy": "A passport that expires at midnight; nobody notices until you're at the border with a queue behind you.",
+   "extra": "<b>Incident:</b> Monitor with a probe exporting <code>days_until_expiry</code> per endpoint; alert at 14 and 7 days.",
+   "source": ""
+  },
+  {
+   "guid": "PS{R=OG*+e",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::tls",
+    "below-cni"
+   ],
+   "front": "What is Application-Layer Protocol Negotiation (ALPN)?",
+   "back": "A TLS extension where the client lists protocols (<code>h2</code>, <code>http/1.1</code>) and the server picks one during the handshake, so HTTP/2 can be selected without an extra round trip.",
+   "text": "",
+   "image": "",
+   "analogy": "While shaking hands you agree which language to speak, rather than starting in English and switching later.",
+   "extra": "<b>Incident:</b> gRPC (needs h2) fails through a proxy → proxy negotiates only http/1.1 on the backend side.",
+   "source": ""
+  },
+  {
+   "guid": "q=1_sKrHq=",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::tls",
+    "below-cni"
+   ],
+   "front": "What are session resumption and 0-RTT, and what is the risk?",
+   "back": "Resumption reuses a previous handshake's secret via a session ticket, skipping the expensive part. TLS 1.3 0-RTT lets the client send data in the first flight. Risk: 0-RTT data can be replayed — only safe for idempotent requests.",
+   "text": "",
+   "image": "",
+   "analogy": "A coat-check ticket: hand it over and skip the queue. But someone who photocopies your ticket can also skip the queue.",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "q%S;TFz4}+",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::tls",
+    "below-cni"
+   ],
+   "front": "How do you check whether a certificate has been revoked?",
+   "back": "Certificate Revocation List (CRL): download a signed list from the CA. Online Certificate Status Protocol (OCSP): ask the CA about one serial. OCSP stapling: the server attaches a fresh OCSP response to its cert so clients don't call the CA. Most clients soft-fail if OCSP is unreachable.",
+   "text": "",
+   "image": "",
+   "analogy": "Checking whether a passport is reported stolen: a printed list at the border (CRL), a phone call to the issuing office (OCSP), or the traveller carrying a recent \"not stolen\" receipt (stapling).",
+   "extra": "<b>Incident:</b> Handshakes suddenly slow by seconds → OCSP responder unreachable from the cluster, clients waiting on the timeout.",
+   "source": ""
+  },
+  {
+   "guid": "Ik%b0o0RU;",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::tls",
+    "below-cni"
+   ],
+   "front": "Distinguish these errors: <i>handshake failure</i>, <i>certificate verify failed</i>, <i>connection reset by peer</i>.",
+   "back": "Handshake failure / no shared cipher: protocol or cipher mismatch (TLS 1.0 client vs 1.2-only server). Certificate verify failed: chain, hostname, expiry, or trust store. Connection reset: usually <b>not</b> TLS — a firewall, an LB idle timeout, or a backend that crashed.",
+   "text": "",
+   "image": "",
+   "analogy": "No common language (handshake failure); suspicious passport (verify failed); the door slammed shut mid-sentence — which is a door problem, not a language problem.",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "p7#n47@#67",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::tls",
+    "below-cni"
+   ],
+   "front": "What is Perfect Forward Secrecy (PFS)?",
+   "back": "Session keys are derived from ephemeral Diffie–Hellman exchanges and discarded, so compromising the server's long-term private key later does not decrypt recorded past traffic. Mandatory in TLS 1.3.",
+   "text": "",
+   "image": "",
+   "analogy": "A fresh house key cut for every visit and melted down afterwards; stealing the master key later opens no old doors.",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "ef>X]j*9Og",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::tls",
+    "below-cni"
+   ],
+   "front": "Where does hostname verification happen and what breaks it?",
+   "back": "The client checks that the requested name matches a Subject Alternative Name (SAN) on the leaf cert (Common Name is ignored by modern clients). Internal services called by IP or by a short name (<code>svc</code> vs <code>svc.ns.svc.cluster.local</code>) fail unless those SANs are present.",
+   "text": "",
+   "image": "",
+   "analogy": "The passport is valid but the name doesn't match the booking. Modern hotels only read the machine-readable line (SAN), not the handwritten one (CN).",
+   "extra": "<b>Incident:</b> \"Works with curl -k, fails in the app\" → SAN mismatch, not a trust problem.",
+   "source": ""
+  },
+  {
+   "guid": "xm%f1&fMSp",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::ebpf",
+    "below-cni"
+   ],
+   "front": "What is extended Berkeley Packet Filter (eBPF)?",
+   "back": "A way to run small, verified, sandboxed programs inside the Linux kernel at defined hook points (packet receive, socket calls, syscalls, function entry), without kernel modules or reboots. Cilium, Calico eBPF mode, Falco and Pixie are built on it.",
+   "text": "",
+   "image": "",
+   "analogy": "Letting a contractor plug pre-inspected devices into the building's electrical panel while it's live, instead of rebuilding the building to add a sensor.",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "qL([}zgtAF",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::ebpf",
+    "below-cni"
+   ],
+   "front": "What does the eBPF verifier guarantee?",
+   "back": "Programs must terminate (bounded loops only), never read/write out of bounds, only call allowed helpers, and stay under complexity limits. Anything that can't be proven safe is rejected at load time — it fails to load rather than crashing the kernel.",
+   "text": "",
+   "image": "",
+   "analogy": "The building inspector who refuses to sign off unless every wire is traceable and no circuit can loop forever. Rejection is annoying; a fire is worse.",
+   "extra": "<b>Incident:</b> Cilium agent CrashLoops after a kernel upgrade with \"verifier\" errors in logs → program/kernel mismatch; check supported kernel versions.",
+   "source": ""
+  },
+  {
+   "guid": "HiOAkIZ*lN",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::ebpf",
+    "below-cni"
+   ],
+   "front": "Name the main eBPF networking hook points and where they sit.",
+   "back": "eXpress Data Path (XDP): in the driver, before the socket buffer (skb) is allocated — fastest, can drop/redirect. Traffic Control (TC) ingress/egress: after skb exists, sees full metadata, used by Cilium for pod veths. Socket hooks (cgroup/sock_ops): at connect()/sendmsg() — sees the application's intent, no packets yet.",
+   "text": "",
+   "image": "",
+   "analogy": "XDP is the guard at the front gate stopping a truck before it's unloaded; TC is the loading dock where parcels are labelled; socket hooks are at the employee's desk, rewriting the address before the letter is even written.",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "ul2PyYWL_j",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::ebpf",
+    "below-cni"
+   ],
+   "front": "What are eBPF maps?",
+   "back": "Kernel-resident key/value stores (hash, array, LRU, per-CPU) shared between eBPF programs and userspace. Cilium keeps Service→backend tables, policy, and conntrack in maps; the agent updates them, the datapath reads them.",
+   "text": "",
+   "image": "",
+   "analogy": "A whiteboard in the machine room: the operators (userspace) write the current rules on it, and the installed devices (programs) read it on every packet.",
+   "extra": "<b>Incident:</b> Cilium <code>bpf lb list</code> shows a Service with stale backends → map not updated; agent restart repopulates.",
+   "source": ""
+  },
+  {
+   "guid": "LI-xeev,dz",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::ebpf",
+    "below-cni"
+   ],
+   "front": "How does Cilium replace kube-proxy?",
+   "back": "At the socket layer: a cgroup eBPF hook on <code>connect()</code> rewrites the ClusterIP:port to a pod IP:port before any packet exists. No DNAT, no conntrack entry for the Service, no iptables walk. For north-south (NodePort) it uses TC/XDP with Direct Server Return (DSR) or SNAT.",
+   "text": "",
+   "image": "",
+   "analogy": "Instead of the post office re-stamping every letter to a PO Box, the address book on your own desk is corrected so you write the real address from the start.",
+   "extra": "<b>Incident:</b> <code>tcpdump</code> inside a pod never shows the ClusterIP — that's expected with socket-LB; don't chase a phantom NAT.",
+   "source": ""
+  },
+  {
+   "guid": "hRK&PtiHY>",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::ebpf",
+    "below-cni"
+   ],
+   "front": "Why does iptables-based Service load balancing scale badly?",
+   "back": "iptables rules are evaluated linearly. Each Service adds chains; each endpoint adds rules with probability matches. At thousands of Services every packet walks tens of thousands of rules, and every endpoint change rewrites the whole table (<code>iptables-restore</code> takes seconds). IP Virtual Server (IPVS) and eBPF use hash lookups — O(1).",
+   "text": "",
+   "image": "",
+   "analogy": "A checkpoint guard who reads the entire rulebook from page one for every car, and reprints the whole book whenever a rule changes — versus a guard with a filing cabinet indexed by plate number.",
+   "extra": "<b>Incident:</b> Endpoint updates lag by seconds on large clusters; rolling deploys route to dead pods → iptables sync latency. Switch to IPVS or eBPF.",
+   "source": ""
+  },
+  {
+   "guid": "dhw9UL%1l?",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::ebpf",
+    "below-cni"
+   ],
+   "front": "What is XDP_DROP used for?",
+   "back": "Dropping packets at the driver before the kernel allocates memory for them — millions of packets per second per core. Used for DDoS mitigation and rate limiting.",
+   "text": "",
+   "image": "",
+   "analogy": "A bouncer who turns people away at the street, before they enter the lobby and take up space.",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "j<BP0/!,4N",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::ebpf",
+    "below-cni"
+   ],
+   "front": "How do eBPF observability tools (Hubble, bpftrace, Pixie) see traffic without proxies?",
+   "back": "They attach to tracepoints, kprobes, and socket hooks, copy small event records into ring buffers/maps, and userspace reads them. No sidecar, no packet copy in the data path, typically single-digit-percent overhead.",
+   "text": "",
+   "image": "",
+   "analogy": "Placing sensors on existing pipes instead of routing every pipe through a metering station.",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "JAm,2Eu(l4",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::ebpf",
+    "below-cni"
+   ],
+   "front": "What is identity-based network policy (Cilium)?",
+   "back": "Pods with the same label set share a numeric security identity. The identity travels in the packet (mark/encap header) and policy is checked as \"identity 1234 → identity 5678 on port 443\", not by IP. Pod IP churn doesn't invalidate policy.",
+   "text": "",
+   "image": "",
+   "analogy": "Checking badge colour at the door rather than looking up each visitor's home address in a list that changes daily.",
+   "extra": "<b>Incident:</b> Policy allows traffic but it's dropped → the peer's identity isn't what you think; <code>hubble observe --verdict DROPPED</code> shows the identities involved.",
+   "source": ""
+  },
+  {
+   "guid": "H&]VS5k4#.",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::ebpf",
+    "below-cni"
+   ],
+   "front": "What are Compile Once – Run Everywhere (CO-RE) and BPF Type Format (BTF)?",
+   "back": "BTF is type metadata the kernel exposes about its own structs. CO-RE lets a compiled eBPF program relocate field offsets at load time using BTF, so one binary runs on many kernel versions without recompiling.",
+   "text": "",
+   "image": "",
+   "analogy": "An appliance with an adaptor plug that reads the socket shape when you plug it in, instead of shipping a different plug per country.",
+   "extra": "<b>Incident:</b> eBPF tool fails to load on a distro kernel: \"no BTF found\" → kernel built without <code>CONFIG_DEBUG_INFO_BTF</code>.",
+   "source": ""
+  },
+  {
+   "guid": "r@qRHsMBOu",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::ebpf",
+    "below-cni"
+   ],
+   "front": "How do you see what eBPF programs are attached on a node?",
+   "back": "<code>bpftool prog list</code>, <code>bpftool net</code> (TC/XDP attachments per interface), <code>bpftool cgroup tree</code> (socket hooks), <code>bpftool map list</code>. For Cilium: <code>cilium bpf *</code> and <code>cilium monitor</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "The building's inspection ledger: every installed device, which circuit it's on, and its whiteboard.",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "RaH3oPA9-!",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::lb",
+    "below-cni"
+   ],
+   "front": "Layer 4 vs Layer 7 load balancer — what can each do?",
+   "back": "L4: balances TCP/UDP connections by IP/port, never sees HTTP, preserves end-to-end TLS, very fast. L7: terminates HTTP(S), routes on host/path/headers, can retry, rewrite, rate-limit, and balance per <b>request</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "Sorting parcels by the address label (L4) vs opening each parcel and reading the letter to decide where it goes (L7).",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": ".-9.Vl;u=",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::lb",
+    "below-cni"
+   ],
+   "front": "What are the three ways an L4 load balancer can forward, and what does each do to the client IP?",
+   "back": "Full NAT (DNAT+SNAT): backend sees the LB's IP; replies return via LB. DNAT only: backend sees client IP; replies must route back through the LB (it must be the default gateway or on-path). Direct Server Return (DSR): backend sees client IP, replies go straight to client; backend must hold the Virtual IP (VIP) on loopback.",
+   "text": "",
+   "image": "",
+   "analogy": "Full NAT: the receptionist relays the whole conversation. DNAT: she transfers the call but the callback must go through her desk. DSR: she hands the caller the direct extension and steps away.",
+   "extra": "<b>Incident:</b> \"All requests come from 10.0.0.1\" → SNAT; fix with DSR, Proxy Protocol, or <code>externalTrafficPolicy: Local</code> in Kubernetes.",
+   "source": ""
+  },
+  {
+   "guid": "H>a9`TCAS@",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::lb",
+    "below-cni"
+   ],
+   "front": "What does <code>externalTrafficPolicy: Local</code> change?",
+   "back": "Nodes only forward to pods on themselves and do not SNAT, so the pod sees the real client IP. Nodes without a local pod fail the LB health check (the healthCheckNodePort) and drop out of rotation. Trade-off: uneven load if pods are unevenly spread.",
+   "text": "",
+   "image": "",
+   "analogy": "Each branch office only serves walk-ins; if a branch has no staff it takes down its \"open\" sign instead of forwarding customers across town.",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "QvQAa:`@e%",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::lb",
+    "below-cni"
+   ],
+   "front": "Active health checks vs passive outlier detection — difference?",
+   "back": "Active: the LB probes each backend on a schedule (<code>/healthz</code>, TCP connect). Passive: the LB watches real traffic and ejects backends returning errors or timing out (Envoy outlier detection). Kubernetes readiness probes feed the endpoints list, which is a third mechanism.",
+   "text": "",
+   "image": "",
+   "analogy": "Calling the restaurant before sending customers (active) vs noticing customers coming back complaining and stopping referrals (passive).",
+   "extra": "<b>Incident:</b> LB marks backends healthy while users get errors → health check hits a trivial endpoint that doesn't exercise the dependency that's broken.",
+   "source": ""
+  },
+  {
+   "guid": "m=+S,S`yfl",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::lb",
+    "below-cni"
+   ],
+   "front": "What is connection draining?",
+   "back": "When a backend is removed, the LB stops sending new connections but lets in-flight ones finish for a grace period. Kubernetes equivalent: pod removed from Endpoints, then <code>preStop</code> sleep, then SIGTERM — the sleep exists because Endpoints propagation is asynchronous.",
+   "text": "",
+   "image": "",
+   "analogy": "Closing a toll lane: switch off the light so no new cars enter, then process the cars already queued.",
+   "extra": "<b>Incident:</b> Rolling deploy causes a burst of 502s → no preStop delay; LB still sends to a pod that's already shutting down.",
+   "source": ""
+  },
+  {
+   "guid": "p:dO$=1y)b",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::lb",
+    "below-cni"
+   ],
+   "front": "Why does an idle-timeout mismatch cause <i>connection reset by peer</i> on the first request?",
+   "back": "The LB (or NAT) silently drops idle connections after N seconds; the client's keep-alive pool still thinks the connection is open, sends a request, and gets a RST. Rule: client idle timeout &lt; LB idle timeout &lt; backend idle timeout.",
+   "text": "",
+   "image": "",
+   "analogy": "The switchboard hangs up silent lines after 60 s without telling anyone; the caller picks up the receiver, starts talking, and hears the dial tone.",
+   "extra": "<b>Incident:</b> First request after a quiet period fails, retry succeeds → timeouts out of order along the chain (AWS NLB 350 s, ALB 60 s, many app servers 75 s).",
+   "source": ""
+  },
+  {
+   "guid": "u_<z`tBa`>",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::lb",
+    "below-cni"
+   ],
+   "front": "What is consistent hashing (ring hash, Maglev) and when do you want it?",
+   "back": "Backends are placed on a hash ring; a key (client IP, session cookie, gRPC key) maps to the nearest backend. Adding/removing one backend only remaps ~1/N of keys. Used for session affinity and cache locality; Cilium and Google's Maglev use it for stable Service→backend mapping across nodes.",
+   "text": "",
+   "image": "",
+   "analogy": "Guests are seated by surname initial. If one table closes, only its guests move; nobody else is disturbed.",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "L1!!aBKY1E",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::lb",
+    "below-cni"
+   ],
+   "front": "What is ephemeral port exhaustion behind SNAT?",
+   "back": "Each outbound connection through a single SNAT IP needs a unique source port to the same destination — about 28k–64k ports (<code>ip_local_port_range</code>), and TIME_WAIT holds them for 60 s. Heavy egress to one destination (an API, a DB) from many pods through one node IP runs out.",
+   "text": "",
+   "image": "",
+   "analogy": "Reception has 64,000 numbered outgoing-call tickets and each used ticket is quarantined for a minute. On a busy morning, new calls fail even though the lines are free.",
+   "extra": "<b>Incident:</b> Egress timeouts to a single external API under load, no errors on the API side → check <code>ss -s</code> and conntrack for the SNAT IP; add SNAT IPs, enable keep-alive, or use a NAT pool.",
+   "source": ""
+  },
+  {
+   "guid": "Hl.?A%bxzw",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::lb",
+    "below-cni"
+   ],
+   "front": "What is TIME_WAIT?",
+   "back": "The side that closes a TCP connection first holds the 4-tuple for 2×Maximum Segment Lifetime (60 s on Linux) so late packets don't corrupt a new connection reusing the same tuple.",
+   "text": "",
+   "image": "",
+   "analogy": "Keeping a vacated mailbox locked for a minute so stray letters aren't delivered to the next tenant.",
+   "extra": "<b>Incident:</b> Tens of thousands of TIME_WAIT on a proxy → the proxy is closing connections instead of the client; enable keep-alive or <code>tcp_tw_reuse</code> on the client side.",
+   "source": ""
+  },
+  {
+   "guid": "i`CNn*we*L",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::lb",
+    "below-cni"
+   ],
+   "front": "Why does gRPC / HTTP/2 load-balance badly through an L4 balancer?",
+   "back": "L4 balances connections. HTTP/2 multiplexes all requests over one long-lived connection, so a client pins to one backend forever and new backends get nothing. Fix: L7 balancing (Envoy/ingress) that balances streams, or client-side balancing with periodic connection recycling (<code>MAX_CONNECTION_AGE</code>).",
+   "text": "",
+   "image": "",
+   "analogy": "A tour bus of 50 passengers assigned to one ticket counter because the bus is one vehicle. The empty counters next to it stay empty.",
+   "extra": "<b>Incident:</b> One pod at 90% CPU, replicas idle → HTTP/2 connection pinning.",
+   "source": ""
+  },
+  {
+   "guid": "gL?J[7`hfL",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::lb",
+    "below-cni"
+   ],
+   "front": "What is the PROXY protocol?",
+   "back": "A small header (v1 text or v2 binary) an L4 LB prepends to the TCP stream stating the original client IP/port. The backend must be configured to expect it, otherwise the header corrupts the first request.",
+   "text": "",
+   "image": "",
+   "analogy": "A sticky note stapled to a forwarded parcel: \"originally from 203.0.113.7\". Useless — and confusing — if the recipient doesn't know to look for it.",
+   "extra": "<b>Incident:</b> \"400 Bad Request\" on every request after enabling PROXY protocol on the LB → the backend wasn't told to parse it.",
+   "source": ""
+  },
+  {
+   "guid": "t%k0|40R>%",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::lb",
+    "below-cni"
+   ],
+   "front": "Why can a TCP connect timeout take exactly 63 s or 127 s?",
+   "back": "SYN retransmits back off exponentially: 1, 2, 4, 8, 16, 32 s. <code>tcp_syn_retries=6</code> → gives up after 63 s; 7 → 127 s. A silent drop (firewall, blackhole route, dead backend behind DNAT) produces these numbers; an active reject produces an immediate \"connection refused\".",
+   "text": "",
+   "image": "",
+   "analogy": "Knocking on a door, waiting twice as long each time before knocking again, and leaving after the sixth knock. A slammed door (RST) would have told you at once.",
+   "extra": "<b>Incident:</b> Requests time out at exactly 63 s → packets being dropped, not refused; something on the path is a black hole.",
+   "source": ""
+  },
+  {
+   "guid": "Q|B+yo&U~@",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::lb",
+    "below-cni"
+   ],
+   "front": "Kubernetes Service types — where does each layer of load balancing happen?",
+   "back": "ClusterIP: node-local DNAT/eBPF to a pod. NodePort: the same, exposed on every node's IP:port. LoadBalancer: an external LB (cloud or MetalLB) forwards to NodePorts (or directly to pods with some CNIs). With <code>externalTrafficPolicy: Cluster</code> the NodePort hop may SNAT and forward to another node — two hops, client IP lost.",
+   "text": "",
+   "image": "",
+   "analogy": "ClusterIP is the internal phone extension; NodePort puts that extension on every building's front desk; LoadBalancer is the public number that rings one of the front desks, which may then transfer you across town.",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "Li+:SD>Tp*",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::lb",
+    "below-cni"
+   ],
+   "front": "What is a half-open TCP connection and how do keepalives help?",
+   "back": "One side has lost the connection (crash, NAT entry expired, LB reboot) but the other still believes it is open and will only learn otherwise when it sends and gets no ACK/RST. TCP keepalive probes (off by default in most apps; <code>SO_KEEPALIVE</code>, <code>tcp_keepalive_time</code> default 7200 s!) detect this.",
+   "text": "",
+   "image": "",
+   "analogy": "Talking into a phone after the other person's line went dead; you find out only when you ask a question and get silence.",
+   "extra": "<b>Incident:</b> Database connection pool returns dead connections after a network blip → enable TCP keepalive with a short interval, or app-level validation on borrow.",
+   "source": ""
+  },
+  {
+   "guid": "wf>W5#4i(_",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::lb",
+    "below-cni"
+   ],
+   "front": "How does an ingress controller differ from the load balancer in front of it?",
+   "back": "The external LB (L4) delivers packets to the cluster nodes. The ingress controller (Envoy, NGINX, HAProxy) is an L7 proxy running as pods that terminates TLS and routes by host/path to Services. Two separate failure domains, two separate timeouts, two separate health checks.",
+   "text": "",
+   "image": "",
+   "analogy": "The city's postal service delivers to the building (LB); the reception desk inside reads the name on the envelope and walks it to the right floor (ingress).",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "kQ,`b[`IRR",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::triage",
+    "below-cni"
+   ],
+   "front": "Triage: pod-to-pod works on the same node, fails across nodes. Where do you look?",
+   "back": "The inter-node path: overlay UDP port blocked (VXLAN 4789, Geneve 6081, WireGuard 51820), BGP session down (no route to the peer's pod CIDR), MTU mismatch (small packets work), or the cloud provider's source/destination check dropping non-VM IPs.",
+   "text": "",
+   "image": "",
+   "analogy": "Internal streets work, the highway is closed: check the on-ramp (encapsulation port), the map (routes), and the height limit (MTU).",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "vb}@(MJ]]i",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::triage",
+    "below-cni"
+   ],
+   "front": "Triage: intermittent ~1–5% of requests fail, uncorrelated with any single node or pod.",
+   "back": "Think per-flow hashing and tables: conntrack table full, ECMP rehash on topology change, SNAT port exhaustion, an LB with one dead backend in rotation still passing a trivial health check, or DNS (UDP conntrack entries, <code>ndots:5</code> search-domain amplification).",
+   "text": "",
+   "image": "",
+   "analogy": "One cashier out of twenty is asleep, but customers are assigned randomly, so complaints look random.",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "yolN7P;Dt/",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::triage",
+    "below-cni"
+   ],
+   "front": "Triage: everything worked yesterday, nothing changed, a whole class of connections now fails at exactly the same moment.",
+   "back": "Something time-based expired: a TLS certificate (leaf, intermediate, or the internal CA), a BGP session after a maintenance reboot with dampening, a DHCP/IPAM lease, or a token used by the CNI/LB controller to talk to the API server.",
+   "text": "",
+   "image": "",
+   "analogy": "The passport expired at midnight; the building didn't change, the calendar did.",
+   "extra": "",
+   "source": ""
+  },
+  {
+   "guid": "P=Q_lGt+%h",
+   "type": "basic",
+   "deck": "Networking below CNI::BGP, TLS, eBPF, Load Balancers",
+   "tags": [
+    "below-cni::triage",
+    "below-cni"
+   ],
+   "front": "Triage: <code>tcpdump</code> on the node shows the packet arriving, but the pod never receives it.",
+   "back": "Between the NIC and the pod: an eBPF/iptables policy drop (NetworkPolicy, Cilium identity mismatch), <code>rp_filter</code>, a missing route to the pod's veth, or the packet being for a Service IP that has no endpoints. <code>hubble observe --verdict DROPPED</code> or <code>iptables -L -v</code> counters show which.",
+   "text": "",
+   "image": "",
+   "analogy": "The parcel reached the loading dock; it never made it up the stairs. Check the dock's rulebook and the internal directory, not the postal service.",
+   "extra": "",
+   "source": ""
+  }
+ ]
+}

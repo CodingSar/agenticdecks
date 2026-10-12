@@ -1,0 +1,3065 @@
+{
+ "source_file": "Go_Intricacies_and_K8s_Operators.apkg",
+ "notes": [
+  {
+   "guid": "fF%@&]Xx(_",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::fundamentals"
+   ],
+   "front": "What is the zero value of a struct in Go, and why does it matter for API design?",
+   "back": "Every field is set to its type's zero value (0, \"\", nil, false...) &mdash; no field is ever \"uninitialized\". Idiomatic Go leans on this: a zero-value struct should be safe/usable out of the box (e.g. <code>sync.Mutex{}</code>, <code>bytes.Buffer{}</code>).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Fundamentals · Types & Values"
+  },
+  {
+   "guid": "Ch{0Fxm?$9",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::fundamentals"
+   ],
+   "front": "How does Go decide whether a type satisfies an interface?",
+   "back": "Structurally and implicitly &mdash; if a type's method set includes every method the interface declares, it satisfies it automatically. There's no <code>implements</code> keyword.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Fundamentals · Types & Values"
+  },
+  {
+   "guid": "POOh4?qZ5]",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::fundamentals"
+   ],
+   "front": "What's the difference between a value receiver and a pointer receiver method set?",
+   "back": "A pointer-receiver method is only in the method set of <code>*T</code>, not <code>T</code>; a value-receiver method is in both <code>T</code>'s and <code>*T</code>'s method sets. This decides whether a value alone, or only its address, satisfies an interface.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Fundamentals · Types & Values"
+  },
+  {
+   "guid": "Okyr(Cw$^o",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::fundamentals"
+   ],
+   "front": "Why can <code>err != nil</code> be true even though the underlying pointer stored in the error is nil?",
+   "back": "An interface value is a (type, value) pair. Assigning a nil <code>*MyError</code> to an <code>error</code> variable gives the interface a non-nil type (<code>*MyError</code>) with a nil value &mdash; so the interface itself is non-nil even though the pointer is nil. This is the classic \"nil interface\" trap.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Fundamentals · Types & Values"
+  },
+  {
+   "guid": "OLXIDV{*!!",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::fundamentals"
+   ],
+   "front": "What is the empty interface (<code>interface{}</code>, or <code>any</code> since Go 1.18) used for, and why use it sparingly?",
+   "back": "It can hold a value of any type since it declares no methods. Overusing it (e.g. as a map value type) throws away compile-time type safety and forces runtime type assertions everywhere it's read.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Fundamentals · Types & Values"
+  },
+  {
+   "guid": "A_yXgV]D>;",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::fundamentals"
+   ],
+   "front": "What's the difference between a slice and an array in Go?",
+   "back": "An array's length is fixed and part of its type; a slice is a lightweight header {pointer, length, capacity} pointing at an underlying array, and can grow via <code>append</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Fundamentals · Types & Values"
+  },
+  {
+   "guid": "y}I|G1z=sD",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::fundamentals"
+   ],
+   "front": "How does struct embedding differ from inheritance?",
+   "back": "Embedding promotes the embedded type's fields/methods to the outer struct via composition, not subtyping. There's no polymorphism: a method on the outer struct doesn't change what's promoted, and the embedded type is unaware of its wrapper.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Fundamentals · Types & Values"
+  },
+  {
+   "guid": "g4tV>,+.I(",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::fundamentals"
+   ],
+   "front": "What's the difference between a <code>rune</code> and a <code>byte</code> in Go string handling?",
+   "back": "<code>byte</code> is an alias for <code>uint8</code> &mdash; one raw byte, e.g. from UTF-8 encoding. <code>rune</code> is an alias for <code>int32</code> representing a single Unicode code point, which may span multiple bytes in a UTF-8-encoded string.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Fundamentals · Types & Values"
+  },
+  {
+   "guid": "Io-oCKpqi(",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::fundamentals"
+   ],
+   "front": "What does <code>iota</code> do inside a <code>const</code> block?",
+   "back": "An auto-incrementing counter, reset to 0 at each <code>const</code> block and incremented by 1 per ConstSpec line &mdash; commonly used to build enumerated constants.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Fundamentals · Types & Values"
+  },
+  {
+   "guid": "l$#;+)22*G",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::fundamentals"
+   ],
+   "front": "Why are Go strings immutable?",
+   "back": "A string is a read-only {pointer, length} header over a byte sequence; you can't write through it. To \"modify\" one, convert to <code>[]byte</code>, mutate, then convert back.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Fundamentals · Types & Values"
+  },
+  {
+   "guid": "d=SU&^Rd5O",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::fundamentals"
+   ],
+   "front": "What happens when you compare two struct values with <code>==</code>?",
+   "back": "Go compares field by field &mdash; but only if every field is itself comparable (no slices, maps, or funcs). Comparing structs containing those is a compile-time error.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Fundamentals · Types & Values"
+  },
+  {
+   "guid": "ClFGyf[TkV",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::fundamentals"
+   ],
+   "front": "What is a type assertion's two-value form, and why prefer it?",
+   "back": "<code>v, ok := x.(T)</code> &mdash; instead of panicking on a failed assertion, <code>ok</code> is false and <code>v</code> is T's zero value, letting you handle the mismatch safely.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Fundamentals · Types & Values"
+  },
+  {
+   "guid": "LSG@$.{=8O",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::interfaces"
+   ],
+   "front": "Why does Go favor small, single-method interfaces like <code>io.Reader</code>?",
+   "back": "Small interfaces are easy to implement and compose. The \"accept interfaces, return structs\" idiom keeps APIs flexible for callers while giving concrete types to producers.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Fundamentals · Interfaces & Composition"
+  },
+  {
+   "guid": "i-f`L>{f)~",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::interfaces"
+   ],
+   "front": "What does it mean for interfaces to be embedded in Go?",
+   "back": "An interface can embed other interfaces; its method set is the union of all embedded interfaces' methods plus its own &mdash; e.g. <code>io.ReadWriter</code> embeds <code>io.Reader</code> and <code>io.Writer</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Fundamentals · Interfaces & Composition"
+  },
+  {
+   "guid": "Jq,O7lW|C=",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::interfaces"
+   ],
+   "front": "What is the \"interface pollution\" anti-pattern?",
+   "back": "Defining an interface prematurely &mdash; before there are 2+ real implementations or a genuine need for abstraction at the call site &mdash; adding indirection without benefit. Idiom: define interfaces at the point of use (consumer side), not alongside the implementation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Fundamentals · Interfaces & Composition"
+  },
+  {
+   "guid": "m20VHKG80.",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::interfaces"
+   ],
+   "front": "Why might exposing a concrete struct from a package be preferable to returning an interface?",
+   "back": "A concrete type keeps the full API surface (fields, extra methods) available, letting the caller define whatever narrow interface it needs. Returning an interface forces every caller into that one fixed abstraction.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Fundamentals · Interfaces & Composition"
+  },
+  {
+   "guid": "s{@NpnUWeF",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::interfaces"
+   ],
+   "front": "What is the <code>Stringer</code> interface, and when is it invoked automatically?",
+   "back": "<code>String() string</code>, from package <code>fmt</code>. <code>fmt.Print*</code> and friends call it automatically when formatting a value with <code>%v</code> or <code>%s</code> if the value implements it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Fundamentals · Interfaces & Composition"
+  },
+  {
+   "guid": "KK&`(?e!x(",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::interfaces"
+   ],
+   "front": "How do you compile-time-verify that a concrete type implements an interface?",
+   "back": "A blank-identifier assertion: <code>var _ MyInterface = (*MyType)(nil)</code> &mdash; fails to compile if MyType doesn't satisfy MyInterface, at zero runtime cost.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Fundamentals · Interfaces & Composition"
+  },
+  {
+   "guid": "QBnYx/{LA6",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::interfaces"
+   ],
+   "front": "What's the risk of embedding a mutex in a struct without naming it?",
+   "back": "An embedded <code>sync.Mutex</code> promotes <code>Lock()</code>/<code>Unlock()</code> onto the outer type's exported API, letting callers lock/unlock it directly &mdash; usually unintended. Prefer a named, unexported field.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Fundamentals · Interfaces & Composition"
+  },
+  {
+   "guid": "EaPCLIVOQV",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::interfaces"
+   ],
+   "front": "How does <code>context.Context</code> enable cancellation across goroutines without shared mutable state?",
+   "back": "It carries a cancellation signal via a read-only <code>Done()</code> channel plus an <code>Err()</code> reason. Goroutines select on Done() and propagate the context downward, so cancellation flows through call chains without shared flags.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Fundamentals · Interfaces & Composition"
+  },
+  {
+   "guid": "ccm<iYfWY7",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::interfaces"
+   ],
+   "front": "Why is <code>io.Reader</code>'s contract \"may return n &gt; 0 bytes and a non-nil error in the same call\" tricky?",
+   "back": "Callers must process the n bytes returned even when <code>err != nil</code>, before checking the error &mdash; implementations may legitimately return both at once (e.g. at EOF with trailing data).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Fundamentals · Interfaces & Composition"
+  },
+  {
+   "guid": "N;6@i5PPY>",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::interfaces"
+   ],
+   "front": "How does Go's compile-time interface satisfaction compare to dynamic-language duck typing?",
+   "back": "\"If it walks like a duck and quacks like a duck\" &mdash; a type qualifies by having the right methods, but Go checks this at compile time (closer to TypeScript's structural typing) rather than at runtime as dynamic languages do.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Fundamentals · Interfaces & Composition"
+  },
+  {
+   "guid": "h+30g/I=E^",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::errors"
+   ],
+   "front": "What is the <code>error</code> interface in Go?",
+   "back": "<code>type error interface { Error() string }</code> &mdash; any type with an <code>Error() string</code> method satisfies it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Error Handling"
+  },
+  {
+   "guid": "n%hY-o=qMG",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::errors"
+   ],
+   "front": "What is a sentinel error, and how should callers check for it?",
+   "back": "A predeclared error value (e.g. <code>var ErrNotFound = errors.New(\"not found\")</code>), checked with <code>errors.Is(err, ErrNotFound)</code> rather than <code>==</code>, so wrapped errors still match.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Error Handling"
+  },
+  {
+   "guid": "sy]`o,a2.m",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::errors"
+   ],
+   "front": "What does <code>errors.Is</code> do differently from <code>==</code> comparison?",
+   "back": "It unwraps the error chain (via each error's <code>Unwrap()</code>) looking for a match against the target, so a wrapped error still matches its sentinel.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Error Handling"
+  },
+  {
+   "guid": "o5:5cTn38F",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::errors"
+   ],
+   "front": "What does <code>errors.As</code> do?",
+   "back": "Walks the error chain for an error whose concrete type matches the target pointer's type, and if found, assigns it &mdash; used to extract a specific custom error type out of a wrapped chain.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Error Handling"
+  },
+  {
+   "guid": "wwmc,!PLGb",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::errors"
+   ],
+   "front": "What does the <code>%w</code> verb do in <code>fmt.Errorf</code>?",
+   "back": "Wraps the given error, making it retrievable via <code>Unwrap()</code> (and therefore <code>errors.Is</code>/<code>As</code>); <code>%v</code>/<code>%s</code> would just embed the message as a plain string with no chain.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Error Handling"
+  },
+  {
+   "guid": "h-R&x{GVbN",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::errors"
+   ],
+   "front": "Why shouldn't you compare error messages with string equality?",
+   "back": "Message text isn't part of the API contract and can change between versions/locales. <code>errors.Is</code>/<code>As</code> against a sentinel or typed error is the stable contract.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Error Handling"
+  },
+  {
+   "guid": "yfeO#$bv4]",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::errors"
+   ],
+   "front": "When is <code>panic</code> idiomatic versus returning an error?",
+   "back": "Panic is reserved for programmer errors and truly unrecoverable states (failed invariant, nil dereference bug) &mdash; not expected failure conditions like a missing file, which should return an error.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Error Handling"
+  },
+  {
+   "guid": "B+r~oY.cn",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::errors"
+   ],
+   "front": "What does <code>recover</code> do, and where must it be called to work?",
+   "back": "Stops a panic's propagation and returns the panic value; it only has an effect when called directly inside a deferred function in the panicking goroutine.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Error Handling"
+  },
+  {
+   "guid": "d95Yuzch70",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::errors"
+   ],
+   "front": "Can <code>recover</code> catch a panic in another goroutine?",
+   "back": "No. A panic not recovered in the goroutine where it occurred crashes the whole program &mdash; each goroutine that can panic needs its own recover.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Error Handling"
+  },
+  {
+   "guid": "Md=MSB06Hm",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::errors"
+   ],
+   "front": "What's the \"typed nil in an interface\" mistake when returning a custom error type?",
+   "back": "Returning a typed nil pointer (<code>var e *MyErr; return e</code>) as <code>error</code> &mdash; the interface is non-nil even though the pointer is nil, so <code>err != nil</code> misleadingly succeeds.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Error Handling"
+  },
+  {
+   "guid": "e?2jC)r9^j",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::errors"
+   ],
+   "front": "Why is <code>errors.Join</code> (Go 1.20+) useful?",
+   "back": "It combines multiple errors into one that still satisfies <code>errors.Is</code>/<code>As</code> against any of them &mdash; useful for aggregating errors from concurrent operations without losing individual identity.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Error Handling"
+  },
+  {
+   "guid": "G@Mjy&z7o:",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::errors"
+   ],
+   "front": "What's the idiomatic way to add context to an error while preserving the original for programmatic inspection?",
+   "back": "<code>fmt.Errorf(\"doing X: %w\", err)</code> &mdash; human-readable context prepended, original error still reachable via Unwrap/errors.Is/As.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Error Handling"
+  },
+  {
+   "guid": "v1c-V}N#gy",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::errors"
+   ],
+   "front": "Why is ignoring an error return value (<code>_ = someFunc()</code>) a serious code smell?",
+   "back": "Go has no exceptions &mdash; an ignored error is the only failure signal, so discarding it silently turns a detectable failure into undefined downstream behavior. <code>go vet</code>/errcheck-style linters flag this.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Error Handling"
+  },
+  {
+   "guid": "vh#%!o9gtn",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::errors"
+   ],
+   "front": "How much context should you wrap onto an error at a boundary (I/O, network) versus deep in business logic?",
+   "back": "Wrap liberally at boundaries, where the original context (which call failed, which resource) is about to be lost. Avoid re-wrapping the same error repeatedly as it travels up a single logical call &mdash; that just adds noise.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Error Handling"
+  },
+  {
+   "guid": "p;p,Mc+d69",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::generics"
+   ],
+   "front": "What is a type parameter in Go generics syntax?",
+   "back": "A placeholder type declared in square brackets after a function/type name, e.g. <code>func Map[T, U any](s []T, f func(T) U) []U</code> &mdash; T and U are type parameters, here constrained by <code>any</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Generics"
+  },
+  {
+   "guid": "b2CXAjp~$F",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::generics"
+   ],
+   "front": "What is a type constraint?",
+   "back": "An interface listing the set of types (or required methods/operators) a type parameter may be instantiated with, e.g. <code>constraints.Ordered</code> for types supporting <code>&lt; &gt;</code> etc.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Generics"
+  },
+  {
+   "guid": "+K3^Il:B?",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::generics"
+   ],
+   "front": "What does <code>~</code> mean in a constraint like <code>~int</code>?",
+   "back": "\"Any type whose underlying type is int,\" not just the named type <code>int</code> itself &mdash; so a custom <code>type Age int</code> still satisfies <code>~int</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Generics"
+  },
+  {
+   "guid": "L[XoV0|D|X",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::generics"
+   ],
+   "front": "Can Go methods have their own type parameters independent of the receiver's?",
+   "back": "No &mdash; methods can use type parameters declared on their receiver's type, but cannot introduce new ones of their own. Only free-standing functions can.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Generics"
+  },
+  {
+   "guid": "MM9wbuU):J",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::generics"
+   ],
+   "front": "What is the built-in <code>comparable</code> constraint used for?",
+   "back": "Restricting a type parameter to types supporting <code>==</code>/<code>!=</code> &mdash; needed e.g. for generic map keys or set implementations.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Generics"
+  },
+  {
+   "guid": "MLw0o5Bg!T",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::generics"
+   ],
+   "front": "When does the Go compiler perform type inference for a generic function call?",
+   "back": "When type arguments can be deduced from the regular arguments (e.g. <code>Map(ints, double)</code> infers T from ints' element type). Explicit type arguments are only needed when inference is ambiguous or impossible.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Generics"
+  },
+  {
+   "guid": "b9}rtkL0+$",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::generics"
+   ],
+   "front": "What's the guidance on when to reach for generics versus a small interface?",
+   "back": "Use generics for truly type-independent data structures/algorithms (containers, Map/Filter/Reduce-style helpers), not as a default over an interface when a small interface would already do the job cleanly.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Generics"
+  },
+  {
+   "guid": "fdv!tr_r3Q",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::generics"
+   ],
+   "front": "What's a key performance caveat of Go generics versus C++ templates?",
+   "back": "Go uses a hybrid compilation approach (partial monomorphization via \"GC shape\" stitching), not full per-type code generation like C++ &mdash; so some generic code can run slightly slower than hand-written type-specific code, especially with interface-heavy constraints.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Generics"
+  },
+  {
+   "guid": "rk9v/vI(yA",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::generics"
+   ],
+   "front": "How do you declare a generic type, e.g. a Stack?",
+   "back": "<code>type Stack[T any] struct { items []T }</code>, with methods like <code>func (s *Stack[T]) Push(v T)</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Generics"
+  },
+  {
+   "guid": "Ij<Nk}W0]R",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::generics"
+   ],
+   "front": "What do the standard library's <code>slices</code> and <code>maps</code> packages (Go 1.21+) provide?",
+   "back": "Generic utility functions over slices and maps &mdash; Contains, Sort, Equal, Clone, DeleteFunc, etc. &mdash; reducing hand-rolled generic helper code.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Generics"
+  },
+  {
+   "guid": "xnz?:Bw(py",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::concurrency_goroutines"
+   ],
+   "front": "What is a goroutine?",
+   "back": "A function running concurrently, scheduled by the Go runtime (not the OS) onto OS threads. Cheap to create (a few KB starting stack that grows), so thousands can run concurrently.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency · Goroutines"
+  },
+  {
+   "guid": "xGe|{gvrPF",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::concurrency_goroutines"
+   ],
+   "front": "What is a goroutine leak?",
+   "back": "A goroutine still running/blocked (commonly on a channel send/receive that never completes) after it's no longer needed, so it and its resources are never garbage collected.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency · Goroutines"
+  },
+  {
+   "guid": "uT02X#Z,1{",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::concurrency_goroutines"
+   ],
+   "front": "Before Go 1.22, what was the classic loop-variable-capture bug with goroutines?",
+   "back": "<code>for _, v := range items { go func(){ use(v) }() }</code> &mdash; all goroutines could capture the same reused loop variable, often all seeing the final value instead of each iteration's.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency · Goroutines"
+  },
+  {
+   "guid": "FXy}=$2Ir]",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::concurrency_goroutines"
+   ],
+   "front": "How did Go 1.22 change loop variable semantics, and does it eliminate the old bug?",
+   "back": "Each loop iteration now gets its own fresh copy of the loop variable(s), fixing the classic closure-capture bug for code built with <code>go.mod</code> declaring <code>go 1.22</code> or later.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency · Goroutines"
+  },
+  {
+   "guid": "i?WPCc-lU1",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::concurrency_goroutines"
+   ],
+   "front": "What does <code>sync.WaitGroup</code> coordinate?",
+   "back": "Waiting for a collection of goroutines to finish: <code>Add(n)</code> before launching, each goroutine calls <code>Done()</code> (typically via defer), and the caller calls <code>Wait()</code> to block until the counter hits zero.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency · Goroutines"
+  },
+  {
+   "guid": "Noa?exkE31",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::concurrency_goroutines"
+   ],
+   "front": "Why must <code>wg.Add()</code> be called before starting the goroutine, not inside it?",
+   "back": "Add() must happen-before Wait() observes the count; calling Add() inside the goroutine races with a Wait() that may already be checking a zero counter.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency · Goroutines"
+  },
+  {
+   "guid": "LJSkyT*=0Y",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::concurrency_goroutines"
+   ],
+   "front": "What does <code>GOMAXPROCS</code> control?",
+   "back": "The maximum number of OS threads that can execute Go code simultaneously (i.e. run goroutines in parallel); defaults to the number of logical CPUs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency · Goroutines"
+  },
+  {
+   "guid": "OW0LvpT:#P",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::concurrency_goroutines"
+   ],
+   "front": "Why doesn't launching more goroutines than GOMAXPROCS necessarily hurt throughput for I/O-bound work?",
+   "back": "The runtime scheduler parks goroutines blocked on I/O/channels and reschedules other runnable goroutines onto available OS threads, so blocked goroutines don't consume CPU.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency · Goroutines"
+  },
+  {
+   "guid": "uzhJA(e_n}",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::concurrency_goroutines"
+   ],
+   "front": "What's the danger of unbounded goroutine creation (e.g. one per incoming request, no limit)?",
+   "back": "Under load it can exhaust memory/scheduler resources faster than the system can process work; a worker pool or semaphore should bound concurrency.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency · Goroutines"
+  },
+  {
+   "guid": "j4XXx}/Q:9",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::concurrency_goroutines"
+   ],
+   "front": "How does <code>runtime.Gosched()</code> differ from blocking on a channel or mutex?",
+   "back": "It voluntarily yields the current goroutine's turn without blocking on any resource, letting other runnable goroutines run &mdash; rarely needed since the scheduler has been preemptive since Go 1.14.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency · Goroutines"
+  },
+  {
+   "guid": "pPm/bm+/3z",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::concurrency_channels"
+   ],
+   "front": "What's the difference between an unbuffered and a buffered channel?",
+   "back": "An unbuffered channel's send blocks until a receiver is ready (synchronous rendezvous); a buffered channel's send only blocks once the buffer is full, decoupling sender/receiver timing up to that capacity.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency · Channels"
+  },
+  {
+   "guid": "s0>=?*C<9p",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::concurrency_channels"
+   ],
+   "front": "What happens when you receive from a <code>nil</code> channel?",
+   "back": "The receive blocks forever &mdash; a nil channel is never ready. Sometimes used deliberately to disable a <code>select</code> case.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency · Channels"
+  },
+  {
+   "guid": "yP65^_AXJf",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::concurrency_channels"
+   ],
+   "front": "What happens when you send on a closed channel?",
+   "back": "It panics immediately. Only the sender should ever close a channel, and never twice.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency · Channels"
+  },
+  {
+   "guid": "vO{Y;i#Kx3",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::concurrency_channels"
+   ],
+   "front": "What happens when you receive from a closed channel?",
+   "back": "It returns immediately with the channel's zero value and <code>ok == false</code> (two-value form), without blocking. Closing signals \"no more values\" &mdash; it doesn't discard values already buffered.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency · Channels"
+  },
+  {
+   "guid": "PERG#Oc%+Q",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::concurrency_channels"
+   ],
+   "front": "What is the \"channel ownership\" idiom?",
+   "back": "Exactly one goroutine (typically the one that created the channel) is responsible for sending to and closing it; receivers never close &mdash; avoiding double-close/send-on-closed panics.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency · Channels"
+  },
+  {
+   "guid": "L.-8[@r4W",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::concurrency_channels"
+   ],
+   "front": "What does a <code>select</code> with a <code>default</code> case do?",
+   "back": "Makes the select non-blocking &mdash; if no channel case is immediately ready, default runs instead of blocking.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency · Channels"
+  },
+  {
+   "guid": "ii^?*ExY=X",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::concurrency_channels"
+   ],
+   "front": "What is the fan-out/fan-in concurrency pattern?",
+   "back": "Fan-out distributes work items across multiple worker goroutines reading from a shared channel; fan-in merges multiple result channels back into a single channel for the consumer.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency · Channels"
+  },
+  {
+   "guid": "HUq&5}fS!F",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::concurrency_channels"
+   ],
+   "front": "What is a pipeline in Go concurrency idiom?",
+   "back": "A series of stages connected by channels, each stage a goroutine receiving from an inbound channel, transforming values, and sending to an outbound channel &mdash; composable, and naturally back-pressured by unbuffered/small-buffer channels.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency · Channels"
+  },
+  {
+   "guid": "MmF<Zy7-[o",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::concurrency_channels"
+   ],
+   "front": "How can a pipeline stage be cancelled cleanly mid-flight?",
+   "back": "By selecting on both the data channel and a <code>done</code>/<code>context.Done()</code> channel in every send/receive, so a goroutine can exit even if downstream stops consuming.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency · Channels"
+  },
+  {
+   "guid": "I/K]PMWMKz",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::concurrency_channels"
+   ],
+   "front": "What's the difference between <code>close(ch)</code> and just letting a channel go out of scope?",
+   "back": "close() explicitly signals \"no more values\" to receivers ranging over the channel or checking the ok flag; letting it go out of scope with no close leaves any blocked range/receive hanging (a common leak cause).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency · Channels"
+  },
+  {
+   "guid": "y@1t<%k]E6",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::concurrency_channels"
+   ],
+   "front": "Why is \"don't communicate by sharing memory; share memory by communicating\" a core Go philosophy, and where are its limits?",
+   "back": "Channels let goroutines coordinate via message passing instead of locking shared state, reducing a class of race bugs. In practice, simple shared counters/caches are often clearer and faster with a mutex &mdash; Go doesn't dogmatically require channels everywhere.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency · Channels"
+  },
+  {
+   "guid": "N~c;(:>cRP",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::concurrency_channels"
+   ],
+   "front": "What is a worker pool pattern in Go?",
+   "back": "A fixed number of goroutines (workers) reading jobs from a shared jobs channel and writing results to a results channel, bounding concurrency to a known N regardless of job count.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency · Channels"
+  },
+  {
+   "guid": "c6;a)..hpj",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::concurrency_sync"
+   ],
+   "front": "What's the difference between <code>sync.Mutex</code> and <code>sync.RWMutex</code>?",
+   "back": "Mutex allows only one holder (reader or writer) at a time; RWMutex allows multiple concurrent readers (<code>RLock</code>) or one exclusive writer (<code>Lock</code>), improving throughput for read-heavy workloads.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency · sync & context"
+  },
+  {
+   "guid": "lGLN61bk(P",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::concurrency_sync"
+   ],
+   "front": "What does <code>sync.Once</code> guarantee?",
+   "back": "Its <code>Do(f)</code> runs f exactly once across however many goroutines call Do concurrently &mdash; commonly used for lazy singleton initialization.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency · sync & context"
+  },
+  {
+   "guid": "if4=qAzBT|",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::concurrency_sync"
+   ],
+   "front": "What does <code>sync/atomic</code> provide, and when should you prefer it over a mutex?",
+   "back": "Lock-free atomic operations (Add, Load, Store, CompareAndSwap) on individual values &mdash; cheaper than a mutex for simple counters/flags, but doesn't generalize to protecting multiple related fields consistently.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency · sync & context"
+  },
+  {
+   "guid": "c?b!(JlbeJ",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::concurrency_sync"
+   ],
+   "front": "What does <code>go test -race</code> actually verify?",
+   "back": "It instruments memory accesses at runtime to catch unsynchronized concurrent read/write (or write/write) to the same location &mdash; it only reports races that actually occur during that run, so it can miss races on untested code paths.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency · sync & context"
+  },
+  {
+   "guid": "P?6,|SN+Cs",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::concurrency_sync"
+   ],
+   "front": "What is <code>context.Context</code> primarily used to propagate?",
+   "back": "Cancellation signals, deadlines/timeouts, and request-scoped values, threaded explicitly through a call chain as the first parameter by convention.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency · sync & context"
+  },
+  {
+   "guid": "O)BSe?tf65",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::concurrency_sync"
+   ],
+   "front": "Why is passing business logic parameters via <code>context.WithValue</code> considered an anti-pattern?",
+   "back": "It makes data flow implicit and untyped (retrieved via interface{} keys with runtime assertions), bypassing the compiler. Context values should be reserved for cross-cutting request-scoped metadata (trace IDs, auth), not core function arguments.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency · sync & context"
+  },
+  {
+   "guid": "h@Ey,tz;4J",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::concurrency_sync"
+   ],
+   "front": "What's the difference between <code>context.WithCancel</code>, <code>WithTimeout</code>, and <code>WithDeadline</code>?",
+   "back": "WithCancel gives a manual cancel function; WithTimeout cancels automatically after a duration; WithDeadline cancels at a specific time. All three return a Done() channel closed on cancellation/expiry.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency · sync & context"
+  },
+  {
+   "guid": "bav<W%j^)D",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::concurrency_sync"
+   ],
+   "front": "Why should you always call a context's cancel function, even after it expires on its own?",
+   "back": "Deferred cancel() releases resources (timers, parent-child links) immediately rather than waiting for GC &mdash; <code>defer cancel()</code> right after creation is the idiom.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency · sync & context"
+  },
+  {
+   "guid": "rQ)YQwq5-I",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::concurrency_sync"
+   ],
+   "front": "What does <code>golang.org/x/sync/errgroup</code> add on top of <code>sync.WaitGroup</code>?",
+   "back": "Runs a group of goroutines, propagates the first non-nil error from any of them, and (via <code>WithContext</code>) automatically cancels a shared context when one goroutine fails, so siblings can stop early.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency · sync & context"
+  },
+  {
+   "guid": "Q!hpkEEfCK",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::concurrency_sync"
+   ],
+   "front": "What is a \"happens-before\" relationship in the Go memory model, and why does it matter beyond avoiding a race-detector warning?",
+   "back": "The guarantee that one event's effects are visible to another goroutine (e.g. a channel send happens-before the corresponding receive completes). Code that's technically race-free but relies on no happens-before ordering can still read stale values &mdash; you need synchronization primitives that establish ordering, not just avoidance of detected races.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency · sync & context"
+  },
+  {
+   "guid": "Oz<YxRxX|A",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::memory"
+   ],
+   "front": "What is escape analysis, and why does it matter for performance?",
+   "back": "The compiler's static analysis to determine whether a value's lifetime provably ends within its function (stays on the stack) or might outlive it (escapes to the heap, requiring GC). Heap allocations are more expensive than stack ones.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Memory & Performance"
+  },
+  {
+   "guid": "j2_ZWH&a]c",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::memory"
+   ],
+   "front": "Name two common causes of a value escaping to the heap.",
+   "back": "Returning a pointer to a local variable, or storing a value in an interface (e.g. passing it to <code>fmt.Println</code> or an <code>interface{}</code> parameter) &mdash; both make the compiler unable to prove the value's scope stays local.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Memory & Performance"
+  },
+  {
+   "guid": "e!oCXaGw_R",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::memory"
+   ],
+   "front": "What's the difference between a slice's length and capacity?",
+   "back": "Length is the number of currently accessible elements; capacity is the size of the underlying backing array from the slice's start pointer. <code>append</code> can grow into unused capacity without reallocating.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Memory & Performance"
+  },
+  {
+   "guid": "s^J4mjg_cK",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::memory"
+   ],
+   "front": "Why can slicing an existing slice cause a subtle aliasing bug?",
+   "back": "A sub-slice shares the same backing array as the original; mutating through one is visible through the other, and appending to the sub-slice can silently overwrite elements beyond its length that the original slice still considers valid.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Memory & Performance"
+  },
+  {
+   "guid": "u@pM~2CC]$",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::memory"
+   ],
+   "front": "When does <code>append</code> reallocate the underlying array versus mutate in place?",
+   "back": "Only when existing capacity is insufficient for the new length; if capacity allows, append writes into the existing backing array and returns a slice header pointing at the same memory.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Memory & Performance"
+  },
+  {
+   "guid": "D9Sk3,vhag",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::memory"
+   ],
+   "front": "How does Go's garbage collector primarily work?",
+   "back": "A concurrent, tri-color mark-and-sweep collector running alongside the program (with brief stop-the-world pauses for setup), tuned to keep pause times low rather than maximize throughput.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Memory & Performance"
+  },
+  {
+   "guid": "oLe{ZtMNdi",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::memory"
+   ],
+   "front": "Why can copying large structs by value in a hot path hurt performance, and what's the trade-off with a pointer instead?",
+   "back": "Every value copy duplicates all fields' memory/cache footprint; a pointer avoids the copy but risks heap escape and loses value-semantics safety (aliasing, no accidental mutation). Idiom: pass small structs by value, larger/mutable ones by pointer.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Memory & Performance"
+  },
+  {
+   "guid": "f7Pi[R.Pe^",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::memory"
+   ],
+   "front": "What does <code>defer</code> cost, and when might that matter?",
+   "back": "A small runtime bookkeeping overhead per call (largely optimized away for simple cases since Go 1.14's open-coded defers) &mdash; usually negligible, but can matter in extremely hot, tight loops.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Memory & Performance"
+  },
+  {
+   "guid": "D3PF:FKmYM",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::mistakes"
+   ],
+   "front": "What happens if you write to a <code>nil</code> map?",
+   "back": "It panics at runtime (\"assignment to entry in nil map\") &mdash; unlike a nil slice, which behaves like an empty slice for reads and append. Maps must be initialized with <code>make()</code> or a literal before writes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Idioms & Common Mistakes"
+  },
+  {
+   "guid": "BAGQ=ZpY2w",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::mistakes"
+   ],
+   "front": "What happens if you read from a <code>nil</code> map?",
+   "back": "It returns the zero value for the map's value type, no panic &mdash; only writes to a nil map are unsafe.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Idioms & Common Mistakes"
+  },
+  {
+   "guid": "g7rLW9*rk(",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::mistakes"
+   ],
+   "front": "Why is calling <code>defer</code> inside a loop often a mistake?",
+   "back": "Deferred calls only run when the enclosing function returns, not at the end of each loop iteration &mdash; so deferring inside a loop (e.g. closing many files) accumulates all deferred calls until the function exits, potentially exhausting file descriptors.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Idioms & Common Mistakes"
+  },
+  {
+   "guid": "biKvwvwGzo",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::mistakes"
+   ],
+   "front": "Why can returning a pointer to a range loop variable be a bug, and does it still matter after Go 1.22?",
+   "back": "With one shared loop variable (pre-1.22 semantics), taking &amp;v repeatedly yields the same address, so a slice of pointers all end up pointing at the final value. Go 1.22 fixed this by giving each iteration its own variable &mdash; but code targeting an older <code>go</code> directive, or reused variables outside a loop, still needs care.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Idioms & Common Mistakes"
+  },
+  {
+   "guid": "qws#TlsA@L",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::mistakes"
+   ],
+   "front": "Why is comparing <code>time.Time</code> values with <code>==</code> usually wrong?",
+   "back": "time.Time includes a monotonic reading plus wall-clock and location fields that can differ between logically-equal instants (e.g. after (de)serialization). Use the <code>Equal()</code> method instead.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Idioms & Common Mistakes"
+  },
+  {
+   "guid": "NH709&gsY=",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::mistakes"
+   ],
+   "front": "What's the risk of unexported struct fields when using <code>encoding/json</code>?",
+   "back": "Unexported fields are invisible to the json package (only exported fields are marshaled/unmarshaled), so a missing export silently drops data with no error.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Idioms & Common Mistakes"
+  },
+  {
+   "guid": "uQw&1cPB1J",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::mistakes"
+   ],
+   "front": "Why is repeated string concatenation with <code>+=</code> in a loop inefficient, and what's the idiomatic fix?",
+   "back": "Strings are immutable, so each <code>+=</code> allocates a new string and copies both operands &mdash; O(n&sup2;) total work. <code>strings.Builder</code> (or bytes.Buffer) accumulates into a growable buffer and produces the final string once.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Idioms & Common Mistakes"
+  },
+  {
+   "guid": "Gb^/*RND_~",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::mistakes"
+   ],
+   "front": "What's the shadowing bug commonly caused by <code>:=</code> inside an <code>if</code>/err check?",
+   "back": "An inner block's <code>if x, err := h(); ...</code> can declare a new <code>err</code> that shadows an outer <code>err</code> of the same name, silently discarding the outer assignment intended by a later <code>val, err = g()</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Idioms & Common Mistakes"
+  },
+  {
+   "guid": "lZ^~}-Hj{3",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::mistakes"
+   ],
+   "front": "Why is embedding a struct just to \"inherit\" its methods, without designing for the composition, a mistake?",
+   "back": "It promotes the embedded type's full method set onto the outer type's public API even if some of those methods don't make sense for the wrapper, widening and coupling the API surface beyond what was intended.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Idioms & Common Mistakes"
+  },
+  {
+   "guid": "fjbU,j[Moy",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::mistakes"
+   ],
+   "front": "What's wrong with expecting a same-named field to \"override\" a promoted method from an embedded type?",
+   "back": "Fields and methods are promoted by depth, and same-named identifiers at the outer level shadow (rather than cleanly override) the promoted ones &mdash; it's clearer to just avoid naming collisions with embedded types.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Idioms & Common Mistakes"
+  },
+  {
+   "guid": "l8/zvNKd5*",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::mistakes"
+   ],
+   "front": "Why is ignoring the second return value from a type assertion risky in production code?",
+   "back": "A failed assertion in the single-value form (<code>v := x.(T)</code>) panics; without the <code>, ok</code> form you have no way to handle an unexpected dynamic type gracefully.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Idioms & Common Mistakes"
+  },
+  {
+   "guid": "K@h^GKLZ-_",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::mistakes"
+   ],
+   "front": "Why can passing a large array by value to a function be a subtle mistake?",
+   "back": "Arrays are copied by value entirely (unlike slices, which copy just the {ptr,len,cap} header) &mdash; passing a large array by value copies all its backing data, easy to do accidentally since arrays and slices look similar syntactically.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Idioms & Common Mistakes"
+  },
+  {
+   "guid": "j]`~rZbdi9",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::mistakes"
+   ],
+   "front": "What's the \"error or panic\" mistake specific to library code?",
+   "back": "Library code panicking on recoverable/expected conditions (bad input, missing file) forces every caller to crash or wrap every call in a deferred recover. Libraries should return errors for anything a caller could reasonably want to handle.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Idioms & Common Mistakes"
+  },
+  {
+   "guid": "j^Hzde0M;,",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::mistakes"
+   ],
+   "front": "Why is it a mistake to start a goroutine without a clear plan for how/when it stops?",
+   "back": "Every goroutine should have an explicit termination condition (context cancellation, channel close, WaitGroup) decided at creation time &mdash; \"fire and forget\" goroutines are the most common source of leaks and are hard to retrofit later.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Idioms & Common Mistakes"
+  },
+  {
+   "guid": "ls;VS{W^@K",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::mistakes"
+   ],
+   "front": "What's the risk of calling <code>time.After</code> repeatedly inside a <code>select</code> in a loop?",
+   "back": "Each call allocates a new timer that isn't garbage collected until it fires, so calling it repeatedly inside a loop (rather than reusing a single <code>time.NewTimer</code>/<code>Reset</code>) leaks timers under high iteration rates.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Idioms & Common Mistakes"
+  },
+  {
+   "guid": "p^3,,Orr6S",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::mistakes"
+   ],
+   "front": "Why might using <code>map[string]interface{}</code> in place of a defined struct be a mistake for API payloads?",
+   "back": "It defers all type-checking to runtime, requires type assertions everywhere it's read, and gives up compiler-checked field names/typos &mdash; a defined struct with json tags achieves the same serialization with static safety.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Idioms & Common Mistakes"
+  },
+  {
+   "guid": "O$V:rKU4/5",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::stdlib"
+   ],
+   "front": "What two methods define <code>io.Reader</code> and <code>io.Writer</code>?",
+   "back": "<code>Read(p []byte) (n int, err error)</code> and <code>Write(p []byte) (n int, err error)</code> &mdash; the foundation nearly all of Go's I/O (files, network conns, buffers, compressors) is built on.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Standard Library"
+  },
+  {
+   "guid": "w+5`0Z#L8r",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::stdlib"
+   ],
+   "front": "What is table-driven testing, and why is it idiomatic in Go?",
+   "back": "A single test function iterates over a slice/map of struct-defined cases (input, expected output, name), running the same assertion logic per case &mdash; reduces duplication and makes adding a new case a one-line change.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Standard Library"
+  },
+  {
+   "guid": "FoR?fn2npY",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::stdlib"
+   ],
+   "front": "What does <code>t.Run()</code> enable in the <code>testing</code> package?",
+   "back": "Named subtests within a test function, each independently reportable/failable/skippable, and filterable via <code>-run TestName/SubtestName</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Standard Library"
+  },
+  {
+   "guid": "wO*0JJzXb?",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::stdlib"
+   ],
+   "front": "What does <code>t.Helper()</code> do inside a test helper function?",
+   "back": "Marks the calling function as a helper so failure line numbers reported by t.Errorf/Fatalf point to the caller's line, not the helper's internals.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Standard Library"
+  },
+  {
+   "guid": "P:sgSnL{kQ",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::stdlib"
+   ],
+   "front": "What's the difference between <code>t.Fatal</code> and <code>t.Error</code> in a test?",
+   "back": "Error marks the test failed but continues executing the rest of the function; Fatal marks it failed and immediately stops that goroutine, skipping remaining code.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Standard Library"
+  },
+  {
+   "guid": "AqpED>EdT-",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::stdlib"
+   ],
+   "front": "What does the <code>reflect</code> package let you do, and why is it usually a last resort?",
+   "back": "Inspect/manipulate values and types at runtime (needed by things like encoding/json, ORMs, generic serialization) &mdash; it's slow, bypasses compile-time type checking, and produces harder-to-read code.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Standard Library"
+  },
+  {
+   "guid": "mj!4:#8&i1",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::stdlib"
+   ],
+   "front": "What do struct tags like <code>json:\"name,omitempty\"</code> control?",
+   "back": "Metadata read via reflection by packages like <code>encoding/json</code> to control field-name mapping and behavior; <code>omitempty</code> skips the field in output if it's the zero value.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Standard Library"
+  },
+  {
+   "guid": "i+Simdpl.C",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::stdlib"
+   ],
+   "front": "Why does <code>encoding/json</code> require exported struct fields, and what happens with an embedded anonymous struct?",
+   "back": "Reflection can only read exported (capitalized) fields; an embedded anonymous struct's exported fields are promoted and flattened into the parent's JSON object by default.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Standard Library"
+  },
+  {
+   "guid": "ygq_[bs`D_",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::stdlib"
+   ],
+   "front": "What is <code>net/http</code>'s <code>Handler</code> interface?",
+   "back": "<code>type Handler interface { ServeHTTP(ResponseWriter, *Request) }</code> &mdash; the single method every HTTP handler, middleware, and router in the standard library builds on.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Standard Library"
+  },
+  {
+   "guid": "Bjm|nHLdu6",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::stdlib"
+   ],
+   "front": "What's the idiomatic way to build HTTP middleware in Go's standard-library style?",
+   "back": "A function taking an <code>http.Handler</code> and returning a new <code>http.Handler</code> that wraps behavior around calling the original &mdash; e.g. <code>func Logging(next http.Handler) http.Handler</code>, composed by nesting calls.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Standard Library"
+  },
+  {
+   "guid": "sKRpy8F`UE",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::stdlib"
+   ],
+   "front": "What does the <code>flag</code> package provide, and what limitation pushes larger CLIs toward third-party libraries?",
+   "back": "Simple command-line flag parsing bound to variables; it has no built-in subcommand support, which is why CLIs with subcommands (kubectl-style tools) typically reach for cobra instead.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Standard Library"
+  },
+  {
+   "guid": "Fbb+c.ejKF",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::stdlib"
+   ],
+   "front": "What's the difference between <code>context.TODO()</code> and <code>context.Background()</code>?",
+   "back": "Both return an empty, never-cancelled root context; Background() is used where you deliberately have no context (main, tests, top-level). TODO() marks \"this should probably take a real context eventually\" for incomplete plumbing.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Standard Library"
+  },
+  {
+   "guid": "GO|:$=lGtF",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::tooling"
+   ],
+   "front": "What does <code>go.mod</code> declare, and what's the significance of its <code>go</code> directive?",
+   "back": "The module's import path, its dependencies with required versions, and (via the <code>go</code> directive) the minimum Go language version the module's syntax/semantics assume &mdash; affecting things like the Go 1.22 loop-variable behavior.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Modules & Tooling"
+  },
+  {
+   "guid": "EM9X^KYf$$",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::tooling"
+   ],
+   "front": "What is Minimal Version Selection (MVS) in Go modules?",
+   "back": "Go's dependency resolution algorithm picks, for each module, the *minimum* version satisfying all requirements across the build's dependency graph &mdash; not automatically the newest available &mdash; keeping builds reproducible.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Modules & Tooling"
+  },
+  {
+   "guid": "grkQ83gHl}",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::tooling"
+   ],
+   "front": "What's the purpose of <code>go.sum</code>?",
+   "back": "Cryptographic checksums of every module version in the dependency graph, verified on each build to detect tampering or accidental changes to a dependency's content.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Modules & Tooling"
+  },
+  {
+   "guid": "k,E$!=IWEZ",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::tooling"
+   ],
+   "front": "Why does Go's module system require semantic import versioning for v2+ major versions?",
+   "back": "A major version bump (v2+) must change the module's import path (e.g. adding <code>/v2</code>) because Go's compatibility promise assumes anything sharing an import path is backward compatible &mdash; letting v1 and v2 coexist as distinct packages in the same build.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Modules & Tooling"
+  },
+  {
+   "guid": "JdeE5:A}~t",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::tooling"
+   ],
+   "front": "What is a Go build tag / build constraint used for?",
+   "back": "A <code>//go:build</code> comment restricting a file's compilation to matching conditions (OS, arch, custom tags) &mdash; e.g. platform-specific implementations, or excluding integration tests via a custom tag.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Modules & Tooling"
+  },
+  {
+   "guid": "jtRN_-n(ff",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::tooling"
+   ],
+   "front": "What does <code>go vet</code> check for that the compiler doesn't?",
+   "back": "Suspicious constructs that compile fine but are likely bugs &mdash; Printf format-string/argument mismatches, unreachable code, struct tag typos, lock value copies &mdash; static analysis beyond syntax/type checking.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Modules & Tooling"
+  },
+  {
+   "guid": "i0CqL:xr4_",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::tooling"
+   ],
+   "front": "What does <code>go generate</code> do, and how does it differ from a build step?",
+   "back": "Scans for <code>//go:generate</code> comments and runs the specified commands (e.g. stringer, mockgen, controller-gen) when explicitly invoked &mdash; not run automatically by <code>go build</code>, so generated code must be regenerated/committed deliberately.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Modules & Tooling"
+  },
+  {
+   "guid": "Nh:1ADgxOm",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::tooling"
+   ],
+   "front": "What problem does Go workspace mode (<code>go.work</code>, Go 1.18+) solve?",
+   "back": "Developing across multiple local modules simultaneously (e.g. a library and an app importing it) without needing <code>replace</code> directives in each go.mod &mdash; go.work overrides module resolution locally for the whole workspace.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Modules & Tooling"
+  },
+  {
+   "guid": "n7erso#mVn",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::tooling"
+   ],
+   "front": "What's the difference between <code>go mod tidy</code> and <code>go mod vendor</code>?",
+   "back": "<code>tidy</code> adds missing/removes unused requirements from go.mod/go.sum based on actual imports; <code>vendor</code> copies all dependency source into a local vendor/ directory for network-independent builds.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Modules & Tooling"
+  },
+  {
+   "guid": "ndMpyRVA##",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::tooling"
+   ],
+   "front": "Why might a Go module deliberately vendor its dependencies in a Kubernetes-ecosystem project?",
+   "back": "Reproducible, network-independent, air-gapped builds (common in enterprise/regulated CI) and protection against upstream module removal or tampering &mdash; many CNCF Go projects, including Kubernetes itself, vendor for exactly this reason.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Modules & Tooling"
+  },
+  {
+   "guid": "nzXe/>,/{^",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::k8s_clientgo"
+   ],
+   "front": "What does <code>k8s.io/client-go</code>'s \"clientset\" provide?",
+   "back": "A generated, statically-typed Go client with one method group per API resource kind (e.g. <code>clientset.CoreV1().Pods(ns).Get(...)</code>) &mdash; compile-time-checked calls against known, built-in Kubernetes API types.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "K8s API · client-go"
+  },
+  {
+   "guid": "Jp>JWRTJv3",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::k8s_clientgo"
+   ],
+   "front": "What is the \"dynamic client\" in client-go, and when do you need it over a typed clientset?",
+   "back": "A client working with <code>unstructured.Unstructured</code> (a generic map[string]interface{} wrapper) instead of typed Go structs &mdash; needed for Custom Resources (CRs) or arbitrary GVKs unknown at compile time.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "K8s API · client-go"
+  },
+  {
+   "guid": "f3&kvxJ`*I",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::k8s_clientgo"
+   ],
+   "front": "What is a Kubernetes Informer, and what problem does it solve versus polling the API server?",
+   "back": "A client-side cache that watches a resource type via the API server's watch endpoint, keeping a local in-memory store in sync with cluster state, and dispatching add/update/delete events to handlers &mdash; avoids hammering the API server with repeated LIST calls.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "K8s API · client-go"
+  },
+  {
+   "guid": "jBiy#$8M.1",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::k8s_clientgo"
+   ],
+   "front": "What is a Lister in client-go, and how does it relate to an Informer?",
+   "back": "A read-only, cache-backed accessor generated alongside an Informer that serves Get/List calls from the Informer's local store rather than the API server &mdash; fast, eventually-consistent reads.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "K8s API · client-go"
+  },
+  {
+   "guid": "fP}MbhCC<|",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::k8s_clientgo"
+   ],
+   "front": "What does a <code>SharedInformerFactory</code> provide?",
+   "back": "A single set of shared Informers (one per resource type, not one per consumer) so multiple controllers watching the same resource types reuse one underlying watch and cache.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "K8s API · client-go"
+  },
+  {
+   "guid": "JL(x-ks;d^",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::k8s_clientgo"
+   ],
+   "front": "What is a <code>workqueue</code> used for in a client-go-based controller?",
+   "back": "A rate-limited queue decoupling \"an event happened\" from \"process that item,\" deduplicating multiple events for the same object into one pending work item and supporting retry-with-backoff on failure.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "K8s API · client-go"
+  },
+  {
+   "guid": "y#WGXauCGv",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::k8s_clientgo"
+   ],
+   "front": "Why do client-go controllers typically enqueue an object's key (namespace/name) rather than the object itself?",
+   "back": "The object may have changed again by the time it's dequeued; re-fetching by key from the informer's cache at processing time ensures you act on the latest known state, not a stale snapshot.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "K8s API · client-go"
+  },
+  {
+   "guid": "q&S]:/pvbF",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::k8s_clientgo"
+   ],
+   "front": "What is the resync period on an Informer, and why is it needed even though the informer is watch-based?",
+   "back": "A periodic full re-delivery of all cached objects to handlers, acting as a safety net against missed/lost watch events and any handler logic that needs to periodically re-verify desired state.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "K8s API · client-go"
+  },
+  {
+   "guid": "O[S54&B}v|",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::k8s_clientgo"
+   ],
+   "front": "What does <code>ListAndWatch</code> describe in client-go/apimachinery?",
+   "back": "The pattern behind Informers: first LIST the full current resource set to establish a baseline (and a resourceVersion), then WATCH for incremental changes from that resourceVersion &mdash; converging to accurate cluster state.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "K8s API · client-go"
+  },
+  {
+   "guid": "oP]S|/V7-Z",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::k8s_clientgo"
+   ],
+   "front": "What happens if a Watch connection's <code>resourceVersion</code> becomes too old (\"too old resource version\")?",
+   "back": "etcd's compacted history can no longer serve incremental changes from that point; the client must fall back to a fresh LIST, which Informers handle automatically via relist-on-error.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "K8s API · client-go"
+  },
+  {
+   "guid": "ksh/iRo7WA",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::k8s_clientgo"
+   ],
+   "front": "What is the discovery client used for?",
+   "back": "Discovering which API groups, versions, and resources (GVRs) are actually served by a given cluster's API server at runtime &mdash; CRDs and API availability vary between clusters/versions, unlike a typed clientset's fixed built-in types.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "K8s API · client-go"
+  },
+  {
+   "guid": "s>=_%[0~lE",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::k8s_clientgo"
+   ],
+   "front": "What's the difference between a typed client's decoding and the unstructured client's handling of unknown fields?",
+   "back": "A typed client decodes JSON into a fixed Go struct, silently dropping fields not present in that struct; the unstructured client preserves the full raw JSON structure as a generic map, losing no fields even if the compiled-in type is out of date.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "K8s API · client-go"
+  },
+  {
+   "guid": "lL^R|kDrHM",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::k8s_clientgo"
+   ],
+   "front": "Why is client-side rate limiting (<code>rest.Config.QPS</code>/<code>Burst</code>) important for controllers?",
+   "back": "Without it, a controller processing many objects can burst enough API requests to overload or get throttled by the API server; client-go builds in a token-bucket limiter per client to smooth request rates.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "K8s API · client-go"
+  },
+  {
+   "guid": "Bl9KsCb8QN",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::k8s_clientgo"
+   ],
+   "front": "What's the purpose of client-go's <code>cache.DeletedFinalStateUnknown</code> type in an informer's delete handler?",
+   "back": "The type delivered when the informer missed the actual delete event (e.g. after a resync gap) and only knows the object *used to* exist &mdash; the handler must type-assert for it and extract the last-known key.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "K8s API · client-go"
+  },
+  {
+   "guid": "PaT09x0*?/",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::k8s_apimachinery"
+   ],
+   "front": "What is <code>runtime.Object</code> in <code>k8s.io/apimachinery</code>?",
+   "back": "The base interface every Kubernetes API type implements (<code>GetObjectKind()</code>, <code>DeepCopyObject()</code>), letting generic client/scheme/serialization code operate on any resource type polymorphically.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "K8s API · apimachinery"
+  },
+  {
+   "guid": "QT|m%H@4FD",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::k8s_apimachinery"
+   ],
+   "front": "What is a <code>Scheme</code> in apimachinery, and what does it register?",
+   "back": "A runtime type registry mapping Go types to their GroupVersionKinds (and back), plus conversion and defaulting functions &mdash; clients/managers need types registered in a Scheme before they can list/watch/serialize them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "K8s API · apimachinery"
+  },
+  {
+   "guid": "I<?$4o.x|B",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::k8s_apimachinery"
+   ],
+   "front": "What's the difference between GroupVersionKind (GVK) and GroupVersionResource (GVR)?",
+   "back": "GVK identifies an API *type* as used in manifests (e.g. apps/v1 Deployment); GVR identifies the corresponding REST *endpoint/resource collection* (e.g. apps/v1 deployments) &mdash; a Kind's plural resource name isn't always trivial (e.g. Endpoints).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "K8s API · apimachinery"
+  },
+  {
+   "guid": "}RxQ[!#g#",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::k8s_apimachinery"
+   ],
+   "front": "What is <code>unstructured.Unstructured</code>?",
+   "back": "A generic, schema-agnostic representation of a Kubernetes object backed by <code>map[string]interface{}</code>, satisfying runtime.Object &mdash; used by the dynamic client and tooling that must work with arbitrary/unknown resource types, including CRDs without generated Go types.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "K8s API · apimachinery"
+  },
+  {
+   "guid": "H{YklVlUKL",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::k8s_apimachinery"
+   ],
+   "front": "Why does nearly every Kubernetes API type have a generated <code>zz_generated.deepcopy.go</code> file?",
+   "back": "runtime.Object requires <code>DeepCopyObject()</code>; Go has no built-in deep copy, so <code>controller-gen object</code> (or deepcopy-gen) generates it mechanically so the API machinery can safely clone objects without accidental shared-state aliasing.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "K8s API · apimachinery"
+  },
+  {
+   "guid": "bV#waJ]?R<",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::k8s_apimachinery"
+   ],
+   "front": "What is a conversion webhook used for in apimachinery-based APIs?",
+   "back": "Converting a Custom Resource between multiple served API versions (e.g. v1alpha1 &harr; v1) on the fly, since etcd stores objects in a single \"storage version\" but clients may request another.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "K8s API · apimachinery"
+  },
+  {
+   "guid": "y)L+d/ABQ3",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::k8s_apimachinery"
+   ],
+   "front": "What does <code>meta.Accessor</code> (or the <code>metav1.Object</code> interface) give you generic access to?",
+   "back": "The common ObjectMeta fields (Name, Namespace, Labels, Annotations, OwnerReferences, ResourceVersion, etc.) via a uniform interface, regardless of the object's concrete Kind &mdash; used by generic controller logic.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "K8s API · apimachinery"
+  },
+  {
+   "guid": "CC|zmmKtn4",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::k8s_apimachinery"
+   ],
+   "front": "What is a <code>Codec</code>/<code>Serializer</code> in apimachinery responsible for?",
+   "back": "Encoding/decoding Kubernetes objects between their Go representation and wire formats (JSON, protobuf, YAML), aware of the Scheme's registered types and API versions.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "K8s API · apimachinery"
+  },
+  {
+   "guid": "w>OPq5FUWL",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::k8s_apimachinery"
+   ],
+   "front": "What does <code>SetDefaults_X</code> (defaulting) in the apimachinery/Scheme convention do?",
+   "back": "Registered defaulting functions that fill in unset fields with API-defined defaults, run automatically when an object is decoded &mdash; ensuring downstream code sees a fully-populated object even if the manifest omitted optional fields.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "K8s API · apimachinery"
+  },
+  {
+   "guid": "O1LsAV}Vr%",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::k8s_apimachinery"
+   ],
+   "front": "Why does apimachinery represent object identity partly through <code>ResourceVersion</code>, and what is it used for?",
+   "back": "It's an opaque, server-assigned value that changes on every write, used for optimistic concurrency control (a write is rejected with Conflict if the version has since changed) and to track a watch's position in etcd's change history.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "K8s API · apimachinery"
+  },
+  {
+   "guid": "G3XUpI41`S",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_runtime"
+   ],
+   "front": "What is the <code>Manager</code> in controller-runtime, and what does it own?",
+   "back": "The top-level runnable that starts and coordinates everything in a controller process &mdash; the shared cache/informers, the client, leader election, metrics/health servers, and all registered controllers/webhooks run under it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · controller-runtime"
+  },
+  {
+   "guid": "fMH|!qIENK",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_runtime"
+   ],
+   "front": "What is the <code>Reconciler</code> interface in controller-runtime?",
+   "back": "<code>Reconcile(ctx, req ctrl.Request) (ctrl.Result, error)</code> &mdash; a single method, called with just a namespace/name key, whose job is to converge actual cluster state toward the desired state described by that object, and which must be safely re-callable (idempotent).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · controller-runtime"
+  },
+  {
+   "guid": "OVt(Hf!lq>",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_runtime"
+   ],
+   "front": "Why must a Reconcile function be idempotent?",
+   "back": "It can be called repeatedly for the same object &mdash; on every relevant change, on resync, after crashes/restarts, after failed retries &mdash; with no guarantee about count or order; it must always converge toward the same correct end state.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · controller-runtime"
+  },
+  {
+   "guid": "CI+.b;gb3m",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_runtime"
+   ],
+   "front": "What's the difference between controller-runtime's cached <code>Client</code> and the \"API reader\" client?",
+   "back": "The default Client reads from (and writes through to) the shared informer cache on GET/LIST, which is fast but only eventually consistent; the APIReader bypasses the cache and reads directly from the API server, used when a guaranteed-fresh read is needed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · controller-runtime"
+  },
+  {
+   "guid": "otZ24t;&-F",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_runtime"
+   ],
+   "front": "What does <code>Builder.For(&amp;MyType{})</code> establish in a controller-runtime setup?",
+   "back": "The \"primary\" resource type this controller reconciles &mdash; a change to any object of this type enqueues a reconcile request for that object.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · controller-runtime"
+  },
+  {
+   "guid": "A+PR4B~QA[",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_runtime"
+   ],
+   "front": "What does <code>Builder.Owns(&amp;corev1.Pod{})</code> add to a controller's watches?",
+   "back": "Watches a secondary resource type (here Pods) and, when one changes, looks up its OwnerReference to find the owning primary resource and enqueues a reconcile for that owner.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · controller-runtime"
+  },
+  {
+   "guid": "B2bax#6SlI",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_runtime"
+   ],
+   "front": "What does <code>Builder.Watches()</code> provide beyond <code>Owns()</code>?",
+   "back": "A more general watch on any resource type with a custom mapping function to translate a changed object into the primary resource's reconcile key &mdash; needed when the relationship isn't expressed via OwnerReference.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · controller-runtime"
+  },
+  {
+   "guid": "x;WU1%4pI_",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_runtime"
+   ],
+   "front": "What is a <code>Predicate</code> in controller-runtime, and why use one?",
+   "back": "A filter function deciding whether a watch event should actually trigger a reconcile &mdash; e.g. <code>predicate.GenerationChangedPredicate</code> skips reconciles triggered only by status subresource updates, reducing unnecessary churn.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · controller-runtime"
+  },
+  {
+   "guid": "mW@Qc=:vir",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_runtime"
+   ],
+   "front": "What does <code>ctrl.Result{Requeue: true}</code> versus <code>ctrl.Result{RequeueAfter: d}</code> tell the controller?",
+   "back": "Requeue: true re-queues for immediate reprocessing (subject to the workqueue's rate limiter); RequeueAfter schedules reprocessing after a specific delay &mdash; used for polling external state or waiting out a known condition.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · controller-runtime"
+  },
+  {
+   "guid": "JP!{(+g;g^",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_runtime"
+   ],
+   "front": "What should a Reconciler return when it hits a transient error?",
+   "back": "A non-nil error &mdash; controller-runtime automatically requeues with exponential backoff on any returned error, so manual RequeueAfter isn't needed for ordinary retriable failures.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · controller-runtime"
+  },
+  {
+   "guid": "t3^Eko)x;<",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_runtime"
+   ],
+   "front": "What is leader election in controller-runtime for, and why does it matter for Operators running multiple replicas?",
+   "back": "Ensures only one replica of a controller is actively reconciling at a time (via a Lease object) while others stand by, preventing conflicting concurrent writes from multiple active reconcile loops while still allowing HA failover if the leader dies.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · controller-runtime"
+  },
+  {
+   "guid": "du;JHyH@uL",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_runtime"
+   ],
+   "front": "What is a field indexer in controller-runtime, and why is it useful?",
+   "back": "Registers a custom index on the cache so you can efficiently List objects filtered by a field value that isn't natively indexed (e.g. \"all Pods whose spec.nodeName == X\") without an O(n) client-side scan.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · controller-runtime"
+  },
+  {
+   "guid": "DR(6Exj:}X",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_runtime"
+   ],
+   "front": "What does <code>SetupWithManager</code> conventionally do?",
+   "back": "Wires the controller into the Manager &mdash; configuring the Builder's For/Owns/Watches, predicates, and options, then registering the controller to be started when the Manager starts.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · controller-runtime"
+  },
+  {
+   "guid": "vMTB?*RcHX",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_runtime"
+   ],
+   "front": "How does controller-runtime rate-limit requeues to avoid hot-looping on a persistently failing reconcile?",
+   "back": "Its default workqueue uses an exponential-backoff rate limiter per item, increasing the delay between requeues on repeated failures for the same object up to a cap, resetting on success.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · controller-runtime"
+  },
+  {
+   "guid": "czdiw<1Yid",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_runtime"
+   ],
+   "front": "What is a <code>ValidatingWebhook</code> versus a <code>MutatingWebhook</code> in controller-runtime's webhook package?",
+   "back": "A mutating webhook can modify an incoming object (e.g. set defaults) before it's persisted; a validating webhook can only accept or reject it. Mutating webhooks always run before validating ones in the admission chain.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · controller-runtime"
+  },
+  {
+   "guid": "i@$Na6Y$9{",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_runtime"
+   ],
+   "front": "Why does controller-runtime recommend keeping business logic separate from the Reconcile function's direct API-call plumbing?",
+   "back": "It makes core reconciliation logic unit-testable without a live API server/cache &mdash; Reconcile becomes thin glue code that fetches state and delegates to logic testable with plain Go structs and fakes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · controller-runtime"
+  },
+  {
+   "guid": "fhPIHDe+ZX",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_kubebuilder"
+   ],
+   "front": "What is Kubebuilder, in relation to controller-runtime?",
+   "back": "A scaffolding CLI and framework generating a standard project layout (APIs, controllers, config manifests) built on top of controller-runtime, plus code-generation markers, so you don't hand-write CRD YAML or RBAC manifests.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Kubebuilder"
+  },
+  {
+   "guid": "KG<x]cv|!e",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_kubebuilder"
+   ],
+   "front": "What does a <code>+kubebuilder:object:root=true</code> marker do?",
+   "back": "Tells controller-gen to generate <code>DeepCopyObject()</code> (and related deepcopy methods) for that type, satisfying the runtime.Object interface requirement automatically.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Kubebuilder"
+  },
+  {
+   "guid": "gp0Zv}d1Yn",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_kubebuilder"
+   ],
+   "front": "What does a <code>+kubebuilder:validation:...</code> marker (e.g. Minimum=1, Enum=A;B;C) control?",
+   "back": "OpenAPI v3 schema validation constraints embedded into the generated CustomResourceDefinition, enforced by the API server on create/update &mdash; invalid values are rejected before reaching your controller.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Kubebuilder"
+  },
+  {
+   "guid": "c?s5wOp!~0",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_kubebuilder"
+   ],
+   "front": "What does a <code>+kubebuilder:rbac:groups=...,resources=...,verbs=...</code> marker generate?",
+   "back": "RBAC Role/ClusterRole manifest rules, aggregated by controller-gen across all annotated code into the operator's RBAC YAML &mdash; keeping needed permissions colocated with the code that needs them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Kubebuilder"
+  },
+  {
+   "guid": "yNu3`V)CMK",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_kubebuilder"
+   ],
+   "front": "What's the typical top-level directory layout Kubebuilder scaffolds?",
+   "back": "<code>api/&lt;version&gt;/</code> holds the CRD's Go type definitions; <code>internal/controller/</code> (or controllers/) holds Reconciler implementations; <code>config/</code> holds Kustomize manifests (CRDs, RBAC, manager Deployment, samples).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Kubebuilder"
+  },
+  {
+   "guid": "tm:d`j+KEY",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_kubebuilder"
+   ],
+   "front": "What does <code>+kubebuilder:printcolumn</code> control?",
+   "back": "Extra columns shown by <code>kubectl get &lt;resource&gt;</code> for a CRD, letting operators expose useful status fields (e.g. Phase, Ready, Age) directly in default CLI output.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Kubebuilder"
+  },
+  {
+   "guid": "M9SN`8H0@A",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_kubebuilder"
+   ],
+   "front": "What does <code>+kubebuilder:subresource:status</code> mark, and why does it matter?",
+   "back": "Declares the CRD has a separate /status subresource; this splits spec updates (by users) from status updates (by the controller) into different API endpoints/RBAC verbs, preventing a whole-object PUT from clobbering controller-written status.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Kubebuilder"
+  },
+  {
+   "guid": "Mt5}{7a9Ob",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_kubebuilder"
+   ],
+   "front": "What tool turns kubebuilder markers into CRD YAML and DeepCopy code, and when is it run?",
+   "back": "<code>controller-gen</code>, typically invoked via <code>make manifests</code>/<code>make generate</code> &mdash; a separate code-generation step, not automatic on every build, so generated files must be regenerated (and usually committed) after changing API types.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Kubebuilder"
+  },
+  {
+   "guid": "IXSl$]7eT4",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_kubebuilder"
+   ],
+   "front": "What's the difference between a CRD version's <code>served</code> and <code>storage</code> fields when a Kubebuilder API has multiple versions?",
+   "back": "<code>served</code> controls whether that version is exposed via the API server for read/write; <code>storage</code> marks exactly one version as the form persisted in etcd &mdash; conversion webhooks translate as needed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Kubebuilder"
+  },
+  {
+   "guid": "E<&7L<>CAh",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_kubebuilder"
+   ],
+   "front": "What does the Kubebuilder-scaffolded <code>PROJECT</code> file track?",
+   "back": "Metadata about the project's domain, repo, and each API resource/group/version/kind that's been scaffolded, so <code>kubebuilder create api</code> knows what already exists and can regenerate consistent boilerplate.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Kubebuilder"
+  },
+  {
+   "guid": "AaCwN[&T[)",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_patterns"
+   ],
+   "front": "What does \"level-triggered\" mean for a Kubernetes controller's reconcile loop, and why is it preferred over edge-triggered logic?",
+   "back": "The Reconciler looks at the full current desired vs. actual state each time (a \"level,\" like a snapshot) rather than reacting to the specific diff of what changed (an \"edge\") &mdash; robust to missed events, since any subsequent reconcile still converges to the correct end state.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Patterns"
+  },
+  {
+   "guid": "ju=cMznby3",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_patterns"
+   ],
+   "front": "What is a finalizer, and what problem does it solve?",
+   "back": "A string added to an object's <code>metadata.finalizers</code> list that blocks actual deletion from etcd until every listed finalizer is removed, giving a controller a chance to run cleanup logic (e.g. deleting external cloud resources) before the object is truly gone.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Patterns"
+  },
+  {
+   "guid": "izhh#jq7!T",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_patterns"
+   ],
+   "front": "How does a controller detect that an object is being deleted while a finalizer is still present?",
+   "back": "<code>metadata.deletionTimestamp</code> is non-nil (the object still physically exists because a finalizer blocks removal) &mdash; the Reconciler checks this field and, if set, runs cleanup then removes its finalizer instead of normal reconcile logic.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Patterns"
+  },
+  {
+   "guid": "EP|xaVl8^D",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_patterns"
+   ],
+   "front": "What is an OwnerReference, and what garbage-collection behavior does it enable?",
+   "back": "A reference on a child object pointing back to its owner; the API server's garbage collector automatically deletes owned objects when the owner is deleted (cascading deletion), and controller-runtime's <code>Owns()</code> watch relies on it to route child events back to the owner.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Patterns"
+  },
+  {
+   "guid": "wMRzbWH.IC",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_patterns"
+   ],
+   "front": "When do you need a finalizer in addition to OwnerReference-based cascading deletion?",
+   "back": "OwnerReference-based GC only works for objects the API server itself can delete (in-cluster objects); external resources (cloud load balancers, DNS records, DB instances) have no OwnerReference concept, so they require a finalizer to run custom deletion logic first.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Patterns"
+  },
+  {
+   "guid": "y.R3dt38AQ",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_patterns"
+   ],
+   "front": "What is a status \"condition\" in the Kubernetes API convention, and why use conditions instead of a single status string?",
+   "back": "A structured, typed array of independent observations (type, status, reason, message, lastTransitionTime). Multiple conditions can be tracked orthogonally (e.g. Ready, Progressing, Degraded) rather than collapsing all state into one enum that can't represent combinations.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Patterns"
+  },
+  {
+   "guid": "fzSP8|i+i*",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_patterns"
+   ],
+   "front": "Why should a controller update status via the dedicated status subresource client call rather than a normal Update()?",
+   "back": "When /status is a separate subresource, updating it through the main object Update() either fails or silently ignores status changes; the dedicated Status().Update()/Patch call targets the correct endpoint and avoids racing with concurrent spec edits.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Patterns"
+  },
+  {
+   "guid": "p_@FaWT9~.",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_patterns"
+   ],
+   "front": "What is optimistic concurrency control via <code>resourceVersion</code>, and how should a controller handle a resulting Conflict error?",
+   "back": "Every write must include the resourceVersion last read; if another writer updated the object in between, the API server rejects the write with a 409 Conflict. The correct handling is to re-fetch and retry (controller-runtime's <code>retry.RetryOnConflict</code> wraps this).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Patterns"
+  },
+  {
+   "guid": "q*rR4[h-]w",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_patterns"
+   ],
+   "front": "What is server-side apply, and how does it change the update model versus a full object replacement?",
+   "back": "A field-ownership-tracking PATCH mechanism where the API server merges a submitted partial object based on which fields each \"field manager\" owns, letting multiple controllers/users co-manage different fields of the same object without clobbering each other's changes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Patterns"
+  },
+  {
+   "guid": "v|+fOS!J>,",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_patterns"
+   ],
+   "front": "Why is watching a secondary resource \"by reference\" (e.g. a Deployment referencing a ConfigMap by name) harder than watching an owned resource?",
+   "back": "There's no OwnerReference to walk backward from the changed ConfigMap to the Deployments referencing it; the controller must build and maintain its own index/mapping function (via <code>Watches()</code> with a custom mapping func).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Patterns"
+  },
+  {
+   "guid": "PJDL5lR!CB",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_patterns"
+   ],
+   "front": "Why do well-behaved Operators typically avoid delete-and-recreate of a child resource on every reconcile?",
+   "back": "Delete+recreate causes unnecessary churn (new UID, lost history, cascading deletes of grandchildren, brief unavailability) and can race with the garbage collector; a targeted Update/Patch only when actual vs desired state differ is the lower-blast-radius approach.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Patterns"
+  },
+  {
+   "guid": "eEQ5F=RE~z",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_patterns"
+   ],
+   "front": "What's the risk of a controller reconciling based on a stale cached read without accounting for eventual consistency?",
+   "back": "The informer cache can lag slightly behind the API server, so a read-then-write can act on outdated state; resourceVersion-based conflict detection (rather than assuming the cache is authoritative) is what makes this safe.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Patterns"
+  },
+  {
+   "guid": "gv6KBL4ZvF",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_patterns"
+   ],
+   "front": "Why is periodic drift correction (a controller re-asserting desired state even with no incoming events) a deliberate design goal?",
+   "back": "Cluster state can diverge from desired state through causes outside the watch stream entirely &mdash; manual kubectl edits, other controllers, node failures &mdash; so periodically re-verifying is what makes an Operator self-healing rather than purely event-driven.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Patterns"
+  },
+  {
+   "guid": "mYrohL+Wlj",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_patterns"
+   ],
+   "front": "What does exponential backoff on reconcile retries protect against that a fixed retry interval doesn't?",
+   "back": "A fixed short interval on a persistently-failing reconcile (e.g. a down external API) hammers that dependency at a constant rate; exponential backoff reduces load the longer it stays failing, while still recovering quickly once fixed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Patterns"
+  },
+  {
+   "guid": "nY,G=U;l,&",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_testing"
+   ],
+   "front": "What is <code>envtest</code> (<code>sigs.k8s.io/controller-runtime/pkg/envtest</code>)?",
+   "back": "A test harness that spins up a real (but minimal) kube-apiserver and etcd binary locally &mdash; no kubelet, no scheduler, no real containers &mdash; giving controller tests a genuine API server to reconcile against instead of a mock.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Testing"
+  },
+  {
+   "guid": "l@&@RLHI,R",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_testing"
+   ],
+   "front": "Why is envtest preferred over a fully mocked client for testing Reconcile logic, despite being slower?",
+   "back": "A real API server enforces actual admission/validation/defaulting/CRD schema behavior and returns real Conflict/NotFound semantics, catching bugs a hand-rolled fake client's simplified behavior would miss.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Testing"
+  },
+  {
+   "guid": "Ac>q9~39dH",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_testing"
+   ],
+   "front": "What is the fake clientset (<code>k8s.io/client-go/kubernetes/fake</code>) good for, and what does it not simulate?",
+   "back": "Fast, in-memory unit tests tracking objects in memory and returning them on Get/List &mdash; but it doesn't enforce real API server validation, defaulting, or admission webhook behavior, so it can pass tests that would fail against a real cluster.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Testing"
+  },
+  {
+   "guid": "fHCLzp;s%i",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_testing"
+   ],
+   "front": "Why is Ginkgo/Gomega (BDD-style testing) common in the controller-runtime/Kubernetes ecosystem specifically?",
+   "back": "Kubebuilder scaffolds envtest-based suite tests with Ginkgo/Gomega by default, and its Eventually()/Consistently() matchers map naturally onto testing eventually-consistent, asynchronous reconcile behavior.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Testing"
+  },
+  {
+   "guid": "w?8^&S4{,P",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_testing"
+   ],
+   "front": "What does Gomega's <code>Eventually(func() bool {...}).Should(BeTrue())</code> pattern address that a plain assertion can't?",
+   "back": "Reconciliation is asynchronous &mdash; after creating/updating an object, the controller may take multiple reconcile passes to reach the expected state; Eventually polls repeatedly with a timeout instead of asserting immediately after the triggering action.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Testing"
+  },
+  {
+   "guid": "EjP!YqQxJT",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_testing"
+   ],
+   "front": "What's the benefit of separating a Reconciler's core decision logic (currentState, desiredState) -> actions from the Reconcile method itself?",
+   "back": "That inner function can be unit-tested with plain Go structs &mdash; no fake client, no envtest, no API server &mdash; making the majority of business-logic test cases fast, deterministic, and independent of Kubernetes machinery.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Testing"
+  },
+  {
+   "guid": "IBzA4LQnCC",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_testing"
+   ],
+   "front": "What is <code>kind</code> (Kubernetes IN Docker) commonly used for in Operator testing pipelines?",
+   "back": "Spinning up a real, disposable multi-node-capable Kubernetes cluster inside Docker containers for full end-to-end tests &mdash; deploying the actual operator image, CRDs, and RBAC, closer to production than envtest's apiserver-only environment.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Testing"
+  },
+  {
+   "guid": "pxl[#Tel0@",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_testing"
+   ],
+   "front": "What's the practical difference in scope between an envtest suite and a kind-based e2e test for an operator?",
+   "back": "envtest verifies reconcile logic against a real API server with nothing scheduling/starting actual Pods; kind runs the full stack, letting you verify Pod scheduling, container startup, Service networking, and the operator's deployed image behaving correctly.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Testing"
+  },
+  {
+   "guid": "i>pZ]BFEXR",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_testing"
+   ],
+   "front": "Why should operator tests generally avoid <code>time.Sleep()</code> for waiting on asynchronous reconcile outcomes?",
+   "back": "Fixed sleeps are either too short (flaky under load) or too long (slow suites); polling assertions like Gomega's Eventually() with a generous timeout are both faster on the common case and more reliable under variable CI load.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Testing"
+  },
+  {
+   "guid": "t.!2%FXQ%Q",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_testing"
+   ],
+   "front": "What does testing a webhook (validating/mutating) typically require beyond a plain envtest apiserver?",
+   "back": "envtest can start webhook infrastructure (cert generation, registering the webhook configuration) alongside the apiserver, but the webhook server itself (your process) must be running and reachable for the test apiserver's admission chain to call it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Testing"
+  },
+  {
+   "guid": "tE%PK=di46",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_observability"
+   ],
+   "front": "What is <code>logr</code> in the controller-runtime ecosystem, and why does controller-runtime depend on an abstraction instead of a concrete logging library?",
+   "back": "A minimal structured-logging interface (Info, Error, V(level), WithValues) that decouples controller-runtime's logging calls from any specific backend, letting operators plug in zap, klog, or another logr-compatible backend without changing library code.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Observability"
+  },
+  {
+   "guid": "QUN&H4~dr]",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_observability"
+   ],
+   "front": "What's the relationship between <code>klog</code> and <code>logr</code> in modern Kubernetes-ecosystem Go code?",
+   "back": "klog (Kubernetes' original logging package) now implements the logr interface via klog/v2's logr adapter, rather than being a competing API &mdash; so code written against logr works whether the underlying sink is klog, zap, or another implementation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Observability"
+  },
+  {
+   "guid": "Gx*6$9RKHA",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_observability"
+   ],
+   "front": "Why does controller-runtime favor structured logging (key-value pairs via WithValues) over formatted string messages?",
+   "back": "Structured fields (e.g. <code>log.WithValues(\"namespace\", req.Namespace, \"name\", req.Name)</code>) are machine-parseable by log aggregation systems without regex scraping, and attach consistent context to every subsequent log line from a given reconcile.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Observability"
+  },
+  {
+   "guid": "n-IjYQI+5#",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_observability"
+   ],
+   "front": "What metrics does controller-runtime expose out of the box via <code>sigs.k8s.io/controller-runtime/pkg/metrics</code>?",
+   "back": "Standard Prometheus metrics like reconcile total/errors/duration per controller and workqueue depth/latency, registered automatically for every controller under the Manager with no extra instrumentation code.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Observability"
+  },
+  {
+   "guid": "r9W)Fy5#H_",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_observability"
+   ],
+   "front": "What is an <code>EventRecorder</code> in controller-runtime, and what's it used for beyond logging?",
+   "back": "A mechanism for emitting Kubernetes Event objects attached to a specific resource (visible via <code>kubectl describe</code>/<code>kubectl get events</code>), giving human-facing, per-object history of what a controller did or why it failed &mdash; distinct from log lines, which aren't tied to the object in the API.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Observability"
+  },
+  {
+   "guid": "k6O#<z%ZRD",
+   "type": "basic",
+   "deck": "Go: Language Intricacies & Kubernetes Operator Engineering",
+   "tags": [
+    "Go::operators_observability"
+   ],
+   "front": "Why is log verbosity (<code>V(n)</code> levels in logr/klog) conventionally used instead of a single on/off debug flag?",
+   "back": "It lets operators dial in exactly how much detail they want at runtime (e.g. V(0) for normal operation, V(4)+ for deep tracing) without recompiling or needing separate debug/production binaries, and lets subsystems log at different granularity independently.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Observability"
+  }
+ ]
+}

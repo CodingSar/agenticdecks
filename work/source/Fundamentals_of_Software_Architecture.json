@@ -1,0 +1,965 @@
+{
+ "source_file": "Fundamentals_of_Software_Architecture.apkg",
+ "notes": [
+  {
+   "guid": "Mi8|^{WT:o",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Foundations"
+   ],
+   "front": "What four dimensions define software architecture (Richards &amp; Ford)?",
+   "back": "<ul><li><b>Structure</b> — the architecture style(s) in use (layered, microservices, …).</li><li><b>Architecture characteristics</b> — the “-ilities” the system must support.</li><li><b>Architecture decisions</b> — hard rules for how the system is built.</li><li><b>Design principles</b> — guidelines (not hard rules) for building it.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Foundations"
+  },
+  {
+   "guid": "As^G2ddo#4",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Foundations"
+   ],
+   "front": "First Law of Software Architecture?",
+   "back": "“Everything in software architecture is a <b>tradeoff</b>.” Corollary: if you think you’ve found something that isn’t a tradeoff, you just haven’t identified the tradeoff yet.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Foundations"
+  },
+  {
+   "guid": "cX}W4Oi0jy",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Foundations"
+   ],
+   "front": "Second Law of Software Architecture?",
+   "back": "“<b>Why</b> is more important than <b>how</b>.” Knowing why a decision was made is more valuable than knowing how it was implemented.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Foundations"
+  },
+  {
+   "guid": "r9SBQ8;BBz",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Foundations"
+   ],
+   "front": "Architecture <b>decision</b> vs design <b>principle</b> — difference?",
+   "back": "A <b>decision</b> is a hard rule that must be followed (e.g. “all inter-layer calls go through the business layer”). A <b>principle</b> is a guideline that leaves implementation latitude (e.g. “prefer asynchronous messaging where practical”).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Foundations"
+  },
+  {
+   "guid": "o;{F,^K?qi",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Foundations"
+   ],
+   "front": "The 8 core expectations of a software architect?",
+   "back": "<ul><li>Make architecture decisions</li><li>Continually analyze the architecture</li><li>Keep current with trends</li><li>Ensure compliance with decisions</li><li>Have diverse exposure / experience</li><li>Have business-domain knowledge</li><li>Possess interpersonal skills</li><li>Understand and navigate politics</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Foundations"
+  },
+  {
+   "guid": "uj/rJsz}._",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Foundations"
+   ],
+   "front": "The knowledge “triangle” — how should an architect balance breadth vs depth?",
+   "back": "Knowledge splits into: <i>stuff you know</i>, <i>stuff you know you don’t know</i>, and <i>stuff you don’t know you don’t know</i>. Developers maximise depth (stuff you know); architects should favour <b>breadth</b> — a large “know you don’t know” zone — since broad exposure supports better decisions than deep but narrow expertise.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Foundations"
+  },
+  {
+   "guid": "OvYF{w1oeD",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Foundations"
+   ],
+   "front": "Frozen Caveman antipattern?",
+   "back": "An architect who irrationally fixates on a past bad experience and reverts to an unlikely worst-case worry on every decision. The fix is to assess <b>risk realistically</b> per situation instead of over-weighting one personal scar.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Foundations"
+  },
+  {
+   "guid": "b`u:QExFpi",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Foundations"
+   ],
+   "front": "How does the book frame the boundary between architecture and design?",
+   "back": "As a <b>spectrum, not a line</b>. Strategic, hard-to-change, high-effort decisions lean architectural; tactical, easy-to-change decisions lean design. Architects and developers should collaborate continuously rather than throw decisions “over the wall.”",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Foundations"
+  },
+  {
+   "guid": "y3gSm|%aQp",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Modularity_&_Coupling"
+   ],
+   "front": "Cohesion?",
+   "back": "The degree to which the parts of a module belong together — how related and focused a module’s responsibilities are. <b>High cohesion is desirable.</b>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Modularity & Coupling"
+  },
+  {
+   "guid": "ruuzH#8PPL",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Modularity_&_Coupling"
+   ],
+   "front": "Coupling: <b>afferent</b> vs <b>efferent</b>?",
+   "back": "<b>Afferent (incoming)</b>: number of components that depend on this component. <b>Efferent (outgoing)</b>: number of components this component depends on.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Modularity & Coupling"
+  },
+  {
+   "guid": "H@if0PZ{R9",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Modularity_&_Coupling"
+   ],
+   "front": "Connascence — definition?",
+   "back": "Two components are <b>connascent</b> if a change in one would require the other to change to preserve overall correctness. Analysed by strength, locality, and degree.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Modularity & Coupling"
+  },
+  {
+   "guid": "Nv%s)pAw1F",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Modularity_&_Coupling"
+   ],
+   "front": "<b>Static</b> connascence — types?",
+   "back": "Detectable by static source analysis: connascence of <b>Name</b>, <b>Type</b>, <b>Meaning</b> (Convention), <b>Position</b>, and <b>Algorithm</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Modularity & Coupling"
+  },
+  {
+   "guid": "Bea*amTJ2)",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Modularity_&_Coupling"
+   ],
+   "front": "<b>Dynamic</b> connascence — types?",
+   "back": "Detectable only at runtime: connascence of <b>Execution</b> (order), <b>Timing</b>, <b>Values</b>, and <b>Identity</b>. Dynamic connascence is generally worse than static.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Modularity & Coupling"
+  },
+  {
+   "guid": "I3;x*<sU1>",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Modularity_&_Coupling"
+   ],
+   "front": "Three properties used to evaluate connascence?",
+   "back": "<ul><li><b>Strength</b> — ease of refactoring (static is stronger / easier than dynamic).</li><li><b>Locality</b> — how close the connascent elements are in the codebase.</li><li><b>Degree</b> — the size of the impact / number of entities affected.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Modularity & Coupling"
+  },
+  {
+   "guid": "pI5>XwMiA:",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Modularity_&_Coupling"
+   ],
+   "front": "Abstractness, Instability (I), and Distance from the Main Sequence (D)?",
+   "back": "<b>Abstractness</b> = ratio of abstract to concrete elements in a component. <b>Instability</b> I = Ce / (Ce + Ca) (efferent over total coupling). <b>Distance</b> D = |A + I − 1|; near 0 is a healthy balance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Modularity & Coupling"
+  },
+  {
+   "guid": "zia_hG+bC^",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Modularity_&_Coupling"
+   ],
+   "front": "“Zone of pain” vs “zone of uselessness”?",
+   "back": "From the abstractness/instability graph. <b>Zone of pain</b>: highly concrete <i>and</i> stable — rigid, hard to change. <b>Zone of uselessness</b>: highly abstract <i>and</i> unstable — abstractions nobody uses. Good components sit near the <b>main sequence</b> line between them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Modularity & Coupling"
+  },
+  {
+   "guid": "tD;zqZMcbd",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Components"
+   ],
+   "front": "What is a <b>component</b> (architecturally)?",
+   "back": "The primary modular building block and unit of deployment — a library, package, service, or layer. It’s the lowest level of the system an architect typically manipulates directly.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Components"
+  },
+  {
+   "guid": "o}G,4eeqcw",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Components"
+   ],
+   "front": "Architecture <b>quantum</b>?",
+   "back": "An <b>independently deployable</b> artifact with high functional cohesion and synchronous connascence. It measures partitioning: a monolith is one quantum; microservices form many quanta.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Components"
+  },
+  {
+   "guid": "b;L|1{tb_4",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Components"
+   ],
+   "front": "Static vs dynamic <b>coupling</b> (architecture quantum)?",
+   "back": "<b>Static</b>: how parts are wired together — dependencies, contracts, and infrastructure needed to operate. <b>Dynamic</b>: how parts communicate at runtime — synchronous vs asynchronous calls.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Components"
+  },
+  {
+   "guid": "eTck*_(dO|",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Characteristics"
+   ],
+   "front": "Three criteria for something to be an <b>architecture characteristic</b>?",
+   "back": "It must (1) specify a <b>non-domain</b> design consideration, (2) influence some <b>structural</b> aspect of the design, and (3) be <b>critical or important</b> to the application’s success.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Characteristics"
+  },
+  {
+   "guid": "gcep,+Bh4y",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Characteristics"
+   ],
+   "front": "Operational vs structural vs cross-cutting characteristics — examples?",
+   "back": "<ul><li><b>Operational</b>: availability, performance, scalability, recoverability.</li><li><b>Structural</b>: modularity, maintainability, configurability, extensibility.</li><li><b>Cross-cutting</b>: security, accessibility, authentication, privacy.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Characteristics"
+  },
+  {
+   "guid": "I77(<UHUt_",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Characteristics"
+   ],
+   "front": "Implicit vs explicit architecture characteristics?",
+   "back": "<b>Implicit</b>: rarely written in requirements but almost always needed (availability, security, performance). <b>Explicit</b>: stated directly in the requirements.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Characteristics"
+  },
+  {
+   "guid": "v<J:YP5Vdc",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Characteristics"
+   ],
+   "front": "Why deliberately limit the number of characteristics you target?",
+   "back": "Each characteristic adds complexity and often conflicts with others; chasing too many yields a generic, over-engineered design. Guideline: <i>“never shoot for the best architecture, but rather the least worst architecture.”</i>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Characteristics"
+  },
+  {
+   "guid": "D4>mOVV^@(",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Characteristics"
+   ],
+   "front": "How can architecture characteristics be <b>measured</b> (three categories)?",
+   "back": "<ul><li><b>Operational</b> measures — e.g. response time, throughput, SLA targets.</li><li><b>Structural</b> measures — e.g. cyclomatic complexity, coupling metrics.</li><li><b>Process</b> measures — e.g. agility, deployability, testability tied to the dev process.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Characteristics"
+  },
+  {
+   "guid": "OT6:qciljP",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Characteristics"
+   ],
+   "front": "What is a <b>fitness function</b> in architecture governance?",
+   "back": "Any objective, automatable check that assesses whether the architecture meets a desired characteristic — e.g. a test that fails when cyclomatic complexity exceeds a threshold, or one that enforces allowed layer dependencies. Enables <b>continuous governance</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Characteristics"
+  },
+  {
+   "guid": "C/H:!d;aUp",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Characteristics"
+   ],
+   "front": "Why are architecture characteristics often in <b>conflict</b>? Give an example.",
+   "back": "Optimising one frequently degrades another, so architects balance rather than maximise. Example: adding security checks/encryption usually reduces performance; maximising raw performance can hurt scalability or modularity.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Characteristics"
+  },
+  {
+   "guid": "igl;c7Yet_",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Styles"
+   ],
+   "front": "Monolithic vs distributed deployment models?",
+   "back": "<b>Monolithic</b>: a single deployment unit holding all code (layered, pipeline, microkernel). <b>Distributed</b>: multiple independently deployed units communicating over a network (service-based, event-driven, space-based, SOA, microservices).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Styles"
+  },
+  {
+   "guid": "ud,=A}Qyyg",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Styles"
+   ],
+   "front": "Name the 8 <b>fallacies of distributed computing</b>.",
+   "back": "<ul><li>The network is reliable</li><li>Latency is zero</li><li>Bandwidth is infinite</li><li>The network is secure</li><li>Topology never changes</li><li>There is one administrator</li><li>Transport cost is zero</li><li>The network is homogeneous</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Styles"
+  },
+  {
+   "guid": "GdzKfKO</p",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Styles"
+   ],
+   "front": "<b>Big Ball of Mud</b> antipattern?",
+   "back": "The absence of any discernible architecture — tangled, highly coupled code with no clear structure, usually from unmanaged organic growth.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Styles"
+  },
+  {
+   "guid": "u|/ML+BP$~",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Styles"
+   ],
+   "front": "Architecture <b>sinkhole</b> antipattern (layered)?",
+   "back": "When requests pass through layers that add no logic — pure pass-through — so the layers add overhead without value. Watch the ~80/20 ratio of meaningful vs pass-through requests.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Styles"
+  },
+  {
+   "guid": "d&8sh;+D~!",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Styles"
+   ],
+   "front": "<b>Open</b> vs <b>closed</b> layers (and “layers of isolation”)?",
+   "back": "A <b>closed</b> layer must be traversed by any request moving down the stack, enforcing layers of isolation. An <b>open</b> layer may be bypassed. Isolation limits the blast radius of change.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Styles"
+  },
+  {
+   "guid": "go_HZLR3U*",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Styles"
+   ],
+   "front": "How does the book compare architecture styles? (the star system)",
+   "back": "Each style is scored ~1–5 stars across characteristics — deployability, elasticity, evolvability, fault tolerance, modularity, overall cost, performance, reliability, scalability, simplicity, testability — to compare <b>tradeoffs</b> rather than crown a single “best” style.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Styles"
+  },
+  {
+   "guid": "i}T_k%^EVB",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Styles"
+   ],
+   "front": "Which characteristics push you from a monolith toward a <b>distributed</b> style?",
+   "back": "High scalability/elasticity, fault tolerance (failure isolation), independent deployability, and evolvability — accepting higher cost, operational complexity, and network performance overhead.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Styles"
+  },
+  {
+   "guid": "s5xO([DCm6",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Styles"
+   ],
+   "front": "Which architecture style is shown, and what are its layers?",
+   "back": "<b>Layered (n-tier)</b> architecture. Typical layers: presentation → business → persistence → database, each usually <b>closed</b> to enforce layers of isolation.<br><img src=\"layered.png\">",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Styles"
+  },
+  {
+   "guid": "uS&p+fpmXN",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Styles"
+   ],
+   "front": "Layered architecture — strengths and weaknesses?",
+   "back": "<b>Strengths</b>: simplicity, low cost, easy to build; a sensible default/starting point. <b>Weaknesses</b>: poor scalability, elasticity, fault tolerance, and deployability (it’s monolithic); prone to the architecture-sinkhole antipattern.<br><img src=\"layered.png\">",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Styles"
+  },
+  {
+   "guid": "DVPerBl2H<",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Styles"
+   ],
+   "front": "Which architecture style is shown?",
+   "back": "<b>Pipeline (pipes and filters)</b> architecture: self-contained, stateless <b>filters</b> connected by unidirectional <b>pipes</b>.<br><img src=\"pipeline.png\">",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Styles"
+  },
+  {
+   "guid": "Hs-I=}(64J",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Styles"
+   ],
+   "front": "Pipeline architecture — the four filter types?",
+   "back": "<ul><li><b>Producer</b> (source) — start point.</li><li><b>Transformer</b> — maps/changes data.</li><li><b>Tester</b> — filters or branches based on a test.</li><li><b>Consumer</b> (sink) — endpoint.</li></ul>Filters are single-purpose, stateless, and independent.<br><img src=\"pipeline.png\">",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Styles"
+  },
+  {
+   "guid": "Q@vq#3$Xbg",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Styles"
+   ],
+   "front": "Which architecture style is shown?",
+   "back": "<b>Microkernel (plug-in)</b> architecture: a minimal <b>core system</b> plus independent, decoupled <b>plug-in</b> components.<br><img src=\"microkernel.png\">",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Styles"
+  },
+  {
+   "guid": "CmrF[(twno",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Styles"
+   ],
+   "front": "Microkernel architecture — core idea and typical uses?",
+   "back": "A minimal core handles the basic flow; specialised or volatile logic lives in independent plug-ins. A <b>registry</b> tracks available plug-ins and <b>contracts</b> govern their communication. Common for product-based apps and tools (Integrated Development Environments / IDEs, browsers with extensions, insurance claims/rules engines).<br><img src=\"microkernel.png\">",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Styles"
+  },
+  {
+   "guid": "QFL%Wzn9>F",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Styles"
+   ],
+   "front": "Which architecture style is shown?",
+   "back": "<b>Service-based</b> architecture — a user interface calling a few coarse-grained, separately deployed <b>domain services</b>, typically over a <b>shared database</b>.<br><img src=\"service_based.png\">",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Styles"
+  },
+  {
+   "guid": "LseImE1DMy",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Styles"
+   ],
+   "front": "Service-based architecture — defining traits and why it’s called “pragmatic”?",
+   "back": "A distributed macro-layered style: a UI calls a small set (often 4–12) of coarse-grained, separately deployed domain services, usually sharing one monolithic database. It delivers much of microservices’ benefit (deployability, fault isolation, evolvability) with far less complexity — hence the most <b>pragmatic</b> distributed architecture.<br><img src=\"service_based.png\">",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Styles"
+  },
+  {
+   "guid": "x}dh*HhsXE",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Styles"
+   ],
+   "front": "Which architecture style is shown, and what are its two topologies?",
+   "back": "<b>Event-driven</b> architecture. <b>Broker</b> topology (no central coordinator) vs <b>mediator</b> topology (central event mediator).<br><img src=\"event_driven.png\">",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Styles"
+  },
+  {
+   "guid": "F{1dRP.Ab!",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Styles"
+   ],
+   "front": "Event-driven: <b>broker</b> vs <b>mediator</b> topology?",
+   "back": "<b>Broker</b>: no central coordinator; events broadcast in a chain, each processor reacts and emits more events — highly decoupled and performant, but workflow control and error handling are hard. <b>Mediator</b>: a central mediator orchestrates the steps — better error handling/recoverability, at the cost of more coupling and a potential bottleneck.<br><img src=\"event_driven.png\">",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Styles"
+  },
+  {
+   "guid": "E|dI!D%>L^",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Styles"
+   ],
+   "front": "Event-driven architecture — overall strengths and weaknesses?",
+   "back": "<b>Strengths</b>: excellent performance, scalability, elasticity, fault tolerance, responsiveness; highly decoupled. <b>Weaknesses</b>: low simplicity, hard to test, complex error handling, non-deterministic flows and eventual consistency.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Styles"
+  },
+  {
+   "guid": "B<4WgC^DU6",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Styles"
+   ],
+   "front": "Which architecture style is shown?",
+   "back": "<b>Space-based</b> architecture — processing units with replicated in-memory data grids over virtualized middleware, with asynchronous data pumps to the database.<br><img src=\"space_based.png\">",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Styles"
+  },
+  {
+   "guid": "k|[IzTMCI-",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Styles"
+   ],
+   "front": "Space-based architecture — core idea, key parts, and when to use it?",
+   "back": "Named after tuple space / shared memory. Data lives in <b>replicated in-memory data grids</b> inside processing units, removing the central database bottleneck; the database is updated <b>asynchronously</b> via data pumps/writers. Parts: processing units, virtualized middleware (messaging / data / processing grids + deployment manager), data pumps, data writers/readers. Best for high, spiky, variable load (ticketing, auctions). Gives extreme scalability and elasticity.<br><img src=\"space_based.png\">",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Styles"
+  },
+  {
+   "guid": "z>y^nA#/&K",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Styles"
+   ],
+   "front": "Which architecture style is shown?",
+   "back": "<b>Orchestration-driven Service-Oriented Architecture (SOA)</b> — a hierarchical service taxonomy mediated by a central orchestration engine / Enterprise Service Bus (ESB).<br><img src=\"soa.png\">",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Styles"
+  },
+  {
+   "guid": "N[yGr&1E9b",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Styles"
+   ],
+   "front": "Orchestration-driven SOA — the service taxonomy and why it fell out of favour?",
+   "back": "Hierarchical services: <b>business</b> (abstract, the “what”), <b>enterprise</b> (concrete, coarse-grained, reusable), <b>application</b>, and <b>infrastructure</b> services — mediated by a central orchestration engine / Enterprise Service Bus (ESB). Heavy reuse plus central mediation made systems brittle: one change rippled widely, killing evolvability. The book treats it as largely superseded.<br><img src=\"soa.png\">",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Styles"
+  },
+  {
+   "guid": "E-BX143,K=",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Styles"
+   ],
+   "front": "Which architecture style is shown?",
+   "back": "<b>Microservices</b> architecture — fine-grained, single-purpose services, each owning its own data (share-nothing), behind an API layer/gateway.<br><img src=\"microservices.png\">",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Styles"
+  },
+  {
+   "guid": "b_d^dJ%BCG",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Styles"
+   ],
+   "front": "Microservices — defining principles?",
+   "back": "Built on Domain-Driven Design’s <b>bounded context</b>: each service is fine-grained, single-purpose, <b>owns its own data</b> (share-nothing), is <b>independently deployable</b>, and communicates over the network (often via an API layer/gateway). Favour duplication over coupling.<br><img src=\"microservices.png\">",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Styles"
+  },
+  {
+   "guid": "FP!|*Ovj^s",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Styles"
+   ],
+   "front": "Microservices — strengths and weaknesses?",
+   "back": "<b>Strengths</b>: best-in-class deployability, evolvability, testability, scalability, elasticity, and fault tolerance. <b>Weaknesses</b>: poor performance (network hops + per-call security), low simplicity, high cost and operational complexity, and full distributed-systems difficulty (the 8 fallacies, distributed transactions).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Styles"
+  },
+  {
+   "guid": "o0OCj.s?Ju",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Styles"
+   ],
+   "front": "Why is <b>simplicity</b> rated high for layered/microkernel but low for microservices?",
+   "back": "Monolithic styles have no network, no distributed data, and few moving parts — easy to reason about and operate. Microservices add distribution, many deployment units, and operational tooling, sharply lowering simplicity.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Styles"
+  },
+  {
+   "guid": "u>(r<6|ES=",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Styles"
+   ],
+   "front": "Bounded context (Domain-Driven Design) — and why microservices embrace it?",
+   "back": "A model and its data are valid only within an explicit <b>boundary</b>; each context owns its own representation. Microservices map one service per bounded context so each owns its data and avoids shared-data coupling.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Styles"
+  },
+  {
+   "guid": "mkY2.zyPw?",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Styles"
+   ],
+   "front": "Microservices communication: <b>choreography</b> vs <b>orchestration</b>?",
+   "back": "<b>Choreography</b> (broker-style, decentralised): services react to events — better decoupling and scaling. <b>Orchestration</b>: a coordinator/mediator drives the workflow — easier complex error handling and workflow control, but more coupling.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Styles"
+  },
+  {
+   "guid": "FMoGLs<|*8",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Styles"
+   ],
+   "front": "Sidecar pattern and service mesh (microservices operational concern)?",
+   "back": "Cross-cutting operational concerns (monitoring, logging, service discovery, security) are factored into a <b>sidecar</b> deployed beside each service; the collection of sidecars forms a <b>service mesh</b>, giving consistent infrastructure without coupling business code.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Styles"
+  },
+  {
+   "guid": "G!.hi8o?vf",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Architecture_Styles"
+   ],
+   "front": "Saga pattern (distributed data consistency)?",
+   "back": "A way to keep data consistent across services without distributed Atomicity-Consistency-Isolation-Durability (ACID) transactions: a sequence of local transactions, each triggering the next, with <b>compensating</b> transactions to undo work on failure.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Architecture Styles"
+  },
+  {
+   "guid": "lbD`p:qhrH",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Techniques_&_Soft_Skills"
+   ],
+   "front": "What is an <b>Architecture Decision Record (ADR)</b>?",
+   "back": "A short document capturing a single architecture decision — typically <i>title, status, context, decision, consequences</i>. ADRs preserve the “why” (Second Law) and build a durable, reviewable history.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Techniques & Soft Skills"
+  },
+  {
+   "guid": "fI5N3v{^#n",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Techniques_&_Soft_Skills"
+   ],
+   "front": "The four levels of the <b>C4</b> diagramming model?",
+   "back": "<b>C</b>ontext, <b>C</b>ontainer, <b>C</b>omponent, <b>C</b>ode — four levels of zoom. Pair with consistent notation, clear legends, and labelled lines. Diagramming and presenting are core architect communication skills.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Techniques & Soft Skills"
+  },
+  {
+   "guid": "P*1g&~fQOJ",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Techniques_&_Soft_Skills"
+   ],
+   "front": "Risk matrix for architecture risk analysis?",
+   "back": "Rate each risk on two axes — <b>likelihood</b> (low/medium/high) and <b>impact</b> (low/medium/high) — forming a 3×3 grid; the product surfaces high-priority (high/high) risks for attention.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Techniques & Soft Skills"
+  },
+  {
+   "guid": "u%IY1iIK67",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Techniques_&_Soft_Skills"
+   ],
+   "front": "What is <b>risk storming</b>?",
+   "back": "A collaborative exercise where several participants <b>independently</b> identify and rate risks on an architecture diagram, then converge — surfacing risks a single architect would miss.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Techniques & Soft Skills"
+  },
+  {
+   "guid": "bIv{*]YNy%",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Techniques_&_Soft_Skills"
+   ],
+   "front": "<b>Conway’s Law</b> and the Inverse Conway Maneuver?",
+   "back": "Conway’s Law: organisations design systems that mirror their own communication structures. The <b>Inverse Conway Maneuver</b> deliberately restructures teams to encourage a desired architecture (e.g. one team per service).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Techniques & Soft Skills"
+  },
+  {
+   "guid": "Mzs&i(8w+3",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Techniques_&_Soft_Skills"
+   ],
+   "front": "How do team boundaries relate to architecture (Team Topologies idea)?",
+   "back": "Because team structure and system structure mirror each other (Conway’s Law), architects should design <b>boundaries</b> — such as a service per team — so communication paths match the desired architecture, and lead with elastic, context-appropriate control.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Techniques & Soft Skills"
+  },
+  {
+   "guid": "ywviG=F}9F",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Techniques_&_Soft_Skills"
+   ],
+   "front": "Why does “there are no right or wrong answers in architecture, only expensive ones” fit the book?",
+   "back": "Because everything is a tradeoff (First Law). Decisions aren’t right/wrong in the abstract — they carry costs and consequences that must be weighed against the required characteristics.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Techniques & Soft Skills"
+  },
+  {
+   "guid": "QfA|(|>A$C",
+   "type": "basic",
+   "deck": "Fundamentals of Software Architecture",
+   "tags": [
+    "Techniques_&_Soft_Skills"
+   ],
+   "front": "What does it mean that architecture is <b>iterative / evolutionary</b>?",
+   "back": "Decisions and characteristics are refined as understanding grows rather than fully specified up front. Supported by <b>evolutionary architecture</b> and automated <b>fitness functions</b> for ongoing governance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Techniques & Soft Skills"
+  }
+ ]
+}

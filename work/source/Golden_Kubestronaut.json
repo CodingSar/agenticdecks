@@ -1,0 +1,3380 @@
+{
+ "source_file": "Golden_Kubestronaut.apkg",
+ "notes": [
+  {
+   "guid": "t0HUIh{;.I",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKA"
+   ],
+   "front": "In CKA, what does <code>etcdctl snapshot save</code> do and what env vars does it need?",
+   "back": "Takes a point-in-time backup of the <b>etcd</b> datastore (the cluster's source of truth). You must set <code>ETCDCTL_API=3</code> and pass <code>--endpoints</code>, <code>--cacert</code>, <code>--cert</code>, and <code>--key</code> (the etcd server CA and client certs). Restore with <code>etcdctl snapshot restore</code> into a new data dir, then point the static pod manifest at it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Administrator · etcd backup"
+  },
+  {
+   "guid": "N`ES5bWD}`",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKA"
+   ],
+   "front": "What is the correct order to upgrade a kubeadm cluster?",
+   "back": "1) Upgrade <b>kubeadm</b> on the control-plane node; 2) <code>kubeadm upgrade plan</code> then <code>kubeadm upgrade apply vX.Y.Z</code>; 3) upgrade <b>kubelet</b> + <b>kubectl</b> on that node and restart kubelet; 4) for each worker: <code>kubeadm upgrade node</code>, then drain, upgrade kubelet/kubectl, uncordon. Upgrade <b>one minor version at a time</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Administrator · upgrades"
+  },
+  {
+   "guid": "jTh~j_,wBV",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKA"
+   ],
+   "front": "Before upgrading or doing maintenance on a node, what two kubectl commands isolate it and restore it?",
+   "back": "<code>kubectl drain &lt;node&gt; --ignore-daemonsets --delete-emptydir-data</code> cordons the node and evicts pods (respecting PodDisruptionBudgets). After maintenance, <code>kubectl uncordon &lt;node&gt;</code> makes it schedulable again. <code>kubectl cordon</code> alone only marks unschedulable without evicting.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Administrator · node maintenance"
+  },
+  {
+   "guid": "raI|q:etzr",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKA"
+   ],
+   "front": "What are the four RBAC objects and how do they pair?",
+   "back": "<b>Role-Based Access Control</b>: <b>Role</b> (namespaced permissions) bound by <b>RoleBinding</b>; <b>ClusterRole</b> (cluster-wide or reusable permissions) bound by <b>ClusterRoleBinding</b>. A RoleBinding can also reference a ClusterRole to grant its rules within a single namespace. Rules are purely additive — there are no deny rules.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Administrator · RBAC"
+  },
+  {
+   "guid": "PUWDs2GgPk",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKA"
+   ],
+   "front": "How do you test whether a subject is allowed to perform an action?",
+   "back": "<code>kubectl auth can-i &lt;verb&gt; &lt;resource&gt; --as &lt;user&gt; -n &lt;ns&gt;</code>. Example: <code>kubectl auth can-i create deployments --as dev -n web</code>. Use <code>--list</code> to enumerate all permissions for a subject.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Administrator · RBAC"
+  },
+  {
+   "guid": "DKG(J!I8P>",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKA"
+   ],
+   "front": "What is a static pod and how does the kubelet find it?",
+   "back": "A pod managed directly by the <b>kubelet</b> on a node (not the API server / scheduler). The kubelet watches the directory in <code>--pod-manifest-path</code> (default <code>/etc/kubernetes/manifests</code>) and runs any pod manifest placed there. Control-plane components (apiserver, etcd, scheduler, controller-manager) run as static pods in kubeadm clusters. A read-only mirror pod appears in the API.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Administrator · static pods"
+  },
+  {
+   "guid": "x?52lb=|TR",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKA"
+   ],
+   "front": "What is the difference between a taint and a toleration?",
+   "back": "A <b>taint</b> is placed on a node (<code>kubectl taint nodes n key=val:NoSchedule</code>) to repel pods. A <b>toleration</b> is placed on a pod to allow (not require) scheduling onto a tainted node. Taint effects: <code>NoSchedule</code>, <code>PreferNoSchedule</code>, <code>NoExecute</code> (also evicts running pods that don't tolerate).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Administrator · scheduling"
+  },
+  {
+   "guid": "vX@K,TPN20",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKA"
+   ],
+   "front": "Node affinity vs pod affinity vs pod anti-affinity?",
+   "back": "<b>Node affinity</b>: attract a pod to nodes by node labels. <b>Pod affinity</b>: co-locate a pod near other pods (by their labels) in a topology domain. <b>Pod anti-affinity</b>: keep pods apart (e.g. spread replicas across zones). Each is <code>requiredDuringScheduling...</code> (hard) or <code>preferred...</code> (soft).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Administrator · scheduling"
+  },
+  {
+   "guid": "GlDl3h]mOj",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKA"
+   ],
+   "front": "What do the PersistentVolume reclaim policies Retain, Delete, and Recycle mean?",
+   "back": "Govern what happens to a <b>PersistentVolume</b> after its claim is deleted. <b>Retain</b>: keep the volume + data, manual cleanup. <b>Delete</b>: delete the underlying storage asset. <b>Recycle</b>: deprecated (scrubbed and reused). Dynamically provisioned volumes default to Delete via the StorageClass.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Administrator · storage"
+  },
+  {
+   "guid": "JM19I*`n1Q",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKA"
+   ],
+   "front": "What does a StorageClass provide, and what is WaitForFirstConsumer?",
+   "back": "A <b>StorageClass</b> defines a provisioner + parameters for dynamic volume provisioning. <code>volumeBindingMode: WaitForFirstConsumer</code> delays binding/provisioning until a pod using the claim is scheduled, so the volume lands in the right zone/topology (avoids zone mismatch). The alternative is <code>Immediate</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Administrator · storage"
+  },
+  {
+   "guid": "d36IMW}Q|1",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKA"
+   ],
+   "front": "In CKA cluster networking, what must every CNI plugin guarantee?",
+   "back": "The <b>Container Network Interface</b> model requires: every pod gets its own IP; pods on any node can reach pods on any other node <b>without NAT</b>; and a node's agents (kubelet) can reach all pods on that node. The pod CIDR must not overlap node/service CIDRs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Administrator · networking"
+  },
+  {
+   "guid": "bSH0$*q^Wd",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKA"
+   ],
+   "front": "What provides in-cluster DNS and what is a Service's DNS name?",
+   "back": "<b>CoreDNS</b> (running as a Deployment, exposed by the <code>kube-dns</code> Service). A Service resolves at <code>&lt;svc&gt;.&lt;namespace&gt;.svc.cluster.local</code>. Pods get DNS config via the kubelet pointing <code>/etc/resolv.conf</code> at the cluster DNS ClusterIP.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Administrator · DNS"
+  },
+  {
+   "guid": "QQQYJ#U@pX",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKA"
+   ],
+   "front": "What are the kube-proxy modes and the modern default direction?",
+   "back": "<b>kube-proxy</b> implements Service virtual IPs. Modes: <code>iptables</code> (default historically), <code>ipvs</code> (better at scale, hash-based LB), and userspace (legacy). Newer dataplanes (e.g. Cilium) can replace kube-proxy entirely using eBPF.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Administrator · networking"
+  },
+  {
+   "guid": "LFN~OXs~L!",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKA"
+   ],
+   "front": "How long are kubeadm certificates valid and how do you check/renew?",
+   "back": "Client/serving certs default to <b>1 year</b>; the cluster CA to 10 years. Check with <code>kubeadm certs check-expiration</code>; renew all with <code>kubeadm certs renew all</code> (renewed automatically on control-plane upgrade).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Administrator · certificates"
+  },
+  {
+   "guid": "PfxWf.,Vtf",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKA"
+   ],
+   "front": "A pod is stuck in Pending. What is your first triage command and common causes?",
+   "back": "<code>kubectl describe pod</code> and read Events. Common Pending causes: insufficient CPU/memory on nodes, unsatisfied nodeSelector/affinity/taints, unbound PVC, or no nodes Ready. <code>kubectl get events --sort-by=.lastTimestamp</code> gives cluster-wide context.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Administrator · troubleshooting"
+  },
+  {
+   "guid": "MvO/zwk~%i",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKA"
+   ],
+   "front": "If the API server is down in a kubeadm cluster, where do you look?",
+   "back": "It runs as a static pod, so kubectl won't work. Check kubelet: <code>journalctl -u kubelet</code>, the container runtime (<code>crictl ps</code>, <code>crictl logs</code>), and the manifest <code>/etc/kubernetes/manifests/kube-apiserver.yaml</code>. Verify etcd is healthy and certs/flags are valid.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Administrator · troubleshooting"
+  },
+  {
+   "guid": "gdLy:X4Y5,",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKA"
+   ],
+   "front": "What is the difference between requests and limits, and what is the QoS impact?",
+   "back": "<b>requests</b> = guaranteed/scheduled amount; <b>limits</b> = hard ceiling. QoS classes: <b>Guaranteed</b> (requests==limits for all resources), <b>Burstable</b> (some requests set), <b>BestEffort</b> (none set). Under node memory pressure, BestEffort pods are evicted first, then Burstable. CPU over-limit is throttled; memory over-limit is OOM-killed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Administrator · resources"
+  },
+  {
+   "guid": "f`M#]PeY7S",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKA"
+   ],
+   "front": "What does a ResourceQuota vs a LimitRange control?",
+   "back": "<b>ResourceQuota</b>: aggregate caps per namespace (total CPU/memory/object counts). <b>LimitRange</b>: per-object defaults and min/max (e.g. default container requests, max PVC size). LimitRange auto-fills requests/limits when pods omit them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Administrator · resources"
+  },
+  {
+   "guid": "t_d`gr4om",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKA"
+   ],
+   "front": "What is the role of kubeconfig contexts and how do you switch?",
+   "back": "A kubeconfig bundles clusters, users, and <b>contexts</b> (a cluster+user+namespace tuple). <code>kubectl config get-contexts</code>, <code>kubectl config use-context &lt;name&gt;</code>, <code>kubectl config set-context --current --namespace=&lt;ns&gt;</code>. The active context is the default target for commands.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Administrator · config"
+  },
+  {
+   "guid": "yn;O^nSg-H",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKA"
+   ],
+   "front": "How do you generate a YAML manifest fast in the exam without writing it by hand?",
+   "back": "Use <code>--dry-run=client -o yaml</code>. Example: <code>kubectl create deploy web --image=nginx --dry-run=client -o yaml &gt; d.yaml</code>. <code>kubectl run</code>, <code>create job/cronjob/configmap/secret/role</code> all support this for scaffolding.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Administrator · exam technique"
+  },
+  {
+   "guid": "L1Jic*.e}]",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKA"
+   ],
+   "front": "What is the difference between a DaemonSet and a Deployment for placement?",
+   "back": "A <b>DaemonSet</b> runs exactly one pod per (matching) node and auto-adds pods to new nodes — used for node agents (CNI, log/metrics collectors). A Deployment runs N replicas placed by the scheduler anywhere. DaemonSet pods tolerate node taints by default for system roles.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Administrator · workloads"
+  },
+  {
+   "guid": "pubyxaOVoq",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKA"
+   ],
+   "front": "What is a CertificateSigningRequest (CSR) used for in cluster admin?",
+   "back": "To issue a client cert for a new user. Submit a base64 CSR as a <code>CertificateSigningRequest</code> object, <code>kubectl certificate approve &lt;csr&gt;</code>, then extract the signed cert and build a kubeconfig. RBAC then authorizes that user/CN.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Administrator · auth"
+  },
+  {
+   "guid": "v`&A:STU,!",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKA"
+   ],
+   "front": "What information does <code>kubectl top</code> need and provide?",
+   "back": "Live CPU/memory usage for nodes and pods. Requires the <b>metrics-server</b> add-on (aggregated API <code>metrics.k8s.io</code>). Not historical — for that use Prometheus. <code>kubectl top nodes</code>, <code>kubectl top pods -n ns</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Administrator · observability"
+  },
+  {
+   "guid": "vjwc_6ZdPJ",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKA"
+   ],
+   "front": "What is the Gateway API and how does it differ from Ingress?",
+   "back": "A newer, role-oriented, more expressive successor to Ingress for L4/L7 routing. Splits responsibilities across <b>GatewayClass</b> (infra), <b>Gateway</b> (a listener/instance), and <b>HTTPRoute/TCPRoute</b> (routing rules). More portable and extensible than the single overloaded Ingress object; CRDs are installed separately.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Administrator · networking"
+  },
+  {
+   "guid": "klkq$Nx|aL",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKS"
+   ],
+   "front": "What are the 4Cs of Cloud Native Security?",
+   "back": "Nested layers, secured outside-in: <b>Cloud</b> (or datacenter infra) → <b>Cluster</b> (Kubernetes components, RBAC, network policy) → <b>Container</b> (image hygiene, runtime) → <b>Code</b> (app security, TLS, deps). A weak outer layer can't be saved by a strong inner one.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Security Specialist · 4Cs"
+  },
+  {
+   "guid": "x;[~c*X_g_",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKS"
+   ],
+   "front": "What is a default-deny NetworkPolicy and why start there?",
+   "back": "A <b>NetworkPolicy</b> selecting all pods with empty ingress (and/or egress) blocks all traffic to/from them; you then add explicit allow rules. Pods are non-isolated by default (all traffic allowed), so default-deny establishes least-privilege networking. Requires a CNI that enforces NetworkPolicy (e.g. Calico, Cilium).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Security Specialist · network policy"
+  },
+  {
+   "guid": "MMg>K![yfV",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKS"
+   ],
+   "front": "What are the three Pod Security Standards profiles?",
+   "back": "<b>Privileged</b> (unrestricted), <b>Baseline</b> (blocks known privilege escalations; minimally restrictive), <b>Restricted</b> (hardened best practice: non-root, drop capabilities, seccomp RuntimeDefault, no host namespaces). Enforced by <b>Pod Security Admission</b> via namespace labels.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Security Specialist · pod security"
+  },
+  {
+   "guid": "LN8cDd<e#9",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKS"
+   ],
+   "front": "How is Pod Security Admission configured per namespace?",
+   "back": "Label the namespace: <code>pod-security.kubernetes.io/&lt;mode&gt;: &lt;level&gt;</code>, where mode is <b>enforce</b>, <b>audit</b>, or <b>warn</b> and level is privileged/baseline/restricted. e.g. <code>pod-security.kubernetes.io/enforce: restricted</code>. PSA is the built-in replacement for the removed PodSecurityPolicy.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Security Specialist · pod security"
+  },
+  {
+   "guid": "m/2Q*+y-=",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKS"
+   ],
+   "front": "What is seccomp and how do you enable the default profile on a pod?",
+   "back": "<b>Secure Computing mode</b> filters which syscalls a container may make. Set <code>securityContext.seccompProfile.type: RuntimeDefault</code> (the container runtime's curated profile) or <code>Localhost</code> with a custom profile path. Blocks dangerous syscalls to shrink the kernel attack surface.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Security Specialist · runtime hardening"
+  },
+  {
+   "guid": "bQ6Weaw.;p",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKS"
+   ],
+   "front": "What does AppArmor do for containers and how is it applied now?",
+   "back": "A Linux Mandatory Access Control module restricting a process's file/capability/network access via a per-profile policy. In recent Kubernetes it's set via the pod/container <code>securityContext.appArmorProfile</code> field (older clusters used the <code>container.apparmor.security.beta.kubernetes.io/&lt;container&gt;</code> annotation).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Security Specialist · runtime hardening"
+  },
+  {
+   "guid": "tn[H1XX>A$",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKS"
+   ],
+   "front": "Which Linux capabilities should you drop, and how?",
+   "back": "Drop all then add only what's needed: <code>securityContext.capabilities: {drop: [\"ALL\"], add: [\"NET_BIND_SERVICE\"]}</code>. Avoid <code>CAP_SYS_ADMIN</code> and privileged mode. Combine with <code>runAsNonRoot: true</code>, <code>allowPrivilegeEscalation: false</code>, and a read-only root filesystem.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Security Specialist · runtime hardening"
+  },
+  {
+   "guid": "N_T2XZ&v%d",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKS"
+   ],
+   "front": "What is Falco and what does it detect?",
+   "back": "A CNCF runtime-security tool that taps kernel syscalls (eBPF or a kernel module) and alerts on suspicious behavior at runtime — e.g. a shell spawned in a container, writes to <code>/etc</code>, unexpected outbound connections, or reads of sensitive files. Rules are YAML; it complements (not replaces) admission-time controls.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Security Specialist · runtime security"
+  },
+  {
+   "guid": "f+Z5_B-im4",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKS"
+   ],
+   "front": "What is kube-bench and what does it check?",
+   "back": "A tool that runs the <b>CIS (Center for Internet Security) Kubernetes Benchmark</b> against a cluster, checking control-plane flags, file permissions, and worker configs for hardening compliance, and reporting pass/fail/remediation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Security Specialist · benchmarking"
+  },
+  {
+   "guid": "l,AQm.3EtN",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKS"
+   ],
+   "front": "What is Trivy used for in a CKS context?",
+   "back": "An open-source scanner for container images, filesystems, and IaC. Finds OS/library CVEs (vulnerabilities), misconfigurations, secrets, and can generate an SBOM. Typically run in CI to gate images before they reach a registry/cluster.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Security Specialist · supply chain"
+  },
+  {
+   "guid": "J+lc]l-(2w",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKS"
+   ],
+   "front": "What is image signing with Cosign and why does it matter?",
+   "back": "<b>Cosign</b> (Sigstore project) cryptographically signs container images; the signature is stored in the registry. Admission policies (Kyverno <code>verifyImages</code>, or a policy controller) verify the signature before allowing deployment — ensuring image <b>provenance/integrity</b> in the software supply chain. Supports keyless (OIDC) signing.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Security Specialist · supply chain"
+  },
+  {
+   "guid": "CmTC9[iVBc",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKS"
+   ],
+   "front": "What is an SBOM and why generate one?",
+   "back": "<b>Software Bill of Materials</b>: a machine-readable inventory of all components/dependencies in an artifact (formats: SPDX, CycloneDX). Enables fast impact analysis when a new CVE drops (e.g. Log4Shell) and is increasingly required for supply-chain compliance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Security Specialist · supply chain"
+  },
+  {
+   "guid": "sTsz.GxKv;",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKS"
+   ],
+   "front": "How do you encrypt Kubernetes Secrets at rest in etcd?",
+   "back": "Configure an <b>EncryptionConfiguration</b> on the API server (<code>--encryption-provider-config</code>) with a provider such as <code>aescbc</code>/<code>aesgcm</code> or a KMS plugin. By default Secrets are only base64-encoded in etcd, not encrypted. After enabling, re-encrypt existing secrets with <code>kubectl get secrets -A -o json | kubectl replace -f -</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Security Specialist · secrets"
+  },
+  {
+   "guid": "qC[,Gj8t?o",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKS"
+   ],
+   "front": "What is the API server audit policy and its levels?",
+   "back": "The audit policy defines what API requests are logged. Levels per rule: <b>None</b>, <b>Metadata</b> (request metadata only), <b>Request</b> (+ request body), <b>RequestResponse</b> (+ response body). Configured via <code>--audit-policy-file</code> and <code>--audit-log-path</code>. Critical for incident forensics.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Security Specialist · audit"
+  },
+  {
+   "guid": "ig2/qMVNK2",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKS"
+   ],
+   "front": "Why disable automatic ServiceAccount token mounting where unused?",
+   "back": "A mounted SA token can be exfiltrated and used against the API server. Set <code>automountServiceAccountToken: false</code> on the pod or ServiceAccount when the workload doesn't call the API. Modern tokens are short-lived, audience-bound projected tokens rather than long-lived secrets.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Security Specialist · least privilege"
+  },
+  {
+   "guid": "LDA8@:y*OE",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKS"
+   ],
+   "front": "What are admission controllers and the two webhook types?",
+   "back": "Plugins in the API request path that intercept create/update before persistence. <b>MutatingAdmissionWebhook</b> can modify objects; <b>ValidatingAdmissionWebhook</b> can accept/reject. Mutating runs before validating. Tools like Kyverno/Gatekeeper register as webhooks; ImagePolicyWebhook gates images.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Security Specialist · admission control"
+  },
+  {
+   "guid": "rAYP#1}xW",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKS"
+   ],
+   "front": "What does the ImagePolicyWebhook admission controller do?",
+   "back": "Sends each pod's images to an external service that returns allow/deny, letting you enforce image provenance/scan policy at admission. Enabled via the API server <code>--admission-control-config-file</code>; failing open vs closed is configurable.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Security Specialist · admission control"
+  },
+  {
+   "guid": "O=&pb>^W|H",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKS"
+   ],
+   "front": "What is gVisor / Kata Containers and when use them?",
+   "back": "Stronger workload isolation via a sandboxed runtime: <b>gVisor</b> intercepts syscalls in a user-space kernel; <b>Kata</b> runs each pod in a lightweight VM. Selected per-pod via a <b>RuntimeClass</b>. Use for untrusted/multi-tenant workloads where namespace isolation is insufficient.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Security Specialist · isolation"
+  },
+  {
+   "guid": "t(]HFz>$Ad",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKS"
+   ],
+   "front": "What is a RuntimeClass?",
+   "back": "A cluster resource selecting which container runtime handler runs a pod (e.g. <code>runc</code>, <code>gvisor</code>, <code>kata</code>). Set <code>spec.runtimeClassName</code> on the pod. Enables mixing standard and sandboxed runtimes on the same cluster.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Security Specialist · isolation"
+  },
+  {
+   "guid": "vVs`xT[j&h",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKS"
+   ],
+   "front": "How do you minimize a container image's attack surface?",
+   "back": "Use minimal/distroless or scratch base images, pin to digests not <code>latest</code>, run as non-root, drop capabilities, read-only root FS, multi-stage builds to exclude build tools, no embedded secrets, and scan in CI. Fewer binaries = fewer CVEs and no shell for an attacker.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Security Specialist · containers"
+  },
+  {
+   "guid": "Hq@B*&?1*(",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKS"
+   ],
+   "front": "What is the principle behind restricting the kubelet API in hardening?",
+   "back": "The kubelet's read/write API (port 10250) can exec into pods and read logs. Harden by requiring authn (<code>--anonymous-auth=false</code>), authz mode Webhook (not AlwaysAllow), and NodeRestriction admission so a node can only modify its own objects — limiting blast radius of a compromised node.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Security Specialist · cluster hardening"
+  },
+  {
+   "guid": "l![$:kwOI*",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKS"
+   ],
+   "front": "What is OPA Gatekeeper and how does its policy model work?",
+   "back": "<b>Open Policy Agent</b> Gatekeeper is a validating admission controller using <b>Rego</b> policies. You define a <b>ConstraintTemplate</b> (the rego logic + a CRD), then create <b>Constraints</b> (instances binding it to resource kinds with parameters). It also supports audit of existing resources. Contrast: Kyverno uses YAML, no Rego.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Kubernetes Security Specialist · policy"
+  },
+  {
+   "guid": "p*z<JVFA-b",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCNA"
+   ],
+   "front": "What is the CNCF and what are its project maturity levels?",
+   "back": "The <b>Cloud Native Computing Foundation</b> (under the Linux Foundation) hosts cloud-native open-source projects. Maturity: <b>Sandbox</b> (early) → <b>Incubating</b> (growing adoption) → <b>Graduated</b> (mature, e.g. Kubernetes, Prometheus, Envoy).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kubernetes & Cloud Native Associate · CNCF"
+  },
+  {
+   "guid": "j[8Z*<VbrE",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCNA"
+   ],
+   "front": "Define cloud native (CNCF definition, in essence).",
+   "back": "Building/running scalable apps in modern dynamic environments using <b>containers, microservices, immutable infrastructure, and declarative APIs</b>, enabling loosely coupled, resilient, observable systems that allow frequent, low-risk changes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kubernetes & Cloud Native Associate · concepts"
+  },
+  {
+   "guid": "wd,7r%<{CA",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCNA"
+   ],
+   "front": "What are CRI, CNI, and CSI?",
+   "back": "Pluggable Kubernetes interfaces: <b>Container Runtime Interface</b> (how kubelet talks to runtimes like containerd/CRI-O), <b>Container Network Interface</b> (pod networking plugins), <b>Container Storage Interface</b> (storage drivers). Standard interfaces decouple Kubernetes from specific implementations.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kubernetes & Cloud Native Associate · interfaces"
+  },
+  {
+   "guid": "y@z`V`1^JC",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCNA"
+   ],
+   "front": "What is the OCI and its main specs?",
+   "back": "The <b>Open Container Initiative</b> standardizes container formats: the <b>image-spec</b> (image layout), <b>runtime-spec</b> (how to run a filesystem bundle), and <b>distribution-spec</b> (registry API). Ensures images/runtimes interoperate across tools.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kubernetes & Cloud Native Associate · standards"
+  },
+  {
+   "guid": "dyTKr.ruqV",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCNA"
+   ],
+   "front": "Name the three autoscalers and what each scales.",
+   "back": "<b>HPA (Horizontal Pod Autoscaler)</b>: adds/removes pod replicas on metrics. <b>VPA (Vertical Pod Autoscaler)</b>: tunes pod CPU/memory requests. <b>Cluster Autoscaler</b>: adds/removes nodes when pods can't schedule or nodes are idle. KEDA adds event-driven scaling (to/from zero).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kubernetes & Cloud Native Associate · autoscaling"
+  },
+  {
+   "guid": "P9CL)WOMxK",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCNA"
+   ],
+   "front": "What are the three pillars of observability?",
+   "back": "<b>Metrics</b> (aggregatable numeric time series, e.g. Prometheus), <b>Logs</b> (discrete timestamped events), and <b>Traces</b> (request flow across services). Often a fourth — events/profiles — is added. OpenTelemetry standardizes their collection.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kubernetes & Cloud Native Associate · observability"
+  },
+  {
+   "guid": "ued#4@m(j/",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCNA"
+   ],
+   "front": "What is serverless / Knative in cloud native?",
+   "back": "A model where you run code without managing servers and scale to zero when idle. <b>Knative</b> brings serverless to Kubernetes: <b>Serving</b> (request-driven autoscaling incl. scale-to-zero) and <b>Eventing</b> (event delivery/sources/brokers).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kubernetes & Cloud Native Associate · serverless"
+  },
+  {
+   "guid": "Dvd@(5GdHZ",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCNA"
+   ],
+   "front": "What is a service mesh, conceptually?",
+   "back": "A dedicated infrastructure layer (proxies + control plane) handling service-to-service traffic management, mutual TLS, and observability transparently to the app. Examples: Istio, Linkerd, Cilium. Moves cross-cutting networking concerns out of application code.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kubernetes & Cloud Native Associate · networking"
+  },
+  {
+   "guid": "cTVmcLM%,Y",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCNA"
+   ],
+   "front": "What is the difference between imperative and declarative management?",
+   "back": "<b>Imperative</b>: you issue commands describing <b>how</b> (e.g. <code>kubectl create</code>, scripts). <b>Declarative</b>: you describe the <b>desired end state</b> (YAML manifests) and a controller continuously reconciles actual toward it. Kubernetes and GitOps are declarative.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kubernetes & Cloud Native Associate · concepts"
+  },
+  {
+   "guid": "MLSLK?KapN",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCNA"
+   ],
+   "front": "What is the reconciliation loop / controller pattern?",
+   "back": "Controllers continuously compare <b>desired state</b> (spec) with <b>observed state</b> (status) and take actions to converge them. This control-loop pattern is the heart of Kubernetes and underlies operators and GitOps.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kubernetes & Cloud Native Associate · concepts"
+  },
+  {
+   "guid": "LW`qT?u/T8",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCNA"
+   ],
+   "front": "What is Helm and what is a chart?",
+   "back": "Helm is the Kubernetes package manager. A <b>chart</b> is a templated, versioned bundle of manifests; <code>values.yaml</code> parameterizes it; installing creates a <b>release</b>. Enables reuse, upgrades, and rollbacks of app deployments.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kubernetes & Cloud Native Associate · packaging"
+  },
+  {
+   "guid": "I,GAOuU~d|",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCNA"
+   ],
+   "front": "What is the Twelve-Factor App methodology (gist)?",
+   "back": "A set of principles for cloud-native apps: e.g. config in the environment, stateless processes, treat backing services as attached resources, build/release/run separation, disposability, logs as event streams. Promotes portability and scalability.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kubernetes & Cloud Native Associate · concepts"
+  },
+  {
+   "guid": "ESf3N>;MwC",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCNA"
+   ],
+   "front": "What is an Operator in Kubernetes?",
+   "back": "A pattern that encodes operational knowledge for a specific application as a custom controller + <b>Custom Resource Definitions (CRDs)</b>. It automates day-2 ops (backups, upgrades, failover) by reconciling a CRD to manage the app like a human operator would.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kubernetes & Cloud Native Associate · extensibility"
+  },
+  {
+   "guid": "p3Jnog=An!",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCNA"
+   ],
+   "front": "What is a CRD?",
+   "back": "A <b>Custom Resource Definition</b> extends the Kubernetes API with new resource types. Once registered, custom resources are managed with kubectl like built-ins and watched by custom controllers/operators. The primary extension mechanism in cloud native.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kubernetes & Cloud Native Associate · extensibility"
+  },
+  {
+   "guid": "PBfEzQV6X#",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCNA"
+   ],
+   "front": "What are the main Kubernetes Service types?",
+   "back": "<b>ClusterIP</b> (internal virtual IP, default), <b>NodePort</b> (exposes on a port on every node), <b>LoadBalancer</b> (provisions an external LB), and <b>ExternalName</b> (CNAME alias). Headless (<code>clusterIP: None</code>) returns pod IPs directly for stateful discovery.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kubernetes & Cloud Native Associate · networking"
+  },
+  {
+   "guid": "p*>N9CmEpq",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCNA"
+   ],
+   "front": "What roles do containerd and CRI-O play?",
+   "back": "They are CRI-compliant <b>container runtimes</b> the kubelet drives to pull images and run containers. Docker is no longer used directly by the kubelet (dockershim removed); containerd is the common default. <code>runc</code> is the low-level OCI runtime underneath.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kubernetes & Cloud Native Associate · runtime"
+  },
+  {
+   "guid": "A4.o||l5~y",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCNA"
+   ],
+   "front": "What is GitOps in one sentence (KCNA level)?",
+   "back": "An operating model where Git is the single source of truth for declarative infrastructure/apps, and an agent continuously reconciles the cluster to match Git, so deployments are versioned, auditable, and self-healing.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kubernetes & Cloud Native Associate · GitOps"
+  },
+  {
+   "guid": "AYgMfE~SJ+",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCSA"
+   ],
+   "front": "What is the Kubernetes threat model framework often referenced (the 4As / STRIDE)?",
+   "back": "KCSA leans on STRIDE: <b>Spoofing, Tampering, Repudiation, Information disclosure, Denial of service, Elevation of privilege</b>. You map each Kubernetes component/trust boundary to these threats to reason about controls.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kubernetes & Cloud Security Associate · threat modeling"
+  },
+  {
+   "guid": "tMy{1YP}m0",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCSA"
+   ],
+   "front": "What are the main trust boundaries in a Kubernetes cluster?",
+   "back": "Between: external users ↔ API server; API server ↔ etcd; control plane ↔ nodes (kubelet); node ↔ pod/container; pod ↔ pod (network); and cluster ↔ cloud/infra. Each boundary needs authn, authz, encryption, and isolation controls.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kubernetes & Cloud Security Associate · architecture"
+  },
+  {
+   "guid": "NFjIm?$_Mv",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCSA"
+   ],
+   "front": "What is the principle of \"secure defaults\" tension in Kubernetes?",
+   "back": "Many Kubernetes defaults favor usability over security (all pod traffic allowed, SA tokens auto-mounted, no Pod Security restrictions, secrets only base64). KCSA expects you to know the insecure defaults and the hardening that closes them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kubernetes & Cloud Security Associate · defaults"
+  },
+  {
+   "guid": "E>mldx6J(u",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCSA"
+   ],
+   "front": "What are the four phases of the request path the API server enforces?",
+   "back": "Every API request goes through <b>Authentication</b> (who are you) → <b>Authorization</b> (are you allowed, via RBAC/Node/Webhook) → <b>Admission Control</b> (mutate/validate/policy) → persistence to etcd. KCSA tests understanding of controls at each stage.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kubernetes & Cloud Security Associate · API security"
+  },
+  {
+   "guid": "o}q&$(Hk2K",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCSA"
+   ],
+   "front": "What supply-chain risks does KCSA emphasize?",
+   "back": "Compromised base images, malicious/typosquatted dependencies, unsigned artifacts, leaked credentials, and build-system tampering. Mitigations: SBOMs, image signing (Cosign), provenance (SLSA), scanning, and admission verification.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kubernetes & Cloud Security Associate · supply chain"
+  },
+  {
+   "guid": "y*={Y0~8`S",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCSA"
+   ],
+   "front": "What is SLSA?",
+   "back": "<b>Supply-chain Levels for Software Artifacts</b>: a framework of graded requirements (levels) for build integrity and provenance, hardening the path from source to artifact against tampering. Referenced for supply-chain assurance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kubernetes & Cloud Security Associate · supply chain"
+  },
+  {
+   "guid": "w50tWzqt+>",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCSA"
+   ],
+   "front": "In KCSA, why is etcd a top-priority asset to protect?",
+   "back": "etcd holds all cluster state including Secrets (only base64 by default). Read access ≈ full cluster compromise. Controls: mutual TLS for etcd peers/clients, restrict to control-plane network, encryption at rest, and regular backups.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kubernetes & Cloud Security Associate · etcd"
+  },
+  {
+   "guid": "e}M43qtC1K",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCSA"
+   ],
+   "front": "What is the difference between authentication and authorization mechanisms in Kubernetes?",
+   "back": "<b>Authn</b>: client certs, bearer/SA tokens, OIDC, webhook — Kubernetes has no user objects. <b>Authz</b>: RBAC (common), ABAC, Node authorizer, and Webhook. Both must pass before admission.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kubernetes & Cloud Security Associate · access control"
+  },
+  {
+   "guid": "wgffc>/&1]",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCSA"
+   ],
+   "front": "What is microsegmentation and why apply it?",
+   "back": "Restricting pod-to-pod traffic to only what's required, using NetworkPolicies (or mesh authz). Limits lateral movement after a single pod is compromised — a core defense-in-depth principle for the cluster layer.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kubernetes & Cloud Security Associate · network security"
+  },
+  {
+   "guid": "EV*O}`l$g?",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCSA"
+   ],
+   "front": "What categories of controls reduce container-layer risk?",
+   "back": "Run as non-root, drop capabilities, read-only FS, seccomp/AppArmor, no privileged mode, resource limits (DoS), trusted/scanned images, and sandboxed runtimes for untrusted workloads. Maps to the Container \"C\" of the 4Cs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kubernetes & Cloud Security Associate · container security"
+  },
+  {
+   "guid": "q/|t^:>}>N",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCSA"
+   ],
+   "front": "Why is observability part of security posture?",
+   "back": "Audit logs, runtime detection (Falco), and metrics provide the detection/response capability — you cannot respond to what you cannot see. KCSA frames logging/monitoring as a security control, not just ops.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kubernetes & Cloud Security Associate · detection"
+  },
+  {
+   "guid": "iq2%zs@q/k",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCSA"
+   ],
+   "front": "What is the shared responsibility model in managed Kubernetes?",
+   "back": "The cloud provider secures the control plane/infrastructure (the Cloud C); you secure workloads, RBAC, network policy, images, and configs (Cluster/Container/Code). Misunderstanding the split is a common gap KCSA highlights.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kubernetes & Cloud Security Associate · cloud"
+  },
+  {
+   "guid": "hF(#[dy]O8",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::LFCS"
+   ],
+   "front": "What do the Linux file permission bits and chmod numeric form mean?",
+   "back": "Three triads — owner/group/other — each with read(4)/write(2)/execute(1). <code>chmod 750 f</code> = rwx for owner, r-x for group, none for other. <code>chmod u+x f</code> is the symbolic form. <code>chown user:group f</code> sets ownership.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Linux Foundation Certified SysAdmin · permissions"
+  },
+  {
+   "guid": "kPAOR7.v[|",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::LFCS"
+   ],
+   "front": "What are SUID, SGID, and the sticky bit?",
+   "back": "<b>SUID</b> (4xxx): run executable as the file owner. <b>SGID</b> (2xxx): run as the group / new files inherit dir group. <b>Sticky bit</b> (1xxx) on a dir: only the file owner can delete their files (e.g. <code>/tmp</code>). Shown as s/t in <code>ls -l</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Linux Foundation Certified SysAdmin · permissions"
+  },
+  {
+   "guid": "s-674MbAS=",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::LFCS"
+   ],
+   "front": "How do you manage a service with systemd?",
+   "back": "<code>systemctl start|stop|restart|status|enable|disable &lt;unit&gt;</code>. <code>enable</code> sets it to start at boot; <code>start</code> only affects now. Unit files live in <code>/etc/systemd/system/</code>; after editing run <code>systemctl daemon-reload</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Linux Foundation Certified SysAdmin · systemd"
+  },
+  {
+   "guid": "s;1a8pu0Hj",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::LFCS"
+   ],
+   "front": "How do you read logs with journald?",
+   "back": "<code>journalctl -u &lt;unit&gt;</code> for a service, <code>-f</code> to follow, <code>-b</code> for current boot, <code>--since \"10 min ago\"</code>, <code>-p err</code> by priority. Persistent storage needs <code>/var/log/journal</code> to exist.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Linux Foundation Certified SysAdmin · logging"
+  },
+  {
+   "guid": "OL.ve`lUno",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::LFCS"
+   ],
+   "front": "What is the modern way to inspect IP addressing and routes?",
+   "back": "The <code>ip</code> suite (iproute2): <code>ip addr</code> (interfaces/IPs), <code>ip route</code> (routing table), <code>ip link set dev eth0 up</code>. <code>ss -tulpn</code> shows listening sockets (replaces netstat).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Linux Foundation Certified SysAdmin · networking"
+  },
+  {
+   "guid": "P-A5#A<6^6",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::LFCS"
+   ],
+   "front": "What is the LVM stack and its three layers?",
+   "back": "<b>Logical Volume Manager</b>: <b>Physical Volumes</b> (PVs, raw disks/partitions) → grouped into a <b>Volume Group</b> (VG) → carved into <b>Logical Volumes</b> (LVs) you format/mount. Enables flexible resizing: <code>lvextend</code> + <code>resize2fs/xfs_growfs</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Linux Foundation Certified SysAdmin · storage"
+  },
+  {
+   "guid": "JU-kl>oOaz",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::LFCS"
+   ],
+   "front": "How do you make a mount persistent across reboots?",
+   "back": "Add an entry to <code>/etc/fstab</code>: <code>&lt;device-or-UUID&gt; &lt;mountpoint&gt; &lt;fstype&gt; &lt;opts&gt; 0 0</code>. Use UUIDs (from <code>blkid</code>) over device names. Test with <code>mount -a</code> before rebooting to catch errors.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Linux Foundation Certified SysAdmin · storage"
+  },
+  {
+   "guid": "qq#-]OxNZD",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::LFCS"
+   ],
+   "front": "How do you find and kill a process?",
+   "back": "Find: <code>ps aux | grep</code>, <code>pgrep -f name</code>, <code>top</code>/<code>htop</code>. Kill: <code>kill &lt;pid&gt;</code> (SIGTERM 15, graceful), <code>kill -9</code> (SIGKILL, forced), <code>pkill name</code>. <code>nice</code>/<code>renice</code> adjust scheduling priority.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Linux Foundation Certified SysAdmin · processes"
+  },
+  {
+   "guid": "OJMJ}n.z8G",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::LFCS"
+   ],
+   "front": "What is the cron syntax for scheduling?",
+   "back": "Five fields: <code>minute hour day-of-month month day-of-week</code> then the command. e.g. <code>0 2 * * 1</code> = 02:00 every Monday. User crontabs via <code>crontab -e</code>; system jobs in <code>/etc/cron.d</code>. systemd timers are the modern alternative.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Linux Foundation Certified SysAdmin · scheduling"
+  },
+  {
+   "guid": "IWpt_(06}4",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::LFCS"
+   ],
+   "front": "Contrast package management on Debian vs RHEL families.",
+   "back": "Debian/Ubuntu: <code>apt</code>/<code>dpkg</code> with <code>.deb</code>. RHEL/Fedora: <code>dnf</code> (or <code>yum</code>)/<code>rpm</code> with <code>.rpm</code>. e.g. <code>apt install nginx</code> vs <code>dnf install nginx</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Linux Foundation Certified SysAdmin · packages"
+  },
+  {
+   "guid": "I#p`M.1yZ~",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::LFCS"
+   ],
+   "front": "What are SELinux modes and how do you toggle?",
+   "back": "<b>Security-Enhanced Linux</b> modes: <b>enforcing</b> (block + log), <b>permissive</b> (log only), <b>disabled</b>. <code>getenforce</code>/<code>setenforce 0|1</code>; persistent in <code>/etc/selinux/config</code>. Denials show in audit log; <code>ausearch</code>/<code>chcon</code>/<code>restorecon</code> manage contexts.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Linux Foundation Certified SysAdmin · security"
+  },
+  {
+   "guid": "oErLaKXt9$",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::LFCS"
+   ],
+   "front": "How do you create a user with a home dir and set a password?",
+   "back": "<code>useradd -m -s /bin/bash alice</code> then <code>passwd alice</code>. Add to a group: <code>usermod -aG sudo alice</code> (the <code>-a</code> appends — omitting it replaces group membership). Users in <code>/etc/passwd</code>, groups in <code>/etc/group</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Linux Foundation Certified SysAdmin · users"
+  },
+  {
+   "guid": "u9w?JXc@6q",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::LFCS"
+   ],
+   "front": "What does redirection and piping look like in bash?",
+   "back": "<code>&gt;</code> overwrite stdout to file, <code>&gt;&gt;</code> append, <code>2&gt;</code> stderr, <code>&amp;&gt;</code> both, <code>|</code> pipe stdout to next command's stdin, <code>&lt;</code> read stdin from file. e.g. <code>cmd 2&gt;&amp;1 | tee log</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Linux Foundation Certified SysAdmin · shell"
+  },
+  {
+   "guid": "o*Av#ue}?4",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::LFCS"
+   ],
+   "front": "What do grep, sed, and awk each do?",
+   "back": "<b>grep</b>: search lines by pattern (<code>grep -r 'err' .</code>). <b>sed</b>: stream-edit (<code>sed 's/old/new/g'</code>). <b>awk</b>: field-based processing (<code>awk '{print $2}'</code>). Core text-processing trio.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Linux Foundation Certified SysAdmin · text tools"
+  },
+  {
+   "guid": "l:@(Aiqzw_",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::LFCS"
+   ],
+   "front": "How do you set up passwordless SSH key auth?",
+   "back": "<code>ssh-keygen</code> to make a keypair, then <code>ssh-copy-id user@host</code> (appends the public key to the server's <code>~/.ssh/authorized_keys</code>). Private key stays local with 600 perms. Config in <code>~/.ssh/config</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Linux Foundation Certified SysAdmin · ssh"
+  },
+  {
+   "guid": "C%.$_|7%#>",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::LFCS"
+   ],
+   "front": "What is the difference between hard and soft (symbolic) links?",
+   "back": "A <b>hard link</b> is another name pointing to the same inode (same data; can't cross filesystems or link dirs). A <b>symlink</b> (<code>ln -s</code>) is a pointer to a path (can cross filesystems, can dangle if target removed).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Linux Foundation Certified SysAdmin · filesystem"
+  },
+  {
+   "guid": "xWRf7D[&zx",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::LFCS"
+   ],
+   "front": "How do you check disk usage and free space?",
+   "back": "<code>df -h</code> shows filesystem free/used space; <code>du -sh &lt;dir&gt;</code> sums a directory's size; <code>du -h --max-depth=1</code> breaks down children. <code>lsblk</code> shows block devices; <code>ncdu</code> is an interactive explorer.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Linux Foundation Certified SysAdmin · storage"
+  },
+  {
+   "guid": "gj_d6*wNR}",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::LFCS"
+   ],
+   "front": "What does the default umask control?",
+   "back": "The permission bits masked off when creating files/dirs. <code>umask 022</code> → new files 644, new dirs 755 (files never get execute by default). Subtract the mask from base perms (666 files / 777 dirs).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Linux Foundation Certified SysAdmin · permissions"
+  },
+  {
+   "guid": "y7?3G~BJ3W",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::LFCS"
+   ],
+   "front": "How do you configure a basic firewall with firewalld or ufw?",
+   "back": "firewalld: <code>firewall-cmd --add-service=http --permanent</code> then <code>--reload</code>; zones group rules. ufw (Ubuntu): <code>ufw allow 22/tcp</code>, <code>ufw enable</code>. Both front-end nftables/iptables.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Linux Foundation Certified SysAdmin · networking"
+  },
+  {
+   "guid": "G-.Ag>+qL6",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::LFCS"
+   ],
+   "front": "What is the boot target system in systemd (vs runlevels)?",
+   "back": "systemd <b>targets</b> replace SysV runlevels: <code>multi-user.target</code> (≈ runlevel 3, no GUI), <code>graphical.target</code> (≈ 5). Set default with <code>systemctl set-default multi-user.target</code>; switch now with <code>systemctl isolate</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Linux Foundation Certified SysAdmin · systemd"
+  },
+  {
+   "guid": "N;?apVoJJQ",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::LFCS"
+   ],
+   "front": "How do you archive and compress files with tar?",
+   "back": "<code>tar -czf out.tar.gz dir/</code> create gzip archive; <code>-xzf</code> extract; <code>-tzf</code> list. Flags: c=create, x=extract, t=list, z=gzip, j=bzip2, f=file, v=verbose.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Linux Foundation Certified SysAdmin · files"
+  },
+  {
+   "guid": "h<iwF.y>Ti",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::PCA"
+   ],
+   "front": "What are the four Prometheus metric types?",
+   "back": "<b>Counter</b> (monotonically increasing, e.g. requests_total), <b>Gauge</b> (up/down, e.g. memory), <b>Histogram</b> (bucketed observations + _sum/_count), <b>Summary</b> (client-side quantiles + _sum/_count). Use <code>rate()</code> on counters and histograms.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Prometheus Certified Associate · data model"
+  },
+  {
+   "guid": "hWLkedjOSG",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::PCA"
+   ],
+   "front": "What does Prometheus's pull model do?",
+   "back": "Prometheus <b>scrapes</b> targets' HTTP <code>/metrics</code> endpoints on an interval (it pulls; targets don't push). Short-lived jobs use the <b>Pushgateway</b> as an exception. Pull simplifies target health detection and central config.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Prometheus Certified Associate · architecture"
+  },
+  {
+   "guid": "z]uBK/rAO8",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::PCA"
+   ],
+   "front": "What is a Prometheus time series uniquely identified by?",
+   "back": "The metric name plus the full set of <b>label</b> key/value pairs. Adding a label value creates a new series, so high-cardinality labels (user IDs, request IDs) explode memory — avoid them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Prometheus Certified Associate · data model"
+  },
+  {
+   "guid": "Q*c2?IZnJ/",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::PCA"
+   ],
+   "front": "What is the difference between rate() and irate()?",
+   "back": "Both compute per-second rate of a counter over a range. <b>rate()</b> averages across the whole window (smooth, good for alerts/dashboards). <b>irate()</b> uses only the last two samples (fast-reacting, spiky). Use rate() for slow alerting.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Prometheus Certified Associate · PromQL"
+  },
+  {
+   "guid": "FLR&&9N|gY",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::PCA"
+   ],
+   "front": "How do you compute a 95th-percentile latency from a histogram?",
+   "back": "<code>histogram_quantile(0.95, sum by (le) (rate(http_request_duration_seconds_bucket[5m])))</code>. The histogram exposes cumulative <code>_bucket</code> series labeled by <code>le</code> (less-or-equal upper bound); the quantile is interpolated server-side.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Prometheus Certified Associate · PromQL"
+  },
+  {
+   "guid": "fy1VAy(mOw",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::PCA"
+   ],
+   "front": "What is the role of an exporter, and name a common one?",
+   "back": "An exporter exposes metrics from a system that doesn't speak Prometheus natively, in the text exposition format. <b>node_exporter</b> exposes host CPU/memory/disk/network. Others: blackbox_exporter (probing), kube-state-metrics (K8s object state).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Prometheus Certified Associate · exporters"
+  },
+  {
+   "guid": "y%E|?NNPG6",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::PCA"
+   ],
+   "front": "What is service discovery in Prometheus for?",
+   "back": "Dynamically finding scrape targets instead of hardcoding them — e.g. <code>kubernetes_sd_configs</code> discovers pods/services/nodes; relabeling rules filter/rewrite which are scraped and their labels. Essential in dynamic clusters.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Prometheus Certified Associate · config"
+  },
+  {
+   "guid": "J$a#Xp)]n)",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::PCA"
+   ],
+   "front": "What is a recording rule and why use it?",
+   "back": "A precomputed expression saved as a new time series on each evaluation (<code>record:</code> in a rule group). Speeds up expensive/frequently-used queries and dashboards, and stabilizes alert expressions.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Prometheus Certified Associate · rules"
+  },
+  {
+   "guid": "x@+b)oG`Td",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::PCA"
+   ],
+   "front": "How does an alerting rule's <code>for</code> clause work?",
+   "back": "An alerting rule fires when its expression is true; <code>for: 5m</code> requires the condition to hold continuously for that duration before transitioning from <b>pending</b> to <b>firing</b>, reducing flapping. Alerts are then sent to Alertmanager.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Prometheus Certified Associate · alerting"
+  },
+  {
+   "guid": "zLVgZ%cABP",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::PCA"
+   ],
+   "front": "What does Alertmanager do (grouping, inhibition, silencing)?",
+   "back": "Receives alerts from Prometheus and handles routing to receivers. <b>Grouping</b> batches related alerts into one notification; <b>inhibition</b> suppresses alerts when a higher-level one is firing; <b>silencing</b> mutes alerts matching labels for a window.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Prometheus Certified Associate · Alertmanager"
+  },
+  {
+   "guid": "G#]ae;:`YD",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::PCA"
+   ],
+   "front": "What is the Pushgateway and its caveat?",
+   "back": "An intermediary that short-lived/batch jobs push metrics to, which Prometheus then scrapes. Caveat: it does not respect job lifecycle — stale pushed metrics persist until deleted, and it's not for long-running services.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Prometheus Certified Associate · architecture"
+  },
+  {
+   "guid": "x{1aNqq~X*",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::PCA"
+   ],
+   "front": "What is the difference between instant and range vectors?",
+   "back": "An <b>instant vector</b> is a set of series with a single value at one timestamp; a <b>range vector</b> selects values over a time window (e.g. <code>metric[5m]</code>). Functions like <code>rate()</code> require a range vector and return an instant vector.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Prometheus Certified Associate · PromQL"
+  },
+  {
+   "guid": "ntJPGI&BJG",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::PCA"
+   ],
+   "front": "How does Prometheus store data (TSDB basics)?",
+   "back": "A local <b>time-series database</b> appending samples to in-memory blocks then flushing to disk blocks; a write-ahead log protects against crashes. It's intended for reliability over long-term clustering — remote_write/long-term backends (Thanos, Mimir, Cortex) extend retention/HA.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Prometheus Certified Associate · storage"
+  },
+  {
+   "guid": "E:jsUHN_!{",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::PCA"
+   ],
+   "front": "What is the basic anatomy of a scrape_config?",
+   "back": "Defines a <code>job_name</code>, scrape interval/timeout, scheme, metrics path, and how to find targets (<code>static_configs</code> or *_sd_configs) plus <code>relabel_configs</code>. Each job tags its series with a <code>job</code> label.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Prometheus Certified Associate · config"
+  },
+  {
+   "guid": "fEX?`T`D+#",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::PCA"
+   ],
+   "front": "How do counters handle resets and why does rate() matter?",
+   "back": "Counters reset to 0 on process restart. <code>rate()</code>/<code>increase()</code> detect resets and correct for them, so you should never query a raw counter's difference manually — always wrap counters in rate()/increase().",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Prometheus Certified Associate · PromQL"
+  },
+  {
+   "guid": "yr}uTEn?K{",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::PCA"
+   ],
+   "front": "What is the USE and RED method for choosing metrics?",
+   "back": "<b>USE</b> (resources): Utilization, Saturation, Errors. <b>RED</b> (request-driven services): Rate, Errors, Duration. Frameworks for deciding which signals to alert/dashboard on.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Prometheus Certified Associate · methodology"
+  },
+  {
+   "guid": "rgWuXm,M4Q",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::ICA"
+   ],
+   "front": "What are the Istio control-plane and data-plane components?",
+   "back": "Control plane: <b>istiod</b> (service discovery, config, certificate authority). Data plane: <b>Envoy</b> proxies — either sidecars (one per pod) or, in ambient mode, the ztunnel + waypoints. istiod pushes config to proxies via xDS.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Istio Certified Associate · architecture"
+  },
+  {
+   "guid": "lw(2l))eU_",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::ICA"
+   ],
+   "front": "What does an Istio VirtualService configure?",
+   "back": "L7 routing rules for a host: match on URI/headers/weights and route to subsets/destinations. Enables traffic splitting (canary), header-based routing, retries, timeouts, and fault injection. Paired with a DestinationRule.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Istio Certified Associate · traffic management"
+  },
+  {
+   "guid": "d1Jq#U8,Px",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::ICA"
+   ],
+   "front": "What does a DestinationRule define?",
+   "back": "Policies applied <b>after</b> routing to a destination: named <b>subsets</b> (by pod labels, e.g. v1/v2), load-balancing algorithm, connection pool limits, and outlier detection (circuit breaking). VirtualService routes to subsets defined here.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Istio Certified Associate · traffic management"
+  },
+  {
+   "guid": "MYy$.m%nc;",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::ICA"
+   ],
+   "front": "How do you do a canary/weighted release in Istio?",
+   "back": "In a VirtualService, route with weights across subsets: e.g. 90% to subset v1, 10% to subset v2 (subsets defined in a DestinationRule). Shift weights gradually to ramp the new version.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Istio Certified Associate · traffic management"
+  },
+  {
+   "guid": "vADqj1~D[,",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::ICA"
+   ],
+   "front": "What is the Istio Gateway resource?",
+   "back": "Configures a load balancer at the mesh edge for inbound (or outbound) traffic — which ports/protocols/hosts are exposed. A VirtualService then binds to the Gateway to route that ingress traffic to mesh services.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Istio Certified Associate · traffic management"
+  },
+  {
+   "guid": "FGr9yzT2HC",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::ICA"
+   ],
+   "front": "What does a ServiceEntry do?",
+   "back": "Adds an external service into Istio's service registry so mesh workloads can route to it with Istio policies (and apply mTLS/telemetry to egress). Used to reach external APIs/databases under mesh control.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Istio Certified Associate · traffic management"
+  },
+  {
+   "guid": "D^]g+=rG~F",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::ICA"
+   ],
+   "front": "What does PeerAuthentication control and what are its modes?",
+   "back": "Sets mutual-TLS requirements for traffic <b>received</b> by workloads. Modes: <b>STRICT</b> (only mTLS), <b>PERMISSIVE</b> (mTLS or plaintext — default, eases migration), <b>DISABLE</b>. Scope: mesh-wide, namespace, or workload.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Istio Certified Associate · security"
+  },
+  {
+   "guid": "JkBj@L~V(}",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::ICA"
+   ],
+   "front": "What is RequestAuthentication vs AuthorizationPolicy?",
+   "back": "<b>RequestAuthentication</b> validates end-user credentials (JWT issuer/JWKS) — it authenticates but doesn't authorize. <b>AuthorizationPolicy</b> then ALLOW/DENY/CUSTOM based on source identity, namespace, JWT claims, methods, paths.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Istio Certified Associate · security"
+  },
+  {
+   "guid": "J|nKw8O$,>",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::ICA"
+   ],
+   "front": "How does Istio establish workload identity for mTLS?",
+   "back": "istiod acts as a CA issuing X.509 certs to each workload, with identity encoded as a <b>SPIFFE</b> ID (<code>spiffe://&lt;trust-domain&gt;/ns/&lt;ns&gt;/sa/&lt;serviceaccount&gt;</code>) derived from the pod's ServiceAccount. mTLS authenticates both ends by this identity.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Istio Certified Associate · security"
+  },
+  {
+   "guid": "zgQ-1U*b|0",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::ICA"
+   ],
+   "front": "What is fault injection in Istio used for?",
+   "back": "Deliberately injecting <b>delays</b> or <b>aborts</b> (e.g. return HTTP 500 to 10% of requests) via a VirtualService, to test application resilience and failure handling without changing app code.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Istio Certified Associate · resilience"
+  },
+  {
+   "guid": "P.RjG/w3?B",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::ICA"
+   ],
+   "front": "What is outlier detection (circuit breaking) in Istio?",
+   "back": "In a DestinationRule, automatically eject backend endpoints that return consecutive errors from the load-balancing pool for a cooldown, preventing a failing instance from dragging down the service. Combined with connection-pool limits.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Istio Certified Associate · resilience"
+  },
+  {
+   "guid": "Fo59i{vLWh",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::ICA"
+   ],
+   "front": "Sidecar mode vs ambient mode in Istio?",
+   "back": "<b>Sidecar</b>: an Envoy proxy injected into every pod (full L7, higher per-pod overhead). <b>Ambient</b> (GA in Istio 1.24): no sidecars — a per-node <b>ztunnel</b> handles L4 mTLS, and optional <b>waypoint</b> proxies add L7 only where needed, reducing overhead.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Istio Certified Associate · architecture"
+  },
+  {
+   "guid": "i^V8|M#c4e",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::ICA"
+   ],
+   "front": "What is ztunnel and HBONE in Istio ambient mode?",
+   "back": "<b>ztunnel</b> (zero-trust tunnel) is a per-node Rust proxy (DaemonSet) doing L4 mTLS, auth, and telemetry. <b>HBONE</b> (HTTP-Based Overlay Network Environment) is the HTTP CONNECT-based, mTLS-encrypted tunneling protocol (port 15008) carrying traffic between ztunnels/waypoints.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Istio Certified Associate · ambient"
+  },
+  {
+   "guid": "tg1HM@qB1e",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::ICA"
+   ],
+   "front": "What is a waypoint proxy and how is it deployed?",
+   "back": "An Envoy proxy providing L7 features (HTTP routing, retries, L7 authz) in ambient mode, shared per namespace/service-account rather than per pod. Deployed via the Kubernetes <b>Gateway API</b> with <code>gatewayClassName: istio-waypoint</code> (e.g. <code>istioctl waypoint apply</code>).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Istio Certified Associate · ambient"
+  },
+  {
+   "guid": "eiu{iy}pQ!",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::ICA"
+   ],
+   "front": "What does istioctl analyze / proxy-config help with?",
+   "back": "<code>istioctl analyze</code> validates config for problems before/after apply. <code>istioctl proxy-config &lt;cluster|route|listener|endpoint&gt; &lt;pod&gt;</code> dumps the Envoy config a sidecar received — the primary way to debug why traffic isn't routing as expected.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Istio Certified Associate · troubleshooting"
+  },
+  {
+   "guid": "oIz8zA;?wN",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::ICA"
+   ],
+   "front": "What telemetry does Istio provide out of the box?",
+   "back": "Proxies emit standardized L7 metrics (request count, duration, size), access logs, and distributed-trace spans, plus service-graph data — without app changes. Integrates with Prometheus/Grafana/Jaeger/Kiali.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Istio Certified Associate · observability"
+  },
+  {
+   "guid": "vWu2LrCr|T",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CCA"
+   ],
+   "front": "What is eBPF and why does Cilium use it?",
+   "back": "<b>extended Berkeley Packet Filter</b> runs sandboxed programs in the Linux kernel on hooks (sockets, XDP, tc) without changing kernel source. Cilium uses it for high-performance networking, security, and observability — enforcing policy in-kernel and replacing iptables-based dataplanes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cilium Certified Associate · eBPF"
+  },
+  {
+   "guid": "A9Pf$w|8lW",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CCA"
+   ],
+   "front": "How does Cilium's identity-based security differ from IP-based?",
+   "back": "Cilium assigns a security <b>identity</b> derived from pod labels, not IP addresses. Policy is enforced on identity, so it remains correct as pods churn and IPs are reused — more scalable than IP/CIDR rules in dynamic clusters.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cilium Certified Associate · security model"
+  },
+  {
+   "guid": "b53t}3w&l/",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CCA"
+   ],
+   "front": "What does a CiliumNetworkPolicy add over the standard NetworkPolicy?",
+   "back": "The standard NetworkPolicy is L3/L4 only. <b>CiliumNetworkPolicy</b> adds L7 awareness — e.g. allow only HTTP <code>GET /api</code>, specific Kafka topics, or DNS-name-based egress (<code>toFQDNs</code>) — plus cluster-wide policies.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cilium Certified Associate · network policy"
+  },
+  {
+   "guid": "m5-G5&TE@y",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CCA"
+   ],
+   "front": "What is Hubble?",
+   "back": "Cilium's observability layer built on eBPF: provides flow-level visibility (which identity talked to which, allowed/denied, L7 verbs), a service map, and metrics — without app instrumentation. CLI (<code>hubble observe</code>) and a UI.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cilium Certified Associate · observability"
+  },
+  {
+   "guid": "P4k!m7Ptw^",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CCA"
+   ],
+   "front": "What does \"kube-proxy replacement\" mean in Cilium?",
+   "back": "Cilium implements Service load balancing (ClusterIP, NodePort, etc.) directly in eBPF, removing the need for kube-proxy and its iptables rules. This improves performance and scalability, especially at high Service counts.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cilium Certified Associate · dataplane"
+  },
+  {
+   "guid": "KxP3<8(uM9",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CCA"
+   ],
+   "front": "What is Cluster Mesh in Cilium?",
+   "back": "Connects multiple Kubernetes clusters into a single network/identity domain — enabling cross-cluster service discovery, load balancing, and network policy, with global services and failover across clusters.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cilium Certified Associate · multi-cluster"
+  },
+  {
+   "guid": "iG%i[@xwYS",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CCA"
+   ],
+   "front": "What transparent encryption options does Cilium offer?",
+   "back": "In-cluster traffic encryption via <b>WireGuard</b> (simple, fast) or <b>IPsec</b>, configured at the agent level — no app changes. Encrypts node-to-node pod traffic for data-in-transit compliance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cilium Certified Associate · encryption"
+  },
+  {
+   "guid": "Lu|64s^OF;",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CCA"
+   ],
+   "front": "What is a Cilium Endpoint and Identity?",
+   "back": "An <b>Endpoint</b> represents a managed networked entity (usually a pod) on a node. Its <b>Identity</b> is the numeric security identity derived from its labels; policy and Hubble flows reference identities. Inspect with <code>cilium endpoint list</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cilium Certified Associate · concepts"
+  },
+  {
+   "guid": "uRE4ntk%FF",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CCA"
+   ],
+   "front": "What is Tetragon?",
+   "back": "A Cilium-project eBPF-based runtime security observability + enforcement tool: tracks process execution, file/network access, and can enforce/kill on policy violations at the kernel level — complementary to Falco-style detection.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cilium Certified Associate · runtime security"
+  },
+  {
+   "guid": "Ect7erSa,v",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CCA"
+   ],
+   "front": "How does Cilium support egress to external services by DNS name?",
+   "back": "With <code>toFQDNs</code> rules in a CiliumNetworkPolicy, Cilium intercepts DNS, learns the resolved IPs, and allows egress only to those FQDNs — solving the problem that external IPs are dynamic and not known in advance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cilium Certified Associate · network policy"
+  },
+  {
+   "guid": "p+Pw{9&7RJ",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CCA"
+   ],
+   "front": "What is XDP and where does it run?",
+   "back": "<b>eXpress Data Path</b> is the earliest eBPF networking hook, at the NIC driver level before the kernel network stack — used for very high-performance packet processing/filtering (e.g. DDoS drop, load balancing) in Cilium.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cilium Certified Associate · eBPF"
+  },
+  {
+   "guid": "g~~A[5cnB}",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CCA"
+   ],
+   "front": "What are the default-deny semantics once a CiliumNetworkPolicy selects a pod?",
+   "back": "As with standard policy, the moment any policy selects an endpoint for a direction (ingress/egress), that direction switches to default-deny for that endpoint, and only explicitly allowed flows pass. Unselected endpoints stay default-allow.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cilium Certified Associate · network policy"
+  },
+  {
+   "guid": "AQBzkj.4#%",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CCA"
+   ],
+   "front": "What does the Cilium agent do on each node?",
+   "back": "Runs as a DaemonSet, manages eBPF programs/maps, assigns identities, enforces policy, programs Service load balancing, and reports to Hubble. The operator handles cluster-wide tasks (IPAM, CRD GC).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cilium Certified Associate · architecture"
+  },
+  {
+   "guid": "jL_{MN|wY&",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CCA"
+   ],
+   "front": "How does Cilium relate to the Gateway API and Ingress?",
+   "back": "Cilium can act as a Gateway API / Ingress controller itself (eBPF-based L7 routing), consolidating CNI + load balancing + ingress in one dataplane rather than running a separate ingress controller.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cilium Certified Associate · ingress"
+  },
+  {
+   "guid": "s,:RdUlP#G",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CGOA"
+   ],
+   "front": "What are the four OpenGitOps principles?",
+   "back": "GitOps systems are: <b>1) Declarative</b> (desired state expressed declaratively); <b>2) Versioned and immutable</b> (stored in Git, full history); <b>3) Pulled automatically</b> (agents pull approved state); <b>4) Continuously reconciled</b> (controllers detect drift and converge actual→desired).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified GitOps Associate · principles"
+  },
+  {
+   "guid": "HLYVMmYdXU",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CGOA"
+   ],
+   "front": "Push-based vs pull-based deployment, and which is GitOps-native?",
+   "back": "<b>Push</b>: a CI pipeline runs <code>kubectl apply</code> into the cluster (credentials live in CI). <b>Pull</b>: an in-cluster agent (Argo CD/Flux) watches Git and applies changes itself. Pull is GitOps-native — better security (no external cluster creds) and continuous reconciliation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified GitOps Associate · models"
+  },
+  {
+   "guid": "P[9ekw5t]S",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CGOA"
+   ],
+   "front": "What is drift and how does GitOps handle it?",
+   "back": "<b>Drift</b> is divergence between the live cluster and the Git-declared desired state (e.g. a manual <code>kubectl edit</code>). A GitOps reconciler detects it and either reports or auto-corrects (self-heal), restoring Git as the source of truth.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified GitOps Associate · reconciliation"
+  },
+  {
+   "guid": "FrCQB)3[>r",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CGOA"
+   ],
+   "front": "What is the difference between the desired state and the observed/actual state?",
+   "back": "<b>Desired state</b> = what Git declares should exist. <b>Actual/observed state</b> = what's running in the cluster. The reconciliation loop continuously drives actual toward desired; the difference is the drift to be resolved.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified GitOps Associate · concepts"
+  },
+  {
+   "guid": "Kgl4jNk?:J",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CGOA"
+   ],
+   "front": "Why is Git the source of truth advantageous for operations?",
+   "back": "Every change is a reviewed, versioned, auditable commit; rollback is <code>git revert</code>; access control uses existing Git/PR workflows; and recovery/rebuild is reproducible from the repo. Improves auditability, security, and disaster recovery.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified GitOps Associate · benefits"
+  },
+  {
+   "guid": "Kq3[eg(1aV",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CGOA"
+   ],
+   "front": "What is the role of an environment/config repo separation?",
+   "back": "Common pattern: app source repo (code) is separate from a config/deployment repo (manifests). CI builds and updates an image tag in the config repo; the GitOps agent deploys from the config repo. Keeps deploy state declarative and decoupled from app builds.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified GitOps Associate · patterns"
+  },
+  {
+   "guid": "t!kqiRqCfD",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CGOA"
+   ],
+   "front": "What does \"reconciliation is continuous, not one-shot\" mean?",
+   "back": "The agent re-checks desired vs actual on an ongoing loop (not just at deploy time), so out-of-band changes are continuously corrected and the system self-heals — distinct from a one-time apply in a classic pipeline.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified GitOps Associate · reconciliation"
+  },
+  {
+   "guid": "H!`4#;nu@U",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CGOA"
+   ],
+   "front": "How does GitOps relate to but differ from CI/CD?",
+   "back": "CI builds/tests artifacts; CD delivers them. GitOps is a specific way to do the CD/deploy half: declarative, Git-driven, pull-based, continuously reconciled. CI still runs outside the cluster; GitOps governs what lands in it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified GitOps Associate · scope"
+  },
+  {
+   "guid": "ehC~61_>Iq",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CGOA"
+   ],
+   "front": "What are common GitOps tools?",
+   "back": "<b>Argo CD</b> and <b>Flux</b> (both CNCF graduated) are the dominant reconciler agents. Supporting tools: Kustomize/Helm for templating, Kargo for promotion, sealed-secrets/External Secrets for secret handling in Git.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified GitOps Associate · tooling"
+  },
+  {
+   "guid": "qN~6T;)Q_1",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CGOA"
+   ],
+   "front": "What is a key challenge GitOps must solve around secrets?",
+   "back": "Plaintext secrets must never sit in Git. Solutions: encrypt before commit (Sealed Secrets, SOPS) or keep secrets external and reference them (External Secrets Operator pulling from Vault/cloud KMS). The reconciler handles the encrypted/reference form.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified GitOps Associate · secrets"
+  },
+  {
+   "guid": "cY[c4ND*K?",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CBA"
+   ],
+   "front": "What problem does Backstage solve?",
+   "back": "An open-source framework (originated at Spotify, CNCF) for building an <b>Internal Developer Portal (IDP)</b>: a single pane unifying the software catalog, docs, scaffolding, and tooling — reducing developer cognitive load and standardizing how services are created and discovered.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Backstage Associate · overview"
+  },
+  {
+   "guid": "N`V+|d)NOE",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CBA"
+   ],
+   "front": "What are the core entity kinds in the Backstage Software Catalog?",
+   "back": "<b>Component</b> (a thing you build/run), <b>API</b> (an interface a component exposes/consumes), <b>Resource</b> (infrastructure dependency), <b>System</b> (group of components), <b>Domain</b> (group of systems), <b>Group</b>/<b>User</b> (org/ownership), <b>Template</b> (scaffolder), <b>Location</b> (points at entity descriptors).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Backstage Associate · catalog"
+  },
+  {
+   "guid": "yVpRE.wvG%",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CBA"
+   ],
+   "front": "What is the catalog-info.yaml file?",
+   "back": "The descriptor (usually in each repo) registering an entity in the catalog — e.g. <code>kind: Component</code> with metadata (name, annotations) and spec (type, lifecycle, <b>owner</b>). Backstage ingests it via a Location to populate the catalog.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Backstage Associate · catalog"
+  },
+  {
+   "guid": "iBT9.,os/4",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CBA"
+   ],
+   "front": "What is the Scaffolder / Software Templates feature?",
+   "back": "Backstage's golden-path creation tool. A <code>kind: Template</code> defines <b>parameters</b> (a form the developer fills) and ordered <b>steps</b> (actions like <code>fetch:template</code>, <code>publish:github</code>, <code>catalog:register</code>) that generate a new repo/service and register it — standardizing how new software starts.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Backstage Associate · scaffolder"
+  },
+  {
+   "guid": "mxCy3Hu7Q1",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CBA"
+   ],
+   "front": "What is TechDocs?",
+   "back": "Backstage's docs-as-code feature: Markdown docs (typically MkDocs) live next to code and render in the portal on the entity's page, discovered via the <code>backstage.io/techdocs-ref</code> annotation. Keeps documentation versioned with the service.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Backstage Associate · techdocs"
+  },
+  {
+   "guid": "tivqyYcpxw",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CBA"
+   ],
+   "front": "How is Backstage extended?",
+   "back": "Through <b>plugins</b> (frontend + backend). The catalog, scaffolder, TechDocs, and search are themselves plugins. A rich plugin ecosystem integrates CI/CD, cloud, monitoring, and security tools into entity pages. Backstage is a framework you build your own portal from.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Backstage Associate · plugins"
+  },
+  {
+   "guid": "lya#+,*Jce",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CBA"
+   ],
+   "front": "What is the ownership model in the catalog?",
+   "back": "Every entity has a <code>spec.owner</code> referencing a Group (preferred) or User — the team responsible. Drives accountability, notifications, and filtering. A common scorecard rule: every Component must be owned by a Group, not a User.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Backstage Associate · ownership"
+  },
+  {
+   "guid": "G)![M`*wja",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CBA"
+   ],
+   "front": "How does Backstage discover and keep the catalog up to date?",
+   "back": "Processors/providers ingest entities from registered <b>Locations</b> (Git repos, URLs) or auto-discovery rules, then periodically re-read them. The materialized entity graph is stored (PostgreSQL in production); search indexes catalog + TechDocs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Backstage Associate · ingestion"
+  },
+  {
+   "guid": "bR7!1#|T9m",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CBA"
+   ],
+   "front": "What is the relationship between System, Component, and API entities?",
+   "back": "A <b>System</b> groups related <b>Components</b> that work together; Components can <code>providesApis</code>/<code>consumesApis</code> referencing <b>API</b> entities; multiple Systems roll up into a <b>Domain</b>. This models architecture and dependencies for discovery.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Backstage Associate · model"
+  },
+  {
+   "guid": "RfJ,E:7?|!",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CBA"
+   ],
+   "front": "Why does Backstage matter for platform engineering?",
+   "back": "It's the typical UI of an Internal Developer Platform — exposing self-service golden paths (templates), discoverability (catalog), and docs in one place, so the platform is consumed as a product. CNPA explicitly references it as the portal layer.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Backstage Associate · platform engineering"
+  },
+  {
+   "guid": "DLf4MD71xi",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::OTCA"
+   ],
+   "front": "What are the signals OpenTelemetry covers?",
+   "back": "<b>Traces</b>, <b>Metrics</b>, and <b>Logs</b> (the three core signals), plus emerging support for <b>profiles</b> and the cross-cutting <b>baggage</b>. OpenTelemetry (OTel) is the CNCF standard for generating/collecting/exporting telemetry, vendor-neutral.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenTelemetry Certified Associate · signals"
+  },
+  {
+   "guid": "v7(=e;MKQs",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::OTCA"
+   ],
+   "front": "What is a span and a trace?",
+   "back": "A <b>span</b> is a single timed operation (name, start/end, attributes, status, events). A <b>trace</b> is a tree of spans sharing a trace ID, representing one request's path across services. Parent/child links via span IDs build the tree.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenTelemetry Certified Associate · tracing"
+  },
+  {
+   "guid": "k[MrgcG0R+",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::OTCA"
+   ],
+   "front": "What is context propagation in OpenTelemetry?",
+   "back": "Passing trace context (trace ID, span ID, flags) across service boundaries so spans link into one trace. Uses the W3C <b>traceparent</b>/<b>tracestate</b> HTTP headers. <b>Baggage</b> propagates arbitrary user-defined key/values alongside it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenTelemetry Certified Associate · context"
+  },
+  {
+   "guid": "MJV;(Fr?C2",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::OTCA"
+   ],
+   "front": "What is the OpenTelemetry Collector and its pipeline stages?",
+   "back": "A vendor-agnostic agent/gateway that ingests, processes, and exports telemetry. Pipeline = <b>receivers</b> (intake, e.g. OTLP) → <b>processors</b> (batch, filter, transform) → <b>exporters</b> (send to backends). Decouples apps from observability backends.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenTelemetry Certified Associate · collector"
+  },
+  {
+   "guid": "uSvc`T1isO",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::OTCA"
+   ],
+   "front": "What is OTLP?",
+   "back": "The <b>OpenTelemetry Protocol</b> — the native wire protocol (gRPC or HTTP, protobuf) for transmitting traces/metrics/logs between SDKs, Collectors, and backends. The default, standardized export format.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenTelemetry Certified Associate · protocol"
+  },
+  {
+   "guid": "u?m26u&ZKD",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::OTCA"
+   ],
+   "front": "Auto-instrumentation vs manual instrumentation?",
+   "back": "<b>Auto</b>: agents/libraries instrument common frameworks with no code changes (fast coverage). <b>Manual</b>: you call the OTel API/SDK to create custom spans/metrics for business logic. Typically combine both.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenTelemetry Certified Associate · instrumentation"
+  },
+  {
+   "guid": "M]mo!d:,3@",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::OTCA"
+   ],
+   "front": "What is the difference between the OTel API and SDK?",
+   "back": "The <b>API</b> defines instrumentation interfaces apps/libraries code against (no-op if unconfigured). The <b>SDK</b> is the implementation that actually samples, processes, and exports. Libraries depend only on the API; the app wires in the SDK.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenTelemetry Certified Associate · architecture"
+  },
+  {
+   "guid": "Er%VW6h5x0",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::OTCA"
+   ],
+   "front": "What are semantic conventions?",
+   "back": "Standardized names for attributes and metrics (e.g. <code>http.request.method</code>, <code>service.name</code>) so telemetry is consistent and portable across languages/vendors/backends. Without them, dashboards/queries can't be reused.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenTelemetry Certified Associate · conventions"
+  },
+  {
+   "guid": "ebm@Vq=0k_",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::OTCA"
+   ],
+   "front": "Head sampling vs tail sampling?",
+   "back": "<b>Head</b>: the sampling decision is made at trace start (cheap, but blind to outcome). <b>Tail</b>: decide after the full trace is seen (e.g. keep all errors/slow traces) — done in the Collector, more useful but needs buffering.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenTelemetry Certified Associate · sampling"
+  },
+  {
+   "guid": "rhf`iu:?/i",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::OTCA"
+   ],
+   "front": "What is a Resource in OpenTelemetry?",
+   "back": "Immutable attributes describing the entity producing telemetry (e.g. <code>service.name</code>, <code>service.version</code>, host, k8s pod). Attached to all signals so a backend can attribute data to the right service/instance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenTelemetry Certified Associate · concepts"
+  },
+  {
+   "guid": "hGD-^0YS,_",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::OTCA"
+   ],
+   "front": "What is an exemplar in metrics?",
+   "back": "A sample data point on a metric (e.g. a histogram bucket) that carries a trace ID, linking an aggregate metric back to a specific representative trace — bridging metrics and traces for drill-down.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenTelemetry Certified Associate · metrics"
+  },
+  {
+   "guid": "Q./!Mi),,q",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::OTCA"
+   ],
+   "front": "What were OpenTracing and OpenCensus relative to OpenTelemetry?",
+   "back": "Two earlier projects that <b>merged</b> to form OpenTelemetry — OpenTracing (tracing API) + OpenCensus (metrics + tracing libs). OTel is the converged, CNCF-hosted standard superseding both.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenTelemetry Certified Associate · history"
+  },
+  {
+   "guid": "k.)UVA{+<U",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::OTCA"
+   ],
+   "front": "Why deploy the Collector as both agent and gateway?",
+   "back": "<b>Agent</b> (per node/sidecar) collects locally with low latency; <b>gateway</b> (central pool) does heavier processing (tail sampling, batching) and fans out to backends. Separating them scales and centralizes export config.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenTelemetry Certified Associate · deployment"
+  },
+  {
+   "guid": "LqK&$i;09R",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::OTCA"
+   ],
+   "front": "What span status and span kinds exist?",
+   "back": "Status: <b>Unset</b>, <b>Ok</b>, <b>Error</b>. Kinds: <b>SERVER</b>, <b>CLIENT</b>, <b>PRODUCER</b>, <b>CONSUMER</b>, <b>INTERNAL</b> — describing the span's role in a request, which helps backends render service topology correctly.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenTelemetry Certified Associate · tracing"
+  },
+  {
+   "guid": "Ll]tMwtR$E",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCA"
+   ],
+   "front": "What is Kyverno and how does it differ from OPA/Gatekeeper?",
+   "back": "A Kubernetes-native policy engine that runs as an <b>admission controller</b> (validating + mutating webhooks). Policies are plain <b>YAML</b> — no Rego to learn (unlike OPA Gatekeeper). It can validate, mutate, generate, verify images, and clean up resources. CNCF incubating.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kyverno Certified Associate · overview"
+  },
+  {
+   "guid": "n|$Xum2RN",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCA"
+   ],
+   "front": "What are Kyverno's rule types?",
+   "back": "Each rule does exactly one of: <b>validate</b> (allow/block), <b>mutate</b> (modify the resource), <b>generate</b> (create dependent resources), or <b>verifyImages</b> (check image signatures via Cosign/Sigstore). Cleanup is a separate CleanupPolicy type.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kyverno Certified Associate · rules"
+  },
+  {
+   "guid": "i4jzq#8[jX",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCA"
+   ],
+   "front": "Policy vs ClusterPolicy in Kyverno?",
+   "back": "<b>Policy</b> is namespaced (applies within one namespace); <b>ClusterPolicy</b> applies cluster-wide. Both contain a list of rules with match/exclude selectors and one action declaration each.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kyverno Certified Associate · scope"
+  },
+  {
+   "guid": "mU/v6-P<o(",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCA"
+   ],
+   "front": "What does validationFailureAction (failureAction) control?",
+   "back": "Whether a failed validate rule <b>blocks</b> the request (<code>Enforce</code>) or merely <b>logs</b> it to a policy report (<code>Audit</code>). Standard rollout: start in Audit to gauge impact, then switch to Enforce.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kyverno Certified Associate · enforcement"
+  },
+  {
+   "guid": "j(^5^Y~&rk",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCA"
+   ],
+   "front": "What is background scanning in Kyverno?",
+   "back": "Periodic re-evaluation (default hourly) of <b>existing</b> resources against validate/verifyImages rules, recording results in PolicyReports/ClusterPolicyReports. It never blocks already-running resources even in Enforce mode — admission control handles new/changed ones.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kyverno Certified Associate · reporting"
+  },
+  {
+   "guid": "CXdcS4d>t(",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCA"
+   ],
+   "front": "What are PolicyReports?",
+   "back": "Kubernetes custom resources Kyverno generates with per-resource results (<code>pass</code>, <code>fail</code>, <code>warn</code>, <code>error</code>, <code>skip</code>). They reflect current state (not history) and back tools like Policy Reporter. Namespaced = PolicyReport, cluster = ClusterPolicyReport.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kyverno Certified Associate · reporting"
+  },
+  {
+   "guid": "K!5T^pD(W=",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCA"
+   ],
+   "front": "Give an example of a Kyverno generate rule use case.",
+   "back": "When a new Namespace is created, automatically generate a default-deny <b>NetworkPolicy</b> and a <b>ResourceQuota</b> in it — so governance defaults appear without manual steps. Generate can also keep generated resources in sync with their source.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kyverno Certified Associate · generate"
+  },
+  {
+   "guid": "tQ*8oh&pmQ",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCA"
+   ],
+   "front": "How does Kyverno verify image signatures?",
+   "back": "A <code>verifyImages</code> rule checks signatures/attestations (keyed or keyless) using <b>Cosign/Sigstore</b>; unsigned or untrusted images are rejected at admission. Enforces supply-chain provenance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kyverno Certified Associate · supply chain"
+  },
+  {
+   "guid": "fo$E9X<alE",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCA"
+   ],
+   "front": "What is a PolicyException?",
+   "back": "A resource that exempts specific resources/namespaces from named policy rules — a controlled escape hatch so you don't have to weaken the policy itself or sprinkle excludes everywhere. Can be scoped and governed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kyverno Certified Associate · exceptions"
+  },
+  {
+   "guid": "mD^APtb=ka",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCA"
+   ],
+   "front": "How do mutate and validate rules order during admission?",
+   "back": "All <b>mutation</b> rules across all policies apply first, then <b>validation</b> rules — so validation sees the already-mutated object. This lets a mutate rule add a default that a validate rule then confirms.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kyverno Certified Associate · admission"
+  },
+  {
+   "guid": "Ek>pNK)Tps",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCA"
+   ],
+   "front": "How do you test Kyverno policies before applying?",
+   "back": "The <b>Kyverno CLI</b>: <code>kyverno apply</code> runs policies against manifests locally, and <code>kyverno test</code> runs declarative test cases (expected results) — slot into CI to catch regressions before cluster rollout.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kyverno Certified Associate · tooling"
+  },
+  {
+   "guid": "r{EJ6PEFE&",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::KCA"
+   ],
+   "front": "What are Kyverno's controllers in v3.x?",
+   "back": "Split into four independently scalable controllers: <b>admission</b> (webhook enforcement), <b>background</b> (scans existing resources, mutate-existing/generate), <b>cleanup</b> (CleanupPolicy/TTL deletion), and <b>reports</b> (PolicyReports).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kyverno Certified Associate · architecture"
+  },
+  {
+   "guid": "jDt:Id1@H/",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CNPA"
+   ],
+   "front": "What is platform engineering, and how does it differ from DevOps?",
+   "back": "Building an <b>Internal Developer Platform (IDP)</b> as a product that gives developers self-service, paved-road access to infrastructure/tooling. DevOps is a culture/practice spreading ownership; platform engineering productizes the underlying capabilities so dev teams aren't each reinventing them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud Native Platform Engineering Associate · fundamentals"
+  },
+  {
+   "guid": "jJBdL84<Ql",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CNPA"
+   ],
+   "front": "What is a \"golden path\" / paved road?",
+   "back": "An opinionated, supported, well-documented default way to build and ship a service (templates + pipelines + guardrails). Optional but easiest — developers get speed and safety; the platform team gets consistency. A core CNPA concept.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud Native Platform Engineering Associate · golden paths"
+  },
+  {
+   "guid": "om/`4wna_N",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CNPA"
+   ],
+   "front": "What does \"treat the platform as a product\" mean?",
+   "back": "Apply product thinking to the internal platform: real users (developers), discovery of their needs, a roadmap, UX, documentation, support, and adoption metrics — rather than a pile of tools imposed top-down. Adoption is voluntary, so it must be genuinely better.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud Native Platform Engineering Associate · product mindset"
+  },
+  {
+   "guid": "tuVcif.4Cs",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CNPA"
+   ],
+   "front": "What is an Internal Developer Platform (IDP)?",
+   "back": "The self-service layer of capabilities (provisioning, CI/CD, environments, observability, security) that developers consume to ship software without filing tickets to ops. Often surfaced via a portal like Backstage. The \"what you build\" in platform engineering.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud Native Platform Engineering Associate · IDP"
+  },
+  {
+   "guid": "sp?bPhI?<p",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CNPA"
+   ],
+   "front": "What does Team Topologies contribute to platform engineering?",
+   "back": "It defines the <b>platform team</b> as one of four fundamental team types, whose job is to reduce other teams' <b>cognitive load</b> by providing self-service capabilities \"as a product,\" interacting via the X-as-a-Service mode.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud Native Platform Engineering Associate · org design"
+  },
+  {
+   "guid": "IFXjvgSxzz",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CNPA"
+   ],
+   "front": "What are the DORA metrics?",
+   "back": "<b>DevOps Research and Assessment</b> delivery metrics: <b>Deployment Frequency</b>, <b>Lead Time for Changes</b>, <b>Change Failure Rate</b>, and <b>Time to Restore Service</b> (MTTR). Used to measure delivery performance and a platform's impact.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud Native Platform Engineering Associate · measurement"
+  },
+  {
+   "guid": "p61:(/)6*Z",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CNPA"
+   ],
+   "front": "What is the CNCF Platform Engineering Maturity Model?",
+   "back": "A model assessing platform maturity across aspects (investment, adoption, interfaces, operations, measurement) at levels like Provisional → Operational → Scalable → Optimizing. Used to plan a platform's evolution rather than judging it as done.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud Native Platform Engineering Associate · maturity"
+  },
+  {
+   "guid": "FXRM8Z<JnE",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CNPA"
+   ],
+   "front": "What is Crossplane and why does it matter for platforms?",
+   "back": "A CNCF tool that turns infrastructure provisioning into Kubernetes APIs: define <b>Composite Resources</b> and Compositions so developers request infra (DBs, buckets) via simple CRDs while the platform controls the implementation. Enables self-service infra with guardrails.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud Native Platform Engineering Associate · provisioning"
+  },
+  {
+   "guid": "P7${8>j1/:",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CNPA"
+   ],
+   "front": "What is the \"thinnest viable platform\" idea?",
+   "back": "Start a platform as small as possible — even a wiki page documenting the paved road — and grow only where it removes real friction. Avoids over-building a heavyweight platform nobody adopts.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud Native Platform Engineering Associate · approach"
+  },
+  {
+   "guid": "v1t3$x<[_a",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CNPA"
+   ],
+   "front": "Continuous Integration vs Continuous Delivery vs Continuous Deployment?",
+   "back": "<b>CI</b>: merge + build + test frequently. <b>Continuous Delivery</b>: every passing build is releasable, deploy on a click. <b>Continuous Deployment</b>: every passing build auto-deploys to prod with no manual gate. Platforms standardize these pipelines.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud Native Platform Engineering Associate · delivery"
+  },
+  {
+   "guid": "s%so<zV,&9",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CNPA"
+   ],
+   "front": "What does \"declarative resource management\" mean for platforms?",
+   "back": "Express desired infra/app state declaratively (manifests/CRDs) and let controllers reconcile — the basis for GitOps, Operators, and Crossplane. Platforms favor declarative + reconciled over imperative scripts for reliability and auditability.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud Native Platform Engineering Associate · declarative"
+  },
+  {
+   "guid": "G5{~Vc-v,b",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CNPA"
+   ],
+   "front": "What does developer experience (DevEx) optimize for, and what's the enemy?",
+   "back": "Optimizes flow, fast feedback, and low friction to ship safely. The enemy is excessive <b>cognitive load</b> — forcing developers to understand the entire infra stack. Platforms abstract that away behind self-service interfaces.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud Native Platform Engineering Associate · developer experience"
+  },
+  {
+   "guid": "m<]Yk/7_.R",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CNPA"
+   ],
+   "front": "What does \"secure by default\" mean in a platform context?",
+   "back": "The paved road bakes in security (mTLS, scanned images, policy enforcement, least-privilege RBAC, network policy) so doing the easy thing is also the secure thing — developers get it without having to be security experts. CNPA exam phrasing cue.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud Native Platform Engineering Associate · security"
+  },
+  {
+   "guid": "pS4L@d`~h3",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CNPA"
+   ],
+   "front": "What platform capabilities map to observability/conformance?",
+   "back": "Standardized metrics/logs/traces (OpenTelemetry, Prometheus), golden-signal dashboards, plus <b>policy engines</b> (Kyverno/OPA) and conformance checks that enforce org standards across all workloads automatically.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud Native Platform Engineering Associate · observability"
+  },
+  {
+   "guid": "bB[u:|JR>L",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CNPA"
+   ],
+   "front": "How do you measure a platform's success beyond DORA?",
+   "back": "Track <b>adoption</b> (teams/services onboarded), developer <b>satisfaction</b> (surveys), self-service rate (tickets avoided), and time-to-first-deploy for new services — i.e. product KPIs proving the platform is reducing friction.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud Native Platform Engineering Associate · measurement"
+  },
+  {
+   "guid": "l3;A/8L?<a",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CNPE"
+   ],
+   "front": "What does the CNPE certification add over CNPA?",
+   "back": "<b>Certified Cloud Native Platform Engineer</b> is the performance-based, professional-level exam: you actually build/operate platform components (GitOps delivery, provisioning APIs, observability, security/policy) hands-on, vs CNPA's multiple-choice associate scope.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud Native Platform Engineer · scope"
+  },
+  {
+   "guid": "|E{>>uC`k",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CNPE"
+   ],
+   "front": "In platform work, why prefer Operators/controllers for day-2 automation?",
+   "back": "They encode operational logic to continuously reconcile complex stateful systems (DBs, certs, backups) — turning manual runbooks into self-healing automation exposed as CRDs, which is the self-service primitive a platform builds on.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud Native Platform Engineer · automation"
+  },
+  {
+   "guid": "jHog$]SA4`",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CNPE"
+   ],
+   "front": "What is a sensible promotion strategy across environments in a platform?",
+   "back": "Promote the same immutable artifact (image digest) dev→staging→prod via Git changes (GitOps), gated by automated tests/policy and progressive delivery (canary/blue-green). Tools like Kargo orchestrate promotion across stages.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud Native Platform Engineer · delivery"
+  },
+  {
+   "guid": "noaynPqX1B",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CNPE"
+   ],
+   "front": "How should a platform expose infrastructure provisioning safely?",
+   "back": "Via abstracted self-service APIs (Crossplane composites, Operators, or templates) that encapsulate sane defaults, policy, cost and security guardrails — developers request a \"database\" not raw cloud primitives, and the platform controls the how.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud Native Platform Engineer · provisioning"
+  },
+  {
+   "guid": "MpH0eRMlH+",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CNPE"
+   ],
+   "front": "What progressive delivery techniques should a platform support?",
+   "back": "<b>Canary</b> (shift a small % of traffic, watch metrics, ramp), <b>blue-green</b> (full standby, instant switch), and automated <b>analysis</b>/rollback on SLO breach (e.g. Argo Rollouts + metrics). Reduces blast radius of releases.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud Native Platform Engineer · progressive delivery"
+  },
+  {
+   "guid": "w>hRvSoFoW",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CAPA"
+   ],
+   "front": "What is Argo CD and its core object?",
+   "back": "A GitOps continuous-delivery controller for Kubernetes. Its core object is the <b>Application</b>: it points at a Git repo/path (source) and a destination cluster/namespace, and continuously reconciles the cluster to match Git. CNCF graduated.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Argo Project Associate · Argo CD"
+  },
+  {
+   "guid": "PP.3uR8VMm",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CAPA"
+   ],
+   "front": "What do Argo CD sync status and health status mean?",
+   "back": "<b>Sync status</b>: is the live state in sync with Git (<code>Synced</code> vs <code>OutOfSync</code>/drift)? <b>Health status</b>: are the resources actually healthy (<code>Healthy</code>, <code>Progressing</code>, <code>Degraded</code>)? They're orthogonal — synced doesn't guarantee healthy.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Argo Project Associate · Argo CD"
+  },
+  {
+   "guid": "fj_d=IE!NH",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CAPA"
+   ],
+   "front": "What is the \"app of apps\" pattern in Argo CD?",
+   "back": "A parent Application whose Git source contains child Application manifests — letting you bootstrap and manage many apps declaratively from one root. ApplicationSets are the more dynamic, templated successor for generating apps.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Argo Project Associate · Argo CD"
+  },
+  {
+   "guid": "KH5LmEjYN9",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CAPA"
+   ],
+   "front": "What are Argo CD sync waves and hooks?",
+   "back": "<b>Sync waves</b> (<code>argocd.argoproj.io/sync-wave</code> annotation) order resource application (low→high). <b>Hooks</b> (PreSync/Sync/PostSync) run jobs at phases — e.g. a PreSync DB migration before the app rolls out.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Argo Project Associate · Argo CD"
+  },
+  {
+   "guid": "NkknAJmT7{",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CAPA"
+   ],
+   "front": "What does auto-sync with self-heal and prune do in Argo CD?",
+   "back": "<b>Auto-sync</b> applies Git changes automatically. <b>Self-heal</b> reverts live drift back to Git. <b>Prune</b> deletes resources removed from Git. Together they make the cluster strictly track the repo.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Argo Project Associate · Argo CD"
+  },
+  {
+   "guid": "lohRCRRCQL",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CAPA"
+   ],
+   "front": "What is Argo Workflows?",
+   "back": "A Kubernetes-native workflow engine where each step runs in a container, orchestrated as a <b>DAG</b> (Directed Acyclic Graph) or sequential steps. Used for CI, batch/data pipelines, and ML jobs. Each Workflow is a CRD.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Argo Project Associate · Workflows"
+  },
+  {
+   "guid": "DUK;kvdj>~",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CAPA"
+   ],
+   "front": "What is the difference between steps and dag templates in Argo Workflows?",
+   "back": "<b>steps</b>: a list of sequential stages (items within a stage run in parallel). <b>dag</b>: tasks declare <code>dependencies</code>, and the engine runs them as soon as their deps complete — more flexible parallelism.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Argo Project Associate · Workflows"
+  },
+  {
+   "guid": "bDZT[_WMD#",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CAPA"
+   ],
+   "front": "What is Argo Rollouts?",
+   "back": "A controller replacing the standard Deployment with advanced strategies: <b>canary</b> and <b>blue-green</b>, with traffic shaping (via ingress/mesh) and automated <b>analysis</b> that promotes or aborts based on metrics. Enables progressive delivery.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Argo Project Associate · Rollouts"
+  },
+  {
+   "guid": "O0bAb=5lU4",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CAPA"
+   ],
+   "front": "What is an AnalysisTemplate in Argo Rollouts?",
+   "back": "Defines metric queries (Prometheus, etc.) and success/failure conditions evaluated during a canary step. If metrics breach thresholds, the rollout automatically pauses/aborts and rolls back — automated quality gating of releases.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Argo Project Associate · Rollouts"
+  },
+  {
+   "guid": "CQ}<oVs:(M",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CAPA"
+   ],
+   "front": "What is Argo Events?",
+   "back": "An event-driven automation framework: <b>EventSources</b> ingest events (webhooks, queues, cron), <b>Sensors</b> evaluate dependencies and trigger actions (e.g. start an Argo Workflow). Connects external events to in-cluster automation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Argo Project Associate · Events"
+  },
+  {
+   "guid": "k_V7X3>xCZ",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CAPA"
+   ],
+   "front": "What is an Argo CD Project (AppProject)?",
+   "back": "A grouping that constrains Applications: which source repos, destination clusters/namespaces, and resource kinds are allowed, plus RBAC. Provides multi-tenancy guardrails so teams can't deploy outside their boundary.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Argo Project Associate · Argo CD"
+  },
+  {
+   "guid": "zpaXW8RYW~",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CAPA"
+   ],
+   "front": "How does Argo CD handle blue-green vs canary at the deployment object level?",
+   "back": "Argo CD itself just syncs manifests; progressive delivery is done by <b>Argo Rollouts</b> via its <code>Rollout</code> CRD (canary/blue-green steps). Argo CD deploys the Rollout object; Rollouts executes the strategy.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Certified Argo Project Associate · integration"
+  },
+  {
+   "guid": "MM3Nhq!+F!",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKAD"
+   ],
+   "front": "What multi-container pod patterns should you know (CKAD/CKA gap)?",
+   "back": "<b>Sidecar</b> (helper alongside main, e.g. log shipper — now a native initContainer with <code>restartPolicy: Always</code>), <b>ambassador</b> (proxy to outside world), <b>adapter</b> (normalize output). Containers in a pod share network + volumes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "App Developer · pod patterns"
+  },
+  {
+   "guid": "j**-iBEEe$",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKAD"
+   ],
+   "front": "What are the three probe types and their effects?",
+   "back": "<b>liveness</b> (restart container if failing), <b>readiness</b> (remove pod from Service endpoints until passing), <b>startup</b> (gate the other probes for slow-starting apps). Each can be httpGet/tcpSocket/exec/grpc.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "App Developer · probes"
+  },
+  {
+   "guid": "e.5m8e5{e4",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKAD"
+   ],
+   "front": "What is Kustomize and how does it differ from Helm?",
+   "back": "A template-free customization tool (built into kubectl: <code>kubectl apply -k</code>). A <b>base</b> + <b>overlays</b> patch manifests per environment — no templating language. Helm uses Go templates + packaging/releases; Kustomize is pure YAML overlays.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "App Developer · packaging"
+  },
+  {
+   "guid": "Fc*yhv26I}",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKAD"
+   ],
+   "front": "What deployment strategies does the built-in Deployment support?",
+   "back": "<b>RollingUpdate</b> (default; <code>maxSurge</code>/<code>maxUnavailable</code> control pace) and <b>Recreate</b> (kill all then start new — brief downtime). Canary/blue-green need extra tooling (Argo Rollouts/mesh).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "App Developer · deployment"
+  },
+  {
+   "guid": "HXLMYC/y|W",
+   "type": "basic",
+   "deck": "Golden Kubestronaut Path",
+   "tags": [
+    "GK::CKAD"
+   ],
+   "front": "What is the difference between a Job and a CronJob?",
+   "back": "A <b>Job</b> runs pods to completion (with <code>completions</code>/<code>parallelism</code> and <code>backoffLimit</code>). A <b>CronJob</b> creates Jobs on a cron schedule. Use for batch/one-off tasks rather than long-running services.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "App Developer · workloads"
+  }
+ ]
+}

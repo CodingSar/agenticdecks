@@ -1,0 +1,961 @@
+{
+ "deck_name": "Physics for Datacenters",
+ "file": "Physics_for_Datacenters.apkg",
+ "description": "The physics behind datacenter power and cooling: energy, thermodynamics, entropy and Landauer, heat transfer, chip power scaling and facility metrics. For architects who need to reason about density, cooling and energy from first principles.",
+ "notes": [
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::01 Energy & Power",
+   "tags": [
+    "physics::energy"
+   ],
+   "front": "What is energy, in the most useful one-line sense?",
+   "back": "A quantity that stays <b>constant over time</b> in an isolated system. It changes form (electrical, chemical, kinetic, heat) but the total is fixed. Unit: joule (J).",
+   "text": "",
+   "image": "",
+   "analogy": "A fixed pile of coins moved between pockets. A datacenter moves coins from the 'electricity' pocket to the 'heat' pocket, doing something useful on the way.",
+   "extra": "",
+   "source": "Susskind · Classical Mechanics L3",
+   "reverse": false,
+   "guid": "gv8`Cnv=7^"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::01 Energy & Power",
+   "tags": [
+    "physics::energy"
+   ],
+   "front": "Why is energy conserved at all?",
+   "back": "Because the laws of physics are the same at every moment. <b>Time-translation symmetry ⇒ energy conservation</b> (Noether's theorem): each symmetry of the laws gives a conserved quantity.",
+   "text": "",
+   "image": "",
+   "analogy": "Energy is the bookkeeping that time-symmetry forces on nature.",
+   "extra": "",
+   "source": "Susskind · Classical Mechanics L7",
+   "reverse": false,
+   "guid": "p4l7)Dk-W6"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::01 Energy & Power",
+   "tags": [
+    "physics::energy"
+   ],
+   "front": "Energy vs power?",
+   "back": "<b>Energy</b> = amount, in joules. <b>Power</b> = rate of flow, in watts (1 W = 1 J/s). Energy = power × time.",
+   "text": "",
+   "image": "",
+   "analogy": "Energy is the water in the bucket, power is how fast the tap runs. Bills are for the bucket; capacity planning is for the tap.",
+   "extra": "",
+   "source": "Basic definitions",
+   "reverse": false,
+   "guid": "Mq.;1*Fk9("
+  },
+  {
+   "type": "cloze",
+   "deck": "Physics for Datacenters::01 Energy & Power",
+   "tags": [
+    "physics::energy",
+    "physics::numbers"
+   ],
+   "front": "",
+   "back": "",
+   "text": "1 kWh = 1000 W × 3600 s = {{c1::3.6 MJ}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>So:</b> a 1 MW datacenter running one hour uses 1 MWh = 3.6 GJ.",
+   "source": "Unit arithmetic",
+   "reverse": false,
+   "guid": "k>26~@j`|1"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::01 Energy & Power",
+   "tags": [
+    "physics::energy"
+   ],
+   "front": "Where does all the electrical energy that enters a datacenter end up?",
+   "back": "As <b>heat</b> inside the building, watt for watt in steady state (only a negligible sliver leaves as light in fibres or radio).",
+   "text": "",
+   "image": "",
+   "analogy": "Computation doesn't consume energy, it degrades it: high-grade electricity in, low-grade warm air out.",
+   "extra": "<b>Consequence:</b> cooling must be sized for the full IT load. Every watt you power, you must also remove.",
+   "source": "First law, steady state",
+   "reverse": false,
+   "guid": "LF4VQ;%/G@"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::01 Energy & Power",
+   "tags": [
+    "physics::energy",
+    "physics::electrical"
+   ],
+   "front": "Electrical power in terms of voltage and current?",
+   "back": "P = V × I (watts = volts × amperes).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Why it matters:</b> the same power can be delivered at high V / low I (low losses) or low V / high I (high I²R losses).",
+   "source": "Circuit basics",
+   "reverse": false,
+   "guid": "q}jr8pr<uK"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::01 Energy & Power",
+   "tags": [
+    "physics::energy"
+   ],
+   "front": "'Race to idle': why can a faster, hungrier chip use less total energy?",
+   "back": "Energy = power × time. Drawing 2× the power but finishing in ⅓ of the time uses ⅔ of the energy, then the chip drops to low-power idle. What counts is joules per job.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Condition:</b> only works if idle power is genuinely low.",
+   "source": "Energy = power × time",
+   "reverse": false,
+   "guid": "nc`}?dl3H|"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::02 Laws of Thermodynamics",
+   "tags": [
+    "physics::thermo"
+   ],
+   "front": "What does the zeroth law of thermodynamics make possible?",
+   "back": "If A is in equilibrium with B, and B with C, then A is with C. That makes <b>temperature</b> well-defined: the thing that's equal when two bodies stop exchanging net heat. A thermometer is just body B.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Thermodynamics",
+   "reverse": false,
+   "guid": "P%O5@%$;J"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::02 Laws of Thermodynamics",
+   "tags": [
+    "physics::thermo"
+   ],
+   "front": "First law of thermodynamics (words and formula)?",
+   "back": "Energy is conserved: ΔE = Q − W, the change in internal energy = heat added − work done by the system.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Server in steady state:</b> electrical work in = heat out, ΔE = 0.",
+   "source": "Susskind · Statistical Mechanics L1",
+   "reverse": false,
+   "guid": "bb>Ns]j1./"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::02 Laws of Thermodynamics",
+   "tags": [
+    "physics::thermo"
+   ],
+   "front": "Second law of thermodynamics, in its most practical form?",
+   "back": "Total entropy of an isolated system never decreases. So heat flows spontaneously only hot → cold, heat can't be fully turned into work, and cooling below ambient costs work.",
+   "text": "",
+   "image": "",
+   "analogy": "You can't unshuffle a deck by shaking it. A chiller fights this drift, and the second law sets its minimum price.",
+   "extra": "",
+   "source": "Susskind · Statistical Mechanics L2–3",
+   "reverse": false,
+   "guid": "zhomMlC2<."
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::02 Laws of Thermodynamics",
+   "tags": [
+    "physics::thermo"
+   ],
+   "front": "Heat vs temperature?",
+   "back": "<b>Heat</b>: energy in transit because of a temperature difference (J). <b>Temperature</b>: how concentrated the energy is per degree of freedom (K). The ocean holds lots of heat at low temperature.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>DC angle:</b> 40 °C exhaust carries many kW but sits only a little above room temperature, so it's hard to use.",
+   "source": "Susskind · Statistical Mechanics L2",
+   "reverse": false,
+   "guid": "mbe~Xw*,!X"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::02 Laws of Thermodynamics",
+   "tags": [
+    "physics::thermo",
+    "physics::cooling"
+   ],
+   "front": "Why can't you cool a server room below ambient 'for free'?",
+   "back": "Heat only flows on its own from hot to cold. Moving it from a cool room to warmer outside air needs a <b>heat pump</b> (chiller), which consumes work.",
+   "text": "",
+   "image": "",
+   "analogy": "Pumping water uphill: possible, but you pay for every metre of lift. The lift is the inside–outside temperature difference.",
+   "extra": "",
+   "source": "Second law (Clausius)",
+   "reverse": false,
+   "guid": "M=o<SDA0*Z"
+  },
+  {
+   "type": "cloze",
+   "deck": "Physics for Datacenters::02 Laws of Thermodynamics",
+   "tags": [
+    "physics::thermo"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Carnot limit for a heat engine: η<sub>max</sub> = {{c1::1 − T<sub>cold</sub>/T<sub>hot</sub>}} (in kelvin).",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> 40 °C exhaust to a 20 °C environment: at most 1 − 293/313 ≈ 6% recoverable as work. That's why waste heat can't economically become electricity.",
+   "source": "Susskind · Statistical Mechanics L3",
+   "reverse": false,
+   "guid": "pXBE,(%Mum"
+  },
+  {
+   "type": "cloze",
+   "deck": "Physics for Datacenters::02 Laws of Thermodynamics",
+   "tags": [
+    "physics::thermo",
+    "physics::cooling"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Chiller COP = {{c1::heat removed / work spent}}. Carnot maximum: COP<sub>max</sub> = {{c2::T<sub>cold</sub> / (T<sub>hot</sub> − T<sub>cold</sub>)}} (kelvin); real chillers reach ~30–60% of it.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Carnot bound for refrigerators",
+   "reverse": false,
+   "guid": "daWKTsb8Vi"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::02 Laws of Thermodynamics",
+   "tags": [
+    "physics::thermo",
+    "physics::numbers"
+   ],
+   "front": "Carnot COP for cooling to 20 °C (293 K) with 35 °C (308 K) outside?",
+   "back": "COP<sub>max</sub> = 293 / 15 ≈ <b>19.5</b>. Real chillers manage ~5–8 here.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Carnot bound",
+   "reverse": false,
+   "guid": "P{%69|}k)C"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::02 Laws of Thermodynamics",
+   "tags": [
+    "physics::thermo"
+   ],
+   "front": "What is exergy, and why is server exhaust heat 'low-quality'?",
+   "back": "Exergy = the part of energy that can still do useful work given the surroundings. Heat near ambient temperature has almost none, even in megawatts.",
+   "text": "",
+   "image": "",
+   "analogy": "Energy is conserved, exergy is not: a datacenter turns high-exergy electricity into near-zero-exergy warm air.",
+   "extra": "<b>Heat reuse:</b> district heating needs a heat pump to lift it to 60–70 °C; efficient at modest ΔT, but never free.",
+   "source": "Second law, availability",
+   "reverse": false,
+   "guid": "HT71*CSfFt"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::03 Heat Transfer & Cooling",
+   "tags": [
+    "physics::cooling"
+   ],
+   "front": "Why does heat capacity decide air vs liquid cooling?",
+   "back": "Per unit volume, water carries <b>~3500× more heat per kelvin</b> than air. Removing the same heat with the same temperature rise takes ~3500× more volume of air.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Then:</b> at some kW per rack the airflow (and fan power) needed becomes absurd; that's where liquid stops being optional.",
+   "source": "Material properties",
+   "reverse": false,
+   "guid": "c^j;ZIx4iL"
+  },
+  {
+   "type": "cloze",
+   "deck": "Physics for Datacenters::03 Heat Transfer & Cooling",
+   "tags": [
+    "physics::cooling",
+    "physics::numbers"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Volumetric heat capacity: water ≈ {{c1::4.2 MJ/(m³·K)}}; air ≈ {{c2::1.2 kJ/(m³·K)}}; ratio ≈ {{c3::3500}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Material constants",
+   "reverse": false,
+   "guid": "w+vDhF)y7A"
+  },
+  {
+   "type": "cloze",
+   "deck": "Physics for Datacenters::03 Heat Transfer & Cooling",
+   "tags": [
+    "physics::cooling"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Heat carried by a fluid stream: Q = {{c1::ṁ · c<sub>p</sub> · ΔT}} (mass flow × specific heat × temperature rise). Twice the heat at the same ΔT needs {{c2::twice the flow}}.",
+   "image": "",
+   "analogy": "The fluid is a conveyor belt for heat: belt speed × load per kilogram × how much warmer you let it get.",
+   "extra": "",
+   "source": "Energy balance",
+   "reverse": false,
+   "guid": "d%#KQ.y6[I"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::03 Heat Transfer & Cooling",
+   "tags": [
+    "physics::cooling"
+   ],
+   "front": "Fourier's law of conduction, and its electrical analogy?",
+   "back": "Q = k·A·ΔT/L. Like Ohm's law: ΔT plays voltage, heat flow plays current, and thermal resistance = L/(k·A).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>So:</b> thin, wide, copper paths pass heat; thick, narrow, insulating ones resist it. A heat sink is a low thermal resistance.",
+   "source": "Heat transfer",
+   "reverse": false,
+   "guid": "jV,6iX^I1a"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::03 Heat Transfer & Cooling",
+   "tags": [
+    "physics::cooling",
+    "physics::chips"
+   ],
+   "front": "Thermal resistance chain: how do you get the chip junction temperature?",
+   "back": "Resistances in series add: <b>T<sub>junction</sub> = T<sub>air</sub> + Q × (R<sub>package</sub> + R<sub>paste</sub> + R<sub>sink</sub> + …)</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> 300 W through 0.2 K/W total sits 60 K above the air. Raise inlet air and the whole chain shifts up.",
+   "source": "Ohm's-law analogy",
+   "reverse": false,
+   "guid": "roE+<1l}zY"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::03 Heat Transfer & Cooling",
+   "tags": [
+    "physics::cooling"
+   ],
+   "front": "Newton's law of cooling (convection): what are the knobs?",
+   "back": "Q = h·A·(T<sub>surface</sub> − T<sub>fluid</sub>). More area (fins), a better or faster fluid (higher h), or a larger ΔT.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Why inlet temperature matters:</b> warmer incoming air shrinks ΔT, so you need more area or airflow for the same heat.",
+   "source": "Heat transfer",
+   "reverse": false,
+   "guid": "K>~QUV+b]"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::03 Heat Transfer & Cooling",
+   "tags": [
+    "physics::cooling"
+   ],
+   "front": "Why does raising the allowed server inlet temperature save chiller energy?",
+   "back": "A higher T<sub>cold</sub> shrinks the temperature lift, which raises COP: every joule moves more heat.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Trade-off:</b> hotter chips leak more and server fans spin faster.",
+   "source": "Carnot COP in facility design",
+   "reverse": false,
+   "guid": "ifYo4FcB8L"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::03 Heat Transfer & Cooling",
+   "tags": [
+    "physics::cooling"
+   ],
+   "front": "Besides better COP, what second saving does a warmer inlet set-point unlock?",
+   "back": "More hours per year when outside air is cooler than the set-point, so <b>free cooling</b> (economisers, no compressor) can do the job.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Facility design",
+   "reverse": false,
+   "guid": null
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::03 Heat Transfer & Cooling",
+   "tags": [
+    "physics::cooling"
+   ],
+   "front": "Why is evaporative cooling so effective, and what does it cost?",
+   "back": "Latent heat: evaporating 1 kg of water absorbs ≈2260 kJ, as much as heating 540 kg of water by 1 K. It cools air without a compressor but <b>consumes water</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Trade-off:</b> cheap in electricity, expensive in water; behind the datacenter water-use debate.",
+   "source": "Thermodynamics",
+   "reverse": false,
+   "guid": "vr(e^9WlHH"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::03 Heat Transfer & Cooling",
+   "tags": [
+    "physics::cooling"
+   ],
+   "front": "Why doesn't a datacenter overheat instantly when cooling fails?",
+   "back": "Thermal mass: air, metal and loop water store heat, so temperature rises at heat load ÷ total heat capacity. For dense racks that ride-through may be only seconds to minutes.",
+   "text": "",
+   "image": "",
+   "analogy": "A bathtub: a big tub fills slowly. A chilled-water tank is a deliberately bigger tub to cover generator start-up.",
+   "extra": "",
+   "source": "Heat capacity applied",
+   "reverse": false,
+   "guid": "pp-R+Cn&y9"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::03 Heat Transfer & Cooling",
+   "tags": [
+    "physics::cooling",
+    "physics::scaling"
+   ],
+   "front": "Square–cube law: why is heat removal a surface problem?",
+   "back": "Grow an object by L and its volume (heat generated) grows as L³ but its surface (heat escape) only as L². Denser and bigger things overheat more easily.",
+   "text": "",
+   "image": "",
+   "analogy": "Elephants have big ears, chips have fins, racks have fans: all add surface to something that has outgrown its own.",
+   "extra": "",
+   "source": "Classical scaling (Galileo)",
+   "reverse": false,
+   "guid": "ykD^12[=kP"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::03 Heat Transfer & Cooling",
+   "tags": [
+    "physics::cooling",
+    "physics::scaling"
+   ],
+   "front": "Fan (and pump) affinity laws: how do airflow, pressure and power scale with speed?",
+   "back": "Airflow ∝ speed, pressure ∝ speed², <b>power ∝ speed³</b>. Doubling airflow costs <b>8×</b> the fan power.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Why liquid wins at density:</b> it needs ~3500× less volume flow, so pumping power stays small.",
+   "source": "Fan affinity laws",
+   "reverse": false,
+   "guid": "N^l$/CucS!"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::03 Heat Transfer & Cooling",
+   "tags": [
+    "physics::cooling",
+    "physics::scaling"
+   ],
+   "front": "Why are rising rack densities pushing datacenters to liquid cooling?",
+   "back": "Racks went from ~5 kW to 40–130+ kW. Air carries little heat per m³ and fan power grows with the cube of airflow, so air becomes impractical; water carries ~3500× more per m³ for little pumping power.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Three facts stack:</b> denser chips (Dennard breakdown), a poor heat carrier (air), cubic fan cost.",
+   "source": "Synthesis",
+   "reverse": false,
+   "guid": "sSsBOi9Jdt"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::04 Entropy & Information",
+   "tags": [
+    "physics::entropy"
+   ],
+   "front": "What is entropy, in the statistical-mechanics sense?",
+   "back": "The <b>logarithm of the number of microstates</b> consistent with what you know: S = k ln Ω. It measures ignorance of the fine detail, not 'disorder' as such.",
+   "text": "",
+   "image": "",
+   "analogy": "A shuffled deck isn't physically different from a sorted one; you just know less. 'Shuffled' allows 52! orders, 'sorted' allows 1.",
+   "extra": "",
+   "source": "Susskind · Statistical Mechanics L1",
+   "reverse": false,
+   "guid": "e,;?fi(JyL"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::04 Entropy & Information",
+   "tags": [
+    "physics::entropy"
+   ],
+   "front": "Why is entropy defined with a logarithm?",
+   "back": "Independent systems combine as Ω₁ × Ω₂ states, and ln(Ω₁Ω₂) = ln Ω₁ + ln Ω₂. The log makes entropy <b>additive</b>, like energy.",
+   "text": "",
+   "image": "",
+   "analogy": "Counts multiply, logs add: two bytes have 256 × 256 states but 8 + 8 = 16 bits.",
+   "extra": "",
+   "source": "Susskind · Statistical Mechanics L1",
+   "reverse": false,
+   "guid": "zP!:a6FFaj"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::04 Entropy & Information",
+   "tags": [
+    "physics::entropy"
+   ],
+   "front": "What is Boltzmann's constant k, physically?",
+   "back": "A conversion factor between temperature and energy (≈1.38 × 10<sup>−23</sup> J/K). kT is the typical thermal energy per degree of freedom, and it sets the size of thermal noise.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Susskind · Statistical Mechanics L2",
+   "reverse": false,
+   "guid": "g5R(Y+25_c"
+  },
+  {
+   "type": "cloze",
+   "deck": "Physics for Datacenters::04 Entropy & Information",
+   "tags": [
+    "physics::entropy",
+    "physics::numbers"
+   ],
+   "front": "",
+   "back": "",
+   "text": "At room temperature (300 K), kT ≈ {{c1::4.1 × 10<sup>−21</sup> J}} ≈ {{c2::0.026 eV (≈ 1/40 eV)}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Use:</b> energy barriers ≫ kT are safe from thermal noise; transistor thresholds are only ~10–20 kT, so voltage can't shrink much further.",
+   "source": "k × 300 K",
+   "reverse": false,
+   "guid": "BzJP,&u-T!"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::04 Entropy & Information",
+   "tags": [
+    "physics::entropy"
+   ],
+   "front": "How is temperature defined via entropy (statistical mechanics)?",
+   "back": "<b>1/T = dS/dE</b>: temperature is the inverse of how much entropy a system gains per unit of energy added. Cold bodies gain a lot per joule; hot ones little.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Susskind · Statistical Mechanics L3",
+   "reverse": false,
+   "guid": "n{u_n%(3(b"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::04 Entropy & Information",
+   "tags": [
+    "physics::entropy"
+   ],
+   "front": "Using dS/dE, why does heat flow from hot to cold?",
+   "back": "Moving a joule from hot (small dS/dE) to cold (large dS/dE) loses a little entropy and gains more, so total entropy rises. The reverse would lower it: not forbidden, just astronomically unlikely.",
+   "text": "",
+   "image": "",
+   "analogy": "Energy flows to whoever 'appreciates' an extra joule most, and cold bodies appreciate it more.",
+   "extra": "",
+   "source": "Susskind · Statistical Mechanics L3",
+   "reverse": false,
+   "guid": "F[bu=wV3:K"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::04 Entropy & Information",
+   "tags": [
+    "physics::entropy"
+   ],
+   "front": "Is the second law strict or statistical?",
+   "back": "Statistical. The microscopic laws are reversible and conserve information; entropy rises because we track only coarse averages. A decrease is allowed, just too improbable to ever see in large systems.",
+   "text": "",
+   "image": "",
+   "analogy": "Every collision could run backwards, but a shuffled deck sorting itself needs every shuffle to go 'right'.",
+   "extra": "",
+   "source": "Susskind · Statistical Mechanics L1–2",
+   "reverse": false,
+   "guid": "jvJV|DAIl7"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::04 Entropy & Information",
+   "tags": [
+    "physics::entropy"
+   ],
+   "front": "Boltzmann distribution: how likely is a state with energy E at temperature T?",
+   "back": "Probability ∝ e<sup>−E/kT</sup>. States far above kT are exponentially rare: one kT up is ~37% as likely, ten kT up ~0.005%.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Why it matters:</b> stored bits and transistor states stay stable only while their energy barriers are many kT high.",
+   "source": "Susskind · Statistical Mechanics L4",
+   "reverse": false,
+   "guid": "q@(ut@jr7="
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::04 Entropy & Information",
+   "tags": [
+    "physics::entropy"
+   ],
+   "front": "What does equipartition say, and what does it imply for heat capacity?",
+   "back": "In equilibrium each independent way of storing energy (degree of freedom) holds ½ kT on average. More ways to 'wiggle' per unit volume → higher heat capacity.",
+   "text": "",
+   "image": "",
+   "analogy": "Heating fills every available pocket a little; water has many pockets per m³, air few and sparse.",
+   "extra": "",
+   "source": "Susskind · Statistical Mechanics L5",
+   "reverse": false,
+   "guid": "EsF<#rKMOd"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::04 Entropy & Information",
+   "tags": [
+    "physics::entropy",
+    "physics::information"
+   ],
+   "front": "How do Shannon entropy and thermodynamic entropy relate?",
+   "back": "Same formula, −Σ p ln p, different units: bits vs J/K. One bit of uncertainty = <b>k ln 2</b> J/K of thermodynamic entropy.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Bridge:</b> k ln 2 turns a bit into a physical quantity, which is what makes computing thermodynamic.",
+   "source": "Susskind · Statistical Mechanics L1",
+   "reverse": false,
+   "guid": "Bs`(_plDh{"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::04 Entropy & Information",
+   "tags": [
+    "physics::entropy",
+    "physics::information"
+   ],
+   "front": "Landauer's principle: why must erasing a bit release heat?",
+   "back": "Erasing takes the memory from 2 possible states to 1, lowering its entropy by k ln 2. The second law requires at least that much entropy, <b>kT ln 2</b> of heat, to go into the surroundings.",
+   "text": "",
+   "image": "",
+   "analogy": "Information is physical because forgetting is physical.",
+   "extra": "<b>Scope:</b> applies to logically irreversible operations (erase, AND, OR); reversible ones need not pay.",
+   "source": "Landauer (1961)",
+   "reverse": false,
+   "guid": "wKCip7eGel"
+  },
+  {
+   "type": "cloze",
+   "deck": "Physics for Datacenters::04 Entropy & Information",
+   "tags": [
+    "physics::entropy",
+    "physics::numbers"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Landauer limit at 300 K: kT ln 2 ≈ {{c1::2.9 × 10<sup>−21</sup> J}} per bit erased.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Landauer's principle",
+   "reverse": false,
+   "guid": "qP>}UT,$~P"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::04 Entropy & Information",
+   "tags": [
+    "physics::entropy",
+    "physics::chips"
+   ],
+   "front": "How far above the Landauer limit is real hardware, and so what limits computing energy today?",
+   "back": "A transistor switch costs ~10<sup>−18</sup>–10<sup>−17</sup> J and a full operation with data movement ~10<sup>−12</sup>–10<sup>−10</sup> J, so <b>10³–10⁸×</b> above the floor. Engineering limits energy (capacitance, voltage, wires, leakage), not fundamental physics.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Order-of-magnitude comparison",
+   "reverse": false,
+   "guid": "K<.uifU&W$"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::04 Entropy & Information",
+   "tags": [
+    "physics::entropy",
+    "physics::information"
+   ],
+   "front": "What is reversible computing, and why is it thermodynamically interesting?",
+   "back": "Computing only with logically reversible gates (output determines input) erases nothing, so in principle it pays no Landauer cost; only the final reset does.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Lesson:</b> the energy of computing is about erasure, not 'thinking'. Practical hardware is still far from competitive.",
+   "source": "Bennett (1973)",
+   "reverse": false,
+   "guid": "D?lwX9{-~e"
+  },
+  {
+   "type": "cloze",
+   "deck": "Physics for Datacenters::05 Chip Power & Scaling",
+   "tags": [
+    "physics::chips"
+   ],
+   "front": "",
+   "back": "",
+   "text": "CMOS dynamic power: P ≈ {{c1::α · C · V² · f}}, where α = fraction of transistors switching per cycle, C = switched capacitance, V = supply voltage, f = clock frequency.",
+   "image": "",
+   "analogy": "Each switch charges a tiny capacitor (½CV²) and dumps it as heat, f times a second.",
+   "extra": "",
+   "source": "CMOS power model",
+   "reverse": false,
+   "guid": "d~QgtfdJf?"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::05 Chip Power & Scaling",
+   "tags": [
+    "physics::chips"
+   ],
+   "front": "Why does supply voltage matter more than frequency for chip power?",
+   "back": "P ∝ V²f, and lowering V also forces lower f (f ∝ V), so P ∝ V³. A 10% voltage cut saves ~19% at fixed f, and ~27% once f drops with it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Hence:</b> DVFS, undervolting, and many slower cores beating one fast core per watt.",
+   "source": "CMOS power model",
+   "reverse": false,
+   "guid": "G(S}5u4tjF"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::05 Chip Power & Scaling",
+   "tags": [
+    "physics::chips"
+   ],
+   "front": "What is leakage (static) power, and why is it thermally dangerous?",
+   "back": "Current through transistors that aren't switching. It grows <b>exponentially with temperature</b>, so hotter → more leakage → more heat: positive feedback that can run away.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Upside:</b> better cooling directly lowers chip power (a Boltzmann-factor effect on your bill).",
+   "source": "Semiconductor physics",
+   "reverse": false,
+   "guid": "C@}E+1HD[f"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::05 Chip Power & Scaling",
+   "tags": [
+    "physics::chips",
+    "physics::scaling"
+   ],
+   "front": "What was Dennard scaling?",
+   "back": "Shrink a transistor by s and you can also cut voltage by s and raise frequency by s while <b>power density stays constant</b>. For ~30 years, more transistors came with free speed and no extra cooling.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dennard et al. (1974)",
+   "reverse": false,
+   "guid": "ko&qSm@Tao"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::05 Chip Power & Scaling",
+   "tags": [
+    "physics::chips",
+    "physics::scaling"
+   ],
+   "front": "Why did Dennard scaling break down around 2005?",
+   "back": "Voltage stopped scaling: below ~1 V, leakage explodes because transistors need thresholds well above kT. With V stuck, packing in more transistors raises power density.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Post-Dennard era",
+   "reverse": false,
+   "guid": "E~KaX9nn*%"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::05 Chip Power & Scaling",
+   "tags": [
+    "physics::chips",
+    "physics::scaling"
+   ],
+   "front": "What did the end of Dennard scaling cause?",
+   "back": "Clock speeds plateaued at ~3–5 GHz, the industry moved to multicore, and 'dark silicon' appeared: parts of a chip that can't all be powered at once.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>For datacenters:</b> power density (100+ W/cm²) made them cooling problems first.",
+   "source": "Esmaeilzadeh et al. (2011)",
+   "reverse": false,
+   "guid": null
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::05 Chip Power & Scaling",
+   "tags": [
+    "physics::chips",
+    "physics::scaling"
+   ],
+   "front": "Moore's law vs Koomey's law?",
+   "back": "<b>Moore</b>: transistors per chip double ~every 2 years.<br><b>Koomey</b>: computations per joule doubled ~every 1.5 years until ~2000, now ~every 2.5–3 years.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>DC angle:</b> if demand grows faster than Koomey efficiency, total energy rises; the current AI situation.",
+   "source": "Koomey et al. (2011)",
+   "reverse": false,
+   "guid": "zpY}&NEsen"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::05 Chip Power & Scaling",
+   "tags": [
+    "physics::chips"
+   ],
+   "front": "Why does moving data cost more energy than computing on it?",
+   "back": "Wires are capacitors: each bit charges a wire, costing ∝ C·V², and C grows with length. A flop costs ~pJ; fetching its operand from DRAM ~100–1000× more.",
+   "text": "",
+   "image": "",
+   "analogy": "Distance = capacitance = energy.",
+   "extra": "<b>Hence:</b> caches, near-memory compute, HBM, and GPU focus on bandwidth per watt.",
+   "source": "Horowitz, ISSCC 2014",
+   "reverse": false,
+   "guid": "wEO_6vMz.:"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::05 Chip Power & Scaling",
+   "tags": [
+    "physics::chips"
+   ],
+   "front": "How does chip power density compare with everyday hot things?",
+   "back": "Server CPU/GPU dies run ~50–150 W/cm², versus ~5–10 W/cm² for a kitchen hotplate and ~100 W/cm² for a nuclear reactor core.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Hence:</b> the die-to-coolant thermal path must be very short; liquid moves onto the package.",
+   "source": "Order-of-magnitude comparison",
+   "reverse": false,
+   "guid": "nB&Fesn@Rx"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::05 Chip Power & Scaling",
+   "tags": [
+    "physics::chips",
+    "physics::scaling"
+   ],
+   "front": "Amdahl's law: what caps parallel speedup?",
+   "back": "With parallel fraction p on N processors, speedup = 1 / ((1 − p) + p/N), so never more than 1/(1 − p). A 95%-parallel job tops out at 20×.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Link:</b> Dennard's end forced multicore; Amdahl caps what multicore buys.",
+   "source": "Amdahl (1967)",
+   "reverse": false,
+   "guid": "JBB>OhA$W0"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::06 Facility Scaling & Metrics",
+   "tags": [
+    "physics::electrical",
+    "physics::facility"
+   ],
+   "front": "Why does power distribution use higher voltages (48 V racks, HVDC)?",
+   "back": "Conductor loss = I²R. For fixed P = V·I, doubling V halves I and cuts losses to a quarter.",
+   "text": "",
+   "image": "",
+   "analogy": "Current is what heats wires; voltage just rides along.",
+   "extra": "<b>But:</b> every conversion step loses a few percent, so the number of steps matters too.",
+   "source": "Joule heating",
+   "reverse": false,
+   "guid": "g~#g1to*=r"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::06 Facility Scaling & Metrics",
+   "tags": [
+    "physics::facility",
+    "physics::metrics"
+   ],
+   "front": "Power Usage Effectiveness (PUE): definition and typical values?",
+   "back": "PUE = total facility energy / IT equipment energy. 1.0 is ideal; modern hyperscale ~1.1; legacy rooms 1.5–2.0.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "The Green Grid",
+   "reverse": false,
+   "guid": "w81wS(V9Q,"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::06 Facility Scaling & Metrics",
+   "tags": [
+    "physics::facility",
+    "physics::metrics"
+   ],
+   "front": "What is PUE's blind spot?",
+   "back": "It measures overhead, not usefulness: it says nothing about whether the IT energy does useful work. Idle servers with great cooling score a great PUE.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "The Green Grid",
+   "reverse": false,
+   "guid": null
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::06 Facility Scaling & Metrics",
+   "tags": [
+    "physics::facility",
+    "physics::metrics"
+   ],
+   "front": "Why is energy per useful operation the right efficiency metric?",
+   "back": "You pay for joules and must remove joules as heat. J/op = W ÷ (op/s). Improve it with fewer joules per switch (voltage, capacitance) or fewer switches per result (algorithms, less data movement).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Synthesis",
+   "reverse": false,
+   "guid": "cD+w0UJfoa"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::06 Facility Scaling & Metrics",
+   "tags": [
+    "physics::facility",
+    "physics::latency"
+   ],
+   "front": "How does the speed of light constrain datacenter and network design?",
+   "back": "Signals travel ~20 cm/ns in fibre or copper (≈5 ns per metre, ⅔ of c). 100 m ≥ 0.5 µs one way; 1000 km ≥ 5 ms one way. No engineering removes it.",
+   "text": "",
+   "image": "",
+   "analogy": "Latency budgets are distance budgets.",
+   "extra": "<b>Hence:</b> memory millimetres from compute, short-cable topologies, regional cloud footprints.",
+   "source": "Susskind · Special Relativity L1",
+   "reverse": false,
+   "guid": "nSc<!{6<.T"
+  }
+ ]
+}

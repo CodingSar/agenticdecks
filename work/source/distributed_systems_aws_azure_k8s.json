@@ -1,0 +1,1617 @@
+{
+ "source_file": "distributed_systems_aws_azure_k8s.apkg",
+ "notes": [
+  {
+   "guid": "i,Hkg[HLj%",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consensus",
+    "fundamentals"
+   ],
+   "front": "What problem does <b>consensus</b> solve, and what makes it fundamentally hard?",
+   "back": "Getting N processes to agree on one value (or one ordered log) despite crashes and message delays.<br><br>Hard because in an asynchronous network a <b>slow node is indistinguishable from a dead node</b>. Any protocol must therefore risk either blocking forever (waiting) or deciding twice (acting on a false suspicion).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consensus fundamentals"
+  },
+  {
+   "guid": "g-`iV9MP-l",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consensus",
+    "fundamentals"
+   ],
+   "front": "State the <b>Fischer–Lynch–Paterson (FLP) impossibility</b> result. How do Raft and Paxos coexist with it?",
+   "back": "No deterministic protocol can guarantee both <b>safety</b> (never two different decisions) and <b>liveness</b> (eventually decides) in a fully asynchronous system with even one crash failure.<br><br>Raft/Paxos guarantee safety <i>unconditionally</i> and liveness only under <b>partial synchrony</b> (timeouts eventually hold). Elections can in theory livelock forever; randomized timeouts make that improbable, not impossible.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consensus fundamentals"
+  },
+  {
+   "guid": "w;b7mW,-AG",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consensus",
+    "quorum"
+   ],
+   "front": "Why does tolerating <b>f crash failures require 2f+1 nodes</b>? Why 3f+1 for Byzantine?",
+   "back": "Any two majorities of 2f+1 overlap in ≥1 node. That intersection is what carries decisions across leader changes. With f down you still have f+1 = majority, so progress continues.<br><br>Byzantine: the overlapping node might lie, so you need overlap of f+1 to guarantee at least one honest node in the intersection → 3f+1.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consensus quorum"
+  },
+  {
+   "guid": "MoD80$|E^R",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consensus",
+    "quorum"
+   ],
+   "front": "Why is a quorum of “any 2 of 5” <b>unsafe</b> for consensus?",
+   "back": "Two disjoint 2-of-5 sets can exist, so two leaders could each commit a different value at the same log index.<br><br>Safety requires <b>every write quorum to intersect every other write quorum</b> (and every read quorum, if reads bypass the leader). The formula for replicated reads/writes is <code>R + W &gt; N</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consensus quorum"
+  },
+  {
+   "guid": "u]j#S^@u+)",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consensus",
+    "paxos",
+    "quorum"
+   ],
+   "front": "<b>Flexible Paxos</b>: which quorums actually need to intersect, and what does that buy you?",
+   "back": "Only the <b>Phase 1 (prepare/leader-election) quorum</b> and the <b>Phase 2 (accept/replication) quorum</b> must intersect: <code>|Q1| + |Q2| &gt; N</code>. Phase 2 quorums need <i>not</i> intersect each other.<br><br>You can make Q2 small (fast, low-latency commits in steady state) at the cost of a larger Q1 (rare, on leader change). Same idea underlies Amazon Aurora's 4/6 write, 3/6 read quorums.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consensus paxos quorum"
+  },
+  {
+   "guid": "IM4.<o8fc(",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consensus",
+    "failure",
+    "messaging"
+   ],
+   "front": "<b>Two Generals</b>: why is exactly-once message <i>delivery</i> impossible over a lossy network?",
+   "back": "Any acknowledgement can itself be lost, so neither side can ever be certain the other knows the message arrived. Induction: the last message is always dispensable, so no finite protocol reaches common knowledge.<br><br>Consequence: real systems offer <b>at-least-once delivery + idempotent/deduplicated processing</b> and call that “exactly-once” (Amazon Simple Queue Service (SQS) FIFO, Kafka transactions).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consensus failure messaging"
+  },
+  {
+   "guid": "H?h$tF18`I",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consensus",
+    "raft"
+   ],
+   "front": "Raft decomposes consensus into three sub-problems. Name them and the safety property that ties them together.",
+   "back": "<ul><li><b>Leader election</b></li><li><b>Log replication</b></li><li><b>Safety</b></li></ul>State Machine Safety: if any server has applied entry <i>i</i>, no other server will ever apply a different entry at index <i>i</i>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consensus raft"
+  },
+  {
+   "guid": "j[EG{CT{Bf",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consensus",
+    "raft"
+   ],
+   "front": "What is a Raft <b>term</b>, and what problem does it solve without synchronized clocks?",
+   "back": "A monotonically increasing logical clock. Each term has at most one leader. Every message carries the sender's term; a node that sees a higher term immediately updates and steps down to follower; messages with a stale term are rejected.<br><br>Terms let nodes detect <b>obsolete leaders and stale information</b> purely from message content — no wall-clock needed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consensus raft"
+  },
+  {
+   "guid": "Cpw|L[N+Qd",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consensus",
+    "raft"
+   ],
+   "front": "Walk through a Raft <b>leader election</b>. Why are election timeouts randomized?",
+   "back": "Follower hears nothing for an election timeout → becomes candidate, increments term, votes for itself, sends RequestVote to all. Wins on a majority, becomes leader, sends heartbeats. Loses if it sees a valid leader's AppendEntries with ≥ its term.<br><br>Randomized timeouts (paper: 150–300 ms) make simultaneous candidates rare, so split votes resolve quickly. This is Raft's practical answer to FLP livelock.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consensus raft"
+  },
+  {
+   "guid": "jp#D2_HX.7",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consensus",
+    "raft"
+   ],
+   "front": "Raft's <b>election restriction</b>: a voter denies a candidate whose log is less up-to-date. Define “up-to-date” and explain why this matters.",
+   "back": "Compare last entry: higher <b>term</b> wins; same term → longer log wins.<br><br>It yields <b>Leader Completeness</b>: any committed entry is guaranteed to be in every future leader's log. The new leader never has to <i>fetch</i> missing committed entries — unlike Paxos, where a new leader must first learn previously chosen values. Data only flows leader → follower.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consensus raft"
+  },
+  {
+   "guid": "Ab5J2{+3Yv",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consensus",
+    "raft"
+   ],
+   "front": "State Raft's <b>Log Matching Property</b> and the mechanism that enforces it.",
+   "back": "If two logs contain an entry with the same index and term, then (1) the entries are identical and (2) all preceding entries are identical.<br><br>Enforced by the AppendEntries <b>consistency check</b>: each RPC carries <code>prevLogIndex</code>/<code>prevLogTerm</code>; the follower rejects if its log doesn't match there, and the leader backs up <code>nextIndex</code> until they agree, then overwrites the follower's divergent suffix.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consensus raft"
+  },
+  {
+   "guid": "qB69oG7R3T",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consensus",
+    "raft"
+   ],
+   "front": "Why can a Raft leader <b>not commit an entry from a previous term</b> merely by observing it on a majority? (Raft paper Figure 8)",
+   "back": "An old-term entry replicated on a majority can still be overwritten: a later candidate whose last entry has a <i>higher term</i> can win election without holding that entry, then overwrite it. Counting replicas is only safe for current-term entries.<br><br>Rule: leaders commit only current-term entries by counting; prior entries commit <i>transitively</i>. Practical trick: a new leader appends a <b>no-op entry</b> immediately so earlier entries become committable.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consensus raft"
+  },
+  {
+   "guid": "Izy|1gcy^~",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consensus",
+    "raft"
+   ],
+   "front": "Why can't Raft switch cluster membership directly from C<sub>old</sub> to C<sub>new</sub>? What are the two safe approaches?",
+   "back": "During the switch different servers would apply the change at different times, so a majority of C<sub>old</sub> and a majority of C<sub>new</sub> could form <b>two disjoint quorums</b> in the same term.<br><br><ul><li><b>Joint consensus</b>: transitional config C<sub>old,new</sub> where decisions require majorities of <i>both</i>.</li><li><b>Single-server changes</b>: add/remove one server at a time — any two consecutive configs' majorities always overlap. etcd uses this (with learners for catch-up).</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consensus raft"
+  },
+  {
+   "guid": "AlYH<og:O%",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consensus",
+    "raft",
+    "k8s"
+   ],
+   "front": "What is a Raft <b>learner</b> (non-voting member) and why does etcd add new members as learners first?",
+   "back": "A member that receives the log but doesn't count toward quorum.<br><br>Adding a fresh voter immediately raises the quorum size while the new node can't yet vote meaningfully (empty log) — a 3→4 node change temporarily makes the cluster <i>less</i> available. Learners catch up first, then get promoted.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consensus raft k8s"
+  },
+  {
+   "guid": "eWv_[JZph#",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consensus",
+    "raft",
+    "consistency"
+   ],
+   "front": "How does Raft serve a <b>linearizable read</b>? Name the two techniques and their trade-off.",
+   "back": "<ul><li><b>ReadIndex</b>: leader records its commit index, exchanges one heartbeat round with a majority to prove it's still leader, then serves the read once the state machine reaches that index. Costs one network round trip; needs no clocks.</li><li><b>Lease-based reads</b>: leader assumes it's still leader for one election timeout after its last successful heartbeat round. Zero extra round trips, but <i>correctness depends on bounded clock drift</i>.</li></ul>Without either, a deposed leader in a partition could serve stale data. etcd defaults to ReadIndex; “serializable” reads skip it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consensus raft consistency"
+  },
+  {
+   "guid": "Ow5lO(*Ov#",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consensus",
+    "raft",
+    "failure"
+   ],
+   "front": "<b>PreVote</b> and <b>CheckQuorum</b> in Raft (both used by etcd): what failure do they fix?",
+   "back": "A follower cut off by a <i>partial</i> partition keeps timing out, incrementing its term and starting elections. When connectivity returns its inflated term forces the healthy leader to step down — a “disruptive server”.<br><br><ul><li><b>PreVote</b>: candidate first asks “would you vote for me?” without incrementing its term; only proceeds if a majority say yes.</li><li><b>CheckQuorum</b>: a leader that can't reach a majority within an election timeout steps down itself, so a partitioned leader stops serving lease reads.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consensus raft failure"
+  },
+  {
+   "guid": "z$_W&Z>^nJ",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consensus",
+    "raft"
+   ],
+   "front": "Raft <b>log compaction</b>: how does snapshotting work and what RPC handles a lagging follower?",
+   "back": "Each server independently snapshots its state machine up to a committed index and discards the log prefix. The snapshot stores the last included index/term (needed for AppendEntries checks) and the current membership.<br><br>If a follower is so far behind that the leader has discarded the entries it needs, the leader sends <b>InstallSnapshot</b>. In etcd, snapshots are also how new members bootstrap.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consensus raft"
+  },
+  {
+   "guid": "I&4myoO&`4",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consensus",
+    "paxos"
+   ],
+   "front": "Paxos roles: <b>proposer, acceptor, learner</b>. What does each do, and which role holds the safety-critical state?",
+   "back": "<ul><li><b>Proposer</b>: drives a ballot, proposes a value.</li><li><b>Acceptor</b>: votes; stores <code>promisedBallot</code>, <code>acceptedBallot</code>, <code>acceptedValue</code> on stable storage — this is the safety-critical state.</li><li><b>Learner</b>: discovers which value was chosen (accepted by a majority).</li></ul>In practice one process plays all roles.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consensus paxos"
+  },
+  {
+   "guid": "nfnOoN_9#@",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consensus",
+    "paxos"
+   ],
+   "front": "Describe the two phases of <b>single-decree Paxos</b>.",
+   "back": "<b>Phase 1 (Prepare/Promise)</b>: proposer picks a unique ballot <i>n</i>, sends Prepare(n). Acceptor promises to ignore anything &lt; n and replies with the highest-ballot value it has already accepted (if any).<br><br><b>Phase 2 (Accept/Accepted)</b>: on a majority of promises, proposer sends Accept(n, v) where v = the highest-ballot accepted value returned, or its own value if none. Acceptors accept unless they've promised a higher ballot. Majority accepted ⇒ chosen.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consensus paxos"
+  },
+  {
+   "guid": "Mf{|Lq+!IA",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consensus",
+    "paxos"
+   ],
+   "front": "Why must a Paxos proposer adopt the <b>highest-ballot value returned in Phase 1</b> instead of its own?",
+   "back": "Once a value v is chosen (accepted by a majority M), any later Phase 1 majority M' intersects M, so at least one acceptor reports v (or a later ballot that, by induction, also carries v). Adopting the highest returned value guarantees every subsequent ballot re-proposes v.<br><br>This is the whole safety argument: <b>chosen values are sticky</b>. Skip it and two ballots can choose different values.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consensus paxos"
+  },
+  {
+   "guid": "b%.2J%]`~&",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consensus",
+    "paxos",
+    "raft"
+   ],
+   "front": "<b>Multi-Paxos</b>: how does it amortize the protocol, and how does the resulting system differ from Raft?",
+   "back": "Run Phase 1 <i>once</i> to establish a stable leader over a range of log slots; then each slot needs only Phase 2 (one round trip) — same steady-state cost as Raft.<br><br>Differences: Paxos permits <b>holes and out-of-order acceptance</b> in the log; a new leader must run Phase 1 per uncertain slot to learn chosen values. Raft forces a contiguous log and pushes all that work onto the election restriction. Paxos is more flexible; Raft is easier to get right.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consensus paxos raft"
+  },
+  {
+   "guid": "_EFP6AET^",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consensus",
+    "paxos",
+    "failure"
+   ],
+   "front": "What is the Paxos <b>dueling proposers</b> problem, and how is it mitigated?",
+   "back": "Two proposers keep issuing higher ballots; each Prepare invalidates the other's pending Accept → livelock (FLP in practice).<br><br>Mitigation: elect a distinguished proposer (leader) and/or randomized exponential backoff. Leader election is itself best-effort — a wrong guess costs liveness, never safety.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consensus paxos failure"
+  },
+  {
+   "guid": "mdr_T|Et@L",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consensus",
+    "paxos",
+    "aws"
+   ],
+   "front": "Where does Amazon Web Services (AWS) run Paxos in production, and what pattern do these uses share?",
+   "back": "<ul><li>Amazon DynamoDB: each partition's replication group elects its leader with a Paxos-based protocol.</li><li>Amazon Elastic Block Store (EBS) control plane and internal lock/metadata services.</li><li>Amazon Route 53 Application Recovery Controller (ARC): routing-control state replicated with Paxos across five regions.</li></ul>Pattern: Paxos guards a <b>small, critical metadata/leadership</b> plane; bulk data replication uses cheaper chain or quorum replication under that leader.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consensus paxos aws"
+  },
+  {
+   "guid": "h|@4B>:5^8",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consensus",
+    "paxos",
+    "aws",
+    "failure"
+   ],
+   "front": "Amazon Route 53 Application Recovery Controller (ARC) uses a Paxos cluster across five regions. What design principle does that illustrate?",
+   "back": "<b>The failover mechanism must be more available than the thing it fails over.</b> The routing-control data plane is replicated across 5 regions and needs only a majority (3) to stay writable, so a regional outage cannot also disable your ability to fail out of that region.<br><br>Corollary: never put your failover switch on the same failure domain as the workload (e.g., in the primary region's control plane).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consensus paxos aws failure"
+  },
+  {
+   "guid": "bQ*/gpsYrs",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consensus",
+    "paxos",
+    "azure",
+    "consistency"
+   ],
+   "front": "Azure Storage architecture: where do Paxos and strong consistency come from?",
+   "back": "Three layers per storage stamp: Front-End → <b>Partition Layer</b> (object semantics, range partitions) → <b>Stream Layer</b> (append-only extents).<br><br>Extents are replicated <b>synchronously in a chain</b> (write acked only when all 3 replicas persist); the Stream Manager tracks extent metadata using Paxos. All writes go through one partition server per range → Azure Storage is <b>strongly consistent within a region</b> and exposes ETags for optimistic concurrency.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consensus paxos azure consistency"
+  },
+  {
+   "guid": "diIT+ZZK`j",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "k8s",
+    "consensus",
+    "raft"
+   ],
+   "front": "What consensus protocol does <b>etcd</b> use, and what is the Kubernetes (K8s) control plane's relationship to it?",
+   "back": "Raft. etcd is the <b>only stateful control-plane component</b>; every Kubernetes object is a key under <code>/registry/...</code>. kube-apiserver is a stateless front-end that validates, serializes and does optimistic concurrency against etcd revisions.<br><br>So Kubernetes' control plane inherits Raft's properties: CP, majority-quorum availability, write latency ≥ one fsync + one majority round trip.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "k8s consensus raft"
+  },
+  {
+   "guid": "pc.!W;RRrU",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "k8s",
+    "consensus",
+    "quorum"
+   ],
+   "front": "Why do etcd clusters run <b>3 or 5 members</b>, never 4 or 6?",
+   "back": "Fault tolerance = ⌊(N−1)/2⌋. 4 members tolerate 1 failure — same as 3 — but add write latency (larger quorum) and one more machine whose failure counts. 5 tolerates 2. 7 is rarely worth the throughput cost of a 4-node quorum.<br><br>Managed control planes (Amazon Elastic Kubernetes Service (EKS), Azure Kubernetes Service (AKS)) spread the members across 3 Availability Zones.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "k8s consensus quorum"
+  },
+  {
+   "guid": "RgvhWV9E0R",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "k8s",
+    "consensus",
+    "failure"
+   ],
+   "front": "Why is etcd write latency bounded below by <b>disk fsync</b>, and what operational rule follows?",
+   "back": "Every Raft log entry must be fsynced to the Write-Ahead Log (WAL) on a majority before the leader acks — otherwise a crash could lose a “committed” entry, violating safety.<br><br>Rule: dedicated low-latency SSD for etcd; watch <code>wal_fsync_duration_seconds</code> (p99 should stay under ~10 ms). Slow disks manifest as leader elections and apiserver timeouts, not as “disk errors”.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "k8s consensus failure"
+  },
+  {
+   "guid": "la%W_y}-6s",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "k8s",
+    "consistency",
+    "raft"
+   ],
+   "front": "etcd exposes <b>linearizable</b> vs <b>serializable</b> reads. Define both and say what kube-apiserver uses.",
+   "back": "<ul><li><b>Linearizable</b> (default): goes through ReadIndex; reflects all writes committed before the read started, even during a leader change.</li><li><b>Serializable</b>: served from the local member's state; can be arbitrarily stale on a partitioned member.</li></ul>kube-apiserver issues quorum (linearizable) reads to etcd by default. Recent versions can serve <i>consistent reads from the watch cache</i> by using etcd progress notifications to confirm the cache has reached the current revision — a ReadIndex at the cache layer.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "k8s consistency raft"
+  },
+  {
+   "guid": "oDcVW9a=fk",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "k8s",
+    "consistency"
+   ],
+   "front": "How does the Kubernetes API implement <b>optimistic concurrency</b>, and what does that force every controller to do?",
+   "back": "Each object carries <code>metadata.resourceVersion</code> (the etcd modification revision). An update must carry the version it read; apiserver performs a compare-and-swap against etcd and returns <b>409 Conflict</b> if the object changed.<br><br>Consequence: controllers must re-read and retry (<code>client-go RetryOnConflict</code>). There are no cross-object transactions — every multi-step operation must be idempotent and reconciled, never assumed atomic.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "k8s consistency"
+  },
+  {
+   "guid": "4aMGi(rdI",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "k8s",
+    "failure",
+    "consensus"
+   ],
+   "front": "How do kube-controller-manager and kube-scheduler replicas pick a leader, and why is this <b>not consensus</b>?",
+   "back": "A <code>Lease</code> object (<code>coordination.k8s.io</code>) updated via compare-and-swap. Defaults: <code>leaseDuration</code> 15 s, <code>renewDeadline</code> 10 s, <code>retryPeriod</code> 2 s.<br><br>It relies on etcd for atomicity, but leadership is <b>time-based</b>: a leader that stalls (garbage-collection pause, VM freeze) may still believe it leads after the lease expired while a new leader acts. “At most one active leader” holds only if the leader stops itself before <code>renewDeadline</code> — and only for actions that are idempotent or protected by resourceVersion.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "k8s failure consensus"
+  },
+  {
+   "guid": "QO$Rh]g)i]",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "failure",
+    "k8s",
+    "consensus"
+   ],
+   "front": "What is a <b>fencing token</b>, and why are leases alone insufficient for mutual exclusion?",
+   "back": "A monotonically increasing number issued with each lock/lease grant; every protected resource rejects requests carrying a token lower than the highest it has seen.<br><br>Scenario: A acquires lease, pauses (GC/VM stall), lease expires, B acquires, then A wakes and writes. Without fencing the storage happily accepts A's stale write. Kubernetes gives you <code>resourceVersion</code>/<code>generation</code> as usable tokens for API objects; external systems need their own.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "failure k8s consensus"
+  },
+  {
+   "guid": "o,mf`A_VXK",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "k8s",
+    "failure"
+   ],
+   "front": "How does Kubernetes detect a <b>dead node</b>, and why does it deliberately act slowly?",
+   "back": "kubelet renews a node <code>Lease</code> (~every 10 s). If the controller-manager sees no renewal within <code>node-monitor-grace-period</code> (~40–50 s), it marks the node NotReady; pods are evicted after <code>tolerationSeconds</code> (default 300 s).<br><br>Detection is <b>timeout-based, so false positives are unavoidable</b>: a partitioned kubelet is indistinguishable from a dead one. Slow reaction trades availability for not double-running workloads.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "k8s failure"
+  },
+  {
+   "guid": "Qx(@|L;.~|",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "k8s",
+    "failure",
+    "consistency"
+   ],
+   "front": "Why will a <b>StatefulSet</b> not recreate a pod from an unreachable node until the old pod is confirmed deleted?",
+   "back": "StatefulSets promise <b>at-most-one</b> pod per ordinal identity. The API cannot know whether pod-0 on the partitioned node is still running and writing to its volume. Creating a second pod-0 = split brain on the same persistent identity.<br><br>Force-deleting (<code>--grace-period=0 --force</code>) is the human asserting a fence (“I have verified the node is dead / powered off”). Cloud providers automate this fence by deleting the Node object when the instance is terminated.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "k8s failure consistency"
+  },
+  {
+   "guid": "D8mQ5[xp?b",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "k8s",
+    "failure"
+   ],
+   "front": "Kubernetes controllers are <b>level-triggered</b>, not edge-triggered. Why is that the right choice for a distributed system?",
+   "back": "Edge-triggered = act on each event; a missed event (watch disconnect, restart, compaction → 410 Gone) leaves the system permanently wrong.<br>Level-triggered = observe current state, compute diff to desired state, act; converges from <i>any</i> starting point.<br><br>Watches are a latency optimization; periodic resync/relist is the correctness mechanism. This is how controllers tolerate lost messages without exactly-once delivery.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "k8s failure"
+  },
+  {
+   "guid": "Pg!L*v#DbP",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "k8s",
+    "raft",
+    "failure"
+   ],
+   "front": "What happens when an etcd member returns <code>410 Gone</code> for a watch, and what does it teach about log compaction?",
+   "back": "etcd compacts old revisions (apiserver default: every 5 min). A client resuming a watch from a compacted revision can't get the intermediate events and must <b>relist</b> from the current state.<br><br>Lesson: any replicated log is eventually truncated; consumers must be able to rebuild from a snapshot. Same reason Raft needs InstallSnapshot.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "k8s raft failure"
+  },
+  {
+   "guid": "tC9WHXo{8H",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "k8s",
+    "failure"
+   ],
+   "front": "etcd hits its <b>space quota</b> (default 2 GB; recommended max 8 GB). What happens to the Kubernetes cluster?",
+   "back": "etcd raises a <code>NOSPACE</code> alarm and becomes <b>read-only cluster-wide</b>. Every Kubernetes write fails; running pods keep running, but nothing can be scheduled, scaled or updated.<br><br>Root causes: unbounded object growth (Events, Jobs, custom resources), missing compaction, no defrag after deletes. Fix: compact → defrag → disarm alarm. Illustrates a <i>capacity failure</i> that looks like a consensus failure.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "k8s failure"
+  },
+  {
+   "guid": "F2{o96kT3(",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "k8s",
+    "quorum",
+    "failure"
+   ],
+   "front": "etcd across Availability Zones: compare a 2-AZ and 3-AZ layout for a 3-member cluster.",
+   "back": "3 AZs, 1 member each: any single AZ loss leaves 2/3 → quorum intact.<br>2 AZs (2+1): losing the AZ with 2 members drops to 1/3 → <b>no quorum</b>, control plane down. Losing the other AZ is fine. Availability is asymmetric and the cluster is only as good as its worst AZ.<br><br>General rule: place members so that no single failure domain holds a majority.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "k8s quorum failure"
+  },
+  {
+   "guid": "vvEi)R,f&W",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "k8s",
+    "quorum"
+   ],
+   "front": "How should a <b>PodDisruptionBudget (PDB)</b> be set for a quorum-based workload (etcd, ZooKeeper, Kafka KRaft) and why?",
+   "back": "<code>minAvailable</code> = quorum size (e.g., 2 of 3, 3 of 5) or <code>maxUnavailable: 1</code>. Voluntary disruptions (node drain, cluster upgrade) then never take the replica set below majority.<br><br>PDBs only govern <i>voluntary</i> evictions. Combine with topology-spread constraints so an AZ outage (involuntary) can't remove a majority either.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "k8s quorum"
+  },
+  {
+   "guid": "nhH{GKCLIL",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "k8s",
+    "consistency"
+   ],
+   "front": "Kubernetes API objects have no multi-object transactions. How do you implement “create A, then B, and roll back if B fails”?",
+   "back": "You don't roll back — you <b>reconcile</b>. Write desired state; a controller drives actual state toward it idempotently and repeatedly. Use <code>ownerReferences</code> for garbage collection, finalizers for ordered teardown, and <code>status.conditions</code> to publish progress.<br><br>This is coordination avoidance: instead of paying for a distributed transaction, design each step so repeating it is harmless.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "k8s consistency"
+  },
+  {
+   "guid": "lVK9o[=>Z8",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "aws",
+    "consistency"
+   ],
+   "front": "Amazon DynamoDB: describe the replication of a single partition and the two read consistency options.",
+   "back": "Each partition has <b>3 replicas across 3 Availability Zones</b>; a Paxos-elected leader accepts writes and acks after persisting on itself plus one more (2 of 3).<br><br><ul><li><b>Eventually consistent read</b> (default, half the Read Capacity Units (RCU)): any replica; may miss a just-committed write (typically &lt;1 s).</li><li><b>Strongly consistent read</b>: served by the leader; reflects every successful write before it. Not available on Global Secondary Indexes (GSI).</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "aws consistency"
+  },
+  {
+   "guid": "JmhvdDHIZ.",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "aws",
+    "consistency",
+    "cap"
+   ],
+   "front": "Amazon DynamoDB <b>Global Tables</b>: what is the consistency model and how are conflicts resolved?",
+   "back": "Multi-active, <b>asynchronous</b> cross-region replication (typically ~1 s). Conflicts resolved by <b>last-writer-wins</b> on a timestamp attribute — concurrent writes in two regions silently drop one.<br><br>Classic PA/EL. Strongly consistent reads are only region-local. Newer <i>multi-Region strong consistency</i> tables route writes through a cross-region quorum, buying linearizability at the cost of cross-region write latency — PACELC as a per-table setting.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "aws consistency cap"
+  },
+  {
+   "guid": "y>hPm4Et!H",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "aws",
+    "consistency"
+   ],
+   "front": "Amazon Simple Storage Service (S3) became <b>strongly consistent</b> for read-after-write in Dec 2020. What did the old model allow, and why is the change notable?",
+   "back": "Old: PUT of a new object was read-after-write consistent, but overwrites/deletes and LIST were eventual — you could read a stale version or see a deleted key listed.<br><br>New: every GET/LIST after a completed PUT/DELETE returns the latest state. Notable because they did it at S3 scale with no latency or price change, by making the metadata index/cache layer <b>coherently versioned</b> so caches can detect and bypass stale entries rather than serving them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "aws consistency"
+  },
+  {
+   "guid": "w)EQ&q)a65",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "aws",
+    "quorum",
+    "consistency"
+   ],
+   "front": "Amazon Aurora storage: what are its <b>write and read quorums</b> and why exactly 6 copies?",
+   "back": "6 copies across 3 Availability Zones (2 per AZ). <b>Write quorum 4/6, read quorum 3/6</b> (4+3 &gt; 6).<br><br>Design target “AZ+1”: survive an entire AZ loss <i>plus</i> one more failure without losing read availability (3 copies left ≥ read quorum), and survive an AZ loss without losing write availability (4 left = write quorum). Repairs use read quorum to rebuild the missing copies.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "aws quorum consistency"
+  },
+  {
+   "guid": "mkemeV[sM*",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "aws",
+    "cap",
+    "consistency"
+   ],
+   "front": "Amazon Aurora Global Database vs Aurora Multi-AZ: place each on the CAP/PACELC map.",
+   "back": "<ul><li><b>Within a region</b>: synchronous 4/6 quorum → CP, linearizable primary.</li><li><b>Global Database</b>: storage-level <i>asynchronous</i> replication to secondary regions (typical lag &lt;1 s). Secondaries serve stale reads (EL). Failover promotes a secondary and accepts data loss up to the replication lag — the Recovery Point Objective (RPO) is the staleness.</li></ul>Lesson: the same product is CP locally and AP/EL globally; ask “consistent with respect to what boundary?”.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "aws cap consistency"
+  },
+  {
+   "guid": "zX[L`:(b69",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "aws",
+    "failure"
+   ],
+   "front": "Amazon Relational Database Service (RDS) Multi-AZ failover flips a DNS name to the standby. What client-side failure mode does this create?",
+   "back": "Clients that cached the old DNS answer (Java Virtual Machine (JVM) default is effectively forever, connection pools hold sockets) keep talking to the old primary — or hang.<br><br>Mitigations: honour DNS TTL, bound connection lifetime, or put Amazon RDS Proxy in front so failover is handled server-side. General rule: <i>a failover that requires clients to notice is only half a failover</i>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "aws failure"
+  },
+  {
+   "guid": "cl$F%B1V]<",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "aws",
+    "failure",
+    "k8s"
+   ],
+   "front": "Define AWS's principle of <b>static stability</b> and give two examples.",
+   "back": "A system keeps operating correctly when a dependency (usually a control plane) is unavailable, by not needing to <i>call</i> that dependency during the failure — it relies on state it already has.<br><br><ul><li>EC2 instances keep running when the EC2 control plane is impaired; Amazon Route 53 keeps answering when its API is down.</li><li>Pre-provision capacity in every AZ so an AZ failure doesn't require launching instances (a control-plane call) to recover.</li></ul>Kubernetes analogue: pods and Service routing keep working when etcd/apiserver are down.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "aws failure k8s"
+  },
+  {
+   "guid": "smVJ$:f?,f",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "aws",
+    "failure"
+   ],
+   "front": "Explain <b>shuffle sharding</b> (Amazon Route 53, many AWS services). What blast radius does it achieve?",
+   "back": "Assign each customer a random subset of k nodes out of N instead of a fixed shard. Two customers sharing <i>all</i> k nodes is combinatorially rare (for 8 nodes, k=2: only 1/28 pairs fully overlap; with retries a client needs just one healthy node).<br><br>A poison-pill request from one customer then degrades a tiny fraction of others rather than a whole shard. It is isolation achieved by statistics rather than by coordination.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "aws failure"
+  },
+  {
+   "guid": "A~pvP4xzA=",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "aws",
+    "cap",
+    "failure"
+   ],
+   "front": "What is a <b>cell-based architecture</b> and why does it sidestep CAP-style trade-offs?",
+   "back": "Partition a service into many independent, identically-shaped cells (each a full stack with fixed max size); a thin routing layer maps customers to cells. Cells share <b>no state</b>.<br><br>No shared state ⇒ no cross-cell coordination ⇒ no consensus or quorum across cells; a cell failure is bounded to its customers. Scale is added by adding cells, not by growing a quorum. Trade-off: cell migration and the routing layer become the hard problems.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "aws cap failure"
+  },
+  {
+   "guid": "pII-vb~4(P",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "aws",
+    "failure"
+   ],
+   "front": "<b>Retry storms</b>: why do naive retries turn a slow dependency into an outage, and what is the AWS-recommended pattern?",
+   "back": "A dependency at capacity gets slow → callers time out and retry → load multiplies (3 retries = 4× load) at exactly the moment capacity is lowest → collapse. With N layers each retrying, amplification is exponential.<br><br><ul><li><b>Exponential backoff with full jitter</b> (spreads retries; avoids synchronized waves).</li><li><b>Retry budgets</b>: e.g., retries ≤10% of successful calls.</li><li>Retry only at one layer; circuit breakers; load shedding.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "aws failure"
+  },
+  {
+   "guid": "w;8R8iQK7x",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "aws",
+    "failure",
+    "messaging"
+   ],
+   "front": "Amazon Simple Queue Service (SQS) Standard vs FIFO: delivery and ordering guarantees, and what “exactly-once processing” really means.",
+   "back": "<ul><li><b>Standard</b>: at-least-once delivery, best-effort ordering, near-unlimited throughput.</li><li><b>FIFO</b>: per-<code>MessageGroupId</code> ordering; “exactly-once processing” = at-least-once + <b>content/ID-based deduplication within a 5-minute window</b>.</li></ul>Delivery is never exactly-once (Two Generals). Consumers must still be idempotent for anything beyond the dedup window or across crashes mid-processing.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "aws failure messaging"
+  },
+  {
+   "guid": "D%daiY@Z32",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "aws",
+    "consistency"
+   ],
+   "front": "Amazon DynamoDB <b>TransactWriteItems</b>: how does it achieve atomicity across partitions and what does it cost?",
+   "back": "A transaction coordinator runs <b>two-phase commit (2PC)</b> across the affected partitions' leaders: prepare (check conditions, reserve) then commit. The result is serializable across the items.<br><br>Cost: 2× write capacity units per item (both phases are persisted), higher latency, and items in a pending transaction reject conflicting transactions (<code>TransactionConflict</code>). Use only where atomicity across items is truly required.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "aws consistency"
+  },
+  {
+   "guid": "f;FZod&6Tj",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "aws",
+    "failure"
+   ],
+   "front": "Amazon DynamoDB <b>hot partition</b>: what limits exist and how do you design around them?",
+   "back": "Per-partition ceiling ≈ 3,000 RCU / 1,000 WCU. A single hot key (celebrity user, current-day timestamp) saturates one partition even if the table has spare capacity elsewhere. Adaptive capacity helps but can't split a single key.<br><br>Fixes: <b>write sharding</b> (append a random/hash suffix to the key and scatter-gather on read), pre-aggregate, or cache with DynamoDB Accelerator (DAX). A load-distribution problem, not a consistency problem.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "aws failure"
+  },
+  {
+   "guid": "fP=k{Nik*Y",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "aws",
+    "messaging",
+    "failure"
+   ],
+   "front": "How do EC2 <code>ClientToken</code> / idempotency tokens turn at-least-once RPC into effectively-once?",
+   "back": "Client generates a unique token per logical operation and sends it on every retry; the service stores token → result and returns the cached result for duplicates.<br><br>This moves deduplication to the receiver where the state lives — the only place it can be done correctly. Same mechanism as SQS FIFO dedup IDs and Stripe idempotency keys.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "aws messaging failure"
+  },
+  {
+   "guid": "i;224UOI`J",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "azure",
+    "consistency"
+   ],
+   "front": "List Azure Cosmos DB's <b>five consistency levels</b> from strongest to weakest.",
+   "back": "<ul><li><b>Strong</b> — linearizable</li><li><b>Bounded staleness</b> — lag ≤ K versions or ≤ T time</li><li><b>Session</b> — read-your-writes, monotonic reads/writes, writes-follow-reads within a session token (the default)</li><li><b>Consistent prefix</b> — never see writes out of order, may be stale</li><li><b>Eventual</b> — no ordering guarantee, converges</li></ul>Each step down buys lower latency and higher availability in multi-region deployments.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "azure consistency"
+  },
+  {
+   "guid": "mN!0~tfR1v",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "azure",
+    "consistency"
+   ],
+   "front": "Azure Cosmos DB <b>bounded staleness</b>: define it precisely and say when it degenerates to strong.",
+   "back": "Reads may lag writes by at most <b>K versions</b> or <b>T time interval</b>, whichever is reached first; outside the window they honour consistent prefix and monotonic reads. Configured per account (e.g., K=100,000 ops or T=5 min for multi-region).<br><br>In a single-region account the window can't accumulate lag, so it behaves like strong consistency. Its value is giving <b>quantified, predictable staleness</b> across regions instead of a binary strong/eventual choice.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "azure consistency"
+  },
+  {
+   "guid": "xmyexavOj3",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "azure",
+    "consistency"
+   ],
+   "front": "Azure Cosmos DB <b>session consistency</b>: how is it implemented, and what mistake breaks it?",
+   "back": "The client Software Development Kit (SDK) carries a <b>session token</b> (per-partition logical sequence numbers) on each request; the replica serving a read must have caught up to that token or forwards.<br><br>Breaks when the token isn't propagated: two microservice instances, a serverless function per request, or a web tier that doesn't pass the token back to the browser. Read-your-writes then silently becomes eventual. Guarantees are scoped to the token, not to the user.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "azure consistency"
+  },
+  {
+   "guid": "ll&WQMC:Da",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "azure",
+    "consistency",
+    "cap"
+   ],
+   "front": "Azure Cosmos DB <b>strong consistency</b> across multiple regions: what does a write cost and what feature is incompatible?",
+   "back": "Writes are committed to a majority quorum in the write region and then synchronously to a majority of regions; documented write latency ≈ <b>2 × RTT</b> to the farthest region.<br><br>Incompatible with <b>multi-region writes</b> (multi-master): you can't have linearizability and concurrent independent writers. PACELC made explicit: pick EC and pay in latency and single-writer topology.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "azure consistency cap"
+  },
+  {
+   "guid": "AcK4tei#>z",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "azure",
+    "consistency",
+    "cap"
+   ],
+   "front": "Azure Cosmos DB with <b>multi-region writes</b>: what conflict-resolution policies exist, and what does each imply?",
+   "back": "<ul><li><b>Last-writer-wins (LWW)</b> (default) on <code>_ts</code> or a custom numeric property — simple; concurrent writes lose data silently.</li><li><b>Custom (stored procedure)</b> — merge logic runs server-side; deterministic and bounded.</li><li><b>Manual</b> — conflicts land in a conflicts feed for the application to resolve.</li></ul>Any multi-master design is AP under partition; the policy is how you make convergence <i>meaningful</i>. If losing a write is unacceptable, model data so concurrent updates commute (counters, sets) or use single-region writes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "azure consistency cap"
+  },
+  {
+   "guid": "scL<y6QrI2",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "azure",
+    "quorum",
+    "consistency"
+   ],
+   "front": "Azure Cosmos DB replication inside a region: replica count, write commitment, and how read quorum varies.",
+   "back": "Each physical partition is a replica set of <b>4 replicas</b>; a write is durable once a <b>majority (3/4)</b> has persisted it.<br><br>Read quorum depends on consistency level: strong and bounded staleness read from a majority (or a caught-up replica via the leader's knowledge); session/eventual read from a single replica. Same R+W&gt;N reasoning as Aurora, made dynamic per request.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "azure quorum consistency"
+  },
+  {
+   "guid": "Fh@`c{)l}p",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "azure",
+    "consistency",
+    "cap"
+   ],
+   "front": "Azure Storage redundancy tiers: LRS, ZRS, GRS, RA-GRS. Which are synchronous, and what does a geo-failover cost?",
+   "back": "<ul><li><b>Locally Redundant (LRS)</b>: 3 synchronous copies, one datacenter.</li><li><b>Zone-Redundant (ZRS)</b>: 3 synchronous copies across 3 AZs — strong consistency survives an AZ loss.</li><li><b>Geo-Redundant (GRS)</b>: LRS + <i>asynchronous</i> copy to the paired region (RPO typically &lt;15 min).</li><li><b>Read-Access GRS (RA-GRS)</b>: you may read the secondary — explicitly stale data.</li></ul>Geo-failover (customer- or Microsoft-initiated) promotes the secondary; writes not yet replicated are lost. Sync = CP within the boundary; async = eventual across it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "azure consistency cap"
+  },
+  {
+   "guid": "p-(jm>/aZ~",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "azure",
+    "consistency",
+    "cap"
+   ],
+   "front": "Azure Service Fabric stateful services: describe replication and the <b>quorum loss</b> state.",
+   "back": "Each partition has a primary and N secondaries; a write is committed when a <b>write quorum (majority)</b> of the replica set acknowledges. Reads go to the primary → linearizable.<br><br>If fewer than a majority are up, the partition enters <b>quorum loss</b>: reads may continue, writes are refused until replicas return or an operator forces a (potentially lossy) recovery. A textbook CP system that refuses to guess.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "azure consistency cap"
+  },
+  {
+   "guid": "xQ)R9y[3A5",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "azure",
+    "failure",
+    "consensus"
+   ],
+   "front": "Azure Blob leases (15–60 s or infinite) are used for leader election (Dapr, Azure Functions, custom apps). What is the failure mode and the fix?",
+   "back": "Same as any lease: the holder may pause (GC, VM freeze), the lease expires, another instance acquires it, and the original resumes still believing it leads.<br><br>Fix: pair the lease with a <b>fencing mechanism</b> — conditional writes using the blob's ETag (<code>If-Match</code>) or a monotonically increasing epoch stored with the lease — so a stale leader's writes are rejected rather than merely discouraged.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "azure failure consensus"
+  },
+  {
+   "guid": "Q&wVCWOC3^",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "azure",
+    "consistency",
+    "failure"
+   ],
+   "front": "Azure SQL Database <b>failover groups</b>: what replication mode, and what does the app need to handle?",
+   "back": "Asynchronous geo-replication to a secondary region; the listener endpoint moves on failover. Because it is async, an unplanned failover can lose recent commits (RPO in seconds); a planned failover waits for sync first.<br><br>App must: use the failover-group listener (not a server name), tolerate transient connection errors with retry, and accept that read-only routing to the secondary returns slightly stale data.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "azure consistency failure"
+  },
+  {
+   "guid": "xG^UHFl$eC",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consistency"
+   ],
+   "front": "Define <b>linearizability</b> precisely. What scope does it apply to?",
+   "back": "Every operation appears to take effect <b>atomically at some instant between its invocation and its response</b>, and the resulting order is consistent with real time: if op A completes before op B starts, B observes A.<br><br>Scope: a <i>single object/register</i> (one key, one lock). Says nothing about multi-object transactions. Equivalently: the system behaves like a single, up-to-date copy.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consistency"
+  },
+  {
+   "guid": "mc/T]dBkDx",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consistency"
+   ],
+   "front": "<b>Serializability</b> vs <b>strict serializability</b> vs linearizability — untangle them.",
+   "back": "<ul><li><b>Serializability</b>: multi-object <i>transactions</i> appear to execute in some serial order. No real-time constraint — a “serializable” system may legally serve you last week's snapshot.</li><li><b>Linearizability</b>: single-object, real-time ordering.</li><li><b>Strict serializability</b> = serializability + real-time order (Google Spanner's “external consistency”, via TrueTime commit-wait).</li></ul>Most cloud databases that say “strongly consistent” mean linearizable per key, not strict serializable across keys.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consistency"
+  },
+  {
+   "guid": "iJ|5LANfW?",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consistency"
+   ],
+   "front": "How does <b>sequential consistency</b> differ from linearizability? Give a real system that offers it.",
+   "back": "Sequential: all clients see the same total order, consistent with each client's own program order — but <i>not</i> necessarily with real time. A client may read stale state as long as it never goes backwards.<br><br>Apache ZooKeeper: writes are linearizable (through the leader), reads are served locally by any follower → sequentially consistent; call <code>sync()</code> before a read to upgrade it. Kubernetes' watch cache offers the same shape.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consistency"
+  },
+  {
+   "guid": "F#lkb@(e.{",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consistency",
+    "cap"
+   ],
+   "front": "Define <b>causal consistency</b>. Why is it the strongest model achievable while remaining available under partition?",
+   "back": "Writes that are causally related (one could have influenced the other — same session, or read-then-write) are observed in that order by every node; <i>concurrent</i> writes may be seen in different orders.<br><br>Enforcing anything stronger (e.g., a total order of concurrent writes) requires nodes on both sides of a partition to agree, which needs communication. Causal order can be tracked with vector clocks/dependency metadata locally, so it survives partitions (Bailis et al., “Highly Available Transactions”).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consistency cap"
+  },
+  {
+   "guid": "PWoeb@;LV)",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consistency",
+    "azure",
+    "aws",
+    "k8s"
+   ],
+   "front": "List the four <b>session guarantees</b> and give one cloud feature that implements each.",
+   "back": "<ul><li><b>Read-your-writes</b> — Cosmos DB session token; DynamoDB strongly consistent read after write.</li><li><b>Monotonic reads</b> — never see older state after newer; sticky routing to one replica.</li><li><b>Monotonic writes</b> — a client's writes apply in order; single-leader per partition.</li><li><b>Writes-follow-reads</b> — a write depends on what you read; carry the read version (resourceVersion in Kubernetes).</li></ul>Together they are “causal consistency for one client”. Cheap to provide; most user-visible anomalies come from missing them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consistency azure aws k8s"
+  },
+  {
+   "guid": "x(9/u?0LK*",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consistency"
+   ],
+   "front": "Define <b>eventual consistency</b> rigorously. What does it <i>not</i> promise?",
+   "back": "If no new writes occur, all replicas eventually converge to the same state.<br><br>It does not promise: when convergence happens, what any single read returns before then, that reads are monotonic, or which write wins. Convergence requires a deterministic merge rule — last-writer-wins, Conflict-free Replicated Data Types (CRDTs), or version vectors + application merge. Without one you have <i>divergence</i>, not eventual consistency.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consistency"
+  },
+  {
+   "guid": "KIX>cQ@#3?",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consistency",
+    "failure",
+    "aws",
+    "azure"
+   ],
+   "front": "<b>Last-writer-wins (LWW)</b>: why is it popular, and what are its two failure modes?",
+   "back": "Popular because it is trivially convergent: keep the value with the highest timestamp.<br><br><ul><li><b>Silent data loss</b>: concurrent updates to the same key discard one entirely (two regions increment the same counter → one increment vanishes).</li><li><b>Clock dependence</b>: a node with a fast clock “wins” the future; skew turns the newer write into the loser.</li></ul>Used by DynamoDB Global Tables and Cosmos DB by default. Accept it only for keys where concurrent writes don't happen or don't matter.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consistency failure aws azure"
+  },
+  {
+   "guid": "sa)DA%[mXr",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consistency"
+   ],
+   "front": "Lamport clocks vs vector clocks vs Hybrid Logical Clocks (HLC): what can each detect?",
+   "back": "<ul><li><b>Lamport</b>: a single counter; gives a total order consistent with causality (a→b ⇒ L(a)&lt;L(b)) but cannot tell concurrency from causality.</li><li><b>Vector clocks</b>: one counter per node; can detect that two events are concurrent (neither ≤ the other) — used by the Dynamo paper to surface conflicts instead of dropping them. Cost: O(nodes) metadata.</li><li><b>HLC</b>: physical time + logical counter; causally consistent <i>and</i> close to wall-clock (CockroachDB, YugabyteDB).</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consistency"
+  },
+  {
+   "guid": "nG4%f:+I&6",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consistency",
+    "aws",
+    "azure",
+    "k8s"
+   ],
+   "front": "Three practical ways to get <b>read-your-writes</b> on top of an eventually consistent store.",
+   "back": "<ul><li>Route the session's reads to the <b>leader/primary</b> (DynamoDB strongly consistent reads; Aurora writer endpoint).</li><li>Carry a <b>version/session token</b> and require the replica to be at least that fresh (Cosmos DB session token; Kubernetes <code>resourceVersion</code> on list/watch).</li><li><b>Sticky routing</b>: read from the replica you wrote to (only monotonic within that replica's lifetime).</li></ul>Each shifts cost: leader load, client complexity, or lost load balancing.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consistency aws azure k8s"
+  },
+  {
+   "guid": "IB6zFB^fwx",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consistency"
+   ],
+   "front": "<b>Snapshot isolation</b> allows write skew. Give the canonical example and say what fixes it.",
+   "back": "Two doctors on call; rule “at least one on call”. Both read (2 on call), both mark themselves off in concurrent transactions; neither transaction wrote what the other read, so no write-write conflict — both commit, zero on call.<br><br>Fixes: true SERIALIZABLE (PostgreSQL Serializable Snapshot Isolation (SSI), including on Amazon RDS/Aurora PostgreSQL), or explicit locking (<code>SELECT … FOR UPDATE</code>) / materializing the constraint as a row.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consistency"
+  },
+  {
+   "guid": "fD`A=XbRPE",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consistency",
+    "failure"
+   ],
+   "front": "What does <b>Jepsen</b> actually test, and what is the recurring lesson from its reports?",
+   "back": "It generates concurrent client histories against a real cluster while injecting faults (partitions, clock skew, process pauses), then checks the history against a model (Knossos for linearizability, Elle for transactional anomalies).<br><br>Recurring lesson: documentation claims (“strongly consistent”, “ACID”) frequently fail <i>only under partitions or leader changes</i> — the exact conditions consensus protocols exist for. Test under faults, or you haven't tested consistency.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consistency failure"
+  },
+  {
+   "guid": "D3Ab6)G5SH",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "consistency",
+    "cap"
+   ],
+   "front": "What is the <b>CALM theorem</b>, and how does it guide design toward coordination avoidance?",
+   "back": "Consistency As Logical Monotonicity: a program has a coordination-free, eventually consistent implementation <b>if and only if it is monotonic</b> (outputs only grow as inputs grow — set union, append, max).<br><br>Non-monotonic operations (delete-then-check, “is this the only one?”, aggregations with negation) inherently need coordination. Design lever: reformulate as monotonic (tombstones, CRDT counters, append-only logs) and reserve consensus for the residual non-monotonic core.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "consistency cap"
+  },
+  {
+   "guid": "P2siT6Vr]s",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "failure"
+   ],
+   "front": "Enumerate the standard <b>failure model hierarchy</b> and say which one Raft/Paxos assume.",
+   "back": "<ul><li><b>Crash-stop</b>: halts, never returns.</li><li><b>Crash-recovery</b>: halts, returns with stable storage intact (RAM lost).</li><li><b>Omission</b>: drops some messages (send/receive).</li><li><b>Timing</b>: responds outside expected bounds (GC pause, slow disk).</li><li><b>Byzantine</b>: arbitrary, including malicious.</li></ul>Raft/Paxos assume <b>crash-recovery + omission</b> with reliable stable storage; they do not tolerate Byzantine nodes (need PBFT/3f+1) or lying disks.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "failure"
+  },
+  {
+   "guid": "Q-_DM6v*uc",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "failure",
+    "raft"
+   ],
+   "front": "Why is “network partition” a misleadingly clean term? Describe <b>partial</b> and <b>asymmetric</b> partitions and a consensus failure they cause.",
+   "back": "Real partitions are rarely a clean split. <b>Partial</b>: A↔B and B↔C work but A↔C doesn't. <b>Asymmetric</b>: A can send to B but not receive.<br><br>In Raft, a follower that can't hear the leader (but can reach others) keeps starting elections with ever-higher terms, deposing a healthy leader each time it reconnects — livelock without any node actually being down. PreVote + CheckQuorum exist for exactly this.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "failure raft"
+  },
+  {
+   "guid": "kd|9%kEt,d",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "failure",
+    "aws",
+    "k8s"
+   ],
+   "front": "Define <b>gray failure</b> (Huang et al.). Why do health checks miss it, and what detects it?",
+   "back": "A component is degraded (partially working, slow, dropping some requests) yet passes its own health checks — <i>differential observability</i>: the monitor and the client see different things.<br><br>Detection must be from the client's perspective: end-to-end canaries, outlier detection/ejection in the load balancer (Envoy, Istio), request hedging, and comparing per-node error/latency against peers. AWS: “health checks are a lie unless they exercise the real path”.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "failure aws k8s"
+  },
+  {
+   "guid": "q`Tr!63v<-",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "failure",
+    "consensus"
+   ],
+   "front": "What is <b>split brain</b>, what two ingredients prevent it, and where does “STONITH” fit?",
+   "back": "Two nodes each believe they are the sole primary and both accept writes → divergent histories.<br><br><ul><li><b>Quorum</b>: only the side with a majority may act (the minority steps down).</li><li><b>Fencing</b>: the old primary is prevented from writing — via fencing tokens at the storage, or <b>Shoot The Other Node In The Head (STONITH)</b>: power/network-cut the suspected node before promoting a new one.</li></ul>Failover by moving a virtual IP without fencing is the classic way to get split brain.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "failure consensus"
+  },
+  {
+   "guid": "xuUnP-bRA4",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "failure",
+    "consistency"
+   ],
+   "front": "Why are <b>lease-based</b> mechanisms vulnerable to clock drift and process pauses? How does Google Spanner handle clocks differently?",
+   "back": "A lease is “I'm leader until T”. If the holder's clock runs slow, or the process is paused (GC, VM live-migration, swap), local time says the lease is valid while everyone else has moved on.<br><br>Spanner's <b>TrueTime</b> returns an <i>interval</i> [earliest, latest] with GPS/atomic-clock bounded uncertainty (~ms); a transaction <b>commit-waits</b> until latest has passed, so timestamps are globally ordered. Uncertainty is made explicit instead of assumed away.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "failure consistency"
+  },
+  {
+   "guid": "Q`r*bJHMk:",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "failure",
+    "consensus"
+   ],
+   "front": "A Java service holds a distributed lock, enters a 30-second stop-the-world GC, and resumes. Trace what can go wrong and what fixes it.",
+   "back": "During the pause it sends no heartbeats → lock/lease expires → another instance acquires it and starts writing. The first instance wakes, has no idea time passed, and continues its critical section → two writers.<br><br>Checking “is the lock still mine?” before writing doesn't help (pause can occur between check and write). Only a <b>fencing token validated by the resource</b> is sound; otherwise make the operation idempotent/commutative so concurrent execution is harmless.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "failure consensus"
+  },
+  {
+   "guid": "bT?%kb@:q*",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "failure"
+   ],
+   "front": "What is a <b>metastable failure</b>? Why doesn't removing the trigger fix it?",
+   "back": "A system pushed by a transient trigger (traffic spike, brief dependency slowdown) into a self-sustaining overloaded state — e.g., retries and timeouts keep effective load above capacity, or a cache flushes and every request now hits the database.<br><br>The feedback loop (retries ↑ → latency ↑ → retries ↑) sustains itself after the trigger is gone. Recovery requires <b>actively shedding load below the sustainable level</b> (throttle, drop retries, warm caches) — not just waiting.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "failure"
+  },
+  {
+   "guid": "I6ZGDt46ei",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "failure"
+   ],
+   "front": "<b>Thundering herd</b> on cache expiry: mechanism and three mitigations.",
+   "back": "A hot key expires; thousands of concurrent requests miss simultaneously and all hit the origin, which was sized for cache-hit traffic.<br><br><ul><li><b>Request coalescing</b> (singleflight): one in-flight origin fetch per key; others wait for it.</li><li><b>Probabilistic early refresh</b> / jittered TTLs so keys don't expire in lockstep.</li><li><b>Serve-stale-while-revalidate</b>: return the old value, refresh in background.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "failure"
+  },
+  {
+   "guid": "pqf)o}2dr`",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "failure",
+    "aws",
+    "azure",
+    "k8s"
+   ],
+   "front": "Why do AWS and Azure deploy changes <b>one Availability Zone or region at a time</b>? Which failure class does this address?",
+   "back": "<b>Correlated failure</b>: a bad deploy or config push is the single most common cause of large outages, and it hits every node it touches simultaneously — unlike hardware faults, which are independent.<br><br>Wave/canary deployment (AWS: one-box → one AZ → one region → waves of regions with bake time; Azure Safe Deployment Practices) converts a correlated failure into a bounded one you can roll back. Kubernetes analogue: <code>maxUnavailable</code>, canary via progressive delivery.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "failure aws azure k8s"
+  },
+  {
+   "guid": "uh#ln0v4pL",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "failure",
+    "consensus"
+   ],
+   "front": "“fsyncgate”: what did PostgreSQL discover about <b>fsync</b>, and what does it imply for any consensus system?",
+   "back": "On Linux, if fsync fails (I/O error), the kernel may <i>clear</i> the dirty flag; a subsequent fsync succeeds even though the data was never written. PostgreSQL had been retrying fsync and believing the second success.<br><br>Implication: a Raft/Paxos node's “persisted to stable storage” assumption can be silently false. Correct behaviour on fsync failure is to <b>crash</b> (panic) and recover from a snapshot — which is what PostgreSQL and etcd now do.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "failure consensus"
+  },
+  {
+   "guid": "wH9JE3=k:d",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "failure"
+   ],
+   "front": "Fixed-timeout failure detectors vs the <b>φ-accrual</b> detector (Cassandra, Akka): what's the trade-off?",
+   "back": "Any detector trades <i>detection time</i> against <i>false positives</i>; a fixed timeout picks one point on that curve for all conditions.<br><br>φ-accrual keeps a history of heartbeat intervals and outputs a continuous suspicion level (φ ≈ −log₁₀ P(heartbeat is merely late)). Callers choose their own threshold, and the detector adapts to changing network latency. Still probabilistic — no detector can be both complete and accurate in an asynchronous system.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "failure"
+  },
+  {
+   "guid": "QP@[^q#*At",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "failure",
+    "consensus",
+    "aws"
+   ],
+   "front": "<b>Two-phase commit (2PC)</b> is blocking. Explain the failure and how Spanner-style “Paxos commit” removes it.",
+   "back": "After participants vote yes (prepared) they must hold locks until the coordinator says commit/abort. If the coordinator crashes after collecting votes but before broadcasting, participants are <b>stuck indefinitely</b> — they can't unilaterally abort (the coordinator may have logged commit).<br><br>Fix: make the coordinator's decision itself a replicated, consensus-backed value (Spanner replicates each participant and the coordinator with Paxos; DynamoDB transactions use a durable coordinator). Blocking is replaced by “wait for the majority”.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "failure consensus aws"
+  },
+  {
+   "guid": "d<rp``9h;%",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "failure",
+    "messaging",
+    "aws"
+   ],
+   "front": "At-least-once vs at-most-once vs “exactly-once”: define, and state where deduplication must live.",
+   "back": "<ul><li><b>At-most-once</b>: send once, never retry — may lose.</li><li><b>At-least-once</b>: retry until acked — may duplicate.</li><li><b>Exactly-once processing</b>: at-least-once delivery + <b>idempotent or deduplicating consumer</b>.</li></ul>Dedup must live at the <i>consumer/state owner</i>, keyed by a client-chosen ID, with the dedup record committed atomically with the effect. Kafka transactions, SQS FIFO, EC2 client tokens all follow this shape.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "failure messaging aws"
+  },
+  {
+   "guid": "MpXbhw<(*N",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "cap"
+   ],
+   "front": "State the <b>CAP theorem</b> correctly (Gilbert &amp; Lynch), and list two common misreadings.",
+   "back": "In the presence of a network partition, a system cannot provide both <b>linearizability</b> (C) and <b>availability</b> (every request to a non-failed node gets a non-error response) (A).<br><br><ul><li>Misreading 1: “pick two of three” — P isn't optional; partitions happen, so the choice is only C-vs-A <i>during</i> one.</li><li>Misreading 2: C means ACID or “any consistency” — it means linearizability specifically. A system can be causally consistent and available.</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "cap"
+  },
+  {
+   "guid": "LijmHZzDST",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "cap",
+    "aws",
+    "azure",
+    "k8s"
+   ],
+   "front": "Define <b>PACELC</b>. Classify etcd, DynamoDB (default), Cassandra, Cosmos DB, Spanner, MongoDB.",
+   "back": "If <b>P</b>artition: <b>A</b>vailability vs <b>C</b>onsistency; <b>E</b>lse: <b>L</b>atency vs <b>C</b>onsistency. Captures that strong consistency costs latency even when nothing is broken.<br><br><ul><li>etcd / ZooKeeper / Spanner: <b>PC/EC</b></li><li>DynamoDB default, Cassandra: <b>PA/EL</b></li><li>Cosmos DB: configurable — strong/bounded ≈ PC/EC; session/eventual ≈ PA/EL</li><li>MongoDB (default write/read concern): <b>PA/EC</b></li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "cap aws azure k8s"
+  },
+  {
+   "guid": "yy@L~FM>/m",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "cap",
+    "consistency",
+    "aws",
+    "azure"
+   ],
+   "front": "Why does strong consistency cost <b>latency</b> even with a perfectly healthy network? Quantify for AWS/Azure topologies.",
+   "back": "A linearizable write must reach a majority before acking; a linearizable read must confirm leadership (ReadIndex) or hit the leader.<br><br><ul><li>Cross-AZ round trip: ~1–2 ms → quorum write ≈ 2–4 ms (DynamoDB, etcd, Aurora).</li><li>Cross-region: 50–150 ms → Cosmos DB strong ≈ 2× RTT to the farthest region; Spanner multi-region commit tens of ms + commit-wait.</li></ul>That is the “EL vs EC” axis: the price is paid on every request, not only during failures.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "cap consistency aws azure"
+  },
+  {
+   "guid": "b~TqiUx+:k",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "cap",
+    "k8s",
+    "failure"
+   ],
+   "front": "Apply CAP to Kubernetes: what happens to the cluster when etcd loses quorum?",
+   "back": "etcd is CP → with no majority it refuses reads (linearizable) and writes. kube-apiserver returns errors; no scheduling, scaling, rollouts, or Lease renewals.<br><br>But the <b>data plane stays up</b>: kubelets keep pods running, kube-proxy/CNI keep routing existing Services, DNS keeps resolving from cache. Control plane = CP; data plane = statically stable. Same layering as AWS: EC2 instances don't stop when the EC2 API does.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "cap k8s failure"
+  },
+  {
+   "guid": "PBa(G5gSUV",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "cap",
+    "aws"
+   ],
+   "front": "Amazon Route 53 offers a 100% availability Service Level Agreement (SLA). How can that be consistent with CAP?",
+   "back": "The SLA covers the <b>data plane</b> (answering DNS queries), which is massively replicated, anycast, and serves possibly-stale answers — an <b>AP</b> system. The control plane (changing records) is a separate, lower-SLA path with eventual propagation.<br><br>CAP forces C vs A only where you insist on linearizability. DNS chose A and made staleness (TTL) part of the contract.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "cap aws"
+  },
+  {
+   "guid": "G[MK7sqM2.",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "cap",
+    "failure"
+   ],
+   "front": "<b>Harvest and yield</b> (Fox &amp; Brewer): a design lever CAP doesn't mention.",
+   "back": "<ul><li><b>Yield</b>: fraction of requests answered.</li><li><b>Harvest</b>: fraction of the data reflected in an answer.</li></ul>Under partial failure you can keep yield at 100% by reducing harvest (search returns results from 9 of 10 shards, marked partial), or keep harvest and let yield drop (fail the request). Most availability engineering is choosing which to degrade per endpoint — not a binary CP/AP switch.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "cap failure"
+  },
+  {
+   "guid": "Pq}hC1A%/Y",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "cap",
+    "consistency"
+   ],
+   "front": "Heuristic: how do you decide CP vs AP for a given piece of data?",
+   "back": "Ask: <b>“If two clients disagree about this value for a few seconds, what breaks?”</b><br><br><ul><li>Nothing / self-correcting (view counts, likes, presence, caches) → <b>AP</b>, eventual, LWW is fine.</li><li>Money, uniqueness (usernames), inventory, leadership → <b>CP</b> per key, or restructure so the invariant is monotonic (escrow: pre-split inventory per region; CRDT counters).</li></ul>Most systems are mixed: a CP core (etcd, a ledger) with AP periphery (caches, read replicas, telemetry).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "cap consistency"
+  },
+  {
+   "guid": "cHnFqCjg)2",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "cap",
+    "consistency",
+    "aws",
+    "azure"
+   ],
+   "front": "Bounded staleness is the practical middle ground. Give the staleness figure for three cloud primitives.",
+   "back": "<ul><li>Amazon DynamoDB eventually consistent reads: usually consistent within ~1 s.</li><li>Amazon Aurora read replicas: typically tens of ms behind the writer (shared storage; only cache invalidation lags).</li><li>Azure Cosmos DB bounded staleness: you set K versions / T seconds; Azure Storage GRS: RPO usually &lt;15 min.</li></ul>Design principle: replace “eventual” with a <b>number</b> and check whether the business can tolerate that number.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "cap consistency aws azure"
+  },
+  {
+   "guid": "Kn,IWdlOes",
+   "type": "basic",
+   "deck": "Distributed Systems::Consensus, Consistency, Failure, CAP (AWS·Azure·K8s)",
+   "tags": [
+    "cap",
+    "consensus",
+    "aws",
+    "k8s"
+   ],
+   "front": "Coordination is the scarce resource. Rank these by how much coordination they need: Raft write, DynamoDB eventual read, S3 PUT, CRDT counter increment, K8s pod creation.",
+   "back": "<ul><li><b>CRDT counter increment</b>: zero — local op, merges later.</li><li><b>DynamoDB eventual read</b>: none beyond routing to a replica.</li><li><b>S3 PUT</b>: strongly consistent index update — coordinated metadata write, but per-key.</li><li><b>Raft write (etcd put)</b>: majority round trip + fsync.</li><li><b>K8s pod creation</b>: Raft write <i>plus</i> a chain of controllers (scheduler, kubelet) each doing further CAS writes — many sequential consensus rounds.</li></ul>Latency and availability ceilings follow this ranking almost exactly.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "cap consensus aws k8s"
+  }
+ ]
+}
