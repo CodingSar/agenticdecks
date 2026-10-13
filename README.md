@@ -1,6 +1,6 @@
 # Agentic Decks
 
-Anki decks for a cloud / Kubernetes platform and enterprise architect, consolidated from 44 source decks into 32.
+Anki decks for a cloud / Kubernetes platform and enterprise architect, consolidated from 44 source decks into 32, plus new decks written from scratch (The Pragmatic Programmer).
 
 - **Import:** `decks/*.apkg`
 - **Editable source of truth:** `work/out/*.json` (one file per deck) + `media/`
@@ -74,6 +74,7 @@ Original note GUIDs are kept on every card that descends from an original note. 
 | `Novius_Bedrijfsarchitectuur.apkg` | Bedrijfsarchitectuur (Novius) | 88 | 137 | 11 |
 | `Open_Agile_Architecture.apkg` | Open Agile Architecture | 211 | 340 | 10 |
 | `Physics_for_Datacenters.apkg` | Physics for Datacenters | 58 | 63 | 6 |
+| `Pragmatic_Programmer.apkg` | The Pragmatic Programmer | 149 | 183 | 9 |
 | `Platform_Engineering.apkg` | Platform Engineering | 241 | 317 | 13 |
 | `Quantitative_Foundations.apkg` | Quantitative Foundations | 349 | 402 | 11 |
 | `Robotics_Arduino_to_Physical_AI.apkg` | Robotics: Arduino to Physical AI | 293 | 321 | 12 |
