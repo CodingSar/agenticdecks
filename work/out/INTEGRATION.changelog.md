@@ -29,3 +29,6 @@
 | Quantitative_Foundations | Why is "extraordinary claims require extraordinary evidence" just Baye | Adoption_Epistemics_Governance |
 | Adoption_Epistemics_Governance | What is Simpson's paradox? | Quantitative_Foundations |
 | Distributed_Systems_and_Data | Why measure response time with percentiles | Quantitative_Foundations |
+
+## New decks (Oct 2026)
+Art History → Architecture Styles: 8 building-architecture cards removed from Art History (orders, Parthenon refinements, pointed arch, Gothic system, Romanesque vs Gothic, Pantheon dome, Greek vs Roman temple).

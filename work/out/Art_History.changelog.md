@@ -18,3 +18,14 @@ Subdecks: 01 How to Look (24) · 02 Materials & Techniques (18) · 03 Prehistori
 ## Overlap with existing decks
 - None found: no existing deck covers art, architecture history or aesthetics (grep for Renaissance/Baroque/Gothic/perspective/fresco hit only ArchiMate/BPMN "viewpoint/perspective" senses).
 - Mild thematic echoes (avant-garde "framework churn", Salon as app-store gatekeeper, literati scrolls as comment threads) are analogies only, not duplicated cards.
+
+## Integration
+Removed 8 architecture cards that Architecture Styles owns:
+- What are the Parthenon's optical refinements, and why?
+- Greek vs Roman temple: how to tell?
+- Why does the pointed arch beat the round arch?
+- The three Greek orders: {{c1::Doric}} (no base, plain cushion capital, sturdy), 
+- Gothic structure rests on three innovations: the {{c1::pointed arch}} (any heigh
+- Romanesque vs Gothic: how to tell at a glance?
+- How does the Pantheon's 43 m concrete dome stand?
+- How do you recognise Romanesque architecture?
