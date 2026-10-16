@@ -42,3 +42,21 @@ Enumerations turned into clozes (33 cloze notes): OpenGitOps principles, lifecyc
 ## Other
 - Analogies: 48 notes, all new (sources had none), ~20%.
 - Removed abbreviation-expansion noise, trimmed version trivia into `extra` (e.g. Helm 3.8 OCI GA, Helm 4 release date), added Helm 4 `--atomic` → `--rollback-on-failure` note, Crossplane v2 Claims note.
+
+## Product-content review
+Deleted (1):
+- "Which commercial product is Score built to feed?" — vendor fact only (Humanitec product tie-in), nothing transferable
+
+Rewritten to the vendor-neutral concept, product moved to `extra` as an example (10, guids kept):
+- "Red Hat Ansible Automation Platform adds {{c1::Automation Controller}} (web UI/API, RBAC, scheduling), {{c2::Execution Environments}} (containerized Ansible runtimes) and {{c3::Automation Hub}} (curated, certified content)." → "A central Ansible controller (AWX and its downstream products) adds {{c1::a web UI/API with RBAC, scheduling and job history}} over the CLI, {{c2::execution environments}} (containerized, versioned Ansible runtimes) and {{c3::a curated content hub}} for approved roles and collections."
+- "What is Red Hat Developer Hub (RHDH), and why pick it over vanilla Backstage?" → "Why do organisations adopt a packaged Backstage distribution instead of building on vanilla Backstage?"
+- "How does RHDH load plugins differently from a classic Backstage build?" → "Backstage plugins: statically compiled vs <b>dynamic</b> loading?"
+- "Humanitec Platform Orchestrator RMCD workflow: {{c1::Read}} the workload spec → {{c2::Match}} its dependencies to resource definitions → {{c3::Create}} the resources → {{c4::Deploy}} the workload." → "Platform orchestrator pattern: at deploy time it {{c1::reads}} the abstract workload spec → {{c2::matches}} each declared dependency to an environment-specific resource definition → {{c3::creates}} or updates those resources → {{c4::deploys}} the workload with the generated configuration."
+- "What is Dynamic Configuration Management (DCM) in the Humanitec model?" → "What is dynamic configuration management, as opposed to static per-environment config files?"
+- "How does the Humanitec Orchestrator relate to Backstage and Argo CD?" → "Where does a platform orchestrator sit relative to the developer portal and the deployment tooling?"
+- "What is Red Hat Advanced Cluster Security (ACS)?" → "Which capability areas does a Kubernetes security platform typically bundle?"
+- "How does ACS integrate with a CI/CD pipeline?" → "How does an image scanner act as a CI/CD gate?"
+- "What does the ACS network graph provide?" → "How does an observed-traffic network graph help with NetworkPolicies?"
+- "How does ACS's scope differ from Kyverno/Gatekeeper?" → "Full-lifecycle Kubernetes security platform vs admission policy engine (Kyverno/Gatekeeper): how do their scopes differ?"
+
+Scrubbed marketing phrasing: none beyond the rewrites above ("out of the box", "enterprise RBAC" were in the RHDH card).

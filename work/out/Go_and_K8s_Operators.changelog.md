@@ -51,3 +51,6 @@ Signal filter:
 - 177 (OwnerReference concept) now asks about `controllerutil.SetControllerReference`; 184 (no delete/recreate) adds `controllerutil.CreateOrUpdate`; 172 (served/storage) now asks about the `+kubebuilder:storageversion` marker. Each keeps its guid.
 - Accuracy fixes: 131 (informer resync replays the local cache and does not relist), 100 (`time.After` leak fixed for Go 1.23+ modules), 37 (`cmp.Ordered`, not `constraints.Ordered`), 52 (Go 1.25 GOMAXPROCS respects cgroup CPU limits), 83 (`GOMEMLIMIT` added), 156 (`Requeue` deprecated in favour of `RequeueAfter`).
 - Tags and `source` labels kept from the source notes.
+
+## Product-content review
+Reviewed card by card: no product-catered cards found (tools present are open-source subjects or short examples in `extra`); nothing deleted, rewritten or scrubbed.

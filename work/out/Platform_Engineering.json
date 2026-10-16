@@ -1308,10 +1308,10 @@
    ],
    "front": "",
    "back": "",
-   "text": "Red Hat Ansible Automation Platform adds {{c1::Automation Controller}} (web UI/API, RBAC, scheduling), {{c2::Execution Environments}} (containerized Ansible runtimes) and {{c3::Automation Hub}} (curated, certified content).",
+   "text": "A central Ansible controller (AWX and its downstream products) adds {{c1::a web UI/API with RBAC, scheduling and job history}} over the CLI, {{c2::execution environments}} (containerized, versioned Ansible runtimes) and {{c3::a curated content hub}} for approved roles and collections.",
    "image": "",
    "analogy": "",
-   "extra": "Automation Controller was formerly Ansible Tower; AWX is its upstream.",
+   "extra": "<b>Example:</b> Red Hat Ansible Automation Platform = Automation Controller (formerly Tower, AWX upstream) + Execution Environments + Automation Hub.",
    "source": "Ansible",
    "reverse": false
   },
@@ -2616,15 +2616,15 @@
    "type": "basic",
    "deck": "Platform Engineering::10 Developer Portals & Workload Specs",
    "tags": [
-    "PlatformEngineering::IDP::RHDH"
+    "PlatformEngineering::IDP::Backstage"
    ],
-   "front": "What is Red Hat Developer Hub (RHDH), and why pick it over vanilla Backstage?",
-   "back": "Red Hat's supported Backstage distribution: enterprise RBAC, audit logging, a curated plugin catalog and commercial support out of the box instead of building that hardening yourself.",
+   "front": "Why do organisations adopt a packaged Backstage distribution instead of building on vanilla Backstage?",
+   "back": "Vanilla Backstage is a framework: RBAC, audit logging, plugin curation, upgrades and support are do-it-yourself. A distribution ships that hardening pre-built, at the cost of less control over the stack.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "",
-   "source": "IDP · RHDH",
+   "extra": "<b>Examples:</b> Red Hat Developer Hub, Roadie, Spotify Portal.",
+   "source": "IDP · Backstage",
    "reverse": false
   },
   {
@@ -2632,15 +2632,15 @@
    "type": "basic",
    "deck": "Platform Engineering::10 Developer Portals & Workload Specs",
    "tags": [
-    "PlatformEngineering::IDP::RHDH"
+    "PlatformEngineering::IDP::Backstage"
    ],
-   "front": "How does RHDH load plugins differently from a classic Backstage build?",
-   "back": "As <b>dynamic plugins</b> enabled at startup via <code>dynamic-plugins.yaml</code>, instead of being compiled into the app — no rebuild to add a plugin.",
+   "front": "Backstage plugins: statically compiled vs <b>dynamic</b> loading?",
+   "back": "<b>Static:</b> plugins are compiled into the app bundle; adding one means rebuild and redeploy. <b>Dynamic:</b> plugins are loaded at startup from configuration, so a plugin can be enabled without rebuilding the app.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "",
-   "source": "IDP · RHDH",
+   "extra": "<b>Example:</b> Red Hat Developer Hub enables dynamic plugins via <code>dynamic-plugins.yaml</code>.",
+   "source": "IDP · Backstage",
    "reverse": false
   },
   {
@@ -2708,22 +2708,6 @@
    "reverse": false
   },
   {
-   "guid": "dvy[E]Uz-l",
-   "type": "basic",
-   "deck": "Platform Engineering::10 Developer Portals & Workload Specs",
-   "tags": [
-    "PlatformEngineering::IDP::Score"
-   ],
-   "front": "Which commercial product is Score built to feed?",
-   "back": "Humanitec's <b>Platform Orchestrator</b> (Humanitec created Score as its open workload spec).",
-   "text": "",
-   "image": "",
-   "analogy": "",
-   "extra": "",
-   "source": "IDP · Score/Humanitec",
-   "reverse": false
-  },
-  {
    "guid": "F3NvZfD~^-",
    "type": "cloze",
    "deck": "Platform Engineering::10 Developer Portals & Workload Specs",
@@ -2732,10 +2716,10 @@
    ],
    "front": "",
    "back": "",
-   "text": "Humanitec Platform Orchestrator RMCD workflow: {{c1::Read}} the workload spec → {{c2::Match}} its dependencies to resource definitions → {{c3::Create}} the resources → {{c4::Deploy}} the workload.",
+   "text": "Platform orchestrator pattern: at deploy time it {{c1::reads}} the abstract workload spec → {{c2::matches}} each declared dependency to an environment-specific resource definition → {{c3::creates}} or updates those resources → {{c4::deploys}} the workload with the generated configuration.",
    "image": "",
    "analogy": "",
-   "extra": "",
+   "extra": "<b>Example:</b> Humanitec calls this RMCD (Read, Match, Create, Deploy); Score is the open workload spec it consumes.",
    "source": "IDP · Score/Humanitec",
    "reverse": false
   },
@@ -2746,12 +2730,12 @@
    "tags": [
     "PlatformEngineering::IDP::Score"
    ],
-   "front": "What is Dynamic Configuration Management (DCM) in the Humanitec model?",
-   "back": "Assembling a workload's environment-specific configuration on demand at deploy time, instead of maintaining static per-environment config files.",
+   "front": "What is dynamic configuration management, as opposed to static per-environment config files?",
+   "back": "A workload's environment-specific configuration (endpoints, credentials, resource bindings) is assembled on demand at deploy time from the workload spec plus environment rules, instead of being hand-maintained per environment.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "",
+   "extra": "<b>Example:</b> Humanitec markets this as \"DCM\"; it is what a platform orchestrator does between workload spec and deployment.",
    "source": "IDP · Score/Humanitec",
    "reverse": false
   },
@@ -2762,12 +2746,12 @@
    "tags": [
     "PlatformEngineering::IDP::Score"
    ],
-   "front": "How does the Humanitec Orchestrator relate to Backstage and Argo CD?",
-   "back": "It's a backend decoupled from the portal layer: it pairs with Backstage (or its own portal) and existing tools like Argo CD and Terraform instead of replacing them.",
+   "front": "Where does a platform orchestrator sit relative to the developer portal and the deployment tooling?",
+   "back": "As a backend layer between them: the portal (e.g. Backstage) is the interface, the orchestrator resolves workload specs into concrete resources and manifests, and existing tools (Argo CD, Terraform) still provision and deploy. It complements them rather than replacing them.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "",
+   "extra": "<b>Examples:</b> Humanitec Platform Orchestrator, Kratix.",
    "source": "IDP · Score/Humanitec",
    "reverse": false
   },
@@ -3288,15 +3272,15 @@
    "type": "basic",
    "deck": "Platform Engineering::12 Supply-Chain Security",
    "tags": [
-    "PlatformEngineering::SupplyChain::ACS"
+    "PlatformEngineering::SupplyChain::SecurityPlatform"
    ],
-   "front": "What is Red Hat Advanced Cluster Security (ACS)?",
-   "back": "Red Hat's Kubernetes security platform, based on open-source StackRox: vulnerability management, config/compliance checks, network segmentation visibility and runtime threat detection.",
+   "front": "Which capability areas does a Kubernetes security platform typically bundle?",
+   "back": "Vulnerability management (image/CVE scanning), configuration and compliance checks (CIS, Pod Security), network segmentation visibility, and runtime threat detection — one view across build, deploy and run.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "",
-   "source": "Supply chain · Red Hat ACS",
+   "extra": "<b>Examples:</b> StackRox (open source; basis of Red Hat Advanced Cluster Security), Sysdig, Wiz, Aqua.",
+   "source": "Supply chain · Security platforms",
    "reverse": false
   },
   {
@@ -3304,15 +3288,15 @@
    "type": "basic",
    "deck": "Platform Engineering::12 Supply-Chain Security",
    "tags": [
-    "PlatformEngineering::SupplyChain::ACS"
+    "PlatformEngineering::SupplyChain::SecurityPlatform"
    ],
-   "front": "How does ACS integrate with a CI/CD pipeline?",
-   "back": "<code>roxctl</code> (or a plugin step) scans images for vulnerabilities and policy violations and fails the build when policies are violated.",
+   "front": "How does an image scanner act as a CI/CD gate?",
+   "back": "A CLI or plugin step scans the freshly built image for vulnerabilities and policy violations and exits non-zero on a violation, failing the build before the image reaches the registry or cluster.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "",
-   "source": "Supply chain · Red Hat ACS",
+   "extra": "<b>Examples:</b> <code>trivy image --exit-code 1 --severity CRITICAL</code>, <code>grype --fail-on high</code>, <code>roxctl image check</code> (ACS).",
+   "source": "Supply chain · Security platforms",
    "reverse": false
   },
   {
@@ -3320,15 +3304,15 @@
    "type": "basic",
    "deck": "Platform Engineering::12 Supply-Chain Security",
    "tags": [
-    "PlatformEngineering::SupplyChain::ACS"
+    "PlatformEngineering::SupplyChain::SecurityPlatform"
    ],
-   "front": "What does the ACS network graph provide?",
-   "back": "A view of actually observed pod-to-pod traffic, used to generate or validate NetworkPolicies against real communication patterns.",
+   "front": "How does an observed-traffic network graph help with NetworkPolicies?",
+   "back": "It shows which pods actually talk to which (allowed and denied flows), so you can generate a least-privilege policy from real communication patterns and validate a proposed policy before enforcing it.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "",
-   "source": "Supply chain · Red Hat ACS",
+   "extra": "<b>Examples:</b> Cilium Hubble service map, Red Hat ACS network graph, Kubescape network-policy generation.",
+   "source": "Supply chain · Security platforms",
    "reverse": false
   },
   {
@@ -3336,15 +3320,15 @@
    "type": "basic",
    "deck": "Platform Engineering::12 Supply-Chain Security",
    "tags": [
-    "PlatformEngineering::SupplyChain::ACS"
+    "PlatformEngineering::SupplyChain::SecurityPlatform"
    ],
-   "front": "How does ACS's scope differ from Kyverno/Gatekeeper?",
-   "back": "ACS spans build-time scanning, deploy-time admission (its own webhook) and runtime detection; Kyverno/Gatekeeper focus on admission-time policy. They complement the SLSA→Cosign→verify chain.",
+   "front": "Full-lifecycle Kubernetes security platform vs admission policy engine (Kyverno/Gatekeeper): how do their scopes differ?",
+   "back": "A security platform spans build-time scanning, deploy-time admission (its own webhook) and runtime detection. Kyverno/Gatekeeper focus on admission-time policy. Both complement the SLSA→Cosign→verify chain.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "",
-   "source": "Supply chain · Red Hat ACS",
+   "extra": "<b>Example:</b> StackRox / Red Hat ACS.",
+   "source": "Supply chain · Security platforms",
    "reverse": false
   },
   {

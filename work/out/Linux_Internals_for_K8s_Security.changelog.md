@@ -32,3 +32,6 @@ Source: `Linux_OS_Internals_for_K8s_Security.json` (193 notes) → **185 notes**
 
 ## Analogies
 - 38 added (about 21% of cards): e.g. copy-on-write (shared textbook), OverlayFS (projector transparencies), CPU vs memory limit (speed governor vs wall), shared kernel (apartment foundation).
+
+## Product-content review
+Reviewed card by card: no product-catered cards found (tools present are open-source subjects or short examples in `extra`); nothing deleted, rewritten or scrubbed.

@@ -98,3 +98,6 @@ Output: **252 notes** in one deck `Kubernetes` with 12 concept subdecks (exam la
 
 ## New contrast / pitfall cards (split-derived ones are counted under splits)
 Labels vs annotations; taints vs node affinity; quota-without-requests rejection; liveness probe on a dependency (cascading restarts); default-deny egress breaks DNS; CrashLoopBackOff `logs --previous`; histogram vs summary; node_exporter vs kube-state-metrics vs metrics-server; init containers; Secrets are not encrypted by default (split).
+
+## Product-content review
+Reviewed card by card: no product-catered cards found (tools present are open-source subjects or short examples in `extra`); nothing deleted, rewritten or scrubbed.

@@ -29,3 +29,6 @@ Source: `cissp_cloud_k8s_grounded.json` (82 notes, avg about 650 chars plus a lo
 ## Analogies
 - 24 added (about 17%): e.g. due diligence vs due care (home inspection vs repair), Bell-LaPadula (spy), RPO/RTO (save point),
   SOC 2 Type I vs II (photo vs CCTV), SBOM (ingredients label).
+
+## Product-content review
+Reviewed card by card: no product-catered cards found (tools present are open-source subjects or short examples in `extra`); nothing deleted, rewritten or scrubbed.
