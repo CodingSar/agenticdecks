@@ -35,3 +35,7 @@ All "In practice" / "Example" fields kept as short `extra` (trimmed to the singl
 
 ## Analogies
 - 16 added (none in source)
+
+## Product-content review
+
+- Reviewed card by card: no product-catered content found; nothing changed. Tool names present (Kubernetes, Argo CD, Cilium, MetalLB, FreeRTOS, CMSIS, k6, Playwright …) are open-source subjects or short examples.

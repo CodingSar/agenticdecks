@@ -396,10 +396,10 @@
    ],
    "front": "",
    "back": "",
-   "text": "Arduino UNO R3: {{c1::ATmega328P}}, 8-bit AVR @ 16 MHz, {{c2::5 V}} logic, {{c3::10-bit}} ADC, 6 PWM pins, external interrupts only on pins {{c4::2 and 3}}.",
+   "text": "Before wiring to an MCU board, check four datasheet facts: {{c1::logic level}} (5 V or 3.3 V), {{c2::ADC resolution}} and reference, which pins offer {{c3::hardware PWM}}, and which pins support {{c4::external interrupts}}.",
    "image": "",
    "analogy": "",
-   "extra": "<b>Memory:</b> 32 KB flash · 2 KB SRAM · 1 KB EEPROM. PWM on 3, 5, 6, 9, 10, 11.",
+   "extra": "<b>Example, Arduino UNO R3:</b> ATmega328P, 8-bit AVR @ 16 MHz, 5 V logic, 10-bit ADC, PWM on 3, 5, 6, 9, 10, 11, external interrupts only on pins 2 and 3; 32 KB flash · 2 KB SRAM · 1 KB EEPROM.",
    "source": "Arduino Documentation",
    "reverse": false
   },
@@ -410,30 +410,13 @@
    "tags": [
     "robotics::02-microcontrollers-arduino"
    ],
-   "front": "Arduino UNO R4 vs R3: main upgrade, and the electrical caveat?",
-   "back": "32-bit Arm Cortex-M4 @ 48 MHz (Renesas RA4M1), more memory, 14-bit ADC, real DAC, CAN, still 5 V logic. Caveat: only ~<b>8 mA per I/O pin</b> (R3: 20 mA).",
+   "front": "Moving a design to a newer, faster MCU board: which electrical assumption most often breaks?",
+   "back": "<b>Per-pin drive current</b> (and sometimes logic level). A 32-bit board can source far less per I/O pin than an 8-bit one, so LEDs or transistor gates driven straight from a pin stop working. Re-check the datasheet.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>WiFi variant:</b> adds an ESP32-S3 radio and an LED matrix.",
+   "extra": "<b>Example:</b> Arduino UNO R4 (Cortex-M4, 14-bit ADC, DAC, CAN, still 5 V) allows only ~8 mA per pin vs ~20 mA on the UNO R3.",
    "source": "Arduino Documentation",
-   "reverse": false
-  },
-  {
-   "guid": "FTbF:NMW6A",
-   "type": "basic",
-   "deck": "Robotics: Arduino to Physical AI::02 Microcontrollers & Embedded Linux",
-   "tags": [
-    "robotics::02-microcontrollers-arduino",
-    "robotics::volatile"
-   ],
-   "front": "Arduino UNO Q (2025): what robot architecture does it put on one board?",
-   "back": "The <b>Linux computer + real-time MCU</b> pattern: a Qualcomm QRB2210 running Debian (vision, AI, Python) plus an STM32U585 running Arduino sketches on Zephyr (real-time I/O), linked by a bridge library.",
-   "text": "",
-   "image": "",
-   "analogy": "",
-   "extra": "",
-   "source": "Arduino UNO Q docs",
    "reverse": false
   },
   {
@@ -603,8 +586,8 @@
    "tags": [
     "robotics::02-microcontrollers-arduino"
    ],
-   "front": "ESP32: why is it popular in hobby robotics?",
-   "back": "Cheap dual-core 240 MHz with Wi-Fi + Bluetooth, many peripherals, FreeRTOS built in, programmable from the Arduino IDE.",
+   "front": "What does a <b>Wi-Fi/Bluetooth-capable MCU</b> (e.g. ESP32) add to a hobby robot?",
+   "back": "Wireless telemetry and tele-op on the MCU itself, a faster (often multi-core) CPU, many peripherals and a built-in RTOS, usually still programmable like a plain MCU from the Arduino IDE.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -619,8 +602,8 @@
    "tags": [
     "robotics::02-microcontrollers-arduino"
    ],
-   "front": "ESP32 pitfalls?",
-   "back": "<b>3.3 V</b> logic (not 5 V tolerant); non-linear ADC, and <b>ADC2 unusable with Wi-Fi on</b>; Wi-Fi current spikes (~500 mA); boot-strapping pins.",
+   "front": "Pitfalls of wireless SoC-class MCUs (e.g. ESP32)?",
+   "back": "<b>3.3 V</b> logic (not 5 V tolerant); ADC quality and availability suffer (ESP32: non-linear ADC, <b>ADC2 unusable with Wi-Fi on</b>); radio current spikes (~500 mA) that sag the supply; boot-strapping pins with reserved states.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1573,22 +1556,6 @@
    "reverse": false
   },
   {
-   "guid": "CyFdIhvSdo",
-   "type": "cloze",
-   "deck": "Robotics: Arduino to Physical AI::02 Microcontrollers & Embedded Linux",
-   "tags": [
-    "robotics::06-raspberry-pi-embedded-linux"
-   ],
-   "front": "",
-   "back": "",
-   "text": "Raspberry Pi 5: GPIO, USB and camera ports hang off the in-house {{c1::RP1}} I/O chip; a {{c2::PCIe 2.0 ×1}} connector adds NVMe or AI accelerators; it needs a {{c3::5 V / 5 A}} USB-C supply and active cooling.",
-   "image": "",
-   "analogy": "",
-   "extra": "<b>CPU:</b> 4× Cortex-A76 @ 2.4 GHz (≈2–3× Pi 4), up to 16 GB RAM.",
-   "source": "Raspberry Pi Documentation",
-   "reverse": false
-  },
-  {
    "guid": "z}/1xs19Kp",
    "type": "basic",
    "deck": "Robotics: Arduino to Physical AI::02 Microcontrollers & Embedded Linux",
@@ -1612,8 +1579,8 @@
     "robotics::06-raspberry-pi-embedded-linux",
     "robotics::volatile"
    ],
-   "front": "GPIO code from a Pi 4 fails on a Pi 5. Why, and what should you use?",
-   "back": "Pi 5 GPIO lives on the separate <b>RP1</b> chip, so register-poking libraries (RPi.GPIO, pigpio) break. Use the kernel character device: <b>libgpiod</b>, <b>lgpio</b>, or <b>gpiozero</b>.",
+   "front": "Register-poking GPIO code breaks on a new SBC revision. Why, and what should you use instead?",
+   "back": "The GPIO block moved (on the Raspberry Pi 5 to the separate <b>RP1</b> chip), so libraries that write hardware registers directly (RPi.GPIO, pigpio) break. Use the kernel GPIO character device via <b>libgpiod</b> (or wrappers such as lgpio, gpiozero), which is stable across boards.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1709,12 +1676,12 @@
     "robotics::06-raspberry-pi-embedded-linux",
     "robotics::volatile"
    ],
-   "front": "Current Raspberry Pi camera software stack?",
-   "back": "<b>libcamera</b>: <code>rpicam-apps</code> CLI and the <b>Picamera2</b> Python library (CSI-2 ribbon cameras). Legacy raspistill/picamera are gone.",
+   "front": "Two camera stacks on an embedded Linux board: how does each reach OpenCV?",
+   "back": "CSI ribbon cameras go through <b>libcamera</b> (on Raspberry Pi: <code>rpicam-apps</code> and the <b>Picamera2</b> library); USB webcams appear as <b>V4L2</b> devices that OpenCV's <code>VideoCapture</code> opens directly.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "USB webcams still appear as V4L2 devices for OpenCV's <code>VideoCapture</code>.",
+   "extra": "Board-specific legacy camera APIs (raspistill/picamera) are gone; old tutorials mislead.",
    "source": "Raspberry Pi Documentation",
    "reverse": false
   },
@@ -1726,8 +1693,8 @@
     "robotics::06-raspberry-pi-embedded-linux",
     "robotics::volatile"
    ],
-   "front": "Raspberry Pi AI HAT+: what can and can't it do?",
-   "back": "A Hailo accelerator (13 or 26 TOPS) on PCIe for real-time detection, segmentation and pose at a few watts. It runs compiled vision nets; it is <b>not a CUDA GPU</b> and won't run large VLAs.",
+   "front": "Edge NPU accelerator vs GPU: what can and can't a few-watt NPU (e.g. Hailo on a Pi HAT) do?",
+   "back": "It runs <b>compiled</b> vision nets (detection, segmentation, pose) in real time at a few watts. It is <b>not a general GPU</b>: no CUDA, limited operator support, and it won't run large VLAs or arbitrary PyTorch models.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1743,12 +1710,12 @@
     "robotics::06-raspberry-pi-embedded-linux",
     "robotics::volatile"
    ],
-   "front": "When do you step up from a Raspberry Pi to an NVIDIA Jetson?",
-   "back": "When you need an on-board <b>CUDA GPU</b>: deep-learning perception, GPU SLAM (Isaac ROS), or running learned policies.",
+   "front": "When does a robot need an on-board <b>GPU computer</b> (e.g. NVIDIA Jetson) instead of a plain SBC?",
+   "back": "When you need an on-board <b>GPU</b>: deep-learning perception, GPU-accelerated SLAM, or running learned policies on the robot.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Range (2025):</b> Orin Nano Super (~67 TOPS) → AGX Orin (275 TOPS) → AGX Thor (Blackwell, aimed at humanoid foundation models).",
+   "extra": "Trade-offs: higher cost, power and cooling; size the module by the TOPS and memory your models need, not by the top of the vendor's range.",
    "source": "NVIDIA Jetson",
    "reverse": false
   },
@@ -1814,22 +1781,6 @@
    "analogy": "",
    "extra": "",
    "source": "OpenCV docs",
-   "reverse": false
-  },
-  {
-   "guid": "PgC4I?]:i6",
-   "type": "basic",
-   "deck": "Robotics: Arduino to Physical AI::02 Microcontrollers & Embedded Linux",
-   "tags": [
-    "robotics::06-raspberry-pi-embedded-linux"
-   ],
-   "front": "Raspberry Pi Pico vs. Raspberry Pi?",
-   "back": "The Pico is a <b>microcontroller</b> board (RP2040 dual M0+ / RP2350 dual M33 or RISC-V), not a Linux computer.",
-   "text": "",
-   "image": "",
-   "analogy": "",
-   "extra": "",
-   "source": "Raspberry Pi Documentation",
    "reverse": false
   },
   {
@@ -3639,7 +3590,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>As of mid-2026:</b> Lyrical Luth (LTS to 2031), Jazzy (LTS to 2029, Ubuntu 24.04), Humble (LTS to 2027); Kilted non-LTS; Rolling = dev branch.",
+   "extra": "Odd-year releases are non-LTS (~1.5 years of support); <b>Rolling</b> is the development branch.",
    "source": "ROS 2 distributions list",
    "reverse": false
   },
@@ -3800,7 +3751,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "Gazebo Classic reached end-of-life in January 2025. MuJoCo GPU variants: MJX, MuJoCo Warp.",
+   "extra": "Gazebo Classic is end-of-life; use modern gz. MuJoCo GPU variants: MJX, MuJoCo Warp.",
    "source": "Gazebo · MuJoCo · Isaac Lab · Newton",
    "reverse": false
   },
@@ -3812,12 +3763,12 @@
     "robotics::11-ros-2-simulation",
     "robotics::volatile"
    ],
-   "front": "Isaac Sim/Lab and Newton: what are they for?",
-   "back": "<b>Isaac Sim/Lab:</b> GPU PhysX + photoreal rendering on OpenUSD; thousands of parallel envs for RL and synthetic data.<br><b>Newton:</b> open-source differentiable GPU physics on NVIDIA Warp, aimed at robot learning.",
+   "front": "GPU-parallel robot-learning simulators vs a classic ROS simulator: what distinguishes them?",
+   "back": "Physics (and often rendering) run on the GPU, so thousands of environments step in parallel for RL and synthetic data; some are differentiable. Classic simulators (Gazebo) favour ROS integration and full-system testing over throughput.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "",
+   "extra": "<b>Examples:</b> Isaac Sim/Lab (PhysX, photoreal OpenUSD rendering), Newton (open-source differentiable physics on Warp), MuJoCo MJX/Warp, Genesis.",
    "source": "Gazebo · MuJoCo · Isaac Lab · Newton",
    "reverse": false
   },
@@ -4359,12 +4310,12 @@
     "robotics::13-physical-ai-robot-foundation-models",
     "robotics::volatile"
    ],
-   "front": "Helix 02 (Figure, 2026): what is 'System 0'?",
-   "back": "A ~10M-parameter network at <b>1 kHz</b> mapping full-body state to joint commands: a learned whole-body controller for balance and contact, trained entirely in simulation to track human motion.",
+   "front": "Three-tier VLA hierarchy: what is a <b>'System 0'</b> layer?",
+   "back": "A small (~10M-parameter) network at ~<b>1 kHz</b> mapping full-body state to joint commands: a learned whole-body controller for balance and contact, typically trained in simulation to track reference motion.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "Pattern: a pixels-to-torque hierarchy (S2 reasoning → S1 at 200 Hz → S0 at 1 kHz), each layer at its natural time-scale.",
+   "extra": "Pattern: a pixels-to-torque hierarchy (S2 reasoning → S1 at ~200 Hz → S0 at 1 kHz), each layer at its natural time-scale. <b>Example:</b> Figure's Helix 02.",
    "source": "Figure AI, Helix 02 (Jan 2026)",
    "reverse": false
   },
@@ -4427,12 +4378,12 @@
     "robotics::13-physical-ai-robot-foundation-models",
     "robotics::volatile"
    ],
-   "front": "NVIDIA Isaac GR00T N-series: what is it?",
-   "back": "An <b>open</b> VLA family for humanoids: VLM 'System 2' + diffusion-transformer/flow 'System 1', cross-embodiment, trained on real tele-op, human video (latent actions) and synthetic data; post-trainable per robot.",
+   "front": "What training recipe do <b>open humanoid foundation policies</b> (e.g. NVIDIA GR00T N) follow?",
+   "back": "A VLM 'System 2' plus a diffusion-transformer/flow 'System 1', trained cross-embodiment on real tele-op, human video (latent actions) and synthetic data, then <b>post-trained per robot</b>.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "N1 released March 2025; later versions (N1.7, 2026) moved to a Cosmos-Reason VLM backbone.",
+   "extra": "",
    "source": "NVIDIA Isaac GR00T · GR00T N1 paper",
    "reverse": false
   },
@@ -4444,12 +4395,12 @@
     "robotics::13-physical-ai-robot-foundation-models",
     "robotics::volatile"
    ],
-   "front": "Gemini Robotics 1.5: what are the two models?",
-   "back": "<b>Gemini Robotics-ER 1.5:</b> embodied-reasoning VLM that plans, points and checks progress (orchestrator).<br><b>Gemini Robotics 1.5:</b> the VLA that executes each step.",
+   "front": "<b>Orchestrator–executor</b> split in robot foundation models: what does each model do?",
+   "back": "<b>Orchestrator:</b> an embodied-reasoning VLM that plans, points at targets and checks progress.<br><b>Executor:</b> the VLA that carries out each step.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "",
+   "extra": "<b>Example:</b> Gemini Robotics-ER 1.5 (orchestrator) + Gemini Robotics 1.5 (VLA).",
    "source": "Gemini Robotics Team 2025, Gemini Robotics 1.5",
    "reverse": false
   },
@@ -4461,12 +4412,12 @@
     "robotics::13-physical-ai-robot-foundation-models",
     "robotics::volatile"
    ],
-   "front": "Gemini Robotics 1.5: what are 'Motion Transfer' and 'thinking before acting'?",
+   "front": "What are <b>motion transfer</b> and <b>'thinking before acting'</b> in VLAs?",
    "back": "<b>Motion Transfer:</b> learning from multi-embodiment data so skills transfer across robots without robot-specific post-training.<br><b>Thinking before acting:</b> the VLA interleaves language reasoning with actions (embodied chain-of-thought).",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "",
+   "extra": "<b>Example:</b> both are headline features of Gemini Robotics 1.5.",
    "source": "Gemini Robotics Team 2025, Gemini Robotics 1.5",
    "reverse": false
   },

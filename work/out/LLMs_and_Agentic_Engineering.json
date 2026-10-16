@@ -271,7 +271,7 @@
    "text": "",
    "image": "",
    "analogy": "Hospital triage: each patient sees two relevant specialists, not every doctor in the building, yet the whole staff must still be on the payroll.",
-   "extra": "MoE is now mainstream (DeepSeek V3, Qwen3, Mistral variants).",
+   "extra": "Used by many current open-weights and frontier models.",
    "source": "Transformer Architecture",
    "reverse": false
   },
@@ -1210,12 +1210,12 @@
    "tags": [
     "llm::memory"
    ],
-   "front": "How does <b>Mem0</b> keep long-term memory consistent?",
+   "front": "How does an <b>extract-then-reconcile</b> memory pipeline keep long-term agent memory consistent?",
    "back": "Two stages: an LLM extracts key facts from new turns, then an update step issues <code>ADD</code>, <code>UPDATE</code>, <code>DELETE</code> or <code>NOOP</code> against existing memories.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "A graph variant (Mem0<sup>g</sup>) stores entity nodes and relationship edges.",
+   "extra": "<b>Example:</b> Mem0 works this way; its graph variant stores entity nodes and relationship edges.",
    "source": "Agent Memory",
    "reverse": false
   },
@@ -1258,12 +1258,12 @@
    "tags": [
     "llm::memory"
    ],
-   "front": "Downside of LLM-driven memory extraction (Mem0, Zep), and the alternative?",
-   "back": "Extra cost, probabilistic extraction errors, and errors that compound over time. Alternative: keep ground-truth episodic logs and derive views from them (e.g. MemMachine).",
+   "front": "Downside of <b>LLM-driven memory extraction</b>, and the alternative?",
+   "back": "Extra cost, probabilistic extraction errors, and errors that compound over time. Alternative: keep ground-truth episodic logs and derive views from them.",
    "text": "",
    "image": "",
    "analogy": "Event sourcing: keep the append-only log as the source of truth and rebuild projections, instead of mutating a summary in place.",
-   "extra": "",
+   "extra": "<b>Examples:</b> extraction-based: Mem0, Zep; log-first: MemMachine.",
    "source": "Agent Memory",
    "reverse": false
   },
@@ -1578,8 +1578,8 @@
    "tags": [
     "llm::harness"
    ],
-   "front": "Which transport replaced HTTP+SSE in <b>MCP</b>, and why does it matter for harnesses?",
-   "back": "<b>Streamable HTTP</b>: client→server via POST, optional server→client SSE stream. MCP servers can run as remote multi-client services, so the harness must handle their wiring and auth.",
+   "front": "What transport do <b>remote MCP servers</b> use, and why does it matter for harnesses?",
+   "back": "<b>Streamable HTTP</b> (successor to HTTP+SSE): client→server via POST, optional server→client SSE stream. MCP servers can run as remote multi-client services, so the harness must handle their wiring and auth.",
    "text": "",
    "image": "",
    "analogy": "",

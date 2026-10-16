@@ -51,3 +51,8 @@ Mock vs stub.
 The pesticide paradox no longer says bugs "adapt" (inaccurate). It now says the tests only probe the paths they were written for.
 
 **Analogies added: 20.**
+
+## Product-content review
+
+**Rewritten** (guid kept; product moved to a short example in `extra`)
+- "Why are hooks better than CLAUDE.md instructions for test discipline?" → "Why are hooks better than instruction-file guidance (CLAUDE.md / AGENTS.md) for test discipline?"

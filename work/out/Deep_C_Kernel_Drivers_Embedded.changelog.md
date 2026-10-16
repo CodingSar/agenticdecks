@@ -28,3 +28,7 @@ Source: `work/source/deep_c_kernel_drivers_embedded.json` (7 subdecks, average n
 ## Notes
 - Contrast cards: kmalloc vs vmalloc, spinlock vs mutex, barrier() vs mb(), atomic_t vs refcount_t, coherent vs streaming DMA, MMIO vs port I/O, PRIMASK vs BASEPRI, reentrant vs thread-safe, hosted vs freestanding, arm-none-eabi vs aarch64-linux-gnu.
 - Original tags and `source` labels kept. The deck was renamed to "Deep C: Kernel, Drivers, Embedded".
+
+## Product-content review
+
+- Reviewed card by card: no product-catered content found; nothing changed. Tool names present (Kubernetes, Argo CD, Cilium, MetalLB, FreeRTOS, CMSIS, k6, Playwright …) are open-source subjects or short examples.

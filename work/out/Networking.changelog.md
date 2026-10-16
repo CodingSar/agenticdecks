@@ -78,3 +78,7 @@ Subdecks: 01 Models & Layering · 02 Physical Layer & Media · 03 Data Link & Et
 - Kubernetes deck: the K8s Service datapath cards (kube-proxy iptables DNAT, hairpin, externalTrafficPolicy, ingress vs LB, preStop draining, CNI responsibilities, Cilium identity policy) are kept here as datapath mechanics. K62 (Service types) was folded into the externalTrafficPolicy card. Dedupe against Kubernetes if it covers the same mechanics.
 - Linux deck: network namespaces, the eBPF definition, the verifier, CO-RE/BTF and bpftool were deleted here because the Linux deck owns eBPF internals. The networking-facing eBPF cards (XDP/TC/socket hooks, XDP_DROP, maps-as-datapath-state, kube-proxy replacement, observability) stay.
 - Cloud/AZ-305: TLS/LB idle-timeout numbers (ALB/NLB) are mentioned only as examples.
+
+## Product-content review
+
+- Reviewed card by card: no product-catered content found; nothing changed. Tool names present (Kubernetes, Argo CD, Cilium, MetalLB, FreeRTOS, CMSIS, k6, Playwright …) are open-source subjects or short examples.

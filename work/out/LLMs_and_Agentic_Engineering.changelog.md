@@ -31,3 +31,13 @@
 - MQA/GQA/MLA comparison split into one card per variant.
 - Contrast cards: pass@k vs pass^k, guardrails vs evaluations, agent vs workflow, pre-inference vs JIT retrieval.
 - Dated statistics kept only as labelled data points in `extra` (Datadog 429s, SWE-bench scaffold spread), with the lasting principle in the answer.
+
+## Product-content review
+
+**Rewritten** (guid kept; product moved to a short example in `extra`)
+- "How does Mem0 keep long-term memory consistent?" → "How does an extract-then-reconcile memory pipeline keep long-term agent memory consistent?"
+- "Downside of LLM-driven memory extraction (Mem0, Zep), and the alternative?" → "Downside of LLM-driven memory extraction, and the alternative?"
+- "Which transport replaced HTTP+SSE in MCP, and why does it matter for harnesses?" → "What transport do remote MCP servers use, and why does it matter for harnesses?"
+
+**Scrubbed** (dated version lists / vendor lineups removed from `extra`, card otherwise unchanged)
+- "What does Mixture-of-Experts (MoE) do in an LLM?"
