@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400" font-family="Helvetica, Arial, sans-serif">
+<rect width="600" height="400" rx="14" fill="#fbfbf8"/>
+<text x="24" y="32" font-size="17" font-weight="700" fill="#1f2937">Prometheus histogram: cumulative le buckets</text>
+<!-- axis -->
+<line x1="60" y1="250" x2="560" y2="250" stroke="#1f2937" stroke-width="2"/>
+<line x1="60" y1="60" x2="60" y2="250" stroke="#1f2937" stroke-width="2"/>
+<text x="40" y="64" font-size="11" fill="#1f2937" text-anchor="end">count</text>
+<!-- bars (cumulative) heights: le 0.1 ->40, 0.3 ->150, 1 ->175, 5 -> 185, +Inf -> 190 -->
+<g stroke="#1f2937" stroke-width="1.2">
+<rect x="90" y="210" width="60" height="40" fill="#bfdbfe"/>
+<rect x="180" y="100" width="60" height="150" fill="#93c5fd"/>
+<rect x="270" y="75" width="60" height="175" fill="#60a5fa"/>
+<rect x="360" y="65" width="60" height="185" fill="#3b82f6"/>
+<rect x="450" y="60" width="60" height="190" fill="#1d4ed8"/>
+</g>
+<g font-size="12" fill="#1f2937" text-anchor="middle">
+<text x="120" y="270">le="0.1"</text><text x="120" y="204">40</text>
+<text x="210" y="270">le="0.3"</text><text x="210" y="94">150</text>
+<text x="300" y="270">le="1"</text><text x="300" y="69">175</text>
+<text x="390" y="270">le="5"</text><text x="390" y="59" fill="#fbfbf8">185</text>
+<text x="480" y="270">le="+Inf"</text>
+</g>
+<text x="390" y="80" font-size="12" fill="#ffffff" text-anchor="middle">185</text>
+<text x="480" y="80" font-size="11" fill="#ffffff" text-anchor="middle">190</text><text x="480" y="93" font-size="10" fill="#ffffff" text-anchor="middle">= _count</text>
+<!-- SLO threshold -->
+<line x1="240" y1="50" x2="240" y2="250" stroke="#dc2626" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="246" y="52" font-size="12" fill="#dc2626" font-weight="700">SLO threshold 300 ms = bucket edge</text>
+<rect x="242" y="122" width="212" height="38" rx="4" fill="#fbfbf8" opacity="0.92"/>
+<text x="246" y="136" font-size="12" fill="#dc2626">good = bucket{le="0.3"} = 150</text>
+<text x="246" y="152" font-size="12" fill="#dc2626">total = _count = 190 → SLI = 79%</text>
+<!-- notes -->
+<text x="60" y="305" font-size="12.5" fill="#1f2937">Each bucket counts observations ≤ its bound, so buckets are nested (cumulative).</text>
+<text x="60" y="325" font-size="12.5" fill="#1f2937">Sum buckets across instances freely; quantiles are interpolated inside a bucket,</text>
+<text x="60" y="345" font-size="12.5" fill="#1f2937">so a quantile is only exact at a bucket edge. Put an edge on your SLO threshold.</text>
+<text x="60" y="375" font-size="12" fill="#6b7280">Native (exponential) histograms: edges follow a fixed growth factor, no choice needed.</text>
+</svg>

@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400" font-family="Helvetica, Arial, sans-serif">
+<rect width="600" height="400" rx="14" fill="#fbfbf8"/>
+<text x="24" y="32" font-size="17" font-weight="700" fill="#1f2937">One trace = a tree of spans sharing a trace_id</text>
+<line x1="170" y1="60" x2="570" y2="60" stroke="#1f2937" stroke-width="1.5"/>
+<text x="170" y="52" font-size="11" fill="#1f2937">0 ms</text>
+<text x="570" y="52" font-size="11" fill="#1f2937" text-anchor="end">400 ms</text>
+<g font-size="12" fill="#1f2937">
+<text x="24" y="92">api-gateway</text>
+<rect x="170" y="76" width="400" height="22" rx="4" fill="#2563eb"/>
+<text x="180" y="91" fill="#fff" font-weight="700">GET /checkout  (SERVER, root span)</text>
+<text x="24" y="132">checkout-svc</text>
+<rect x="190" y="116" width="360" height="22" rx="4" fill="#3b82f6"/>
+<text x="200" y="131" fill="#fff">POST /orders  (SERVER)</text>
+<text x="24" y="172">↳ client call</text>
+<rect x="210" y="156" width="150" height="22" rx="4" fill="#60a5fa"/>
+<text x="218" y="171" fill="#1f2937">GET /inventory (CLIENT)</text>
+<text x="24" y="212">inventory-svc</text>
+<rect x="230" y="196" width="90" height="22" rx="4" fill="#93c5fd"/>
+<text x="238" y="211" fill="#1f2937">SERVER</text>
+<text x="368" y="211" fill="#6b7280" font-size="11">gap = network + queueing</text>
+<text x="24" y="252">↳ db client</text>
+<rect x="340" y="236" width="160" height="22" rx="4" fill="#dc2626"/>
+<text x="348" y="251" fill="#fff">SELECT … (ERROR)</text>
+<text x="24" y="292">payments (async)</text>
+<rect x="470" y="276" width="100" height="22" rx="4" fill="#d97706"/>
+<text x="478" y="291" fill="#fff">consume</text>
+<path d="M550 138 C 560 200, 520 230, 520 276" stroke="#d97706" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/>
+<text x="596" y="232" font-size="11" fill="#d97706" text-anchor="end">span link</text>
+</g>
+<line x1="170" y1="330" x2="570" y2="330" stroke="#dc2626" stroke-width="4"/>
+<text x="24" y="334" font-size="12" fill="#dc2626" font-weight="700">critical path</text>
+<text x="170" y="350" font-size="11" fill="#6b7280">the chain of spans whose durations add up to the root's latency</text>
+<text x="24" y="382" font-size="11.5" fill="#1f2937">Each span: name · trace_id · span_id · parent_span_id · start/end · attributes · events · status</text>
+</svg>

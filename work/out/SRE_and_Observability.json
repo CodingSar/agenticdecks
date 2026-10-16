@@ -1,0 +1,3407 @@
+{
+ "deck_name": "SRE & Observability",
+ "file": "SRE_and_Observability.apkg",
+ "description": "The reasoning behind <b>Site Reliability Engineering</b> (SLIs/SLOs, error budgets and burn rates, alerting philosophy, incident response, blameless postmortems, capacity and release) and <b>modern observability</b> (Prometheus metrics model, structured events, distributed tracing, OpenTelemetry, Kubernetes platform signals). For a cloud/Kubernetes platform architect.",
+ "notes": [
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::01 SRE Principles",
+   "tags": [
+    "sre::principles"
+   ],
+   "front": "What is <b>Site Reliability Engineering</b>, in Ben Treynor's one-line definition?",
+   "back": "\"What happens when you ask a software engineer to design an operations team\": running production with engineering, not with headcount.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Consequence:</b> SREs are hired as engineers, write code, and are measured on reliability <i>and</i> on how little manual work the service needs.",
+   "source": "SRE Book · Ch. 1",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::01 SRE Principles",
+   "tags": [
+    "sre::principles"
+   ],
+   "front": "<b>SRE vs traditional ops</b>: what is the structural difference?",
+   "back": "Ops scales people with load and handles failure by hand; SRE caps manual work, automates it away, and treats reliability as a software problem.",
+   "text": "",
+   "image": "",
+   "analogy": "Ops is bailing water faster as the boat grows; SRE is redesigning the hull so it leaks less.",
+   "extra": "",
+   "source": "SRE Book · Ch. 1",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::01 SRE Principles",
+   "tags": [
+    "sre::principles"
+   ],
+   "front": "Why does the classic dev/ops split produce <b>conflict</b> rather than cooperation?",
+   "back": "Devs are rewarded for velocity, ops for stability. Opposed incentives make each side build walls: launch gates, change freezes, slow reviews.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>SRE's fix:</b> replace the political negotiation with a shared, objective number: the error budget.",
+   "source": "SRE Book · Ch. 1",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::01 SRE Principles",
+   "tags": [
+    "sre::principles"
+   ],
+   "front": "<b>Embracing risk</b>: why does SRE refuse to target 100% reliability?",
+   "back": "Past some point users can't tell (their phone, Wi-Fi and ISP fail more often), while each extra nine costs roughly 10× more. Spend that on features.",
+   "text": "",
+   "image": "",
+   "analogy": "A bridge rated for 100× its heaviest truck isn't safer in practice; it is just expensive.",
+   "extra": "",
+   "source": "SRE Book · Ch. 3",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "SRE & Observability::01 SRE Principles",
+   "tags": [
+    "sre::toil"
+   ],
+   "front": "",
+   "back": "",
+   "text": "SRE defines <b>toil</b> as work that is {{c1::manual}}, {{c2::repetitive}}, {{c3::automatable}}, {{c4::tactical / interrupt-driven}}, {{c5::without enduring value}} and {{c6::scaling linearly with service growth}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Test:</b> if the service doubled in size, would this work double too? Then it's toil.",
+   "source": "SRE Book · Ch. 5",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::01 SRE Principles",
+   "tags": [
+    "sre::toil"
+   ],
+   "front": "Why does Google cap toil at <b>50%</b> of an SRE team's time?",
+   "back": "To guarantee at least half the time goes into engineering that reduces future toil. Above 50% the team drifts into being a plain ops team.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Measured:</b> teams track toil in surveys and on-call load; exceeding the cap is escalated, not absorbed.",
+   "source": "SRE Book · Ch. 5",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::01 SRE Principles",
+   "tags": [
+    "sre::toil"
+   ],
+   "front": "What does <b>not</b> count as toil, even though it isn't feature work?",
+   "back": "Overhead (meetings, reviews, HR paperwork) and real engineering such as designing automation. Toil is specifically the hands-on work of running the service.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Book · Ch. 5",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::01 SRE Principles",
+   "tags": [
+    "sre::toil"
+   ],
+   "front": "Beyond lost hours, why is toil <b>harmful</b> to an SRE organisation?",
+   "back": "It stalls careers, burns people out, sets the precedent that devs can offload operations, and slows the service's own progress.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Book · Ch. 5",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::01 SRE Principles",
+   "tags": [
+    "sre::toil",
+    "sre::automation"
+   ],
+   "front": "In the SRE view, when should a <b>runbook step</b> be turned into code?",
+   "back": "As soon as it is written down precisely enough for a human to follow mechanically: at that point it is specified well enough to automate.",
+   "text": "",
+   "image": "",
+   "analogy": "A recipe followed by rote is a program waiting for a computer.",
+   "extra": "",
+   "source": "SRE Book · Ch. 7",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "SRE & Observability::01 SRE Principles",
+   "tags": [
+    "sre::release"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Google's release engineering rests on: a {{c1::self-service}} model (teams release without a release engineer), {{c2::high velocity}} (small frequent releases), {{c3::hermetic}} builds and {{c4::enforcement of policies}} via tooling.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Book · Ch. 8",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::01 SRE Principles",
+   "tags": [
+    "sre::release"
+   ],
+   "front": "Why does SRE insist on <b>hermetic builds</b>?",
+   "back": "The build depends only on pinned tool and library versions, not on the machine's state, so any old release can be rebuilt to patch it.",
+   "text": "",
+   "image": "",
+   "analogy": "A hermetically sealed jar: what's inside is the same whoever opens it, wherever, whenever.",
+   "extra": "",
+   "source": "SRE Book · Ch. 8",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::01 SRE Principles",
+   "tags": [
+    "sre::simplicity"
+   ],
+   "front": "Why does SRE want production software to be <b>\"boring\"</b>?",
+   "back": "Surprise is the enemy of reliability. Essential complexity is accepted; accidental complexity (clever abstractions, unused flags) is pushed back.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Pitfall:</b> \"it's stable because nobody changes it\" is not boring, it's fragile. Stability must survive change.",
+   "source": "SRE Book · Ch. 9",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::01 SRE Principles",
+   "tags": [
+    "sre::simplicity"
+   ],
+   "front": "Why does SRE treat <b>deleted code</b> (\"negative lines\") as a reliability win?",
+   "back": "Every line is a liability: a place for bugs and a cost to understand. Dead code and unused flags still break, confuse and need maintenance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Book · Ch. 9",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::01 SRE Principles",
+   "tags": [
+    "sre::principles"
+   ],
+   "front": "What is a <b>Production Readiness Review</b> (PRR), and what is it for?",
+   "back": "The gate before SRE takes on-call for a service: design, monitoring, capacity, dependencies and release process are reviewed and fixed first.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Also:</b> the main way the \"wisdom of production\" flows back into design; the SRE Workbook recommends involving SRE far earlier than the PRR.",
+   "source": "SRE Book · Ch. 32",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::01 SRE Principles",
+   "tags": [
+    "sre::principles"
+   ],
+   "front": "What does it mean for SRE to <b>\"hand back the pager\"</b>, and why is that threat useful?",
+   "back": "If a service exceeds its agreed ops load or ignores its error-budget policy, on-call duty returns to the developers. It keeps the incentives honest.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Book · Ch. 32",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::01 SRE Principles",
+   "tags": [
+    "sre::principles"
+   ],
+   "front": "<b>SRE vs DevOps</b>: how do they relate?",
+   "back": "DevOps is a philosophy (break silos, automate, measure, accept failure). SRE is one concrete implementation with specific practices: SLOs, error budgets, toil caps.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Google's phrasing: <code>class SRE implements interface DevOps</code>.",
+   "source": "SRE Workbook · Ch. 1",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::02 SLIs, SLOs & SLAs",
+   "tags": [
+    "sre::slo"
+   ],
+   "front": "What is a <b>Service Level Indicator</b> (SLI)?",
+   "back": "A quantitative measure of one aspect of the service as users experience it, usually a ratio: good events ÷ valid events.",
+   "text": "",
+   "image": "",
+   "analogy": "The speedometer reading, as opposed to the speed limit (SLO) and the fine (SLA).",
+   "extra": "<b>Examples:</b> fraction of requests served without 5xx; fraction of requests faster than 300 ms; fraction of data fresher than 10 min.",
+   "source": "SRE Book · Ch. 4",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::02 SLIs, SLOs & SLAs",
+   "tags": [
+    "sre::slo"
+   ],
+   "front": "What is a <b>Service Level Objective</b> (SLO)?",
+   "back": "A target for an SLI over a window, e.g. \"99.9% of valid requests succeed in under 300 ms over 30 days\".",
+   "text": "",
+   "image": "<img src=\"sre_sli_slo_sla.svg\">",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Book · Ch. 4",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::02 SLIs, SLOs & SLAs",
+   "tags": [
+    "sre::slo"
+   ],
+   "front": "What is a <b>Service Level Agreement</b> (SLA)?",
+   "back": "A contract with customers that attaches consequences (credits, penalties) to missing stated service levels.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Rule of thumb:</b> no consequence, no SLA; it's just an SLO you published.",
+   "source": "SRE Book · Ch. 4",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::02 SLIs, SLOs & SLAs",
+   "tags": [
+    "sre::slo"
+   ],
+   "front": "<b>SLO vs SLA</b>: how do you tell them apart?",
+   "back": "An SLA has external consequences and is negotiated with customers; an SLO is the internal engineering target. The SLO is normally stricter.",
+   "text": "",
+   "image": "",
+   "analogy": "SLO is the speed you drive at; SLA is the limit the camera fines you for.",
+   "extra": "",
+   "source": "SRE Book · Ch. 4",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::02 SLIs, SLOs & SLAs",
+   "tags": [
+    "sre::slo"
+   ],
+   "front": "Why set the internal <b>SLO tighter than the SLA</b>?",
+   "back": "The gap is your reaction time: missing the SLO triggers engineering action before the contract (and money) is breached.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Book · Ch. 4",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::02 SLIs, SLOs & SLAs",
+   "tags": [
+    "sre::slo"
+   ],
+   "front": "Why express SLIs as a <b>ratio of good to valid events</b> rather than raw numbers or quantiles?",
+   "back": "A 0–100% scale works for every SLI, turns directly into an error budget, and lets you combine SLIs across journeys with the same machinery.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Workbook · Ch. 2",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::02 SLIs, SLOs & SLAs",
+   "tags": [
+    "sre::slo"
+   ],
+   "front": "In an SLI, why distinguish <b>valid</b> events from all events?",
+   "back": "To exclude what you cannot be responsible for, e.g. malformed requests or client 4xx errors. Otherwise a buggy client burns your budget.",
+   "text": "",
+   "image": "",
+   "analogy": "A pizzeria's delivery time shouldn't count orders placed with a wrong address.",
+   "extra": "<b>Pitfall:</b> exclude too much and the SLI stops describing user experience; document the validity rule.",
+   "source": "SRE Workbook · Ch. 2",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::02 SLIs, SLOs & SLAs",
+   "tags": [
+    "sre::slo"
+   ],
+   "front": "How should you <b>choose which SLIs</b> to define?",
+   "back": "Start from user journeys (\"browse\", \"checkout\") and ask what the user would notice. Measure that, not CPU or queue depth.",
+   "text": "",
+   "image": "",
+   "analogy": "A restaurant's SLI is \"meals served hot within 20 minutes\", not \"oven temperature\".",
+   "extra": "",
+   "source": "SRE Workbook · Ch. 2",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "SRE & Observability::02 SLIs, SLOs & SLAs",
+   "tags": [
+    "sre::slo"
+   ],
+   "front": "",
+   "back": "",
+   "text": "The SLI menu by service type: request-driven services use {{c1::availability}} and {{c2::latency}} (and quality); pipelines use {{c3::freshness}}, {{c4::correctness}} and coverage; storage uses {{c5::durability}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Workbook · Ch. 2",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::02 SLIs, SLOs & SLAs",
+   "tags": [
+    "sre::slo"
+   ],
+   "front": "Why define a <b>latency SLI</b> as \"share of requests faster than X\" rather than \"p99 latency ≤ X\"?",
+   "back": "The ratio form plugs into error budgets and burn rates; a quantile is not a ratio of good events and behaves badly at low traffic.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Equivalent:</b> \"99% of requests under 300 ms\" is the same promise as \"p99 ≤ 300 ms\", but it's countable per request.",
+   "source": "SRE Workbook · Ch. 2",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::02 SLIs, SLOs & SLAs",
+   "tags": [
+    "sre::slo"
+   ],
+   "front": "Why can't you <b>average percentiles</b> across instances or time windows?",
+   "back": "A percentile is a property of the whole distribution; the mean of per-instance p99s is not the fleet p99. Aggregate the histograms, then take the quantile.",
+   "text": "",
+   "image": "",
+   "analogy": "Averaging each classroom's tallest pupil doesn't give the school's tallest pupil.",
+   "extra": "",
+   "source": "SLO practice",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::02 SLIs, SLOs & SLAs",
+   "tags": [
+    "sre::slo"
+   ],
+   "front": "<b>Request-based vs window-based SLO</b>: what's the difference?",
+   "back": "Request-based: good requests ÷ all requests over the window. Window-based: share of short time windows (e.g. 1-minute) that met the criterion.",
+   "text": "",
+   "image": "",
+   "analogy": "Grading a shop by customers served happily (request-based) versus by minutes the door was open (window-based).",
+   "extra": "",
+   "source": "SRE Workbook · Ch. 2",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::02 SLIs, SLOs & SLAs",
+   "tags": [
+    "sre::slo"
+   ],
+   "front": "What is the practical consequence of a <b>request-based</b> SLO during traffic peaks?",
+   "back": "Errors at peak hit more requests and burn more budget; the same outage at 3 a.m. costs little. Budget tracks user harm, not clock time.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Window-based</b> SLOs weigh every minute equally, which suits 'it must always be up' systems but ignores how many users were affected.",
+   "source": "SRE Workbook · Ch. 2",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "SRE & Observability::02 SLIs, SLOs & SLAs",
+   "tags": [
+    "sre::slo"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Allowed downtime per year: 99% ≈ {{c1::3.65 days}}; 99.9% ≈ {{c2::8.8 hours}}; 99.99% ≈ {{c3::53 minutes}}; 99.999% ≈ {{c4::5.3 minutes}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Per 30 days:</b> 99.9% ≈ 43 min, 99.99% ≈ 4.3 min. Each extra nine divides allowed downtime by 10.",
+   "source": "SRE Book · Ch. 4",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::02 SLIs, SLOs & SLAs",
+   "tags": [
+    "sre::slo"
+   ],
+   "front": "In what sense is an SLO a <b>budget for change</b>?",
+   "back": "100% − SLO is the unreliability you may spend. Risky releases, experiments and migrations are legitimate ways to spend it, as long as it lasts.",
+   "text": "",
+   "image": "",
+   "analogy": "A monthly allowance: spend it on something, don't hoard it, don't overdraw.",
+   "extra": "",
+   "source": "SRE Book · Ch. 3",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::02 SLIs, SLOs & SLAs",
+   "tags": [
+    "sre::slo"
+   ],
+   "front": "Why is <b>consistently exceeding</b> your SLO by a wide margin also a problem?",
+   "back": "Users come to depend on the unofficial level, and you have been too conservative with change. Either tighten the SLO or spend the budget.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Google's trick:</b> Chubby injects planned outages so clients don't assume it never fails.",
+   "source": "SRE Book · Ch. 4",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::02 SLIs, SLOs & SLAs",
+   "tags": [
+    "sre::slo"
+   ],
+   "front": "How does a <b>serial critical dependency</b> bound your achievable SLO?",
+   "back": "You can't be more available than a dependency you need for every request. A 99.9% dependency caps you below 99.9% unless you add redundancy or a fallback.",
+   "text": "",
+   "image": "",
+   "analogy": "A chain is no stronger than its weakest link; two links in series are weaker than either.",
+   "extra": "",
+   "source": "SRE Workbook · Ch. 2",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::02 SLIs, SLOs & SLAs",
+   "tags": [
+    "sre::slo"
+   ],
+   "front": "Why measure an availability SLI at the <b>load balancer</b> rather than inside the application?",
+   "back": "The LB sees requests the app never received (crashes, overload, timeouts). App-side metrics make a dead backend look perfectly healthy.",
+   "text": "",
+   "image": "",
+   "analogy": "Ask the receptionist how many callers got through, not the staff who answered.",
+   "extra": "<b>Closer still:</b> client-side telemetry (RUM) also sees DNS, CDN and network failures, at the cost of noise.",
+   "source": "SRE Workbook · Ch. 2",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::02 SLIs, SLOs & SLAs",
+   "tags": [
+    "sre::slo"
+   ],
+   "front": "<b>Achievable vs aspirational SLO</b>: where should a new SLO start?",
+   "back": "Start from what the service actually achieves today (achievable), publish that, then move stepwise toward the level users need (aspirational).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Workbook · Ch. 2",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::02 SLIs, SLOs & SLAs",
+   "tags": [
+    "sre::slo"
+   ],
+   "front": "Why must SLOs be <b>reviewed periodically</b>?",
+   "back": "User expectations, traffic and architecture change. An SLO that never alerts or never passes has stopped describing reality and should be re-set.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Workbook · Ch. 2",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::03 Error Budgets & Burn Rate",
+   "tags": [
+    "sre::error_budget"
+   ],
+   "front": "What is an <b>error budget</b>?",
+   "back": "1 − SLO: the amount of unreliability the service may accumulate over the SLO window before the objective is missed.",
+   "text": "",
+   "image": "",
+   "analogy": "A fixed monthly allowance of failure; every bad request is a coin spent.",
+   "extra": "",
+   "source": "SRE Book · Ch. 3",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::03 Error Budgets & Burn Rate",
+   "tags": [
+    "sre::error_budget"
+   ],
+   "front": "SLO 99.9% over 30 days, 10 million valid requests. How big is the <b>error budget</b>?",
+   "back": "0.1% of 10 M = <b>10,000 failed requests</b> for the whole window.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> a 20-minute full outage at 10 req/s burns 12,000, so one bad release can spend more than a month's budget.",
+   "source": "SRE Workbook · Ch. 5",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::03 Error Budgets & Burn Rate",
+   "tags": [
+    "sre::burn_rate"
+   ],
+   "front": "What is <b>burn rate</b>?",
+   "back": "How fast you are consuming error budget relative to the rate that would exhaust it exactly at the end of the window. Burn rate 1 = on track to use 100%.",
+   "text": "",
+   "image": "<img src=\"sre_burn_rate.svg\">",
+   "analogy": "Fuel burn: at rate 1 the tank empties as you reach the destination; at rate 2 you're stranded halfway.",
+   "extra": "",
+   "source": "SRE Workbook · Ch. 5",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::03 Error Budgets & Burn Rate",
+   "tags": [
+    "sre::burn_rate"
+   ],
+   "front": "How do you <b>compute burn rate</b> from an observed error ratio?",
+   "back": "\\( \\text{burn rate} = \\dfrac{\\text{observed error ratio}}{1-\\text{SLO}} \\). SLO 99.9% and 1% errors → 0.01 / 0.001 = <b>10</b>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Workbook · Ch. 5",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::03 Error Budgets & Burn Rate",
+   "tags": [
+    "sre::burn_rate"
+   ],
+   "front": "At burn rate <b>14.4</b> on a 30-day window, how much budget disappears in one hour?",
+   "back": "2%. One hour is 1/720 of the window; 14.4 × 1/720 = 0.02. Sustained, the whole budget is gone in about two days.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Formula:</b> time to exhaustion = window ÷ burn rate = 720 h ÷ 14.4 ≈ 50 h.",
+   "source": "SRE Workbook · Ch. 5",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::03 Error Budgets & Burn Rate",
+   "tags": [
+    "sre::burn_rate",
+    "sre::alerting"
+   ],
+   "front": "Why alert on <b>burn rate</b> rather than \"error ratio above the SLO threshold\"?",
+   "back": "A threshold over a short window fires on noise; over a long window it fires too late. Burn rate expresses how urgently the budget is being lost.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Workbook · Ch. 5",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::03 Error Budgets & Burn Rate",
+   "tags": [
+    "sre::burn_rate",
+    "sre::alerting"
+   ],
+   "front": "In <b>multi-window</b> burn-rate alerting, why combine a long window with a short one?",
+   "back": "The long window (e.g. 1 h) proves the burn is significant; the short window (e.g. 5 min) proves it is still happening, so the alert resets quickly once fixed.",
+   "text": "",
+   "image": "",
+   "analogy": "A fire alarm that needs both a hot room (1 h) and smoke right now (5 min) before it rings, and goes quiet once the smoke clears.",
+   "extra": "<b>Rule of thumb:</b> short window ≈ 1/12 of the long window.",
+   "source": "SRE Workbook · Ch. 5",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::03 Error Budgets & Burn Rate",
+   "tags": [
+    "sre::burn_rate",
+    "sre::alerting"
+   ],
+   "front": "Why use <b>multiple burn rates</b> (fast and slow) rather than one?",
+   "back": "A fast burn (outage) must page within minutes; a slow leak (1× over days) would never trip a fast alert but still exhausts the budget. Slow burns become tickets.",
+   "text": "",
+   "image": "",
+   "analogy": "A burst pipe and a dripping tap both empty the tank; you need a different alarm for each.",
+   "extra": "",
+   "source": "SRE Workbook · Ch. 5",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "SRE & Observability::03 Error Budgets & Burn Rate",
+   "tags": [
+    "sre::burn_rate"
+   ],
+   "front": "",
+   "back": "",
+   "text": "SRE Workbook burn-rate tiers: 2% of budget in 1 h = burn rate {{c1::14.4}} (page); 5% in 6 h = burn rate {{c2::6}} (page); 10% in 3 days = burn rate {{c3::1}} (ticket).",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Derivation:</b> rate = budget fraction × (window ÷ alert window), e.g. 0.02 × 720 h / 1 h = 14.4.",
+   "source": "SRE Workbook · Ch. 5",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::03 Error Budgets & Burn Rate",
+   "tags": [
+    "sre::burn_rate"
+   ],
+   "front": "Why does burn-rate alerting break down for <b>low-traffic</b> services, and what helps?",
+   "back": "With few requests one error is a huge ratio, so alerts flap. Fixes: longer windows, synthetic traffic to raise the denominator, or a looser SLO.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Workbook · Ch. 5",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::03 Error Budgets & Burn Rate",
+   "tags": [
+    "sre::error_budget"
+   ],
+   "front": "What is an <b>error budget policy</b>?",
+   "back": "A document agreed by dev, SRE and product that says what happens when the budget is exhausted or nearly so, and who decides.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Typical clauses:</b> feature freeze until budget recovers; reliability work prioritised; postmortem required; escalation path when teams disagree.",
+   "source": "SRE Workbook · Ch. 2",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::03 Error Budgets & Burn Rate",
+   "tags": [
+    "sre::error_budget"
+   ],
+   "front": "Why must the error budget policy be agreed <b>in advance</b> and signed off by leadership?",
+   "back": "In the moment, shipping pressure wins every argument. A pre-commitment with executive backing makes the trade-off enforceable when it hurts.",
+   "text": "",
+   "image": "",
+   "analogy": "Ulysses tied to the mast: decide the rule before you hear the sirens.",
+   "extra": "",
+   "source": "SRE Workbook · Ch. 2",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::03 Error Budgets & Burn Rate",
+   "tags": [
+    "sre::error_budget"
+   ],
+   "front": "When the budget is <b>exhausted</b> and a release freeze applies, what may still ship?",
+   "back": "Changes that improve reliability, security fixes and rollbacks. Feature launches wait until the rolling window recovers budget.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Workbook · Ch. 2",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::03 Error Budgets & Burn Rate",
+   "tags": [
+    "sre::error_budget"
+   ],
+   "front": "<b>Error budget vs incident count</b>: why is the budget the better reliability measure?",
+   "back": "The budget weighs each incident by user harm (bad events); a count treats a one-minute blip and a three-hour outage the same.",
+   "text": "",
+   "image": "",
+   "analogy": "Counting car accidents says nothing about whether they were fender-benders or write-offs.",
+   "extra": "",
+   "source": "SRE Workbook · Ch. 2",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::03 Error Budgets & Burn Rate",
+   "tags": [
+    "sre::error_budget"
+   ],
+   "front": "What does <b>unspent budget</b> near the end of a window tell you?",
+   "back": "You're taking too little risk. Use it: faster rollouts, chaos experiments, a risky migration. Budget doesn't carry over.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Workbook · Ch. 2",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::03 Error Budgets & Burn Rate",
+   "tags": [
+    "sre::error_budget"
+   ],
+   "front": "<b>Rolling vs calendar</b> SLO window: what's the trade-off?",
+   "back": "Rolling (last 30 days) keeps recent incidents visible and recovers smoothly. Calendar (this month) aligns with business reporting but resets the budget abruptly.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Workbook · Ch. 2",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "SRE & Observability::04 Monitoring & Alerting Philosophy",
+   "tags": [
+    "sre::monitoring"
+   ],
+   "front": "",
+   "back": "",
+   "text": "The <b>four golden signals</b> of monitoring: {{c1::latency}}, {{c2::traffic}}, {{c3::errors}} and {{c4::saturation}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Minimum viable monitoring:</b> if you can measure only four things about a user-facing system, measure these.",
+   "source": "SRE Book · Ch. 6",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::04 Monitoring & Alerting Philosophy",
+   "tags": [
+    "sre::monitoring"
+   ],
+   "front": "Why is <b>saturation</b> the forward-looking golden signal?",
+   "back": "It measures how full the constrained resource is (queue depth, memory, connections). It predicts failure before errors or latency show it.",
+   "text": "",
+   "image": "",
+   "analogy": "Water level in a dam: nothing is wrong yet, but you can see the overflow coming.",
+   "extra": "",
+   "source": "SRE Book · Ch. 6",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::04 Monitoring & Alerting Philosophy",
+   "tags": [
+    "sre::monitoring"
+   ],
+   "front": "Why track the <b>latency of failed requests</b> separately from successful ones?",
+   "back": "Fast failures (immediate 500s) pull the average down and hide slowness; slow failures are the worst case: the user waited <i>and</i> got nothing.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Book · Ch. 6",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::04 Monitoring & Alerting Philosophy",
+   "tags": [
+    "sre::monitoring"
+   ],
+   "front": "<b>Golden signals vs RED</b>: what does RED leave out, and why?",
+   "back": "RED (Rate, Errors, Duration) drops saturation. It's a request-centric view of a service; saturation belongs to resources, which USE covers.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Monitoring methods",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::04 Monitoring & Alerting Philosophy",
+   "tags": [
+    "sre::monitoring"
+   ],
+   "front": "In the <b>USE method</b>, utilisation vs saturation?",
+   "back": "Utilisation: fraction of time the resource was busy. Saturation: extra work it couldn't serve, queued or waiting. A resource can be 100% utilised with zero saturation.",
+   "text": "",
+   "image": "",
+   "analogy": "A checkout till: utilisation is how often the cashier is busy; saturation is the length of the queue.",
+   "extra": "",
+   "source": "Monitoring methods",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::04 Monitoring & Alerting Philosophy",
+   "tags": [
+    "sre::alerting"
+   ],
+   "front": "<b>Symptom-based vs cause-based</b> alerting: which should page, and why?",
+   "back": "Page on symptoms users feel (SLI dropping). Causes are many and change over time; one cause can trigger a flood, and a cause with no symptom isn't urgent.",
+   "text": "",
+   "image": "<img src=\"sre_symptom_vs_cause.svg\">",
+   "analogy": "",
+   "extra": "<b>Example:</b> \"disk 90% full\" is a cause → ticket. \"Error ratio burning budget at 14×\" is a symptom → page.",
+   "source": "SRE Book · Ch. 6",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "SRE & Observability::04 Monitoring & Alerting Philosophy",
+   "tags": [
+    "sre::alerting"
+   ],
+   "front": "",
+   "back": "",
+   "text": "A page must be {{c1::urgent}} (needs a human now), {{c2::actionable}} (there's something to do), {{c3::novel}} (not a repeat of another alert) and {{c4::require intelligence}} (otherwise automate it).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ewaschuk · Philosophy on Alerting",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::04 Monitoring & Alerting Philosophy",
+   "tags": [
+    "sre::alerting"
+   ],
+   "front": "<b>Page vs ticket vs log</b>: how do you decide the delivery channel for an alert?",
+   "back": "Page: must be acted on now. Ticket: must be fixed within days. Log/dashboard: useful for diagnosis only. Anything paged that could wait is fatigue.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Book · Ch. 6",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::04 Monitoring & Alerting Philosophy",
+   "tags": [
+    "sre::alerting"
+   ],
+   "front": "What is <b>alert fatigue</b>, and what does it cost?",
+   "back": "Repeated non-actionable alerts teach responders to ignore alerts. Real incidents get missed, and on-callers burn out.",
+   "text": "",
+   "image": "",
+   "analogy": "Car alarms: everyone has learned they mean nothing, so nobody looks.",
+   "extra": "",
+   "source": "SRE Book · Ch. 6",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::04 Monitoring & Alerting Philosophy",
+   "tags": [
+    "sre::monitoring"
+   ],
+   "front": "<b>Black-box vs white-box</b> monitoring: what does each tell you?",
+   "back": "Black-box probes the service from outside, like a user: \"it is broken now\". White-box reads internals (metrics, logs): \"it is about to break, and here's why\".",
+   "text": "",
+   "image": "",
+   "analogy": "Black-box is the mystery shopper; white-box is the kitchen's own thermometers.",
+   "extra": "",
+   "source": "SRE Book · Ch. 6",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::04 Monitoring & Alerting Philosophy",
+   "tags": [
+    "sre::monitoring"
+   ],
+   "front": "Why keep <b>black-box probes</b> even with rich white-box metrics?",
+   "back": "Internal metrics can't see failures outside the process: DNS, certificates, load balancers, a region that vanished. Probes validate the whole path end to end.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Book · Ch. 6",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "SRE & Observability::04 Monitoring & Alerting Philosophy",
+   "tags": [
+    "sre::alerting"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Evaluating an alerting rule: {{c1::precision}} (share of alerts that were real), {{c2::recall}} (share of real incidents alerted), {{c3::detection time}} and {{c4::reset time}} (how long it keeps firing after the fix).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Workbook · Ch. 5",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::04 Monitoring & Alerting Philosophy",
+   "tags": [
+    "sre::alerting"
+   ],
+   "front": "What three questions should you ask of <b>every existing alert</b> when pruning?",
+   "back": "Did anyone act on it? Was it urgent, or could it have waited? Would another alert have caught the same problem? Three \"no\"s → delete it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Book · Ch. 6",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::04 Monitoring & Alerting Philosophy",
+   "tags": [
+    "sre::monitoring"
+   ],
+   "front": "<b>Dashboards vs alerts</b>: what is each for?",
+   "back": "Alerts interrupt a human for a decision. Dashboards answer \"what is going on?\" during investigation. Never add an alert to replace looking at a graph.",
+   "text": "",
+   "image": "",
+   "analogy": "The pager is a fire alarm; the dashboard is the building's floor plan you consult after it rings.",
+   "extra": "",
+   "source": "SRE Book · Ch. 6",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::04 Monitoring & Alerting Philosophy",
+   "tags": [
+    "sre::observability"
+   ],
+   "front": "<b>Monitoring vs observability</b>: how does the Honeycomb school distinguish them?",
+   "back": "Monitoring watches known failure modes with predefined checks. Observability lets you ask new questions of the system from outside without shipping new code.",
+   "text": "",
+   "image": "",
+   "analogy": "Monitoring is a dashboard of warning lights; observability is being able to pop the hood and probe anything.",
+   "extra": "<b>Key phrase:</b> unknown unknowns. You cannot pre-aggregate your way to a question you haven't thought of yet.",
+   "source": "Observability Engineering · Ch. 1",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::04 Monitoring & Alerting Philosophy",
+   "tags": [
+    "sre::alerting"
+   ],
+   "front": "Why should every page <b>link to a playbook</b>?",
+   "back": "It cuts time to mitigation, reduces variance between responders, and shows which alerts are mechanical enough to automate away.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Book · Ch. 11",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::05 Metrics & Prometheus Model",
+   "tags": [
+    "sre::metrics",
+    "sre::prometheus"
+   ],
+   "front": "How does PromQL <code>rate()</code> handle a <b>counter reset</b> (process restart)?",
+   "back": "A drop in value is read as a reset to zero and the increase continues from there, so restarts don't produce negative rates.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Pitfall:</b> a reset <i>within</i> the window loses the counts accumulated just before it; keep windows short relative to restart frequency.",
+   "source": "Prometheus · Counters",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::05 Metrics & Prometheus Model",
+   "tags": [
+    "sre::metrics",
+    "sre::prometheus"
+   ],
+   "front": "Why must a <code>rate()</code> range be at least <b>2× (ideally 4×)</b> the scrape interval?",
+   "back": "rate() needs at least two samples in the range; with fewer it returns nothing. 4× tolerates a missed scrape without gaps in the graph.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Prometheus · PromQL",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::05 Metrics & Prometheus Model",
+   "tags": [
+    "sre::metrics",
+    "sre::prometheus"
+   ],
+   "front": "Why does <code>increase(http_requests_total[5m])</code> return <b>fractional</b> values like 2.5?",
+   "back": "It is rate() × window seconds, extrapolated to the window edges from the samples inside it. It estimates, it doesn't count.",
+   "text": "",
+   "image": "",
+   "analogy": "Estimating how far a car drove from two odometer glances and assuming constant speed in between.",
+   "extra": "",
+   "source": "Prometheus · PromQL",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::05 Metrics & Prometheus Model",
+   "tags": [
+    "sre::metrics",
+    "sre::prometheus"
+   ],
+   "front": "Why should \"items processed\" be a <b>counter</b>, not a gauge of \"items per minute\"?",
+   "back": "A counter survives missed scrapes and can be rated over any window; a per-minute gauge bakes one window into the exporter and loses data when a scrape is skipped.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Prometheus · Instrumentation",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::05 Metrics & Prometheus Model",
+   "tags": [
+    "sre::metrics",
+    "sre::prometheus"
+   ],
+   "front": "Why is a <b>gauge of \"last request latency\"</b> almost useless?",
+   "back": "Scraped every 15 s, it shows one arbitrary request out of thousands. Latency is a distribution: use a histogram.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Prometheus · Instrumentation",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::05 Metrics & Prometheus Model",
+   "tags": [
+    "sre::metrics",
+    "sre::prometheus"
+   ],
+   "front": "Why are Prometheus histogram buckets <b>cumulative</b> (<code>le</code> = \"less than or equal\")?",
+   "back": "So buckets can be summed across instances and dropped without breaking others, and a single bucket already answers \"how many requests under X?\".",
+   "text": "",
+   "image": "<img src=\"sre_histogram_buckets.svg\">",
+   "analogy": "Nested measuring cups: the 1-litre cup already contains everything the 300 ml cup would.",
+   "extra": "",
+   "source": "Prometheus · Histograms",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::05 Metrics & Prometheus Model",
+   "tags": [
+    "sre::metrics",
+    "sre::prometheus",
+    "sre::slo"
+   ],
+   "front": "Why put a histogram <b>bucket boundary exactly at your SLO latency threshold</b>?",
+   "back": "<code>histogram_quantile</code> interpolates linearly inside a bucket, so it's only exact at an edge. With an edge at 300 ms, <code>bucket{le=\"0.3\"} / count</code> is your exact SLI.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Workbook · Ch. 5",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::05 Metrics & Prometheus Model",
+   "tags": [
+    "sre::metrics",
+    "sre::prometheus"
+   ],
+   "front": "<b>Native (exponential) histograms vs classic buckets</b>: what changes?",
+   "back": "Bucket edges follow a fixed growth factor, so no manual choice; buckets are sparse, one series instead of N, and higher resolution at lower cost.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Also:</b> histograms of different resolutions still merge. OpenTelemetry's exponential histogram is the same idea.",
+   "source": "Prometheus · Native histograms",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::05 Metrics & Prometheus Model",
+   "tags": [
+    "sre::metrics",
+    "sre::prometheus",
+    "sre::cardinality"
+   ],
+   "front": "What does one <b>time series</b> cost in Prometheus, and what drives memory?",
+   "back": "Each unique label combination is a series kept in memory (head block) with its index. Memory scales with active series, not with sample volume.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Prometheus · Storage",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::05 Metrics & Prometheus Model",
+   "tags": [
+    "sre::metrics",
+    "sre::prometheus",
+    "sre::cardinality"
+   ],
+   "front": "Why does label <b>churn</b> hurt Prometheus more than a stable high series count?",
+   "back": "Every new label value creates a new series; pod names, request IDs or build hashes keep creating them, so the index grows without bound and queries slow.",
+   "text": "",
+   "image": "",
+   "analogy": "A library can hold many books, but a new shelf for every borrower each day wrecks the catalogue.",
+   "extra": "",
+   "source": "Prometheus · Storage",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::05 Metrics & Prometheus Model",
+   "tags": [
+    "sre::metrics",
+    "sre::prometheus",
+    "sre::cardinality"
+   ],
+   "front": "A metric has labels with 10, 50 and 100 possible values. How many series can it create <b>per target</b>?",
+   "back": "Up to 10 × 50 × 100 = <b>50,000</b>. Cardinality multiplies across labels; across 200 targets that's 10 million series.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Prometheus · Cardinality",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::05 Metrics & Prometheus Model",
+   "tags": [
+    "sre::metrics",
+    "sre::prometheus",
+    "sre::slo"
+   ],
+   "front": "How are <b>recording rules</b> used specifically for SLOs?",
+   "back": "Precompute the SLI error ratio at several windows (5m, 1h, 6h, 3d) as named series, so burn-rate alerts and dashboards are cheap and use one definition.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Naming convention:</b> <code>level:metric:operations</code>, e.g. <code>job:slo_errors_per_request:ratio_rate1h</code>.",
+   "source": "SRE Workbook · Ch. 5",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::05 Metrics & Prometheus Model",
+   "tags": [
+    "sre::metrics",
+    "sre::prometheus"
+   ],
+   "front": "What is <b>staleness</b> in Prometheus, and why does it matter for alerting?",
+   "back": "A series with no sample for 5 min (or whose target vanished) returns no value. A disappeared service produces <i>nothing</i>, not zero, so threshold alerts go silent.",
+   "text": "",
+   "image": "",
+   "analogy": "A silent smoke detector is not the same as a detector reporting no smoke.",
+   "extra": "<b>Fix:</b> alert on <code>absent()</code> or on <code>up == 0</code> as well as on the SLI.",
+   "source": "Prometheus · Staleness",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::05 Metrics & Prometheus Model",
+   "tags": [
+    "sre::metrics",
+    "sre::prometheus"
+   ],
+   "front": "Why do you need <b>remote write</b> and a long-term store (Thanos, Mimir, Cortex) at all?",
+   "back": "Local TSDB is single-node with bounded retention and no global view. Remote write streams samples to object storage with downsampling, dedup and multi-cluster queries.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Prometheus · Long-term storage",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::05 Metrics & Prometheus Model",
+   "tags": [
+    "sre::metrics",
+    "sre::prometheus"
+   ],
+   "front": "<b>Federation vs remote write</b>: when is each the right tool?",
+   "back": "Federation: a parent Prometheus scrapes a <i>selected, aggregated</i> subset from children (hierarchical). Remote write: stream everything to a central store for a global view and HA.",
+   "text": "",
+   "image": "",
+   "analogy": "Federation is a manager reading summary reports from branch offices; remote write is every branch mailing every receipt to head office.",
+   "extra": "",
+   "source": "Prometheus · Federation",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::05 Metrics & Prometheus Model",
+   "tags": [
+    "sre::metrics",
+    "sre::prometheus"
+   ],
+   "front": "How does a <b>highly available Prometheus pair</b> work, and where are duplicates removed?",
+   "back": "Two identical servers scrape the same targets. Each adds an external <code>replica</code> label; the query layer (e.g. Thanos Query) deduplicates at read time.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Prometheus · HA",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "SRE & Observability::05 Metrics & Prometheus Model",
+   "tags": [
+    "sre::metrics",
+    "sre::prometheus"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Prometheus naming: counters end in {{c1::<code>_total</code>}}; values use {{c2::base units}} (seconds, bytes, not ms or MB); the {{c3::unit}} is a suffix like <code>_seconds</code>.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Why:</b> base units let any series be combined without conversion; the suffix makes rate(…_total) read as 'events per second'.",
+   "source": "Prometheus · Naming",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::06 Logs & Structured Events",
+   "tags": [
+    "sre::logs"
+   ],
+   "front": "Why log <b>structured</b> key–value / JSON records instead of printf-style sentences?",
+   "back": "Fields become queryable dimensions with no regex parsing; the same record can be filtered, grouped and counted by any key.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> <code>{\"event\":\"order_failed\",\"user_id\":42,\"region\":\"eu-west\",\"ms\":812}</code> instead of \"Order for user 42 failed after 812ms\".",
+   "source": "Observability Engineering · Ch. 5",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::06 Logs & Structured Events",
+   "tags": [
+    "sre::logs",
+    "sre::observability"
+   ],
+   "front": "What is a <b>wide event</b> (canonical log line)?",
+   "back": "One record per request per service, emitted at the end, carrying all context: user, region, version, feature flags, timings, outcome.",
+   "text": "",
+   "image": "",
+   "analogy": "A flight data recorder entry per request, instead of 40 scattered cockpit remarks.",
+   "extra": "<b>Origin:</b> Stripe's canonical log lines; Honeycomb's events. One row answers questions you didn't anticipate, without joins.",
+   "source": "Observability Engineering · Ch. 5",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::06 Logs & Structured Events",
+   "tags": [
+    "sre::logs",
+    "sre::observability",
+    "sre::cardinality"
+   ],
+   "front": "<b>High cardinality vs high dimensionality</b>: what's the difference?",
+   "back": "Cardinality: how many distinct values a field has (user_id: millions). Dimensionality: how many fields each event carries (hundreds). Observability wants both.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Observability Engineering · Ch. 1",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::06 Logs & Structured Events",
+   "tags": [
+    "sre::logs",
+    "sre::cardinality"
+   ],
+   "front": "Why do <b>metrics choke on high cardinality</b> while event stores don't?",
+   "back": "Metrics pre-aggregate at write time, one series per label combination. Event stores keep raw rows (often columnar) and aggregate at query time, so values cost nothing extra.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Observability Engineering · Ch. 1",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::06 Logs & Structured Events",
+   "tags": [
+    "sre::logs"
+   ],
+   "front": "What is the semantic line between <b>ERROR</b> and <b>WARN</b> log levels?",
+   "back": "ERROR: an operation failed and someone should look. WARN: something unexpected happened but was handled. If no one will ever act on it, it isn't an ERROR.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Logging practice",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::06 Logs & Structured Events",
+   "tags": [
+    "sre::logs",
+    "sre::tracing"
+   ],
+   "front": "What is a <b>correlation ID</b>, and how does it relate to the trace ID?",
+   "back": "A request-scoped ID copied into every log line the request produces, so logs can be stitched together. The W3C trace ID is its standardised form.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> put <code>trace_id</code> and <code>span_id</code> into every log record; then logs, traces and exemplars share one key.",
+   "source": "Observability Engineering · Ch. 6",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::06 Logs & Structured Events",
+   "tags": [
+    "sre::logs",
+    "sre::sampling"
+   ],
+   "front": "How should you <b>sample logs</b> without losing the signal?",
+   "back": "Keep 100% of errors and rare events, sample the flood of identical successes, and record the sample rate on each kept event so counts can be re-weighted.",
+   "text": "",
+   "image": "",
+   "analogy": "Keep every complaint letter, but only every hundredth thank-you note, and remember you kept one in a hundred.",
+   "extra": "",
+   "source": "Observability Engineering · Ch. 17",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::06 Logs & Structured Events",
+   "tags": [
+    "sre::logs"
+   ],
+   "front": "Where does the <b>cost of logs</b> come from, and why does it grow faster than you expect?",
+   "back": "Ingest, indexing and retention are billed per byte, and bytes scale with request volume × lines per request. Chatty INFO logs grow linearly with traffic.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Levers:</b> drop DEBUG/INFO in prod, one wide event per request, tiered storage (hot 7 days, cold archive), sampling.",
+   "source": "Observability cost",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::06 Logs & Structured Events",
+   "tags": [
+    "sre::logs"
+   ],
+   "front": "When do <b>logs beat metrics</b>?",
+   "back": "When you need the specific case: which user, which request, the exact payload, a rare event, or a question you didn't define a metric for.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Observability Engineering · Ch. 2",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::06 Logs & Structured Events",
+   "tags": [
+    "sre::logs",
+    "sre::metrics"
+   ],
+   "front": "When do <b>metrics beat logs</b>?",
+   "back": "For trends, alerting and long retention: millions of events collapse into a few cheap numbers that are fast to query and compare over months.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Observability Engineering · Ch. 2",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::06 Logs & Structured Events",
+   "tags": [
+    "sre::logs",
+    "sre::observability"
+   ],
+   "front": "What is the critique of the <b>\"three pillars\"</b> (metrics, logs, traces)?",
+   "back": "They are storage formats, not capabilities. Observability is the ability to answer new questions; a single stream of rich events can derive all three.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Observability Engineering · Ch. 1",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::06 Logs & Structured Events",
+   "tags": [
+    "sre::logs",
+    "sre::tracing"
+   ],
+   "front": "How does a <b>wide event</b> relate to a <b>span</b>?",
+   "back": "A span is a wide event with timing and a parent pointer. Attach enough attributes to spans and they double as your structured logs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Observability Engineering · Ch. 6",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::06 Logs & Structured Events",
+   "tags": [
+    "sre::logs",
+    "sre::kubernetes"
+   ],
+   "front": "Why should containerised apps log to <b>stdout</b> and let an agent ship logs?",
+   "back": "The app stays ignorant of the logging backend; the platform collects, enriches (pod, namespace) and routes uniformly. Rotation and buffering stop being the app's problem.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Twelve-Factor · Logs",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::06 Logs & Structured Events",
+   "tags": [
+    "sre::logs"
+   ],
+   "front": "Why is <b>PII in logs</b> an observability design problem, not only a legal one?",
+   "back": "Once stored, it is replicated to indexes, backups and vendors. Redact at the source or in the collector; never log raw request bodies or headers by default.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Observability practice",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::06 Logs & Structured Events",
+   "tags": [
+    "sre::logs",
+    "sre::metrics"
+   ],
+   "front": "When is <b>deriving metrics from logs</b> (counting ERROR lines) acceptable, and what is the pitfall?",
+   "back": "Fine as a stopgap or for third-party software you can't instrument. Pitfall: expensive, laggy and brittle: a reworded message silently breaks the alert.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Observability practice",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "SRE & Observability::07 Distributed Tracing",
+   "tags": [
+    "sre::tracing"
+   ],
+   "front": "",
+   "back": "",
+   "text": "A <b>span</b> records an operation with a name, start and end time, a {{c1::span context}} (trace_id + span_id), a {{c2::parent span id}}, key–value {{c3::attributes}}, timestamped {{c4::events}} and a {{c5::status}}.",
+   "image": "<img src=\"sre_trace_spans.svg\">",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenTelemetry · Traces",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::07 Distributed Tracing",
+   "tags": [
+    "sre::tracing"
+   ],
+   "front": "What does a <b>trace</b> show that aggregate metrics never can?",
+   "back": "Where the time went in <i>one specific request</i> across services: the causal chain, the parallelism and the gaps between hops.",
+   "text": "",
+   "image": "",
+   "analogy": "Metrics are the airport's average delay; a trace is one passenger's itinerary showing exactly where the wait happened.",
+   "extra": "",
+   "source": "Distributed tracing",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "SRE & Observability::07 Distributed Tracing",
+   "tags": [
+    "sre::tracing"
+   ],
+   "front": "",
+   "back": "",
+   "text": "W3C <code>traceparent</code> header: <code>{{c1::00}}-{{c2::&lt;32 hex trace-id&gt;}}-{{c3::&lt;16 hex parent-id&gt;}}-{{c4::01}}</code>: version, trace id, parent span id, flags (01 = sampled).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "W3C Trace Context",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::07 Distributed Tracing",
+   "tags": [
+    "sre::tracing"
+   ],
+   "front": "<code>traceparent</code> vs <code>tracestate</code>: what is each for?",
+   "back": "<code>traceparent</code> carries the standard trace/span IDs and sampled flag. <code>tracestate</code> carries vendor-specific key–value pairs that must be forwarded untouched.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "W3C Trace Context",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::07 Distributed Tracing",
+   "tags": [
+    "sre::tracing"
+   ],
+   "front": "Why did the industry need <b>W3C Trace Context</b> instead of vendor headers (B3, uber-trace-id)?",
+   "back": "Every hop, including proxies, meshes and SaaS, must forward the same header or the trace breaks. One standard header set made cross-vendor traces possible.",
+   "text": "",
+   "image": "",
+   "analogy": "A parcel tracking number only works if every courier along the route reads and forwards the same label.",
+   "extra": "",
+   "source": "W3C Trace Context",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::07 Distributed Tracing",
+   "tags": [
+    "sre::tracing"
+   ],
+   "front": "When do you use a <b>span link</b> instead of a parent–child relationship?",
+   "back": "When causality isn't a simple call: a consumer processing a batch of messages from many producers, or a job triggered long after the request. Links join traces without forcing a tree.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenTelemetry · Traces",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::07 Distributed Tracing",
+   "tags": [
+    "sre::tracing"
+   ],
+   "front": "How is trace context propagated across an <b>async boundary</b> such as a queue?",
+   "back": "The producer injects <code>traceparent</code> into message headers; the consumer extracts it and starts a CONSUMER span, usually linked (or parented) to the producer span.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenTelemetry · Messaging",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::07 Distributed Tracing",
+   "tags": [
+    "sre::tracing",
+    "sre::sampling",
+    "sre::otel"
+   ],
+   "front": "Why does <b>tail sampling</b> require a stateful, trace-ID-aware collector tier?",
+   "back": "The decision needs the whole trace (was there an error? how slow?), so all spans of a trace must land on the same collector and wait in memory until it completes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Mechanics:</b> a load-balancing exporter routes by trace_id to a gateway pool; a decision wait of ~10–30 s bounds memory.",
+   "source": "OpenTelemetry · Sampling",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::07 Distributed Tracing",
+   "tags": [
+    "sre::tracing",
+    "sre::sampling"
+   ],
+   "front": "Why is <b>head sampling</b> cheap but blind?",
+   "back": "The root decides at the start with no knowledge of the outcome, so errors and slow requests are kept at the same rate as boring successes.",
+   "text": "",
+   "image": "",
+   "analogy": "Deciding which flights to investigate before take-off: you keep 1% of them, crashes included only by luck.",
+   "extra": "",
+   "source": "OpenTelemetry · Sampling",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::07 Distributed Tracing",
+   "tags": [
+    "sre::tracing",
+    "sre::sampling"
+   ],
+   "front": "Why must downstream services <b>respect the parent's sampling decision</b>?",
+   "back": "Otherwise traces have holes: a kept root with missing children, or orphan spans with no root. OTel's default <code>ParentBased</code> sampler exists for this.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenTelemetry · Sampling",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::07 Distributed Tracing",
+   "tags": [
+    "sre::tracing",
+    "sre::metrics"
+   ],
+   "front": "How does an <b>exemplar</b> shorten the investigation of a latency SLO alert?",
+   "back": "The histogram bucket that burned the budget carries trace IDs from that exact time and bucket, so you jump from the alert to a representative slow trace in one click.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenMetrics · Exemplars",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::07 Distributed Tracing",
+   "tags": [
+    "sre::tracing"
+   ],
+   "front": "How is a <b>service map</b> produced from traces?",
+   "back": "Each CLIENT→SERVER span pair with <code>service.name</code> on both sides is an edge; aggregating edges gives the dependency graph with call rates and error rates.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Distributed tracing",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::07 Distributed Tracing",
+   "tags": [
+    "sre::tracing"
+   ],
+   "front": "<b>Baggage vs span attributes</b>: what's the difference?",
+   "back": "Attributes describe one span and are stored. Baggage (W3C <code>baggage</code> header) is propagated to every downstream hop but is <i>not</i> recorded unless copied onto spans.",
+   "text": "",
+   "image": "",
+   "analogy": "Attributes are notes written in one hotel's guest book; baggage is the suitcase the traveller carries to every hotel.",
+   "extra": "<b>Pitfalls:</b> baggage travels in every request header: keep it tiny, never put PII or secrets in it.",
+   "source": "OpenTelemetry · Baggage",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::07 Distributed Tracing",
+   "tags": [
+    "sre::tracing"
+   ],
+   "front": "What is the <b>critical path</b> of a trace, and why does it matter?",
+   "back": "The chain of spans whose durations add up to the root's latency. Optimising a span off the critical path (a parallel branch) changes nothing for the user.",
+   "text": "",
+   "image": "",
+   "analogy": "In a project plan, shortening a task with slack doesn't move the deadline.",
+   "extra": "",
+   "source": "Distributed tracing",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::07 Distributed Tracing",
+   "tags": [
+    "sre::tracing"
+   ],
+   "front": "Why instrument both the <b>CLIENT</b> and the <b>SERVER</b> side of a call?",
+   "back": "The gap between the client span and the server span is network, TLS, proxy and queueing time. With only server spans that time is invisible.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenTelemetry · Span kinds",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::07 Distributed Tracing",
+   "tags": [
+    "sre::tracing",
+    "sre::slo",
+    "sre::sampling"
+   ],
+   "front": "Why should you <b>not compute SLIs from sampled traces</b>?",
+   "back": "Sampling, especially tail sampling, biases what is kept toward errors and slow requests. SLIs need every event: use metrics, or metrics derived from spans <i>before</i> sampling.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Observability Engineering · Ch. 17",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::07 Distributed Tracing",
+   "tags": [
+    "sre::tracing",
+    "sre::otel"
+   ],
+   "front": "HTTP semantic conventions: when does a <b>4xx</b> response set span status to ERROR?",
+   "back": "On a CLIENT span, yes (the call failed for the caller). On a SERVER span, no: a 4xx is the client's fault, not the server's. 5xx is ERROR on both.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>SRE link:</b> this mirrors the 'valid events' rule in SLIs: don't count the client's mistakes against your service.",
+   "source": "OpenTelemetry · HTTP semconv",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "SRE & Observability::08 OpenTelemetry",
+   "tags": [
+    "sre::otel"
+   ],
+   "front": "",
+   "back": "",
+   "text": "OpenTelemetry <b>signals</b>: {{c1::traces}}, {{c2::metrics}}, {{c3::logs}} and (newest) {{c4::profiles}}. Baggage is propagated context, not a signal of its own.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenTelemetry · Concepts",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::08 OpenTelemetry",
+   "tags": [
+    "sre::otel"
+   ],
+   "front": "Why does OpenTelemetry bundle <b>all signals in one project</b> rather than separate standards?",
+   "back": "Correlation: a shared context gives trace IDs in logs, exemplars in metrics and the same <code>Resource</code> on everything, through one SDK and one Collector.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenTelemetry · Concepts",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::08 OpenTelemetry",
+   "tags": [
+    "sre::otel"
+   ],
+   "front": "Why should a <b>shared library</b> depend only on the OTel <b>API</b>, never on the SDK?",
+   "back": "The API is a no-op until an application installs an SDK, so the library adds no vendor, exporter or config choice. The app owner decides what happens to the telemetry.",
+   "text": "",
+   "image": "",
+   "analogy": "A library logs through an interface; the application plugs in the logger.",
+   "extra": "",
+   "source": "OpenTelemetry · API vs SDK",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "SRE & Observability::08 OpenTelemetry",
+   "tags": [
+    "sre::otel"
+   ],
+   "front": "",
+   "back": "",
+   "text": "In the tracing SDK a {{c1::TracerProvider}} owns the {{c2::Resource}} and {{c3::Sampler}}, and feeds spans through a {{c4::SpanProcessor}} (usually Batch) to an {{c5::Exporter}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenTelemetry · SDK",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::08 OpenTelemetry",
+   "tags": [
+    "sre::otel"
+   ],
+   "front": "Why route telemetry through a <b>Collector</b> instead of exporting straight from the app?",
+   "back": "Decouples apps from backends; gives retry, buffering, enrichment, redaction and fan-out in one place; and keeps backend credentials out of every pod.",
+   "text": "",
+   "image": "<img src=\"sre_otel_collector.svg\">",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenTelemetry · Collector",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::08 OpenTelemetry",
+   "tags": [
+    "sre::otel"
+   ],
+   "front": "In a Collector pipeline, why is <code>memory_limiter</code> first and <code>batch</code> last?",
+   "back": "The limiter must refuse data before the process OOMs, so it guards the entrance. Batching compresses right before export so nothing downstream un-batches it.",
+   "text": "",
+   "image": "",
+   "analogy": "The bouncer stands at the door, not at the bar; and you pack the boxes right before loading the truck.",
+   "extra": "",
+   "source": "OpenTelemetry · Collector",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::08 OpenTelemetry",
+   "tags": [
+    "sre::otel",
+    "sre::kubernetes"
+   ],
+   "front": "What does the <code>k8sattributes</code> processor do, and why do it in the Collector rather than the app?",
+   "back": "Maps the sender's pod IP to pod, namespace, deployment and node labels and stamps them on telemetry. Apps don't know this reliably; the Collector asks the API server once.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenTelemetry · Collector",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::08 OpenTelemetry",
+   "tags": [
+    "sre::otel",
+    "sre::kubernetes"
+   ],
+   "front": "Collector as <b>sidecar vs node-level DaemonSet agent</b>: what's the trade-off?",
+   "back": "Sidecar: per-pod isolation and config, but N copies of memory and a restart per app change. DaemonSet: one per node, shared and cheap, but a noisy pod can starve its neighbours.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenTelemetry · Deployment",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::08 OpenTelemetry",
+   "tags": [
+    "sre::otel"
+   ],
+   "front": "<b>OTLP over gRPC (4317) vs OTLP over HTTP/protobuf (4318)</b>: when choose which?",
+   "back": "gRPC: efficient streaming between services and collectors. HTTP: browsers, serverless, strict proxies and firewalls that can't speak HTTP/2 gRPC.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenTelemetry · OTLP",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::08 OpenTelemetry",
+   "tags": [
+    "sre::otel"
+   ],
+   "front": "Why is <code>service.name</code> the single most important <b>resource attribute</b>?",
+   "back": "It's the join key for everything: service maps, RED dashboards, log-to-trace links and SLOs all group by it. A missing or inconsistent name fragments the service.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenTelemetry · Semantic conventions",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::08 OpenTelemetry",
+   "tags": [
+    "sre::otel"
+   ],
+   "front": "<b>Resource attributes vs span attributes</b>: how to decide where a value goes?",
+   "back": "Resource: facts about the producer that hold for all its telemetry (service, version, pod, cloud region). Span attribute: facts about this one operation (route, status, user tier).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenTelemetry · Resources",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::08 OpenTelemetry",
+   "tags": [
+    "sre::otel"
+   ],
+   "front": "What does <b>auto-instrumentation</b> not give you?",
+   "back": "Business context. It knows frameworks (HTTP, DB, queues) but not your domain: order value, tenant, feature flag. Those need manual attributes or custom spans.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenTelemetry · Instrumentation",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::08 OpenTelemetry",
+   "tags": [
+    "sre::otel",
+    "sre::metrics"
+   ],
+   "front": "<b>Cumulative vs delta temporality</b> in OTel metrics: what's the difference and who wants which?",
+   "back": "Cumulative: value since process start (Prometheus style). Delta: change since the last export (StatsD/Datadog style). The Collector can convert delta to cumulative, but needs state.",
+   "text": "",
+   "image": "",
+   "analogy": "Cumulative is the odometer; delta is the trip meter you reset after every reading.",
+   "extra": "",
+   "source": "OpenTelemetry · Metrics",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "SRE & Observability::08 OpenTelemetry",
+   "tags": [
+    "sre::otel",
+    "sre::metrics"
+   ],
+   "front": "",
+   "back": "",
+   "text": "OTel metric instruments: {{c1::Counter}} (monotonic), {{c2::UpDownCounter}} (can decrease), {{c3::Histogram}} (distribution), and {{c4::Gauge}} (last value, often via an asynchronous callback).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenTelemetry · Metrics",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::08 OpenTelemetry",
+   "tags": [
+    "sre::otel",
+    "sre::cardinality"
+   ],
+   "front": "What is an OTel metrics <b>View</b>, and why does a platform team care?",
+   "back": "An SDK-side rule that changes aggregation, bucket boundaries or drops attributes for an instrument, with no code change. It is the cardinality control knob at the source.",
+   "text": "",
+   "image": "",
+   "analogy": "A dimmer switch on an instrument: turn down the detail without rewiring the lamp.",
+   "extra": "",
+   "source": "OpenTelemetry · Metrics",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::08 OpenTelemetry",
+   "tags": [
+    "sre::otel",
+    "sre::slo",
+    "sre::tracing"
+   ],
+   "front": "What is the <b>spanmetrics connector</b>, and why is it valuable for SLOs?",
+   "back": "A Collector component that acts as exporter of one pipeline and receiver of another, turning spans into RED metrics. Place it before sampling and you get exact SLIs from traces.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenTelemetry · Connectors",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::08 OpenTelemetry",
+   "tags": [
+    "sre::otel",
+    "sre::logs"
+   ],
+   "front": "Why does OpenTelemetry <b>not</b> define a new user-facing logging API, unlike traces and metrics?",
+   "back": "Every language already has entrenched loggers. OTel provides a bridge/appender for them that attaches trace context and ships records as OTLP, instead of asking the world to rewrite log calls.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenTelemetry · Logs",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::08 OpenTelemetry",
+   "tags": [
+    "sre::otel",
+    "sre::prometheus"
+   ],
+   "front": "How can the Collector <b>replace a Prometheus server</b> for scraping?",
+   "back": "Its <code>prometheus</code> receiver reads scrape configs and service discovery; a <code>prometheusremotewrite</code> exporter sends to Mimir/Thanos. The Operator's Target Allocator shards targets across replicas.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenTelemetry · Prometheus receiver",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::08 OpenTelemetry",
+   "tags": [
+    "sre::otel"
+   ],
+   "front": "What happens in the Collector when the <b>backend is down</b>?",
+   "back": "The exporter's sending queue buffers and retries with backoff; when the queue is full, new data is dropped. A persistent (file-backed) queue survives a Collector restart.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Monitor it:</b> <code>otelcol_exporter_send_failed_*</code> and queue size are the Collector's own SLIs.",
+   "source": "OpenTelemetry · Exporters",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::09 Incident Response",
+   "tags": [
+    "sre::incident"
+   ],
+   "front": "Where does the <b>Incident Command System</b> come from, and why did SRE borrow it?",
+   "back": "From US firefighting (FEMA ICS). It gives clear roles, a single decision-maker and a span of control that scales from one responder to dozens.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Book · Ch. 14",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "SRE & Observability::09 Incident Response",
+   "tags": [
+    "sre::incident"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Incident roles: the {{c1::Incident Commander}} owns decisions and delegates; the {{c2::Operations Lead}} does the hands-on work; the {{c3::Communications Lead}} updates stakeholders; the {{c4::Planning / Scribe}} role keeps the log and handles follow-ups.",
+   "image": "<img src=\"sre_incident_roles.svg\">",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Book · Ch. 14",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::09 Incident Response",
+   "tags": [
+    "sre::incident"
+   ],
+   "front": "Why should the <b>Incident Commander not debug</b>?",
+   "back": "Heads-down debugging destroys situational awareness. The IC's job is to hold the whole picture, set priorities and decide, which no one else is doing.",
+   "text": "",
+   "image": "",
+   "analogy": "The conductor doesn't play an instrument during the concert.",
+   "extra": "",
+   "source": "SRE Book · Ch. 14",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::09 Incident Response",
+   "tags": [
+    "sre::incident"
+   ],
+   "front": "What is the <b>live incident document</b> for?",
+   "back": "A single shared source of truth: timeline, current theory, who is doing what, next update time. It enables handoffs and becomes the postmortem's raw material.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Book · Ch. 14",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::09 Incident Response",
+   "tags": [
+    "sre::incident"
+   ],
+   "front": "What should define an incident's <b>severity level</b>?",
+   "back": "User impact and urgency (scope, SLO budget being burned, data at risk), never the suspected cause. Severity sets response size and communication cadence.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Incident management",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::09 Incident Response",
+   "tags": [
+    "sre::incident"
+   ],
+   "front": "Why have a <b>low threshold for declaring</b> an incident?",
+   "back": "Standing down an unneeded response is cheap; ramping up late is expensive. Declaring early also starts the record and the communication clock.",
+   "text": "",
+   "image": "",
+   "analogy": "Calling the fire brigade for smoke and sending them home is cheaper than calling them for flames.",
+   "extra": "",
+   "source": "SRE Book · Ch. 14",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::09 Incident Response",
+   "tags": [
+    "sre::incident"
+   ],
+   "front": "What makes a <b>handoff</b> of the IC role safe?",
+   "back": "It is explicit and acknowledged: \"You are now Incident Commander.\" \"I have the incident.\" The gap where nobody is in command is the danger.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Book · Ch. 14",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "SRE & Observability::09 Incident Response",
+   "tags": [
+    "sre::oncall"
+   ],
+   "front": "",
+   "back": "",
+   "text": "SRE Book on-call sizing: an engineer spends at most {{c1::25%}} of time on call, handles at most {{c2::two}} incidents per 12-hour shift, in a team of at least {{c3::8}} (single site) or 6 + 6 (multi-site).",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Reasoning:</b> primary + secondary rotations with 25% caps need 8 people; below that, either toil or burnout rises.",
+   "source": "SRE Book · Ch. 11",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::09 Incident Response",
+   "tags": [
+    "sre::oncall"
+   ],
+   "front": "When should an on-caller <b>escalate</b>, and why is it not a failure?",
+   "back": "When a time-box passes without progress, or the fix needs access or knowledge they lack. The goal is mitigation speed, not solving it alone.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Book · Ch. 11",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::09 Incident Response",
+   "tags": [
+    "sre::incident"
+   ],
+   "front": "Why send status updates on a <b>fixed cadence</b> even when there's no news?",
+   "back": "\"No change, next update at :30\" stops stakeholders interrupting responders and builds trust that silence doesn't mean abandonment.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Incident management",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::09 Incident Response",
+   "tags": [
+    "sre::incident"
+   ],
+   "front": "<b>MTTD vs MTTR</b>: what does each measure?",
+   "back": "MTTD: mean time to detect, from fault to alert. MTTR: mean time to recover (or repair), from fault to users being fine again. Monitoring shrinks MTTD; mitigations shrink MTTR.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Incident metrics",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::09 Incident Response",
+   "tags": [
+    "sre::incident"
+   ],
+   "front": "Why is <b>MTBF</b> a weak target for distributed services, and why is even MTTR a shaky statistic?",
+   "back": "Frequent small failures with fast recovery beat rare huge ones, so chasing MTBF misleads. And incident durations are heavy-tailed, so a mean of a few dozen is mostly noise.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Reference:</b> the VOID report (Courtney Nash) argues MTTR is too noisy to show improvement; track budget burn and learning instead.",
+   "source": "Incident metrics",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::09 Incident Response",
+   "tags": [
+    "sre::incident"
+   ],
+   "front": "Why <b>mitigate before you understand</b> the cause?",
+   "back": "Users are hurting now; the root cause can wait. Rollback, failover, flag off or shed load first, then investigate on a stable system.",
+   "text": "",
+   "image": "",
+   "analogy": "Stop the bleeding before you work out why the patient fell.",
+   "extra": "",
+   "source": "SRE Workbook · Ch. 9",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "SRE & Observability::09 Incident Response",
+   "tags": [
+    "sre::incident"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Generic mitigations to prepare in advance: {{c1::rollback}} the last change, {{c2::drain traffic}} to another region or cluster, {{c3::turn off a feature flag}}, {{c4::add capacity}} or shed low-priority load.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Why generic:</b> they work before you know the cause; the SRE Workbook calls them the first thing to try.",
+   "source": "SRE Workbook · Ch. 9",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::09 Incident Response",
+   "tags": [
+    "sre::incident",
+    "sre::oncall"
+   ],
+   "front": "What makes a <b>good runbook</b>?",
+   "back": "Tied to one alert, says how to confirm the problem, how to mitigate, and links the dashboards; kept current by the on-call rotation. Pure steps with no judgement should be automated.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Book · Ch. 11",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::09 Incident Response",
+   "tags": [
+    "sre::chaos"
+   ],
+   "front": "What is <b>chaos engineering</b>?",
+   "back": "Experimenting on a system to build confidence in its behaviour under turbulence: state a steady-state hypothesis, inject a realistic fault, limit blast radius, compare.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Principles of Chaos",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::09 Incident Response",
+   "tags": [
+    "sre::chaos"
+   ],
+   "front": "Why run chaos experiments <b>in production</b>?",
+   "back": "Only production has the real traffic, data, config and dependencies. A staging success proves little; a controlled production failure proves the hypothesis.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Principles of Chaos",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::09 Incident Response",
+   "tags": [
+    "sre::chaos"
+   ],
+   "front": "<b>Chaos engineering vs game day (DiRT)</b>: what does each test?",
+   "back": "Chaos tests the <i>system's</i> tolerance to faults. A game day tests the <i>people and process</i>: paging, access, runbooks, communication, decision-making.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Typical game-day findings:</b> expired credentials, stale runbooks, nobody knew who could approve a failover.",
+   "source": "SRE Book · Ch. 28",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::09 Incident Response",
+   "tags": [
+    "sre::oncall"
+   ],
+   "front": "What is the <b>Wheel of Misfortune</b>?",
+   "back": "Role-play training where an on-caller works through a past incident replayed by a game master. It builds judgement before the real page arrives.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Book · Ch. 28",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::10 Postmortems & Learning",
+   "tags": [
+    "sre::postmortem"
+   ],
+   "front": "What makes a postmortem <b>blameless</b>?",
+   "back": "It assumes everyone acted in good faith with the information they had, and asks what in the system made that action reasonable and its outcome bad.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Book · Ch. 15",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::10 Postmortems & Learning",
+   "tags": [
+    "sre::postmortem"
+   ],
+   "front": "Why is <b>blame</b> bad for reliability, not just for morale?",
+   "back": "Blamed people hide information, so the next postmortem learns less. People and incentives are part of the system; punishing them fixes nothing structural.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Book · Ch. 15",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::10 Postmortems & Learning",
+   "tags": [
+    "sre::postmortem"
+   ],
+   "front": "<b>Blameless vs no accountability</b>: how do they differ?",
+   "back": "Accountability shifts from \"who caused it\" to \"who owns fixing the conditions\". Action items have owners and deadlines; people aren't punished for honest mistakes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Book · Ch. 15",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "SRE & Observability::10 Postmortems & Learning",
+   "tags": [
+    "sre::postmortem"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Typical postmortem <b>triggers</b>: user-visible downtime beyond a threshold, {{c1::data loss}}, {{c2::on-call intervention}} (rollback, rerouting), resolution time over a threshold, and a {{c3::monitoring failure}} (found by a human, not an alert).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Book · Ch. 15",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::10 Postmortems & Learning",
+   "tags": [
+    "sre::postmortem"
+   ],
+   "front": "Why prefer <b>contributing factors</b> over a single <b>root cause</b>?",
+   "back": "Complex systems fail when several normally harmless conditions combine. \"Root cause\" is just where you stopped looking; naming one hides the others.",
+   "text": "",
+   "image": "",
+   "analogy": "A plane crash report lists a dozen holes that lined up, not one.",
+   "extra": "",
+   "source": "Resilience engineering",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::10 Postmortems & Learning",
+   "tags": [
+    "sre::postmortem"
+   ],
+   "front": "What is the limitation of <b>Five Whys</b>?",
+   "back": "Each \"why\" has several true answers, so following one chain produces a tidy story that reflects the asker's bias. Use it to branch, not to find 'the' cause.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Resilience engineering",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "SRE & Observability::10 Postmortems & Learning",
+   "tags": [
+    "sre::postmortem"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Good postmortem action items are classified as {{c1::prevent}} (stop recurrence), {{c2::detect}} (alert sooner) or {{c3::mitigate}} (recover faster), and tracked like bugs with owners and dates.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Book · Ch. 15",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::10 Postmortems & Learning",
+   "tags": [
+    "sre::postmortem"
+   ],
+   "front": "Why do many postmortems <b>fail to change anything</b>?",
+   "back": "Action items untracked or too many, no review of the document, blame creeping in, and no sharing beyond the team. Writing it is 20% of the value.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Practice:</b> postmortem review groups, a tracked backlog, and 'postmortem of the month' for visibility.",
+   "source": "SRE Book · Ch. 15",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::10 Postmortems & Learning",
+   "tags": [
+    "sre::postmortem"
+   ],
+   "front": "What is <b>hindsight bias</b>, and how does it poison postmortems?",
+   "back": "Knowing the outcome makes it seem obvious in advance. \"They should have seen it\" judges people by information they did not have at the time.",
+   "text": "",
+   "image": "",
+   "analogy": "A detective novel is obvious on the second reading.",
+   "extra": "",
+   "source": "Dekker · Field Guide",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::10 Postmortems & Learning",
+   "tags": [
+    "sre::postmortem"
+   ],
+   "front": "Why avoid <b>counterfactuals</b> (\"if only they had checked…\") in a postmortem?",
+   "back": "They describe a world that didn't happen and explain nothing about why the real action made sense at the time. Ask what made the check seem unnecessary.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dekker · Field Guide",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::10 Postmortems & Learning",
+   "tags": [
+    "sre::postmortem"
+   ],
+   "front": "What is <b>normalisation of deviance</b>?",
+   "back": "Small rule-bendings that don't fail become routine and the baseline shifts, until the accumulated deviation meets a condition it can't survive.",
+   "text": "",
+   "image": "",
+   "analogy": "Challenger: O-ring erosion was seen on earlier flights, didn't cause disaster, and became 'acceptable'.",
+   "extra": "",
+   "source": "Vaughan · Challenger",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::10 Postmortems & Learning",
+   "tags": [
+    "sre::postmortem",
+    "sre::resilience"
+   ],
+   "front": "<b>Safety-I vs Safety-II</b>: how do they define safety?",
+   "back": "Safety-I: as few things as possible go wrong; study failures. Safety-II: as many things as possible go right under varying conditions; study everyday work too.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Hollnagel · Safety-II",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::10 Postmortems & Learning",
+   "tags": [
+    "sre::postmortem",
+    "sre::resilience"
+   ],
+   "front": "<b>Work-as-imagined vs work-as-done</b>: why does the gap matter in incident analysis?",
+   "back": "Procedures describe imagined work; people adapt them daily to make the system work. Incidents expose the gap, and fixing the procedure alone widens it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Hollnagel · Safety-II",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::10 Postmortems & Learning",
+   "tags": [
+    "sre::resilience"
+   ],
+   "front": "<b>Robustness vs resilience</b> in the resilience-engineering sense?",
+   "back": "Robustness: withstanding anticipated faults by design (redundancy, limits). Resilience: adapting to the unanticipated, which mostly means people with slack, skill and authority.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Resilience engineering",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::10 Postmortems & Learning",
+   "tags": [
+    "sre::postmortem"
+   ],
+   "front": "Dekker's <b>old view vs new view</b> of human error?",
+   "back": "Old view: human error causes failure, so remove or retrain the human. New view: human error is a symptom of deeper system trouble and the starting point of investigation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dekker · Field Guide",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::10 Postmortems & Learning",
+   "tags": [
+    "sre::postmortem",
+    "sre::resilience"
+   ],
+   "front": "Why review <b>near misses</b>, not only incidents?",
+   "back": "Same mechanisms, no damage, far more frequent, and nobody is defensive, so you learn the same lessons cheaper and earlier.",
+   "text": "",
+   "image": "",
+   "analogy": "Aviation improved by studying the thousand near-collisions, not only the rare crash.",
+   "extra": "",
+   "source": "Safety science",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::10 Postmortems & Learning",
+   "tags": [
+    "sre::postmortem"
+   ],
+   "front": "What happens when <b>incident count</b> becomes a team KPI?",
+   "back": "Goodhart's law: incidents stop being declared, severities get downgraded, and learning stops. Incident data is for learning, not for performance reviews.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Incident metrics",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "SRE & Observability::10 Postmortems & Learning",
+   "tags": [
+    "sre::postmortem"
+   ],
+   "front": "",
+   "back": "",
+   "text": "The reflective part of a postmortem has three headings: what went {{c1::well}}, what went {{c2::wrong}}, and where we got {{c3::lucky}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Why 'lucky':</b> it captures latent failures that didn't bite this time, the Safety-II angle inside the standard template.",
+   "source": "SRE Book · Ch. 15",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::11 Capacity, Load & Release",
+   "tags": [
+    "sre::capacity"
+   ],
+   "front": "What are the three inputs of <b>capacity planning</b> in the SRE sense?",
+   "back": "A demand forecast (organic and inorganic growth), the lead time to provision, and headroom for failure and load tests. Then validate with regular load testing.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Book · Ch. 18",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::11 Capacity, Load & Release",
+   "tags": [
+    "sre::capacity"
+   ],
+   "front": "Why provision <b>N+2</b> rather than N+1?",
+   "back": "One unit may be down for planned maintenance or upgrade while another fails unexpectedly. N+1 leaves you at exactly N during every rollout.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Book · Ch. 18",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::11 Capacity, Load & Release",
+   "tags": [
+    "sre::capacity"
+   ],
+   "front": "<b>Organic vs inorganic growth</b> in demand forecasting?",
+   "back": "Organic: steady adoption and usage trends you can extrapolate. Inorganic: step changes from launches, marketing, migrations or a new big customer; these must be collected from people.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Book · Ch. 18",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::11 Capacity, Load & Release",
+   "tags": [
+    "sre::capacity"
+   ],
+   "front": "Why <b>load-test to failure</b>, not just to the planned peak?",
+   "back": "You need to know where the knee is and <i>how</i> the system fails (slow, erroring, cascading) before production finds out. Headroom is meaningless without the ceiling.",
+   "text": "",
+   "image": "",
+   "analogy": "You don't know a bridge's safety margin until you know the load that cracks it.",
+   "extra": "",
+   "source": "SRE Book · Ch. 18",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "SRE & Observability::11 Capacity, Load & Release",
+   "tags": [
+    "sre::load"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Google's request <b>criticality</b> levels, shed from the bottom up: {{c1::CRITICAL_PLUS}} (user-visible, must not fail), {{c2::CRITICAL}}, {{c3::SHEDDABLE_PLUS}} (retries tolerated), {{c4::SHEDDABLE}} (batch, drop freely).",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Point:</b> load shedding is a policy question, criticality is propagated with the request so every layer sheds the same things first.",
+   "source": "SRE Book · Ch. 21",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::11 Capacity, Load & Release",
+   "tags": [
+    "sre::load"
+   ],
+   "front": "<b>Load shedding vs graceful degradation</b>: how do they differ?",
+   "back": "Shedding refuses some requests cheaply to protect the rest. Degradation serves everyone a cheaper answer: cached, partial, fewer results, recommendations off.",
+   "text": "",
+   "image": "",
+   "analogy": "A full restaurant either turns people away at the door or serves a shorter menu to all.",
+   "extra": "",
+   "source": "SRE Book · Ch. 22",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::11 Capacity, Load & Release",
+   "tags": [
+    "sre::load"
+   ],
+   "front": "Why should <b>retries happen at one layer only</b>?",
+   "back": "Stacked retries multiply: three layers each retrying three times is 27× load on the bottom service during an outage. Retry at the edge, fail fast below.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Companions:</b> retry budgets, backoff with jitter and circuit breakers are covered in the Distributed Systems deck.",
+   "source": "SRE Book · Ch. 22",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::11 Capacity, Load & Release",
+   "tags": [
+    "sre::load"
+   ],
+   "front": "What is <b>deadline propagation</b>, and what does it prevent?",
+   "back": "Each hop passes the remaining time budget downstream and gives up when it is spent. Prevents servers working on requests the user has already abandoned.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Book · Ch. 22",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::11 Capacity, Load & Release",
+   "tags": [
+    "sre::load"
+   ],
+   "front": "Why can <b>adding capacity</b> during a cascading failure fail to help?",
+   "back": "New instances start cold (empty caches, JIT, connections) and are swamped immediately by the queued load. Cut load first, then add capacity.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Book · Ch. 22",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::11 Capacity, Load & Release",
+   "tags": [
+    "sre::capacity",
+    "sre::release"
+   ],
+   "front": "What is a server's <b>lame-duck state</b>, and why have it?",
+   "back": "On shutdown it keeps serving but tells load balancers to stop sending new requests, then drains in-flight work. Avoids the errors of a hard stop during every deploy.",
+   "text": "",
+   "image": "",
+   "analogy": "A shop that locks the door to new customers but lets those inside finish paying.",
+   "extra": "",
+   "source": "SRE Book · Ch. 20",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::11 Capacity, Load & Release",
+   "tags": [
+    "sre::release"
+   ],
+   "front": "What is the statistical trap in judging a <b>canary</b>?",
+   "back": "A small canary sees little traffic, so its error rate is noisy. Compare it to a baseline of the <i>same size and age</i>, not to the whole fleet, and give it enough events.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Workbook · Ch. 16",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::11 Capacity, Load & Release",
+   "tags": [
+    "sre::release",
+    "sre::slo"
+   ],
+   "front": "A service has a 99.9% SLO. Roughly how many requests must a <b>canary</b> see before a budget-level error rate is even observable?",
+   "back": "On the order of thousands: at 0.1% errors you expect one error per 1,000 requests, so a few hundred requests tell you nothing either way.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Workbook · Ch. 16",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::11 Capacity, Load & Release",
+   "tags": [
+    "sre::release"
+   ],
+   "front": "Why roll out in <b>exponentially growing stages</b> (1% → 10% → 50% → 100%) with bake time?",
+   "back": "Early stages bound the blast radius while the error rate is unknown; later stages confirm at scale. Bake time lets slow failures (leaks, caches) show up.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Progressive-delivery <i>mechanics</i> (Argo Rollouts, Flagger) live in the Platform Engineering deck.",
+   "source": "SRE Workbook · Ch. 16",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::11 Capacity, Load & Release",
+   "tags": [
+    "sre::release"
+   ],
+   "front": "From the SRE angle, what do <b>feature flags</b> buy you, and what do they cost?",
+   "back": "They decouple deploy from release and make 'flag off' the fastest mitigation. Costs: flag debt, untested flag combinations, and configuration becoming a change that needs the same care as code.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Workbook · Ch. 16",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::11 Capacity, Load & Release",
+   "tags": [
+    "sre::release"
+   ],
+   "front": "Why does Google run <b>Launch Coordination Engineering</b> (launch reviews) as a dedicated function?",
+   "back": "A launch touches capacity, dependencies, rollback, monitoring and policy. A small team that has seen hundreds of launches catches what a first-time team cannot.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Book · Ch. 27",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::11 Capacity, Load & Release",
+   "tags": [
+    "sre::release"
+   ],
+   "front": "Why must every release be <b>rollback-able</b>, and what does that imply for schema changes?",
+   "back": "Rollback is the universal mitigation. Schema and data changes must stay compatible with the previous version (expand, migrate, contract later), or rollback is a lie.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Book · Ch. 27",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::11 Capacity, Load & Release",
+   "tags": [
+    "sre::release"
+   ],
+   "front": "Why are <b>change freezes</b> a double-edged sword?",
+   "back": "Most outages follow changes, so a freeze lowers risk this week. But changes pile up and ship as one big risky batch afterwards. Small, frequent, reversible changes are safer.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Workbook · Ch. 16",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::12 Observability for Kubernetes & Platforms",
+   "tags": [
+    "sre::kubernetes",
+    "sre::platform"
+   ],
+   "front": "<b>cAdvisor vs kube-state-metrics</b>: which answers which question?",
+   "back": "cAdvisor (inside the kubelet): resource usage of containers (CPU seconds, memory bytes). kube-state-metrics: state of API objects (pods pending, deployment replicas unavailable).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>node_exporter</b> covers the host itself: disk, network, kernel. Three exporters, three layers.",
+   "source": "Kubernetes · Metrics",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::12 Observability for Kubernetes & Platforms",
+   "tags": [
+    "sre::kubernetes",
+    "sre::platform"
+   ],
+   "front": "Latency SLO breaches while CPU utilisation looks low: which Kubernetes metric do you check?",
+   "back": "<code>container_cpu_cfs_throttled_periods_total</code> vs <code>…_periods_total</code>. CPU limits throttle bursty pods even at low average usage.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kubernetes · CPU limits",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "SRE & Observability::12 Observability for Kubernetes & Platforms",
+   "tags": [
+    "sre::kubernetes",
+    "sre::platform"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Control-plane health signals: API server {{c1::request latency and error rate}}, etcd {{c2::WAL fsync duration}} (p99 well under 10 ms), scheduler {{c3::pending pods / scheduling latency}}, and controller {{c4::workqueue depth}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kubernetes · Control plane",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::12 Observability for Kubernetes & Platforms",
+   "tags": [
+    "sre::kubernetes",
+    "sre::platform"
+   ],
+   "front": "Why is <b>etcd fsync latency</b> the key control-plane SLI?",
+   "back": "Every write serialises through etcd's disk. Slow fsync delays raft heartbeats, triggers leader elections, and surfaces as API server timeouts cluster-wide.",
+   "text": "",
+   "image": "",
+   "analogy": "The whole cluster queues behind a single notary's signature; if the notary is slow, everyone waits.",
+   "extra": "",
+   "source": "Kubernetes · etcd",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::12 Observability for Kubernetes & Platforms",
+   "tags": [
+    "sre::kubernetes",
+    "sre::platform",
+    "sre::slo"
+   ],
+   "front": "Who is the <b>user</b> in a platform team's SLO, and what journeys do you measure?",
+   "back": "The developer. Journeys: a deploy reaches Running within X s, the API answers, logs appear within Y s, a new namespace is ready in Z min.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Platform SLOs",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::12 Observability for Kubernetes & Platforms",
+   "tags": [
+    "sre::kubernetes",
+    "sre::platform",
+    "sre::slo"
+   ],
+   "front": "Why is <b>time-to-schedule</b> a user-facing SLI for a platform, not an internal detail?",
+   "back": "Developers experience it as 'my deploy is stuck'. It aggregates node capacity, quotas, admission webhooks and image pulls into one number they feel.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Platform SLOs",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::12 Observability for Kubernetes & Platforms",
+   "tags": [
+    "sre::kubernetes",
+    "sre::platform"
+   ],
+   "front": "Which parts of observability should a <b>platform team own</b>, and which must stay with tenants?",
+   "back": "Platform: Collector, storage, default dashboards, SDK config, cardinality limits. Tenants: their SLIs, SLOs, alerts and runbooks, because only they know what 'good' means.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Observability as a platform",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "SRE & Observability::12 Observability for Kubernetes & Platforms",
+   "tags": [
+    "sre::kubernetes",
+    "sre::platform",
+    "sre::cardinality"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Levers to cut observability cost without losing signal: {{c1::drop unused metrics}} (relabeling), {{c2::cap cardinality}} per tenant, {{c3::tier retention}} (hot vs cold), and {{c4::sample}} traces and logs.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Scale:</b> observability commonly runs at 10–30% of infrastructure spend; cardinality and log volume dominate.",
+   "source": "Observability cost",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::12 Observability for Kubernetes & Platforms",
+   "tags": [
+    "sre::kubernetes",
+    "sre::platform",
+    "sre::cardinality"
+   ],
+   "front": "Why do most scraped metrics turn out to be <b>never queried</b>, and what do you do about it?",
+   "back": "Exporters emit everything by default and nobody prunes. Audit which series dashboards and rules actually use, then drop the rest with relabeling or Views.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Observability cost",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::12 Observability for Kubernetes & Platforms",
+   "tags": [
+    "sre::kubernetes",
+    "sre::platform",
+    "sre::cardinality"
+   ],
+   "front": "Why enforce <b>per-tenant series limits</b> in a shared metrics backend?",
+   "back": "One team's label explosion (a user ID label, a per-pod histogram) can OOM the ingesters for everyone. Limits turn a platform outage into one tenant's rejected samples.",
+   "text": "",
+   "image": "",
+   "analogy": "Circuit breakers per apartment keep one tenant's faulty toaster from blacking out the building.",
+   "extra": "",
+   "source": "Multi-tenant metrics",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::12 Observability for Kubernetes & Platforms",
+   "tags": [
+    "sre::kubernetes",
+    "sre::platform",
+    "sre::otel"
+   ],
+   "front": "What does the <b>OpenTelemetry Operator</b> do?",
+   "back": "Manages Collector instances via an <code>OpenTelemetryCollector</code> CRD and injects auto-instrumentation into annotated pods via an <code>Instrumentation</code> CRD and a mutating webhook.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenTelemetry · Operator",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::12 Observability for Kubernetes & Platforms",
+   "tags": [
+    "sre::kubernetes",
+    "sre::platform",
+    "sre::otel"
+   ],
+   "front": "How does the Operator <b>inject auto-instrumentation</b> without changing the image?",
+   "back": "The mutating webhook adds an init container that copies the agent into a shared volume and sets env vars (e.g. <code>JAVA_TOOL_OPTIONS</code>, <code>OTEL_*</code>) on the app container.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenTelemetry · Operator",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::12 Observability for Kubernetes & Platforms",
+   "tags": [
+    "sre::kubernetes",
+    "sre::platform",
+    "sre::profiling"
+   ],
+   "front": "What is <b>continuous profiling</b>?",
+   "back": "Always-on, low-overhead (~1% CPU, often eBPF) sampling of stack traces across the fleet, stored as time series, so you can ask which code burned CPU or memory at 3 a.m. last Tuesday.",
+   "text": "",
+   "image": "",
+   "analogy": "A security camera over the CPU, always recording, so you can rewind to the moment it got busy.",
+   "extra": "",
+   "source": "Continuous profiling",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::12 Observability for Kubernetes & Platforms",
+   "tags": [
+    "sre::kubernetes",
+    "sre::platform",
+    "sre::profiling"
+   ],
+   "front": "When does <b>profiling beat tracing</b>?",
+   "back": "When the time is spent <i>inside</i> one process: GC, serialisation, a hot loop. A span says 'this call took 800 ms'; a profile says which lines.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Link:</b> profiles tagged with trace/span IDs let you jump from a slow span to its flame graph.",
+   "source": "Continuous profiling",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::12 Observability for Kubernetes & Platforms",
+   "tags": [
+    "sre::kubernetes",
+    "sre::platform"
+   ],
+   "front": "Why export <b>Kubernetes Events</b> instead of relying on <code>kubectl get events</code>?",
+   "back": "Events are kept for only about an hour. Exporting them (event exporter, OTel <code>k8sobjects</code>) lets you correlate OOMKills, evictions and failed pulls with SLO dips later.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kubernetes · Events",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::12 Observability for Kubernetes & Platforms",
+   "tags": [
+    "sre::kubernetes",
+    "sre::platform",
+    "sre::alerting"
+   ],
+   "front": "How do you make sure the <b>alerting pipeline itself</b> is working?",
+   "back": "A 'watchdog' alert that always fires, routed to a dead-man's switch that pages if the heartbeat stops. Plus meta-monitoring: a separate, simpler Prometheus or external probe watching the monitoring stack.",
+   "text": "",
+   "image": "",
+   "analogy": "A smoke detector that chirps to prove its battery is alive.",
+   "extra": "",
+   "source": "Monitoring the monitoring",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "SRE & Observability::12 Observability for Kubernetes & Platforms",
+   "tags": [
+    "sre::kubernetes",
+    "sre::platform",
+    "sre::otel"
+   ],
+   "front": "How do <b>semantic conventions</b> let a platform ship 'golden dashboards' per service automatically?",
+   "back": "If every service emits <code>http.server.request.duration</code> with the same attributes and <code>service.name</code>, one templated RED dashboard and one SLO rule set work for all of them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Observability as a platform",
+   "reverse": false
+  }
+ ]
+}

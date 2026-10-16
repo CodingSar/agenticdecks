@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="k" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1f2937"/></marker></defs>
+<rect width="600" height="400" rx="14" fill="#fbfbf8"/>
+<text x="24" y="32" font-size="17" font-weight="700" fill="#1f2937">OpenTelemetry Collector: agent → gateway</text>
+<g font-size="11.5" fill="#1f2937">
+<rect x="24" y="70" width="90" height="34" rx="6" fill="#e5e7eb" stroke="#1f2937"/><text x="69" y="92" text-anchor="middle">app pod (SDK)</text>
+<rect x="24" y="120" width="90" height="34" rx="6" fill="#e5e7eb" stroke="#1f2937"/><text x="69" y="142" text-anchor="middle">app pod (SDK)</text>
+<rect x="24" y="170" width="90" height="34" rx="6" fill="#e5e7eb" stroke="#1f2937"/><text x="69" y="192" text-anchor="middle">kubelet / logs</text>
+</g>
+<line x1="114" y1="87" x2="150" y2="120" stroke="#1f2937" stroke-width="1.5" marker-end="url(#k)"/>
+<line x1="114" y1="137" x2="150" y2="137" stroke="#1f2937" stroke-width="1.5" marker-end="url(#k)"/>
+<line x1="114" y1="187" x2="150" y2="154" stroke="#1f2937" stroke-width="1.5" marker-end="url(#k)"/>
+<rect x="152" y="62" width="180" height="160" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+<text x="242" y="82" font-size="13" font-weight="700" fill="#059669" text-anchor="middle">agent (DaemonSet)</text>
+<g font-size="11.5" fill="#065f46">
+<text x="162" y="104">receivers: otlp, filelog,</text>
+<text x="162" y="118">   kubeletstats</text>
+<text x="162" y="140">processors: memory_limiter</text>
+<text x="162" y="154">   → k8sattributes → batch</text>
+<text x="162" y="176">exporters: otlp → gateway</text>
+<text x="162" y="204" fill="#6b7280">one per node; enriches, cheap</text>
+</g>
+<line x1="332" y1="137" x2="372" y2="137" stroke="#1f2937" stroke-width="1.5" marker-end="url(#k)"/>
+<text x="352" y="128" font-size="10" fill="#1f2937" text-anchor="middle">OTLP</text>
+<rect x="374" y="62" width="200" height="160" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+<text x="474" y="82" font-size="13" font-weight="700" fill="#2563eb" text-anchor="middle">gateway (Deployment)</text>
+<g font-size="11.5" fill="#1e3a8a">
+<text x="384" y="104">receivers: otlp</text>
+<text x="384" y="126">processors: memory_limiter</text>
+<text x="384" y="140">   → tail_sampling → redact</text>
+<text x="384" y="154">   → batch</text>
+<text x="384" y="176">exporters: tempo, mimir, loki</text>
+<text x="384" y="204" fill="#6b7280">holds credentials; one egress</text>
+</g>
+<line x1="474" y1="222" x2="474" y2="250" stroke="#1f2937" stroke-width="1.5" marker-end="url(#k)"/>
+<rect x="374" y="252" width="200" height="34" rx="6" fill="#e5e7eb" stroke="#1f2937"/>
+<text x="474" y="274" font-size="12" fill="#1f2937" text-anchor="middle">backends (traces · metrics · logs)</text>
+<rect x="24" y="300" width="552" height="82" rx="8" fill="#fff7ed" stroke="#d97706" stroke-width="1.5"/>
+<text x="36" y="322" font-size="13" font-weight="700" fill="#b45309">One pipeline per signal: receivers → processors → exporters</text>
+<text x="36" y="344" font-size="11.5" fill="#92400e">memory_limiter first (shed before OOM) · batch last (compress right before export)</text>
+<text x="36" y="366" font-size="11.5" fill="#92400e">tail sampling needs every span of a trace on one gateway: route by trace_id</text>
+</svg>
