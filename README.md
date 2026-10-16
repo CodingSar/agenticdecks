@@ -1,6 +1,6 @@
 # Agentic Decks
 
-Anki decks for a cloud / Kubernetes platform and enterprise architect, consolidated from 44 source decks into 32, plus new decks written from scratch (The Pragmatic Programmer, the general-education series, Identity & Zero Trust, SRE & Observability, Software Engineering Classics).
+Anki decks for a cloud / Kubernetes platform and enterprise architect, consolidated from 44 source decks into 32, plus new decks written from scratch (The Pragmatic Programmer, the general-education series, Identity & Zero Trust, SRE & Observability, Software Engineering Classics, Chemistry).
 
 - **Import:** `decks/*.apkg`
 - **Editable source of truth:** `work/out/*.json` (one file per deck) + `media/`
@@ -10,10 +10,10 @@ Anki decks for a cloud / Kubernetes platform and enterprise architect, consolida
 
 | | Before | After |
 |---|---|---|
-| Decks | 44 | 41 |
-| Notes | 4,506 | 6,566 |
-| Cards | 4,684 | 8,329 |
-| Notes with an analogy | 126 | 1272 |
+| Decks | 44 | 42 |
+| Notes | 4,506 | 6,870 |
+| Cards | 4,684 | 8,675 |
+| Notes with an analogy | 126 | 1394 |
 | Answers > 60 words | many (avg. note 300–950 chars) | 0 (validator-enforced) |
 
 There are more cards because long, multi-part cards were split into atomic ones (minimum information principle). Each card now takes seconds to review instead of a paragraph.
@@ -21,7 +21,7 @@ Duplicates, book/author/edition trivia, "chapter N covers…" cards and deck-met
 
 A **product-content review** (Oct 2026) removed or generalised cards that taught one vendor's product rather than a transferable concept (feature lists, SKUs, marketing claims, dated release news); open-source tools that are a deck's subject and cross-provider mapping cards stayed, and in the vendor-scoped exam decks (AZ-305, STACKIT) only marketing phrasing and dated news were removed. Each deck's changelog has a `## Product-content review` section.
 
-The **general-education decks** (Art History, Philosophy, Music History, Architecture Styles, Physics) were written to `work/WRITER_BRIEF.md`: recognise-the-style, why-it-arose and what-it-reacted-against questions, contrast cards for look-alikes, 1–3 canonical anchors per movement, and hand-drawn SVG diagrams in `media/`.
+The **general-education decks** (Art History, Philosophy, Music History, Architecture Styles, Physics, Chemistry) were written to `work/WRITER_BRIEF.md`: recognise-the-style, why-it-arose and what-it-reacted-against questions, contrast cards for look-alikes, 1–3 canonical anchors per movement, and hand-drawn SVG diagrams in `media/`. **Chemistry** (Oct 2026) runs from high-school foundations to master's-level ideas in 12 subdecks, each anchored in everyday and practical chemistry (kitchen, body, garage, lab, industry, environment); it was written by six parallel writer agents, one pair of subdecks each, then merged and deduplicated.
 
 **Professional gap-fillers** (Oct 2026): **Identity & Zero Trust** (OAuth 2.0, OIDC, SAML, JWT, PKI, authorization models, NIST 800-207, SPIFFE, cloud IAM patterns), **SRE & Observability** (SLIs/SLOs, error budgets and burn-rate alerting, Prometheus model, tracing, OpenTelemetry, incident response, postmortems) and **Software Engineering Classics**, a composition deck of the enduring ideas in the canonical books and papers (Brooks, Parnas, Ousterhout, McConnell, Fowler, GoF, Feathers, SICP, Bentley, Raymond, Peopleware, Accelerate, Nygard, Humble & Farley, Beck, Kent, Norman, Google SWE, Dijkstra, Lampson, Saltzer et al.), organised by idea with the source work on each card. They were written to the same brief and deduplicated against the existing decks (`work/out/INTEGRATION.changelog.md`).
 
@@ -66,6 +66,7 @@ Original note GUIDs are kept on every card that descends from an original note. 
 | `Architecture_Styles.apkg` | Architecture Styles | 217 | 257 | 11 |
 | `Art_History.apkg` | Art History | 202 | 210 | 12 |
 | `BPMN_and_Business_Architecture.apkg` | BPMN & Business Architecture | 64 | 69 | 8 |
+| `Chemistry.apkg` | Chemistry | 304 | 346 | 12 |
 | `CISSP_Cloud_K8s.apkg` | CISSP (Cloud & Kubernetes Grounded) | 141 | 243 | 8 |
 | `Cloud_Architecture.apkg` | Cloud Architecture | 113 | 178 | 10 |
 | `Data_Engineering.apkg` | Data Engineering | 79 | 99 | 6 |
