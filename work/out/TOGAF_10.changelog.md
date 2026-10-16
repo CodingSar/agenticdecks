@@ -18,3 +18,7 @@
 - #34 "Relationship between Stakeholders, Concerns, Views, and Viewpoints (per TOGAF / ": duplicate: stakeholder/concern/view/viewpoint (ISO 42010) is owned by the ArchiMate 3 deck (Views & Viewpoints)
 - #76 "Name several domains covered by TOGAF Series Guides in the 10th-edition Library.": vague list of Series Guide titles that 'evolve over time'; low signal
 - #81 "What does "Applying the ADM" guidance address?": 'what does document X cover' meta card
+
+## Product-content review
+
+Reviewed all cards for product-catered content (vendor feature lists, tool plugs, certification marketing, dated news, promotional phrasing): nothing applied, no changes made.

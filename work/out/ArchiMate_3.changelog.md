@@ -28,3 +28,8 @@
 - #122 "Describe the two levels of the ArchiMate 3 Certification for People program": certification-program/exam-format meta (levels, question counts, pass marks): one-time logistics, not knowledge to space
 - #123 "ArchiMate 3 Part 1 exam: format, duration, pass mark, open book?": certification-program/exam-format meta (levels, question counts, pass marks): one-time logistics, not knowledge to space
 - #124 "ArchiMate 3 Part 2 exam: format, scoring, pass mark, open book?": certification-program/exam-format meta (levels, question counts, pass marks): one-time logistics, not knowledge to space
+
+## Product-content review
+
+Reviewed all cards for product-catered content. No cards deleted. No cards rewritten. 1 card scrubbed of certification phrasing:
+- `xFiofeWPjn`: front "Typical application-layer pattern in an ArchiMate exam scenario?" → "Typical application-layer pattern in an ArchiMate model?"

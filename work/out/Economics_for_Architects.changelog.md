@@ -21,3 +21,7 @@ Every note had an Example plus an "Investor lens" in `extra`. The **Investor len
 ## Splits / analogies
 - 1 split: fixed vs variable cost → plus a separate "operating leverage" card
 - 3 analogies added (buffet / free service, used-car lemons, burning the boats)
+
+## Product-content review
+
+Reviewed all cards for product-catered content (vendor feature lists, tool plugs, certification marketing, dated news, promotional phrasing): nothing applied, no changes made.

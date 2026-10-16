@@ -29,3 +29,7 @@
 - Enumerations turned into clozes: four binding levels, five Kernwaarden, five Vijflaagsmodel layers, GEMMA's four layers, Common Ground layers, Gegevenslandschap principles, NORA owner/manager/authority.
 - NAP01–17: the prompt is now the Dutch principle name → what it asks (the number moves to extra), instead of memorising number → name.
 - Contrast cards: NORA Vijflaagsmodel vs Common Ground vijflaagsmodel (new); NORA comply-or-explain vs non-binding GEMMA principles (rewritten); informatie vs gegeven; Verwerkingenlogging vs Verwerkingsactiviteiten (extra).
+
+## Product-content review
+
+Reviewed all cards for product-catered content (vendor feature lists, tool plugs, certification marketing, dated news, promotional phrasing): nothing applied, no changes made.

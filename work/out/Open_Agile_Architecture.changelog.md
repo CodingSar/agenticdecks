@@ -74,3 +74,7 @@
 - #265 "What is the strangler fig pattern?": duplicate: owned by Adaptive Systems deck (strangler fig)
 - #268 "The four levels of the C4 model for describing software architecture are {{c1::C": duplicate: owned by Architect Craft deck (mental models) (C4 model)
 - #270 "What does Gregor Hohpe's architect elevator metaphor say about the architect's r": duplicate: owned by Architect Craft deck (mental models) (architect elevator)
+
+## Product-content review
+
+Reviewed all cards for product-catered content (vendor feature lists, tool plugs, certification marketing, dated news, promotional phrasing): nothing applied, no changes made.

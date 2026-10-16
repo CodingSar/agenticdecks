@@ -46,3 +46,7 @@
 ## Other edits
 - Long enumerations became clozes: Kendall notation, hat-matrix properties, GLM components, regularisation techniques, leakage forms, MCMC diagnostics, deadly triad, CNN biases, curse of dimensionality, likelihood-test trinity, max-entropy distributions.
 - Prompts reworded to "why/when/what breaks" where possible, e.g. "Why do connection pools exhaust in cascades?", "How can you cut queueing delay without adding capacity?".
+
+## Product-content review
+
+Reviewed all cards for product-catered content (vendor feature lists, tool plugs, certification marketing, dated news, promotional phrasing): nothing applied, no changes made.

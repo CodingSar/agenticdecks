@@ -12,3 +12,7 @@
 - "What does the people view examine + competency vs capability" was cut down to the contrast; the rest moved to extra.
 - Long answers trimmed throughout to ≤ ~30 words (several were 40–60).
 - No deletions: no trivia cards found; the BCS business architecture cards are thin but on topic.
+
+## Product-content review
+
+Reviewed all cards for product-catered content (vendor feature lists, tool plugs, certification marketing, dated news, promotional phrasing): nothing applied, no changes made.

@@ -15,3 +15,7 @@
   - Mixed bullets split into grammar vs etymology: *de repente*, *a pesar de*, *contar con*, *de hecho*, *ni idea*, *gana*, *desconectar*, *casualidad*.
   - Three wordy backs tightened: no-fault *se*, *actualmente*, *darse cuenta*.
 - **Analogies:** none added. Etymology in `extra` serves as the hook, as requested.
+
+## Product-content review
+
+Reviewed all cards for product-catered content (vendor feature lists, tool plugs, certification marketing, dated news, promotional phrasing): nothing applied, no changes made.

@@ -34,3 +34,7 @@
 - LPM dimension activity lists became reverse-style "Which dimension does X?" cards.
 - Answers trimmed to about 25 words; long role lists cut to 3–4 bullets.
 - New contrast card: Solution Intent vs Solution Context.
+
+## Product-content review
+
+Reviewed all cards for product-catered content (vendor feature lists, tool plugs, certification marketing, dated news, promotional phrasing): nothing applied, no changes made.

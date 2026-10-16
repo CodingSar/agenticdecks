@@ -23,3 +23,7 @@ Enabling vs complicated-subsystem; platform vs complicated-subsystem; collaborat
 Team size and Dunbar: the claim is now stated accurately (≈5–9 per team; Dunbar's layers cap groupings).
 
 **Analogies added: 8.**
+
+## Product-content review
+
+Reviewed all cards for product-catered content (vendor feature lists, tool plugs, certification marketing, dated news, promotional phrasing): nothing applied, no changes made.

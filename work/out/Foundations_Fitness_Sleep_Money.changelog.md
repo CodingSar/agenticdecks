@@ -19,3 +19,7 @@
 - **Merges:** none. Emergency fund vs F-you fund was kept as an explicit contrast card.
 - **Deletions:** none. All notes are actionable principles.
 - **Analogies added:** 17 (30%). Examples: wake time as anchor, alcohol = sedation not sleep, IPS = Ulysses and the mast, Coast FI = ball rolling to goal, big rocks first, debt payoff = guaranteed return.
+
+## Product-content review
+
+Reviewed all cards for product-catered content (vendor feature lists, tool plugs, certification marketing, dated news, promotional phrasing): nothing applied, no changes made.

@@ -26,3 +26,7 @@ Service-based vs microservices; upstream vs downstream; Conformist vs Anticorrup
 - Enumerations (four dimensions, characteristic criteria/categories, connascence types, 8 fallacies, filter types, C4) became clozes.
 - Formulas use MathJax.
 - **Analogies added: 25** (sources had none).
+
+## Product-content review
+
+Reviewed all cards for product-catered content (vendor feature lists, tool plugs, certification marketing, dated news, promotional phrasing): nothing applied, no changes made.

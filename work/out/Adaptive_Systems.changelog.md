@@ -18,3 +18,7 @@
 ## Splits / analogies
 - 0 splits
 - 8 analogies added (fog-bound hill climb, thermostat, sandpile, marble in a bowl, stone/reed/muscle, ship compartments, strangler fig, Red Queen)
+
+## Product-content review
+
+Reviewed all cards for product-catered content (vendor feature lists, tool plugs, certification marketing, dated news, promotional phrasing): nothing applied, no changes made.

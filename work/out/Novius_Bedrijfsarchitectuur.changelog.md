@@ -41,3 +41,7 @@
 - Lists turned into clozes: koffertje (4), architect's core activities (4), viewpoint/view/modeltype/model, model-hygiene rules, modelling in five steps, BOM points of attention, technology-function layers.
 - Example lists for each model type became "an X is a {{classificatie/landschaps/gebruiks/constructie}}model" clozes (guids kept).
 - Answers trimmed; no long-answer warnings.
+
+## Product-content review
+
+Reviewed all cards for product-catered content (vendor feature lists, tool plugs, certification marketing, dated news, promotional phrasing): nothing applied, no changes made.

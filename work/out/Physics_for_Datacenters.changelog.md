@@ -21,3 +21,7 @@ Subdecks: 01 Energy & Power · 02 Laws of Thermodynamics · 03 Heat Transfer & C
 - Amdahl's law (P49) is also in Quantitative Foundations; it's kept here framed through the end of Dennard scaling.
 - PUE (P46) is also in Cloud_AI_Infrastructure (Cloud Architecture cluster).
 - The speed-of-light latency card overlaps slightly with the Networking bandwidth/latency card (different angle).
+
+## Product-content review
+
+Reviewed all cards for product-catered content (vendor feature lists, tool plugs, certification marketing, dated news, promotional phrasing): nothing applied, no changes made.

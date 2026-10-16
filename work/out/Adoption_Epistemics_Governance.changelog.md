@@ -40,3 +40,7 @@ History cards were rewritten as **transferable lessons** (the prompt asks for th
 ## Splits / analogies
 - 0 splits (long cards were trimmed instead; the Fuller and Ostrom lists became clozes)
 - 3 analogies added
+
+## Product-content review
+
+Reviewed all cards for product-catered content (vendor feature lists, tool plugs, certification marketing, dated news, promotional phrasing): nothing applied, no changes made.
