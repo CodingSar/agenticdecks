@@ -1,0 +1,3319 @@
+{
+ "deck_name": "Identity & Zero Trust",
+ "file": "Identity_and_Zero_Trust.apkg",
+ "description": "Identity and Zero Trust for a cloud and platform architect: authentication and assurance, PKI, OAuth 2.0, OIDC, tokens, SAML and legacy federation, authorization models, NIST 800-207 Zero Trust, workload identity (SPIFFE, Kubernetes, cloud federation), cloud IAM patterns and identity threats. Protocol and architecture concepts, not vendor trivia.",
+ "notes": [
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::01 Identity Concepts",
+   "tags": [
+    "identity::concepts"
+   ],
+   "front": "<b>Authentication</b> vs <b>authorization</b>: key difference?",
+   "back": "Authentication proves <i>who</i> you are (verifying a credential). Authorization decides <i>what</i> you may do. Authn comes first; authz consumes its result.",
+   "text": "",
+   "image": "",
+   "analogy": "Airport: passport control checks who you are (authn); the boarding pass decides which plane you may board (authz).",
+   "extra": "<b>Pitfall:</b> \"401 Unauthorized\" is really an authentication failure; 403 Forbidden is the authorization failure.",
+   "source": "Identity · Concepts",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::01 Identity Concepts",
+   "tags": [
+    "identity::concepts"
+   ],
+   "front": "Why is an <b>identifier</b> (username, email, sub) not an identity?",
+   "back": "An identifier is just a label pointing at an identity. Identity is the set of attributes and the proof binding a subject to them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Pitfall:</b> emails change hands and get reassigned; keying authorization on them instead of a stable <code>sub</code> causes account takeovers.",
+   "source": "Identity · Concepts",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::01 Identity Concepts",
+   "tags": [
+    "identity::concepts"
+   ],
+   "front": "What is a <b>credential</b>, as distinct from an identity?",
+   "back": "Evidence used to prove an identity claim: a password, key, certificate, token. Credentials rotate and expire; the identity persists.",
+   "text": "",
+   "image": "",
+   "analogy": "Your identity is you; your passport is a credential. Renewing the passport doesn't make you a different person.",
+   "extra": "",
+   "source": "Identity · Concepts",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::01 Identity Concepts",
+   "tags": [
+    "identity::concepts"
+   ],
+   "front": "What does <b>federation</b> mean in identity?",
+   "back": "One domain (the IdP) authenticates a user and asserts the result to another domain (the SP/RP) that trusts it, so users aren't re-registered everywhere.",
+   "text": "",
+   "image": "",
+   "analogy": "A driving licence issued by one state is accepted as ID in another: trust the issuer, don't re-verify the person.",
+   "extra": "",
+   "source": "Identity · Concepts",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Identity & Zero Trust::01 Identity Concepts",
+   "tags": [
+    "identity::concepts"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Federation roles: the {{c1::Identity Provider (IdP)}} authenticates the user and issues assertions; the {{c2::Service Provider (SP) / Relying Party (RP)}} consumes them and grants access.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Naming:</b> SAML says SP; OAuth/OIDC say Relying Party or Client. Same role.",
+   "source": "Identity · Concepts",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::01 Identity Concepts",
+   "tags": [
+    "identity::concepts"
+   ],
+   "front": "<b>Relying Party</b> vs <b>Service Provider</b>: different things?",
+   "back": "Same role, different vocabularies: SP is SAML's term, RP is OIDC's. Both consume an identity assertion from an IdP.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Identity · Concepts",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::01 Identity Concepts",
+   "tags": [
+    "identity::concepts"
+   ],
+   "front": "<b>SSO</b> vs <b>federation</b>: how do they relate?",
+   "back": "Federation is the trust/protocol relationship between IdP and SPs. SSO is the user experience it enables: one login, many apps.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "You can have SSO without federation (one shared session store inside one company) and federation without seamless SSO.",
+   "source": "Identity · Concepts",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::01 Identity Concepts",
+   "tags": [
+    "identity::concepts"
+   ],
+   "front": "What is the <b>IdP as a single point of failure</b> trade-off in federation?",
+   "back": "Central IdP: one place to enforce MFA, revoke, audit. But one outage or compromise affects every federated app at once.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Mitigation:</b> hardened IdP, phishing-resistant admin MFA, monitored break-glass accounts, short sessions.",
+   "source": "Identity · Concepts",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::01 Identity Concepts",
+   "tags": [
+    "identity::concepts"
+   ],
+   "front": "What does <b>account linking</b> solve?",
+   "back": "Mapping several external identities (Google, corporate SAML, local password) to one internal account, so the app has one subject regardless of login route.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Pitfall:</b> auto-linking by email lets an attacker with a matching unverified email at another IdP take over the account.",
+   "source": "Identity · Concepts",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::01 Identity Concepts",
+   "tags": [
+    "identity::concepts"
+   ],
+   "front": "In NIST SP 800-63, what are <b>IAL</b>, <b>AAL</b> and <b>FAL</b>?",
+   "back": "Three independent assurance levels: <b>IAL</b> identity proofing, <b>AAL</b> authentication strength, <b>FAL</b> federation assertion protection. Each 1–3.",
+   "text": "",
+   "image": "",
+   "analogy": "Three independent dials on a mixing desk: how well we checked who you are, how strongly you log in, how safely the assertion travels.",
+   "extra": "Independent on purpose: a well-proofed identity can still log in with a weak authenticator, and vice versa.",
+   "source": "Identity · NIST 800-63",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Identity & Zero Trust::01 Identity Concepts",
+   "tags": [
+    "identity::concepts"
+   ],
+   "front": "",
+   "back": "",
+   "text": "NIST 800-63 Identity Assurance: {{c1::IAL1}} = self-asserted attributes, no proofing; {{c2::IAL2}} = remote or in-person proofing against evidence; {{c3::IAL3}} = in-person (or supervised remote) proofing with physical evidence verification.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Identity · NIST 800-63",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Identity & Zero Trust::01 Identity Concepts",
+   "tags": [
+    "identity::concepts"
+   ],
+   "front": "",
+   "back": "",
+   "text": "NIST 800-63 Authenticator Assurance: {{c1::AAL1}} = single factor; {{c2::AAL2}} = two factors (or one multi-factor authenticator); {{c3::AAL3}} = hardware-based, verifier-impersonation-resistant authenticator.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>In practice:</b> AAL3 means FIDO2 security keys or PIV smart cards, not TOTP or push.",
+   "source": "Identity · NIST 800-63",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::01 Identity Concepts",
+   "tags": [
+    "identity::concepts"
+   ],
+   "front": "Why does NIST 800-63 separate <b>identity proofing</b> from <b>authentication</b>?",
+   "back": "Proofing happens once, at enrollment (who is this person?). Authentication happens every login (is this the same subject as enrolled?). Different risks, different controls.",
+   "text": "",
+   "image": "",
+   "analogy": "Proofing is the background check when you're hired; authentication is swiping your badge each morning.",
+   "extra": "",
+   "source": "Identity · NIST 800-63",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Identity & Zero Trust::02 Credentials & Authentication",
+   "tags": [
+    "identity::authn"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Authentication factors: {{c1::something you know}} (password, PIN), {{c2::something you have}} (key, phone, card), {{c3::something you are}} (biometric).",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Rule:</b> MFA needs two <i>different</i> categories. Password + security question is still one factor.",
+   "source": "Authentication · NIST 800-63B",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::02 Credentials & Authentication",
+   "tags": [
+    "identity::authn"
+   ],
+   "front": "Why store <b>password hashes</b> with a slow KDF instead of a fast hash like SHA-256?",
+   "back": "A fast hash lets attackers test billions of guesses per second offline. A deliberately slow, salted, memory-hard KDF makes each guess expensive.",
+   "text": "",
+   "image": "",
+   "analogy": "A lock that takes a second to try each key is fine for the owner but ruins a burglar with a million keys.",
+   "extra": "<b>Choices:</b> Argon2id (preferred), scrypt, bcrypt. PBKDF2 only where FIPS compliance forces it.",
+   "source": "Authentication · NIST 800-63B",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::02 Credentials & Authentication",
+   "tags": [
+    "identity::authn"
+   ],
+   "front": "What does a <b>salt</b> protect against in password storage?",
+   "back": "Precomputed (rainbow) tables and cross-user attacks: a unique random salt per password means identical passwords hash differently and each must be cracked separately.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Authentication · NIST 800-63B",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::02 Credentials & Authentication",
+   "tags": [
+    "identity::authn"
+   ],
+   "front": "<b>Salt</b> vs <b>pepper</b> in password hashing?",
+   "back": "Salt: per-user, random, stored beside the hash. Pepper: one secret value kept outside the database (HSM, config) so a DB dump alone can't be cracked.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Authentication · NIST 800-63B",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::02 Credentials & Authentication",
+   "tags": [
+    "identity::authn"
+   ],
+   "front": "Why does NIST 800-63B advise <b>against</b> forced periodic password rotation and composition rules?",
+   "back": "They produce predictable patterns (Summer2024!) and reuse. Better: check against breached-password lists, allow long passphrases, rotate only on evidence of compromise.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Authentication · NIST 800-63B",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::02 Credentials & Authentication",
+   "tags": [
+    "identity::authn"
+   ],
+   "front": "What makes an authenticator <b>phishing-resistant</b>?",
+   "back": "The credential is cryptographically bound to the legitimate origin, so a look-alike site can't obtain a usable response. User judgment is not in the loop.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Phishing-resistant:</b> FIDO2/WebAuthn, PIV/smart cards, certificate-based auth. <b>Not:</b> SMS, TOTP, push, email codes.",
+   "source": "Authentication · NIST 800-63B",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::02 Credentials & Authentication",
+   "tags": [
+    "identity::authn"
+   ],
+   "front": "Why is <b>TOTP</b> phishable even though the code changes every 30 seconds?",
+   "back": "An attacker-in-the-middle proxy relays the code to the real site within the window. The code proves possession of the seed, not that you're talking to the right site.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Authentication · NIST 800-63B",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::02 Credentials & Authentication",
+   "tags": [
+    "identity::authn"
+   ],
+   "front": "Why is <b>SMS OTP</b> the weakest second factor?",
+   "back": "SIM swapping, SS7 interception and phishing relays all defeat it. Possession of a phone number is not strong possession of a device.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Authentication · NIST 800-63B",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::02 Credentials & Authentication",
+   "tags": [
+    "identity::authn"
+   ],
+   "front": "What is <b>MFA fatigue</b> (push bombing), and what counters it?",
+   "back": "Flooding a user with push prompts until they tap Approve. Counters: number matching, showing location/app context, rate limits, or moving to FIDO2.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Used in the 2022 Uber breach: the attacker also messaged the victim on WhatsApp pretending to be IT.",
+   "source": "Authentication · NIST 800-63B",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::02 Credentials & Authentication",
+   "tags": [
+    "identity::authn"
+   ],
+   "front": "<b>TOTP</b> vs <b>push notification</b> MFA: trade-off?",
+   "back": "TOTP: offline, no vendor dependency, but typed and phishable. Push: better UX and context, but needs connectivity and invites fatigue attacks. Neither resists AiTM phishing.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Authentication · NIST 800-63B",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::02 Credentials & Authentication",
+   "tags": [
+    "identity::authn"
+   ],
+   "front": "How does <b>WebAuthn</b> achieve phishing resistance?",
+   "back": "The browser includes the site's origin in the signed challenge and the authenticator holds a key pair per origin. A fake domain gets a different key, so the signature never fits.",
+   "text": "",
+   "image": "",
+   "analogy": "A key cut for one specific door: the phishing site has a different lock, so the key simply doesn't turn.",
+   "extra": "",
+   "source": "Authentication · FIDO2/WebAuthn",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Identity & Zero Trust::02 Credentials & Authentication",
+   "tags": [
+    "identity::authn"
+   ],
+   "front": "",
+   "back": "",
+   "text": "FIDO2 = {{c1::WebAuthn}} (the W3C browser API between site and browser) + {{c2::CTAP}} (the protocol between browser/OS and the external authenticator, e.g. over USB/NFC/BLE).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Authentication · FIDO2/WebAuthn",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::02 Credentials & Authentication",
+   "tags": [
+    "identity::authn"
+   ],
+   "front": "What is a <b>passkey</b>?",
+   "back": "A FIDO2/WebAuthn discoverable credential, usually synced across a user's devices via the platform's cloud keychain, replacing the password entirely.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Trade-off:</b> synced passkeys are convenient but tie assurance to the cloud account; device-bound passkeys (security keys) suit AAL3.",
+   "source": "Authentication · FIDO2/WebAuthn",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::02 Credentials & Authentication",
+   "tags": [
+    "identity::authn"
+   ],
+   "front": "<b>Roaming</b> vs <b>platform</b> authenticator in FIDO2?",
+   "back": "Roaming: separate hardware (YubiKey) used over CTAP, portable across devices. Platform: built into the device (Touch ID, Windows Hello, TPM-backed).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Authentication · FIDO2/WebAuthn",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::02 Credentials & Authentication",
+   "tags": [
+    "identity::authn"
+   ],
+   "front": "In WebAuthn, what does the <b>Relying Party ID</b> (rpId) constrain?",
+   "back": "The domain a credential is scoped to. The browser only offers the credential on that domain or its subdomains, which is the heart of the phishing resistance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Authentication · FIDO2/WebAuthn",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::02 Credentials & Authentication",
+   "tags": [
+    "identity::authn"
+   ],
+   "front": "Why does a WebAuthn <b>biometric</b> not leave the device, and why does that matter for privacy?",
+   "back": "The biometric only unlocks the local private key. The server sees a signature, never fingerprint data, so a server breach leaks no biometrics.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Authentication · FIDO2/WebAuthn",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::02 Credentials & Authentication",
+   "tags": [
+    "identity::authn"
+   ],
+   "front": "Why does <b>step-up authentication</b> exist?",
+   "back": "Not every action deserves the same friction. Log in at a low level; demand a stronger factor only for sensitive operations (payments, admin changes).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "OIDC expresses it with <code>acr_values</code> requests and the <code>acr</code> claim in the ID token.",
+   "source": "Authentication · NIST 800-63B",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::03 PKI & Certificates",
+   "tags": [
+    "identity::pki"
+   ],
+   "front": "What does an <b>X.509 certificate</b> actually assert?",
+   "back": "A CA's signed statement: \"this public key belongs to this subject (name/SAN), valid for this period, for these usages.\" It binds a key to an identity.",
+   "text": "",
+   "image": "<img src=\"idz_pki_chain.svg\">",
+   "analogy": "A notarised letter: the notary (CA) vouches that the signature (public key) belongs to the named person.",
+   "extra": "",
+   "source": "PKI · X.509 / RFC 5280",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::03 PKI & Certificates",
+   "tags": [
+    "identity::pki"
+   ],
+   "front": "How does a <b>certificate chain</b> establish trust?",
+   "back": "Each certificate is signed by the one above; the chain ends at a root in the verifier's trust store. Trusting the root means trusting everything it signed.",
+   "text": "",
+   "image": "<img src=\"idz_pki_chain.svg\">",
+   "analogy": "",
+   "extra": "<b>Pitfall:</b> servers forgetting to send intermediates; clients can't build the chain and fail with 'unknown issuer'.",
+   "source": "PKI · X.509 / RFC 5280",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::03 PKI & Certificates",
+   "tags": [
+    "identity::pki"
+   ],
+   "front": "Why do CAs use <b>offline roots</b> and <b>online intermediates</b>?",
+   "back": "The root key is the crown jewel: keep it offline and sign rarely. Intermediates do daily issuance; if one is compromised, revoke it without replacing every trust store.",
+   "text": "",
+   "image": "",
+   "analogy": "The master key stays in a vault; staff carry sub-keys that can be re-cut if lost.",
+   "extra": "",
+   "source": "PKI · X.509 / RFC 5280",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::03 PKI & Certificates",
+   "tags": [
+    "identity::pki"
+   ],
+   "front": "What is a <b>trust store</b>, and why do different clients disagree about validity?",
+   "back": "The set of root CAs a verifier accepts. Browsers, OSes, Java and containers ship different stores, so one cert may validate in Chrome and fail in a JVM or Alpine image.",
+   "text": "",
+   "image": "",
+   "analogy": "The list of notaries your bank recognises: a perfectly genuine stamp from an unlisted notary is still rejected.",
+   "extra": "",
+   "source": "PKI · X.509 / RFC 5280",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::03 PKI & Certificates",
+   "tags": [
+    "identity::pki"
+   ],
+   "front": "What is a <b>CSR</b>, and what does it deliberately not contain?",
+   "back": "A Certificate Signing Request: the public key plus requested subject/SANs, signed with the private key to prove possession. The private key never leaves the requester.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "PKI · X.509 / RFC 5280",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Identity & Zero Trust::03 PKI & Certificates",
+   "tags": [
+    "identity::pki"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Certificate name matching: modern clients check the {{c1::Subject Alternative Name (SAN)}} extension, not the legacy {{c2::Common Name (CN)}} field, which browsers now ignore.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "PKI · X.509 / RFC 5280",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::03 PKI & Certificates",
+   "tags": [
+    "identity::pki"
+   ],
+   "front": "What do <b>Key Usage</b> and <b>Extended Key Usage</b> constrain?",
+   "back": "What a certificate's key may do (signing, key encipherment, CA signing) and for which purposes (serverAuth, clientAuth, codeSigning). A server cert shouldn't sign other certs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Pitfall:</b> service-mesh client auth failing because a cert lacks <code>clientAuth</code> EKU.",
+   "source": "PKI · X.509 / RFC 5280",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::03 PKI & Certificates",
+   "tags": [
+    "identity::pki"
+   ],
+   "front": "What does the <b>Basic Constraints: CA</b> flag prevent?",
+   "back": "A leaf certificate acting as an issuer. Without the check, anyone with a valid server cert could mint certificates for any domain.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "This was a real bug class in early browsers and in some TLS libraries that skipped the check.",
+   "source": "PKI · X.509 / RFC 5280",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::03 PKI & Certificates",
+   "tags": [
+    "identity::pki"
+   ],
+   "front": "Why is <b>revocation</b> the weakest part of PKI?",
+   "back": "The cert looks valid until it expires; the verifier must actively ask whether it was revoked. CRLs lag and grow; OCSP adds latency, privacy leaks and soft-fail.",
+   "text": "",
+   "image": "",
+   "analogy": "A stolen credit card still has a valid expiry date printed on it; only a live check with the bank reveals the block.",
+   "extra": "",
+   "source": "PKI · Revocation",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::03 PKI & Certificates",
+   "tags": [
+    "identity::pki"
+   ],
+   "front": "What is <b>OCSP soft-fail</b>, and why does it undermine revocation?",
+   "back": "If the OCSP responder is unreachable, most clients proceed as if valid. An attacker who can block OCSP traffic therefore neutralises revocation.",
+   "text": "",
+   "image": "",
+   "analogy": "A guard who waves everyone through whenever the phone line to headquarters is dead.",
+   "extra": "",
+   "source": "PKI · Revocation",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::03 PKI & Certificates",
+   "tags": [
+    "identity::pki"
+   ],
+   "front": "What is <b>OCSP Must-Staple</b> meant to fix?",
+   "back": "Soft-fail: the certificate declares that a stapled OCSP response is required, so a missing staple is treated as failure instead of silently passing.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Rarely deployed; the industry is moving to short-lived certificates and browser-pushed revocation lists (CRLite, CRLSets) instead.",
+   "source": "PKI · Revocation",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::03 PKI & Certificates",
+   "tags": [
+    "identity::pki"
+   ],
+   "front": "Why do <b>short-lived certificates</b> change the revocation problem rather than solve it?",
+   "back": "With hours-to-days validity, expiry does the revoking: no CRL/OCSP needed. The cost moves to issuance automation, which must now be highly available.",
+   "text": "",
+   "image": "",
+   "analogy": "A day pass instead of a lifetime membership you would otherwise have to cancel.",
+   "extra": "<b>Trade-off:</b> an issuance outage now becomes an availability outage within hours.",
+   "source": "PKI · Lifecycle",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::03 PKI & Certificates",
+   "tags": [
+    "identity::pki"
+   ],
+   "front": "What does <b>ACME</b> automate?",
+   "back": "Domain validation and certificate issuance/renewal between a client and a CA: prove control of the name via an HTTP or DNS challenge, receive a cert, repeat before expiry.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Made famous by Let's Encrypt; cert-manager uses it in Kubernetes.",
+   "source": "PKI · ACME RFC 8555",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::03 PKI & Certificates",
+   "tags": [
+    "identity::pki"
+   ],
+   "front": "ACME <b>HTTP-01</b> vs <b>DNS-01</b> challenge: when do you need DNS-01?",
+   "back": "HTTP-01 serves a token on port 80 of the host. DNS-01 publishes a TXT record and is the only option for wildcard certs or hosts not reachable from the internet.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "PKI · ACME RFC 8555",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Identity & Zero Trust::03 PKI & Certificates",
+   "tags": [
+    "identity::pki"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Certificate lifecycle: {{c1::key generation}} → {{c2::CSR}} → {{c3::validation (domain/organisation)}} → {{c4::issuance}} → deployment → {{c5::renewal or revocation}}. Automate every step or outages follow.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "PKI · Lifecycle",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::03 PKI & Certificates",
+   "tags": [
+    "identity::pki"
+   ],
+   "front": "Why do <b>certificate expiries</b> cause so many outages?",
+   "back": "Issuance is automated once, renewal is forgotten; hidden certs (internal CAs, mTLS clients, webhooks) have no owner and no monitoring until they expire.",
+   "text": "",
+   "image": "",
+   "analogy": "Smoke-detector batteries: everyone knows they expire, nobody owns the calendar.",
+   "extra": "<b>In practice:</b> inventory every cert, alert on expiry, and prefer short lifetimes so renewal breakage surfaces early and often.",
+   "source": "PKI · Lifecycle",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::03 PKI & Certificates",
+   "tags": [
+    "identity::pki"
+   ],
+   "front": "What does <b>Certificate Transparency</b> add to public PKI?",
+   "back": "Public, append-only logs of every issued cert. Mis-issuance becomes detectable by the domain owner instead of relying on CAs behaving.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "PKI · Certificate Transparency",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::04 OAuth 2.0",
+   "tags": [
+    "identity::oauth"
+   ],
+   "front": "What problem does <b>OAuth 2.0</b> solve?",
+   "back": "Delegated authorization: let a client app access a user's resources at an API without the user handing over their password to the client.",
+   "text": "",
+   "image": "",
+   "analogy": "A hotel key card: it opens your room for your stay, but you never give the guest your master key or your identity.",
+   "extra": "",
+   "source": "OAuth 2.0 · RFC 6749",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Identity & Zero Trust::04 OAuth 2.0",
+   "tags": [
+    "identity::oauth"
+   ],
+   "front": "",
+   "back": "",
+   "text": "OAuth 2.0 roles: {{c1::Resource Owner}} (the user), {{c2::Client}} (the app wanting access), {{c3::Authorization Server}} (issues tokens), {{c4::Resource Server}} (the API that accepts tokens).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OAuth 2.0 · RFC 6749",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::04 OAuth 2.0",
+   "tags": [
+    "identity::oauth"
+   ],
+   "front": "<b>Confidential</b> vs <b>public</b> client in OAuth?",
+   "back": "Confidential clients (server-side apps) can keep a client secret. Public clients (SPAs, mobile, CLI) cannot, so they must use PKCE and never rely on a secret.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OAuth 2.0 · RFC 6749",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::04 OAuth 2.0",
+   "tags": [
+    "identity::oauth"
+   ],
+   "front": "Why does the <b>authorization code</b> flow exchange a code for a token instead of returning the token directly?",
+   "back": "The code travels through the browser (front channel) and is useless without the client's back-channel exchange. Tokens never touch the browser URL, history or logs.",
+   "text": "",
+   "image": "<img src=\"idz_auth_code_pkce.svg\">",
+   "analogy": "",
+   "extra": "",
+   "source": "OAuth 2.0 · RFC 6749",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Identity & Zero Trust::04 OAuth 2.0",
+   "tags": [
+    "identity::oauth"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Authorization code flow: client redirects user to the AS's {{c1::authorization endpoint}} → user authenticates/consents → AS redirects back with a {{c2::code}} → client POSTs code to the {{c3::token endpoint}} → receives access (and refresh) token.",
+   "image": "<img src=\"idz_auth_code_pkce.svg\">",
+   "analogy": "",
+   "extra": "",
+   "source": "OAuth 2.0 · RFC 6749",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::04 OAuth 2.0",
+   "tags": [
+    "identity::oauth"
+   ],
+   "front": "<b>Front channel</b> vs <b>back channel</b> in OAuth?",
+   "back": "Front channel: messages via browser redirects, visible and tamperable. Back channel: direct server-to-server HTTPS call. Secrets and tokens belong on the back channel.",
+   "text": "",
+   "image": "",
+   "analogy": "Front channel: a note carried by the user through a crowded hall. Back channel: a sealed phone line between two offices.",
+   "extra": "",
+   "source": "OAuth 2.0 · RFC 6749",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::04 OAuth 2.0",
+   "tags": [
+    "identity::oauth"
+   ],
+   "front": "What attack does <b>PKCE</b> prevent?",
+   "back": "Authorization code interception: a malicious app on the same device steals the code from the redirect. Without the original <code>code_verifier</code> the stolen code is worthless.",
+   "text": "",
+   "image": "<img src=\"idz_auth_code_pkce.svg\">",
+   "analogy": "",
+   "extra": "",
+   "source": "OAuth 2.0 · RFC 7636 PKCE",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Identity & Zero Trust::04 OAuth 2.0",
+   "tags": [
+    "identity::oauth"
+   ],
+   "front": "",
+   "back": "",
+   "text": "PKCE: client generates a random {{c1::code_verifier}}, sends its SHA-256 hash as {{c2::code_challenge}} with the authorization request, then presents the verifier at the token endpoint; the AS re-hashes and compares.",
+   "image": "",
+   "analogy": "Send a sealed photo of your key first; later show the key itself and prove it matches the photo.",
+   "extra": "",
+   "source": "OAuth 2.0 · RFC 7636 PKCE",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::04 OAuth 2.0",
+   "tags": [
+    "identity::oauth"
+   ],
+   "front": "Why is the <b>implicit grant</b> deprecated?",
+   "back": "The access token is returned in the URL fragment: exposed to browser history, referrers and scripts, with no client authentication and no way to use PKCE.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Replacement:</b> authorization code + PKCE, even for SPAs.",
+   "source": "OAuth 2.0 · Security BCP",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::04 OAuth 2.0",
+   "tags": [
+    "identity::oauth"
+   ],
+   "front": "Why is <b>Resource Owner Password Credentials</b> (ROPC) deprecated?",
+   "back": "The client handles the user's password, defeating OAuth's purpose, and it can't support MFA, SSO or phishing-resistant login.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OAuth 2.0 · Security BCP",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::04 OAuth 2.0",
+   "tags": [
+    "identity::oauth"
+   ],
+   "front": "When is the <b>client credentials</b> grant the right choice?",
+   "back": "Machine-to-machine calls with no user involved: the client authenticates as itself to the token endpoint and gets a token representing the application.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Pitfall:</b> using it for user-facing actions hides the real actor from audit logs.",
+   "source": "OAuth 2.0 · RFC 6749",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::04 OAuth 2.0",
+   "tags": [
+    "identity::oauth"
+   ],
+   "front": "What is the <b>device authorization grant</b> for?",
+   "back": "Input-constrained devices (TVs, CLIs): the device shows a short code and URL, the user approves on a phone, and the device polls the token endpoint.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Risk:</b> device-code phishing; attackers send victims a legitimate verification URL and code to approve.",
+   "source": "OAuth 2.0 · RFC 8628 Device",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::04 OAuth 2.0",
+   "tags": [
+    "identity::oauth"
+   ],
+   "front": "What is a <b>refresh token</b>, and why separate it from the access token?",
+   "back": "A long-lived credential used only at the token endpoint to obtain new short-lived access tokens. Keeps access tokens short without forcing re-login.",
+   "text": "",
+   "image": "",
+   "analogy": "Access token = daily visitor badge; refresh token = the letter at reception that lets you collect a new badge each morning.",
+   "extra": "",
+   "source": "OAuth 2.0 · RFC 6749",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::04 OAuth 2.0",
+   "tags": [
+    "identity::oauth"
+   ],
+   "front": "What is <b>refresh token rotation</b>, and what does it detect?",
+   "back": "Each refresh returns a new refresh token and invalidates the old one. If a stolen old token is replayed, the AS detects reuse and revokes the whole family.",
+   "text": "",
+   "image": "",
+   "analogy": "A ticket stub torn at every use; if two people show the same stub number, the whole ticket is voided.",
+   "extra": "",
+   "source": "OAuth 2.0 · Security BCP",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::04 OAuth 2.0",
+   "tags": [
+    "identity::oauth"
+   ],
+   "front": "What does an OAuth <b>scope</b> express?",
+   "back": "The client's requested permissions at the resource server (<code>read:repo</code>). Scopes limit the <i>client</i>, not what the user may do: both constraints apply.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OAuth 2.0 · RFC 6749",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::04 OAuth 2.0",
+   "tags": [
+    "identity::oauth"
+   ],
+   "front": "<b>Scope</b> vs <b>audience</b> in an access token?",
+   "back": "Scope: what operations are allowed. Audience: which resource server the token is for. A token with the right scope but wrong audience must be rejected.",
+   "text": "",
+   "image": "",
+   "analogy": "Scope is what the ticket lets you do; audience is which venue it's valid at.",
+   "extra": "",
+   "source": "OAuth 2.0 · RFC 6749",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::04 OAuth 2.0",
+   "tags": [
+    "identity::oauth"
+   ],
+   "front": "Why must the AS validate the <b>redirect_uri</b> with exact string matching?",
+   "back": "Pattern or prefix matching lets an attacker register or craft a URI that sends the authorization code to a server they control (open-redirect to code theft).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OAuth 2.0 · Security BCP",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::04 OAuth 2.0",
+   "tags": [
+    "identity::oauth"
+   ],
+   "front": "What is the <b>state</b> parameter for?",
+   "back": "CSRF protection on the redirect: the client binds a random value to the user's session and checks it on return, so an attacker can't inject their own code into your session.",
+   "text": "",
+   "image": "",
+   "analogy": "A cloakroom tag: you only accept the coat handed back if the number matches the tag in your pocket.",
+   "extra": "",
+   "source": "OAuth 2.0 · RFC 6749",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::04 OAuth 2.0",
+   "tags": [
+    "identity::oauth"
+   ],
+   "front": "What does <b>OAuth 2.1</b> change versus 2.0?",
+   "back": "Consolidates the security BCP: PKCE required, implicit and ROPC removed, exact redirect URI matching, refresh tokens sender-constrained or rotated, no bearer tokens in query strings.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OAuth 2.1 · draft",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::04 OAuth 2.0",
+   "tags": [
+    "identity::oauth"
+   ],
+   "front": "Why are <b>bearer tokens</b> risky by design?",
+   "back": "Whoever holds the token can use it; there is no proof the presenter is the legitimate client. Theft equals access until expiry.",
+   "text": "",
+   "image": "",
+   "analogy": "Cash: whoever holds the note can spend it, no questions asked.",
+   "extra": "",
+   "source": "OAuth 2.0 · RFC 6750",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::05 OpenID Connect",
+   "tags": [
+    "identity::oidc"
+   ],
+   "front": "What does <b>OpenID Connect</b> add on top of OAuth 2.0?",
+   "back": "An identity layer: a signed <b>ID token</b> saying who authenticated, when and how, plus standard claims, discovery and a userinfo endpoint.",
+   "text": "",
+   "image": "<img src=\"idz_oidc_tokens.svg\">",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenID Connect · Core 1.0",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::05 OpenID Connect",
+   "tags": [
+    "identity::oidc"
+   ],
+   "front": "<b>ID token</b> vs <b>access token</b>: who is each for?",
+   "back": "ID token: for the <i>client</i>, proves the user authenticated. Access token: for the <i>resource server</i>, grants API access. Never send an ID token to an API as authorization.",
+   "text": "",
+   "image": "<img src=\"idz_oidc_tokens.svg\">",
+   "analogy": "ID token = your passport, shown to the app. Access token = the boarding pass, shown at the gate (the API).",
+   "extra": "",
+   "source": "OpenID Connect · Core 1.0",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::05 OpenID Connect",
+   "tags": [
+    "identity::oidc"
+   ],
+   "front": "Why must an API <b>not</b> accept an ID token as an access token?",
+   "back": "Its audience is the client, not the API; it carries no scopes and may contain PII. Accepting it lets any client that received an ID token call your API.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenID Connect · Core 1.0",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Identity & Zero Trust::05 OpenID Connect",
+   "tags": [
+    "identity::oidc"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Core ID-token claims: {{c1::iss}} = issuer; {{c2::sub}} = stable subject identifier; {{c3::aud}} = client ID it was issued to; {{c4::exp}} = expiry; {{c5::iat}} = issued-at; {{c6::nonce}} = replay binding to the request.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenID Connect · Core 1.0",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::05 OpenID Connect",
+   "tags": [
+    "identity::oidc"
+   ],
+   "front": "Which ID-token claim should you key user accounts on, and why not <code>email</code>?",
+   "back": "<code>sub</code> (scoped to <code>iss</code>). Emails can change or be reassigned; some IdPs don't verify them. <code>iss</code>+<code>sub</code> is the stable, unique pair.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenID Connect · Core 1.0",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::05 OpenID Connect",
+   "tags": [
+    "identity::oidc"
+   ],
+   "front": "What is the <b>nonce</b> in OIDC for?",
+   "back": "The client puts a random nonce in the authentication request; the IdP echoes it in the ID token. The client verifies it to tie the token to its own request and block replay.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>vs state:</b> <code>state</code> protects the redirect/session (CSRF); <code>nonce</code> protects the ID token itself.",
+   "source": "OpenID Connect · Core 1.0",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::05 OpenID Connect",
+   "tags": [
+    "identity::oidc"
+   ],
+   "front": "<b>state</b> vs <b>nonce</b>: how to tell them apart?",
+   "back": "<code>state</code>: OAuth, round-trips via the redirect, binds the response to the browser session. <code>nonce</code>: OIDC, lands inside the signed ID token, binds the token to the request.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenID Connect · Core 1.0",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::05 OpenID Connect",
+   "tags": [
+    "identity::oidc"
+   ],
+   "front": "What does <b>OIDC Discovery</b> provide?",
+   "back": "A JSON document at <code>/.well-known/openid-configuration</code> listing endpoints, supported scopes/algorithms and the <code>jwks_uri</code>, so clients configure themselves from the issuer URL alone.",
+   "text": "",
+   "image": "",
+   "analogy": "A phone book published at a well-known address: give me the issuer, I look up every number myself.",
+   "extra": "",
+   "source": "OpenID Connect · Discovery 1.0",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::05 OpenID Connect",
+   "tags": [
+    "identity::oidc"
+   ],
+   "front": "What is the <b>userinfo endpoint</b>, and when would you use it instead of ID-token claims?",
+   "back": "An OAuth-protected endpoint returning the user's claims for an access token. Use it when the ID token is kept minimal or when claims change during the session.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenID Connect · Core 1.0",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Identity & Zero Trust::05 OpenID Connect",
+   "tags": [
+    "identity::oidc"
+   ],
+   "front": "",
+   "back": "",
+   "text": "OIDC standard scopes map to claim sets: {{c1::openid}} (required, requests an ID token), {{c2::profile}} (name, picture…), {{c3::email}}, {{c4::offline_access}} (asks for a refresh token).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenID Connect · Core 1.0",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::05 OpenID Connect",
+   "tags": [
+    "identity::oidc"
+   ],
+   "front": "What do the <b>acr</b> and <b>amr</b> claims tell a relying party?",
+   "back": "<code>acr</code>: the authentication context class (assurance level) achieved. <code>amr</code>: the methods used (pwd, otp, hwk). Both let RPs enforce step-up policy.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenID Connect · Core 1.0",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::05 OpenID Connect",
+   "tags": [
+    "identity::oidc"
+   ],
+   "front": "OIDC <b>response_type</b>: what does <code>code</code> vs <code>id_token</code> vs hybrid mean?",
+   "back": "<code>code</code>: everything via back-channel (recommended). <code>id_token</code>: implicit, token in the fragment (deprecated). Hybrid (<code>code id_token</code>): ID token up front, access token via code.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Modern guidance:</b> just use <code>code</code> with PKCE; hybrid's benefit (early identity) rarely justifies the complexity.",
+   "source": "OpenID Connect · Core 1.0",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::05 OpenID Connect",
+   "tags": [
+    "identity::oidc"
+   ],
+   "front": "What are <b>OIDC front-channel and back-channel logout</b>?",
+   "back": "Ways for the IdP to tell RPs a session ended: front-channel via hidden iframes in the browser; back-channel via a signed logout token POSTed server-to-server (more reliable).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenID Connect · Logout",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::05 OpenID Connect",
+   "tags": [
+    "identity::oidc"
+   ],
+   "front": "Why is <b>single logout</b> so hard in federated systems?",
+   "back": "Each RP holds its own session; the IdP must notify every one, over channels that may fail. Short RP sessions plus continuous revalidation are more robust than perfect logout.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenID Connect · Logout",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::05 OpenID Connect",
+   "tags": [
+    "identity::oidc"
+   ],
+   "front": "<b>OIDC</b> vs <b>SAML</b>: how to tell them apart at a glance?",
+   "back": "OIDC: JSON/JWT over REST, built on OAuth, mobile and API friendly. SAML: XML assertions via browser POST, enterprise SSO, no API access story.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Rule of thumb:</b> new apps and anything calling APIs → OIDC; legacy enterprise SaaS integration → SAML.",
+   "source": "OpenID Connect vs SAML",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::05 OpenID Connect",
+   "tags": [
+    "identity::oidc"
+   ],
+   "front": "When should an architect still choose <b>SAML</b> over OIDC?",
+   "back": "When the partner or SaaS only supports SAML, or an existing enterprise IdP and compliance tooling is built around SAML attribute contracts.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenID Connect vs SAML",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Identity & Zero Trust::06 Tokens: JWT, Opaque & Introspection",
+   "tags": [
+    "identity::tokens"
+   ],
+   "front": "",
+   "back": "",
+   "text": "A JWS-style JWT has three Base64url parts: {{c1::header}} (alg, kid, typ) . {{c2::payload}} (claims) . {{c3::signature}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Pitfall:</b> Base64url is encoding, not encryption. Anyone can read the payload; only JWE encrypts it.",
+   "source": "Tokens · RFC 7519 JWT",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::06 Tokens: JWT, Opaque & Introspection",
+   "tags": [
+    "identity::tokens"
+   ],
+   "front": "<b>JWS</b> vs <b>JWE</b>?",
+   "back": "JWS: signed JWT, readable by anyone, integrity and origin guaranteed. JWE: encrypted JWT, contents hidden from the client. Most access/ID tokens are JWS.",
+   "text": "",
+   "image": "",
+   "analogy": "JWS is a postcard with a tamper-evident seal; JWE is a sealed envelope.",
+   "extra": "",
+   "source": "Tokens · RFC 7519 JWT",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::06 Tokens: JWT, Opaque & Introspection",
+   "tags": [
+    "identity::tokens"
+   ],
+   "front": "<b>Self-contained (JWT)</b> vs <b>opaque</b> access tokens: trade-off?",
+   "back": "JWT: validated locally with the issuer's public key, fast, but can't be revoked before expiry. Opaque: just a reference, must be introspected, but revocation is immediate.",
+   "text": "",
+   "image": "",
+   "analogy": "JWT = a signed letter you can read yourself; opaque token = a claim ticket you must hand to the counter.",
+   "extra": "",
+   "source": "Tokens · RFC 7519 JWT",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::06 Tokens: JWT, Opaque & Introspection",
+   "tags": [
+    "identity::tokens"
+   ],
+   "front": "What is <b>token introspection</b>?",
+   "back": "A resource server POSTs a token to the AS's introspection endpoint and gets back <code>active</code> plus claims. Needed for opaque tokens; optional for JWTs when you want live revocation.",
+   "text": "",
+   "image": "",
+   "analogy": "Phoning the issuing bank to ask whether the card is still active before accepting it.",
+   "extra": "",
+   "source": "Tokens · RFC 7662",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::06 Tokens: JWT, Opaque & Introspection",
+   "tags": [
+    "identity::tokens"
+   ],
+   "front": "Why is the <b>alg: none</b> JWT attack possible?",
+   "back": "Libraries that trust the header's <code>alg</code> treat an unsigned token as valid. Verifiers must pin the expected algorithm and reject <code>none</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Tokens · RFC 7519 JWT",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::06 Tokens: JWT, Opaque & Introspection",
+   "tags": [
+    "identity::tokens"
+   ],
+   "front": "What is the <b>RS256-to-HS256 key confusion</b> attack?",
+   "back": "Attacker switches <code>alg</code> to HMAC and signs with the server's <i>public</i> key as the HMAC secret. A library that accepts any alg verifies it successfully.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Defence:</b> fix allowed algorithms per key; never let the token choose.",
+   "source": "Tokens · RFC 7519 JWT",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Identity & Zero Trust::06 Tokens: JWT, Opaque & Introspection",
+   "tags": [
+    "identity::tokens"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Mandatory JWT checks: signature with the expected key; {{c1::iss}} equals the trusted issuer; {{c2::aud}} contains this service; {{c3::exp}} not passed (small clock skew); {{c4::nbf}} reached if present.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Tokens · RFC 7519 JWT",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::06 Tokens: JWT, Opaque & Introspection",
+   "tags": [
+    "identity::tokens"
+   ],
+   "front": "Why must a resource server check <b>aud</b> even when the signature is valid?",
+   "back": "A valid token for another API from the same issuer would otherwise be accepted. Audience restriction stops token reuse across services (confused deputy).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Tokens · RFC 7519 JWT",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::06 Tokens: JWT, Opaque & Introspection",
+   "tags": [
+    "identity::tokens"
+   ],
+   "front": "What does the <b>kid</b> header do, and what's its security pitfall?",
+   "back": "Selects which key from the issuer's key set verifies the token, enabling rotation. Pitfall: treating <code>kid</code> as a file path or SQL value (injection) or fetching keys from a URL in the token.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Tokens · RFC 7519 JWT",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::06 Tokens: JWT, Opaque & Introspection",
+   "tags": [
+    "identity::tokens"
+   ],
+   "front": "What is a <b>JWKS</b> endpoint, and how does it enable key rotation?",
+   "back": "A JSON Web Key Set of the issuer's current public keys. The issuer publishes a new key, signs with it after a grace period, and verifiers fetch by <code>kid</code>; old keys retire later.",
+   "text": "",
+   "image": "",
+   "analogy": "A noticeboard of currently valid official stamps; verifiers compare the stamp on a letter to the board.",
+   "extra": "",
+   "source": "Tokens · RFC 7519 JWT",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::06 Tokens: JWT, Opaque & Introspection",
+   "tags": [
+    "identity::tokens"
+   ],
+   "front": "What is the <b>jku / x5u</b> header pitfall?",
+   "back": "They let the token name a URL for its own verification key. A verifier that follows it accepts attacker-hosted keys. Only trust keys from the pre-configured issuer.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Tokens · RFC 7519 JWT",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::06 Tokens: JWT, Opaque & Introspection",
+   "tags": [
+    "identity::tokens"
+   ],
+   "front": "What is a <b>sender-constrained</b> (proof-of-possession) token?",
+   "back": "A token bound to a key the client must prove it holds (DPoP or mTLS). A stolen token alone is useless without the key.",
+   "text": "",
+   "image": "",
+   "analogy": "A cheque payable only to the named account holder, versus cash.",
+   "extra": "",
+   "source": "Tokens · RFC 9449 DPoP",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::06 Tokens: JWT, Opaque & Introspection",
+   "tags": [
+    "identity::tokens"
+   ],
+   "front": "How does <b>DPoP</b> work in one sentence?",
+   "back": "The client signs each HTTP request (method, URL, time, token hash) with a private key whose public part the AS bound to the token; the RS verifies both.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Tokens · RFC 9449 DPoP",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::06 Tokens: JWT, Opaque & Introspection",
+   "tags": [
+    "identity::tokens"
+   ],
+   "front": "<b>DPoP</b> vs <b>mTLS-bound tokens</b>: when to pick which?",
+   "back": "mTLS binding (RFC 8705) suits services with a cert infrastructure and TLS terminating at the app. DPoP works at the application layer through proxies, CDNs and in browsers.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Tokens · RFC 8705 / 9449",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::06 Tokens: JWT, Opaque & Introspection",
+   "tags": [
+    "identity::tokens"
+   ],
+   "front": "What does <b>OAuth Token Exchange</b> (RFC 8693) let a service do?",
+   "back": "Trade one token for another at the AS: narrow scope, change audience for a downstream API, or carry delegation (<code>act</code> claim) so the chain of actors is visible.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Solves the 'pass the user's token everywhere' anti-pattern in microservices.",
+   "source": "Tokens · RFC 8693",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::06 Tokens: JWT, Opaque & Introspection",
+   "tags": [
+    "identity::tokens"
+   ],
+   "front": "<b>Impersonation</b> vs <b>delegation</b> in token exchange?",
+   "back": "Impersonation: the new token looks like it's the user; the intermediary vanishes. Delegation: the token says subject = user, <code>act</code> = service, preserving the audit trail.",
+   "text": "",
+   "image": "",
+   "analogy": "Signing a letter as the boss, versus signing it 'p.p.' on the boss's behalf: delegation keeps your name on it.",
+   "extra": "",
+   "source": "Tokens · RFC 8693",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::06 Tokens: JWT, Opaque & Introspection",
+   "tags": [
+    "identity::tokens"
+   ],
+   "front": "Why is <b>token revocation</b> inherently a trade-off against statelessness?",
+   "back": "Instant revocation needs shared state checked per request; stateless JWTs avoid that but stay valid until <code>exp</code>. Short lifetimes plus refresh rotation is the usual compromise.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Tokens · RFC 7009",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::06 Tokens: JWT, Opaque & Introspection",
+   "tags": [
+    "identity::tokens"
+   ],
+   "front": "What is the <b>phantom token</b> (or split token) pattern?",
+   "back": "Opaque tokens outside, JWTs inside: the API gateway introspects or exchanges the opaque token once and forwards a JWT to internal services.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Keeps PII out of clients and gives internal services fast local validation.",
+   "source": "Tokens · Patterns",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::07 SAML & Legacy Federation",
+   "tags": [
+    "identity::saml"
+   ],
+   "front": "What is a <b>SAML assertion</b>?",
+   "back": "A signed XML statement from the IdP about a subject: authentication statement (how/when), attribute statement (groups, email), and conditions (audience, validity window).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SAML 2.0 · OASIS",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Identity & Zero Trust::07 SAML & Legacy Federation",
+   "tags": [
+    "identity::saml"
+   ],
+   "front": "",
+   "back": "",
+   "text": "SAML assertion parts: {{c1::Authentication statement}} (who, when, how); {{c2::Attribute statement}} (name, groups, roles); {{c3::Conditions}} (NotBefore/NotOnOrAfter, AudienceRestriction).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SAML 2.0 · OASIS",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::07 SAML & Legacy Federation",
+   "tags": [
+    "identity::saml"
+   ],
+   "front": "<b>SP-initiated</b> vs <b>IdP-initiated</b> SAML flow?",
+   "back": "SP-initiated: user hits the app, is redirected to the IdP with an AuthnRequest, returns with a response. IdP-initiated: user clicks the app in the IdP portal; the IdP posts an unsolicited assertion.",
+   "text": "",
+   "image": "<img src=\"idz_saml_flow.svg\">",
+   "analogy": "",
+   "extra": "",
+   "source": "SAML 2.0 · OASIS",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::07 SAML & Legacy Federation",
+   "tags": [
+    "identity::saml"
+   ],
+   "front": "Why is <b>IdP-initiated SAML</b> considered less secure?",
+   "back": "No request to bind the response to (no <code>InResponseTo</code>), so stolen assertions can be replayed and attackers can inject a victim into their own session.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SAML 2.0 · OASIS",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::07 SAML & Legacy Federation",
+   "tags": [
+    "identity::saml"
+   ],
+   "front": "What does the <b>HTTP-POST binding</b> in SAML mean, and why not a redirect?",
+   "back": "The assertion is sent as a form field auto-submitted by the browser. Signed XML is too large for URL query strings, where redirects would carry it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SAML 2.0 · OASIS",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::07 SAML & Legacy Federation",
+   "tags": [
+    "identity::saml"
+   ],
+   "front": "What is the <b>XML Signature Wrapping</b> class of attacks?",
+   "back": "Moving the signed assertion elsewhere in the document and inserting a forged one where the parser looks. Verifier checks the signature on one node, processes another.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Lesson:</b> XML-DSig's flexibility is the root cause; OIDC's compact JWS avoids this class entirely.",
+   "source": "SAML 2.0 · OASIS",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::07 SAML & Legacy Federation",
+   "tags": [
+    "identity::saml"
+   ],
+   "front": "What is SAML <b>metadata</b> for?",
+   "back": "An XML document each side publishes with entity ID, endpoints, bindings and signing certs, so IdP and SP configure trust by exchanging files instead of hand-typing.",
+   "text": "",
+   "image": "",
+   "analogy": "Exchanging business cards with every address, phone number and signature specimen printed on them.",
+   "extra": "",
+   "source": "SAML 2.0 · OASIS",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::07 SAML & Legacy Federation",
+   "tags": [
+    "identity::saml"
+   ],
+   "front": "What is the <b>NameID</b> in SAML, and what is the persistent vs transient distinction?",
+   "back": "The subject identifier. Persistent: stable pairwise pseudonym per SP. Transient: one-time, for anonymous access. Email-format NameIDs are common but unstable.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SAML 2.0 · OASIS",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::07 SAML & Legacy Federation",
+   "tags": [
+    "identity::saml"
+   ],
+   "front": "Why does <b>SAML persist</b> despite OIDC?",
+   "back": "Thousands of enterprise SaaS apps and IdPs already speak it, attribute contracts are embedded in compliance processes, and it works fine for browser SSO.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SAML vs OIDC",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::07 SAML & Legacy Federation",
+   "tags": [
+    "identity::saml"
+   ],
+   "front": "What does SAML <b>lack</b> that pushed APIs and mobile to OAuth/OIDC?",
+   "back": "No access-token concept for calling APIs, no native mobile flow, and XML parsing is heavy. It only answers \"who logged in\", not \"may this app call that API\".",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SAML vs OIDC",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::07 SAML & Legacy Federation",
+   "tags": [
+    "identity::saml"
+   ],
+   "front": "What core idea makes <b>Kerberos</b> different from token-based web federation?",
+   "back": "Symmetric-key tickets issued by a trusted KDC: tickets are encrypted for a specific service with that service's key, so services verify them without calling home.",
+   "text": "",
+   "image": "",
+   "analogy": "A sealed envelope only the destination can open, issued by a trusted post office.",
+   "extra": "",
+   "source": "Kerberos · RFC 4120",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::07 SAML & Legacy Federation",
+   "tags": [
+    "identity::saml"
+   ],
+   "front": "Why doesn't <b>Kerberos</b> work well across the internet or between organisations?",
+   "back": "It assumes a shared KDC, pre-registered service principals and reachable ports; cross-realm trust is manual. Federation protocols were built for exactly those gaps.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kerberos · RFC 4120",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::07 SAML & Legacy Federation",
+   "tags": [
+    "identity::saml"
+   ],
+   "front": "Kerberos <b>ticket</b> vs OAuth <b>access token</b>: key contrast?",
+   "back": "Ticket: symmetric crypto, service-specific, verified offline with the service's own key. Access token: usually asymmetric signature or introspection, HTTP-native, works across organisations.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kerberos · RFC 4120",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::07 SAML & Legacy Federation",
+   "tags": [
+    "identity::saml"
+   ],
+   "front": "What is <b>Kerberos delegation</b>, and why is unconstrained delegation dangerous?",
+   "back": "Letting a service act as the user toward another service. Unconstrained delegation stores the user's TGT on the service; compromise it and you are every user who logged in.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Modern analogue:</b> OAuth token exchange with explicit <code>act</code> claims and audience limits.",
+   "source": "Kerberos · RFC 4120",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::07 SAML & Legacy Federation",
+   "tags": [
+    "identity::saml"
+   ],
+   "front": "What is <b>LDAP</b>, and what role does it still play?",
+   "back": "A protocol for querying hierarchical directories (users, groups, attributes). Still the backing store behind many IdPs and the authn/authz source for legacy apps.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "LDAP · RFC 4511",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::07 SAML & Legacy Federation",
+   "tags": [
+    "identity::saml"
+   ],
+   "front": "What is an <b>LDAP bind</b>, and why is 'authenticate by binding' a weak pattern?",
+   "back": "A bind authenticates the connection with a DN and password. Apps that log users in by binding handle plaintext passwords and bypass MFA and central session control.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "LDAP · RFC 4511",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::07 SAML & Legacy Federation",
+   "tags": [
+    "identity::saml"
+   ],
+   "front": "<b>LDAP directory</b> vs <b>IdP</b>: how to keep them apart?",
+   "back": "LDAP answers \"what attributes does this object have?\" over a persistent connection. An IdP answers \"did this user authenticate?\" with a signed assertion.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "LDAP · RFC 4511",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::08 Authorization Models",
+   "tags": [
+    "identity::authz"
+   ],
+   "front": "What is <b>RBAC</b>, and what is its structural weakness?",
+   "back": "Permissions attach to roles; subjects get roles. Weakness: role explosion as every combination of context (region, project, team) needs its own role.",
+   "text": "",
+   "image": "",
+   "analogy": "A key ring: fine for a few doors, but soon you carry a separate key for every room in every building.",
+   "extra": "",
+   "source": "Authorization · Models",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::08 Authorization Models",
+   "tags": [
+    "identity::authz"
+   ],
+   "front": "What is <b>ABAC</b>, and what does it solve that RBAC can't?",
+   "back": "Policies evaluate attributes of subject, resource, action and environment (\"owners may edit their own documents during business hours\"). Context without role explosion.",
+   "text": "",
+   "image": "",
+   "analogy": "RBAC is a guest list; ABAC is a bouncer with rules (over 18, dress code, before midnight).",
+   "extra": "",
+   "source": "Authorization · Models",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::08 Authorization Models",
+   "tags": [
+    "identity::authz"
+   ],
+   "front": "<b>RBAC</b> vs <b>ABAC</b>: how to decide?",
+   "back": "RBAC when permissions are coarse and stable and auditors want a reviewable role list. ABAC when decisions depend on resource or context attributes. Most systems blend them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Authorization · Models",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::08 Authorization Models",
+   "tags": [
+    "identity::authz"
+   ],
+   "front": "What is <b>ReBAC</b>?",
+   "back": "Relationship-based access control: permissions derive from a graph of relations (user → member of → team → owns → folder → contains → doc). Google Zanzibar popularised it.",
+   "text": "",
+   "image": "",
+   "analogy": "Permissions flow along the branches of an org chart or family tree: you inherit what the folder above you grants.",
+   "extra": "Suits sharing and hierarchy: Drive, GitHub repos, folder trees.",
+   "source": "Authorization · Zanzibar",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::08 Authorization Models",
+   "tags": [
+    "identity::authz"
+   ],
+   "front": "What problem did <b>Zanzibar</b> solve at Google scale?",
+   "back": "Consistent, low-latency authorization checks across trillions of relationship tuples with a <i>zookie</i> consistency token to avoid the \"new enemy\" problem.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Authorization · Zanzibar",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::08 Authorization Models",
+   "tags": [
+    "identity::authz"
+   ],
+   "front": "What is the <b>new enemy problem</b> in distributed authorization?",
+   "back": "Stale replica reads: you remove Bob's access then add a document; a check against an old snapshot still grants Bob. Zanzibar's zookies pin checks to a minimum snapshot.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Authorization · Zanzibar",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Identity & Zero Trust::08 Authorization Models",
+   "tags": [
+    "identity::authz"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Externalised authorization roles: {{c1::PEP}} (Policy Enforcement Point) intercepts the request; {{c2::PDP}} (Policy Decision Point) evaluates policy; {{c3::PIP}} (Policy Information Point) supplies attributes; {{c4::PAP}} (Policy Administration Point) authors policies.",
+   "image": "<img src=\"idz_pdp_pep_pip.svg\">",
+   "analogy": "",
+   "extra": "",
+   "source": "Authorization · XACML",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::08 Authorization Models",
+   "tags": [
+    "identity::authz"
+   ],
+   "front": "<b>PEP</b> vs <b>PDP</b>: key difference?",
+   "back": "The PEP sits in the request path and enforces (gateway, sidecar, middleware). The PDP decides and knows no HTTP; it can be a library, sidecar or central service.",
+   "text": "",
+   "image": "<img src=\"idz_pdp_pep_pip.svg\">",
+   "analogy": "PEP is the bouncer at the door; PDP is the manager on the radio who says yes or no.",
+   "extra": "",
+   "source": "Authorization · XACML",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::08 Authorization Models",
+   "tags": [
+    "identity::authz"
+   ],
+   "front": "Why separate the <b>PDP</b> from the application?",
+   "back": "Policies change on a different cadence from code, must be auditable by non-developers, and should be consistent across dozens of services.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Authorization · XACML",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::08 Authorization Models",
+   "tags": [
+    "identity::authz"
+   ],
+   "front": "What is <b>OPA</b> (Open Policy Agent) in this model, and what is Rego?",
+   "back": "A general-purpose PDP that evaluates JSON input against policies written in Rego, a declarative Datalog-like language. Used for API authz, Kubernetes admission, CI gates.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Authorization · OPA",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::08 Authorization Models",
+   "tags": [
+    "identity::authz"
+   ],
+   "front": "<b>Cedar</b> vs <b>Rego</b>: what does Cedar prioritise?",
+   "back": "Cedar (AWS) is purpose-built for authorization: entity/relationship schema, forbid-overrides-permit, analysable and formally verified. Rego is a general query language.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Authorization · Cedar",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::08 Authorization Models",
+   "tags": [
+    "identity::authz"
+   ],
+   "front": "Why do policy engines favour <b>default deny</b> with <b>forbid overriding permit</b>?",
+   "back": "A forgotten rule fails closed, and a single explicit prohibition can't be undone by accumulating permits elsewhere. It keeps reasoning about policy local.",
+   "text": "",
+   "image": "",
+   "analogy": "A door that locks when the power fails, rather than swinging open.",
+   "extra": "",
+   "source": "Authorization · Models",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::08 Authorization Models",
+   "tags": [
+    "identity::authz"
+   ],
+   "front": "What is the <b>principle of least privilege</b> in operational terms?",
+   "back": "Grant the minimum permissions needed for the task, for the minimum time, and remove them when the task ends. It's a process, not a one-time configuration.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Authorization · Models",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::08 Authorization Models",
+   "tags": [
+    "identity::authz"
+   ],
+   "front": "Why does <b>decision caching</b> at the PEP need care?",
+   "back": "Cached allows outlive revocations; cached denies outlive grants. Cache with short TTLs keyed on all decision inputs, and invalidate on policy or attribute change.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Authorization · Operations",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::08 Authorization Models",
+   "tags": [
+    "identity::authz"
+   ],
+   "front": "<b>Coarse-grained</b> vs <b>fine-grained</b> authorization: where does each live?",
+   "back": "Coarse (may this app/role reach this service?) at the gateway or mesh. Fine (may this user edit this row?) needs resource data, so it lives in or beside the application.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Authorization · Models",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::08 Authorization Models",
+   "tags": [
+    "identity::authz"
+   ],
+   "front": "What does <b>separation of duties</b> require of an authorization model?",
+   "back": "That some permission combinations are forbidden for one subject (request and approve a payment). Needs policy that reasons about toxic combinations, not just grants.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Authorization · Models",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::08 Authorization Models",
+   "tags": [
+    "identity::authz"
+   ],
+   "front": "<b>Permissions on identity</b> vs <b>permissions on resource</b> (resource policies)?",
+   "back": "Identity-based: attached to the subject (\"Alice may read bucket X\"). Resource-based: attached to the object (\"bucket X allows Alice\"). Cloud providers evaluate both and intersect them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Authorization · Models",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::09 Zero Trust Architecture",
+   "tags": [
+    "identity::zerotrust"
+   ],
+   "front": "What does <b>Zero Trust</b> reject, in one sentence?",
+   "back": "The idea that network location implies trust: being inside the perimeter (VPN, office LAN) grants nothing; every request is authenticated and authorized on its own.",
+   "text": "",
+   "image": "<img src=\"idz_zero_trust.svg\">",
+   "analogy": "A hotel where every door, lift and gym needs your key card, instead of one lobby guard and open corridors.",
+   "extra": "",
+   "source": "Zero Trust · NIST 800-207",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::09 Zero Trust Architecture",
+   "tags": [
+    "identity::zerotrust"
+   ],
+   "front": "Why did the <b>perimeter model</b> fail?",
+   "back": "Cloud, SaaS, remote work and mobile moved users and data outside; attackers who phished one inside device moved laterally freely. The perimeter protected the wrong boundary.",
+   "text": "",
+   "image": "",
+   "analogy": "Castle and moat: once an attacker is over the wall, every room inside is unlocked.",
+   "extra": "",
+   "source": "Zero Trust · NIST 800-207",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Identity & Zero Trust::09 Zero Trust Architecture",
+   "tags": [
+    "identity::zerotrust"
+   ],
+   "front": "",
+   "back": "",
+   "text": "NIST 800-207 tenets (1–3): all data sources and computing services are {{c1::resources}}; all communication is secured {{c2::regardless of network location}}; access is granted {{c3::per session}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Zero Trust · NIST 800-207",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Identity & Zero Trust::09 Zero Trust Architecture",
+   "tags": [
+    "identity::zerotrust"
+   ],
+   "front": "",
+   "back": "",
+   "text": "NIST 800-207 tenets (4–5): access is determined by {{c1::dynamic policy}} (identity, device, behaviour, environment); the enterprise {{c2::monitors and measures the integrity and security posture}} of all owned assets.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Zero Trust · NIST 800-207",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Identity & Zero Trust::09 Zero Trust Architecture",
+   "tags": [
+    "identity::zerotrust"
+   ],
+   "front": "",
+   "back": "",
+   "text": "NIST 800-207 tenets (6–7): authentication and authorization are {{c1::dynamic and strictly enforced before access}}; the enterprise {{c2::collects as much information as possible}} about assets and traffic to improve policy.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Zero Trust · NIST 800-207",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Identity & Zero Trust::09 Zero Trust Architecture",
+   "tags": [
+    "identity::zerotrust"
+   ],
+   "front": "",
+   "back": "",
+   "text": "NIST 800-207 logical components: the {{c1::Policy Engine}} makes the grant/deny decision; the {{c2::Policy Administrator}} establishes or tears down the session path; the {{c3::Policy Enforcement Point}} enables/monitors the connection.",
+   "image": "<img src=\"idz_zero_trust.svg\">",
+   "analogy": "",
+   "extra": "",
+   "source": "Zero Trust · NIST 800-207",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::09 Zero Trust Architecture",
+   "tags": [
+    "identity::zerotrust"
+   ],
+   "front": "<b>Policy Engine</b> vs <b>Policy Administrator</b> in NIST 800-207?",
+   "back": "The Engine decides (trust algorithm over identity, device, risk). The Administrator executes: issues session credentials and tells the PEP to open or close the path.",
+   "text": "",
+   "image": "<img src=\"idz_zero_trust.svg\">",
+   "analogy": "",
+   "extra": "",
+   "source": "Zero Trust · NIST 800-207",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::09 Zero Trust Architecture",
+   "tags": [
+    "identity::zerotrust"
+   ],
+   "front": "<b>Control plane</b> vs <b>data plane</b> in Zero Trust architecture?",
+   "back": "Control plane: engine and administrator deciding and configuring. Data plane: the PEP and the actual traffic between subject and resource. Decisions are made off-path, enforced in-path.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Zero Trust · NIST 800-207",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::09 Zero Trust Architecture",
+   "tags": [
+    "identity::zerotrust"
+   ],
+   "front": "What is the <b>implicit trust zone</b> in NIST 800-207?",
+   "back": "The segment past the PEP where traffic flows without further checks. Zero Trust aims to make that zone as small as possible, ideally a single resource.",
+   "text": "",
+   "image": "",
+   "analogy": "Airside at an airport: past security you walk freely, which is exactly why Zero Trust shrinks that area to one gate.",
+   "extra": "",
+   "source": "Zero Trust · NIST 800-207",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::09 Zero Trust Architecture",
+   "tags": [
+    "identity::zerotrust"
+   ],
+   "front": "What are the three main ZTA <b>deployment approaches</b> in 800-207?",
+   "back": "Enhanced identity governance (identity is the main policy input), micro-segmentation (network gateways per resource group), and software-defined perimeter (overlay network tunnels).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Zero Trust · NIST 800-207",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::09 Zero Trust Architecture",
+   "tags": [
+    "identity::zerotrust"
+   ],
+   "front": "What was <b>BeyondCorp</b>'s core move?",
+   "back": "Google removed VPN privileges: every internal app was put behind an identity-aware proxy that checked user and device inventory per request, from any network.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Zero Trust · BeyondCorp",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::09 Zero Trust Architecture",
+   "tags": [
+    "identity::zerotrust"
+   ],
+   "front": "Why does Zero Trust make <b>device identity</b> a first-class input?",
+   "back": "A legitimate user on a compromised or unmanaged device is still a threat. Device certificates plus posture (patched, disk-encrypted, EDR running) feed the policy decision.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Zero Trust · BeyondCorp",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::09 Zero Trust Architecture",
+   "tags": [
+    "identity::zerotrust"
+   ],
+   "front": "What is <b>device posture</b>?",
+   "back": "The measurable security state of an endpoint at request time: OS version, disk encryption, EDR health, jailbreak status. Collected by an agent or MDM and fed to the policy engine.",
+   "text": "",
+   "image": "",
+   "analogy": "A vehicle inspection sticker checked at the gate: the driver's licence alone doesn't get an unsafe car in.",
+   "extra": "",
+   "source": "Zero Trust · NIST 800-207",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::09 Zero Trust Architecture",
+   "tags": [
+    "identity::zerotrust"
+   ],
+   "front": "What is <b>micro-segmentation</b> in Zero Trust terms?",
+   "back": "Policy enforcement between individual workloads or small groups (identity-based firewalling, mesh policies), so compromise of one does not grant reach to its neighbours.",
+   "text": "",
+   "image": "",
+   "analogy": "Watertight compartments in a ship: one breach floods one compartment, not the hull.",
+   "extra": "Differs from VLAN segmentation by being identity/workload-aware rather than address-based.",
+   "source": "Zero Trust · NIST 800-207",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::09 Zero Trust Architecture",
+   "tags": [
+    "identity::zerotrust"
+   ],
+   "front": "<b>ZTNA</b> vs <b>VPN</b>: key difference?",
+   "back": "VPN joins the device to the network (then everything is reachable). ZTNA brokers access to one application at a time after identity and posture checks; the network stays invisible.",
+   "text": "",
+   "image": "",
+   "analogy": "VPN hands you keys to the building; ZTNA escorts you to one specific meeting room each time.",
+   "extra": "",
+   "source": "Zero Trust · ZTNA",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::09 Zero Trust Architecture",
+   "tags": [
+    "identity::zerotrust"
+   ],
+   "front": "What is an <b>identity-aware proxy</b>?",
+   "back": "A reverse proxy that authenticates the user (OIDC/SAML), checks device and policy, then forwards to the app with identity headers or a signed token. The PEP of BeyondCorp-style ZTA.",
+   "text": "",
+   "image": "",
+   "analogy": "A receptionist who checks your ID and your visitor badge, then walks you to one specific office.",
+   "extra": "",
+   "source": "Zero Trust · BeyondCorp",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::09 Zero Trust Architecture",
+   "tags": [
+    "identity::zerotrust"
+   ],
+   "front": "What does <b>continuous evaluation</b> mean in Zero Trust?",
+   "back": "Trust is re-assessed during the session, not only at login: posture changes, risk signals or revocation events can shorten, step-up or terminate access mid-session.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Standards:</b> Shared Signals Framework / CAEP let IdPs and apps exchange such events.",
+   "source": "Zero Trust · NIST 800-207",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::09 Zero Trust Architecture",
+   "tags": [
+    "identity::zerotrust"
+   ],
+   "front": "What is the <b>trust algorithm</b> in NIST 800-207?",
+   "back": "The policy engine's logic combining subject identity, device, resource sensitivity, behaviour and threat intel into a decision; may be score-based or criteria-based, singular or contextual.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Zero Trust · NIST 800-207",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::10 Workload & Machine Identity",
+   "tags": [
+    "identity::workload"
+   ],
+   "front": "Why do workloads need <b>identities</b> rather than shared secrets?",
+   "back": "Secrets are static, copied, leaked in logs and hard to rotate. An identity is attested from the platform, short-lived and specific to one workload, so it can be authorized and audited.",
+   "text": "",
+   "image": "",
+   "analogy": "A shared door code versus a named badge: the code tells you nothing about who entered.",
+   "extra": "",
+   "source": "Workload Identity · SPIFFE",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::10 Workload & Machine Identity",
+   "tags": [
+    "identity::workload"
+   ],
+   "front": "<b>Secret</b> vs <b>identity</b> for a service: how to tell them apart?",
+   "back": "A secret is something the workload <i>has</i> (API key, password) and must protect. An identity is something the platform <i>proves about</i> the workload, usually via short-lived credentials.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Workload Identity · SPIFFE",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::10 Workload & Machine Identity",
+   "tags": [
+    "identity::workload"
+   ],
+   "front": "What is the <b>secret zero</b> problem?",
+   "back": "To fetch secrets a workload needs a credential, which is itself a secret. Workload attestation breaks the loop: the platform vouches for the workload, no bootstrap secret required.",
+   "text": "",
+   "image": "<img src=\"idz_spiffe_attestation.svg\">",
+   "analogy": "You need a key to open the safe that holds the key. Attestation is the locksmith who recognises you and opens it.",
+   "extra": "",
+   "source": "Workload Identity · SPIFFE",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::10 Workload & Machine Identity",
+   "tags": [
+    "identity::workload"
+   ],
+   "front": "What does <b>SPIFFE</b> standardise?",
+   "back": "A naming scheme for workload identity (<code>spiffe://trust-domain/path</code>), credential formats (SVIDs), and the Workload API for obtaining them without secrets.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Workload Identity · SPIFFE",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::10 Workload & Machine Identity",
+   "tags": [
+    "identity::workload"
+   ],
+   "front": "What is an <b>SVID</b>?",
+   "back": "SPIFFE Verifiable Identity Document: a short-lived credential carrying a SPIFFE ID, either an X.509 certificate (SAN URI) or a JWT. The workload's proof of identity.",
+   "text": "",
+   "image": "",
+   "analogy": "An employee badge that expires at the end of every shift and is reissued automatically.",
+   "extra": "",
+   "source": "Workload Identity · SPIFFE",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::10 Workload & Machine Identity",
+   "tags": [
+    "identity::workload"
+   ],
+   "front": "<b>X.509-SVID</b> vs <b>JWT-SVID</b>: when do you use which?",
+   "back": "X.509-SVID for mTLS between workloads (transport-level identity). JWT-SVID when identity must pass through a layer that terminates TLS (L7 proxies, cloud APIs).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Workload Identity · SPIFFE",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::10 Workload & Machine Identity",
+   "tags": [
+    "identity::workload"
+   ],
+   "front": "What is <b>workload attestation</b> in SPIRE?",
+   "back": "The agent inspects the calling process via platform selectors (Kubernetes pod labels/service account, Unix UID, cloud instance metadata) and matches them to a registration entry.",
+   "text": "",
+   "image": "<img src=\"idz_spiffe_attestation.svg\">",
+   "analogy": "",
+   "extra": "",
+   "source": "Workload Identity · SPIFFE",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Identity & Zero Trust::10 Workload & Machine Identity",
+   "tags": [
+    "identity::workload"
+   ],
+   "front": "",
+   "back": "",
+   "text": "SPIRE two-step attestation: {{c1::node attestation}} proves the agent runs on a legitimate node (cloud instance identity doc, TPM, k8s PSAT); {{c2::workload attestation}} identifies the process calling the agent.",
+   "image": "<img src=\"idz_spiffe_attestation.svg\">",
+   "analogy": "",
+   "extra": "",
+   "source": "Workload Identity · SPIFFE",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::10 Workload & Machine Identity",
+   "tags": [
+    "identity::workload"
+   ],
+   "front": "What is a SPIFFE <b>trust domain</b>, and how does <b>federation</b> work between two?",
+   "back": "An administrative identity realm with its own CA bundle. Federation exchanges bundles via the SPIFFE bundle endpoint, so workloads in domain A can verify SVIDs from B.",
+   "text": "",
+   "image": "",
+   "analogy": "Two countries recognising each other's passports after exchanging specimen documents.",
+   "extra": "",
+   "source": "Workload Identity · SPIFFE",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::10 Workload & Machine Identity",
+   "tags": [
+    "identity::workload"
+   ],
+   "front": "How does a <b>service mesh</b> use workload identity for mTLS?",
+   "back": "The sidecar or node proxy receives an X.509 identity per workload (SPIFFE-formatted), authenticates peers via mTLS and feeds the peer identity into L7 authorization policy.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Networking and Kubernetes decks cover the TLS mechanics and Istio objects; here the point is identity as the policy key.",
+   "source": "Workload Identity · Service Mesh",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::10 Workload & Machine Identity",
+   "tags": [
+    "identity::workload"
+   ],
+   "front": "Why are <b>projected service account tokens</b> safer than legacy secret-based tokens in Kubernetes?",
+   "back": "They are time-bound, audience-bound and tied to the pod's lifetime, so a leaked token expires and only works at the intended API, not everywhere.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Workload Identity · Kubernetes",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::10 Workload & Machine Identity",
+   "tags": [
+    "identity::workload"
+   ],
+   "front": "What makes a Kubernetes service account token usable for <b>external</b> identity federation?",
+   "back": "The cluster exposes an OIDC discovery document and JWKS for its token issuer; external systems validate the JWT like any OIDC token and map <code>sub</code>/<code>aud</code> to a trust policy.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Workload Identity · Kubernetes",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::10 Workload & Machine Identity",
+   "tags": [
+    "identity::workload"
+   ],
+   "front": "What does <b>cloud workload identity federation</b> exchange, mechanically?",
+   "back": "A platform-issued OIDC token (Kubernetes SA, GitHub Actions, another cloud) for short-lived cloud credentials, via a trust policy that pins issuer, subject and audience.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Pitfall:</b> trust policies that match only on issuer let every workload in that issuer assume the role.",
+   "source": "Workload Identity · Cloud Federation",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::10 Workload & Machine Identity",
+   "tags": [
+    "identity::workload"
+   ],
+   "front": "Why should a workload identity <b>trust policy</b> constrain <code>sub</code> and <code>aud</code>, not just <code>iss</code>?",
+   "back": "Issuer alone identifies the platform, not the workload. Any pod or pipeline from that issuer could obtain the cloud role. Subject pins the workload; audience pins the target.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Workload Identity · Cloud Federation",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::10 Workload & Machine Identity",
+   "tags": [
+    "identity::workload"
+   ],
+   "front": "What is the <b>instance metadata service</b> risk for workload credentials?",
+   "back": "Any process on the node (including a compromised pod) can call the metadata endpoint and get the node's cloud credentials. SSRF bugs reach it too.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Fixes:</b> IMDSv2-style session tokens, blocking pod access to the metadata IP, per-pod identity instead of node identity.",
+   "source": "Workload Identity · Cloud",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::10 Workload & Machine Identity",
+   "tags": [
+    "identity::workload"
+   ],
+   "front": "Why is <b>per-pod identity</b> preferable to <b>node identity</b> in Kubernetes?",
+   "back": "Node identity is shared by every pod on the node: least privilege is impossible and audit trails blur. Per-pod identity gives each workload only its own role.",
+   "text": "",
+   "image": "",
+   "analogy": "Every flat with its own key, versus one key that opens the whole building.",
+   "extra": "",
+   "source": "Workload Identity · Kubernetes",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::10 Workload & Machine Identity",
+   "tags": [
+    "identity::workload"
+   ],
+   "front": "<b>Machine identity</b> for CI/CD: why prefer OIDC federation over long-lived deploy keys?",
+   "back": "Each pipeline run gets a short-lived token asserting repo, branch and environment; cloud trust policies can require <code>main</code> branch only. Nothing to leak or rotate.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Workload Identity · CI/CD",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::11 Cloud IAM Patterns",
+   "tags": [
+    "identity::cloud_iam"
+   ],
+   "front": "What is a <b>principal</b> in cloud IAM?",
+   "back": "Any authenticated entity that can make a request: human user, group, service identity, federated identity or assumed role. Policies name principals.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud IAM · Patterns",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::11 Cloud IAM Patterns",
+   "tags": [
+    "identity::cloud_iam"
+   ],
+   "front": "<b>Role</b> vs <b>policy</b> in cloud IAM: how to keep them apart?",
+   "back": "A policy is the document listing allowed/denied actions on resources. A role is an assumable identity (with attached policies) that principals take on temporarily.",
+   "text": "",
+   "image": "",
+   "analogy": "A policy is the job description; a role is the uniform you put on to perform it.",
+   "extra": "",
+   "source": "Cloud IAM · Patterns",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::11 Cloud IAM Patterns",
+   "tags": [
+    "identity::cloud_iam"
+   ],
+   "front": "What does <b>assuming a role</b> (impersonation) give you, mechanically?",
+   "back": "Short-lived credentials for a different identity, issued after the role's trust policy accepts you. Your permissions become the role's, not the union of both.",
+   "text": "",
+   "image": "<img src=\"idz_assume_role.svg\">",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud IAM · Patterns",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::11 Cloud IAM Patterns",
+   "tags": [
+    "identity::cloud_iam"
+   ],
+   "front": "<b>Trust policy</b> vs <b>permission policy</b> on a role?",
+   "back": "Trust policy: <i>who</i> may assume the role. Permission policy: <i>what</i> the role may do. Both must allow, and the caller's own policy must also allow the assume action.",
+   "text": "",
+   "image": "<img src=\"idz_assume_role.svg\">",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud IAM · Patterns",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::11 Cloud IAM Patterns",
+   "tags": [
+    "identity::cloud_iam"
+   ],
+   "front": "How does <b>cross-account (cross-tenant) access</b> work without sharing credentials?",
+   "back": "The target account creates a role trusting the source account's principal; the source assumes it and receives temporary credentials. Trust is declared on the resource side.",
+   "text": "",
+   "image": "<img src=\"idz_assume_role.svg\">",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud IAM · Patterns",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::11 Cloud IAM Patterns",
+   "tags": [
+    "identity::cloud_iam"
+   ],
+   "front": "What is the <b>confused deputy</b> problem in cross-account roles?",
+   "back": "A service that assumes roles on behalf of many customers could be tricked into using customer A's role for customer B. An external ID / audience condition the caller must present prevents it.",
+   "text": "",
+   "image": "",
+   "analogy": "A valet with keys to many cars handed a forged ticket: the external ID is the ticket stub only the real owner has.",
+   "extra": "",
+   "source": "Cloud IAM · Patterns",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::11 Cloud IAM Patterns",
+   "tags": [
+    "identity::cloud_iam"
+   ],
+   "front": "What is a <b>permission boundary</b>?",
+   "back": "A policy that caps the maximum permissions an identity can ever have, regardless of what is attached later. Lets teams create roles without being able to exceed the boundary.",
+   "text": "",
+   "image": "",
+   "analogy": "A credit limit: you choose what to buy, but the bank caps the total.",
+   "extra": "",
+   "source": "Cloud IAM · Patterns",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::11 Cloud IAM Patterns",
+   "tags": [
+    "identity::cloud_iam"
+   ],
+   "front": "How do cloud providers combine <b>identity policies</b>, <b>resource policies</b> and <b>organisation guardrails</b>?",
+   "back": "Explicit deny anywhere wins; otherwise the request needs an allow from identity or resource policy, within the organisation guardrail and permission boundary.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud IAM · Patterns",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::11 Cloud IAM Patterns",
+   "tags": [
+    "identity::cloud_iam"
+   ],
+   "front": "What is <b>privilege escalation</b> via IAM, and name the generic pattern?",
+   "back": "Using a permitted action to gain more permissions: e.g. rights to attach policies, update a trusted role, or create credentials for a more privileged identity.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Classic paths:</b> iam:PassRole + compute create; policy version update; modifying a role's trust policy; impersonating a service account.",
+   "source": "Cloud IAM · Patterns",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::11 Cloud IAM Patterns",
+   "tags": [
+    "identity::cloud_iam"
+   ],
+   "front": "Why is <b>'pass role to a service'</b> a classic escalation primitive?",
+   "back": "If you may launch a workload and attach a powerful role to it, you effectively gain that role by running your own code inside the workload.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud IAM · Patterns",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::11 Cloud IAM Patterns",
+   "tags": [
+    "identity::cloud_iam"
+   ],
+   "front": "What does <b>Just-in-Time (JIT) access</b> change about privileged roles?",
+   "back": "Nobody holds admin standing. Elevation is requested, optionally approved, granted for a time window and automatically removed, with the reason logged.",
+   "text": "",
+   "image": "",
+   "analogy": "A tool crib: borrow the dangerous tool for the job, sign it out, sign it back in.",
+   "extra": "",
+   "source": "Cloud IAM · Patterns",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::11 Cloud IAM Patterns",
+   "tags": [
+    "identity::cloud_iam"
+   ],
+   "front": "<b>Standing privilege</b> vs <b>JIT access</b>: why does it matter for breach impact?",
+   "back": "A phished admin with standing privilege is an instant full compromise. With JIT, the attacker must also pass an elevation request, approval and alerting.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud IAM · Patterns",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::11 Cloud IAM Patterns",
+   "tags": [
+    "identity::cloud_iam"
+   ],
+   "front": "How should a <b>break-glass</b> account be designed so it's safe to exist?",
+   "back": "Excluded from the IdP dependency, phishing-resistant credential sealed offline, alert on any use, scoped and time-limited where possible, credentials rotated after each use.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud IAM · Patterns",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::11 Cloud IAM Patterns",
+   "tags": [
+    "identity::cloud_iam"
+   ],
+   "front": "Why are <b>long-lived access keys</b> for humans considered an anti-pattern?",
+   "back": "They sit in laptops, repos and CI logs for years and work from anywhere. Federated SSO yields short-lived session credentials with MFA and central revocation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud IAM · Patterns",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::11 Cloud IAM Patterns",
+   "tags": [
+    "identity::cloud_iam"
+   ],
+   "front": "What are <b>service control / organisation policies</b> for?",
+   "back": "Guardrails applied to whole accounts or folders that even account admins can't lift: deny regions, deny disabling logging, deny leaving the organisation.",
+   "text": "",
+   "image": "",
+   "analogy": "Building codes: even the owner of the house can't waive them.",
+   "extra": "",
+   "source": "Cloud IAM · Patterns",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::11 Cloud IAM Patterns",
+   "tags": [
+    "identity::cloud_iam"
+   ],
+   "front": "What is <b>attribute- or tag-based access control</b> in cloud IAM?",
+   "back": "Policies conditioned on tags of the principal and resource matching (<code>project = ${principal.project}</code>), so one policy scales across teams instead of one role per team.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud IAM · Patterns",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::11 Cloud IAM Patterns",
+   "tags": [
+    "identity::cloud_iam"
+   ],
+   "front": "Cross-provider concept map: <b>AWS role</b>, <b>GCP service account impersonation</b>, <b>Azure managed identity</b>: what do they share?",
+   "back": "All provide a platform-issued, short-lived credential for a workload identity without storing a secret, and all rely on a trust relationship deciding who may obtain it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud IAM · Cross-provider",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::12 Sessions, Threats & Operations",
+   "tags": [
+    "identity::sessions"
+   ],
+   "front": "What is a <b>session</b>, and why does one exist after authentication?",
+   "back": "A server-side (or signed) record that the user authenticated, referenced by a cookie or token, so credentials aren't re-sent on every request.",
+   "text": "",
+   "image": "",
+   "analogy": "A festival wristband: your ticket is checked once at the gate, then the wristband gets you through every tent.",
+   "extra": "",
+   "source": "Sessions · OWASP",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::12 Sessions, Threats & Operations",
+   "tags": [
+    "identity::sessions"
+   ],
+   "front": "<b>Server-side session</b> vs <b>stateless signed session</b> (JWT in cookie)?",
+   "back": "Server-side: a random ID, instantly revocable, needs a store. Stateless: self-contained, scales without shared state, can't be revoked before expiry.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Sessions · OWASP",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::12 Sessions, Threats & Operations",
+   "tags": [
+    "identity::sessions"
+   ],
+   "front": "Why <b>regenerate the session ID</b> on login?",
+   "back": "Prevents session fixation: an attacker who planted a known session ID before login would otherwise own the authenticated session.",
+   "text": "",
+   "image": "",
+   "analogy": "A hotel re-encodes the key card at check-in, so a card the attacker handed you earlier no longer opens your room.",
+   "extra": "",
+   "source": "Sessions · OWASP",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Identity & Zero Trust::12 Sessions, Threats & Operations",
+   "tags": [
+    "identity::sessions"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Cookie hardening flags: {{c1::HttpOnly}} hides the cookie from JavaScript; {{c2::Secure}} sends it over HTTPS only; {{c3::SameSite}} limits cross-site sending.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Sessions · OWASP",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::12 Sessions, Threats & Operations",
+   "tags": [
+    "identity::sessions"
+   ],
+   "front": "<b>SameSite=Lax</b> vs <b>Strict</b> vs <b>None</b>?",
+   "back": "Strict: never sent cross-site. Lax: sent on top-level GET navigations only (default in modern browsers). None: always sent, requires <code>Secure</code>, needed for cross-site embeds and some SSO flows.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Sessions · OWASP",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::12 Sessions, Threats & Operations",
+   "tags": [
+    "identity::sessions"
+   ],
+   "front": "What is <b>CSRF</b>, and why does SameSite largely defuse it?",
+   "back": "A malicious site makes the browser send a state-changing request with the victim's cookies. SameSite stops cookies riding along on cross-site POSTs.",
+   "text": "",
+   "image": "",
+   "analogy": "Someone mails a pre-signed form from your address: the bank sees your letterhead and acts.",
+   "extra": "<b>Still use</b> anti-CSRF tokens for defence in depth and for non-cookie edge cases.",
+   "source": "Sessions · OWASP",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::12 Sessions, Threats & Operations",
+   "tags": [
+    "identity::sessions"
+   ],
+   "front": "Why is an OIDC login callback a <b>SameSite</b> pitfall?",
+   "back": "The IdP POSTs back cross-site (form_post), so a <code>Strict</code> or <code>Lax</code> session/state cookie isn't sent and the flow breaks. Use <code>None; Secure</code> for the state cookie or the <code>code</code> response via GET.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Sessions · OWASP",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::12 Sessions, Threats & Operations",
+   "tags": [
+    "identity::sessions"
+   ],
+   "front": "What is <b>Adversary-in-the-Middle (AiTM) phishing</b>?",
+   "back": "A reverse-proxy phishing site relays the real login (including OTP/push) in real time and captures the resulting session cookie or tokens, defeating most MFA.",
+   "text": "",
+   "image": "",
+   "analogy": "A fake ATM fascia that passes your card and PIN straight through to the real ATM behind it, keeping a copy.",
+   "extra": "<b>Defence:</b> FIDO2/WebAuthn (origin-bound), token binding, conditional access on device.",
+   "source": "Threats · Identity Attacks",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::12 Sessions, Threats & Operations",
+   "tags": [
+    "identity::sessions"
+   ],
+   "front": "What is <b>token theft</b> via infostealer, and why does MFA not help?",
+   "back": "Malware copies browser cookies or refresh tokens from a logged-in device. The attacker replays an already-authenticated session; MFA already happened.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Defence:</b> device-bound sessions (DPoP, token binding), short sessions, posture checks, revocation on anomaly.",
+   "source": "Threats · Identity Attacks",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::12 Sessions, Threats & Operations",
+   "tags": [
+    "identity::sessions"
+   ],
+   "front": "What is <b>consent phishing</b>?",
+   "back": "Attacker registers a malicious OAuth app and tricks users into granting it scopes (read mail, files). No password stolen; the app holds a legitimate refresh token.",
+   "text": "",
+   "image": "",
+   "analogy": "Signing a power of attorney thinking it was a petition.",
+   "extra": "<b>Defence:</b> admin consent policies, publisher verification, restrict user consent to low-risk scopes, audit app grants.",
+   "source": "Threats · Identity Attacks",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::12 Sessions, Threats & Operations",
+   "tags": [
+    "identity::sessions"
+   ],
+   "front": "What is a <b>replay attack</b> in token terms, and which mechanisms counter it?",
+   "back": "Re-sending a captured valid message or token. Counters: nonces, short expiry, one-time codes (auth code single use), sender-constraining, <code>jti</code> tracking.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Threats · Identity Attacks",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::12 Sessions, Threats & Operations",
+   "tags": [
+    "identity::sessions"
+   ],
+   "front": "What is <b>credential stuffing</b>, and why does it work?",
+   "back": "Replaying username/password pairs from other breaches at scale. It works because people reuse passwords; rate limits, breached-password checks and MFA blunt it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Threats · Identity Attacks",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::12 Sessions, Threats & Operations",
+   "tags": [
+    "identity::sessions"
+   ],
+   "front": "<b>Session hijacking</b> vs <b>session fixation</b>?",
+   "back": "Hijacking: steal an existing valid session ID (XSS, malware, sniffing). Fixation: make the victim authenticate into a session ID the attacker already knows.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Threats · Identity Attacks",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::12 Sessions, Threats & Operations",
+   "tags": [
+    "identity::sessions"
+   ],
+   "front": "What is the <b>mover</b> stage's design requirement in joiner-mover-leaver?",
+   "back": "Access must be recomputed from the new role, not added on top: remove old entitlements first, then grant new ones. Birthright access should derive from attributes, not history.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Identity Governance · IGA",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::12 Sessions, Threats & Operations",
+   "tags": [
+    "identity::sessions"
+   ],
+   "front": "Why should <b>deprovisioning</b> be automated from the HR system rather than ticketed?",
+   "back": "Leaver tickets lag by days and miss accounts; HR termination events are authoritative. Automation disables the IdP account, revokes sessions and tokens within minutes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Identity Governance · IGA",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::12 Sessions, Threats & Operations",
+   "tags": [
+    "identity::sessions"
+   ],
+   "front": "What does <b>SCIM</b> standardise?",
+   "back": "A REST/JSON API (<code>/Users</code>, <code>/Groups</code>) for provisioning and deprovisioning identities from an IdP into apps, so lifecycle changes propagate automatically.",
+   "text": "",
+   "image": "",
+   "analogy": "SSO lets people through the door; SCIM is HR telling each building who should have a desk.",
+   "extra": "",
+   "source": "Identity Governance · SCIM RFC 7644",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::12 Sessions, Threats & Operations",
+   "tags": [
+    "identity::sessions"
+   ],
+   "front": "<b>SSO (SAML/OIDC)</b> vs <b>SCIM</b>: what does each handle?",
+   "back": "SSO handles authentication at login time (just-in-time user creation at best). SCIM handles the account lifecycle: create before first login, update attributes, deactivate on leaving.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Identity Governance · SCIM RFC 7644",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::12 Sessions, Threats & Operations",
+   "tags": [
+    "identity::sessions"
+   ],
+   "front": "Why is <b>JIT provisioning</b> via SSO alone insufficient for governance?",
+   "back": "Accounts appear only when someone logs in and never disappear; leavers keep accounts, and reviewers can't see entitlements before use. SCIM-style push provisioning closes the gap.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Identity Governance · IGA",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::12 Sessions, Threats & Operations",
+   "tags": [
+    "identity::sessions"
+   ],
+   "front": "How do you make <b>access reviews</b> effective instead of rubber-stamping?",
+   "back": "Review risk-based (privileged and sensitive first), show usage data, default to remove on no response, and keep each reviewer's list short.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Identity Governance · IGA",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Identity & Zero Trust::12 Sessions, Threats & Operations",
+   "tags": [
+    "identity::sessions"
+   ],
+   "front": "What is <b>Shared Signals / CAEP</b> for?",
+   "back": "A standard for IdPs, apps and security tools to push security events (session revoked, credential changed, device non-compliant) to each other, enabling continuous evaluation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Identity Governance · OpenID SSF",
+   "reverse": false
+  }
+ ]
+}
