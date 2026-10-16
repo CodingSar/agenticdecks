@@ -28,3 +28,13 @@
 
 ## Analogies: 25 cards (~18%)
 Examples: phone tree (action group), bouncer (Conditional Access), building code vs keys (Policy vs RBAC), shared printer (elastic pool), photo album vs second house (Backup vs Site Recovery), photocopies (redundancy ≠ backup), order rail (queue load leveling), airline hub (hub-spoke), friend of a friend (non-transitive peering), phone directory vs receptionist (Traffic Manager vs Front Door).
+
+## Product-content review
+
+Reviewed card by card for vendor-catered content: 0 deleted, 1 rewritten to the underlying concept, 1 scrubbed of marketing/dated phrasing.
+
+### Rewritten (1)
+- "What is Cosmos DB's key differentiator vs a relational database for global apps?" → "When do you recommend Cosmos DB over a relational database?"
+
+### Scrubbed (1)
+- "Azure Blueprints is retiring. What replaces it?": removed dated retirement-timeline extra (phase-out dates)

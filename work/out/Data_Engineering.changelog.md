@@ -18,3 +18,20 @@
 
 ## Analogies
 - 14 added (e.g. partitions as checkout lanes, ISR as understudies, retention vs compaction as CCTV vs contacts list, ETL vs ELT as central kitchen vs groceries).
+
+## Product-content review
+
+Reviewed card by card for vendor-catered content: 3 deleted, 6 rewritten to the underlying concept, 0 scrubbed of marketing/dated phrasing.
+
+### Deleted (3)
+- "Event Hubs ↔ Kafka vocabulary: namespace ≈ {{c1::cluster}}, event hub ≈ {{c2::topic}}; partitions and consumer groups keep their names." — single-vendor naming taxonomy (Event Hubs ↔ Kafka terms); folded into the Kafka-compatible-services card's extra
+- "What do Redshift RA3 nodes change?" — single-vendor SKU (Redshift RA3 node type); the concept is already the 'separation of storage and compute' card
+- "How does an Azure Synapse dedicated SQL pool lay out data?" — single-vendor SKU internals (Synapse 60 distributions, DWU levels) plus dated successor note; nothing transferable
+
+### Rewritten (6)
+- "Amazon MSK vs Kinesis Data Streams?" → "Managed open-source Kafka vs a provider-proprietary streaming service: trade-off?"
+- "How does Azure Event Hubs relate to Kafka?" → "Kafka-protocol-compatible services that aren't Kafka: what works, and what doesn't?"
+- "What is Event Hubs Capture?" → "What is the 'stream capture to lake' pattern?"
+- "Amazon Redshift: what do the leader node and compute nodes do?" → "MPP warehouse architecture: what do the leader (coordinator) node and the compute nodes do?"
+- "What do Redshift distribution keys and sort keys control?" → "In an MPP warehouse, what do distribution keys and sort/cluster keys control?"
+- "Synapse table distribution: {{c1::HASH(column)}} for large fact tables (high-cardinality join key); {{c2::ROUND_ROBIN}} (default, fastest load, joins shuffle); {{c3::REPLICATE}} for small dimensions." → "MPP table distribution strategies: {{c1::hash on a column}} for large fact tables (high-cardinality join key); {{c2::round-robin}} (fastest load, joins shuffle); {{c3::replicate}} for small dimensions."

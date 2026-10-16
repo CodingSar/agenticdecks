@@ -172,12 +172,12 @@
     "reliability-regions",
     "tradeoffs"
    ],
-   "front": "What does GCP VM live migration do that AWS/Azure typically don't?",
-   "back": "Moves a running VM to another host during host maintenance with <b>no reboot</b>. AWS/Azure often need a scheduled reboot or stop/start for some maintenance events.",
+   "front": "VM live migration during host maintenance: what does it do, and why does it matter for stateful VMs?",
+   "back": "Moves a running VM to another host with <b>no reboot</b>, so host maintenance doesn't interrupt long-running stateful VMs. Without it, maintenance means a scheduled reboot or stop/start.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Effect:</b> fewer maintenance interruptions for long-running stateful VMs on GCP.",
+   "extra": "<b>Example:</b> GCP Compute Engine live-migrates by default; AWS/Azure often need a reboot or stop/start for some maintenance events.",
    "source": "Cloud · Trade-offs",
    "reverse": false
   },
@@ -226,12 +226,12 @@
     "iam-governance",
     "tradeoffs"
    ],
-   "front": "In AWS IAM policy evaluation, what wins when an Allow and a Deny both match?",
+   "front": "In cloud IAM policy evaluation, what wins when an Allow and a Deny both match?",
    "back": "The <b>explicit Deny</b>. Default is implicit deny; an Allow only applies if no Deny matches.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "",
+   "extra": "Same rule in AWS IAM, Azure RBAC deny assignments and GCP IAM deny policies.",
    "source": "Cloud · Trade-offs",
    "reverse": false
   },
@@ -244,12 +244,12 @@
     "iam-governance",
     "tradeoffs"
    ],
-   "front": "What is a GCP IAM binding, and how far does it reach?",
-   "back": "A role granted to a principal <b>on a node of the resource hierarchy</b> (org, folder, project, resource). It is inherited by everything below that node.",
+   "front": "In a hierarchical IAM model, what is a role binding/assignment, and how far does it reach?",
+   "back": "A role granted to a principal <b>on a node of the resource hierarchy</b> (org, folder/management group, project/subscription, resource). It is inherited by everything below that node.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "",
+   "extra": "<b>Examples:</b> GCP IAM bindings; Azure RBAC role assignments on a scope.",
    "source": "Cloud · Trade-offs",
    "reverse": false
   },
@@ -513,12 +513,12 @@
     "networking",
     "tradeoffs"
    ],
-   "front": "Managed service mesh in 2026: what replaced AWS App Mesh and Azure Open Service Mesh?",
-   "back": "<b>AWS:</b> App Mesh reached end of support (Sept 2026) → VPC Lattice or ECS Service Connect.<br><b>Azure:</b> OSM retired → Istio-based AKS add-on.<br>GCP: Cloud Service Mesh (managed Istio).",
+   "front": "Managed (provider-branded) service meshes: what is the durable pattern behind the churn?",
+   "back": "Provider-branded meshes come and go; <b>Istio</b> is the common substrate underneath and the Kubernetes Gateway API the converging surface. Design against those, not the brand.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "Lesson: managed meshes churn; Istio is the converging standard underneath.",
+   "extra": "<b>Examples:</b> AWS App Mesh retired (→ VPC Lattice / ECS Service Connect); Azure Open Service Mesh retired (→ Istio-based AKS add-on); GCP Cloud Service Mesh is managed Istio.",
    "source": "Cloud · Trade-offs",
    "reverse": false
   },
@@ -590,7 +590,7 @@
    "text": "<b>Managed Kubernetes</b><br>AWS: {{c1::EKS}}<br>Azure: {{c2::AKS}}<br>GCP: {{c3::GKE}}",
    "image": "",
    "analogy": "",
-   "extra": "GKE is generally seen as the most mature (Kubernetes came from Google).",
+   "extra": "",
    "source": "Cloud · Service mapping",
    "reverse": false
   },
@@ -605,12 +605,12 @@
     "pricing",
     "tradeoffs"
    ],
-   "front": "Managed Kubernetes cost: which of EKS / AKS / GKE does <i>not</i> charge for the control plane by default?",
-   "back": "<b>AKS</b> (Free tier; the paid Standard tier adds an uptime SLA). EKS bills ~$0.10 per cluster-hour; GKE charges a cluster management fee (free-tier credit covers one cluster).",
+   "front": "Managed Kubernetes cost: what do you pay for besides the worker nodes?",
+   "back": "A <b>control-plane fee</b> per cluster-hour (sometimes waived on a free tier whose paid tier adds an uptime SLA), plus load balancers, storage and egress. Many small clusters multiply the fixed fee.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "Exact rates drift; the structure is the durable fact.",
+   "extra": "<b>Examples:</b> EKS ~$0.10 per cluster-hour; GKE a management fee with a free-tier credit for one cluster; AKS Free tier (Standard adds the SLA). Rates drift; the structure is the durable fact.",
    "source": "Cloud · Trade-offs",
    "reverse": false
   },
@@ -624,12 +624,12 @@
     "compute",
     "tradeoffs"
    ],
-   "front": "GKE Autopilot vs Standard: what do you give up for not managing nodes?",
-   "back": "Autopilot: Google runs the nodes, you pay per <b>pod resource request</b>. You lose node-level freedom (privileged pods, some DaemonSets, custom node config).",
+   "front": "Node-less (fully managed node) mode of a managed Kubernetes service vs standard node pools: what do you give up?",
+   "back": "The provider runs and sizes the nodes; you pay per <b>pod resource request</b>. You lose node-level freedom: privileged pods, some DaemonSets, custom node config and kernel tuning.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "EKS/AKS analogs: Fargate profiles, AKS Automatic / virtual nodes (ACI).",
+   "extra": "<b>Examples:</b> GKE Autopilot, EKS Fargate profiles, AKS Automatic / virtual nodes (ACI).",
    "source": "Cloud · Trade-offs",
    "reverse": false
   },
@@ -866,12 +866,12 @@
     "storage",
     "databases"
    ],
-   "front": "Is S3 eventually consistent?",
-   "back": "No longer. Since <b>December 2020</b> S3 is <b>strongly read-after-write consistent</b> for all operations. Azure Blob and GCS are strongly consistent too.",
+   "front": "Are cloud object stores (S3, Blob Storage, GCS) eventually consistent?",
+   "back": "No. All three are <b>strongly read-after-write consistent</b> for all operations (S3 since December 2020; Blob Storage and GCS earlier).",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "Old interview answers calling S3 eventually consistent are outdated.",
+   "extra": "Older interview answers calling S3 eventually consistent are outdated.",
    "source": "Cloud · Trade-offs",
    "reverse": false
   },
@@ -1126,7 +1126,7 @@
     "tradeoffs"
    ],
    "front": "DynamoDB vs Cosmos DB: how does each go multi-region, and how much consistency choice do you get?",
-   "back": "<b>DynamoDB:</b> regional; Global Tables add multi-active replication (last-writer-wins). Reads: eventual or strong.<br><b>Cosmos DB:</b> turnkey global distribution with <b>five</b> tunable consistency levels.",
+   "back": "<b>DynamoDB:</b> regional; Global Tables add multi-active replication (last-writer-wins). Reads: eventual or strong.<br><b>Cosmos DB:</b> built-in global distribution with <b>five</b> tunable consistency levels.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1216,12 +1216,12 @@
     "pricing",
     "tradeoffs"
    ],
-   "front": "Which automatic, no-commitment discount is unique to GCP?",
-   "back": "<b>Sustained Use Discounts:</b> Compute Engine VMs that run for a large share of the month get cheaper automatically.",
+   "front": "Commitment-based vs automatic usage-based discounts: what is the difference?",
+   "back": "<b>Commitment:</b> you promise 1–3 years of spend or instances and get the discount up front (reservations, savings plans, CUDs).<br><b>Automatic:</b> the provider discounts resources that run most of the month, with no promise.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "AWS/Azure need an explicit reservation or savings plan for comparable discounts.",
+   "extra": "<b>Example:</b> GCP Sustained Use Discounts are automatic; AWS/Azure need an explicit reservation or savings plan for comparable discounts.",
    "source": "Cloud · Trade-offs",
    "reverse": false
   },
@@ -1669,23 +1669,6 @@
    "reverse": false
   },
   {
-   "guid": "kwiMkg?[Wl",
-   "type": "cloze",
-   "deck": "Cloud Architecture::09 AI Accelerators",
-   "tags": [
-    "GPU",
-    "cloud::ai-infra"
-   ],
-   "front": "",
-   "back": "",
-   "text": "Datacenter AI accelerators: NVIDIA {{c1::H100 / H200}} (Hopper) and {{c2::B200}} (Blackwell); AMD {{c3::MI300X}}.",
-   "image": "",
-   "analogy": "",
-   "extra": "Generations churn yearly; know the current flagship names and their memory sizes when sizing.",
-   "source": "Cloud · AI infrastructure",
-   "reverse": false
-  },
-  {
    "guid": "xfS=.n~wm5",
    "type": "basic",
    "deck": "Cloud Architecture::09 AI Accelerators",
@@ -1780,10 +1763,10 @@
    ],
    "front": "",
    "back": "",
-   "text": "AWS custom AI chips: {{c1::Trainium}} for training, {{c2::Inferentia}} for inference.",
+   "text": "Cloud providers split custom AI silicon into {{c1::training}} chips (throughput, large memory, fast interconnect) and {{c2::inference}} chips (latency and cost per query at low precision).",
    "image": "",
    "analogy": "",
-   "extra": "",
+   "extra": "<b>Example:</b> AWS Trainium and Inferentia; Google TPU generations also come in training- and inference-oriented variants.",
    "source": "Cloud · AI infrastructure",
    "reverse": false
   },

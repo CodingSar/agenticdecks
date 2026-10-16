@@ -19,3 +19,16 @@ No whole notes deleted. Redundant fragments dropped during splits: Object Storag
 
 ## Analogies
 18 notes (~11%), all new: Gardener seeds/shoots, SNA as shared VPC, Pinniped passport office, admin kubeconfig master key, break-glass fire axe, JWKS hologram check, ESO pantry, registry warehouse, split-horizon phonebook, hub location, and others.
+
+## Product-content review
+
+Reviewed card by card for vendor-catered content: 1 deleted, 1 rewritten to the underlying concept, 1 scrubbed of marketing/dated phrasing.
+
+### Deleted (1)
+- "What was yawol on SKE?" — dated history item (legacy LB operator used by clusters created before June 2024); no decision value for new designs
+
+### Rewritten (1)
+- "Who operates STACKIT, and what is its core positioning?" → "Who operates STACKIT, and why do architects choose it?"
+
+### Scrubbed (1)
+- "Why is STACKIT attractive for Dutch/EU public-sector compliance (BIO2, NIS2)?": dropped 'Strong sovereignty answers' lead-in

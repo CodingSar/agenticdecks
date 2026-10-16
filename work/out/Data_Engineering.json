@@ -672,12 +672,12 @@
     "DataEng::kafka-ecosystem",
     "AWS"
    ],
-   "front": "Amazon MSK vs Kinesis Data Streams?",
-   "back": "<b>MSK</b>: real Kafka (clients, Connect, Streams), long retention, tiered storage. <b>Kinesis</b>: proprietary API, capacity in shards (1 MB/s in, 2 MB/s out), tight Lambda/Firehose integration, simpler but lock-in.",
+   "front": "Managed open-source Kafka vs a provider-proprietary streaming service: trade-off?",
+   "back": "<b>Managed Kafka:</b> real Kafka protocol and ecosystem (clients, Connect, Streams), long retention, portable.<br><b>Proprietary stream:</b> capacity in provider units (shards), tight integration with the provider's serverless and delivery services; simpler but lock-in.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "",
+   "extra": "<b>Example:</b> Amazon MSK vs Kinesis Data Streams (shards of 1 MB/s in, 2 MB/s out).",
    "source": "Data Eng · Kafka",
    "reverse": false
   },
@@ -689,29 +689,12 @@
     "DataEng::kafka-ecosystem",
     "Azure"
    ],
-   "front": "How does Azure Event Hubs relate to Kafka?",
-   "back": "It exposes a <b>Kafka-compatible endpoint</b>: Kafka clients work with a connection-string change. It isn't Kafka, so Connect/Streams aren't fully supported natively.",
+   "front": "Kafka-protocol-compatible services that aren't Kafka: what works, and what doesn't?",
+   "back": "Kafka clients connect with a connection-string change, but the broker isn't Kafka: Connect, Streams and broker-side features (transactions, compaction details, tiered storage) may be missing or partial. Check feature parity before committing.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "",
-   "source": "Data Eng · Kafka",
-   "reverse": false
-  },
-  {
-   "guid": null,
-   "type": "cloze",
-   "deck": "Data Engineering::04 Kafka Ecosystem & Managed Streaming",
-   "tags": [
-    "DataEng::kafka-ecosystem",
-    "Azure"
-   ],
-   "front": "",
-   "back": "",
-   "text": "Event Hubs ↔ Kafka vocabulary: namespace ≈ {{c1::cluster}}, event hub ≈ {{c2::topic}}; partitions and consumer groups keep their names.",
-   "image": "",
-   "analogy": "",
-   "extra": "",
+   "extra": "<b>Examples:</b> Azure Event Hubs (namespace ≈ cluster, event hub ≈ topic; partitions and consumer groups keep their names), Pub/Sub Kafka API, Redpanda, WarpStream.",
    "source": "Data Eng · Kafka",
    "reverse": false
   },
@@ -723,12 +706,12 @@
     "DataEng::kafka-ecosystem",
     "Azure"
    ],
-   "front": "What is <b>Event Hubs Capture</b>?",
-   "back": "Automatic landing of the stream into Blob/ADLS Gen2 (Avro files): a no-code path from streaming into the analytics lake.",
+   "front": "What is the 'stream capture to lake' pattern?",
+   "back": "The streaming platform automatically lands the raw stream as files (Avro/Parquet) in object storage, giving analytics a replayable raw layer without writing a consumer.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "",
+   "extra": "<b>Examples:</b> Event Hubs Capture → Blob/ADLS Gen2; Kinesis Data Firehose → S3; Kafka Connect S3/GCS sink.",
    "source": "Data Eng · Kafka",
    "reverse": false
   },
@@ -840,12 +823,12 @@
     "DataEng::analytics",
     "AWS"
    ],
-   "front": "Amazon Redshift: what do the leader node and compute nodes do?",
-   "back": "The <b>leader</b> parses, plans and coordinates; <b>compute nodes</b> hold slices that scan in parallel (MPP).",
+   "front": "MPP warehouse architecture: what do the leader (coordinator) node and the compute nodes do?",
+   "back": "The <b>leader</b> parses, plans and coordinates; <b>compute nodes</b> hold slices of the data that scan in parallel (massively parallel processing).",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "",
+   "extra": "<b>Examples:</b> Amazon Redshift, Synapse dedicated SQL pool (control node + 60 distributions), Greenplum.",
    "source": "Data Eng · OLAP vs OLTP",
    "reverse": false
   },
@@ -857,46 +840,12 @@
     "DataEng::analytics",
     "AWS"
    ],
-   "front": "What do Redshift <b>RA3</b> nodes change?",
-   "back": "Compute is decoupled from Redshift Managed Storage on S3 (with local SSD cache), so compute and storage scale independently. Serverless goes further.",
+   "front": "In an MPP warehouse, what do distribution keys and sort/cluster keys control?",
+   "back": "<b>Distribution key</b>: which node a row lives on; co-locate join keys to avoid shuffles. <b>Sort/cluster key</b>: physical order, so min/max zone maps skip blocks.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "",
-   "source": "Data Eng · OLAP vs OLTP",
-   "reverse": false
-  },
-  {
-   "guid": null,
-   "type": "basic",
-   "deck": "Data Engineering::05 Analytics & Warehousing",
-   "tags": [
-    "DataEng::analytics",
-    "AWS"
-   ],
-   "front": "What do Redshift <b>distribution keys</b> and <b>sort keys</b> control?",
-   "back": "<b>Distribution key</b>: which node a row lives on; co-locate join keys to avoid shuffles. <b>Sort key</b>: physical order, so zone maps skip blocks.",
-   "text": "",
-   "image": "",
-   "analogy": "",
-   "extra": "",
-   "source": "Data Eng · OLAP vs OLTP",
-   "reverse": false
-  },
-  {
-   "guid": "ckuM`j(z5*",
-   "type": "basic",
-   "deck": "Data Engineering::05 Analytics & Warehousing",
-   "tags": [
-    "DataEng::analytics",
-    "Azure"
-   ],
-   "front": "How does an Azure Synapse dedicated SQL pool lay out data?",
-   "back": "Always <b>60 distributions</b>; the DWU level decides how many nodes serve them. Default storage is a clustered columnstore index.",
-   "text": "",
-   "image": "",
-   "analogy": "",
-   "extra": "Fabric Warehouse is the successor, storing Delta/Parquet in OneLake.",
+   "extra": "<b>Names:</b> Redshift DISTKEY / SORTKEY; Synapse HASH distribution + clustered columnstore order; BigQuery clustering.",
    "source": "Data Eng · OLAP vs OLTP",
    "reverse": false
   },
@@ -910,10 +859,10 @@
    ],
    "front": "",
    "back": "",
-   "text": "Synapse table distribution: {{c1::HASH(column)}} for large fact tables (high-cardinality join key); {{c2::ROUND_ROBIN}} (default, fastest load, joins shuffle); {{c3::REPLICATE}} for small dimensions.",
+   "text": "MPP table distribution strategies: {{c1::hash on a column}} for large fact tables (high-cardinality join key); {{c2::round-robin}} (fastest load, joins shuffle); {{c3::replicate}} for small dimensions.",
    "image": "",
    "analogy": "",
-   "extra": "",
+   "extra": "<b>Names:</b> Synapse HASH / ROUND_ROBIN / REPLICATE; Redshift DISTSTYLE KEY / EVEN / ALL.",
    "source": "Data Eng · OLAP vs OLTP",
    "reverse": false
   },

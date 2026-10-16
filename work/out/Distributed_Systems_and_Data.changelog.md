@@ -29,3 +29,15 @@
 
 ## Analogies
 - 37 analogies added (sources had none), e.g. sloppy-quorum hinted handoff (neighbour takes your parcel), 2PC (officiant faints), shuffle sharding (dealt hands), cells (watertight compartments).
+
+## Product-content review
+
+Reviewed card by card for vendor-catered content: 0 deleted, 6 rewritten to the underlying concept, 0 scrubbed of marketing/dated phrasing.
+
+### Rewritten (6)
+- "Amazon SQS Standard vs FIFO?" → "Queue 'FIFO / exactly-once' tiers (e.g. SQS FIFO): what do they actually guarantee?"
+- "DynamoDB eventually consistent vs strongly consistent reads?" → "Per-request eventual vs strongly consistent reads (DynamoDB, Cosmos DB): what does the strong option cost?"
+- "What do DynamoDB multi-Region strong consistency tables trade?" → "Multi-region strongly consistent tables (DynamoDB MRSC, Cosmos DB strong): what do they trade?"
+- "Azure Storage redundancy: {{c1::LRS}} = 3 sync copies in one datacenter; {{c2::ZRS}} = 3 sync copies across 3 AZs; {{c3::GRS}} = LRS + async copy to the paired region; {{c4::RA-GRS}} = GRS with readable (stale) secondary." → "Storage redundancy levels: {{c1::sync copies in one datacenter}} (Azure LRS, S3 One Zone-IA) → {{c2::sync copies across AZs}} (ZRS, S3 Standard) → {{c3::plus an async copy to a distant region}} (GRS, S3 cross-region replication) → optionally a {{c4::readable, stale secondary}} (RA-GRS)."
+- "Azure Service Fabric stateful services: what is quorum loss?" → "What is quorum loss in a replicated stateful partition, and what are the options?"
+- "Azure SQL failover groups: replication mode, and what must the app handle?" → "Asynchronously geo-replicated databases (Azure SQL failover groups, Aurora Global): what must the app handle?"
