@@ -32,3 +32,18 @@
 
 ## New decks (Oct 2026)
 Art History → Architecture Styles: 8 building-architecture cards removed from Art History (orders, Parthenon refinements, pointed arch, Gothic system, Romanesque vs Gothic, Pantheon dome, Greek vs Roman temple).
+
+## Integration of new decks (Identity & Zero Trust, SRE & Observability, Software Engineering Classics)
+
+Removed after `similar.py 0.55` scan:
+
+- **Software_Engineering_Classics**: "Hickey 2011, Simple Made Easy: {{c1::simple}} is objective (one braid, un-complected); {{c" — repeats own card on Hickey simple vs easy
+- **Software_Engineering_Classics**: "Norvig 1996, Design Patterns in Dynamic Languages: {{c1::16 of 23}} GoF patterns are invis" — repeats own card on Norvig critique
+- **Software_Engineering_Classics**: "Naur 1985, Programming as Theory Building: a program is {{c1::the theory in its developers" — repeats own card on Naur theory building
+- **Software_Engineering_Classics**: "Parnas 1979, Designing Software for Ease of Extension and Contraction: design a loop-free " — repeats own card on Parnas uses hierarchy
+- **Software_Engineering_Classics**: "GOOS: why mock only types you own?" — duplicates Software Testing#37 (don't mock what you don't own)
+- **Software_Engineering_Classics**: "XP values: {{c1::communication}}, {{c2::simplicity}}, {{c3::feedback}}, {{c4::courage}}, a" — duplicates Open Agile Architecture#155 (XP values)
+- **Software_Engineering_Classics**: "Fowler's definition of refactoring?" — duplicates Open Agile Architecture#40 (definition of refactoring)
+- **Identity_and_Zero_Trust**: "What is OPA (Open Policy Agent) in this model, and what is Rego?" — duplicates Platform Engineering#180 (OPA)
+- **Identity_and_Zero_Trust**: "Authentication factors: {{c1::something you know}} (password, PIN), {{c2::something you ha" — duplicates CISSP#80 (authentication factors)
+- **SRE_and_Observability**: "Why do you need remote write and a long-term store (Thanos, Mimir, Cortex) at all?" — duplicates Kubernetes#158 (Prometheus remote write / long-term storage)

@@ -1,6 +1,6 @@
 # Agentic Decks
 
-Anki decks for a cloud / Kubernetes platform and enterprise architect, consolidated from 44 source decks into 32, plus new decks written from scratch (The Pragmatic Programmer).
+Anki decks for a cloud / Kubernetes platform and enterprise architect, consolidated from 44 source decks into 32, plus new decks written from scratch (The Pragmatic Programmer, the general-education series, Identity & Zero Trust, SRE & Observability, Software Engineering Classics).
 
 - **Import:** `decks/*.apkg`
 - **Editable source of truth:** `work/out/*.json` (one file per deck) + `media/`
@@ -10,10 +10,10 @@ Anki decks for a cloud / Kubernetes platform and enterprise architect, consolida
 
 | | Before | After |
 |---|---|---|
-| Decks | 44 | 38 |
-| Notes | 4,506 | 5,944 |
-| Cards | 4,684 | 7,510 |
-| Notes with an analogy | 126 | 1099 |
+| Decks | 44 | 41 |
+| Notes | 4,506 | 6,566 |
+| Cards | 4,684 | 8,329 |
+| Notes with an analogy | 126 | 1272 |
 | Answers > 60 words | many (avg. note 300–950 chars) | 0 (validator-enforced) |
 
 There are more cards because long, multi-part cards were split into atomic ones (minimum information principle). Each card now takes seconds to review instead of a paragraph.
@@ -22,6 +22,8 @@ Duplicates, book/author/edition trivia, "chapter N covers…" cards and deck-met
 A **product-content review** (Oct 2026) removed or generalised cards that taught one vendor's product rather than a transferable concept (feature lists, SKUs, marketing claims, dated release news); open-source tools that are a deck's subject and cross-provider mapping cards stayed, and in the vendor-scoped exam decks (AZ-305, STACKIT) only marketing phrasing and dated news were removed. Each deck's changelog has a `## Product-content review` section.
 
 The **general-education decks** (Art History, Philosophy, Music History, Architecture Styles, Physics) were written to `work/WRITER_BRIEF.md`: recognise-the-style, why-it-arose and what-it-reacted-against questions, contrast cards for look-alikes, 1–3 canonical anchors per movement, and hand-drawn SVG diagrams in `media/`.
+
+**Professional gap-fillers** (Oct 2026): **Identity & Zero Trust** (OAuth 2.0, OIDC, SAML, JWT, PKI, authorization models, NIST 800-207, SPIFFE, cloud IAM patterns), **SRE & Observability** (SLIs/SLOs, error budgets and burn-rate alerting, Prometheus model, tracing, OpenTelemetry, incident response, postmortems) and **Software Engineering Classics**, a composition deck of the enduring ideas in the canonical books and papers (Brooks, Parnas, Ousterhout, McConnell, Fowler, GoF, Feathers, SICP, Bentley, Raymond, Peopleware, Accelerate, Nygard, Humble & Farley, Beck, Kent, Norman, Google SWE, Dijkstra, Lampson, Saltzer et al.), organised by idea with the source work on each card. They were written to the same brief and deduplicated against the existing decks (`work/out/INTEGRATION.changelog.md`).
 
 **Merges** (same topic, different book or exam → one concept-organised deck):
 Kubernetes in Action + Golden Kubestronaut → **Kubernetes** ·
@@ -72,6 +74,7 @@ Original note GUIDs are kept on every card that descends from an original note. 
 | `Economics_for_Architects.apkg` | Economics for Architects | 64 | 69 | 5 |
 | `Foundations_Fitness_Sleep_Money.apkg` | Foundations: Fitness, Sleep & Money | 56 | 58 | 5 |
 | `Go_and_K8s_Operators.apkg` | Go & Kubernetes Operators | 176 | 181 | 10 |
+| `Identity_and_Zero_Trust.apkg` | Identity & Zero Trust | 205 | 249 | 12 |
 | `Kubernetes.apkg` | Kubernetes | 245 | 322 | 12 |
 | `LLMs_and_Agentic_Engineering.apkg` | LLMs & Agentic Engineering | 126 | 163 | 9 |
 | `Linux_Internals_for_K8s_Security.apkg` | Linux Internals for Kubernetes & Security | 179 | 200 | 12 |
@@ -88,8 +91,10 @@ Original note GUIDs are kept on every card that descends from an original note. 
 | `Quantitative_Foundations.apkg` | Quantitative Foundations | 349 | 402 | 11 |
 | `Robotics_Arduino_to_Physical_AI.apkg` | Robotics: Arduino to Physical AI | 290 | 316 | 12 |
 | `SAFe_for_Architects.apkg` | SAFe for Architects | 109 | 184 | 10 |
+| `SRE_and_Observability.apkg` | SRE & Observability | 206 | 274 | 12 |
 | `STACKIT_Hybrid_Cloud_Architect.apkg` | STACKIT Hybrid Cloud Architect | 157 | 215 | 6 |
 | `Software_Architecture_and_DDD.apkg` | Software Architecture & DDD | 123 | 167 | 10 |
+| `Software_Engineering_Classics.apkg` | Software Engineering Classics | 211 | 296 | 12 |
 | `Software_Testing.apkg` | Software Testing | 120 | 188 | 8 |
 | `Spanish_Intermediate_Advanced.apkg` | Spanish (Intermediate/Advanced) | 202 | 202 | 11 |
 | `TOGAF_10.apkg` | TOGAF 10 | 80 | 129 | 7 |

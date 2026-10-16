@@ -1329,23 +1329,6 @@
     "sre::metrics",
     "sre::prometheus"
    ],
-   "front": "Why do you need <b>remote write</b> and a long-term store (Thanos, Mimir, Cortex) at all?",
-   "back": "Local TSDB is single-node with bounded retention and no global view. Remote write streams samples to object storage with downsampling, dedup and multi-cluster queries.",
-   "text": "",
-   "image": "",
-   "analogy": "",
-   "extra": "",
-   "source": "Prometheus · Long-term storage",
-   "reverse": false
-  },
-  {
-   "guid": null,
-   "type": "basic",
-   "deck": "SRE & Observability::05 Metrics & Prometheus Model",
-   "tags": [
-    "sre::metrics",
-    "sre::prometheus"
-   ],
    "front": "<b>Federation vs remote write</b>: when is each the right tool?",
    "back": "Federation: a parent Prometheus scrapes a <i>selected, aggregated</i> subset from children (hierarchical). Remote write: stream everything to a central store for a global view and HA.",
    "text": "",
