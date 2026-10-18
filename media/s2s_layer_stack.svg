@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1f2937">
+<rect width="600" height="400" fill="white"/>
+<text x="300" y="22" font-size="15" text-anchor="middle" font-weight="bold">The layer stack: for (i…) a[i] += b[i];</text>
+<g stroke="#1f2937" stroke-width="2">
+<rect x="40" y="36" width="520" height="34" fill="#dbeafe"/>
+<rect x="40" y="74" width="520" height="34" fill="#dbeafe"/>
+<rect x="40" y="112" width="520" height="34" fill="#fde68a"/>
+<rect x="40" y="150" width="520" height="34" fill="#fde68a"/>
+<rect x="40" y="188" width="520" height="34" fill="#fecaca"/>
+<rect x="40" y="226" width="520" height="34" fill="#d1fae5"/>
+<rect x="40" y="264" width="520" height="34" fill="#d1fae5"/>
+<rect x="40" y="302" width="520" height="34" fill="#e5e7eb"/>
+</g>
+<g font-size="12">
+<text x="50" y="58" font-weight="bold">01 Front end</text><text x="190" y="58">chars → tokens → AST: ForStmt(cond, CompoundAssign(Subscript…))</text>
+<text x="50" y="96" font-weight="bold">02 Semantics</text><text x="190" y="96">types pick the operation: int add vs float add; i overflow = UB</text>
+<text x="50" y="134" font-weight="bold">03 IR / SSA</text><text x="190" y="134">preheader → header(φ i) → body(load, add, store) → latch</text>
+<text x="50" y="172" font-weight="bold">03/04 Vectorise+codegen</text><text x="190" y="172">alias check, 8 ints per ymm, registers, pointer bump</text>
+<text x="50" y="210" font-weight="bold">06 ISA  (the contract)</text><text x="190" y="210">vmovdqu / vpaddd / add / cmp / jne — architectural state only</text>
+<text x="50" y="248" font-weight="bold">08 Microarchitecture</text><text x="190" y="248">µops, fusion, rename, OoO; the loop branch is predicted</text>
+<text x="50" y="286" font-weight="bold">09 Memory</text><text x="190" y="286">64-byte lines, prefetcher streams a and b; bandwidth-bound</text>
+<text x="50" y="324" font-weight="bold">Silicon</text><text x="190" y="324">adders, SRAM cells, DRAM rows: transistors switching</text>
+</g>
+<g stroke="#1f2937" stroke-width="1.5" fill="none">
+<path d="M570,36 L585,36 L585,184 L570,184"/><path d="M570,188 L585,188 L585,336 L570,336"/>
+</g>
+<text x="592" y="115" font-size="11" transform="rotate(90 592,115)">software</text>
+<text x="592" y="255" font-size="11" transform="rotate(90 592,255)">hardware</text>
+<text x="300" y="360" text-anchor="middle" font-size="11" fill="#4b5563">each layer may assume only what the layer below promises; timing is never promised, which is where abstractions leak</text>
+<text x="300" y="380" text-anchor="middle" font-size="11" fill="#4b5563">(numbers = subdecks of this deck)</text>
+</svg>

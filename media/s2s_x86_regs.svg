@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" font-family="monospace" font-size="14">
+<rect width="600" height="400" fill="#fff"/>
+<text x="300" y="28" text-anchor="middle" font-family="sans-serif" font-size="17" font-weight="bold" fill="#222">x86-64 sub-registers: one 64-bit register, four names</text>
+<!-- bit ruler -->
+<text x="40" y="70" font-size="11" fill="#555">bit 63</text><text x="300" y="70" text-anchor="middle" font-size="11" fill="#555">bit 32 | bit 31</text><text x="470" y="70" text-anchor="middle" font-size="11" fill="#555">15</text><text x="520" y="70" text-anchor="middle" font-size="11" fill="#555">8|7</text><text x="565" y="70" text-anchor="middle" font-size="11" fill="#555">0</text>
+<!-- rax -->
+<rect x="40" y="80" width="520" height="40" fill="#fde9d9" stroke="#222" stroke-width="2"/>
+<text x="300" y="105" text-anchor="middle" font-weight="bold" fill="#222">rax (64)</text>
+<!-- eax -->
+<rect x="300" y="135" width="260" height="40" fill="#e7f0fa" stroke="#222" stroke-width="2"/>
+<text x="430" y="160" text-anchor="middle" font-weight="bold" fill="#222">eax (low 32)</text>
+<!-- ax -->
+<rect x="430" y="190" width="130" height="40" fill="#e6f5e6" stroke="#222" stroke-width="2"/>
+<text x="495" y="215" text-anchor="middle" font-weight="bold" fill="#222">ax (16)</text>
+<!-- ah al -->
+<rect x="430" y="245" width="65" height="40" fill="#fff3c4" stroke="#222" stroke-width="2"/>
+<rect x="495" y="245" width="65" height="40" fill="#fff3c4" stroke="#222" stroke-width="2"/>
+<text x="462" y="270" text-anchor="middle" font-weight="bold" fill="#222">ah</text>
+<text x="527" y="270" text-anchor="middle" font-weight="bold" fill="#222">al</text>
+<!-- zero extension note -->
+<rect x="40" y="135" width="255" height="40" fill="none" stroke="#1a6" stroke-width="2" stroke-dasharray="6 3"/>
+<text x="167" y="153" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#1a6">writing eax zeroes</text>
+<text x="167" y="168" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#1a6">bits 63..32 (free)</text>
+<rect x="40" y="190" width="385" height="40" fill="none" stroke="#c33" stroke-width="2" stroke-dasharray="6 3"/>
+<text x="232" y="208" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#c33">writing ax / al / ah keeps the upper bits:</text>
+<text x="232" y="223" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#c33">merge → false dependency on old value</text>
+<!-- table -->
+<text x="40" y="320" font-family="sans-serif" font-size="13" fill="#222">Same pattern: rbx/ebx/bx/bl, rsi/esi/si/sil, rsp/esp/sp/spl, r8/r8d/r8w/r8b</text>
+<text x="40" y="342" font-family="sans-serif" font-size="13" fill="#222">ah/bh/ch/dh exist only for the legacy four; a REX prefix makes sil/dil/bpl/spl reachable</text>
+<text x="40" y="364" font-family="sans-serif" font-size="13" fill="#222">and the two sets cannot be mixed in one instruction.</text>
+<text x="40" y="390" font-family="sans-serif" font-size="12" fill="#444">Hence `xor eax,eax` zeroes all of rax in 2 bytes, and `mov eax,imm32` beats `mov rax,imm64`.</text>
+</svg>

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1f2937">
+<defs><marker id="ab" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/></marker>
+<marker id="ag" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#059669"/></marker></defs>
+<rect width="600" height="400" fill="white"/>
+<text x="300" y="24" font-size="15" text-anchor="middle" font-weight="bold">Weight-stationary systolic array (3×3 shown)</text>
+<text x="300" y="42" text-anchor="middle" fill="#4b5563">weights W stay in the cells; activations X stream right; partial sums flow down</text>
+<!-- grid -->
+<g stroke="#1f2937" stroke-width="2">
+<rect x="200" y="90" width="60" height="60" fill="#fde68a"/><rect x="280" y="90" width="60" height="60" fill="#fde68a"/><rect x="360" y="90" width="60" height="60" fill="#fde68a"/>
+<rect x="200" y="170" width="60" height="60" fill="#fde68a"/><rect x="280" y="170" width="60" height="60" fill="#fde68a"/><rect x="360" y="170" width="60" height="60" fill="#fde68a"/>
+<rect x="200" y="250" width="60" height="60" fill="#fde68a"/><rect x="280" y="250" width="60" height="60" fill="#fde68a"/><rect x="360" y="250" width="60" height="60" fill="#fde68a"/>
+</g>
+<g text-anchor="middle" font-size="12">
+<text x="230" y="115">w11</text><text x="310" y="115">w12</text><text x="390" y="115">w13</text>
+<text x="230" y="195">w21</text><text x="310" y="195">w22</text><text x="390" y="195">w23</text>
+<text x="230" y="275">w31</text><text x="310" y="275">w32</text><text x="390" y="275">w33</text>
+<text x="230" y="140" font-size="10" fill="#4b5563">acc += x·w</text><text x="310" y="140" font-size="10" fill="#4b5563">acc += x·w</text><text x="390" y="140" font-size="10" fill="#4b5563">acc += x·w</text>
+</g>
+<!-- horizontal activation arrows -->
+<g stroke="#2563eb" stroke-width="2" marker-end="url(#ab)">
+<line x1="140" y1="120" x2="196" y2="120"/><line x1="262" y1="120" x2="276" y2="120"/><line x1="342" y1="120" x2="356" y2="120"/>
+<line x1="140" y1="200" x2="196" y2="200"/><line x1="262" y1="200" x2="276" y2="200"/><line x1="342" y1="200" x2="356" y2="200"/>
+<line x1="140" y1="280" x2="196" y2="280"/><line x1="262" y1="280" x2="276" y2="280"/><line x1="342" y1="280" x2="356" y2="280"/>
+</g>
+<g fill="#2563eb" font-size="11">
+<text x="60" y="124">x row 1 →</text><text x="60" y="204">x row 2 →   (skewed</text><text x="60" y="284">x row 3 →    one step/row)</text>
+</g>
+<!-- vertical partial-sum arrows -->
+<g stroke="#059669" stroke-width="2" marker-end="url(#ag)">
+<line x1="230" y1="60" x2="230" y2="86"/><line x1="310" y1="60" x2="310" y2="86"/><line x1="390" y1="60" x2="390" y2="86"/>
+<line x1="230" y1="152" x2="230" y2="166"/><line x1="310" y1="152" x2="310" y2="166"/><line x1="390" y1="152" x2="390" y2="166"/>
+<line x1="230" y1="232" x2="230" y2="246"/><line x1="310" y1="232" x2="310" y2="246"/><line x1="390" y1="232" x2="390" y2="246"/>
+<line x1="230" y1="312" x2="230" y2="340"/><line x1="310" y1="312" x2="310" y2="340"/><line x1="390" y1="312" x2="390" y2="340"/>
+</g>
+<g fill="#059669" font-size="11" text-anchor="middle">
+<text x="310" y="56">partial sum in = 0</text>
+<text x="310" y="358">column outputs = one row of X·W (into FP32 accumulators)</text>
+</g>
+<text x="300" y="388" text-anchor="middle" font-size="11" fill="#4b5563">each cell: register → multiply-add → neighbour; no instruction fetch, no cache lookup per MAC</text>
+</svg>

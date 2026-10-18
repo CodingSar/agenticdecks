@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" font-family="sans-serif" font-size="14">
+<rect width="600" height="400" fill="#fff"/>
+<text x="300" y="28" text-anchor="middle" font-size="17" font-weight="bold" fill="#222">Tri-colour marking: black never points to white</text>
+<defs><marker id="m" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#222"/></marker>
+<marker id="mr" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c33"/></marker></defs>
+<!-- roots -->
+<rect x="20" y="150" width="70" height="40" rx="4" fill="#ddd" stroke="#222" stroke-width="2"/>
+<text x="55" y="175" text-anchor="middle" font-size="13" fill="#222">roots</text>
+<!-- black -->
+<circle cx="170" cy="120" r="24" fill="#222" stroke="#222" stroke-width="2"/><text x="170" y="125" text-anchor="middle" fill="#fff" font-size="13">A</text>
+<circle cx="170" cy="230" r="24" fill="#222" stroke="#222" stroke-width="2"/><text x="170" y="235" text-anchor="middle" fill="#fff" font-size="13">B</text>
+<!-- grey -->
+<circle cx="300" cy="120" r="24" fill="#999" stroke="#222" stroke-width="2"/><text x="300" y="125" text-anchor="middle" fill="#fff" font-size="13">C</text>
+<circle cx="300" cy="230" r="24" fill="#999" stroke="#222" stroke-width="2"/><text x="300" y="235" text-anchor="middle" fill="#fff" font-size="13">D</text>
+<!-- white -->
+<circle cx="440" cy="120" r="24" fill="#fff" stroke="#222" stroke-width="2"/><text x="440" y="125" text-anchor="middle" fill="#222" font-size="13">E</text>
+<circle cx="440" cy="230" r="24" fill="#fff" stroke="#222" stroke-width="2"/><text x="440" y="235" text-anchor="middle" fill="#222" font-size="13">F</text>
+<circle cx="540" cy="175" r="24" fill="#fff" stroke="#222" stroke-width="2" stroke-dasharray="4 3"/><text x="540" y="180" text-anchor="middle" fill="#222" font-size="13">G</text>
+<!-- edges -->
+<g stroke="#222" stroke-width="2" fill="none" marker-end="url(#m)">
+<path d="M90 160 L146 128"/><path d="M90 180 L146 222"/>
+<path d="M194 120 L276 120"/><path d="M194 230 L276 230"/>
+<path d="M324 120 L416 120"/><path d="M324 230 L416 230"/>
+</g>
+<!-- mutator write: black B -> white G, barrier shades G -->
+<path d="M190 245 C300 330, 480 300, 530 198" fill="none" stroke="#c33" stroke-width="2.5" stroke-dasharray="6 4" marker-end="url(#mr)"/>
+<text x="360" y="318" text-anchor="middle" font-size="12" fill="#c33" font-weight="bold">mutator stores B.ptr = G while marking runs</text>
+<text x="360" y="335" text-anchor="middle" font-size="12" fill="#c33">write barrier shades G grey, else G would be freed while reachable</text>
+<!-- legend -->
+<circle cx="40" cy="370" r="8" fill="#222"/><text x="55" y="375" font-size="12" fill="#222">black: scanned, all children seen</text>
+<circle cx="270" cy="370" r="8" fill="#999" stroke="#222"/><text x="285" y="375" font-size="12" fill="#222">grey: reached, children pending</text>
+<circle cx="480" cy="370" r="8" fill="#fff" stroke="#222"/><text x="495" y="375" font-size="12" fill="#222">white: not yet reached</text>
+<text x="300" y="75" text-anchor="middle" font-size="12" fill="#444">Marking pops a grey node, shades its white children grey, then blackens it. Done when no grey remains; white = garbage.</text>
+</svg>

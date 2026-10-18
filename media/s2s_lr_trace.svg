@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2937">
+<rect width="600" height="400" fill="white"/>
+<text x="300" y="26" font-size="15" font-weight="bold" text-anchor="middle">LR shift-reduce trace for  1 + 2 * 3   (E → E + T | T,  T → T * n | n)</text>
+<g font-family="Menlo, Consolas, monospace" font-size="12">
+<text x="20" y="60" font-weight="bold">Stack</text><text x="230" y="60" font-weight="bold">Input left</text><text x="380" y="60" font-weight="bold">Action</text>
+<line x1="20" y1="66" x2="580" y2="66" stroke="#1f2937"/>
+<text x="20" y="88">$</text>            <text x="230" y="88">1 + 2 * 3 $</text><text x="380" y="88" fill="#2563eb">shift 1</text>
+<text x="20" y="110">$ 1</text>          <text x="230" y="110">+ 2 * 3 $</text>  <text x="380" y="110" fill="#dc2626">reduce T → n</text>
+<text x="20" y="132">$ T</text>          <text x="230" y="132">+ 2 * 3 $</text>  <text x="380" y="132" fill="#dc2626">reduce E → T</text>
+<text x="20" y="154">$ E</text>          <text x="230" y="154">+ 2 * 3 $</text>  <text x="380" y="154" fill="#2563eb">shift +</text>
+<text x="20" y="176">$ E +</text>        <text x="230" y="176">2 * 3 $</text>    <text x="380" y="176" fill="#2563eb">shift 2</text>
+<text x="20" y="198">$ E + 2</text>      <text x="230" y="198">* 3 $</text>      <text x="380" y="198" fill="#dc2626">reduce T → n</text>
+<text x="20" y="220">$ E + T</text>      <text x="230" y="220">* 3 $</text>      <text x="380" y="220" fill="#d97706" font-weight="bold">shift *  (not reduce E→E+T!)</text>
+<text x="20" y="242">$ E + T *</text>    <text x="230" y="242">3 $</text>        <text x="380" y="242" fill="#2563eb">shift 3</text>
+<text x="20" y="264">$ E + T * 3</text>  <text x="230" y="264">$</text>          <text x="380" y="264" fill="#dc2626">reduce T → n</text>
+<text x="20" y="286">$ E + T * T?</text> <text x="230" y="286">$</text>          <text x="380" y="286" fill="#dc2626">reduce T → T * n</text>
+<text x="20" y="308">$ E + T</text>      <text x="230" y="308">$</text>          <text x="380" y="308" fill="#dc2626">reduce E → E + T</text>
+<text x="20" y="330">$ E</text>          <text x="230" y="330">$</text>          <text x="380" y="330" fill="#16a34a" font-weight="bold">accept</text>
+</g>
+<rect x="20" y="206" width="560" height="20" fill="#fef3c7" opacity="0.5"/>
+<text x="20" y="362" font-size="12">The lookahead <tspan font-weight="bold">*</tspan> decides: with E + T on the stack the table says SHIFT, so * binds tighter than +.</text>
+<text x="20" y="382" font-size="12" fill="#6b7280">Reduce = pop the right-hand side, push the left-hand side. Rightmost derivation, built in reverse.</text>
+</svg>

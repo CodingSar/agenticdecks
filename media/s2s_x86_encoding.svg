@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" font-family="monospace" font-size="13">
+<rect width="600" height="400" fill="#fff"/>
+<text x="300" y="28" text-anchor="middle" font-family="sans-serif" font-size="17" font-weight="bold" fill="#222">x86-64 instruction encoding: variable length, 1–15 bytes</text>
+<g stroke="#222" stroke-width="2">
+<rect x="20" y="70" width="85" height="50" fill="#f3f3f3"/>
+<rect x="105" y="70" width="60" height="50" fill="#fde9d9"/>
+<rect x="165" y="70" width="90" height="50" fill="#e7f0fa"/>
+<rect x="255" y="70" width="75" height="50" fill="#e6f5e6"/>
+<rect x="330" y="70" width="60" height="50" fill="#e6f5e6"/>
+<rect x="390" y="70" width="95" height="50" fill="#fff3c4"/>
+<rect x="485" y="70" width="95" height="50" fill="#fff3c4"/>
+</g>
+<text x="62" y="92" text-anchor="middle" fill="#222">legacy</text><text x="62" y="108" text-anchor="middle" fill="#222">prefixes</text>
+<text x="135" y="100" text-anchor="middle" fill="#222">REX</text>
+<text x="210" y="100" text-anchor="middle" fill="#222">opcode</text>
+<text x="292" y="100" text-anchor="middle" fill="#222">ModRM</text>
+<text x="360" y="100" text-anchor="middle" fill="#222">SIB</text>
+<text x="437" y="100" text-anchor="middle" fill="#222">disp</text>
+<text x="532" y="100" text-anchor="middle" fill="#222">imm</text>
+<g font-family="sans-serif" font-size="11" fill="#555">
+<text x="62" y="138" text-anchor="middle">0–4 B</text>
+<text x="135" y="138" text-anchor="middle">0–1 B</text>
+<text x="210" y="138" text-anchor="middle">1–3 B</text>
+<text x="292" y="138" text-anchor="middle">0–1 B</text>
+<text x="360" y="138" text-anchor="middle">0–1 B</text>
+<text x="437" y="138" text-anchor="middle">0/1/4 B</text>
+<text x="532" y="138" text-anchor="middle">0/1/2/4(8) B</text>
+</g>
+<!-- details -->
+<g font-family="sans-serif" font-size="12" fill="#222">
+<text x="20" y="175">legacy prefixes: 66 (operand size), 67 (address size), F0 (LOCK), F2/F3 (REP / SSE selector), segment override</text>
+<text x="20" y="198">REX = 0100 W R X B : W = 64-bit operand, R/X/B = 4th bit of reg / index / base (reach r8–r15)</text>
+<text x="20" y="221">opcode: 1 byte, or 0F xx, or 0F 38 xx / 0F 3A xx (SSE); some opcodes hold the register in the low 3 bits</text>
+<text x="20" y="244">ModRM = mod(2) reg(3) rm(3): mod=11 register–register, else memory; rm=100 means "SIB follows"</text>
+<text x="20" y="267">SIB = scale(2) index(3) base(3) : addr = base + index*2^scale + disp</text>
+<text x="20" y="290">VEX (C4/C5) and EVEX (62) replace legacy prefixes + REX for AVX / AVX-512 (EVEX adds mask + zeroing bits)</text>
+</g>
+<!-- example -->
+<rect x="20" y="310" width="560" height="75" rx="6" fill="#f8f8f8" stroke="#222" stroke-width="1.5"/>
+<text x="30" y="332" fill="#222">48 8B 44 24 08       mov rax, [rsp+8]</text>
+<text x="30" y="352" fill="#222">48=REX.W  8B=mov r64,r/m64  44=ModRM(mod 01,reg rax,rm SIB)  24=SIB(base rsp)  08=disp8</text>
+<text x="30" y="372" font-family="sans-serif" font-size="12" fill="#444">Length is known only after decoding the prefixes, opcode and ModRM: why parallel x86 decode is hard.</text>
+</svg>
