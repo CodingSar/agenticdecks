@@ -9,7 +9,7 @@
   <g text-anchor="middle" fill="#222" font-family="Menlo, Consolas, monospace" font-size="11">
     <text x="90" y="91">add x0,x1,x2</text><text x="230" y="91">ldr x3,[x4,#8]</text><text x="370" y="91">movk x0,#1,lsl 16</text><text x="510" y="91">b.eq .L1</text>
   </g>
-  <text x="20" y="122" fill="#555" font-size="11">4-byte aligned: a decoder knows where instruction N+1 starts before looking at N (wide decode is cheap). Price: immediates must fit in 12&#8211;16 bits.</text>
+  <text x="20" y="122" fill="#555" font-size="11">4-byte aligned: the decoder knows where N+1 starts before decoding N, so wide decode is cheap. Price: small immediates.</text>
   <!-- RISC-V C -->
   <text x="20" y="152" fill="#222" font-weight="bold">RISC-V with C extension: 16-bit and 32-bit mixed, 2-byte aligned</text>
   <g stroke="#222" stroke-width="1.5">

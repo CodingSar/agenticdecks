@@ -27,8 +27,8 @@
 </g>
 <text x="300" y="285" text-anchor="middle" font-size="12" fill="#dc2626">lookup of n: innermost env first, then follow the parent pointers outward</text>
 <g font-size="12">
-<text x="20" y="320" font-weight="bold">Lexical scope:</text><text x="130" y="320">which env is "parent" is fixed by where the code was WRITTEN (resolved at compile time → slot index).</text>
-<text x="20" y="342" font-weight="bold">Dynamic scope:</text><text x="130" y="342">the parent would be whoever CALLED c at run time; the result would depend on the caller.</text>
-<text x="20" y="372" fill="#6b7280">Lua detail: an upvalue is "open" while n is still on the stack and "closed" (copied to the heap) when counter returns.</text>
+<text x="20" y="320" font-weight="bold">Lexical scope:</text><text x="130" y="320" font-size="12">parent env = where the code was WRITTEN; resolved at compile time to a slot index.</text>
+<text x="20" y="342" font-weight="bold">Dynamic scope:</text><text x="130" y="342" font-size="12">parent env = whoever CALLED c at run time; the result would depend on the caller.</text>
+<text x="20" y="372" font-size="11" fill="#6b7280">Lua: an upvalue is "open" while n is on the stack, "closed" (copied to the heap) once counter returns.</text>
 </g>
 </svg>

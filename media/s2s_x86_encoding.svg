@@ -28,16 +28,16 @@
 </g>
 <!-- details -->
 <g font-family="sans-serif" font-size="12" fill="#222">
-<text x="20" y="175">legacy prefixes: 66 (operand size), 67 (address size), F0 (LOCK), F2/F3 (REP / SSE selector), segment override</text>
-<text x="20" y="198">REX = 0100 W R X B : W = 64-bit operand, R/X/B = 4th bit of reg / index / base (reach r8–r15)</text>
-<text x="20" y="221">opcode: 1 byte, or 0F xx, or 0F 38 xx / 0F 3A xx (SSE); some opcodes hold the register in the low 3 bits</text>
-<text x="20" y="244">ModRM = mod(2) reg(3) rm(3): mod=11 register–register, else memory; rm=100 means "SIB follows"</text>
-<text x="20" y="267">SIB = scale(2) index(3) base(3) : addr = base + index*2^scale + disp</text>
-<text x="20" y="290">VEX (C4/C5) and EVEX (62) replace legacy prefixes + REX for AVX / AVX-512 (EVEX adds mask + zeroing bits)</text>
+<text x="20" y="175" font-size="10.5">prefixes: 66 operand size, 67 address size, F0 LOCK, F2/F3 REP or SSE selector, segment</text>
+<text x="20" y="198" font-size="10.5">REX = 0100WRXB: W = 64-bit operand; R/X/B = 4th bit of reg / index / base (r8–r15)</text>
+<text x="20" y="221" font-size="10.5">opcode: 1 byte, or 0F xx, or 0F 38 xx / 0F 3A xx; some hold the register in the low 3 bits</text>
+<text x="20" y="244" font-size="10.5">ModRM = mod(2) reg(3) rm(3): mod=11 reg–reg, else memory; rm=100 means "SIB follows"</text>
+<text x="20" y="267" font-size="10.5">SIB = scale(2) index(3) base(3): addr = base + index*2^scale + disp</text>
+<text x="20" y="290" font-size="10.5">VEX (C4/C5) / EVEX (62) replace prefixes+REX for AVX / AVX-512 (EVEX adds mask+zeroing)</text>
 </g>
 <!-- example -->
 <rect x="20" y="310" width="560" height="75" rx="6" fill="#f8f8f8" stroke="#222" stroke-width="1.5"/>
 <text x="30" y="332" fill="#222">48 8B 44 24 08       mov rax, [rsp+8]</text>
-<text x="30" y="352" fill="#222">48=REX.W  8B=mov r64,r/m64  44=ModRM(mod 01,reg rax,rm SIB)  24=SIB(base rsp)  08=disp8</text>
-<text x="30" y="372" font-family="sans-serif" font-size="12" fill="#444">Length is known only after decoding the prefixes, opcode and ModRM: why parallel x86 decode is hard.</text>
+<text x="30" y="352" font-size="11" fill="#222">48=REX.W  8B=mov r64,r/m64  44=ModRM(01,rax,SIB)  24=SIB(base rsp)  08=disp8</text>
+<text x="30" y="372" font-family="sans-serif" font-size="11" fill="#444">Length is known only after prefixes, opcode and ModRM are decoded: parallel x86 decode is hard.</text>
 </svg>

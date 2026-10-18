@@ -1,6 +1,6 @@
 # Agentic Decks
 
-Anki decks for a cloud / Kubernetes platform and enterprise architect, consolidated from 44 source decks into 32, plus new decks written from scratch (The Pragmatic Programmer, the general-education series, Identity & Zero Trust, SRE & Observability, Software Engineering Classics, Chemistry).
+Anki decks for a cloud / Kubernetes platform and enterprise architect, consolidated from 44 source decks into 32, plus new decks written from scratch (The Pragmatic Programmer, the general-education series, Identity & Zero Trust, SRE & Observability, Software Engineering Classics, Chemistry, From Source to Silicon).
 
 - **Import:** `decks/*.apkg`
 - **Editable source of truth:** `work/out/*.json` (one file per deck) + `media/`
@@ -10,10 +10,10 @@ Anki decks for a cloud / Kubernetes platform and enterprise architect, consolida
 
 | | Before | After |
 |---|---|---|
-| Decks | 44 | 42 |
-| Notes | 4,506 | 6,870 |
-| Cards | 4,684 | 8,675 |
-| Notes with an analogy | 126 | 1394 |
+| Decks | 44 | 43 |
+| Notes | 4,506 | 7,188 |
+| Cards | 4,684 | 9,099 |
+| Notes with an analogy | 126 | 1510 |
 | Answers > 60 words | many (avg. note 300–950 chars) | 0 (validator-enforced) |
 
 There are more cards because long, multi-part cards were split into atomic ones (minimum information principle). Each card now takes seconds to review instead of a paragraph.
@@ -24,6 +24,8 @@ A **product-content review** (Oct 2026) removed or generalised cards that taught
 The **general-education decks** (Art History, Philosophy, Music History, Architecture Styles, Physics, Chemistry) were written to `work/WRITER_BRIEF.md`: recognise-the-style, why-it-arose and what-it-reacted-against questions, contrast cards for look-alikes, 1–3 canonical anchors per movement, and hand-drawn SVG diagrams in `media/`. **Chemistry** (Oct 2026) runs from high-school foundations to master's-level ideas in 12 subdecks, each anchored in everyday and practical chemistry (kitchen, body, garage, lab, industry, environment); it was written by six parallel writer agents, one pair of subdecks each, then merged and deduplicated.
 
 **Professional gap-fillers** (Oct 2026): **Identity & Zero Trust** (OAuth 2.0, OIDC, SAML, JWT, PKI, authorization models, NIST 800-207, SPIFFE, cloud IAM patterns), **SRE & Observability** (SLIs/SLOs, error budgets and burn-rate alerting, Prometheus model, tracing, OpenTelemetry, incident response, postmortems) and **Software Engineering Classics**, a composition deck of the enduring ideas in the canonical books and papers (Brooks, Parnas, Ousterhout, McConnell, Fowler, GoF, Feathers, SICP, Bentley, Raymond, Peopleware, Accelerate, Nygard, Humble & Farley, Beck, Kent, Norman, Google SWE, Dijkstra, Lampson, Saltzer et al.), organised by idea with the source work on each card. They were written to the same brief and deduplicated against the existing decks (`work/out/INTEGRATION.changelog.md`).
+
+**From Source to Silicon** (Oct 2026) is a zero-to-hero deck on how a program becomes electrons: lexing and parsing, type systems, IR and optimisation, codegen, ABI and linking, interpreters, JITs and GC, x86-64 / ARM64 / RISC-V / IBM Z assembly, pipelines, out-of-order cores and microcode, caches and memory models, GPU SIMT, TPU systolic arrays and ML compilers, with a twelfth subdeck that explicitly maps one program through every layer. Six research-and-writer agents drafted two subdecks each from primary sources; a composer agent merged them, removed duplicates, added bridge and contrast cards across layers, normalised the `Link:` cross-references and deduplicated against Deep C, Cloud Architecture, Linux Internals, Go and LLMs (`work/out/From_Source_to_Silicon.changelog.md`). 21 hand-drawn SVG diagrams (`media/s2s_*.svg`).
 
 **Merges** (same topic, different book or exam → one concept-organised deck):
 Kubernetes in Action + Golden Kubestronaut → **Kubernetes** ·
@@ -74,6 +76,7 @@ Original note GUIDs are kept on every card that descends from an original note. 
 | `Distributed_Systems_and_Data.apkg` | Distributed Systems & Data | 218 | 267 | 12 |
 | `Economics_for_Architects.apkg` | Economics for Architects | 64 | 69 | 5 |
 | `Foundations_Fitness_Sleep_Money.apkg` | Foundations: Fitness, Sleep & Money | 56 | 58 | 5 |
+| `From_Source_to_Silicon.apkg` | From Source to Silicon | 318 | 424 | 12 |
 | `Go_and_K8s_Operators.apkg` | Go & Kubernetes Operators | 176 | 181 | 10 |
 | `Identity_and_Zero_Trust.apkg` | Identity & Zero Trust | 205 | 249 | 12 |
 | `Kubernetes.apkg` | Kubernetes | 245 | 322 | 12 |
