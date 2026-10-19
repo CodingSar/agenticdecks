@@ -12,7 +12,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "DDIA frames data systems by three concerns: {{c1::reliability}} (works correctly despite faults), {{c2::scalability}} (reasonable ways to cope with growing load) and {{c3::maintainability}} (people can keep working on it productively).",
+   "text": "Designing Data-Intensive Applications (DDIA) frames data systems by three concerns: {{c1::reliability}} (works correctly despite faults), {{c2::scalability}} (reasonable ways to cope with growing load) and {{c3::maintainability}} (people can keep working on it productively).",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -170,8 +170,8 @@
    "tags": [
     "DistSys::storage"
    ],
-   "front": "How does an <b>LSM-tree</b> storage engine handle a write?",
-   "back": "Append to a WAL, insert into an in-memory sorted <b>memtable</b>; when full, flush it as an immutable sorted file (<b>SSTable</b>). Background <b>compaction</b> merges SSTables, dropping overwritten/deleted keys.",
+   "front": "How does an <b>log-structured merge (LSM)-tree</b> storage engine handle a write?",
+   "back": "Append to a write-ahead log (WAL), insert into an in-memory sorted <b>memtable</b>; when full, flush it as an immutable sorted file (<b>SSTable</b>). Background <b>compaction</b> merges SSTables, dropping overwritten/deleted keys.",
    "text": "",
    "image": "",
    "analogy": "Like tossing notes into an inbox and filing them into sorted folders later, instead of finding the right page every time.",
@@ -186,8 +186,8 @@
    "tags": [
     "DistSys::storage"
    ],
-   "front": "How does an LSM-tree answer a point read, and why can it be slow?",
-   "back": "Check the memtable, then SSTables newest to oldest. A key may need several files checked (read amplification); Bloom filters and sparse indexes skip most of them.",
+   "front": "How does an log-structured merge (LSM)-tree answer a point read, and why can it be slow?",
+   "back": "Check the memtable, then sorted string tables (SSTables) newest to oldest. A key may need several files checked (read amplification); Bloom filters and sparse indexes skip most of them.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -218,7 +218,7 @@
    "tags": [
     "DistSys::storage"
    ],
-   "front": "Structurally, how do B-trees differ from LSM-trees?",
+   "front": "Structurally, how do B-trees differ from log-structured merge (LSM)-trees?",
    "back": "B-trees update fixed-size pages <b>in place</b> in a balanced tree. LSM-trees only <b>append</b> and later merge.",
    "text": "",
    "image": "",
@@ -234,7 +234,7 @@
    "tags": [
     "DistSys::storage"
    ],
-   "front": "When does an <b>LSM-tree</b> beat a B-tree, and what does it cost?",
+   "front": "When does an <b>log-structured merge (LSM)-tree</b> beat a B-tree, and what does it cost?",
    "back": "Write-heavy, time-series or wide-column workloads: sequential writes, higher throughput, better compression. Cost: compaction competes for I/O and reads/space amplify.",
    "text": "",
    "image": "",
@@ -250,7 +250,7 @@
    "tags": [
     "DistSys::storage"
    ],
-   "front": "When does a <b>B-tree</b> beat an LSM-tree?",
+   "front": "When does a <b>B-tree</b> beat an log-structured merge (LSM)-tree?",
    "back": "Read-dominated, transactional workloads: predictable point/range reads, and each key lives in exactly one place, which makes locking simple (PostgreSQL, MySQL InnoDB).",
    "text": "",
    "image": "",
@@ -267,7 +267,7 @@
     "DistSys::storage"
    ],
    "front": "What is <b>write amplification</b>?",
-   "back": "Bytes physically written ÷ bytes logically written: one write triggers several disk writes (WAL, B-tree page splits, compaction rewrites). It limits write throughput and wears SSDs.",
+   "back": "Bytes physically written ÷ bytes logically written: one write triggers several disk writes (write-ahead log (WAL), B-tree page splits, compaction rewrites). It limits write throughput and wears SSDs.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -314,8 +314,8 @@
    "tags": [
     "DistSys::storage"
    ],
-   "front": "What does a <b>Bloom filter</b> do in an LSM store?",
-   "back": "A per-SSTable probabilistic set: 'definitely not here' or 'maybe here'. Point lookups skip files that can't hold the key. False positives possible, false negatives never.",
+   "front": "What does a <b>Bloom filter</b> do in an log-structured merge (LSM) store?",
+   "back": "A per-sorted string table (SSTable) probabilistic set: 'definitely not here' or 'maybe here'. Point lookups skip files that can't hold the key. False positives possible, false negatives never.",
    "text": "",
    "image": "",
    "analogy": "A bouncer with a guest list that sometimes waves in a stranger but never turns away an invited guest.",
@@ -348,7 +348,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Besides crash recovery, the WAL feeds {{c1::physical replication}} (PostgreSQL streaming replication, MySQL binlog) and {{c2::change data capture}} tools such as Debezium.",
+   "text": "Besides crash recovery, the write-ahead log (WAL) feeds {{c1::physical replication}} (PostgreSQL streaming replication, MySQL binlog) and {{c2::change data capture}} tools such as Debezium.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -362,7 +362,7 @@
    "tags": [
     "DistSys::storage"
    ],
-   "front": "OLTP vs OLAP workloads?",
+   "front": "online transaction processing (OLTP) vs online analytical processing (OLAP) workloads?",
    "back": "<b>OLTP</b>: many small key-based reads/writes, latency-sensitive, user-facing, row-oriented. <b>OLAP</b>: few big queries scanning many rows but few columns, throughput-oriented, column-oriented warehouses.",
    "text": "",
    "image": "",
@@ -447,7 +447,7 @@
    "text": "",
    "image": "",
    "analogy": "Two people with different forms for the same data line up the boxes by label, not by box number.",
-   "extra": "Good for generated schemas (e.g. from a DB table) and big files where the schema is stored once.",
+   "extra": "Good for generated schemas (e.g. from a database (DB) table) and big files where the schema is stored once.",
    "source": "DDIA · Ch 4",
    "reverse": false
   },
@@ -543,7 +543,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>K8s:</b> passing <code>resourceVersion</code> gives writes-follow-reads.",
+   "extra": "<b>Kubernetes (K8s):</b> passing <code>resourceVersion</code> gives writes-follow-reads.",
    "source": "Dist Sys · Consistency",
    "reverse": false
   },
@@ -575,7 +575,7 @@
    "text": "Read-your-writes on an eventually consistent store: route reads to the {{c1::leader}}, carry a {{c2::version/session token}} the replica must have reached, or use {{c3::sticky routing}} to the replica you wrote to.",
    "image": "",
    "analogy": "",
-   "extra": "<b>Costs:</b> leader load, client complexity, lost load balancing. <b>Examples:</b> DynamoDB strongly consistent reads; Cosmos DB session token.",
+   "extra": "<b>Costs:</b> leader load, client complexity, lost load balancing. <b>Examples:</b> DynamoDB strongly consistent reads; Cosmos database (DB) session token.",
    "source": "Dist Sys · Consistency",
    "reverse": false
   },
@@ -671,7 +671,7 @@
    "text": "Last-writer-wins converges trivially but has two failure modes: {{c1::silent data loss}} (one of two concurrent updates vanishes) and {{c2::clock dependence}} (a node with a fast clock wins even when its write is older).",
    "image": "",
    "analogy": "",
-   "extra": "Default in DynamoDB Global Tables and Cosmos DB multi-region writes. Use only where concurrent writes don't happen or don't matter.",
+   "extra": "Default in DynamoDB Global Tables and Cosmos database (DB) multi-region writes. Use only where concurrent writes don't happen or don't matter.",
    "source": "Dist Sys · Consistency",
    "reverse": false
   },
@@ -748,12 +748,12 @@
     "AWS",
     "Azure"
    ],
-   "front": "Why can one hot key throttle a DynamoDB/Cosmos DB table that has spare total capacity?",
+   "front": "Why can one hot key throttle a DynamoDB/Cosmos database (DB) table that has spare total capacity?",
    "back": "Throughput is capped <b>per physical partition</b>, and one key always maps to one partition. A low-cardinality or time-clustered key concentrates load there.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Limits:</b> DynamoDB ≈ 3,000 RCU / 1,000 WCU per partition; Cosmos DB 10,000 RU/s per physical partition, 20 GB per logical partition.",
+   "extra": "<b>Limits:</b> DynamoDB ≈ 3,000 read capacity unit (RCU) / 1,000 write capacity unit (WCU) per partition; Cosmos DB 10,000 request unit (RU)/s per physical partition, 20 GB per logical partition.",
    "source": "Dist Sys · AWS/Azure",
    "reverse": false
   },
@@ -767,7 +767,7 @@
     "Azure"
    ],
    "front": "How do you fix a hot partition key?",
-   "back": "Choose a high-cardinality key, or <b>write-shard</b> it: add a random/hash suffix and scatter-gather on read. Also: pre-aggregate, cache (DAX), Cosmos DB hierarchical partition keys.",
+   "back": "Choose a high-cardinality key, or <b>write-shard</b> it: add a random/hash suffix and scatter-gather on read. Also: pre-aggregate, cache (DAX), Cosmos database (DB) hierarchical partition keys.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -831,7 +831,7 @@
     "DistSys::transactions"
    ],
    "front": "What is <b>snapshot isolation</b>, and how is it implemented?",
-   "back": "Each transaction reads a consistent snapshot as of its start. Implemented with <b>MVCC</b>: keep several committed versions per row. Prevents non-repeatable reads.",
+   "back": "Each transaction reads a consistent snapshot as of its start. Implemented with <b>multi-version concurrency control (MVCC)</b>: keep several committed versions per row. Prevents non-repeatable reads.",
    "text": "",
    "image": "",
    "analogy": "Each transaction reads from a photo of the database taken when it started, while others keep editing the real thing.",
@@ -846,7 +846,7 @@
    "tags": [
     "DistSys::transactions"
    ],
-   "front": "What does MVCC cost operationally?",
+   "front": "What does multi-version concurrency control (MVCC) cost operationally?",
    "back": "Old row versions pile up until garbage collection (PostgreSQL <code>VACUUM</code>, InnoDB purge). Long-running transactions block cleanup → table bloat.",
    "text": "",
    "image": "",
@@ -879,7 +879,7 @@
     "DistSys::transactions"
    ],
    "front": "Give the canonical <b>write skew</b> example and the fixes.",
-   "back": "Two on-call doctors each see 2 on call and sign off concurrently; no row conflict, both commit → 0 on call. Fix: SERIALIZABLE (e.g. PostgreSQL SSI), <code>SELECT … FOR UPDATE</code>, or materialize the constraint as a row.",
+   "back": "Two on-call doctors each see 2 on call and sign off concurrently; no row conflict, both commit → 0 on call. Fix: SERIALIZABLE (e.g. PostgreSQL serializable snapshot isolation (SSI)), <code>SELECT … FOR UPDATE</code>, or materialize the constraint as a row.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1071,7 +1071,7 @@
     "DistSys::consistency"
    ],
    "front": "What does eventual consistency need in order to actually converge?",
-   "back": "A deterministic merge rule: last-writer-wins, CRDTs, or version vectors plus an application merge. Without one you get <b>divergence</b>.",
+   "back": "A deterministic merge rule: last-writer-wins, conflict-free replicated data types (CRDTs), or version vectors plus an application merge. Without one you get <b>divergence</b>.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1086,12 +1086,12 @@
    "tags": [
     "DistSys::consistency"
    ],
-   "front": "State the <b>CAP theorem</b> precisely.",
+   "front": "State the <b>consistency, availability, partition tolerance (CAP) theorem</b> precisely.",
    "back": "During a network partition, a system cannot be both <b>linearizable</b> (C) and <b>available</b> (every non-failed node returns a non-error response) (A).",
    "text": "",
    "image": "",
    "analogy": "Two bank branches with the phone line cut: refuse withdrawals (consistent) or allow them and risk an overdraft (available).",
-   "extra": "Says nothing about the no-partition case; PACELC fills that gap.",
+   "extra": "Says nothing about the no-partition case; partition, availability, consistency, else latency, consistency (PACELC) fills that gap.",
    "source": "DDIA · Ch 9",
    "reverse": false
   },
@@ -1102,7 +1102,7 @@
    "tags": [
     "DistSys::consistency"
    ],
-   "front": "Why is 'CAP: pick two of three' a misreading?",
+   "front": "Why is 'consistency, availability, partition tolerance (CAP): pick two of three' a misreading?",
    "back": "Partitions aren't optional; they happen. The only choice is C vs A <i>while partitioned</i>.",
    "text": "",
    "image": "",
@@ -1118,7 +1118,7 @@
    "tags": [
     "DistSys::consistency"
    ],
-   "front": "In CAP, what does the 'C' mean, and why does that matter?",
+   "front": "In consistency, availability, partition tolerance (CAP), what does the 'C' mean, and why does that matter?",
    "back": "<b>Linearizability</b> specifically, not ACID consistency or 'any consistency'. A system can be causally consistent and still available.",
    "text": "",
    "image": "",
@@ -1134,7 +1134,7 @@
    "tags": [
     "DistSys::consistency"
    ],
-   "front": "What does <b>PACELC</b> add to CAP?",
+   "front": "What does <b>PACELC</b> add to consistency, availability, partition tolerance (CAP)?",
    "back": "If <b>P</b>artitioned: <b>A</b> vs <b>C</b>; <b>E</b>lse: <b>L</b>atency vs <b>C</b>onsistency. Strong consistency costs latency even when nothing is broken.",
    "text": "",
    "image": "",
@@ -1155,10 +1155,10 @@
    ],
    "front": "",
    "back": "",
-   "text": "PACELC classes: etcd, ZooKeeper and Spanner are {{c1::PC/EC}}; DynamoDB (default) and Cassandra are {{c2::PA/EL}}; MongoDB with default concerns is {{c3::PA/EC}}.",
+   "text": "partition, availability, consistency, else latency, consistency (PACELC) classes: etcd, ZooKeeper and Spanner are {{c1::PC/EC}}; DynamoDB (default) and Cassandra are {{c2::PA/EL}}; MongoDB with default concerns is {{c3::PA/EC}}.",
    "image": "",
    "analogy": "",
-   "extra": "Cosmos DB is configurable: strong/bounded ≈ PC/EC, session/eventual ≈ PA/EL.",
+   "extra": "Cosmos database (DB) is configurable: strong/bounded ≈ PC/EC, session/eventual ≈ PA/EL.",
    "source": "Dist Sys · Consistency",
    "reverse": false
   },
@@ -1176,7 +1176,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Numbers:</b> cross-AZ RTT ~1–2 ms → quorum write ≈ 2–4 ms; cross-region 50–150 ms → Cosmos DB strong ≈ 2× RTT to farthest region.",
+   "extra": "<b>Numbers:</b> cross-availability zone (AZ) round-trip time (RTT) ~1–2 ms → quorum write ≈ 2–4 ms; cross-region 50–150 ms → Cosmos database (DB) strong ≈ 2× RTT to farthest region.",
    "source": "Dist Sys · Consistency",
    "reverse": false
   },
@@ -1187,7 +1187,7 @@
    "tags": [
     "DistSys::consistency"
    ],
-   "front": "Heuristic: how do you decide CP vs AP for a piece of data?",
+   "front": "Heuristic: how do you decide consistent and partition-tolerant (CP) vs available and partition-tolerant (AP) for a piece of data?",
    "back": "Ask: <b>'If two clients disagree about this value for a few seconds, what breaks?'</b> Nothing (likes, presence, caches) → AP. Money, uniqueness, inventory, leadership → CP, or make the invariant monotonic.",
    "text": "",
    "image": "",
@@ -1222,7 +1222,7 @@
     "Azure"
    ],
    "front": "Why replace 'eventually consistent' with a <b>number</b>?",
-   "back": "Then the business can check whether it tolerates that staleness. E.g. DynamoDB eventual reads ≈ 1 s; Aurora replicas tens of ms; Azure GRS RPO &lt; 15 min.",
+   "back": "Then the business can check whether it tolerates that staleness. E.g. DynamoDB eventual reads ≈ 1 s; Aurora replicas tens of ms; Azure geo-redundant storage (GRS) recovery point objective (RPO) &lt; 15 min.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1239,7 +1239,7 @@
     "AWS",
     "K8s"
    ],
-   "front": "Order by coordination needed: Raft write, CRDT increment, K8s pod creation, DynamoDB eventual read, S3 PUT.",
+   "front": "Order by coordination needed: Raft write, conflict-free replicated data type (CRDT) increment, Kubernetes (K8s) pod creation, DynamoDB eventual read, S3 PUT.",
    "back": "CRDT increment (none) → DynamoDB eventual read → S3 PUT (per-key metadata) → Raft write (majority + fsync) → pod creation (many sequential consensus writes).",
    "text": "",
    "image": "",
@@ -1272,11 +1272,11 @@
     "DistSys::consistency"
    ],
    "front": "How do you use CALM as a design lever?",
-   "back": "Reformulate operations as monotonic (tombstones, CRDT counters, append-only logs) and reserve consensus for the remaining non-monotonic core (deletes, 'is this the only one?').",
+   "back": "Reformulate operations as monotonic (tombstones, conflict-free replicated data type (CRDT) counters, append-only logs) and reserve consensus for the remaining non-monotonic core (deletes, 'is this the only one?').",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "",
+   "extra": "CALM stands for consistency as logical monotonicity.",
    "source": "Dist Sys · Consistency",
    "reverse": false
   },
@@ -1335,7 +1335,7 @@
    "tags": [
     "DistSys::consensus"
    ],
-   "front": "What does the <b>FLP result</b> say?",
+   "front": "What does the <b>Fischer-Lynch-Paterson (FLP) result</b> say?",
    "back": "In a fully asynchronous system where even one node may crash, no deterministic consensus algorithm can guarantee it always terminates.",
    "text": "",
    "image": "",
@@ -1351,7 +1351,7 @@
    "tags": [
     "DistSys::consensus"
    ],
-   "front": "How do Raft and Paxos coexist with FLP?",
+   "front": "How do Raft and Paxos coexist with Fischer-Lynch-Paterson (FLP)?",
    "back": "They guarantee <b>safety</b> unconditionally, but <b>liveness</b> only under partial synchrony (timeouts eventually hold). Randomized timeouts make livelock improbable, not impossible.",
    "text": "",
    "image": "",
@@ -1501,7 +1501,7 @@
     "Raft"
    ],
    "front": "Why are Raft election timeouts <b>randomized</b>?",
-   "back": "So candidates rarely time out together; split votes resolve quickly. This is Raft's practical answer to FLP livelock.",
+   "back": "So candidates rarely time out together; split votes resolve quickly. This is Raft's practical answer to Fischer-Lynch-Paterson (FLP) livelock.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1570,7 +1570,7 @@
     "Raft"
    ],
    "front": "How does AppendEntries enforce Log Matching?",
-   "back": "Each RPC carries <code>prevLogIndex</code>/<code>prevLogTerm</code>. A follower rejects on mismatch; the leader backs up <code>nextIndex</code> until they agree, then overwrites the follower's divergent suffix.",
+   "back": "Each remote procedure call (RPC) carries <code>prevLogIndex</code>/<code>prevLogTerm</code>. A follower rejects on mismatch; the leader backs up <code>nextIndex</code> until they agree, then overwrites the follower's divergent suffix.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1931,7 +1931,7 @@
     "AWS",
     "Paxos"
    ],
-   "front": "What pattern do AWS's production Paxos uses (DynamoDB leader election, EBS, Route 53 ARC) share?",
+   "front": "What pattern do AWS's production Paxos uses (DynamoDB leader election, EBS, Route 53 Application Recovery Controller (ARC)) share?",
    "back": "Paxos guards a <b>small, critical metadata/leadership</b> plane; bulk data is replicated more cheaply (chain or quorum replication) under the elected leader.",
    "text": "",
    "image": "",
@@ -1979,7 +1979,7 @@
    "tags": [
     "DistSys::consensus"
    ],
-   "front": "How does Spanner-style <b>Paxos commit</b> remove 2PC's blocking?",
+   "front": "How does Spanner-style <b>Paxos commit</b> remove two-phase commit (2PC)'s blocking?",
    "back": "The coordinator's decision is itself a consensus-replicated value (each participant group runs Paxos), so a crashed coordinator is replaced by its majority instead of waited for.",
    "text": "",
    "image": "",
@@ -1995,7 +1995,7 @@
    "tags": [
     "DistSys::consensus"
    ],
-   "front": "How do Raft, Paxos and Zab avoid 2PC's single-coordinator blocking?",
+   "front": "How do Raft, Paxos and Zab avoid two-phase commit (2PC)'s single-coordinator blocking?",
    "back": "Decisions need only a <b>majority</b>, and term/epoch numbers let a new leader supersede a failed one. Progress continues while a majority is up.",
    "text": "",
    "image": "",
@@ -2060,7 +2060,7 @@
     "DistSys::failure"
    ],
    "front": "What is a <b>Byzantine fault</b>, and do datacenter systems usually tolerate it?",
-   "back": "A node behaving arbitrarily or maliciously (lying, contradictory messages). Tolerating it is expensive (PBFT, 3f+1), so most systems assume nodes may crash or be slow but are honest.",
+   "back": "A node behaving arbitrarily or maliciously (lying, contradictory messages). Tolerating it is expensive (practical Byzantine fault tolerance (PBFT), 3f+1), so most systems assume nodes may crash or be slow but are honest.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2076,7 +2076,7 @@
     "DistSys::failure"
    ],
    "front": "Why are time-of-day clocks dangerous for ordering events across nodes?",
-   "back": "NTP-synced clocks drift and can jump backward; skew between nodes can exceed the gaps you measure. Ordering by them (e.g. LWW) silently loses data.",
+   "back": "network time protocol (NTP)-synced clocks drift and can jump backward; skew between nodes can exceed the gaps you measure. Ordering by them (e.g. last-writer-wins (LWW)) silently loses data.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2188,7 +2188,7 @@
    "tags": [
     "DistSys::failure"
    ],
-   "front": "A service holds a lease, hits a 30 s stop-the-world GC pause, and resumes. What goes wrong?",
+   "front": "A service holds a lease, hits a 30 s stop-the-world garbage collection (GC) pause, and resumes. What goes wrong?",
    "back": "No heartbeats during the pause → lease expires → another instance takes it and writes. The first wakes, unaware time passed, and keeps writing → <b>two writers</b>.",
    "text": "",
    "image": "",
@@ -2221,7 +2221,7 @@
     "DistSys::failure"
    ],
    "front": "Why are leases vulnerable to clock drift and process pauses?",
-   "back": "A lease says 'leader until T'. A slow clock or a paused process (GC, VM migration, swap) makes local time say the lease is still valid while everyone else has moved on.",
+   "back": "A lease says 'leader until T'. A slow clock or a paused process (garbage collection (GC), VM migration, swap) makes local time say the lease is still valid while everyone else has moved on.",
    "text": "",
    "image": "",
    "analogy": "A parking ticket 'valid until 15:00' only protects you if your watch agrees with the warden's.",
@@ -2434,7 +2434,7 @@
     "K8s"
    ],
    "front": "Give examples of static stability in AWS and Kubernetes.",
-   "back": "EC2 instances keep running when the EC2 API is impaired; pre-provisioned capacity in each AZ avoids launching instances during an AZ outage; K8s pods and Services keep working when etcd is down.",
+   "back": "EC2 instances keep running when the EC2 API is impaired; pre-provisioned capacity in each availability zone (AZ) avoids launching instances during an AZ outage; K8s pods and Services keep working when etcd is down.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2450,7 +2450,7 @@
     "DistSys::resilience",
     "AWS"
    ],
-   "front": "What design principle does Route 53 ARC (Paxos across 5 regions) illustrate?",
+   "front": "What design principle does Route 53 Application Recovery Controller (ARC) (Paxos across 5 regions) illustrate?",
    "back": "<b>The failover mechanism must be more available than what it fails over.</b> Never put the failover switch in the failing region's control plane.",
    "text": "",
    "image": "",
@@ -2484,7 +2484,7 @@
     "DistSys::resilience",
     "AWS"
    ],
-   "front": "What is a <b>cell-based architecture</b>, and why does it sidestep CAP-style trade-offs?",
+   "front": "What is a <b>cell-based architecture</b>, and why does it sidestep consistency, availability, partition tolerance (CAP)-style trade-offs?",
    "back": "Many independent, fixed-size full-stack cells sharing no state, with a thin router mapping customers to cells. No cross-cell coordination; failures stay inside one cell.",
    "text": "",
    "image": "",
@@ -2502,12 +2502,12 @@
     "AWS",
     "Azure"
    ],
-   "front": "Why do AWS and Azure roll changes out one AZ/region at a time?",
+   "front": "Why do AWS and Azure roll changes out one availability zone (AZ)/region at a time?",
    "back": "Bad deploys and config pushes are <b>correlated failures</b>, the top cause of big outages, hitting everything at once. Waves with bake time turn them into bounded, reversible ones.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>K8s analogue:</b> <code>maxUnavailable</code>, progressive delivery.",
+   "extra": "<b>Kubernetes (K8s) analogue:</b> <code>maxUnavailable</code>, progressive delivery.",
    "source": "Dist Sys · Failure",
    "reverse": false
   },
@@ -2600,7 +2600,7 @@
     "DistSys::streams"
    ],
    "front": "What is the <b>end-to-end argument</b> for correctness?",
-   "back": "Some guarantees (e.g. true duplicate suppression) can only be done at the application endpoints. TCP retransmits or DB transactions alone can't; you need end-to-end operation IDs.",
+   "back": "Some guarantees (e.g. true duplicate suppression) can only be done at the application endpoints. TCP retransmits or database (DB) transactions alone can't; you need end-to-end operation IDs.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2616,7 +2616,7 @@
     "DistSys::streams",
     "AWS"
    ],
-   "front": "Queue 'FIFO / exactly-once' tiers (e.g. SQS FIFO): what do they actually guarantee?",
+   "front": "Queue 'first in, first out (FIFO) / exactly-once' tiers (e.g. SQS FIFO): what do they actually guarantee?",
    "back": "Order only <b>per message group</b>, and deduplication by ID within a <b>bounded window</b> (SQS: 5 minutes). The standard tier is at-least-once, best-effort order, far higher throughput.",
    "text": "",
    "image": "",
@@ -2632,7 +2632,7 @@
    "tags": [
     "DistSys::streams"
    ],
-   "front": "AMQP/JMS-style brokers vs log-based brokers (Kafka)?",
+   "front": "Advanced Message Queuing Protocol (AMQP)/Java Message Service (JMS)-style brokers vs log-based brokers (Kafka)?",
    "back": "<b>AMQP/JMS</b>: messages deleted once acked; good task queues, hard to replay. <b>Log-based</b>: durable partitioned log; consumers track an offset, so they can replay and read independently.",
    "text": "",
    "image": "",
@@ -2664,7 +2664,7 @@
    "tags": [
     "DistSys::streams"
    ],
-   "front": "Event sourcing vs CDC?",
+   "front": "Event sourcing vs change data capture (CDC)?",
    "back": "<b>Event sourcing</b>: the app stores immutable <b>domain events</b> as the source of truth and derives state by replay. <b>CDC</b>: extracts low-level row changes from a normal database.",
    "text": "",
    "image": "",
@@ -2745,7 +2745,7 @@
     "DistSys::streams"
    ],
    "front": "What is the MapReduce model?",
-   "back": "<b>Map</b> each record to key-value pairs → the framework sorts and groups by key (<b>shuffle</b>) → <b>reduce</b> all values per key. Inputs and outputs are immutable files on a distributed FS.",
+   "back": "<b>Map</b> each record to key-value pairs → the framework sorts and groups by key (<b>shuffle</b>) → <b>reduce</b> all values per key. Inputs and outputs are immutable files on a distributed file system (FS).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2856,12 +2856,12 @@
    "tags": [
     "DistSys::streams"
    ],
-   "front": "What is <b>CQRS</b> in DDIA's framing?",
+   "front": "What is <b>CQRS</b> in Designing Data-Intensive Applications (DDIA)'s framing?",
    "back": "Separate the write path (commands/events appended to a log) from the read path (query-optimized views derived from it). You can rebuild or add views by replaying the log.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "",
+   "extra": "CQRS stands for command query responsibility segregation.",
    "source": "DDIA · Ch 10–12",
    "reverse": false
   },
@@ -2891,7 +2891,7 @@
     "K8s"
    ],
    "front": "What does the Kubernetes control plane inherit from etcd's Raft?",
-   "back": "CP behaviour, majority-quorum availability, and write latency of at least one fsync plus one majority round trip.",
+   "back": "consistent and partition-tolerant (CP) behaviour, majority-quorum availability, and write latency of at least one fsync plus one majority round trip.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2924,7 +2924,7 @@
     "DistSys::case-studies",
     "K8s"
    ],
-   "front": "A 3-member etcd cluster across 2 AZs (2+1) vs 3 AZs (1+1+1)?",
+   "front": "A 3-member etcd cluster across 2 availability zones (AZs) (2+1) vs 3 AZs (1+1+1)?",
    "back": "3 AZs: any one AZ loss leaves 2/3, quorum intact. 2 AZs: losing the AZ with 2 members leaves 1/3, no quorum. Rule: no single failure domain may hold a majority.",
    "text": "",
    "image": "",
@@ -2942,7 +2942,7 @@
     "K8s"
    ],
    "front": "Why is etcd write latency bounded below by <b>disk fsync</b>?",
-   "back": "Each Raft entry must be fsynced to the WAL on a majority before the ack, or a crash could lose a 'committed' entry.",
+   "back": "Each Raft entry must be fsynced to the write-ahead log (WAL) on a majority before the ack, or a crash could lose a 'committed' entry.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3026,7 +3026,7 @@
     "DistSys::case-studies",
     "K8s"
    ],
-   "front": "What does the lack of cross-object transactions in the K8s API force controllers to do?",
+   "front": "What does the lack of cross-object transactions in the Kubernetes (K8s) API force controllers to do?",
    "back": "Re-read and retry on conflict (<code>RetryOnConflict</code>) and make every multi-step operation idempotent and reconciled, never assumed atomic.",
    "text": "",
    "image": "",
@@ -3044,7 +3044,7 @@
     "K8s"
    ],
    "front": "In Kubernetes, how do you do 'create A, then B, roll back if B fails'?",
-   "back": "You don't roll back, you <b>reconcile</b>: write desired state and let a controller converge idempotently. Use <code>ownerReferences</code> for GC, finalizers for teardown, <code>status.conditions</code> for progress.",
+   "back": "You don't roll back, you <b>reconcile</b>: write desired state and let a controller converge idempotently. Use <code>ownerReferences</code> for garbage collection (GC), finalizers for teardown, <code>status.conditions</code> for progress.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3184,7 +3184,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "Default quota 2 GB, max recommended 8 GB. Causes: Events/Jobs/CR growth, missing compaction.",
+   "extra": "Default quota 2 GB, max recommended 8 GB. Causes: Events/Jobs/custom resource (CR) growth, missing compaction.",
    "source": "Dist Sys · K8s",
    "reverse": false
   },
@@ -3213,8 +3213,8 @@
     "DistSys::case-studies",
     "K8s"
    ],
-   "front": "How should a PodDisruptionBudget be set for etcd, ZooKeeper or Kafka KRaft, and what doesn't it cover?",
-   "back": "<code>maxUnavailable: 1</code> (or minAvailable = quorum) so drains never drop below majority. PDBs cover only <i>voluntary</i> evictions; add topology spread for AZ outages.",
+   "front": "How should a PodDisruptionBudget be set for etcd, ZooKeeper or Kafka Kafka Raft (KRaft), and what doesn't it cover?",
+   "back": "<code>maxUnavailable: 1</code> (or minAvailable = quorum) so drains never drop below majority. PDBs cover only <i>voluntary</i> evictions; add topology spread for availability zone (AZ) outages.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3231,7 +3231,7 @@
     "AWS"
    ],
    "front": "How is a single DynamoDB partition replicated?",
-   "back": "Three replicas in three AZs; a Paxos-elected leader takes writes and acks once 2 of 3 have persisted.",
+   "back": "Three replicas in three availability zones (AZs); a Paxos-elected leader takes writes and acks once 2 of 3 have persisted.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3247,8 +3247,8 @@
     "DistSys::case-studies",
     "AWS"
    ],
-   "front": "Per-request eventual vs strongly consistent reads (DynamoDB, Cosmos DB): what does the strong option cost?",
-   "back": "<b>Eventual:</b> any replica, cheaper (DynamoDB: half the read cost), may miss a just-committed write.<br><b>Strong:</b> served by the leader or a quorum, sees all prior writes; costs more and is unavailable on asynchronously maintained secondary indexes (DynamoDB GSIs).",
+   "front": "Per-request eventual vs strongly consistent reads (DynamoDB, Cosmos database (DB)): what does the strong option cost?",
+   "back": "<b>Eventual:</b> any replica, cheaper (DynamoDB: half the read cost), may miss a just-committed write.<br><b>Strong:</b> served by the leader or a quorum, sees all prior writes; costs more and is unavailable on asynchronously maintained secondary indexes (DynamoDB global secondary indexs (GSIs)).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3281,8 +3281,8 @@
     "DistSys::case-studies",
     "AWS"
    ],
-   "front": "Multi-region <i>strongly consistent</i> tables (DynamoDB MRSC, Cosmos DB strong): what do they trade?",
-   "back": "Writes go through a cross-region quorum: linearizability at the cost of cross-region write latency. PACELC as a per-table choice.",
+   "front": "Multi-region <i>strongly consistent</i> tables (DynamoDB MRSC, Cosmos database (DB) strong): what do they trade?",
+   "back": "Writes go through a cross-region quorum: linearizability at the cost of cross-region write latency. partition, availability, consistency, else latency, consistency (PACELC) as a per-table choice.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3299,7 +3299,7 @@
     "AWS"
    ],
    "front": "How does DynamoDB <code>TransactWriteItems</code> get atomicity across partitions, and at what cost?",
-   "back": "A durable coordinator runs <b>2PC</b> across partition leaders. Cost: 2× WCU per item, more latency, and <code>TransactionConflict</code> rejections. Use only where needed.",
+   "back": "A durable coordinator runs <b>two-phase commit (2PC)</b> across partition leaders. Cost: 2× write capacity unit (WCU) per item, more latency, and <code>TransactionConflict</code> rejections. Use only where needed.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3333,7 +3333,7 @@
     "AWS"
    ],
    "front": "Amazon Aurora storage quorums: what are they, and why 6 copies?",
-   "back": "6 copies over 3 AZs; write 4/6, read 3/6. Survives an AZ loss with writes intact (4 left) and AZ + 1 more failure with reads intact (3 left).",
+   "back": "6 copies over 3 availability zones (AZs); write 4/6, read 3/6. Survives an AZ loss with writes intact (4 left) and AZ + 1 more failure with reads intact (3 left).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3367,8 +3367,8 @@
     "DistSys::case-studies",
     "AWS"
    ],
-   "front": "Aurora Multi-AZ vs Aurora Global Database on CAP/PACELC?",
-   "back": "In-region: synchronous 4/6 quorum, CP. Global: <i>async</i> storage replication (&lt;1 s), stale secondary reads (EL); failover loses up to the lag, so RPO = staleness.",
+   "front": "Aurora Multi-availability zone (AZ) vs Aurora Global Database on consistency, availability, partition tolerance (CAP)/partition, availability, consistency, else latency, consistency (PACELC)?",
+   "back": "In-region: synchronous 4/6 quorum, consistent and partition-tolerant (CP). Global: <i>async</i> storage replication (&lt;1 s), stale secondary reads (EL); failover loses up to the lag, so recovery point objective (RPO) = staleness.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3384,8 +3384,8 @@
     "DistSys::case-studies",
     "AWS"
    ],
-   "front": "RDS Multi-AZ fails over by flipping DNS. What client-side failure does that cause?",
-   "back": "Clients with cached DNS (JVM defaults) or long-lived pooled connections keep talking to the old primary or hang. Fix: honour TTL, cap connection lifetime, or use RDS Proxy.",
+   "front": "RDS Multi-availability zone (AZ) fails over by flipping DNS. What client-side failure does that cause?",
+   "back": "Clients with cached DNS (Java virtual machine (JVM) defaults) or long-lived pooled connections keep talking to the old primary or hang. Fix: honour time to live (TTL), cap connection lifetime, or use RDS Proxy.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3401,8 +3401,8 @@
     "DistSys::case-studies",
     "AWS"
    ],
-   "front": "How can Route 53 offer a 100% availability SLA without breaking CAP?",
-   "back": "The SLA covers the <b>data plane</b> (answering queries): massively replicated, possibly stale, AP. Changing records is a separate, eventually propagated control plane.",
+   "front": "How can Route 53 offer a 100% availability service level agreement (SLA) without breaking consistency, availability, partition tolerance (CAP)?",
+   "back": "The SLA covers the <b>data plane</b> (answering queries): massively replicated, possibly stale, available and partition-tolerant (AP). Changing records is a separate, eventually propagated control plane.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3418,7 +3418,7 @@
     "DistSys::case-studies",
     "Azure"
    ],
-   "front": "What does Cosmos DB <b>bounded staleness</b> guarantee?",
+   "front": "What does Cosmos database (DB) <b>bounded staleness</b> guarantee?",
    "back": "Reads lag writes by at most <b>K versions or T time</b>, whichever comes first: quantified staleness instead of a strong/eventual binary. Single-region, it behaves like strong.",
    "text": "",
    "image": "",
@@ -3435,8 +3435,8 @@
     "DistSys::case-studies",
     "Azure"
    ],
-   "front": "How is Cosmos DB <b>session</b> consistency implemented?",
-   "back": "The SDK carries a <b>session token</b> (per-partition sequence numbers); a replica serves the read only once it has caught up to that token.",
+   "front": "How is Cosmos database (DB) <b>session</b> consistency implemented?",
+   "back": "The software development kit (SDK) carries a <b>session token</b> (per-partition sequence numbers); a replica serves the read only once it has caught up to that token.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3452,7 +3452,7 @@
     "DistSys::case-studies",
     "Azure"
    ],
-   "front": "What silently breaks Cosmos DB session consistency?",
+   "front": "What silently breaks Cosmos database (DB) session consistency?",
    "back": "Not passing the session token along: multiple service instances, a function per request, or a web tier that doesn't return it to the browser. Read-your-writes becomes eventual.",
    "text": "",
    "image": "",
@@ -3469,8 +3469,8 @@
     "DistSys::case-studies",
     "Azure"
    ],
-   "front": "Cosmos DB strong consistency across regions: what does a write cost, and what's incompatible?",
-   "back": "Synchronous commit to a majority of regions, ≈ 2× RTT to the farthest region. Incompatible with <b>multi-region writes</b>: no linearizability with independent concurrent writers.",
+   "front": "Cosmos database (DB) strong consistency across regions: what does a write cost, and what's incompatible?",
+   "back": "Synchronous commit to a majority of regions, ≈ 2× round-trip time (RTT) to the farthest region. Incompatible with <b>multi-region writes</b>: no linearizability with independent concurrent writers.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3488,7 +3488,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Cosmos DB multi-region write conflict policies: {{c1::last-writer-wins}} (default, on <code>_ts</code>), {{c2::custom stored procedure}} (server-side merge), {{c3::manual}} (conflicts feed for the app).",
+   "text": "Cosmos database (DB) multi-region write conflict policies: {{c1::last-writer-wins}} (default, on <code>_ts</code>), {{c2::custom stored procedure}} (server-side merge), {{c3::manual}} (conflicts feed for the app).",
    "image": "",
    "analogy": "",
    "extra": "If losing a write is unacceptable, model updates to commute (counters, sets) or use single-region writes.",
@@ -3503,7 +3503,7 @@
     "DistSys::case-studies",
     "Azure"
    ],
-   "front": "How does Cosmos DB replicate inside a region?",
+   "front": "How does Cosmos database (DB) replicate inside a region?",
    "back": "Each physical partition is a 4-replica set; a write is durable at a majority (3/4). Strong/bounded reads use a majority; session/eventual read a single replica.",
    "text": "",
    "image": "",
@@ -3522,10 +3522,10 @@
    ],
    "front": "",
    "back": "",
-   "text": "Storage redundancy levels: {{c1::sync copies in one datacenter}} (Azure LRS, S3 One Zone-IA) → {{c2::sync copies across AZs}} (ZRS, S3 Standard) → {{c3::plus an async copy to a distant region}} (GRS, S3 cross-region replication) → optionally a {{c4::readable, stale secondary}} (RA-GRS).",
+   "text": "Storage redundancy levels: {{c1::sync copies in one datacenter}} (Azure locally redundant storage (LRS), S3 One Zone-IA) → {{c2::sync copies across AZs}} (zone-redundant storage (ZRS), S3 Standard) → {{c3::plus an async copy to a distant region}} (geo-redundant storage (GRS), S3 cross-region replication) → optionally a {{c4::readable, stale secondary}} (read-access geo-redundant storage (RA-GRS)).",
    "image": "",
    "analogy": "",
-   "extra": "Geo-failover loses writes not yet replicated (RPO typically &lt; 15 min).",
+   "extra": "Geo-failover loses writes not yet replicated (recovery point objective (RPO) typically &lt; 15 min).",
    "source": "Dist Sys · Azure",
    "reverse": false
   },
@@ -3542,7 +3542,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "Exposes ETags for optimistic concurrency.",
+   "extra": "Exposes entity tags (ETags) for optimistic concurrency.",
    "source": "Dist Sys · Azure",
    "reverse": false
   },
@@ -3559,7 +3559,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Examples:</b> Azure Service Fabric stateful services, etcd, Kafka KRaft controllers.",
+   "extra": "<b>Examples:</b> Azure Service Fabric stateful services, etcd, Kafka Kafka Raft (KRaft) controllers.",
    "source": "Dist Sys · Azure",
    "reverse": false
   },
@@ -3572,7 +3572,7 @@
     "Azure"
    ],
    "front": "Using Azure Blob leases for leader election: failure mode and fix?",
-   "back": "The holder pauses, the lease expires, another instance takes over, the old one resumes as 'leader'. Fix: fence writes with conditional ETag (<code>If-Match</code>) or an epoch.",
+   "back": "The holder pauses, the lease expires, another instance takes over, the old one resumes as 'leader'. Fix: fence writes with conditional entity tag (ETag) (<code>If-Match</code>) or an epoch.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3589,7 +3589,7 @@
     "Azure"
    ],
    "front": "Asynchronously geo-replicated databases (Azure SQL failover groups, Aurora Global): what must the app handle?",
-   "back": "An unplanned failover can lose recent commits (RPO = replication lag). Apps must use the stable listener endpoint, retry transient errors, and accept stale reads from the secondary.",
+   "back": "An unplanned failover can lose recent commits (recovery point objective (RPO) = replication lag). Apps must use the stable listener endpoint, retry transient errors, and accept stale reads from the secondary.",
    "text": "",
    "image": "",
    "analogy": "",
