@@ -32,3 +32,21 @@ Reviewed card by card for vendor-catered content: 1 deleted, 1 rewritten to the 
 
 ### Scrubbed (1)
 - "Why is STACKIT attractive for Dutch/EU public-sector compliance (BIO2, NIS2)?": dropped 'Strong sovereignty answers' lead-in
+
+## Abbreviations expanded
+Notes touched: 136 (incl. note 7 SKE reworded to "STACKIT Kubernetes Engine (SKE)")
+SKE → STACKIT Kubernetes Engine; SNA → STACKIT Network Area; VPN → virtual private network; OIDC → OpenID Connect;
+DB → database; HA → high availability; DR → disaster recovery; IAM → identity and access management; LB → load balancer;
+AD → Active Directory; AD CS → Active Directory Certificate Services; LDAP → lightweight directory access protocol;
+MPLS → multiprotocol label switching; BGP → border gateway protocol; DC → data center; ESO → External Secrets Operator;
+SIEM → security information and event management; CIDR → classless inter-domain routing; PKI → public key infrastructure;
+KMS → key management service; NAT → network address translation; SSO → single sign-on; IPsec → Internet Protocol Security;
+CSI → Container Storage Interface; ACL → access control list; CNI → Container Network Interface; IPAM → IP address management;
+ALB → Application Load Balancer; NLB → Network Load Balancer; RTO → recovery time objective; GDPR → General Data Protection Regulation;
+RWO → ReadWriteOnce; RWX → ReadWriteMany; NFS → Network File System; WAF → web application firewall;
+BIO2 → Baseline Informatiebeveiliging Overheid 2; NIS2 → Network and Information Security Directive 2; OTel → OpenTelemetry;
+JWT → JSON Web Token; JWKS → JSON Web Key Set; SPOF → single point of failure; CRD → custom resource definition;
+IdP/IDP → identity provider; WAN → wide area network; IaC → infrastructure as code; SDK → software development kit;
+PITR → point-in-time recovery; GSLB → global server load balancing; HSM → hardware security module; mTLS → mutual TLS;
+SAML → security assertion markup language; CNCF → Cloud Native Computing Foundation; CDN → content delivery network;
+IOPS → input/output operations per second

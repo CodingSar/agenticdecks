@@ -135,7 +135,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "STACKIT compute: {{c1::Compute Engine}} = OpenStack VMs (≈ EC2); {{c2::SKE (STACKIT Kubernetes Engine)}} = managed Kubernetes (≈ GKE/AKS/EKS); {{c3::Cloud Foundry}} = PaaS for pushing apps without managing clusters; {{c4::Confidential Server / Confidential Kubernetes}} = in-memory-encrypted compute for highly sensitive workloads.",
+   "text": "STACKIT compute: {{c1::Compute Engine}} = OpenStack VMs (≈ EC2); {{c2::STACKIT Kubernetes Engine (SKE)}} = managed Kubernetes (≈ GKE/AKS/EKS); {{c3::Cloud Foundry}} = PaaS for pushing apps without managing clusters; {{c4::Confidential Server / Confidential Kubernetes}} = in-memory-encrypted compute for highly sensitive workloads.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -277,7 +277,7 @@
     "compliance",
     "tradeoff"
    ],
-   "front": "Running Baseline Informatiebeveiliging Overheid 2 (BIO2)/NIS2 workloads on STACKIT: what remains <b>your</b> job (shared responsibility)?",
+   "front": "Running Baseline Informatiebeveiliging Overheid 2 (BIO2)/Network and Information Security Directive 2 (NIS2) workloads on STACKIT: what remains <b>your</b> job (shared responsibility)?",
    "back": "Zoning/segmentation, access control and joiner-mover-leaver via your Active Directory (AD), central audit logging, encryption config, incident response, and demonstrable control of the deployment chain (GitOps + signed images).",
    "text": "",
    "image": "",
@@ -299,7 +299,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "STACKIT operates the control planes; clusters are self-service via Portal, CLI, API or Terraform, with auto-updates and auto-repair. CNCF-conformant.",
+   "extra": "STACKIT operates the control planes; clusters are self-service via Portal, CLI, API or Terraform, with auto-updates and auto-repair. Cloud Native Computing Foundation (CNCF)-conformant.",
    "source": "ske · gardener",
    "reverse": false
   },
@@ -415,7 +415,7 @@
     "lifecycle",
     "fleet"
    ],
-   "front": "What happens when an STACKIT Kubernetes Engine (SKE) cluster's Kubernetes minor version leaves support?",
+   "front": "What happens when a STACKIT Kubernetes Engine (SKE) cluster's Kubernetes minor version leaves support?",
    "back": "It is <b>force-upgraded</b> — you can't pin a version forever.",
    "text": "",
    "image": "",
@@ -537,7 +537,7 @@
     "ske",
     "autoscaling"
    ],
-   "front": "Why is an STACKIT Kubernetes Engine (SKE) node pool's max size also a tenancy control?",
+   "front": "Why is a STACKIT Kubernetes Engine (SKE) node pool's max size also a tenancy control?",
    "back": "A runaway tenant can only grow to the pool max — the autoscaler limit acts as a hard compute quota.",
    "text": "",
    "image": "",
@@ -627,7 +627,7 @@
     "networking",
     "hybrid"
    ],
-   "front": "How do you expose an STACKIT Kubernetes Engine (SKE) Service only to on-prem over the virtual private network (VPN)?",
+   "front": "How do you expose a STACKIT Kubernetes Engine (SKE) Service only to on-prem over the virtual private network (VPN)?",
    "back": "The <b>internal load balancer (LB)</b> annotation: the LB gets a private IP in the node network instead of a public one.",
    "text": "",
    "image": "",
@@ -663,7 +663,7 @@
     "networking",
     "hybrid"
    ],
-   "front": "How do you preserve client source IPs through an STACKIT Kubernetes Engine (SKE) load balancer?",
+   "front": "How do you preserve client source IPs through a STACKIT Kubernetes Engine (SKE) load balancer?",
    "back": "Enable <b>PROXY protocol v2</b> via the <code>lb.stackit.cloud/...</code> annotation (the backend must speak it).",
    "text": "",
    "image": "",
@@ -751,7 +751,7 @@
     "security"
    ],
    "front": "How do you harden access to the STACKIT Kubernetes Engine (SKE) API server?",
-   "back": "Enable the <b>access control list (ACL) extension</b> to allow-list only your on-prem egress IPs/VPN ranges, use short-lived credentials (<code>stackit ske kubeconfig login</code>), and audit tool identities separately.",
+   "back": "Enable the <b>access control list (ACL) extension</b> to allow-list only your on-prem egress IPs/virtual private network (VPN) ranges, use short-lived credentials (<code>stackit ske kubeconfig login</code>), and audit tool identities separately.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -915,8 +915,8 @@
     "networking",
     "multitenancy"
    ],
-   "front": "Why avoid designing around CNI-specific features on STACKIT Kubernetes Engine (SKE)?",
-   "back": "On a managed cluster you don't choose the Container Network Interface (CNI) or its low-level config, so you can't guarantee those features fleet-wide.",
+   "front": "Why avoid designing around Container Network Interface (CNI)-specific features on STACKIT Kubernetes Engine (SKE)?",
+   "back": "On a managed cluster you don't choose the CNI or its low-level config, so you can't guarantee those features fleet-wide.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -950,7 +950,7 @@
     "compute"
    ],
    "front": "Why do VMs still matter in a Kubernetes-centric STACKIT design?",
-   "back": "virtual private network (VPN) test endpoints, jump hosts and self-managed appliances (e.g. self-run VPN gateways).",
+   "back": "Virtual private network (VPN) test endpoints, jump hosts and self-managed appliances (e.g. self-run VPN gateways).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1039,7 +1039,7 @@
     "hybrid"
    ],
    "front": "Why is the STACKIT Network Area (SNA) the hub of a hybrid STACKIT design?",
-   "back": "virtual private network (VPN) and multiprotocol label switching (MPLS) connections terminate in the SNA, so on-prem routes become available to every attached project.",
+   "back": "Virtual private network (VPN) and multiprotocol label switching (MPLS) connections terminate in the SNA, so on-prem routes become available to every attached project.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1148,7 +1148,7 @@
     "hybrid"
    ],
    "front": "STACKIT virtual private network (VPN): protocol and supported topologies?",
-   "back": "Managed <b>Internet Protocol Security (IPsec) (IKEv2)</b> gateways attached to an STACKIT Network Area (SNA); site-to-site and site-to-multisite only — <b>no client (point-to-site) VPN</b>.",
+   "back": "Managed <b>Internet Protocol Security (IPsec, IKEv2)</b> gateways attached to a STACKIT Network Area (SNA); site-to-site and site-to-multisite only — <b>no client (point-to-site) VPN</b>.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1295,7 +1295,7 @@
     "loadbalancer",
     "tradeoff"
    ],
-   "front": "Hybrid fleet: why usually run your own ingress controller behind an Network Load Balancer (NLB) rather than the managed Application Load Balancer (ALB)?",
+   "front": "Hybrid fleet: why usually run your own ingress controller behind a Network Load Balancer (NLB) rather than the managed Application Load Balancer (ALB)?",
    "back": "Full feature control (canary, auth hooks, middlewares) and <b>identical config across STACKIT Kubernetes Engine (SKE) and on-prem clusters</b>; the ALB only saves ops for simpler setups.",
    "text": "",
    "image": "",
@@ -1313,7 +1313,7 @@
     "dns"
    ],
    "front": "How do STACKIT DNS records get automated from Kubernetes?",
-   "back": "<b>external-dns</b> (webhook-based provider) writes records into STACKIT DNS zones pointing at ingress/LB IPs.",
+   "back": "<b>external-dns</b> (webhook-based provider) writes records into STACKIT DNS zones pointing at ingress/load balancer (LB) IPs.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1401,8 +1401,8 @@
     "oidc",
     "pingfederate"
    ],
-   "front": "Why can't Kubernetes authenticate users against Active Directory (AD)/LDAP directly, and what bridges the gap?",
-   "back": "kube-apiserver has <b>no lightweight directory access protocol (LDAP) authenticator</b> (only certs, tokens, OpenID Connect (OIDC), webhook). An OIDC provider federating to AD — <b>PingFederate</b> — issues ID tokens with username + group claims.",
+   "front": "Why can't Kubernetes authenticate users against Active Directory (AD)/lightweight directory access protocol (LDAP) directly, and what bridges the gap?",
+   "back": "kube-apiserver has <b>no LDAP authenticator</b> (only certs, tokens, OpenID Connect (OIDC), webhook). An OIDC provider federating to AD — <b>PingFederate</b> — issues ID tokens with username + group claims.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1419,7 +1419,7 @@
     "oidc",
     "pingfederate"
    ],
-   "front": "Does Kubernetes call PingFederate/AD on every request?",
+   "front": "Does Kubernetes call PingFederate/Active Directory (AD) on every request?",
    "back": "No. It validates the JSON Web Token (JWT) signature locally against the issuer's published keys (JSON Web Key Set (JWKS)).",
    "text": "",
    "image": "",
@@ -1566,7 +1566,7 @@
     "tradeoff"
    ],
    "front": "Do you need <b>Dex</b> if PingFederate already fronts Active Directory?",
-   "back": "No. Dex (a lightweight OpenID Connect (OIDC) broker with lightweight directory access protocol (LDAP)/SAML/GitHub connectors) would just add a hop and ops burden.",
+   "back": "No. Dex (a lightweight OpenID Connect (OIDC) broker with lightweight directory access protocol (LDAP)/security assertion markup language (SAML)/GitHub connectors) would just add a hop and ops burden.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1839,7 +1839,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Tenant limits on STACKIT/SKE stack in layers: {{c1::project quotas}} (cores, RAM, volumes, public IPs; raised via support); {{c2::node pool min/max}}; {{c3::ResourceQuota}} per namespace; {{c4::LimitRange}} per pod/container (forces requests to be set).",
+   "text": "Tenant limits on STACKIT/STACKIT Kubernetes Engine (SKE) stack in layers: {{c1::project quotas}} (cores, RAM, volumes, public IPs; raised via support); {{c2::node pool min/max}}; {{c3::ResourceQuota}} per namespace; {{c4::LimitRange}} per pod/container (forces requests to be set).",
    "image": "",
    "analogy": "",
    "extra": "Tenancy design = deciding at which of these layers a tenant is throttled.",
@@ -1857,7 +1857,7 @@
     "ske"
    ],
    "front": "Cluster-per-tenant on STACKIT Kubernetes Engine (SKE): pros?",
-   "back": "Real control-plane and node isolation, independent versions/CRDs, per-tenant blast radius and maintenance windows, clean cost attribution, offboarding = delete the cluster.",
+   "back": "Real control-plane and node isolation, independent versions/custom resource definitions (CRDs), per-tenant blast radius and maintenance windows, clean cost attribution, offboarding = delete the cluster.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1948,7 +1948,7 @@
     "tradeoff"
    ],
    "front": "Why is a shared STACKIT project weak for tenant separation?",
-   "back": "identity and access management (IAM) roles are project-wide, so separation collapses at the cloud level; plus quota contention and murky cost attribution.",
+   "back": "Identity and access management (IAM) roles are project-wide, so separation collapses at the cloud level; plus quota contention and murky cost attribution.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2077,7 +2077,7 @@
     "hybrid",
     "tradeoff"
    ],
-   "front": "disaster recovery (DR) with one STACKIT region: what does in-region high availability (HA) cover?",
+   "front": "Disaster recovery (DR) with one STACKIT region: what does in-region high availability (HA) cover?",
    "back": "Node pools across eu01-1/2/3, zone-aware StatefulSets and managed databases (DBs) on HA plans — zone failures, not loss of the region or provider.",
    "text": "",
    "image": "",
@@ -2152,7 +2152,7 @@
     "architecture"
    ],
    "front": "Hybrid reference topology: what stays <b>on-prem</b>?",
-   "back": "Active Directory (AD)/LDAP, PingFederate, Git + CI, Vault, Harbor, central monitoring/SIEM, Terraform runners.",
+   "back": "Active Directory (AD)/lightweight directory access protocol (LDAP), PingFederate, Git + CI, Vault, Harbor, central monitoring/security information and event management (SIEM), Terraform runners.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2169,7 +2169,7 @@
     "architecture"
    ],
    "front": "Hybrid reference topology: what lives <b>in STACKIT</b>?",
-   "back": "The STACKIT Network Area (SNA) (fed by virtual private network (VPN)/MPLS), projects per team/env, STACKIT Kubernetes Engine (SKE) workload clusters (+ optional hub), managed databases (DBs), Object Storage, DNS, Observability.",
+   "back": "The STACKIT Network Area (SNA) (fed by virtual private network (VPN)/multiprotocol label switching (MPLS)), projects per team/env, STACKIT Kubernetes Engine (SKE) workload clusters (+ optional hub), managed databases (DBs), Object Storage, DNS, Observability.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2240,7 +2240,7 @@
     "ipam"
    ],
    "front": "Besides node networks, what address space do you reserve in the STACKIT Network Area (SNA) plan?",
-   "back": "load balancer (LB) IPs, virtual private network (VPN) transfer networks, a future disaster recovery (DR) site, vCluster hosts.",
+   "back": "Load balancer (LB) IPs, virtual private network (VPN) transfer networks, a future disaster recovery (DR) site, vCluster hosts.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2346,7 +2346,7 @@
     "availability"
    ],
    "front": "Why do existing sessions survive a PingFederate outage while new logins fail?",
-   "back": "Apps validate JWTs locally against cached JSON Web Key Set (JWKS); only issuing new tokens needs the identity provider (IdP).",
+   "back": "Apps validate JSON Web Tokens (JWTs) locally against cached JSON Web Key Set (JWKS); only issuing new tokens needs the identity provider (IdP).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2438,7 +2438,7 @@
     "ci",
     "tradeoff"
    ],
-   "front": "On-prem vs in-cluster (STACKIT Kubernetes Engine (SKE)) CI runners: trade-off?",
+   "front": "On-prem vs in-cluster STACKIT Kubernetes Engine (SKE) CI runners: trade-off?",
    "back": "<b>On-prem:</b> next to Git/Vault/artifacts, reach STACKIT via public APIs.<br><b>SKE:</b> next to deploy targets and elastic — but CI becomes a noisy-neighbour tenant needing quotas.",
    "text": "",
    "image": "",
@@ -2693,7 +2693,7 @@
     "tradeoff"
    ],
    "front": "Hairpinning all cloud egress through on-prem inspection: trade-off?",
-   "back": "<b>+</b> single inspection/policy point, SIEM-friendly.<br><b>−</b> eats virtual private network (VPN) bandwidth, adds latency, and the proxy becomes a fleet-wide single point of failure (SPOF).",
+   "back": "<b>+</b> single inspection/policy point, security information and event management (SIEM)-friendly.<br><b>−</b> eats virtual private network (VPN) bandwidth, adds latency, and the proxy becomes a fleet-wide single point of failure (SPOF).",
    "text": "",
    "image": "",
    "analogy": "Routing every delivery van through headquarters' inspection gate, even when the customer is next door.",
