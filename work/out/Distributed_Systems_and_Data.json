@@ -170,8 +170,8 @@
    "tags": [
     "DistSys::storage"
    ],
-   "front": "How does an <b>log-structured merge (LSM)-tree</b> storage engine handle a write?",
-   "back": "Append to a write-ahead log (WAL), insert into an in-memory sorted <b>memtable</b>; when full, flush it as an immutable sorted file (<b>SSTable</b>). Background <b>compaction</b> merges SSTables, dropping overwritten/deleted keys.",
+   "front": "How does an <b>Log-structured merge (LSM)-tree</b> storage engine handle a write?",
+   "back": "Append to a write-ahead log (WAL), insert into an in-memory sorted <b>memtable</b>; when full, flush it as an immutable sorted file (<b>Sorted string table (SSTable)</b>). Background <b>compaction</b> merges SSTables, dropping overwritten/deleted keys.",
    "text": "",
    "image": "",
    "analogy": "Like tossing notes into an inbox and filing them into sorted folders later, instead of finding the right page every time.",
@@ -186,7 +186,7 @@
    "tags": [
     "DistSys::storage"
    ],
-   "front": "How does an log-structured merge (LSM)-tree answer a point read, and why can it be slow?",
+   "front": "How does a log-structured merge (LSM)-tree answer a point read, and why can it be slow?",
    "back": "Check the memtable, then sorted string tables (SSTables) newest to oldest. A key may need several files checked (read amplification); Bloom filters and sparse indexes skip most of them.",
    "text": "",
    "image": "",
@@ -234,7 +234,7 @@
    "tags": [
     "DistSys::storage"
    ],
-   "front": "When does an <b>log-structured merge (LSM)-tree</b> beat a B-tree, and what does it cost?",
+   "front": "When does an <b>Log-structured merge (LSM)-tree</b> beat a B-tree, and what does it cost?",
    "back": "Write-heavy, time-series or wide-column workloads: sequential writes, higher throughput, better compression. Cost: compaction competes for I/O and reads/space amplify.",
    "text": "",
    "image": "",
@@ -250,7 +250,7 @@
    "tags": [
     "DistSys::storage"
    ],
-   "front": "When does a <b>B-tree</b> beat an log-structured merge (LSM)-tree?",
+   "front": "When does a <b>B-tree</b> beat a log-structured merge (LSM)-tree?",
    "back": "Read-dominated, transactional workloads: predictable point/range reads, and each key lives in exactly one place, which makes locking simple (PostgreSQL, MySQL InnoDB).",
    "text": "",
    "image": "",
@@ -314,8 +314,8 @@
    "tags": [
     "DistSys::storage"
    ],
-   "front": "What does a <b>Bloom filter</b> do in an log-structured merge (LSM) store?",
-   "back": "A per-sorted string table (SSTable) probabilistic set: 'definitely not here' or 'maybe here'. Point lookups skip files that can't hold the key. False positives possible, false negatives never.",
+   "front": "What does a <b>Bloom filter</b> do in a log-structured merge (LSM) store?",
+   "back": "A probabilistic set per sorted string table (SSTable): 'definitely not here' or 'maybe here'. Point lookups skip files that can't hold the key. False positives possible, false negatives never.",
    "text": "",
    "image": "",
    "analogy": "A bouncer with a guest list that sometimes waves in a stranger but never turns away an invited guest.",
@@ -362,7 +362,7 @@
    "tags": [
     "DistSys::storage"
    ],
-   "front": "online transaction processing (OLTP) vs online analytical processing (OLAP) workloads?",
+   "front": "Online transaction processing (OLTP) vs online analytical processing (OLAP) workloads?",
    "back": "<b>OLTP</b>: many small key-based reads/writes, latency-sensitive, user-facing, row-oriented. <b>OLAP</b>: few big queries scanning many rows but few columns, throughput-oriented, column-oriented warehouses.",
    "text": "",
    "image": "",
@@ -447,7 +447,7 @@
    "text": "",
    "image": "",
    "analogy": "Two people with different forms for the same data line up the boxes by label, not by box number.",
-   "extra": "Good for generated schemas (e.g. from a database (DB) table) and big files where the schema is stored once.",
+   "extra": "Good for generated schemas (e.g. from a DB table) and big files where the schema is stored once.",
    "source": "DDIA · Ch 4",
    "reverse": false
   },
@@ -575,7 +575,7 @@
    "text": "Read-your-writes on an eventually consistent store: route reads to the {{c1::leader}}, carry a {{c2::version/session token}} the replica must have reached, or use {{c3::sticky routing}} to the replica you wrote to.",
    "image": "",
    "analogy": "",
-   "extra": "<b>Costs:</b> leader load, client complexity, lost load balancing. <b>Examples:</b> DynamoDB strongly consistent reads; Cosmos database (DB) session token.",
+   "extra": "<b>Costs:</b> leader load, client complexity, lost load balancing. <b>Examples:</b> DynamoDB strongly consistent reads; Cosmos DB session token.",
    "source": "Dist Sys · Consistency",
    "reverse": false
   },
@@ -671,7 +671,7 @@
    "text": "Last-writer-wins converges trivially but has two failure modes: {{c1::silent data loss}} (one of two concurrent updates vanishes) and {{c2::clock dependence}} (a node with a fast clock wins even when its write is older).",
    "image": "",
    "analogy": "",
-   "extra": "Default in DynamoDB Global Tables and Cosmos database (DB) multi-region writes. Use only where concurrent writes don't happen or don't matter.",
+   "extra": "Default in DynamoDB Global Tables and Cosmos DB multi-region writes. Use only where concurrent writes don't happen or don't matter.",
    "source": "Dist Sys · Consistency",
    "reverse": false
   },
@@ -748,7 +748,7 @@
     "AWS",
     "Azure"
    ],
-   "front": "Why can one hot key throttle a DynamoDB/Cosmos database (DB) table that has spare total capacity?",
+   "front": "Why can one hot key throttle a DynamoDB/Cosmos DB table that has spare total capacity?",
    "back": "Throughput is capped <b>per physical partition</b>, and one key always maps to one partition. A low-cardinality or time-clustered key concentrates load there.",
    "text": "",
    "image": "",
@@ -767,7 +767,7 @@
     "Azure"
    ],
    "front": "How do you fix a hot partition key?",
-   "back": "Choose a high-cardinality key, or <b>write-shard</b> it: add a random/hash suffix and scatter-gather on read. Also: pre-aggregate, cache (DAX), Cosmos database (DB) hierarchical partition keys.",
+   "back": "Choose a high-cardinality key, or <b>write-shard</b> it: add a random/hash suffix and scatter-gather on read. Also: pre-aggregate, cache (DAX), Cosmos DB hierarchical partition keys.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -831,7 +831,7 @@
     "DistSys::transactions"
    ],
    "front": "What is <b>snapshot isolation</b>, and how is it implemented?",
-   "back": "Each transaction reads a consistent snapshot as of its start. Implemented with <b>multi-version concurrency control (MVCC)</b>: keep several committed versions per row. Prevents non-repeatable reads.",
+   "back": "Each transaction reads a consistent snapshot as of its start. Implemented with <b>Multi-version concurrency control (MVCC)</b>: keep several committed versions per row. Prevents non-repeatable reads.",
    "text": "",
    "image": "",
    "analogy": "Each transaction reads from a photo of the database taken when it started, while others keep editing the real thing.",
@@ -1086,7 +1086,7 @@
    "tags": [
     "DistSys::consistency"
    ],
-   "front": "State the <b>consistency, availability, partition tolerance (CAP) theorem</b> precisely.",
+   "front": "State the <b>Consistency, availability, partition tolerance (CAP) theorem</b> precisely.",
    "back": "During a network partition, a system cannot be both <b>linearizable</b> (C) and <b>available</b> (every non-failed node returns a non-error response) (A).",
    "text": "",
    "image": "",
@@ -1155,10 +1155,10 @@
    ],
    "front": "",
    "back": "",
-   "text": "partition, availability, consistency, else latency, consistency (PACELC) classes: etcd, ZooKeeper and Spanner are {{c1::PC/EC}}; DynamoDB (default) and Cassandra are {{c2::PA/EL}}; MongoDB with default concerns is {{c3::PA/EC}}.",
+   "text": "Partition, availability, consistency, else latency, consistency (PACELC) classes: etcd, ZooKeeper and Spanner are {{c1::PC/EC}}; DynamoDB (default) and Cassandra are {{c2::PA/EL}}; MongoDB with default concerns is {{c3::PA/EC}}.",
    "image": "",
    "analogy": "",
-   "extra": "Cosmos database (DB) is configurable: strong/bounded ≈ PC/EC, session/eventual ≈ PA/EL.",
+   "extra": "Cosmos DB is configurable: strong/bounded ≈ PC/EC, session/eventual ≈ PA/EL.",
    "source": "Dist Sys · Consistency",
    "reverse": false
   },
@@ -1176,7 +1176,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Numbers:</b> cross-availability zone (AZ) round-trip time (RTT) ~1–2 ms → quorum write ≈ 2–4 ms; cross-region 50–150 ms → Cosmos database (DB) strong ≈ 2× RTT to farthest region.",
+   "extra": "<b>Numbers:</b> cross-availability zone (AZ) round-trip time (RTT) ~1–2 ms → quorum write ≈ 2–4 ms; cross-region 50–150 ms → Cosmos DB strong ≈ 2× RTT to farthest region.",
    "source": "Dist Sys · Consistency",
    "reverse": false
   },
@@ -2076,7 +2076,7 @@
     "DistSys::failure"
    ],
    "front": "Why are time-of-day clocks dangerous for ordering events across nodes?",
-   "back": "network time protocol (NTP)-synced clocks drift and can jump backward; skew between nodes can exceed the gaps you measure. Ordering by them (e.g. last-writer-wins (LWW)) silently loses data.",
+   "back": "Network time protocol (NTP)-synced clocks drift and can jump backward; skew between nodes can exceed the gaps you measure. Ordering by them (e.g. Last-writer-wins (LWW)) silently loses data.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2450,7 +2450,7 @@
     "DistSys::resilience",
     "AWS"
    ],
-   "front": "What design principle does Route 53 Application Recovery Controller (ARC) (Paxos across 5 regions) illustrate?",
+   "front": "What design principle does Route 53 Application Recovery Controller (ARC), Paxos across 5 regions, illustrate?",
    "back": "<b>The failover mechanism must be more available than what it fails over.</b> Never put the failover switch in the failing region's control plane.",
    "text": "",
    "image": "",
@@ -2600,7 +2600,7 @@
     "DistSys::streams"
    ],
    "front": "What is the <b>end-to-end argument</b> for correctness?",
-   "back": "Some guarantees (e.g. true duplicate suppression) can only be done at the application endpoints. TCP retransmits or database (DB) transactions alone can't; you need end-to-end operation IDs.",
+   "back": "Some guarantees (e.g. true duplicate suppression) can only be done at the application endpoints. TCP retransmits or DB transactions alone can't; you need end-to-end operation IDs.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2891,7 +2891,7 @@
     "K8s"
    ],
    "front": "What does the Kubernetes control plane inherit from etcd's Raft?",
-   "back": "consistent and partition-tolerant (CP) behaviour, majority-quorum availability, and write latency of at least one fsync plus one majority round trip.",
+   "back": "Consistent and partition-tolerant (CP) behaviour, majority-quorum availability, and write latency of at least one fsync plus one majority round trip.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3213,7 +3213,7 @@
     "DistSys::case-studies",
     "K8s"
    ],
-   "front": "How should a PodDisruptionBudget be set for etcd, ZooKeeper or Kafka Kafka Raft (KRaft), and what doesn't it cover?",
+   "front": "How should a PodDisruptionBudget be set for etcd, ZooKeeper or Kafka Raft (KRaft), and what doesn't it cover?",
    "back": "<code>maxUnavailable: 1</code> (or minAvailable = quorum) so drains never drop below majority. PDBs cover only <i>voluntary</i> evictions; add topology spread for availability zone (AZ) outages.",
    "text": "",
    "image": "",
@@ -3247,7 +3247,7 @@
     "DistSys::case-studies",
     "AWS"
    ],
-   "front": "Per-request eventual vs strongly consistent reads (DynamoDB, Cosmos database (DB)): what does the strong option cost?",
+   "front": "Per-request eventual vs strongly consistent reads (DynamoDB, Cosmos DB): what does the strong option cost?",
    "back": "<b>Eventual:</b> any replica, cheaper (DynamoDB: half the read cost), may miss a just-committed write.<br><b>Strong:</b> served by the leader or a quorum, sees all prior writes; costs more and is unavailable on asynchronously maintained secondary indexes (DynamoDB global secondary indexs (GSIs)).",
    "text": "",
    "image": "",
@@ -3281,8 +3281,8 @@
     "DistSys::case-studies",
     "AWS"
    ],
-   "front": "Multi-region <i>strongly consistent</i> tables (DynamoDB MRSC, Cosmos database (DB) strong): what do they trade?",
-   "back": "Writes go through a cross-region quorum: linearizability at the cost of cross-region write latency. partition, availability, consistency, else latency, consistency (PACELC) as a per-table choice.",
+   "front": "Multi-region <i>strongly consistent</i> tables (DynamoDB MRSC, Cosmos DB strong): what do they trade?",
+   "back": "Writes go through a cross-region quorum: linearizability at the cost of cross-region write latency. Partition, availability, consistency, else latency, consistency (PACELC) as a per-table choice.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3299,7 +3299,7 @@
     "AWS"
    ],
    "front": "How does DynamoDB <code>TransactWriteItems</code> get atomicity across partitions, and at what cost?",
-   "back": "A durable coordinator runs <b>two-phase commit (2PC)</b> across partition leaders. Cost: 2× write capacity unit (WCU) per item, more latency, and <code>TransactionConflict</code> rejections. Use only where needed.",
+   "back": "A durable coordinator runs <b>Two-phase commit (2PC)</b> across partition leaders. Cost: 2× write capacity unit (WCU) per item, more latency, and <code>TransactionConflict</code> rejections. Use only where needed.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3367,7 +3367,7 @@
     "DistSys::case-studies",
     "AWS"
    ],
-   "front": "Aurora Multi-availability zone (AZ) vs Aurora Global Database on consistency, availability, partition tolerance (CAP)/partition, availability, consistency, else latency, consistency (PACELC)?",
+   "front": "Aurora Multi-availability zone (Multi-AZ) vs Aurora Global Database on consistency, availability, partition tolerance (CAP)/partition, availability, consistency, else latency, consistency (PACELC)?",
    "back": "In-region: synchronous 4/6 quorum, consistent and partition-tolerant (CP). Global: <i>async</i> storage replication (&lt;1 s), stale secondary reads (EL); failover loses up to the lag, so recovery point objective (RPO) = staleness.",
    "text": "",
    "image": "",
@@ -3384,7 +3384,7 @@
     "DistSys::case-studies",
     "AWS"
    ],
-   "front": "RDS Multi-availability zone (AZ) fails over by flipping DNS. What client-side failure does that cause?",
+   "front": "RDS Multi-availability zone (Multi-AZ) fails over by flipping DNS. What client-side failure does that cause?",
    "back": "Clients with cached DNS (Java virtual machine (JVM) defaults) or long-lived pooled connections keep talking to the old primary or hang. Fix: honour time to live (TTL), cap connection lifetime, or use RDS Proxy.",
    "text": "",
    "image": "",
@@ -3418,7 +3418,7 @@
     "DistSys::case-studies",
     "Azure"
    ],
-   "front": "What does Cosmos database (DB) <b>bounded staleness</b> guarantee?",
+   "front": "What does Cosmos DB <b>bounded staleness</b> guarantee?",
    "back": "Reads lag writes by at most <b>K versions or T time</b>, whichever comes first: quantified staleness instead of a strong/eventual binary. Single-region, it behaves like strong.",
    "text": "",
    "image": "",
@@ -3435,7 +3435,7 @@
     "DistSys::case-studies",
     "Azure"
    ],
-   "front": "How is Cosmos database (DB) <b>session</b> consistency implemented?",
+   "front": "How is Cosmos DB <b>session</b> consistency implemented?",
    "back": "The software development kit (SDK) carries a <b>session token</b> (per-partition sequence numbers); a replica serves the read only once it has caught up to that token.",
    "text": "",
    "image": "",
@@ -3452,7 +3452,7 @@
     "DistSys::case-studies",
     "Azure"
    ],
-   "front": "What silently breaks Cosmos database (DB) session consistency?",
+   "front": "What silently breaks Cosmos DB session consistency?",
    "back": "Not passing the session token along: multiple service instances, a function per request, or a web tier that doesn't return it to the browser. Read-your-writes becomes eventual.",
    "text": "",
    "image": "",
@@ -3469,7 +3469,7 @@
     "DistSys::case-studies",
     "Azure"
    ],
-   "front": "Cosmos database (DB) strong consistency across regions: what does a write cost, and what's incompatible?",
+   "front": "Cosmos DB strong consistency across regions: what does a write cost, and what's incompatible?",
    "back": "Synchronous commit to a majority of regions, ≈ 2× round-trip time (RTT) to the farthest region. Incompatible with <b>multi-region writes</b>: no linearizability with independent concurrent writers.",
    "text": "",
    "image": "",
@@ -3488,7 +3488,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Cosmos database (DB) multi-region write conflict policies: {{c1::last-writer-wins}} (default, on <code>_ts</code>), {{c2::custom stored procedure}} (server-side merge), {{c3::manual}} (conflicts feed for the app).",
+   "text": "Cosmos DB multi-region write conflict policies: {{c1::last-writer-wins}} (default, on <code>_ts</code>), {{c2::custom stored procedure}} (server-side merge), {{c3::manual}} (conflicts feed for the app).",
    "image": "",
    "analogy": "",
    "extra": "If losing a write is unacceptable, model updates to commute (counters, sets) or use single-region writes.",
@@ -3503,7 +3503,7 @@
     "DistSys::case-studies",
     "Azure"
    ],
-   "front": "How does Cosmos database (DB) replicate inside a region?",
+   "front": "How does Cosmos DB replicate inside a region?",
    "back": "Each physical partition is a 4-replica set; a write is durable at a majority (3/4). Strong/bounded reads use a majority; session/eventual read a single replica.",
    "text": "",
    "image": "",
@@ -3559,7 +3559,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Examples:</b> Azure Service Fabric stateful services, etcd, Kafka Kafka Raft (KRaft) controllers.",
+   "extra": "<b>Examples:</b> Azure Service Fabric stateful services, etcd, Kafka Raft (KRaft) controllers.",
    "source": "Dist Sys · Azure",
    "reverse": false
   },
