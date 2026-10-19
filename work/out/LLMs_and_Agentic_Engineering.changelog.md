@@ -41,3 +41,7 @@
 
 **Scrubbed** (dated version lists / vendor lineups removed from `extra`, card otherwise unchanged)
 - "What does Mixture-of-Experts (MoE) do in an LLM?"
+
+## Abbreviations expanded
+34 notes touched. ABBR → expansion:
+RAG → retrieval-augmented generation; KV → key-value; MQA → multi-query attention; GQA → grouped-query attention; MLA → multi-head latent attention; MHA → multi-head attention; RLHF → reinforcement learning from human feedback; MCP → model context protocol; MLP → multilayer perceptron; MoE → mixture of experts; KL → Kullback-Leibler divergence; YaRN → yet another RoPE extension; IO → input/output; FP16/FP8/FP4 → 16-bit/8-bit/4-bit floating point; INT8 → 8-bit integer; RL → reinforcement learning; PPO → proximal policy optimization; LoRA → low-rank adaptation; MMLU → massive multitask language understanding; METR → Model Evaluation and Threat Research; MRR → mean reciprocal rank; SSE → server-sent events; DOI → digital object identifier.

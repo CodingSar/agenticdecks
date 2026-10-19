@@ -234,7 +234,7 @@
    "tags": [
     "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
    ],
-   "front": "Which Azure service gives IP flow verify, next-hop analysis, packet capture and network security group (NSG)/VNet flow logs?",
+   "front": "Which Azure service gives IP flow verify, next-hop analysis, packet capture and network security group (NSG)/virtual network (VNet) flow logs?",
    "back": "<b>Network Watcher</b> (regional).",
    "text": "",
    "image": "",
@@ -474,7 +474,7 @@
    "tags": [
     "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
    ],
-   "front": "Legacy apps in Azure need Kerberos/NTLM/LDAP, but you don't want to extend on-prem Active Directory Domain Services (AD DS). What do you recommend?",
+   "front": "Legacy apps in Azure need Kerberos/NT LAN Manager (NTLM)/Lightweight Directory Access Protocol (LDAP), but you don't want to extend on-prem Active Directory Domain Services (AD DS). What do you recommend?",
    "back": "<b>Microsoft Entra Domain Services:</b> managed domain controllers synced from Entra ID; no DCs to deploy or patch.",
    "text": "",
    "image": "",
@@ -764,7 +764,7 @@
     "AZ305::Data_Storage::Relational"
    ],
    "front": "Azure SQL Database: database transaction unit (DTU) vs vCore purchasing model?",
-   "back": "<b>DTU:</b> one bundled compute/memory/IO unit, simple.<br><b>vCore:</b> choose compute and storage separately, supports <b>Azure Hybrid Benefit</b>; recommended for production.",
+   "back": "<b>DTU:</b> one bundled compute/memory/input/output (IO) unit, simple.<br><b>vCore:</b> choose compute and storage separately, supports <b>Azure Hybrid Benefit</b>; recommended for production.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1005,7 +1005,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Azure Storage account services: {{c1::Blob}} (objects, data lake), {{c2::Files}} (managed Server Message Block (SMB)/NFS shares), {{c3::Queue}} (simple async messages), {{c4::Table}} (NoSQL key-value).",
+   "text": "Azure Storage account services: {{c1::Blob}} (objects, data lake), {{c2::Files}} (managed Server Message Block (SMB)/Network File System (NFS) shares), {{c3::Queue}} (simple async messages), {{c4::Table}} (NoSQL key-value).",
    "image": "",
    "analogy": "",
    "extra": "New key-value designs usually pick Cosmos DB for Table.",
@@ -1164,7 +1164,7 @@
    "tags": [
     "AZ305::Data_Storage::Integration"
    ],
-   "front": "What orchestrates scheduled extract, transform, load (ETL)/ELT pipelines across on-prem and cloud sources?",
+   "front": "What orchestrates scheduled extract, transform, load (ETL)/extract, load, transform (ELT) pipelines across on-prem and cloud sources?",
    "back": "<b>Azure Data Factory</b> (Synapse/Fabric pipelines use the same engine): connectors, visual designer, integration runtimes.",
    "text": "",
    "image": "",
@@ -1325,7 +1325,7 @@
     "AZ305::Business_Continuity::Backup_DR"
    ],
    "front": "Which vault redundancy protects the backups themselves against a regional disaster?",
-   "back": "<b>geo-redundant storage (GRS)</b> on the Recovery Services vault (vs cheaper locally redundant storage (LRS)/ZRS). Set it before protecting items.",
+   "back": "<b>geo-redundant storage (GRS)</b> on the Recovery Services vault (vs cheaper locally redundant storage (LRS)/zone-redundant storage (ZRS)). Set it before protecting items.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1388,7 +1388,7 @@
    "tags": [
     "AZ305::Business_Continuity::Backup_DR"
    ],
-   "front": "Why doesn't geo-redundant storage (GRS)/ZRS protect blobs against accidental deletion, and what does?",
+   "front": "Why doesn't geo-redundant storage (GRS)/zone-redundant storage (ZRS) protect blobs against accidental deletion, and what does?",
    "back": "Redundancy <b>replicates the mistake</b>. Use <b>blob soft delete, container soft delete and versioning</b>.",
    "text": "",
    "image": "",
@@ -2110,7 +2110,7 @@
     "AZ305::Infrastructure::Network"
    ],
    "front": "network security group (NSG) vs Azure Firewall?",
-   "back": "<b>NSG:</b> free, distributed L3/L4 filter on a subnet/NIC.<br><b>Azure Firewall:</b> central managed L3–layer 7 (L7) firewall (fully qualified domain name (FQDN) filtering, threat intel), usually in the hub. Complementary.",
+   "back": "<b>NSG:</b> free, distributed L3/L4 filter on a subnet/network interface card (NIC).<br><b>Azure Firewall:</b> central managed L3–L7 firewall (fully qualified domain name (FQDN) filtering, threat intel), usually in the hub. Complementary.",
    "text": "",
    "image": "",
    "analogy": "NSGs are locks on each room door; Azure Firewall is the security desk in the lobby that inspects everyone leaving the building.",
