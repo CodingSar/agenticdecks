@@ -11,10 +11,10 @@
    ],
    "front": "",
    "back": "",
-   "text": "OSI model, bottom → top:<br>L1 {{c1::Physical}}: raw bits on a medium<br>L2 {{c2::Data Link}}: frames on one link, MAC addressing, error detection<br>L3 {{c3::Network}}: routing packets end to end across networks<br>L4 {{c4::Transport}}: process-to-process delivery, reliability<br>L5 {{c5::Session}}: dialog control<br>L6 {{c6::Presentation}}: encoding, compression, encryption<br>L7 {{c7::Application}}: HTTP, DNS, SMTP",
+   "text": "OSI model, bottom → top:<br>L1 {{c1::Physical}}: raw bits on a medium<br>L2 {{c2::Data Link}}: frames on one link, medium access control (MAC) addressing, error detection<br>L3 {{c3::Network}}: routing packets end to end across networks<br>L4 {{c4::Transport}}: process-to-process delivery, reliability<br>L5 {{c5::Session}}: dialog control<br>L6 {{c6::Presentation}}: encoding, compression, encryption<br>L7 {{c7::Application}}: HTTP, DNS, Simple Mail Transfer Protocol (SMTP)",
    "image": "",
    "analogy": "Mnemonic bottom-up: <i>Please Do Not Throw Sausage Pizza Away</i>.",
-   "extra": "<b>In practice:</b> people say \"L4\" or \"L7 load balancer\" using OSI numbers, even though the internet runs the TCP/IP stack.",
+   "extra": "<b>In practice:</b> people say \"layer 4 (L4, transport)\" or \"layer 7 (L7, application) load balancer\" using Open Systems Interconnection (OSI) numbers, even though the internet runs the TCP/IP stack.",
    "source": "Tanenbaum · Ch1",
    "reverse": false,
    "guid": "AaL*xJ!$1b"
@@ -27,10 +27,10 @@
    ],
    "front": "",
    "back": "",
-   "text": "TCP/IP model, bottom → top: {{c1::Link}} → {{c2::Internet}} (IP, best-effort packet delivery and routing) → {{c3::Transport}} (TCP/UDP) → {{c4::Application}}.",
+   "text": "TCP/IP model, bottom → top: {{c1::Link}} → {{c2::Internet}} (IP, best-effort packet delivery and routing) → {{c3::Transport}} (TCP/User Datagram Protocol (UDP)) → {{c4::Application}}.",
    "image": "",
    "analogy": "",
-   "extra": "<b>vs OSI:</b> no separate Session/Presentation layers; apps (or TLS) handle that.",
+   "extra": "<b>vs Open Systems Interconnection (OSI):</b> no separate Session/Presentation layers; apps (or TLS) handle that.",
    "source": "Tanenbaum · Ch1",
    "reverse": false,
    "guid": "A=x^u^T=lO"
@@ -41,8 +41,8 @@
    "tags": [
     "networking::models"
    ],
-   "front": "L2 vs L3 vs L4: which identifier does each layer use, and how far does it reach?",
-   "back": "<ul><li><b>L2</b>: MAC address, same segment only</li><li><b>L3</b>: IP address, routed across networks</li><li><b>L4</b>: port, picks the process on the host</li></ul>",
+   "front": "Layer 2 (L2, data link) vs layer 3 (L3, network) vs layer 4 (L4, transport): which identifier does each layer use, and how far does it reach?",
+   "back": "<ul><li><b>L2</b>: medium access control (MAC) address, same segment only</li><li><b>L3</b>: IP address, routed across networks</li><li><b>L4</b>: port, picks the process on the host</li></ul>",
    "text": "",
    "image": "",
    "analogy": "L2 is the house number on your street, L3 the full postal address, L4 the name on the mailbox inside the building.",
@@ -89,8 +89,8 @@
    "tags": [
     "networking::models"
    ],
-   "front": "What is encapsulation (SDU → PDU) as data goes down the stack?",
-   "back": "Each layer takes the data handed down (SDU) and adds its own header to form its PDU: segment (L4) → packet (L3) → frame (L2). The receiver strips headers in reverse.",
+   "front": "What is encapsulation (service data unit (SDU) → protocol data unit (PDU)) as data goes down the stack?",
+   "back": "Each layer takes the data handed down (SDU) and adds its own header to form its PDU: segment (layer 4 (L4, transport)) → packet (layer 3 (L3, network)) → frame (layer 2 (L2, data link)). The receiver strips headers in reverse.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -138,7 +138,7 @@
     "networking::models"
    ],
    "front": "LAN vs WAN: what is the defining difference?",
-   "back": "A <b>LAN</b> is privately owned and confined to a building or campus. A <b>WAN</b> spans cities or continents and runs over a carrier's routers and leased lines.",
+   "back": "A <b>local area network (LAN)</b> is privately owned and confined to a building or campus. A <b>wide area network (WAN)</b> spans cities or continents and runs over a carrier's routers and leased lines.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -282,7 +282,7 @@
     "networking::physical"
    ],
    "front": "Multimode vs single-mode fibre: when do you use which?",
-   "back": "<b>Multimode</b>: wide core, many light paths that spread out (modal dispersion), cheap optics, ~100–500 m (in-building).<br><b>Single-mode</b>: narrow core, one path, km-range links (campus, metro, WAN).",
+   "back": "<b>Multimode</b>: wide core, many light paths that spread out (modal dispersion), cheap optics, ~100–500 m (in-building).<br><b>Single-mode</b>: narrow core, one path, km-range links (campus, metro, wide area network (WAN)).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -298,7 +298,7 @@
     "networking::physical"
    ],
    "front": "GEO vs LEO satellites: why does the orbit matter for networking?",
-   "back": "<b>GEO</b> (~35,800 km) looks stationary, but light needs ~270 ms each way through the satellite.<br><b>LEO</b> (~500–1500 km, e.g. Starlink) gives tens of ms of latency but needs large constellations and handovers.",
+   "back": "<b>Geostationary Earth orbit (GEO)</b> (~35,800 km) looks stationary, but light needs ~270 ms each way through the satellite.<br><b>Low Earth orbit (LEO)</b> (~500–1500 km, e.g. Starlink) gives tens of ms of latency but needs large constellations and handovers.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -314,7 +314,7 @@
     "networking::physical"
    ],
    "front": "FDM vs TDM multiplexing?",
-   "back": "<b>FDM</b>: each signal gets its own frequency band, all transmit at once.<br><b>TDM</b>: each signal gets the full band in turn, in time slots.",
+   "back": "<b>Frequency-division multiplexing (FDM)</b>: each signal gets its own frequency band, all transmit at once.<br><b>Time-division multiplexing (TDM)</b>: each signal gets the full band in turn, in time slots.",
    "text": "",
    "image": "",
    "analogy": "FDM is radio stations on different frequencies; TDM is people taking turns at one microphone.",
@@ -330,7 +330,7 @@
     "networking::physical"
    ],
    "front": "What is WDM (wavelength division multiplexing), and where does it matter?",
-   "back": "FDM for light: many wavelengths (colours) carry independent streams on one fibre. DWDM lets one fibre pair carry many Tbit/s, e.g. for datacenter interconnect.",
+   "back": "Frequency-division multiplexing (FDM) for light: many wavelengths (colours) carry independent streams on one fibre. Dense wavelength-division multiplexing (DWDM) lets one fibre pair carry many Tbit/s, e.g. for datacenter interconnect.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -346,7 +346,7 @@
     "networking::physical"
    ],
    "front": "How does CDMA let many transmitters share one band at the same time?",
-   "back": "Each sender spreads its bits with a unique, mutually orthogonal chip code; the receiver correlates with one code to extract that sender and the rest looks like noise.",
+   "back": "In code-division multiple access (CDMA), each sender spreads its bits with a unique, mutually orthogonal chip code; the receiver correlates with one code to extract that sender and the rest looks like noise.",
    "text": "",
    "image": "",
    "analogy": "A party where every pair talks in a different language: you can follow your own conversation and the rest is background noise.",
@@ -361,7 +361,7 @@
    "tags": [
     "networking::physical"
    ],
-   "front": "Why is ADSL asymmetric, and what makes DSL possible on phone lines?",
+   "front": "Why is asymmetric digital subscriber line (ADSL) asymmetric, and what makes digital subscriber line (DSL) possible on phone lines?",
    "back": "DSL uses frequencies above the voice band on the existing copper loop. ADSL gives most of that spectrum to downstream because home users download far more than they upload.",
    "text": "",
    "image": "",
@@ -442,7 +442,7 @@
     "networking::datalink"
    ],
    "front": "Error-detecting vs error-correcting codes: when do you choose which?",
-   "back": "<b>Detecting</b> (CRC): cheap, ask for retransmission. Good on reliable links (fibre).<br><b>Correcting</b> (Hamming, FEC): more redundancy, fix errors locally. Good on noisy or long-delay links (wireless, satellite).",
+   "back": "<b>Detecting</b> (cyclic redundancy check (CRC)): cheap, ask for retransmission. Good on reliable links (fibre).<br><b>Correcting</b> (Hamming, forward error correction (FEC)): more redundancy, fix errors locally. Good on noisy or long-delay links (wireless, satellite).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -489,7 +489,7 @@
    "tags": [
     "networking::datalink"
    ],
-   "front": "CRC vs a simple checksum: why does Ethernet use a CRC?",
+   "front": "Cyclic redundancy check (CRC) vs a simple checksum: why does Ethernet use a CRC?",
    "back": "A CRC (remainder of polynomial division) catches all burst errors shorter than its length and most others. Simple sums (like the IP/TCP checksum) are cheaper to compute but miss many error patterns.",
    "text": "",
    "image": "",
@@ -507,7 +507,7 @@
     "networking::reliability"
    ],
    "front": "Why is stop-and-wait slow on long links?",
-   "back": "The sender sends one frame and then waits a full round trip for the ACK. When the RTT is much longer than the time to send a frame, the link sits idle most of the time.",
+   "back": "The sender sends one frame and then waits a full round trip for the acknowledgement (ACK). When the round-trip time (RTT) is much longer than the time to send a frame, the link sits idle most of the time.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -524,7 +524,7 @@
     "networking::reliability"
    ],
    "front": "How big should a sliding window be?",
-   "back": "Big enough to cover the bandwidth-delay product: window ≥ bandwidth × RTT. Then ACKs come back before the window runs out and the pipe stays full.",
+   "back": "Big enough to cover the bandwidth-delay product: window ≥ bandwidth × round-trip time (RTT). Then acknowledgements (ACKs) come back before the window runs out and the pipe stays full.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -558,7 +558,7 @@
     "networking::reliability"
    ],
    "front": "What is piggybacking?",
-   "back": "Carrying the ACK for received data inside an outgoing data frame in the reverse direction, so no separate ACK frame is needed.",
+   "back": "Carrying the acknowledgement (ACK) for received data inside an outgoing data frame in the reverse direction, so no separate ACK frame is needed.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -575,7 +575,7 @@
     "networking::mac"
    ],
    "front": "What problem does the MAC (Medium Access Control) sublayer solve?",
-   "back": "Deciding who may transmit next on a shared channel. Static schemes (FDM/TDM) waste capacity on bursty traffic, so LANs use dynamic, contention-based access.",
+   "back": "Deciding who may transmit next on a shared channel. Static schemes (frequency-division multiplexing (FDM)/time-division multiplexing (TDM)) waste capacity on bursty traffic, so local area networks (LANs) use dynamic, contention-based access.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -609,7 +609,7 @@
     "networking::mac"
    ],
    "front": "How does CSMA improve on ALOHA?",
-   "back": "Stations listen first (carrier sense) and transmit only if the channel is idle. Collisions still happen within the propagation delay, but far less often.",
+   "back": "In carrier sense multiple access (CSMA), stations listen first (carrier sense) and transmit only if the channel is idle. Collisions still happen within the propagation delay, but far less often.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -627,7 +627,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "CSMA variants when the channel is busy: {{c1::1-persistent}} waits and sends the instant it goes idle (collides when several wait); {{c2::non-persistent}} backs off a random time before sensing again; {{c3::p-persistent}} sends with probability p in each idle slot.",
+   "text": "Carrier sense multiple access (CSMA) variants when the channel is busy: {{c1::1-persistent}} waits and sends the instant it goes idle (collides when several wait); {{c2::non-persistent}} backs off a random time before sensing again; {{c3::p-persistent}} sends with probability p in each idle slot.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -643,7 +643,7 @@
     "networking::mac"
    ],
    "front": "What does CSMA/CD add, and where was it used?",
-   "back": "Collision Detection: keep listening while transmitting and abort as soon as a collision is detected, then back off (binary exponential). Used by classic shared-medium Ethernet.",
+   "back": "Collision Detection (the CD in carrier sense multiple access with collision detection, CSMA/CD): keep listening while transmitting and abort as soon as a collision is detected, then back off (binary exponential). Used by classic shared-medium Ethernet.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -664,7 +664,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "",
+   "extra": "<b>Expansion:</b> carrier sense multiple access with collision detection (CSMA/CD)",
    "source": "Tanenbaum · Ch4",
    "reverse": false,
    "guid": "jKQe,f!`iy"
@@ -693,8 +693,8 @@
     "networking::datalink",
     "networking::wireless"
    ],
-   "front": "Why does Wi-Fi use CSMA/CA instead of CSMA/CD?",
-   "back": "A radio can't hear collisions while it transmits (its own signal swamps the receiver). So 802.11 avoids collisions instead: random backoff, ACK for every frame, optional RTS/CTS.",
+   "front": "Why does Wi-Fi use carrier sense multiple access with collision avoidance (CSMA/CA) instead of carrier sense multiple access with collision detection (CSMA/CD)?",
+   "back": "A radio can't hear collisions while it transmits (its own signal swamps the receiver). So 802.11 avoids collisions instead: random backoff, acknowledgement (ACK) for every frame, optional request to send (RTS)/clear to send (CTS).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -711,7 +711,7 @@
     "networking::wireless"
    ],
    "front": "What is the hidden terminal problem, and what mitigates it?",
-   "back": "A and C can't hear each other, so both sense idle and transmit to B, colliding there. <b>RTS/CTS</b> mitigates it: B's Clear-to-Send is heard by C, which then stays quiet.",
+   "back": "A and C can't hear each other, so both sense idle and transmit to B, colliding there. <b>Request to send (RTS)/clear to send (CTS)</b> mitigates it: B's Clear-to-Send is heard by C, which then stays quiet.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -727,8 +727,8 @@
     "networking::datalink",
     "networking::ethernet"
    ],
-   "front": "What is a MAC address and how is it structured?",
-   "back": "A 48-bit L2 interface address: the first 24 bits are the vendor's OUI and the rest is assigned by the vendor. It only matters on the local segment; routers rewrite the L2 header each hop.",
+   "front": "What is a medium access control (MAC) address and how is it structured?",
+   "back": "A 48-bit layer 2 (L2, data link) interface address: the first 24 bits are the vendor's organizationally unique identifier (OUI) and the rest is assigned by the vendor. It only matters on the local segment; routers rewrite the L2 header each hop.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -745,7 +745,7 @@
     "networking::ethernet"
    ],
    "front": "Hub vs switch vs router?",
-   "back": "<ul><li><b>Hub</b> (L1): repeats bits to every port, one collision domain</li><li><b>Switch</b> (L2, a multiport bridge): learns MACs, forwards frames to one port</li><li><b>Router</b> (L3): forwards packets between IP networks, splits broadcast domains</li></ul>",
+   "back": "<ul><li><b>Hub</b> (layer 1 (L1, physical)): repeats bits to every port, one collision domain</li><li><b>Switch</b> (layer 2 (L2, data link), a multiport bridge): learns medium access control addresses (MACs), forwards frames to one port</li><li><b>Router</b> (layer 3 (L3, network)): forwards packets between IP networks, splits broadcast domains</li></ul>",
    "text": "",
    "image": "",
    "analogy": "",
@@ -761,8 +761,8 @@
     "networking::datalink",
     "networking::ethernet"
    ],
-   "front": "What does a VLAN do?",
-   "back": "It splits one physical switch fabric into separate L2 broadcast domains, whatever the port location. 802.1Q tags frames with a 12-bit VLAN ID on trunks. Traffic between VLANs needs a router.",
+   "front": "What does a virtual local area network (VLAN) do?",
+   "back": "It splits one physical switch fabric into separate layer 2 (L2, data link) broadcast domains, whatever the port location. 802.1Q tags frames with a 12-bit VLAN ID on trunks. Traffic between VLANs needs a router.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -778,12 +778,12 @@
     "networking::datalink",
     "networking::ethernet"
    ],
-   "front": "Why does a switched LAN with redundant links need Spanning Tree Protocol?",
-   "back": "Ethernet frames have no TTL, so a loop makes broadcasts circulate forever (broadcast storm). STP blocks redundant ports to form a loop-free tree and unblocks them on failure.",
+   "front": "Why does a switched local area network (LAN) with redundant links need Spanning Tree Protocol (STP)?",
+   "back": "Ethernet frames have no time to live (TTL), so a loop makes broadcasts circulate forever (broadcast storm). STP blocks redundant ports to form a loop-free tree and unblocks them on failure.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Modern DCs:</b> avoid STP with routed leaf-spine (L3 to the ToR) and ECMP.",
+   "extra": "<b>Modern data centers (DCs):</b> avoid STP with routed leaf-spine (layer 3 (L3, network) to the top-of-rack (ToR) switch) and equal-cost multi-path (ECMP).",
    "source": "Tanenbaum · Ch4",
    "reverse": false,
    "guid": "HvcZEsg&v#"
@@ -796,7 +796,7 @@
     "networking::routing"
    ],
    "front": "Datagram vs virtual-circuit network layer?",
-   "back": "<b>Datagram</b> (IP): each packet routed independently by destination address, no setup, survives router failure.<br><b>Virtual circuit</b> (MPLS, ATM): path set up first, packets carry a short circuit label, state in every router.",
+   "back": "<b>Datagram</b> (IP): each packet routed independently by destination address, no setup, survives router failure.<br><b>Virtual circuit</b> (Multiprotocol Label Switching (MPLS), Asynchronous Transfer Mode (ATM)): path set up first, packets carry a short circuit label, state in every router.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -812,7 +812,7 @@
     "networking::routing"
    ],
    "front": "<b>Routing</b> vs <b>forwarding</b>?",
-   "back": "<b>Routing</b>: control plane, computes the tables (OSPF, BGP), runs in seconds.<br><b>Forwarding</b>: data plane, looks up each packet in the table and sends it out a port, runs in nanoseconds.",
+   "back": "<b>Routing</b>: control plane, computes the tables (Open Shortest Path First (OSPF), Border Gateway Protocol (BGP)), runs in seconds.<br><b>Forwarding</b>: data plane, looks up each packet in the table and sends it out a port, runs in nanoseconds.",
    "text": "",
    "image": "",
    "analogy": "Routing is drawing the road map; forwarding is the driver glancing at a signpost at each junction.",
@@ -859,7 +859,7 @@
    "tags": [
     "networking::routing"
    ],
-   "front": "How does distance-vector routing work (e.g. RIP)?",
+   "front": "How does distance-vector routing work (e.g. Routing Information Protocol (RIP))?",
    "back": "Each router keeps a best-distance and next hop per destination and periodically sends that table to its neighbours (Bellman-Ford). No router sees the full topology.",
    "text": "",
    "image": "",
@@ -876,7 +876,7 @@
     "networking::routing"
    ],
    "front": "What is count-to-infinity in distance-vector routing?",
-   "back": "After a link fails, neighbours keep advertising stale routes to each other through the failed path, bumping the metric by 1 each round until it reaches \"infinity\" (16 in RIP). Bad news spreads slowly.",
+   "back": "After a link fails, neighbours keep advertising stale routes to each other through the failed path, bumping the metric by 1 each round until it reaches \"infinity\" (16 in Routing Information Protocol (RIP)). Bad news spreads slowly.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -907,7 +907,7 @@
    "tags": [
     "networking::routing"
    ],
-   "front": "What is OSPF?",
+   "front": "What is Open Shortest Path First (OSPF)?",
    "back": "A link-state interior gateway protocol (IGP) for routing inside one autonomous system. It floods link-state advertisements, runs Dijkstra, and supports areas for hierarchy.",
    "text": "",
    "image": "",
@@ -944,7 +944,7 @@
    "text": "",
    "image": "",
    "analogy": "\"Netherlands\" is a hint, \"Utrecht\" narrows it, \"Oudegracht 12\" decides it.",
-   "extra": "<b>Incident:</b> pod CIDR overlaps the corporate network → the more specific route hijacks traffic and \"the intranet is unreachable from pods\".",
+   "extra": "<b>Incident:</b> pod Classless Inter-Domain Routing (CIDR) overlaps the corporate network → the more specific route hijacks traffic and \"the intranet is unreachable from pods\".",
    "source": "Below CNI · Foundations",
    "reverse": false,
    "guid": "qZMrb3AiXA"
@@ -973,7 +973,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "An IPv4 address is {{c1::32}} bits (dotted decimal); an IPv6 address is {{c2::128}} bits (eight groups of hex, <code>::</code> compresses zeros).",
+   "text": "An Internet Protocol version 4 (IPv4) address is {{c1::32}} bits (dotted decimal); an Internet Protocol version 6 (IPv6) address is {{c2::128}} bits (eight groups of hex, <code>::</code> compresses zeros).",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -988,8 +988,8 @@
     "networking::ip",
     "networking::ipv6"
    ],
-   "front": "Why was IPv6 created?",
-   "back": "Mainly IPv4 address exhaustion: 128-bit addresses remove the need for NAT. It also has a simpler fixed header, no router fragmentation and built-in autoconfiguration (SLAAC).",
+   "front": "Why was Internet Protocol version 6 (IPv6) created?",
+   "back": "Mainly Internet Protocol version 4 (IPv4) address exhaustion: 128-bit addresses remove the need for network address translation (NAT). It also has a simpler fixed header, no router fragmentation and built-in autoconfiguration (stateless address autoconfiguration, SLAAC).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1009,7 +1009,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "",
+   "extra": "<b>Expansion:</b> Classless Inter-Domain Routing (CIDR)",
    "source": "Tanenbaum · Ch5",
    "reverse": false,
    "guid": "lz=zapr6HR"
@@ -1042,7 +1042,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Pitfall:</b> NAT tables expire idle flows, silently killing long-lived quiet TCP connections.",
+   "extra": "<b>Pitfall:</b> network address translation (NAT) tables expire idle flows, silently killing long-lived quiet TCP connections.",
    "source": "Tanenbaum · Ch5",
    "reverse": false,
    "guid": "EB$&ASrsGR"
@@ -1054,11 +1054,11 @@
     "networking::ip"
    ],
    "front": "What is ICMP used for?",
-   "back": "Control and error messages for IP: echo request/reply (<code>ping</code>), destination unreachable, TTL exceeded (<code>traceroute</code>), and fragmentation needed (Path MTU Discovery).",
+   "back": "Control and error messages for IP: echo request/reply (<code>ping</code>), destination unreachable, time to live (TTL) exceeded (<code>traceroute</code>), and fragmentation needed (Path maximum transmission unit (MTU) Discovery).",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Pitfall:</b> blocking all ICMP breaks PMTUD and creates MTU black holes.",
+   "extra": "<b>Pitfall:</b> blocking all Internet Control Message Protocol (ICMP) breaks path MTU discovery (PMTUD) and creates MTU black holes.",
    "source": "Tanenbaum · Ch5",
    "reverse": false,
    "guid": "rw2Y;*tJe0"
@@ -1070,7 +1070,7 @@
     "networking::ip",
     "networking::arp"
    ],
-   "front": "How does ARP resolve an IP to a MAC?",
+   "front": "How does Address Resolution Protocol (ARP) resolve an IP to a medium access control (MAC)?",
    "back": "Broadcast \"who has 10.0.0.5?\" on the local segment; the owner replies with its MAC and the answer is cached for a while.",
    "text": "",
    "image": "",
@@ -1088,7 +1088,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "DHCP lease exchange: {{c1::Discover}} → {{c2::Offer}} → {{c3::Request}} → {{c4::Acknowledge}} (DORA). It hands out IP, mask, gateway and DNS servers for a limited lease.",
+   "text": "Dynamic Host Configuration Protocol (DHCP) lease exchange: {{c1::Discover}} → {{c2::Offer}} → {{c3::Request}} → {{c4::Acknowledge}} (DORA). It hands out IP, mask, gateway and DNS servers for a limited lease.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -1103,11 +1103,11 @@
     "networking::routing"
    ],
    "front": "What does MPLS do differently from plain IP forwarding?",
-   "back": "The ingress router assigns a short label; core routers swap labels on a pre-set path (LSP) instead of doing IP lookups. Main value today: traffic engineering and L3VPNs for carriers.",
+   "back": "The ingress router assigns a short label; core routers swap labels on a pre-set path (label-switched path (LSP)) instead of doing IP lookups. Main value today: traffic engineering and layer 3 virtual private networks (L3VPNs) for carriers.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "",
+   "extra": "<b>Expansion:</b> Multiprotocol Label Switching (MPLS)",
    "source": "Tanenbaum · Ch5",
    "reverse": false,
    "guid": "Ivb0%(abt$"
@@ -1119,8 +1119,8 @@
     "networking::ip",
     "networking::routing"
    ],
-   "front": "What is anycast, and why do DNS resolvers and CDNs use it?",
-   "back": "The same IP prefix is announced from many sites; routing (BGP) delivers each client to the topologically nearest one. You get low latency and automatic failover with no client logic.",
+   "front": "What is anycast, and why do DNS resolvers and content delivery networks (CDNs) use it?",
+   "back": "The same IP prefix is announced from many sites; routing (Border Gateway Protocol (BGP)) delivers each client to the topologically nearest one. You get low latency and automatic failover with no client logic.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1136,12 +1136,12 @@
     "networking::ip",
     "networking::mtu"
    ],
-   "front": "Why do overlay networks cause MTU problems?",
-   "back": "Encapsulation (VXLAN, Geneve, WireGuard) adds 50–80 bytes. If the pod interface still uses 1500, full-size packets exceed the physical MTU and are dropped or fragmented.",
+   "front": "Why do overlay networks cause maximum transmission unit (MTU) problems?",
+   "back": "Encapsulation (virtual extensible local area network (VXLAN), Geneve, WireGuard) adds 50–80 bytes. If the pod interface still uses 1500, full-size packets exceed the physical MTU and are dropped or fragmented.",
    "text": "",
    "image": "",
    "analogy": "A letter inside a second envelope: the slot is a fixed size, so the inner letter must be smaller.",
-   "extra": "<b>Incident:</b> small requests work, large ones hang. Test with <code>ping -M do -s 1400</code> between pods and lower the CNI MTU.",
+   "extra": "<b>Incident:</b> small requests work, large ones hang. Test with <code>ping -M do -s 1400</code> between pods and lower the container network interface (CNI) MTU.",
    "source": "Below CNI · Foundations",
    "reverse": false,
    "guid": "M&omqnD4-|"
@@ -1153,8 +1153,8 @@
     "networking::ip",
     "networking::mtu"
    ],
-   "front": "What is a PMTUD black hole?",
-   "back": "Path MTU Discovery relies on ICMP \"fragmentation needed\" replies. A firewall that drops ICMP hides the oversized-packet signal, so large packets vanish silently while small ones work.",
+   "front": "What is a path maximum transmission unit (MTU) discovery (PMTUD) black hole?",
+   "back": "Path MTU Discovery relies on Internet Control Message Protocol (ICMP) \"fragmentation needed\" replies. A firewall that drops ICMP hides the oversized-packet signal, so large packets vanish silently while small ones work.",
    "text": "",
    "image": "",
    "analogy": "A mail room that silently bins oversized envelopes instead of returning them.",
@@ -1187,7 +1187,7 @@
     "networking::congestion"
    ],
    "front": "Flow control vs congestion control?",
-   "back": "<b>Flow control</b>: keeps one sender from overrunning one <i>receiver's</i> buffer (TCP rwnd).<br><b>Congestion control</b>: keeps all senders from overloading the <i>network</i> in between (TCP cwnd).",
+   "back": "<b>Flow control</b>: keeps one sender from overrunning one <i>receiver's</i> buffer (TCP receive window (rwnd)).<br><b>Congestion control</b>: keeps all senders from overloading the <i>network</i> in between (TCP congestion window (cwnd)).",
    "text": "",
    "image": "",
    "analogy": "Flow control: don't pour faster than the glass can take. Congestion control: don't all flush at once or the building's pipes back up.",
@@ -1219,11 +1219,11 @@
     "networking::congestion"
    ],
    "front": "What does RED (Random Early Detection) do, and why?",
-   "back": "A router drops (or ECN-marks) packets with rising probability as the average queue grows, before the queue fills. Senders slow down early and one at a time instead of all at once.",
+   "back": "A router drops (or marks with explicit congestion notification, ECN) packets with rising probability as the average queue grows, before the queue fills. Senders slow down early and one at a time instead of all at once.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Context:</b> avoids synchronized TCP backoff and bufferbloat; modern AQMs: CoDel, FQ-CoDel.",
+   "extra": "<b>Context:</b> avoids synchronized TCP backoff and bufferbloat; modern active queue management (AQM) schemes: CoDel, FQ-CoDel.",
    "source": "Tanenbaum · Ch5",
    "reverse": false,
    "guid": "z7%l#:XQ0c"
@@ -1234,7 +1234,7 @@
    "tags": [
     "networking::bgp"
    ],
-   "front": "What is BGP in one sentence?",
+   "front": "What is Border Gateway Protocol (BGP) in one sentence?",
    "back": "A path-vector protocol in which peers tell each other which prefixes they can reach and via which sequence of autonomous systems (AS_PATH). It runs over TCP 179.",
    "text": "",
    "image": "",
@@ -1250,8 +1250,8 @@
    "tags": [
     "networking::bgp"
    ],
-   "front": "What is an autonomous system (AS), and why does a BGP-peered cluster need an ASN?",
-   "back": "An AS is a set of routers under one routing policy, identified by an ASN. Calico, Cilium or MetalLB peer with the ToR switches as their own (private) AS, or share the fabric's AS with iBGP.",
+   "front": "What is an autonomous system (AS), and why does a Border Gateway Protocol (BGP)-peered cluster need an autonomous system number (ASN)?",
+   "back": "An AS is a set of routers under one routing policy, identified by an ASN. Calico, Cilium or MetalLB peer with the top-of-rack (ToR) switches as their own (private) AS, or share the fabric's AS with internal Border Gateway Protocol (iBGP).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1268,7 +1268,7 @@
     "networking::routing"
    ],
    "front": "IGP vs EGP: what is each for?",
-   "back": "<b>IGP</b> (OSPF, IS-IS): fast shortest-path routing <i>inside</i> one AS, optimises metrics.<br><b>EGP</b> (BGP): routing <i>between</i> ASes, driven by policy (who you'll carry traffic for), not shortest path.",
+   "back": "<b>Interior gateway protocol (IGP)</b> (Open Shortest Path First (OSPF), Intermediate System to Intermediate System (IS-IS)): fast shortest-path routing <i>inside</i> one autonomous system (AS), optimises metrics.<br><b>Exterior gateway protocol (EGP)</b> (Border Gateway Protocol (BGP)): routing <i>between</i> ASes, driven by policy (who you'll carry traffic for), not shortest path.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1284,7 +1284,7 @@
     "networking::bgp"
    ],
    "front": "eBGP vs iBGP: what's the practical difference?",
-   "back": "<b>eBGP</b>: peers in different ASes; routes are re-advertised and AS_PATH is prepended.<br><b>iBGP</b>: same AS; a route learned via iBGP is <b>not</b> passed to another iBGP peer. So iBGP needs a full mesh or a route reflector.",
+   "back": "<b>External Border Gateway Protocol (eBGP)</b>: peers in different autonomous systems (ASes); routes are re-advertised and AS_PATH is prepended.<br><b>Internal Border Gateway Protocol (iBGP)</b>: same AS; a route learned via iBGP is <b>not</b> passed to another iBGP peer. So iBGP needs a full mesh or a route reflector.",
    "text": "",
    "image": "",
    "analogy": "Gossip rule: you repeat what an outsider told you, but never what a fellow townsperson told you.",
@@ -1299,8 +1299,8 @@
    "tags": [
     "networking::bgp"
    ],
-   "front": "What is a BGP route reflector, and when does a cluster need one?",
-   "back": "An iBGP router allowed to re-advertise iBGP routes to its clients, which removes the full-mesh requirement. Calico defaults to full mesh; at ~50+ nodes switch to reflectors (often the ToRs).",
+   "front": "What is a Border Gateway Protocol (BGP) route reflector, and when does a cluster need one?",
+   "back": "An internal Border Gateway Protocol (iBGP) router allowed to re-advertise iBGP routes to its clients, which removes the full-mesh requirement. Calico defaults to full mesh; at ~50+ nodes switch to reflectors (often the top-of-rack switches, ToRs).",
    "text": "",
    "image": "",
    "analogy": "The town crier: every household tells the crier, and the crier tells everyone.",
@@ -1315,8 +1315,8 @@
    "tags": [
     "networking::bgp"
    ],
-   "front": "Why would a CNI or MetalLB use BGP instead of an overlay?",
-   "back": "It advertises pod CIDRs and Service IPs straight into the physical network: no encapsulation, no MTU loss, and external clients reach pods without a NAT hop. Cost: the network team must accept your peers.",
+   "front": "Why would a container network interface (CNI) or MetalLB use Border Gateway Protocol (BGP) instead of an overlay?",
+   "back": "It advertises pod Classless Inter-Domain Routing ranges (CIDRs) and Service IPs straight into the physical network: no encapsulation, no maximum transmission unit (MTU) loss, and external clients reach pods without a network address translation (NAT) hop. Cost: the network team must accept your peers.",
    "text": "",
    "image": "",
    "analogy": "Registering your street with the city so the post delivers to your door, instead of re-enveloping every letter to a sorting hub.",
@@ -1333,10 +1333,10 @@
    ],
    "front": "",
    "back": "",
-   "text": "BGP best-path order (the parts that matter on-prem): highest {{c1::Weight}} (Cisco-local) → highest {{c2::LOCAL_PREF}} → locally originated → shortest {{c3::AS_PATH}} → lowest origin → lowest {{c4::MED}} → eBGP over iBGP → lowest IGP metric → lowest router ID.",
+   "text": "Border Gateway Protocol (BGP) best-path order (the parts that matter on-prem): highest {{c1::Weight}} (Cisco-local) → highest {{c2::LOCAL_PREF}} → locally originated → shortest {{c3::AS_PATH}} → lowest origin → lowest {{c4::MED}} → external Border Gateway Protocol (eBGP) over internal Border Gateway Protocol (iBGP) → lowest interior gateway protocol (IGP) metric → lowest router ID.",
    "image": "",
    "analogy": "",
-   "extra": "<b>Incident:</b> traffic to a Service takes a strange path → AS_PATH prepending or a LOCAL_PREF policy is steering it; <code>show ip bgp &lt;prefix&gt;</code> on the ToR.",
+   "extra": "<b>Incident:</b> traffic to a Service takes a strange path → AS_PATH prepending or a LOCAL_PREF policy is steering it; <code>show ip bgp &lt;prefix&gt;</code> on the top-of-rack (ToR) switch.<br><b>Expansion:</b> multi-exit discriminator (MED)",
    "source": "Below CNI · BGP",
    "reverse": false,
    "guid": "Ob=k{zHKE7"
@@ -1347,7 +1347,7 @@
    "tags": [
     "networking::bgp"
    ],
-   "front": "A BGP peer sits in state <b>Active</b>. Good or bad?",
+   "front": "A Border Gateway Protocol (BGP) peer sits in state <b>Active</b>. Good or bad?",
    "back": "Bad. Active means \"still trying to open the TCP session\" (Idle → Connect → Active → OpenSent → OpenConfirm → <b>Established</b>). Likely causes: peer unreachable, wrong peer IP, or TCP 179 filtered.",
    "text": "",
    "image": "",
@@ -1363,12 +1363,12 @@
    "tags": [
     "networking::bgp"
    ],
-   "front": "What happens when a BGP hold timer expires?",
+   "front": "What happens when a Border Gateway Protocol (BGP) hold timer expires?",
    "back": "The session drops and <b>all routes from that peer are withdrawn</b>. Defaults: keepalive 60 s, hold 90 s (both sides use the lower value).",
    "text": "",
    "image": "",
    "analogy": "90 seconds of silence means \"hang up and forget everything they ever told you\".",
-   "extra": "<b>Incident:</b> node under CPU pressure starves its BGP daemon → pod CIDR vanishes from the fabric for ~90 s, then self-heals.",
+   "extra": "<b>Incident:</b> node under CPU pressure starves its BGP daemon → pod Classless Inter-Domain Routing (CIDR) vanishes from the fabric for ~90 s, then self-heals.",
    "source": "Below CNI · BGP",
    "reverse": false,
    "guid": "?{PnB.7x~"
@@ -1379,8 +1379,8 @@
    "tags": [
     "networking::bgp"
    ],
-   "front": "Why pair BFD with BGP?",
-   "back": "Bidirectional Forwarding Detection sends light hellos (e.g. every 300 ms, 3 misses) and detects a failed link or peer in under a second, tearing BGP down instead of waiting 90 s for the hold timer.",
+   "front": "Why pair BFD with Border Gateway Protocol (BGP)?",
+   "back": "Bidirectional Forwarding Detection (BFD) sends light hellos (e.g. every 300 ms, 3 misses) and detects a failed link or peer in under a second, tearing BGP down instead of waiting 90 s for the hold timer.",
    "text": "",
    "image": "",
    "analogy": "A heart-rate monitor instead of a nurse who checks in every 90 seconds.",
@@ -1396,7 +1396,7 @@
     "networking::bgp",
     "networking::ecmp"
    ],
-   "front": "How does ECMP spread traffic for a Service IP advertised by several nodes?",
+   "front": "How does equal-cost multi-path (ECMP) spread traffic for a Service IP advertised by several nodes?",
    "back": "The switch installs every next-hop for the same /32 and hashes each flow's 5-tuple to pick one, so load is balanced per flow. Adding or removing a node rehashes many flows unless the switch has resilient hashing.",
    "text": "",
    "image": "",
@@ -1412,7 +1412,7 @@
    "tags": [
     "networking::bgp"
    ],
-   "front": "What is a BGP community used for?",
+   "front": "What is a Border Gateway Protocol (BGP) community used for?",
    "back": "A 32-bit tag on a route (e.g. <code>65000:100</code>) that tells other routers which policy to apply: prefer, don't export, blackhole. Well-known: <code>no-export</code>, <code>no-advertise</code>.",
    "text": "",
    "image": "",
@@ -1428,7 +1428,7 @@
    "tags": [
     "networking::bgp"
    ],
-   "front": "Why can a recovered node stay unreachable for minutes after its BGP session comes back?",
+   "front": "Why can a recovered node stay unreachable for minutes after its Border Gateway Protocol (BGP) session comes back?",
    "back": "<b>Route dampening</b>: the switch penalises a prefix that keeps flapping and suppresses it for a while, even after it stabilises.",
    "text": "",
    "image": "",
@@ -1445,8 +1445,8 @@
     "networking::bgp",
     "networking::loadbalancing"
    ],
-   "front": "MetalLB L2 (ARP) mode vs BGP mode?",
-   "back": "<b>L2</b>: one node answers ARP for the IP, so all traffic hits that node; failover takes seconds; no load spreading.<br><b>BGP</b>: several nodes advertise, ECMP spreads traffic, fast failover, but the switches must cooperate.",
+   "front": "MetalLB layer 2 (L2, data link) mode, using Address Resolution Protocol (ARP), vs Border Gateway Protocol (BGP) mode?",
+   "back": "<b>L2</b>: one node answers ARP for the IP, so all traffic hits that node; failover takes seconds; no load spreading.<br><b>BGP</b>: several nodes advertise, equal-cost multi-path (ECMP) spreads traffic, fast failover, but the switches must cooperate.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1511,7 +1511,7 @@
     "networking::tcp"
    ],
    "front": "TCP vs UDP: what does each give you?",
-   "back": "<b>TCP</b>: connection, reliable in-order byte stream, flow and congestion control.<br><b>UDP</b>: connectionless datagrams with ports and a checksum only; no ordering, no retransmission.",
+   "back": "<b>TCP</b>: connection, reliable in-order byte stream, flow and congestion control.<br><b>User Datagram Protocol (UDP)</b>: connectionless datagrams with ports and a checksum only; no ordering, no retransmission.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1526,7 +1526,7 @@
    "tags": [
     "networking::transport"
    ],
-   "front": "When would you pick UDP over TCP?",
+   "front": "When would you pick User Datagram Protocol (UDP) over TCP?",
    "back": "When late data is useless or the app wants its own reliability: DNS queries, voice/video, games, telemetry, and protocols like QUIC that build their own transport on top.",
    "text": "",
    "image": "",
@@ -1543,7 +1543,7 @@
     "networking::tcp"
    ],
    "front": "TCP three-way handshake: the steps, and why three?",
-   "back": "SYN → SYN-ACK → ACK. Each side must announce its own initial sequence number and see it acknowledged, which takes three messages.",
+   "back": "Synchronize (SYN) → synchronize-acknowledge (SYN-ACK) → acknowledge (ACK). Each side must announce its own initial sequence number and see it acknowledged, which takes three messages.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1559,7 +1559,7 @@
     "networking::tcp"
    ],
    "front": "Why does closing a TCP connection take four segments?",
-   "back": "TCP is full duplex, so each direction closes on its own: FIN → ACK one way, FIN → ACK the other. One side can keep sending after the other has finished (half-close).",
+   "back": "TCP is full duplex, so each direction closes on its own: finish (FIN) → acknowledgement (ACK) one way, FIN → ACK the other. One side can keep sending after the other has finished (half-close).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1575,7 +1575,7 @@
     "networking::tcp"
    ],
    "front": "What are TCP sequence numbers for?",
-   "back": "They number every byte, so the receiver can reorder segments, discard duplicates, and send cumulative ACKs (\"I have everything up to byte N\").",
+   "back": "They number every byte, so the receiver can reorder segments, discard duplicates, and send cumulative acknowledgements (ACKs) (\"I have everything up to byte N\").",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1607,7 +1607,7 @@
     "networking::tcp",
     "networking::congestion"
    ],
-   "front": "TCP rwnd vs cwnd: which limits the sender?",
+   "front": "TCP receive window (rwnd) vs congestion window (cwnd): which limits the sender?",
    "back": "The smaller one. <b>rwnd</b> is set by the receiver (buffer space). <b>cwnd</b> is the sender's own estimate of what the network can take. In-flight data ≤ min(rwnd, cwnd).",
    "text": "",
    "image": "",
@@ -1624,7 +1624,7 @@
     "networking::tcp"
    ],
    "front": "How does TCP set its retransmission timeout (RTO)?",
-   "back": "From a smoothed RTT plus four times its measured variance. When the RTO fires, TCP retransmits and doubles the RTO (exponential backoff).",
+   "back": "From a smoothed round-trip time (RTT) plus four times its measured variance. When the RTO fires, TCP retransmits and doubles the RTO (exponential backoff).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1641,7 +1641,7 @@
     "networking::congestion"
    ],
    "front": "What is TCP slow start?",
-   "back": "cwnd starts small (~10 segments) and doubles every RTT, one segment per ACK, until it reaches ssthresh or a loss happens. \"Slow\" only compared to sending a full window at once.",
+   "back": "Congestion window (cwnd) starts small (~10 segments) and doubles every round-trip time (RTT), one segment per acknowledgement (ACK), until it reaches slow-start threshold (ssthresh) or a loss happens. \"Slow\" only compared to sending a full window at once.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1658,7 +1658,7 @@
     "networking::congestion"
    ],
    "front": "What is AIMD in TCP congestion avoidance?",
-   "back": "Additive Increase, Multiplicative Decrease: above ssthresh, cwnd grows by ~1 segment per RTT, and on loss it is cut (halved in Reno). This makes competing flows converge on a fair share.",
+   "back": "Additive Increase, Multiplicative Decrease (AIMD): above slow-start threshold (ssthresh), congestion window (cwnd) grows by ~1 segment per round-trip time (RTT), and on loss it is cut (halved in Reno). This makes competing flows converge on a fair share.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1674,8 +1674,8 @@
     "networking::tcp",
     "networking::congestion"
    ],
-   "front": "What do three duplicate ACKs trigger in TCP, and why three?",
-   "back": "<b>Fast retransmit</b> of the missing segment, without waiting for the RTO. One or two dup ACKs could just be reordering; three strongly suggests loss.",
+   "front": "What do three duplicate acknowledgements (ACKs) trigger in TCP, and why three?",
+   "back": "<b>Fast retransmit</b> of the missing segment, without waiting for the retransmission timeout (RTO). One or two dup ACKs could just be reordering; three strongly suggests loss.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1692,7 +1692,7 @@
     "networking::congestion"
    ],
    "front": "After fast retransmit, why doesn't TCP fall back to slow start (fast recovery)?",
-   "back": "Dup ACKs prove later segments are still getting through, so the path is working. TCP halves cwnd and continues linearly. Only an RTO timeout resets cwnd to 1.",
+   "back": "Dup acknowledgements (ACKs) prove later segments are still getting through, so the path is working. TCP halves congestion window (cwnd) and continues linearly. Only a retransmission timeout (RTO) resets cwnd to 1.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1724,11 +1724,11 @@
     "networking::tcp"
    ],
    "front": "What does Nagle's algorithm do?",
-   "back": "While data is unacknowledged, the sender holds back small writes and coalesces them into one segment until the ACK arrives or a full segment is ready.",
+   "back": "While data is unacknowledged, the sender holds back small writes and coalesces them into one segment until the acknowledgement (ACK) arrives or a full segment is ready.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Pitfall:</b> Nagle + delayed ACK can add ~40–200 ms per request for chatty RPCs; latency-sensitive apps set <code>TCP_NODELAY</code>.",
+   "extra": "<b>Pitfall:</b> Nagle + delayed ACK can add ~40–200 ms per request for chatty remote procedure calls (RPCs); latency-sensitive apps set <code>TCP_NODELAY</code>.",
    "source": "Tanenbaum · Ch6",
    "reverse": false,
    "guid": "z~;Ja~!@8`"
@@ -1757,7 +1757,7 @@
     "networking::quic"
    ],
    "front": "What does QUIC fix compared with TCP + TLS?",
-   "back": "It runs over UDP with TLS 1.3 built in: a 1-RTT (or 0-RTT) setup, independent streams so one loss doesn't stall the others, and connection migration across IP changes. HTTP/3 runs on it.",
+   "back": "It runs over User Datagram Protocol (UDP) with TLS 1.3 built in: a 1 round-trip time (1-RTT) (or 0 round-trip time (0-RTT)) setup, independent streams so one loss doesn't stall the others, and connection migration across IP changes. HTTP/3 runs on it.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1773,7 +1773,7 @@
     "networking::tcp"
    ],
    "front": "What is TIME_WAIT and who holds it?",
-   "back": "The side that closes first keeps the 4-tuple for 2×MSL (60 s on Linux), so late packets can't corrupt a new connection that reuses the same tuple.",
+   "back": "The side that closes first keeps the 4-tuple for 2×maximum segment lifetime (MSL) (60 s on Linux), so late packets can't corrupt a new connection that reuses the same tuple.",
    "text": "",
    "image": "",
    "analogy": "Keeping a vacated mailbox locked for a minute so stray letters don't reach the next tenant.",
@@ -1789,7 +1789,7 @@
     "networking::tcp"
    ],
    "front": "What is a half-open TCP connection?",
-   "back": "One side has lost the connection (crash, expired NAT entry, LB reboot) but the other still thinks it is open. It only finds out when it next sends and gets a RST or nothing.",
+   "back": "One side has lost the connection (crash, expired network address translation (NAT) entry, load balancer (LB) reboot) but the other still thinks it is open. It only finds out when it next sends and gets a reset (RST) or nothing.",
    "text": "",
    "image": "",
    "analogy": "Talking into a phone after the line went dead; you find out only when you ask a question.",
@@ -1822,7 +1822,7 @@
     "networking::troubleshooting"
    ],
    "front": "Why does a TCP connect often time out after exactly 63 s?",
-   "back": "SYN retries back off 1, 2, 4, 8, 16, 32 s; with <code>tcp_syn_retries=6</code> the total is 63 s (7 → 127 s). That pattern means packets are being silently <b>dropped</b>; an active reject fails at once with \"connection refused\".",
+   "back": "Synchronize (SYN) retries back off 1, 2, 4, 8, 16, 32 s; with <code>tcp_syn_retries=6</code> the total is 63 s (7 → 127 s). That pattern means packets are being silently <b>dropped</b>; an active reject fails at once with \"connection refused\".",
    "text": "",
    "image": "",
    "analogy": "Knocking, waiting twice as long each time, and leaving after the sixth knock. A slammed door would have told you at once.",
@@ -1838,7 +1838,7 @@
     "networking::dns"
    ],
    "front": "How is DNS structured?",
-   "back": "A distributed, hierarchical database: root zone → TLDs (<code>.com</code>, <code>.nl</code>) → second-level domains → subdomains. Each zone is delegated to its own authoritative servers via NS records.",
+   "back": "A distributed, hierarchical database: root zone → top-level domains (TLDs) (<code>.com</code>, <code>.nl</code>) → second-level domains → subdomains. Each zone is delegated to its own authoritative servers via name server (NS) records.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1858,7 +1858,7 @@
    "text": "",
    "image": "",
    "analogy": "Recursive: a concierge who books the table for you. Iterative: a series of people who each say \"ask them over there\".",
-   "extra": "<b>Typical:</b> stub → recursive resolver (recursive query); resolver → root/TLD/authoritative (iterative).",
+   "extra": "<b>Typical:</b> stub → recursive resolver (recursive query); resolver → root/top-level domain (TLD)/authoritative (iterative).",
    "source": "Tanenbaum · Ch7",
    "reverse": false,
    "guid": "zxx}p?H]&D"
@@ -1871,10 +1871,10 @@
    ],
    "front": "",
    "back": "",
-   "text": "DNS record types: {{c1::A}} → IPv4 address; {{c2::AAAA}} → IPv6 address; {{c3::CNAME}} → alias to another name; {{c4::MX}} → mail server for the domain; {{c5::NS}} → delegates a zone to its name servers.",
+   "text": "DNS record types: {{c1::A}} → Internet Protocol version 4 (IPv4) address; {{c2::AAAA}} → Internet Protocol version 6 (IPv6) address; {{c3::CNAME}} → alias to another name; {{c4::MX}} → mail server for the domain; {{c5::NS}} → delegates a zone to its name servers.",
    "image": "",
    "analogy": "",
-   "extra": "<b>Pitfall:</b> a CNAME can't sit at the zone apex; providers offer ALIAS/ANAME for that.",
+   "extra": "<b>Pitfall:</b> a canonical name (CNAME) can't sit at the zone apex; providers offer ALIAS/ANAME for that.<br><b>Expansions:</b> mail exchange (MX); name server (NS)",
    "source": "Tanenbaum · Ch7",
    "reverse": false,
    "guid": "tK(VTOg/us"
@@ -1886,7 +1886,7 @@
     "networking::dns"
    ],
    "front": "What does a DNS record's TTL control, and what's the operational catch?",
-   "back": "How long resolvers may cache the answer. Long TTLs cut load and latency but delay cutovers; lower the TTL well before a migration, because caches keep the old TTL until it runs out.",
+   "back": "How long resolvers may cache the answer. Long time-to-live values (TTLs) cut load and latency but delay cutovers; lower the TTL well before a migration, because caches keep the old TTL until it runs out.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1922,7 +1922,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Pitfall:</b> keep-alive pools meet LB idle timeouts; see the idle-timeout card.",
+   "extra": "<b>Pitfall:</b> keep-alive pools meet load balancer (LB) idle timeouts; see the idle-timeout card.",
    "source": "Tanenbaum · Ch7",
    "reverse": false,
    "guid": "e1t:=a_wR/"
@@ -1950,7 +1950,7 @@
     "networking::application"
    ],
    "front": "SMTP vs IMAP/POP3?",
-   "back": "<b>SMTP</b> pushes mail: client → server and server → server.<br><b>IMAP</b>/<b>POP3</b> pull mail: a client reads from its mailbox (IMAP keeps it on the server, POP3 downloads).",
+   "back": "<b>Simple Mail Transfer Protocol (SMTP)</b> pushes mail: client → server and server → server.<br><b>Internet Message Access Protocol (IMAP)</b>/<b>Post Office Protocol version 3 (POP3)</b> pull mail: a client reads from its mailbox (IMAP keeps it on the server, POP3 downloads).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1965,7 +1965,7 @@
    "tags": [
     "networking::application"
    ],
-   "front": "How does a CDN lower latency and origin load?",
+   "front": "How does a content delivery network (CDN) lower latency and origin load?",
    "back": "Edge servers close to users cache content; users are steered to a nearby edge (via DNS or anycast). Hits never travel to the origin.",
    "text": "",
    "image": "",
@@ -1982,7 +1982,7 @@
     "networking::application"
    ],
    "front": "What is peer-to-peer architecture, and its main trade-off?",
-   "back": "Peers act as both client and server and exchange data directly. Capacity grows with the number of users, but discovery, trust and NAT traversal get harder.",
+   "back": "Peers act as both client and server and exchange data directly. Capacity grows with the number of users, but discovery, trust and network address translation (NAT) traversal get harder.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2014,7 +2014,7 @@
     "networking::tls"
    ],
    "front": "How does the TLS 1.3 handshake finish in one round trip?",
-   "back": "ClientHello already carries a key share (plus SNI, ALPN). ServerHello returns its key share, then the encrypted Certificate, CertificateVerify, Finished. Client sends Finished and data flows. TLS 1.2 needed 2 RTTs.",
+   "back": "ClientHello already carries a key share (plus Server Name Indication (SNI), Application-Layer Protocol Negotiation (ALPN)). ServerHello returns its key share, then the encrypted Certificate, CertificateVerify, Finished. Client sends Finished and data flows. TLS 1.2 needed 2 round-trip times (RTTs).",
    "text": "",
    "image": "",
    "analogy": "Each stranger mails half a secret in the first envelope; after one exchange both can build the same key.",
@@ -2031,7 +2031,7 @@
     "networking::crypto"
    ],
    "front": "Asymmetric vs symmetric crypto: what does each do in TLS?",
-   "back": "<b>Asymmetric</b> (ECDHE, RSA/ECDSA): key agreement and identity during the handshake, slow.<br><b>Symmetric</b> (AES-GCM, ChaCha20): bulk encryption of the data, fast.",
+   "back": "<b>Asymmetric</b> (Elliptic Curve Diffie-Hellman Ephemeral (ECDHE), Rivest–Shamir–Adleman (RSA)/Elliptic Curve Digital Signature Algorithm (ECDSA)): key agreement and identity during the handshake, slow.<br><b>Symmetric</b> (Advanced Encryption Standard in Galois/Counter Mode (AES-GCM), ChaCha20): bulk encryption of the data, fast.",
    "text": "",
    "image": "",
    "analogy": "A padlock anyone can snap shut is used once to agree on a shared house key, which both then use for every door.",
@@ -2065,7 +2065,7 @@
     "networking::pki"
    ],
    "front": "What does a TLS client need in its trust store, and what must the server send?",
-   "back": "The client needs only the <b>root CA</b>. The server must send its leaf <b>plus the intermediates</b>, so the client can check the chain link by link up to the root.",
+   "back": "The client needs only the <b>root certificate authority (CA)</b>. The server must send its leaf <b>plus the intermediates</b>, so the client can check the chain link by link up to the root.",
    "text": "",
    "image": "",
    "analogy": "A passport issued by a municipality under the state's authority: the border guard knows states, so the traveller carries the municipality's letter.",
@@ -2082,7 +2082,7 @@
     "networking::pki"
    ],
    "front": "What does TLS hostname verification check, and what commonly breaks it?",
-   "back": "The requested name must match a <b>Subject Alternative Name</b> on the leaf cert (CN is ignored). Calling a service by IP or by a short name (<code>svc</code> vs <code>svc.ns.svc.cluster.local</code>) fails unless that SAN is there.",
+   "back": "The requested name must match a <b>Subject Alternative Name (SAN)</b> on the leaf cert (common name (CN) is ignored). Calling a service by IP or by a short name (<code>svc</code> vs <code>svc.ns.svc.cluster.local</code>) fails unless that SAN is there.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2098,7 +2098,7 @@
     "networking::tls"
    ],
    "front": "What is SNI, and why do ingress controllers depend on it?",
-   "back": "Server Name Indication: the hostname sent in plaintext in ClientHello, so one IP can serve many certificates. Ingress and L4 proxies pick the cert and route on it. ECH encrypts it.",
+   "back": "Server Name Indication (SNI): the hostname sent in plaintext in ClientHello, so one IP can serve many certificates. Ingress and layer 4 (L4, transport) proxies pick the cert and route on it. Encrypted Client Hello (ECH) encrypts it.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2114,7 +2114,7 @@
     "networking::tls"
    ],
    "front": "What is ALPN used for?",
-   "back": "A TLS extension where the client offers protocols (<code>h2</code>, <code>http/1.1</code>) and the server picks one during the handshake, so HTTP/2 is chosen without an extra round trip.",
+   "back": "Application-Layer Protocol Negotiation (ALPN): a TLS extension where the client offers protocols (<code>h2</code>, <code>http/1.1</code>) and the server picks one during the handshake, so HTTP/2 is chosen without an extra round trip.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2135,7 +2135,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Incident:</b> mesh-wide 503s every N hours → cert rotation failing (CA unreachable, clock skew).",
+   "extra": "<b>Incident:</b> mesh-wide 503s every N hours → cert rotation failing (certificate authority (CA) unreachable, clock skew).",
    "source": "Below CNI · TLS",
    "reverse": false,
    "guid": "OIFol(0P]`"
@@ -2148,7 +2148,7 @@
     "networking::loadbalancing"
    ],
    "front": "TLS termination vs passthrough at a load balancer?",
-   "back": "<b>Termination</b>: LB decrypts, so it can route on path/headers, retry and add headers; backends get plaintext or re-encrypted traffic.<br><b>Passthrough</b>: LB forwards ciphertext and routes only on SNI; end-to-end encryption, no L7 features.",
+   "back": "<b>Termination</b>: LB decrypts, so it can route on path/headers, retry and add headers; backends get plaintext or re-encrypted traffic.<br><b>Passthrough</b>: LB forwards ciphertext and routes only on Server Name Indication (SNI); end-to-end encryption, no layer 7 (L7, application) features.",
    "text": "",
    "image": "",
    "analogy": "Customs opening the parcel to sort by contents vs forwarding it sealed by the outside label.",
@@ -2165,7 +2165,7 @@
     "networking::pki"
    ],
    "front": "What is the most common TLS outage, and why does it hit so hard?",
-   "back": "<b>Certificate expiry.</b> Nothing checks validity until a handshake, so at expiry every new connection fails at once. Watch intermediates and internal CA roots too, not just leaves.",
+   "back": "<b>Certificate expiry.</b> Nothing checks validity until a handshake, so at expiry every new connection fails at once. Watch intermediates and internal certificate authority (CA) roots too, not just leaves.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2180,7 +2180,7 @@
    "tags": [
     "networking::tls"
    ],
-   "front": "TLS session resumption vs 0-RTT: what's the risk of 0-RTT?",
+   "front": "TLS session resumption vs 0 round-trip time (0-RTT): what's the risk of 0-RTT?",
    "back": "Resumption reuses a prior secret via a session ticket to skip the expensive handshake. 0-RTT also sends data in the first flight, but that data can be <b>replayed</b>, so it's only safe for idempotent requests.",
    "text": "",
    "image": "",
@@ -2198,7 +2198,7 @@
     "networking::pki"
    ],
    "front": "CRL vs OCSP vs OCSP stapling?",
-   "back": "<b>CRL</b>: download the CA's signed list of revoked serials.<br><b>OCSP</b>: ask the CA about one cert.<br><b>Stapling</b>: the server attaches a fresh OCSP response, so clients needn't call the CA.",
+   "back": "<b>Certificate revocation list (CRL)</b>: download the certificate authority's (CA's) signed list of revoked serials.<br><b>Online Certificate Status Protocol (OCSP)</b>: ask the CA about one cert.<br><b>Stapling</b>: the server attaches a fresh OCSP response, so clients needn't call the CA.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2215,7 +2215,7 @@
     "networking::troubleshooting"
    ],
    "front": "<i>handshake failure</i> vs <i>certificate verify failed</i> vs <i>connection reset by peer</i>: what does each point to?",
-   "back": "<ul><li><b>Handshake failure</b>: protocol/cipher mismatch</li><li><b>Verify failed</b>: chain, hostname, expiry or trust store</li><li><b>Reset</b>: usually <i>not</i> TLS: firewall, LB idle timeout, crashed backend</li></ul>",
+   "back": "<ul><li><b>Handshake failure</b>: protocol/cipher mismatch</li><li><b>Verify failed</b>: chain, hostname, expiry or trust store</li><li><b>Reset</b>: usually <i>not</i> TLS: firewall, load balancer (LB) idle timeout, crashed backend</li></ul>",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2230,8 +2230,8 @@
    "tags": [
     "networking::loadbalancing"
    ],
-   "front": "L4 vs L7 load balancer: what can each do?",
-   "back": "<b>L4</b>: balances TCP/UDP <i>connections</i> by IP/port; never sees HTTP, keeps TLS end to end, very fast.<br><b>L7</b>: terminates HTTP(S), routes on host/path/headers, retries and rewrites, balances per <i>request</i>.",
+   "front": "Layer 4 (L4, transport) vs layer 7 (L7, application) load balancer: what can each do?",
+   "back": "<b>L4</b>: balances TCP/User Datagram Protocol (UDP) <i>connections</i> by IP/port; never sees HTTP, keeps TLS end to end, very fast.<br><b>L7</b>: terminates HTTP(S), routes on host/path/headers, retries and rewrites, balances per <i>request</i>.",
    "text": "",
    "image": "",
    "analogy": "Sorting parcels by the address label (L4) vs opening each one and reading the letter (L7).",
@@ -2246,12 +2246,12 @@
    "tags": [
     "networking::loadbalancing"
    ],
-   "front": "L4 LB forwarding modes: full NAT vs DNAT-only vs DSR. What does the backend see as the client IP?",
-   "back": "<ul><li><b>Full NAT</b>: the LB's IP; replies go back via the LB</li><li><b>DNAT only</b>: the client IP; replies must route back through the LB</li><li><b>DSR</b>: the client IP; replies go straight to the client (backend holds the VIP on loopback)</li></ul>",
+   "front": "Layer 4 (L4, transport) load balancer (LB) forwarding modes: full network address translation (NAT) vs destination network address translation (DNAT)-only vs direct server return (DSR). What does the backend see as the client IP?",
+   "back": "<ul><li><b>Full NAT</b>: the LB's IP; replies go back via the LB</li><li><b>DNAT only</b>: the client IP; replies must route back through the LB</li><li><b>DSR</b>: the client IP; replies go straight to the client (backend holds the virtual IP (VIP) on loopback)</li></ul>",
    "text": "",
    "image": "",
    "analogy": "Full NAT: the receptionist relays the whole call. DSR: she gives the caller the direct extension and steps away.",
-   "extra": "<b>Incident:</b> \"all requests come from 10.0.0.1\" → SNAT. Fix with DSR, PROXY protocol, or <code>externalTrafficPolicy: Local</code>.",
+   "extra": "<b>Incident:</b> \"all requests come from 10.0.0.1\" → source network address translation (SNAT). Fix with DSR, PROXY protocol, or <code>externalTrafficPolicy: Local</code>.",
    "source": "Below CNI · Load balancing",
    "reverse": false,
    "guid": ".-9.Vl;u="
@@ -2263,7 +2263,7 @@
     "networking::loadbalancing"
    ],
    "front": "What is the PROXY protocol, and how does enabling it break things?",
-   "back": "A small header an L4 LB adds at the start of the TCP stream, carrying the original client IP/port. If the backend isn't configured to parse it, the header corrupts the first request.",
+   "back": "A small header a layer 4 (L4, transport) load balancer (LB) adds at the start of the TCP stream, carrying the original client IP/port. If the backend isn't configured to parse it, the header corrupts the first request.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2279,7 +2279,7 @@
     "networking::loadbalancing"
    ],
    "front": "Active health checks vs passive outlier detection?",
-   "back": "<b>Active</b>: the LB probes each backend on a schedule (<code>/healthz</code>, TCP connect).<br><b>Passive</b>: the LB watches real traffic and ejects backends that error or time out (Envoy outlier detection).",
+   "back": "<b>Active</b>: the load balancer (LB) probes each backend on a schedule (<code>/healthz</code>, TCP connect).<br><b>Passive</b>: the LB watches real traffic and ejects backends that error or time out (Envoy outlier detection).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2296,7 +2296,7 @@
     "networking::kubernetes"
    ],
    "front": "What is connection draining, and why does a Kubernetes pod need a <code>preStop</code> sleep for it?",
-   "back": "Draining: stop new connections to a backend but let in-flight ones finish. Endpoint removal reaches LBs and kube-proxy asynchronously, so a short preStop sleep keeps the pod serving until traffic stops arriving.",
+   "back": "Draining: stop new connections to a backend but let in-flight ones finish. Endpoint removal reaches load balancers (LBs) and kube-proxy asynchronously, so a short preStop sleep keeps the pod serving until traffic stops arriving.",
    "text": "",
    "image": "",
    "analogy": "Switch off a toll lane's light, then process the cars already queued.",
@@ -2313,11 +2313,11 @@
     "networking::tcp"
    ],
    "front": "Why does an idle-timeout mismatch cause <i>connection reset</i> on the first request after a quiet spell?",
-   "back": "The LB or NAT silently drops idle connections; the client's keep-alive pool still thinks they're open and gets a RST. Rule: client idle timeout &lt; LB idle timeout &lt; backend idle timeout.",
+   "back": "The load balancer (LB) or network address translation (NAT) silently drops idle connections; the client's keep-alive pool still thinks they're open and gets a TCP reset (RST). Rule: client idle timeout &lt; LB idle timeout &lt; backend idle timeout.",
    "text": "",
    "image": "",
    "analogy": "The switchboard hangs up silent lines without telling anyone; you start talking and hear a dial tone.",
-   "extra": "<b>Example:</b> AWS ALB 60 s, NLB 350 s, many app servers 75 s; first request fails, retry succeeds.",
+   "extra": "<b>Example:</b> AWS Application Load Balancer (ALB) 60 s, Network Load Balancer (NLB) 350 s, many app servers 75 s; first request fails, retry succeeds.",
    "source": "Below CNI · Load balancing",
    "reverse": false,
    "guid": "p:dO$=1y)b"
@@ -2345,8 +2345,8 @@
     "networking::loadbalancing",
     "networking::http"
    ],
-   "front": "Why does gRPC / HTTP/2 load-balance badly through an L4 balancer?",
-   "back": "L4 balances connections, and HTTP/2 multiplexes every request over one long-lived connection. Each client pins to one backend, and new replicas get nothing. Fix: L7 (per-stream) balancing, or client-side balancing with <code>MAX_CONNECTION_AGE</code>.",
+   "front": "Why does gRPC / HTTP/2 load-balance badly through a layer 4 (L4, transport) balancer?",
+   "back": "L4 balances connections, and HTTP/2 multiplexes every request over one long-lived connection. Each client pins to one backend, and new replicas get nothing. Fix: layer 7 (L7, application) (per-stream) balancing, or client-side balancing with <code>MAX_CONNECTION_AGE</code>.",
    "text": "",
    "image": "",
    "analogy": "A tour bus of 50 passengers sent to one ticket counter because it's one vehicle.",
@@ -2362,12 +2362,12 @@
     "networking::loadbalancing",
     "networking::nat"
    ],
-   "front": "What is ephemeral (SNAT) port exhaustion?",
+   "front": "What is ephemeral (source network address translation (SNAT)) port exhaustion?",
    "back": "Each connection from one SNAT IP to the same destination IP:port needs a unique source port (~28k by default), and TIME_WAIT holds each for 60 s. Heavy egress from many pods to one API runs out.",
    "text": "",
    "image": "",
    "analogy": "64,000 numbered outgoing-call tickets, each quarantined for a minute after use; on a busy morning calls fail while lines sit free.",
-   "extra": "<b>Fix:</b> more SNAT IPs, connection reuse (keep-alive), a NAT pool. Check <code>ss -s</code>, conntrack.",
+   "extra": "<b>Fix:</b> more SNAT IPs, connection reuse (keep-alive), a network address translation (NAT) pool. Check <code>ss -s</code>, conntrack.",
    "source": "Below CNI · Load balancing",
    "reverse": false,
    "guid": "L1!!aBKY1E"
@@ -2380,7 +2380,7 @@
     "networking::kubernetes"
    ],
    "front": "Ingress controller vs the load balancer in front of it?",
-   "back": "The external LB (often L4) gets packets to the nodes. The ingress controller (Envoy, NGINX) is an L7 proxy in pods that terminates TLS and routes by host/path. Two failure domains, two sets of timeouts and health checks.",
+   "back": "The external LB (often layer 4 (L4, transport)) gets packets to the nodes. The ingress controller (Envoy, NGINX) is a layer 7 (L7, application) proxy in pods that terminates TLS and routes by host/path. Two failure domains, two sets of timeouts and health checks.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2396,8 +2396,8 @@
     "networking::datapath",
     "networking::kubernetes"
    ],
-   "front": "What does a CNI plugin do when a pod starts, and what is outside its job?",
-   "back": "It creates a veth pair, moves one end into the pod's netns as <code>eth0</code>, gets an IP from IPAM and adds host routes. How the host reaches other nodes (overlay, BGP, fabric) is <b>not</b> CNI's job.",
+   "front": "What does a container network interface (CNI) plugin do when a pod starts, and what is outside its job?",
+   "back": "It creates a veth pair, moves one end into the pod's netns as <code>eth0</code>, gets an IP from IP address management (IPAM) and adds host routes. How the host reaches other nodes (overlay, Border Gateway Protocol (BGP), fabric) is <b>not</b> CNI's job.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2430,8 +2430,8 @@
     "networking::datapath",
     "networking::overlay"
    ],
-   "front": "What does VXLAN encapsulation look like on the wire?",
-   "back": "The pod's original L2 frame inside a VXLAN header (VNI) → UDP dst <b>4789</b> → outer IP node→node → outer Ethernet. The physical network sees only node-to-node UDP.",
+   "front": "What does virtual extensible local area network (VXLAN) encapsulation look like on the wire?",
+   "back": "The pod's original layer 2 (L2, data link) frame inside a VXLAN header (VXLAN network identifier (VNI)) → User Datagram Protocol (UDP) dst <b>4789</b> → outer IP node→node → outer Ethernet. The physical network sees only node-to-node UDP.",
    "text": "",
    "image": "",
    "analogy": "A shipping container: your parcel keeps its label, the container is addressed dock to dock.",
@@ -2448,11 +2448,11 @@
     "networking::linux"
    ],
    "front": "What is conntrack, and why does its table fill up?",
-   "back": "Netfilter's connection-tracking table records each flow (5-tuple + state) so NAT and stateful rules work. Entries live until timeout (TCP established: 5 days by default), capped by <code>nf_conntrack_max</code>.",
+   "back": "Netfilter's connection-tracking table records each flow (5-tuple + state) so network address translation (NAT) and stateful rules work. Entries live until timeout (TCP established: 5 days by default), capped by <code>nf_conntrack_max</code>.",
    "text": "",
    "image": "",
    "analogy": "A bouncer's clipboard: once it's full, new guests are refused even if the club is empty.",
-   "extra": "<b>Incident:</b> <code>nf_conntrack: table full, dropping packet</code> → random failures under load. Raise the limit, shorten timeouts, look for UDP/DNS floods.",
+   "extra": "<b>Incident:</b> <code>nf_conntrack: table full, dropping packet</code> → random failures under load. Raise the limit, shorten timeouts, look for User Datagram Protocol (UDP)/DNS floods.",
    "source": "Below CNI · Foundations",
    "reverse": false,
    "guid": "xWFPvy|A6>"
@@ -2465,7 +2465,7 @@
     "networking::kubernetes"
    ],
    "front": "How does kube-proxy in iptables mode implement a ClusterIP Service?",
-   "back": "DNAT rules in the <code>nat</code> table rewrite ClusterIP:port to one pod IP:targetPort, picked at random (<code>statistic mode random</code>). conntrack remembers the choice so replies are un-NATed.",
+   "back": "Destination network address translation (DNAT) rules in the <code>nat</code> table rewrite ClusterIP:port to one pod IP:targetPort, picked at random (<code>statistic mode random</code>). conntrack remembers the choice so replies are un-NATed.",
    "text": "",
    "image": "",
    "analogy": "A PO Box: letters are re-stamped with a real street address, and the clerk notes which house got each one so replies can be traced.",
@@ -2482,7 +2482,7 @@
     "networking::kubernetes"
    ],
    "front": "Why does iptables-based Service load balancing scale badly?",
-   "back": "Rules are matched linearly, and each Service/endpoint adds rules, so at thousands of Services every packet walks a huge list. Each change rewrites the whole table (seconds). IPVS and eBPF use hash lookups (O(1)).",
+   "back": "Rules are matched linearly, and each Service/endpoint adds rules, so at thousands of Services every packet walks a huge list. Each change rewrites the whole table (seconds). IP Virtual Server (IPVS) and extended Berkeley Packet Filter (eBPF) use hash lookups (O(1)).",
    "text": "",
    "image": "",
    "analogy": "A guard who reads the whole rulebook for every car and reprints it whenever a rule changes.",
@@ -2499,7 +2499,7 @@
     "networking::kubernetes"
    ],
    "front": "What is hairpin traffic, and what must be configured for it to work?",
-   "back": "A pod calls a Service that load-balances back to itself: the packet is DNATed to its own IP and must re-enter through the same bridge port. It needs hairpin mode on the bridge or SNAT (masquerade).",
+   "back": "A pod calls a Service that load-balances back to itself: the packet is rewritten by destination network address translation (DNAT) to its own IP and must re-enter through the same bridge port. It needs hairpin mode on the bridge or source network address translation (SNAT, masquerade).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2516,7 +2516,7 @@
     "networking::kubernetes"
    ],
    "front": "What does <code>externalTrafficPolicy: Local</code> change compared with <code>Cluster</code>?",
-   "back": "<b>Local</b>: nodes send only to their own pods and don't SNAT, so the pod sees the real client IP; nodes with no local pod fail the LB health check. <b>Cluster</b>: may SNAT and hop to another node, and the client IP is lost.",
+   "back": "<b>Local</b>: nodes send only to their own pods and don't apply source network address translation (SNAT), so the pod sees the real client IP; nodes with no local pod fail the load balancer (LB) health check. <b>Cluster</b>: may SNAT and hop to another node, and the client IP is lost.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2534,10 +2534,10 @@
    ],
    "front": "",
    "back": "",
-   "text": "eBPF networking hooks, earliest first: {{c1::XDP}} runs in the NIC driver before an skb exists (fastest, drop/redirect); {{c2::TC}} ingress/egress runs on the skb with full metadata (Cilium on pod veths); {{c3::socket/cgroup}} hooks run at <code>connect()</code>/<code>sendmsg()</code>, before any packet exists.",
+   "text": "Extended Berkeley Packet Filter (eBPF) networking hooks, earliest first: {{c1::XDP}} runs in the network interface card (NIC) driver before a socket buffer (skb) exists (fastest, drop/redirect); {{c2::TC}} ingress/egress runs on the skb with full metadata (Cilium on pod veths); {{c3::socket/cgroup}} hooks run at <code>connect()</code>/<code>sendmsg()</code>, before any packet exists.",
    "image": "",
    "analogy": "XDP is the guard at the front gate, TC the loading dock, socket hooks the clerk who fixes the address before the letter is written.",
-   "extra": "",
+   "extra": "<b>Expansions:</b> Express Data Path (XDP); traffic control (TC)",
    "source": "Below CNI · eBPF",
    "reverse": false,
    "guid": "HiOAkIZ*lN"
@@ -2550,7 +2550,7 @@
     "networking::ebpf"
    ],
    "front": "What is <code>XDP_DROP</code> used for, and why is it so fast?",
-   "back": "DDoS mitigation and rate limiting: it drops packets in the driver before the kernel allocates memory for them, at millions of packets per second per core.",
+   "back": "Distributed denial of service (DDoS) mitigation and rate limiting: it drops packets in the driver before the kernel allocates memory for them, at millions of packets per second per core.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2568,11 +2568,11 @@
     "networking::kubernetes"
    ],
    "front": "How does Cilium replace kube-proxy for ClusterIP traffic?",
-   "back": "A cgroup eBPF hook on <code>connect()</code> rewrites ClusterIP:port to a pod IP:port before any packet exists: no DNAT, no Service conntrack entry, no iptables walk. NodePort uses TC/XDP with DSR or SNAT.",
+   "back": "A cgroup extended Berkeley Packet Filter (eBPF) hook on <code>connect()</code> rewrites ClusterIP:port to a pod IP:port before any packet exists: no destination network address translation (DNAT), no Service conntrack entry, no iptables walk. NodePort uses traffic control (TC)/Express Data Path (XDP) with direct server return (DSR) or source network address translation (SNAT).",
    "text": "",
    "image": "",
    "analogy": "Correcting the address book on your desk so you write the real address from the start, instead of the post office re-stamping every letter.",
-   "extra": "<b>Gotcha:</b> tcpdump in the pod never shows the ClusterIP; that's expected with socket-LB.",
+   "extra": "<b>Gotcha:</b> tcpdump in the pod never shows the ClusterIP; that's expected with socket-level load balancing (socket-LB).",
    "source": "Below CNI · eBPF",
    "reverse": false,
    "guid": "LI-xeev,dz"
@@ -2585,7 +2585,7 @@
     "networking::ebpf"
    ],
    "front": "Where does Cilium's datapath keep Service backends, policy and conntrack state?",
-   "back": "In <b>eBPF maps</b>: kernel key/value stores (hash, LRU, per-CPU) that the agent writes from userspace and the datapath programs read on every packet.",
+   "back": "In <b>extended Berkeley Packet Filter (eBPF) maps</b>: kernel key/value stores (hash, least recently used (LRU), per-CPU) that the agent writes from userspace and the datapath programs read on every packet.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2601,7 +2601,7 @@
     "networking::datapath",
     "networking::ebpf"
    ],
-   "front": "How do eBPF observability tools (Hubble, Pixie) see traffic without sidecars?",
+   "front": "How do extended Berkeley Packet Filter (eBPF) observability tools (Hubble, Pixie) see traffic without sidecars?",
    "back": "They attach to tracepoints, kprobes and socket hooks, write small event records into ring buffers, and userspace reads them. No packet copies in the data path; overhead is typically a few percent.",
    "text": "",
    "image": "",
@@ -2618,7 +2618,7 @@
     "networking::troubleshooting"
    ],
    "front": "Triage: pod-to-pod works on the same node, fails across nodes. Where do you look?",
-   "back": "The inter-node path: overlay port blocked (VXLAN 4789, Geneve 6081, WireGuard 51820), BGP down (no route to the peer's pod CIDR), MTU mismatch, or the cloud source/dest check dropping pod IPs.",
+   "back": "The inter-node path: overlay port blocked (virtual extensible local area network (VXLAN) 4789, Geneve 6081, WireGuard 51820), Border Gateway Protocol (BGP) down (no route to the peer's pod Classless Inter-Domain Routing (CIDR)), maximum transmission unit (MTU) mismatch, or the cloud source/dest check dropping pod IPs.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2635,7 +2635,7 @@
     "networking::bgp"
    ],
    "front": "Triage: one node's pods are unreachable from outside, but pod-to-pod on that node works. First check?",
-   "back": "That node's BGP session: Established? Is its pod CIDR in the peer's table? Did the ToR reject it (prefix list, max-prefix limit)? Local traffic doesn't need BGP.",
+   "back": "That node's Border Gateway Protocol (BGP) session: Established? Is its pod Classless Inter-Domain Routing (CIDR) in the peer's table? Did the top-of-rack (ToR) switch reject it (prefix list, max-prefix limit)? Local traffic doesn't need BGP.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2651,7 +2651,7 @@
     "networking::troubleshooting"
    ],
    "front": "Triage: ~1–5% of requests fail at random, not tied to any node or pod. Suspects?",
-   "back": "Per-flow hashing and full tables: conntrack full, ECMP rehash, SNAT port exhaustion, one dead backend still passing a trivial health check, or DNS (UDP conntrack, <code>ndots:5</code> amplification).",
+   "back": "Per-flow hashing and full tables: conntrack full, equal-cost multi-path (ECMP) rehash, source network address translation (SNAT) port exhaustion, one dead backend still passing a trivial health check, or DNS (User Datagram Protocol (UDP) conntrack, <code>ndots:5</code> amplification).",
    "text": "",
    "image": "",
    "analogy": "One cashier in twenty is asleep, and customers are assigned at random, so the complaints look random.",
@@ -2667,7 +2667,7 @@
     "networking::troubleshooting"
    ],
    "front": "Triage: nothing changed, yet a whole class of connections fails at the same moment. Suspects?",
-   "back": "Something time-based expired: a TLS cert (leaf, intermediate or internal CA), a DHCP/IPAM lease, a CNI/LB controller's API token, or BGP held down by dampening after a reboot.",
+   "back": "Something time-based expired: a TLS cert (leaf, intermediate or internal certificate authority (CA)), a Dynamic Host Configuration Protocol (DHCP)/IP address management (IPAM) lease, a container network interface (CNI)/load balancer (LB) controller's API token, or Border Gateway Protocol (BGP) held down by dampening after a reboot.",
    "text": "",
    "image": "",
    "analogy": "The building didn't change; the calendar did.",
@@ -2683,7 +2683,7 @@
     "networking::troubleshooting"
    ],
    "front": "Triage: <code>tcpdump</code> on the node shows the packet arriving, but the pod never gets it. Suspects?",
-   "back": "Between NIC and pod: a NetworkPolicy/eBPF/iptables drop, <code>rp_filter</code>, a missing route to the pod's veth, or a Service IP with no endpoints. Use <code>hubble observe --verdict DROPPED</code> or <code>iptables -L -v</code> counters.",
+   "back": "Between network interface card (NIC) and pod: a NetworkPolicy/extended Berkeley Packet Filter (eBPF)/iptables drop, <code>rp_filter</code>, a missing route to the pod's veth, or a Service IP with no endpoints. Use <code>hubble observe --verdict DROPPED</code> or <code>iptables -L -v</code> counters.",
    "text": "",
    "image": "",
    "analogy": "",
