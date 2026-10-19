@@ -13,13 +13,15 @@ Anki decks for a cloud / Kubernetes platform and enterprise architect, consolida
 | Decks | 44 | 43 |
 | Notes | 4,506 | 7,188 |
 | Cards | 4,684 | 9,099 |
-| Notes with an analogy | 126 | 1510 |
+| Notes with an analogy | 126 | 1,510 |
 | Answers > 60 words | many (avg. note 300–950 chars) | 0 (validator-enforced) |
 
 There are more cards because long, multi-part cards were split into atomic ones (minimum information principle). Each card now takes seconds to review instead of a paragraph.
 Duplicates, book/author/edition trivia, "chapter N covers…" cards and deck-meta cards were removed. Every deletion is listed with its reason in `work/out/<deck>.changelog.md`. Cross-deck duplicates are in `work/out/INTEGRATION.changelog.md`.
 
 A **product-content review** (Oct 2026) removed or generalised cards that taught one vendor's product rather than a transferable concept (feature lists, SKUs, marketing claims, dated release news); open-source tools that are a deck's subject and cross-provider mapping cards stayed, and in the vendor-scoped exam decks (AZ-305, STACKIT) only marketing phrasing and dated news were removed. Each deck's changelog has a `## Product-content review` section.
+
+**Abbreviations** (Oct 2026): every card is seen on its own, so an abbreviation is written out on first use *on each card* — `memory management unit (MMU)`, then `MMU`. Universally known ones (API, HTTP, CPU, SQL…) and product/ISA names (CUDA, RISC-V, LLVM) stay bare, and an expansion never appears on the front when it is the answer. 23 decks were rewritten this way; each changelog has an `## Abbreviations expanded` section listing the map.
 
 The **general-education decks** (Art History, Philosophy, Music History, Architecture Styles, Physics, Chemistry) were written to `work/WRITER_BRIEF.md`: recognise-the-style, why-it-arose and what-it-reacted-against questions, contrast cards for look-alikes, 1–3 canonical anchors per movement, and hand-drawn SVG diagrams in `media/`. **Chemistry** (Oct 2026) runs from high-school foundations to master's-level ideas in 12 subdecks, each anchored in everyday and practical chemistry (kitchen, body, garage, lab, industry, environment); it was written by six parallel writer agents, one pair of subdecks each, then merged and deduplicated.
 
@@ -68,8 +70,8 @@ Original note GUIDs are kept on every card that descends from an original note. 
 | `Architecture_Styles.apkg` | Architecture Styles | 217 | 257 | 11 |
 | `Art_History.apkg` | Art History | 202 | 210 | 12 |
 | `BPMN_and_Business_Architecture.apkg` | BPMN & Business Architecture | 64 | 69 | 8 |
-| `Chemistry.apkg` | Chemistry | 304 | 346 | 12 |
 | `CISSP_Cloud_K8s.apkg` | CISSP (Cloud & Kubernetes Grounded) | 141 | 243 | 8 |
+| `Chemistry.apkg` | Chemistry | 304 | 346 | 12 |
 | `Cloud_Architecture.apkg` | Cloud Architecture | 113 | 178 | 10 |
 | `Data_Engineering.apkg` | Data Engineering | 79 | 99 | 6 |
 | `Deep_C_Kernel_Drivers_Embedded.apkg` | Deep C: Kernel, Drivers, Embedded | 350 | 430 | 8 |

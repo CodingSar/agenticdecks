@@ -191,3 +191,5 @@ Notes touched: 200 of 318. Form "full name (ABBR)" at the first occurrence per n
 - XLA → Accelerated Linear Algebra
 - ZF → zero flag
 - zIIP → IBM Z Integrated Information Processor
+
+Residual pass: expanded 43 more notes (AF, ALU, AoS, AST, AVX, BF16, CAS, CSE, DCE, DFA, ECC, ERMSB, FLOP, FP4, FP8, FP16, FSRM, GC, HIR, HLO, IDEs, IPC, IR, ISA, L1, L2, L3, LALR, LL/SC, LR, MIR, MLIR, MSRs, MXU, NFA, OF, PF, PLT, PR/SM, PTX, REX, RFO, RTL, SF, SIMD, SIMT, SLR, SM, SMT, SoA, SSA, TSO, UB, VPU, XLA, ZF, zIIPs; also the corresponding full names). Abbreviations that occur only inside cloze deletions are given in a "Terms:" line in `extra`. `Link:` lines (chapter titles such as "03 IR & Optimisation") are left bare by design. Product/ISA/company names and the universal set (CPU, GPU, RAM, OS, VM, API, ML, LLM, units) stay bare. Note #273 trimmed from 63 to 53 words by moving the "algebra, common-subexpression and dead-code elimination (CSE, DCE)" clause to `extra` (cloze deletions untouched). check.py: 0 errors, 0 warnings.

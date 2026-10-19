@@ -34,7 +34,7 @@
    "text": "Lexer construction: regular expression &rarr; {{c1::NFA (Thompson's construction)}} &rarr; {{c2::DFA (subset construction)}} &rarr; {{c3::minimised DFA}} &rarr; a transition table the lexer walks one character at a time.",
    "image": "<img src=\"s2s_regex_dfa.svg\">",
    "analogy": "",
-   "extra": "<b>Example:</b> <code>flex</code>, <code>re2c</code> and most regex engines used for lexing do exactly this; backtracking engines (PCRE) do not.",
+   "extra": "<b>Example:</b> <code>flex</code>, <code>re2c</code> and most regex engines used for lexing do exactly this; backtracking engines (PCRE) do not. <b>Terms:</b> nondeterministic finite automaton (NFA); deterministic finite automaton (DFA)",
    "source": "Front end · Parsing",
    "reverse": false
   },
@@ -259,7 +259,7 @@
     "s2s",
     "lr"
    ],
-   "front": "In an <b>LR</b> (shift-reduce) parser, what do <b>shift</b> and <b>reduce</b> do?",
+   "front": "In a <b>left-to-right, rightmost-derivation (LR)</b> (shift-reduce) parser, what do <b>shift</b> and <b>reduce</b> do?",
    "back": "<b>Shift</b> pushes the next input token onto the stack. <b>Reduce</b> pops a rule's right-hand side off the stack and pushes its nonterminal. A table indexed by (state, lookahead) says which to do.",
    "text": "",
    "image": "<img src=\"s2s_lr_trace.svg\">",
@@ -282,7 +282,7 @@
    "text": "Left-to-right, rightmost-derivation (LR) table flavours: {{c1::SLR}} uses FOLLOW sets for reduce decisions (small, weak); {{c2::canonical LR(1)}} carries a lookahead in every item (strongest, huge tables); {{c3::LALR(1)}} merges LR(1) states with the same core, nearly as strong with SLR-sized tables, and is what yacc/bison build.",
    "image": "",
    "analogy": "",
-   "extra": "<b>Pitfall:</b> merging states can introduce reduce/reduce conflicts that LR(1) would not have, a classic head-scratcher when bison rejects a grammar.",
+   "extra": "<b>Pitfall:</b> merging states can introduce reduce/reduce conflicts that LR(1) would not have, a classic head-scratcher when bison rejects a grammar. <b>Terms:</b> simple LR (SLR); look-ahead LR (LALR)",
    "source": "Front end · Parsing",
    "reverse": false
   },
@@ -333,7 +333,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>In practice:</b> IDEs need even more: the tree must stay usable while the user is mid-keystroke, which is why tree-sitter inserts explicit ERROR/MISSING nodes rather than aborting.",
+   "extra": "<b>In practice:</b> integrated development environments (IDEs) need even more: the tree must stay usable while the user is mid-keystroke, which is why tree-sitter inserts explicit ERROR/MISSING nodes rather than aborting.",
    "source": "Front end · Parsing",
    "reverse": false
   },
@@ -834,7 +834,7 @@
    "text": "",
    "image": "",
    "analogy": "Translating a rich dialect into a small pidgin everyone downstream understands.",
-   "extra": "<b>Example:</b> rustc lowers abstract syntax tree (AST) &rarr; HIR (desugared) &rarr; MIR (control flow graph). <b>Link:</b> 03 IR &amp; Optimisation · IR designs (LLVM IR / MIR)",
+   "extra": "<b>Example:</b> rustc lowers abstract syntax tree (AST) &rarr; high-level intermediate representation (HIR) (desugared) &rarr; mid-level intermediate representation (MIR) (control flow graph). <b>Link:</b> 03 IR &amp; Optimisation · IR designs (LLVM IR / MIR)",
    "source": "Types",
    "reverse": false
   },
@@ -1262,10 +1262,10 @@
    ],
    "front": "",
    "back": "",
-   "text": "Three intermediate representation (IR) designs: {{c1::LLVM IR}} is a single typed static single assignment (SSA) language, close to a portable assembler; {{c2::GCC}} lowers through GENERIC &rarr; GIMPLE (three-address, SSA) &rarr; RTL (target-specific); {{c3::MLIR}} is a framework of <i>dialects</i> at different abstraction levels that are progressively lowered.",
+   "text": "Three intermediate representation (IR) designs: {{c1::LLVM IR}} is a single typed static single assignment (SSA) language, close to a portable assembler; {{c2::GCC}} lowers through GENERIC &rarr; GIMPLE (three-address, SSA) &rarr; register transfer language (RTL) (target-specific); {{c3::MLIR}} is a framework of <i>dialects</i> at different abstraction levels that are progressively lowered.",
    "image": "",
    "analogy": "",
-   "extra": "<b>Link:</b> 11 Accelerators · MLIR dialects",
+   "extra": "<b>Terms:</b> multi-level intermediate representation (MLIR) <b>Link:</b> 11 Accelerators · MLIR dialects",
    "source": "IR & Opt",
    "reverse": false
   },
@@ -1479,7 +1479,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "AAPCS64 register roles: {{c1::x0&ndash;x7}} arguments and results; {{c2::x8}} indirect-result (struct return) pointer; {{c3::x16/x17}} intra-procedure scratch (IP0/IP1, used by PLT/veneers); {{c4::x18}} platform register (reserved by the OS); {{c5::x19&ndash;x28}} callee-saved; {{c6::x29}} frame pointer; {{c7::x30}} link register.",
+   "text": "AAPCS64 register roles: {{c1::x0&ndash;x7}} arguments and results; {{c2::x8}} indirect-result (struct return) pointer; {{c3::x16/x17}} intra-procedure scratch (IP0/IP1, used by procedure linkage table (PLT)/veneers); {{c4::x18}} platform register (reserved by the OS); {{c5::x19&ndash;x28}} callee-saved; {{c6::x29}} frame pointer; {{c7::x30}} link register.",
    "image": "",
    "analogy": "",
    "extra": "<b>Link:</b> 07 ARM64/RISC-V/Z · registers, sp, xzr",
@@ -1744,7 +1744,7 @@
    "text": "Link-time optimisation (LTO) mechanics: with <code>-flto</code> each <code>.o</code> contains {{c1::compiler IR (LLVM bitcode / GCC GIMPLE bytecode)}} instead of machine code; the linker calls a {{c2::plugin}} that runs the optimiser over the whole program and hands back real objects. {{c3::ThinLTO}} keeps per-module optimisation in parallel, importing only hot functions via a summary index.",
    "image": "",
    "analogy": "",
-   "extra": "<b>Pitfall:</b> full LTO is single-threaded and memory-hungry on big programs; ThinLTO is the practical default (Chrome, Firefox). <b>Link:</b> 03 IR &amp; Optimisation · inlining; devirtualisation",
+   "extra": "<b>Pitfall:</b> full LTO is single-threaded and memory-hungry on big programs; ThinLTO is the practical default (Chrome, Firefox). <b>Terms:</b> intermediate representation (IR) <b>Link:</b> 03 IR &amp; Optimisation · inlining; devirtualisation",
    "source": "Codegen & ABI",
    "reverse": false
   },
@@ -2096,7 +2096,7 @@
     "contrast"
    ],
    "front": "WebAssembly bytecode vs Java virtual machine (JVM) bytecode: what is the key design difference?",
-   "back": "Wasm is a low-level target: a typed stack machine over one flat <b>linear memory</b>, no objects, no GC (until the GC proposal), validated in one pass. JVM bytecode is object-level and assumes a garbage-collected heap.",
+   "back": "Wasm is a low-level target: a typed stack machine over one flat <b>linear memory</b>, no objects, no garbage collection (GC) (until the GC proposal), validated in one pass. JVM bytecode is object-level and assumes a garbage-collected heap.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2382,7 +2382,7 @@
    "text": "The arithmetic flags: {{c1::ZF}} (result zero), {{c2::CF}} (unsigned carry/borrow), {{c3::SF}} (sign bit of result), {{c4::OF}} (signed overflow). Most arithmetic logic unit (ALU) instructions set them; <code>mov</code>, <code>lea</code> and <code>cmov</code> leave them untouched.",
    "image": "",
    "analogy": "",
-   "extra": "<b>Also:</b> PF (parity of low byte) and AF (binary-coded decimal (BCD) half-carry) are legacy; <code>inc</code>/<code>dec</code> set everything but carry flag (CF).",
+   "extra": "<b>Also:</b> parity flag (PF; parity of low byte) and auxiliary carry flag (AF; binary-coded decimal (BCD) half-carry) are legacy; <code>inc</code>/<code>dec</code> set everything but carry flag (CF). <b>Terms:</b> zero flag (ZF); sign flag (SF); overflow flag (OF)",
    "source": "ISA · x86-64",
    "reverse": false
   },
@@ -2531,7 +2531,7 @@
    "text": "x86-64 instruction layout, in order: optional {{c1::legacy prefixes}} (up to 4), optional {{c2::REX}} prefix, {{c3::opcode}} (1&ndash;3 bytes), optional {{c4::ModRM}} byte, optional scale-index-base (SIB) byte, optional displacement, optional immediate. Hard maximum: 15 bytes.",
    "image": "<img src=\"s2s_x86_encoding.svg\">",
    "analogy": "",
-   "extra": "<b>Example:</b> <code>48 8B 44 24 08</code> = <code>mov rax, [rsp+8]</code>: REX.W, opcode, mode-register-memory (ModRM), SIB, disp8. <b>Prefix magic:</b> <code>F3 0F 10</code> is <code>movss</code>, <code>F2 0F 10</code> <code>movsd</code>, <code>66 0F 10</code> <code>movupd</code>: same opcode, the prefix picks the instruction; <code>F0</code> is LOCK.",
+   "extra": "<b>Example:</b> <code>48 8B 44 24 08</code> = <code>mov rax, [rsp+8]</code>: REX.W, opcode, mode-register-memory (ModRM), SIB, disp8. <b>Prefix magic:</b> <code>F3 0F 10</code> is <code>movss</code>, <code>F2 0F 10</code> <code>movsd</code>, <code>66 0F 10</code> <code>movupd</code>: same opcode, the prefix picks the instruction; <code>F0</code> is LOCK. <b>Terms:</b> register extension (REX)",
    "source": "ISA · x86-64",
    "reverse": false
   },
@@ -2622,7 +2622,7 @@
     "microcode"
    ],
    "front": "What does <code>rep movsb</code> do, and why does a 2-byte instruction compete with hand-tuned <code>memcpy</code>?",
-   "back": "It copies <code>rcx</code> bytes from <code>[rsi]</code> to <code>[rdi]</code>, direction by direction flag (DF). It is microcoded, so the CPU can choose cache-line-wide moves internally; with ERMSB/FSRM it is fast even for short copies.",
+   "back": "It copies <code>rcx</code> bytes from <code>[rsi]</code> to <code>[rdi]</code>, direction by direction flag (DF). It is microcoded, so the CPU can choose cache-line-wide moves internally; with enhanced REP MOVSB (ERMSB)/fast short REP MOV (FSRM) it is fast even for short copies.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3111,7 +3111,7 @@
     "simd"
    ],
    "front": "RISC-V Vector (V) extension: how does a loop learn the vector length, and what family does that put it in?",
-   "back": "<code>vsetvli t0, a0, e32</code> asks for <code>a0</code> 32-bit elements and returns the count <code>vl</code> the hardware can do (&le; VLEN/32); the loop strip-mines by <code>vl</code>. Vector-length agnostic, like Scalable Vector Extension (SVE), unlike fixed-width AVX/NEON.",
+   "back": "<code>vsetvli t0, a0, e32</code> asks for <code>a0</code> 32-bit elements and returns the count <code>vl</code> the hardware can do (&le; VLEN/32); the loop strip-mines by <code>vl</code>. Vector-length agnostic, like Scalable Vector Extension (SVE), unlike fixed-width Advanced Vector Extensions (AVX)/NEON.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3206,7 +3206,7 @@
     "sie"
    ],
    "front": "What does the IBM Z <code>SIE</code> instruction do, and who uses it?",
-   "back": "<b>Start Interpretive Execution</b>: the hypervisor hands the CPU a <i>state description</i> and the guest runs its own privileged code at near-native speed until an <b>interception</b> (I/O, time slice, instruction needing help). PR/SM logical partitions (LPARs) and z/VM both use it, nested two levels deep.",
+   "back": "<b>Start Interpretive Execution</b>: the hypervisor hands the CPU a <i>state description</i> and the guest runs its own privileged code at near-native speed until an <b>interception</b> (I/O, time slice, instruction needing help). Processor Resource/Systems Manager (PR/SM) logical partitions (LPARs) and z/VM both use it, nested two levels deep.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3225,7 +3225,7 @@
     "licensing"
    ],
    "front": "IBM Z: a central processor (CP) vs an IBM Z Integrated Information Processor (zIIP): what is the difference, and why does it matter commercially?",
-   "back": "Same silicon. A <b>zIIP</b> is firmware-restricted to eligible work (Db2 Distributed Relational Database Architecture (DRDA) and utilities, Java, some z/OS services). Time on zIIPs is <b>not counted</b> in the MSU-based software charges, so eligible workloads run cheaper.",
+   "back": "Same silicon. A <b>zIIP</b> is firmware-restricted to eligible work (Db2 Distributed Relational Database Architecture (DRDA) and utilities, Java, some z/OS services). Time on IBM Z Integrated Information Processors (zIIPs) is <b>not counted</b> in the MSU-based software charges, so eligible workloads run cheaper.",
    "text": "",
    "image": "",
    "analogy": "A toll road with a free lane for buses only: same tarmac, but only certain vehicles may use it and it doesn't ring up the meter.",
@@ -3262,7 +3262,7 @@
     "ras"
    ],
    "front": "Which reliability, availability and serviceability (RAS) mechanisms make IBM Z different from commodity servers, not just &quot;more reliable&quot;?",
-   "back": "Every core checks its own results (duplicated execution/ECC on registers); a faulting instruction is <b>retried</b> transparently; a failing core's state moves to a <b>spare core</b> without the OS noticing; memory uses redundant array of independent memory (RAIM) (RAID-like dual in-line memory module (DIMM) redundancy).",
+   "back": "Every core checks its own results (duplicated execution/error-correcting code (ECC) on registers); a faulting instruction is <b>retried</b> transparently; a failing core's state moves to a <b>spare core</b> without the OS noticing; memory uses redundant array of independent memory (RAIM) (RAID-like dual in-line memory module (DIMM) redundancy).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3434,7 +3434,7 @@
     "contrast"
    ],
    "front": "Micro-fusion vs macro-fusion on x86 cores: what gets fused, and why bother?",
-   "back": "<b>Micro-fusion</b>: one instruction's load + ALU (<code>add eax,[rbx]</code>) is one &micro;op in the front end, split only at execution. <b>Macro-fusion</b>: two instructions, <code>cmp</code>/<code>test</code> + <code>jcc</code>, become one &micro;op end to end. Both save front-end and reorder buffer (ROB) slots.",
+   "back": "<b>Micro-fusion</b>: one instruction's load + arithmetic logic unit (ALU) (<code>add eax,[rbx]</code>) is one &micro;op in the front end, split only at execution. <b>Macro-fusion</b>: two instructions, <code>cmp</code>/<code>test</code> + <code>jcc</code>, become one &micro;op end to end. Both save front-end and reorder buffer (ROB) slots.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3476,7 +3476,7 @@
    "text": "",
    "image": "",
    "analogy": "Sticky notes over specific pages of a reference book, reapplied every morning because the cleaner removes them overnight.",
-   "extra": "<b>In practice:</b> Linux loads it from the initrd very early; late loading on a running system is discouraged because MSRs can vanish mid-update.",
+   "extra": "<b>In practice:</b> Linux loads it from the initrd very early; late loading on a running system is discouraged because model-specific registers (MSRs) can vanish mid-update.",
    "source": "µarch",
    "reverse": false
   },
@@ -3719,7 +3719,7 @@
     "uarch",
     "smt"
    ],
-   "front": "SMT (hyper-threading): why does it raise throughput on an out-of-order core, and when does it hurt?",
+   "front": "Simultaneous multithreading (SMT) (hyper-threading): why does it raise throughput on an out-of-order core, and when does it hurt?",
    "back": "Issue slots sit idle while one thread waits on a miss or mispredict; a second thread with its own registers and rename map fills them. It hurts when both threads are compute-bound and fight for the same ports, caches and translation lookaside buffer (TLB): each runs slower.",
    "text": "",
    "image": "",
@@ -3877,7 +3877,7 @@
    "text": "",
    "image": "",
    "analogy": "A coat check with 8 hooks per ticket number instead of 1: fewer fights over a hook, but more hooks to scan.",
-   "extra": "<b>In practice:</b> Level 1 cache (L1) is 8–12-way, L2/L3 up to 16-way or more; direct-mapped caches are rare today outside tiny embedded cores.",
+   "extra": "<b>In practice:</b> Level 1 cache (L1) is 8–12-way, level 2 and level 3 (L2/L3) caches up to 16-way or more; direct-mapped caches are rare today outside tiny embedded cores.",
    "source": "Memory",
    "reverse": false
   },
@@ -3931,7 +3931,7 @@
     "cache",
     "replacement"
    ],
-   "front": "Why do L2/L3 caches not use true least recently used (LRU) replacement?",
+   "front": "Why do level 2 and level 3 (L2/L3) caches not use true least recently used (LRU) replacement?",
    "back": "Tracking exact recency across 16 ways is costly, and LRU is defeated by streaming scans that evict the whole useful working set. They use tree-PLRU or RRIP-style policies that resist scans.",
    "text": "",
    "image": "",
@@ -3971,7 +3971,7 @@
     "inclusive"
    ],
    "front": "Inclusive vs exclusive cache hierarchy: what does each buy?",
-   "back": "<b>Inclusive</b> (level 3 cache (L3) holds everything L1/L2 hold): L3 can act as a snoop filter, no need to probe cores. <b>Exclusive/victim</b> (lines live in one level only): more usable capacity.",
+   "back": "<b>Inclusive</b> (level 3 cache (L3) holds everything level 1 and level 2 (L1/L2) caches hold): L3 can act as a snoop filter, no need to probe cores. <b>Exclusive/victim</b> (lines live in one level only): more usable capacity.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3994,7 +3994,7 @@
    "text": "Cache roles: {{c1::L1}} is split into instruction and data caches, private, tuned for latency; {{c2::L2}} is private and unified, hiding level 1 cache (L1) misses; {{c3::L3 (LLC)}} is shared by the cores, sliced per core and reached over a ring or mesh.",
    "image": "",
    "analogy": "",
-   "extra": "<b>Why it matters:</b> a level 3 cache (L3) hit costs ~40 cycles partly because the line may sit in another core's slice across the interconnect.",
+   "extra": "<b>Why it matters:</b> a level 3 cache (L3) hit costs ~40 cycles partly because the line may sit in another core's slice across the interconnect. <b>Terms:</b> level 2 cache (L2)",
    "source": "Memory",
    "reverse": false
   },
@@ -4046,7 +4046,7 @@
     "mesi"
    ],
    "front": "Core A writes a line that core B holds in Shared state. What happens under Modified-Exclusive-Shared-Invalid (MESI)?",
-   "back": "A sends an invalidation (upgrade/RFO); B's copy becomes Invalid; A's becomes Modified. When B reads again, A must write the line back and both drop to Shared.",
+   "back": "A sends an invalidation (upgrade/read for ownership (RFO)); B's copy becomes Invalid; A's becomes Modified. When B reads again, A must write the line back and both drop to Shared.",
    "text": "",
    "image": "",
    "analogy": "One shared whiteboard marker: to write, you grab it and everyone else's photo of the board is declared stale.",
@@ -4108,7 +4108,7 @@
    "text": "Memory models: {{c1::sequential consistency}} = one global interleaving in program order; {{c2::TSO (x86, SPARC)}} = only a store may be delayed past a later load (store buffer); {{c3::weak / relaxed (ARM, POWER, RISC-V)}} = loads and stores may reorder freely unless fenced.",
    "image": "",
    "analogy": "",
-   "extra": "<b>Link:</b> 07 ARM64/RISC-V/Z · weak ordering; Deep C · barriers x86 vs ARM",
+   "extra": "<b>Terms:</b> total store order (TSO) <b>Link:</b> 07 ARM64/RISC-V/Z · weak ordering; Deep C · barriers x86 vs ARM",
    "source": "Memory",
    "reverse": false
   },
@@ -4182,7 +4182,7 @@
     "ll-sc",
     "contrast"
    ],
-   "front": "LL/SC (ARM <code>ldxr/stxr</code>, RISC-V <code>lr/sc</code>) vs CAS (x86 <code>cmpxchg</code>): key difference?",
+   "front": "Load-linked/store-conditional (LL/SC) (ARM <code>ldxr/stxr</code>, RISC-V <code>lr/sc</code>) vs compare-and-swap (CAS) (x86 <code>cmpxchg</code>): key difference?",
    "back": "<b>CAS</b> compares a value, so it misses an A→B→A change (ABA). <b>LL/SC</b> tracks the <i>address</i> with a reservation and the store fails if anyone wrote in between, but it can fail spuriously, so it always loops.",
    "text": "",
    "image": "",
@@ -4240,7 +4240,7 @@
     "pagewalk"
    ],
    "front": "A 4-level page walk could cost four memory accesses. Why is a translation lookaside buffer (TLB) miss usually much cheaper?",
-   "back": "Page-table entries are ordinary cacheable data, so the walker usually hits L1/L2, and paging-structure caches keep the upper levels, leaving one or two real accesses.",
+   "back": "Page-table entries are ordinary cacheable data, so the walker usually hits the level 1 and level 2 (L1/L2) caches, and paging-structure caches keep the upper levels, leaving one or two real accesses.",
    "text": "",
    "image": "",
    "analogy": "Looking up an address in a 4-volume atlas where the first three volumes are already open on the desk.",
@@ -4341,7 +4341,7 @@
    "text": "CUDA launch hierarchy: a kernel runs as a {{c1::grid}} of {{c2::thread blocks}}; each block runs entirely on one {{c3::SM}}, and its threads are executed 32 at a time as {{c4::warps}}.",
    "image": "<img src=\"s2s_gpu_mapping.svg\">",
    "analogy": "",
-   "extra": "<b>Link:</b> Cloud Architecture · warp &amp; SM definitions",
+   "extra": "<b>Terms:</b> streaming multiprocessor (SM) <b>Link:</b> Cloud Architecture · warp &amp; SM definitions",
    "source": "GPU",
    "reverse": false
   },
@@ -4623,7 +4623,7 @@
     "sass"
    ],
    "front": "What are the stages from a <code>.cu</code> file to code running on the GPU?",
-   "back": "<code>nvcc</code> splits host and device code. Device code → PTX (virtual instruction set architecture (ISA)) → <code>ptxas</code> → NVIDIA's native GPU assembly (SASS) cubin for a specific streaming multiprocessor (SM); the host compiler builds the CPU side and the cubins/PTX are embedded as a fat binary.",
+   "back": "<code>nvcc</code> splits host and device code. Device code → parallel thread execution (PTX) (virtual instruction set architecture (ISA)) → <code>ptxas</code> → NVIDIA's native GPU assembly (SASS) cubin for a specific streaming multiprocessor (SM); the host compiler builds the CPU side and the cubins/PTX are embedded as a fat binary.",
    "text": "",
    "image": "<img src=\"s2s_cuda_pipeline.svg\">",
    "analogy": "",
@@ -4966,7 +4966,7 @@
    "text": "A tensor processing unit (TPU) TensorCore has three kinds of unit: the {{c1::MXU (matrix unit, the systolic array)}} for matmuls, the {{c2::VPU (vector unit)}} for elementwise ops, reductions, activations and normalisation, and a {{c3::scalar unit}} that runs the control flow and issues instructions to the other two.",
    "image": "",
    "analogy": "",
-   "extra": "<b>In practice:</b> a kernel that is all softmax/layernorm leaves the MXU idle; Accelerated Linear Algebra (XLA)'s job is to keep the MXU fed and hide the VPU work under it.",
+   "extra": "<b>In practice:</b> a kernel that is all softmax/layernorm leaves the matrix multiply unit (MXU) idle; Accelerated Linear Algebra (XLA)'s job is to keep the MXU fed and hide the vector processing unit (VPU) work under it.",
    "source": "Accelerators",
    "reverse": false
   },
@@ -4985,7 +4985,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Same split on GPUs:</b> tensor cores multiply FP16/BF16 fragments and accumulate in FP32 for the same reasons. <b>Link:</b> Cloud Architecture · BF16 vs FP16 range; 10 GPU · tensor-core MMA",
+   "extra": "<b>Same split on GPUs:</b> tensor cores multiply 16-bit floating point (FP16)/brain floating point 16 (BF16) fragments and accumulate in FP32 for the same reasons. <b>Link:</b> Cloud Architecture · BF16 vs FP16 range; 10 GPU · tensor-core MMA",
    "source": "Accelerators",
    "reverse": false
   },
@@ -5037,7 +5037,7 @@
     "fp4",
     "numerics"
    ],
-   "front": "What is <b>block (micro)scaling</b> such as the Open Compute Project (OCP) microscaling (MX) formats, and what problem does it fix for FP8/FP4?",
+   "front": "What is <b>block (micro)scaling</b> such as the Open Compute Project (OCP) microscaling (MX) formats, and what problem does it fix for 8-bit floating point (FP8)/4-bit floating point (FP4)?",
    "back": "A small block (e.g. 32 elements) shares one 8-bit exponent scale, so each element can be tiny (FP4/FP6/FP8) yet the block keeps useful dynamic range.",
    "text": "",
    "image": "",
@@ -5095,10 +5095,10 @@
    ],
    "front": "",
    "back": "",
-   "text": "Accelerated Linear Algebra (XLA)'s pipeline: the framework emits {{c1::HLO}} (a graph of tensor ops with static shapes); target-independent passes simplify it (algebra, common-subexpression and dead-code elimination (CSE, DCE)); {{c2::layout assignment}} picks physical dimension orders and tiles; {{c3::fusion}} merges ops into kernels; {{c4::buffer assignment}} fixes every allocation at compile time; a backend (LLVM for CPU/GPU, the tensor processing unit (TPU) backend) emits machine code.",
+   "text": "Accelerated Linear Algebra (XLA)'s pipeline: the framework emits {{c1::HLO}} (a graph of tensor ops with static shapes); target-independent passes simplify it; {{c2::layout assignment}} picks physical dimension orders and tiles; {{c3::fusion}} merges ops into kernels; {{c4::buffer assignment}} fixes every allocation at compile time; a backend (LLVM for CPU/GPU, the tensor processing unit (TPU) backend) emits machine code.",
    "image": "<img src=\"s2s_xla_pipeline.svg\">",
    "analogy": "",
-   "extra": "<b>Link:</b> 03 IR &amp; Optimisation · pass pipeline",
+   "extra": "<b>Simplification passes:</b> algebra, common-subexpression and dead-code elimination (CSE, DCE). <b>Terms:</b> high-level operations (HLO). <b>Link:</b> 03 IR &amp; Optimisation · pass pipeline",
    "source": "Accelerators",
    "reverse": false
   },
@@ -5378,7 +5378,7 @@
    "text": "The layer stack for <code>for (i=0;i&lt;n;i++) a[i]+=b[i];</code>: front end makes {{c1::tokens and an AST}}; the middle end makes {{c2::SSA IR and optimises it (vectorise)}}; the back end emits {{c3::machine code in the ISA}}; the core turns it into {{c4::µops scheduled out of order}}; memory serves it in {{c5::64-byte cache lines}}.",
    "image": "<img src=\"s2s_layer_stack.svg\">",
    "analogy": "",
-   "extra": "<b>Layers:</b> 01&ndash;04 are software (the compiler), 06 is the contract, 08&ndash;09 are hardware. Each layer may rely only on what the one below promises. <b>Link:</b> 01 Parsing · AST; 03 IR &amp; Optimisation · SSA; 06 x86-64 · AVX loop; 08 Microarchitecture · µops; 09 Memory · cache lines",
+   "extra": "<b>Layers:</b> 01&ndash;04 are software (the compiler), 06 is the contract, 08&ndash;09 are hardware. Each layer may rely only on what the one below promises. <b>Terms:</b> intermediate representation (IR); instruction set architecture (ISA); abstract syntax tree (AST); static single assignment (SSA) <b>Link:</b> 01 Parsing · AST; 03 IR &amp; Optimisation · SSA; 06 x86-64 · AVX loop; 08 Microarchitecture · µops; 09 Memory · cache lines",
    "source": "Mapping",
    "reverse": false
   },
@@ -5524,7 +5524,7 @@
     "roofline"
    ],
    "front": "<b>Layer 09 (memory).</b> What bounds this loop, and how do you tell?",
-   "back": "Each iteration moves 96 bytes (two loads, one store) for 8 adds: ~0.08 FLOP/byte, far below any ridge point, so it is <b>bandwidth-bound</b>. Cache lines (64 B) are streamed by the hardware prefetcher; the core idles on memory.",
+   "back": "Each iteration moves 96 bytes (two loads, one store) for 8 adds: ~0.08 floating-point operation (FLOP)/byte, far below any ridge point, so it is <b>bandwidth-bound</b>. Cache lines (64 B) are streamed by the hardware prefetcher; the core idles on memory.",
    "text": "",
    "image": "",
    "analogy": "Eight people with one tiny door: the door, not the people, sets the pace.",
@@ -5661,7 +5661,7 @@
     "bridge"
    ],
    "front": "<b>Python, TPU path.</b> Which layers does <code>a @ b</code> cross under <code>jax.jit</code> on a TPU?",
-   "back": "Tracing &rarr; jaxpr &rarr; high-level operations (HLO) &rarr; XLA (layout tiles, fusion, static buffer assignment) &rarr; tensor processing unit (TPU) backend &rarr; an instruction stream for the scalar unit that drives the matrix multiply unit (MXU) systolic array and the vector processing unit (VPU). No hand-written kernel anywhere: the compiler owns every byte moved.",
+   "back": "Tracing &rarr; jaxpr &rarr; high-level operations (HLO) &rarr; Accelerated Linear Algebra (XLA) (layout tiles, fusion, static buffer assignment) &rarr; tensor processing unit (TPU) backend &rarr; an instruction stream for the scalar unit that drives the matrix multiply unit (MXU) systolic array and the vector processing unit (VPU). No hand-written kernel anywhere: the compiler owns every byte moved.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -5680,7 +5680,7 @@
     "isa"
    ],
    "front": "What is the <b>hardware/software contract</b>, and which layer defines it?",
-   "back": "The <b>ISA</b> (layer 06): the compiler may assume exactly the documented effect of each instruction on architectural state; the hardware may implement it any way it likes (µops, speculation, caches) as long as that state matches.",
+   "back": "The <b>instruction set architecture (ISA)</b> (layer 06): the compiler may assume exactly the documented effect of each instruction on architectural state; the hardware may implement it any way it likes (µops, speculation, caches) as long as that state matches.",
    "text": "",
    "image": "",
    "analogy": "A restaurant menu: you may rely on what the dish is, not on how the kitchen is organised.",
@@ -5702,7 +5702,7 @@
    "text": "What each layer may assume: a C program may assume only the {{c1::abstract machine (anything else is UB)}}; the compiler may assume {{c2::ISA semantics and the ABI}}; the CPU may reorder freely as long as {{c3::a single thread sees program order}}; other threads are promised only what the {{c4::memory model}} says.",
    "image": "",
    "analogy": "",
-   "extra": "<b>Link:</b> 02 Types · UB; 04 Codegen &amp; ABI · ABI vs API; 09 Memory · memory models; Deep C · barriers x86 vs ARM",
+   "extra": "<b>Terms:</b> application binary interface (ABI); undefined behaviour (UB); instruction set architecture (ISA) <b>Link:</b> 02 Types · UB; 04 Codegen &amp; ABI · ABI vs API; 09 Memory · memory models; Deep C · barriers x86 vs ARM",
    "source": "Mapping",
    "reverse": false
   },
@@ -5739,7 +5739,7 @@
    "text": "Where abstractions leak: fast on sorted, slow on random data → {{c1::branch mispredict}} (08); a cliff at a size threshold → {{c2::cache misses}} (09); a 'working' program changes with -O2 → {{c3::UB}} (02/03); periodic stalls → {{c4::GC pauses}} (05); branchy GPU kernels at half speed → {{c5::warp divergence}} (10).",
    "image": "",
    "analogy": "",
-   "extra": "<b>Use:</b> each symptom names the layer to blame, so you profile with that layer's tool (perf counters, cache stats, undefined behaviour sanitizer (UBSan), garbage collection (GC) logs, Nsight). <b>Link:</b> 08 Microarchitecture · branch prediction; 09 Memory · cache lines; 05 Runtimes · GC pauses; 10 GPU · divergence",
+   "extra": "<b>Use:</b> each symptom names the layer to blame, so you profile with that layer's tool (perf counters, cache stats, undefined behaviour sanitizer (UBSan), garbage collection (GC) logs, Nsight). <b>Terms:</b> undefined behaviour (UB). <b>Link:</b> 08 Microarchitecture · branch prediction; 09 Memory · cache lines; 05 Runtimes · GC pauses; 10 GPU · divergence",
    "source": "Mapping",
    "reverse": false
   },
@@ -5773,7 +5773,7 @@
     "cache"
    ],
    "front": "Which layer do you blame: the same loop is <b>4× slower once the array passes a few MB</b>, with no change in instruction count?",
-   "back": "The <b>memory hierarchy</b> (09): the working set fell out of L2/L3 into dynamic RAM (DRAM). Instructions per cycle (IPC) drops, cache-miss counters rise; the fix is blocking or a smaller/denser data layout.",
+   "back": "The <b>memory hierarchy</b> (09): the working set fell out of the level 2 and level 3 (L2/L3) caches into dynamic RAM (DRAM). Instructions per cycle (IPC) drops, cache-miss counters rise; the fix is blocking or a smaller/denser data layout.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -5815,7 +5815,7 @@
    "text": "Performance mental models and their layer: {{c1::IPC}} measures how well the core (08) is fed; {{c2::Roofline}} tells whether a kernel is compute- or memory-bound (09, 11); {{c3::Amdahl's law}} bounds speed-up by the serial fraction (any parallel layer, 10); {{c4::latency vs throughput}} decides whether to optimise one request's path or the pipeline's width.",
    "image": "",
    "analogy": "",
-   "extra": "<b>Link:</b> 08 Microarchitecture · Top-Down; 09 Memory · Roofline; 10 GPU · Amdahl",
+   "extra": "<b>Terms:</b> instructions per cycle (IPC) <b>Link:</b> 08 Microarchitecture · Top-Down; 09 Memory · Roofline; 10 GPU · Amdahl",
    "source": "Mapping",
    "reverse": false
   },
@@ -5831,7 +5831,7 @@
     "throughput"
    ],
    "front": "<b>Latency</b> vs <b>throughput</b>: how does the choice change what you optimise at each layer?",
-   "back": "<b>Latency</b> (one request fast): shorten the critical path: fewer dependent loads, avoid misses and mispredicts, batch size 1. <b>Throughput</b> (many per second): widen the pipeline: batching, SIMD/SIMT, more in-flight work, accept per-item delay.",
+   "back": "<b>Latency</b> (one request fast): shorten the critical path: fewer dependent loads, avoid misses and mispredicts, batch size 1. <b>Throughput</b> (many per second): widen the pipeline: batching, single instruction, multiple data/threads (SIMD/SIMT), more in-flight work, accept per-item delay.",
    "text": "",
    "image": "",
    "analogy": "An ambulance vs a freight train: both move things; you design the road differently.",
@@ -5914,7 +5914,7 @@
    "text": "What the compiler cannot do for you: it will not change your {{c1::data structures or layout (AoS → SoA, pointer chasing → arrays)}}, your {{c2::algorithmic complexity}}, or add {{c3::parallelism across threads or devices}}; it cannot know {{c4::aliasing or value ranges you did not state}}, and it will not save code that relies on {{c5::undefined behaviour}}.",
    "image": "",
    "analogy": "",
-   "extra": "<b>Why:</b> each needs a guarantee that lives in a layer above the compiler (your intent, your data), or would change observable behaviour. <b>Link:</b> 09 Memory · cache lines; 03 IR &amp; Optimisation · alias analysis; 02 Types · UB",
+   "extra": "<b>Why:</b> each needs a guarantee that lives in a layer above the compiler (your intent, your data), or would change observable behaviour. <b>Terms:</b> array of structures (AoS); structure of arrays (SoA) <b>Link:</b> 09 Memory · cache lines; 03 IR &amp; Optimisation · alias analysis; 02 Types · UB",
    "source": "Mapping",
    "reverse": false
   },
