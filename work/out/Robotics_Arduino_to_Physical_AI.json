@@ -58,7 +58,7 @@
    "tags": [
     "robotics::01-electronics-fundamentals"
    ],
-   "front": "How do you size an light-emitting diode (LED) series resistor? (5 V supply, 2 V forward voltage, 10 mA)",
+   "front": "How do you size a light-emitting diode (LED) series resistor? (5 V supply, 2 V forward voltage, 10 mA)",
    "back": "R = (V<sub>supply</sub> − V<sub>f</sub>) / I = 3 V / 0.010 A = 300 Ω → next standard value, <b>330 Ω</b>.",
    "text": "",
    "image": "",
@@ -154,7 +154,7 @@
    "tags": [
     "robotics::01-electronics-fundamentals"
    ],
-   "front": "Low-side N-channel metal-oxide-semiconductor field-effect transistor (MOSFET) switch from an microcontroller unit (MCU) pin: where do load, source and gate go?",
+   "front": "Low-side N-channel metal-oxide-semiconductor field-effect transistor (MOSFET) switch from a microcontroller unit (MCU) pin: where do load, source and gate go?",
    "back": "Load between V+ and <b>drain</b>; <b>source</b> to ground; <b>gate</b> driven by the pin. Load supply and MCU share a common ground.",
    "text": "",
    "image": "",
@@ -346,7 +346,7 @@
    "tags": [
     "robotics::01-electronics-fundamentals"
    ],
-   "front": "Fixes for an microcontroller unit (MCU) that resets when motors start?",
+   "front": "Fixes for a microcontroller unit (MCU) that resets when motors start?",
    "back": "Separate regulator/battery for logic; bulk capacitor on the motor supply; never power motors/servos from the Arduino 5 V pin; thick short wiring; caps across brushed motor terminals.",
    "text": "",
    "image": "",
@@ -379,7 +379,7 @@
     "robotics::02-microcontrollers-arduino"
    ],
    "front": "Why can't a Raspberry Pi simply replace the Arduino on a robot?",
-   "back": "Linux scheduling gives <b>timing jitter</b>, so hard real-time I/O (motor pulse-width modulation (PWM), encoder counting, safety timeouts) belongs on an microcontroller unit (MCU). Robots pair them: microprocessor unit (MPU) for perception/planning, MCU for real-time control.",
+   "back": "Linux scheduling gives <b>timing jitter</b>, so hard real-time I/O (motor pulse-width modulation (PWM), encoder counting, safety timeouts) belongs on a microcontroller unit (MCU). Robots pair them: microprocessor unit (MPU) for perception/planning, MCU for real-time control.",
    "text": "",
    "image": "",
    "analogy": "The Pi is the brain planning the route; the MCU is the spinal cord handling reflexes that can't wait for a thought.",
@@ -396,7 +396,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Before wiring to an microcontroller unit (MCU) board, check four datasheet facts: {{c1::logic level}} (5 V or 3.3 V), {{c2::ADC resolution}} and reference, which pins offer {{c3::hardware PWM}}, and which pins support {{c4::external interrupts}}.",
+   "text": "Before wiring to a microcontroller unit (MCU) board, check four datasheet facts: {{c1::logic level}} (5 V or 3.3 V), {{c2::ADC resolution}} and reference, which pins offer {{c3::hardware PWM}}, and which pins support {{c4::external interrupts}}.",
    "image": "",
    "analogy": "",
    "extra": "<b>Example, Arduino UNO R3:</b> ATmega328P, 8-bit AVR @ 16 MHz, 5 V logic, 10-bit analog-to-digital converter (ADC), pulse-width modulation (PWM) on 3, 5, 6, 9, 10, 11, external interrupts only on pins 2 and 3; 32 KB flash · 2 KB static random-access memory (SRAM) · 1 KB electrically erasable programmable read-only memory (EEPROM).",
@@ -634,7 +634,7 @@
    "tags": [
     "robotics::02-microcontrollers-arduino"
    ],
-   "front": "What does an real-time operating system (RTOS) (FreeRTOS, Zephyr) give you over a bare-metal super-loop?",
+   "front": "What does a real-time operating system (RTOS) (FreeRTOS, Zephyr) give you over a bare-metal super-loop?",
    "back": "<b>Pre-emptive, priority-based tasks</b> with bounded latency, plus queues, mutexes/semaphores and software timers.",
    "text": "",
    "image": "",
@@ -650,7 +650,7 @@
    "tags": [
     "robotics::02-microcontrollers-arduino"
    ],
-   "front": "When is an real-time operating system (RTOS) worth it on an microcontroller unit (MCU), and what does it cost?",
+   "front": "When is a real-time operating system (RTOS) worth it on a microcontroller unit (MCU), and what does it cost?",
    "back": "When activities with different rates/priorities coexist (1 kHz motor loop, 100 Hz fusion, comms, logging). Costs: RAM per task stack; new bugs (priority inversion, races, deadlock).",
    "text": "",
    "image": "",
@@ -1596,7 +1596,7 @@
     "robotics::06-raspberry-pi-embedded-linux"
    ],
    "front": "Why does software pulse-width modulation (PWM) from Linux make servos jitter, and what fixes it?",
-   "back": "The scheduler pre-empts user-space timing, so pulse widths wobble by 10s–100s of µs. Fix: hardware PWM channels, a <b>PCA9685</b> inter-integrated circuit (I2C) PWM chip, or an microcontroller unit (MCU).",
+   "back": "The scheduler pre-empts user-space timing, so pulse widths wobble by 10s–100s of µs. Fix: hardware PWM channels, a <b>PCA9685</b> inter-integrated circuit (I2C) PWM chip, or a microcontroller unit (MCU).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1934,7 +1934,7 @@
    "tags": [
     "robotics::07-control-theory"
    ],
-   "front": "What does a discrete proportional-integral-derivative (PID) on an microcontroller unit (MCU) need that the textbook formula hides?",
+   "front": "What does a discrete proportional-integral-derivative (PID) on a microcontroller unit (MCU) need that the textbook formula hides?",
    "back": "A <b>fixed, known sample period</b> (timer interrupt or scheduled task); integral ≈ Σe·dt, derivative ≈ Δ/dt. Timing jitter acts like noise on D.",
    "text": "",
    "image": "",
