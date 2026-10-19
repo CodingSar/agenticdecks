@@ -58,3 +58,99 @@ Reviewed card by card for vendor-catered content: 1 deleted, 9 rewritten to the 
 ### Scrubbed (2)
 - "Managed KubernetesAWS: {{c1::EKS}}Azure: {{c2::AKS}}GCP: {{c3::GKE}}": removed extra 'GKE is generally seen as the most mature' (promotional claim)
 - "DynamoDB vs Cosmos DB: how does each go multi-region, and how much consistency choice do you get?": 'turnkey global distribution' → 'built-in global distribution'
+
+## Abbreviations expanded
+
+Notes touched: 67
+
+- IAM → identity and access management
+- TPU → tensor processing unit
+- VPC → virtual private cloud
+- NIC → network interface card
+- IOPS → input/output operations per second
+- FP16 → 16-bit floating point
+- BF16 → brain floating point
+- ASIC → application-specific integrated circuit
+- HA → high availability
+- AZ → availability zone
+- L7 → layer 7
+- L4 → layer 4
+- KVM → kernel-based virtual machine
+- NFS → network file system
+- SMB → server message block
+- PCIe → peripheral component interconnect express
+- NVMe → non-volatile memory express
+- SMT → simultaneous multithreading
+- NUMA → non-uniform memory access
+- FLOPS → floating-point operations per second
+- FP8 → 8-bit floating point
+- FP32 → 32-bit floating point
+- RoCE → remote direct memory access over converged Ethernet
+- RDMA → remote direct memory access
+- SDK → software development kit
+- CSI → container storage interface
+- DR → disaster recovery
+- SCP → service control policy
+- RG → resource group
+- OU → organizational unit
+- IRSA → identity and access management (IAM) roles for service accounts
+- TDX → Trust Domain Extensions
+- SEV → Secure Encrypted Virtualization
+- ACL → access control list
+- LB → load balancer
+- CDN → content delivery network
+- WAF → web application firewall
+- FaaS → function as a service
+- SLA → service level agreement
+- HDD → hard disk drive
+- SATA → Serial ATA
+- AHCI → Advanced Host Controller Interface
+- RAID → redundant array of independent disks
+- SAN → storage area network
+- NAS → network-attached storage
+- CUD → committed use discount
+- UPI → Ultra Path Interconnect
+- DPDK → Data Plane Development Kit
+- RISC → reduced instruction set computer
+- INT8 → 8-bit integer
+- VRAM → video random access memory
+- GDDR → graphics double data rate
+- DRAM → dynamic random access memory
+- FSDP → fully sharded data parallel
+- MIG → Multi-Instance GPU
+- vGPU → virtual GPU
+- FPGA → field-programmable gate array
+- NCCL → NVIDIA Collective Communications Library
+- HPC → high-performance computing
+- PFC → priority flow control
+- ECN → explicit congestion notification
+- DPU → data processing unit
+- UPS → uninterruptible power supply
+- EKS → Elastic Kubernetes Service
+- AKS → Azure Kubernetes Service
+- GKE → Google Kubernetes Engine
+- S3 → Simple Storage Service
+- EBS → Elastic Block Store
+- KMS → Key Management Service
+- ECS → Elastic Container Service
+- ECR → Elastic Container Registry
+- EC2 → Elastic Compute Cloud
+- RDS → Relational Database Service
+- SQS → Simple Queue Service
+- ALB → Application Load Balancer
+- NLB → Network Load Balancer
+- CDK → Cloud Development Kit
+- ACI → Azure Container Instances
+- VNet → virtual network
+- NSG → network security group
+- TDP → thermal design power
+- HBM → high-bandwidth memory
+- ZeRO → Zero Redundancy Optimizer
+- GPFS → General Parallel File System
+- iSCSI → Internet Small Computer Systems Interface
+- TCO → total cost of ownership
+- IA → infrequent access
+- ARM → Azure Resource Manager
+- GCS → Google Cloud Storage
+
+Where an abbreviation occurs only inside a cloze answer (EC2, ECR, EKS/AKS/GKE, ALB/NLB, L4/L7, OU, IA, IRSA, SEV/TDX, LB/WAF) or would leak the answer (EBS/NFS in the storage-models cloze), it is expanded in `extra` instead.
