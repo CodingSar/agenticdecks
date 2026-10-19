@@ -60,3 +60,54 @@ Rewritten to the vendor-neutral concept, product moved to `extra` as an example 
 - "How does ACS's scope differ from Kyverno/Gatekeeper?" → "Full-lifecycle Kubernetes security platform vs admission policy engine (Kyverno/Gatekeeper): how do their scopes differ?"
 
 Scrubbed marketing phrasing: none beyond the rewrites above ("out of the box", "enterprise RBAC" were in the RHDH card).
+
+
+## Abbreviations expanded
+
+Notes touched: 72
+
+- CRD → custom resource definition
+- OCI → Open Container Initiative
+- SBOM → software bill of materials
+- SLSA → Supply-chain Levels for Software Artifacts
+- SDK → software development kit
+- OPA → Open Policy Agent
+- SSO → single sign-on
+- CNCF → Cloud Native Computing Foundation
+- DB → database
+- WAN → wide area network
+- CNI → Container Network Interface
+- KMS → key management service
+- IaC → infrastructure as code
+- IAM → identity and access management
+- GA → general availability
+- CEL → Common Expression Language
+- OIDC → OpenID Connect
+- CVE → Common Vulnerabilities and Exposures
+- CSI → Container Storage Interface
+- SCM → source control management
+- HPA → Horizontal Pod Autoscaler
+- CR → custom resource
+- PGP → Pretty Good Privacy
+- MPL → Mozilla Public License
+- WinRM → Windows Remote Management
+- PVC → persistent volume claim
+- GC → garbage collection
+- DORA → DevOps Research and Assessment
+- LDAP → Lightweight Directory Access Protocol
+- OWASP → Open Worldwide Application Security Project
+- SPDX → Software Package Data Exchange
+- CIS → Center for Internet Security
+- LB → load balancer
+- GSLB → global server load balancing
+- CIDR → Classless Inter-Domain Routing
+- HCP → HashiCorp Cloud Platform
+- HCL → HashiCorp Configuration Language
+- KCL → Kusion Configuration Language
+- XR → composite resource
+- MR → managed resource
+- OLM → Operator Lifecycle Manager
+- ACS → Advanced Cluster Security
+- CD → continuous delivery (note 2 only; "Argo CD"/"Flux CD" left as product names)
+
+Left bare: VPN, ISO, mTLS (well known); SOPS, AWX, Argo CD (names); L1/L3/L7, INI, S3, EC2, CI (whitelist/product); acronyms already expanded on their card (HNC, TVP, SSA, XRD, CMPs, CSVs, BSL).

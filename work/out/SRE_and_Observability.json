@@ -90,7 +90,7 @@
    "tags": [
     "sre::toil"
    ],
-   "front": "Why does Google cap toil at <b>50%</b> of an Site Reliability Engineering (SRE) team's time?",
+   "front": "Why does Google cap toil at <b>50%</b> of a Site Reliability Engineering (SRE) team's time?",
    "back": "To guarantee at least half the time goes into engineering that reduces future toil. Above 50% the team drifts into being a plain ops team.",
    "text": "",
    "image": "",
@@ -122,7 +122,7 @@
    "tags": [
     "sre::toil"
    ],
-   "front": "Beyond lost hours, why is toil <b>harmful</b> to an Site Reliability Engineering (SRE) organisation?",
+   "front": "Beyond lost hours, why is toil <b>harmful</b> to a Site Reliability Engineering (SRE) organisation?",
    "back": "It stalls careers, burns people out, sets the precedent that devs can offload operations, and slows the service's own progress.",
    "text": "",
    "image": "",
@@ -284,7 +284,7 @@
     "sre::slo"
    ],
    "front": "What is a <b>Service Level Objective</b> (SLO)?",
-   "back": "A target for an Service Level Indicator (SLI) over a window, e.g. \"99.9% of valid requests succeed in under 300 ms over 30 days\".",
+   "back": "A target for a Service Level Indicator (SLI) over a window, e.g. \"99.9% of valid requests succeed in under 300 ms over 30 days\".",
    "text": "",
    "image": "<img src=\"sre_sli_slo_sla.svg\">",
    "analogy": "",
@@ -304,7 +304,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Rule of thumb:</b> no consequence, no SLA; it's just an Service Level Objective (SLO) you published.",
+   "extra": "<b>Rule of thumb:</b> no consequence, no SLA; it's just a Service Level Objective (SLO) you published.",
    "source": "SRE Book · Ch. 4",
    "reverse": false
   },
@@ -363,7 +363,7 @@
    "tags": [
     "sre::slo"
    ],
-   "front": "In an Service Level Indicator (SLI), why distinguish <b>valid</b> events from all events?",
+   "front": "In a Service Level Indicator (SLI), why distinguish <b>valid</b> events from all events?",
    "back": "To exclude what you cannot be responsible for, e.g. malformed requests or client 4xx errors. Otherwise a buggy client burns your budget.",
    "text": "",
    "image": "",
@@ -491,7 +491,7 @@
    "tags": [
     "sre::slo"
    ],
-   "front": "In what sense is an Service Level Objective (SLO) a <b>budget for change</b>?",
+   "front": "In what sense is a Service Level Objective (SLO) a <b>budget for change</b>?",
    "back": "100% − SLO is the unreliability you may spend. Risky releases, experiments and migrations are legitimate ways to spend it, as long as it lasts.",
    "text": "",
    "image": "",
@@ -544,7 +544,7 @@
    "text": "",
    "image": "",
    "analogy": "Ask the receptionist how many callers got through, not the staff who answered.",
-   "extra": "<b>Closer still:</b> client-side telemetry (real user monitoring (RUM)) also sees DNS, content delivery network (CDN) and network failures, at the cost of noise.",
+   "extra": "<b>Closer still:</b> client-side telemetry (real user monitoring, RUM) also sees DNS, content delivery network (CDN) and network failures, at the cost of noise.",
    "source": "SRE Workbook · Ch. 2",
    "reverse": false
   },
@@ -1828,7 +1828,7 @@
     "sre::tracing"
    ],
    "front": "<b>Baggage vs span attributes</b>: what's the difference?",
-   "back": "Attributes describe one span and are stored. Baggage (World Wide Web Consortium (W3C) <code>baggage</code> header) is propagated to every downstream hop but is <i>not</i> recorded unless copied onto spans.",
+   "back": "Attributes describe one span and are stored. Baggage (<code>baggage</code> header of the World Wide Web Consortium, W3C) is propagated to every downstream hop but is <i>not</i> recorded unless copied onto spans.",
    "text": "",
    "image": "",
    "analogy": "Attributes are notes written in one hotel's guest book; baggage is the suitcase the traveller carries to every hotel.",
@@ -1991,7 +1991,7 @@
     "sre::otel"
    ],
    "front": "In a Collector pipeline, why is <code>memory_limiter</code> first and <code>batch</code> last?",
-   "back": "The limiter must refuse data before the process out-of-memory kills (OOMs), so it guards the entrance. Batching compresses right before export so nothing downstream un-batches it.",
+   "back": "The limiter must refuse data before the process runs out of memory (OOMs), so it guards the entrance. Batching compresses right before export so nothing downstream un-batches it.",
    "text": "",
    "image": "",
    "analogy": "The bouncer stands at the door, not at the bar; and you pack the boxes right before loading the truck.",
@@ -2139,8 +2139,8 @@
     "sre::otel",
     "sre::cardinality"
    ],
-   "front": "What is an OpenTelemetry (OTel) metrics <b>View</b>, and why does a platform team care?",
-   "back": "An software development kit (SDK)-side rule that changes aggregation, bucket boundaries or drops attributes for an instrument, with no code change. It is the cardinality control knob at the source.",
+   "front": "What is a OpenTelemetry (OTel) metrics <b>View</b>, and why does a platform team care?",
+   "back": "A software development kit (SDK)-side rule that changes aggregation, bucket boundaries or drops attributes for an instrument, with no code change. It is the cardinality control knob at the source.",
    "text": "",
    "image": "",
    "analogy": "A dimmer switch on an instrument: turn down the detail without rewiring the lamp.",
@@ -2224,7 +2224,7 @@
     "sre::incident"
    ],
    "front": "Where does the <b>Incident Command System</b> come from, and why did Site Reliability Engineering (SRE) borrow it?",
-   "back": "From US firefighting (Federal Emergency Management Agency (FEMA) ICS). It gives clear roles, a single decision-maker and a span of control that scales from one responder to dozens.",
+   "back": "From US firefighting (Federal Emergency Management Agency, FEMA, ICS). It gives clear roles, a single decision-maker and a span of control that scales from one responder to dozens.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2496,7 +2496,7 @@
    "tags": [
     "sre::chaos"
    ],
-   "front": "<b>Chaos engineering vs game day (Disaster Recovery Testing (DiRT))</b>: what does each test?",
+   "front": "<b>Chaos engineering vs game day (Disaster Recovery Testing, DiRT)</b>: what does each test?",
    "back": "Chaos tests the <i>system's</i> tolerance to faults. A game day tests the <i>people and process</i>: paging, access, runbooks, communication, decision-making.",
    "text": "",
    "image": "",
@@ -3253,7 +3253,7 @@
     "sre::cardinality"
    ],
    "front": "Why enforce <b>per-tenant series limits</b> in a shared metrics backend?",
-   "back": "One team's label explosion (a user ID label, a per-pod histogram) can out of memory (OOM) the ingesters for everyone. Limits turn a platform outage into one tenant's rejected samples.",
+   "back": "One team's label explosion (a user ID label, a per-pod histogram) can run the ingesters out of memory (OOM) for everyone. Limits turn a platform outage into one tenant's rejected samples.",
    "text": "",
    "image": "",
    "analogy": "Circuit breakers per apartment keep one tenant's faulty toaster from blacking out the building.",
@@ -3325,7 +3325,7 @@
     "sre::profiling"
    ],
    "front": "When does <b>profiling beat tracing</b>?",
-   "back": "When the time is spent <i>inside</i> one process: Garbage collection (GC), serialisation, a hot loop. A span says 'this call took 800 ms'; a profile says which lines.",
+   "back": "When the time is spent <i>inside</i> one process: garbage collection (GC), serialisation, a hot loop. A span says 'this call took 800 ms'; a profile says which lines.",
    "text": "",
    "image": "",
    "analogy": "",
