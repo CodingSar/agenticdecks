@@ -368,7 +368,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Pitfall:</b> <code>A &larr; 'a' / 'ab'</code> never matches <code>ab</code>; with context-free grammar (CFG) alternation it would. Put the longer alternative first. <b>Packrat:</b> memoising every (rule, position) makes parsing expression grammar (PEG) backtracking linear; CPython's parser (PEP 617) is PEG/packrat.",
+   "extra": "<b>Pitfall:</b> <code>A &larr; 'a' / 'ab'</code> never matches <code>ab</code>; with context-free grammar (CFG) alternation it would. Put the longer alternative first. <b>Packrat:</b> memoising every (rule, position) makes parsing expression grammar (PEG) backtracking linear; CPython's parser (Python Enhancement Proposal (PEP) 617) is PEG/packrat.",
    "source": "Front end · Parsing",
    "reverse": false
   },
@@ -1385,7 +1385,7 @@
     "contrast"
    ],
    "front": "<b>Graph colouring</b> vs <b>linear scan</b> register allocation: when is each chosen?",
-   "back": "Colouring: better code, superlinear time; ahead-of-time compilers. Linear scan: one pass over live intervals sorted by start, near-linear, slightly worse code; JITs (HotSpot C1, early V8) where compile time is on the critical path.",
+   "back": "Colouring: better code, superlinear time; ahead-of-time compilers. Linear scan: one pass over live intervals sorted by start, near-linear, slightly worse code; just-in-time compilers (JITs) (HotSpot C1, early V8) where compile time is on the critical path.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1464,7 +1464,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Why shadow space:</b> the callee can spill its four register arguments to fixed slots next to the stack arguments, keeping varargs and unwinders simple. <b>In practice:</b> a Linux object cannot call a Windows DLL without a thunk. <b>Link:</b> 06 x86-64 · syscall vs function ABI",
+   "extra": "<b>Why shadow space:</b> the callee can spill its four register arguments to fixed slots next to the stack arguments, keeping varargs and unwinders simple. <b>In practice:</b> a Linux object cannot call a Windows dynamic-link library (DLL) without a thunk. <b>Link:</b> 06 x86-64 · syscall vs function ABI",
    "source": "Codegen & ABI",
    "reverse": false
   },
@@ -1909,7 +1909,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>In practice:</b> the free-threaded build (PEP 703) is an opt-in alternative interpreter; I/O-bound code already releases the GIL around blocking calls.",
+   "extra": "<b>In practice:</b> the free-threaded build (Python Enhancement Proposal (PEP) 703) is an opt-in alternative interpreter; I/O-bound code already releases the GIL around blocking calls.",
    "source": "Runtimes",
    "reverse": false
   },
@@ -2382,7 +2382,7 @@
    "text": "The arithmetic flags: {{c1::ZF}} (result zero), {{c2::CF}} (unsigned carry/borrow), {{c3::SF}} (sign bit of result), {{c4::OF}} (signed overflow). Most arithmetic logic unit (ALU) instructions set them; <code>mov</code>, <code>lea</code> and <code>cmov</code> leave them untouched.",
    "image": "",
    "analogy": "",
-   "extra": "<b>Also:</b> PF (parity of low byte) and AF (binary-coded decimal (BCD) half-carry) are legacy; <code>inc</code>/<code>dec</code> set everything but CF.",
+   "extra": "<b>Also:</b> PF (parity of low byte) and AF (binary-coded decimal (BCD) half-carry) are legacy; <code>inc</code>/<code>dec</code> set everything but carry flag (CF).",
    "source": "ISA · x86-64",
    "reverse": false
   },
@@ -2416,7 +2416,7 @@
     "contrast"
    ],
    "front": "<code>jl</code>/<code>jg</code> vs <code>jb</code>/<code>ja</code> after a <code>cmp</code>: what is the difference?",
-   "back": "<i>Less/greater</i> are signed (decided from SF&ne;OF and ZF); <i>below/above</i> are unsigned (decided from CF and ZF). The same <code>cmp</code> serves both; the jump chooses the interpretation.",
+   "back": "<i>Less/greater</i> are signed (decided from sign flag (SF)&ne;overflow flag (OF) and zero flag (ZF)); <i>below/above</i> are unsigned (decided from carry flag (CF) and ZF). The same <code>cmp</code> serves both; the jump chooses the interpretation.",
    "text": "",
    "image": "",
    "analogy": "One thermometer reading; whether -1 is \"below\" 1 depends on whether you read it as a signed or unsigned scale.",
@@ -3096,7 +3096,7 @@
    "text": "RISC-V privilege levels: {{c1::M (machine)}} is mandatory and highest, running firmware; {{c2::S (supervisor)}} runs the OS; {{c3::U (user)}} runs applications; the {{c4::H (hypervisor)}} extension splits S into HS/VS/VU for virtualisation. <code>ecall</code> traps to the next level up.",
    "image": "",
    "analogy": "",
-   "extra": "<b>In practice:</b> OpenSBI runs in M-mode and Linux in S-mode; tiny MCUs implement M only. <b>Link:</b> 12 Mapping · virtualisation (VMX / SVM / SIE)",
+   "extra": "<b>In practice:</b> OpenSBI runs in M-mode and Linux in S-mode; tiny microcontrollers (MCUs) implement M only. <b>Link:</b> 12 Mapping · virtualisation (VMX / SVM / SIE)",
    "source": "ISA · ARM64 / RISC-V / Z",
    "reverse": false
   },
@@ -3472,7 +3472,7 @@
     "updates"
    ],
    "front": "How does a microcode update actually get applied to a CPU?",
-   "back": "BIOS or the OS writes the update's memory address to a model-specific register (Intel: <code>WRMSR 0x79</code>); the CPU verifies the vendor's signature, loads the patch into on-chip <b>patch RAM</b>, and <b>match registers</b> redirect microcode sequencer ROM (MSROM) entry points to it. Volatile: redone every boot.",
+   "back": "Basic input/output system (BIOS) or the OS writes the update's memory address to a model-specific register (Intel: <code>WRMSR 0x79</code>); the CPU verifies the vendor's signature, loads the patch into on-chip <b>patch RAM</b>, and <b>match registers</b> redirect microcode sequencer ROM (MSROM) entry points to it. Volatile: redone every boot.",
    "text": "",
    "image": "",
    "analogy": "Sticky notes over specific pages of a reference book, reapplied every morning because the cleaner removes them overnight.",
@@ -3623,7 +3623,7 @@
     "branch-prediction",
     "ras"
    ],
-   "front": "Why does a <code>ret</code> need its own predictor (return address stack) rather than the BTB?",
+   "front": "Why does a <code>ret</code> need its own predictor (return address stack) rather than the branch target buffer (BTB)?",
    "back": "One <code>ret</code> has many targets, one per call site, so a BTB entry keyed by its address is always stale. The RAS pushes on <code>call</code> and pops on <code>ret</code>, mirroring the stack in hardware.",
    "text": "",
    "image": "",
@@ -3702,7 +3702,7 @@
     "contrast"
    ],
    "front": "Spectre v2 vs Meltdown: how do their hardware mechanisms differ?",
-   "back": "<b>v2</b>: attacker trains the BTB so the victim's <i>indirect branch</i> speculatively jumps to a gadget (branch target injection). <b>Meltdown</b>: a load of kernel memory is permission-checked only at retirement, after dependents already used the value. Predictor abuse versus a deferred fault.",
+   "back": "<b>v2</b>: attacker trains the branch target buffer (BTB) so the victim's <i>indirect branch</i> speculatively jumps to a gadget (branch target injection). <b>Meltdown</b>: a load of kernel memory is permission-checked only at retirement, after dependents already used the value. Predictor abuse versus a deferred fault.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3817,7 +3817,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Orders of magnitude on a modern server core: L1 hit {{c1::~1 ns (a few cycles)}}, L3 hit {{c2::~10 ns}}, dynamic RAM (DRAM) {{c3::~100 ns}}, Non-Volatile Memory Express (NVMe) read {{c4::~100 µs}}, which is why one cache miss costs about as much as a few hundred simple instructions.",
+   "text": "Orders of magnitude on a modern server core: Level 1 cache (L1) hit {{c1::~1 ns (a few cycles)}}, level 3 cache (L3) hit {{c2::~10 ns}}, dynamic RAM (DRAM) {{c3::~100 ns}}, Non-Volatile Memory Express (NVMe) read {{c4::~100 µs}}, which is why one cache miss costs about as much as a few hundred simple instructions.",
    "image": "",
    "analogy": "L1 is the desk, L3 the bookshelf in the room, DRAM the library across the street, NVMe a parcel from another city.",
    "extra": "<b>In practice:</b> numbers drift with each chip; the ratios (×10 per level, ×1000 to storage) are what to remember.",
@@ -3877,7 +3877,7 @@
    "text": "",
    "image": "",
    "analogy": "A coat check with 8 hooks per ticket number instead of 1: fewer fights over a hook, but more hooks to scan.",
-   "extra": "<b>In practice:</b> L1 is 8–12-way, L2/L3 up to 16-way or more; direct-mapped caches are rare today outside tiny embedded cores.",
+   "extra": "<b>In practice:</b> Level 1 cache (L1) is 8–12-way, L2/L3 up to 16-way or more; direct-mapped caches are rare today outside tiny embedded cores.",
    "source": "Memory",
    "reverse": false
   },
@@ -3892,7 +3892,7 @@
     "vipt",
     "tlb"
    ],
-   "front": "Why do L1 data caches index with the virtual address but tag with the physical one (VIPT)?",
+   "front": "Why do level 1 cache (L1) data caches index with the virtual address but tag with the physical one (VIPT)?",
    "back": "The set can be selected before address translation finishes, so the translation lookaside buffer (TLB) lookup and the cache lookup run in parallel; the physical tag then confirms the hit with no aliasing problems.",
    "text": "",
    "image": "",
@@ -3912,7 +3912,7 @@
     "vipt",
     "tlb"
    ],
-   "front": "Why is an L1 data cache typically 32 KB 8-way or 48 KB 12-way, rather than, say, 64 KB 4-way?",
+   "front": "Why is a level 1 cache (L1) data cache typically 32 KB 8-way or 48 KB 12-way, rather than, say, 64 KB 4-way?",
    "back": "Virtually indexed, physically tagged (VIPT) only works if the index bits lie inside the page offset, i.e. <b>way size ≤ page size</b> (4 KB). More capacity therefore has to come from more ways, not more sets.",
    "text": "",
    "image": "",
@@ -3971,11 +3971,11 @@
     "inclusive"
    ],
    "front": "Inclusive vs exclusive cache hierarchy: what does each buy?",
-   "back": "<b>Inclusive</b> (L3 holds everything L1/L2 hold): L3 can act as a snoop filter, no need to probe cores. <b>Exclusive/victim</b> (lines live in one level only): more usable capacity.",
+   "back": "<b>Inclusive</b> (level 3 cache (L3) holds everything L1/L2 hold): L3 can act as a snoop filter, no need to probe cores. <b>Exclusive/victim</b> (lines live in one level only): more usable capacity.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Example:</b> Intel's older ring-bus parts were inclusive; AMD Zen's L3 is a victim cache filled by L2 evictions, so L2 + L3 capacity adds up. Non-inclusive non-exclusive (NINE) sits in between.",
+   "extra": "<b>Example:</b> Intel's older ring-bus parts were inclusive; AMD Zen's L3 is a victim cache filled by level 2 cache (L2) evictions, so L2 + L3 capacity adds up. Non-inclusive non-exclusive (NINE) sits in between.",
    "source": "Memory",
    "reverse": false
   },
@@ -3991,10 +3991,10 @@
    ],
    "front": "",
    "back": "",
-   "text": "Cache roles: {{c1::L1}} is split into instruction and data caches, private, tuned for latency; {{c2::L2}} is private and unified, hiding L1 misses; {{c3::L3 (LLC)}} is shared by the cores, sliced per core and reached over a ring or mesh.",
+   "text": "Cache roles: {{c1::L1}} is split into instruction and data caches, private, tuned for latency; {{c2::L2}} is private and unified, hiding level 1 cache (L1) misses; {{c3::L3 (LLC)}} is shared by the cores, sliced per core and reached over a ring or mesh.",
    "image": "",
    "analogy": "",
-   "extra": "<b>Why it matters:</b> an L3 hit costs ~40 cycles partly because the line may sit in another core's slice across the interconnect.",
+   "extra": "<b>Why it matters:</b> a level 3 cache (L3) hit costs ~40 cycles partly because the line may sit in another core's slice across the interconnect.",
    "source": "Memory",
    "reverse": false
   },
@@ -4085,7 +4085,7 @@
     "contrast"
    ],
    "front": "Coherence vs memory consistency: key difference?",
-   "back": "<b>Coherence:</b> all cores eventually agree on the value sequence of <i>one</i> location (Modified-Exclusive-Shared-Invalid (MESI) gives this). <b>Consistency:</b> the rules for the order in which accesses to <i>different</i> locations become visible (SC, total store order (TSO), weak).",
+   "back": "<b>Coherence:</b> all cores eventually agree on the value sequence of <i>one</i> location (Modified-Exclusive-Shared-Invalid (MESI) gives this). <b>Consistency:</b> the rules for the order in which accesses to <i>different</i> locations become visible (sequential consistency (SC), total store order (TSO), weak).",
    "text": "",
    "image": "",
    "analogy": "Coherence: everyone eventually reads the same version of each page. Consistency: whether everyone sees the pages updated in the same order.",
@@ -4429,7 +4429,7 @@
     "gpu",
     "shared-memory"
    ],
-   "front": "What is shared memory on a streaming multiprocessor (SM), and why is it faster than hitting L1?",
+   "front": "What is shared memory on a streaming multiprocessor (SM), and why is it faster than hitting level 1 cache (L1)?",
    "back": "A programmer-managed scratchpad per block (tens to ~200 KB per SM, carved from the same static RAM (SRAM) as L1). You decide what to stage, so there are no tags, no misses, and data is reused by all threads in the block.",
    "text": "",
    "image": "",
@@ -4584,7 +4584,7 @@
     "bandwidth"
    ],
    "front": "Why is a GPU's memory system built for bandwidth rather than latency?",
-   "back": "Thousands of resident warps generate thousands of outstanding requests, and the warp scheduler hides each one's latency; what limits throughput is bytes per second, hence wide high-bandwidth memory (HBM) and a large shared L2 that also resolves global atomics.",
+   "back": "Thousands of resident warps generate thousands of outstanding requests, and the warp scheduler hides each one's latency; what limits throughput is bytes per second, hence wide high-bandwidth memory (HBM) and a large shared level 2 cache (L2) that also resolves global atomics.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -4664,11 +4664,11 @@
     "bridge"
    ],
    "front": "NVIDIA's native GPU assembly (SASS) vs &micro;ops: does a GPU have a decode stage like a CPU's x86 &rarr; &micro;op front end?",
-   "back": "Not in that sense. SASS is already a fixed-width, RISC-like instruction set architecture (ISA) the streaming multiprocessor (SM) issues directly, with dependency and stall counts written into control bits by <code>ptxas</code> at compile time. The CPU decodes and schedules at run time; the GPU moved that work into <code>ptxas</code>, so parallel thread execution (PTX) &rarr; SASS is its 'decode', done once.",
+   "back": "Not in that sense. SASS is already a fixed-width, RISC-like instruction set architecture (ISA) the streaming multiprocessor (SM) issues directly, with dependency and stall counts written into control bits by <code>ptxas</code> at compile time.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Consequence:</b> no &micro;op cache, no renaming, no out-of-order on the SM; latency is hidden by switching warps instead. <b>Link:</b> 08 Microarchitecture · µop cache; scheduler; 10 GPU · latency hiding",
+   "extra": "<b>Detail:</b> the CPU decodes and schedules at run time; the GPU moved that work into <code>ptxas</code>, so parallel thread execution (PTX) &rarr; SASS is its 'decode', done once. <b>Consequence:</b> no &micro;op cache, no renaming, no out-of-order on the SM; latency is hidden by switching warps instead. <b>Link:</b> 08 Microarchitecture · µop cache; scheduler; 10 GPU · latency hiding",
    "source": "GPU",
    "reverse": false
   },
@@ -5037,7 +5037,7 @@
     "fp4",
     "numerics"
    ],
-   "front": "What is <b>block (micro)scaling</b> such as the Open Compute Project (OCP) MX formats, and what problem does it fix for FP8/FP4?",
+   "front": "What is <b>block (micro)scaling</b> such as the Open Compute Project (OCP) microscaling (MX) formats, and what problem does it fix for FP8/FP4?",
    "back": "A small block (e.g. 32 elements) shares one 8-bit exponent scale, so each element can be tiny (FP4/FP6/FP8) yet the block keeps useful dynamic range.",
    "text": "",
    "image": "",
@@ -5095,7 +5095,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Accelerated Linear Algebra (XLA)'s pipeline: the framework emits {{c1::HLO}} (a graph of tensor ops with static shapes); target-independent passes simplify it (algebra, common subexpression elimination (CSE), dead-code elimination (DCE)); {{c2::layout assignment}} picks physical dimension orders and tiles; {{c3::fusion}} merges ops into kernels; {{c4::buffer assignment}} fixes every allocation at compile time; a backend (LLVM for CPU/GPU, the tensor processing unit (TPU) backend) emits machine code.",
+   "text": "Accelerated Linear Algebra (XLA)'s pipeline: the framework emits {{c1::HLO}} (a graph of tensor ops with static shapes); target-independent passes simplify it (algebra, common-subexpression and dead-code elimination (CSE, DCE)); {{c2::layout assignment}} picks physical dimension orders and tiles; {{c3::fusion}} merges ops into kernels; {{c4::buffer assignment}} fixes every allocation at compile time; a backend (LLVM for CPU/GPU, the tensor processing unit (TPU) backend) emits machine code.",
    "image": "<img src=\"s2s_xla_pipeline.svg\">",
    "analogy": "",
    "extra": "<b>Link:</b> 03 IR &amp; Optimisation · pass pipeline",

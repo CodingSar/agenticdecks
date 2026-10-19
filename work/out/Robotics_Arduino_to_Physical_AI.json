@@ -43,7 +43,7 @@
     "robotics::01-electronics-fundamentals"
    ],
    "front": "Voltage divider on a robot: name a correct use and the classic misuse.",
-   "back": "<b>Correct:</b> scaling a signal (5 V → 3.3 V), reading resistive sensors, battery monitoring on an ADC pin.<br><b>Misuse:</b> as a power supply; output sags as soon as a load draws current.",
+   "back": "<b>Correct:</b> scaling a signal (5 V → 3.3 V), reading resistive sensors, battery monitoring on an analog-to-digital converter (ADC) pin.<br><b>Misuse:</b> as a power supply; output sags as soon as a load draws current.",
    "text": "",
    "image": "",
    "analogy": "A divider is a tap on a leaky pipe: fine for sensing pressure, useless for delivering flow.",
@@ -58,7 +58,7 @@
    "tags": [
     "robotics::01-electronics-fundamentals"
    ],
-   "front": "How do you size an LED series resistor? (5 V supply, 2 V forward voltage, 10 mA)",
+   "front": "How do you size an light-emitting diode (LED) series resistor? (5 V supply, 2 V forward voltage, 10 mA)",
    "back": "R = (V<sub>supply</sub> − V<sub>f</sub>) / I = 3 V / 0.010 A = 300 Ω → next standard value, <b>330 Ω</b>.",
    "text": "",
    "image": "",
@@ -107,7 +107,7 @@
     "robotics::01-electronics-fundamentals"
    ],
    "front": "What does a decoupling (bypass) capacitor do?",
-   "back": "Sits between an IC's supply pin and ground, supplying fast transient current locally and shunting high-frequency noise.",
+   "back": "Sits between an integrated circuit (IC)'s supply pin and ground, supplying fast transient current locally and shunting high-frequency noise.",
    "text": "",
    "image": "",
    "analogy": "A small water tank right next to the tap: sudden demand is met locally instead of waiting for the distant main.",
@@ -123,7 +123,7 @@
     "robotics::01-electronics-fundamentals"
    ],
    "front": "Standard placement practice for decoupling capacitors?",
-   "back": "<b>100 nF ceramic</b> as close as possible to every IC supply pin, plus bulk electrolytic (100–1000 µF) near motor drivers and servo rails.",
+   "back": "<b>100 nF ceramic</b> as close as possible to every integrated circuit (IC) supply pin, plus bulk electrolytic (100–1000 µF) near motor drivers and servo rails.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -143,7 +143,7 @@
    "text": "",
    "image": "",
    "analogy": "Like water hammer: slam a valve on flowing water and the pipe bursts; the diode is the relief valve.",
-   "extra": "<b>Note:</b> H-bridge driver ICs usually have these built in (or use MOSFET body diodes).",
+   "extra": "<b>Note:</b> H-bridge driver integrated circuits (ICs) usually have these built in (or use metal-oxide-semiconductor field-effect transistor (MOSFET) body diodes).",
    "source": "Horowitz & Hill, The Art of Electronics (3rd ed.)",
    "reverse": false
   },
@@ -154,7 +154,7 @@
    "tags": [
     "robotics::01-electronics-fundamentals"
    ],
-   "front": "Low-side N-channel MOSFET switch from an MCU pin: where do load, source and gate go?",
+   "front": "Low-side N-channel metal-oxide-semiconductor field-effect transistor (MOSFET) switch from an microcontroller unit (MCU) pin: where do load, source and gate go?",
    "back": "Load between V+ and <b>drain</b>; <b>source</b> to ground; <b>gate</b> driven by the pin. Load supply and MCU share a common ground.",
    "text": "",
    "image": "",
@@ -170,7 +170,7 @@
    "tags": [
     "robotics::01-electronics-fundamentals"
    ],
-   "front": "MOSFET low-side switch: what does each support part do? (logic-level FET, gate resistor, gate pull-down)",
+   "front": "Metal-oxide-semiconductor field-effect transistor (MOSFET) low-side switch: what does each support part do? (logic-level field-effect transistor (FET), gate resistor, gate pull-down)",
    "back": "<ul><li><b>Logic-level</b> FET: fully on at 3.3–5 V gate drive (R<sub>DS(on)</sub> specified at 2.5/4.5 V)</li><li>~100–220 Ω gate resistor: limits gate charging current</li><li>~10 kΩ gate–source pull-down: keeps it off during reset</li></ul>",
    "text": "",
    "image": "",
@@ -203,7 +203,7 @@
     "robotics::01-electronics-fundamentals"
    ],
    "front": "Level-shifting options between 5 V and 3.3 V logic?",
-   "back": "<ul><li>Resistor divider: one direction, slow signals</li><li>BSS138 MOSFET shifter: bidirectional, ideal for I2C</li><li>Translator IC (74LVC245, TXS0108)</li></ul>",
+   "back": "<ul><li>Resistor divider: one direction, slow signals</li><li>BSS138 metal-oxide-semiconductor field-effect transistor (MOSFET) shifter: bidirectional, ideal for inter-integrated circuit (I2C)</li><li>Translator integrated circuit (IC) (74LVC245, TXS0108)</li></ul>",
    "text": "",
    "image": "",
    "analogy": "",
@@ -218,7 +218,7 @@
    "tags": [
     "robotics::01-electronics-fundamentals"
    ],
-   "front": "LiPo cell voltages: nominal, full, and minimum?",
+   "front": "Lithium polymer (LiPo) cell voltages: nominal, full, and minimum?",
    "back": "<b>3.7 V</b> nominal, <b>4.2 V</b> full, don't discharge below ~<b>3.0–3.3 V</b>.",
    "text": "",
    "image": "",
@@ -234,7 +234,7 @@
    "tags": [
     "robotics::01-electronics-fundamentals"
    ],
-   "front": "What does a LiPo labelled '3S 2200 mAh 25C' give you?",
+   "front": "What does a lithium polymer (LiPo) labelled '3S 2200 mAh 25C' give you?",
    "back": "3S = 3 cells in series → 11.1 V nominal (12.6 V full). Max continuous current = 2.2 Ah × 25 = <b>55 A</b>.",
    "text": "",
    "image": "",
@@ -250,7 +250,7 @@
    "tags": [
     "robotics::01-electronics-fundamentals"
    ],
-   "front": "LiPo safety rules?",
+   "front": "Lithium polymer (LiPo) safety rules?",
    "back": "Balance-charge with a LiPo charger, use a low-voltage cutoff/alarm, never puncture or charge unattended: <b>fire hazard</b>.",
    "text": "",
    "image": "",
@@ -330,7 +330,7 @@
    "tags": [
     "robotics::01-electronics-fundamentals"
    ],
-   "front": "Symptom: the MCU resets whenever the motors start. Cause?",
+   "front": "Symptom: the microcontroller unit (MCU) resets whenever the motors start. Cause?",
    "back": "Motor inrush/stall current sags the supply below the <b>brown-out</b> threshold (or injects noise).",
    "text": "",
    "image": "",
@@ -346,7 +346,7 @@
    "tags": [
     "robotics::01-electronics-fundamentals"
    ],
-   "front": "Fixes for an MCU that resets when motors start?",
+   "front": "Fixes for an microcontroller unit (MCU) that resets when motors start?",
    "back": "Separate regulator/battery for logic; bulk capacitor on the motor supply; never power motors/servos from the Arduino 5 V pin; thick short wiring; caps across brushed motor terminals.",
    "text": "",
    "image": "",
@@ -362,12 +362,12 @@
    "tags": [
     "robotics::02-microcontrollers-arduino"
    ],
-   "front": "MCU vs. MPU: what is the difference?",
+   "front": "Microcontroller unit (MCU) vs. microprocessor unit (MPU): what is the difference?",
    "back": "<b>MCU:</b> CPU + flash + RAM + peripherals on one chip; bare-metal/RTOS; deterministic µs timing.<br><b>MPU:</b> needs external RAM/storage, runs Linux; high throughput, <b>non-deterministic</b> timing.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Examples:</b> MCU: ATmega328P, STM32, ESP32, RP2040. MPU: Raspberry Pi, Jetson.<br><b>Pi limits:</b> no ADC, fragile 3.3 V I/O, slow boot, needs clean shutdown.",
+   "extra": "<b>Examples:</b> MCU: ATmega328P, STM32, ESP32, RP2040. MPU: Raspberry Pi, Jetson.<br><b>Pi limits:</b> no analog-to-digital converter (ADC), fragile 3.3 V I/O, slow boot, needs clean shutdown.",
    "source": "Arduino Documentation",
    "reverse": false
   },
@@ -379,7 +379,7 @@
     "robotics::02-microcontrollers-arduino"
    ],
    "front": "Why can't a Raspberry Pi simply replace the Arduino on a robot?",
-   "back": "Linux scheduling gives <b>timing jitter</b>, so hard real-time I/O (motor PWM, encoder counting, safety timeouts) belongs on an MCU. Robots pair them: MPU for perception/planning, MCU for real-time control.",
+   "back": "Linux scheduling gives <b>timing jitter</b>, so hard real-time I/O (motor pulse-width modulation (PWM), encoder counting, safety timeouts) belongs on an microcontroller unit (MCU). Robots pair them: microprocessor unit (MPU) for perception/planning, MCU for real-time control.",
    "text": "",
    "image": "",
    "analogy": "The Pi is the brain planning the route; the MCU is the spinal cord handling reflexes that can't wait for a thought.",
@@ -396,10 +396,10 @@
    ],
    "front": "",
    "back": "",
-   "text": "Before wiring to an MCU board, check four datasheet facts: {{c1::logic level}} (5 V or 3.3 V), {{c2::ADC resolution}} and reference, which pins offer {{c3::hardware PWM}}, and which pins support {{c4::external interrupts}}.",
+   "text": "Before wiring to an microcontroller unit (MCU) board, check four datasheet facts: {{c1::logic level}} (5 V or 3.3 V), {{c2::ADC resolution}} and reference, which pins offer {{c3::hardware PWM}}, and which pins support {{c4::external interrupts}}.",
    "image": "",
    "analogy": "",
-   "extra": "<b>Example, Arduino UNO R3:</b> ATmega328P, 8-bit AVR @ 16 MHz, 5 V logic, 10-bit ADC, PWM on 3, 5, 6, 9, 10, 11, external interrupts only on pins 2 and 3; 32 KB flash · 2 KB SRAM · 1 KB EEPROM.",
+   "extra": "<b>Example, Arduino UNO R3:</b> ATmega328P, 8-bit AVR @ 16 MHz, 5 V logic, 10-bit analog-to-digital converter (ADC), pulse-width modulation (PWM) on 3, 5, 6, 9, 10, 11, external interrupts only on pins 2 and 3; 32 KB flash · 2 KB static random-access memory (SRAM) · 1 KB electrically erasable programmable read-only memory (EEPROM).",
    "source": "Arduino Documentation",
    "reverse": false
   },
@@ -410,12 +410,12 @@
    "tags": [
     "robotics::02-microcontrollers-arduino"
    ],
-   "front": "Moving a design to a newer, faster MCU board: which electrical assumption most often breaks?",
-   "back": "<b>Per-pin drive current</b> (and sometimes logic level). A 32-bit board can source far less per I/O pin than an 8-bit one, so LEDs or transistor gates driven straight from a pin stop working. Re-check the datasheet.",
+   "front": "Moving a design to a newer, faster microcontroller unit (MCU) board: which electrical assumption most often breaks?",
+   "back": "<b>Per-pin drive current</b> (and sometimes logic level). A 32-bit board can source far less per I/O pin than an 8-bit one, so light-emitting diodes (LEDs) or transistor gates driven straight from a pin stop working. Re-check the datasheet.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Example:</b> Arduino UNO R4 (Cortex-M4, 14-bit ADC, DAC, CAN, still 5 V) allows only ~8 mA per pin vs ~20 mA on the UNO R3.",
+   "extra": "<b>Example:</b> Arduino UNO R4 (Cortex-M4, 14-bit analog-to-digital converter (ADC), digital-to-analog converter (DAC), controller area network (CAN), still 5 V) allows only ~8 mA per pin vs ~20 mA on the UNO R3.",
    "source": "Arduino Documentation",
    "reverse": false
   },
@@ -443,11 +443,11 @@
     "robotics::02-microcontrollers-arduino"
    ],
    "front": "What does <code>analogWrite()</code> actually output on an UNO R3?",
-   "back": "Not an analog voltage: a <b>PWM square wave</b>, 8-bit duty (0–255) at ~490 Hz (~980 Hz on pins 5, 6). Average = duty × 5 V.",
+   "back": "Not an analog voltage: a <b>pulse-width modulation (PWM) square wave</b>, 8-bit duty (0–255) at ~490 Hz (~980 Hz on pins 5, 6). Average = duty × 5 V.",
    "text": "",
    "image": "",
    "analogy": "Flicking a light switch very fast: the room looks half-lit, but the bulb is only ever fully on or off.",
-   "extra": "Fine for LED dimming and motor-driver inputs; needs a low-pass filter for a true analog level. UNO R4 has a real DAC on A0.",
+   "extra": "Fine for light-emitting diode (LED) dimming and motor-driver inputs; needs a low-pass filter for a true analog level. UNO R4 has a real digital-to-analog converter (DAC) on A0.",
    "source": "Arduino Documentation",
    "reverse": false
   },
@@ -506,7 +506,7 @@
    "tags": [
     "robotics::02-microcontrollers-arduino"
    ],
-   "front": "Arduino ISR rules: what should (and shouldn't) happen inside an interrupt handler?",
+   "front": "Arduino interrupt service routine (ISR) rules: what should (and shouldn't) happen inside an interrupt handler?",
    "back": "Keep it tiny: set a flag/count, do the work in <code>loop()</code>. No <code>delay()</code>, no Serial; <code>millis()</code> doesn't advance inside.",
    "text": "",
    "image": "",
@@ -522,7 +522,7 @@
    "tags": [
     "robotics::02-microcontrollers-arduino"
    ],
-   "front": "Variables shared between an ISR and <code>loop()</code> on 8-bit AVR: which two precautions?",
+   "front": "Variables shared between an interrupt service routine (ISR) and <code>loop()</code> on 8-bit AVR: which two precautions?",
    "back": "Declare them <code>volatile</code>; copy multi-byte values inside <code>noInterrupts()</code>/<code>interrupts()</code>, since they aren't read atomically.",
    "text": "",
    "image": "",
@@ -543,7 +543,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Hardware alternative:</b> RC filter + Schmitt trigger.",
+   "extra": "<b>Hardware alternative:</b> resistor-capacitor (RC) filter + Schmitt trigger.",
    "source": "Arduino Documentation",
    "reverse": false
   },
@@ -555,7 +555,7 @@
     "robotics::02-microcontrollers-arduino"
    ],
    "front": "On an UNO R3, what side effect does the Servo library have?",
-   "back": "It takes over <b>Timer1</b>, disabling <code>analogWrite()</code> PWM on <b>pins 9 and 10</b>.",
+   "back": "It takes over <b>Timer1</b>, disabling <code>analogWrite()</code> pulse-width modulation (PWM) on <b>pins 9 and 10</b>.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -586,8 +586,8 @@
    "tags": [
     "robotics::02-microcontrollers-arduino"
    ],
-   "front": "What does a <b>Wi-Fi/Bluetooth-capable MCU</b> (e.g. ESP32) add to a hobby robot?",
-   "back": "Wireless telemetry and tele-op on the MCU itself, a faster (often multi-core) CPU, many peripherals and a built-in RTOS, usually still programmable like a plain MCU from the Arduino IDE.",
+   "front": "What does a <b>Wi-Fi/Bluetooth-capable microcontroller unit (MCU)</b> (e.g. ESP32) add to a hobby robot?",
+   "back": "Wireless telemetry and tele-op on the MCU itself, a faster (often multi-core) CPU, many peripherals and a built-in real-time operating system (RTOS), usually still programmable like a plain MCU from the Arduino integrated development environment (IDE).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -602,8 +602,8 @@
    "tags": [
     "robotics::02-microcontrollers-arduino"
    ],
-   "front": "Pitfalls of wireless SoC-class MCUs (e.g. ESP32)?",
-   "back": "<b>3.3 V</b> logic (not 5 V tolerant); ADC quality and availability suffer (ESP32: non-linear ADC, <b>ADC2 unusable with Wi-Fi on</b>); radio current spikes (~500 mA) that sag the supply; boot-strapping pins with reserved states.",
+   "front": "Pitfalls of wireless system on chip (SoC)-class microcontroller units (MCUs) (e.g. ESP32)?",
+   "back": "<b>3.3 V</b> logic (not 5 V tolerant); analog-to-digital converter (ADC) quality and availability suffer (ESP32: non-linear ADC, <b>ADC2 unusable with Wi-Fi on</b>); radio current spikes (~500 mA) that sag the supply; boot-strapping pins with reserved states.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -634,7 +634,7 @@
    "tags": [
     "robotics::02-microcontrollers-arduino"
    ],
-   "front": "What does an RTOS (FreeRTOS, Zephyr) give you over a bare-metal super-loop?",
+   "front": "What does an real-time operating system (RTOS) (FreeRTOS, Zephyr) give you over a bare-metal super-loop?",
    "back": "<b>Pre-emptive, priority-based tasks</b> with bounded latency, plus queues, mutexes/semaphores and software timers.",
    "text": "",
    "image": "",
@@ -650,7 +650,7 @@
    "tags": [
     "robotics::02-microcontrollers-arduino"
    ],
-   "front": "When is an RTOS worth it on an MCU, and what does it cost?",
+   "front": "When is an real-time operating system (RTOS) worth it on an microcontroller unit (MCU), and what does it cost?",
    "back": "When activities with different rates/priorities coexist (1 kHz motor loop, 100 Hz fusion, comms, logging). Costs: RAM per task stack; new bugs (priority inversion, races, deadlock).",
    "text": "",
    "image": "",
@@ -667,7 +667,7 @@
     "robotics::02-microcontrollers-arduino"
    ],
    "front": "What is a <b>watchdog timer</b>, and why should a mobile robot enable it?",
-   "back": "A hardware countdown that resets the MCU unless firmware periodically 'kicks' it; if code hangs, the robot reboots into a safe state instead of driving on stale commands.",
+   "back": "A hardware countdown that resets the microcontroller unit (MCU) unless firmware periodically 'kicks' it; if code hangs, the robot reboots into a safe state instead of driving on stale commands.",
    "text": "",
    "image": "",
    "analogy": "A dead man's switch: let go (stop kicking) and the train stops.",
@@ -683,7 +683,7 @@
     "robotics::03-sensors"
    ],
    "front": "Proprioceptive vs. exteroceptive sensors?",
-   "back": "<b>Proprioceptive:</b> robot's internal state (encoders, IMU, motor current, joint torque).<br><b>Exteroceptive:</b> the environment (camera, LiDAR, ultrasonic, tactile, GNSS).",
+   "back": "<b>Proprioceptive:</b> robot's internal state (encoders, inertial measurement unit (IMU), motor current, joint torque).<br><b>Exteroceptive:</b> the environment (camera, light detection and ranging (LiDAR), ultrasonic, tactile, global navigation satellite system (GNSS)).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -698,7 +698,7 @@
    "tags": [
     "robotics::03-sensors"
    ],
-   "front": "IMU: what do '6-axis' and '9-axis' mean?",
+   "front": "Inertial measurement unit (IMU): what do '6-axis' and '9-axis' mean?",
    "back": "6-axis = 3-axis accelerometer (specific force) + 3-axis gyroscope (angular velocity). 9-axis adds a 3-axis <b>magnetometer</b> (heading).",
    "text": "",
    "image": "",
@@ -714,7 +714,7 @@
    "tags": [
     "robotics::03-sensors"
    ],
-   "front": "From an IMU, which orientation angles are observable from gravity, and which isn't?",
+   "front": "From an inertial measurement unit (IMU), which orientation angles are observable from gravity, and which isn't?",
    "back": "Roll and pitch are observable from gravity; <b>yaw</b> needs a magnetometer or another absolute reference.",
    "text": "",
    "image": "",
@@ -763,7 +763,7 @@
     "robotics::03-sensors"
    ],
    "front": "How does a quadrature encoder give both position and direction?",
-   "back": "Two channels A and B, 90° out of phase: <b>which leads</b> gives direction, counting edges gives displacement. Counting all edges of both = <b>4× PPR</b>.",
+   "back": "Two channels A and B, 90° out of phase: <b>which leads</b> gives direction, counting edges gives displacement. Counting all edges of both = <b>4× pulses per revolution (PPR)</b>.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -794,7 +794,7 @@
    "tags": [
     "robotics::03-sensors"
    ],
-   "front": "Output-shaft resolution: 12 PPR motor encoder, quadrature decoding, 50:1 gearbox?",
+   "front": "Output-shaft resolution: 12 pulses per revolution (PPR) motor encoder, quadrature decoding, 50:1 gearbox?",
    "back": "12 × 4 × 50 = <b>2400 counts/rev</b> → 0.15° per count.",
    "text": "",
    "image": "",
@@ -842,7 +842,7 @@
    "tags": [
     "robotics::03-sensors"
    ],
-   "front": "LiDAR on robots: principle and main types?",
+   "front": "Light detection and ranging (LiDAR) on robots: principle and main types?",
    "back": "Laser time-of-flight. <b>2D spinning</b> (RPLIDAR): indoor mapping/navigation standard. <b>3D multi-beam/solid-state</b>: outdoor point clouds. Single-point ToF chips (VL53L1X): cheap short range.",
    "text": "",
    "image": "",
@@ -863,7 +863,7 @@
    "text": "Depth cameras: {{c1::stereo}} triangulates between two cameras (works outdoors, struggles on texture-less surfaces); {{c2::structured light}} projects a known pattern (accurate close up, fails in sunlight); {{c3::time-of-flight}} times light per pixel (good range, multipath issues).",
    "image": "",
    "analogy": "",
-   "extra": "<b>Example:</b> Intel RealSense D4xx = active stereo (IR projector adds texture). All output RGB-D → point clouds.",
+   "extra": "<b>Example:</b> Intel RealSense D4xx = active stereo (infrared (IR) projector adds texture). All output red, green, blue (RGB)-D → point clouds.",
    "source": "Siegwart, Nourbakhsh & Scaramuzza, Introduction to Autonomous Mobile Robots (2nd ed.)",
    "reverse": false
   },
@@ -891,7 +891,7 @@
     "robotics::03-sensors"
    ],
    "front": "Hall-effect sensor: what does it measure, and where does it appear in robots?",
-   "back": "Magnetic field (analog voltage or threshold switch). Uses: <b>BLDC commutation</b>, magnetic absolute encoders (AS5600), wheel-speed pickups, contactless limit switches, current sensing.",
+   "back": "Magnetic field (analog voltage or threshold switch). Uses: <b>brushless direct current (BLDC) commutation</b>, magnetic absolute encoders (AS5600), wheel-speed pickups, contactless limit switches, current sensing.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -939,7 +939,7 @@
     "robotics::03-sensors"
    ],
    "front": "Why do vision-based tactile sensors suit manipulation learning?",
-   "back": "Their output is an <b>image</b>, so it plugs straight into vision encoders; several VLAs add tactile tokens for contact-rich tasks like insertion.",
+   "back": "Their output is an <b>image</b>, so it plugs straight into vision encoders; several vision-language-action models (VLAs) add tactile tokens for contact-rich tasks like insertion.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -954,12 +954,12 @@
    "tags": [
     "robotics::04-actuators-power-transmission"
    ],
-   "front": "Brushed DC motor: what sets speed and what sets torque?",
+   "front": "Brushed direct current (DC) motor: what sets speed and what sets torque?",
    "back": "Speed ∝ <b>voltage</b> (minus back-EMF); torque ∝ <b>current</b> (τ = K<sub>t</sub>·I).",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Consequences:</b> control speed with PWM duty; motor current is a cheap torque estimate; stall = max current.",
+   "extra": "<b>Consequences:</b> control speed with pulse-width modulation (PWM) duty; motor current is a cheap torque estimate; stall = max current.",
    "source": "Hughes & Drury, Electric Motors and Drives (5th ed.)",
    "reverse": false
   },
@@ -970,8 +970,8 @@
    "tags": [
     "robotics::04-actuators-power-transmission"
    ],
-   "front": "What is an H-bridge, and how does it control a DC motor?",
-   "back": "Four switches around the motor: closing diagonal pairs reverses polarity (forward/reverse); PWM on enable sets speed; both low sides on = brake.",
+   "front": "What is an H-bridge, and how does it control a direct current (DC) motor?",
+   "back": "Four switches around the motor: closing diagonal pairs reverses polarity (forward/reverse); pulse-width modulation (PWM) on enable sets speed; both low sides on = brake.",
    "text": "",
    "image": "",
    "analogy": "Like an H-shaped set of railway points: flip the diagonal pair and the train runs through the motor the other way.",
@@ -986,7 +986,7 @@
    "tags": [
     "robotics::04-actuators-power-transmission"
    ],
-   "front": "Why move from the L298N to MOSFET motor drivers (TB6612FNG, DRV8833)?",
+   "front": "Why move from the L298N to metal-oxide-semiconductor field-effect transistor (MOSFET) motor drivers (TB6612FNG, DRV8833)?",
    "back": "The L298N's bipolar transistors drop ~<b>2 V</b> (hot, inefficient); MOSFET drivers drop a fraction of a volt.",
    "text": "",
    "image": "",
@@ -1019,7 +1019,7 @@
     "robotics::04-actuators-power-transmission"
    ],
    "front": "What is inside a hobby servo, and how should it be powered?",
-   "back": "DC motor + gearbox + potentiometer + closed-loop position controller (no feedback to you). Power from a separate 5–6 V rail; stall can exceed 1 A.",
+   "back": "direct current (DC) motor + gearbox + potentiometer + closed-loop position controller (no feedback to you). Power from a separate 5–6 V rail; stall can exceed 1 A.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1066,7 +1066,7 @@
    "tags": [
     "robotics::04-actuators-power-transmission"
    ],
-   "front": "BLDC vs. brushed motor: how is a BLDC commutated?",
+   "front": "Brushless direct current (BLDC) vs. brushed motor: how is a BLDC commutated?",
    "back": "<b>Electronically</b>: a controller switches the three-phase stator using Hall sensors, an encoder or sensorless back-EMF.",
    "text": "",
    "image": "",
@@ -1082,8 +1082,8 @@
    "tags": [
     "robotics::04-actuators-power-transmission"
    ],
-   "front": "BLDC motor: pros and cons vs. brushed?",
-   "back": "+ Higher efficiency and power density, long life, less electrical noise.<br>− Needs a three-phase inverter/controller (ESC or FOC drive).",
+   "front": "Brushless direct current (BLDC) motor: pros and cons vs. brushed?",
+   "back": "+ Higher efficiency and power density, long life, less electrical noise.<br>− Needs a three-phase inverter/controller (electronic speed controller (ESC) or field-oriented control (FOC) drive).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1099,7 +1099,7 @@
     "robotics::04-actuators-power-transmission"
    ],
    "front": "Field-Oriented Control (FOC): what is the core trick?",
-   "back": "Transform phase currents into the rotor-aligned <b>d/q frame</b> (Clarke + Park), where they are DC quantities, so simple PI loops regulate I<sub>q</sub> (torque) and hold I<sub>d</sub> ≈ 0.",
+   "back": "Transform phase currents into the rotor-aligned <b>d/q frame</b> (Clarke + Park), where they are direct current (DC) quantities, so simple proportional-integral (PI) loops regulate I<sub>q</sub> (torque) and hold I<sub>d</sub> ≈ 0.",
    "text": "",
    "image": "",
    "analogy": "Like describing a merry-go-round rider from a seat on the ride: in the rotating frame they're standing still, so control is easy.",
@@ -1114,7 +1114,7 @@
    "tags": [
     "robotics::04-actuators-power-transmission"
    ],
-   "front": "Why is FOC the basis of torque-controlled robot joints?",
+   "front": "Why is field-oriented control (FOC) the basis of torque-controlled robot joints?",
    "back": "Smooth, quiet, efficient torque control <b>down to zero speed</b> (ODrive, SimpleFOC, moteus).",
    "text": "",
    "image": "",
@@ -1162,7 +1162,7 @@
    "tags": [
     "robotics::04-actuators-power-transmission"
    ],
-   "front": "On a DC motor's torque–speed line, where is mechanical power maximal?",
+   "front": "On a direct current (DC) motor's torque–speed line, where is mechanical power maximal?",
    "back": "At <b>half no-load speed and half stall torque</b> (P = τ·ω on a linear line).",
    "text": "",
    "image": "",
@@ -1195,7 +1195,7 @@
     "robotics::04-actuators-power-transmission"
    ],
    "front": "What is a Quasi-Direct-Drive (QDD) actuator?",
-   "back": "A high-torque-density 'pancake' BLDC with a <b>low gear ratio</b> (~6–10:1) and no torque sensor; torque is estimated from motor current.",
+   "back": "A high-torque-density 'pancake' brushless direct current (BLDC) with a <b>low gear ratio</b> (~6–10:1) and no torque sensor; torque is estimated from motor current.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1210,8 +1210,8 @@
    "tags": [
     "robotics::04-actuators-power-transmission"
    ],
-   "front": "Why did QDD actuators transform legged robots?",
-   "back": "Low reflected inertia and friction make them <b>back-drivable and impact-tolerant</b>, with accurate current-based torque control; easy to simulate, so RL policies transfer.",
+   "front": "Why did quasi-direct drive (QDD) actuators transform legged robots?",
+   "back": "Low reflected inertia and friction make them <b>back-drivable and impact-tolerant</b>, with accurate current-based torque control; easy to simulate, so reinforcement learning (RL) policies transfer.",
    "text": "",
    "image": "",
    "analogy": "A QDD leg is like a human leg with relaxed muscles: it gives on impact and you feel the ground through it.",
@@ -1242,7 +1242,7 @@
    "tags": [
     "robotics::04-actuators-power-transmission"
    ],
-   "front": "SEA trade-off?",
+   "front": "Series elastic actuator (SEA) trade-off?",
    "back": "+ Accurate force control, shock tolerance, energy storage.<br>− Lower control bandwidth.",
    "text": "",
    "image": "",
@@ -1259,7 +1259,7 @@
     "robotics::04-actuators-power-transmission"
    ],
    "front": "Planetary vs. strain-wave vs. cycloidal reducers: one-line niche each?",
-   "back": "<b>Planetary:</b> cheap, back-drivable at low ratios, some backlash (QDD legs).<br><b>Strain-wave:</b> 50–160:1, near-zero backlash, poor back-drive (industrial/cobot arms).<br><b>Cycloidal:</b> high ratio, shock-robust, heavier.",
+   "back": "<b>Planetary:</b> cheap, back-drivable at low ratios, some backlash (quasi-direct drive (QDD) legs).<br><b>Strain-wave:</b> 50–160:1, near-zero backlash, poor back-drive (industrial/cobot arms).<br><b>Cycloidal:</b> high ratio, shock-robust, heavier.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1275,7 +1275,7 @@
     "robotics::04-actuators-power-transmission"
    ],
    "front": "What is a smart bus servo (Dynamixel, Feetech STS3215)?",
-   "back": "A servo with its own MCU on a daisy-chained serial bus; each has an ID and reports position, velocity, load, voltage and temperature.",
+   "back": "A servo with its own microcontroller unit (MCU) on a daisy-chained serial bus; each has an ID and reports position, velocity, load, voltage and temperature.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1306,8 +1306,8 @@
    "tags": [
     "robotics::05-communication-protocols"
    ],
-   "front": "UART: how does it work?",
-   "back": "Asynchronous point-to-point serial: TX→RX crossed plus common ground; <b>no clock line</b>, so both ends must agree on the baud rate.",
+   "front": "Universal asynchronous receiver-transmitter (UART): how does it work?",
+   "back": "Asynchronous point-to-point serial: transmit (TX)→receive (RX) crossed plus common ground; <b>no clock line</b>, so both ends must agree on the baud rate.",
    "text": "",
    "image": "",
    "analogy": "Two people tapping Morse code with no shared metronome: it only works if both agreed the tempo beforehand.",
@@ -1322,7 +1322,7 @@
    "tags": [
     "robotics::05-communication-protocols"
    ],
-   "front": "UART: what does '115200 8N1' mean?",
+   "front": "Universal asynchronous receiver-transmitter (UART): what does '115200 8N1' mean?",
    "back": "115 200 bit/s, 8 data bits, No parity, 1 stop bit; with the start bit that's 10 bits on the wire per byte.",
    "text": "",
    "image": "",
@@ -1338,8 +1338,8 @@
    "tags": [
     "robotics::05-communication-protocols"
    ],
-   "front": "I2C: wiring and addressing?",
-   "back": "Two open-drain lines, <b>SDA</b> and <b>SCL</b>, with pull-up resistors (~2.2–10 kΩ); one controller, many targets selected by <b>7-bit address</b>.",
+   "front": "Inter-integrated circuit (I2C): wiring and addressing?",
+   "back": "Two open-drain lines, <b>serial data (SDA)</b> and <b>serial clock (SCL)</b>, with pull-up resistors (~2.2–10 kΩ); one controller, many targets selected by <b>7-bit address</b>.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1354,8 +1354,8 @@
    "tags": [
     "robotics::05-communication-protocols"
    ],
-   "front": "Classic I2C failure modes?",
-   "back": "Missing pull-ups; two devices with the same address (fix: address pins or TCA9548A mux); long wires (bus capacitance); a target holding SDA low (bus lock-up).",
+   "front": "Classic inter-integrated circuit (I2C) failure modes?",
+   "back": "Missing pull-ups; two devices with the same address (fix: address pins or TCA9548A mux); long wires (bus capacitance); a target holding serial data (SDA) low (bus lock-up).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1370,12 +1370,12 @@
    "tags": [
     "robotics::05-communication-protocols"
    ],
-   "front": "SPI: wiring and characteristics?",
-   "back": "SCK, MOSI/COPI, MISO/CIPO and <b>one chip-select per device</b>; full-duplex, push-pull, no addressing, tens of Mbit/s. Clock mode (0–3) must match.",
+   "front": "Serial peripheral interface (SPI): wiring and characteristics?",
+   "back": "serial clock (SCK), master out, slave in (MOSI)/COPI, master in, slave out (MISO)/CIPO and <b>one chip-select per device</b>; full-duplex, push-pull, no addressing, tens of Mbit/s. Clock mode (0–3) must match.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Used for:</b> displays, SD cards, high-rate IMUs, external ADCs, encoder chips.",
+   "extra": "<b>Used for:</b> displays, secure digital (SD) cards, high-rate inertial measurement units (IMUs), external analog-to-digital converters (ADCs), encoder chips.",
    "source": "SparkFun Learn tutorials",
    "reverse": false
   },
@@ -1386,12 +1386,12 @@
    "tags": [
     "robotics::05-communication-protocols"
    ],
-   "front": "UART vs. I2C vs. SPI: when to pick each?",
+   "front": "Universal asynchronous receiver-transmitter (UART) vs. inter-integrated circuit (I2C) vs. serial peripheral interface (SPI): when to pick each?",
    "back": "<b>UART:</b> two devices, simple streams (GPS, board-to-board).<br><b>I2C:</b> many slow sensors on two wires.<br><b>SPI:</b> high rate/low latency, few devices.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "None is robust over long noisy cables; use differential buses (CAN, RS-485).",
+   "extra": "None is robust over long noisy cables; use differential buses (controller area network (CAN), RS-485).",
    "source": "SparkFun Learn tutorials",
    "reverse": false
   },
@@ -1402,7 +1402,7 @@
    "tags": [
     "robotics::05-communication-protocols"
    ],
-   "front": "CAN bus: physical layer and topology?",
+   "front": "Controller area network (CAN) bus: physical layer and topology?",
    "back": "Two-wire <b>differential</b> bus (CAN_H/CAN_L), multi-master, <b>120 Ω termination at each end</b>.",
    "text": "",
    "image": "",
@@ -1418,12 +1418,12 @@
    "tags": [
     "robotics::05-communication-protocols"
    ],
-   "front": "CAN arbitration: how is priority decided?",
+   "front": "Controller area network (CAN) arbitration: how is priority decided?",
    "back": "Messages carry an <b>identifier, not an address</b>; bitwise arbitration where dominant 0 beats recessive 1, so the <b>lowest ID wins</b>, non-destructively.",
    "text": "",
    "image": "",
    "analogy": "Everyone starts speaking at once, but whoever says '0' first keeps talking and the others politely fall silent; no one's sentence is garbled.",
-   "extra": "Built-in CRC, ACK and automatic retransmission. Classical CAN: ≤1 Mbit/s, 8 data bytes.",
+   "extra": "Built-in cyclic redundancy check (CRC), acknowledgement (ACK) and automatic retransmission. Classical CAN: ≤1 Mbit/s, 8 data bytes.",
    "source": "Bosch CAN 2.0 spec / CAN in Automation",
    "reverse": false
   },
@@ -1434,7 +1434,7 @@
    "tags": [
     "robotics::05-communication-protocols"
    ],
-   "front": "What does CAN FD add over classical CAN?",
+   "front": "What does CAN flexible data-rate (FD) add over classical CAN?",
    "back": "Up to <b>64 data bytes</b> per frame and a faster data phase (typically 2–8 Mbit/s).",
    "text": "",
    "image": "",
@@ -1450,7 +1450,7 @@
    "tags": [
     "robotics::05-communication-protocols"
    ],
-   "front": "Why is CAN the default bus for robot joint actuators?",
+   "front": "Why is controller area network (CAN) the default bus for robot joint actuators?",
    "back": "Noise immunity near motors, just two wires daisy-chained through limbs, deterministic priority, built-in error handling, cheap transceivers.",
    "text": "",
    "image": "",
@@ -1466,12 +1466,12 @@
    "tags": [
     "robotics::05-communication-protocols"
    ],
-   "front": "RS-485: what is it, and how does it differ from CAN?",
+   "front": "RS-485: what is it, and how does it differ from controller area network (CAN)?",
    "back": "A differential <b>electrical standard</b> (not a protocol): multi-drop, long cables (~1200 m), usually half-duplex. Unlike CAN it has <b>no arbitration or error handling</b>; the protocol on top must add them.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Carries:</b> Modbus RTU, Dynamixel Protocol 2.0, DMX.",
+   "extra": "<b>Carries:</b> Modbus remote terminal unit (RTU), Dynamixel Protocol 2.0, Digital Multiplex (DMX).",
    "source": "Horowitz & Hill, The Art of Electronics (3rd ed.)",
    "reverse": false
   },
@@ -1515,7 +1515,7 @@
     "robotics::05-communication-protocols"
    ],
    "front": "How is wireless used properly on robots?",
-   "back": "Stabilising loops run on board; wireless carries only <b>set-points, tele-op commands and telemetry</b>, with a command timeout/fail-safe and best-effort (UDP-style) streams for fresh data.",
+   "back": "Stabilising loops run on board; wireless carries only <b>set-points, tele-op commands and telemetry</b>, with a command timeout/fail-safe and best-effort (User Datagram Protocol (UDP)-style) streams for fresh data.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1530,8 +1530,8 @@
    "tags": [
     "robotics::05-communication-protocols"
    ],
-   "front": "Custom Pi↔MCU serial protocol: what must every packet have?",
-   "back": "<ul><li><b>Framing</b> (start byte + length, or COBS with 0x00 delimiter) to resynchronise</li><li><b>Integrity</b> check (checksum/CRC)</li><li>Message type + fixed binary layout (endianness, padding)</li></ul>",
+   "front": "Custom Pi↔microcontroller unit (MCU) serial protocol: what must every packet have?",
+   "back": "<ul><li><b>Framing</b> (start byte + length, or Consistent Overhead Byte Stuffing (COBS) with 0x00 delimiter) to resynchronise</li><li><b>Integrity</b> check (checksum/CRC)</li><li>Message type + fixed binary layout (endianness, padding)</li></ul>",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1551,7 +1551,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>ROS 2 bridges:</b> MAVROS; PX4's native uXRCE-DDS bridge.",
+   "extra": "<b>Robot Operating System (ROS) 2 bridges:</b> MAVROS; PX4's native uXRCE-DDS bridge.",
    "source": "MAVLink developer guide",
    "reverse": false
   },
@@ -1562,12 +1562,12 @@
    "tags": [
     "robotics::06-raspberry-pi-embedded-linux"
    ],
-   "front": "Raspberry Pi GPIO electrical rules?",
-   "back": "<b>3.3 V, NOT 5 V tolerant</b>; ~16 mA per pin, ~50 mA total; <b>no analog inputs</b> (add an MCP3008/ADS1115 ADC).",
+   "front": "Raspberry Pi general-purpose input/output (GPIO) electrical rules?",
+   "back": "<b>3.3 V, NOT 5 V tolerant</b>; ~16 mA per pin, ~50 mA total; <b>no analog inputs</b> (add an MCP3008/ADS1115 analog-to-digital converter (ADC)).",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "Header also offers I2C, SPI, UART, two hardware PWM channels, 5 V and 3.3 V rails.",
+   "extra": "Header also offers inter-integrated circuit (I2C), serial peripheral interface (SPI), universal asynchronous receiver-transmitter (UART), two hardware pulse-width modulation (PWM) channels, 5 V and 3.3 V rails.",
    "source": "Raspberry Pi Documentation",
    "reverse": false
   },
@@ -1579,7 +1579,7 @@
     "robotics::06-raspberry-pi-embedded-linux",
     "robotics::volatile"
    ],
-   "front": "Register-poking GPIO code breaks on a new SBC revision. Why, and what should you use instead?",
+   "front": "Register-poking general-purpose input/output (GPIO) code breaks on a new single-board computer (SBC) revision. Why, and what should you use instead?",
    "back": "The GPIO block moved (on the Raspberry Pi 5 to the separate <b>RP1</b> chip), so libraries that write hardware registers directly (RPi.GPIO, pigpio) break. Use the kernel GPIO character device via <b>libgpiod</b> (or wrappers such as lgpio, gpiozero), which is stable across boards.",
    "text": "",
    "image": "",
@@ -1595,8 +1595,8 @@
    "tags": [
     "robotics::06-raspberry-pi-embedded-linux"
    ],
-   "front": "Why does software PWM from Linux make servos jitter, and what fixes it?",
-   "back": "The scheduler pre-empts user-space timing, so pulse widths wobble by 10s–100s of µs. Fix: hardware PWM channels, a <b>PCA9685</b> I2C PWM chip, or an MCU.",
+   "front": "Why does software pulse-width modulation (PWM) from Linux make servos jitter, and what fixes it?",
+   "back": "The scheduler pre-empts user-space timing, so pulse widths wobble by 10s–100s of µs. Fix: hardware PWM channels, a <b>PCA9685</b> inter-integrated circuit (I2C) PWM chip, or an microcontroller unit (MCU).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1612,7 +1612,7 @@
     "robotics::06-raspberry-pi-embedded-linux"
    ],
    "front": "What does PREEMPT_RT give Linux?",
-   "back": "Nearly all kernel code becomes pre-emptible and IRQ handlers become threads → <b>bounded worst-case latency</b> (tens to ~100 µs) for SCHED_FIFO threads; enough for ~1 kHz loops.",
+   "back": "Nearly all kernel code becomes pre-emptible and interrupt request (IRQ) handlers become threads → <b>bounded worst-case latency</b> (tens to ~100 µs) for SCHED_FIFO threads; enough for ~1 kHz loops.",
    "text": "",
    "image": "",
    "analogy": "It doesn't make the car faster; it guarantees the ambulance always gets through the traffic within a fixed time.",
@@ -1644,7 +1644,7 @@
     "robotics::06-raspberry-pi-embedded-linux"
    ],
    "front": "Canonical two-tier compute architecture of a mobile robot?",
-   "back": "<b>Linux computer</b> (Pi/Jetson): cameras, LiDAR, SLAM, planning, ROS 2, AI.<br><b>Microcontroller:</b> encoders, PID loops at 100 Hz–1 kHz+, IMU, safety timeouts.",
+   "back": "<b>Linux computer</b> (Pi/Jetson): cameras, light detection and ranging (LiDAR), simultaneous localization and mapping (SLAM), planning, Robot Operating System (ROS) 2, AI.<br><b>Microcontroller:</b> encoders, proportional-integral-derivative (PID) loops at 100 Hz–1 kHz+, inertial measurement unit (IMU), safety timeouts.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1659,8 +1659,8 @@
    "tags": [
     "robotics::06-raspberry-pi-embedded-linux"
    ],
-   "front": "Two-tier robot: what crosses the Linux↔MCU interface?",
-   "back": "Velocity commands down (e.g. <code>cmd_vel</code>), odometry and sensor data up, over USB/UART, CAN or micro-ROS.",
+   "front": "Two-tier robot: what crosses the Linux↔microcontroller unit (MCU) interface?",
+   "back": "Velocity commands down (e.g. <code>cmd_vel</code>), odometry and sensor data up, over USB/UART, controller area network (CAN) or micro-ROS.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1677,7 +1677,7 @@
     "robotics::volatile"
    ],
    "front": "Two camera stacks on an embedded Linux board: how does each reach OpenCV?",
-   "back": "CSI ribbon cameras go through <b>libcamera</b> (on Raspberry Pi: <code>rpicam-apps</code> and the <b>Picamera2</b> library); USB webcams appear as <b>V4L2</b> devices that OpenCV's <code>VideoCapture</code> opens directly.",
+   "back": "camera serial interface (CSI) ribbon cameras go through <b>libcamera</b> (on Raspberry Pi: <code>rpicam-apps</code> and the <b>Picamera2</b> library); USB webcams appear as <b>Video4Linux2 (V4L2)</b> devices that OpenCV's <code>VideoCapture</code> opens directly.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1693,8 +1693,8 @@
     "robotics::06-raspberry-pi-embedded-linux",
     "robotics::volatile"
    ],
-   "front": "Edge NPU accelerator vs GPU: what can and can't a few-watt NPU (e.g. Hailo on a Pi HAT) do?",
-   "back": "It runs <b>compiled</b> vision nets (detection, segmentation, pose) in real time at a few watts. It is <b>not a general GPU</b>: no CUDA, limited operator support, and it won't run large VLAs or arbitrary PyTorch models.",
+   "front": "Edge neural processing unit (NPU) accelerator vs GPU: what can and can't a few-watt NPU (e.g. Hailo on a Pi hardware attached on top (HAT)) do?",
+   "back": "It runs <b>compiled</b> vision nets (detection, segmentation, pose) in real time at a few watts. It is <b>not a general GPU</b>: no CUDA, limited operator support, and it won't run large vision-language-action models (VLAs) or arbitrary PyTorch models.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1710,12 +1710,12 @@
     "robotics::06-raspberry-pi-embedded-linux",
     "robotics::volatile"
    ],
-   "front": "When does a robot need an on-board <b>GPU computer</b> (e.g. NVIDIA Jetson) instead of a plain SBC?",
-   "back": "When you need an on-board <b>GPU</b>: deep-learning perception, GPU-accelerated SLAM, or running learned policies on the robot.",
+   "front": "When does a robot need an on-board <b>GPU computer</b> (e.g. NVIDIA Jetson) instead of a plain single-board computer (SBC)?",
+   "back": "When you need an on-board <b>GPU</b>: deep-learning perception, GPU-accelerated simultaneous localization and mapping (SLAM), or running learned policies on the robot.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "Trade-offs: higher cost, power and cooling; size the module by the TOPS and memory your models need, not by the top of the vendor's range.",
+   "extra": "Trade-offs: higher cost, power and cooling; size the module by the tera operations per second (TOPS) and memory your models need, not by the top of the vendor's range.",
    "source": "NVIDIA Jetson",
    "reverse": false
   },
@@ -1742,8 +1742,8 @@
    "tags": [
     "robotics::06-raspberry-pi-embedded-linux"
    ],
-   "front": "How do you protect a Pi robot from SD-card corruption?",
-   "back": "Provide a clean-shutdown path, use a read-only/overlay root filesystem or boot from NVMe/SSD, and log to RAM or external storage.",
+   "front": "How do you protect a Pi robot from secure digital (SD)-card corruption?",
+   "back": "Provide a clean-shutdown path, use a read-only/overlay root filesystem or boot from non-volatile memory express (NVMe)/SSD, and log to RAM or external storage.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1759,7 +1759,7 @@
     "robotics::06-raspberry-pi-embedded-linux"
    ],
    "front": "Minimal OpenCV colour-tracking pipeline to steer toward a ball?",
-   "back": "Frame → <b>HSV</b> → <code>inRange()</code> mask (+erode/dilate) → largest contour → centroid. Steering error = centroid x − image centre; contour area ≈ distance.",
+   "back": "Frame → <b>hue, saturation, value (HSV)</b> → <code>inRange()</code> mask (+erode/dilate) → largest contour → centroid. Steering error = centroid x − image centre; contour area ≈ distance.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1774,8 +1774,8 @@
    "tags": [
     "robotics::06-raspberry-pi-embedded-linux"
    ],
-   "front": "Why convert to HSV for colour tracking?",
-   "back": "Hue separates colour from brightness, so thresholds are more <b>robust to lighting</b> than in BGR.",
+   "front": "Why convert to hue, saturation, value (HSV) for colour tracking?",
+   "back": "Hue separates colour from brightness, so thresholds are more <b>robust to lighting</b> than in blue, green, red (BGR).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1790,8 +1790,8 @@
    "tags": [
     "robotics::06-raspberry-pi-embedded-linux"
    ],
-   "front": "What is special about the RP2040/RP2350's PIO?",
-   "back": "<b>Programmable I/O</b> state machines implement custom, cycle-exact protocols in hardware: quadrature decoding, WS2812 LEDs, extra UARTs.",
+   "front": "What is special about the RP2040/RP2350's programmable input/output (PIO)?",
+   "back": "<b>Programmable I/O</b> state machines implement custom, cycle-exact protocols in hardware: quadrature decoding, WS2812 light-emitting diodes (LEDs), extra universal asynchronous receiver-transmitters (UARTs).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1806,7 +1806,7 @@
    "tags": [
     "robotics::06-raspberry-pi-embedded-linux"
    ],
-   "front": "Simplest way to run ROS 2 on a Raspberry Pi?",
+   "front": "Simplest way to run Robot Operating System (ROS) 2 on a Raspberry Pi?",
    "back": "Install <b>64-bit Ubuntu</b> (ROS 2 Tier-1 platform) and <code>apt install</code> the matching distro. On Raspberry Pi OS: Docker or build from source.",
    "text": "",
    "image": "",
@@ -1838,7 +1838,7 @@
    "tags": [
     "robotics::07-control-theory"
    ],
-   "front": "PID control law?",
+   "front": "Proportional-integral-derivative (PID) control law?",
    "back": "u = K<sub>p</sub>·e + K<sub>i</sub>·∫e dt + K<sub>d</sub>·de/dt",
    "text": "",
    "image": "",
@@ -1856,7 +1856,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "PID terms: {{c1::P}} reacts to present error (more gain = faster, more overshoot); {{c2::I}} accumulates past error and removes steady-state error; {{c3::D}} reacts to the error's rate, adding damping but amplifying noise.",
+   "text": "Proportional-integral-derivative (PID) terms: {{c1::P}} reacts to present error (more gain = faster, more overshoot); {{c2::I}} accumulates past error and removes steady-state error; {{c3::D}} reacts to the error's rate, adding damping but amplifying noise.",
    "image": "",
    "analogy": "Steering a boat: P turns toward the line, I corrects for a steady current, D eases off as you approach so you don't overshoot.",
    "extra": "",
@@ -1886,7 +1886,7 @@
    "tags": [
     "robotics::07-control-theory"
    ],
-   "front": "Practical fixes that make the PID derivative term usable on real hardware?",
+   "front": "Practical fixes that make the proportional-integral-derivative (PID) derivative term usable on real hardware?",
    "back": "<b>Low-pass filter</b> it (noise); <b>derivative on measurement</b> (−K<sub>d</sub>·dy/dt) to avoid 'derivative kick' on set-point steps; accurate, consistent dt.",
    "text": "",
    "image": "",
@@ -1934,7 +1934,7 @@
    "tags": [
     "robotics::07-control-theory"
    ],
-   "front": "What does a discrete PID on an MCU need that the textbook formula hides?",
+   "front": "What does a discrete proportional-integral-derivative (PID) on an microcontroller unit (MCU) need that the textbook formula hides?",
    "back": "A <b>fixed, known sample period</b> (timer interrupt or scheduled task); integral ≈ Σe·dt, derivative ≈ Δ/dt. Timing jitter acts like noise on D.",
    "text": "",
    "image": "",
@@ -1951,7 +1951,7 @@
     "robotics::07-control-theory"
    ],
    "front": "Ziegler–Nichols ultimate-gain tuning: procedure?",
-   "back": "With I = D = 0, raise K<sub>p</sub> until sustained oscillation → <b>K<sub>u</sub></b> and period <b>T<sub>u</sub></b>. Classic PID: K<sub>p</sub> = 0.6K<sub>u</sub>, T<sub>i</sub> = T<sub>u</sub>/2, T<sub>d</sub> = T<sub>u</sub>/8.",
+   "back": "With I = D = 0, raise K<sub>p</sub> until sustained oscillation → <b>K<sub>u</sub></b> and period <b>T<sub>u</sub></b>. Classic proportional-integral-derivative (PID): K<sub>p</sub> = 0.6K<sub>u</sub>, T<sub>i</sub> = T<sub>u</sub>/2, T<sub>d</sub> = T<sub>u</sub>/8.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2031,7 +2031,7 @@
     "robotics::07-control-theory"
    ],
    "front": "How fast must a digital control loop sample?",
-   "back": "Rule of thumb: <b>10–20× the desired closed-loop bandwidth</b> (Nyquist's 2× only avoids aliasing), with an anti-aliasing filter before the ADC.",
+   "back": "Rule of thumb: <b>10–20× the desired closed-loop bandwidth</b> (Nyquist's 2× only avoids aliasing), with an anti-aliasing filter before the analog-to-digital converter (ADC).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2099,7 +2099,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "Workhorse for balancing robots, quadrotors and stabilising trajectories (time-varying LQR).",
+   "extra": "Workhorse for balancing robots, quadrotors and stabilising trajectories (time-varying linear-quadratic regulator (LQR)).",
    "source": "Tedrake, Underactuated Robotics (MIT 6.832)",
    "reverse": false
   },
@@ -2110,7 +2110,7 @@
    "tags": [
     "robotics::07-control-theory"
    ],
-   "front": "LQR tuning: what do Q and R trade off?",
+   "front": "Linear-quadratic regulator (LQR) tuning: what do Q and R trade off?",
    "back": "<b>Q</b> penalises state error, <b>R</b> penalises actuator effort; tuning = choosing these weights. Good margins given full state.",
    "text": "",
    "image": "",
@@ -2211,7 +2211,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "Needs a good model and torque-controlled joints; more accurate at speed than independent joint PID.",
+   "extra": "Needs a good model and torque-controlled joints; more accurate at speed than independent joint proportional-integral-derivative (PID).",
    "source": "Lynch & Park, Modern Robotics (2017)",
    "reverse": false
   },
@@ -2223,11 +2223,11 @@
     "robotics::07-control-theory"
    ],
    "front": "What is Whole-Body Control on a humanoid/legged robot?",
-   "back": "A ~1 kHz controller computing all joint torques at once by solving a constrained <b>QP</b> over the floating-base dynamics, with weighted/prioritised tasks (balance, feet, hands, posture).",
+   "back": "A ~1 kHz controller computing all joint torques at once by solving a constrained <b>quadratic programming (QP)</b> over the floating-base dynamics, with weighted/prioritised tasks (balance, feet, hands, posture).",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "Constraints: friction cones, torque and joint limits. Sits beneath MPC/footstep planning; increasingly complemented by RL whole-body policies.",
+   "extra": "Constraints: friction cones, torque and joint limits. Sits beneath model predictive control (MPC)/footstep planning; increasingly complemented by reinforcement learning (RL) whole-body policies.",
    "source": "Tedrake, Underactuated Robotics (MIT 6.832)",
    "reverse": false
   },
@@ -2272,7 +2272,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "{{c1::Configuration space}} = all joint configurations q (dimension = DoF); {{c2::task space}} = where the task is expressed (e.g. end-effector pose); {{c3::workspace}} = poses the end-effector can reach (a robot property).",
+   "text": "{{c1::Configuration space}} = all joint configurations q (dimension = degrees of freedom (DoF)); {{c2::task space}} = where the task is expressed (e.g. end-effector pose); {{c3::workspace}} = poses the end-effector can reach (a robot property).",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -2303,7 +2303,7 @@
     "robotics::08-kinematics-dynamics"
    ],
    "front": "What is gimbal lock?",
-   "back": "A singularity of three-angle (Euler/RPY) representations: at a middle angle (pitch ±90°) the first and third axes align and a DoF is lost. A flaw of the <b>representation</b>, not the rotation.",
+   "back": "A singularity of three-angle (Euler/RPY) representations: at a middle angle (pitch ±90°) the first and third axes align and a degrees of freedom (DoF) is lost. A flaw of the <b>representation</b>, not the rotation.",
    "text": "",
    "image": "",
    "analogy": "Like longitude at the North Pole: every longitude meets there, so 'which way is east' stops meaning anything, though nothing is wrong with the Earth.",
@@ -2335,7 +2335,7 @@
     "robotics::08-kinematics-dynamics"
    ],
    "front": "Quaternion pitfalls?",
-   "back": "<b>Double cover</b> (q and −q are the same rotation); and ordering conventions: ROS uses (x, y, z, w), Eigen's constructor (w, x, y, z).",
+   "back": "<b>Double cover</b> (q and −q are the same rotation); and ordering conventions: Robot Operating System (ROS) uses (x, y, z, w), Eigen's constructor (w, x, y, z).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2355,7 +2355,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "Backbone of forward kinematics, camera extrinsics and ROS tf2.",
+   "extra": "Backbone of forward kinematics, camera extrinsics and Robot Operating System (ROS) tf2.",
    "source": "Lynch & Park, Modern Robotics (2017)",
    "reverse": false
   },
@@ -2382,7 +2382,7 @@
    "tags": [
     "robotics::08-kinematics-dynamics"
    ],
-   "front": "DH vs. Product of Exponentials (PoE) for forward kinematics?",
+   "front": "Denavit–Hartenberg (DH) vs. Product of Exponentials (PoE) for forward kinematics?",
    "back": "<b>DH:</b> a frame per link by convention, T = A<sub>1</sub>…A<sub>n</sub>.<br><b>PoE:</b> T = e<sup>[S<sub>1</sub>]θ<sub>1</sub></sup>…e<sup>[S<sub>n</sub>]θ<sub>n</sub></sup>M with screw axes in the base frame; no per-link frames.",
    "text": "",
    "image": "",
@@ -2400,7 +2400,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "DH parameters: {{c1::a}} = link length (along x), {{c2::α}} = link twist (about x), {{c3::d}} = link offset (along z), {{c4::θ}} = joint angle (about z).",
+   "text": "Denavit–Hartenberg (DH) parameters: {{c1::a}} = link length (along x), {{c2::α}} = link twist (about x), {{c3::d}} = link offset (along z), {{c4::θ}} = joint angle (about z).",
    "image": "",
    "analogy": "",
    "extra": "Revolute: θ is variable; prismatic: d. 'Standard' and 'modified' (Craig) conventions differ.",
@@ -2430,7 +2430,7 @@
    "tags": [
     "robotics::08-kinematics-dynamics"
    ],
-   "front": "Analytic vs. numerical IK?",
+   "front": "Analytic vs. numerical inverse kinematics (IK)?",
    "back": "<b>Analytic:</b> closed form for special geometries (spherical wrist); fast, all solutions.<br><b>Numerical:</b> iterate Δq = J⁺e from a guess; general, one nearby solution, can fail near singularities.",
    "text": "",
    "image": "",
@@ -2451,7 +2451,7 @@
    "text": "",
    "image": "",
    "analogy": "A gear ratio that changes with posture: it tells you how fast the hand moves for each joint's speed right now.",
-   "extra": "Used for resolved-rate control, numerical IK, singularity/manipulability analysis and force mapping.",
+   "extra": "Used for resolved-rate control, numerical inverse kinematics (IK), singularity/manipulability analysis and force mapping.",
    "source": "Lynch & Park, Modern Robotics (2017)",
    "reverse": false
   },
@@ -2595,7 +2595,7 @@
    "text": "",
    "image": "",
    "analogy": "Walking blindfolded counting steps: a 2° heading error barely matters after 5 m but puts you in the wrong street after 500 m.",
-   "extra": "<b>Fix:</b> calibrate systematic errors (UMBmark), fuse with IMU, correct with exteroceptive localisation.",
+   "extra": "<b>Fix:</b> calibrate systematic errors (UMBmark), fuse with inertial measurement unit (IMU), correct with exteroceptive localisation.",
    "source": "Siegwart, Nourbakhsh & Scaramuzza, Introduction to Autonomous Mobile Robots (2nd ed.)",
    "reverse": false
   },
@@ -2623,7 +2623,7 @@
     "robotics::08-kinematics-dynamics"
    ],
    "front": "What is an underactuated system? Robotic examples?",
-   "back": "Fewer actuators than DoF, so control must exploit natural dynamics. E.g. cart-pole, Acrobot, quadrotor (4 inputs, 6 DoF), <b>every legged robot</b> (unactuated floating base).",
+   "back": "Fewer actuators than degrees of freedom (DoF), so control must exploit natural dynamics. E.g. cart-pole, Acrobot, quadrotor (4 inputs, 6 DoF), <b>every legged robot</b> (unactuated floating base).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2654,8 +2654,8 @@
    "tags": [
     "robotics::08-kinematics-dynamics"
    ],
-   "front": "How did classical humanoids (ASIMO) use the ZMP, and what replaced it?",
-   "back": "Planned CoM trajectories with the <b>Linear Inverted Pendulum</b> so the ZMP tracked the footsteps: stable but flat-footed. Modern robots use MPC/WBC or RL with dynamic contacts.",
+   "front": "How did classical humanoids (ASIMO) use the zero moment point (ZMP), and what replaced it?",
+   "back": "Planned center of mass (CoM) trajectories with the <b>Linear Inverted Pendulum</b> so the ZMP tracked the footsteps: stable but flat-footed. Modern robots use model predictive control (MPC)/WBC or reinforcement learning (RL) with dynamic contacts.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2799,11 +2799,11 @@
     "robotics::09-perception-state-estimation"
    ],
    "front": "Classical feature-matching pipeline between images?",
-   "back": "Detect key-points → describe → match (nearest neighbour + ratio test) → reject outliers with <b>RANSAC</b>.",
+   "back": "Detect key-points → describe → match (nearest neighbour + ratio test) → reject outliers with <b>random sample consensus (RANSAC)</b>.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Descriptors:</b> SIFT (accurate, slow), ORB (binary, real-time, ORB-SLAM). Learned: SuperPoint + LightGlue.",
+   "extra": "<b>Descriptors:</b> scale-invariant feature transform (SIFT) (accurate, slow), ORB (binary, real-time, ORB-SLAM). Learned: SuperPoint + LightGlue.",
    "source": "Hartley & Zisserman, Multiple View Geometry (2nd ed.); OpenCV calibration docs",
    "reverse": false
   },
@@ -2894,7 +2894,7 @@
    "tags": [
     "robotics::09-perception-state-estimation"
    ],
-   "front": "What does the Kalman gain do, and when is the KF optimal?",
+   "front": "What does the Kalman gain do, and when is the Kalman filter (KF) optimal?",
    "back": "K weights prediction vs. measurement by their uncertainties (Q process noise, R measurement noise). Optimal for <b>linear</b> systems with <b>Gaussian</b> noise.",
    "text": "",
    "image": "",
@@ -2910,12 +2910,12 @@
    "tags": [
     "robotics::09-perception-state-estimation"
    ],
-   "front": "EKF vs. UKF?",
+   "front": "Extended Kalman filter (EKF) vs. unscented Kalman filter (UKF)?",
    "back": "<b>EKF:</b> linearise f, h with Jacobians at the estimate; cheap, can diverge if strongly non-linear.<br><b>UKF:</b> push <b>sigma points</b> through the true functions; no Jacobians, usually more accurate.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>ROS:</b> <code>robot_localization</code> fuses odometry + IMU (+GNSS) with either.",
+   "extra": "<b>Robot Operating System (ROS):</b> <code>robot_localization</code> fuses odometry + inertial measurement unit (IMU) (+global navigation satellite system (GNSS)) with either.",
    "source": "Thrun, Burgard & Fox, Probabilistic Robotics (2005)",
    "reverse": false
   },
@@ -2974,7 +2974,7 @@
    "tags": [
     "robotics::09-perception-state-estimation"
    ],
-   "front": "Graph-based SLAM: front-end vs. back-end?",
+   "front": "Graph-based simultaneous localization and mapping (SLAM): front-end vs. back-end?",
    "back": "<b>Front-end:</b> turns sensor data into constraints (odometry, scan matching, feature tracking, place recognition).<br><b>Back-end:</b> non-linear least-squares over a <b>pose graph</b> (g2o, GTSAM, Ceres).",
    "text": "",
    "image": "",
@@ -3027,7 +3027,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "Core of LiDAR odometry/scan matching. Variants: point-to-plane, GICP; alternative: NDT.",
+   "extra": "Core of light detection and ranging (LiDAR) odometry/scan matching. Variants: point-to-plane, generalized iterative closest point (GICP); alternative: normal distributions transform (NDT).",
    "source": "Thrun, Burgard & Fox, Probabilistic Robotics (2005)",
    "reverse": false
   },
@@ -3038,7 +3038,7 @@
    "tags": [
     "robotics::09-perception-state-estimation"
    ],
-   "front": "ICP's main weakness?",
+   "front": "Iterative closest point (ICP)'s main weakness?",
    "back": "Needs a <b>good initial guess</b>; otherwise converges to a local minimum.",
    "text": "",
    "image": "",
@@ -3070,12 +3070,12 @@
    "tags": [
     "robotics::09-perception-state-estimation"
    ],
-   "front": "What does Visual-Inertial Odometry add over VO?",
-   "back": "Fusing an IMU makes <b>metric scale and gravity direction observable</b> and bridges fast motion/brief visual drop-outs.",
+   "front": "What does Visual-Inertial Odometry add over visual odometry (VO)?",
+   "back": "Fusing an inertial measurement unit (IMU) makes <b>metric scale and gravity direction observable</b> and bridges fast motion/brief visual drop-outs.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Examples:</b> VINS-Fusion, OpenVINS, ORB-SLAM3; principle behind AR/VR headset tracking.",
+   "extra": "<b>Examples:</b> VINS-Fusion, OpenVINS, ORB-SLAM3; principle behind augmented reality (AR)/VR headset tracking.",
    "source": "Campos et al. 2021, ORB-SLAM3",
    "reverse": false
   },
@@ -3107,7 +3107,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "SigLIP + DINOv2 is the most common vision front-end of VLAs (e.g. OpenVLA).",
+   "extra": "SigLIP + DINOv2 is the most common vision front-end of vision-language-action models (VLAs) (e.g. OpenVLA).",
    "source": "Kawaharazuka et al. 2025, VLA Models for Robotics: A Review",
    "reverse": false
   },
@@ -3118,8 +3118,8 @@
    "tags": [
     "robotics::09-perception-state-estimation"
    ],
-   "front": "What is RTK GNSS positioning?",
-   "back": "A base station (or NTRIP service) streams <b>carrier-phase corrections</b>; the rover resolves integer ambiguities → <b>centimetre</b> accuracy instead of metres.",
+   "front": "What is RTK global navigation satellite system (GNSS) positioning?",
+   "back": "A base station (or Networked Transport of RTCM via Internet Protocol (NTRIP) service) streams <b>carrier-phase corrections</b>; the rover resolves integer ambiguities → <b>centimetre</b> accuracy instead of metres.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3214,7 +3214,7 @@
    "tags": [
     "robotics::10-motion-planning-navigation"
    ],
-   "front": "PRM vs. RRT?",
+   "front": "Probabilistic roadmap (PRM) vs. rapidly-exploring random tree (RRT)?",
    "back": "<b>PRM:</b> multi-query; build a roadmap of collision-free samples once, then graph-search it (static scenes).<br><b>RRT:</b> single-query; grow a tree from the start toward random samples (RRT-Connect grows two).",
    "text": "",
    "image": "",
@@ -3235,7 +3235,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "Informed RRT*/BIT* converge faster. Library: OMPL. Paths are still usually shortcut/smoothed.",
+   "extra": "Informed rapidly-exploring random tree (RRT)*/BIT* converge faster. Library: Open Motion Planning Library (OMPL). Paths are still usually shortcut/smoothed.",
    "source": "LaValle, Planning Algorithms",
    "reverse": false
   },
@@ -3326,8 +3326,8 @@
    "tags": [
     "robotics::10-motion-planning-navigation"
    ],
-   "front": "How does MPPI control work?",
-   "back": "Sample thousands of noisy control <b>sequences</b>, roll them out through the model, and average them weighted by exp(−cost): a sampling-based MPC that handles non-convex costs (widely used in Nav2).",
+   "front": "How does model predictive path integral (MPPI) control work?",
+   "back": "Sample thousands of noisy control <b>sequences</b>, roll them out through the model, and average them weighted by exp(−cost): a sampling-based model predictive control (MPC) that handles non-convex costs (widely used in Nav2).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3406,12 +3406,12 @@
    "tags": [
     "robotics::10-motion-planning-navigation"
    ],
-   "front": "Why have Behavior Trees displaced FSMs for robot task logic?",
+   "front": "Why have Behavior Trees displaced finite state machines (FSMs) for robot task logic?",
    "back": "Modular reusable sub-trees, no transition explosion, and inherently <b>reactive</b> (conditions re-checked every tick).",
    "text": "",
    "image": "",
    "analogy": "An FSM is a flowchart of rooms with doors between every pair; a BT is a to-do list with fallbacks you re-read from the top every second.",
-   "extra": "Nav2's navigator is a BT (BehaviorTree.CPP, XML).",
+   "extra": "Nav2's navigator is a BT (BehaviorTree.CPP, extensible markup language (XML)).",
    "source": "Colledanchise & Ögren, Behavior Trees in Robotics and AI",
    "reverse": false
   },
@@ -3423,11 +3423,11 @@
     "robotics::10-motion-planning-navigation"
    ],
    "front": "Sampling-based planning vs. trajectory optimisation for manipulators?",
-   "back": "<b>Sampling</b> (RRT-Connect): global, won't get stuck in local minima, jerky paths.<br><b>Optimisation</b> (CHOMP, TrajOpt, cuRobo): smooth and fast but <b>local</b>, depends on the initial guess.",
+   "back": "<b>Sampling</b> (rapidly-exploring random tree (RRT)-Connect): global, won't get stuck in local minima, jerky paths.<br><b>Optimisation</b> (CHOMP, TrajOpt, cuRobo): smooth and fast but <b>local</b>, depends on the initial guess.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "Common combo: sample a seed, then optimise. TAMP adds a symbolic layer for long-horizon tasks.",
+   "extra": "Common combo: sample a seed, then optimise. task and motion planning (TAMP) adds a symbolic layer for long-horizon tasks.",
    "source": "MoveIt 2 documentation",
    "reverse": false
   },
@@ -3486,8 +3486,8 @@
    "tags": [
     "robotics::11-ros-2-simulation"
    ],
-   "front": "Status of ROS 1, and what ROS 2 changed?",
-   "back": "ROS 1 (final: Noetic) reached end-of-life on <b>31 May 2025</b>. ROS 2: no central master, built on DDS, real-time and multi-robot capable, security, lifecycle nodes.",
+   "front": "Status of Robot Operating System (ROS) 1, and what ROS 2 changed?",
+   "back": "ROS 1 (final: Noetic) reached end-of-life on <b>31 May 2025</b>. ROS 2: no central master, built on Data Distribution Service (DDS), real-time and multi-robot capable, security, lifecycle nodes.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3504,7 +3504,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "ROS 2 primitives: a {{c1::topic}} is anonymous many-to-many publish/subscribe; a {{c2::service}} is a quick request/response; an {{c3::action}} is a long-running, pre-emptable goal with feedback and a result.",
+   "text": "Robot Operating System (ROS) 2 primitives: a {{c1::topic}} is anonymous many-to-many publish/subscribe; a {{c2::service}} is a quick request/response; an {{c3::action}} is a long-running, pre-emptable goal with feedback and a result.",
    "image": "",
    "analogy": "Topic = radio broadcast; service = phone call; action = ordering a taxi with live tracking that you can cancel.",
    "extra": "<b>Examples:</b> topic: sensor data, <code>cmd_vel</code>; action: navigate to pose. Nodes are the processes; parameters configure them.",
@@ -3519,8 +3519,8 @@
     "robotics::11-ros-2-simulation",
     "robotics::volatile"
    ],
-   "front": "What is DDS's role in ROS 2?",
-   "back": "Industrial pub/sub standard providing automatic peer <b>discovery</b> (no master), RTPS over UDP, and rich QoS.",
+   "front": "What is DDS's role in Robot Operating System (ROS) 2?",
+   "back": "Industrial pub/sub standard providing automatic peer <b>discovery</b> (no master), Real-Time Publish-Subscribe (RTPS) over User Datagram Protocol (UDP), and rich quality of service (QoS).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3537,7 +3537,7 @@
     "robotics::volatile"
    ],
    "front": "What is the RMW layer, and why is Zenoh notable?",
-   "back": "The ROS Middleware interface abstracts the vendor (Fast DDS, Cyclone DDS, Connext). <b>rmw_zenoh</b> is a non-DDS option that behaves better over Wi-Fi and WAN.",
+   "back": "The Robot Operating System (ROS) Middleware interface abstracts the vendor (Fast Data Distribution Service (DDS), Cyclone DDS, Connext). <b>rmw_zenoh</b> is a non-DDS option that behaves better over Wi-Fi and wide area network (WAN).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3552,7 +3552,7 @@
    "tags": [
     "robotics::11-ros-2-simulation"
    ],
-   "front": "Key ROS 2 QoS settings?",
+   "front": "Key Robot Operating System (ROS) 2 quality of service (QoS) settings?",
    "back": "<b>Reliability</b> (RELIABLE vs BEST_EFFORT for lossy sensor streams), <b>durability</b> (TRANSIENT_LOCAL gives late joiners the last message: maps, robot_description), history depth.",
    "text": "",
    "image": "",
@@ -3568,7 +3568,7 @@
    "tags": [
     "robotics::11-ros-2-simulation"
    ],
-   "front": "Classic ROS 2 QoS pitfall?",
+   "front": "Classic Robot Operating System (ROS) 2 quality of service (QoS) pitfall?",
    "back": "<b>Incompatible QoS = silently no data</b>, e.g. a RELIABLE subscriber won't match a BEST_EFFORT publisher. Check with <code>ros2 topic info -v</code>.",
    "text": "",
    "image": "",
@@ -3585,8 +3585,8 @@
     "robotics::11-ros-2-simulation",
     "robotics::volatile"
    ],
-   "front": "ROS 2 release pattern, and which distro should a new project pick?",
-   "back": "A release every <b>May</b>; even years are 5-year <b>LTS</b> tied to an Ubuntu LTS. Pick the newest LTS your drivers already support.",
+   "front": "Robot Operating System (ROS) 2 release pattern, and which distro should a new project pick?",
+   "back": "A release every <b>May</b>; even years are 5-year <b>long-term support (LTS)</b> tied to an Ubuntu LTS. Pick the newest LTS your drivers already support.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3601,7 +3601,7 @@
    "tags": [
     "robotics::11-ros-2-simulation"
    ],
-   "front": "REP 105: standard frame chain of a mobile robot?",
+   "front": "ROS Enhancement Proposal (REP) 105: standard frame chain of a mobile robot?",
    "back": "<code>map → odom → base_link → sensor frames</code>",
    "text": "",
    "image": "",
@@ -3617,12 +3617,12 @@
    "tags": [
     "robotics::11-ros-2-simulation"
    ],
-   "front": "REP 105: who publishes <code>odom → base_link</code> vs. <code>map → odom</code>, and how do they behave?",
+   "front": "ROS Enhancement Proposal (REP) 105: who publishes <code>odom → base_link</code> vs. <code>map → odom</code>, and how do they behave?",
    "back": "<b>odom→base_link:</b> odometry/IMU fusion; smooth but drifts.<br><b>map→odom:</b> localisation/SLAM; globally accurate but can <b>jump</b>.",
    "text": "",
    "image": "",
    "analogy": "odom is your step-counting sense of position; map is the occasional glance at a street sign that corrects it.",
-   "extra": "base_link → sensors: static transforms from the URDF via robot_state_publisher. Conventions: x forward, y left, z up (REP 103).",
+   "extra": "base_link → sensors: static transforms from the Unified Robot Description Format (URDF) via robot_state_publisher. Conventions: x forward, y left, z up (REP 103).",
    "source": "REP 105, Coordinate Frames for Mobile Platforms",
    "reverse": false
   },
@@ -3633,8 +3633,8 @@
    "tags": [
     "robotics::11-ros-2-simulation"
    ],
-   "front": "What is a URDF?",
-   "back": "XML robot description: a tree of <b>links</b> (visual, collision, inertial) connected by <b>joints</b> (type, axis, limits); xacro adds macros.",
+   "front": "What is a Unified Robot Description Format (URDF)?",
+   "back": "extensible markup language (XML) robot description: a tree of <b>links</b> (visual, collision, inertial) connected by <b>joints</b> (type, axis, limits); xacro adds macros.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3649,8 +3649,8 @@
    "tags": [
     "robotics::11-ros-2-simulation"
    ],
-   "front": "URDF limitations, and richer alternatives?",
-   "back": "Tree only (<b>no closed loops</b>), one robot. Richer: Gazebo SDF, MuJoCo MJCF, OpenUSD (Isaac Sim).",
+   "front": "Unified Robot Description Format (URDF) limitations, and richer alternatives?",
+   "back": "Tree only (<b>no closed loops</b>), one robot. Richer: Gazebo Simulation Description Format (SDF), MuJoCo MJCF, OpenUSD (Isaac Sim).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3666,7 +3666,7 @@
     "robotics::11-ros-2-simulation"
    ],
    "front": "What is ros2_control?",
-   "back": "ROS 2's real-time control framework: <b>hardware interface</b> plugins expose state/command interfaces; a <b>controller manager</b> runs read → update → write; swappable controllers (joint_trajectory, diff_drive …).",
+   "back": "Robot Operating System (ROS) 2's real-time control framework: <b>hardware interface</b> plugins expose state/command interfaces; a <b>controller manager</b> runs read → update → write; swappable controllers (joint_trajectory, diff_drive …).",
    "text": "",
    "image": "",
    "analogy": "Like a device-driver model: controllers talk to an abstract interface, so swapping sim for hardware is a plugin change.",
@@ -3686,7 +3686,7 @@
    "text": "Nav2: the {{c1::BT Navigator}} orchestrates the task; the {{c2::planner server}} computes the global path; the {{c3::controller server}} follows it; the {{c4::behaviour server}} runs recoveries (spin, back up, wait).",
    "image": "",
    "analogy": "",
-   "extra": "<b>Also:</b> global/local costmaps, AMCL + map server or SLAM Toolbox, smoother, waypoint follower, collision monitor, lifecycle manager.",
+   "extra": "<b>Also:</b> global/local costmaps, adaptive Monte Carlo localization (AMCL) + map server or simultaneous localization and mapping (SLAM) Toolbox, smoother, waypoint follower, collision monitor, lifecycle manager.",
    "source": "Nav2 documentation",
    "reverse": false
   },
@@ -3698,7 +3698,7 @@
     "robotics::11-ros-2-simulation"
    ],
    "front": "What does MoveIt 2 provide?",
-   "back": "ROS 2 manipulation framework: planning scene + collision checking, motion-planning plugins (OMPL, Pilz, STOMP), IK plugins (KDL, TRAC-IK), time parameterisation, execution via ros2_control.",
+   "back": "Robot Operating System (ROS) 2 manipulation framework: planning scene + collision checking, motion-planning plugins (Open Motion Planning Library (OMPL), Pilz, STOMP), inverse kinematics (IK) plugins (KDL, TRAC-IK), time parameterisation, execution via ros2_control.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3714,7 +3714,7 @@
     "robotics::11-ros-2-simulation"
    ],
    "front": "What is micro-ROS?",
-   "back": "ROS 2 for microcontrollers (rclc on <b>Micro XRCE-DDS</b>, on FreeRTOS/Zephyr/bare-metal); an <b>agent</b> on the Linux host bridges the MCU into the ROS 2 graph as a first-class node.",
+   "back": "Robot Operating System (ROS) 2 for microcontrollers (rclc on <b>Micro XRCE-DDS</b>, on FreeRTOS/Zephyr/bare-metal); an <b>agent</b> on the Linux host bridges the microcontroller unit (MCU) into the ROS 2 graph as a first-class node.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3747,7 +3747,7 @@
     "robotics::volatile"
    ],
    "front": "Gazebo vs. MuJoCo: what is each best at?",
-   "back": "<b>Gazebo</b> (modern gz): ROS-integrated full-system and navigation testing with sensors and worlds.<br><b>MuJoCo:</b> fast, accurate contact dynamics; research standard for control and RL.",
+   "back": "<b>Gazebo</b> (modern gz): Robot Operating System (ROS)-integrated full-system and navigation testing with sensors and worlds.<br><b>MuJoCo:</b> fast, accurate contact dynamics; research standard for control and reinforcement learning (RL).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3763,8 +3763,8 @@
     "robotics::11-ros-2-simulation",
     "robotics::volatile"
    ],
-   "front": "GPU-parallel robot-learning simulators vs a classic ROS simulator: what distinguishes them?",
-   "back": "Physics (and often rendering) run on the GPU, so thousands of environments step in parallel for RL and synthetic data; some are differentiable. Classic simulators (Gazebo) favour ROS integration and full-system testing over throughput.",
+   "front": "GPU-parallel robot-learning simulators vs a classic Robot Operating System (ROS) simulator: what distinguishes them?",
+   "back": "Physics (and often rendering) run on the GPU, so thousands of environments step in parallel for reinforcement learning (RL) and synthetic data; some are differentiable. Classic simulators (Gazebo) favour ROS integration and full-system testing over throughput.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3795,7 +3795,7 @@
    "tags": [
     "robotics::12-robot-learning-foundations"
    ],
-   "front": "Why are real robots POMDPs, and how do policies cope?",
+   "front": "Why are real robots partially observable Markov decision processs (POMDPs), and how do policies cope?",
    "back": "They never see the true state, only images and joint readings. Remedies: feed an <b>observation history</b>, recurrent/transformer memory, or an estimated state.",
    "text": "",
    "image": "",
@@ -3811,7 +3811,7 @@
    "tags": [
     "robotics::12-robot-learning-foundations"
    ],
-   "front": "RL vs. imitation learning for robots: core trade-off?",
+   "front": "Reinforcement learning (RL) vs. imitation learning for robots: core trade-off?",
    "back": "<b>RL:</b> learns from reward; can exceed humans, but sample-hungry and unsafe → mostly in sim.<br><b>IL:</b> supervised from demos; no reward/sim needed, but bounded by demo quality and coverage.",
    "text": "",
    "image": "",
@@ -3828,7 +3828,7 @@
     "robotics::12-robot-learning-foundations"
    ],
    "front": "Which learning paradigm dominates locomotion, and which manipulation?",
-   "back": "<b>Locomotion:</b> RL in simulation (dynamics are simulable, rewards easy). <b>Manipulation:</b> imitation learning from real demonstrations (contact and visuals are hard to simulate).",
+   "back": "<b>Locomotion:</b> reinforcement learning (RL) in simulation (dynamics are simulable, rewards easy). <b>Manipulation:</b> imitation learning from real demonstrations (contact and visuals are hard to simulate).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3848,7 +3848,7 @@
    "text": "",
    "image": "",
    "analogy": "A learner driver who only ever watched perfect driving: once slightly off the lane, they've never seen how to get back.",
-   "extra": "<b>Mitigations:</b> recovery data, DAgger, action chunking, noise injection, diffusion/flow policies.",
+   "extra": "<b>Mitigations:</b> recovery data, dataset aggregation (DAgger), action chunking, noise injection, diffusion/flow policies.",
    "source": "Ross, Gordon & Bagnell 2011, DAgger",
    "reverse": false
   },
@@ -3859,7 +3859,7 @@
    "tags": [
     "robotics::12-robot-learning-foundations"
    ],
-   "front": "How does DAgger fix behaviour cloning's distribution shift?",
+   "front": "How does dataset aggregation (DAgger) fix behaviour cloning's distribution shift?",
    "back": "Run the <b>learner's</b> policy, have the expert label the states <i>it</i> visits, add them and retrain. Training data matches the learner's own states → error grows linearly, not quadratically.",
    "text": "",
    "image": "",
@@ -3944,7 +3944,7 @@
    "text": "",
    "image": "",
    "analogy": "Training a pilot in a hundred slightly different simulators so the real plane feels like one more variant.",
-   "extra": "Too little → no transfer; too much → over-conservative. Main reason RL locomotion transfers zero-shot.",
+   "extra": "Too little → no transfer; too much → over-conservative. Main reason reinforcement learning (RL) locomotion transfers zero-shot.",
    "source": "Tobin et al. 2017, Domain Randomization",
    "reverse": false
   },
@@ -3955,7 +3955,7 @@
    "tags": [
     "robotics::12-robot-learning-foundations"
    ],
-   "front": "What is an actuator network, and why did it matter for legged RL?",
+   "front": "What is an actuator network, and why did it matter for legged reinforcement learning (RL)?",
    "back": "A small net trained on hardware logs to predict the torque an actuator <b>actually</b> produces from recent commands/states (capturing friction, compliance, delay). Put into the sim, it closed the sim-to-real gap for ANYmal.",
    "text": "",
    "image": "",
@@ -3972,7 +3972,7 @@
     "robotics::12-robot-learning-foundations"
    ],
    "front": "Teacher–student (privileged) learning: how does it work?",
-   "back": "<b>Teacher:</b> RL in sim with privileged info (friction, height map, contacts). <b>Student:</b> on-board sensors only, trained by supervision to imitate the teacher or infer the privileged latent from proprioceptive history.",
+   "back": "<b>Teacher:</b> reinforcement learning (RL) in sim with privileged info (friction, height map, contacts). <b>Student:</b> on-board sensors only, trained by supervision to imitate the teacher or infer the privileged latent from proprioceptive history.",
    "text": "",
    "image": "",
    "analogy": "A sighted guide teaches a blindfolded student; the student learns to infer the terrain from how their feet feel.",
@@ -4003,7 +4003,7 @@
    "tags": [
     "robotics::12-robot-learning-foundations"
    ],
-   "front": "Why did massively parallel GPU simulation change robot RL?",
+   "front": "Why did massively parallel GPU simulation change robot reinforcement learning (RL)?",
    "back": "Physics and network both run on the GPU, so <b>thousands of environments</b> step in parallel without CPU–GPU transfer; quadruped walking trained in minutes on one GPU (Rudin et al. 2021).",
    "text": "",
    "image": "",
@@ -4024,7 +4024,7 @@
    "text": "",
    "image": "",
    "analogy": "Writing in whole words rather than letter by letter: fewer decisions, smoother strokes.",
-   "extra": "ACT adds a conditional VAE and <b>temporal ensembling</b> of overlapping chunks. Introduced with ALOHA; now used by virtually all VLAs.",
+   "extra": "ACT adds a conditional variational autoencoder (VAE) and <b>temporal ensembling</b> of overlapping chunks. Introduced with ALOHA; now used by virtually all vision-language-action models (VLAs).",
    "source": "Zhao et al. 2023, ALOHA / Action Chunking with Transformers",
    "reverse": false
   },
@@ -4084,7 +4084,7 @@
     "robotics::12-robot-learning-foundations"
    ],
    "front": "Main ways to collect manipulation demonstrations?",
-   "back": "<ul><li><b>Leader–follower</b> tele-op (ALOHA, GELLO, SO-101)</li><li><b>VR/hand tracking</b> (standard for humanoids)</li><li><b>Hand-held grippers</b> (UMI; trajectories via visual SLAM)</li><li><b>Egocentric human video</b>: most scalable, no action labels</li></ul>",
+   "back": "<ul><li><b>Leader–follower</b> tele-op (ALOHA, GELLO, SO-101)</li><li><b>virtual reality (VR)/hand tracking</b> (standard for humanoids)</li><li><b>Hand-held grippers</b> (Universal Manipulation Interface (UMI); trajectories via visual simultaneous localization and mapping (SLAM))</li><li><b>Egocentric human video</b>: most scalable, no action labels</li></ul>",
    "text": "",
    "image": "",
    "analogy": "",
@@ -4104,7 +4104,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Current paradigm:</b> foundation models (VLAs, world models) + sim/synthetic data + fleet data, replacing hand-built pipelines for unstructured tasks.",
+   "extra": "<b>Current paradigm:</b> foundation models (vision-language-action models (VLAs), world models) + sim/synthetic data + fleet data, replacing hand-built pipelines for unstructured tasks.",
    "source": "NVIDIA 2025, Cosmos World Foundation Model Platform for Physical AI",
    "reverse": false
   },
@@ -4132,7 +4132,7 @@
     "robotics::13-physical-ai-robot-foundation-models"
    ],
    "front": "What is a Vision-Language-Action (VLA) model?",
-   "back": "A model taking <b>images + a language instruction</b> (optionally proprioception) and <b>directly outputting robot actions</b>, usually a pre-trained VLM backbone plus an action head (tokens or diffusion/flow).",
+   "back": "A model taking <b>images + a language instruction</b> (optionally proprioception) and <b>directly outputting robot actions</b>, usually a pre-trained vision-language model (VLM) backbone plus an action head (tokens or diffusion/flow).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -4148,11 +4148,11 @@
     "robotics::13-physical-ai-robot-foundation-models"
    ],
    "front": "RT-1 vs. RT-2: what was RT-2's key idea?",
-   "back": "RT-1 trained from scratch on robot data only. <b>RT-2</b> wrote actions as <b>text tokens</b> and co-fine-tuned a web-pre-trained VLM on web + robot data, so web knowledge transferred to control.",
+   "back": "RT-1 trained from scratch on robot data only. <b>RT-2</b> wrote actions as <b>text tokens</b> and co-fine-tuned a web-pre-trained vision-language model (VLM) on web + robot data, so web knowledge transferred to control.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Result:</b> semantic generalisation absent from robot data ('pick up the extinct animal'). It coined the term VLA.",
+   "extra": "<b>Result:</b> semantic generalisation absent from robot data ('pick up the extinct animal'). It coined the term vision-language-action (VLA).",
    "source": "Brohan et al. 2023, RT-2 (RT-1:",
    "reverse": false
   },
@@ -4163,7 +4163,7 @@
    "tags": [
     "robotics::13-physical-ai-robot-foundation-models"
    ],
-   "front": "How do autoregressive VLAs (RT-2, OpenVLA) tokenise actions, and what is the drawback?",
+   "front": "How do autoregressive vision-language-action models (VLAs) (RT-2, OpenVLA) tokenise actions, and what is the drawback?",
    "back": "Each action dimension per step is <b>binned into 256 tokens</b>. At high control rates that yields many correlated tokens → slow inference, poor dexterous learning.",
    "text": "",
    "image": "",
@@ -4180,7 +4180,7 @@
     "robotics::13-physical-ai-robot-foundation-models"
    ],
    "front": "What does the FAST action tokenizer change?",
-   "back": "Applies a <b>DCT</b> to each action chunk, quantises, then compresses with BPE → far fewer tokens, ~5× faster training, and autoregressive VLAs that match diffusion-style models on dexterous tasks.",
+   "back": "Applies a <b>discrete cosine transform (DCT)</b> to each action chunk, quantises, then compresses with byte-pair encoding (BPE) → far fewer tokens, ~5× faster training, and autoregressive vision-language-action models (VLAs) that match diffusion-style models on dexterous tasks.",
    "text": "",
    "image": "",
    "analogy": "Like JPEG for motion: store the few frequencies that matter instead of every sample.",
@@ -4212,7 +4212,7 @@
     "robotics::13-physical-ai-robot-foundation-models"
    ],
    "front": "OpenVLA: architecture and significance?",
-   "back": "7B open VLA: Llama 2 + fused <b>SigLIP + DINOv2</b> encoders, 256-bin action tokens, trained on OXE. Beat the closed 55B RT-2-X and showed cheap <b>LoRA</b> fine-tuning on consumer GPUs.",
+   "back": "7B open vision-language-action (VLA): Llama 2 + fused <b>SigLIP + DINOv2</b> encoders, 256-bin action tokens, trained on Open X-Embodiment (OXE). Beat the closed 55B RT-2-X and showed cheap <b>low-rank adaptation (LoRA)</b> fine-tuning on consumer GPUs.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -4228,7 +4228,7 @@
     "robotics::13-physical-ai-robot-foundation-models"
    ],
    "front": "π0 (Physical Intelligence): what is the architecture?",
-   "back": "A pre-trained VLM (PaliGemma ~3B) plus a ~300M <b>action expert</b> that generates continuous action chunks by <b>flow matching</b>, enabling ~50 Hz dexterous control.",
+   "back": "A pre-trained vision-language model (VLM) (PaliGemma ~3B) plus a ~300M <b>action expert</b> that generates continuous action chunks by <b>flow matching</b>, enabling ~50 Hz dexterous control.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -4260,7 +4260,7 @@
     "robotics::13-physical-ai-robot-foundation-models"
    ],
    "front": "Flow matching vs. diffusion for action generation?",
-   "back": "Diffusion reverses a stochastic noising process over many steps. <b>Flow matching</b> regresses a <b>velocity field</b> moving noise to data along near-straight paths; inference integrates an ODE in ~5–10 steps → low latency.",
+   "back": "Diffusion reverses a stochastic noising process over many steps. <b>Flow matching</b> regresses a <b>velocity field</b> moving noise to data along near-straight paths; inference integrates an ordinary differential equation (ODE) in ~5–10 steps → low latency.",
    "text": "",
    "image": "",
    "analogy": "Diffusion is finding your way down a foggy mountain step by step; flow matching is learning the direct ski run.",
@@ -4276,8 +4276,8 @@
     "robotics::13-physical-ai-robot-foundation-models",
     "robotics::volatile"
    ],
-   "front": "System 1 / System 2 VLA architecture: what does each part do?",
-   "back": "<b>System 2:</b> large VLM reasoning slowly (few Hz), emitting a latent conditioning.<br><b>System 1:</b> small fast visuomotor policy turning it + fresh observations into actions at control rate (e.g. 200 Hz).",
+   "front": "System 1 / System 2 vision-language-action (VLA) architecture: what does each part do?",
+   "back": "<b>System 2:</b> large vision-language model (VLM) reasoning slowly (few Hz), emitting a latent conditioning.<br><b>System 1:</b> small fast visuomotor policy turning it + fresh observations into actions at control rate (e.g. 200 Hz).",
    "text": "",
    "image": "",
    "analogy": "A rally co-driver reading pace notes (slow, deliberate) while the driver's hands react instantly to the road.",
@@ -4293,8 +4293,8 @@
     "robotics::13-physical-ai-robot-foundation-models",
     "robotics::volatile"
    ],
-   "front": "Which trade-off does the dual-system VLA resolve?",
-   "back": "'General but slow' (big VLM) vs. 'fast but narrow' (small policy): each runs at its natural rate, <b>asynchronously</b>.",
+   "front": "Which trade-off does the dual-system vision-language-action (VLA) resolve?",
+   "back": "'General but slow' (big vision-language model (VLM)) vs. 'fast but narrow' (small policy): each runs at its natural rate, <b>asynchronously</b>.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -4310,7 +4310,7 @@
     "robotics::13-physical-ai-robot-foundation-models",
     "robotics::volatile"
    ],
-   "front": "Three-tier VLA hierarchy: what is a <b>'System 0'</b> layer?",
+   "front": "Three-tier vision-language-action (VLA) hierarchy: what is a <b>'System 0'</b> layer?",
    "back": "A small (~10M-parameter) network at ~<b>1 kHz</b> mapping full-body state to joint commands: a learned whole-body controller for balance and contact, typically trained in simulation to track reference motion.",
    "text": "",
    "image": "",
@@ -4379,7 +4379,7 @@
     "robotics::volatile"
    ],
    "front": "What training recipe do <b>open humanoid foundation policies</b> (e.g. NVIDIA GR00T N) follow?",
-   "back": "A VLM 'System 2' plus a diffusion-transformer/flow 'System 1', trained cross-embodiment on real tele-op, human video (latent actions) and synthetic data, then <b>post-trained per robot</b>.",
+   "back": "A vision-language model (VLM) 'System 2' plus a diffusion-transformer/flow 'System 1', trained cross-embodiment on real tele-op, human video (latent actions) and synthetic data, then <b>post-trained per robot</b>.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -4396,7 +4396,7 @@
     "robotics::volatile"
    ],
    "front": "<b>Orchestrator–executor</b> split in robot foundation models: what does each model do?",
-   "back": "<b>Orchestrator:</b> an embodied-reasoning VLM that plans, points at targets and checks progress.<br><b>Executor:</b> the VLA that carries out each step.",
+   "back": "<b>Orchestrator:</b> an embodied-reasoning vision-language model (VLM) that plans, points at targets and checks progress.<br><b>Executor:</b> the VLA that carries out each step.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -4412,7 +4412,7 @@
     "robotics::13-physical-ai-robot-foundation-models",
     "robotics::volatile"
    ],
-   "front": "What are <b>motion transfer</b> and <b>'thinking before acting'</b> in VLAs?",
+   "front": "What are <b>motion transfer</b> and <b>'thinking before acting'</b> in vision-language-action models (VLAs)?",
    "back": "<b>Motion Transfer:</b> learning from multi-embodiment data so skills transfer across robots without robot-specific post-training.<br><b>Thinking before acting:</b> the VLA interleaves language reasoning with actions (embodied chain-of-thought).",
    "text": "",
    "image": "",
@@ -4464,7 +4464,7 @@
     "robotics::volatile"
    ],
    "front": "What is the 2026 trend toward 'world-action models'?",
-   "back": "Start from a pre-trained <b>video generation model</b> (which already encodes dynamics) and train it to predict future frames <b>and actions</b> jointly, instead of adding an action head to a VLM.",
+   "back": "Start from a pre-trained <b>video generation model</b> (which already encodes dynamics) and train it to predict future frames <b>and actions</b> jointly, instead of adding an action head to a vision-language model (VLM).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -4480,7 +4480,7 @@
     "robotics::13-physical-ai-robot-foundation-models"
    ],
    "front": "Robot data pyramid: what are the three tiers, from scarce to abundant?",
-   "back": "<b>Real tele-operation</b> (best signal, costly) → <b>simulation/synthetic</b> (unlimited, sim-to-real gap) → <b>human video</b> (vast, no action labels). Plus web image–text via the VLM backbone.",
+   "back": "<b>Real tele-operation</b> (best signal, costly) → <b>simulation/synthetic</b> (unlimited, sim-to-real gap) → <b>human video</b> (vast, no action labels). Plus web image–text via the vision-language model (VLM) backbone.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -4496,7 +4496,7 @@
     "robotics::13-physical-ai-robot-foundation-models"
    ],
    "front": "How can policies learn from human video that has no action labels?",
-   "back": "<b>Latent action models</b> (e.g. LAPA): a VQ-VAE infers a discrete 'latent action' between frames; pre-train on those, then swap in a real action head. Also hand-pose retargeting.",
+   "back": "<b>Latent action models</b> (e.g. LAPA): a vector quantization (VQ)-VAE infers a discrete 'latent action' between frames; pre-train on those, then swap in a real action head. Also hand-pose retargeting.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -4512,12 +4512,12 @@
     "robotics::13-physical-ai-robot-foundation-models",
     "robotics::volatile"
    ],
-   "front": "Why apply RL to large VLAs, and how is the big backbone protected?",
+   "front": "Why apply reinforcement learning (RL) to large vision-language-action models (VLAs), and how is the big backbone protected?",
    "back": "Imitation plateaus below production reliability and speed; RL learns from the policy's <b>own experience</b>. Often RL acts only on a small head or the noise space (DSRL), keeping the backbone frozen.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Examples:</b> HIL-SERL with human corrections; Physical Intelligence's π*0.6/RECAP (advantage-conditioned training on autonomous roll-outs).",
+   "extra": "<b>Examples:</b> hardware-in-the-loop (HIL)-SERL with human corrections; Physical Intelligence's π*0.6/RECAP (advantage-conditioned training on autonomous roll-outs).",
    "source": "Physical Intelligence research blog",
    "reverse": false
   },
@@ -4528,7 +4528,7 @@
    "tags": [
     "robotics::13-physical-ai-robot-foundation-models"
    ],
-   "front": "A VLA needs ~100 ms per inference but the robot must move smoothly at 50 Hz. Main techniques?",
+   "front": "A vision-language-action (VLA) needs ~100 ms per inference but the robot must move smoothly at 50 Hz. Main techniques?",
    "back": "<b>Action chunking</b> (~1 s per inference), <b>asynchronous inference</b> (next chunk computed while the current runs), and <b>Real-Time Chunking</b>.",
    "text": "",
    "image": "",
@@ -4596,7 +4596,7 @@
     "robotics::volatile"
    ],
    "front": "How can a hobbyist get hands-on with Physical AI for a few hundred euros?",
-   "back": "<b>LeRobot</b> (Hugging Face: datasets, tele-op tools, ACT/Diffusion/π0/SmolVLA) + an <b>SO-101</b> leader/follower arm pair (~€100–250).",
+   "back": "<b>LeRobot</b> (Hugging Face: datasets, tele-op tools, action chunking transformer (ACT)/Diffusion/π0/SmolVLA) + an <b>SO-101</b> leader/follower arm pair (~€100–250).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -4662,7 +4662,7 @@
     "robotics::13-physical-ai-robot-foundation-models"
    ],
    "front": "Safety layers above the hardware for learned robot policies?",
-   "back": "<b>Standards:</b> ISO 10218 / ISO/TS 15066 (power-and-force limiting, speed-and-separation). <b>Control:</b> impedance control, CBF/MPC safety filters. <b>Semantic:</b> reasoning about hazards (ASIMOV benchmark), oversight, staged deployment.",
+   "back": "<b>Standards:</b> ISO 10218 / ISO/TS 15066 (power-and-force limiting, speed-and-separation). <b>Control:</b> impedance control, control barrier function (CBF)/MPC safety filters. <b>Semantic:</b> reasoning about hazards (ASIMOV benchmark), oversight, staged deployment.",
    "text": "",
    "image": "",
    "analogy": "",

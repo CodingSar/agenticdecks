@@ -47,7 +47,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Example:</b> two disks each fail 1%/year. Independent: both fail ≈ 0.01%. Sharing a power supply or firmware bug: closer to 1%. RAID math assumes independence that rarely holds.",
+   "extra": "<b>Example:</b> two disks each fail 1%/year. Independent: both fail ≈ 0.01%. Sharing a power supply or firmware bug: closer to 1%. redundant array of independent disks (RAID) math assumes independence that rarely holds.",
    "source": "Probability & Distributions",
    "reverse": false
   },
@@ -299,7 +299,7 @@
     "quant::probability"
    ],
    "front": "What does the <b>Central Limit Theorem</b> state?",
-   "back": "For i.i.d. variables with mean μ and finite variance σ², \\(\\sqrt n(\\bar X_n-\\mu)\\xrightarrow{d}N(0,\\sigma^2)\\): sums and means are approximately normal whatever the individual distribution.",
+   "back": "For independent and identically distributed (i.i.d.) variables with mean μ and finite variance σ², \\(\\sqrt n(\\bar X_n-\\mu)\\xrightarrow{d}N(0,\\sigma^2)\\): sums and means are approximately normal whatever the individual distribution.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -314,7 +314,7 @@
    "tags": [
     "quant::probability"
    ],
-   "front": "What is the practical consequence of the CLT, and when does it fail?",
+   "front": "What is the practical consequence of the central limit theorem (CLT), and when does it fail?",
    "back": "Error bars on averages work even for skewed data (e.g. daily mean latency over a million requests). It needs finite variance, so it silently fails for power-law data.",
    "text": "",
    "image": "",
@@ -330,7 +330,7 @@
    "tags": [
     "quant::probability"
    ],
-   "front": "Why is the Gaussian the limit in the CLT?",
+   "front": "Why is the Gaussian the limit in the central limit theorem (CLT)?",
    "back": "Adding independent variables <b>convolves</b> their densities; the Gaussian is the fixed point of \"convolve and rescale\" and the maximum-entropy distribution for a given variance.",
    "text": "",
    "image": "",
@@ -463,7 +463,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Underlies:</b> KL ≥ 0, the ELBO, \\(E[X^2]\\ge E[X]^2\\), and why the log of an average exceeds the average of logs.<br><b>Geometry:</b> A chord of a convex function lies above the curve. \\(E[f(X)]\\) is a weighted average of points on the curve, so it sits on or above the curve evaluated at the average x. Underlies: KL divergence \\(\\ge 0\\), the Evidence Lower Bound (ELBO), \\(E[X^2]\\ge E[X]^2\\), and why the log of an average exceeds the average of logs.",
+   "extra": "<b>Underlies:</b> Kullback–Leibler (KL) divergence ≥ 0, the ELBO, \\(E[X^2]\\ge E[X]^2\\), and why the log of an average exceeds the average of logs.<br><b>Geometry:</b> A chord of a convex function lies above the curve. \\(E[f(X)]\\) is a weighted average of points on the curve, so it sits on or above the curve evaluated at the average x. Underlies: KL divergence \\(\\ge 0\\), the Evidence Lower Bound (ELBO), \\(E[X^2]\\ge E[X]^2\\), and why the log of an average exceeds the average of logs.",
    "source": "Probability & Distributions",
    "reverse": false
   },
@@ -602,7 +602,7 @@
    "tags": [
     "quant::information_theory"
    ],
-   "front": "How do cross-entropy, entropy and KL divergence relate?",
+   "front": "How do cross-entropy, entropy and Kullback–Leibler (KL) divergence relate?",
    "back": "\\(H(p,q)=H(p)+\\mathrm{KL}(p\\,\\|\\,q)\\). H(p) doesn't depend on the model, so <b>minimising cross-entropy = minimising KL = maximising likelihood</b>.",
    "text": "",
    "image": "",
@@ -618,12 +618,12 @@
    "tags": [
     "quant::information_theory"
    ],
-   "front": "Define <b>KL divergence</b> and what it measures.",
+   "front": "Define <b>Kullback–Leibler (KL) divergence</b> and what it measures.",
    "back": "\\(\\mathrm{KL}(p\\,\\|\\,q)=E_p[\\log(p/q)]\\ge0\\): the extra bits (log-loss) wasted by using model q when the truth is p.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Example:</b> RLHF keeps a KL penalty between the tuned and base model: improve the reward without drifting far from what you were.",
+   "extra": "<b>Example:</b> reinforcement learning from human feedback (RLHF) keeps a KL penalty between the tuned and base model: improve the reward without drifting far from what you were.",
    "source": "Information Theory",
    "reverse": false
   },
@@ -634,7 +634,7 @@
    "tags": [
     "quant::information_theory"
    ],
-   "front": "Why isn't KL divergence a true distance?",
+   "front": "Why isn't Kullback–Leibler (KL) divergence a true distance?",
    "back": "It is asymmetric (\\(\\mathrm{KL}(p\\|q)\\ne\\mathrm{KL}(q\\|p)\\)) and violates the triangle inequality.",
    "text": "",
    "image": "",
@@ -911,7 +911,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Example:</b> LoRA learns \\(\\Delta W=AB\\) with A d×8 and B 8×d instead of a full d×d update, betting that the needed change is low-rank.",
+   "extra": "<b>Example:</b> low-rank adaptation (LoRA) learns \\(\\Delta W=AB\\) with A d×8 and B 8×d instead of a full d×d update, betting that the needed change is low-rank.",
    "source": "Linear Algebra & Calculus",
    "reverse": false
   },
@@ -954,7 +954,7 @@
    "tags": [
     "quant::linear_algebra"
    ],
-   "front": "What does the <b>SVD</b> \\(A=U\\Sigma V^\\top\\) say geometrically?",
+   "front": "What does the <b>singular value decomposition (SVD)</b> \\(A=U\\Sigma V^\\top\\) say geometrically?",
    "back": "Every linear map = rotate/reflect (\\(V^\\top\\)), stretch along the axes (Σ), rotate/reflect (U). The unit sphere maps to an ellipsoid with semi-axes \\(\\sigma_iu_i\\). Works for non-square matrices.",
    "text": "",
    "image": "<img src=\"svd_map.svg\">",
@@ -1626,7 +1626,7 @@
    "tags": [
     "quant::inference"
    ],
-   "front": "FWER vs FDR control: what does each limit?",
+   "front": "family-wise error rate (FWER) vs false discovery rate (FDR) control: what does each limit?",
    "back": "<b>FWER</b>: P(at least one false rejection), e.g. Bonferroni (test at α/m); strict, power collapses as m grows. <b>FDR</b>: the expected fraction of rejections that are false, e.g. Benjamini–Hochberg.",
    "text": "",
    "image": "",
@@ -1850,12 +1850,12 @@
    "tags": [
     "quant::inference"
    ],
-   "front": "Why is maximum likelihood estimation a <b>KL projection</b>?",
+   "front": "Why is maximum likelihood estimation a <b>Kullback–Leibler (KL) divergence projection</b>?",
    "back": "Average log-likelihood → \\(-H(p^*)-\\mathrm{KL}(p^*\\|p_\\theta)\\), so maximising likelihood minimises KL from the data distribution to the model: the KL-closest point on the model manifold.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "If the truth is off the model surface (misspecification), MLE converges to the KL-nearest point rather than to nonsense.<br><b>Geometry:</b> The model family is a curved surface (manifold) inside the space of all distributions. The empirical distribution is a point off that surface. MLE finds the closest point on the surface, with KL as the notion of &quot;closest&quot;. If the truth is not on the surface (misspecification), MLE converges to the KL-nearest point rather than to nonsense.",
+   "extra": "If the truth is off the model surface (misspecification), maximum likelihood estimate (MLE) converges to the KL-nearest point rather than to nonsense.<br><b>Geometry:</b> The model family is a curved surface (manifold) inside the space of all distributions. The empirical distribution is a point off that surface. MLE finds the closest point on the surface, with KL as the notion of &quot;closest&quot;. If the truth is not on the surface (misspecification), MLE converges to the KL-nearest point rather than to nonsense.",
    "source": "Statistical Inference",
    "reverse": false
   },
@@ -1899,7 +1899,7 @@
     "quant::inference"
    ],
    "front": "What does the <b>Cramér–Rao bound</b> say?",
-   "back": "Any unbiased estimator has \\(\\mathrm{Cov}(\\hat\\theta)\\succeq I_n(\\theta)^{-1}\\) (scalar: \\(\\mathrm{Var}\\ge1/(nI_1)\\)): variance ≥ inverse curvature. The MLE attains it asymptotically.",
+   "back": "Any unbiased estimator has \\(\\mathrm{Cov}(\\hat\\theta)\\succeq I_n(\\theta)^{-1}\\) (scalar: \\(\\mathrm{Var}\\ge1/(nI_1)\\)): variance ≥ inverse curvature. The maximum likelihood estimate (MLE) attains it asymptotically.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1914,7 +1914,7 @@
    "tags": [
     "quant::inference"
    ],
-   "front": "What is the asymptotic distribution of the MLE?",
+   "front": "What is the asymptotic distribution of the maximum likelihood estimate (MLE)?",
    "back": "\\(\\sqrt n(\\hat\\theta-\\theta_0)\\xrightarrow{d}N\\big(0,I(\\theta_0)^{-1}\\big)\\), under regularity conditions.",
    "text": "",
    "image": "",
@@ -1930,8 +1930,8 @@
    "tags": [
     "quant::inference"
    ],
-   "front": "Core idea of the proof that the MLE is asymptotically normal?",
-   "back": "Taylor-expand the score at \\(\\theta_0\\): the score is a sum (CLT → Gaussian), the Hessian an average (LLN → nI). So \\(\\hat\\theta-\\theta_0\\approx\\) noise / curvature.",
+   "front": "Core idea of the proof that the maximum likelihood estimate (MLE) is asymptotically normal?",
+   "back": "Taylor-expand the score at \\(\\theta_0\\): the score is a sum (central limit theorem (CLT) → Gaussian), the Hessian an average (law of large numbers (LLN) → nI). So \\(\\hat\\theta-\\theta_0\\approx\\) noise / curvature.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1995,7 +1995,7 @@
     "quant::inference"
    ],
    "front": "In an exponential family \\(p(x\\mid\\eta)=h(x)\\exp(\\eta^\\top T(x)-A(\\eta))\\), what do the derivatives of \\(A\\) give?",
-   "back": "\\(\\nabla A=E[T(x)]\\) and \\(\\nabla^2A=\\mathrm{Cov}[T(x)]\\). So A is convex, the log-likelihood is concave, and the MLE is <b>moment matching</b>.",
+   "back": "\\(\\nabla A=E[T(x)]\\) and \\(\\nabla^2A=\\mathrm{Cov}[T(x)]\\). So A is convex, the log-likelihood is concave, and the maximum likelihood estimate (MLE) is <b>moment matching</b>.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2058,8 +2058,8 @@
    "tags": [
     "quant::inference"
    ],
-   "front": "Under model misspecification, what does the MLE converge to, and with what covariance?",
-   "back": "To the KL-closest (\"pseudo-true\") parameter, with the <b>sandwich</b> covariance \\(A^{-1}BA^{-1}/n\\) (A = curvature, B = score variance), which collapses to \\(I^{-1}/n\\) when the model is correct.",
+   "front": "Under model misspecification, what does the maximum likelihood estimate (MLE) converge to, and with what covariance?",
+   "back": "To the Kullback–Leibler (KL)-closest (\"pseudo-true\") parameter, with the <b>sandwich</b> covariance \\(A^{-1}BA^{-1}/n\\) (A = curvature, B = score variance), which collapses to \\(I^{-1}/n\\) when the model is correct.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2075,7 +2075,7 @@
     "quant::inference"
    ],
    "front": "What is the <b>James–Stein</b> phenomenon?",
-   "back": "For \\(x\\sim N(\\theta,I_d)\\) with d ≥ 3, shrinking x toward a common point gives lower total mean squared error than the MLE x, for <b>every</b> θ.",
+   "back": "For \\(x\\sim N(\\theta,I_d)\\) with d ≥ 3, shrinking x toward a common point gives lower total mean squared error than the maximum likelihood estimate (MLE) x, for <b>every</b> θ.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2106,7 +2106,7 @@
    "tags": [
     "quant::inference"
    ],
-   "front": "How does the <b>EM algorithm</b> work, viewed as a lower bound?",
+   "front": "How does the <b>expectation–maximization (EM) algorithm</b> work, viewed as a lower bound?",
    "back": "\\(\\log p(x\\mid\\theta)=\\mathcal L(q,\\theta)+\\mathrm{KL}(q\\|p(z\\mid x,\\theta))\\). E-step: set q to the posterior over latents so the bound touches; M-step: maximise the bound over θ. Likelihood never decreases.",
    "text": "",
    "image": "",
@@ -2122,8 +2122,8 @@
    "tags": [
     "quant::inference"
    ],
-   "front": "<b>AIC vs BIC</b>: what does each target?",
-   "back": "AIC \\(=-2\\ell+2k\\) targets prediction (≈ leave-one-out CV; tends to overfit slightly). BIC \\(=-2\\ell+k\\log n\\) targets identifying the true model (consistent if it is among the candidates).",
+   "front": "<b>Akaike information criterion (AIC) vs Bayesian information criterion (BIC)</b>: what does each target?",
+   "back": "AIC \\(=-2\\ell+2k\\) targets prediction (≈ leave-one-out cross-validation (CV); tends to overfit slightly). BIC \\(=-2\\ell+k\\log n\\) targets identifying the true model (consistent if it is among the candidates).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2154,7 +2154,7 @@
    "tags": [
     "quant::regression"
    ],
-   "front": "What do the OLS <b>normal equations</b> say geometrically?",
+   "front": "What do the ordinary least squares (OLS) <b>normal equations</b> say geometrically?",
    "back": "\\(X^\\top(y-X\\hat\\beta)=0\\): the residual is perpendicular to every column of X. Solving gives \\(\\hat\\beta=(X^\\top X)^{-1}X^\\top y\\).",
    "text": "",
    "image": "",
@@ -2283,7 +2283,7 @@
     "quant::regression"
    ],
    "front": "What does the <b>Gauss–Markov</b> theorem say, and what does it not require?",
-   "back": "If \\(E[\\varepsilon]=0\\) and \\(\\mathrm{Cov}(\\varepsilon)=\\sigma^2I\\), OLS is BLUE: minimum variance among linear unbiased estimators. Normality is <b>not</b> required.",
+   "back": "If \\(E[\\varepsilon]=0\\) and \\(\\mathrm{Cov}(\\varepsilon)=\\sigma^2I\\), ordinary least squares (OLS) is best linear unbiased estimator (BLUE): minimum variance among linear unbiased estimators. Normality is <b>not</b> required.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2298,7 +2298,7 @@
    "tags": [
     "quant::regression"
    ],
-   "front": "What is \\(\\mathrm{Cov}(\\hat\\beta)\\) for OLS, and what shape is the confidence region?",
+   "front": "What is \\(\\mathrm{Cov}(\\hat\\beta)\\) for ordinary least squares (OLS), and what shape is the confidence region?",
    "back": "\\(\\sigma^2(X^\\top X)^{-1}\\): the confidence ellipsoid is the inverse of the data cloud's shape, long where the predictors have little spread.",
    "text": "",
    "image": "",
@@ -2314,7 +2314,7 @@
    "tags": [
     "quant::regression"
    ],
-   "front": "Under what noise model is OLS the MLE, and what do other noise models give?",
+   "front": "Under what noise model is ordinary least squares (OLS) the maximum likelihood estimate (MLE), and what do other noise models give?",
    "back": "Gaussian noise → squared loss → OLS. Laplace noise → absolute loss (median regression); Student-t → robust regression that downweights outliers.",
    "text": "",
    "image": "",
@@ -2330,12 +2330,12 @@
    "tags": [
     "quant::regression"
    ],
-   "front": "What does <b>ridge regression</b> do in the SVD basis of X?",
+   "front": "What does <b>ridge regression</b> do in the singular value decomposition (SVD) basis of X?",
    "back": "\\(\\hat\\beta=(X^\\top X+\\lambda I)^{-1}X^\\top y\\) scales the fit along each \\(u_j\\) by \\(d_j^2/(d_j^2+\\lambda)\\): high-variance directions barely change, thin (noisy) directions shrink toward 0.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "A soft version of principal-component regression, which uses a hard 0/1 cutoff.<br><b>Geometry:</b> Ridge distrusts exactly the directions where the data is thin and the OLS coefficient is therefore noisy. It is a &quot;soft&quot; version of principal component regression, which uses a hard 0/1 cutoff instead of a smooth factor.",
+   "extra": "A soft version of principal-component regression, which uses a hard 0/1 cutoff.<br><b>Geometry:</b> Ridge distrusts exactly the directions where the data is thin and the ordinary least squares (OLS) coefficient is therefore noisy. It is a &quot;soft&quot; version of principal component regression, which uses a hard 0/1 cutoff instead of a smooth factor.",
    "source": "Regression & GLMs",
    "reverse": false
   },
@@ -2364,7 +2364,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "As MAP estimates under Gaussian noise: ridge = a {{c1::Gaussian}} prior on β; lasso = a {{c2::Laplace (double-exponential)}} prior; λ is a {{c3::noise-to-signal ratio}} (\\(\\sigma^2/\\tau^2\\) for ridge).",
+   "text": "As maximum a posteriori (MAP) estimates under Gaussian noise: ridge = a {{c1::Gaussian}} prior on β; lasso = a {{c2::Laplace (double-exponential)}} prior; λ is a {{c3::noise-to-signal ratio}} (\\(\\sigma^2/\\tau^2\\) for ridge).",
    "image": "",
    "analogy": "",
    "extra": "Penalty = negative log prior. The lasso's zeros are a property of the MAP point only; truly sparse Bayesian answers need spike-and-slab or horseshoe priors.<br><b>Geometry:</b> Penalty = negative log prior. λ is a noise-to-signal ratio: noisy data or a tight prior means more shrinkage. Caveat: the lasso&#x27;s sparsity is a property of the MAP point only; the full Laplace posterior puts zero mass on exact zeros. Truly sparse Bayesian answers need spike-and-slab or horseshoe priors.",
@@ -2427,11 +2427,11 @@
     "quant::regression"
    ],
    "front": "What breaks under <b>heteroskedasticity</b>?",
-   "back": "OLS stays unbiased and consistent but is no longer efficient, and the usual standard errors are wrong.",
+   "back": "ordinary least squares (OLS) stays unbiased and consistent but is no longer efficient, and the usual standard errors are wrong.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Geometry:</b> GLS is OLS after whitening the noise: a perpendicular projection in the metric defined by \\(\\Omega^{-1}\\). When noise is an ellipsoid rather than a sphere, &quot;perpendicular&quot; must be measured with the Mahalanobis ruler; precise observations get more say.",
+   "extra": "<b>Geometry:</b> generalized least squares (GLS) is OLS after whitening the noise: a perpendicular projection in the metric defined by \\(\\Omega^{-1}\\). When noise is an ellipsoid rather than a sphere, &quot;perpendicular&quot; must be measured with the Mahalanobis ruler; precise observations get more say.",
    "source": "Regression & GLMs",
    "reverse": false
   },
@@ -2443,7 +2443,7 @@
     "quant::regression"
    ],
    "front": "Two standard fixes for heteroskedasticity?",
-   "back": "Keep OLS with robust \"sandwich\" standard errors, or use GLS: OLS after whitening the noise, so precise observations get more weight.",
+   "back": "Keep ordinary least squares (OLS) with robust \"sandwich\" standard errors, or use generalized least squares (GLS): OLS after whitening the noise, so precise observations get more weight.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2458,7 +2458,7 @@
    "tags": [
     "quant::regression"
    ],
-   "front": "How does the OLS line differ from the first principal component of 2-D data?",
+   "front": "How does the ordinary least squares (OLS) line differ from the first principal component of 2-D data?",
    "back": "OLS minimises <b>vertical</b> distances (asymmetric in x and y); PCA minimises <b>perpendicular</b> distances (symmetric; the ellipse's major axis). The OLS line is always flatter.",
    "text": "",
    "image": "",
@@ -2475,7 +2475,7 @@
     "quant::regression"
    ],
    "front": "What is <b>attenuation bias</b>?",
-   "back": "Measurement error in x flattens the OLS slope by the reliability ratio \\(\\sigma_x^2/(\\sigma_x^2+\\sigma_{\\text{err}}^2)\\).",
+   "back": "Measurement error in x flattens the ordinary least squares (OLS) slope by the reliability ratio \\(\\sigma_x^2/(\\sigma_x^2+\\sigma_{\\text{err}}^2)\\).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2506,8 +2506,8 @@
    "tags": [
     "quant::regression"
    ],
-   "front": "What is the leave-one-out CV shortcut for linear smoothers \\(\\hat y=Sy\\)?",
-   "back": "\\(e_{(i)}=(y_i-\\hat y_i)/(1-S_{ii})\\): one fit gives all n leave-one-out residuals. GCV replaces \\(S_{ii}\\) by tr(S)/n.",
+   "front": "What is the leave-one-out cross-validation (CV) shortcut for linear smoothers \\(\\hat y=Sy\\)?",
+   "back": "\\(e_{(i)}=(y_i-\\hat y_i)/(1-S_{ii})\\): one fit gives all n leave-one-out residuals. generalized cross-validation (GCV) replaces \\(S_{ii}\\) by tr(S)/n.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2538,8 +2538,8 @@
    "tags": [
     "quant::regression"
    ],
-   "front": "What is special about the <b>canonical link</b> in a GLM?",
-   "back": "Natural parameter = linear predictor (logit for Bernoulli, log for Poisson, identity for Gaussian). Score equations become \\(X^\\top(y-\\hat\\mu)=0\\) and the likelihood is concave: residual ⊥ predictors, as in OLS.",
+   "front": "What is special about the <b>canonical link</b> in a generalized linear model (GLM)?",
+   "back": "Natural parameter = linear predictor (logit for Bernoulli, log for Poisson, identity for Gaussian). Score equations become \\(X^\\top(y-\\hat\\mu)=0\\) and the likelihood is concave: residual ⊥ predictors, as in ordinary least squares (OLS).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2587,7 +2587,7 @@
     "quant::regression"
    ],
    "front": "What happens to logistic regression under <b>perfect separation</b>?",
-   "back": "The MLE doesn't exist: scaling w up always raises the likelihood, so ‖w‖ → ∞ (huge coefficients and SEs, convergence warnings). Fix: L1/L2 penalty, Firth correction, weakly informative priors.",
+   "back": "The maximum likelihood estimate (MLE) doesn't exist: scaling w up always raises the likelihood, so ‖w‖ → ∞ (huge coefficients and SEs, convergence warnings). Fix: L1/L2 penalty, Firth correction, weakly informative priors.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2602,7 +2602,7 @@
    "tags": [
     "quant::regression"
    ],
-   "front": "How is a GLM fitted?",
+   "front": "How is a generalized linear model (GLM) fitted?",
    "back": "<b>Iteratively Reweighted Least Squares</b>: Newton/Fisher scoring where each step solves a weighted least-squares problem on a working response, re-linearising around the current fit.",
    "text": "",
    "image": "",
@@ -2618,8 +2618,8 @@
    "tags": [
     "quant::regression"
    ],
-   "front": "What is <b>deviance</b> in a GLM?",
-   "back": "\\(D=2[\\ell_{\\text{saturated}}-\\ell_{\\text{fitted}}]\\): the GLM's analogue of the residual sum of squares (RSS/σ² for Gaussian). Deviance differences between nested models are LR statistics, ≈ χ².",
+   "front": "What is <b>deviance</b> in a generalized linear model (GLM)?",
+   "back": "\\(D=2[\\ell_{\\text{saturated}}-\\ell_{\\text{fitted}}]\\): the GLM's analogue of the residual sum of squares (RSS/σ² for Gaussian). Deviance differences between nested models are likelihood ratio (LR) statistics, ≈ χ².",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2698,8 +2698,8 @@
    "tags": [
     "quant::regression"
    ],
-   "front": "How do smoothing splines / GAMs fit nonlinear functions while remaining linear models?",
-   "back": "Expand x in a basis (B-splines) and penalise roughness \\(\\lambda\\int f''(x)^2dx=\\lambda\\beta^\\top\\Omega\\beta\\): generalised ridge regression, with λ chosen by CV or REML.",
+   "front": "How do smoothing splines / generalized additive models (GAMs) fit nonlinear functions while remaining linear models?",
+   "back": "Expand x in a basis (B-splines) and penalise roughness \\(\\lambda\\int f''(x)^2dx=\\lambda\\beta^\\top\\Omega\\beta\\): generalised ridge regression, with λ chosen by cross-validation (CV) or restricted maximum likelihood (REML).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2938,7 +2938,7 @@
    "tags": [
     "quant::causal"
    ],
-   "front": "The naive treated-vs-control difference = ATE + what?",
+   "front": "The naive treated-vs-control difference = average treatment effect (ATE) + what?",
    "back": "Selection bias: \\(E[Y(0)\\mid T=1]-E[Y(0)\\mid T=0]\\). Randomisation makes treatment independent of potential outcomes, so this term is zero.",
    "text": "",
    "image": "",
@@ -2954,7 +2954,7 @@
    "tags": [
     "quant::causal"
    ],
-   "front": "What must hold to identify the ATE from observational data?",
+   "front": "What must hold to identify the average treatment effect (ATE) from observational data?",
    "back": "<b>Conditional ignorability</b> \\(T\\perp Y(t)\\mid X\\) (no unmeasured confounders) and <b>overlap</b> \\(0<P(T=1\\mid X)<1\\).",
    "text": "",
    "image": "",
@@ -3019,7 +3019,7 @@
     "quant::causal"
    ],
    "front": "What problem do <b>instrumental variables</b> solve, and what must an instrument satisfy?",
-   "back": "A regressor correlated with the error (confounding, reverse causation, measurement error) makes OLS inconsistent. The instrument must be <b>relevant</b> (moves x) and <b>excluded</b> (affects y only through x).",
+   "back": "A regressor correlated with the error (confounding, reverse causation, measurement error) makes ordinary least squares (OLS) inconsistent. The instrument must be <b>relevant</b> (moves x) and <b>excluded</b> (affects y only through x).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3035,7 +3035,7 @@
     "quant::causal"
    ],
    "front": "What does Two-Stage Least Squares do geometrically?",
-   "back": "Projects x onto the instrument's span (the clean part, orthogonal to the error), then regresses y on that projection. A weak instrument leaves a tiny sliver: noisy and biased toward OLS.",
+   "back": "Projects x onto the instrument's span (the clean part, orthogonal to the error), then regresses y on that projection. A weak instrument leaves a tiny sliver: noisy and biased toward ordinary least squares (OLS).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3322,7 +3322,7 @@
    "tags": [
     "quant::bayes"
    ],
-   "front": "What is the conceptual weakness of the MAP estimate?",
+   "front": "What is the conceptual weakness of the maximum a posteriori (MAP) estimate?",
    "back": "It is not invariant to reparameterisation (densities transform with a Jacobian, so the peak moves when you change coordinates), and it ignores posterior mass.",
    "text": "",
    "image": "",
@@ -3355,7 +3355,7 @@
     "quant::bayes"
    ],
    "front": "What does <b>de Finetti's theorem</b> say?",
-   "back": "An infinite exchangeable (order-invariant) sequence is a mixture of i.i.d. sequences: if order doesn't matter to you, you are acting as if there is an unknown parameter with a prior.",
+   "back": "An infinite exchangeable (order-invariant) sequence is a mixture of independent and identically distributed (i.i.d.) sequences: if order doesn't matter to you, you are acting as if there is an unknown parameter with a prior.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3419,7 +3419,7 @@
     "quant::bayes"
    ],
    "front": "Why does the <b>typical set</b> matter for Bayesian computation?",
-   "back": "In high dimensions almost all posterior mass lies in a thin shell away from the mode, so expectations come from that shell: MAP optimisation finds an atypical point, and samplers must explore the shell.",
+   "back": "In high dimensions almost all posterior mass lies in a thin shell away from the mode, so expectations come from that shell: maximum a posteriori (MAP) optimisation finds an atypical point, and samplers must explore the shell.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3435,7 +3435,7 @@
     "quant::bayes"
    ],
    "front": "What is the <b>Laplace approximation</b>?",
-   "back": "A Gaussian at the MAP with covariance = inverse Hessian of the negative log-posterior: \\(N(\\hat\\theta_{MAP},H^{-1})\\). Purely local; poor for skewed, multimodal or boundary posteriors.",
+   "back": "A Gaussian at the maximum a posteriori (MAP) with covariance = inverse Hessian of the negative log-posterior: \\(N(\\hat\\theta_{MAP},H^{-1})\\). Purely local; poor for skewed, multimodal or boundary posteriors.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3503,7 +3503,7 @@
    "text": "",
    "image": "",
    "analogy": "A frictionless puck flicked across the negative-log-posterior surface: it glides along the valley's contours instead of stumbling randomly.",
-   "extra": "Cost per independent draw ~d^(5/4) vs d² for random walk. NUTS picks trajectory length automatically.",
+   "extra": "Cost per independent draw ~d^(5/4) vs d² for random walk. No-U-Turn Sampler (NUTS) picks trajectory length automatically.",
    "source": "Bayesian Reasoning",
    "reverse": false
   },
@@ -3515,7 +3515,7 @@
     "quant::bayes"
    ],
    "front": "What is <b>Neal's funnel</b>?",
-   "back": "In hierarchical models (\\(\\alpha_j\\sim N(\\mu,\\tau)\\)), small τ squeezes the α's together and large τ frees them: curvature varies by orders of magnitude, no single step size works, and HMC reports divergences.",
+   "back": "In hierarchical models (\\(\\alpha_j\\sim N(\\mu,\\tau)\\)), small τ squeezes the α's together and large τ frees them: curvature varies by orders of magnitude, no single step size works, and Hamiltonian Monte Carlo (HMC) reports divergences.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3548,7 +3548,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "MCMC diagnostics: {{c1::\\(\\hat R\\)}} compares between- and within-chain variance (want &lt; 1.01); {{c2::effective sample size (ESS)}} counts equivalent independent draws; {{c3::divergences}} (HMC) mean estimates are biased, not merely noisy.",
+   "text": "Markov chain Monte Carlo (MCMC) diagnostics: {{c1::\\(\\hat R\\)}} compares between- and within-chain variance (want &lt; 1.01); {{c2::effective sample size (ESS)}} counts equivalent independent draws; {{c3::divergences}} (HMC) mean estimates are biased, not merely noisy.",
    "image": "",
    "analogy": "Search parties dropped at different spots: only when they all report the same territory do you trust the map.",
    "extra": "R-hat can only detect non-convergence, never prove convergence.<br><b>Geometry:</b> \\(\\hat R\\) is a one-way Analysis of Variance (ANOVA) across chains: if chains started in different places still disagree about where the mass is, none of them can be trusted. It can only detect non-convergence, never prove convergence.",
@@ -3563,7 +3563,7 @@
     "quant::bayes"
    ],
    "front": "What does <b>variational inference</b> optimise?",
-   "back": "It picks q from a tractable family to minimise \\(\\mathrm{KL}(q\\|p(\\theta\\mid x))\\), by maximising the ELBO, since \\(\\log p(x)=\\mathrm{ELBO}(q)+\\mathrm{KL}(q\\|p(\\theta\\mid x))\\).",
+   "back": "It picks q from a tractable family to minimise \\(\\mathrm{KL}(q\\|p(\\theta\\mid x))\\), by maximising the evidence lower bound (ELBO), since \\(\\log p(x)=\\mathrm{ELBO}(q)+\\mathrm{KL}(q\\|p(\\theta\\mid x))\\).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3578,8 +3578,8 @@
    "tags": [
     "quant::bayes"
    ],
-   "front": "Reverse KL(q‖p) vs forward KL(p‖q) when fitting a unimodal q to a multimodal p?",
-   "back": "<b>Reverse</b> (variational inference): mode-seeking, locks onto one mode, too narrow. <b>Forward</b> (maximum likelihood, EP): mass-covering, straddles all modes and puts mass in the empty valley between them.",
+   "front": "Reverse Kullback–Leibler (KL) divergence KL(q‖p) vs forward KL(p‖q) when fitting a unimodal q to a multimodal p?",
+   "back": "<b>Reverse</b> (variational inference): mode-seeking, locks onto one mode, too narrow. <b>Forward</b> (maximum likelihood, expectation propagation (EP)): mass-covering, straddles all modes and puts mass in the empty valley between them.",
    "text": "",
    "image": "<img src=\"kl_modes.svg\">",
    "analogy": "",
@@ -3610,7 +3610,7 @@
    "tags": [
     "quant::bayes"
    ],
-   "front": "How does GP regression predict, and what does it cost?",
+   "front": "How does Gaussian process (GP) regression predict, and what does it cost?",
    "back": "By Gaussian conditioning on the observed points: mean \\(k_*^\\top(K+\\sigma^2I)^{-1}y\\); the variance pinches near the data and returns to the prior far away. Cost \\(O(n^3)\\).",
    "text": "",
    "image": "",
@@ -3626,7 +3626,7 @@
    "tags": [
     "quant::bayes"
    ],
-   "front": "How are Bayesian linear regression, ridge, kernel ridge and GP regression related?",
+   "front": "How are Bayesian linear regression, ridge, kernel ridge and Gaussian process (GP) regression related?",
    "back": "Bayesian linear regression with prior \\(N(0,\\tau^2I)\\) has posterior mean = ridge (λ = σ²/τ²). Swapping x for features φ(x) induces a kernel; the GP posterior mean = kernel ridge, plus a predictive variance.",
    "text": "",
    "image": "",
@@ -3722,7 +3722,7 @@
    "tags": [
     "quant::ml"
    ],
-   "front": "With a constant learning rate η and batch size B, where does SGD end up?",
+   "front": "With a constant learning rate η and batch size B, where does stochastic gradient descent (SGD) end up?",
    "back": "Hovering in a noise ball of size ∝ η/B instead of converging; decaying η gives convergence. The noise biases it toward flat minima (implicit regularisation).",
    "text": "",
    "image": "",
@@ -3759,7 +3759,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "Affine-invariant; can be attracted to saddles. L-BFGS, Gauss–Newton and natural gradient approximate it. Preconditioning = choosing a ruler under which the landscape is isotropic.<br><b>Geometry:</b> Multiplying by \\(H^{-1}\\) is a change of coordinates that makes the elliptical valley round, after which the gradient points straight at the minimum. Preconditioning in general = choosing a ruler under which the landscape is isotropic.",
+   "extra": "Affine-invariant; can be attracted to saddles. limited-memory Broyden–Fletcher–Goldfarb–Shanno (L-BFGS), Gauss–Newton and natural gradient approximate it. Preconditioning = choosing a ruler under which the landscape is isotropic.<br><b>Geometry:</b> Multiplying by \\(H^{-1}\\) is a change of coordinates that makes the elliptical valley round, after which the gradient points straight at the minimum. Preconditioning in general = choosing a ruler under which the landscape is isotropic.",
    "source": "Machine Learning",
    "reverse": false
   },
@@ -3770,7 +3770,7 @@
    "tags": [
     "quant::ml"
    ],
-   "front": "What does <b>momentum</b> add to SGD?",
+   "front": "What does <b>momentum</b> add to stochastic gradient descent (SGD)?",
    "back": "A running average of gradients: zigzag components across the valley cancel, components along the floor accumulate. Improves dependence on the condition number from κ to √κ.",
    "text": "",
    "image": "",
@@ -3787,7 +3787,7 @@
     "quant::ml"
    ],
    "front": "What does <b>Adam</b> add on top of momentum?",
-   "back": "Per-coordinate scaling by a running RMS of gradients: a cheap diagonal preconditioner, so step size is roughly scale-invariant per parameter. It can't fix valleys that run diagonally.",
+   "back": "Per-coordinate scaling by a running root mean square (RMS) of gradients: a cheap diagonal preconditioner, so step size is roughly scale-invariant per parameter. It can't fix valleys that run diagonally.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3819,11 +3819,11 @@
     "quant::ml"
    ],
    "front": "What is the <b>natural gradient</b>?",
-   "back": "\\(F^{-1}\\nabla L\\), with F the Fisher information: steepest descent when step length is measured by KL between the model's distributions, not by parameter distance. Reparameterisation-invariant.",
+   "back": "\\(F^{-1}\\nabla L\\), with F the Fisher information: steepest descent when step length is measured by Kullback–Leibler (KL) divergence between the model's distributions, not by parameter distance. Reparameterisation-invariant.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "Relatives: Fisher scoring, K-FAC, TRPO; Adam is a crude diagonal approximation.<br><b>Geometry:</b> &quot;Steepest&quot; depends on what counts as a unit step. The Euclidean gradient assumes parameter space is flat with an arbitrary coordinate grid. The natural gradient uses the intrinsic ruler of the statistical manifold, under which equal-length steps change the model&#x27;s predictions by equal amounts.",
+   "extra": "Relatives: Fisher scoring, Kronecker-factored approximate curvature (K-FAC), trust region policy optimization (TRPO); Adam is a crude diagonal approximation.<br><b>Geometry:</b> &quot;Steepest&quot; depends on what counts as a unit step. The Euclidean gradient assumes parameter space is flat with an arbitrary coordinate grid. The natural gradient uses the intrinsic ruler of the statistical manifold, under which equal-length steps change the model&#x27;s predictions by equal amounts.",
    "source": "Machine Learning",
    "reverse": false
   },
@@ -3983,7 +3983,7 @@
    "text": "Regularisation techniques: {{c1::L2 / weight decay}} shrinks weights; {{c2::L1}} sparsifies; {{c3::dropout}} randomly disables units; {{c4::data augmentation}} enlarges the effective dataset; {{c5::early stopping}} halts before memorisation.",
    "image": "",
    "analogy": "",
-   "extra": "All trade a little bias for less variance. Weight decay = MAP estimation with a Gaussian prior.",
+   "extra": "All trade a little bias for less variance. Weight decay = maximum a posteriori (MAP) estimation with a Gaussian prior.",
    "source": "Machine Learning",
    "reverse": false
   },
@@ -4074,7 +4074,7 @@
    "tags": [
     "quant::ml"
    ],
-   "front": "What does <b>ROC AUC</b> measure?",
+   "front": "What does <b>receiver operating characteristic (ROC) area under the curve (AUC)</b> measure?",
    "back": "The probability the model scores a random positive above a random negative: a pure ranking measure, invariant to class prevalence and monotone score transforms.",
    "text": "",
    "image": "",
@@ -4090,7 +4090,7 @@
    "tags": [
     "quant::ml"
    ],
-   "front": "Why prefer precision–recall curves over ROC AUC on heavily imbalanced data?",
+   "front": "Why prefer precision–recall curves over receiver operating characteristic (ROC) area under the curve (AUC) on heavily imbalanced data?",
    "back": "ROC's false-positive rate is a fraction of a huge negative class, so a tiny rate hides many false alarms; precision exposes them.",
    "text": "",
    "image": "",
@@ -4139,7 +4139,7 @@
     "quant::ml"
    ],
    "front": "What is a <b>proper scoring rule</b>?",
-   "back": "A score minimised in expectation by reporting the true probability: log loss, Brier score. Accuracy and AUC are not proper.",
+   "back": "A score minimised in expectation by reporting the true probability: log loss, Brier score. Accuracy and area under the curve (AUC) are not proper.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -4175,7 +4175,7 @@
    "text": "Shift types: {{c1::covariate shift}}: p(x) changes, p(y|x) fixed (fix: importance weighting); {{c2::label shift}}: p(y) changes, p(x|y) fixed (fix: re-weight class priors); {{c3::concept drift}}: p(y|x) itself changes (fix: new labels, retraining, monitoring).",
    "image": "",
    "analogy": "",
-   "extra": "<b>Geometry:</b> Covariate shift moves the spotlight to a different part of the same function. Harmless for a correctly specified model, harmful for a misspecified one, because the best approximation (the KL projection) depends on where you look.",
+   "extra": "<b>Geometry:</b> Covariate shift moves the spotlight to a different part of the same function. Harmless for a correctly specified model, harmful for a misspecified one, because the best approximation (the Kullback–Leibler (KL) divergence projection) depends on where you look.",
    "source": "Machine Learning",
    "reverse": false
   },
@@ -4282,7 +4282,7 @@
    "tags": [
     "quant::ml"
    ],
-   "front": "What is the <b>VC dimension</b>, and its value for hyperplanes in \\(\\mathbb R^d\\)?",
+   "front": "What is the <b>Vapnik–Chervonenkis (VC) dimension</b>, and its value for hyperplanes in \\(\\mathbb R^d\\)?",
    "back": "The size of the largest point set the class can shatter (realise all labelings). Hyperplanes: d + 1. The generalisation gap scales like \\(O(\\sqrt{\\mathrm{VC}/n})\\).",
    "text": "",
    "image": "",
@@ -4347,7 +4347,7 @@
     "quant::ml"
    ],
    "front": "What does the <b>representer theorem</b> say?",
-   "back": "For losses regularised by an RKHS norm, the minimiser has the form \\(f^*(x)=\\sum_{i=1}^n\\alpha_ik(x_i,x)\\): an infinite-dimensional search reduces to n coefficients.",
+   "back": "For losses regularised by an reproducing kernel Hilbert space (RKHS) norm, the minimiser has the form \\(f^*(x)=\\sum_{i=1}^n\\alpha_ik(x_i,x)\\): an infinite-dimensional search reduces to n coefficients.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -4399,7 +4399,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Geometry:</b> A nonlinear autoencoder fits a curved k-dimensional manifold instead of a flat subspace. The VAE&#x27;s KL term forces the codes to fill a standard Gaussian blob without holes, so that every point in latent space decodes to something sensible and you can sample.",
+   "extra": "<b>Geometry:</b> A nonlinear autoencoder fits a curved k-dimensional manifold instead of a flat subspace. The variational autoencoder (VAE)&#x27;s Kullback–Leibler (KL) divergence term forces the codes to fill a standard Gaussian blob without holes, so that every point in latent space decodes to something sensible and you can sample.",
    "source": "Machine Learning",
    "reverse": false
   },
@@ -4442,7 +4442,7 @@
    "tags": [
     "quant::ml"
    ],
-   "front": "Gaussian mixture fitted by EM: what are the E- and M-steps?",
+   "front": "Gaussian mixture fitted by expectation–maximization (EM): what are the E- and M-steps?",
    "back": "<b>E:</b> compute each point's responsibility per component (posterior membership). <b>M:</b> update weights, means and covariances as responsibility-weighted averages.",
    "text": "",
    "image": "",
@@ -4570,7 +4570,7 @@
    "tags": [
     "quant::ml"
    ],
-   "front": "LDA vs logistic regression?",
+   "front": "linear discriminant analysis (LDA) vs logistic regression?",
    "back": "Same linear form. LDA fits the joint density (more efficient if the Gaussian assumption holds); logistic regression fits the conditional likelihood (more robust when it doesn't).",
    "text": "",
    "image": "",
@@ -4587,7 +4587,7 @@
     "quant::ml"
    ],
    "front": "Why is cross-entropy the standard classification loss?",
-   "back": "It is the negative log-likelihood of a categorical model (so maximum likelihood = KL minimisation), and with softmax its gradient w.r.t. the logits is simply \\(p-y\\).",
+   "back": "It is the negative log-likelihood of a categorical model (so maximum likelihood = Kullback–Leibler (KL) divergence minimisation), and with softmax its gradient w.r.t. the logits is simply \\(p-y\\).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -4618,7 +4618,7 @@
    "tags": [
     "quant::ml"
    ],
-   "front": "What can't you read from a t-SNE or UMAP plot?",
+   "front": "What can't you read from a t-distributed stochastic neighbour embedding (t-SNE) or uniform manifold approximation and projection (UMAP) plot?",
    "back": "Cluster sizes, distances between clusters and apparent density: these methods preserve only local neighbourhoods, and results depend on perplexity/neighbour count and seed.",
    "text": "",
    "image": "",
@@ -4634,7 +4634,7 @@
    "tags": [
     "quant::deep_learning"
    ],
-   "front": "What function does a ReLU network compute, geometrically?",
+   "front": "What function does a rectified linear unit (ReLU) network compute, geometrically?",
    "back": "A continuous <b>piecewise-linear</b> function: each neuron's hyperplane splits input space, together tiling it into convex polytopes with one affine map on each.",
    "text": "",
    "image": "<img src=\"relu_pieces.svg\">",
@@ -4716,7 +4716,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Remedies for vanishing/exploding gradients: {{c1::variance-preserving initialisation}}, {{c2::non-saturating (ReLU-family) activations}}, {{c3::residual connections}}, {{c4::normalisation layers}}, {{c5::gradient clipping}}, and gating (LSTM/GRU).",
+   "text": "Remedies for vanishing/exploding gradients: {{c1::variance-preserving initialisation}}, {{c2::non-saturating (ReLU-family) activations}}, {{c3::residual connections}}, {{c4::normalisation layers}}, {{c5::gradient clipping}}, and gating (long short-term memory (LSTM)/gated recurrent unit (GRU)).",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -4731,7 +4731,7 @@
     "quant::deep_learning"
    ],
    "front": "What is the principle behind <b>Xavier/Glorot</b> and <b>He</b> initialisation?",
-   "back": "Choose weight variance so activation (forward) and gradient (backward) variances are preserved across layers: Xavier \\(2/(n_{in}+n_{out})\\); He \\(2/n_{in}\\) for ReLU (× 2 because ReLU zeroes half the inputs).",
+   "back": "Choose weight variance so activation (forward) and gradient (backward) variances are preserved across layers: Xavier \\(2/(n_{in}+n_{out})\\); He \\(2/n_{in}\\) for rectified linear unit (ReLU) (× 2 because ReLU zeroes half the inputs).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -4783,7 +4783,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "For plain SGD the two coincide.<br><b>Geometry:</b> L2-in-the-loss pulls toward the origin in Adam&#x27;s warped per-coordinate metric; decoupled decay pulls toward the origin in plain Euclidean space.",
+   "extra": "For plain stochastic gradient descent (SGD) the two coincide.<br><b>Geometry:</b> L2-in-the-loss pulls toward the origin in Adam&#x27;s warped per-coordinate metric; decoupled decay pulls toward the origin in plain Euclidean space.",
    "source": "Deep Learning",
    "reverse": false
   },
@@ -4907,7 +4907,7 @@
     "quant::deep_learning"
    ],
    "front": "What does a <b>Variational Autoencoder</b> add to an autoencoder?",
-   "back": "A probabilistic encoder/decoder trained on the ELBO (reconstruction − KL to a Gaussian prior) with the reparameterisation trick \\(z=\\mu+\\sigma\\odot\\epsilon\\); the KL term fills latent space so you can sample from it.",
+   "back": "A probabilistic encoder/decoder trained on the evidence lower bound (ELBO) (reconstruction − Kullback–Leibler (KL) divergence to a Gaussian prior) with the reparameterisation trick \\(z=\\mu+\\sigma\\odot\\epsilon\\); the KL term fills latent space so you can sample from it.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -4922,7 +4922,7 @@
    "tags": [
     "quant::deep_learning"
    ],
-   "front": "What game does a <b>GAN</b> play?",
+   "front": "What game does a <b>generative adversarial network (GAN)</b> play?",
    "back": "A generator and a discriminator play a minimax game; with an optimal discriminator the generator minimises the Jensen–Shannon divergence to the data distribution.",
    "text": "",
    "image": "",
@@ -4938,8 +4938,8 @@
    "tags": [
     "quant::deep_learning"
    ],
-   "front": "GAN failure modes, and the Wasserstein fix?",
-   "back": "Mode collapse, oscillation, and vanishing generator gradients when D wins. Non-overlapping manifolds make JS flat; Wasserstein (earth-mover) distance still slopes toward the data.",
+   "front": "generative adversarial network (GAN) failure modes, and the Wasserstein fix?",
+   "back": "Mode collapse, oscillation, and vanishing generator gradients when D wins. Non-overlapping manifolds make Jensen–Shannon (JS) divergence flat; Wasserstein (earth-mover) distance still slopes toward the data.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -5050,7 +5050,7 @@
    "tags": [
     "quant::rl"
    ],
-   "front": "Define V, Q and the advantage A in RL.",
+   "front": "Define V, Q and the advantage A in reinforcement learning (RL).",
    "back": "\\(V^\\pi(s)\\): expected return from s under π. \\(Q^\\pi(s,a)\\): expected return taking a first, then π. \\(A=Q-V\\): how much better a is than π's average action (\\(E_\\pi[A]=0\\)).",
    "text": "",
    "image": "",
@@ -5115,7 +5115,7 @@
     "quant::rl"
    ],
    "front": "What is <b>generalised policy iteration</b>?",
-   "back": "Any interleaving of partial evaluation and partial improvement; nearly every RL algorithm (e.g. actor-critic) is an instance.",
+   "back": "Any interleaving of partial evaluation and partial improvement; nearly every reinforcement learning (RL) algorithm (e.g. actor-critic) is an instance.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -5130,7 +5130,7 @@
    "tags": [
     "quant::rl"
    ],
-   "front": "Monte Carlo vs TD(0) value estimation?",
+   "front": "Monte Carlo vs temporal difference (TD) learning TD(0) value estimation?",
    "back": "<b>MC</b> targets the full observed return: unbiased, high variance, needs complete episodes. <b>TD(0)</b> targets \\(r+\\gamma V(s')\\): bootstraps from its own estimate, biased, low variance, online.",
    "text": "",
    "image": "",
@@ -5146,7 +5146,7 @@
    "tags": [
     "quant::rl"
    ],
-   "front": "What is the <b>TD error</b>?",
+   "front": "What is the <b>temporal difference (TD) error</b>?",
    "back": "\\(\\delta_t=r_{t+1}+\\gamma V(s_{t+1})-V(s_t)\\): a reward-prediction surprise (better or worse than expected). Update \\(V(s_t)\\leftarrow V(s_t)+\\alpha\\delta_t\\).",
    "text": "",
    "image": "",
@@ -5162,7 +5162,7 @@
    "tags": [
     "quant::rl"
    ],
-   "front": "How do n-step returns and TD(λ) interpolate between TD and Monte Carlo?",
+   "front": "How do n-step returns and temporal difference (TD) learning TD(λ) interpolate between TD and Monte Carlo?",
    "back": "n-step: n real rewards, then bootstrap. The λ-return geometrically averages all n-step returns: λ = 0 is TD(0), λ = 1 is Monte Carlo. Eligibility traces implement it online.",
    "text": "",
    "image": "",
@@ -5178,7 +5178,7 @@
    "tags": [
     "quant::rl"
    ],
-   "front": "<b>Q-learning</b> vs <b>SARSA</b>?",
+   "front": "<b>Q-learning</b> vs <b>state–action–reward–state–action (SARSA)</b>?",
    "back": "Q-learning (off-policy) targets \\(\\max_{a'}Q(s',a')\\), learning Q* regardless of behaviour. SARSA (on-policy) targets the action actually taken, so it values the policy including its exploration.",
    "text": "",
    "image": "",
@@ -5199,7 +5199,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Geometry:</b> Each arm has an estimate with an error bar. UCB ranks arms by the <strong>top</strong> of the bar: an arm is tried either because it looks good or because its bar is wide, and trying it shrinks the bar. Thompson sampling picks each arm with exactly the probability that it is the best one.",
+   "extra": "<b>Geometry:</b> Each arm has an estimate with an error bar. upper confidence bound (UCB) ranks arms by the <strong>top</strong> of the bar: an arm is tried either because it looks good or because its bar is wide, and trying it shrinks the bar. Thompson sampling picks each arm with exactly the probability that it is the best one.",
    "source": "Reinforcement Learning",
    "reverse": false
   },
@@ -5210,7 +5210,7 @@
    "tags": [
     "quant::rl"
    ],
-   "front": "Bandits: how does <b>UCB</b> choose an arm?",
+   "front": "Bandits: how does <b>upper confidence bound (UCB)</b> choose an arm?",
    "back": "Highest estimate plus uncertainty bonus, \\(\\hat\\mu_a+\\sqrt{2\\ln t/n_a}\\) (\"optimism in the face of uncertainty\"): an arm is tried because it looks good or because its error bar is wide. Logarithmic regret.",
    "text": "",
    "image": "",
@@ -5244,7 +5244,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "RL's \"deadly triad\": {{c1::function approximation}} + {{c2::bootstrapping}} (TD targets) + {{c3::off-policy training}}. Any two are safe; all three can diverge.",
+   "text": "reinforcement learning (RL)'s \"deadly triad\": {{c1::function approximation}} + {{c2::bootstrapping}} (temporal difference (TD) targets) + {{c3::off-policy training}}. Any two are safe; all three can diverge.",
    "image": "<img src=\"projected_bellman.svg\">",
    "analogy": "",
    "extra": "<b>Geometry:</b> the Bellman backup leaves the space of representable value functions and is projected back. On-policy that composition contracts; off-policy the weighting mismatches and it can expand.",
@@ -5339,7 +5339,7 @@
     "quant::rl"
    ],
    "front": "What does Generalised Advantage Estimation's λ trade off?",
-   "back": "\\(\\hat A_t=\\sum_l(\\gamma\\lambda)^l\\delta_{t+l}\\): λ = 0 is one-step TD (low variance, biased by critic error); λ = 1 is Monte Carlo (unbiased, high variance).",
+   "back": "\\(\\hat A_t=\\sum_l(\\gamma\\lambda)^l\\delta_{t+l}\\): λ = 0 is one-step temporal difference (TD) (low variance, biased by critic error); λ = 1 is Monte Carlo (unbiased, high variance).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -5354,7 +5354,7 @@
    "tags": [
     "quant::rl"
    ],
-   "front": "What problem do trust-region policy methods (TRPO, PPO) solve?",
+   "front": "What problem do trust-region policy methods (trust region policy optimization (TRPO), proximal policy optimization (PPO)) solve?",
    "back": "A too-large policy step can collapse performance, and data from the old policy can't reveal it; equal parameter steps can mean very unequal behaviour changes. So limit the step in distribution (KL) space.",
    "text": "",
    "image": "",
@@ -5370,7 +5370,7 @@
    "tags": [
     "quant::rl"
    ],
-   "front": "<b>TRPO</b> vs <b>PPO</b>: how does each limit the step?",
+   "front": "<b>trust region policy optimization (TRPO)</b> vs <b>proximal policy optimization (PPO)</b>: how does each limit the step?",
    "back": "TRPO maximises the importance-ratio surrogate subject to \\(\\mathrm{KL}(\\pi_{\\text{old}}\\|\\pi_\\theta)\\le\\delta\\) (a natural-gradient step). PPO clips the ratio to [1 − ε, 1 + ε] so there is no incentive to move far.",
    "text": "",
    "image": "",
@@ -5387,7 +5387,7 @@
     "quant::rl"
    ],
    "front": "On-policy vs off-policy learning?",
-   "back": "<b>On-policy</b> learns about the policy generating the data (SARSA, PPO): stable, sample-hungry. <b>Off-policy</b> learns a target policy from another behaviour policy's data (Q-learning, DQN, SAC): enables replay buffers and learning from logs.",
+   "back": "<b>On-policy</b> learns about the policy generating the data (state–action–reward–state–action (SARSA), proximal policy optimization (PPO)): stable, sample-hungry. <b>Off-policy</b> learns a target policy from another behaviour policy's data (Q-learning, deep Q-network (DQN), soft actor-critic (SAC)): enables replay buffers and learning from logs.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -5402,7 +5402,7 @@
    "tags": [
     "quant::rl"
    ],
-   "front": "Why are importance-sampling corrections hard in off-policy RL?",
+   "front": "Why are importance-sampling corrections hard in off-policy reinforcement learning (RL)?",
    "back": "The product of per-step ratios π/μ has variance growing exponentially with the horizon; remedies truncate the ratios (Retrace, V-trace).",
    "text": "",
    "image": "",
@@ -5418,8 +5418,8 @@
    "tags": [
     "quant::rl"
    ],
-   "front": "Promise and central difficulty of <b>model-based RL</b>?",
-   "back": "Learn the dynamics and plan (Dyna, MPC, MCTS as in AlphaZero/MuZero) for far better sample efficiency. But one-step errors compound over rollouts, and the planner actively exploits model errors.",
+   "front": "Promise and central difficulty of <b>model-based reinforcement learning (RL)</b>?",
+   "back": "Learn the dynamics and plan (Dyna, model predictive control (MPC), Monte Carlo tree search (MCTS) as in AlphaZero/MuZero) for far better sample efficiency. But one-step errors compound over rollouts, and the planner actively exploits model errors.",
    "text": "",
    "image": "",
    "analogy": "Planning on a map is free, but an optimiser hunting for shortcuts finds exactly the places where the cartographer made mistakes.",
@@ -5434,7 +5434,7 @@
    "tags": [
     "quant::rl"
    ],
-   "front": "How is a <b>POMDP</b> reduced to an MDP?",
+   "front": "How is a <b>partially observable Markov decision process (POMDP)</b> reduced to an Markov decision process (MDP)?",
    "back": "Use the belief state b(s) = P(s | history), updated by Bayes filtering: it is a sufficient statistic, and the belief process is a continuous-state MDP.",
    "text": "",
    "image": "",
@@ -5514,8 +5514,8 @@
    "tags": [
     "quant::rl"
    ],
-   "front": "Remedies in offline RL?",
-   "back": "Stay near the behaviour policy (behaviour-cloning regularisation), be pessimistic (CQL pushes Q down on unseen actions), or penalise uncertainty.",
+   "front": "Remedies in offline reinforcement learning (RL)?",
+   "back": "Stay near the behaviour policy (behaviour-cloning regularisation), be pessimistic (conservative Q-learning (CQL) pushes Q down on unseen actions), or penalise uncertainty.",
    "text": "",
    "image": "",
    "analogy": "The data covers a thin tube of state-action space; improve as much as possible while staying inside the tube.",
@@ -5530,7 +5530,7 @@
    "tags": [
     "quant::rl"
    ],
-   "front": "What is the occupancy-measure (linear programming) view of an MDP?",
+   "front": "What is the occupancy-measure (linear programming) view of an Markov decision process (MDP)?",
    "back": "Return is linear in the discounted state-action occupancy ρ, and valid occupancies form a polytope (flow-conservation constraints): solving the MDP is a linear programme whose dual variables are V(s).",
    "text": "",
    "image": "<img src=\"occupancy_polytope.svg\">",
@@ -5546,7 +5546,7 @@
    "tags": [
     "quant::rl"
    ],
-   "front": "Why does an optimal <b>deterministic</b> policy always exist (LP view)?",
+   "front": "Why does an optimal <b>deterministic</b> policy always exist (linear programming (LP) view)?",
    "back": "A linear objective over a polytope is maximised at a vertex, and the vertices correspond to deterministic policies.",
    "text": "",
    "image": "",
@@ -5579,7 +5579,7 @@
     "quant::rl"
    ],
    "front": "How do value functions address credit assignment?",
-   "back": "They act as a potential field that turns a distant reward into immediate TD errors (local slopes). Also: eligibility traces, advantages, discounting, shaping, hindsight relabelling, hierarchy.",
+   "back": "They act as a potential field that turns a distant reward into immediate temporal difference (TD) errors (local slopes). Also: eligibility traces, advantages, discounting, shaping, hindsight relabelling, hierarchy.",
    "text": "",
    "image": "",
    "analogy": "",

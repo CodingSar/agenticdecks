@@ -14,7 +14,7 @@
     "K8s"
    ],
    "front": "<b>Block storage</b>: traits, AWS/Azure services, Kubernetes access mode?",
-   "back": "Single-attach, low-latency disk with a filesystem on top. AWS EBS · Azure Managed Disk · PV with <code>ReadWriteOnce</code>.",
+   "back": "Single-attach, low-latency disk with a filesystem on top. AWS Elastic Block Store (EBS) · Azure Managed Disk · persistent volume (PV) with <code>ReadWriteOnce</code>.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -33,7 +33,7 @@
     "K8s"
    ],
    "front": "<b>File storage</b>: traits, AWS/Azure services, Kubernetes access mode?",
-   "back": "Shared network filesystem. AWS EFS / FSx · Azure Files / Azure NetApp Files · PV with <code>ReadWriteMany</code>.",
+   "back": "Shared network filesystem. AWS Elastic File System (EFS) / FSx · Azure Files / Azure NetApp Files · persistent volume (PV) with <code>ReadWriteMany</code>.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -52,7 +52,7 @@
     "K8s"
    ],
    "front": "<b>Object storage</b>: traits, AWS/Azure services, and how Kubernetes pods reach it?",
-   "back": "HTTP API, flat namespace, immutable objects, cheapest and most durable. S3 · Azure Blob / ADLS Gen2. No native PV: SDK, or CSI drivers like Mountpoint for S3 / BlobFuse.",
+   "back": "HTTP API, flat namespace, immutable objects, cheapest and most durable. S3 · Azure Blob / Azure Data Lake Storage (ADLS) Gen2. No native persistent volume (PV): software development kit (SDK), or container storage interface (CSI) drivers like Mountpoint for S3 / BlobFuse.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -67,8 +67,8 @@
    "tags": [
     "DataEng::storage"
    ],
-   "front": "What are <b>Parquet</b> and <b>ORC</b>?",
-   "back": "Columnar, self-describing <b>file formats</b> for analytics, with per-column encoding and compression (dictionary, RLE, Snappy/ZSTD). Parquet dominates on AWS and Azure.",
+   "front": "What are <b>Parquet</b> and <b>Optimized Row Columnar (ORC)</b>?",
+   "back": "Columnar, self-describing <b>file formats</b> for analytics, with per-column encoding and compression (dictionary, run-length encoding (RLE), Snappy/ZSTD). Parquet dominates on AWS and Azure.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -83,7 +83,7 @@
    "tags": [
     "DataEng::storage"
    ],
-   "front": "How do Parquet files let a query engine on S3/ADLS skip data?",
+   "front": "How do Parquet files let a query engine on S3/Azure Data Lake Storage (ADLS) skip data?",
    "back": "<b>Predicate pushdown</b>: per-row-group min/max statistics skip whole chunks. <b>Column pruning</b>: byte-range GETs fetch only the requested columns.",
    "text": "",
    "image": "",
@@ -100,7 +100,7 @@
     "DataEng::storage"
    ],
    "front": "What problem do open table formats (Iceberg, Delta Lake, Hudi) solve?",
-   "back": "Object storage gives you files, not tables. A <b>metadata layer</b> over Parquet adds ACID multi-file commits and safe concurrent writers.",
+   "back": "Object storage gives you files, not tables. A <b>metadata layer</b> over Parquet adds atomicity, consistency, isolation, durability (ACID) multi-file commits and safe concurrent writers.",
    "text": "",
    "image": "",
    "analogy": "A library catalogue over a pile of books: the books don't change, but the catalogue decides atomically which ones are 'on the shelf'.",
@@ -117,7 +117,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Beyond ACID commits, table formats give {{c1::time travel}} (query old snapshots), {{c2::schema evolution}}, hidden partitioning, and {{c3::row-level updates/deletes}} (needed for CDC and GDPR erasure).",
+   "text": "Beyond atomicity, consistency, isolation, durability (ACID) commits, table formats give {{c1::time travel}} (query old snapshots), {{c2::schema evolution}}, hidden partitioning, and {{c3::row-level updates/deletes}} (needed for change data capture (CDC) and General Data Protection Regulation (GDPR) erasure).",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -150,8 +150,8 @@
     "Azure",
     "K8s"
    ],
-   "front": "Why are EBS volumes and Azure Managed Disks a scheduling concern for stateful pods?",
-   "back": "They're <b>zonal</b>: a disk can attach only to nodes in its own AZ, so a pod rescheduled to another zone can't mount its volume.",
+   "front": "Why are Elastic Block Store (EBS) volumes and Azure Managed Disks a scheduling concern for stateful pods?",
+   "back": "They're <b>zonal</b>: a disk can attach only to nodes in its own availability zone (AZ), so a pod rescheduled to another zone can't mount its volume.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -172,7 +172,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "Azure also offers ZRS disks; AWS has no cross-AZ EBS.",
+   "extra": "Azure also offers zone-redundant storage (ZRS) disks; AWS has no cross-availability-zone (AZ) Elastic Block Store (EBS).",
    "source": "Data Eng · Storage",
    "reverse": false
   },
@@ -185,7 +185,7 @@
     "K8s"
    ],
    "front": "Why run a database or Kafka broker as a <b>StatefulSet</b>, not a Deployment?",
-   "back": "Each replica gets a <b>stable identity</b> (ordinal name, DNS via headless Service) and its <b>own PVC</b> that follows it; ordered rollouts protect quorum. Deployments treat pods as interchangeable.",
+   "back": "Each replica gets a <b>stable identity</b> (ordinal name, DNS via headless Service) and its <b>own persistent volume claim (PVC)</b> that follows it; ordered rollouts protect quorum. Deployments treat pods as interchangeable.",
    "text": "",
    "image": "",
    "analogy": "Deployments are hotel rooms (any free one will do); StatefulSets are named rented flats with your own furniture inside.",
@@ -203,7 +203,7 @@
     "AWS",
     "Azure"
    ],
-   "front": "What do the cloud CSI drivers (EBS, Azure Disk) add beyond mounting a volume?",
+   "front": "What do the cloud container storage interface (CSI) drivers (Elastic Block Store (EBS), Azure Disk) add beyond mounting a volume?",
    "back": "Dynamic provisioning, online expansion, <code>VolumeSnapshot</code> and cloning, and topology reporting so the scheduler knows the volume's zone.",
    "text": "",
    "image": "",
@@ -221,7 +221,7 @@
     "K8s"
    ],
    "front": "What are the two layers of backup for stateful workloads on Kubernetes?",
-   "back": "<b>Volume level</b>: CSI VolumeSnapshots (EBS/Azure Disk snapshots), orchestrated with Velero. <b>Application level</b>: native backups to object storage (pgBackRest/WAL-G, MirrorMaker 2).",
+   "back": "<b>Volume level</b>: container storage interface (CSI) VolumeSnapshots (Elastic Block Store (EBS)/Azure Disk snapshots), orchestrated with Velero. <b>Application level</b>: native backups to object storage (pgBackRest/WAL-G, MirrorMaker 2).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -242,7 +242,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "Cross-region restores of multi-TB data are bandwidth-bound: set RTO accordingly.",
+   "extra": "Cross-region restores of multi-TB data are bandwidth-bound: set recovery time objective (RTO) accordingly.",
    "source": "Data Eng · Storage",
    "reverse": false
   },
@@ -367,7 +367,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Kafka durability: {{c1::<code>replication.factor=3</code>}} (three copies across AZs) + {{c2::<code>acks=all</code>}} (producer waits for the ISR) + {{c3::<code>min.insync.replicas=2</code>}} (reject writes with fewer in sync) survives one broker/AZ loss without data loss.",
+   "text": "Kafka durability: {{c1::<code>replication.factor=3</code>}} (three copies across availability zones (AZs)) + {{c2::<code>acks=all</code>}} (producer waits for the in-sync replica set (ISR)) + {{c3::<code>min.insync.replicas=2</code>}} (reject writes with fewer in sync) survives one broker/AZ loss without data loss.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -414,7 +414,7 @@
     "DataEng::kafka"
    ],
    "front": "Where does Kafka exactly-once stop applying?",
-   "back": "At the edge of Kafka: it holds for Kafka→Kafka pipelines (Kafka Streams). Writing to an external system needs idempotent sinks or 2PC.",
+   "back": "At the edge of Kafka: it holds for Kafka→Kafka pipelines (Kafka Streams). Writing to an external system needs idempotent sinks or two-phase commit (2PC).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -446,11 +446,11 @@
     "DataEng::kafka"
    ],
    "front": "What is Kafka <b>consumer lag</b>, and why is it the main health metric?",
-   "back": "Latest offset − committed offset: how far behind a consumer is. Growing lag means consumers can't keep up. Also the usual KEDA/HPA scaling signal.",
+   "back": "Latest offset − committed offset: how far behind a consumer is. Growing lag means consumers can't keep up. Also the usual Kubernetes Event-driven Autoscaling (KEDA)/horizontal pod autoscaler (HPA) scaling signal.",
    "text": "",
    "image": "",
    "analogy": "The gap between the conveyor belt and the worker: growing piles mean the worker can't keep up.",
-   "extra": "MSK: <code>MaxOffsetLag</code>; self-run: Burrow, kafka-exporter.",
+   "extra": "Managed Streaming for Apache Kafka (MSK): <code>MaxOffsetLag</code>; self-run: Burrow, kafka-exporter.",
    "source": "Data Eng · Kafka",
    "reverse": false
   },
@@ -479,7 +479,7 @@
     "K8s"
    ],
    "front": "What does <b>Strimzi</b> do?",
-   "back": "A CNCF operator: you declare <code>Kafka</code>, <code>KafkaTopic</code>, <code>KafkaUser</code>, <code>KafkaConnect</code> resources and it reconciles brokers as pods with PVCs, rolling restarts, TLS, and rebalancing.",
+   "back": "A Cloud Native Computing Foundation (CNCF) operator: you declare <code>Kafka</code>, <code>KafkaTopic</code>, <code>KafkaUser</code>, <code>KafkaConnect</code> resources and it reconciles brokers as pods with persistent volume claims (PVCs), rolling restarts, TLS, and rebalancing.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -495,8 +495,8 @@
     "DataEng::kafka-ecosystem",
     "K8s"
    ],
-   "front": "Why set <code>broker.rack</code> when Kafka spans AZs?",
-   "back": "So each partition's replicas are placed in different zones and RF=3 actually survives an AZ outage. It also enables fetch-from-follower.",
+   "front": "Why set <code>broker.rack</code> when Kafka spans availability zones (AZs)?",
+   "back": "So each partition's replicas are placed in different zones and replication factor (RF)=3 actually survives an AZ outage. It also enables fetch-from-follower.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -512,7 +512,7 @@
     "DataEng::kafka-ecosystem"
    ],
    "front": "When should you use <b>Kafka Connect</b> instead of writing a consumer?",
-   "back": "For plumbing: reusable source/sink connectors (JDBC, S3/ADLS, Elasticsearch, Debezium) with offset tracking, task scaling and simple transforms. Write custom code only for business logic.",
+   "back": "For plumbing: reusable source/sink connectors (Java Database Connectivity (JDBC), S3/Azure Data Lake Storage (ADLS), Elasticsearch, Debezium) with offset tracking, task scaling and simple transforms. Write custom code only for business logic.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -527,12 +527,12 @@
    "tags": [
     "DataEng::kafka-ecosystem"
    ],
-   "front": "How does <b>Debezium</b> capture changes from an OLTP database?",
+   "front": "How does <b>Debezium</b> capture changes from an online transaction processing (OLTP) database?",
    "back": "As Kafka Connect source connectors reading the DB's own log (PostgreSQL replication slot, MySQL binlog, MongoDB oplog), emitting before/after row images. Captures deletes; no polling.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Managed alternatives:</b> AWS DMS → Kinesis/MSK; Fabric mirroring.",
+   "extra": "<b>Managed alternatives:</b> AWS Database Migration Service (DMS) → Kinesis/Managed Streaming for Apache Kafka (MSK); Fabric mirroring.",
    "source": "Data Eng · Kafka",
    "reverse": false
   },
@@ -543,8 +543,8 @@
    "tags": [
     "DataEng::kafka-ecosystem"
    ],
-   "front": "What's the main operational risk when a Debezium/CDC consumer stalls on PostgreSQL?",
-   "back": "The <b>replication slot</b> retains WAL until consumed, so the source's disk fills up.",
+   "front": "What's the main operational risk when a Debezium/change data capture (CDC) consumer stalls on PostgreSQL?",
+   "back": "The <b>replication slot</b> retains write-ahead log (WAL) until consumed, so the source's disk fills up.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -591,12 +591,12 @@
    "tags": [
     "DataEng::kafka-ecosystem"
    ],
-   "front": "What is Kafka <b>tiered storage</b> (KIP-405)?",
+   "front": "What is Kafka <b>tiered storage</b> (Kafka Improvement Proposal (KIP)-405)?",
    "back": "Brokers keep recent segments on local disk and offload older ones to object storage, serving historical reads from there.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "MSK Provisioned, Confluent, Kafka ≥ 3.6 with a remote storage plugin.",
+   "extra": "Managed Streaming for Apache Kafka (MSK) Provisioned, Confluent, Kafka ≥ 3.6 with a remote storage plugin.",
    "source": "Data Eng · Kafka",
    "reverse": false
   },
@@ -677,7 +677,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Example:</b> Amazon MSK vs Kinesis Data Streams (shards of 1 MB/s in, 2 MB/s out).",
+   "extra": "<b>Example:</b> Amazon Managed Streaming for Apache Kafka (MSK) vs Kinesis Data Streams (shards of 1 MB/s in, 2 MB/s out).",
    "source": "Data Eng · Kafka",
    "reverse": false
   },
@@ -711,7 +711,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Examples:</b> Event Hubs Capture → Blob/ADLS Gen2; Kinesis Data Firehose → S3; Kafka Connect S3/GCS sink.",
+   "extra": "<b>Examples:</b> Event Hubs Capture → Blob/Azure Data Lake Storage (ADLS) Gen2; Kinesis Data Firehose → S3; Kafka Connect S3/Google Cloud Storage (GCS) sink.",
    "source": "Data Eng · Kafka",
    "reverse": false
   },
@@ -724,7 +724,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Capacity sizing: OLTP systems are sized by {{c1::transactions per second and p99 latency}}; OLAP systems by {{c2::scan throughput and concurrent queries}}.",
+   "text": "Capacity sizing: online transaction processing (OLTP) systems are sized by {{c1::transactions per second and p99 latency}}; online analytical processing (OLAP) systems by {{c2::scan throughput and concurrent queries}}.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -738,8 +738,8 @@
    "tags": [
     "DataEng::analytics"
    ],
-   "front": "Why run analytics on a separate system from the OLTP database?",
-   "back": "Big scans evict the OLTP hot working set, hold long MVCC snapshots (bloat) and contend with writers. And the layouts are opposite: rows + indexes vs columns + scans.",
+   "front": "Why run analytics on a separate system from the online transaction processing (OLTP) database?",
+   "back": "Big scans evict the OLTP hot working set, hold long multi-version concurrency control (MVCC) snapshots (bloat) and contend with writers. And the layouts are opposite: rows + indexes vs columns + scans.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -756,8 +756,8 @@
     "AWS",
     "Azure"
    ],
-   "front": "How does data get from OLTP systems to analytics?",
-   "back": "ETL/ELT batches, CDC streams (Debezium → Kafka → lake), or managed zero-ETL links (Aurora → Redshift zero-ETL; Azure SQL/Cosmos DB → Fabric mirroring).",
+   "front": "How does data get from online transaction processing (OLTP) systems to analytics?",
+   "back": "Extract, transform, load (ETL)/extract, load, transform (ELT) batches, change data capture (CDC) streams (Debezium → Kafka → lake), or managed zero-ETL links (Aurora → Redshift zero-ETL; Azure SQL/Cosmos DB → Fabric mirroring).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -840,7 +840,7 @@
     "DataEng::analytics",
     "AWS"
    ],
-   "front": "In an MPP warehouse, what do distribution keys and sort/cluster keys control?",
+   "front": "In a massively parallel processing (MPP) warehouse, what do distribution keys and sort/cluster keys control?",
    "back": "<b>Distribution key</b>: which node a row lives on; co-locate join keys to avoid shuffles. <b>Sort/cluster key</b>: physical order, so min/max zone maps skip blocks.",
    "text": "",
    "image": "",
@@ -859,7 +859,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "MPP table distribution strategies: {{c1::hash on a column}} for large fact tables (high-cardinality join key); {{c2::round-robin}} (fastest load, joins shuffle); {{c3::replicate}} for small dimensions.",
+   "text": "Massively parallel processing (MPP) table distribution strategies: {{c1::hash on a column}} for large fact tables (high-cardinality join key); {{c2::round-robin}} (fastest load, joins shuffle); {{c3::replicate}} for small dimensions.",
    "image": "",
    "analogy": "",
    "extra": "<b>Names:</b> Synapse HASH / ROUND_ROBIN / REPLICATE; Redshift DISTSTYLE KEY / EVEN / ALL.",
@@ -926,7 +926,7 @@
     "DataEng::analytics"
    ],
    "front": "ETL vs ELT?",
-   "back": "<b>ETL</b>: transform on a separate engine, then load the result. <b>ELT</b>: load raw data into the warehouse/lake first, then transform there with SQL (dbt, Spark).",
+   "back": "<b>Extract, transform, load (ETL)</b>: transform on a separate engine, then load the result. <b>Extract, load, transform (ELT)</b>: load raw data into the warehouse/lake first, then transform there with SQL (dbt, Spark).",
    "text": "",
    "image": "",
    "analogy": "ETL cooks at a central kitchen and delivers meals; ELT delivers the groceries and cooks in your kitchen.",
@@ -941,7 +941,7 @@
    "tags": [
     "DataEng::analytics"
    ],
-   "front": "Why did the cloud push the industry toward ELT?",
+   "front": "Why did the cloud push the industry toward extract, load, transform (ELT)?",
    "back": "Cloud warehouses put cheap, elastic compute next to the data, so moving raw data once and transforming in place beats routing it through an external tool.",
    "text": "",
    "image": "",
@@ -962,7 +962,7 @@
    "text": "",
    "image": "",
    "analogy": "A shared library with many reading rooms: add readers or rooms without copying the books.",
-   "extra": "<b>Examples:</b> Redshift RA3, Snowflake, Databricks, Trino on EKS/AKS.",
+   "extra": "<b>Examples:</b> Redshift RA3, Snowflake, Databricks, Trino on Elastic Kubernetes Service (EKS)/Azure Kubernetes Service (AKS).",
    "source": "Data Eng · OLAP vs OLTP",
    "reverse": false
   },
@@ -974,7 +974,7 @@
     "DataEng::analytics"
    ],
    "front": "What's the main trade-off of separating storage and compute?",
-   "back": "The network becomes the bottleneck, so engines rely on local SSD caches and compute must sit in the same region (ideally AZ) as the data.",
+   "back": "The network becomes the bottleneck, so engines rely on local SSD caches and compute must sit in the same region (ideally availability zone (AZ)) as the data.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1009,7 +1009,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Cloud network pricing (rough): same-AZ private traffic is free; {{c1::cross-AZ}} costs ~$0.01/GB in each direction; cross-region ~$0.02/GB; {{c2::internet egress}} ~$0.05–0.09/GB.",
+   "text": "Cloud network pricing (rough): same-availability-zone (AZ) private traffic is free; {{c1::cross-AZ}} costs ~$0.01/GB in each direction; cross-region ~$0.02/GB; {{c2::internet egress}} ~$0.05–0.09/GB.",
    "image": "",
    "analogy": "",
    "extra": "Verify current regional pricing.",
@@ -1025,7 +1025,7 @@
     "AWS",
     "Azure"
    ],
-   "front": "Why can a chatty multi-AZ microservice mesh or Kafka cluster surprise you on the bill?",
+   "front": "Why can a chatty multi-availability-zone (AZ) microservice mesh or Kafka cluster surprise you on the bill?",
    "back": "Every cross-AZ hop is billed per GB (on both sides on AWS), so replication and chatty calls can quietly cost more than the compute.",
    "text": "",
    "image": "",
@@ -1043,7 +1043,7 @@
     "AWS",
     "Azure"
    ],
-   "front": "What are the main costs of a multi-AZ Kafka cluster, and the levers?",
+   "front": "What are the main costs of a multi-availability-zone (AZ) Kafka cluster, and the levers?",
    "back": "<b>Cross-AZ replication</b> (compress, batch with <code>linger.ms</code>), <b>cross-AZ consumer reads</b> (fetch-from-follower), <b>broker block storage</b> (size by throughput; tiered storage).",
    "text": "",
    "image": "",
@@ -1059,8 +1059,8 @@
    "tags": [
     "DataEng::gravity"
    ],
-   "front": "What is Kafka <b>fetch-from-follower</b> (KIP-392), and its trade-off?",
-   "back": "Consumers set <code>client.rack</code> and read from a replica in their own zone instead of the leader, cutting cross-AZ traffic. Follower reads lag slightly behind the leader.",
+   "front": "What is Kafka <b>fetch-from-follower</b> (Kafka Improvement Proposal (KIP)-392), and its trade-off?",
+   "back": "Consumers set <code>client.rack</code> and read from a replica in their own zone instead of the leader, cutting cross-availability-zone (AZ) traffic. Follower reads lag slightly behind the leader.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1076,7 +1076,7 @@
     "DataEng::gravity",
     "K8s"
    ],
-   "front": "Which Kubernetes features keep Service traffic inside one AZ?",
+   "front": "Which Kubernetes features keep Service traffic inside one availability zone (AZ)?",
    "back": "Even pod spread (<code>topologySpreadConstraints</code> on zone) plus <code>trafficDistribution: PreferClose</code> on the Service; meshes add locality load balancing (Istio).",
    "text": "",
    "image": "",
@@ -1112,7 +1112,7 @@
     "Azure"
    ],
    "front": "Rule: where must state live if it has to survive a zone outage?",
-   "back": "On a <b>regional</b> service (S3, Blob ZRS, Aurora, DynamoDB, Cosmos DB) or replicated by the application (Kafka ISR, DB replicas), never on a single zonal disk.",
+   "back": "On a <b>regional</b> service (S3, Blob zone-redundant storage (ZRS), Aurora, DynamoDB, Cosmos DB) or replicated by the application (Kafka in-sync replica set (ISR), DB replicas), never on a single zonal disk.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1131,7 +1131,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "{{c1::Zonal}} storage (one AZ): EBS, instance store, single-AZ RDS, Azure LRS Managed Disks. {{c2::Regional}} storage: S3, EFS, Aurora storage, DynamoDB, Blob/ADLS ZRS, ZRS disks, Cosmos DB.",
+   "text": "{{c1::Zonal}} storage (one availability zone (AZ)): Elastic Block Store (EBS), instance store, single-AZ Relational Database Service (RDS), Azure locally redundant storage (LRS) Managed Disks. {{c2::Regional}} storage: S3, Elastic File System (EFS), Aurora storage, DynamoDB, Blob/Azure Data Lake Storage (ADLS) zone-redundant storage (ZRS), ZRS disks, Cosmos DB.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -1148,7 +1148,7 @@
     "Azure"
    ],
    "front": "Gateway/service endpoints vs PrivateLink/Private Endpoints for reaching S3/Blob?",
-   "back": "<b>S3 Gateway Endpoint / Azure Service Endpoint</b>: free, route-based, stays on the backbone. <b>PrivateLink / Private Endpoint</b>: a private IP in your VNet/VPC; hourly + per-GB fee.",
+   "back": "<b>S3 Gateway Endpoint / Azure Service Endpoint</b>: free, route-based, stays on the backbone. <b>PrivateLink / Private Endpoint</b>: a private IP in your virtual network (VNet)/virtual private cloud (VPC); hourly + per-GB fee.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1167,7 +1167,7 @@
     "K8s"
    ],
    "front": "Why route Kubernetes-to-object-storage traffic through private endpoints?",
-   "back": "It avoids NAT gateway per-GB fees (~$0.045/GB on AWS) and lets bucket policies deny all public access.",
+   "back": "It avoids network address translation (NAT) gateway per-GB fees (~$0.045/GB on AWS) and lets bucket policies deny all public access.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1183,7 +1183,7 @@
     "DataEng::gravity"
    ],
    "front": "Why do hybrid platforms often keep compute on-premises?",
-   "back": "Master data (ERP, sensor archives, regulated records) lives there; its gravity, residency rules and link bandwidth pull processing to it.",
+   "back": "Master data (enterprise resource planning (ERP), sensor archives, regulated records) lives there; its gravity, residency rules and link bandwidth pull processing to it.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1220,7 +1220,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Running cloud services on-prem: AWS offers {{c1::Outposts}} and EKS Anywhere; Azure offers {{c2::Azure Arc}} (Arc-enabled Kubernetes and data services) and Azure Local.",
+   "text": "Running cloud services on-prem: AWS offers {{c1::Outposts}} and Elastic Kubernetes Service (EKS) Anywhere; Azure offers {{c2::Azure Arc}} (Arc-enabled Kubernetes and data services) and Azure Local.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -1259,7 +1259,7 @@
    "text": "Storage tiers: S3 goes Standard → Intelligent-Tiering → {{c1::Standard-IA}} → Glacier Instant/Flexible → {{c2::Glacier Deep Archive}}; Azure Blob goes Hot → Cool → Cold → {{c3::Archive}}.",
    "image": "",
    "analogy": "",
-   "extra": "",
+   "extra": "<b>IA:</b> infrequent access.",
    "source": "Data Eng · Data gravity",
    "reverse": false
   },
@@ -1274,7 +1274,7 @@
     "K8s"
    ],
    "front": "Which platform controls enforce data residency?",
-   "back": "Region allow-lists (AWS SCPs, Azure Policy <code>allowedLocations</code>), in-jurisdiction replication, region-bound customer-managed keys, and admission policies placing workloads only in allowed regions.",
+   "back": "Region allow-lists (AWS service control policies (SCPs), Azure Policy <code>allowedLocations</code>), in-jurisdiction replication, region-bound customer-managed keys, and admission policies placing workloads only in allowed regions.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1290,7 +1290,7 @@
     "DataEng::gravity"
    ],
    "front": "Placing a new stream-processing service: what's the first question?",
-   "back": "Where is the <b>largest input dataset</b> (Kafka cluster, lake bucket)? Put compute in that region and AZ set.",
+   "back": "Where is the <b>largest input dataset</b> (Kafka cluster, lake bucket)? Put compute in that region and availability zone (AZ) set.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1306,7 +1306,7 @@
     "DataEng::gravity"
    ],
    "front": "Where should a data service write its output?",
-   "back": "Next to its consumers: the lake for analytics, an OLTP store for serving. Justify every cross-region or internet flow.",
+   "back": "Next to its consumers: the lake for analytics, an online transaction processing (OLTP) store for serving. Justify every cross-region or internet flow.",
    "text": "",
    "image": "",
    "analogy": "",

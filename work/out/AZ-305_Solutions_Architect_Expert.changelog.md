@@ -38,3 +38,78 @@ Reviewed card by card for vendor-catered content: 0 deleted, 1 rewritten to the 
 
 ### Scrubbed (1)
 - "Azure Blueprints is retiring. What replaces it?": removed dated retirement-timeline extra (phase-out dates)
+
+## Abbreviations expanded
+
+76 notes touched.
+
+- KQL → Kusto Query Language
+- SIEM → security information and event management
+- SMS → short message service
+- ITSM → IT service management
+- APM → application performance management
+- NSG → network security group
+- VNet → virtual network
+- ARM → Azure Resource Manager
+- FIDO2 → Fast Identity Online 2
+- MFA → multi-factor authentication
+- PHS → password hash synchronization
+- AD → Active Directory
+- AD FS → Active Directory Federation Services
+- AD DS → Active Directory Domain Services
+- B2B → business to business
+- B2C → business to consumer
+- PIM → Privileged Identity Management
+- HSM → hardware security module
+- FIPS → Federal Information Processing Standard
+- LDAP → Lightweight Directory Access Protocol
+- NTLM → NT LAN Manager
+- SKU → stock keeping unit
+- RG → resource group
+- DTU → database transaction unit
+- IO → input/output
+- PITR → point-in-time restore
+- HA → high availability
+- TDE → transparent data encryption
+- SMB → Server Message Block
+- NFS → Network File System
+- LRS → locally redundant storage
+- ZRS → zone-redundant storage
+- GRS → geo-redundant storage
+- RA-GRS → read-access geo-redundant storage
+- GZRS → geo-zone-redundant storage
+- HDFS → Hadoop Distributed File System
+- POSIX → Portable Operating System Interface
+- ACL → access control list
+- HPC → high-performance computing
+- ETL → extract, transform, load
+- ELT → extract, load, transform
+- ACID → atomicity, consistency, isolation, durability
+- RPO → recovery point objective
+- RTO → recovery time objective
+- DR → disaster recovery
+- SLA → service-level agreement
+- VMSS → Virtual Machine Scale Sets
+- BCDR → business continuity and disaster recovery
+- WAF → web application firewall
+- L7 → layer 7
+- NVMe → non-volatile memory express
+- AKS → Azure Kubernetes Service
+- ACI → Azure Container Instances
+- KEDA → Kubernetes Event-driven Autoscaling
+- JWT → JSON Web Token
+- SOAP → Simple Object Access Protocol
+- CAF → Cloud Adoption Framework
+- DMS → Azure Database Migration Service
+- VPN → virtual private network
+- IPsec → Internet Protocol Security
+- WAN → wide area network
+- SD-WAN → software-defined wide area network
+- UDR → user-defined route
+- FQDN → fully qualified domain name
+- NIC → network interface card
+- L4 → layer 4
+- XSS → cross-site scripting
+- OWASP → Open Worldwide Application Security Project
+- DDoS → distributed denial of service
+- SR-IOV → single root I/O virtualization

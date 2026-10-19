@@ -19,3 +19,175 @@
 **Diagrams (21, all `media/s2s_*.svg`, rendered and checked).** regex_dfa, lr_trace, scope_chain, ssa_phi, stack_frame, plt_got, tiered_jit, tricolour, x86_regs, x86_encoding, isa_encoding, pipeline_forwarding, ooo_core, cache_lookup, mesi, gpu_mapping, coalescing, cuda_pipeline, systolic_ws, xla_pipeline, layer_stack. Fixed clipped text in isa_encoding, scope_chain, stack_frame, pipeline_forwarding, x86_encoding, tricolour and an unrenderable `⇒` glyph in xla_pipeline. No unused images.
 
 **Deliberately left out.** Product spec sheets (core counts, clocks, SKUs), a second SIMD-vs-SIMT or systolic card outside their home subdecks, NUMA (Cloud Architecture), a Go-GC card beyond the comparative one, Wasm GC proposal details, GPU/TPU interconnect topology, and compiler-construction trivia (tool names, history without a lesson).
+
+## Abbreviations expanded
+
+Notes touched: 200 of 318. Form "full name (ABBR)" at the first occurrence per note (front/text, back, extra; skipping code, cloze interiors, Link: lines and cards that already expand it).
+
+- ABI → application binary interface
+- ABIs → application binary interfaces
+- ALU → arithmetic logic unit
+- AOT → ahead-of-time
+- ASLR → address space layout randomisation
+- AST → abstract syntax tree
+- AVX → Advanced Vector Extensions
+- AVX2 → Advanced Vector Extensions 2
+- AoS → array of structures
+- BCD → binary-coded decimal
+- BF16 → brain floating point 16
+- BIOS → basic input/output system
+- BLAS → Basic Linear Algebra Subprograms
+- BPE → byte-pair encoding
+- BTB → branch target buffer
+- CCWs → channel command words
+- CF → carry flag
+- CFG → control-flow graph
+- CFI → call frame information
+- CISC → complex instruction set computer
+- CP → central processor
+- CPUID → CPU identification
+- CPs → central processors
+- CSE → common subexpression elimination
+- DAG → directed acyclic graph
+- DCE → dead-code elimination
+- DF → direction flag
+- DFA → deterministic finite automaton
+- DIMM → dual in-line memory module
+- DLL → dynamic-link library
+- DPDK → Data Plane Development Kit
+- DRAM → dynamic RAM
+- DRDA → Distributed Relational Database Architecture
+- DSB → decoded stream buffer
+- DSLs → domain-specific languages
+- EBCDIC → Extended Binary Coded Decimal Interchange Code
+- ELF → Executable and Linkable Format
+- FLOP → floating-point operation
+- FLOP/s → floating-point operations per second
+- FLOPs → floating-point operations
+- FMAs → fused multiply-add operations
+- FP32 → 32-bit floating point
+- FP8 → 8-bit floating point
+- FPU → floating-point unit
+- GC → garbage collection
+- GCC → GNU Compiler Collection
+- GELU → Gaussian error linear unit
+- GEMM → general matrix multiply
+- GIL → global interpreter lock
+- GLR → generalised LR
+- GOT → global offset table
+- GSPMD → general and scalable parallelisation for ML computation graphs
+- GVN → global value numbering
+- HBM → high-bandwidth memory
+- HIP → Heterogeneous-computing Interface for Portability
+- HLO → high-level operations
+- HM → Hindley-Milner
+- IBRS → indirect branch restricted speculation
+- IFUNC → indirect function
+- ILP → instruction-level parallelism
+- INT8 → 8-bit integer
+- IPC → instructions per cycle
+- IR → intermediate representation
+- ISA → instruction set architecture
+- JIT → just-in-time
+- JITs → just-in-time compilers
+- JS → JavaScript
+- JVM → Java virtual machine
+- KPTI → kernel page-table isolation
+- L1 → level 1 cache
+- L2 → level 2 cache
+- L3 → level 3 cache
+- LICM → loop-invariant code motion
+- LL → left-to-right, leftmost-derivation
+- LLC → last-level cache
+- LMUL → vector register group multiplier
+- LPARs → logical partitions
+- LR → left-to-right, rightmost-derivation
+- LRU → least recently used
+- LSE → Large System Extensions
+- LSP → Language Server Protocol
+- LTO → link-time optimisation
+- MAC → multiply-accumulate
+- MCUs → microcontrollers
+- MESI → Modified-Exclusive-Shared-Invalid
+- MESIF → Modified-Exclusive-Shared-Invalid-Forward
+- MFMA → matrix fused multiply-add
+- MLIR → multi-level intermediate representation
+- MOESI → Modified-Owned-Exclusive-Shared-Invalid
+- MSROM → microcode sequencer ROM
+- MVC → move characters
+- MX → microscaling
+- MXU → matrix multiply unit
+- ModRM → mode-register-memory
+- NFA → nondeterministic finite automaton
+- NVMe → Non-Volatile Memory Express
+- NZCV → negative, zero, carry, overflow
+- OCP → Open Compute Project
+- OF → overflow flag
+- OoO → out-of-order
+- PC → program counter
+- PCIe → Peripheral Component Interconnect Express
+- PCRE → Perl Compatible Regular Expressions
+- PEG → parsing expression grammar
+- PEP → Python Enhancement Proposal
+- PGO → profile-guided optimisation
+- PIE → position-independent executable
+- PLT → procedure linkage table
+- PRE → partial redundancy elimination
+- PSW → program status word
+- PTX → parallel thread execution
+- RAIM → redundant array of independent memory
+- RAS → reliability, availability and serviceability
+- RAT → register alias table
+- RAW → read-after-write
+- RELRO → relocation read-only
+- REX → register extension
+- RFO → read for ownership
+- RISC → reduced instruction set computer
+- ROB → reorder buffer
+- RRIP → re-reference interval prediction
+- SAP → system assist processor
+- SASS → NVIDIA's native GPU assembly
+- SB → store buffering
+- SC → sequential consistency
+- SF → sign flag
+- SIB → scale-index-base
+- SIE → start interpretive execution
+- SIMD → single instruction, multiple data
+- SIMT → single instruction, multiple threads
+- SLP → superword-level parallelism
+- SM → streaming multiprocessor
+- SMs → streaming multiprocessors
+- SPMD → single program, multiple data
+- SRAM → static RAM
+- SS → storage-to-storage
+- SSA → static single assignment
+- SSE → Streaming SIMD Extensions
+- SSE2 → Streaming SIMD Extensions 2
+- SVE → Scalable Vector Extension
+- SVM → Secure Virtual Machine
+- SoA → structure of arrays
+- SysV → System V
+- TAGE → tagged geometric history length
+- TBDR → tile-based deferred rendering
+- TDX → Trust Domain Extensions
+- TLAB → thread-local allocation buffer
+- TLB → translation lookaside buffer
+- TLP → thread-level parallelism
+- TLS → thread-local storage
+- TPU → tensor processing unit
+- TSO → total store order
+- UB → undefined behaviour
+- UBSan → undefined behaviour sanitizer
+- UEFI → Unified Extensible Firmware Interface
+- VIPT → virtually indexed, physically tagged
+- VLEN → vector register length
+- VMCB → virtual machine control block
+- VMCS → virtual machine control structure
+- VMX → Virtual Machine Extensions
+- VPU → vector processing unit
+- WAR → write-after-read
+- WAW → write-after-write
+- XA → extended architecture
+- XLA → Accelerated Linear Algebra
+- ZF → zero flag
+- zIIP → IBM Z Integrated Information Processor
