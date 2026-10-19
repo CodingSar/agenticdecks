@@ -12,7 +12,7 @@
     "lexing"
    ],
    "front": "Why do compilers split the front end into a <b>lexer</b> and a <b>parser</b> instead of one pass over characters?",
-   "back": "Tokens are a <i>regular</i> language (fast DFA, no stack); structure is <i>context-free</i>. Splitting keeps the grammar free of whitespace/comment noise and makes each part simpler and faster.",
+   "back": "Tokens are a <i>regular</i> language (fast deterministic finite automaton (DFA), no stack); structure is <i>context-free</i>. Splitting keeps the grammar free of whitespace/comment noise and makes each part simpler and faster.",
    "text": "",
    "image": "",
    "analogy": "Reading: you first group letters into words, then words into sentences. Nobody parses grammar letter by letter.",
@@ -47,8 +47,8 @@
     "lexing",
     "automata"
    ],
-   "front": "Why does a lexer run a <b>DFA</b> rather than simulating the NFA directly?",
-   "back": "A DFA is in exactly one state, so each character is one table lookup: O(1) per character, no backtracking, no set of states to track.",
+   "front": "Why does a lexer run a <b>DFA</b> rather than simulating the nondeterministic finite automaton (NFA) directly?",
+   "back": "A deterministic finite automaton (DFA) is in exactly one state, so each character is one table lookup: O(1) per character, no backtracking, no set of states to track.",
    "text": "",
    "image": "",
    "analogy": "NFA simulation is like following every fork in a maze at once; the DFA has pre-computed where each combination of forks leads.",
@@ -176,7 +176,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Contrast:</b> LR parsers love left recursion (constant stack depth); right recursion makes their stack grow with the list length.",
+   "extra": "<b>Contrast:</b> Left-to-right, rightmost-derivation (LR) parsers love left recursion (constant stack depth); right recursion makes their stack grow with the list length.",
    "source": "Front end · Parsing",
    "reverse": false
   },
@@ -211,7 +211,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>In practice:</b> hand-written parsers cheat with unlimited lookahead or backtracking where LL(1) is inconvenient; Python's old parser was LL(1) and accumulated hacks for that reason.",
+   "extra": "<b>In practice:</b> hand-written parsers cheat with unlimited lookahead or backtracking where left-to-right, leftmost-derivation (LL)(1) is inconvenient; Python's old parser was LL(1) and accumulated hacks for that reason.",
    "source": "Front end · Parsing",
    "reverse": false
   },
@@ -243,7 +243,7 @@
     "contrast"
    ],
    "front": "<b>LL</b> vs <b>LR</b> parsing: key difference?",
-   "back": "LL is top-down: it must <i>predict</i> the rule from the first token(s). LR is bottom-up: it shifts tokens onto a stack and only decides on a rule after seeing its whole right-hand side (plus lookahead). LR accepts strictly more grammars.",
+   "back": "Left-to-right, leftmost-derivation (LL) is top-down: it must <i>predict</i> the rule from the first token(s). Left-to-right, rightmost-derivation (LR) is bottom-up: it shifts tokens onto a stack and only decides on a rule after seeing its whole right-hand side (plus lookahead). LR accepts strictly more grammars.",
    "text": "",
    "image": "",
    "analogy": "LL guesses the dish from the first ingredient; LR tastes the whole plate, then names it.",
@@ -279,7 +279,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "LR table flavours: {{c1::SLR}} uses FOLLOW sets for reduce decisions (small, weak); {{c2::canonical LR(1)}} carries a lookahead in every item (strongest, huge tables); {{c3::LALR(1)}} merges LR(1) states with the same core, nearly as strong with SLR-sized tables, and is what yacc/bison build.",
+   "text": "Left-to-right, rightmost-derivation (LR) table flavours: {{c1::SLR}} uses FOLLOW sets for reduce decisions (small, weak); {{c2::canonical LR(1)}} carries a lookahead in every item (strongest, huge tables); {{c3::LALR(1)}} merges LR(1) states with the same core, nearly as strong with SLR-sized tables, and is what yacc/bison build.",
    "image": "",
    "analogy": "",
    "extra": "<b>Pitfall:</b> merging states can introduce reduce/reduce conflicts that LR(1) would not have, a classic head-scratcher when bison rejects a grammar.",
@@ -294,12 +294,12 @@
     "s2s",
     "glr"
    ],
-   "front": "What does a <b>GLR</b> parser do when the LR table has a conflict?",
+   "front": "What does a <b>GLR</b> parser do when the left-to-right, rightmost-derivation (LR) table has a conflict?",
    "back": "It forks the parse stack and pursues every action in parallel (sharing common prefixes); branches that hit an error die, and surviving branches merge again. Ambiguity becomes a parse forest instead of an error.",
    "text": "",
    "image": "",
    "analogy": "A detective who follows every suspect simultaneously and drops those whose alibi checks out.",
-   "extra": "<b>Example:</b> tree-sitter and Elkhound (a C++ parser) are GLR; it handles C++'s declaration-vs-expression ambiguity without the lexer hack.",
+   "extra": "<b>Example:</b> tree-sitter and Elkhound (a C++ parser) are generalised LR (GLR); it handles C++'s declaration-vs-expression ambiguity without the lexer hack.",
    "source": "Front end · Parsing",
    "reverse": false
   },
@@ -316,7 +316,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>In practice:</b> GCC moved from a bison grammar to hand-written C parsers around 2004 for exactly these reasons. Generators remain great for prototypes, DSLs and verifying a grammar is unambiguous.",
+   "extra": "<b>In practice:</b> GNU Compiler Collection (GCC) moved from a bison grammar to hand-written C parsers around 2004 for exactly these reasons. Generators remain great for prototypes, domain-specific languages (DSLs) and verifying a grammar is unambiguous.",
    "source": "Front end · Parsing",
    "reverse": false
   },
@@ -347,7 +347,7 @@
     "contrast"
    ],
    "front": "<b>Parse tree</b> (concrete syntax tree) vs <b>AST</b>: key difference?",
-   "back": "The parse tree mirrors the grammar exactly, including every nonterminal, parenthesis and semicolon. The AST keeps only meaning: <code>(1 + 2)</code> is just a <code>+</code> node with two children.",
+   "back": "The parse tree mirrors the grammar exactly, including every nonterminal, parenthesis and semicolon. The abstract syntax tree (AST) keeps only meaning: <code>(1 + 2)</code> is just a <code>+</code> node with two children.",
    "text": "",
    "image": "",
    "analogy": "A verbatim court transcript (parse tree) versus the minutes that record the decisions (AST).",
@@ -368,7 +368,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Pitfall:</b> <code>A &larr; 'a' / 'ab'</code> never matches <code>ab</code>; with CFG alternation it would. Put the longer alternative first. <b>Packrat:</b> memoising every (rule, position) makes PEG backtracking linear; CPython's parser (PEP 617) is PEG/packrat.",
+   "extra": "<b>Pitfall:</b> <code>A &larr; 'a' / 'ab'</code> never matches <code>ab</code>; with control-flow graph (CFG) alternation it would. Put the longer alternative first. <b>Packrat:</b> memoising every (rule, position) makes parsing expression grammar (PEG) backtracking linear; CPython's parser (Python Enhancement Proposal (PEP) 617) is PEG/packrat.",
    "source": "Front end · Parsing",
    "reverse": false
   },
@@ -386,7 +386,7 @@
    "text": "",
    "image": "",
    "analogy": "Repairing one brick in a wall instead of rebuilding the wall.",
-   "extra": "<b>In practice:</b> that is what powers syntax highlighting, folding and structural navigation in Neovim, Zed, GitHub and many LSP tools.",
+   "extra": "<b>In practice:</b> that is what powers syntax highlighting, folding and structural navigation in Neovim, Zed, GitHub and many Language Server Protocol (LSP) tools.",
    "source": "Front end · Parsing",
    "reverse": false
   },
@@ -401,7 +401,7 @@
     "contrast"
    ],
    "front": "A compiler's <b>lexer tokens</b> vs an LLM's <b>BPE tokens</b>: key difference?",
-   "back": "A lexer's tokens are defined by the language grammar (one identifier, one keyword). BPE tokens are statistically frequent byte sequences: <code>printf(</code> may be one token and <code>xyzzy</code> three, with no notion of syntax.",
+   "back": "A lexer's tokens are defined by the language grammar (one identifier, one keyword). Byte-pair encoding (BPE) tokens are statistically frequent byte sequences: <code>printf(</code> may be one token and <code>xyzzy</code> three, with no notion of syntax.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -524,7 +524,7 @@
     "contrast"
    ],
    "front": "<b>Static</b> vs <b>dynamic</b> typing: key difference?",
-   "back": "Static: types belong to expressions and are checked before the program runs (C, Rust, Java). Dynamic: types belong to run-time values and are checked when an operation executes (Python, JS).",
+   "back": "Static: types belong to expressions and are checked before the program runs (C, Rust, Java). Dynamic: types belong to run-time values and are checked when an operation executes (Python, JavaScript (JS)).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -601,7 +601,7 @@
    "text": "",
    "image": "",
    "analogy": "Filling a form: some fields you work out yourself; others are pre-printed and you only confirm they fit.",
-   "extra": "<b>Why:</b> it scales to features full HM cannot handle (subtyping, higher-rank types) and gives errors at the annotation that was violated.",
+   "extra": "<b>Why:</b> it scales to features full Hindley-Milner (HM) cannot handle (subtyping, higher-rank types) and gives errors at the annotation that was violated.",
    "source": "Types",
    "reverse": false
   },
@@ -651,7 +651,7 @@
     "hm",
     "polymorphism"
    ],
-   "front": "What is <b>let-polymorphism</b>, and why does HM generalise at <code>let</code> but not at lambda parameters?",
+   "front": "What is <b>let-polymorphism</b>, and why does Hindley-Milner (HM) generalise at <code>let</code> but not at lambda parameters?",
    "back": "A <code>let</code>-bound definition gets a type scheme (<code>&forall;a. a &rarr; a</code>) and can be used at several types in its body. Generalising lambda parameters too would be System F, whose inference is undecidable.",
    "text": "",
    "image": "",
@@ -693,7 +693,7 @@
    "text": "<b>Variance</b> of a function type: <code>A &rarr; B</code> is {{c1::contravariant}} in its argument (accepts a <i>wider</i> input) and {{c2::covariant}} in its result (returns a <i>narrower</i> output). A mutable cell or array must be {{c3::invariant}} to stay sound.",
    "image": "",
    "analogy": "A job posting: a candidate who accepts more kinds of tasks (wider input) and delivers more specific results (narrower output) is a safe substitute.",
-   "extra": "<b>Contrast:</b> subtyping (one type stands in for another) is a different mechanism from HM polymorphism (one body for all types). <b>Example:</b> Kotlin's <code>out T</code>/<code>in T</code>, Java's <code>? extends</code>/<code>? super</code>, Rust's lifetime variance all express this.",
+   "extra": "<b>Contrast:</b> subtyping (one type stands in for another) is a different mechanism from Hindley-Milner (HM) polymorphism (one body for all types). <b>Example:</b> Kotlin's <code>out T</code>/<code>in T</code>, Java's <code>? extends</code>/<code>? super</code>, Rust's lifetime variance all express this.",
    "source": "Types",
    "reverse": false
   },
@@ -834,7 +834,7 @@
    "text": "",
    "image": "",
    "analogy": "Translating a rich dialect into a small pidgin everyone downstream understands.",
-   "extra": "<b>Example:</b> rustc lowers AST &rarr; HIR (desugared) &rarr; MIR (control flow graph). <b>Link:</b> 03 IR &amp; Optimisation · IR designs (LLVM IR / MIR)",
+   "extra": "<b>Example:</b> rustc lowers abstract syntax tree (AST) &rarr; HIR (desugared) &rarr; MIR (control flow graph). <b>Link:</b> 03 IR &amp; Optimisation · IR designs (LLVM IR / MIR)",
    "source": "Types",
    "reverse": false
   },
@@ -864,7 +864,7 @@
     "s2s",
     "ir"
    ],
-   "front": "Why do compilers lower the AST to an <b>intermediate representation</b> instead of optimising the tree directly?",
+   "front": "Why do compilers lower the abstract syntax tree (AST) to an <b>intermediate representation</b> instead of optimising the tree directly?",
    "back": "An IR is flat and explicit (temporaries, no nesting, uniform ops), so analyses are simple, and it decouples <i>M</i> front ends from <i>N</i> back ends: M+N components instead of M&times;N.",
    "text": "",
    "image": "",
@@ -883,7 +883,7 @@
     "ast",
     "bridge"
    ],
-   "front": "<b>AST &rarr; IR</b>: what is lost in the lowering, and what is gained?",
+   "front": "<b>Abstract syntax tree (AST) &rarr; intermediate representation (IR)</b>: what is lost in the lowering, and what is gained?",
    "back": "Lost: source structure (nesting, parentheses, sugar, names of sub-expressions) and the easy path to good error messages; positions survive only as debug metadata. Gained: explicit control flow (CFG), explicit temporaries and one uniform instruction set, so analyses become graph algorithms.",
    "text": "",
    "image": "",
@@ -919,8 +919,8 @@
     "ir",
     "ssa"
    ],
-   "front": "Why do virtually all modern optimisers work on <b>SSA form</b>?",
-   "back": "Each value is assigned exactly once, so every use points at its single definition. Def-use chains come for free and constant propagation, GVN and DCE become sparse (work per value, not per program point) and much simpler.",
+   "front": "Why do virtually all modern optimisers work on <b>static single assignment (SSA) form</b>?",
+   "back": "Each value is assigned exactly once, so every use points at its single definition. Def-use chains come for free and constant propagation, global value numbering (GVN) and dead-code elimination (DCE) become sparse (work per value, not per program point) and much simpler.",
    "text": "",
    "image": "",
    "analogy": "Immutable variables in a functional language, or Git commits: nothing is ever overwritten, you just create a new name for the new value.",
@@ -939,7 +939,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "In SSA, a {{c1::&phi;-function}} sits at the start of a <b>join block</b> and selects, for each incoming {{c2::predecessor edge}}, which version of the variable flows in, e.g. <code>x4 = &phi;(x2 from B1, x3 from B2)</code>.",
+   "text": "In static single assignment (SSA), a {{c1::&phi;-function}} sits at the start of a <b>join block</b> and selects, for each incoming {{c2::predecessor edge}}, which version of the variable flows in, e.g. <code>x4 = &phi;(x2 from B1, x3 from B2)</code>.",
    "image": "<img src=\"s2s_ssa_phi.svg\">",
    "analogy": "A railway points switch at a junction: the value that arrives depends on which track you came in on.",
    "extra": "<b>Pitfall:</b> &phi; is not an instruction the CPU runs: before code generation each &phi; becomes copies at the end of its predecessor blocks, which the register allocator then coalesces away. <b>Link:</b> 04 Codegen &amp; ABI · register allocation (φ → copies)",
@@ -956,12 +956,12 @@
     "ssa",
     "dominance"
    ],
-   "front": "In a CFG, what does <b>&ldquo;A dominates B&rdquo;</b> mean?",
+   "front": "In a control-flow graph (CFG), what does <b>&ldquo;A dominates B&rdquo;</b> mean?",
    "back": "Every path from the entry block to B passes through A. The entry dominates everything; every block dominates itself. The relation forms the <b>dominator tree</b>.",
    "text": "",
    "image": "",
    "analogy": "A toll booth on the only road into a valley: whatever is true at the booth is true everywhere in the valley.",
-   "extra": "<b>In practice:</b> a definition in A is guaranteed visible in every block A dominates, which is why dominance underlies SSA, LICM and GVN.",
+   "extra": "<b>In practice:</b> a definition in A is guaranteed visible in every block A dominates, which is why dominance underlies static single assignment (SSA), loop-invariant code motion (LICM) and global value numbering (GVN).",
    "source": "IR & Opt",
    "reverse": false
   },
@@ -975,12 +975,12 @@
     "ssa",
     "dominance"
    ],
-   "front": "Where does classic SSA construction (Cytron et al.) place &phi;-functions for a variable defined in block A?",
+   "front": "Where does classic static single assignment (SSA) construction (Cytron et al.) place &phi;-functions for a variable defined in block A?",
    "back": "In A's <b>dominance frontier</b>: blocks B that A does <i>not</i> strictly dominate but one of whose predecessors A does dominate. Iterate, because a new &phi; is itself a definition.",
    "text": "",
    "image": "<img src=\"s2s_ssa_phi.svg\">",
    "analogy": "",
-   "extra": "<b>Example:</b> in the picture <code>DF(B1) = DF(B2) = {B3}</code>, so B3 gets one &phi;. <b>Also:</b> this gives <i>minimal</i> SSA; <i>pruned</i> SSA additionally drops &phi;s for dead variables (needs liveness). Braun et al. 2013 build SSA straight from the AST without dominance frontiers.",
+   "extra": "<b>Example:</b> in the picture <code>DF(B1) = DF(B2) = {B3}</code>, so B3 gets one &phi;. <b>Also:</b> this gives <i>minimal</i> SSA; <i>pruned</i> SSA additionally drops &phi;s for dead variables (needs liveness). Braun et al. 2013 build SSA straight from the abstract syntax tree (AST) without dominance frontiers.",
    "source": "IR & Opt",
    "reverse": false
   },
@@ -993,7 +993,7 @@
     "dataflow"
    ],
    "front": "What is <b>dataflow analysis</b> in one sentence, and how is the answer computed?",
-   "back": "A per-block transfer function plus a meet operator over a lattice; iterate over the CFG until nothing changes (fixpoint). Monotone functions on a finite-height lattice guarantee termination.",
+   "back": "A per-block transfer function plus a meet operator over a lattice; iterate over the control-flow graph (CFG) until nothing changes (fixpoint). Monotone functions on a finite-height lattice guarantee termination.",
    "text": "",
    "image": "",
    "analogy": "Rumours spreading through an office: each person combines what their neighbours know and passes it on, until a day goes by with nothing new.",
@@ -1047,7 +1047,7 @@
     "contrast"
    ],
    "front": "<b>CSE</b> vs <b>GVN</b>: what does global value numbering catch that common-subexpression elimination doesn't?",
-   "back": "CSE matches lexically identical expressions. GVN assigns a number to each <i>value</i> computed, so it also catches <code>a+b</code> vs <code>b+a</code>, copies and renamed variables, and (with PRE) expressions available on only some paths.",
+   "back": "CSE matches lexically identical expressions. GVN assigns a number to each <i>value</i> computed, so it also catches <code>a+b</code> vs <code>b+a</code>, copies and renamed variables, and (with partial redundancy elimination (PRE)) expressions available on only some paths.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1117,7 +1117,7 @@
     "unrolling"
    ],
    "front": "What does <b>loop unrolling</b> buy, and what does it cost?",
-   "back": "Fewer branches and induction-variable updates per element, and a bigger straight-line body for scheduling and SLP vectorisation. Costs: code size, i-cache pressure and a remainder loop for trip counts not divisible by the factor.",
+   "back": "Fewer branches and induction-variable updates per element, and a bigger straight-line body for scheduling and superword-level parallelism (SLP) vectorisation. Costs: code size, i-cache pressure and a remainder loop for trip counts not divisible by the factor.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1188,7 +1188,7 @@
     "alias",
     "tbaa"
    ],
-   "front": "How does <b>type-based alias analysis</b> reach the optimiser in LLVM, given LLVM IR has no C types?",
+   "front": "How does <b>type-based alias analysis</b> reach the optimiser in LLVM, given LLVM intermediate representation (IR) has no C types?",
    "back": "The front end attaches <code>!tbaa</code> metadata to every load and store, describing the access type in a type tree; the alias analysis then reports that accesses of unrelated types <i>cannot</i> alias.",
    "text": "",
    "image": "",
@@ -1206,7 +1206,7 @@
     "devirtualisation"
    ],
    "front": "When can a compiler <b>devirtualise</b> a C++ virtual call into a direct (and then inlinable) call?",
-   "back": "When it knows the dynamic type: the object was just constructed in view, the class or method is <code>final</code>, or whole-program vtable analysis (LTO, <code>-fwhole-program-vtables</code>) shows a single override.",
+   "back": "When it knows the dynamic type: the object was just constructed in view, the class or method is <code>final</code>, or whole-program vtable analysis (link-time optimisation (LTO), <code>-fwhole-program-vtables</code>) shows a single override.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1224,7 +1224,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "<b>PGO</b> feeds real execution counts back into the compiler. {{c1::Instrumented}} PGO inserts counters into a special build (exact, but slower training runs); {{c2::sampling}} PGO (AutoFDO) uses <code>perf</code> samples from production binaries (approximate, zero build friction).",
+   "text": "<b>Profile-guided optimisation (PGO)</b> feeds real execution counts back into the compiler. {{c1::Instrumented}} PGO inserts counters into a special build (exact, but slower training runs); {{c2::sampling}} PGO (AutoFDO) uses <code>perf</code> samples from production binaries (approximate, zero build friction).",
    "image": "",
    "analogy": "",
    "extra": "<b>In practice:</b> profiles mostly change block layout (hot path straight-line, cold code moved away), inlining decisions and branch probabilities; typical wins are 5&ndash;15% on branchy code.",
@@ -1242,7 +1242,7 @@
     "contrast"
    ],
    "front": "LLVM <b>undef</b> vs <b>poison</b>: what is the difference?",
-   "back": "<code>undef</code>: an arbitrary ordinary value (each use may pick a different one). <code>poison</code>: the result of violating a rule such as <code>nsw</code>; it propagates through arithmetic and is UB only once it reaches a side effect.",
+   "back": "<code>undef</code>: an arbitrary ordinary value (each use may pick a different one). <code>poison</code>: the result of violating a rule such as <code>nsw</code>; it propagates through arithmetic and is undefined behaviour (UB) only once it reaches a side effect.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1262,7 +1262,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Three IR designs: {{c1::LLVM IR}} is a single typed SSA language, close to a portable assembler; {{c2::GCC}} lowers through GENERIC &rarr; GIMPLE (three-address, SSA) &rarr; RTL (target-specific); {{c3::MLIR}} is a framework of <i>dialects</i> at different abstraction levels that are progressively lowered.",
+   "text": "Three intermediate representation (IR) designs: {{c1::LLVM IR}} is a single typed static single assignment (SSA) language, close to a portable assembler; {{c2::GCC}} lowers through GENERIC &rarr; GIMPLE (three-address, SSA) &rarr; RTL (target-specific); {{c3::MLIR}} is a framework of <i>dialects</i> at different abstraction levels that are progressively lowered.",
    "image": "",
    "analogy": "",
    "extra": "<b>Link:</b> 11 Accelerators · MLIR dialects",
@@ -1312,11 +1312,11 @@
     "reading-output"
    ],
    "front": "In <code>-O2</code> output a <code>static</code> helper function has vanished from <code>objdump</code> and from the symbol table. What happened, and how do you confirm it?",
-   "back": "It was inlined into all callers and, being internal, deleted. Confirm with <code>-Rpass=inline</code> (clang) or <code>-fopt-info-inline</code> (gcc), or read the IR with <code>-emit-llvm -S</code>.",
+   "back": "It was inlined into all callers and, being internal, deleted. Confirm with <code>-Rpass=inline</code> (clang) or <code>-fopt-info-inline</code> (gcc), or read the intermediate representation (IR) with <code>-emit-llvm -S</code>.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>In practice:</b> Compiler Explorer with <code>-O2 -emit-llvm</code> or GCC's <code>-fdump-tree-optimized</code> shows the IR after the middle end, before instruction selection. <b>Link:</b> 06 x86-64 · reading compiler output",
+   "extra": "<b>In practice:</b> Compiler Explorer with <code>-O2 -emit-llvm</code> or GNU Compiler Collection (GCC)'s <code>-fdump-tree-optimized</code> shows the IR after the middle end, before instruction selection. <b>Link:</b> 06 x86-64 · reading compiler output",
    "source": "IR & Opt",
    "reverse": false
   },
@@ -1329,8 +1329,8 @@
     "codegen",
     "isel"
    ],
-   "front": "Why is <b>instruction selection</b> described as <i>tiling</i> a tree or DAG?",
-   "back": "One machine instruction can cover several IR operations (x86 <code>lea</code> does shift+add+add; a memory operand folds a load into an add). The selector covers the IR graph with instruction patterns at minimum total cost.",
+   "front": "Why is <b>instruction selection</b> described as <i>tiling</i> a tree or directed acyclic graph (DAG)?",
+   "back": "One machine instruction can cover several intermediate representation (IR) operations (x86 <code>lea</code> does shift+add+add; a memory operand folds a load into an add). The selector covers the IR graph with instruction patterns at minimum total cost.",
    "text": "",
    "image": "",
    "analogy": "Covering a floor plan with rugs of different shapes and prices: the cheapest full cover is the chosen instruction sequence.",
@@ -1405,7 +1405,7 @@
     "bridge"
    ],
    "front": "<b>Register allocation</b> (compiler, 04) vs <b>register renaming</b> (core, 08): what does each map, and why are both needed?",
-   "back": "Allocation maps unbounded virtual registers onto the ISA's 16 or 31 names at compile time, spilling when short. Renaming maps those names onto hundreds of physical registers at run time, removing the false dependencies that name reuse created. The compiler decides what lives where; the core undoes the sharing.",
+   "back": "Allocation maps unbounded virtual registers onto the instruction set architecture (ISA)'s 16 or 31 names at compile time, spilling when short. Renaming maps those names onto hundreds of physical registers at run time, removing the false dependencies that name reuse created. The compiler decides what lives where; the core undoes the sharing.",
    "text": "",
    "image": "",
    "analogy": "A hotel with 16 room numbers: allocation books guests into them; renaming quietly gives each new guest a fresh physical room while the number on the key stays the same.",
@@ -1440,7 +1440,7 @@
     "abi",
     "calling-convention"
    ],
-   "front": "What does a <b>calling convention</b> fix, and why do ABIs split registers into caller-saved and callee-saved?",
+   "front": "What does a <b>calling convention</b> fix, and why do application binary interfaces (ABIs) split registers into caller-saved and callee-saved?",
    "back": "Where arguments and results go, register ownership, stack alignment, who cleans up. The split lets short-lived values use caller-saved registers for free, while values living across calls sit in callee-saved ones, saved only by functions that actually use them.",
    "text": "",
    "image": "",
@@ -1460,7 +1460,7 @@
     "contrast"
    ],
    "front": "<b>SysV AMD64</b> vs <b>Windows x64</b> calling convention: the key differences?",
-   "back": "<ul><li>6 integer argument registers vs 4 (rcx, rdx, r8, r9)</li><li>Win64: caller reserves 32 bytes of <i>shadow space</i>; SysV: none, but a red zone</li><li>Win64 keeps xmm6&ndash;15 callee-saved; SysV: all vector registers caller-saved</li></ul>",
+   "back": "<ul><li>6 integer argument registers vs 4 (rcx, rdx, r8, r9)</li><li>Win64: caller reserves 32 bytes of <i>shadow space</i>; System V (SysV): none, but a red zone</li><li>Win64 keeps xmm6&ndash;15 callee-saved; SysV: all vector registers caller-saved</li></ul>",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1496,8 +1496,8 @@
     "x86-64",
     "structs"
    ],
-   "front": "How does the SysV AMD64 ABI pass a small <code>struct { double d; long n; }</code> argument, and a 32-byte struct?",
-   "back": "Each eightbyte is classified: <code>d</code> is SSE &rarr; xmm0, <code>n</code> is INTEGER &rarr; rdi. Aggregates over 16 bytes (or with unaligned fields) are class MEMORY: copied onto the stack by the caller.",
+   "front": "How does the System V (SysV) AMD64 application binary interface (ABI) pass a small <code>struct { double d; long n; }</code> argument, and a 32-byte struct?",
+   "back": "Each eightbyte is classified: <code>d</code> is Streaming SIMD Extensions (SSE) &rarr; xmm0, <code>n</code> is INTEGER &rarr; rdi. Aggregates over 16 bytes (or with unaligned fields) are class MEMORY: copied onto the stack by the caller.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1516,7 +1516,7 @@
     "stack"
    ],
    "front": "Why is the x86-64 stack 16-byte aligned at every <code>call</code>, and what does that imply at function entry?",
-   "back": "SSE instructions like <code>movaps</code> fault on unaligned stack operands, so the ABI demands <code>rsp</code> &equiv; 0 mod 16 at the call. The pushed return address makes <code>rsp</code> &equiv; 8 mod 16 at entry; prologues restore alignment.",
+   "back": "Streaming SIMD Extensions (SSE) instructions like <code>movaps</code> fault on unaligned stack operands, so the application binary interface (ABI) demands <code>rsp</code> &equiv; 0 mod 16 at the call. The pushed return address makes <code>rsp</code> &equiv; 8 mod 16 at entry; prologues restore alignment.",
    "text": "",
    "image": "<img src=\"s2s_stack_frame.svg\">",
    "analogy": "",
@@ -1535,7 +1535,7 @@
     "frame-pointer"
    ],
    "front": "What does <code>-fomit-frame-pointer</code> buy and cost?",
-   "back": "Buys one more general register (<code>rbp</code>) and a shorter prologue. Costs: stack walking must use <code>.eh_frame</code> CFI unwind tables instead of following the <code>rbp</code> chain, which is slower for profilers and impossible for simple in-kernel/eBPF stack walkers.",
+   "back": "Buys one more general register (<code>rbp</code>) and a shorter prologue. Costs: stack walking must use <code>.eh_frame</code> call frame information (CFI) unwind tables instead of following the <code>rbp</code> chain, which is slower for profilers and impossible for simple in-kernel/eBPF stack walkers.",
    "text": "",
    "image": "<img src=\"s2s_stack_frame.svg\">",
    "analogy": "",
@@ -1553,7 +1553,7 @@
     "varargs",
     "x86-64"
    ],
-   "front": "Why does the SysV ABI require the caller of a <b>variadic</b> function to set <code>al</code>?",
+   "front": "Why does the System V (SysV) application binary interface (ABI) require the caller of a <b>variadic</b> function to set <code>al</code>?",
    "back": "<code>al</code> is an upper bound (0&ndash;8) on the number of vector registers used for arguments. The callee's prologue saves xmm0&ndash;7 into the register save area only when <code>al &ne; 0</code>, so <code>printf</code> without floats skips eight 16-byte stores.",
    "text": "",
    "image": "",
@@ -1577,7 +1577,7 @@
    "text": "",
    "image": "",
    "analogy": "API is the menu wording; ABI is the shape of the plates. You can keep the menu and still break every dish by changing plate sizes.",
-   "extra": "<b>In practice:</b> opaque handles plus accessor functions (the <i>pimpl</i> idiom) keep the ABI stable; <code>abi-compliance-checker</code>/<code>abidiff</code> find breaks.",
+   "extra": "<b>In practice:</b> opaque handles plus accessor functions (the <i>pimpl</i> idiom) keep the application binary interface (ABI) stable; <code>abi-compliance-checker</code>/<code>abidiff</code> find breaks.",
    "source": "Codegen & ABI",
    "reverse": false
   },
@@ -1627,11 +1627,11 @@
     "pic"
    ],
    "front": "Why is <b>position-independent code</b> nearly free on x86-64 but was costly on 32-bit x86?",
-   "back": "x86-64 has <code>rip</code>-relative addressing, so code and its own data are reached by a constant offset wherever the image lands. i386 had no PC-relative data addressing: PIC had to compute the GOT address into <code>ebx</code> and lose a register.",
+   "back": "x86-64 has <code>rip</code>-relative addressing, so code and its own data are reached by a constant offset wherever the image lands. i386 had no PC-relative data addressing: PIC had to compute the global offset table (GOT) address into <code>ebx</code> and lose a register.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>PIE:</b> the executable itself built as PIC so ASLR can randomise it; hence the error <code>R_X86_64_32 ... can not be used when making a PIE object; recompile with -fPIE</code> for objects using 32-bit absolute addresses. <b>Link:</b> 06 x86-64 · RIP-relative addressing; 07 ARM64/RISC-V/Z · adrp + add",
+   "extra": "<b>Position-independent executable (PIE):</b> the executable itself built as PIC so address space layout randomisation (ASLR) can randomise it; hence the error <code>R_X86_64_32 ... can not be used when making a PIE object; recompile with -fPIE</code> for objects using 32-bit absolute addresses. <b>Link:</b> 06 x86-64 · RIP-relative addressing; 07 ARM64/RISC-V/Z · adrp + add",
    "source": "Codegen & ABI",
    "reverse": false
   },
@@ -1647,7 +1647,7 @@
     "contrast"
    ],
    "front": "<b>GOT</b> vs <b>PLT</b>: what is each, and why are both needed?",
-   "back": "GOT: a table of <i>addresses</i> in writable data, filled by the dynamic loader. PLT: tiny <i>code</i> stubs, one per imported function, that jump through the GOT. Code stays read-only and shareable; only the small GOT is patched per process.",
+   "back": "Global offset table (GOT): a table of <i>addresses</i> in writable data, filled by the dynamic loader. Procedure linkage table (PLT): tiny <i>code</i> stubs, one per imported function, that jump through the GOT. Code stays read-only and shareable; only the small GOT is patched per process.",
    "text": "",
    "image": "",
    "analogy": "The PLT is a desk of switchboard operators; the GOT is their phone book, updated without rewiring anyone's desk.",
@@ -1665,8 +1665,8 @@
     "plt",
     "lazy-binding"
    ],
-   "front": "Step through the <b>first call</b> to <code>puts</code> through the PLT with lazy binding.",
-   "back": "<code>call puts@plt</code> &rarr; <code>jmp *GOT[n]</code>, which initially points back into the PLT &rarr; push the relocation index, jump to PLT[0] &rarr; <code>_dl_runtime_resolve</code> finds <code>puts</code>, writes its address into GOT[n], jumps there. Later calls go straight through the GOT.",
+   "front": "Step through the <b>first call</b> to <code>puts</code> through the procedure linkage table (PLT) with lazy binding.",
+   "back": "<code>call puts@plt</code> &rarr; <code>jmp *GOT[n]</code>, which initially points back into the PLT &rarr; push the relocation index, jump to PLT[0] &rarr; <code>_dl_runtime_resolve</code> finds <code>puts</code>, writes its address into global offset table (GOT)[n], jumps there. Later calls go straight through the GOT.",
    "text": "",
    "image": "<img src=\"s2s_plt_got.svg\">",
    "analogy": "Directory enquiries on the first call, speed-dial afterwards.",
@@ -1685,7 +1685,7 @@
     "security"
    ],
    "front": "Why do hardened builds disable lazy binding with <code>-z now</code>, and what is <b>full RELRO</b>?",
-   "back": "A lazily bound GOT must stay writable for the process lifetime, so a memory-corruption bug can overwrite a GOT slot and hijack the next library call. <code>-z now</code> resolves everything at load, then RELRO remaps the GOT read-only.",
+   "back": "A lazily bound global offset table (GOT) must stay writable for the process lifetime, so a memory-corruption bug can overwrite a GOT slot and hijack the next library call. <code>-z now</code> resolves everything at load, then relocation read-only (RELRO) remaps the GOT read-only.",
    "text": "",
    "image": "<img src=\"s2s_plt_got.svg\">",
    "analogy": "",
@@ -1703,7 +1703,7 @@
     "interposition"
    ],
    "front": "Why does a call from <i>inside</i> <code>libfoo.so</code> to its own exported function <code>foo()</code> still go through the PLT, and why does <code>LD_PRELOAD</code> work at all?",
-   "back": "ELF <b>symbol interposition</b>: the first definition in load order wins, so the executable or a preloaded library may override <code>foo</code>. The compiler must therefore emit an interposable (PLT) call even to a local definition.",
+   "back": "Executable and Linkable Format (ELF) <b>symbol interposition</b>: the first definition in load order wins, so the executable or a preloaded library may override <code>foo</code>. The compiler must therefore emit an interposable (PLT) call even to a local definition.",
    "text": "",
    "image": "",
    "analogy": "Company policy says any caller may be redirected by the front desk, so even colleagues in the same office must dial through reception.",
@@ -1722,7 +1722,7 @@
     "contrast"
    ],
    "front": "<b>Static</b> vs <b>dynamic</b> linking: what do you trade?",
-   "back": "Static: self-contained, fastest startup and calls, LTO over everything; but each binary carries its own libc and a libc security fix means rebuilding all. Dynamic: one shared, patchable copy; but PLT indirection, load-time resolution and version mismatches.",
+   "back": "Static: self-contained, fastest startup and calls, link-time optimisation (LTO) over everything; but each binary carries its own libc and a libc security fix means rebuilding all. Dynamic: one shared, patchable copy; but procedure linkage table (PLT) indirection, load-time resolution and version mismatches.",
    "text": "",
    "image": "",
    "analogy": "Every flat with its own boiler versus district heating: independence and no shared outages, or one plant that is cheaper to run and fix for everyone.",
@@ -1741,7 +1741,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "LTO mechanics: with <code>-flto</code> each <code>.o</code> contains {{c1::compiler IR (LLVM bitcode / GCC GIMPLE bytecode)}} instead of machine code; the linker calls a {{c2::plugin}} that runs the optimiser over the whole program and hands back real objects. {{c3::ThinLTO}} keeps per-module optimisation in parallel, importing only hot functions via a summary index.",
+   "text": "Link-time optimisation (LTO) mechanics: with <code>-flto</code> each <code>.o</code> contains {{c1::compiler IR (LLVM bitcode / GCC GIMPLE bytecode)}} instead of machine code; the linker calls a {{c2::plugin}} that runs the optimiser over the whole program and hands back real objects. {{c3::ThinLTO}} keeps per-module optimisation in parallel, importing only hot functions via a summary index.",
    "image": "",
    "analogy": "",
    "extra": "<b>Pitfall:</b> full LTO is single-threaded and memory-hungry on big programs; ThinLTO is the practical default (Chrome, Firefox). <b>Link:</b> 03 IR &amp; Optimisation · inlining; devirtualisation",
@@ -1759,7 +1759,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "ELF TLS access models, from fastest to most general: {{c1::local-exec}} (<code>mov %fs:x@tpoff</code>, variable in the executable); {{c2::initial-exec}} (offset loaded from the GOT, variable in a library present at startup); {{c3::local-dynamic}} (one <code>__tls_get_addr</code> call for the module, then offsets); {{c4::global-dynamic}} (<code>__tls_get_addr</code> per variable, works after <code>dlopen</code>).",
+   "text": "Executable and Linkable Format (ELF) TLS access models, from fastest to most general: {{c1::local-exec}} (<code>mov %fs:x@tpoff</code>, variable in the executable); {{c2::initial-exec}} (offset loaded from the global offset table (GOT), variable in a library present at startup); {{c3::local-dynamic}} (one <code>__tls_get_addr</code> call for the module, then offsets); {{c4::global-dynamic}} (<code>__tls_get_addr</code> per variable, works after <code>dlopen</code>).",
    "image": "",
    "analogy": "",
    "extra": "<b>In practice:</b> the compiler picks by <code>-fPIC</code>/<code>-fPIE</code>; <code>-ftls-model=initial-exec</code> speeds up a library you promise never to <code>dlopen</code>.",
@@ -1776,7 +1776,7 @@
     "symbol-versioning"
    ],
    "front": "A binary built on a new distro fails on an old one with <code>version 'GLIBC_2.34' not found</code>. What mechanism is this?",
-   "back": "ELF <b>symbol versioning</b>: each glibc symbol carries the version it was introduced or changed in (<code>memcpy@GLIBC_2.14</code>), and the loader refuses to bind if the installed library lacks that version node.",
+   "back": "Executable and Linkable Format (ELF) <b>symbol versioning</b>: each glibc symbol carries the version it was introduced or changed in (<code>memcpy@GLIBC_2.14</code>), and the loader refuses to bind if the installed library lacks that version node.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1793,8 +1793,8 @@
     "linking",
     "ifunc"
    ],
-   "front": "How does one <code>libc.so</code> run an AVX2 <code>memcpy</code> on new CPUs and an SSE2 one on old CPUs?",
-   "back": "GNU <b>IFUNC</b>: the symbol points at a resolver that the dynamic loader runs once (checking <code>cpuid</code>) and whose chosen implementation is written into the GOT slot. All callers are then dispatched at full speed.",
+   "front": "How does one <code>libc.so</code> run an Advanced Vector Extensions 2 (AVX2) <code>memcpy</code> on new CPUs and an Streaming SIMD Extensions 2 (SSE2) one on old CPUs?",
+   "back": "GNU <b>indirect function (IFUNC)</b>: the symbol points at a resolver that the dynamic loader runs once (checking <code>cpuid</code>) and whose chosen implementation is written into the global offset table (GOT) slot. All callers are then dispatched at full speed.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1813,7 +1813,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "<code>printf(&quot;hi\\n&quot;)</code> reaches the kernel: PLT &rarr; libc's <code>printf</code> &rarr; formatting into the {{c1::<code>FILE</code> buffer of stdout}} &rarr; flush (line-buffered on a tty) &rarr; {{c2::<code>write(1, buf, n)</code>}} wrapper &rarr; the {{c3::<code>syscall</code>}} instruction with the call number in <code>rax</code> &rarr; kernel <code>sys_write</code> &rarr; tty or pipe driver.",
+   "text": "<code>printf(&quot;hi\\n&quot;)</code> reaches the kernel: Procedure linkage table (PLT) &rarr; libc's <code>printf</code> &rarr; formatting into the {{c1::<code>FILE</code> buffer of stdout}} &rarr; flush (line-buffered on a tty) &rarr; {{c2::<code>write(1, buf, n)</code>}} wrapper &rarr; the {{c3::<code>syscall</code>}} instruction with the call number in <code>rax</code> &rarr; kernel <code>sys_write</code> &rarr; tty or pipe driver.",
    "image": "",
    "analogy": "",
    "extra": "<b>Pitfall:</b> when stdout is a pipe it is fully buffered, so output appears only at exit or when 4&nbsp;KiB fill: the reason logs &ldquo;vanish&rdquo; when a program is killed. <b>Link:</b> 06 x86-64 · syscall convention",
@@ -1830,7 +1830,7 @@
     "interpreter"
    ],
    "front": "Why is a bytecode interpreter usually several times faster than a tree-walking interpreter of the same language?",
-   "back": "Bytecode is a flat, compact array: no pointer-chasing through AST nodes, no recursive <code>eval()</code> calls per node, and resolved names become slot indices.",
+   "back": "Bytecode is a flat, compact array: no pointer-chasing through abstract syntax tree (AST) nodes, no recursive <code>eval()</code> calls per node, and resolved names become slot indices.",
    "text": "",
    "image": "",
    "analogy": "A tree-walker re-reads the recipe book from the index every step; bytecode is the recipe copied onto one card in order.",
@@ -1849,7 +1849,7 @@
     "contrast"
    ],
    "front": "Stack VM vs register VM: what is the trade-off?",
-   "back": "Stack VM (JVM, CPython, Wasm): tiny instructions, trivial codegen, but more instructions and pushes/pops. Register VM (Lua 5, Dalvik): fewer, larger instructions that name operands directly, so less dispatch overhead.",
+   "back": "Stack VM (Java virtual machine (JVM), CPython, Wasm): tiny instructions, trivial codegen, but more instructions and pushes/pops. Register VM (Lua 5, Dalvik): fewer, larger instructions that name operands directly, so less dispatch overhead.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1890,7 +1890,7 @@
    "text": "CPython executes code as a {{c1::stack-based}} bytecode in the loop in <code>ceval.c</code>; since 3.11 its {{c2::specialising adaptive}} interpreter rewrites hot generic instructions (e.g. <code>BINARY_OP</code>) into type-specialised variants in place (\"quickening\"), guarded by cheap type checks.",
    "image": "",
    "analogy": "",
-   "extra": "<b>In practice:</b> <code>dis.dis(f, adaptive=True)</code> shows the specialised opcodes. The experimental copy-and-patch JIT (3.13+) builds on these traces.",
+   "extra": "<b>In practice:</b> <code>dis.dis(f, adaptive=True)</code> shows the specialised opcodes. The experimental copy-and-patch just-in-time (JIT) (3.13+) builds on these traces.",
    "source": "Runtimes",
    "reverse": false
   },
@@ -1904,12 +1904,12 @@
     "cpython",
     "gil"
    ],
-   "front": "What does CPython's GIL actually protect, and why is removing it hard?",
+   "front": "What does CPython's global interpreter lock (GIL) actually protect, and why is removing it hard?",
    "back": "It makes the interpreter's shared state, above all non-atomic reference-count updates, safe with one lock. Without it every <code>Py_INCREF</code> needs atomics or biased counting, costing single-thread speed.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>In practice:</b> the free-threaded build (PEP 703) is an opt-in alternative interpreter; I/O-bound code already releases the GIL around blocking calls.",
+   "extra": "<b>In practice:</b> the free-threaded build (Python Enhancement Proposal (PEP) 703) is an opt-in alternative interpreter; I/O-bound code already releases the GIL around blocking calls.",
    "source": "Runtimes",
    "reverse": false
   },
@@ -1947,7 +1947,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Why the JIT cares:</b> a monomorphic call site names one target, so it can be inlined behind a single shape guard. <b>Link:</b> 08 Microarchitecture · branch prediction (the guard is a branch); 12 Mapping · JS a.b through the IC",
+   "extra": "<b>Why the just-in-time (JIT) cares:</b> a monomorphic call site names one target, so it can be inlined behind a single shape guard. <b>Link:</b> 08 Microarchitecture · branch prediction (the guard is a branch); 12 Mapping · JS a.b through the IC",
    "source": "Runtimes",
    "reverse": false
   },
@@ -1961,7 +1961,7 @@
     "jit",
     "tiers"
    ],
-   "front": "Why do modern VMs use <b>tiered</b> JIT compilation instead of one optimising compiler?",
+   "front": "Why do modern VMs use <b>tiered</b> just-in-time (JIT) compilation instead of one optimising compiler?",
    "back": "Optimising compilation is slow and needs profile data that only exists after running. Cheap tiers start fast and collect type feedback; the expensive tier is spent only on code proven hot.",
    "text": "",
    "image": "<img src=\"s2s_tiered_jit.svg\">",
@@ -1999,7 +1999,7 @@
     "jit",
     "speculation"
    ],
-   "front": "What does it mean that a JIT <b>speculates</b>, and what keeps it correct?",
+   "front": "What does it mean that a just-in-time (JIT) <b>speculates</b>, and what keeps it correct?",
    "back": "It compiles for the types and branches seen so far (e.g. \"<code>x</code> is always an int\") and emits a cheap <b>guard</b>; if the guard fails, execution deoptimises back to a lower tier instead of computing a wrong result.",
    "text": "",
    "image": "",
@@ -2038,7 +2038,7 @@
     "contrast",
     "bridge"
    ],
-   "front": "<b>Speculation</b> in a CPU (08) vs in a JIT (05): what is the bet, and what is the undo?",
+   "front": "<b>Speculation</b> in a CPU (08) vs in a just-in-time (JIT) (05): what is the bet, and what is the undo?",
    "back": "CPU: predicts branches and addresses, executes ahead, squashes and restarts within tens of cycles, invisibly, per instruction. JIT: assumes the types and call targets seen so far, compiles specialised code behind guards, and on a miss deoptimises in microseconds by rebuilding interpreter frames.",
    "text": "",
    "image": "",
@@ -2076,7 +2076,7 @@
     "jit",
     "contrast"
    ],
-   "front": "JIT vs AOT: what can a JIT do that an AOT compiler cannot, and what does it pay?",
+   "front": "Just-in-time (JIT) vs ahead-of-time (AOT): what can a JIT do that an AOT compiler cannot, and what does it pay?",
    "back": "JIT: sees the real profile and loaded classes, so it can speculate, inline through dynamic dispatch and target the exact CPU. Pays warm-up time, compile CPU, memory for code versions and non-determinism.",
    "text": "",
    "image": "",
@@ -2095,7 +2095,7 @@
     "wasm",
     "contrast"
    ],
-   "front": "WebAssembly bytecode vs JVM bytecode: what is the key design difference?",
+   "front": "WebAssembly bytecode vs Java virtual machine (JVM) bytecode: what is the key design difference?",
    "back": "Wasm is a low-level target: a typed stack machine over one flat <b>linear memory</b>, no objects, no GC (until the GC proposal), validated in one pass. JVM bytecode is object-level and assumes a garbage-collected heap.",
    "text": "",
    "image": "",
@@ -2114,12 +2114,12 @@
     "gc",
     "contrast"
    ],
-   "front": "Reference counting vs tracing GC: key difference?",
+   "front": "Reference counting vs tracing garbage collection (GC): key difference?",
    "back": "RC frees an object the moment its count hits zero (prompt, deterministic, work spread evenly) but cannot free cycles and pays a write on every pointer copy. Tracing finds live objects from roots in batches; handles cycles, but pauses and delays reclamation.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Pitfall:</b> <code>a.next = b; b.next = a</code> never reaches zero: CPython adds a cycle collector for exactly this. JVM, V8, Go and .NET trace.",
+   "extra": "<b>Pitfall:</b> <code>a.next = b; b.next = a</code> never reaches zero: CPython adds a cycle collector for exactly this. Java virtual machine (JVM), V8, Go and .NET trace.",
    "source": "Runtimes",
    "reverse": false
   },
@@ -2152,7 +2152,7 @@
     "gc",
     "generational"
    ],
-   "front": "What is the <b>generational hypothesis</b>, and why does it make GC cheap?",
+   "front": "What is the <b>generational hypothesis</b>, and why does it make garbage collection (GC) cheap?",
    "back": "Most objects die young. A small nursery collected often with a copying collector costs only the few survivors; long-lived objects are promoted and scanned rarely.",
    "text": "",
    "image": "",
@@ -2189,8 +2189,8 @@
     "runtime",
     "gc"
    ],
-   "front": "Why can allocation in a GC'd runtime be <i>faster</i> than <code>malloc</code>?",
-   "back": "Bump allocation: the thread owns a local buffer (TLAB / nursery) and allocation is \"pointer += size\" with no locking or free-list search. The cost is paid later, at collection, in proportion to survivors.",
+   "front": "Why can allocation in a garbage collection (GC)'d runtime be <i>faster</i> than <code>malloc</code>?",
+   "back": "Bump allocation: the thread owns a local buffer (thread-local allocation buffer (TLAB) / nursery) and allocation is \"pointer += size\" with no locking or free-list search. The cost is paid later, at collection, in proportion to survivors.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2246,7 +2246,7 @@
     "gc",
     "contrast"
    ],
-   "front": "Incremental vs concurrent GC: key difference?",
+   "front": "Incremental vs concurrent garbage collection (GC): key difference?",
    "back": "Incremental interleaves small GC steps with the mutator on the <i>same</i> thread (bounded pause, no parallelism). Concurrent runs GC threads alongside mutator threads, so it needs barriers and synchronisation but hides most work.",
    "text": "",
    "image": "",
@@ -2284,7 +2284,7 @@
     "gc",
     "pauses"
    ],
-   "front": "Why does <b>allocation rate</b> often matter more than heap size for GC overhead?",
+   "front": "Why does <b>allocation rate</b> often matter more than heap size for garbage collection (GC) overhead?",
    "back": "Collection frequency is allocation rate divided by free space; each cycle costs roughly the live set. High allocation with a small heap means scanning the same live data over and over.",
    "text": "",
    "image": "",
@@ -2304,7 +2304,7 @@
     "go",
     "contrast"
    ],
-   "front": "Go's GC vs HotSpot's generational collectors: what did Go choose differently, and why?",
+   "front": "Go's garbage collection (GC) vs HotSpot's generational collectors: what did Go choose differently, and why?",
    "back": "Go is non-generational and non-moving: concurrent tri-colour mark-sweep with a hybrid barrier, tuned purely for low pause. It gives up bump allocation and cheap nursery collection, accepting lower throughput for simpler pointers (no relocation, easy cgo).",
    "text": "",
    "image": "",
@@ -2379,10 +2379,10 @@
    ],
    "front": "",
    "back": "",
-   "text": "The arithmetic flags: {{c1::ZF}} (result zero), {{c2::CF}} (unsigned carry/borrow), {{c3::SF}} (sign bit of result), {{c4::OF}} (signed overflow). Most ALU instructions set them; <code>mov</code>, <code>lea</code> and <code>cmov</code> leave them untouched.",
+   "text": "The arithmetic flags: {{c1::ZF}} (result zero), {{c2::CF}} (unsigned carry/borrow), {{c3::SF}} (sign bit of result), {{c4::OF}} (signed overflow). Most arithmetic logic unit (ALU) instructions set them; <code>mov</code>, <code>lea</code> and <code>cmov</code> leave them untouched.",
    "image": "",
    "analogy": "",
-   "extra": "<b>Also:</b> PF (parity of low byte) and AF (BCD half-carry) are legacy; <code>inc</code>/<code>dec</code> set everything but CF.",
+   "extra": "<b>Also:</b> PF (parity of low byte) and AF (binary-coded decimal (BCD) half-carry) are legacy; <code>inc</code>/<code>dec</code> set everything but CF.",
    "source": "ISA · x86-64",
    "reverse": false
   },
@@ -2472,7 +2472,7 @@
     "pic"
    ],
    "front": "What is <b>RIP-relative</b> addressing, and why was it added in x86-64?",
-   "back": "A memory operand of the form <code>[rip + disp32]</code>. It makes position-independent code cheap: globals and constants are reached by a fixed offset from the current instruction, with no GOT lookup or base-register setup.",
+   "back": "A memory operand of the form <code>[rip + disp32]</code>. It makes position-independent code cheap: globals and constants are reached by a fixed offset from the current instruction, with no global offset table (GOT) lookup or base-register setup.",
    "text": "",
    "image": "",
    "analogy": "Directions given relative to where you stand (\"two doors down\") work wherever the building is placed; absolute street numbers do not.",
@@ -2528,10 +2528,10 @@
    ],
    "front": "",
    "back": "",
-   "text": "x86-64 instruction layout, in order: optional {{c1::legacy prefixes}} (up to 4), optional {{c2::REX}} prefix, {{c3::opcode}} (1&ndash;3 bytes), optional {{c4::ModRM}} byte, optional SIB byte, optional displacement, optional immediate. Hard maximum: 15 bytes.",
+   "text": "x86-64 instruction layout, in order: optional {{c1::legacy prefixes}} (up to 4), optional {{c2::REX}} prefix, {{c3::opcode}} (1&ndash;3 bytes), optional {{c4::ModRM}} byte, optional scale-index-base (SIB) byte, optional displacement, optional immediate. Hard maximum: 15 bytes.",
    "image": "<img src=\"s2s_x86_encoding.svg\">",
    "analogy": "",
-   "extra": "<b>Example:</b> <code>48 8B 44 24 08</code> = <code>mov rax, [rsp+8]</code>: REX.W, opcode, ModRM, SIB, disp8. <b>Prefix magic:</b> <code>F3 0F 10</code> is <code>movss</code>, <code>F2 0F 10</code> <code>movsd</code>, <code>66 0F 10</code> <code>movupd</code>: same opcode, the prefix picks the instruction; <code>F0</code> is LOCK.",
+   "extra": "<b>Example:</b> <code>48 8B 44 24 08</code> = <code>mov rax, [rsp+8]</code>: Register extension (REX).W, opcode, mode-register-memory (ModRM), SIB, disp8. <b>Prefix magic:</b> <code>F3 0F 10</code> is <code>movss</code>, <code>F2 0F 10</code> <code>movsd</code>, <code>66 0F 10</code> <code>movupd</code>: same opcode, the prefix picks the instruction; <code>F0</code> is LOCK.",
    "source": "ISA · x86-64",
    "reverse": false
   },
@@ -2547,7 +2547,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "The REX prefix is <code>0100WRXB</code>: {{c1::W}} selects 64-bit operand size, {{c2::R}} extends the ModRM <i>reg</i> field, {{c3::X}} extends the SIB <i>index</i>, {{c4::B}} extends ModRM <i>rm</i> / SIB <i>base</i>, each adding the fourth bit needed to name <code>r8</code>&ndash;<code>r15</code>.",
+   "text": "The register extension (REX) prefix is <code>0100WRXB</code>: {{c1::W}} selects 64-bit operand size, {{c2::R}} extends the mode-register-memory (ModRM) <i>reg</i> field, {{c3::X}} extends the scale-index-base (SIB) <i>index</i>, {{c4::B}} extends ModRM <i>rm</i> / SIB <i>base</i>, each adding the fourth bit needed to name <code>r8</code>&ndash;<code>r15</code>.",
    "image": "",
    "analogy": "A fourth digit added to the room-number dial: without it the hotel's new wing (r8&ndash;r15) is unreachable.",
    "extra": "<b>Side effect:</b> any REX prefix also switches the byte registers from <code>ah/ch/dh/bh</code> to <code>spl/bpl/sil/dil</code>, so the two sets cannot be mixed in one instruction.",
@@ -2566,7 +2566,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "ModRM is <code>mod(2) reg(3) rm(3)</code>: <code>mod = 11</code> means {{c1::register-to-register}}; other values mean <i>rm</i> is a memory operand with 0-, 8- or 32-bit displacement. <code>rm = 100</code> means {{c2::a SIB byte follows}} (<code>scale index base</code>), needed for any indexed address or an <code>rsp</code> base.",
+   "text": "Mode-register-memory (ModRM) is <code>mod(2) reg(3) rm(3)</code>: <code>mod = 11</code> means {{c1::register-to-register}}; other values mean <i>rm</i> is a memory operand with 0-, 8- or 32-bit displacement. <code>rm = 100</code> means {{c2::a SIB byte follows}} (<code>scale index base</code>), needed for any indexed address or an <code>rsp</code> base.",
    "image": "",
    "analogy": "",
    "extra": "<b>Quirk:</b> <code>mod=00, rm=101</code> does not mean <code>[rbp]</code> but <code>[rip+disp32]</code>; that is where RIP-relative addressing lives.",
@@ -2584,7 +2584,7 @@
     "decode"
    ],
    "front": "Why is x86 instruction decoding hard to do in parallel, and how do CPUs cope?",
-   "back": "Length is unknown until prefixes, opcode and ModRM are parsed, so finding where instruction N+1 starts depends on decoding N. Decoders pre-mark instruction boundaries, speculate lengths at every byte, and cache decoded &micro;ops so hot loops skip decode entirely.",
+   "back": "Length is unknown until prefixes, opcode and mode-register-memory (ModRM) are parsed, so finding where instruction N+1 starts depends on decoding N. Decoders pre-mark instruction boundaries, speculate lengths at every byte, and cache decoded &micro;ops so hot loops skip decode entirely.",
    "text": "",
    "image": "",
    "analogy": "Reading a sentence with no spaces: you can only find the next word once you have finished the current one.",
@@ -2607,7 +2607,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>In practice:</b> UEFI firmware switches to 64-bit mode within the first instructions; Intel's X86S proposal (since dropped) explored removing the legacy modes.",
+   "extra": "<b>In practice:</b> Unified Extensible Firmware Interface (UEFI) firmware switches to 64-bit mode within the first instructions; Intel's X86S proposal (since dropped) explored removing the legacy modes.",
    "source": "ISA · x86-64",
    "reverse": false
   },
@@ -2622,7 +2622,7 @@
     "microcode"
    ],
    "front": "What does <code>rep movsb</code> do, and why does a 2-byte instruction compete with hand-tuned <code>memcpy</code>?",
-   "back": "It copies <code>rcx</code> bytes from <code>[rsi]</code> to <code>[rdi]</code>, direction by DF. It is microcoded, so the CPU can choose cache-line-wide moves internally; with ERMSB/FSRM it is fast even for short copies.",
+   "back": "It copies <code>rcx</code> bytes from <code>[rsi]</code> to <code>[rdi]</code>, direction by direction flag (DF). It is microcoded, so the CPU can choose cache-line-wide moves internally; with ERMSB/FSRM it is fast even for short copies.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2641,7 +2641,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "SIMD register widths: {{c1::<code>xmm</code>}} = 128 bits (SSE), {{c2::<code>ymm</code>}} = 256 bits (AVX), {{c3::<code>zmm</code>}} = 512 bits (AVX-512). Each is the low part of the next; 64-bit mode has 16 of them, AVX-512 raises that to 32.",
+   "text": "Single instruction, multiple data (SIMD) register widths: {{c1::<code>xmm</code>}} = 128 bits (SSE), {{c2::<code>ymm</code>}} = 256 bits (AVX), {{c3::<code>zmm</code>}} = 512 bits (AVX-512). Each is the low part of the next; 64-bit mode has 16 of them, AVX-512 raises that to 32.",
    "image": "",
    "analogy": "",
    "extra": "<b>Example:</b> one <code>vaddps ymm0, ymm1, ymm2</code> adds 8 floats; <code>zmm</code> does 16. <b>Link:</b> 03 IR &amp; Optimisation · loop vectorisation",
@@ -2658,8 +2658,8 @@
     "simd",
     "avx"
    ],
-   "front": "Why do compilers emit <code>vzeroupper</code> before returning from AVX code?",
-   "back": "Legacy SSE instructions leave the upper 128 bits of <code>ymm</code> untouched, so after a VEX instruction wrote them the CPU must merge on every SSE op (or pay a state transition). Zeroing the upper halves ends the dirty state.",
+   "front": "Why do compilers emit <code>vzeroupper</code> before returning from Advanced Vector Extensions (AVX) code?",
+   "back": "Legacy Streaming SIMD Extensions (SSE) instructions leave the upper 128 bits of <code>ymm</code> untouched, so after a VEX instruction wrote them the CPU must merge on every SSE op (or pay a state transition). Zeroing the upper halves ends the dirty state.",
    "text": "",
    "image": "",
    "analogy": "Wiping the whiteboard before handing the room to a team that only uses the left half; otherwise they keep working around your leftovers.",
@@ -2696,12 +2696,12 @@
     "simd",
     "intrinsics"
    ],
-   "front": "What are SIMD <b>intrinsics</b>, and when do you reach for them instead of auto-vectorisation?",
+   "front": "What are single instruction, multiple data (SIMD) <b>intrinsics</b>, and when do you reach for them instead of auto-vectorisation?",
    "back": "C functions like <code>_mm256_add_ps()</code> (<code>&lt;immintrin.h&gt;</code>) that map roughly one-to-one onto instructions, with the compiler still allocating registers. Use them when the loop shape (shuffles, horizontal ops, saturating math) defeats the vectoriser.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Pitfall:</b> code using AVX intrinsics needs <code>-mavx2</code> or <code>__attribute__((target(\"avx2\")))</code> plus a runtime CPUID dispatch, or it faults on older CPUs.",
+   "extra": "<b>Pitfall:</b> code using Advanced Vector Extensions (AVX) intrinsics needs <code>-mavx2</code> or <code>__attribute__((target(\"avx2\")))</code> plus a runtime CPU identification (CPUID) dispatch, or it faults on older CPUs.",
    "source": "ISA · x86-64",
    "reverse": false
   },
@@ -2734,7 +2734,7 @@
     "syscall",
     "contrast"
    ],
-   "front": "The function-call ABI passes argument 4 in <code>rcx</code>, but the syscall ABI uses <code>r10</code>. Why?",
+   "front": "The function-call application binary interface (ABI) passes argument 4 in <code>rcx</code>, but the syscall ABI uses <code>r10</code>. Why?",
    "back": "The <code>syscall</code> instruction itself overwrites <code>rcx</code> with the return address (and <code>r11</code> with <code>rflags</code>), so the kernel could never see an argument left there. libc wrappers just <code>mov r10, rcx</code>.",
    "text": "",
    "image": "",
@@ -2771,8 +2771,8 @@
     "x87",
     "history"
    ],
-   "front": "What is the x87 FPU, and what is it still used for on x86-64?",
-   "back": "The 1980 coprocessor design: eight 80-bit registers <code>st(0)</code>&ndash;<code>st(7)</code> organised as a stack, with extended precision. The x86-64 ABI moved <code>float</code>/<code>double</code> to SSE registers; x87 survives only for <code>long double</code>.",
+   "front": "What is the x87 floating-point unit (FPU), and what is it still used for on x86-64?",
+   "back": "The 1980 coprocessor design: eight 80-bit registers <code>st(0)</code>&ndash;<code>st(7)</code> organised as a stack, with extended precision. The x86-64 application binary interface (ABI) moved <code>float</code>/<code>double</code> to Streaming SIMD Extensions (SSE) registers; x87 survives only for <code>long double</code>.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2790,7 +2790,7 @@
     "idioms",
     "history"
    ],
-   "front": "Why did GCC emit <code>rep ret</code> instead of a plain <code>ret</code> for years?",
+   "front": "Why did GNU Compiler Collection (GCC) emit <code>rep ret</code> instead of a plain <code>ret</code> for years?",
    "back": "AMD K8-era cores could not predict a single-byte <code>ret</code> that was a branch target or followed a conditional jump. The meaningless <code>rep</code> prefix made it two bytes and avoided the penalty; the idiom outlived the hardware.",
    "text": "",
    "image": "",
@@ -2832,7 +2832,7 @@
    "text": "AArch64 has {{c1::31}} general-purpose 64-bit registers <code>x0&ndash;x30</code>; <code>x30</code> is the {{c2::link register (lr)}}; register number 31 in an encoding means {{c3::<code>sp</code> or <code>xzr</code> (zero register)}} depending on the instruction.",
    "image": "",
    "analogy": "",
-   "extra": "<b>Pitfall:</b> the PC is <i>not</i> a general register in AArch64 (it was <code>r15</code> in 32-bit ARM); you reach it only via <code>adr</code>/<code>adrp</code> and branches.",
+   "extra": "<b>Pitfall:</b> the program counter (PC) is <i>not</i> a general register in AArch64 (it was <code>r15</code> in 32-bit ARM); you reach it only via <code>adr</code>/<code>adrp</code> and branches.",
    "source": "ISA · ARM64 / RISC-V / Z",
    "reverse": false
   },
@@ -2903,7 +2903,7 @@
     "branchless"
    ],
    "front": "What does <code>csel x0, x1, x2, eq</code> do, and why do compilers love it?",
-   "back": "Conditional select: <code>x0 = Z ? x1 : x2</code>, using the NZCV flags, with no branch. A short <code>if/else</code> that assigns one value becomes branch-free, so it can't mispredict.",
+   "back": "Conditional select: <code>x0 = Z ? x1 : x2</code>, using the negative, zero, carry, overflow (NZCV) flags, with no branch. A short <code>if/else</code> that assigns one value becomes branch-free, so it can't mispredict.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2940,7 +2940,7 @@
     "sve",
     "contrast"
    ],
-   "front": "NEON vs SVE: what is the key architectural difference?",
+   "front": "NEON vs Scalable Vector Extension (SVE): what is the key architectural difference?",
    "back": "NEON: 32 fixed <b>128-bit</b> vectors; the width is baked into the binary. SVE: the implementation picks <b>128&ndash;2048 bits</b> (multiples of 128) and the same binary runs correctly on any width (vector-length agnostic).",
    "text": "",
    "image": "",
@@ -2960,7 +2960,7 @@
     "sve",
     "predication"
    ],
-   "front": "How does an SVE loop process the last partial chunk without a scalar remainder loop?",
+   "front": "How does an Scalable Vector Extension (SVE) loop process the last partial chunk without a scalar remainder loop?",
    "back": "With <b>predicate registers</b> <code>p0&ndash;p15</code>: <code>whilelt p0.s, x_i, x_n</code> sets one mask bit per remaining element; predicated loads, ops and stores skip inactive lanes.",
    "text": "",
    "image": "",
@@ -2998,7 +2998,7 @@
     "biglittle",
     "energy"
    ],
-   "front": "big.LITTLE / DynamIQ: why mix a few big cores with several little cores that implement the <i>same</i> ISA?",
+   "front": "big.LITTLE / DynamIQ: why mix a few big cores with several little cores that implement the <i>same</i> instruction set architecture (ISA)?",
    "back": "The scheduler can migrate a thread between core types transparently; big out-of-order cores take bursts, little in-order cores run background work at a fraction of the energy.",
    "text": "",
    "image": "",
@@ -3021,7 +3021,7 @@
    "text": "RISC-V extension letters: <b>I</b> = {{c1::base integer}}, <b>M</b> = {{c2::multiply/divide}}, <b>A</b> = {{c3::atomics}}, <b>F</b>/<b>D</b> = {{c4::single/double float}}, <b>C</b> = {{c5::compressed 16-bit}}, <b>V</b> = {{c6::vectors}}.",
    "image": "",
    "analogy": "",
-   "extra": "<b>Why modular:</b> a microcontroller ships <code>rv32imc</code>, a server <code>rv64gc</code>; the ISA is open, so anyone may implement it and add custom extensions, with vendors competing on microarchitecture rather than on the instruction set. <b>Pitfall:</b> fragmentation, which the RVA profiles (e.g. RVA23) exist to curb.",
+   "extra": "<b>Why modular:</b> a microcontroller ships <code>rv32imc</code>, a server <code>rv64gc</code>; the instruction set architecture (ISA) is open, so anyone may implement it and add custom extensions, with vendors competing on microarchitecture rather than on the instruction set. <b>Pitfall:</b> fragmentation, which the RVA profiles (e.g. RVA23) exist to curb.",
    "source": "ISA · ARM64 / RISC-V / Z",
    "reverse": false
   },
@@ -3035,7 +3035,7 @@
     "extensions",
     "encoding"
    ],
-   "front": "What does the ISA string <code>rv64gc</code> mean, and what does the <b>C</b> extension cost the hardware?",
+   "front": "What does the instruction set architecture (ISA) string <code>rv64gc</code> mean, and what does the <b>C</b> extension cost the hardware?",
    "back": "64-bit; <b>G</b> = IMAFD + Zicsr + Zifencei (the general-purpose bundle); <b>C</b> adds 16-bit forms of common instructions, cutting code size ~25&ndash;30%. Cost: instructions may start on any 2-byte boundary, so fetch must handle two lengths.",
    "text": "",
    "image": "<img src=\"s2s_isa_encoding.svg\">",
@@ -3055,11 +3055,11 @@
     "contrast"
    ],
    "front": "Why does RISC-V have no condition-code flags, and what does it do instead?",
-   "back": "Branches compare two registers directly: <code>beq</code>, <code>bne</code>, <code>blt</code>, <code>bge</code>. No hidden flag register means no implicit dependency between every ALU op and the branch, which simplifies out-of-order tracking.",
+   "back": "Branches compare two registers directly: <code>beq</code>, <code>bne</code>, <code>blt</code>, <code>bge</code>. No hidden flag register means no implicit dependency between every arithmetic logic unit (ALU) op and the branch, which simplifies out-of-order tracking.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Contrast:</b> x86 and ARM set NZCV on <code>cmp</code> and read them in <code>jcc</code>/<code>b.cond</code>; the core must rename the flags like a register. <b>Link:</b> 08 Microarchitecture · register renaming",
+   "extra": "<b>Contrast:</b> x86 and ARM set negative, zero, carry, overflow (NZCV) on <code>cmp</code> and read them in <code>jcc</code>/<code>b.cond</code>; the core must rename the flags like a register. <b>Link:</b> 08 Microarchitecture · register renaming",
    "source": "ISA · ARM64 / RISC-V / Z",
    "reverse": false
   },
@@ -3111,11 +3111,11 @@
     "simd"
    ],
    "front": "RISC-V Vector (V) extension: how does a loop learn the vector length, and what family does that put it in?",
-   "back": "<code>vsetvli t0, a0, e32</code> asks for <code>a0</code> 32-bit elements and returns the count <code>vl</code> the hardware can do (&le; VLEN/32); the loop strip-mines by <code>vl</code>. Vector-length agnostic, like SVE, unlike fixed-width AVX/NEON.",
+   "back": "<code>vsetvli t0, a0, e32</code> asks for <code>a0</code> 32-bit elements and returns the count <code>vl</code> the hardware can do (&le; VLEN/32); the loop strip-mines by <code>vl</code>. Vector-length agnostic, like Scalable Vector Extension (SVE), unlike fixed-width AVX/NEON.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Detail:</b> VLEN is the implementation's register width (often 128&ndash;512 bits); grouping registers (LMUL) lets one instruction act on several. <b>Link:</b> 10 GPU · SIMD vs SIMT",
+   "extra": "<b>Detail:</b> Vector register length (VLEN) is the implementation's register width (often 128&ndash;512 bits); grouping registers (LMUL) lets one instruction act on several. <b>Link:</b> 10 GPU · SIMD vs SIMT",
    "source": "ISA · ARM64 / RISC-V / Z",
    "reverse": false
   },
@@ -3130,7 +3130,7 @@
     "compat"
    ],
    "front": "Why does z/Architecture still support 24-, 31- and 64-bit addressing modes at once, and why 31 rather than 32?",
-   "back": "Compatibility: S/360 programs stored flags in the top byte of 24-bit addresses, so XA could only widen to 31 bits, keeping bit&nbsp;0 as a mode flag (<code>BASSM</code>). PSW bits select the mode and 1970s binaries still run unchanged.",
+   "back": "Compatibility: S/360 programs stored flags in the top byte of 24-bit addresses, so extended architecture (XA) could only widen to 31 bits, keeping bit&nbsp;0 as a mode flag (<code>BASSM</code>). Program status word (PSW) bits select the mode and 1970s binaries still run unchanged.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3153,7 +3153,7 @@
    "text": "z/Architecture has {{c1::16}} general registers of 64 bits (plus 16 floating-point, 16 access, 16 control and 32 vector registers); instructions are {{c2::2, 4 or 6}} bytes long, with the length given by the top two bits of the first opcode byte.",
    "image": "<img src=\"s2s_isa_encoding.svg\">",
    "analogy": "",
-   "extra": "<b>Why it matters:</b> length is known before decoding the rest, so despite being CISC, Z decodes far more easily than x86. Big-endian, EBCDIC by convention. <b>Link:</b> 06 x86-64 · variable-length decoding",
+   "extra": "<b>Why it matters:</b> length is known before decoding the rest, so despite being complex instruction set computer (CISC), Z decodes far more easily than x86. Big-endian, Extended Binary Coded Decimal Interchange Code (EBCDIC) by convention. <b>Link:</b> 06 x86-64 · variable-length decoding",
    "source": "ISA · ARM64 / RISC-V / Z",
    "reverse": false
   },
@@ -3167,12 +3167,12 @@
     "cisc",
     "ss-format"
    ],
-   "front": "What is a storage-to-storage (SS) instruction on IBM Z, with an example, and why is it the CISC extreme?",
-   "back": "Both operands live in memory and the length is in the instruction: <code>MVC 0(80,R6),0(R7)</code> copies 80 bytes in one instruction; <code>AP</code> adds two packed decimals in memory. One instruction does what RISC needs a loop for.",
+   "front": "What is a storage-to-storage (SS) instruction on IBM Z, with an example, and why is it the complex instruction set computer (CISC) extreme?",
+   "back": "Both operands live in memory and the length is in the instruction: <code>MVC 0(80,R6),0(R7)</code> copies 80 bytes in one instruction; <code>AP</code> adds two packed decimals in memory. One instruction does what reduced instruction set computer (RISC) needs a loop for.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Detail:</b> MVC's length field is 8 bits, so up to 256 bytes; <code>MVCL</code> handles longer moves with registers. <b>Link:</b> 08 Microarchitecture · µop vs microcode",
+   "extra": "<b>Detail:</b> Move characters (MVC)'s length field is 8 bits, so up to 256 bytes; <code>MVCL</code> handles longer moves with registers. <b>Link:</b> 08 Microarchitecture · µop vs microcode",
    "source": "ISA · ARM64 / RISC-V / Z",
    "reverse": false
   },
@@ -3206,7 +3206,7 @@
     "sie"
    ],
    "front": "What does the IBM Z <code>SIE</code> instruction do, and who uses it?",
-   "back": "<b>Start Interpretive Execution</b>: the hypervisor hands the CPU a <i>state description</i> and the guest runs its own privileged code at near-native speed until an <b>interception</b> (I/O, time slice, instruction needing help). PR/SM LPARs and z/VM both use it, nested two levels deep.",
+   "back": "<b>Start Interpretive Execution</b>: the hypervisor hands the CPU a <i>state description</i> and the guest runs its own privileged code at near-native speed until an <b>interception</b> (I/O, time slice, instruction needing help). PR/SM logical partitions (LPARs) and z/VM both use it, nested two levels deep.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3224,12 +3224,12 @@
     "ziip",
     "licensing"
    ],
-   "front": "IBM Z: a CP vs a zIIP: what is the difference, and why does it matter commercially?",
-   "back": "Same silicon. A <b>zIIP</b> is firmware-restricted to eligible work (Db2 DRDA and utilities, Java, some z/OS services). Time on zIIPs is <b>not counted</b> in the MSU-based software charges, so eligible workloads run cheaper.",
+   "front": "IBM Z: a central processor (CP) vs a IBM Z Integrated Information Processor (zIIP): what is the difference, and why does it matter commercially?",
+   "back": "Same silicon. A <b>zIIP</b> is firmware-restricted to eligible work (Db2 Distributed Relational Database Architecture (DRDA) and utilities, Java, some z/OS services). Time on zIIPs is <b>not counted</b> in the MSU-based software charges, so eligible workloads run cheaper.",
    "text": "",
    "image": "",
    "analogy": "A toll road with a free lane for buses only: same tarmac, but only certain vehicles may use it and it doesn't ring up the meter.",
-   "extra": "<b>Pitfall:</b> eligible work that spills onto general CPs when zIIPs are busy is billed; capacity planning watches that spill.",
+   "extra": "<b>Pitfall:</b> eligible work that spills onto general central processors (CPs) when zIIPs are busy is billed; capacity planning watches that spill.",
    "source": "ISA · ARM64 / RISC-V / Z",
    "reverse": false
   },
@@ -3243,8 +3243,8 @@
     "io",
     "channel"
    ],
-   "front": "Channel I/O on IBM Z: what does the CPU do differently from a PCIe device driver on x86?",
-   "back": "The CPU builds a <b>channel program</b> (chain of CCWs) and issues <code>SSCH</code>; the channel subsystem (its own SAP processors) runs the whole transfer and interrupts once at the end. Almost no CPU cycles go to moving I/O.",
+   "front": "Channel I/O on IBM Z: what does the CPU do differently from a Peripheral Component Interconnect Express (PCIe) device driver on x86?",
+   "back": "The CPU builds a <b>channel program</b> (chain of channel command words (CCWs)) and issues <code>SSCH</code>; the channel subsystem (its own system assist processor (SAP) processors) runs the whole transfer and interrupts once at the end. Almost no CPU cycles go to moving I/O.",
    "text": "",
    "image": "",
    "analogy": "Hand a concierge a full itinerary and go to sleep; the hotel wakes you only when everything is done.",
@@ -3261,8 +3261,8 @@
     "ibmz",
     "ras"
    ],
-   "front": "Which RAS mechanisms make IBM Z different from commodity servers, not just &quot;more reliable&quot;?",
-   "back": "Every core checks its own results (duplicated execution/ECC on registers); a faulting instruction is <b>retried</b> transparently; a failing core's state moves to a <b>spare core</b> without the OS noticing; memory uses RAIM (RAID-like DIMM redundancy).",
+   "front": "Which reliability, availability and serviceability (RAS) mechanisms make IBM Z different from commodity servers, not just &quot;more reliable&quot;?",
+   "back": "Every core checks its own results (duplicated execution/ECC on registers); a faulting instruction is <b>retried</b> transparently; a failing core's state moves to a <b>spare core</b> without the OS noticing; memory uses redundant array of independent memory (RAIM) (RAID-like dual in-line memory module (DIMM) redundancy).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3281,7 +3281,7 @@
     "risc",
     "contrast"
    ],
-   "front": "CISC vs RISC today: since both run out-of-order cores on &micro;ops, what is the <i>actual</i> dividing line?",
+   "front": "Complex instruction set computer (CISC) vs reduced instruction set computer (RISC) today: since both run out-of-order cores on &micro;ops, what is the <i>actual</i> dividing line?",
    "back": "Encoding regularity and the load/store discipline, not instruction count. RISC: fixed-length, register-to-register, trivial decode. CISC: variable length, memory operands, complex decode that needs &micro;op caches to keep up.",
    "text": "",
    "image": "",
@@ -3301,7 +3301,7 @@
     "contrast"
    ],
    "front": "Microcoded vs hardwired decode: how do x86, ARM/RISC-V and IBM Z each handle complex instructions?",
-   "back": "ARM/RISC-V: nearly everything hardwired into a few &micro;ops. x86: hardwired fast path plus an MSROM for the long tail. IBM Z: <b>millicode</b>, a vertical microcode written in z instructions plus privileged extras, for SS, decimal and SIE work.",
+   "back": "ARM/RISC-V: nearly everything hardwired into a few &micro;ops. x86: hardwired fast path plus an microcode sequencer ROM (MSROM) for the long tail. IBM Z: <b>millicode</b>, a vertical microcode written in z instructions plus privileged extras, for storage-to-storage (SS), decimal and start interpretive execution (SIE) work.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3319,8 +3319,8 @@
     "isa",
     "contrast"
    ],
-   "front": "ISA vs microarchitecture: what is the difference, and why does it matter for performance claims?",
-   "back": "The <b>ISA</b> is the contract software sees: registers, instructions, memory model. The <b>microarchitecture</b> is one implementation of it: pipeline depth, caches, OoO width. Zen and Golden Cove share an ISA but differ in every performance property.",
+   "front": "Instruction set architecture (ISA) vs microarchitecture: what is the difference, and why does it matter for performance claims?",
+   "back": "The <b>ISA</b> is the contract software sees: registers, instructions, memory model. The <b>microarchitecture</b> is one implementation of it: pipeline depth, caches, out-of-order (OoO) width. Zen and Golden Cove share an ISA but differ in every performance property.",
    "text": "",
    "image": "",
    "analogy": "Sheet music versus a particular orchestra: the notes are fixed, the tempo, section sizes and sound are the orchestra's.",
@@ -3342,7 +3342,7 @@
    "text": "",
    "image": "<img src=\"s2s_pipeline_forwarding.svg\">",
    "analogy": "Laundry: washer, dryer, folding run on different loads at once; each load still takes the full three steps.",
-   "extra": "<b>Stages (classic RISC):</b> IF fetch, ID decode, EX execute, MEM access, WB write back. <b>Hazards:</b> structural (same unit), data (result not ready), control (next PC unknown): fixed by duplication, forwarding and prediction. <b>Superscalar</b> = several pipelines side by side (IPC &gt; 1), orthogonal to pipelining.",
+   "extra": "<b>Stages (classic reduced instruction set computer (RISC)):</b> IF fetch, ID decode, EX execute, MEM access, WB write back. <b>Hazards:</b> structural (same unit), data (result not ready), control (next program counter (PC) unknown): fixed by duplication, forwarding and prediction. <b>Superscalar</b> = several pipelines side by side (instructions per cycle (IPC) &gt; 1), orthogonal to pipelining.",
    "source": "µarch",
    "reverse": false
   },
@@ -3357,7 +3357,7 @@
     "forwarding"
    ],
    "front": "How does <b>forwarding</b> (bypassing) remove most data-hazard stalls, and which case still stalls?",
-   "back": "The ALU result is routed from the end of EX straight into the next instruction's EX input, instead of waiting for WB. A <b>load-use</b> pair still needs one bubble: loaded data exists only after MEM.",
+   "back": "The arithmetic logic unit (ALU) result is routed from the end of EX straight into the next instruction's EX input, instead of waiting for WB. A <b>load-use</b> pair still needs one bubble: loaded data exists only after MEM.",
    "text": "",
    "image": "<img src=\"s2s_pipeline_forwarding.svg\">",
    "analogy": "Passing the dish hand-to-hand down the counter instead of putting it on the shelf and having the next cook fetch it.",
@@ -3395,7 +3395,7 @@
     "contrast"
    ],
    "front": "&micro;op vs microcode: what is the difference?",
-   "back": "A <b>&micro;op</b> is the simple internal operation every decoded instruction becomes (1 for <code>add</code>, 2&ndash;3 for <code>push</code>). <b>Microcode</b> is a stored program in the MSROM that <i>generates</i> long &micro;op sequences for complex instructions. Most &micro;ops never involve microcode.",
+   "back": "A <b>&micro;op</b> is the simple internal operation every decoded instruction becomes (1 for <code>add</code>, 2&ndash;3 for <code>push</code>). <b>Microcode</b> is a stored program in the microcode sequencer ROM (MSROM) that <i>generates</i> long &micro;op sequences for complex instructions. Most &micro;ops never involve microcode.",
    "text": "",
    "image": "",
    "analogy": "&micro;ops are the words; microcode is a phrasebook consulted only for the rare, long expressions.",
@@ -3434,7 +3434,7 @@
     "contrast"
    ],
    "front": "Micro-fusion vs macro-fusion on x86 cores: what gets fused, and why bother?",
-   "back": "<b>Micro-fusion</b>: one instruction's load + ALU (<code>add eax,[rbx]</code>) is one &micro;op in the front end, split only at execution. <b>Macro-fusion</b>: two instructions, <code>cmp</code>/<code>test</code> + <code>jcc</code>, become one &micro;op end to end. Both save front-end and ROB slots.",
+   "back": "<b>Micro-fusion</b>: one instruction's load + ALU (<code>add eax,[rbx]</code>) is one &micro;op in the front end, split only at execution. <b>Macro-fusion</b>: two instructions, <code>cmp</code>/<code>test</code> + <code>jcc</code>, become one &micro;op end to end. Both save front-end and reorder buffer (ROB) slots.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3452,7 +3452,7 @@
     "uop-cache",
     "frontend"
    ],
-   "front": "Why do x86 cores have a decoded &micro;op cache (Intel's DSB), and what does it change about the variable-length cost?",
+   "front": "Why do x86 cores have a decoded &micro;op cache (Intel's decoded stream buffer (DSB)), and what does it change about the variable-length cost?",
    "back": "It caches already decoded &micro;ops keyed by fetch address. Hot loops are fed from it, bypassing the length decoders entirely (less power, shorter pipeline). x86 pays the variable-length tax mainly on cold code.",
    "text": "",
    "image": "",
@@ -3472,7 +3472,7 @@
     "updates"
    ],
    "front": "How does a microcode update actually get applied to a CPU?",
-   "back": "BIOS or the OS writes the update's memory address to a model-specific register (Intel: <code>WRMSR 0x79</code>); the CPU verifies the vendor's signature, loads the patch into on-chip <b>patch RAM</b>, and <b>match registers</b> redirect MSROM entry points to it. Volatile: redone every boot.",
+   "back": "BIOS or the OS writes the update's memory address to a model-specific register (Intel: <code>WRMSR 0x79</code>); the CPU verifies the vendor's signature, loads the patch into on-chip <b>patch RAM</b>, and <b>match registers</b> redirect microcode sequencer ROM (MSROM) entry points to it. Volatile: redone every boot.",
    "text": "",
    "image": "",
    "analogy": "Sticky notes over specific pages of a reference book, reapplied every morning because the cleaner removes them overnight.",
@@ -3491,7 +3491,7 @@
     "security"
    ],
    "front": "Why must microcode updates be signed, and what can they fix versus not fix?",
-   "back": "Unsigned, an attacker could rewrite instruction semantics below the OS. They can change anything that passes through microcode or has a hook: add flushes, disable features, insert mitigations (Spectre v2 IBRS). They cannot fix a hardwired datapath such as a wrong adder.",
+   "back": "Unsigned, an attacker could rewrite instruction semantics below the OS. They can change anything that passes through microcode or has a hook: add flushes, disable features, insert mitigations (Spectre v2 indirect branch restricted speculation (IBRS)). They cannot fix a hardwired datapath such as a wrong adder.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3510,7 +3510,7 @@
     "renaming"
    ],
    "front": "Register renaming: what problem does it solve, and how?",
-   "back": "False dependencies (WAR, WAW): with 16&ndash;32 architectural names, reuse would serialise independent work. Each write gets a <b>fresh physical register</b> from a file of hundreds; only true RAW dependencies remain to order execution.",
+   "back": "False dependencies (write-after-read (WAR), write-after-write (WAW)): with 16&ndash;32 architectural names, reuse would serialise independent work. Each write gets a <b>fresh physical register</b> from a file of hundreds; only true read-after-write (RAW) dependencies remain to order execution.",
    "text": "",
    "image": "",
    "analogy": "A whiteboard with 16 labelled spots versus a fresh index card for every result: the label just points at the newest card.",
@@ -3552,7 +3552,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Pitfall:</b> scheduler size, not ROB size, often limits how far ahead a core can look past a long dependency chain.",
+   "extra": "<b>Pitfall:</b> scheduler size, not reorder buffer (ROB) size, often limits how far ahead a core can look past a long dependency chain.",
    "source": "µarch",
    "reverse": false
   },
@@ -3604,8 +3604,8 @@
     "branch-prediction",
     "tage"
    ],
-   "front": "TAGE: what is the core idea behind the branch predictors in modern high-end cores?",
-   "back": "Several tables indexed by a hash of the PC and global branch history of <b>geometrically increasing lengths</b>, each entry partially tagged. The longest-history table that hits provides the prediction. Long patterns are captured while most storage serves short histories.",
+   "front": "Tagged geometric history length (TAGE): what is the core idea behind the branch predictors in modern high-end cores?",
+   "back": "Several tables indexed by a hash of the program counter (PC) and global branch history of <b>geometrically increasing lengths</b>, each entry partially tagged. The longest-history table that hits provides the prediction. Long patterns are captured while most storage serves short histories.",
    "text": "",
    "image": "",
    "analogy": "Ask every witness; trust the one with the longest relevant memory who actually recognises this situation.",
@@ -3706,7 +3706,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Fixes:</b> retpoline / IBRS for v2, KPTI for Meltdown. <b>Why fundamental:</b> speculation is architecturally invisible but microarchitecturally visible (caches, predictors, port contention), so any shared state touched on a squashed path is a potential side channel.",
+   "extra": "<b>Fixes:</b> retpoline / indirect branch restricted speculation (IBRS) for v2, kernel page-table isolation (KPTI) for Meltdown. <b>Why fundamental:</b> speculation is architecturally invisible but microarchitecturally visible (caches, predictors, port contention), so any shared state touched on a squashed path is a potential side channel.",
    "source": "µarch",
    "reverse": false
   },
@@ -3720,7 +3720,7 @@
     "smt"
    ],
    "front": "SMT (hyper-threading): why does it raise throughput on an out-of-order core, and when does it hurt?",
-   "back": "Issue slots sit idle while one thread waits on a miss or mispredict; a second thread with its own registers and rename map fills them. It hurts when both threads are compute-bound and fight for the same ports, caches and TLB: each runs slower.",
+   "back": "Issue slots sit idle while one thread waits on a miss or mispredict; a second thread with its own registers and rename map fills them. It hurts when both threads are compute-bound and fight for the same ports, caches and translation lookaside buffer (TLB): each runs slower.",
    "text": "",
    "image": "",
    "analogy": "Two cooks sharing one stove: when one waits for water to boil, the other uses the burners.",
@@ -3759,7 +3759,7 @@
     "performance"
    ],
    "front": "A reduction loop <code>for (...) sum += a[i];</code> runs far below the core's width. What limits it, and what does the compiler do?",
-   "back": "The <b>loop-carried dependency</b> through <code>sum</code>: each add waits for the previous one, so IPC is bounded by 1/latency of the add (about 4 cycles for FP). The compiler unrolls with several independent accumulators to expose parallelism.",
+   "back": "The <b>loop-carried dependency</b> through <code>sum</code>: each add waits for the previous one, so instructions per cycle (IPC) is bounded by 1/latency of the add (about 4 cycles for FP). The compiler unrolls with several independent accumulators to expose parallelism.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3779,7 +3779,7 @@
     "contrast"
    ],
    "front": "Apple's M-series cores vs typical x86 cores: what is the structural reason for their high IPC at lower clocks?",
-   "back": "Fixed-length AArch64 lets them decode 8+ instructions per cycle cheaply and feed a very deep out-of-order window (ROB of many hundreds) with many execution units. x86 reaches similar width only via the &micro;op cache and fusion tricks, and at higher clocks.",
+   "back": "Fixed-length AArch64 lets them decode 8+ instructions per cycle cheaply and feed a very deep out-of-order window (reorder buffer (ROB) of many hundreds) with many execution units. x86 reaches similar width only via the &micro;op cache and fusion tricks, and at higher clocks.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3798,7 +3798,7 @@
     "energy"
    ],
    "front": "Why are Arm's &quot;little&quot; cores in-order, when out-of-order is clearly faster?",
-   "back": "Renaming, ROB, schedulers and recovery logic burn area and power on every cycle whether or not they find parallelism. For background work, a 2&ndash;3 wide in-order core with good caches gives acceptable speed at a fraction of the energy.",
+   "back": "Renaming, reorder buffer (ROB), schedulers and recovery logic burn area and power on every cycle whether or not they find parallelism. For background work, a 2&ndash;3 wide in-order core with good caches gives acceptable speed at a fraction of the energy.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3817,7 +3817,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Orders of magnitude on a modern server core: L1 hit {{c1::~1 ns (a few cycles)}}, L3 hit {{c2::~10 ns}}, DRAM {{c3::~100 ns}}, NVMe read {{c4::~100 µs}}, which is why one cache miss costs about as much as a few hundred simple instructions.",
+   "text": "Orders of magnitude on a modern server core: L1 hit {{c1::~1 ns (a few cycles)}}, L3 hit {{c2::~10 ns}}, dynamic RAM (DRAM) {{c3::~100 ns}}, Non-Volatile Memory Express (NVMe) read {{c4::~100 µs}}, which is why one cache miss costs about as much as a few hundred simple instructions.",
    "image": "",
    "analogy": "L1 is the desk, L3 the bookshelf in the room, DRAM the library across the street, NVMe a parcel from another city.",
    "extra": "<b>In practice:</b> numbers drift with each chip; the ratios (×10 per level, ×1000 to storage) are what to remember.",
@@ -3893,7 +3893,7 @@
     "tlb"
    ],
    "front": "Why do L1 data caches index with the virtual address but tag with the physical one (VIPT)?",
-   "back": "The set can be selected before address translation finishes, so the TLB lookup and the cache lookup run in parallel; the physical tag then confirms the hit with no aliasing problems.",
+   "back": "The set can be selected before address translation finishes, so the translation lookaside buffer (TLB) lookup and the cache lookup run in parallel; the physical tag then confirms the hit with no aliasing problems.",
    "text": "",
    "image": "",
    "analogy": "Walking to the right aisle from the first digits of a call number while the catalogue still resolves the rest.",
@@ -3913,7 +3913,7 @@
     "tlb"
    ],
    "front": "Why is an L1 data cache typically 32 KB 8-way or 48 KB 12-way, rather than, say, 64 KB 4-way?",
-   "back": "VIPT only works if the index bits lie inside the page offset, i.e. <b>way size ≤ page size</b> (4 KB). More capacity therefore has to come from more ways, not more sets.",
+   "back": "Virtually indexed, physically tagged (VIPT) only works if the index bits lie inside the page offset, i.e. <b>way size ≤ page size</b> (4 KB). More capacity therefore has to come from more ways, not more sets.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3931,12 +3931,12 @@
     "cache",
     "replacement"
    ],
-   "front": "Why do L2/L3 caches not use true LRU replacement?",
+   "front": "Why do L2/L3 caches not use true least recently used (LRU) replacement?",
    "back": "Tracking exact recency across 16 ways is costly, and LRU is defeated by streaming scans that evict the whole useful working set. They use tree-PLRU or RRIP-style policies that resist scans.",
    "text": "",
    "image": "",
    "analogy": "A bouncer who admits newcomers only to a probation spot near the exit: one pass through the club doesn't throw out the regulars.",
-   "extra": "<b>In practice:</b> Intel's adaptive policies and AMD's RRIP variants insert new lines with low priority unless they prove reuse.",
+   "extra": "<b>In practice:</b> Intel's adaptive policies and AMD's re-reference interval prediction (RRIP) variants insert new lines with low priority unless they prove reuse.",
    "source": "Memory",
    "reverse": false
   },
@@ -4028,7 +4028,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "MESI line states: {{c1::Modified}} = dirty and the only copy; {{c2::Exclusive}} = clean and the only copy; {{c3::Shared}} = clean, other caches may hold it; {{c4::Invalid}} = no valid data.",
+   "text": "Modified-Exclusive-Shared-Invalid (MESI) line states: {{c1::Modified}} = dirty and the only copy; {{c2::Exclusive}} = clean and the only copy; {{c3::Shared}} = clean, other caches may hold it; {{c4::Invalid}} = no valid data.",
    "image": "<img src=\"s2s_mesi.svg\">",
    "analogy": "",
    "extra": "<b>Why E exists:</b> read-then-write of private data is the common case; from E the write becomes M silently, from S it would need an invalidation broadcast every time.",
@@ -4045,7 +4045,7 @@
     "coherence",
     "mesi"
    ],
-   "front": "Core A writes a line that core B holds in Shared state. What happens under MESI?",
+   "front": "Core A writes a line that core B holds in Shared state. What happens under Modified-Exclusive-Shared-Invalid (MESI)?",
    "back": "A sends an invalidation (upgrade/RFO); B's copy becomes Invalid; A's becomes Modified. When B reads again, A must write the line back and both drop to Shared.",
    "text": "",
    "image": "",
@@ -4064,7 +4064,7 @@
     "coherence",
     "moesi"
    ],
-   "front": "MOESI's Owned and MESIF's Forward state: what problem do they solve?",
+   "front": "Modified-Owned-Exclusive-Shared-Invalid (MOESI)'s Owned and Modified-Exclusive-Shared-Invalid-Forward (MESIF)'s Forward state: what problem do they solve?",
    "back": "Who answers a snoop for a line in several caches. <b>Owned</b> (AMD): a dirty line can be shared without writing it back; the owner supplies it. <b>Forward</b> (Intel): one clean sharer is designated to respond, so memory and others stay quiet.",
    "text": "",
    "image": "",
@@ -4085,7 +4085,7 @@
     "contrast"
    ],
    "front": "Coherence vs memory consistency: key difference?",
-   "back": "<b>Coherence:</b> all cores eventually agree on the value sequence of <i>one</i> location (MESI gives this). <b>Consistency:</b> the rules for the order in which accesses to <i>different</i> locations become visible (SC, TSO, weak).",
+   "back": "<b>Coherence:</b> all cores eventually agree on the value sequence of <i>one</i> location (Modified-Exclusive-Shared-Invalid (MESI) gives this). <b>Consistency:</b> the rules for the order in which accesses to <i>different</i> locations become visible (SC, total store order (TSO), weak).",
    "text": "",
    "image": "",
    "analogy": "Coherence: everyone eventually reads the same version of each page. Consistency: whether everyone sees the pages updated in the same order.",
@@ -4128,7 +4128,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Why it matters:</b> this is the store-buffering (SB) litmus test; Dekker/Peterson locks are broken on TSO without a fence.",
+   "extra": "<b>Why it matters:</b> this is the store-buffering (SB) litmus test; Dekker/Peterson locks are broken on total store order (TSO) without a fence.",
    "source": "Memory",
    "reverse": false
   },
@@ -4144,7 +4144,7 @@
     "contrast"
    ],
    "front": "How do acquire loads and release stores map to instructions on x86 vs ARM64?",
-   "back": "<b>x86:</b> plain <code>mov</code> for both (TSO already gives the ordering); only a seq_cst store needs <code>xchg</code> or <code>mfence</code>. <b>ARM64:</b> dedicated <code>ldar</code> / <code>stlr</code>; plain <code>ldr</code>/<code>str</code> would be reordered.",
+   "back": "<b>x86:</b> plain <code>mov</code> for both (total store order (TSO) already gives the ordering); only a seq_cst store needs <code>xchg</code> or <code>mfence</code>. <b>ARM64:</b> dedicated <code>ldar</code> / <code>stlr</code>; plain <code>ldr</code>/<code>str</code> would be reordered.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -4187,7 +4187,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>In practice:</b> ARMv8.1 LSE added single-instruction atomics (<code>cas</code>, <code>ldadd</code>) because LL/SC loops scale poorly under contention.",
+   "extra": "<b>In practice:</b> ARMv8.1 Large System Extensions (LSE) added single-instruction atomics (<code>cas</code>, <code>ldadd</code>) because LL/SC loops scale poorly under contention.",
    "source": "Memory",
    "reverse": false
   },
@@ -4220,12 +4220,12 @@
     "tlb",
     "hugepages"
    ],
-   "front": "What is TLB reach, and why do huge pages help even when the page walk itself is cheap?",
+   "front": "What is translation lookaside buffer (TLB) reach, and why do huge pages help even when the page walk itself is cheap?",
    "back": "Reach = entries × page size, e.g. ~1500 × 4 KB ≈ 6 MB, far below a server's working set. 2 MB pages multiply the reach ×512 so most translations never miss at all.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>In practice:</b> this is the capacity argument for transparent huge pages and 1 GB pages in databases and DPDK. <b>Link:</b> Linux Internals · TLB &amp; huge pages",
+   "extra": "<b>In practice:</b> this is the capacity argument for transparent huge pages and 1 GB pages in databases and Data Plane Development Kit (DPDK). <b>Link:</b> Linux Internals · TLB &amp; huge pages",
    "source": "Memory",
    "reverse": false
   },
@@ -4239,7 +4239,7 @@
     "tlb",
     "pagewalk"
    ],
-   "front": "A 4-level page walk could cost four memory accesses. Why is a TLB miss usually much cheaper?",
+   "front": "A 4-level page walk could cost four memory accesses. Why is a translation lookaside buffer (TLB) miss usually much cheaper?",
    "back": "Page-table entries are ordinary cacheable data, so the walker usually hits L1/L2, and paging-structure caches keep the upper levels, leaving one or two real accesses.",
    "text": "",
    "image": "",
@@ -4258,7 +4258,7 @@
     "dram",
     "rowbuffer"
    ],
-   "front": "DRAM: why is an access to the bank's already-open row much faster than one to another row?",
+   "front": "Dynamic RAM (DRAM): why is an access to the bank's already-open row much faster than one to another row?",
    "back": "A row-buffer hit is just a column read. A miss needs <b>precharge</b> (close the old row) then <b>activate</b> (sense the new row into the buffer) before the column read: roughly three times the latency.",
    "text": "",
    "image": "",
@@ -4283,7 +4283,7 @@
    "text": "",
    "image": "",
    "analogy": "A wider motorway does not shorten a single car's trip; it only lets more cars travel at once.",
-   "extra": "<b>Little's law:</b> achieved bandwidth = outstanding requests ÷ latency, so saturating DRAM needs tens of misses in flight (line-fill buffers, prefetch, many cores).",
+   "extra": "<b>Little's law:</b> achieved bandwidth = outstanding requests ÷ latency, so saturating dynamic RAM (DRAM) needs tens of misses in flight (line-fill buffers, prefetch, many cores).",
    "source": "Memory",
    "reverse": false
   },
@@ -4298,11 +4298,11 @@
     "performance"
    ],
    "front": "What does the Roofline model tell you about a kernel?",
-   "back": "Plot attainable FLOP/s against <b>arithmetic intensity</b> (FLOPs per byte moved). Below the ridge point the kernel is memory-bound and only less traffic helps; above it, compute-bound and only better instructions help.",
+   "back": "Plot attainable floating-point operations per second (FLOP/s) against <b>arithmetic intensity</b> (floating-point operations (FLOPs) per byte moved). Below the ridge point the kernel is memory-bound and only less traffic helps; above it, compute-bound and only better instructions help.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Example:</b> a dot product does ~1 FLOP per 8 bytes: hopelessly memory-bound; a large matmul reuses each byte hundreds of times. <b>Link:</b> 11 Accelerators · ridge point; 12 Mapping · performance models",
+   "extra": "<b>Example:</b> a dot product does ~1 floating-point operation (FLOP) per 8 bytes: hopelessly memory-bound; a large matmul reuses each byte hundreds of times. <b>Link:</b> 11 Accelerators · ridge point; 12 Mapping · performance models",
    "source": "Memory",
    "reverse": false
   },
@@ -4317,7 +4317,7 @@
     "simd",
     "contrast"
    ],
-   "front": "SIMD vs SIMT: key difference?",
+   "front": "Single instruction, multiple data (SIMD) vs single instruction, multiple threads (SIMT): key difference?",
    "back": "<b>SIMD:</b> one thread issues one wide instruction over a vector register; lanes are explicit in the code. <b>SIMT:</b> each lane is written as an independent scalar thread; hardware groups 32 into a warp that shares one instruction stream.",
    "text": "",
    "image": "",
@@ -4355,12 +4355,12 @@
     "cuda",
     "blocks"
    ],
-   "front": "Why must a thread block run entirely on one SM?",
+   "front": "Why must a thread block run entirely on one streaming multiprocessor (SM)?",
    "back": "Its threads share that SM's shared memory and synchronise with <code>__syncthreads()</code>, a hardware barrier that only exists inside an SM.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Consequence:</b> blocks are the unit of scheduling, dispatched in any order as SMs free up; a block must never wait for another block (deadlock), so inter-block sync needs atomics or a cooperative grid launch.",
+   "extra": "<b>Consequence:</b> blocks are the unit of scheduling, dispatched in any order as streaming multiprocessors (SMs) free up; a block must never wait for another block (deadlock), so inter-block sync needs atomics or a cooperative grid launch.",
    "source": "GPU",
    "reverse": false
   },
@@ -4376,7 +4376,7 @@
     "latency-hiding"
    ],
    "front": "How does a GPU hide a ~500-cycle global memory latency without out-of-order execution or large caches?",
-   "back": "Each SM keeps many warps resident with all their registers; every cycle the warp schedulers issue from whichever warps are ready. A stalled warp costs nothing; another warp fills the slot.",
+   "back": "Each streaming multiprocessor (SM) keeps many warps resident with all their registers; every cycle the warp schedulers issue from whichever warps are ready. A stalled warp costs nothing; another warp fills the slot.",
    "text": "",
    "image": "",
    "analogy": "A dentist with ten chairs: while one patient's anaesthetic sets, the dentist works on the others; no chair is ever cleared and re-set.",
@@ -4393,7 +4393,7 @@
     "gpu",
     "occupancy"
    ],
-   "front": "What is occupancy on an SM?",
+   "front": "What is occupancy on an streaming multiprocessor (SM)?",
    "back": "Resident warps divided by the maximum the SM can hold (e.g. 64 warps). It is limited by registers per thread, shared memory per block and the block-count cap.",
    "text": "",
    "image": "",
@@ -4412,11 +4412,11 @@
     "occupancy"
    ],
    "front": "Why is 100% occupancy not always the goal?",
-   "back": "Latency only has to be covered: a few warps each with lots of independent work (ILP, several loads in flight) can saturate the units at low occupancy, while using the saved registers for bigger tiles.",
+   "back": "Latency only has to be covered: a few warps each with lots of independent work (instruction-level parallelism (ILP), several loads in flight) can saturate the units at low occupancy, while using the saved registers for bigger tiles.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Example:</b> tuned GEMM kernels run at 25–50% occupancy with huge register tiles; naive kernels need high occupancy because each warp issues one load then waits.",
+   "extra": "<b>Example:</b> tuned general matrix multiply (GEMM) kernels run at 25–50% occupancy with huge register tiles; naive kernels need high occupancy because each warp issues one load then waits.",
    "source": "GPU",
    "reverse": false
   },
@@ -4429,8 +4429,8 @@
     "gpu",
     "shared-memory"
    ],
-   "front": "What is shared memory on an SM, and why is it faster than hitting L1?",
-   "back": "A programmer-managed scratchpad per block (tens to ~200 KB per SM, carved from the same SRAM as L1). You decide what to stage, so there are no tags, no misses, and data is reused by all threads in the block.",
+   "front": "What is shared memory on an streaming multiprocessor (SM), and why is it faster than hitting L1?",
+   "back": "A programmer-managed scratchpad per block (tens to ~200 KB per SM, carved from the same static RAM (SRAM) as L1). You decide what to stage, so there are no tags, no misses, and data is reused by all threads in the block.",
    "text": "",
    "image": "",
    "analogy": "A whiteboard in the team room: everyone in the block writes and reads it, nobody outside can see it.",
@@ -4530,7 +4530,7 @@
    "text": "",
    "image": "",
    "analogy": "A season ticket for one regular commuter versus a minibus that picks up whoever is standing in a row right now.",
-   "extra": "<b>Lesson:</b> on a CPU keep what one thread needs together (AoS can be fine); on a GPU keep what neighbouring threads need together (SoA). <b>Link:</b> 09 Memory · cache lines; 10 GPU · AoS vs SoA",
+   "extra": "<b>Lesson:</b> on a CPU keep what one thread needs together (array of structures (AoS) can be fine); on a GPU keep what neighbouring threads need together (SoA). <b>Link:</b> 09 Memory · cache lines; 10 GPU · AoS vs SoA",
    "source": "GPU",
    "reverse": false
   },
@@ -4565,7 +4565,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "CUDA memory spaces: {{c1::global}} = device DRAM, visible to all blocks and the host; {{c2::shared}} = per-block on-chip scratchpad; {{c3::local}} = per-thread spills and indexed arrays, physically in global memory; {{c4::constant}} = 64 KB read-only, cached and broadcast.",
+   "text": "CUDA memory spaces: {{c1::global}} = device dynamic RAM (DRAM), visible to all blocks and the host; {{c2::shared}} = per-block on-chip scratchpad; {{c3::local}} = per-thread spills and indexed arrays, physically in global memory; {{c4::constant}} = 64 KB read-only, cached and broadcast.",
    "image": "",
    "analogy": "",
    "extra": "<b>Pitfall:</b> constant memory is fast only when a warp reads the <i>same</i> address (one fetch broadcast); differing addresses serialise. Good for coefficients, bad for per-thread tables.",
@@ -4584,7 +4584,7 @@
     "bandwidth"
    ],
    "front": "Why is a GPU's memory system built for bandwidth rather than latency?",
-   "back": "Thousands of resident warps generate thousands of outstanding requests, and the warp scheduler hides each one's latency; what limits throughput is bytes per second, hence wide HBM and a large shared L2 that also resolves global atomics.",
+   "back": "Thousands of resident warps generate thousands of outstanding requests, and the warp scheduler hides each one's latency; what limits throughput is bytes per second, hence wide high-bandwidth memory (HBM) and a large shared L2 that also resolves global atomics.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -4602,12 +4602,12 @@
     "tensor-core",
     "mma"
    ],
-   "front": "What does a tensor-core instruction such as PTX <code>mma.sync.m16n8k16</code> compute, and who issues it?",
+   "front": "What does a tensor-core instruction such as parallel thread execution (PTX) <code>mma.sync.m16n8k16</code> compute, and who issues it?",
    "back": "A whole warp cooperatively computes <code>D = A×B + C</code> on a small tile (16×16 by 16×8 here), with fragments of A, B and C spread across the 32 threads' registers.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Why it matters:</b> one instruction replaces thousands of scalar FMAs, so matmul throughput jumps an order of magnitude over CUDA cores. <b>Link:</b> 11 Accelerators · systolic array; bfloat16 &amp; FP32 accumulation",
+   "extra": "<b>Why it matters:</b> one instruction replaces thousands of scalar fused multiply-add operations (FMAs), so matmul throughput jumps an order of magnitude over CUDA cores. <b>Link:</b> 11 Accelerators · systolic array; bfloat16 &amp; FP32 accumulation",
    "source": "GPU",
    "reverse": false
   },
@@ -4623,7 +4623,7 @@
     "sass"
    ],
    "front": "What are the stages from a <code>.cu</code> file to code running on the GPU?",
-   "back": "<code>nvcc</code> splits host and device code. Device code → PTX (virtual ISA) → <code>ptxas</code> → SASS cubin for a specific SM; the host compiler builds the CPU side and the cubins/PTX are embedded as a fat binary.",
+   "back": "<code>nvcc</code> splits host and device code. Device code → PTX (virtual instruction set architecture (ISA)) → <code>ptxas</code> → NVIDIA's native GPU assembly (SASS) cubin for a specific streaming multiprocessor (SM); the host compiler builds the CPU side and the cubins/PTX are embedded as a fat binary.",
    "text": "",
    "image": "<img src=\"s2s_cuda_pipeline.svg\">",
    "analogy": "",
@@ -4642,8 +4642,8 @@
     "sass",
     "contrast"
    ],
-   "front": "PTX vs SASS: key difference?",
-   "back": "<b>PTX:</b> a stable, textual, virtual ISA with unlimited virtual registers; forward-compatible across GPU generations. <b>SASS:</b> the real, undocumented machine code of one architecture, after register allocation and scheduling by <code>ptxas</code>.",
+   "front": "Parallel thread execution (PTX) vs NVIDIA's native GPU assembly (SASS): key difference?",
+   "back": "<b>PTX:</b> a stable, textual, virtual instruction set architecture (ISA) with unlimited virtual registers; forward-compatible across GPU generations. <b>SASS:</b> the real, undocumented machine code of one architecture, after register allocation and scheduling by <code>ptxas</code>.",
    "text": "",
    "image": "",
    "analogy": "PTX is the LLVM IR of the GPU world; SASS is the x86 bytes.",
@@ -4663,8 +4663,8 @@
     "contrast",
     "bridge"
    ],
-   "front": "SASS vs &micro;ops: does a GPU have a decode stage like a CPU's x86 &rarr; &micro;op front end?",
-   "back": "Not in that sense. SASS is already a fixed-width, RISC-like ISA the SM issues directly, with dependency and stall counts written into control bits by <code>ptxas</code> at compile time. The CPU decodes and schedules at run time; the GPU moved that work into <code>ptxas</code>, so PTX &rarr; SASS is its 'decode', done once.",
+   "front": "NVIDIA's native GPU assembly (SASS) vs &micro;ops: does a GPU have a decode stage like a CPU's x86 &rarr; &micro;op front end?",
+   "back": "Not in that sense. SASS is already a fixed-width, RISC-like instruction set architecture (ISA) the streaming multiprocessor (SM) issues directly, with dependency and stall counts written into control bits by <code>ptxas</code> at compile time. The CPU decodes and schedules at run time; the GPU moved that work into <code>ptxas</code>, so parallel thread execution (PTX) &rarr; SASS is its 'decode', done once.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -4682,7 +4682,7 @@
     "compute-capability",
     "fatbin"
    ],
-   "front": "Why does a CUDA fat binary carry PTX as well as SASS cubins?",
+   "front": "Why does a CUDA fat binary carry parallel thread execution (PTX) as well as NVIDIA's native GPU assembly (SASS) cubins?",
    "back": "A cubin runs only on the compute capability it was built for. When a newer GPU has no matching cubin, the driver JIT-compiles the embedded PTX to its SASS at load time (and caches it on disk).",
    "text": "",
    "image": "",
@@ -4708,7 +4708,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>In practice:</b> HIP is source-portable with CUDA (hipify), but tensor-core code (<code>mma</code>) must be rewritten against AMD's MFMA intrinsics.",
+   "extra": "<b>In practice:</b> Heterogeneous-computing Interface for Portability (HIP) is source-portable with CUDA (hipify), but tensor-core code (<code>mma</code>) must be rewritten against AMD's matrix fused multiply-add (MFMA) intrinsics.",
    "source": "GPU",
    "reverse": false
   },
@@ -4723,7 +4723,7 @@
     "tbdr"
    ],
    "front": "Why do Apple and ARM mobile GPUs use tile-based deferred rendering (TBDR)?",
-   "back": "The screen is split into tiles that fit on-chip memory; all geometry is binned first, hidden surfaces removed, then each tile is shaded and written once. Framebuffer and depth traffic to DRAM, the main power cost, nearly disappears.",
+   "back": "The screen is split into tiles that fit on-chip memory; all geometry is binned first, hidden surfaces removed, then each tile is shaded and written once. Framebuffer and depth traffic to dynamic RAM (DRAM), the main power cost, nearly disappears.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -4741,7 +4741,7 @@
     "cuda-graphs"
    ],
    "front": "Why can 100,000 tiny kernel launches be slower than the same work on a CPU, and what do CUDA graphs change?",
-   "back": "Each launch costs a few microseconds of driver and queue work, so microsecond-sized kernels are overhead-bound. A graph captures the kernel/copy sequence once as a DAG and replays it as one launch, back to back on the GPU.",
+   "back": "Each launch costs a few microseconds of driver and queue work, so microsecond-sized kernels are overhead-bound. A graph captures the kernel/copy sequence once as a directed acyclic graph (DAG) and replays it as one launch, back to back on the GPU.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -4815,7 +4815,7 @@
     "performance"
    ],
    "front": "A kernel runs 50× faster on the GPU than on the CPU, yet the program only gains 2×. Why?",
-   "back": "Amdahl's law: the serial parts (host preprocessing, PCIe copies, launch latency) now dominate. If they were 40% of the original time, the ceiling is 1/0.4 = 2.5× however fast the kernel.",
+   "back": "Amdahl's law: the serial parts (host preprocessing, Peripheral Component Interconnect Express (PCIe) copies, launch latency) now dominate. If they were 40% of the original time, the ceiling is 1/0.4 = 2.5× however fast the kernel.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -4851,11 +4851,11 @@
     "fundamentals"
    ],
    "front": "Why are AI accelerators built around <b>matrix multiplication</b> rather than general-purpose compute?",
-   "back": "Dense layers, convolutions and attention all reduce to matmuls, so one highly regular operation carries most of the FLOPs of training and inference.",
+   "back": "Dense layers, convolutions and attention all reduce to matmuls, so one highly regular operation carries most of the floating-point operations (FLOPs) of training and inference.",
    "text": "",
    "image": "",
    "analogy": "A bakery that sells 95% bread buys a bread oven, not a general kitchen.",
-   "extra": "<b>In practice:</b> everything that is <i>not</i> a matmul (softmax, layernorm, GELU) still needs a programmable vector unit next to the array.",
+   "extra": "<b>In practice:</b> everything that is <i>not</i> a matmul (softmax, layernorm, Gaussian error linear unit (GELU)) still needs a programmable vector unit next to the array.",
    "source": "Accelerators",
    "reverse": false
   },
@@ -4868,12 +4868,12 @@
     "accelerator",
     "roofline"
    ],
-   "front": "An accelerator has peak <i>P</i> FLOP/s and HBM bandwidth <i>B</i> bytes/s. Which kernels on it are <b>memory-bound</b>, and what does that cover in practice?",
-   "back": "Every kernel whose <b>arithmetic intensity</b> (FLOPs per byte moved) is below the ridge point <i>P/B</i>, which on accelerators is hundreds of FLOP/byte: everything except large matmuls, i.e. elementwise ops, softmax, layernorm and batch-1 decode.",
+   "front": "An accelerator has peak <i>P</i> floating-point operations per second (FLOP/s) and high-bandwidth memory (HBM) bandwidth <i>B</i> bytes/s. Which kernels on it are <b>memory-bound</b>, and what does that cover in practice?",
+   "back": "Every kernel whose <b>arithmetic intensity</b> (floating-point operations (FLOPs) per byte moved) is below the ridge point <i>P/B</i>, which on accelerators is hundreds of FLOP/byte: everything except large matmuls, i.e. elementwise ops, softmax, layernorm and batch-1 decode.",
    "text": "",
    "image": "",
    "analogy": "Chewing per bite: a dish you must fetch a spoonful at a time is limited by the trips, not by your jaw.",
-   "extra": "<b>Consequence:</b> most of an accelerator compiler's work is raising intensity: fusion, tiling, keeping operands in SRAM. <b>Link:</b> 09 Memory · Roofline",
+   "extra": "<b>Consequence:</b> most of an accelerator compiler's work is raising intensity: fusion, tiling, keeping operands in static RAM (SRAM). <b>Link:</b> 09 Memory · Roofline",
    "source": "Accelerators",
    "reverse": false
   },
@@ -4891,7 +4891,7 @@
    "text": "",
    "image": "<img src=\"s2s_systolic_ws.svg\">",
    "analogy": "A bucket brigade: every person stands still, water (data) passes hand to hand, nobody walks back to the well.",
-   "extra": "<b>Example:</b> the TPU's MXU. Each cell does one multiply-add per clock and hands results to its neighbour; <b>Link:</b> Cloud Architecture · systolic array intro",
+   "extra": "<b>Example:</b> the tensor processing unit (TPU)'s matrix multiply unit (MXU). Each cell does one multiply-add per clock and hands results to its neighbour; <b>Link:</b> Cloud Architecture · systolic array intro",
    "source": "Accelerators",
    "reverse": false
   },
@@ -4906,7 +4906,7 @@
     "energy"
    ],
    "front": "Why does a systolic array need <b>no instruction fetch, register-file read or cache lookup</b> per multiply-add, and why is that the whole point?",
-   "back": "Data moves register-to-register between neighbours on a fixed schedule; the dataflow <i>is</i> the program. The energy of a CPU/GPU MAC is dominated by exactly those overheads, not the arithmetic.",
+   "back": "Data moves register-to-register between neighbours on a fixed schedule; the dataflow <i>is</i> the program. The energy of a CPU/GPU multiply-accumulate (MAC) is dominated by exactly those overheads, not the arithmetic.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -4928,7 +4928,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Pitfall:</b> fill/drain latency is wasted unless the next tile is already streaming in; the TPU double-buffers weights so new weights load while the current ones compute.",
+   "extra": "<b>Pitfall:</b> fill/drain latency is wasted unless the next tile is already streaming in; the tensor processing unit (TPU) double-buffers weights so new weights load while the current ones compute.",
    "source": "Accelerators",
    "reverse": false
   },
@@ -4942,7 +4942,7 @@
     "systolic",
     "inference"
    ],
-   "front": "What breaks when the matrix you multiply is <b>smaller than the systolic array</b> (e.g. batch 1 decoding on a 128×128 MXU)?",
+   "front": "What breaks when the matrix you multiply is <b>smaller than the systolic array</b> (e.g. batch 1 decoding on a 128×128 matrix multiply unit (MXU))?",
    "back": "The array is padded with zeros: utilisation collapses to (rows used ÷ 128). Each weight is loaded for one multiply instead of 128, so the step becomes memory-bound.",
    "text": "",
    "image": "",
@@ -4963,10 +4963,10 @@
    ],
    "front": "",
    "back": "",
-   "text": "A TPU TensorCore has three kinds of unit: the {{c1::MXU (matrix unit, the systolic array)}} for matmuls, the {{c2::VPU (vector unit)}} for elementwise ops, reductions, activations and normalisation, and a {{c3::scalar unit}} that runs the control flow and issues instructions to the other two.",
+   "text": "A tensor processing unit (TPU) TensorCore has three kinds of unit: the {{c1::MXU (matrix unit, the systolic array)}} for matmuls, the {{c2::VPU (vector unit)}} for elementwise ops, reductions, activations and normalisation, and a {{c3::scalar unit}} that runs the control flow and issues instructions to the other two.",
    "image": "",
    "analogy": "",
-   "extra": "<b>In practice:</b> a kernel that is all softmax/layernorm leaves the MXU idle; XLA's job is to keep the MXU fed and hide the VPU work under it.",
+   "extra": "<b>In practice:</b> a kernel that is all softmax/layernorm leaves the MXU idle; Accelerated Linear Algebra (XLA)'s job is to keep the MXU fed and hide the VPU work under it.",
    "source": "Accelerators",
    "reverse": false
   },
@@ -4980,8 +4980,8 @@
     "bfloat16",
     "numerics"
    ],
-   "front": "The MXU multiplies in <b>bfloat16</b> but accumulates in <b>FP32</b>. Why that split?",
-   "back": "A multiplier's area grows roughly with the <i>square</i> of mantissa bits, so 8-bit mantissas make the array far denser; the adder chain is cheap, and FP32 sums avoid losing small products over thousands of terms.",
+   "front": "The matrix multiply unit (MXU) multiplies in <b>bfloat16</b> but accumulates in <b>FP32</b>. Why that split?",
+   "back": "A multiplier's area grows roughly with the <i>square</i> of mantissa bits, so 8-bit mantissas make the array far denser; the adder chain is cheap, and 32-bit floating point (FP32) sums avoid losing small products over thousands of terms.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -4999,8 +4999,8 @@
     "int8",
     "inference"
    ],
-   "front": "Why is <b>INT8</b> so attractive for inference hardware, and what must software add to make it work?",
-   "back": "Integer multipliers are much smaller and 8-bit values halve bandwidth versus BF16. Software must supply a <b>scale</b> (and sometimes zero-point) per tensor or channel, chosen by calibration or training-aware quantisation.",
+   "front": "Why is <b>8-bit integer (INT8)</b> so attractive for inference hardware, and what must software add to make it work?",
+   "back": "Integer multipliers are much smaller and 8-bit values halve bandwidth versus bfloat16 (brain floating point) (BF16). Software must supply a <b>scale</b> (and sometimes zero-point) per tensor or channel, chosen by calibration or training-aware quantisation.",
    "text": "",
    "image": "",
    "analogy": "Shipping prices in whole cents with the currency noted once on the invoice: the unit (scale) travels separately from the numbers.",
@@ -5018,12 +5018,12 @@
     "numerics",
     "contrast"
    ],
-   "front": "FP8 <b>E4M3</b> vs <b>E5M2</b>: which goes where in training, and why?",
+   "front": "8-bit floating point (FP8) <b>E4M3</b> vs <b>E5M2</b>: which goes where in training, and why?",
    "back": "<b>E4M3</b> (more mantissa, range ≈ ±448) for weights and activations, which need precision. <b>E5M2</b> (more exponent, range ≈ ±57k) for gradients, which need range more than precision.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>In practice:</b> both still need a per-tensor FP32 scale factor; the raw FP8 range is too small for most tensors.",
+   "extra": "<b>In practice:</b> both still need a per-tensor 32-bit floating point (FP32) scale factor; the raw FP8 range is too small for most tensors.",
    "source": "Accelerators",
    "reverse": false
   },
@@ -5037,7 +5037,7 @@
     "fp4",
     "numerics"
    ],
-   "front": "What is <b>block (micro)scaling</b> such as the OCP MX formats, and what problem does it fix for FP8/FP4?",
+   "front": "What is <b>block (micro)scaling</b> such as the Open Compute Project (OCP) MX formats, and what problem does it fix for FP8/FP4?",
    "back": "A small block (e.g. 32 elements) shares one 8-bit exponent scale, so each element can be tiny (FP4/FP6/FP8) yet the block keeps useful dynamic range.",
    "text": "",
    "image": "",
@@ -5057,7 +5057,7 @@
     "hbm"
    ],
    "front": "On-chip <b>SRAM</b> vs <b>HBM</b> on an accelerator: what does each give, and what does the compiler do with the difference?",
-   "back": "SRAM: tens of MB, enormous bandwidth, low energy. HBM: tens of GB, ~10× less bandwidth and far more energy per byte. The compiler <b>tiles</b> work so the hot set lives in SRAM and HBM is streamed once.",
+   "back": "Static RAM (SRAM): tens of MB, enormous bandwidth, low energy. High-bandwidth memory (HBM): tens of GB, ~10× less bandwidth and far more energy per byte. The compiler <b>tiles</b> work so the hot set lives in SRAM and HBM is streamed once.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -5095,7 +5095,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "XLA's pipeline: the framework emits {{c1::HLO}} (a graph of tensor ops with static shapes); target-independent passes simplify it (algebra, CSE, DCE); {{c2::layout assignment}} picks physical dimension orders and tiles; {{c3::fusion}} merges ops into kernels; {{c4::buffer assignment}} fixes every allocation at compile time; a backend (LLVM for CPU/GPU, the TPU backend) emits machine code.",
+   "text": "Accelerated Linear Algebra (XLA)'s pipeline: the framework emits {{c1::HLO}} (a graph of tensor ops with static shapes); target-independent passes simplify it (algebra, common subexpression elimination (CSE), dead-code elimination (DCE)); {{c2::layout assignment}} picks physical dimension orders and tiles; {{c3::fusion}} merges ops into kernels; {{c4::buffer assignment}} fixes every allocation at compile time; a backend (LLVM for CPU/GPU, the tensor processing unit (TPU) backend) emits machine code.",
    "image": "<img src=\"s2s_xla_pipeline.svg\">",
    "analogy": "",
    "extra": "<b>Link:</b> 03 IR &amp; Optimisation · pass pipeline",
@@ -5111,12 +5111,12 @@
     "xla",
     "fusion"
    ],
-   "front": "What does XLA <b>fusion</b> actually buy, and on which kind of op?",
-   "back": "It avoids writing intermediate tensors to HBM and reading them back. For memory-bound elementwise chains (<code>exp(x)*y + z</code>) three kernels and three round-trips become one.",
+   "front": "What does Accelerated Linear Algebra (XLA) <b>fusion</b> actually buy, and on which kind of op?",
+   "back": "It avoids writing intermediate tensors to high-bandwidth memory (HBM) and reading them back. For memory-bound elementwise chains (<code>exp(x)*y + z</code>) three kernels and three round-trips become one.",
    "text": "",
    "image": "",
    "analogy": "Running all errands in one trip instead of coming home between shops.",
-   "extra": "<b>Why it works:</b> a matmul's intensity grows with size (~2N³ FLOPs on ~3N² values); an elementwise op's is fixed at ~1 FLOP/element, so fusing it into a matmul adds free FLOPs and removes a memory pass. <b>Link:</b> 09 Memory · Roofline; 08 Microarchitecture · µop fusion (contrast)",
+   "extra": "<b>Why it works:</b> a matmul's intensity grows with size (~2N³ floating-point operations (FLOPs) on ~3N² values); an elementwise op's is fixed at ~1 FLOP/element, so fusing it into a matmul adds free FLOPs and removes a memory pass. <b>Link:</b> 09 Memory · Roofline; 08 Microarchitecture · µop fusion (contrast)",
    "source": "Accelerators",
    "reverse": false
   },
@@ -5131,8 +5131,8 @@
     "contrast",
     "bridge"
    ],
-   "front": "Compiler <b>fusion</b> (XLA / Inductor, 11) vs <b>&micro;op fusion</b> (08): same word, what differs?",
-   "back": "Compiler fusion merges whole tensor ops into one kernel so intermediates never touch HBM: saves memory traffic, decided at compile time. &micro;op fusion merges two adjacent instructions into one pipeline slot: saves front-end width, done by hardware per instruction. Opposite ends of the stack, same motive: remove an intermediate hand-off.",
+   "front": "Compiler <b>fusion</b> (Accelerated Linear Algebra (XLA) / Inductor, 11) vs <b>&micro;op fusion</b> (08): same word, what differs?",
+   "back": "Compiler fusion merges whole tensor ops into one kernel so intermediates never touch high-bandwidth memory (HBM): saves memory traffic, decided at compile time. &micro;op fusion merges two adjacent instructions into one pipeline slot: saves front-end width, done by hardware per instruction. Opposite ends of the stack, same motive: remove an intermediate hand-off.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -5150,7 +5150,7 @@
     "static-shapes",
     "aot"
    ],
-   "front": "Why does XLA demand <b>static shapes</b> and compile <b>ahead of time</b>, and what does that cost the user?",
+   "front": "Why does Accelerated Linear Algebra (XLA) demand <b>static shapes</b> and compile <b>ahead of time</b>, and what does that cost the user?",
    "back": "Static shapes let it choose tiles, pad to the hardware's lanes and fix every buffer at compile time, so the device never allocates or branches on sizes. Cost: a new shape means a recompile, so ragged data is bucketed or padded.",
    "text": "",
    "image": "",
@@ -5223,7 +5223,7 @@
     "mlir",
     "ir"
    ],
-   "front": "What problem does <b>MLIR</b> solve that a single IR like LLVM IR cannot?",
+   "front": "What problem does <b>multi-level intermediate representation (MLIR)</b> solve that a single intermediate representation (IR) like LLVM IR cannot?",
    "back": "One infrastructure for many <b>dialects</b> at different abstraction levels (tensor ops, loops, affine maps, GPU, LLVM), with <b>progressive lowering</b> between them. Tensor-level optimisations are impossible once everything is scalar LLVM IR.",
    "text": "",
    "image": "",
@@ -5244,7 +5244,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "A typical MLIR lowering for a matmul: {{c1::linalg}} (structured op with indexing maps: tile, fuse, vectorise here) → {{c2::affine / scf}} (explicit loops; affine maps allow polyhedral analysis of bounds and dependences) → {{c3::vector}} ops → {{c4::llvm}} dialect → LLVM IR → machine code.",
+   "text": "A typical multi-level intermediate representation (MLIR) lowering for a matmul: {{c1::linalg}} (structured op with indexing maps: tile, fuse, vectorise here) → {{c2::affine / scf}} (explicit loops; affine maps allow polyhedral analysis of bounds and dependences) → {{c3::vector}} ops → {{c4::llvm}} dialect → LLVM intermediate representation (IR) → machine code.",
    "image": "",
    "analogy": "",
    "extra": "<b>Why the order:</b> tiling on <code>linalg.matmul</code> is a one-line transform; recovering the same tiling from nested loops would need loop-nest analysis.",
@@ -5262,7 +5262,7 @@
     "fusion"
    ],
    "front": "Why is <b>FlashAttention</b> best understood as a compiler idea (tiling + fusion) rather than a new model?",
-   "back": "It computes exact attention in tiles that fit on-chip SRAM, fusing QKᵀ, softmax and ×V so the n×n score matrix never touches HBM. The enabling trick is <b>online softmax</b>: rescaling running sums as new tiles arrive.",
+   "back": "It computes exact attention in tiles that fit on-chip static RAM (SRAM), fusing QKᵀ, softmax and ×V so the n×n score matrix never touches high-bandwidth memory (HBM). The enabling trick is <b>online softmax</b>: rescaling running sums as new tiles arrive.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -5281,7 +5281,7 @@
     "inference"
    ],
    "front": "Groq-style <b>deterministic dataflow</b> accelerators: what does the compiler decide, and what disappears from the hardware?",
-   "back": "The compiler schedules every data movement to the clock cycle at compile time. The chip drops caches, branch predictors and dynamic schedulers; weights sit in on-chip SRAM, so latency is exact and tiny.",
+   "back": "The compiler schedules every data movement to the clock cycle at compile time. The chip drops caches, branch predictors and dynamic schedulers; weights sit in on-chip static RAM (SRAM), so latency is exact and tiny.",
    "text": "",
    "image": "",
    "analogy": "A railway timetable instead of road traffic: no lights, no jams, but every train was planned months ago.",
@@ -5300,7 +5300,7 @@
     "sram"
    ],
    "front": "Why does Cerebras build a <b>wafer-scale</b> chip, and what architectural model goes with it?",
-   "back": "Keeping hundreds of thousands of small cores and their SRAM on one wafer avoids the off-chip bandwidth wall between dies. Cores form a 2-D mesh with local memory; <b>dataflow</b> execution lets them skip multiplies by zero (sparsity).",
+   "back": "Keeping hundreds of thousands of small cores and their static RAM (SRAM) on one wafer avoids the off-chip bandwidth wall between dies. Cores form a 2-D mesh with local memory; <b>dataflow</b> execution lets them skip multiplies by zero (sparsity).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -5318,7 +5318,7 @@
     "numerics"
    ],
    "front": "Why does hardware accelerate only <b>structured</b> sparsity (e.g. 2:4), not arbitrary zeros in a weight matrix?",
-   "back": "With exactly 2 non-zeros per group of 4, a 2-bit index per value lets the MAC array fetch the matching activations and skip half the work with fixed-size metadata. Random sparsity needs irregular indexing that breaks the systolic flow.",
+   "back": "With exactly 2 non-zeros per group of 4, a 2-bit index per value lets the multiply-accumulate (MAC) array fetch the matching activations and skip half the work with fixed-size metadata. Random sparsity needs irregular indexing that breaks the systolic flow.",
    "text": "",
    "image": "",
    "analogy": "A parking garage with every other bay guaranteed empty is easy to size; random empty bays save nothing.",
@@ -5337,7 +5337,7 @@
     "contrast"
    ],
    "front": "Why are <b>training</b> chips designed differently from <b>inference</b> chips, in terms of arithmetic intensity?",
-   "back": "Training runs big batches: high intensity, compute-bound, needs FP32 accumulation, memory for optimizer state and fast collectives. Inference (especially decode) reads every weight for little compute: low intensity, memory-bound, wants low precision and SRAM-near weights.",
+   "back": "Training runs big batches: high intensity, compute-bound, needs 32-bit floating point (FP32) accumulation, memory for optimizer state and fast collectives. Inference (especially decode) reads every weight for little compute: low intensity, memory-bound, wants low precision and SRAM-near weights.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -5355,8 +5355,8 @@
     "spmd",
     "sharding"
    ],
-   "front": "How does an ML compiler split one model across thousands of TPU chips (XLA's SPMD partitioner / GSPMD)?",
-   "back": "The user annotates how a few tensors are <b>sharded</b> across a device mesh; the partitioner propagates shardings through the HLO graph and inserts collectives (all-reduce, all-gather) where ops need data another chip holds.",
+   "front": "How does an ML compiler split one model across thousands of tensor processing unit (TPU) chips (Accelerated Linear Algebra (XLA)'s single program, multiple data (SPMD) partitioner / general and scalable parallelisation for ML computation graphs (GSPMD))?",
+   "back": "The user annotates how a few tensors are <b>sharded</b> across a device mesh; the partitioner propagates shardings through the high-level operations (HLO) graph and inserts collectives (all-reduce, all-gather) where ops need data another chip holds.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -5411,7 +5411,7 @@
     "ub"
    ],
    "front": "<b>Layer 02 (semantics).</b> How do types change what <code>a[i] += b[i]</code> means and compiles to?",
-   "back": "With <code>int</code> arrays it is an integer add (<code>vpaddd</code>); with <code>float</code> a float add (<code>vaddps</code>); mixing types inserts conversions. Signed overflow of <code>i</code> is UB, which lets the optimiser assume the loop terminates normally.",
+   "back": "With <code>int</code> arrays it is an integer add (<code>vpaddd</code>); with <code>float</code> a float add (<code>vaddps</code>); mixing types inserts conversions. Signed overflow of <code>i</code> is undefined behaviour (UB), which lets the optimiser assume the loop terminates normally.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -5428,7 +5428,7 @@
     "mapping",
     "ssa"
    ],
-   "front": "<b>Layer 03 (IR).</b> What does the loop look like in SSA form?",
+   "front": "<b>Layer 03 (IR).</b> What does the loop look like in static single assignment (SSA) form?",
    "back": "Blocks: <i>preheader</i> (i₀ = 0) → <i>header</i> with <code>i = φ(i₀, i₁)</code> and the exit test → <i>body</i> (load a[i], load b[i], add, store) → <i>latch</i> (i₁ = i + 1) back to the header.",
    "text": "",
    "image": "",
@@ -5447,7 +5447,7 @@
     "vectorisation",
     "alias"
    ],
-   "front": "<b>Layer 03 (optimisation).</b> What must the compiler prove before it may vectorise <code>a[i] += b[i]</code> with 8-wide AVX2?",
+   "front": "<b>Layer 03 (optimisation).</b> What must the compiler prove before it may vectorise <code>a[i] += b[i]</code> with 8-wide Advanced Vector Extensions 2 (AVX2)?",
    "back": "That <code>a</code> and <code>b</code> do not overlap in a way that creates a loop-carried dependence. Without <code>restrict</code> it emits a <b>runtime alias check</b> and keeps a scalar fallback, plus a remainder loop for <code>n % 8</code>.",
    "text": "",
    "image": "",
@@ -5466,7 +5466,7 @@
     "codegen",
     "regalloc"
    ],
-   "front": "<b>Layer 04 (codegen).</b> Which register-level decisions turn the vectorised IR into a tight loop?",
+   "front": "<b>Layer 04 (codegen).</b> Which register-level decisions turn the vectorised intermediate representation (IR) into a tight loop?",
    "back": "<code>i</code> lives in a register; <b>strength reduction</b> replaces <code>a + i*4</code> with a running byte offset; register allocation gives the vector temporary a <code>ymm</code>; the exit test becomes <code>cmp/jne</code>.",
    "text": "",
    "image": "",
@@ -5485,7 +5485,7 @@
     "x86",
     "avx2"
    ],
-   "front": "<b>Layer 06 (ISA).</b> What does the hot AVX2 loop body look like on x86-64?",
+   "front": "<b>Layer 06 (ISA).</b> What does the hot Advanced Vector Extensions 2 (AVX2) loop body look like on x86-64?",
    "back": "<pre>.L: vmovdqu ymm0, [rsi+rax]\n    vpaddd  ymm0, ymm0, [rdi+rax]\n    vmovdqu [rdi+rax], ymm0\n    add     rax, 32\n    cmp     rax, rdx\n    jne     .L</pre>",
    "text": "",
    "image": "",
@@ -5543,12 +5543,12 @@
     "sve",
     "bridge"
    ],
-   "front": "<b>Layer 07 (another ISA).</b> Compile the same loop for AArch64 with SVE: what changes below the IR, and what does not?",
-   "back": "Same tokens, AST, SSA and vectorised IR. Below: fixed 32-bit instructions, predicated <code>ld1w</code>/<code>add</code>/<code>st1w</code> under a <code>whilelt</code> mask that also covers the tail (no remainder loop), <code>incw</code> stepping by the vector length. The binary never names the vector width.",
+   "front": "<b>Layer 07 (another ISA).</b> Compile the same loop for AArch64 with Scalable Vector Extension (SVE): what changes below the intermediate representation (IR), and what does not?",
+   "back": "Same tokens, abstract syntax tree (AST), static single assignment (SSA) and vectorised IR. Below: fixed 32-bit instructions, predicated <code>ld1w</code>/<code>add</code>/<code>st1w</code> under a <code>whilelt</code> mask that also covers the tail (no remainder loop), <code>incw</code> stepping by the vector length. The binary never names the vector width.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Lesson:</b> the ISA layer decides the code's shape; every layer above it is shared across targets. <b>Link:</b> 07 ARM64/RISC-V/Z · SVE predication; 06 x86-64 · AVX-512 masking; 03 IR &amp; Optimisation · loop vectorisation",
+   "extra": "<b>Lesson:</b> the instruction set architecture (ISA) layer decides the code's shape; every layer above it is shared across targets. <b>Link:</b> 07 ARM64/RISC-V/Z · SVE predication; 06 x86-64 · AVX-512 masking; 03 IR &amp; Optimisation · loop vectorisation",
    "source": "Mapping",
    "reverse": false
   },
@@ -5563,7 +5563,7 @@
     "inline-cache",
     "jit"
    ],
-   "front": "<b>JS, layer 05→06.</b> How does an <b>inline cache</b> turn <code>a.b</code> into machine code?",
+   "front": "<b>JavaScript (JS), layer 05→06.</b> How does an <b>inline cache</b> turn <code>a.b</code> into machine code?",
    "back": "Ignition bytecode (<code>GetNamedProperty a, [b], [slot]</code>) records (hidden class → offset) in its feedback slot. When monomorphic, TurboFan emits: compare <code>a</code>'s map with the cached one; on match load <code>[a + offset]</code>; on mismatch jump to a slow path or <b>deoptimise</b>.",
    "text": "",
    "image": "",
@@ -5601,12 +5601,12 @@
     "python",
     "blas"
    ],
-   "front": "<b>Python, NumPy path.</b> Which layers does <code>a @ b</code> cross before an AVX instruction runs?",
-   "back": "Python bytecode → NumPy's C <code>matmul</code> ufunc → a <b>BLAS</b> library (OpenBLAS/MKL) <code>sgemm</code> → hand-tuned, cache-blocked AVX-512/NEON micro-kernels, multithreaded. The interpreter is involved only at the top.",
+   "front": "<b>Python, NumPy path.</b> Which layers does <code>a @ b</code> cross before an Advanced Vector Extensions (AVX) instruction runs?",
+   "back": "Python bytecode → NumPy's C <code>matmul</code> ufunc → a <b>Basic Linear Algebra Subprograms (BLAS)</b> library (OpenBLAS/MKL) <code>sgemm</code> → hand-tuned, cache-blocked AVX-512/NEON micro-kernels, multithreaded. The interpreter is involved only at the top.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Lesson:</b> interpreted glue around compiled kernels is fine when each call does millions of FLOPs; it is fatal when it does ten. <b>Link:</b> 05 Runtimes · bytecode interpreter; 06 x86-64 · AVX; 09 Memory · cache blocking",
+   "extra": "<b>Lesson:</b> interpreted glue around compiled kernels is fine when each call does millions of floating-point operations (FLOPs); it is fatal when it does ten. <b>Link:</b> 05 Runtimes · bytecode interpreter; 06 x86-64 · AVX; 09 Memory · cache blocking",
    "source": "Mapping",
    "reverse": false
   },
@@ -5621,7 +5621,7 @@
     "cuda"
    ],
    "front": "<b>Python, PyTorch eager path.</b> What happens between <code>a @ b</code> on CUDA tensors and the GPU?",
-   "back": "ATen's <b>dispatcher</b> picks the CUDA/dtype kernel → <b>cuBLAS</b> is called → it launches a <b>precompiled SASS</b> kernel (shipped per compute capability, with PTX fallback) on a stream; Python returns before the GPU finishes.",
+   "back": "ATen's <b>dispatcher</b> picks the CUDA/dtype kernel → <b>cuBLAS</b> is called → it launches a <b>precompiled NVIDIA's native GPU assembly (SASS)</b> kernel (shipped per compute capability, with parallel thread execution (PTX) fallback) on a stream; Python returns before the GPU finishes.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -5640,11 +5640,11 @@
     "triton"
    ],
    "front": "<b>Python, compiled path.</b> How does <code>torch.compile</code> change the route to the GPU?",
-   "back": "Dynamo traces the Python into an FX graph → Inductor fuses elementwise ops and emits <b>Triton</b> kernels → Triton → LLVM → PTX → <code>ptxas</code> → SASS. Matmuls are autotuned among cuBLAS, Triton and CUTLASS candidates.",
+   "back": "Dynamo traces the Python into an FX graph → Inductor fuses elementwise ops and emits <b>Triton</b> kernels → Triton → LLVM → parallel thread execution (PTX) → <code>ptxas</code> → NVIDIA's native GPU assembly (SASS). Matmuls are autotuned among cuBLAS, Triton and CUTLASS candidates.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Vs eager:</b> one launch per op and every intermediate in HBM become fused kernels with intermediates in registers; the price is compile time and shape guards. <b>Link:</b> 11 Accelerators · Triton; fusion; 10 GPU · launch overhead &amp; CUDA graphs",
+   "extra": "<b>Vs eager:</b> one launch per op and every intermediate in high-bandwidth memory (HBM) become fused kernels with intermediates in registers; the price is compile time and shape guards. <b>Link:</b> 11 Accelerators · Triton; fusion; 10 GPU · launch overhead &amp; CUDA graphs",
    "source": "Mapping",
    "reverse": false
   },
@@ -5661,7 +5661,7 @@
     "bridge"
    ],
    "front": "<b>Python, TPU path.</b> Which layers does <code>a @ b</code> cross under <code>jax.jit</code> on a TPU?",
-   "back": "Tracing &rarr; jaxpr &rarr; HLO &rarr; XLA (layout tiles, fusion, static buffer assignment) &rarr; TPU backend &rarr; an instruction stream for the scalar unit that drives the MXU systolic array and the VPU. No hand-written kernel anywhere: the compiler owns every byte moved.",
+   "back": "Tracing &rarr; jaxpr &rarr; high-level operations (HLO) &rarr; XLA (layout tiles, fusion, static buffer assignment) &rarr; tensor processing unit (TPU) backend &rarr; an instruction stream for the scalar unit that drives the matrix multiply unit (MXU) systolic array and the vector processing unit (VPU). No hand-written kernel anywhere: the compiler owns every byte moved.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -5717,7 +5717,7 @@
     "security"
    ],
    "front": "Why is <b>Spectre</b> best described as a breach of the layer contract rather than a bug in one layer?",
-   "back": "The ISA never promised <i>timing</i>; speculation keeps architectural state correct yet leaves cache-state footprints. Software that assumed 'unexecuted code has no effect' relied on something no layer guaranteed.",
+   "back": "The instruction set architecture (ISA) never promised <i>timing</i>; speculation keeps architectural state correct yet leaves cache-state footprints. Software that assumed 'unexecuted code has no effect' relied on something no layer guaranteed.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -5739,7 +5739,7 @@
    "text": "Where abstractions leak: fast on sorted, slow on random data → {{c1::branch mispredict}} (08); a cliff at a size threshold → {{c2::cache misses}} (09); a 'working' program changes with -O2 → {{c3::UB}} (02/03); periodic stalls → {{c4::GC pauses}} (05); branchy GPU kernels at half speed → {{c5::warp divergence}} (10).",
    "image": "",
    "analogy": "",
-   "extra": "<b>Use:</b> each symptom names the layer to blame, so you profile with that layer's tool (perf counters, cache stats, UBSan, GC logs, Nsight). <b>Link:</b> 08 Microarchitecture · branch prediction; 09 Memory · cache lines; 05 Runtimes · GC pauses; 10 GPU · divergence",
+   "extra": "<b>Use:</b> each symptom names the layer to blame, so you profile with that layer's tool (perf counters, cache stats, undefined behaviour sanitizer (UBSan), garbage collection (GC) logs, Nsight). <b>Link:</b> 08 Microarchitecture · branch prediction; 09 Memory · cache lines; 05 Runtimes · GC pauses; 10 GPU · divergence",
    "source": "Mapping",
    "reverse": false
   },
@@ -5754,7 +5754,7 @@
     "gc"
    ],
    "front": "Which layer do you blame: a service is fast, then <b>stalls for tens of ms every few seconds</b>, with CPU idle during the stall?",
-   "back": "The <b>runtime</b> (05): a stop-the-world GC pause or JIT deoptimisation storm. Check GC logs before touching the algorithm or the hardware.",
+   "back": "The <b>runtime</b> (05): a stop-the-world garbage collection (GC) pause or just-in-time (JIT) deoptimisation storm. Check GC logs before touching the algorithm or the hardware.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -5773,7 +5773,7 @@
     "cache"
    ],
    "front": "Which layer do you blame: the same loop is <b>4× slower once the array passes a few MB</b>, with no change in instruction count?",
-   "back": "The <b>memory hierarchy</b> (09): the working set fell out of L2/L3 into DRAM. IPC drops, cache-miss counters rise; the fix is blocking or a smaller/denser data layout.",
+   "back": "The <b>memory hierarchy</b> (09): the working set fell out of L2/L3 into dynamic RAM (DRAM). Instructions per cycle (IPC) drops, cache-miss counters rise; the fix is blocking or a smaller/denser data layout.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -5793,11 +5793,11 @@
     "bridge"
    ],
    "front": "Which layer do you blame: a program is <b>30% slower after a compiler upgrade</b>, same source, same machine?",
-   "back": "The compiler layers (03/04): a changed inlining or vectorisation decision, different loop alignment or code layout, or a newly exploited piece of UB. Hardware and runtime did not change. Diff the two <code>-O2</code> outputs on Compiler Explorer and read <code>-Rpass-missed</code>.",
+   "back": "The compiler layers (03/04): a changed inlining or vectorisation decision, different loop alignment or code layout, or a newly exploited piece of undefined behaviour (UB). Hardware and runtime did not change. Diff the two <code>-O2</code> outputs on Compiler Explorer and read <code>-Rpass-missed</code>.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Pitfall:</b> 'slower' may be i-cache layout (09) rather than instruction count; compare instructions retired and IPC with <code>perf stat</code>. <b>Link:</b> 03 IR &amp; Optimisation · inlining heuristics; reading -O2 output; 08 Microarchitecture · Top-Down",
+   "extra": "<b>Pitfall:</b> 'slower' may be i-cache layout (09) rather than instruction count; compare instructions retired and instructions per cycle (IPC) with <code>perf stat</code>. <b>Link:</b> 03 IR &amp; Optimisation · inlining heuristics; reading -O2 output; 08 Microarchitecture · Top-Down",
    "source": "Mapping",
    "reverse": false
   },
@@ -5852,8 +5852,8 @@
     "contrast",
     "bridge"
    ],
-   "front": "Three <b>'intermediate instruction sets'</b>: bytecode (05), PTX (10), microcode (08). Who produces each, who consumes it, and on which side of the ISA does it sit?",
-   "back": "<ul><li><b>Bytecode:</b> compiler &rarr; interpreter/JIT; above the ISA, portable, visible to the program.</li><li><b>PTX:</b> compiler &rarr; <code>ptxas</code> or driver JIT &rarr; SASS; a virtual ISA above the real one.</li><li><b>Microcode:</b> CPU vendor &rarr; the core's sequencer; below the ISA, invisible to software.</li></ul>",
+   "front": "Three <b>'intermediate instruction sets'</b>: bytecode (05), parallel thread execution (PTX) (10), microcode (08). Who produces each, who consumes it, and on which side of the instruction set architecture (ISA) does it sit?",
+   "back": "<ul><li><b>Bytecode:</b> compiler &rarr; interpreter/JIT; above the ISA, portable, visible to the program.</li><li><b>PTX:</b> compiler &rarr; <code>ptxas</code> or driver just-in-time (JIT) &rarr; NVIDIA's native GPU assembly (SASS); a virtual ISA above the real one.</li><li><b>Microcode:</b> CPU vendor &rarr; the core's sequencer; below the ISA, invisible to software.</li></ul>",
    "text": "",
    "image": "",
    "analogy": "A recipe in the cookbook (bytecode), the recipe adapted for your oven (PTX), and the oven's own firmware (microcode).",
@@ -5872,8 +5872,8 @@
     "vmx",
     "sie"
    ],
-   "front": "<b>Under the stack: virtualisation.</b> How do Intel VMX, AMD SVM and IBM's SIE let a guest OS run unmodified on the real ISA?",
-   "back": "The CPU adds a <b>guest mode</b> (VMX non-root / SVM guest / SIE interpretive execution) in which sensitive instructions and events <b>exit</b> to the hypervisor, with guest state saved in a control block (VMCS / VMCB / state description). Nested page tables translate guest-physical to host-physical.",
+   "front": "<b>Under the stack: virtualisation.</b> How do Intel Virtual Machine Extensions (VMX), AMD Secure Virtual Machine (SVM) and IBM's start interpretive execution (SIE) let a guest OS run unmodified on the real instruction set architecture (ISA)?",
+   "back": "The CPU adds a <b>guest mode</b> (VMX non-root / SVM guest / SIE interpretive execution) in which sensitive instructions and events <b>exit</b> to the hypervisor, with guest state saved in a control block (virtual machine control structure (VMCS) / virtual machine control block (VMCB) / state description). Nested page tables translate guest-physical to host-physical.",
    "text": "",
    "image": "",
    "analogy": "A flight simulator cockpit: the pilot uses real controls, but certain switches quietly route to the instructor's console.",
@@ -5891,12 +5891,12 @@
     "confidential-computing",
     "security"
    ],
-   "front": "<b>Confidential computing</b> (AMD SEV-SNP, Intel TDX): what changes in the trust layering compared with ordinary virtualisation?",
+   "front": "<b>Confidential computing</b> (AMD SEV-SNP, Intel Trust Domain Extensions (TDX)): what changes in the trust layering compared with ordinary virtualisation?",
    "back": "The hypervisor still schedules the VM but is <b>untrusted</b>: guest memory is encrypted with per-VM keys held by hardware, integrity is checked, and <b>remote attestation</b> proves to the tenant which firmware/guest image is running.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Layer:</b> a hardware root of trust sits <i>below</i> the hypervisor; the ISA contract now includes 'the host cannot read this memory'. <b>Link:</b> Cloud Architecture · shared-responsibility model",
+   "extra": "<b>Layer:</b> a hardware root of trust sits <i>below</i> the hypervisor; the instruction set architecture (ISA) contract now includes 'the host cannot read this memory'. <b>Link:</b> Cloud Architecture · shared-responsibility model",
    "source": "Mapping",
    "reverse": false
   },

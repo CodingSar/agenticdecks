@@ -43,7 +43,7 @@
     "PlatformEngineering::GitOps"
    ],
    "front": "Why is \"manifests in Git + <code>kubectl apply</code> from CI\" not GitOps?",
-   "back": "Nothing reconciles continuously, so drift from manual changes is never detected or corrected. It is push-based CD.",
+   "back": "Nothing reconciles continuously, so drift from manual changes is never detected or corrected. It is push-based continuous delivery (CD).",
    "text": "",
    "image": "",
    "analogy": "A thermostat keeps measuring and correcting the temperature; a CI apply sets the heater once and walks away.",
@@ -59,7 +59,7 @@
     "PlatformEngineering::GitOps"
    ],
    "front": "GitOps secrets: <b>encrypted-in-Git</b> vs <b>reference-in-Git</b> — examples of each?",
-   "back": "<b>Encrypted in Git:</b> Sealed Secrets, SOPS.<br><b>Reference in Git:</b> External Secrets Operator, Secrets Store CSI driver — Git holds only a pointer to Vault / cloud KMS.",
+   "back": "<b>Encrypted in Git:</b> Sealed Secrets, SOPS.<br><b>Reference in Git:</b> External Secrets Operator, Secrets Store Container Storage Interface (CSI) driver — Git holds only a pointer to Vault / cloud key management service (KMS).",
    "text": "",
    "image": "",
    "analogy": "Encrypted-in-Git is a locked safe kept in the repo; reference-in-Git is a claim ticket pointing to a safe kept elsewhere.",
@@ -127,7 +127,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Tenancy pattern:</b> one AppProject per tenant, SSO groups mapped to project roles, cluster-scoped kinds (e.g. ClusterRole) denied → tenants self-serve within guardrails.",
+   "extra": "<b>Tenancy pattern:</b> one AppProject per tenant, single sign-on (SSO) groups mapped to project roles, cluster-scoped kinds (e.g. ClusterRole) denied → tenants self-serve within guardrails.",
    "source": "Argo CD",
    "reverse": false
   },
@@ -239,7 +239,7 @@
    "text": "ApplicationSet generators: {{c1::List}} (fixed items); {{c2::Cluster}} (registered clusters, filtered by labels); {{c3::Git}} (directories or files in a repo); {{c4::Matrix / Merge}} (combine other generators).",
    "image": "",
    "analogy": "",
-   "extra": "Also: SCM Provider, Pull Request, Cluster Decision Resource, Plugin.",
+   "extra": "Also: source control management (SCM) Provider, Pull Request, Cluster Decision Resource, Plugin.",
    "source": "Argo CD",
    "reverse": false
   },
@@ -316,7 +316,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Argo CD sync options: {{c1::<code>CreateNamespace=true</code>}} creates the destination namespace; {{c2::<code>ServerSideApply=true</code>}} applies via server-side apply (e.g. CRDs too large for the last-applied annotation); {{c3::<code>PruneLast=true</code>}} prunes only after everything else has synced.",
+   "text": "Argo CD sync options: {{c1::<code>CreateNamespace=true</code>}} creates the destination namespace; {{c2::<code>ServerSideApply=true</code>}} applies via server-side apply (e.g. custom resource definitions (CRDs) too large for the last-applied annotation); {{c3::<code>PruneLast=true</code>}} prunes only after everything else has synced.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -475,7 +475,7 @@
     "PlatformEngineering::GitOps::ArgoCD"
    ],
    "front": "What is Argo Rollouts?",
-   "back": "A separate controller with a <code>Rollout</code> CRD for blue-green and canary delivery: traffic shaping (Istio, NGINX, Gateway API...) plus automated analysis (AnalysisTemplates against Prometheus etc.).",
+   "back": "A separate controller with a <code>Rollout</code> custom resource definition (CRD) for blue-green and canary delivery: traffic shaping (Istio, NGINX, Gateway API...) plus automated analysis (AnalysisTemplates against Prometheus etc.).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -507,7 +507,7 @@
     "PlatformEngineering::GitOps::Flux"
    ],
    "front": "Which Flux source kinds exist?",
-   "back": "<code>GitRepository</code>, <code>OCIRepository</code>, <code>HelmRepository</code> (HTTP or OCI), <code>HelmChart</code>, <code>Bucket</code> (S3-compatible).",
+   "back": "<code>GitRepository</code>, <code>OCIRepository</code>, <code>HelmRepository</code> (HTTP or Open Container Initiative (OCI)), <code>HelmChart</code>, <code>Bucket</code> (S3-compatible).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -522,7 +522,7 @@
    "tags": [
     "PlatformEngineering::GitOps::Flux"
    ],
-   "front": "Flux <code>Kustomization</code> CR vs Kustomize's <code>kustomization.yaml</code>?",
+   "front": "Flux <code>Kustomization</code> custom resource (CR) vs Kustomize's <code>kustomization.yaml</code>?",
    "back": "<b>Flux Kustomization</b> (<code>kustomize.toolkit.fluxcd.io</code>): tells kustomize-controller which path from which source to build and apply, with interval, prune, health checks.<br><b>kustomization.yaml</b>: the Kustomize build config itself (Flux generates one if absent).",
    "text": "",
    "image": "",
@@ -539,7 +539,7 @@
     "PlatformEngineering::GitOps::Flux"
    ],
    "front": "Does a Flux <code>HelmRelease</code> create a real Helm release?",
-   "back": "Yes. helm-controller uses the Helm SDK: the release shows in <code>helm ls</code>, hooks run natively, <code>lookup</code> works.",
+   "back": "Yes. helm-controller uses the Helm software development kit (SDK): the release shows in <code>helm ls</code>, hooks run natively, <code>lookup</code> works.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -586,7 +586,7 @@
    "tags": [
     "PlatformEngineering::GitOps::Flux"
    ],
-   "front": "How do you order Flux reconciliations (e.g. CRDs and infra before apps)?",
+   "front": "How do you order Flux reconciliations (e.g. custom resource definitions (CRDs) and infra before apps)?",
    "back": "<code>spec.dependsOn</code> on Kustomizations/HelmReleases, combined with <code>wait: true</code> or <code>healthChecks</code>.",
    "text": "",
    "image": "",
@@ -619,7 +619,7 @@
     "PlatformEngineering::GitOps::Flux"
    ],
    "front": "How does Flux decrypt SOPS-encrypted secrets?",
-   "back": "Natively in kustomize-controller: <code>spec.decryption: {provider: sops, secretRef: {name: sops-age}}</code> (age/PGP keys) or cloud KMS via workload identity.",
+   "back": "Natively in kustomize-controller: <code>spec.decryption: {provider: sops, secretRef: {name: sops-age}}</code> (age/PGP keys) or cloud key management service (KMS) via workload identity.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -779,7 +779,7 @@
     "PlatformEngineering::GitOps::Flux"
    ],
    "front": "Argo CD vs Flux: architecture and UI?",
-   "back": "<b>Argo CD:</b> application-centric server with built-in UI, SSO and RBAC.<br><b>Flux:</b> a set of composable controllers, no built-in UI, tenancy via Kubernetes RBAC + impersonation.",
+   "back": "<b>Argo CD:</b> application-centric server with built-in UI, single sign-on (SSO) and RBAC.<br><b>Flux:</b> a set of composable controllers, no built-in UI, tenancy via Kubernetes RBAC + impersonation.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -811,7 +811,7 @@
     "PlatformEngineering::IaC"
    ],
    "front": "Declarative vs imperative Infrastructure as Code?",
-   "back": "<b>Declarative:</b> describe the end state (Terraform, CloudFormation, Kubernetes manifests); the tool computes the diff.<br><b>Imperative:</b> describe the steps (shell scripts, SDK scripts, many Ansible playbooks).",
+   "back": "<b>Declarative:</b> describe the end state (Terraform, CloudFormation, Kubernetes manifests); the tool computes the diff.<br><b>Imperative:</b> describe the steps (shell scripts, software development kit (SDK) scripts, many Ansible playbooks).",
    "text": "",
    "image": "",
    "analogy": "Declarative gives the taxi driver the address; imperative gives turn-by-turn directions.",
@@ -826,7 +826,7 @@
    "tags": [
     "PlatformEngineering::IaC"
    ],
-   "front": "What does idempotency mean in IaC, and why does it matter?",
+   "front": "What does idempotency mean in infrastructure as code (IaC), and why does it matter?",
    "back": "Applying the same configuration N times gives the same result as applying it once. It makes retries, re-runs and continuous reconciliation safe.",
    "text": "",
    "image": "",
@@ -875,7 +875,7 @@
     "PlatformEngineering::IaC"
    ],
    "front": "Where is the line between Terraform and GitOps in a Kubernetes platform?",
-   "back": "<b>Terraform:</b> cloud resources (networks, clusters, node pools, DBs, DNS, IAM) plus a one-time bootstrap of the GitOps agent.<br><b>GitOps (Argo/Flux + Helm):</b> everything inside the clusters.",
+   "back": "<b>Terraform:</b> cloud resources (networks, clusters, node pools, databases (DBs), DNS, identity and access management (IAM)) plus a one-time bootstrap of the GitOps agent.<br><b>GitOps (Argo/Flux + Helm):</b> everything inside the clusters.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -991,7 +991,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "azurerm: blob lease; gcs: lock object; HCP Terraform: built in.",
+   "extra": "azurerm: blob lease; gcs: lock object; HashiCorp Cloud Platform (HCP) Terraform: built in.",
    "source": "Terraform",
    "reverse": false
   },
@@ -1099,7 +1099,7 @@
     "PlatformEngineering::IaC::Terraform"
    ],
    "front": "When do you need an explicit <code>depends_on</code> in Terraform?",
-   "back": "Only for hidden dependencies not expressed via references (e.g. an IAM policy that must exist before an app uses it). Overuse makes plans less precise.",
+   "back": "Only for hidden dependencies not expressed via references (e.g. an identity and access management (IAM) policy that must exist before an app uses it). Overuse makes plans less precise.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1147,7 +1147,7 @@
     "PlatformEngineering::IaC::Terraform"
    ],
    "front": "Why does OpenTofu exist?",
-   "back": "HashiCorp moved Terraform to the Business Source License (BSL, restricts competing commercial use) in 2023; OpenTofu is the Linux Foundation fork that stays MPL 2.0 open source and largely drop-in compatible.",
+   "back": "HashiCorp moved Terraform to the Business Source License (BSL, restricts competing commercial use) in 2023; OpenTofu is the Linux Foundation fork that stays Mozilla Public License (MPL) 2.0 open source and largely drop-in compatible.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1163,7 +1163,7 @@
     "PlatformEngineering::IaC::Terraform"
    ],
    "front": "Pulumi vs Terraform in one line?",
-   "back": "Same desired-state engine idea, but infrastructure is written in general-purpose languages (TypeScript, Python, Go...) instead of HCL.",
+   "back": "Same desired-state engine idea, but infrastructure is written in general-purpose languages (TypeScript, Python, Go...) instead of HashiCorp Configuration Language (HCL).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1195,7 +1195,7 @@
     "PlatformEngineering::IaC::Ansible"
    ],
    "front": "What makes Ansible \"agentless\", and how does it reach targets?",
-   "back": "Nothing is installed on managed nodes: the control node pushes modules over <b>SSH</b> (Linux) or <b>WinRM</b> (Windows) and runs them there.",
+   "back": "Nothing is installed on managed nodes: the control node pushes modules over <b>SSH</b> (Linux) or <b>Windows Remote Management (WinRM)</b> (Windows) and runs them there.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1387,7 +1387,7 @@
     "PlatformEngineering::IaC::Crossplane"
    ],
    "front": "What is a Crossplane Provider?",
-   "back": "A package that adds CRDs + controllers for one external system (e.g. <code>provider-aws</code>), so Crossplane can manage that system's resources.",
+   "back": "A package that adds custom resource definitions (CRDs) + controllers for one external system (e.g. <code>provider-aws</code>), so Crossplane can manage that system's resources.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1419,7 +1419,7 @@
     "PlatformEngineering::IaC::Crossplane"
    ],
    "front": "What is a Crossplane Composite Resource (XR)?",
-   "back": "A higher-level resource that bundles several MRs into one logical unit (e.g. a \"Database\" = network + instance + firewall rule).",
+   "back": "A higher-level resource that bundles several managed resources (MRs) into one logical unit (e.g. a \"Database\" = network + instance + firewall rule).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1451,7 +1451,7 @@
     "PlatformEngineering::IaC::Crossplane"
    ],
    "front": "What is a Crossplane Composition?",
-   "back": "The implementation behind an XR's API: it defines which MRs an XR creates and how they are configured.",
+   "back": "The implementation behind an composite resource (XR)'s API: it defines which managed resources (MRs) an XR creates and how they are configured.",
    "text": "",
    "image": "",
    "analogy": "The XRD is the interface, the Composition is the class implementing it — swap Compositions (AWS vs Azure) without changing the API.",
@@ -1483,7 +1483,7 @@
     "PlatformEngineering::IaC::Crossplane"
    ],
    "front": "What is a Crossplane Package?",
-   "back": "An OCI image used to install and version Providers, Configurations and Functions, pulled from any OCI registry.",
+   "back": "An Open Container Initiative (OCI) image used to install and version Providers, Configurations and Functions, pulled from any OCI registry.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1499,7 +1499,7 @@
     "PlatformEngineering::IaC::Crossplane"
    ],
    "front": "What are Crossplane Composition Functions?",
-   "back": "Pipeline steps inside a Composition that compute the composed resources with real code (Go, Python, KCL...) instead of patch-and-transform YAML templates.",
+   "back": "Pipeline steps inside a Composition that compute the composed resources with real code (Go, Python, Kusion Configuration Language (KCL)...) instead of patch-and-transform YAML templates.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1515,7 +1515,7 @@
     "PlatformEngineering::IaC::Crossplane"
    ],
    "front": "What is the \"control plane abstraction\" pattern behind Crossplane and KRO (Kube Resource Orchestrator)?",
-   "back": "Using the Kubernetes API server — declarative reconciliation, RBAC, CRD extensibility — as a universal control plane for any resource (cloud infra, SaaS, other K8s objects), not just workloads.",
+   "back": "Using the Kubernetes API server — declarative reconciliation, RBAC, custom resource definition (CRD) extensibility — as a universal control plane for any resource (cloud infra, SaaS, other K8s objects), not just workloads.",
    "text": "",
    "image": "",
    "analogy": "The API server becomes the organisation's single order desk: every request, whatever it is for, goes through the same forms, permissions and follow-up process.",
@@ -1530,8 +1530,8 @@
    "tags": [
     "PlatformEngineering::PolicyAsCode"
    ],
-   "front": "Policy-as-code for IaC: which tool fits each job?",
-   "back": "<b>Conftest:</b> OPA Rego against config or plan JSON in CI.<br><b>Sentinel:</b> policy built into HCP Terraform/Enterprise.<br><b>Checkov / Trivy (ex-tfsec):</b> static misconfiguration scanners with built-in rules.",
+   "front": "Policy-as-code for infrastructure as code (IaC): which tool fits each job?",
+   "back": "<b>Conftest:</b> Open Policy Agent (OPA) Rego against config or plan JSON in CI.<br><b>Sentinel:</b> policy built into HashiCorp Cloud Platform (HCP) Terraform/Enterprise.<br><b>Checkov / Trivy (ex-tfsec):</b> static misconfiguration scanners with built-in rules.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1548,7 +1548,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Helm terms: a {{c1::chart}} is a package of templates + default values; a {{c2::release}} is an installed instance of a chart in a namespace; a {{c3::revision}} is a numbered version of a release (each upgrade/rollback adds one); a {{c4::repository}} publishes charts (HTTP index or OCI registry).",
+   "text": "Helm terms: a {{c1::chart}} is a package of templates + default values; a {{c2::release}} is an installed instance of a chart in a namespace; a {{c3::revision}} is a numbered version of a release (each upgrade/rollback adds one); a {{c4::repository}} publishes charts (HTTP index or Open Container Initiative (OCI) registry).",
    "image": "",
    "analogy": "Chart = recipe; release = a dish cooked from it in one kitchen (namespace); revision = each re-cook with changes.",
    "extra": "",
@@ -1658,7 +1658,7 @@
    "tags": [
     "PlatformEngineering::Helm"
    ],
-   "front": "How does Helm treat CRDs in the <code>crds/</code> directory?",
+   "front": "How does Helm treat custom resource definitions (CRDs) in the <code>crds/</code> directory?",
    "back": "Installed on first install only — never templated, upgraded or deleted. CRD upgrades must happen out of band (or ship CRDs as templates / a separate chart).",
    "text": "",
    "image": "",
@@ -1851,7 +1851,7 @@
     "PlatformEngineering::Helm"
    ],
    "front": "How do you keep a resource when a Helm release is uninstalled?",
-   "back": "Annotation <code>helm.sh/resource-policy: keep</code> (common on PVCs and Secrets); the resource is left orphaned.",
+   "back": "Annotation <code>helm.sh/resource-policy: keep</code> (common on persistent volume claims (PVCs) and Secrets); the resource is left orphaned.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1882,12 +1882,12 @@
    "tags": [
     "PlatformEngineering::Helm"
    ],
-   "front": "How are Helm charts distributed via OCI registries?",
+   "front": "How are Helm charts distributed via Open Container Initiative (OCI) registries?",
    "back": "<code>helm push chart.tgz oci://registry/ns</code> and <code>helm install x oci://registry/ns/chart --version 1.2.3</code> — no <code>helm repo add</code> needed.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "GA since Helm 3.8.",
+   "extra": "general availability (GA) since Helm 3.8.",
    "source": "Helm",
    "reverse": false
   },
@@ -1915,7 +1915,7 @@
     "PlatformEngineering::Helm"
    ],
    "front": "Headline changes in Helm 4?",
-   "back": "Server-side apply support, a WebAssembly-based plugin system and a modernised SDK/logging; Helm 3 charts (<code>apiVersion: v2</code>) still work.",
+   "back": "Server-side apply support, a WebAssembly-based plugin system and a modernised software development kit (SDK)/logging; Helm 3 charts (<code>apiVersion: v2</code>) still work.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1931,7 +1931,7 @@
     "PlatformEngineering::Operators"
    ],
    "front": "What is a Kubernetes Operator?",
-   "back": "A custom controller plus CRDs that encodes human operational knowledge (install, upgrade, backup, failover) for one application in a reconciliation loop.",
+   "back": "A custom controller plus custom resource definitions (CRDs) that encodes human operational knowledge (install, upgrade, backup, failover) for one application in a reconciliation loop.",
    "text": "",
    "image": "",
    "analogy": "A runbook turned into a robot SRE that watches the app around the clock and performs the steps itself.",
@@ -2010,7 +2010,7 @@
    "tags": [
     "PlatformEngineering::Operators"
    ],
-   "front": "What does enabling the <code>/status</code> subresource change on a CRD?",
+   "front": "What does enabling the <code>/status</code> subresource change on a custom resource definition (CRD)?",
    "back": "Status is written through a separate endpoint and spec updates ignore status — so RBAC can separate them, and <code>generation</code> bumps only on spec changes.",
    "text": "",
    "image": "",
@@ -2059,7 +2059,7 @@
     "PlatformEngineering::Operators"
    ],
    "front": "How does an Operator use finalizers to clean up external resources?",
-   "back": "A finalizer string blocks deletion: deleting sets <code>deletionTimestamp</code>, the controller does external cleanup (e.g. deletes the cloud DB), then removes its finalizer so the object goes away.",
+   "back": "A finalizer string blocks deletion: deleting sets <code>deletionTimestamp</code>, the controller does external cleanup (e.g. deletes the cloud database (DB)), then removes its finalizer so the object goes away.",
    "text": "",
    "image": "",
    "analogy": "A \"do not discard until signed off\" sticker: the object can't be thrown away until the controller removes its sticker after cleanup.",
@@ -2092,7 +2092,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Cascading deletion: {{c1::background}} (default) deletes the owner immediately and GC removes dependents afterwards; {{c2::foreground}} deletes dependents first; {{c3::orphan}} keeps dependents and strips their ownerReferences.",
+   "text": "Cascading deletion: {{c1::background}} (default) deletes the owner immediately and garbage collection (GC) removes dependents afterwards; {{c2::foreground}} deletes dependents first; {{c3::orphan}} keeps dependents and strips their ownerReferences.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -2154,7 +2154,7 @@
    "tags": [
     "PlatformEngineering::Operators"
    ],
-   "front": "CRD versioning: served vs storage version?",
+   "front": "custom resource definition (CRD) versioning: served vs storage version?",
    "back": "Many versions can be <code>served</code>; exactly one is the <code>storage</code> version. Non-trivial schema differences need a conversion webhook.",
    "text": "",
    "image": "",
@@ -2171,7 +2171,7 @@
     "PlatformEngineering::Operators"
    ],
    "front": "Which Custom Resource validation option supports cross-field rules without running a webhook?",
-   "back": "CEL rules in the CRD schema (<code>x-kubernetes-validations</code>), evaluated in the API server.",
+   "back": "Common Expression Language (CEL) rules in the custom resource definition (CRD) schema (<code>x-kubernetes-validations</code>), evaluated in the API server.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2188,7 +2188,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Operator tooling: {{c1::controller-runtime}} is the Go library (manager, client, cache); {{c2::Kubebuilder}} adds scaffolding and code generation on top; {{c3::Operator SDK}} builds on Kubebuilder and adds Helm/Ansible operators plus OLM bundle tooling.",
+   "text": "Operator tooling: {{c1::controller-runtime}} is the Go library (manager, client, cache); {{c2::Kubebuilder}} adds scaffolding and code generation on top; {{c3::Operator SDK}} builds on Kubebuilder and adds Helm/Ansible operators plus Operator Lifecycle Manager (OLM) bundle tooling.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -2315,7 +2315,7 @@
     "PlatformEngineering::IDP::PlatformAsProduct"
    ],
    "front": "What does a platform product manager do?",
-   "back": "Runs discovery with developers as customers, prioritises the roadmap (e.g. which golden path next) and tracks adoption, DORA metrics and developer satisfaction.",
+   "back": "Runs discovery with developers as customers, prioritises the roadmap (e.g. which golden path next) and tracks adoption, DevOps Research and Assessment (DORA) metrics and developer satisfaction.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2331,7 +2331,7 @@
     "PlatformEngineering::IDP::PlatformAsProduct"
    ],
    "front": "What does \"X-as-a-Service\" mean in platform engineering?",
-   "back": "Capabilities (DB provisioning, CI templates, observability setup) exposed as self-service APIs/UI that developers consume directly instead of filing tickets.",
+   "back": "Capabilities (database (DB) provisioning, CI templates, observability setup) exposed as self-service APIs/UI that developers consume directly instead of filing tickets.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2443,7 +2443,7 @@
     "PlatformEngineering::IDP::Backstage"
    ],
    "front": "What is Backstage?",
-   "back": "A CNCF open-source framework (from Spotify) for building an internal developer portal: one UI for the software catalog, docs, CI/CD status and scaffolding templates.",
+   "back": "A Cloud Native Computing Foundation (CNCF) open-source framework (from Spotify) for building an internal developer portal: one UI for the software catalog, docs, CI/CD status and scaffolding templates.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2539,7 +2539,7 @@
     "PlatformEngineering::IDP::Backstage"
    ],
    "front": "Why does a Backstage Component's <code>spec.owner</code> matter so much?",
-   "back": "It resolves to a Group/User (synced from GitHub teams, LDAP, Okta) and drives \"who do I ask\" and on-call/alert routing — a stale owner is worse than none.",
+   "back": "It resolves to a Group/User (synced from GitHub teams, Lightweight Directory Access Protocol (LDAP), Okta) and drives \"who do I ask\" and on-call/alert routing — a stale owner is worse than none.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2651,7 +2651,7 @@
     "PlatformEngineering::IDP::Score"
    ],
    "front": "What is Score?",
-   "back": "A CNCF Sandbox, platform-agnostic workload specification: a developer describes a workload's runtime needs once in <code>score.yaml</code>, independent of the target platform.",
+   "back": "A Cloud Native Computing Foundation (CNCF) Sandbox, platform-agnostic workload specification: a developer describes a workload's runtime needs once in <code>score.yaml</code>, independent of the target platform.",
    "text": "",
    "image": "",
    "analogy": "A universal plug spec: the workload declares the plug it needs, and each environment supplies a matching socket.",
@@ -2875,11 +2875,11 @@
     "PlatformEngineering::PolicyAsCode::Kyverno"
    ],
    "front": "Policy webhooks (Kyverno/Gatekeeper) vs <b>ValidatingAdmissionPolicy</b>: key difference?",
-   "back": "ValidatingAdmissionPolicy runs CEL expressions inside the API server — no webhook to operate or time out. Webhook engines add mutation, generation, image verification and richer logic.",
+   "back": "ValidatingAdmissionPolicy runs Common Expression Language (CEL) expressions inside the API server — no webhook to operate or time out. Webhook engines add mutation, generation, image verification and richer logic.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "ValidatingAdmissionPolicy is GA since Kubernetes 1.30.",
+   "extra": "ValidatingAdmissionPolicy is general availability (GA) since Kubernetes 1.30.",
    "source": "Policy as code · comparison",
    "reverse": false
   },
@@ -2906,8 +2906,8 @@
    "tags": [
     "PlatformEngineering::PolicyAsCode::OPA"
    ],
-   "front": "How does Gatekeeper relate to OPA?",
-   "back": "Gatekeeper wraps OPA as a Kubernetes validating (and mutating) admission controller and adds CRDs on top of raw Rego.",
+   "front": "How does Gatekeeper relate to Open Policy Agent (OPA)?",
+   "back": "Gatekeeper wraps OPA as a Kubernetes validating (and mutating) admission controller and adds custom resource definitions (CRDs) on top of raw Rego.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2939,7 +2939,7 @@
     "PlatformEngineering::PolicyAsCode::OPA"
    ],
    "front": "What does Gatekeeper's <code>Config</code> sync do?",
-   "back": "Replicates chosen cluster resources into OPA's cache so Rego can reference other objects (e.g. all Namespaces), not just the incoming request.",
+   "back": "Replicates chosen cluster resources into Open Policy Agent (OPA)'s cache so Rego can reference other objects (e.g. all Namespaces), not just the incoming request.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2970,7 +2970,7 @@
    "tags": [
     "PlatformEngineering::PolicyAsCode::OPA"
    ],
-   "front": "Kyverno vs OPA/Gatekeeper: when to choose which?",
+   "front": "Kyverno vs Open Policy Agent (OPA)/Gatekeeper: when to choose which?",
    "back": "<b>Kyverno:</b> YAML, Kubernetes-native, fastest for common K8s policies.<br><b>OPA/Gatekeeper:</b> Rego is more expressive and reusable beyond K8s (CI, APIs, Terraform), better for complex cross-resource logic.",
    "text": "",
    "image": "",
@@ -2987,7 +2987,7 @@
     "PlatformEngineering::SupplyChain::Sigstore"
    ],
    "front": "What is Sigstore?",
-   "back": "Open-source infrastructure for signing, verifying and recording provenance of artifacts (images, binaries, SBOMs) without long-lived private keys.",
+   "back": "Open-source infrastructure for signing, verifying and recording provenance of artifacts (images, binaries, software bill of materialss (SBOMs)) without long-lived private keys.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3003,7 +3003,7 @@
     "PlatformEngineering::SupplyChain::Sigstore"
    ],
    "front": "What is Cosign?",
-   "back": "Sigstore's client for signing and verifying OCI container images and other OCI artifacts.",
+   "back": "Sigstore's client for signing and verifying Open Container Initiative (OCI) container images and other OCI artifacts.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3019,7 +3019,7 @@
     "PlatformEngineering::SupplyChain::Sigstore"
    ],
    "front": "What is Sigstore <b>keyless signing</b>?",
-   "back": "Signing with a short-lived certificate from Fulcio bound to an OIDC identity (e.g. a GitHub Actions workflow), instead of a long-lived key the signer must guard.",
+   "back": "Signing with a short-lived certificate from Fulcio bound to an OpenID Connect (OIDC) identity (e.g. a GitHub Actions workflow), instead of a long-lived key the signer must guard.",
    "text": "",
    "image": "",
    "analogy": "Like a visitor badge issued at reception after an ID check and valid for minutes; the reception logbook (Rekor) proves you held it when you signed.",
@@ -3035,7 +3035,7 @@
     "PlatformEngineering::SupplyChain::Sigstore"
    ],
    "front": "What is Fulcio?",
-   "back": "Sigstore's certificate authority: issues minutes-long X.509 signing certificates bound to a verified OIDC identity.",
+   "back": "Sigstore's certificate authority: issues minutes-long X.509 signing certificates bound to a verified OpenID Connect (OIDC) identity.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3083,7 +3083,7 @@
     "PlatformEngineering::SupplyChain::Sigstore"
    ],
    "front": "Where does Cosign store an image signature?",
-   "back": "As a separate OCI artifact in the same registry, tagged from the image digest — the image manifest itself is unchanged.",
+   "back": "As a separate Open Container Initiative (OCI) artifact in the same registry, tagged from the image digest — the image manifest itself is unchanged.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3099,7 +3099,7 @@
     "PlatformEngineering::SupplyChain::Sigstore"
    ],
    "front": "Cosign <b>attestation</b> vs plain signature?",
-   "back": "A signature asserts \"signed by X\". An attestation (<code>cosign attest</code>) is a signed in-toto statement carrying structured data about the artifact, e.g. an SBOM or SLSA provenance.",
+   "back": "A signature asserts \"signed by X\". An attestation (<code>cosign attest</code>) is a signed in-toto statement carrying structured data about the artifact, e.g. an software bill of materials (SBOM) or Supply-chain Levels for Software Artifacts (SLSA) provenance.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3130,8 +3130,8 @@
    "tags": [
     "PlatformEngineering::SupplyChain::SBOM"
    ],
-   "front": "What are the two dominant SBOM formats?",
-   "back": "<b>SPDX</b> (Linux Foundation, license-compliance roots, ISO standard) and <b>CycloneDX</b> (OWASP, security roots).",
+   "front": "What are the two dominant software bill of materials (SBOM) formats?",
+   "back": "<b>Software Package Data Exchange (SPDX)</b> (Linux Foundation, license-compliance roots, ISO standard) and <b>CycloneDX</b> (Open Worldwide Application Security Project (OWASP), security roots).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3148,7 +3148,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Anchore tools: {{c1::Syft}} generates an SBOM from an image, filesystem or archive; {{c2::Grype}} matches SBOM components against vulnerability databases to report CVEs.",
+   "text": "Anchore tools: {{c1::Syft}} generates an software bill of materials (SBOM) from an image, filesystem or archive; {{c2::Grype}} matches SBOM components against vulnerability databases to report Common Vulnerabilities and Exposuress (CVEs).",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -3162,7 +3162,7 @@
    "tags": [
     "PlatformEngineering::SupplyChain::SBOM"
    ],
-   "front": "How is an SBOM attached to an image for later verification?",
+   "front": "How is an software bill of materials (SBOM) attached to an image for later verification?",
    "back": "As a Cosign attestation (<code>cosign attest --predicate sbom.json</code>), signed and stored next to the image so consumers can verify authenticity and content.",
    "text": "",
    "image": "",
@@ -3194,7 +3194,7 @@
    "tags": [
     "PlatformEngineering::SupplyChain::SLSA"
    ],
-   "front": "What is SLSA <b>provenance</b>?",
+   "front": "What is Supply-chain Levels for Software Artifacts (SLSA) <b>provenance</b>?",
    "back": "A signed in-toto attestation describing how an artifact was built: source repo/commit, builder identity, build steps and inputs.",
    "text": "",
    "image": "",
@@ -3226,7 +3226,7 @@
    "tags": [
     "PlatformEngineering::SupplyChain::SLSA"
    ],
-   "front": "How do SLSA v1.0 Build Levels differ?",
+   "front": "How do Supply-chain Levels for Software Artifacts (SLSA) v1.0 Build Levels differ?",
    "back": "From L1 (provenance exists) up to levels requiring a hardened, isolated build platform whose provenance the repo owner can't forge — rising trust in <i>how</i> provenance was produced.",
    "text": "",
    "image": "",
@@ -3242,7 +3242,7 @@
    "tags": [
     "PlatformEngineering::SupplyChain::SLSA"
    ],
-   "front": "Which format do SLSA provenance, SBOM attestations and scan results share?",
+   "front": "Which format do Supply-chain Levels for Software Artifacts (SLSA) provenance, software bill of materials (SBOM) attestations and scan results share?",
    "back": "The <b>in-toto attestation</b> format (subject + predicate envelope), so all can be signed and verified the same way.",
    "text": "",
    "image": "",
@@ -3275,7 +3275,7 @@
     "PlatformEngineering::SupplyChain::SecurityPlatform"
    ],
    "front": "Which capability areas does a Kubernetes security platform typically bundle?",
-   "back": "Vulnerability management (image/CVE scanning), configuration and compliance checks (CIS, Pod Security), network segmentation visibility, and runtime threat detection — one view across build, deploy and run.",
+   "back": "Vulnerability management (image/CVE scanning), configuration and compliance checks (Center for Internet Security (CIS), Pod Security), network segmentation visibility, and runtime threat detection — one view across build, deploy and run.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3311,7 +3311,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Examples:</b> Cilium Hubble service map, Red Hat ACS network graph, Kubescape network-policy generation.",
+   "extra": "<b>Examples:</b> Cilium Hubble service map, Red Hat Advanced Cluster Security (ACS) network graph, Kubescape network-policy generation.",
    "source": "Supply chain · Security platforms",
    "reverse": false
   },
@@ -3323,11 +3323,11 @@
     "PlatformEngineering::SupplyChain::SecurityPlatform"
    ],
    "front": "Full-lifecycle Kubernetes security platform vs admission policy engine (Kyverno/Gatekeeper): how do their scopes differ?",
-   "back": "A security platform spans build-time scanning, deploy-time admission (its own webhook) and runtime detection. Kyverno/Gatekeeper focus on admission-time policy. Both complement the SLSA→Cosign→verify chain.",
+   "back": "A security platform spans build-time scanning, deploy-time admission (its own webhook) and runtime detection. Kyverno/Gatekeeper focus on admission-time policy. Both complement the Supply-chain Levels for Software Artifacts (SLSA)→Cosign→verify chain.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Example:</b> StackRox / Red Hat ACS.",
+   "extra": "<b>Example:</b> StackRox / Red Hat Advanced Cluster Security (ACS).",
    "source": "Supply chain · Security platforms",
    "reverse": false
   },
@@ -3388,7 +3388,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Namespace isolation still shares: the {{c1::control plane}} (one API server + etcd — noisy tenants degrade all); {{c2::cluster-scoped resources}} (CRDs, webhooks, ClusterRoles — operator versions collide); {{c3::node kernels}} (a container escape lands next to other tenants); and {{c4::one Kubernetes version and upgrade window}}.",
+   "text": "Namespace isolation still shares: the {{c1::control plane}} (one API server + etcd — noisy tenants degrade all); {{c2::cluster-scoped resources}} (custom resource definitions (CRDs), webhooks, ClusterRoles — operator versions collide); {{c3::node kernels}} (a container escape lands next to other tenants); and {{c4::one Kubernetes version and upgrade window}}.",
    "image": "",
    "analogy": "Namespaces are office cubicles: your own desk, but shared air conditioning, lifts and one building maintenance schedule.",
    "extra": "",
@@ -3419,7 +3419,7 @@
     "PlatformEngineering::MultiTenancy"
    ],
    "front": "What does vCluster give tenants that namespaces don't?",
-   "back": "Their own API server: own CRDs, webhooks and versions without collisions, cluster-admin rights, fast and cheap creation (no cloud control-plane fee).",
+   "back": "Their own API server: own custom resource definitions (CRDs), webhooks and versions without collisions, cluster-admin rights, fast and cheap creation (no cloud control-plane fee).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3468,7 +3468,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Namespace-as-a-service tools: {{c1::Capsule}} groups namespaces into a Tenant CRD so tenant owners self-create namespaces within guardrails; {{c2::Hierarchical Namespace Controller (HNC)}} gives parent/child namespaces with policy propagation.",
+   "text": "Namespace-as-a-service tools: {{c1::Capsule}} groups namespaces into a Tenant custom resource definition (CRD) so tenant owners self-create namespaces within guardrails; {{c2::Hierarchical Namespace Controller (HNC)}} gives parent/child namespaces with policy propagation.",
    "image": "",
    "analogy": "",
    "extra": "<b>Value:</b> tenancy becomes self-service, with quotas, NetworkPolicies and RBAC templates propagated automatically.",
@@ -3498,7 +3498,7 @@
    "tags": [
     "PlatformEngineering::MultiTenancy"
    ],
-   "front": "Tenancy model for teams that need their own CRDs, operators or cluster-admin?",
+   "front": "Tenancy model for teams that need their own custom resource definitions (CRDs), operators or cluster-admin?",
    "back": "vCluster on shared host clusters.",
    "text": "",
    "image": "",
@@ -3596,7 +3596,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Reasons to run multiple clusters: {{c1::environment separation}} with independent upgrade cadence; {{c2::tenant/compliance isolation}}; {{c3::blast-radius control}} (bad rollout, poisoned CRD, control-plane outage stays local); {{c4::upgrade canarying}} in rings; {{c5::placement}} (on-prem + cloud).",
+   "text": "Reasons to run multiple clusters: {{c1::environment separation}} with independent upgrade cadence; {{c2::tenant/compliance isolation}}; {{c3::blast-radius control}} (bad rollout, poisoned custom resource definition (CRD), control-plane outage stays local); {{c4::upgrade canarying}} in rings; {{c5::placement}} (on-prem + cloud).",
    "image": "",
    "analogy": "",
    "extra": "<b>Anti-reason:</b> \"one cluster per microservice\" — cluster count must track automation maturity.",
@@ -3675,7 +3675,7 @@
     "PlatformEngineering::MultiCluster"
    ],
    "front": "Why do hybrid (on-prem + cloud) fleets lean toward pull-based GitOps?",
-   "back": "The WAN link is the least reliable component; pull agents keep reconciling the last known state when it fails.",
+   "back": "The wide area network (WAN) link is the least reliable component; pull agents keep reconciling the last known state when it fails.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3755,7 +3755,7 @@
     "PlatformEngineering::MultiCluster"
    ],
    "front": "Cilium ClusterMesh: what does it need, and why is it risky on managed Kubernetes?",
-   "back": "Pod-to-pod routing across clusters; needs non-overlapping pod CIDRs, mutual reachability and control of the CNI — which a managed service usually doesn't give you.",
+   "back": "Pod-to-pod routing across clusters; needs non-overlapping pod Classless Inter-Domain Routings (CIDRs), mutual reachability and control of the Container Network Interface (CNI) — which a managed service usually doesn't give you.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3771,7 +3771,7 @@
     "PlatformEngineering::MultiCluster"
    ],
    "front": "Istio multi-cluster: benefit and cost?",
-   "back": "mTLS and locality failover across clusters via east-west gateways, without CNI coupling — but operationally heavy.",
+   "back": "mTLS and locality failover across clusters via east-west gateways, without Container Network Interface (CNI) coupling — but operationally heavy.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3823,7 +3823,7 @@
    "text": "Answers to data gravity, in order of preference: {{c1::externalise state to managed services}} reachable from any cluster → {{c2::application-level replication}} between sites → {{c3::backup/restore}} as the fallback.",
    "image": "",
    "analogy": "",
-   "extra": "<b>Anti-pattern:</b> stretching etcd, storage or synchronous replication across a WAN/VPN.",
+   "extra": "<b>Anti-pattern:</b> stretching etcd, storage or synchronous replication across a wide area network (WAN)/VPN.",
    "source": "Multi-cluster",
    "reverse": false
   },

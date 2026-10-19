@@ -12,7 +12,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "A <b>process</b> is a running program instance with its own {{c1::virtual address space}}, at least one thread, a PID and open file descriptors.",
+   "text": "A <b>process</b> is a running program instance with its own {{c1::virtual address space}}, at least one thread, a process identifier (PID) and open file descriptors.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -27,7 +27,7 @@
     "Linux::process"
    ],
    "front": "What does <code>fork()</code> return in the parent vs the child?",
-   "back": "Child: <code>0</code>. Parent: the child's PID. Both continue from the instruction after <code>fork()</code>.",
+   "back": "Child: <code>0</code>. Parent: the child's process identifier (PID). Both continue from the instruction after <code>fork()</code>.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -43,7 +43,7 @@
     "Linux::process"
    ],
    "front": "What does <code>exec()</code> replace, and what does it keep?",
-   "back": "Replaces the memory image (code, data, stack) with a new program; keeps the same <b>PID</b>.",
+   "back": "Replaces the memory image (code, data, stack) with a new program; keeps the same <b>process identifier (PID)</b>.",
    "text": "",
    "image": "",
    "analogy": "fork() photocopies you; exec() gives the copy a new script to follow while it keeps the same name badge.",
@@ -75,7 +75,7 @@
     "Linux::process"
    ],
    "front": "What is a <b>zombie</b> process?",
-   "back": "A terminated process whose exit status the parent hasn't collected with <code>wait()</code>; its PID and exit code linger until reaped.",
+   "back": "A terminated process whose exit status the parent hasn't collected with <code>wait()</code>; its process identifier (PID) and exit code linger until reaped.",
    "text": "",
    "image": "",
    "analogy": "A guest who has checked out but whose room key nobody has collected, so the room still shows as occupied.",
@@ -91,7 +91,7 @@
     "Linux::process"
    ],
    "front": "What happens to an <b>orphan</b> process?",
-   "back": "It is re-parented, usually to PID 1 (init or the container's PID 1), which must reap it when it exits.",
+   "back": "It is re-parented, usually to process identifier (PID) 1 (init or the container's PID 1), which must reap it when it exits.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -111,7 +111,7 @@
    "text": "Linux process states: running (R), sleeping (S), {{c1::uninterruptible sleep (<code>D</code>)}}: usually blocked on I/O and ignores even SIGKILL; stopped (T); {{c2::zombie (<code>Z</code>)}}: exited, not yet reaped.",
    "image": "",
    "analogy": "",
-   "extra": "<b>In practice:</b> many <code>D</code> processes usually mean stuck storage (e.g. a hung NFS mount).",
+   "extra": "<b>In practice:</b> many <code>D</code> processes usually mean stuck storage (e.g. a hung network file system (NFS) mount).",
    "source": "Process & Scheduling",
    "reverse": false
   },
@@ -122,7 +122,7 @@
    "tags": [
     "Linux::process"
    ],
-   "front": "What two responsibilities make <b>PID 1</b> special?",
+   "front": "What two responsibilities make <b>process identifier (PID) 1</b> special?",
    "back": "<ul><li>It must reap orphaned/zombie children.</li><li>It gets no default signal actions: an unhandled SIGTERM is simply ignored.</li></ul>",
    "text": "",
    "image": "",
@@ -138,7 +138,7 @@
    "tags": [
     "Linux::process"
    ],
-   "front": "Why is running a plain application as PID 1 in a container a problem?",
+   "front": "Why is running a plain application as process identifier (PID) 1 in a container a problem?",
    "back": "It typically ignores SIGTERM (no handler), so pods only die at the grace-period SIGKILL, and it never reaps zombies.",
    "text": "",
    "image": "",
@@ -154,7 +154,7 @@
    "tags": [
     "Linux::process"
    ],
-   "front": "What does a minimal init (<code>tini</code>, <code>dumb-init</code>) do as a container's PID 1?",
+   "front": "What does a minimal init (<code>tini</code>, <code>dumb-init</code>) do as a container's process identifier (PID) 1?",
    "back": "Forwards signals to the app (running as its child) and reaps zombies.",
    "text": "",
    "image": "",
@@ -170,7 +170,7 @@
    "tags": [
     "Linux::process"
    ],
-   "front": "How does <b>CFS</b> pick the next task to run?",
+   "front": "How does <b>Completely Fair Scheduler (CFS)</b> pick the next task to run?",
    "back": "It picks the task with the lowest <b>vruntime</b> (virtual runtime): the leftmost node of a red-black tree of runnable tasks, i.e. the least-served task.",
    "text": "",
    "image": "",
@@ -186,7 +186,7 @@
    "tags": [
     "Linux::process"
    ],
-   "front": "What replaced CFS as Linux's default scheduler (kernel 6.6), and what does it add?",
+   "front": "What replaced Completely Fair Scheduler (CFS) as Linux's default scheduler (kernel 6.6), and what does it add?",
    "back": "<b>EEVDF</b> (Earliest Eligible Virtual Deadline First): adds eligibility and virtual deadlines to fair sharing, cutting latency for interactive tasks.",
    "text": "",
    "image": "",
@@ -203,7 +203,7 @@
     "Linux::process"
    ],
    "front": "Process vs thread: what do threads share and what is private?",
-   "back": "Threads of one process share the address space and file descriptors; each has its own stack, registers and TID.",
+   "back": "Threads of one process share the address space and file descriptors; each has its own stack, registers and thread identifier (TID).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -251,7 +251,7 @@
     "Linux::process"
    ],
    "front": "What is a context switch, and why is it costly?",
-   "back": "The kernel saves one task's CPU state (registers, PC, SP) and restores another's. Cost: the save/restore plus cache and TLB pollution.",
+   "back": "The kernel saves one task's CPU state (registers, program counter (PC), stack pointer (SP)) and restores another's. Cost: the save/restore plus cache and translation lookaside buffer (TLB) pollution.",
    "text": "",
    "image": "",
    "analogy": "A chef juggling orders: every switch means putting one recipe away, clearing the counter and laying out another.",
@@ -299,7 +299,7 @@
     "Linux::memory"
    ],
    "front": "What is a page table?",
-   "back": "A per-process kernel structure mapping virtual page numbers to physical frames; the MMU walks it on memory access.",
+   "back": "A per-process kernel structure mapping virtual page numbers to physical frames; the memory management unit (MMU) walks it on memory access.",
    "text": "",
    "image": "",
    "analogy": "The index at the back of a book, translating a topic (virtual page) to the actual page number (physical frame).",
@@ -314,7 +314,7 @@
    "tags": [
     "Linux::memory"
    ],
-   "front": "What is the TLB, and what happens on a TLB miss?",
+   "front": "What is the translation lookaside buffer (TLB), and what happens on a TLB miss?",
    "back": "A small CPU cache of recent virtual→physical translations. A miss forces a (slow) page-table walk.",
    "text": "",
    "image": "",
@@ -346,12 +346,12 @@
    "tags": [
     "Linux::memory"
    ],
-   "front": "How does the OOM killer choose a victim, and how can you influence it?",
+   "front": "How does the out of memory (OOM) killer choose a victim, and how can you influence it?",
    "back": "It kills the process with the highest badness score (mostly memory use); bias it via <code>/proc/[pid]/oom_score_adj</code> (−1000 = never kill).",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Kubernetes</b> sets <code>oom_score_adj</code> by QoS class: Guaranteed is protected most, BestEffort is killed first.",
+   "extra": "<b>Kubernetes</b> sets <code>oom_score_adj</code> by quality of service (QoS) class: Guaranteed is protected most, BestEffort is killed first.",
    "source": "Memory Management",
    "reverse": false
   },
@@ -379,7 +379,7 @@
     "Linux::memory"
    ],
    "front": "cgroup v2 <code>memory.high</code> vs <code>memory.max</code>?",
-   "back": "<b>high</b>: soft limit; the kernel throttles and reclaims aggressively, no kill. <b>max</b>: hard ceiling; exceeding it triggers the OOM killer.",
+   "back": "<b>high</b>: soft limit; the kernel throttles and reclaims aggressively, no kill. <b>max</b>: hard ceiling; exceeding it triggers the out of memory (OOM) killer.",
    "text": "",
    "image": "",
    "analogy": "memory.high is the rumble strip on the road's edge; memory.max is the guard rail.",
@@ -395,7 +395,7 @@
     "Linux::memory"
    ],
    "front": "What is memory overcommit, and how does it fail?",
-   "back": "The kernel allows allocations beyond physical memory, betting not all pages get touched. Failure arrives later as an OOM kill, not as <code>malloc()</code> failing.",
+   "back": "The kernel allows allocations beyond physical memory, betting not all pages get touched. Failure arrives later as an out of memory (OOM) kill, not as <code>malloc()</code> failing.",
    "text": "",
    "image": "",
    "analogy": "Airline overbooking: fine until everyone actually shows up, then someone gets bumped.",
@@ -410,12 +410,12 @@
    "tags": [
     "Linux::memory"
    ],
-   "front": "What is a VMA, and where do you see a process's VMAs?",
+   "front": "What is a virtual memory area (VMA), and where do you see a process's VMAs?",
    "back": "A contiguous virtual-memory region with uniform permissions and backing (file or anonymous). Listed in <code>/proc/[pid]/maps</code>.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<code>maps</code> is useful for debugging memory layout, ASLR and what libraries are mapped.",
+   "extra": "<code>maps</code> is useful for debugging memory layout, address space layout randomization (ASLR) and what libraries are mapped.",
    "source": "Memory Management",
    "reverse": false
   },
@@ -443,7 +443,7 @@
     "Linux::memory"
    ],
    "front": "Stack vs heap memory?",
-   "back": "<b>Stack:</b> per-thread call frames, grows/shrinks automatically. <b>Heap:</b> process-wide dynamic allocations, freed explicitly or by a GC.",
+   "back": "<b>Stack:</b> per-thread call frames, grows/shrinks automatically. <b>Heap:</b> process-wide dynamic allocations, freed explicitly or by a garbage collector (GC).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -475,7 +475,7 @@
     "Linux::namespaces"
    ],
    "front": "What is a Linux namespace?",
-   "back": "A kernel feature giving a process its own isolated instance of a global resource (PIDs, network stack, mounts, …). It is the core isolation mechanism behind containers.",
+   "back": "A kernel feature giving a process its own isolated instance of a global resource (process identifiers (PIDs), network stack, mounts, …). It is the core isolation mechanism behind containers.",
    "text": "",
    "image": "",
    "analogy": "Rooms with one-way mirrors in a shared building: each room sees only its own furniture, but the building (kernel) is one.",
@@ -491,7 +491,7 @@
     "Linux::namespaces"
    ],
    "front": "Mnemonic for the 8 Linux namespace types?",
-   "back": "<b>PUMIC NUT</b>: PID, UTS, Mount, IPC, Cgroup, Net, User, Time.",
+   "back": "<b>PUMIC NUT</b>: process identifier (PID), Unix time-sharing (UTS), Mount, inter-process communication (IPC), Cgroup, Net, User, Time.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -506,7 +506,7 @@
    "tags": [
     "Linux::namespaces"
    ],
-   "front": "What does a PID namespace isolate?",
+   "front": "What does a process identifier (PID) namespace isolate?",
    "back": "The process ID space: members see only processes in it (and descendants), numbered from 1. The first process becomes that namespace's PID 1.",
    "text": "",
    "image": "",
@@ -554,8 +554,8 @@
    "tags": [
     "Linux::namespaces"
    ],
-   "front": "What does a UTS namespace isolate?",
-   "back": "Hostname and NIS domain name (from <code>uname()</code>), so a container can have its own hostname.",
+   "front": "What does an Unix time-sharing (UTS) namespace isolate?",
+   "back": "Hostname and Network Information Service (NIS) domain name (from <code>uname()</code>), so a container can have its own hostname.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -570,8 +570,8 @@
    "tags": [
     "Linux::namespaces"
    ],
-   "front": "What does an IPC namespace isolate?",
-   "back": "System V IPC objects (message queues, semaphores, shared memory) and POSIX message queues.",
+   "front": "What does an inter-process communication (IPC) namespace isolate?",
+   "back": "System V IPC objects (message queues, semaphores, shared memory) and Portable Operating System Interface (POSIX) message queues.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -587,7 +587,7 @@
     "Linux::namespaces"
    ],
    "front": "What does a user namespace do, and why is it central to rootless containers?",
-   "back": "It remaps UIDs/GIDs: UID 0 inside maps to an unprivileged host UID. The container looks root inside without holding real host root.",
+   "back": "It remaps user identifiers (UIDs)/group identifiers (GIDs): UID 0 inside maps to an unprivileged host UID. The container looks root inside without holding real host root.",
    "text": "",
    "image": "",
    "analogy": "Being captain of your own boat: full authority on deck, none in the harbour master's office.",
@@ -619,7 +619,7 @@
     "Linux::namespaces"
    ],
    "front": "What problem does the time namespace solve?",
-   "back": "Per-namespace offsets for <code>CLOCK_MONOTONIC</code>/<code>CLOCK_BOOTTIME</code>, so a checkpointed/migrated container (CRIU) keeps consistent clocks.",
+   "back": "Per-namespace offsets for <code>CLOCK_MONOTONIC</code>/<code>CLOCK_BOOTTIME</code>, so a checkpointed/migrated container (checkpoint/restore in userspace (CRIU)) keeps consistent clocks.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -651,7 +651,7 @@
     "Linux::namespaces"
    ],
    "front": "How do you run <code>tcpdump</code> inside a container's network namespace from the host, with no tools in the image?",
-   "back": "<code>nsenter -t &lt;pid&gt; -n tcpdump …</code>: joins the target PID's network namespace via <code>setns()</code>.",
+   "back": "<code>nsenter -t &lt;pid&gt; -n tcpdump …</code>: joins the target process identifier (PID)'s network namespace via <code>setns()</code>.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -683,7 +683,7 @@
     "Linux::namespaces"
    ],
    "front": "In namespace terms, what is a container?",
-   "back": "An ordinary process placed in its own PID, net, mount, UTS and IPC (usually also cgroup/user) namespaces, still on the host's shared kernel.",
+   "back": "An ordinary process placed in its own process identifier (PID), net, mount, Unix time-sharing (UTS) and inter-process communication (IPC) (usually also cgroup/user) namespaces, still on the host's shared kernel.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -747,7 +747,7 @@
     "Linux::namespaces"
    ],
    "front": "What does <code>hostPID: true</code> do at the namespace level?",
-   "back": "The pod shares the node's PID namespace and can see (and, with privileges, signal or ptrace) every host process.",
+   "back": "The pod shares the node's process identifier (PID) namespace and can see (and, with privileges, signal or ptrace) every host process.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -763,7 +763,7 @@
     "Linux::namespaces"
    ],
    "front": "What does <code>hostUsers: false</code> do for a pod?",
-   "back": "Gives the pod its own user namespace: root in the container maps to an unprivileged host UID, shrinking breakout impact.",
+   "back": "Gives the pod its own user namespace: root in the container maps to an unprivileged host user identifier (UID), shrinking breakout impact.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -778,7 +778,7 @@
    "tags": [
     "Linux::namespaces"
    ],
-   "front": "What happens when PID 1 of a PID namespace exits?",
+   "front": "What happens when process identifier (PID) 1 of a PID namespace exits?",
    "back": "The kernel SIGKILLs every other process in that namespace, which is why the main process exiting ends the whole container.",
    "text": "",
    "image": "",
@@ -843,7 +843,7 @@
     "Linux::cgroups"
    ],
    "front": "Which cgroup version should current Kubernetes nodes run?",
-   "back": "<b>cgroup v2</b> (default on RHEL 9+, Ubuntu 22.04+); Kubernetes treats v1 as legacy (maintenance mode).",
+   "back": "<b>cgroup v2</b> (default on Red Hat Enterprise Linux (RHEL) 9+, Ubuntu 22.04+); Kubernetes treats v1 as legacy (maintenance mode).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -891,7 +891,7 @@
     "Linux::cgroups"
    ],
    "front": "What does the cgroup <code>pids</code> controller protect against?",
-   "back": "Fork bombs: <code>pids.max</code> caps processes/threads so one container can't exhaust the host's PID table.",
+   "back": "Fork bombs: <code>pids.max</code> caps processes/threads so one container can't exhaust the host's process identifier (PID) table.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -938,8 +938,8 @@
    "tags": [
     "Linux::cgroups"
    ],
-   "front": "What does writing a PID to <code>cgroup.procs</code> do?",
-   "back": "Moves that process into the cgroup (<code>cgroup.procs</code> lists member PIDs; <code>cgroup.threads</code> lists TIDs).",
+   "front": "What does writing a process identifier (PID) to <code>cgroup.procs</code> do?",
+   "back": "Moves that process into the cgroup (<code>cgroup.procs</code> lists member PIDs; <code>cgroup.threads</code> lists thread identifiers (TIDs)).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -955,7 +955,7 @@
     "Linux::cgroups"
    ],
    "front": "What does the cgroup v2 <code>io</code> controller limit?",
-   "back": "Per-device block I/O bandwidth and IOPS (<code>io.max</code>), so one container can't starve others' disk access.",
+   "back": "Per-device block I/O bandwidth and input/output operations per second (IOPS) (<code>io.max</code>), so one container can't starve others' disk access.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1067,7 +1067,7 @@
     "Linux::capabilities"
    ],
    "front": "Why is <code>CAP_SYS_PTRACE</code> plus <code>hostPID: true</code> dangerous?",
-   "back": "ptrace lets you inspect and inject into processes; with the host PID namespace, the container can attach to and manipulate host processes.",
+   "back": "ptrace lets you inspect and inject into processes; with the host process identifier (PID) namespace, the container can attach to and manipulate host processes.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1130,7 +1130,7 @@
    "tags": [
     "Linux::capabilities"
    ],
-   "front": "Does a container running as UID 0 get root's full capability set by default?",
+   "front": "Does a container running as user identifier (UID) 0 get root's full capability set by default?",
    "back": "No. Runtimes drop many (e.g. <code>CAP_SYS_ADMIN</code>, <code>CAP_SYS_MODULE</code>, <code>CAP_NET_ADMIN</code>) and keep a small set (e.g. <code>CAP_CHOWN</code>, <code>CAP_NET_BIND_SERVICE</code>).",
    "text": "",
    "image": "",
@@ -1147,7 +1147,7 @@
     "Linux::capabilities"
    ],
    "front": "What does <code>--privileged</code> / <code>privileged: true</code> do, and why is it roughly host root?",
-   "back": "All capabilities, no seccomp or AppArmor/SELinux confinement, and access to host devices. It removes nearly every kernel barrier, even if namespaces remain.",
+   "back": "All capabilities, no seccomp or AppArmor/Security-Enhanced Linux (SELinux) confinement, and access to host devices. It removes nearly every kernel barrier, even if namespaces remain.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1211,7 +1211,7 @@
     "Linux::capabilities"
    ],
    "front": "Why is dropping capabilities more effective than only <code>runAsNonRoot</code>?",
-   "back": "<code>runAsNonRoot</code> only changes the UID; a non-root process can still hold dangerous capabilities unless they are dropped.",
+   "back": "<code>runAsNonRoot</code> only changes the user identifier (UID); a non-root process can still hold dangerous capabilities unless they are dropped.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1226,7 +1226,7 @@
    "tags": [
     "Linux::capabilities"
    ],
-   "front": "Why isn't UID 0 inside a container automatically host root?",
+   "front": "Why isn't user identifier (UID) 0 inside a container automatically host root?",
    "back": "Privilege is cut by dropped capabilities, and identity can be remapped by a user namespace, so \"root\" is constrained on both axes.",
    "text": "",
    "image": "",
@@ -1243,7 +1243,7 @@
     "Linux::capabilities"
    ],
    "front": "Why aren't capabilities alone a complete sandbox?",
-   "back": "Single capabilities like <code>CAP_SYS_ADMIN</code> or <code>CAP_SYS_MODULE</code> enable escape by themselves; combine with namespaces, cgroups, seccomp and an LSM.",
+   "back": "Single capabilities like <code>CAP_SYS_ADMIN</code> or <code>CAP_SYS_MODULE</code> enable escape by themselves; combine with namespaces, cgroups, seccomp and a Linux Security Module (LSM).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1275,7 +1275,7 @@
     "Linux::lsm"
    ],
    "front": "What is the Linux Security Module (LSM) framework?",
-   "back": "Kernel hooks at security-relevant operations (open file, create socket, …) where a pluggable MAC module (SELinux, AppArmor, BPF LSM) allows or denies.",
+   "back": "Kernel hooks at security-relevant operations (open file, create socket, …) where a pluggable mandatory access control (MAC) module (Security-Enhanced Linux (SELinux), AppArmor, Berkeley Packet Filter (BPF) LSM) allows or denies.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1290,7 +1290,7 @@
    "tags": [
     "Linux::lsm"
    ],
-   "front": "How does SELinux decide whether to allow an operation?",
+   "front": "How does Security-Enhanced Linux (SELinux) decide whether to allow an operation?",
    "back": "It compares the subject's and object's labels (<code>user:role:type:level</code>) against policy, mainly by <b>type enforcement</b>.",
    "text": "",
    "image": "",
@@ -1308,7 +1308,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "SELinux modes: {{c1::enforcing}} blocks and logs violations; {{c2::permissive}} only logs them (for policy development); disabled is off.",
+   "text": "Security-Enhanced Linux (SELinux) modes: {{c1::enforcing}} blocks and logs violations; {{c2::permissive}} only logs them (for policy development); disabled is off.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -1322,7 +1322,7 @@
    "tags": [
     "Linux::lsm"
    ],
-   "front": "What is AppArmor's equivalent of SELinux permissive mode?",
+   "front": "What is AppArmor's equivalent of Security-Enhanced Linux (SELinux) permissive mode?",
    "back": "<b>Complain mode</b>: profile violations are logged but not blocked.",
    "text": "",
    "image": "",
@@ -1338,7 +1338,7 @@
    "tags": [
     "Linux::lsm"
    ],
-   "front": "AppArmor vs SELinux: confinement model?",
+   "front": "AppArmor vs Security-Enhanced Linux (SELinux): confinement model?",
    "back": "<b>AppArmor:</b> path-based profiles per program. <b>SELinux:</b> label-based; every process and object has a context, regardless of path.",
    "text": "",
    "image": "",
@@ -1356,7 +1356,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Default MAC by distro: RHEL/Fedora use {{c1::SELinux}}; Debian/Ubuntu use {{c2::AppArmor}}.",
+   "text": "Default mandatory access control (MAC) by distro: Red Hat Enterprise Linux (RHEL)/Fedora use {{c1::SELinux}}; Debian/Ubuntu use {{c2::AppArmor}}.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -1370,7 +1370,7 @@
    "tags": [
     "Linux::lsm"
    ],
-   "front": "Why does SELinux use MCS categories for containers?",
+   "front": "Why does Security-Enhanced Linux (SELinux) use multi-category security (MCS) categories for containers?",
    "back": "All containers share one type (e.g. <code>container_t</code>); a unique MCS category pair per container stops one from accessing another's files.",
    "text": "",
    "image": "",
@@ -1386,7 +1386,7 @@
    "tags": [
     "Linux::lsm"
    ],
-   "front": "Which Kubernetes securityContext field sets SELinux labels?",
+   "front": "Which Kubernetes securityContext field sets Security-Enhanced Linux (SELinux) labels?",
    "back": "<code>seLinuxOptions</code> (user, role, type, level).",
    "text": "",
    "image": "",
@@ -1402,8 +1402,8 @@
    "tags": [
     "Linux::lsm"
    ],
-   "front": "What is BPF LSM?",
-   "back": "An LSM backend letting eBPF programs implement LSM hooks directly: programmable security policy without SELinux/AppArmor policy languages.",
+   "front": "What is Berkeley Packet Filter (BPF) Linux Security Module (LSM)?",
+   "back": "An LSM backend letting extended Berkeley Packet Filter (eBPF) programs implement LSM hooks directly: programmable security policy without Security-Enhanced Linux (SELinux)/AppArmor policy languages.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1418,8 +1418,8 @@
    "tags": [
     "Linux::lsm"
    ],
-   "front": "Can seccomp and an LSM (SELinux/AppArmor) run together?",
-   "back": "Yes: seccomp isn't an LSM and stacks with any. Minor LSMs can also stack; SELinux and AppArmor are usually exclusive as the main MAC.",
+   "front": "Can seccomp and a Linux Security Module (LSM) (Security-Enhanced Linux (SELinux)/AppArmor) run together?",
+   "back": "Yes: seccomp isn't an LSM and stacks with any. Minor LSMs can also stack; SELinux and AppArmor are usually exclusive as the main mandatory access control (MAC).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1435,7 +1435,7 @@
     "Linux::lsm"
    ],
    "front": "What do <code>sestatus</code> and <code>aa-status</code> show?",
-   "back": "<code>sestatus</code>: SELinux mode and policy. <code>aa-status</code>: loaded AppArmor profiles and enforce/complain state.",
+   "back": "<code>sestatus</code>: Security-Enhanced Linux (SELinux) mode and policy. <code>aa-status</code>: loaded AppArmor profiles and enforce/complain state.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1467,7 +1467,7 @@
     "Linux::lsm"
    ],
    "front": "seccomp strict mode vs filter (seccomp-bpf) mode?",
-   "back": "<b>Strict:</b> only <code>read</code>, <code>write</code>, <code>exit</code>, <code>sigreturn</code>. <b>Filter:</b> a BPF program decides per syscall.",
+   "back": "<b>Strict:</b> only <code>read</code>, <code>write</code>, <code>exit</code>, <code>sigreturn</code>. <b>Filter:</b> a Berkeley Packet Filter (BPF) program decides per syscall.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1594,7 +1594,7 @@
    "tags": [
     "Linux::ebpf"
    ],
-   "front": "What is eBPF?",
+   "front": "What is extended Berkeley Packet Filter (eBPF)?",
    "back": "Verified, sandboxed programs run inside the kernel at hook points, extending observability, networking and security without kernel modules.",
    "text": "",
    "image": "",
@@ -1610,7 +1610,7 @@
    "tags": [
     "Linux::ebpf"
    ],
-   "front": "What does the eBPF verifier check, and why?",
+   "front": "What does the extended Berkeley Packet Filter (eBPF) verifier check, and why?",
    "back": "Before loading: termination, valid memory access and pointer safety, so buggy or untrusted programs can't crash or exploit the kernel.",
    "text": "",
    "image": "",
@@ -1626,7 +1626,7 @@
    "tags": [
     "Linux::ebpf"
    ],
-   "front": "Why couldn't early eBPF programs contain unbounded loops?",
+   "front": "Why couldn't early extended Berkeley Packet Filter (eBPF) programs contain unbounded loops?",
    "back": "The verifier must prove termination; unbounded loops can't be proven. Loops with provable bounds are now allowed.",
    "text": "",
    "image": "",
@@ -1642,8 +1642,8 @@
    "tags": [
     "Linux::ebpf"
    ],
-   "front": "What is a BPF map?",
-   "back": "A kernel key-value structure (hash, array, ring buffer, …) for eBPF state and data exchange with user space.",
+   "front": "What is a Berkeley Packet Filter (BPF) map?",
+   "back": "A kernel key-value structure (hash, array, ring buffer, …) for extended Berkeley Packet Filter (eBPF) state and data exchange with user space.",
    "text": "",
    "image": "",
    "analogy": "A shared whiteboard between the kernel program and its user-space partner.",
@@ -1660,7 +1660,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "eBPF hook types: {{c1::kprobes/uprobes}}: dynamic hooks on almost any kernel/user function; {{c2::tracepoints}}: stable static kernel instrumentation; XDP and TC: network path; LSM and cgroup hooks: security and per-cgroup events.",
+   "text": "extended Berkeley Packet Filter (eBPF) hook types: {{c1::kprobes/uprobes}}: dynamic hooks on almost any kernel/user function; {{c2::tracepoints}}: stable static kernel instrumentation; express data path (XDP) and traffic control (TC): network path; Linux Security Module (LSM) and cgroup hooks: security and per-cgroup events.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -1674,8 +1674,8 @@
    "tags": [
     "Linux::ebpf"
    ],
-   "front": "What is XDP?",
-   "back": "An eBPF hook at the earliest receive point, before the kernel allocates its packet buffer (<code>sk_buff</code>): very fast filtering, load balancing, DDoS drop.",
+   "front": "What is express data path (XDP)?",
+   "back": "An extended Berkeley Packet Filter (eBPF) hook at the earliest receive point, before the kernel allocates its packet buffer (<code>sk_buff</code>): very fast filtering, load balancing, distributed denial of service (DDoS) drop.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1690,7 +1690,7 @@
    "tags": [
     "Linux::ebpf"
    ],
-   "front": "TC eBPF hook vs XDP?",
+   "front": "traffic control (TC) extended Berkeley Packet Filter (eBPF) hook vs express data path (XDP)?",
    "back": "TC runs later, on full packet structures: more context and handles <b>egress</b> too, but slower than XDP (ingress only).",
    "text": "",
    "image": "",
@@ -1706,8 +1706,8 @@
    "tags": [
     "Linux::ebpf"
    ],
-   "front": "What is eBPF CO-RE?",
-   "back": "Compile Once, Run Everywhere: BTF type info lets the loader fix up struct offsets per kernel, so one binary runs across versions.",
+   "front": "What is extended Berkeley Packet Filter (eBPF) CO-RE?",
+   "back": "Compile Once, Run Everywhere: BPF Type Format (BTF) type info lets the loader fix up struct offsets per kernel, so one binary runs across versions.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1723,7 +1723,7 @@
     "Linux::ebpf"
    ],
    "front": "What does <code>bpftool</code> do?",
-   "back": "Inspects loaded eBPF programs and maps: list them, dump map contents, show attachments.",
+   "back": "Inspects loaded extended Berkeley Packet Filter (eBPF) programs and maps: list them, dump map contents, show attachments.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1739,7 +1739,7 @@
     "Linux::ebpf"
    ],
    "front": "Why was <code>CAP_BPF</code> introduced?",
-   "back": "So eBPF tooling no longer needs the far broader <code>CAP_SYS_ADMIN</code>.",
+   "back": "So extended Berkeley Packet Filter (eBPF) tooling no longer needs the far broader <code>CAP_SYS_ADMIN</code>.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1754,8 +1754,8 @@
    "tags": [
     "Linux::ebpf"
    ],
-   "front": "What is the BPF ring buffer for?",
-   "back": "Efficiently streaming events from eBPF programs to user space, replacing perf buffers for most uses.",
+   "front": "What is the Berkeley Packet Filter (BPF) ring buffer for?",
+   "back": "Efficiently streaming events from extended Berkeley Packet Filter (eBPF) programs to user space, replacing perf buffers for most uses.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1771,7 +1771,7 @@
     "Linux::ebpf"
    ],
    "front": "What is bpftrace?",
-   "back": "A high-level tracing language that compiles one-liners into eBPF (kprobes/uprobes/tracepoints) without writing C.",
+   "back": "A high-level tracing language that compiles one-liners into extended Berkeley Packet Filter (eBPF) (kprobes/uprobes/tracepoints) without writing C.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1818,7 +1818,7 @@
    "tags": [
     "Linux::filesystems"
    ],
-   "front": "What is the VFS?",
+   "front": "What is the virtual file system (VFS)?",
    "back": "The kernel layer giving one interface (open, read, write) over every filesystem type (ext4, XFS, overlayfs, tmpfs, …).",
    "text": "",
    "image": "",
@@ -2011,7 +2011,7 @@
     "Linux::networking"
    ],
    "front": "What is a Linux bridge, and how do containers use it?",
-   "back": "A kernel L2 virtual switch. Each container's host-side veth end attaches to it (e.g. <code>docker0</code>); NAT reaches the outside.",
+   "back": "A kernel L2 virtual switch. Each container's host-side veth end attaches to it (e.g. <code>docker0</code>); network address translation (NAT) reaches the outside.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2043,7 +2043,7 @@
     "Linux::networking"
    ],
    "front": "What does nftables improve over iptables?",
-   "back": "Unified syntax for IPv4/IPv6/ARP/bridge, atomic incremental rule updates and set-based lookups that scale better.",
+   "back": "Unified syntax for IPv4/IPv6/Address Resolution Protocol (ARP)/bridge, atomic incremental rule updates and set-based lookups that scale better.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2060,7 +2060,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "kube-proxy modes: {{c1::iptables}}: long-time default, now maintenance mode; {{c2::IPVS}}: deprecated in 1.35; {{c3::nftables}}: GA in 1.33, recommended on kernel 5.13+.",
+   "text": "kube-proxy modes: {{c1::iptables}}: long-time default, now maintenance mode; {{c2::IPVS}}: deprecated in 1.35; {{c3::nftables}}: general availability (GA) in 1.33, recommended on kernel 5.13+.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -2106,8 +2106,8 @@
    "tags": [
     "Linux::networking"
    ],
-   "front": "How does Cilium's eBPF kube-proxy replacement avoid iptables/nftables?",
-   "back": "Service→endpoint mappings live in BPF maps; eBPF programs at XDP/TC (or socket level) look them up and forward in constant time, with no netfilter chains.",
+   "front": "How does Cilium's extended Berkeley Packet Filter (eBPF) kube-proxy replacement avoid iptables/nftables?",
+   "back": "Service→endpoint mappings live in Berkeley Packet Filter (BPF) maps; eBPF programs at express data path (XDP)/traffic control (TC) (or socket level) look them up and forward in constant time, with no netfilter chains.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2395,7 +2395,7 @@
     "Linux::ipc"
    ],
    "front": "What is a Unix domain socket, and where do container nodes use them?",
-   "back": "A same-host socket addressed by a filesystem path, with the normal socket API. E.g. the CRI socket (<code>containerd.sock</code>) and <code>docker.sock</code>.",
+   "back": "A same-host socket addressed by a filesystem path, with the normal socket API. E.g. the container runtime interface (CRI) socket (<code>containerd.sock</code>) and <code>docker.sock</code>.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2442,7 +2442,7 @@
    "tags": [
     "Linux::runtime"
    ],
-   "front": "What do the two main OCI specifications define?",
+   "front": "What do the two main Open Container Initiative (OCI) specifications define?",
    "back": "<b>Image Spec:</b> the layered image format. <b>Runtime Spec:</b> how a runtime creates and runs a container from an on-disk bundle.",
    "text": "",
    "image": "",
@@ -2459,7 +2459,7 @@
     "Linux::runtime"
    ],
    "front": "What is runc?",
-   "back": "The reference OCI runtime: creates namespaces and cgroups, applies capabilities and seccomp/LSM, then <code>execve()</code>s the entrypoint.",
+   "back": "The reference Open Container Initiative (OCI) runtime: creates namespaces and cgroups, applies capabilities and seccomp/Linux Security Module (LSM), then <code>execve()</code>s the entrypoint.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2474,7 +2474,7 @@
    "tags": [
     "Linux::runtime"
    ],
-   "front": "What is the CRI?",
+   "front": "What is the container runtime interface (CRI)?",
    "back": "The gRPC API through which the kubelet drives any compliant runtime (containerd, CRI-O) without runtime-specific code.",
    "text": "",
    "image": "",
@@ -2523,7 +2523,7 @@
     "Linux::runtime"
    ],
    "front": "Simplified: what happens at OS level when a pod's container starts?",
-   "back": "kubelet → CRI → containerd → shim → <b>runc</b>: <code>clone()</code> with namespace flags, set cgroup, apply caps and seccomp/LSM, <code>execve()</code> the entrypoint.",
+   "back": "kubelet → container runtime interface (CRI) → containerd → shim → <b>runc</b>: <code>clone()</code> with namespace flags, set cgroup, apply caps and seccomp/Linux Security Module (LSM), <code>execve()</code> the entrypoint.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2587,7 +2587,7 @@
     "Linux::privesc"
    ],
    "front": "Why is the shared kernel the core trust boundary for containers?",
-   "back": "Namespaces, cgroups, capabilities, seccomp and LSMs are all enforced by one host kernel; one kernel exploit (LPE) bypasses them all. Hence gVisor/Kata for untrusted workloads.",
+   "back": "Namespaces, cgroups, capabilities, seccomp and Linux Security Modules (LSMs) are all enforced by one host kernel; one kernel exploit (local privilege escalation (LPE)) bypasses them all. Hence gVisor/Kata for untrusted workloads.",
    "text": "",
    "image": "",
    "analogy": "Apartments with good locks still share one foundation; crack the foundation and every apartment is exposed.",
@@ -2763,7 +2763,7 @@
     "Linux::tools"
    ],
    "front": "How does <code>tcpdump</code> capture packets?",
-   "back": "An <code>AF_PACKET</code> socket receives raw frame copies, with a (classic) BPF filter in the kernel selecting what to pass up.",
+   "back": "An <code>AF_PACKET</code> socket receives raw frame copies, with a (classic) Berkeley Packet Filter (BPF) filter in the kernel selecting what to pass up.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2779,7 +2779,7 @@
     "Linux::tools"
    ],
    "front": "What does <code>lsof</code> show, and why does it reveal network connections?",
-   "back": "Open file descriptors per process. Sockets and pipes are fds too, so it lists connections and IPC endpoints as well as files.",
+   "back": "Open file descriptors per process. Sockets and pipes are fds too, so it lists connections and inter-process communication (IPC) endpoints as well as files.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2795,7 +2795,7 @@
     "Linux::tools"
    ],
    "front": "What is auditd used for?",
-   "back": "Logging security-relevant events (chosen syscalls, file access, auth) from the kernel audit subsystem, for compliance (CIS, PCI-DSS) and forensics.",
+   "back": "Logging security-relevant events (chosen syscalls, file access, auth) from the kernel audit subsystem, for compliance (Center for Internet Security (CIS), Payment Card Industry Data Security Standard (PCI-DSS)) and forensics.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2811,7 +2811,7 @@
     "Linux::tools"
    ],
    "front": "Why use <code>crictl</code> rather than the <code>docker</code> CLI on a Kubernetes node?",
-   "back": "Nodes run CRI runtimes (containerd, CRI-O), not Docker Engine; <code>crictl</code> talks CRI to inspect pods, containers and images.",
+   "back": "Nodes run container runtime interface (CRI) runtimes (containerd, CRI-O), not Docker Engine; <code>crictl</code> talks CRI to inspect pods, containers and images.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2827,7 +2827,7 @@
     "Linux::tools"
    ],
    "front": "What is Falco?",
-   "back": "A CNCF runtime-security tool that evaluates syscall events (via eBPF) against rules, e.g. alerting on a shell in a container or writes to sensitive paths.",
+   "back": "A Cloud Native Computing Foundation (CNCF) runtime-security tool that evaluates syscall events (via extended Berkeley Packet Filter (eBPF)) against rules, e.g. alerting on a shell in a container or writes to sensitive paths.",
    "text": "",
    "image": "",
    "analogy": "A smoke detector for container behaviour: it doesn't stop the fire, it shouts.",

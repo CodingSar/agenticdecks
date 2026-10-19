@@ -203,7 +203,7 @@
     "llm::architecture"
    ],
    "front": "Geometrically, where does an attention output lie relative to the value vectors?",
-   "back": "Inside their <b>convex hull</b>: it is a convex combination (weights ≥ 0, summing to 1). Attention interpolates; the following MLP layers and residuals extrapolate.",
+   "back": "Inside their <b>convex hull</b>: it is a convex combination (weights ≥ 0, summing to 1). Attention interpolates; the following multilayer perceptron (MLP) layers and residuals extrapolate.",
    "text": "",
    "image": "<img src=\"attention_hull.svg\">",
    "analogy": "",
@@ -251,7 +251,7 @@
     "llm::architecture"
    ],
    "front": "What are the two sub-blocks of a transformer layer, and what does each do?",
-   "back": "<b>Attention</b> moves information <i>between</i> positions. The <b>MLP / feed-forward</b> block processes each position independently and holds most parameters (much of the factual recall).",
+   "back": "<b>Attention</b> moves information <i>between</i> positions. The <b>multilayer perceptron (MLP) / feed-forward</b> block processes each position independently and holds most parameters (much of the factual recall).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -282,7 +282,7 @@
    "tags": [
     "llm::architecture"
    ],
-   "front": "In an MoE model, what do <b>compute</b> cost and <b>memory</b> cost scale with?",
+   "front": "In an mixture of experts (MoE) model, what do <b>compute</b> cost and <b>memory</b> cost scale with?",
    "back": "Compute scales with the <b>active</b> parameters per token; memory with the <b>total</b> parameters, since all experts must be loaded.",
    "text": "",
    "image": "",
@@ -298,7 +298,7 @@
    "tags": [
     "llm::architecture"
    ],
-   "front": "What production risk does MoE introduce in serving?",
+   "front": "What production risk does mixture of experts (MoE) introduce in serving?",
    "back": "<b>Routing imbalance</b>: \"hot\" experts receive uneven load, causing latency spikes that only appear at scale.",
    "text": "",
    "image": "",
@@ -331,7 +331,7 @@
     "llm::architecture"
    ],
    "front": "Why doesn't a model trained at 8k context automatically work at 128k?",
-   "back": "Positional behaviour is learned within the trained range. Extending it needs retraining or interpolation tricks (e.g. YaRN), and quality often degrades at the far end.",
+   "back": "Positional behaviour is learned within the trained range. Extending it needs retraining or interpolation tricks (e.g. yet another RoPE extension (YaRN)), and quality often degrades at the far end.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -347,7 +347,7 @@
     "llm::architecture"
    ],
    "front": "What does <b>FlashAttention</b> do?",
-   "back": "An IO-aware <b>exact</b> attention kernel that tiles the computation so the full n×n attention matrix is never materialised in GPU memory: faster and less memory for long sequences, same result.",
+   "back": "An input/output (IO)-aware <b>exact</b> attention kernel that tiles the computation so the full n×n attention matrix is never materialised in GPU memory: faster and less memory for long sequences, same result.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -362,8 +362,8 @@
    "tags": [
     "llm::architecture"
    ],
-   "front": "Attention variants: what do MHA, MQA, GQA and MLA have in common as a design goal?",
-   "back": "Shrinking the <b>KV cache</b>: they trade how many separate Key/Value heads are stored against quality.",
+   "front": "Attention variants: what do multi-head attention (MHA), multi-query attention (MQA), grouped-query attention (GQA) and multi-head latent attention (MLA) have in common as a design goal?",
+   "back": "Shrinking the <b>key-value (KV) cache</b>: they trade how many separate Key/Value heads are stored against quality.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -379,7 +379,7 @@
     "llm::architecture"
    ],
    "front": "<b>Multi-Query Attention (MQA)</b>: what is shared, and what is the trade-off?",
-   "back": "All query heads share one Key/Value head: up to ~32× smaller KV cache, at a ~1–3 point quality loss.",
+   "back": "All query heads share one Key/Value head: up to ~32× smaller key-value (KV) cache, at a ~1–3 point quality loss.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -395,7 +395,7 @@
     "llm::architecture"
    ],
    "front": "<b>Grouped-Query Attention (GQA)</b>: what is shared?",
-   "back": "Query heads share K/V within groups: a balance between full multi-head quality and MQA efficiency. Default in Llama 3 and Mistral.",
+   "back": "Query heads share K/V within groups: a balance between full multi-head quality and multi-query attention (MQA) efficiency. Default in Llama 3 and Mistral.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -411,7 +411,7 @@
     "llm::architecture"
    ],
    "front": "<b>Multi-head Latent Attention (MLA)</b> (DeepSeek): what does it cache?",
-   "back": "A low-rank latent projection of K/V instead of the full K/V: ~7–14× KV-cache compression with little quality loss.",
+   "back": "A low-rank latent projection of K/V instead of the full K/V: ~7–14× key-value (KV)-cache compression with little quality loss.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -474,7 +474,7 @@
    "tags": [
     "llm::inference"
    ],
-   "front": "What is the <b>KV cache</b> and why is it used?",
+   "front": "What is the <b>key-value (KV) cache</b> and why is it used?",
    "back": "The stored Keys and Values of all previous tokens, so each new token attends to them without recomputing them. It keeps per-token decode cost low.",
    "text": "",
    "image": "",
@@ -490,12 +490,12 @@
    "tags": [
     "llm::inference"
    ],
-   "front": "What is the main cost of the KV cache, and how does it scale?",
+   "front": "What is the main cost of the key-value (KV) cache, and how does it scale?",
    "back": "GPU memory, growing <b>linearly with context length</b> (and batch size). Above ~128k tokens it can exceed the weights themselves.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Example:</b> Llama 70B at 1M context ≈ 135 GB of KV cache at FP16, more than its weights. A 100k prompt on a 70B model can need tens of GB per request.",
+   "extra": "<b>Example:</b> Llama 70B at 1M context ≈ 135 GB of KV cache at 16-bit floating point (FP16), more than its weights. A 100k prompt on a 70B model can need tens of GB per request.",
    "source": "Inference & Serving",
    "reverse": false
   },
@@ -507,7 +507,7 @@
     "llm::inference"
    ],
    "front": "Why is the first token slow and the rest fast?",
-   "back": "<b>Prefill</b> processes the whole prompt at once (compute-heavy; sets time-to-first-token). <b>Decode</b> then generates each token against the KV cache (cheap per token, memory-bound).",
+   "back": "<b>Prefill</b> processes the whole prompt at once (compute-heavy; sets time-to-first-token). <b>Decode</b> then generates each token against the key-value (KV) cache (cheap per token, memory-bound).",
    "text": "",
    "image": "",
    "analogy": "Reading a whole letter before replying (prefill) versus then speaking your answer one word at a time (decode).",
@@ -523,7 +523,7 @@
     "llm::inference"
    ],
    "front": "Why can providers discount <b>prompt caching</b>?",
-   "back": "An identical prompt prefix lets them reuse its stored KV cache and skip the prefill compute for that part.",
+   "back": "An identical prompt prefix lets them reuse its stored key-value (KV) cache and skip the prefill compute for that part.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -540,7 +540,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "KV-cache optimisations in production serving: {{c1::PagedAttention}} (paged KV memory management, vLLM), {{c2::prefix caching}} (reuse KV for shared prompt prefixes), {{c3::attention compression}} (MQA/GQA/MLA) and {{c4::quantization}} (INT8, FP8, FP4).",
+   "text": "key-value (KV)-cache optimisations in production serving: {{c1::PagedAttention}} (paged KV memory management, vLLM), {{c2::prefix caching}} (reuse KV for shared prompt prefixes), {{c3::attention compression}} (multi-query attention (MQA)/grouped-query attention (GQA)/multi-head latent attention (MLA)) and {{c4::quantization}} (8-bit integer (INT8), 8-bit floating point (FP8), 4-bit floating point (FP4)).",
    "image": "",
    "analogy": "PagedAttention is OS virtual memory for the KV cache: fixed-size pages allocated on demand instead of one big contiguous reservation per request.",
    "extra": "Combined they cut long-context cost ~4–40×.",
@@ -635,7 +635,7 @@
     "llm::inference"
    ],
    "front": "What is a <b>reasoning</b> (\"thinking\") model, mechanically?",
-   "back": "The same transformer, post-trained with RL on verifiable tasks (math, code) to generate a long chain of intermediate tokens before answering: <b>test-time compute scaling</b>.",
+   "back": "The same transformer, post-trained with reinforcement learning (RL) on verifiable tasks (math, code) to generate a long chain of intermediate tokens before answering: <b>test-time compute scaling</b>.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -714,7 +714,7 @@
    "tags": [
     "llm::training"
    ],
-   "front": "In RLHF, how is the <b>reward model</b> fitted?",
+   "front": "In reinforcement learning from human feedback (RLHF), how is the <b>reward model</b> fitted?",
    "back": "On pairwise human preferences, using the <b>Bradley–Terry</b> model: \\(P(y_w\\succ y_l)=\\sigma\\big(r(x,y_w)-r(x,y_l)\\big)\\).",
    "text": "",
    "image": "",
@@ -730,8 +730,8 @@
    "tags": [
     "llm::training"
    ],
-   "front": "What objective does the RLHF policy step optimise, and why the KL term?",
-   "back": "\\(\\max_\\pi E[r(x,y)]-\\beta\\,\\mathrm{KL}(\\pi\\,\\|\\,\\pi_{\\text{ref}})\\), usually with PPO. The KL term keeps the policy near the data where the learned reward is trustworthy, preventing reward hacking.",
+   "front": "What objective does the reinforcement learning from human feedback (RLHF) policy step optimise, and why the Kullback-Leibler divergence (KL) term?",
+   "back": "\\(\\max_\\pi E[r(x,y)]-\\beta\\,\\mathrm{KL}(\\pi\\,\\|\\,\\pi_{\\text{ref}})\\), usually with proximal policy optimization (PPO). The KL term keeps the policy near the data where the learned reward is trustworthy, preventing reward hacking.",
    "text": "",
    "image": "",
    "analogy": "A leash to the reference model: improve on the reward, but don't drift more than a few bits per token from what you were.",
@@ -746,8 +746,8 @@
    "tags": [
     "llm::training"
    ],
-   "front": "How does <b>Direct Preference Optimisation (DPO)</b> simplify RLHF?",
-   "back": "The KL-regularised optimum is \\(\\pi^*\\propto\\pi_{\\text{ref}}\\,e^{r/\\beta}\\). DPO inverts it to express the reward via policy log-ratios and trains directly with a logistic loss on preference pairs: no reward model, no sampling loop.",
+   "front": "How does <b>Direct Preference Optimisation (DPO)</b> simplify reinforcement learning from human feedback (RLHF)?",
+   "back": "The Kullback-Leibler divergence (KL)-regularised optimum is \\(\\pi^*\\propto\\pi_{\\text{ref}}\\,e^{r/\\beta}\\). DPO inverts it to express the reward via policy log-ratios and trains directly with a logistic loss on preference pairs: no reward model, no sampling loop.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -779,7 +779,7 @@
     "llm::training"
    ],
    "front": "Why is \"fine-tune the model on our docs so it knows our product\" usually the wrong plan?",
-   "back": "Fine-tuning changes behaviour far better than it adds facts: injected knowledge is fuzzy, hallucinated at the edges, and needs retraining on every change. With RAG you just replace the document.",
+   "back": "Fine-tuning changes behaviour far better than it adds facts: injected knowledge is fuzzy, hallucinated at the edges, and needs retraining on every change. With retrieval-augmented generation (RAG) you just replace the document.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -863,7 +863,7 @@
    "text": "Decision rule: start with {{c1::prompting}} (system prompt + a few examples); use {{c2::RAG}} when the model needs facts it lacks or that change; use {{c3::fine-tuning}} when it must behave differently at scale (format, style, a cheaper model) and you have examples plus an eval set.",
    "image": "",
    "analogy": "",
-   "extra": "They combine: RAG for <i>what</i>, fine-tuning for <i>how</i>. Neither replaces an eval set.",
+   "extra": "They combine: retrieval-augmented generation (RAG) for <i>what</i>, fine-tuning for <i>how</i>. Neither replaces an eval set.",
    "source": "Training & Adaptation",
    "reverse": false
   },
@@ -986,7 +986,7 @@
    "tags": [
     "llm::rag_context"
    ],
-   "front": "With a 200k context window, why still build RAG instead of pasting all the documents?",
+   "front": "With a 200k context window, why still build retrieval-augmented generation (RAG) instead of pasting all the documents?",
    "back": "Cost per question, prefill latency, diluted attention (more hallucination), corpora that never fit, and freshness. Stuffing wins only for small, stable corpora.",
    "text": "",
    "image": "",
@@ -1018,7 +1018,7 @@
    "tags": [
     "llm::rag_context"
    ],
-   "front": "What are the offline and online steps of a standard RAG pipeline?",
+   "front": "What are the offline and online steps of a standard retrieval-augmented generation (RAG) pipeline?",
    "back": "<b>Offline:</b> chunk documents → embed each chunk → store in a vector index.<br><b>Online:</b> embed the question → fetch the top-k similar chunks → put them in the prompt → generate.",
    "text": "",
    "image": "",
@@ -1034,7 +1034,7 @@
    "tags": [
     "llm::rag_context"
    ],
-   "front": "When a RAG answer is wrong, what should you check first, and why?",
+   "front": "When a retrieval-augmented generation (RAG) answer is wrong, what should you check first, and why?",
    "back": "What was retrieved: most failures (~80%) happen before generation.",
    "text": "",
    "image": "",
@@ -1050,7 +1050,7 @@
    "tags": [
     "llm::rag_context"
    ],
-   "front": "Why does RAG reduce hallucination but not eliminate it?",
+   "front": "Why does retrieval-augmented generation (RAG) reduce hallucination but not eliminate it?",
    "back": "The model still generates freely; retrieved text only raises the odds of grounded output. It may answer from memory when nothing relevant is found, blend in invented details, misread negations, or fabricate citations.",
    "text": "",
    "image": "",
@@ -1500,7 +1500,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Agent harness components: the {{c1::agent loop}} (call → parse → execute → feed back → decide to stop), {{c2::tool calling}} (incl. MCP servers), {{c3::context management}} (history, retrieval, compaction), plus memory, guardrails and {{c4::tracing/observability}}.",
+   "text": "Agent harness components: the {{c1::agent loop}} (call → parse → execute → feed back → decide to stop), {{c2::tool calling}} (incl. model context protocol (MCP) servers), {{c3::context management}} (history, retrieval, compaction), plus memory, guardrails and {{c4::tracing/observability}}.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -1519,7 +1519,7 @@
    "text": "",
    "image": "",
    "analogy": "A Swiss Army knife with 100 blades: past a point, finding the right tool costs more than the tools add.",
-   "extra": "Don't bolt on every MCP server \"just in case\"; tool definitions also eat context.",
+   "extra": "Don't bolt on every model context protocol (MCP) server \"just in case\"; tool definitions also eat context.",
    "source": "Harness Engineering",
    "reverse": false
   },
@@ -1578,8 +1578,8 @@
    "tags": [
     "llm::harness"
    ],
-   "front": "What transport do <b>remote MCP servers</b> use, and why does it matter for harnesses?",
-   "back": "<b>Streamable HTTP</b> (successor to HTTP+SSE): client→server via POST, optional server→client SSE stream. MCP servers can run as remote multi-client services, so the harness must handle their wiring and auth.",
+   "front": "What transport do <b>remote model context protocol (MCP) servers</b> use, and why does it matter for harnesses?",
+   "back": "<b>Streamable HTTP</b> (successor to HTTP+server-sent events (SSE)): client→server via POST, optional server→client SSE stream. MCP servers can run as remote multi-client services, so the harness must handle their wiring and auth.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1599,7 +1599,7 @@
    "text": "",
    "image": "",
    "analogy": "SQL injection for LLMs: untrusted data gets interpreted as commands because data and instructions travel in the same channel, except here there is no reliable escaping.",
-   "extra": "<b>Example:</b> A RAG bot over a shared wiki: anyone who can edit a wiki page can plant instructions for the bot. An email-reading agent: a malicious email can steer it. The more tools an agent has, the more damage an injection can do.",
+   "extra": "<b>Example:</b> A retrieval-augmented generation (RAG) bot over a shared wiki: anyone who can edit a wiki page can plant instructions for the bot. An email-reading agent: a malicious email can steer it. The more tools an agent has, the more damage an injection can do.",
    "source": "Harness Engineering",
    "reverse": false
   },
@@ -1723,7 +1723,7 @@
     "llm::evaluation"
    ],
    "front": "What is <b>MMLU</b>, and why is it a weak signal now?",
-   "back": "~14k multiple-choice questions over 57 subjects. Weaknesses: contamination (questions leak into training data), saturation (top models within noise), format mismatch with real tasks, label errors.",
+   "back": "Massive multitask language understanding (MMLU) is ~14k multiple-choice questions over 57 subjects. Weaknesses: contamination (questions leak into training data), saturation (top models within noise), format mismatch with real tasks, label errors.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1803,7 +1803,7 @@
     "llm::evaluation"
    ],
    "front": "Why is pass@1 on short tasks misleading for long-horizon agents?",
-   "back": "Reliability degrades super-linearly with task length and complexity. Use duration-bucketed, variance-aware metrics (pass^k, METR time horizons) with partial credit.",
+   "back": "Reliability degrades super-linearly with task length and complexity. Use duration-bucketed, variance-aware metrics (pass^k, Model Evaluation and Threat Research (METR) time horizons) with partial credit.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1866,8 +1866,8 @@
    "tags": [
     "llm::evaluation"
    ],
-   "front": "How do you evaluate a RAG system in two layers?",
-   "back": "<b>Retrieval:</b> did the right chunks reach the top-k (recall@k, precision@k, MRR; no LLM needed)?<br><b>Generation:</b> given those chunks, is the answer faithful, relevant and complete?",
+   "front": "How do you evaluate a retrieval-augmented generation (RAG) system in two layers?",
+   "back": "<b>Retrieval:</b> did the right chunks reach the top-k (recall@k, precision@k, mean reciprocal rank (MRR); no LLM needed)?<br><b>Generation:</b> given those chunks, is the answer faithful, relevant and complete?",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1983,7 +1983,7 @@
    "text": "",
    "image": "",
    "analogy": "A confident improv actor: trained to always keep the scene going plausibly, never to stop and check the facts.",
-   "extra": "<b>Example:</b> Ask for a citation on an obscure topic → the model produces a real-looking author, journal, year, and DOI that don't exist, because that <em>pattern</em> is what citations look like.",
+   "extra": "<b>Example:</b> Ask for a citation on an obscure topic → the model produces a real-looking author, journal, year, and digital object identifier (DOI) that don't exist, because that <em>pattern</em> is what citations look like.",
    "source": "Evaluation & Reliability",
    "reverse": false
   },
@@ -2012,7 +2012,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Vendor phrases decoded: \"trained on your data\" → usually {{c1::RAG over your documents}} (occasionally a LoRA adapter); \"understands your business\" → {{c2::a system prompt plus retrieval}}; \"proprietary model\" → often {{c3::an open-weights fine-tune or a wrapped frontier API}}.",
+   "text": "Vendor phrases decoded: \"trained on your data\" → usually {{c1::RAG over your documents}} (occasionally a low-rank adaptation (LoRA) adapter); \"understands your business\" → {{c2::a system prompt plus retrieval}}; \"proprietary model\" → often {{c3::an open-weights fine-tune or a wrapped frontier API}}.",
    "image": "",
    "analogy": "",
    "extra": "\"Agentic\" → an LLM loop with tools: ask the success rate. \"Hallucination-free\" → not a thing: ask what is verified and how.",

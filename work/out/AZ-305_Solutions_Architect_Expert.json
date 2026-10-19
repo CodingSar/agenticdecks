@@ -11,7 +11,7 @@
     "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
    ],
    "front": "Azure Monitor Metrics vs Logs: when do you recommend each?",
-   "back": "<b>Metrics:</b> lightweight near-real-time numbers → dashboards and fast threshold alerts.<br><b>Logs:</b> event records in Log Analytics, queried with KQL → diagnosis and cross-resource correlation.",
+   "back": "<b>Metrics:</b> lightweight near-real-time numbers → dashboards and fast threshold alerts.<br><b>Logs:</b> event records in Log Analytics, queried with Kusto Query Language (KQL) → diagnosis and cross-resource correlation.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -106,7 +106,7 @@
    "tags": [
     "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
    ],
-   "front": "Route the Activity Log and resource logs to a third-party SIEM outside Azure: what do you configure?",
+   "front": "Route the Activity Log and resource logs to a third-party security information and event management (SIEM) outside Azure: what do you configure?",
    "back": "<b>Diagnostic settings</b> streaming to an <b>Event Hub</b>, which the SIEM consumes.",
    "text": "",
    "image": "",
@@ -139,7 +139,7 @@
     "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
    ],
    "front": "Metric alert vs log alert: latency and cost?",
-   "back": "<b>Metric alert:</b> near-real-time (~1 min), cheap to run often.<br><b>Log alert:</b> scheduled KQL query, richer logic but higher latency and query cost.",
+   "back": "<b>Metric alert:</b> near-real-time (~1 min), cheap to run often.<br><b>Log alert:</b> scheduled Kusto Query Language (KQL) query, richer logic but higher latency and query cost.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -154,7 +154,7 @@
    "tags": [
     "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
    ],
-   "front": "Which Azure Monitor component holds the notification/automation logic (email, SMS, webhook, Function, ITSM) so many alert rules can reuse it?",
+   "front": "Which Azure Monitor component holds the notification/automation logic (email, short message service (SMS), webhook, Function, IT service management (ITSM)) so many alert rules can reuse it?",
    "back": "An <b>Action Group</b>.",
    "text": "",
    "image": "",
@@ -171,7 +171,7 @@
     "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
    ],
    "front": "What is Application Insights, and where does its data live?",
-   "back": "Azure Monitor's <b>APM</b> feature: requests, response times, dependencies, exceptions. Workspace-based App Insights stores data in Log Analytics, queried with KQL.",
+   "back": "Azure Monitor's <b>application performance management (APM)</b> feature: requests, response times, dependencies, exceptions. Workspace-based App Insights stores data in Log Analytics, queried with Kusto Query Language (KQL).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -234,7 +234,7 @@
    "tags": [
     "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
    ],
-   "front": "Which Azure service gives IP flow verify, next-hop analysis, packet capture and NSG/VNet flow logs?",
+   "front": "Which Azure service gives IP flow verify, next-hop analysis, packet capture and network security group (NSG)/VNet flow logs?",
    "back": "<b>Network Watcher</b> (regional).",
    "text": "",
    "image": "",
@@ -251,7 +251,7 @@
     "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
    ],
    "front": "What do you recommend for interactive, parameterized reports combining logs, metrics and Resource Graph data (e.g. post-incident reviews)?",
-   "back": "<b>Azure Monitor Workbooks.</b> They can be versioned as ARM templates.",
+   "back": "<b>Azure Monitor Workbooks.</b> They can be versioned as Azure Resource Manager (ARM) templates.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -283,11 +283,11 @@
     "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
    ],
    "front": "Name two phishing-resistant passwordless methods Entra ID supports.",
-   "back": "<b>Windows Hello for Business</b> and <b>FIDO2 security keys</b> (also passkeys). Both use device-bound public-key crypto, so there is no shared secret to phish.",
+   "back": "<b>Windows Hello for Business</b> and <b>Fast Identity Online 2 (FIDO2) security keys</b> (also passkeys). Both use device-bound public-key crypto, so there is no shared secret to phish.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "SMS and voice codes are <b>not</b> phishing-resistant.",
+   "extra": "short message service (SMS) and voice codes are <b>not</b> phishing-resistant.",
    "source": "AZ-305 · Identity, governance & monitoring",
    "reverse": false
   },
@@ -298,7 +298,7 @@
    "tags": [
     "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
    ],
-   "front": "Which Entra ID feature enforces 'require MFA from untrusted networks' or 'block legacy authentication'?",
+   "front": "Which Entra ID feature enforces 'require multi-factor authentication (MFA) from untrusted networks' or 'block legacy authentication'?",
    "back": "<b>Conditional Access:</b> evaluates signals (user, location, device, app, risk) at sign-in and applies grant/session controls.",
    "text": "",
    "image": "",
@@ -330,8 +330,8 @@
    "tags": [
     "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
    ],
-   "front": "Entra Connect: when do you choose Pass-through Authentication (PTA) over PHS, and what is the cost?",
-   "back": "When passwords (even hashed) must not leave on-prem. Agents validate against AD in real time, so sign-in <b>depends on on-prem</b> availability.",
+   "front": "Entra Connect: when do you choose Pass-through Authentication (PTA) over password hash synchronization (PHS), and what is the cost?",
+   "back": "When passwords (even hashed) must not leave on-prem. Agents validate against Active Directory (AD) in real time, so sign-in <b>depends on on-prem</b> availability.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -347,7 +347,7 @@
     "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
    ],
    "front": "Entra hybrid identity: when is federation (AD FS) still justified?",
-   "back": "Only for requirements the cloud can't meet, e.g. on-prem smart-card/certificate auth or a third-party on-prem MFA at sign-in. Most complex option.",
+   "back": "Only for requirements the cloud can't meet, e.g. on-prem smart-card/certificate auth or a third-party on-prem multi-factor authentication (MFA) at sign-in. Most complex option.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -362,7 +362,7 @@
    "tags": [
     "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
    ],
-   "front": "Entra B2B vs External ID (B2C)?",
+   "front": "Entra business to business (B2B) vs External ID (B2C)?",
    "back": "<b>B2B:</b> partner users access <i>your</i> resources as guests with their home credentials.<br><b>External ID / B2C:</b> customers sign up to <i>your apps</i> with social or local accounts.",
    "text": "",
    "image": "",
@@ -427,7 +427,7 @@
     "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
    ],
    "front": "Key Vault: which permission model do you recommend for new deployments, and why?",
-   "back": "<b>Azure RBAC</b> (over legacy vault access policies): fine-grained per-secret scope, standard role assignments, PIM and audit integration.",
+   "back": "<b>Azure RBAC</b> (over legacy vault access policies): fine-grained per-secret scope, standard role assignments, Privileged Identity Management (PIM) and audit integration.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -442,7 +442,7 @@
    "tags": [
     "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
    ],
-   "front": "Regulation demands single-tenant, FIPS 140-2 Level 3 HSMs for keys. What do you recommend?",
+   "front": "Regulation demands single-tenant, Federal Information Processing Standard (FIPS) 140-2 Level 3 hardware security modules (HSMs) for keys. What do you recommend?",
    "back": "<b>Azure Key Vault Managed HSM</b> (dedicated HSM pool, customer has full control).",
    "text": "",
    "image": "",
@@ -459,7 +459,7 @@
     "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
    ],
    "front": "Which Entra feature replaces standing admin access with just-in-time, time-bound role elevation?",
-   "back": "<b>Privileged Identity Management (PIM):</b> eligible assignments must be <b>activated</b> (justification, approval, MFA) for a limited window.",
+   "back": "<b>Privileged Identity Management (PIM):</b> eligible assignments must be <b>activated</b> (justification, approval, multi-factor authentication (MFA)) for a limited window.",
    "text": "",
    "image": "",
    "analogy": "A hotel key card that opens the server room only for the hour you booked.",
@@ -474,7 +474,7 @@
    "tags": [
     "AZ305::Identity_Governance_Monitoring::Authentication_Authorization"
    ],
-   "front": "Legacy apps in Azure need Kerberos/NTLM/LDAP, but you don't want to extend on-prem AD DS. What do you recommend?",
+   "front": "Legacy apps in Azure need Kerberos/NTLM/LDAP, but you don't want to extend on-prem Active Directory Domain Services (AD DS). What do you recommend?",
    "back": "<b>Microsoft Entra Domain Services:</b> managed domain controllers synced from Entra ID; no DCs to deploy or patch.",
    "text": "",
    "image": "",
@@ -491,7 +491,7 @@
     "AZ305::Identity_Governance_Monitoring::Governance"
    ],
    "front": "An external auditor needs time-limited read-only access to a subscription. What do you recommend?",
-   "back": "Invite as an <b>Entra B2B guest</b> and give a <b>PIM eligible Reader</b> assignment with an expiry: no standing access.",
+   "back": "Invite as an <b>Entra business to business (B2B) guest</b> and give a <b>Privileged Identity Management (PIM) eligible Reader</b> assignment with an expiry: no standing access.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -540,7 +540,7 @@
     "AZ305::Identity_Governance_Monitoring::Governance"
    ],
    "front": "Azure RBAC vs Azure Policy?",
-   "back": "<b>RBAC:</b> <i>who</i> can do <i>what</i> (e.g. restart this VM).<br><b>Policy:</b> what resources may <i>look like</i>, regardless of who deploys (e.g. only approved VM SKUs).",
+   "back": "<b>RBAC:</b> <i>who</i> can do <i>what</i> (e.g. restart this VM).<br><b>Policy:</b> what resources may <i>look like</i>, regardless of who deploys (e.g. only approved VM stock keeping units (SKUs)).",
    "text": "",
    "image": "",
    "analogy": "RBAC is who gets a key to the building; Policy is the building code every renovation must pass.",
@@ -636,7 +636,7 @@
     "AZ305::Identity_Governance_Monitoring::Governance"
    ],
    "front": "Azure Blueprints is retiring. What replaces it?",
-   "back": "<b>Template Specs</b> (versioned ARM/Bicep templates) and <b>Deployment Stacks</b> (grouping, lifecycle and deny-assignment locking).",
+   "back": "<b>Template Specs</b> (versioned Azure Resource Manager (ARM)/Bicep templates) and <b>Deployment Stacks</b> (grouping, lifecycle and deny-assignment locking).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -652,7 +652,7 @@
     "AZ305::Identity_Governance_Monitoring::Governance"
    ],
    "front": "Prevent accidental deletion of a critical resource even by Owners. What do you recommend?",
-   "back": "A <b>resource lock</b> (<code>CanNotDelete</code> or <code>ReadOnly</code>) at resource, RG or subscription scope. It overrides RBAC for everyone until removed.",
+   "back": "A <b>resource lock</b> (<code>CanNotDelete</code> or <code>ReadOnly</code>) at resource, resource group (RG) or subscription scope. It overrides RBAC for everyone until removed.",
    "text": "",
    "image": "",
    "analogy": "A glass case over the fire-alarm button: even the building owner has to lift it off first.",
@@ -685,7 +685,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "{{c1::Microsoft Entra ID Governance}} combines entitlement management (access packages), access reviews and PIM to automate the identity access lifecycle.",
+   "text": "{{c1::Microsoft Entra ID Governance}} combines entitlement management (access packages), access reviews and Privileged Identity Management (PIM) to automate the identity access lifecycle.",
    "image": "",
    "analogy": "",
    "extra": "An <b>access package</b> bundles groups, apps and sites that users request, with approval and expiry.",
@@ -732,7 +732,7 @@
     "AZ305::Identity_Governance_Monitoring::Governance"
    ],
    "front": "Cloud Adoption Framework vs Well-Architected Framework: difference in scope?",
-   "back": "<b>CAF:</b> the organization's whole cloud journey (strategy → manage).<br><b>WAF:</b> the design quality of an individual workload.",
+   "back": "<b>CAF:</b> the organization's whole cloud journey (strategy → manage).<br><b>web application firewall (WAF):</b> the design quality of an individual workload.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -763,7 +763,7 @@
    "tags": [
     "AZ305::Data_Storage::Relational"
    ],
-   "front": "Azure SQL Database: DTU vs vCore purchasing model?",
+   "front": "Azure SQL Database: database transaction unit (DTU) vs vCore purchasing model?",
    "back": "<b>DTU:</b> one bundled compute/memory/IO unit, simple.<br><b>vCore:</b> choose compute and storage separately, supports <b>Azure Hybrid Benefit</b>; recommended for production.",
    "text": "",
    "image": "",
@@ -861,7 +861,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Azure SQL Database PITR retention defaults to {{c1::7}} days, configurable up to {{c2::35}} days.",
+   "text": "Azure SQL Database point-in-time restore (PITR) retention defaults to {{c1::7}} days, configurable up to {{c2::35}} days.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -876,7 +876,7 @@
     "AZ305::Data_Storage::Relational"
    ],
    "front": "When do you recommend Azure Database for PostgreSQL/MySQL Flexible Server over Azure SQL Database?",
-   "back": "When the app depends on the <b>open-source engine</b> (PostgreSQL/MySQL code, extensions, tooling) and you still want managed PaaS with zone-redundant HA.",
+   "back": "When the app depends on the <b>open-source engine</b> (PostgreSQL/MySQL code, extensions, tooling) and you still want managed PaaS with zone-redundant high availability (HA).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -908,7 +908,7 @@
     "AZ305::Data_Storage::Relational"
    ],
    "front": "A regulated customer must control (and be able to revoke) the keys protecting their Azure SQL data. What do you recommend?",
-   "back": "<b>TDE with customer-managed keys</b> (BYOK) stored in Key Vault. Revoking key access makes the database inaccessible.",
+   "back": "<b>transparent data encryption (TDE) with customer-managed keys</b> (BYOK) stored in Key Vault. Revoking key access makes the database inaccessible.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -956,7 +956,7 @@
     "AZ305::Data_Storage::Semi_Unstructured"
    ],
    "front": "When do you recommend Cosmos DB over a relational database?",
-   "back": "Globally distributed, schema-flexible apps: <b>multi-region replication</b> (reads and optional writes) with low-latency SLAs, elastic horizontal partitioning and tunable consistency.",
+   "back": "Globally distributed, schema-flexible apps: <b>multi-region replication</b> (reads and optional writes) with low-latency service-level agreements (SLAs), elastic horizontal partitioning and tunable consistency.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1005,7 +1005,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Azure Storage account services: {{c1::Blob}} (objects, data lake), {{c2::Files}} (managed SMB/NFS shares), {{c3::Queue}} (simple async messages), {{c4::Table}} (NoSQL key-value).",
+   "text": "Azure Storage account services: {{c1::Blob}} (objects, data lake), {{c2::Files}} (managed Server Message Block (SMB)/NFS shares), {{c3::Queue}} (simple async messages), {{c4::Table}} (NoSQL key-value).",
    "image": "",
    "analogy": "",
    "extra": "New key-value designs usually pick Cosmos DB for Table.",
@@ -1035,7 +1035,7 @@
    "tags": [
     "AZ305::Data_Storage::Semi_Unstructured"
    ],
-   "front": "What does LRS protect against, and when is it still an acceptable choice?",
+   "front": "What does locally redundant storage (LRS) protect against, and when is it still an acceptable choice?",
    "back": "3 synchronous copies in <b>one datacenter</b>: survives disk/rack failure, not a datacenter loss. Fine for reproducible data, cost-driven cases, or apps that replicate themselves.",
    "text": "",
    "image": "",
@@ -1051,8 +1051,8 @@
    "tags": [
     "AZ305::Data_Storage::Semi_Unstructured"
    ],
-   "front": "HA within a region, surviving a datacenter failure, no cross-region replication. Which redundancy?",
-   "back": "<b>ZRS:</b> synchronous copies across <b>three availability zones</b> in the region.",
+   "front": "high availability (HA) within a region, surviving a datacenter failure, no cross-region replication. Which redundancy?",
+   "back": "<b>zone-redundant storage (ZRS):</b> synchronous copies across <b>three availability zones</b> in the region.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1068,12 +1068,12 @@
     "AZ305::Data_Storage::Semi_Unstructured",
     "AZ305::Business_Continuity::High_Availability"
    ],
-   "front": "GRS vs RA-GRS?",
+   "front": "geo-redundant storage (GRS) vs read-access geo-redundant storage (RA-GRS)?",
    "back": "Both replicate asynchronously to the paired region. <b>GRS:</b> secondary readable only after failover. <b>RA-GRS:</b> a read-only secondary endpoint is always available.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "Same distinction for GZRS vs RA-GZRS.",
+   "extra": "Same distinction for geo-zone-redundant storage (GZRS) vs RA-GZRS.",
    "source": "AZ-305 · Data storage",
    "reverse": false
   },
@@ -1084,7 +1084,7 @@
    "tags": [
     "AZ305::Business_Continuity::High_Availability"
    ],
-   "front": "GZRS vs GRS?",
+   "front": "geo-zone-redundant storage (GZRS) vs geo-redundant storage (GRS)?",
    "back": "Both copy to a secondary region. In the primary, <b>GZRS</b> keeps 3 copies across zones (ZRS), while GRS keeps 3 copies in one datacenter (LRS).",
    "text": "",
    "image": "",
@@ -1100,7 +1100,7 @@
    "tags": [
     "AZ305::Data_Storage::Semi_Unstructured"
    ],
-   "front": "Foundation for a big-data platform needing a hierarchical namespace, POSIX ACLs and HDFS compatibility?",
+   "front": "Foundation for a big-data platform needing a hierarchical namespace, Portable Operating System Interface (POSIX) access control lists (ACLs) and Hadoop Distributed File System (HDFS) compatibility?",
    "back": "<b>Azure Data Lake Storage Gen2</b>: Blob Storage with hierarchical namespace enabled.",
    "text": "",
    "image": "",
@@ -1117,7 +1117,7 @@
     "AZ305::Data_Storage::Semi_Unstructured"
    ],
    "front": "Lift-and-shift a file server used by Windows (SMB) and Linux (NFS) clients. What do you recommend?",
-   "back": "<b>Azure Files</b> (Premium for performance), with identity via on-prem AD DS or Entra Kerberos to keep share permissions.",
+   "back": "<b>Azure Files</b> (Premium for performance), with identity via on-prem Active Directory Domain Services (AD DS) or Entra Kerberos to keep share permissions.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1132,7 +1132,7 @@
    "tags": [
     "AZ305::Data_Storage::Semi_Unstructured"
    ],
-   "front": "SAP HANA or HPC needs sub-millisecond, high-throughput shared file storage. What do you recommend?",
+   "front": "SAP HANA or high-performance computing (HPC) needs sub-millisecond, high-throughput shared file storage. What do you recommend?",
    "back": "<b>Azure NetApp Files</b>.",
    "text": "",
    "image": "",
@@ -1164,7 +1164,7 @@
    "tags": [
     "AZ305::Data_Storage::Integration"
    ],
-   "front": "What orchestrates scheduled ETL/ELT pipelines across on-prem and cloud sources?",
+   "front": "What orchestrates scheduled extract, transform, load (ETL)/ELT pipelines across on-prem and cloud sources?",
    "back": "<b>Azure Data Factory</b> (Synapse/Fabric pipelines use the same engine): connectors, visual designer, integration runtimes.",
    "text": "",
    "image": "",
@@ -1181,7 +1181,7 @@
     "AZ305::Data_Storage::Integration"
    ],
    "front": "Data Factory must read an on-prem Oracle database not reachable from the internet. Which component?",
-   "back": "A <b>Self-Hosted Integration Runtime</b> installed on-prem (or in a VNet). It connects outbound, so no inbound firewall ports are needed.",
+   "back": "A <b>Self-Hosted Integration Runtime</b> installed on-prem (or in a virtual network (VNet)). It connects outbound, so no inbound firewall ports are needed.",
    "text": "",
    "image": "",
    "analogy": "An insider who phones out to headquarters, so nobody needs to unlock the front door from outside.",
@@ -1213,7 +1213,7 @@
     "AZ305::Data_Storage::Integration"
    ],
    "front": "When do you recommend Azure Databricks over Synapse?",
-   "back": "Code-first Spark engineering and ML: notebooks, Python/Scala transformations, <b>Delta Lake</b> ACID tables. Synapse fits SQL-centric warehousing.",
+   "back": "Code-first Spark engineering and ML: notebooks, Python/Scala transformations, <b>Delta Lake</b> atomicity, consistency, isolation, durability (ACID) tables. Synapse fits SQL-centric warehousing.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1245,7 +1245,7 @@
     "AZ305::Data_Storage::Integration"
    ],
    "front": "Fast ad hoc exploration over huge volumes of time-series and log data?",
-   "back": "<b>Azure Data Explorer</b> (KQL; the same engine as Log Analytics).",
+   "back": "<b>Azure Data Explorer</b> (Kusto Query Language (KQL); the same engine as Log Analytics).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1260,7 +1260,7 @@
    "tags": [
     "AZ305::Business_Continuity::Backup_DR"
    ],
-   "front": "RPO vs RTO: what does each one drive in a design?",
+   "front": "recovery point objective (RPO) vs recovery time objective (RTO): what does each one drive in a design?",
    "back": "<b>RPO</b> (max data loss, in time) drives backup/replication <b>frequency</b>.<br><b>RTO</b> (max downtime) drives <b>failover automation</b> and standby capacity (cold/warm/hot).",
    "text": "",
    "image": "",
@@ -1293,7 +1293,7 @@
     "AZ305::Business_Continuity::Backup_DR"
    ],
    "front": "Azure Backup vs Azure Site Recovery?",
-   "back": "<b>Backup:</b> point-in-time copies → 'can I get my data back?'<br><b>Site Recovery:</b> continuous replication + orchestrated failover → 'can the app keep running?' (far lower RTO).",
+   "back": "<b>Backup:</b> point-in-time copies → 'can I get my data back?'<br><b>Site Recovery:</b> continuous replication + orchestrated failover → 'can the app keep running?' (far lower recovery time objective (RTO)).",
    "text": "",
    "image": "",
    "analogy": "Backup is a photo album of your house; Site Recovery is a furnished second house you can move into tonight.",
@@ -1308,7 +1308,7 @@
    "tags": [
     "AZ305::Business_Continuity::Backup_DR"
    ],
-   "front": "Azure-to-Azure VM replication with Site Recovery: what RPO is typical, and why?",
+   "front": "Azure-to-Azure VM replication with Site Recovery: what recovery point objective (RPO) is typical, and why?",
    "back": "<b>~30 seconds to a few minutes</b>, because disk writes replicate continuously; no backup schedule can match that.",
    "text": "",
    "image": "",
@@ -1325,7 +1325,7 @@
     "AZ305::Business_Continuity::Backup_DR"
    ],
    "front": "Which vault redundancy protects the backups themselves against a regional disaster?",
-   "back": "<b>GRS</b> on the Recovery Services vault (vs cheaper LRS/ZRS). Set it before protecting items.",
+   "back": "<b>geo-redundant storage (GRS)</b> on the Recovery Services vault (vs cheaper locally redundant storage (LRS)/ZRS). Set it before protecting items.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1341,7 +1341,7 @@
     "AZ305::Business_Continuity::Backup_DR"
    ],
    "front": "Restore an Azure VM backup in the paired region for compliance testing, without a real outage. Which capability?",
-   "back": "<b>Cross Region Restore</b>, available when the vault uses GRS.",
+   "back": "<b>Cross Region Restore</b>, available when the vault uses geo-redundant storage (GRS).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1372,7 +1372,7 @@
    "tags": [
     "AZ305::Business_Continuity::Backup_DR"
    ],
-   "front": "Cross-region DR: Azure SQL Database vs SQL Server on an Azure VM?",
+   "front": "Cross-region disaster recovery (DR): Azure SQL Database vs SQL Server on an Azure VM?",
    "back": "<b>Azure SQL Database:</b> auto-failover groups.<br><b>SQL Server on VM:</b> Always On availability groups across regions, or Site Recovery for the whole VM.",
    "text": "",
    "image": "",
@@ -1388,7 +1388,7 @@
    "tags": [
     "AZ305::Business_Continuity::Backup_DR"
    ],
-   "front": "Why doesn't GRS/ZRS protect blobs against accidental deletion, and what does?",
+   "front": "Why doesn't geo-redundant storage (GRS)/ZRS protect blobs against accidental deletion, and what does?",
    "back": "Redundancy <b>replicates the mistake</b>. Use <b>blob soft delete, container soft delete and versioning</b>.",
    "text": "",
    "image": "",
@@ -1438,7 +1438,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "VM SLA: two or more VMs across availability zones {{c1::99.99%}}; in an availability set {{c2::99.95%}}.",
+   "text": "VM service-level agreement (SLA): two or more VMs across availability zones {{c1::99.99%}}; in an availability set {{c2::99.95%}}.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -1468,7 +1468,7 @@
    "tags": [
     "AZ305::Business_Continuity::High_Availability"
    ],
-   "front": "VMSS uniform vs flexible orchestration?",
+   "front": "Virtual Machine Scale Sets (VMSS) uniform vs flexible orchestration?",
    "back": "<b>Uniform:</b> identical instances from one model, large stateless fleets.<br><b>Flexible:</b> mixed sizes and Spot/regular, standard VMs spread across zones/fault domains; recommended for new deployments.",
    "text": "",
    "image": "",
@@ -1484,7 +1484,7 @@
    "tags": [
     "AZ305::Business_Continuity::High_Availability"
    ],
-   "front": "What HA does Azure SQL Business Critical give with no extra setup?",
+   "front": "What high availability (HA) does Azure SQL Business Critical give with no extra setup?",
    "back": "An Always On-style replica set (zone-redundant if enabled) with fast automatic failover and a free <b>readable secondary</b>.",
    "text": "",
    "image": "",
@@ -1500,7 +1500,7 @@
    "tags": [
     "AZ305::Business_Continuity::High_Availability"
    ],
-   "front": "How does Cosmos DB give global users HA and low latency?",
+   "front": "How does Cosmos DB give global users high availability (HA) and low latency?",
    "back": "<b>Multi-region replication</b> near users, automatic failover by region priority, and optional <b>multi-region writes</b> so every region accepts writes.",
    "text": "",
    "image": "",
@@ -1516,8 +1516,8 @@
    "tags": [
     "AZ305::Business_Continuity::High_Availability"
    ],
-   "front": "What are Azure region pairs for in a BCDR design?",
-   "back": "Paired regions in one geography get <b>sequential platform updates</b> and recovery priority; GRS and many geo-replication defaults use the pair as DR target.",
+   "front": "What are Azure region pairs for in a business continuity and disaster recovery (BCDR) design?",
+   "back": "Paired regions in one geography get <b>sequential platform updates</b> and recovery priority; geo-redundant storage (GRS) and many geo-replication defaults use the pair as DR target.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1533,7 +1533,7 @@
     "AZ305::Business_Continuity::High_Availability"
    ],
    "front": "Global HTTP app: route users to the closest healthy region. What do you recommend?",
-   "back": "<b>Azure Front Door</b>: global L7 with health-probe failover and latency routing, plus WAF and caching.",
+   "back": "<b>Azure Front Door</b>: global layer 7 (L7) with health-probe failover and latency routing, plus web application firewall (WAF) and caching.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1548,7 +1548,7 @@
    "tags": [
     "AZ305::Business_Continuity::High_Availability"
    ],
-   "front": "Single region, compute across zones, needs L7 routing, TLS termination and WAF. What do you recommend?",
+   "front": "Single region, compute across zones, needs layer 7 (L7) routing, TLS termination and web application firewall (WAF). What do you recommend?",
    "back": "Zone-redundant <b>Application Gateway v2 with WAF</b> (regional L7).",
    "text": "",
    "image": "",
@@ -1569,7 +1569,7 @@
    "text": "Azure VM series: {{c1::B}} burstable · {{c2::D}} general purpose · {{c3::E}} memory-optimized · {{c4::F}} compute-optimized",
    "image": "",
    "analogy": "",
-   "extra": "Also: N = GPU, L = storage (local NVMe), M = very large memory (SAP HANA).",
+   "extra": "Also: N = GPU, L = storage (local non-volatile memory express (NVMe)), M = very large memory (SAP HANA).",
    "source": "AZ-305 · Infrastructure",
    "reverse": false
   },
@@ -1580,7 +1580,7 @@
    "tags": [
     "AZ305::Infrastructure::Compute"
    ],
-   "front": "When do you recommend AKS over Azure Container Apps?",
+   "front": "When do you recommend Azure Kubernetes Service (AKS) over Azure Container Apps?",
    "back": "When the team needs Kubernetes primitives directly (custom controllers/operators, complex networking, StatefulSets) and has K8s skills. Container Apps = containers without running Kubernetes.",
    "text": "",
    "image": "",
@@ -1597,7 +1597,7 @@
     "AZ305::Infrastructure::Compute"
    ],
    "front": "Azure Container Instances vs Container Apps?",
-   "back": "<b>ACI:</b> run a container (group) on demand, no orchestration.<br><b>Container Apps:</b> managed serverless microservices platform with revisions, ingress, KEDA scaling and scale-to-zero.",
+   "back": "<b>ACI:</b> run a container (group) on demand, no orchestration.<br><b>Container Apps:</b> managed serverless microservices platform with revisions, ingress, Kubernetes Event-driven Autoscaling (KEDA) scaling and scale-to-zero.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1614,7 +1614,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Azure Functions plans: {{c1::Consumption / Flex Consumption}} pay per execution, scales to zero, cold starts · {{c2::Premium}} pre-warmed instances, VNet integration, long runs · {{c3::Dedicated (App Service plan)}} runs on capacity you already pay for.",
+   "text": "Azure Functions plans: {{c1::Consumption / Flex Consumption}} pay per execution, scales to zero, cold starts · {{c2::Premium}} pre-warmed instances, virtual network (VNet) integration, long runs · {{c3::Dedicated (App Service plan)}} runs on capacity you already pay for.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -1725,7 +1725,7 @@
     "AZ305::Infrastructure::Compute"
    ],
    "front": "Bursty, unpredictable GPU inference load. What compute do you recommend, and why not a fixed VM?",
-   "back": "<b>Azure ML managed online endpoints</b>, or AKS / Container Apps with GPU workload profiles and autoscaling. A fixed GPU VM bills while idle.",
+   "back": "<b>Azure ML managed online endpoints</b>, or Azure Kubernetes Service (AKS) / Container Apps with GPU workload profiles and autoscaling. A fixed GPU VM bills while idle.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1741,7 +1741,7 @@
     "AZ305::Infrastructure::Application_Architecture"
    ],
    "front": "Expose many backend microservices behind one secured, versioned API with rate limits and keys?",
-   "back": "<b>Azure API Management</b>: gateway with policies (quotas, JWT validation, transforms) and a developer portal.",
+   "back": "<b>Azure API Management</b>: gateway with policies (quotas, JSON Web Token (JWT) validation, transforms) and a developer portal.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1756,7 +1756,7 @@
    "tags": [
     "AZ305::Infrastructure::Application_Architecture"
    ],
-   "front": "Expose a legacy SOAP backend to REST/JSON clients without rewriting it?",
+   "front": "Expose a legacy Simple Object Access Protocol (SOAP) backend to REST/JSON clients without rewriting it?",
    "back": "<b>API Management</b> transformation policies (REST ↔ SOAP translation).",
    "text": "",
    "image": "",
@@ -1903,7 +1903,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "CAF migration strategies: {{c1::Rehost}} (lift and shift) · {{c2::Refactor}} (small changes to fit PaaS) · {{c3::Rearchitect}} (redesign for cloud-native) · {{c4::Rebuild}} (rewrite) · {{c5::Replace}} (switch to SaaS)",
+   "text": "Cloud Adoption Framework (CAF) migration strategies: {{c1::Rehost}} (lift and shift) · {{c2::Refactor}} (small changes to fit PaaS) · {{c3::Rearchitect}} (redesign for cloud-native) · {{c4::Rebuild}} (rewrite) · {{c5::Replace}} (switch to SaaS)",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -1938,7 +1938,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "Exam answers may still name DMA for assessment and DMS for the move.",
+   "extra": "Exam answers may still name DMA for assessment and Azure Database Migration Service (DMS) for the move.",
    "source": "AZ-305 · Infrastructure",
    "reverse": false
   },
@@ -1997,7 +1997,7 @@
    "tags": [
     "AZ305::Infrastructure::Migration"
    ],
-   "front": "Migrate Windows file servers preserving ACLs, with a cutover that takes over the old server name?",
+   "front": "Migrate Windows file servers preserving access control lists (ACLs), with a cutover that takes over the old server name?",
    "back": "<b>Storage Migration Service</b> (Windows Admin Center).",
    "text": "",
    "image": "",
@@ -2013,8 +2013,8 @@
    "tags": [
     "AZ305::Infrastructure::Network"
    ],
-   "front": "VPN Gateway vs ExpressRoute for hybrid connectivity?",
-   "back": "<b>VPN:</b> IPsec over the internet; cheap, variable latency.<br><b>ExpressRoute:</b> private circuit via a provider (or ExpressRoute Direct); higher bandwidth, predictable latency, SLA.",
+   "front": "virtual private network (VPN) Gateway vs ExpressRoute for hybrid connectivity?",
+   "back": "<b>VPN:</b> Internet Protocol Security (IPsec) over the internet; cheap, variable latency.<br><b>ExpressRoute:</b> private circuit via a provider (or ExpressRoute Direct); higher bandwidth, predictable latency, service-level agreement (SLA).",
    "text": "",
    "image": "",
    "analogy": "VPN: an armoured car on the public motorway. ExpressRoute: your own private rail line.",
@@ -2030,7 +2030,7 @@
     "AZ305::Infrastructure::Network"
    ],
    "front": "What do you recommend as a backup path for an ExpressRoute circuit?",
-   "back": "A <b>site-to-site VPN</b> as failover: the circuit is still one physical path.",
+   "back": "A <b>site-to-site virtual private network (VPN)</b> as failover: the circuit is still one physical path.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2047,10 +2047,10 @@
    ],
    "front": "",
    "back": "",
-   "text": "VNet peering is {{c1::non-transitive}}: if A peers with B and B with C, A cannot reach C through B.",
+   "text": "virtual network (VNet) peering is {{c1::non-transitive}}: if A peers with B and B with C, A cannot reach C through B.",
    "image": "",
    "analogy": "A friend of a friend is not automatically your friend.",
-   "extra": "Full mesh grows as n(n−1)/2 links, so at scale use hub-spoke or Virtual WAN.",
+   "extra": "Full mesh grows as n(n−1)/2 links, so at scale use hub-spoke or Virtual wide area network (WAN).",
    "source": "AZ-305 · Infrastructure",
    "reverse": false
   },
@@ -2062,7 +2062,7 @@
     "AZ305::Infrastructure::Network"
    ],
    "front": "Hub-spoke topology: what lives in the hub, and what is the benefit?",
-   "back": "Shared services (VPN/ExpressRoute gateways, Azure Firewall, DNS) in the hub; workloads in peered spokes. Central inspection and no duplicated gateways.",
+   "back": "Shared services (virtual private network (VPN)/ExpressRoute gateways, Azure Firewall, DNS) in the hub; workloads in peered spokes. Central inspection and no duplicated gateways.",
    "text": "",
    "image": "",
    "analogy": "An airline hub: spokes fly through one airport where security screening happens once.",
@@ -2077,8 +2077,8 @@
    "tags": [
     "AZ305::Infrastructure::Network"
    ],
-   "front": "Dozens of branches and VNets need any-to-any connectivity without hand-building hub-spoke. What do you recommend?",
-   "back": "<b>Azure Virtual WAN</b>: managed hubs, SD-WAN branch integration, transitive routing.",
+   "front": "Dozens of branches and virtual networks (VNets) need any-to-any connectivity without hand-building hub-spoke. What do you recommend?",
+   "back": "<b>Azure Virtual wide area network (WAN)</b>: managed hubs, software-defined wide area network (SD-WAN) branch integration, transitive routing.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2094,7 +2094,7 @@
     "AZ305::Infrastructure::Network"
    ],
    "front": "Force all spoke internet egress through Azure Firewall in the hub. How?",
-   "back": "A <b>UDR</b> on each spoke subnet: <code>0.0.0.0/0</code> → next hop = firewall's private IP, overriding the default internet route.",
+   "back": "A <b>user-defined route (UDR)</b> on each spoke subnet: <code>0.0.0.0/0</code> → next hop = firewall's private IP, overriding the default internet route.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2109,8 +2109,8 @@
    "tags": [
     "AZ305::Infrastructure::Network"
    ],
-   "front": "NSG vs Azure Firewall?",
-   "back": "<b>NSG:</b> free, distributed L3/L4 filter on a subnet/NIC.<br><b>Azure Firewall:</b> central managed L3–L7 firewall (FQDN filtering, threat intel), usually in the hub. Complementary.",
+   "front": "network security group (NSG) vs Azure Firewall?",
+   "back": "<b>NSG:</b> free, distributed L3/L4 filter on a subnet/NIC.<br><b>Azure Firewall:</b> central managed L3–layer 7 (L7) firewall (fully qualified domain name (FQDN) filtering, threat intel), usually in the hub. Complementary.",
    "text": "",
    "image": "",
    "analogy": "NSGs are locks on each room door; Azure Firewall is the security desk in the lobby that inspects everyone leaving the building.",
@@ -2125,8 +2125,8 @@
    "tags": [
     "AZ305::Infrastructure::Network"
    ],
-   "front": "Protect a public web app from SQL injection and XSS. What do you recommend?",
-   "back": "A <b>Web Application Firewall</b> on Application Gateway (regional) or Front Door (global), using OWASP rule sets.",
+   "front": "Protect a public web app from SQL injection and cross-site scripting (XSS). What do you recommend?",
+   "back": "A <b>Web Application Firewall</b> on Application Gateway (regional) or Front Door (global), using Open Worldwide Application Security Project (OWASP) rule sets.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2141,7 +2141,7 @@
    "tags": [
     "AZ305::Infrastructure::Network"
    ],
-   "front": "When do you recommend paid Azure DDoS Protection over the free infrastructure protection?",
+   "front": "When do you recommend paid Azure distributed denial of service (DDoS) Protection over the free infrastructure protection?",
    "back": "Internet-facing production apps needing <b>adaptive tuning</b> per app, attack telemetry, <b>cost protection</b> and the DDoS Rapid Response team.",
    "text": "",
    "image": "",
@@ -2159,7 +2159,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Azure load balancing: {{c1::Load Balancer}} = L4, regional · {{c2::Application Gateway}} = L7, regional (WAF, TLS offload, path routing) · {{c3::Front Door}} = L7, global edge (WAF, caching) · {{c4::Traffic Manager}} = DNS-based, global, any protocol",
+   "text": "Azure load balancing: {{c1::Load Balancer}} = layer 4 (L4), regional · {{c2::Application Gateway}} = layer 7 (L7), regional (web application firewall (WAF), TLS offload, path routing) · {{c3::Front Door}} = L7, global edge (WAF, caching) · {{c4::Traffic Manager}} = DNS-based, global, any protocol",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -2189,7 +2189,7 @@
    "tags": [
     "AZ305::Infrastructure::Network"
    ],
-   "front": "Service endpoint vs private endpoint for reaching a PaaS service from a VNet?",
+   "front": "Service endpoint vs private endpoint for reaching a PaaS service from a virtual network (VNet)?",
    "back": "<b>Service endpoint:</b> PaaS firewall trusts your subnet, but the service keeps its public endpoint.<br><b>Private endpoint:</b> private IP inside your VNet, reachable from on-prem too. Preferred.",
    "text": "",
    "image": "",
@@ -2206,7 +2206,7 @@
     "AZ305::Infrastructure::Network"
    ],
    "front": "What must accompany a private endpoint so clients resolve the PaaS name to the private IP?",
-   "back": "A <b>Private DNS zone</b> (e.g. <code>privatelink.blob.core.windows.net</code>) linked to the VNet. Otherwise names resolve to the public IP.",
+   "back": "A <b>Private DNS zone</b> (e.g. <code>privatelink.blob.core.windows.net</code>) linked to the virtual network (VNet). Otherwise names resolve to the public IP.",
    "text": "",
    "image": "",
    "analogy": "",

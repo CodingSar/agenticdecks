@@ -124,7 +124,7 @@
     "classics::complexity"
    ],
    "front": "Why does Brooks conclude there is <b>no silver bullet</b>?",
-   "back": "Past 10× gains (high-level languages, time-sharing, IDEs) removed <i>accidental</i> difficulty. What remains is mostly essential, so no single technique can give another order of magnitude.",
+   "back": "Past 10× gains (high-level languages, time-sharing, integrated development environments (IDEs)) removed <i>accidental</i> difficulty. What remains is mostly essential, so no single technique can give another order of magnitude.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -268,7 +268,7 @@
    "tags": [
     "classics::modularity"
    ],
-   "front": "What did Parnas' <b>KWIC index</b> example show?",
+   "front": "What did Parnas' <b>key word in context (KWIC) index</b> example show?",
    "back": "The same program decomposed by processing steps or by hidden decisions. Only the second survives a change of line-storage format without touching every module.",
    "text": "",
    "image": "<img src=\"sec_kwic.svg\">",
@@ -319,7 +319,7 @@
     "classics::modularity"
    ],
    "front": "Ousterhout's canonical <b>deep module</b> example?",
-   "back": "Unix file I/O: <code>open/read/write/lseek/close</code> hide caching, drivers, permissions and block allocation behind five calls.",
+   "back": "Unix file input/output (I/O): <code>open/read/write/lseek/close</code> hide caching, drivers, permissions and block allocation behind five calls.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -478,7 +478,7 @@
    "tags": [
     "classics::modularity"
    ],
-   "front": "What is an <b>abstraction barrier</b> in SICP?",
+   "front": "What is an <b>abstraction barrier</b> in <i>Structure and Interpretation of Computer Programs</i> (SICP)?",
    "back": "A layer of constructors and selectors separating how data is <i>used</i> from how it is <i>represented</i>. Code above the barrier never touches the representation.",
    "text": "",
    "image": "",
@@ -496,7 +496,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "SICP: every powerful language supplies {{c1::primitive expressions}}, {{c2::means of combination}} and {{c3::means of abstraction}}. Judge an API or DSL by the same three.",
+   "text": "<i>Structure and Interpretation of Computer Programs</i> (SICP): every powerful language supplies {{c1::primitive expressions}}, {{c2::means of combination}} and {{c3::means of abstraction}}. Judge an API or domain-specific language (DSL) by the same three.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -543,7 +543,7 @@
    "tags": [
     "classics::readability"
    ],
-   "front": "SICP's preface claim about who programs are for?",
+   "front": "<i>Structure and Interpretation of Computer Programs</i> (SICP)'s preface claim about who programs are for?",
    "back": "Programs must be written for <b>people to read</b>, and only incidentally for machines to execute.",
    "text": "",
    "image": "",
@@ -932,7 +932,7 @@
     "classics::contrast"
    ],
    "front": "<b>Object seam vs link seam</b>: difference?",
-   "back": "Object seam: subclass and override a method, chosen at the call site. Link seam: swap a library or module at link/import time. Object seams are the OO workhorse.",
+   "back": "Object seam: subclass and override a method, chosen at the call site. Link seam: swap a library or module at link/import time. Object seams are the object-oriented (OO) workhorse.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1142,7 +1142,7 @@
     "classics::evolution",
     "classics::contrast"
    ],
-   "front": "<b>DRY vs the wrong abstraction</b>: when is duplication the better choice?",
+   "front": "<b>Don't repeat yourself (DRY) vs the wrong abstraction</b>: when is duplication the better choice?",
    "back": "When the shared code would need flags and special cases for each caller. Duplication is far cheaper than an abstraction that bends to fit; inline it and let it diverge.",
    "text": "",
    "image": "",
@@ -1190,7 +1190,7 @@
    "tags": [
     "classics::patterns"
    ],
-   "front": "GoF: why <b>program to an interface, not an implementation</b>?",
+   "front": "Gang of Four (GoF): why <b>program to an interface, not an implementation</b>?",
    "back": "Clients that know only the interface can be given any implementation, now or later. Binding to a concrete class fixes the choice at compile time.",
    "text": "",
    "image": "",
@@ -1206,7 +1206,7 @@
    "tags": [
     "classics::patterns"
    ],
-   "front": "GoF: why <b>favour composition over inheritance</b>?",
+   "front": "Gang of Four (GoF): why <b>favour composition over inheritance</b>?",
    "back": "Inheritance is white-box reuse: subclasses see parent internals and are fixed at compile time. Composition is black-box, swappable at run time, and keeps each class focused.",
    "text": "",
    "image": "",
@@ -1224,7 +1224,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "GoF catalogue by what varies: algorithm → {{c1::Strategy}}; object creation → {{c2::Factory / Builder}}; incompatible interface → {{c3::Adapter}}; responsibilities without subclassing → {{c4::Decorator}}; part–whole trees → {{c5::Composite}}; a request as an object → {{c6::Command}}.",
+   "text": "Gang of Four (GoF) catalogue by what varies: algorithm → {{c1::Strategy}}; object creation → {{c2::Factory / Builder}}; incompatible interface → {{c3::Adapter}}; responsibilities without subclassing → {{c4::Decorator}}; part–whole trees → {{c5::Composite}}; a request as an object → {{c6::Command}}.",
    "image": "",
    "analogy": "",
    "extra": "<b>Meta-principle:</b> encapsulate the concept that varies.",
@@ -1272,7 +1272,7 @@
     "classics::patterns"
    ],
    "front": "Why is <b>Decorator</b> both the showcase and the cautionary tale?",
-   "back": "It adds responsibilities at run time without subclass explosion, but stacked decorators (Java I/O streams) give many shallow classes a user must assemble.",
+   "back": "It adds responsibilities at run time without subclass explosion, but stacked decorators (Java input/output (I/O) streams) give many shallow classes a user must assemble.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1287,7 +1287,7 @@
    "tags": [
     "classics::patterns"
    ],
-   "front": "Norvig's critique: what happens to GoF patterns in <b>dynamic languages</b>?",
+   "front": "Norvig's critique: what happens to Gang of Four (GoF) patterns in <b>dynamic languages</b>?",
    "back": "16 of 23 become invisible or trivial: first-class functions replace Strategy, Command and Template Method; multimethods replace Visitor. Patterns mark missing language features.",
    "text": "",
    "image": "",
@@ -1321,7 +1321,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Modern equivalents: Strategy → {{c1::a lambda}}; Iterator → {{c2::generators / for-each}}; Observer → {{c3::events or reactive streams}}; Visitor → {{c4::pattern matching on sum types}}; Singleton → {{c5::a DI container}}.",
+   "text": "Modern equivalents: Strategy → {{c1::a lambda}}; Iterator → {{c2::generators / for-each}}; Observer → {{c3::events or reactive streams}}; Visitor → {{c4::pattern matching on sum types}}; Singleton → {{c5::a dependency injection (DI) container}}.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -1387,7 +1387,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "PoEAA object-relational behaviours: track all changes in a business transaction and commit once → {{c1::Unit of Work}}; one in-memory object per row → {{c2::Identity Map}}; load related data only when touched → {{c3::Lazy Load}}.",
+   "text": "<i>Patterns of Enterprise Application Architecture</i> (PoEAA) object-relational behaviours: track all changes in a business transaction and commit once → {{c1::Unit of Work}}; one in-memory object per row → {{c2::Identity Map}}; load related data only when touched → {{c3::Lazy Load}}.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -1402,7 +1402,7 @@
     "classics::patterns"
    ],
    "front": "Fowler's <b>First Law of Distributed Object Design</b>?",
-   "back": "<b>Don't distribute your objects.</b> Remote calls are orders of magnitude slower, so cross boundaries only with coarse-grained Remote Facades and DTOs.",
+   "back": "<b>Don't distribute your objects.</b> Remote calls are orders of magnitude slower, so cross boundaries only with coarse-grained Remote Facades and data transfer objects (DTOs).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1438,7 +1438,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Older name:</b> Fowler's Separated Interface (PoEAA) — interface in one package, implementation in another.",
+   "extra": "<b>Older name:</b> Fowler's Separated Interface in <i>Patterns of Enterprise Application Architecture</i> (PoEAA) — interface in one package, implementation in another.",
    "source": "Martin · Clean Architecture",
    "reverse": false
   },
@@ -1450,7 +1450,7 @@
     "classics::patterns"
    ],
    "front": "The main <b>critique of Clean Architecture</b> as practised?",
-   "back": "Heavy layering and DTO mapping for CRUD systems; Accelerate found <i>loose coupling</i> predicts performance, not any particular onion; and 'the database is a detail' ignores that data outlives applications.",
+   "back": "Heavy layering and data transfer object (DTO) mapping for create, read, update, delete (CRUD) systems; Accelerate found <i>loose coupling</i> predicts performance, not any particular onion; and 'the database is a detail' ignores that data outlives applications.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1775,7 +1775,7 @@
     "classics::robustness"
    ],
    "front": "Nygard: why is every <b>integration point</b> a crack starter?",
-   "back": "Every socket, DB and remote call can hang, refuse or lie, and failure propagates along coupling. 'Every integration point will eventually fail.'",
+   "back": "Every socket, database (DB) and remote call can hang, refuse or lie, and failure propagates along coupling. 'Every integration point will eventually fail.'",
    "text": "",
    "image": "",
    "analogy": "Cracks in a hull run along the welds: the joints are where stress concentrates.",
@@ -2137,7 +2137,7 @@
    "text": "",
    "image": "",
    "analogy": "A conveyor belt paced by its slowest station, with a small pile in front of it and no new parts loaded faster than it can eat.",
-   "extra": "<b>Modern form:</b> the rope is a WIP limit; the buffer is a small ready-queue before the bottleneck team.",
+   "extra": "<b>Modern form:</b> the rope is a work in progress (WIP) limit; the buffer is a small ready-queue before the bottleneck team.",
    "source": "Goldratt · The Goal",
    "reverse": false
   },
@@ -2262,7 +2262,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Deployment pipeline stages: {{c1::commit stage}} (under ten minutes: compile, unit tests, analysis) → {{c2::automated acceptance tests}} → {{c3::capacity tests}} → {{c4::manual / exploratory / UAT}} → {{c5::release}}. Confidence rises and cost rises; fail fast in the cheap stages.",
+   "text": "Deployment pipeline stages: {{c1::commit stage}} (under ten minutes: compile, unit tests, analysis) → {{c2::automated acceptance tests}} → {{c3::capacity tests}} → {{c4::manual / exploratory / user acceptance testing (UAT)}} → {{c5::release}}. Confidence rises and cost rises; fail fast in the cheap stages.",
    "image": "<img src=\"sec_pipeline.svg\">",
    "analogy": "",
    "extra": "",
@@ -2486,7 +2486,7 @@
     "classics::craft",
     "classics::contrast"
    ],
-   "front": "SICP: <b>procedure vs process</b>?",
+   "front": "<i>Structure and Interpretation of Computer Programs</i> (SICP): <b>procedure vs process</b>?",
    "back": "A recursive <i>procedure</i> (calls itself) can generate an iterative <i>process</i> if state lives in the arguments (tail recursion). Shape of execution ≠ shape of text.",
    "text": "",
    "image": "",
@@ -2502,12 +2502,12 @@
    "tags": [
     "classics::craft"
    ],
-   "front": "SICP's <b>sequences as conventional interfaces</b>: what idea is it?",
+   "front": "<i>Structure and Interpretation of Computer Programs</i> (SICP)'s <b>sequences as conventional interfaces</b>: what idea is it?",
    "back": "Express computations as <code>enumerate → map → filter → accumulate</code> over a stream of elements, so stages compose like signal-processing blocks.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "Ancestor of LINQ, Java Streams and data pipelines.",
+   "extra": "Ancestor of language integrated query (LINQ), Java Streams and data pipelines.",
    "source": "SICP",
    "reverse": false
   },
@@ -2518,7 +2518,7 @@
    "tags": [
     "classics::craft"
    ],
-   "front": "<b>Stratified design</b> (SICP's picture language)?",
+   "front": "<b>Stratified design</b> in the picture language of <i>Structure and Interpretation of Computer Programs</i> (SICP)?",
    "back": "Each layer is a complete language for building the next: primitives, combination, abstraction, again and again. Change one layer without rewriting the rest.",
    "text": "",
    "image": "",
@@ -2534,7 +2534,7 @@
    "tags": [
     "classics::craft"
    ],
-   "front": "XP's core bet on the <b>cost-of-change curve</b>?",
+   "front": "Extreme programming (XP)'s core bet on the <b>cost-of-change curve</b>?",
    "back": "Change need not get exponentially dearer over time if tests, refactoring and integration keep it cheap. 'Embrace change' is only rational if that holds.",
    "text": "",
    "image": "",
@@ -2550,7 +2550,7 @@
    "tags": [
     "classics::craft"
    ],
-   "front": "XP: of cost, time, quality and scope, which is <b>negotiable</b>?",
+   "front": "Extreme programming (XP): of cost, time, quality and scope, which is <b>negotiable</b>?",
    "back": "Only scope. Cutting quality slows you down rather than saving time; cost and time are usually fixed from outside.",
    "text": "",
    "image": "",
@@ -2566,7 +2566,7 @@
    "tags": [
     "classics::craft"
    ],
-   "front": "Why is <b>YAGNI</b> only safe together with refactoring?",
+   "front": "Why is <b>you aren't gonna need it (YAGNI)</b> only safe together with refactoring?",
    "back": "Building for today's need is a bet that you can change the design later. Without cheap refactoring the bet fails and 'simplest thing' becomes a dead end.",
    "text": "",
    "image": "",
@@ -2582,7 +2582,7 @@
    "tags": [
     "classics::craft"
    ],
-   "front": "GOOS: why build the <b>walking skeleton</b> before any real feature?",
+   "front": "<i>Growing Object-Oriented Software, Guided by Tests</i> (GOOS): why build the <b>walking skeleton</b> before any real feature?",
    "back": "The first feature is the hardest: it forces build, deploy and end-to-end test infrastructure into existence. Everything after rides on that pipeline.",
    "text": "",
    "image": "",
@@ -2598,7 +2598,7 @@
    "tags": [
     "classics::craft"
    ],
-   "front": "GOOS: <b>'listen to the tests'</b>, what does a hard-to-write test tell you?",
+   "front": "<i>Growing Object-Oriented Software, Guided by Tests</i> (GOOS): <b>'listen to the tests'</b>, what does a hard-to-write test tell you?",
    "back": "A design smell: too many dependencies (does too much), too many expectations (confused responsibilities), bloated constructors. Fix the object, not the test.",
    "text": "",
    "image": "",
@@ -2615,7 +2615,7 @@
     "classics::craft",
     "classics::contrast"
    ],
-   "front": "<b>Values vs objects</b> (GOOS)?",
+   "front": "<b>Values vs objects</b> in <i>Growing Object-Oriented Software, Guided by Tests</i> (GOOS)?",
    "back": "Values: immutable, no identity, compared by content (money, dates). Objects: identity, state and behaviour; they are the communicating parts of the system.",
    "text": "",
    "image": "",
@@ -2633,7 +2633,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "GOOS object peer stereotypes: {{c1::dependencies}} (required, passed in the constructor), {{c2::notifications}} (fire-and-forget observers), {{c3::adjustments}} (policies that tweak behaviour).",
+   "text": "<i>Growing Object-Oriented Software, Guided by Tests</i> (GOOS) object peer stereotypes: {{c1::dependencies}} (required, passed in the constructor), {{c2::notifications}} (fire-and-forget observers), {{c3::adjustments}} (policies that tweak behaviour).",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -2664,7 +2664,7 @@
     "classics::craft"
    ],
    "front": "Petzold: what does <b>feedback</b> between two gates add?",
-   "back": "Memory. A pair of cross-coupled NOR gates (a latch) holds a bit after the input is removed; from latches come registers and RAM.",
+   "back": "Memory. A pair of cross-coupled not-or (NOR) gates (a latch) holds a bit after the input is removed; from latches come registers and RAM.",
    "text": "",
    "image": "",
    "analogy": "Two people each saying 'I'll stay if you stay': the agreement persists after the question stops.",
@@ -2828,7 +2828,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "The DDD deck covers bounded context mechanics; this is the epistemology behind it.",
+   "extra": "The domain-driven design (DDD) deck covers bounded context mechanics; this is the epistemology behind it.",
    "source": "Kent · Data and Reality",
    "reverse": false
   },
@@ -2839,7 +2839,7 @@
    "tags": [
     "classics::data"
    ],
-   "front": "SICP: what <b>is</b> data?",
+   "front": "<i>Structure and Interpretation of Computer Programs</i> (SICP): what <b>is</b> data?",
    "back": "Whatever satisfies the contract of its operations: if <code>(car (cons x y))</code> is <code>x</code>, pairs exist, even when <code>cons</code> is implemented as a closure.",
    "text": "",
    "image": "",
@@ -2855,7 +2855,7 @@
    "tags": [
     "classics::data"
    ],
-   "front": "SICP: what does <b>assignment</b> cost you?",
+   "front": "<i>Structure and Interpretation of Computer Programs</i> (SICP): what does <b>assignment</b> cost you?",
    "back": "It introduces time: the same expression can mean different things at different moments, 'sameness' becomes a question, and the substitution model stops working.",
    "text": "",
    "image": "",
@@ -2872,7 +2872,7 @@
     "classics::data",
     "classics::contrast"
    ],
-   "front": "<b>Objects vs streams</b> as two views of change (SICP)?",
+   "front": "<b>Objects vs streams</b> as two views of change in <i>Structure and Interpretation of Computer Programs</i> (SICP)?",
    "back": "Object view: the world is things with state that changes. Stream view: the world is signals over time; state is a stream of values and no assignment is needed.",
    "text": "",
    "image": "",
@@ -2888,7 +2888,7 @@
    "tags": [
     "classics::data"
    ],
-   "front": "SICP's <b>data-directed programming</b>: what problem does the operation table solve?",
+   "front": "<i>Structure and Interpretation of Computer Programs</i> (SICP)'s <b>data-directed programming</b>: what problem does the operation table solve?",
    "back": "Adding a new type or a new operation without editing existing code (additivity). A table indexed by (operation, type) replaces switch statements.",
    "text": "",
    "image": "",
@@ -2920,7 +2920,7 @@
    "tags": [
     "classics::data"
    ],
-   "front": "Delivery as <b>stocks and flows</b>: what are WIP, started work and deployed work?",
+   "front": "Delivery as <b>stocks and flows</b>: what are work in progress (WIP), started work and deployed work?",
    "back": "WIP is a stock; starting and deploying are the inflow and outflow. The stock changes only through its flows, so lead time falls by limiting inflow or raising outflow.",
    "text": "",
    "image": "<img src=\"sec_stocks_flows.svg\">",
@@ -3166,7 +3166,7 @@
    "text": "Google's team culture pillars (HRT): {{c1::humility}} (you are not the centre of the universe), {{c2::respect}} (care about colleagues as people), {{c3::trust}} (believe they are competent and let them drive).",
    "image": "",
    "analogy": "",
-   "extra": "",
+   "extra": "<b>HRT</b> stands for humility, respect, trust.",
    "source": "Winters et al. · SWE at Google",
    "reverse": false
   },
@@ -3225,7 +3225,7 @@
    "tags": [
     "classics::people"
    ],
-   "front": "XP's <b>energised work</b> rule?",
+   "front": "Extreme programming (XP)'s <b>energised work</b> rule?",
    "back": "Work only as many hours as you can sustain productively (the 40-hour week). Overtime is a symptom of a planning problem, not a cure.",
    "text": "",
    "image": "",
@@ -3246,7 +3246,7 @@
    "text": "Parnas 1972, <i>On the Criteria To Be Used in Decomposing Systems into Modules</i>: modularise around {{c1::design decisions likely to change}}, not processing steps; worked example: {{c2::the KWIC index}}.",
    "image": "",
    "analogy": "",
-   "extra": "",
+   "extra": "<b>KWIC</b> stands for key word in context.",
    "source": "Parnas 1972",
    "reverse": false
   },

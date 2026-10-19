@@ -17,3 +17,28 @@
 - *Open Agile Architecture*: no Scrum/Kanban, Three Ways cloze, YAGNI or walking-skeleton definitions; those ideas are asked from a different angle (which Way owns post-mortems; why YAGNI needs refactoring; why build the skeleton first).
 - *Architect Craft*: Brooks's Law statement, Westrum typology, Meadows stocks/flows definition, leverage points and "optimise the non-constraint" already exist; here they appear as Brooks-vs-Amdahl, Westrum's messenger test, WIP-as-stock, Herbie and Drum–Buffer–Rope.
 - *Adoption & Epistemics*: "worse is better" and Chesterton's fence not repeated.
+
+## Abbreviations expanded
+Notes touched: 41
+- SICP → Structure and Interpretation of Computer Programs (italic)
+- GoF → Gang of Four
+- GOOS → Growing Object-Oriented Software, Guided by Tests (italic)
+- PoEAA → Patterns of Enterprise Application Architecture (italic)
+- XP → extreme programming
+- KWIC → key word in context
+- WIP → work in progress
+- I/O → input/output
+- DSL → domain-specific language
+- OO → object-oriented
+- DRY → don't repeat yourself
+- YAGNI → you aren't gonna need it
+- CRUD → create, read, update, delete
+- UAT → user acceptance testing
+- NOR → not-or
+- DDD → domain-driven design
+- DB → database
+- DI → dependency injection
+- LINQ → language integrated query
+- DTO → data transfer object
+- IDE → integrated development environment
+- HRT → humility, respect, trust (explained in extra, since the cloze deletions are the expansion)
