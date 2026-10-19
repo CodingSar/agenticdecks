@@ -32,3 +32,127 @@ Source: `cissp_cloud_k8s_grounded.json` (82 notes, avg about 650 chars plus a lo
 
 ## Product-content review
 Reviewed card by card: no product-catered cards found (tools present are open-source subjects or short examples in `extra`); nothing deleted, rewritten or scrubbed.
+
+## Abbreviations expanded
+
+89 notes touched. First occurrence per note written as "full name (ABBR)"; answer-bearing cloze deletions and answer-leaking fronts expanded in `back`/`extra` instead (`Terms:` line in `extra` where the abbreviation occurs only inside a deletion).
+
+- IdP → identity provider
+- OIDC → OpenID Connect
+- KMS → key management service
+- MFA → multi-factor authentication
+- NIS2 → Network and Information Security Directive 2
+- RTO → recovery time objective
+- RPO → recovery point objective
+- MTD → maximum tolerable downtime
+- SSO → single sign-on
+- ALE → annualized loss expectancy
+- SLE → single loss expectancy
+- AV → asset value
+- EF → exposure factor
+- IPsec → internet protocol security
+- OSI → Open Systems Interconnection
+- SA → service account
+- SBOM → software bill of materials
+- SCA → software composition analysis
+- SAST → static application security testing
+- DAST → dynamic application security testing
+- IAST → interactive application security testing
+- AES → advanced encryption standard
+- CDI → constrained data item
+- TP → transformation procedure
+- IVP → integrity verification procedure
+- UDI → unconstrained data item
+- DEK → data encryption key
+- KEK → key encryption key
+- DNSSEC → DNS security extensions
+- DR → disaster recovery
+- HMAC → hash-based message authentication code
+- HSM → hardware security module
+- TPM → trusted platform module
+- JWT → JSON Web Token
+- KDC → key distribution center
+- SAML → security assertion markup language
+- SIEM → security information and event management
+- SOAR → security orchestration, automation and response
+- SLSA → supply-chain levels for software artifacts
+- SOC → System and Organization Controls
+- VPN → virtual private network
+- mTLS → mutual TLS
+- ABAC → attribute-based access control
+- DAC → discretionary access control
+- AH → authentication header
+- ESP → encapsulating security payload
+- IKE → internet key exchange
+- BIO2 → Baseline Informatiebeveiliging Overheid
+- BSIMM → Building Security In Maturity Model
+- SAMM → Software Assurance Maturity Model
+- C2 → command and control
+- C5 → Cloud Computing Compliance Criteria Catalogue
+- CASB → cloud access security broker
+- CMMI → Capability Maturity Model Integration
+- CNI → container network interface
+- COTS → commercial off-the-shelf
+- CRL → certificate revocation list
+- OCSP → online certificate status protocol
+- CVSS → common vulnerability scoring system
+- DLP → data loss prevention
+- DMZ → demilitarized zone
+- DoH → DNS over HTTPS
+- DoT → DNS over TLS
+- DoS → denial of service
+- ECC → elliptic curve cryptography
+- ECDHE → elliptic curve Diffie-Hellman ephemeral
+- FIDO2 → Fast Identity Online 2
+- GDPR → General Data Protection Regulation
+- HA → high availability
+- IMDSv2 → instance metadata service version 2
+- IPS → intrusion prevention system
+- IR → incident response
+- IRSA → identity and access management (IAM) roles for service accounts
+- KPI → key performance indicator
+- KRI → key risk indicator
+- LSM → Linux security module
+- MTTD → mean time to detect
+- NAT → network address translation
+- PAT → port address translation
+- NGFW → next-generation firewall
+- PKI → public key infrastructure
+- PV → persistent volume
+- RAID → redundant array of independent disks
+- RSA → Rivest-Shamir-Adleman
+- SDLC → software development life cycle
+- SDN → software-defined networking
+- SEV → secure encrypted virtualization
+- TDX → trust domain extensions
+- SPDX → Software Package Data Exchange
+- SQLi → SQL injection
+- SSRF → server-side request forgery
+- TCB → trusted computing base
+- TGT → ticket-granting ticket
+- WAF → web application firewall
+- XSS → cross-site scripting
+- TEE → trusted execution environment
+- ACL → access control list
+- VLAN → virtual local area network
+- PCR → platform configuration register
+- SPIFFE → Secure Production Identity Framework for Everyone
+- SPIRE → SPIFFE Runtime Environment
+- SVID → SPIFFE Verifiable Identity Document
+- WAL → write-ahead log
+- NL → Netherlands
+- NIST → National Institute of Standards and Technology
+- SP → Special Publication
+- OWASP → Open Worldwide Application Security Project
+- CIS → Center for Internet Security
+- FIPS → Federal Information Processing Standards
+- RFC → Request for Comments
+- CIA → confidentiality, integrity and availability
+- ATT&CK → MITRE Adversarial Tactics, Techniques, and Common Knowledge
+- CLOUD → Clarifying Lawful Overseas Use of Data
+- CVE → common vulnerabilities and exposures
+- CA / RA → Certificate Authority / Registration Authority
+- (ISC)² → International Information System Security Certification Consortium
+- STRIDE → spoofing, tampering, repudiation, information disclosure, denial of service, elevation of privilege
+- MAC → message authentication code (HMAC note) / mandatory access control (DAC vs MAC note)
+- Left bare on purpose: STRIDE in its own cloze (expansion is the answer), BOLA (expansion is the answer), IAAA, DAD, CISSP, RBAC/TLS/API etc. (whitelist), OAuth, XML, ISO, L3/L4/L7.
