@@ -35,3 +35,18 @@ Source: `Linux_OS_Internals_for_K8s_Security.json` (193 notes) → **185 notes**
 
 ## Product-content review
 Reviewed card by card: no product-catered cards found (tools present are open-source subjects or short examples in `extra`); nothing deleted, rewritten or scrubbed.
+
+## Abbreviations expanded
+82 notes touched. First occurrence per note expanded as "full name (ABBR)" (skipped inside `<code>`, cloze interiors, tags):
+eBPF → extended Berkeley Packet Filter; BPF → Berkeley Packet Filter; PID → process identifier; LSM → Linux Security Module;
+OOM → out of memory; UID → user identifier; GID → group identifier; IPC → inter-process communication; XDP → express data path;
+CRI → container runtime interface; UTS → Unix time-sharing; MAC → mandatory access control; TC → traffic control;
+CFS → Completely Fair Scheduler; TID → thread identifier; TLB → translation lookaside buffer; OCI → Open Container Initiative;
+NFS → network file system; PC → program counter; SP → stack pointer; MMU → memory management unit; QoS → quality of service;
+ASLR → address space layout randomization; VMA → virtual memory area; GC → garbage collector; NIS → Network Information Service;
+POSIX → Portable Operating System Interface; CRIU → checkpoint/restore in userspace; IOPS → input/output operations per second;
+MCS → multi-category security; DDoS → distributed denial of service; BTF → BPF Type Format; VFS → virtual file system;
+NAT → network address translation; ARP → Address Resolution Protocol; GA → general availability; LPE → local privilege escalation;
+CIS → Center for Internet Security; PCI-DSS → Payment Card Industry Data Security Standard; CNCF → Cloud Native Computing Foundation;
+SELinux → Security-Enhanced Linux; RHEL → Red Hat Enterprise Linux.
+(EEVDF is in the map but did not need expansion: note 11 only mentions CFS.)
