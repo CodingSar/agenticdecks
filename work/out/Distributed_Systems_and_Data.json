@@ -170,8 +170,8 @@
    "tags": [
     "DistSys::storage"
    ],
-   "front": "How does an <b>Log-structured merge (LSM)-tree</b> storage engine handle a write?",
-   "back": "Append to a write-ahead log (WAL), insert into an in-memory sorted <b>memtable</b>; when full, flush it as an immutable sorted file (<b>Sorted string table (SSTable)</b>). Background <b>compaction</b> merges SSTables, dropping overwritten/deleted keys.",
+   "front": "How does a <b>log-structured merge (LSM)-tree</b> storage engine handle a write?",
+   "back": "Append to a write-ahead log (WAL), insert into an in-memory sorted <b>memtable</b>; when full, flush it as an immutable sorted file (<b>sorted string table (SSTable)</b>). Background <b>compaction</b> merges SSTables, dropping overwritten/deleted keys.",
    "text": "",
    "image": "",
    "analogy": "Like tossing notes into an inbox and filing them into sorted folders later, instead of finding the right page every time.",
@@ -234,7 +234,7 @@
    "tags": [
     "DistSys::storage"
    ],
-   "front": "When does an <b>Log-structured merge (LSM)-tree</b> beat a B-tree, and what does it cost?",
+   "front": "When does a <b>log-structured merge (LSM)-tree</b> beat a B-tree, and what does it cost?",
    "back": "Write-heavy, time-series or wide-column workloads: sequential writes, higher throughput, better compression. Cost: compaction competes for I/O and reads/space amplify.",
    "text": "",
    "image": "",
@@ -831,7 +831,7 @@
     "DistSys::transactions"
    ],
    "front": "What is <b>snapshot isolation</b>, and how is it implemented?",
-   "back": "Each transaction reads a consistent snapshot as of its start. Implemented with <b>Multi-version concurrency control (MVCC)</b>: keep several committed versions per row. Prevents non-repeatable reads.",
+   "back": "Each transaction reads a consistent snapshot as of its start. Implemented with <b>multi-version concurrency control (MVCC)</b>: keep several committed versions per row. Prevents non-repeatable reads.",
    "text": "",
    "image": "",
    "analogy": "Each transaction reads from a photo of the database taken when it started, while others keep editing the real thing.",
@@ -1086,7 +1086,7 @@
    "tags": [
     "DistSys::consistency"
    ],
-   "front": "State the <b>Consistency, availability, partition tolerance (CAP) theorem</b> precisely.",
+   "front": "State the <b>consistency, availability, partition tolerance (CAP) theorem</b> precisely.",
    "back": "During a network partition, a system cannot be both <b>linearizable</b> (C) and <b>available</b> (every non-failed node returns a non-error response) (A).",
    "text": "",
    "image": "",
@@ -3299,7 +3299,7 @@
     "AWS"
    ],
    "front": "How does DynamoDB <code>TransactWriteItems</code> get atomicity across partitions, and at what cost?",
-   "back": "A durable coordinator runs <b>Two-phase commit (2PC)</b> across partition leaders. Cost: 2× write capacity unit (WCU) per item, more latency, and <code>TransactionConflict</code> rejections. Use only where needed.",
+   "back": "A durable coordinator runs <b>two-phase commit (2PC)</b> across partition leaders. Cost: 2× write capacity unit (WCU) per item, more latency, and <code>TransactionConflict</code> rejections. Use only where needed.",
    "text": "",
    "image": "",
    "analogy": "",

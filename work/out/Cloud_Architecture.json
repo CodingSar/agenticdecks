@@ -117,7 +117,7 @@
     "tradeoffs"
    ],
    "front": "Kubernetes as a portability layer: where does portability leak?",
-   "back": "At every cloud integration: <b>storage</b> (CSI drivers), <b>load balancers/ingress</b>, <b>identity and access management (IAM) / workload identity</b>, and the managed databases and queues the apps depend on.",
+   "back": "At every cloud integration: <b>storage</b> (container storage interface (CSI) drivers), <b>load balancers/ingress</b>, <b>identity and access management (IAM) / workload identity</b>, and the managed databases and queues the apps depend on.",
    "text": "",
    "image": "",
    "analogy": "Kubernetes is a universal power adapter: the plug fits every country, but the voltage (storage, IAM, LBs) still differs behind the wall.",
@@ -321,7 +321,7 @@
    "text": "<b>Workload identity without static keys</b><br>AWS: {{c1::IAM roles (IRSA / EKS Pod Identity on EKS)}}<br>Azure: {{c2::Managed Identities / Workload Identity}}<br>GCP: {{c3::Service accounts + Workload Identity}}",
    "image": "",
    "analogy": "",
-   "extra": "All three let pods/VMs assume an identity from the platform instead of embedding long-lived credentials.<br><b>Acronyms:</b> EKS = Elastic Kubernetes Service.",
+   "extra": "All three let pods/VMs assume an identity from the platform instead of embedding long-lived credentials.<br><b>Acronyms:</b> IRSA = identity and access management (IAM) roles for service accounts; EKS = Elastic Kubernetes Service.",
    "source": "Cloud · Service mapping",
    "reverse": false
   },
@@ -352,11 +352,11 @@
     "security"
    ],
    "front": "Encryption at rest: what is the default on all three clouds, and what does a customer-managed key (CMK) add?",
-   "back": "Default: encrypted with <b>platform-managed keys</b>. CMK (AWS Key Management Service (KMS) / Key Vault / Cloud KMS) adds control, revocation and audit.",
+   "back": "Default: encrypted with <b>platform-managed keys</b>. CMK (AWS KMS / Key Vault / Cloud KMS) adds control, revocation and audit.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Pitfall:</b> with CMK, key availability = data availability. Delete or lose access to the key and the data is gone.",
+   "extra": "<b>Pitfall:</b> with CMK, key availability = data availability. Delete or lose access to the key and the data is gone.<br><b>Acronyms:</b> KMS = Key Management Service.",
    "source": "Cloud · Trade-offs",
    "reverse": false
   },
@@ -373,7 +373,7 @@
    "text": "<b>Confidential computing (data encrypted in use)</b><br>AWS: {{c1::Nitro Enclaves}}<br>Azure: {{c2::Confidential VMs / confidential containers}}<br>GCP: {{c3::Confidential VMs (AMD SEV / Intel TDX)}}",
    "image": "",
    "analogy": "",
-   "extra": "Protects memory even from the hypervisor and host operator.",
+   "extra": "Protects memory even from the hypervisor and host operator.<br><b>Acronyms:</b> TDX = Trust Domain Extensions; SEV = Secure Encrypted Virtualization.",
    "source": "Cloud · Service mapping",
    "reverse": false
   },
@@ -462,7 +462,7 @@
    "text": "Load balancers:<br>AWS: {{c1::ALB (L7), NLB (L4)}}<br>Azure: {{c2::Application Gateway (L7, regional), Load Balancer (L4), Front Door (L7, global)}}<br>GCP: {{c3::Cloud Load Balancing, one product, global or regional, L4/L7}}",
    "image": "",
    "analogy": "",
-   "extra": "GCP's global L7 LB behind a single anycast IP is its distinctive feature.<br><b>Acronyms:</b> ALB = Application Load Balancer; NLB = Network Load Balancer.",
+   "extra": "GCP's global layer 7 (L7) load balancer (LB) behind a single anycast IP is its distinctive feature.<br><b>Acronyms:</b> L4 = layer 4; ALB = Application Load Balancer; NLB = Network Load Balancer.",
    "source": "Cloud · Service mapping",
    "reverse": false
   },
@@ -480,7 +480,7 @@
    "text": "<b>content delivery network (CDN)</b><br>AWS: {{c1::CloudFront}}<br>Azure: {{c2::Front Door (also global L7 LB + WAF)}}<br>GCP: {{c3::Cloud CDN}}",
    "image": "",
    "analogy": "",
-   "extra": "<b>Acronyms:</b> L7 = layer 7.",
+   "extra": "<b>Acronyms:</b> L7 = layer 7; LB = load balancer; WAF = web application firewall.",
    "source": "Cloud · Service mapping",
    "reverse": false
   },
@@ -518,7 +518,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Examples:</b> AWS App Mesh retired (→ virtual private cloud (VPC) Lattice / Elastic Container Service (ECS) Service Connect); Azure Open Service Mesh retired (→ Istio-based Azure Kubernetes Service (AKS) add-on); GCP Cloud Service Mesh is managed Istio.",
+   "extra": "<b>Examples:</b> AWS App Mesh retired (→ VPC Lattice / Elastic Container Service (ECS) Service Connect); Azure Open Service Mesh retired (→ Istio-based Azure Kubernetes Service (AKS) add-on); GCP Cloud Service Mesh is managed Istio.",
    "source": "Cloud · Trade-offs",
    "reverse": false
   },
@@ -572,7 +572,7 @@
    "text": "<b>Serverless containers (no node management)</b><br>AWS: {{c1::Fargate (ECS or EKS)}}<br>Azure: {{c2::Container Apps / Container Instances}}<br>GCP: {{c3::Cloud Run}}",
    "image": "",
    "analogy": "",
-   "extra": "Cloud Run is request-driven containers with scale-to-zero, a middle ground between function as a service (FaaS) and full orchestration.<br><b>Acronyms:</b> EKS = Elastic Kubernetes Service.",
+   "extra": "Cloud Run is request-driven containers with scale-to-zero, a middle ground between function as a service (FaaS) and full orchestration.<br><b>Acronyms:</b> EKS = Elastic Kubernetes Service; ECS = Elastic Container Service.",
    "source": "Cloud · Service mapping",
    "reverse": false
   },
@@ -629,7 +629,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Examples:</b> Google Kubernetes Engine (GKE) Autopilot, Elastic Kubernetes Service (EKS) Fargate profiles, Azure Kubernetes Service (AKS) Automatic / virtual nodes (ACI).",
+   "extra": "<b>Examples:</b> Google Kubernetes Engine (GKE) Autopilot, Elastic Kubernetes Service (EKS) Fargate profiles, Azure Kubernetes Service (AKS) Automatic / virtual nodes (Azure Container Instances, ACI).",
    "source": "Cloud · Trade-offs",
    "reverse": false
   },
@@ -779,10 +779,10 @@
    ],
    "front": "",
    "back": "",
-   "text": "Storage models:<br>{{c1::Block}}: raw addressable blocks, a virtual disk for one host (EBS)<br>{{c2::Object}}: immutable objects + metadata over an HTTP API (S3)<br>{{c3::File}}: shared hierarchical filesystem over the network (NFS/server message block (SMB))",
+   "text": "Storage models:<br>{{c1::Block}}: raw addressable blocks, a virtual disk for one host (EBS)<br>{{c2::Object}}: immutable objects + metadata over an HTTP API (S3)<br>{{c3::File}}: shared hierarchical filesystem over the network (NFS/SMB)",
    "image": "",
    "analogy": "",
-   "extra": "",
+   "extra": "<b>Acronyms:</b> EBS = Elastic Block Store; S3 = Simple Storage Service; NFS = network file system; SMB = server message block.",
    "source": "Cloud · AI infrastructure",
    "reverse": false
   },
@@ -799,7 +799,7 @@
    "text": "<b>Object storage</b><br>AWS: {{c1::S3}}<br>Azure: {{c2::Blob Storage}}<br>GCP: {{c3::Cloud Storage (GCS)}}",
    "image": "",
    "analogy": "",
-   "extra": "<b>Acronyms:</b> S3 = Simple Storage Service.",
+   "extra": "<b>Acronyms:</b> S3 = Simple Storage Service; GCS = Google Cloud Storage.",
    "source": "Cloud · Service mapping",
    "reverse": false
   },
@@ -833,7 +833,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Object storage tiers (hot → archive):<br>AWS Simple Storage Service (S3): {{c1::Standard → Standard-IA / One Zone-IA → Glacier tiers}}<br>Azure Blob: {{c2::Hot → Cool → Cold → Archive}}<br>GCS: {{c3::Standard → Nearline → Coldline → Archive}}",
+   "text": "Object storage tiers (hot → archive):<br>AWS Simple Storage Service (S3): {{c1::Standard → Standard-IA / One Zone-IA → Glacier tiers}}<br>Azure Blob: {{c2::Hot → Cool → Cold → Archive}}<br>Google Cloud Storage (GCS): {{c3::Standard → Nearline → Coldline → Archive}}",
    "image": "",
    "analogy": "",
    "extra": "<b>Acronyms:</b> IA = infrequent access.",
@@ -866,7 +866,7 @@
     "storage",
     "databases"
    ],
-   "front": "Are cloud object stores (S3, Blob Storage, GCS) eventually consistent?",
+   "front": "Are cloud object stores (Simple Storage Service (S3), Blob Storage, Google Cloud Storage (GCS)) eventually consistent?",
    "back": "No. All three are <b>strongly read-after-write consistent</b> for all operations (S3 since December 2020; Blob Storage and GCS earlier).",
    "text": "",
    "image": "",
@@ -968,8 +968,8 @@
     "Storage",
     "cloud::ai-infra"
    ],
-   "front": "Storage area network (SAN) vs network-attached storage (NAS)?",
-   "back": "<b>SAN:</b> dedicated network giving servers <b>block</b> access (Fibre Channel, Internet Small Computer Systems Interface (iSCSI)).<br><b>NAS:</b> <b>file</b>-level access over the normal network (NFS, server message block (SMB)); simpler, usually slower.",
+   "front": "SAN vs NAS?",
+   "back": "<b>Storage area network (SAN):</b> dedicated network giving servers <b>block</b> access (Fibre Channel, Internet Small Computer Systems Interface (iSCSI)).<br><b>Network-attached storage (NAS):</b> <b>file</b>-level access over the normal network (network file system (NFS), server message block (SMB)); simpler, usually slower.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1107,7 +1107,7 @@
     "cloud",
     "databases"
    ],
-   "front": "What do Aurora and AlloyDB change compared with vanilla managed Postgres (RDS / Cloud SQL)?",
+   "front": "What do Aurora and AlloyDB change compared with vanilla managed Postgres (Relational Database Service (RDS) / Cloud SQL)?",
    "back": "They split compute from a <b>purpose-built distributed storage layer</b> (Aurora: 6 copies across 3 availability zones (AZs)), giving faster failover and cheap read replicas. AlloyDB adds columnar acceleration.",
    "text": "",
    "image": "",
@@ -1130,7 +1130,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "Consistency-level details live in the Distributed Systems &amp; Data and availability zone (AZ)-305 decks.",
+   "extra": "Consistency-level details live in the Distributed Systems &amp; Data and AZ-305 decks.",
    "source": "Cloud · Trade-offs",
    "reverse": false
   },
@@ -1473,7 +1473,7 @@
     "cloud::ai-infra"
    ],
    "front": "CUDA cores vs Tensor Cores?",
-   "back": "<b>CUDA cores:</b> general scalar FP/INT arithmetic.<br><b>Tensor Cores:</b> dedicated matrix multiply-accumulate units at low precision (FP16/brain floating point (BF16)/8-bit floating point (FP8)/8-bit integer (INT8)), where most AI floating-point operations per second (FLOPS) come from.",
+   "back": "<b>CUDA cores:</b> general scalar FP/INT arithmetic.<br><b>Tensor Cores:</b> dedicated matrix multiply-accumulate units at low precision (16-bit floating point (FP16)/brain floating point (BF16)/8-bit floating point (FP8)/8-bit integer (INT8)), where most AI floating-point operations per second (FLOPS) come from.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1744,7 +1744,7 @@
     "TPU",
     "cloud::ai-infra"
    ],
-   "front": "Why choose a custom AI application-specific integrated circuit (ASIC) (TPU, Trainium) over GPUs, and what do you lose?",
+   "front": "Why choose a custom AI application-specific integrated circuit (ASIC), such as a tensor processing unit (TPU) or Trainium, over GPUs, and what do you lose?",
    "back": "<b>Gain:</b> better cost and power efficiency for a known workload at scale.<br><b>Lose:</b> flexibility and the CUDA ecosystem.",
    "text": "",
    "image": "",
@@ -1778,7 +1778,7 @@
     "Cloud",
     "cloud::ai-infra"
    ],
-   "front": "Where does an field-programmable gate array (FPGA) fit between CPUs and application-specific integrated circuits (ASICs) in the cloud?",
+   "front": "Where does a field-programmable gate array (FPGA) fit between CPUs and application-specific integrated circuits (ASICs) in the cloud?",
    "back": "A chip whose logic can be <b>reprogrammed</b> after manufacture: custom acceleration (networking, video, some inference) where an ASIC isn't worth building.",
    "text": "",
    "image": "",
@@ -1864,7 +1864,7 @@
     "cloud::ai-infra"
    ],
    "front": "Remote direct memory access over converged Ethernet (RoCE) vs InfiniBand?",
-   "back": "<b>RoCE</b> runs RDMA over standard Ethernet; InfiniBand is a separate fabric. RoCE reuses Ethernet gear and skills but needs a tuned, near-lossless network (PFC/explicit congestion notification (ECN)).",
+   "back": "<b>RoCE</b> runs RDMA over standard Ethernet; InfiniBand is a separate fabric. RoCE reuses Ethernet gear and skills but needs a tuned, near-lossless network (priority flow control (PFC)/explicit congestion notification (ECN)).",
    "text": "",
    "image": "",
    "analogy": "",
