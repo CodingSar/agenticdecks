@@ -39,3 +39,133 @@
 **Scrubbed** (dated version lists / vendor lineups removed from `extra`, card otherwise unchanged)
 - "ROS 2 release pattern, and which distro should a new project pick?"
 - "Gazebo vs. MuJoCo: what is each best at?"
+
+## Abbreviations expanded
+
+167 notes touched. First occurrence per note written as "full name (ABBR)".
+
+- ROS → Robot Operating System
+- MCU → microcontroller unit
+- VLA → vision-language-action
+- RL → reinforcement learning
+- CAN → controller area network
+- IMU → inertial measurement unit
+- VLM → vision-language model
+- ADC → analog-to-digital converter
+- PWM → pulse-width modulation
+- SLAM → simultaneous localization and mapping
+- PID → proportional-integral-derivative
+- I2C → inter-integrated circuit
+- DoF → degrees of freedom
+- MOSFET → metal-oxide-semiconductor field-effect transistor
+- LiDAR → light detection and ranging
+- DC → direct current
+- UART → universal asynchronous receiver-transmitter
+- DDS → Data Distribution Service
+- RTOS → real-time operating system
+- BLDC → brushless direct current
+- MPC → model predictive control
+- IC → integrated circuit
+- LiPo → lithium polymer
+- MPU → microprocessor unit
+- GNSS → global navigation satellite system
+- QDD → quasi-direct drive
+- SPI → serial peripheral interface
+- UDP → User Datagram Protocol
+- IK → inverse kinematics
+- RRT → rapidly-exploring random tree
+- QoS → quality of service
+- URDF → Unified Robot Description Format
+- LED → light-emitting diode
+- FOC → field-oriented control
+- SDA → serial data
+- SD → secure digital
+- CRC → cyclic redundancy check
+- GPIO → general-purpose input/output
+- SBC → single-board computer
+- HSV → hue, saturation, value
+- DH → Denavit–Hartenberg
+- RANSAC → random sample consensus
+- VR → virtual reality
+- XML → extensible markup language
+- REP → ROS Enhancement Proposal
+- DAgger → dataset aggregation
+- VAE → variational autoencoder
+- FET → field-effect transistor
+- EEPROM → electrically erasable programmable read-only memory
+- SRAM → static random-access memory
+- IDE → integrated development environment
+- SoC → system on chip
+- RGB → red, green, blue
+- IR → infrared
+- ESC → electronic speed controller
+- PI → proportional-integral
+- SEA → series elastic actuator
+- TX → transmit
+- RX → receive
+- SCL → serial clock
+- MOSI → master out, slave in
+- MISO → master in, slave out
+- SCK → serial clock
+- ACK → acknowledgement
+- FD → flexible data-rate
+- RTU → remote terminal unit
+- DMX → Digital Multiplex
+- COBS → Consistent Overhead Byte Stuffing
+- IRQ → interrupt request
+- V4L2 → Video4Linux2
+- CSI → camera serial interface
+- HAT → hardware attached on top
+- NPU → neural processing unit
+- TOPS → tera operations per second
+- NVMe → non-volatile memory express
+- BGR → blue, green, red
+- QP → quadratic programming
+- SLERP → spherical linear interpolation
+- ZMP → zero moment point
+- CoM → center of mass
+- SIFT → scale-invariant feature transform
+- PnP → perspective-n-point
+- KF → Kalman filter
+- UKF → unscented Kalman filter
+- EKF → extended Kalman filter
+- GICP → generalized iterative closest point
+- SVD → singular value decomposition
+- NDT → normal distributions transform
+- ICP → iterative closest point
+- VO → visual odometry
+- AR → augmented reality
+- RTK → real-time kinematic
+- NTRIP → Networked Transport of RTCM via Internet Protocol
+- PRM → probabilistic roadmap
+- MPPI → model predictive path integral
+- FSM → finite state machine
+- TAMP → task and motion planning
+- RTPS → Real-Time Publish-Subscribe
+- WAN → wide area network
+- LTS → long-term support
+- SDF → Simulation Description Format
+- AMCL → adaptive Monte Carlo localization
+- POMDP → partially observable Markov decision process
+- PPO → proximal policy optimization
+- SAC → soft actor-critic
+- UMI → Universal Manipulation Interface
+- DCT → discrete cosine transform
+- BPE → byte-pair encoding
+- LoRA → low-rank adaptation
+- OXE → Open X-Embodiment
+- ODE → ordinary differential equation
+- VQ → vector quantization
+- HIL → hardware-in-the-loop
+- ACT → action chunking transformer
+- CBF → control barrier function
+- LQR → linear-quadratic regulator
+- DAC → digital-to-analog converter
+- ISR → interrupt service routine
+- PPR → pulses per revolution
+- PIO → programmable input/output
+- RMW → ROS middleware
+- RC → resistor-capacitor
+- OMPL → Open Motion Planning Library
+
+Left bare (names/products, math symbols, or already expanded): GPS, RS-485, COPI/CIPO, ORB, SAM, CLIP, PX4, MAVLink, XRCE, MCAP, SERL, RECAP, DSRL, LAPA, TOPP-RA, TOTG, PoE (already expanded as Product of Exponentials), GND, HIGH/LOW, S0/S1/S2, ISO/TS, universally-known set.
