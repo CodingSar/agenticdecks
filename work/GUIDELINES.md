@@ -32,7 +32,10 @@ Sources: Wozniak, *Twenty Rules of Formulating Knowledge* (supermemo.com); Super
     book/author/publication trivia ("written in 1999 by…", "which edition…", "who wrote…"),
     "what does chapter N cover", deck-meta cards, history trivia with no lesson in it, and marketing
     fluff. Keep history only when it explains *why* something is the way it is.
-11. **Visual formatting.** Use short HTML: `<b>` for the key term, `<br>` for line breaks,
+11. **Abbreviations.** Each card is seen alone, so write every abbreviation out on first use *on that card*:
+    `memory management unit (MMU)`, then `MMU`. Universally known ones (API, HTTP, CPU, SQL, JSON, AWS…) may stay bare.
+    Never expand on the front if the expansion is the answer.
+12. **Visual formatting.** Use short HTML: `<b>` for the key term, `<br>` for line breaks,
     `<ul><li>` for at most 3–4 bullets, `<code>` for commands, flags and identifiers. No walls of
     text. Leave MathJax `\( \)` as it is.
 

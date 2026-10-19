@@ -15,6 +15,7 @@ Read first: `work/GUIDELINES.md` (card rules + field schema). Then skim two exis
 - **Atomic.** One idea per card; backs ≤ ~25 words (hard max 60). Lists become one cloze deletion per item.
 - **Analogies** in the `analogy` field for 20–30% of cards, where an abstract idea needs a concrete hook. Accurate only.
 - **Contrast cards** ("Baroque vs Rococo: how to tell?") for every pair that's commonly confused.
+- **Abbreviations:** write `full name (ABBR)` on first use on every card (cards are seen alone); see GUIDELINES rule 11.
 - **Formulas** in MathJax `\( \)`, physics only where the formula *is* the idea.
 - **Images:** no downloaded or copyrighted images. You may draw simple, clean SVG diagrams yourself (≤ 20 KB each,
   legible on a white background, 600×400-ish, dark strokes, a little colour) and save them to `media/<prefix>_<name>.svg`,
