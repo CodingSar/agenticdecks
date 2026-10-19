@@ -17,3 +17,105 @@
 - `Linux_Internals_for_K8s_Security`: capabilities untouched.
 
 **Checks.** `tools/check.py`: 0 errors, 0 warnings; all `back` fields ≤ 34 words. `guid: null` throughout. build.py not run.
+
+## Abbreviations expanded
+
+141 notes touched. First occurrence per note written as "full name (ABBR)"; skipped where already expanded, inside code/cloze deletions, or when the expansion would leak the answer (ABAC, LDAP expanded in back). NIST SP 800 expanded as Special Publication (SP). Left bare: SHA-256, SHA, UX, HR, DB, UID, CRLSets/CRLite, field names (NameID etc.).
+
+- IdP → identity provider
+- OIDC → OpenID Connect
+- SAML → Security Assertion Markup Language
+- JWT → JSON Web Token
+- NIST → National Institute of Standards and Technology
+- CA → certificate authority
+- MFA → multi-factor authentication
+- SSO → single sign-on
+- AS → authorization server
+- FIDO2 → Fast IDentity Online 2
+- PEP → policy enforcement point
+- PKCE → Proof Key for Code Exchange
+- SP → service provider
+- XML → Extensible Markup Language
+- DPoP → Demonstrating Proof-of-Possession
+- IAM → identity and access management
+- OCSP → Online Certificate Status Protocol
+- TOTP → time-based one-time password
+- AAL3 → authenticator assurance level 3
+- AAL1 → authenticator assurance level 1
+- AAL2 → authenticator assurance level 2
+- AAL → authenticator assurance level
+- CSRF → cross-site request forgery
+- JWS → JSON Web Signature
+- LDAP → Lightweight Directory Access Protocol
+- RP → relying party
+- SAN → subject alternative name
+- SVID → SPIFFE Verifiable Identity Document
+- URI → uniform resource identifier
+- VPN → virtual private network
+- ABAC → attribute-based access control
+- ACME → Automatic Certificate Management Environment
+- CAEP → Continuous Access Evaluation Profile
+- CRL → certificate revocation list
+- CTAP → Client to Authenticator Protocol
+- EDR → endpoint detection and response
+- IAL1 → identity assurance level 1
+- IAL2 → identity assurance level 2
+- IAL3 → identity assurance level 3
+- IAL → identity assurance level
+- JIT → just-in-time
+- JWE → JSON Web Encryption
+- KDC → key distribution center
+- OTP → one-time password
+- PDP → policy decision point
+- PII → personally identifiable information
+- PIV → personal identity verification
+- PKI → public key infrastructure
+- RFC → Request for Comments
+- SCIM → System for Cross-domain Identity Management
+- SMS → short message service
+- SPA → single-page application
+- TPM → trusted platform module
+- ZTA → zero trust architecture
+- AiTM → adversary-in-the-middle
+- BCP → best current practice
+- BLE → Bluetooth Low Energy
+- CDN → content delivery network
+- CSR → certificate signing request
+- DN → distinguished name
+- FAL → federation assurance level
+- HMAC → hash-based message authentication code
+- HS256 → HMAC with SHA-256
+- HSM → hardware security module
+- JVM → Java virtual machine
+- JWKS → JSON Web Key Set
+- KDF → key derivation function
+- LAN → local area network
+- MDM → mobile device management
+- NFC → near-field communication
+- PBKDF2 → password-based key derivation function 2
+- PSAT → projected service account token
+- ROPC → resource owner password credentials
+- RS256 → RSA with SHA-256
+- SA → service account
+- SIM → subscriber identity module
+- SS7 → Signaling System No. 7
+- SSRF → server-side request forgery
+- TGT → ticket-granting ticket
+- TTL → time-to-live value
+- VLAN → virtual local area network
+- W3C → World Wide Web Consortium
+- XSS → cross-site scripting
+- ZTNA → zero trust network access
+- mTLS → mutual TLS
+- SPIFFE → Secure Production Identity Framework for Everyone
+- SPIRE → SPIFFE Runtime Environment
+- RS → resource server
+- PAP → policy administration point
+- PIP → policy information point
+- EKU → extended key usage
+- ReBAC → relationship-based access control
+- FIPS → Federal Information Processing Standards
+- CN → common name
+- WebAuthn → Web Authentication
+- L7 → Layer 7
+- IMDSv2 → instance metadata service version 2
