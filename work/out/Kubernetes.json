@@ -151,7 +151,7 @@
     "Exam::CKA"
    ],
    "front": "What is the kubelet's job?",
-   "back": "The node agent: watches for pods bound to its node, has the container runtime (via CRI) run them, runs their probes, and reports pod and node status to the API server.",
+   "back": "The node agent: watches for pods bound to its node, has the container runtime (via container runtime interface (CRI)) run them, runs their probes, and reports pod and node status to the API server.",
    "text": "",
    "image": "",
    "analogy": "The kubelet is a site foreman: it reads the work orders posted at HQ for its site, gets the crew to do them, and reports progress back.",
@@ -274,7 +274,7 @@
     "Exam::KCNA"
    ],
    "front": "Under the kubelet, what do containerd/CRI-O do vs runc?",
-   "back": "<b>containerd / CRI-O</b>: CRI runtimes that pull images and manage container lifecycles. <b>runc</b>: the low-level OCI runtime that actually creates the container process.",
+   "back": "<b>containerd / CRI-O</b>: container runtime interface (CRI) runtimes that pull images and manage container lifecycles. <b>runc</b>: the low-level Open Container Initiative (OCI) runtime that actually creates the container process.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -397,7 +397,7 @@
     "Exam::CKA"
    ],
    "front": "What is the pause (infrastructure) container in a Pod?",
-   "back": "A tiny container that holds the pod's network (and IPC) namespace. App containers join it, so the pod keeps one IP even as app containers restart.",
+   "back": "A tiny container that holds the pod's network (and inter-process communication (IPC)) namespace. App containers join it, so the pod keeps one IP even as app containers restart.",
    "text": "",
    "image": "",
    "analogy": "The pause container is the apartment's lease holder: tenants (app containers) can move in and out while the address (IP) stays the same.",
@@ -536,7 +536,7 @@
     "Exam::CKA"
    ],
    "front": "DaemonSet vs Deployment: how are pods placed?",
-   "back": "<b>DaemonSet</b>: exactly one pod per (matching) node, added automatically to new nodes; for node agents (CNI, log/metrics collectors). <b>Deployment</b>: N replicas placed anywhere by the scheduler.",
+   "back": "<b>DaemonSet</b>: exactly one pod per (matching) node, added automatically to new nodes; for node agents (container network interface (CNI), log/metrics collectors). <b>Deployment</b>: N replicas placed anywhere by the scheduler.",
    "text": "",
    "image": "",
    "analogy": "A DaemonSet is one smoke detector per room: add a room (node) and it gets its own detector automatically.",
@@ -622,7 +622,7 @@
     "Exam::CKA"
    ],
    "front": "How does a StatefulSet give each pod its own persistent storage?",
-   "back": "<code>volumeClaimTemplates</code> create one PVC per pod (<code>data-web-0</code>, …). A rescheduled pod reattaches to the <b>same</b> PVC, keeping its data.",
+   "back": "<code>volumeClaimTemplates</code> create one persistent volume claim (PVC) per pod (<code>data-web-0</code>, …). A rescheduled pod reattaches to the <b>same</b> PVC, keeping its data.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -863,7 +863,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Pod QoS classes: {{c1::Guaranteed}} = every container has requests == limits for CPU and memory; {{c2::Burstable}} = some requests/limits set but not Guaranteed; {{c3::BestEffort}} = none set.",
+   "text": "Pod quality of service (QoS) classes: {{c1::Guaranteed}} = every container has requests == limits for CPU and memory; {{c2::Burstable}} = some requests/limits set but not Guaranteed; {{c3::BestEffort}} = none set.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -878,7 +878,7 @@
     "Kubernetes::Scheduling_Resources_Autoscaling",
     "Exam::CKA"
    ],
-   "front": "Under node memory pressure, in which QoS order are pods evicted?",
+   "front": "Under node memory pressure, in which quality of service (QoS) order are pods evicted?",
    "back": "<b>BestEffort</b> first, then <b>Burstable</b> (those furthest over their requests), <b>Guaranteed</b> last.",
    "text": "",
    "image": "",
@@ -965,7 +965,7 @@
     "Kubernetes::Scheduling_Resources_Autoscaling",
     "Exam::KCNA"
    ],
-   "front": "What does KEDA add over a plain HPA?",
+   "front": "What does Kubernetes Event-driven Autoscaling (KEDA) add over a plain horizontal pod autoscaler (HPA)?",
    "back": "Event-driven scaling on external sources (queue length, Kafka lag, cron), including scaling <b>to and from zero</b>.",
    "text": "",
    "image": "",
@@ -983,11 +983,11 @@
     "Exam::CKA"
    ],
    "front": "What does the Kubernetes pod network model require?",
-   "back": "Every pod gets its own IP, and all pods can reach all other pods on any node <b>without NAT</b>; node agents can reach local pods. A CNI plugin implements it.",
+   "back": "Every pod gets its own IP, and all pods can reach all other pods on any node <b>without network address translation (NAT)</b>; node agents can reach local pods. A container network interface (CNI) plugin implements it.",
    "text": "",
    "image": "",
    "analogy": "A flat pod network is one big office floor where every desk has a direct phone line, with no switchboard rewriting numbers (NAT) in between.",
-   "extra": "<b>Pitfall:</b> pod CIDR must not overlap the node or Service CIDRs.",
+   "extra": "<b>Pitfall:</b> pod classless inter-domain routing (CIDR) must not overlap the node or Service CIDRs.",
    "source": "KIA Ch 11 · CKA",
    "reverse": false
   },
@@ -1020,7 +1020,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Service types build on each other: {{c1::ClusterIP}} (internal virtual IP, the default) → {{c2::NodePort}} (same port on every node, 30000–32767) → {{c3::LoadBalancer}} (cloud LB in front). {{c4::ExternalName}} is just a DNS CNAME alias.",
+   "text": "Service types build on each other: {{c1::ClusterIP}} (internal virtual IP, the default) → {{c2::NodePort}} (same port on every node, 30000–32767) → {{c3::LoadBalancer}} (cloud LB in front). {{c4::ExternalName}} is just a DNS canonical name (CNAME) alias.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -1104,7 +1104,7 @@
     "Exam::CKA"
    ],
    "front": "What does kube-proxy do?",
-   "back": "On every node it programs the dataplane (iptables or IPVS rules) so traffic to a Service's virtual IP is load-balanced to the backend pods.",
+   "back": "On every node it programs the dataplane (iptables or IP Virtual Server (IPVS) rules) so traffic to a Service's virtual IP is load-balanced to the backend pods.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1120,12 +1120,12 @@
     "Kubernetes::Networking_Services",
     "Exam::CKA"
    ],
-   "front": "kube-proxy: iptables mode vs IPVS mode?",
+   "front": "kube-proxy: iptables mode vs IP Virtual Server (IPVS) mode?",
    "back": "<b>iptables</b>: rule chains with linear matching; fine for most clusters. <b>IPVS</b>: kernel hash-table load balancer; scales better to thousands of Services and offers more LB algorithms.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "eBPF dataplanes (e.g. Cilium) can replace kube-proxy entirely.",
+   "extra": "Extended Berkeley Packet Filter (eBPF) dataplanes (e.g. Cilium) can replace kube-proxy entirely.",
    "source": "CKA · networking",
    "reverse": false
   },
@@ -1191,7 +1191,7 @@
     "Exam::CKA"
    ],
    "front": "Why was the Gateway API created as a successor to Ingress?",
-   "back": "Ingress is one overloaded object (HTTP only, vendor features via annotations). Gateway API is role-oriented, portable and expressive, covering L4 and L7 (HTTP, gRPC, TCP).",
+   "back": "Ingress is one overloaded object (HTTP only, vendor features via annotations). Gateway API is role-oriented, portable and expressive, covering layer 4 (L4) and layer 7 (L7) (HTTP, gRPC, TCP).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1226,7 +1226,7 @@
     "Exam::CKAD"
    ],
    "front": "What does a NetworkPolicy do, and what's needed for it to take effect?",
-   "back": "An L3/L4 allow-list for ingress/egress of pods selected by labels. It works only if the CNI enforces it (e.g. Calico, Cilium); otherwise it's silently ignored.",
+   "back": "A layer 3 (L3)/layer 4 (L4) allow-list for ingress/egress of pods selected by labels. It works only if the container network interface (CNI) enforces it (e.g. Calico, Cilium); otherwise it's silently ignored.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1280,7 +1280,7 @@
     "Exam::CKS"
    ],
    "front": "After applying a default-deny egress policy, what usually breaks first?",
-   "back": "<b>DNS</b>: pods can't reach CoreDNS on port 53 (UDP/TCP) until you explicitly allow it.",
+   "back": "<b>DNS</b>: pods can't reach CoreDNS on port 53 (User Datagram Protocol (UDP)/TCP) until you explicitly allow it.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1350,7 +1350,7 @@
     "Exam::CKA"
    ],
    "front": "What does a StorageClass enable?",
-   "back": "<b>Dynamic provisioning</b>: a PVC that names the class makes its provisioner (usually a CSI driver) create a matching PV on demand. No pre-made PVs needed.",
+   "back": "<b>Dynamic provisioning</b>: a persistent volume claim (PVC) that names the class makes its provisioner (usually a container storage interface (CSI) driver) create a matching persistent volume (PV) on demand. No pre-made PVs needed.",
    "text": "",
    "image": "",
    "analogy": "A StorageClass is a print-on-demand catalogue: order a book (PVC) and it's printed (PV) when you ask, instead of pulling from a pre-stocked shelf.",
@@ -1367,7 +1367,7 @@
     "Exam::CKA"
    ],
    "front": "What problem does <code>volumeBindingMode: WaitForFirstConsumer</code> solve?",
-   "back": "It delays provisioning until a pod using the PVC is scheduled, so the volume is created in that pod's zone. <code>Immediate</code> can create it in the wrong zone.",
+   "back": "It delays provisioning until a pod using the persistent volume claim (PVC) is scheduled, so the volume is created in that pod's zone. <code>Immediate</code> can create it in the wrong zone.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1385,7 +1385,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "PV access modes: {{c1::ReadWriteOnce (RWO)}} = read-write by a single <b>node</b>; {{c2::ReadOnlyMany (ROX)}} = read-only by many nodes; {{c3::ReadWriteMany (RWX)}} = read-write by many nodes; {{c4::ReadWriteOncePod (RWOP)}} = read-write by a single <b>pod</b>.",
+   "text": "Persistent volume (PV) access modes: {{c1::ReadWriteOnce (RWO)}} = read-write by a single <b>node</b>; {{c2::ReadOnlyMany (ROX)}} = read-only by many nodes; {{c3::ReadWriteMany (RWX)}} = read-write by many nodes; {{c4::ReadWriteOncePod (RWOP)}} = read-write by a single <b>pod</b>.",
    "image": "",
    "analogy": "",
    "extra": "<b>Pitfall:</b> RWO still lets several pods on the <i>same node</i> mount the volume; use RWOP for true single-writer.",
@@ -1402,7 +1402,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "PV reclaim policies (after the claim is deleted): {{c1::Retain}} keeps the volume and data for manual cleanup; {{c2::Delete}} removes the backing storage asset; {{c3::Recycle}} (deprecated) scrubbed it for reuse.",
+   "text": "Persistent volume (PV) reclaim policies (after the claim is deleted): {{c1::Retain}} keeps the volume and data for manual cleanup; {{c2::Delete}} removes the backing storage asset; {{c3::Recycle}} (deprecated) scrubbed it for reuse.",
    "image": "",
    "analogy": "",
    "extra": "Dynamically provisioned PVs inherit the StorageClass <code>reclaimPolicy</code>, default <b>Delete</b>.",
@@ -1542,7 +1542,7 @@
     "Exam::KCSA"
    ],
    "front": "How does the API server authenticate users, and what's notably missing?",
-   "back": "X.509 client certs, bearer tokens (ServiceAccount, OIDC), or an authenticating proxy/webhook. There are <b>no User objects</b>: users exist only as names asserted by credentials.",
+   "back": "X.509 client certs, bearer tokens (ServiceAccount, OpenID Connect (OIDC)), or an authenticating proxy/webhook. There are <b>no User objects</b>: users exist only as names asserted by credentials.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1560,7 +1560,7 @@
     "Exam::CKS"
    ],
    "front": "Which Kubernetes authorization modes exist besides RBAC?",
-   "back": "<b>Node</b> (for kubelets), <b>Webhook</b> (external decision), <b>ABAC</b> (legacy), and AlwaysAllow/AlwaysDeny (testing only).",
+   "back": "<b>Node</b> (for kubelets), <b>Webhook</b> (external decision), <b>attribute-based access control (ABAC)</b> (legacy), and AlwaysAllow/AlwaysDeny (testing only).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1650,7 +1650,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "A ClusterRole + ClusterRoleBinding is required for cluster-scoped resources such as nodes and PVs.",
+   "extra": "A ClusterRole + ClusterRoleBinding is required for cluster-scoped resources such as nodes and persistent volumes (PVs).",
    "source": "KIA Ch 12 · CKA",
    "reverse": false
   },
@@ -1680,7 +1680,7 @@
     "Exam::CKA"
    ],
    "front": "How do you onboard a human user with a client certificate?",
-   "back": "Submit a <code>CertificateSigningRequest</code> with the base64 CSR, <code>kubectl certificate approve</code> it, put the issued cert in a kubeconfig, then grant RBAC to its CN (user) / O (group).",
+   "back": "Submit a <code>CertificateSigningRequest</code> with the base64 CSR, <code>kubectl certificate approve</code> it, put the issued cert in a kubeconfig, then grant RBAC to its common name (CN) (user) / O (group).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1835,7 +1835,7 @@
     "Exam::CKS"
    ],
    "front": "How is an AppArmor profile applied to a container in current Kubernetes?",
-   "back": "<code>securityContext.appArmorProfile</code> (type <code>RuntimeDefault</code> or <code>Localhost</code>), GA in 1.30. Older clusters used the <code>container.apparmor.security.beta.kubernetes.io/&lt;c&gt;</code> annotation.",
+   "back": "<code>securityContext.appArmorProfile</code> (type <code>RuntimeDefault</code> or <code>Localhost</code>), generally available (GA) in 1.30. Older clusters used the <code>container.apparmor.security.beta.kubernetes.io/&lt;c&gt;</code> annotation.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1852,7 +1852,7 @@
     "Exam::CKS"
    ],
    "front": "How does a pod select a sandboxed runtime such as gVisor?",
-   "back": "Set <code>spec.runtimeClassName</code> to a <b>RuntimeClass</b>, which maps to a CRI handler (e.g. runc, runsc, kata).",
+   "back": "Set <code>spec.runtimeClassName</code> to a <b>RuntimeClass</b>, which maps to a container runtime interface (CRI) handler (e.g. runc, runsc, kata).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1920,7 +1920,7 @@
     "Exam::CKS"
    ],
    "front": "How do you enable encryption at rest for Secrets in etcd?",
-   "back": "Give kube-apiserver an <b>EncryptionConfiguration</b> via <code>--encryption-provider-config</code>, with a provider such as <code>aescbc</code>, <code>aesgcm</code> or KMS v2 first in the list.",
+   "back": "Give kube-apiserver an <b>EncryptionConfiguration</b> via <code>--encryption-provider-config</code>, with a provider such as <code>aescbc</code>, <code>aesgcm</code> or key management service (KMS) v2 first in the list.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1954,7 +1954,7 @@
     "Exam::KCSA"
    ],
    "front": "Why is etcd the most valuable asset to protect in a cluster?",
-   "back": "It holds all state, including Secrets (unencrypted by default): read access ≈ full cluster compromise. Protect it with mTLS, control-plane-only network access, encryption at rest and backups.",
+   "back": "It holds all state, including Secrets (unencrypted by default): read access ≈ full cluster compromise. Protect it with mutual TLS (mTLS), control-plane-only network access, encryption at rest and backups.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1988,7 +1988,7 @@
     "Exam::KCSA"
    ],
    "front": "In KCSA threat modelling, how is STRIDE applied to a cluster?",
-   "back": "Map each trust boundary (user→API server, API server→etcd, control plane→kubelet, pod→pod, cluster→cloud) to Spoofing, Tampering, Repudiation, Info disclosure, DoS and Elevation of privilege, then choose controls.",
+   "back": "Map each trust boundary (user→API server, API server→etcd, control plane→kubelet, pod→pod, cluster→cloud) to Spoofing, Tampering, Repudiation, Info disclosure, denial of service (DoS) and Elevation of privilege, then choose controls.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2023,7 +2023,7 @@
     "Exam::KCSA"
    ],
    "front": "How do you minimize a container image's attack surface?",
-   "back": "Minimal/distroless base, multi-stage builds (no build tools), pin by digest, run as non-root, no embedded secrets, scan in CI. Fewer binaries → fewer CVEs and no shell for an attacker.",
+   "back": "Minimal/distroless base, multi-stage builds (no build tools), pin by digest, run as non-root, no embedded secrets, scan in CI. Fewer binaries → fewer common vulnerabilities and exposures (CVEs) and no shell for an attacker.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2040,7 +2040,7 @@
     "Exam::CKS"
    ],
    "front": "What does Trivy scan for?",
-   "back": "Container images, filesystems and IaC: OS/library CVEs, misconfigurations and leaked secrets; it can also emit an SBOM. Usually run in CI to gate images before they reach the registry.",
+   "back": "Container images, filesystems and infrastructure as code (IaC): OS/library common vulnerabilities and exposures (CVEs), misconfigurations and leaked secrets; it can also emit an software bill of materials (SBOM). Usually run in CI to gate images before they reach the registry.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2057,7 +2057,7 @@
     "Exam::CKS"
    ],
    "front": "What is kube-bench?",
-   "back": "A tool that checks a cluster against the <b>CIS Kubernetes Benchmark</b> (control-plane flags, file permissions, kubelet config) and reports pass/fail with remediation.",
+   "back": "A tool that checks a cluster against the <b>Center for Internet Security (CIS) Kubernetes Benchmark</b> (control-plane flags, file permissions, kubelet config) and reports pass/fail with remediation.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2078,7 +2078,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Mitigations:</b> SBOMs, image signing (Cosign), SLSA provenance, scanning, admission-time verification. Depth: Platform Engineering deck.",
+   "extra": "<b>Mitigations:</b> software bills of materials (SBOMs), image signing (Cosign), Supply-chain Levels for Software Artifacts (SLSA) provenance, scanning, admission-time verification. Depth: Platform Engineering deck.",
    "source": "KCSA · supply chain",
    "reverse": false
   },
@@ -2091,7 +2091,7 @@
     "Exam::CKS"
    ],
    "front": "What does Falco detect?",
-   "back": "Suspicious <b>runtime</b> behaviour from kernel syscall events (via eBPF), e.g. a shell spawned in a container, writes under <code>/etc</code>, sensitive file reads, unexpected connections.",
+   "back": "Suspicious <b>runtime</b> behaviour from kernel syscall events (via extended Berkeley Packet Filter (eBPF)), e.g. a shell spawned in a container, writes under <code>/etc</code>, sensitive file reads, unexpected connections.",
    "text": "",
    "image": "",
    "analogy": "A CCTV camera inside the building, where admission control is the guard at the door.",
@@ -2245,7 +2245,7 @@
     "Exam::CKA"
    ],
    "front": "Which flags does <code>etcdctl snapshot save</code> need on a kubeadm cluster?",
-   "back": "<code>--endpoints</code>, <code>--cacert</code>, <code>--cert</code>, <code>--key</code> (etcd CA and client cert, from the etcd manifest), with <code>ETCDCTL_API=3</code>.",
+   "back": "<code>--endpoints</code>, <code>--cacert</code>, <code>--cert</code>, <code>--key</code> (etcd certificate authority (CA) and client cert, from the etcd manifest), with <code>ETCDCTL_API=3</code>.",
    "text": "",
    "image": "",
    "analogy": "An etcd snapshot is a photograph of the company's filing cabinet: restore it and the cluster 'remembers' everything as of that moment.",
@@ -2347,7 +2347,7 @@
     "Exam::CKA"
    ],
    "front": "How long are kubeadm certificates valid, and how do you check and renew them?",
-   "back": "Leaf certs <b>1 year</b>, CA 10 years. <code>kubeadm certs check-expiration</code>; <code>kubeadm certs renew all</code>. <code>kubeadm upgrade</code> also renews them.",
+   "back": "Leaf certs <b>1 year</b>, certificate authority (CA) 10 years. <code>kubeadm certs check-expiration</code>; <code>kubeadm certs renew all</code>. <code>kubeadm upgrade</code> also renews them.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2364,7 +2364,7 @@
     "Exam::CKA"
    ],
    "front": "A pod is stuck in Pending. First triage step, and the usual causes?",
-   "back": "<code>kubectl describe pod</code> → Events. Causes: not enough CPU/memory, unmet nodeSelector/affinity/taints, unbound PVC, or no Ready nodes.",
+   "back": "<code>kubectl describe pod</code> → Events. Causes: not enough CPU/memory, unmet nodeSelector/affinity/taints, unbound persistent volume claim (PVC), or no Ready nodes.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2451,7 +2451,7 @@
     "Exam::CKA"
    ],
    "front": "node_exporter vs kube-state-metrics vs metrics-server?",
-   "back": "<b>node_exporter</b>: host CPU/memory/disk. <b>kube-state-metrics</b>: object state (desired replicas, pod phase). <b>metrics-server</b>: live usage for <code>kubectl top</code> and HPA, not for Prometheus.",
+   "back": "<b>node_exporter</b>: host CPU/memory/disk. <b>kube-state-metrics</b>: object state (desired replicas, pod phase). <b>metrics-server</b>: live usage for <code>kubectl top</code> and horizontal pod autoscaler (HPA), not for Prometheus.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2739,8 +2739,8 @@
     "Kubernetes::Observability",
     "Exam::PCA"
    ],
-   "front": "Prometheus storage: what's local, and how do you get long-term retention / HA?",
-   "back": "A local single-node TSDB (in-memory head block + WAL, compacted to disk blocks). For long-term retention and HA, <code>remote_write</code> to Thanos, Mimir or Cortex.",
+   "front": "Prometheus storage: what's local, and how do you get long-term retention / high availability (HA)?",
+   "back": "A local single-node time-series database (TSDB) (in-memory head block + write-ahead log (WAL), compacted to disk blocks). For long-term retention and HA, <code>remote_write</code> to Thanos, Mimir or Cortex.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2775,7 +2775,7 @@
     "Exam::KCNA"
    ],
    "front": "What is OpenTelemetry?",
-   "back": "The CNCF vendor-neutral standard (API, SDKs, Collector, OTLP) for generating, collecting and exporting traces, metrics and logs.",
+   "back": "The Cloud Native Computing Foundation (CNCF) vendor-neutral standard (API, software development kits (SDKs), Collector, OpenTelemetry Protocol (OTLP)) for generating, collecting and exporting traces, metrics and logs.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2827,7 +2827,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "OpenTelemetry Collector pipeline: {{c1::receivers}} (ingest, e.g. OTLP) → {{c2::processors}} (batch, filter, transform) → {{c3::exporters}} (send to backends).",
+   "text": "OpenTelemetry Collector pipeline: {{c1::receivers}} (ingest, e.g. OpenTelemetry Protocol (OTLP)) → {{c2::processors}} (batch, filter, transform) → {{c3::exporters}} (send to backends).",
    "image": "",
    "analogy": "The Collector is a mail sorting office: intake (receivers), sorting and bundling (processors), dispatch to destinations (exporters).",
    "extra": "Decouples apps from observability backends: switch vendors by changing Collector config.",
@@ -2842,7 +2842,7 @@
     "Kubernetes::Observability",
     "Exam::OTCA"
    ],
-   "front": "Why deploy the OTel Collector as both agent and gateway?",
+   "front": "Why deploy the OpenTelemetry (OTel) Collector as both agent and gateway?",
    "back": "<b>Agent</b> (per node/sidecar): local, low-latency collection. <b>Gateway</b> (central pool): heavy processing (tail sampling, batching) and fan-out to backends.",
    "text": "",
    "image": "",
@@ -2860,7 +2860,7 @@
     "Exam::OTCA"
    ],
    "front": "What is OTLP?",
-   "back": "The OpenTelemetry Protocol: the native wire format (protobuf over gRPC or HTTP) for traces, metrics and logs between SDKs, Collectors and backends.",
+   "back": "The OpenTelemetry Protocol: the native wire format (protobuf over gRPC or HTTP) for traces, metrics and logs between software development kits (SDKs), Collectors and backends.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2893,7 +2893,7 @@
     "Kubernetes::Observability",
     "Exam::OTCA"
    ],
-   "front": "OpenTelemetry API vs SDK?",
+   "front": "OpenTelemetry API vs software development kit (SDK)?",
    "back": "The <b>API</b> is the interface code instruments against (a no-op if unconfigured). The <b>SDK</b> implements sampling, processing and export. Libraries depend only on the API; the app wires in the SDK.",
    "text": "",
    "image": "",
@@ -3013,7 +3013,7 @@
     "Exam::KCNA"
    ],
    "front": "What is a service mesh?",
-   "back": "An infrastructure layer (proxies + control plane) that handles service-to-service traffic management, mTLS and telemetry transparently, moving those concerns out of app code.",
+   "back": "An infrastructure layer (proxies + control plane) that handles service-to-service traffic management, mutual TLS (mTLS) and telemetry transparently, moving those concerns out of app code.",
    "text": "",
    "image": "",
    "analogy": "Each service gets a personal assistant who places and answers its calls, encrypting, retrying and logging them, so the service just talks.",
@@ -3030,7 +3030,7 @@
     "Exam::ICA"
    ],
    "front": "Istio control plane vs data plane?",
-   "back": "Control plane: <b>istiod</b> (discovery, config, certificate authority), pushing config via xDS. Data plane: <b>Envoy</b> sidecars per pod, or ztunnel + waypoint proxies in ambient mode.",
+   "back": "Control plane: <b>istiod</b> (discovery, config, certificate authority), pushing config via x Discovery Service (xDS). Data plane: <b>Envoy</b> sidecars per pod, or ztunnel + waypoint proxies in ambient mode.",
    "text": "",
    "image": "",
    "analogy": "istiod is air-traffic control issuing flight plans; Envoy proxies are the pilots actually flying the traffic.",
@@ -3047,7 +3047,7 @@
     "Exam::ICA"
    ],
    "front": "Istio sidecar mode vs ambient mode?",
-   "back": "<b>Sidecar</b>: an Envoy in every pod (full L7, per-pod overhead). <b>Ambient</b>: no sidecars; a per-node <b>ztunnel</b> does L4 mTLS, and optional <b>waypoint</b> proxies add L7 only where needed.",
+   "back": "<b>Sidecar</b>: an Envoy in every pod (full layer 7 (L7), per-pod overhead). <b>Ambient</b>: no sidecars; a per-node <b>ztunnel</b> does layer 4 (L4) mutual TLS (mTLS), and optional <b>waypoint</b> proxies add L7 only where needed.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3064,7 +3064,7 @@
     "Exam::ICA"
    ],
    "front": "What is ztunnel in Istio ambient mode?",
-   "back": "A per-node proxy (DaemonSet, written in Rust) handling L4 mTLS, authentication and telemetry for all pods on the node.",
+   "back": "A per-node proxy (DaemonSet, written in Rust) handling layer 4 (L4) mutual TLS (mTLS), authentication and telemetry for all pods on the node.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3081,7 +3081,7 @@
     "Exam::ICA"
    ],
    "front": "What is HBONE in Istio ambient mode?",
-   "back": "HTTP-Based Overlay Network Environment: mTLS-encrypted HTTP CONNECT tunnelling (port 15008) carrying traffic between ztunnels and waypoints.",
+   "back": "HTTP-Based Overlay Network Environment: mutual TLS (mTLS)-encrypted HTTP CONNECT tunnelling (port 15008) carrying traffic between ztunnels and waypoints.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3098,7 +3098,7 @@
     "Exam::ICA"
    ],
    "front": "What is an Istio waypoint proxy, and how is it deployed?",
-   "back": "An Envoy providing L7 features (routing, retries, L7 authz) in ambient mode, shared per namespace/service account. Deployed as a Gateway API Gateway with <code>gatewayClassName: istio-waypoint</code>.",
+   "back": "An Envoy providing layer 7 (L7) features (routing, retries, L7 authz) in ambient mode, shared per namespace/service account. Deployed as a Gateway API Gateway with <code>gatewayClassName: istio-waypoint</code>.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3115,7 +3115,7 @@
     "Exam::ICA"
    ],
    "front": "What does an Istio VirtualService configure?",
-   "back": "L7 routing rules for a host: match on URI/headers, then route by weight to destinations/subsets, with retries, timeouts and fault injection.",
+   "back": "Layer 7 (L7) routing rules for a host: match on uniform resource identifier (URI)/headers, then route by weight to destinations/subsets, with retries, timeouts and fault injection.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3132,7 +3132,7 @@
     "Exam::ICA"
    ],
    "front": "Istio VirtualService vs DestinationRule?",
-   "back": "VirtualService = <b>how requests are routed</b> to a host. DestinationRule = <b>what applies after routing</b>: named subsets (v1/v2 by pod labels), LB policy, connection pools, outlier detection.",
+   "back": "VirtualService = <b>how requests are routed</b> to a host. DestinationRule = <b>what applies after routing</b>: named subsets (v1/v2 by pod labels), load balancer (LB) policy, connection pools, outlier detection.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3183,7 +3183,7 @@
     "Exam::ICA"
    ],
    "front": "What does an Istio ServiceEntry do?",
-   "back": "Adds an external service to the mesh registry, so traffic to it gets Istio routing, policy, mTLS origination and telemetry.",
+   "back": "Adds an external service to the mesh registry, so traffic to it gets Istio routing, policy, mutual TLS (mTLS) origination and telemetry.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3201,7 +3201,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Istio PeerAuthentication mTLS modes: {{c1::STRICT}} accepts mTLS only; {{c2::PERMISSIVE}} accepts mTLS or plaintext (the default, eases migration); {{c3::DISABLE}} turns mTLS off.",
+   "text": "Istio PeerAuthentication mutual TLS (mTLS) modes: {{c1::STRICT}} accepts mTLS only; {{c2::PERMISSIVE}} accepts mTLS or plaintext (the default, eases migration); {{c3::DISABLE}} turns mTLS off.",
    "image": "",
    "analogy": "PERMISSIVE is a door that accepts both keycards and old metal keys during the migration; STRICT accepts keycards only.",
    "extra": "",
@@ -3217,7 +3217,7 @@
     "Exam::ICA"
    ],
    "front": "Istio RequestAuthentication vs AuthorizationPolicy?",
-   "back": "<b>RequestAuthentication</b> validates end-user JWTs (issuer/JWKS); it authenticates but doesn't authorize. <b>AuthorizationPolicy</b> ALLOWs/DENYs by identity, namespace, JWT claims, method, path.",
+   "back": "<b>RequestAuthentication</b> validates end-user JSON Web Tokens (JWTs) (issuer/JSON Web Key Set (JWKS)); it authenticates but doesn't authorize. <b>AuthorizationPolicy</b> ALLOWs/DENYs by identity, namespace, JWT claims, method, path.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3233,8 +3233,8 @@
     "Kubernetes::Service_Mesh_Cilium",
     "Exam::ICA"
    ],
-   "front": "How does Istio give each workload an mTLS identity?",
-   "back": "istiod acts as a CA issuing X.509 certs with a <b>SPIFFE</b> ID derived from the pod's ServiceAccount: <code>spiffe://&lt;trust-domain&gt;/ns/&lt;ns&gt;/sa/&lt;sa&gt;</code>.",
+   "front": "How does Istio give each workload an mutual TLS (mTLS) identity?",
+   "back": "istiod acts as a certificate authority (CA) issuing X.509 certs with a <b>Secure Production Identity Framework for Everyone (SPIFFE)</b> ID derived from the pod's ServiceAccount: <code>spiffe://&lt;trust-domain&gt;/ns/&lt;ns&gt;/sa/&lt;sa&gt;</code>.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3268,7 +3268,7 @@
     "Exam::ICA"
    ],
    "front": "What is outlier detection in Istio?",
-   "back": "A DestinationRule setting that ejects endpoints returning consecutive errors from the LB pool for a cooldown, so one bad instance doesn't drag the service down (circuit breaking).",
+   "back": "A DestinationRule setting that ejects endpoints returning consecutive errors from the load balancer (LB) pool for a cooldown, so one bad instance doesn't drag the service down (circuit breaking).",
    "text": "",
    "image": "",
    "analogy": "A relay team benching a runner who keeps dropping the baton, then letting them back after a rest.",
@@ -3302,7 +3302,7 @@
     "Exam::ICA"
    ],
    "front": "What telemetry does Istio give you without app changes?",
-   "back": "Proxies emit standard L7 metrics (request count, duration, size), access logs, trace spans and service-graph data, feeding Prometheus, Grafana, Jaeger and Kiali.",
+   "back": "Proxies emit standard layer 7 (L7) metrics (request count, duration, size), access logs, trace spans and service-graph data, feeding Prometheus, Grafana, Jaeger and Kiali.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3318,8 +3318,8 @@
     "Kubernetes::Service_Mesh_Cilium",
     "Exam::CCA"
    ],
-   "front": "Why does Cilium use eBPF instead of iptables?",
-   "back": "eBPF programs run in-kernel at hooks (tc, XDP, sockets), so policy, Service load balancing and visibility use efficient hash-map lookups instead of long linear iptables chains.",
+   "front": "Why does Cilium use extended Berkeley Packet Filter (eBPF) instead of iptables?",
+   "back": "eBPF programs run in-kernel at hooks (tc, eXpress Data Path (XDP), sockets), so policy, Service load balancing and visibility use efficient hash-map lookups instead of long linear iptables chains.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3353,7 +3353,7 @@
     "Exam::CCA"
    ],
    "front": "What does a CiliumNetworkPolicy add over a standard NetworkPolicy?",
-   "back": "Standard policy is L3/L4 only. CiliumNetworkPolicy adds <b>L7</b> rules (e.g. allow only <code>GET /api</code>, Kafka topics), DNS-based egress, and cluster-wide policies.",
+   "back": "Standard policy is layer 3 (L3)/layer 4 (L4) only. CiliumNetworkPolicy adds <b>layer 7 (L7)</b> rules (e.g. allow only <code>GET /api</code>, Kafka topics), DNS-based egress, and cluster-wide policies.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3387,7 +3387,7 @@
     "Exam::CCA"
    ],
    "front": "What is Hubble?",
-   "back": "Cilium's eBPF-based observability layer: flow visibility (who talked to whom, allowed/denied, L7 verbs), a service map and metrics, without app instrumentation. CLI: <code>hubble observe</code>.",
+   "back": "Cilium's extended Berkeley Packet Filter (eBPF)-based observability layer: flow visibility (who talked to whom, allowed/denied, layer 7 (L7) verbs), a service map and metrics, without app instrumentation. CLI: <code>hubble observe</code>.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3404,7 +3404,7 @@
     "Exam::CCA"
    ],
    "front": "What does kube-proxy replacement mean in Cilium?",
-   "back": "Cilium implements Service load balancing (ClusterIP, NodePort, …) directly in eBPF, so kube-proxy and its iptables rules aren't needed; it scales better with many Services.",
+   "back": "Cilium implements Service load balancing (ClusterIP, NodePort, …) directly in extended Berkeley Packet Filter (eBPF), so kube-proxy and its iptables rules aren't needed; it scales better with many Services.",
    "text": "",
    "image": "",
    "analogy": "Replacing kube-proxy's iptables with eBPF is like swapping a long paper checklist read top to bottom for an indexed lookup table.",
@@ -3421,7 +3421,7 @@
     "Exam::CCA"
    ],
    "front": "Cilium agent vs Cilium operator?",
-   "back": "<b>Agent</b> (DaemonSet): per node, manages eBPF programs/maps, identities, policy and Service LB. <b>Operator</b>: cluster-wide tasks such as IPAM and garbage collection.",
+   "back": "<b>Agent</b> (DaemonSet): per node, manages extended Berkeley Packet Filter (eBPF) programs/maps, identities, policy and Service load balancer (LB). <b>Operator</b>: cluster-wide tasks such as IP address management (IPAM) and garbage collection.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3455,7 +3455,7 @@
     "Exam::CCA"
    ],
    "front": "What transparent encryption options does Cilium offer?",
-   "back": "<b>WireGuard</b> (simple, fast) or <b>IPsec</b>, enabled at the agent level to encrypt node-to-node pod traffic with no app changes.",
+   "back": "<b>WireGuard</b> (simple, fast) or <b>Internet Protocol Security (IPsec)</b>, enabled at the agent level to encrypt node-to-node pod traffic with no app changes.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3472,7 +3472,7 @@
     "Exam::CCA"
    ],
    "front": "How does Cilium relate to Ingress and the Gateway API?",
-   "back": "Cilium can be the Ingress / Gateway API controller itself (Envoy + eBPF), consolidating CNI, load balancing and ingress in one dataplane.",
+   "back": "Cilium can be the Ingress / Gateway API controller itself (Envoy + extended Berkeley Packet Filter (eBPF)), consolidating container network interface (CNI), load balancing and ingress in one dataplane.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3488,7 +3488,7 @@
     "Kubernetes::Cloud_Native_Ecosystem",
     "Exam::KCNA"
    ],
-   "front": "What is cloud native, in essence (CNCF definition)?",
+   "front": "What is cloud native, in essence (Cloud Native Computing Foundation (CNCF) definition)?",
    "back": "Building and running scalable apps in dynamic environments with <b>containers, microservices, immutable infrastructure and declarative APIs</b>, giving loosely coupled, resilient, observable systems that change often with low risk.",
    "text": "",
    "image": "",
@@ -3507,7 +3507,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "CNCF project maturity levels: {{c1::Sandbox}} (early) → {{c2::Incubating}} (growing adoption) → {{c3::Graduated}} (mature, e.g. Kubernetes, Prometheus, Envoy).",
+   "text": "Cloud Native Computing Foundation (CNCF) project maturity levels: {{c1::Sandbox}} (early) → {{c2::Incubating}} (growing adoption) → {{c3::Graduated}} (mature, e.g. Kubernetes, Prometheus, Envoy).",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -3711,7 +3711,7 @@
     "Exam::CAPA"
    ],
    "front": "What is Argo Workflows?",
-   "back": "A Kubernetes-native workflow engine (Workflow CRD) where each step runs in a container, ordered as steps or a DAG. Used for CI, batch/data and ML pipelines.",
+   "back": "A Kubernetes-native workflow engine (Workflow custom resource definition (CRD)) where each step runs in a container, ordered as steps or a directed acyclic graph (DAG). Used for CI, batch/data and ML pipelines.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3868,7 +3868,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "Depth (golden paths, Backstage, TVP): Platform Engineering deck.",
+   "extra": "Depth (golden paths, Backstage, thinnest viable platform (TVP)): Platform Engineering deck.",
    "source": "CNPA · fundamentals",
    "reverse": false
   },
@@ -3880,7 +3880,7 @@
     "Kubernetes::Cloud_Native_Ecosystem",
     "Exam::CNPA"
    ],
-   "front": "What is the CNCF Platform Engineering Maturity Model for?",
+   "front": "What is the Cloud Native Computing Foundation (CNCF) Platform Engineering Maturity Model for?",
    "back": "Assessing a platform across aspects (investment, adoption, interfaces, operations, measurement) at levels Provisional → Operational → Scalable → Optimizing, to plan its evolution.",
    "text": "",
    "image": "",
@@ -4019,7 +4019,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "LVM layers: {{c1::Physical Volumes}} (disks/partitions) are pooled into a {{c2::Volume Group}}, which is carved into {{c3::Logical Volumes}} that you format and mount.",
+   "text": "Logical volume manager (LVM) layers: {{c1::Physical Volumes}} (disks/partitions) are pooled into a {{c2::Volume Group}}, which is carved into {{c3::Logical Volumes}} that you format and mount.",
    "image": "",
    "analogy": "LVM is pooling several bank accounts (disks) into one fund (volume group) and then writing budgets (logical volumes) you can enlarge later.",
    "extra": "Grow: <code>lvextend</code> then <code>resize2fs</code> / <code>xfs_growfs</code> (or <code>lvextend -r</code>).",
@@ -4035,7 +4035,7 @@
     "Exam::LFCS"
    ],
    "front": "How do you make a mount persistent across reboots safely?",
-   "back": "Add an <code>/etc/fstab</code> line (<code>UUID=… /mnt/data xfs defaults 0 0</code>), using UUIDs from <code>blkid</code>, and test with <code>mount -a</code> before rebooting.",
+   "back": "Add an <code>/etc/fstab</code> line (<code>UUID=… /mnt/data xfs defaults 0 0</code>), using universally unique identifiers (UUIDs) from <code>blkid</code>, and test with <code>mount -a</code> before rebooting.",
    "text": "",
    "image": "",
    "analogy": "",

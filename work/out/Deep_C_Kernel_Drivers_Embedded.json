@@ -16,7 +16,7 @@
    "text": "In C, {{c1::undefined}} behaviour means the standard imposes no requirements and the optimiser may assume it never happens; {{c2::unspecified}} means several outcomes are allowed and none is documented (e.g. argument evaluation order); {{c3::implementation-defined}} means the implementation chooses and must document it (e.g. <code>sizeof(int)</code>, signedness of <code>char</code>).",
    "image": "",
    "analogy": "",
-   "extra": "<b>Why it matters:</b> in kernel and firmware code UB becomes silent memory corruption or a security hole.",
+   "extra": "<b>Why it matters:</b> in kernel and firmware code undefined behaviour (UB) becomes silent memory corruption or a security hole.",
    "source": "01 Language Core and Undefined Behaviour",
    "reverse": false
   },
@@ -30,7 +30,7 @@
     "integers"
    ],
    "front": "Why may <code>if (x + 1 &lt; x)</code> with <code>int x</code> compile to <code>false</code>?",
-   "back": "Signed overflow is UB, so the optimiser assumes it never happens and the test is always false. Unsigned arithmetic, by contrast, is defined to wrap modulo 2<sup>N</sup>.",
+   "back": "Signed overflow is undefined behaviour (UB), so the optimiser assumes it never happens and the test is always false. Unsigned arithmetic, by contrast, is defined to wrap modulo 2<sup>N</sup>.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -90,7 +90,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "On a 16-bit-<code>int</code> MCU (AVR, MSP430) <code>uint16_t</code> is <code>unsigned int</code>: the product wraps to 1 before widening. Defined, but wrong.",
+   "extra": "On a 16-bit-<code>int</code> microcontroller unit (MCU) (AVR, MSP430) <code>uint16_t</code> is <code>unsigned int</code>: the product wraps to 1 before widening. Defined, but wrong.",
    "source": "01 Language Core and Undefined Behaviour",
    "reverse": false
   },
@@ -160,7 +160,7 @@
     "kernel"
    ],
    "front": "Why is the kernel's <code>BIT(n)</code> defined as <code>(1UL &lt;&lt; (n))</code>, and what about bits &ge; 32?",
-   "back": "The unsigned constant avoids shifting into the sign bit (<code>1U &lt;&lt; 31</code> is fine). <code>1UL &lt;&lt; 40</code> is UB on 32-bit targets: use <code>BIT_ULL(n)</code>.",
+   "back": "The unsigned constant avoids shifting into the sign bit (<code>1U &lt;&lt; 31</code> is fine). <code>1UL &lt;&lt; 40</code> is undefined behaviour (UB) on 32-bit targets: use <code>BIT_ULL(n)</code>.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -179,7 +179,7 @@
     "kernel"
    ],
    "front": "What does right-shifting a negative signed value do in C?",
-   "back": "Implementation-defined; an arithmetic (sign-extending) shift on every relevant ABI.",
+   "back": "Implementation-defined; an arithmetic (sign-extending) shift on every relevant application binary interface (ABI).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -198,7 +198,7 @@
     "embedded"
    ],
    "front": "<code>uint8_t b[4]; uint64_t v = b[0] | b[1] &lt;&lt; 8 | b[2] &lt;&lt; 16 | b[3] &lt;&lt; 24;</code> Find the bug.",
-   "back": "<code>b[3]</code> promotes to signed <code>int</code>; if &ge; 0x80, <code>&lt;&lt; 24</code> hits the sign bit (UB, in practice negative) and conversion to <code>uint64_t</code> sign-extends the top 32 bits to ones. Fix: <code>(uint32_t)b[3] &lt;&lt; 24</code> or <code>get_unaligned_le32(b)</code>.",
+   "back": "<code>b[3]</code> promotes to signed <code>int</code>; if &ge; 0x80, <code>&lt;&lt; 24</code> hits the sign bit (undefined behaviour (UB), in practice negative) and conversion to <code>uint64_t</code> sign-extends the top 32 bits to ones. Fix: <code>(uint32_t)b[3] &lt;&lt; 24</code> or <code>get_unaligned_le32(b)</code>.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -249,7 +249,7 @@
     "deepc",
     "integers"
    ],
-   "front": "What did C23 change about integer representation, and what is still UB?",
+   "front": "What did C23 change about integer representation, and what is still undefined behaviour (UB)?",
    "back": "Two's complement is mandatory (ones' complement and sign-magnitude are gone). Signed arithmetic overflow remains UB.",
    "text": "",
    "image": "",
@@ -266,7 +266,7 @@
     "deepc",
     "ub"
    ],
-   "front": "Which are UB: <code>i = i++ + 1;</code> <code>a[i] = i++;</code> <code>f(i++, i++);</code> <code>i = i + 1;</code>?",
+   "front": "Which are undefined behaviour (UB): <code>i = i++ + 1;</code> <code>a[i] = i++;</code> <code>f(i++, i++);</code> <code>i = i + 1;</code>?",
    "back": "The first three: the object is modified twice, or modified and read, with the side effects unsequenced. <code>i = i + 1</code> is fine.",
    "text": "",
    "image": "",
@@ -320,7 +320,7 @@
     "kernel"
    ],
    "front": "<code>struct sock *sk = tun-&gt;sk; if (!tun) return POLLERR;</code> Why was this an exploitable kernel bug (CVE-2009-1897)?",
-   "back": "<code>tun</code> is dereferenced before the check, so the compiler infers it is non-NULL (else UB) and deletes the check. With page 0 mapped by user space, the kernel used attacker-controlled data.",
+   "back": "<code>tun</code> is dereferenced before the check, so the compiler infers it is non-NULL (else undefined behaviour (UB)) and deletes the check. With page 0 mapped by user space, the kernel used attacker-controlled data.",
    "text": "",
    "image": "",
    "analogy": "The optimiser reasons like a detective: \"you opened the door, so you must have had the key\", and throws away the later key check.",
@@ -338,7 +338,7 @@
     "abi"
    ],
    "front": "<code>printk(\"%d\\n\", val)</code> with <code>u64 val</code>: why is it wrong?",
-   "back": "Variadic arguments get only the default promotions, so a format/argument mismatch is UB. On 32-bit targets the 64-bit argument also misaligns every argument after it.",
+   "back": "Variadic arguments get only the default promotions, so a format/argument mismatch is undefined behaviour (UB). On 32-bit targets the 64-bit argument also misaligns every argument after it.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -466,7 +466,7 @@
     "integers"
    ],
    "front": "On a Cortex-M4F, why write <code>1.0f</code> rather than <code>1.0</code>?",
-   "back": "Its FPU is single-precision only; <code>1.0</code> is a <code>double</code>, which forces slow software double-precision arithmetic.",
+   "back": "Its floating-point unit (FPU) is single-precision only; <code>1.0</code> is a <code>double</code>, which forces slow software double-precision arithmetic.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -522,7 +522,7 @@
     "aliasing"
    ],
    "front": "State C's strict aliasing rule.",
-   "back": "An object may only be accessed through its own type (or qualified/signed/unsigned variant), an aggregate containing it, or a character type. Anything else is UB, so the compiler may assume an <code>int *</code> and a <code>float *</code> never alias.",
+   "back": "An object may only be accessed through its own type (or qualified/signed/unsigned variant), an aggregate containing it, or a character type. Anything else is undefined behaviour (UB), so the compiler may assume an <code>int *</code> and a <code>float *</code> never alias.",
    "text": "",
    "image": "",
    "analogy": "The compiler treats differently typed pointers as separate bank accounts: a deposit to one can't change the other's balance, so it keeps cached balances.",
@@ -594,7 +594,7 @@
     "memory",
     "embedded"
    ],
-   "front": "Why is reading a declared <code>char buf[N]</code> through a <code>u32 *</code> UB even when aligned?",
+   "front": "Why is reading a declared <code>char buf[N]</code> through a <code>u32 *</code> undefined behaviour (UB) even when aligned?",
    "back": "Its effective type stays <code>char</code>, so it is a strict-aliasing violation. <code>memcpy()</code> out of it is always valid.",
    "text": "",
    "image": "",
@@ -631,7 +631,7 @@
     "embedded"
    ],
    "front": "What does <code>volatile</code> NOT give you?",
-   "back": "Atomicity (<code>v++</code> is still load-add-store), mutual exclusion, ordering between CPUs (barriers), or cache coherency for DMA buffers.",
+   "back": "Atomicity (<code>v++</code> is still load-add-store), mutual exclusion, ordering between CPUs (barriers), or cache coherency for direct memory access (DMA) buffers.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -649,7 +649,7 @@
     "embedded"
    ],
    "front": "What are the legitimate uses of <code>volatile</code>?",
-   "back": "MMIO registers, variables shared with an ISR or signal handler, and locals that must survive <code>longjmp()</code>.",
+   "back": "Memory-mapped I/O (MMIO) registers, variables shared with an interrupt service routine (ISR) or signal handler, and locals that must survive <code>longjmp()</code>.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -666,7 +666,7 @@
     "aliasing"
    ],
    "front": "What does <code>restrict</code> promise, and what happens if the promise is broken?",
-   "back": "For the pointer's lifetime, the object is accessed only through it (or pointers derived from it), so the compiler can skip reloads and vectorise. Breaking it is UB and never diagnosed.",
+   "back": "For the pointer's lifetime, the object is accessed only through it (or pointers derived from it), so the compiler can skip reloads and vectorise. Breaking it is undefined behaviour (UB) and never diagnosed.",
    "text": "",
    "image": "",
    "analogy": "Telling the movers you hold the only key to the room, so they can rearrange furniture without checking whether anyone else moved it.",
@@ -684,7 +684,7 @@
     "drivers"
    ],
    "front": "<code>memcpy()</code> vs <code>memmove()</code>: what is the rule, and where does it bite?",
-   "back": "Overlapping buffers in <code>memcpy</code> are UB (its parameters are <code>restrict</code>); <code>memmove</code> handles overlap. Shifting data within one buffer, such as dropping a consumed header, overlaps by construction.",
+   "back": "Overlapping buffers in <code>memcpy</code> are undefined behaviour (UB) (its parameters are <code>restrict</code>); <code>memmove</code> handles overlap. Shifting data within one buffer, such as dropping a consumed header, overlaps by construction.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -701,7 +701,7 @@
     "memory",
     "drivers"
    ],
-   "front": "What should you use to copy to or from an MMIO region?",
+   "front": "What should you use to copy to or from a memory-mapped I/O (MMIO) region?",
    "back": "<code>memcpy_toio()</code> / <code>memcpy_fromio()</code>. Plain <code>memcpy</code> may use access widths, unaligned accesses or instructions that device memory doesn't tolerate.",
    "text": "",
    "image": "",
@@ -735,7 +735,7 @@
     "deepc",
     "const"
    ],
-   "front": "When is writing through a cast-away <code>const</code> UB, and what happens in practice?",
+   "front": "When is writing through a cast-away <code>const</code> undefined behaviour (UB), and what happens in practice?",
    "back": "Only if the object itself was defined <code>const</code>. Kernel: it sits in write-protected <code>.rodata</code> &rarr; oops. Microcontroller: it sits in flash &rarr; write ignored or bus fault.",
    "text": "",
    "image": "",
@@ -771,7 +771,7 @@
     "ub"
    ],
    "front": "When is C pointer arithmetic valid?",
-   "back": "Only within one array object (a single object counts as an array of 1) or to one past the end, which may not be dereferenced. Merely forming a pointer outside that range is UB.",
+   "back": "Only within one array object (a single object counts as an array of 1) or to one past the end, which may not be dereferenced. Merely forming a pointer outside that range is undefined behaviour (UB).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -895,7 +895,7 @@
     "linkage"
    ],
    "front": "Why is <code>static inline</code> the idiom for functions in C headers?",
-   "back": "C99 plain <code>inline</code> emits no external symbol; if the compiler doesn't inline (e.g. at -O0) the link fails unless one TU provides an <code>extern inline</code> definition. <code>static inline</code> gives each TU a private copy if needed.",
+   "back": "C99 plain <code>inline</code> emits no external symbol; if the compiler doesn't inline (e.g. at -O0) the link fails unless one translation unit (TU) provides an <code>extern inline</code> definition. <code>static inline</code> gives each TU a private copy if needed.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1054,7 +1054,7 @@
     "drivers"
    ],
    "front": "Which dangling-pointer bug is specific to interrupt- or callback-driven code?",
-   "back": "Handing a pointer to a <b>stack</b> object to something that outlives the function (timer, work item, DMA transfer, queued message). The frame is reused and the callback or device writes into someone else's stack.",
+   "back": "Handing a pointer to a <b>stack</b> object to something that outlives the function (timer, work item, direct memory access (DMA) transfer, queued message). The frame is reused and the callback or device writes into someone else's stack.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1077,7 +1077,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "On an MCU without MMU it is worse: no guard page, so overflow silently corrupts <code>.bss</code> or the heap.",
+   "extra": "On a microcontroller unit (MCU) without memory management unit (MMU) it is worse: no guard page, so overflow silently corrupts <code>.bss</code> or the heap.",
    "source": "01 Language Core and Undefined Behaviour",
    "reverse": false
   },
@@ -1109,7 +1109,7 @@
     "layout"
    ],
    "front": "What is a typical driver use of <code>static_assert</code>?",
-   "back": "Pinning hardware or ABI layouts so refactors can't break them: <code>static_assert(sizeof(struct foo_desc) == 16);</code> and <code>static_assert(offsetof(struct foo_regs, irq_status) == 0x20);</code>",
+   "back": "Pinning hardware or application binary interface (ABI) layouts so refactors can't break them: <code>static_assert(sizeof(struct foo_desc) == 16);</code> and <code>static_assert(offsetof(struct foo_regs, irq_status) == 0x20);</code>",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1161,7 +1161,7 @@
     "deepc",
     "layout"
    ],
-   "front": "Sizes of <code>struct a { char c1; int i; char c2; }</code> and <code>struct b { int i; char c1; char c2; }</code> on a typical ABI?",
+   "front": "Sizes of <code>struct a { char c1; int i; char c2; }</code> and <code>struct b { int i; char c1; char c2; }</code> on a typical application binary interface (ABI)?",
    "back": "<code>a</code> = 12 (1 + 3 pad + 4 + 1 + 3 tail pad); <code>b</code> = 8 (4 + 1 + 1 + 2 tail pad). Ordering members from largest to smallest alignment minimises padding.",
    "text": "",
    "image": "",
@@ -1349,7 +1349,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Byte order: network byte order is {{c1::big-endian}}; PCI and USB are {{c2::little-endian}}.",
+   "text": "Byte order: network byte order is {{c1::big-endian}}; Peripheral Component Interconnect (PCI) and USB are {{c2::little-endian}}.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -1423,7 +1423,7 @@
     "embedded",
     "layout"
    ],
-   "front": "Why is <code>-fshort-enums</code> an ABI hazard?",
+   "front": "Why is <code>-fshort-enums</code> an application binary interface (ABI) hazard?",
    "back": "It picks the smallest type. Bare-metal ARM toolchains often use variable-size enums while Linux ABIs use <code>int</code>, so mixing objects silently changes struct layouts and argument sizes (linker warns about \"variable-size enums\").",
    "text": "",
    "image": "",
@@ -1442,7 +1442,7 @@
     "integers"
    ],
    "front": "Is plain <code>char</code> signed?",
-   "back": "Implementation-defined: signed on x86, unsigned on ARM, PowerPC and RISC-V. Since Linux 6.2 the kernel builds with <code>-funsigned-char</code> everywhere.",
+   "back": "Implementation-defined: signed on x86, unsigned on ARM, PowerPC and reduced instruction set computer (RISC)-V. Since Linux 6.2 the kernel builds with <code>-funsigned-char</code> everywhere.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1534,7 +1534,7 @@
     "drivers"
    ],
    "front": "Where do drivers need explicit alignment?",
-   "back": "DMA descriptors that hardware requires on 8/16/64-byte boundaries, buffers aligned to the cache line for cache maintenance, and hot per-CPU data on separate cache lines.",
+   "back": "Direct memory access (DMA) descriptors that hardware requires on 8/16/64-byte boundaries, buffers aligned to the cache line for cache maintenance, and hot per-CPU data on separate cache lines.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1553,7 +1553,7 @@
     "layout"
    ],
    "front": "A driver fills a stack struct member by member, then <code>copy_to_user()</code>s it. What is the vulnerability?",
-   "back": "Padding bytes and unassigned members still hold stale kernel stack contents: an information leak that can defeat KASLR or expose keys.",
+   "back": "Padding bytes and unassigned members still hold stale kernel stack contents: an information leak that can defeat kernel address space layout randomization (KASLR) or expose keys.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1627,7 +1627,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "x86-64 System V ABI: integer arguments in {{c1::<code>rdi, rsi, rdx, rcx, r8, r9</code>}}; return value in {{c2::<code>rax</code>}}; callee-saved registers {{c3::<code>rbx, rbp, r12&ndash;r15</code>}}.",
+   "text": "x86-64 System V application binary interface (ABI): integer arguments in {{c1::<code>rdi, rsi, rdx, rcx, r8, r9</code>}}; return value in {{c2::<code>rax</code>}}; callee-saved registers {{c3::<code>rbx, rbp, r12&ndash;r15</code>}}.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -1663,7 +1663,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "32-bit ARM AAPCS: arguments and return value in {{c1::<code>r0&ndash;r3</code>}}; callee-saved {{c2::<code>r4&ndash;r11</code>}}; stack aligned to {{c3::8 bytes}} at public interfaces.",
+   "text": "32-bit ARM Arm Architecture Procedure Call Standard (AAPCS): arguments and return value in {{c1::<code>r0&ndash;r3</code>}}; callee-saved {{c2::<code>r4&ndash;r11</code>}}; stack aligned to {{c3::8 bytes}} at public interfaces.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -1698,7 +1698,7 @@
     "stack"
    ],
    "front": "Which coding rules follow from the small, fixed kernel stack?",
-   "back": "No large locals (use <code>kmalloc()</code>), no unbounded recursion, no VLAs or <code>alloca()</code>. <code>-Wframe-larger-than=</code> and <code>scripts/checkstack.pl</code> find offenders.",
+   "back": "No large locals (use <code>kmalloc()</code>), no unbounded recursion, no variable-length arrays (VLAs) or <code>alloca()</code>. <code>-Wframe-larger-than=</code> and <code>scripts/checkstack.pl</code> find offenders.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1716,7 +1716,7 @@
     "stack"
    ],
    "front": "What does <code>CONFIG_VMAP_STACK</code> change?",
-   "back": "Kernel stacks live in vmalloc space with guard pages, so an overflow faults immediately; side effect: stack memory can't be used for DMA.",
+   "back": "Kernel stacks live in vmalloc space with guard pages, so an overflow faults immediately; side effect: stack memory can't be used for direct memory access (DMA).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1734,7 +1734,7 @@
     "memory"
    ],
    "front": "<code>kmalloc()</code> vs <code>vmalloc()</code>?",
-   "back": "kmalloc: slab-backed, physically contiguous, fast; for small objects (KiB). vmalloc: only virtually contiguous; for large buffers; may sleep; not directly usable for DMA.",
+   "back": "kmalloc: slab-backed, physically contiguous, fast; for small objects (KiB). vmalloc: only virtually contiguous; for large buffers; may sleep; not directly usable for direct memory access (DMA).",
    "text": "",
    "image": "",
    "analogy": "kmalloc: adjacent seats in one row. vmalloc: seats scattered around the theatre, with a seating map that makes them look adjacent.",
@@ -1772,7 +1772,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Allocation flags: {{c1::<code>GFP_KERNEL</code>}} may sleep to reclaim memory (process context, no spinlock held); {{c2::<code>GFP_ATOMIC</code>}} never sleeps and may dip into reserves (IRQ handlers, under spinlocks); {{c3::<code>GFP_NOWAIT</code>}} never sleeps and gets no reserves.",
+   "text": "Allocation flags: {{c1::<code>GFP_KERNEL</code>}} may sleep to reclaim memory (process context, no spinlock held); {{c2::<code>GFP_ATOMIC</code>}} never sleeps and may dip into reserves (interrupt request (IRQ) handlers, under spinlocks); {{c3::<code>GFP_NOWAIT</code>}} never sleeps and gets no reserves.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -1790,7 +1790,7 @@
     "concurrency"
    ],
    "front": "What happens if you allocate with <code>GFP_KERNEL</code> in atomic context, and what is the better design?",
-   "back": "\"BUG: sleeping function called from invalid context\" (with DEBUG_ATOMIC_SLEEP) or a deadlock. Better: allocate in <code>probe()</code> or process context and only use the memory in the IRQ path.",
+   "back": "\"BUG: sleeping function called from invalid context\" (with DEBUG_ATOMIC_SLEEP) or a deadlock. Better: allocate in <code>probe()</code> or process context and only use the memory in the interrupt request (IRQ) path.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1810,7 +1810,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Driver addresses: a {{c1::kernel virtual address (<code>void *</code>)}} is what the CPU dereferences; a {{c2::physical address (<code>phys_addr_t</code>)}} must be mapped first (<code>ioremap()</code>, <code>memremap()</code>); a {{c3::DMA/bus address (<code>dma_addr_t</code>)}} is what the device puts on the bus and may differ because of an IOMMU.",
+   "text": "Driver addresses: a {{c1::kernel virtual address (<code>void *</code>)}} is what the CPU dereferences; a {{c2::physical address (<code>phys_addr_t</code>)}} must be mapped first (<code>ioremap()</code>, <code>memremap()</code>); a {{c3::DMA/bus address (<code>dma_addr_t</code>)}} is what the device puts on the bus and may differ because of an input-output memory management unit (IOMMU).",
    "image": "",
    "analogy": "One building, three addresses: the street address you use (virtual), the land-registry plot number (physical), and the courier company's own code for it (DMA address via the IOMMU).",
    "extra": "",
@@ -1828,7 +1828,7 @@
     "dma"
    ],
    "front": "When is <code>virt_to_phys()</code> valid?",
-   "back": "Only for the kernel's linear mapping (kmalloc memory), not vmalloc, stack or ioremap addresses. Devices may only be given addresses from the DMA mapping API.",
+   "back": "Only for the kernel's linear mapping (kmalloc memory), not vmalloc, stack or ioremap addresses. Devices may only be given addresses from the direct memory access (DMA) mapping API.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1847,7 +1847,7 @@
     "security"
    ],
    "front": "Why may a driver not dereference a user-space pointer directly?",
-   "back": "It may be invalid or unmapped (the access must fault safely), or point into kernel memory (confused deputy). SMAP (x86) and PAN (ARM) make a direct access fault anyway.",
+   "back": "It may be invalid or unmapped (the access must fault safely), or point into kernel memory (confused deputy). Supervisor mode access prevention (SMAP) (x86) and privileged access never (PAN) (ARM) make a direct access fault anyway.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1940,7 +1940,7 @@
     "mmio"
    ],
    "front": "Memory-mapped I/O vs port I/O?",
-   "back": "MMIO: registers in the physical address space, mapped with <code>ioremap()</code> and accessed with <code>readl()</code>/<code>writel()</code>; universal on ARM, RISC-V and PCIe. Port I/O: a separate x86 address space (<code>inb()</code>/<code>outb()</code>) for legacy devices.",
+   "back": "MMIO: registers in the physical address space, mapped with <code>ioremap()</code> and accessed with <code>readl()</code>/<code>writel()</code>; universal on ARM, reduced instruction set computer (RISC)-V and Peripheral Component Interconnect Express (PCIe). Port I/O: a separate x86 address space (<code>inb()</code>/<code>outb()</code>) for legacy devices.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1976,7 +1976,7 @@
     "abi"
    ],
    "front": "Why is floating point forbidden in Linux kernel code?",
-   "back": "On kernel entry only integer registers are saved; the FPU/vector state still belongs to the interrupted user task, so using it would corrupt user state. Saving it on every entry costs too much.",
+   "back": "On kernel entry only integer registers are saved; the floating-point unit (FPU)/vector state still belongs to the interrupted user task, so using it would corrupt user state. Saving it on every entry costs too much.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1993,8 +1993,8 @@
     "kernel",
     "abi"
    ],
-   "front": "What is the escape hatch for FPU/SIMD use in the kernel?",
-   "back": "<code>kernel_fpu_begin()</code>/<code>kernel_fpu_end()</code> on x86, <code>kernel_neon_begin()</code> on ARM: preemption off, no sleeping. Used by crypto and RAID code; otherwise use fixed point.",
+   "front": "What is the escape hatch for floating-point unit (FPU)/single instruction, multiple data (SIMD) use in the kernel?",
+   "back": "<code>kernel_fpu_begin()</code>/<code>kernel_fpu_end()</code> on x86, <code>kernel_neon_begin()</code> on ARM: preemption off, no sleeping. Used by crypto and redundant array of independent disks (RAID) code; otherwise use fixed point.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2048,7 +2048,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "C build stages: {{c1::preprocess}} (<code>gcc -E</code> &rarr; <code>.i</code>), {{c2::compile}} (<code>-S</code> &rarr; <code>.s</code>), {{c3::assemble}} (<code>-c</code> &rarr; ELF <code>.o</code>), {{c4::link}} (<code>ld</code>: resolve symbols, apply relocations, place sections).",
+   "text": "C build stages: {{c1::preprocess}} (<code>gcc -E</code> &rarr; <code>.i</code>), {{c2::compile}} (<code>-S</code> &rarr; <code>.s</code>), {{c3::assemble}} (<code>-c</code> &rarr; Executable and Linkable Format (ELF) <code>.o</code>), {{c4::link}} (<code>ld</code>: resolve symbols, apply relocations, place sections).",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -2080,7 +2080,7 @@
     "deepc",
     "toolchain"
    ],
-   "front": "How does firmware get from an ELF file to a flashable image?",
+   "front": "How does firmware get from an Executable and Linkable Format (ELF) file to a flashable image?",
    "back": "<code>objcopy -O binary</code> (or <code>-O ihex</code>) strips the ELF metadata down to raw bytes.",
    "text": "",
    "image": "",
@@ -2157,7 +2157,7 @@
     "sections"
    ],
    "front": "Firmware: what are the LMA and VMA of <code>.data</code>, and who bridges them?",
-   "back": "VMA: the RAM address where it lives at run time. LMA: the flash address where its initial values are stored. Startup code copies LMA &rarr; VMA (and zeroes <code>.bss</code>) before <code>main()</code>; linker script <code>&gt; RAM AT &gt; FLASH</code>.",
+   "back": "Virtual memory address (VMA): the RAM address where it lives at run time. Load memory address (LMA): the flash address where its initial values are stored. Startup code copies LMA &rarr; VMA (and zeroes <code>.bss</code>) before <code>main()</code>; linker script <code>&gt; RAM AT &gt; FLASH</code>.",
    "text": "",
    "image": "",
    "analogy": "Furniture shipped in a moving van (flash) must be unpacked into the house (RAM) before anyone lives there.",
@@ -2175,7 +2175,7 @@
     "startup"
    ],
    "front": "On Cortex-M reset, what does the hardware itself load from the vector table?",
-   "back": "Word 0 into the Main Stack Pointer (MSP), word 1 into the PC (the reset handler). The table is at address 0 by default.",
+   "back": "Word 0 into the Main Stack Pointer (MSP), word 1 into the program counter (PC) (the reset handler). The table is at address 0 by default.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2193,7 +2193,7 @@
     "startup"
    ],
    "front": "What does a Cortex-M <code>Reset_Handler</code> do before <code>main()</code>?",
-   "back": "Copies <code>.data</code> from flash to RAM, zeroes <code>.bss</code>, calls <code>SystemInit()</code> (clocks, flash wait states, FPU, VTOR), runs constructors (<code>__libc_init_array</code>), then calls <code>main()</code>.",
+   "back": "Copies <code>.data</code> from flash to RAM, zeroes <code>.bss</code>, calls <code>SystemInit()</code> (clocks, flash wait states, floating-point unit (FPU), VTOR), runs constructors (<code>__libc_init_array</code>), then calls <code>main()</code>.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2268,7 +2268,7 @@
     "linker"
    ],
    "front": "How do Cortex-M startup files use weak symbols, and what is the trap?",
-   "back": "Every ISR name is a weak alias of <code>Default_Handler</code> (an infinite loop); defining <code>USART1_IRQHandler</code> overrides it. Misspell the name and it still links: the IRQ lands in Default_Handler and the system appears to hang.",
+   "back": "Every interrupt service routine (ISR) name is a weak alias of <code>Default_Handler</code> (an infinite loop); defining <code>USART1_IRQHandler</code> overrides it. Misspell the name and it still links: the interrupt request (IRQ) lands in Default_Handler and the system appears to hang.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2402,7 +2402,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Kernel flags that define away UB: {{c1::<code>-fno-strict-aliasing</code>}} (type punning allowed), {{c2::<code>-fno-strict-overflow</code>}} (signed and pointer wrap defined), {{c3::<code>-fno-delete-null-pointer-checks</code>}} (NULL tests survive a prior dereference).",
+   "text": "Kernel flags that define away undefined behaviour (UB): {{c1::<code>-fno-strict-aliasing</code>}} (type punning allowed), {{c2::<code>-fno-strict-overflow</code>}} (signed and pointer wrap defined), {{c3::<code>-fno-delete-null-pointer-checks</code>}} (NULL tests survive a prior dereference).",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -2491,7 +2491,7 @@
     "toolchain",
     "debugging"
    ],
-   "front": "From <code>size</code> output, how do you estimate an MCU's flash and static RAM use?",
+   "front": "From <code>size</code> output, how do you estimate a microcontroller unit (MCU)'s flash and static RAM use?",
    "back": "Flash &asymp; text + data (initial values are stored in flash). Static RAM &asymp; data + bss.",
    "text": "",
    "image": "",
@@ -2529,7 +2529,7 @@
     "modules"
    ],
    "front": "What kind of file is a <code>.ko</code>, and what does loading it involve?",
-   "back": "A relocatable (not fully linked) ELF object. The loader copies its sections, resolves undefined symbols against the kernel's exports, applies relocations, checks <code>vermagic</code>/modversions, and runs its init function.",
+   "back": "A relocatable (not fully linked) Executable and Linkable Format (ELF) object. The loader copies its sections, resolves undefined symbols against the kernel's exports, applies relocations, checks <code>vermagic</code>/modversions, and runs its init function.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2548,7 +2548,7 @@
     "modules"
    ],
    "front": "<code>EXPORT_SYMBOL</code> vs <code>EXPORT_SYMBOL_GPL</code>?",
-   "back": "Only exported symbols are visible to modules; <code>_GPL</code> ones only to modules with a GPL-compatible <code>MODULE_LICENSE</code>. A missing export shows as \"Unknown symbol in module\".",
+   "back": "Only exported symbols are visible to modules; <code>_GPL</code> ones only to modules with a GNU General Public License (GPL)-compatible <code>MODULE_LICENSE</code>. A missing export shows as \"Unknown symbol in module\".",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2585,7 +2585,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "sparse annotations: {{c1::<code>__user</code>}} marks a user-space pointer (no direct dereference); {{c2::<code>__iomem</code>}} an MMIO cookie (accessors only); {{c3::<code>__bitwise</code>}} types such as <code>__le32</code> can't mix without conversion; {{c4::<code>__acquires</code>/<code>__releases</code>}} check lock balance.",
+   "text": "sparse annotations: {{c1::<code>__user</code>}} marks a user-space pointer (no direct dereference); {{c2::<code>__iomem</code>}} a memory-mapped I/O (MMIO) cookie (accessors only); {{c3::<code>__bitwise</code>}} types such as <code>__le32</code> can't mix without conversion; {{c4::<code>__acquires</code>/<code>__releases</code>}} check lock balance.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -2622,7 +2622,7 @@
     "embedded"
    ],
    "front": "<code>arm-none-eabi-</code> vs <code>aarch64-linux-gnu-</code> toolchains?",
-   "back": "<code>none-eabi</code>: no OS, bare-metal EABI, ships newlib; for MCU firmware. <code>linux-gnu</code>: targets Linux with glibc; for user space and, by convention, the kernel.",
+   "back": "<code>none-eabi</code>: no OS, bare-metal Embedded Application Binary Interface (EABI), ships newlib; for microcontroller unit (MCU) firmware. <code>linux-gnu</code>: targets Linux with glibc; for user space and, by convention, the kernel.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2640,7 +2640,7 @@
     "toolchain"
    ],
    "front": "How do you make <code>printf()</code> work on a bare-metal newlib target?",
-   "back": "Retarget it: implement <code>_write()</code> to push bytes to a UART (plus <code>_sbrk()</code> etc. as needed). <code>--specs=nosys.specs</code> supplies dummies; <code>--specs=nano.specs</code> selects newlib-nano.",
+   "back": "Retarget it: implement <code>_write()</code> to push bytes to an universal asynchronous receiver-transmitter (UART) (plus <code>_sbrk()</code> etc. as needed). <code>--specs=nosys.specs</code> supplies dummies; <code>--specs=nano.specs</code> selects newlib-nano.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2658,7 +2658,7 @@
     "toolchain"
    ],
    "front": "What does <code>printf()</code> cost on a microcontroller?",
-   "back": "Tens of KiB of flash with float formatting, hundreds of bytes of stack, maybe heap, not reentrant, and it blocks on the UART. Never call it from an ISR.",
+   "back": "Tens of KiB of flash with float formatting, hundreds of bytes of stack, maybe heap, not reentrant, and it blocks on the universal asynchronous receiver-transmitter (UART). Never call it from an interrupt service routine (ISR).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2677,7 +2677,7 @@
     "toolchain"
    ],
    "front": "Why does an empty <code>for</code> delay loop vanish at -O2, and what should you use instead?",
-   "back": "It has no observable side effect, so it is removed; <code>volatile</code> keeps it but timing still depends on compiler, flags and clock. Use a hardware timer/SysTick, the DWT cycle counter, or kernel <code>udelay()</code>/<code>usleep_range()</code>.",
+   "back": "It has no observable side effect, so it is removed; <code>volatile</code> keeps it but timing still depends on compiler, flags and clock. Use a hardware timer/SysTick, the data watchpoint and trace (DWT) cycle counter, or kernel <code>udelay()</code>/<code>usleep_range()</code>.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2753,7 +2753,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Kernel attributes: {{c1::<code>__must_check</code>}} warns when a caller ignores the return value; {{c2::<code>__maybe_unused</code>}} silences unused warnings (e.g. PM callbacks without CONFIG_PM); {{c3::<code>__cold</code>}} marks rarely run code, optimised for size and placed away from hot code; {{c4::<code>fallthrough;</code>}} marks an intentional switch fall-through.",
+   "text": "Kernel attributes: {{c1::<code>__must_check</code>}} warns when a caller ignores the return value; {{c2::<code>__maybe_unused</code>}} silences unused warnings (e.g. Power management (PM) callbacks without CONFIG_PM); {{c3::<code>__cold</code>}} marks rarely run code, optimised for size and placed away from hot code; {{c4::<code>fallthrough;</code>}} marks an intentional switch fall-through.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -2859,7 +2859,7 @@
     "concurrency",
     "ub"
    ],
-   "front": "An ISR and the main loop share a variable on a single-core MCU. Can they race?",
+   "front": "An interrupt service routine (ISR) and the main loop share a variable on a single-core microcontroller unit (MCU). Can they race?",
    "back": "Yes: concurrency without parallelism. The ISR can run between any two instructions of the main loop.",
    "text": "",
    "image": "",
@@ -2877,7 +2877,7 @@
     "concurrency",
     "ub"
    ],
-   "front": "How does KCSAN detect data races?",
+   "front": "How does Kernel Concurrency Sanitizer (KCSAN) detect data races?",
    "back": "It sets watchpoints on sampled memory accesses and reports concurrent conflicting accesses that aren't marked (READ_ONCE, atomics) or protected by locks.",
    "text": "",
    "image": "",
@@ -2896,7 +2896,7 @@
     "kernel"
    ],
    "front": "Why does kernel documentation call <code>volatile</code> \"considered harmful\"?",
-   "back": "Shared data is protected by locks, atomics or RCU, which already force correct accesses. <code>volatile</code> on a declaration pessimises every access and hides the real concurrency design.",
+   "back": "Shared data is protected by locks, atomics or read-copy-update (RCU), which already force correct accesses. <code>volatile</code> on a declaration pessimises every access and hides the real concurrency design.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2915,7 +2915,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Kernel replacements for <code>volatile</code>: MMIO uses {{c1::<code>readl()</code>/<code>writel()</code> on <code>__iomem</code> pointers}}; a single lockless access uses {{c2::<code>READ_ONCE()</code>/<code>WRITE_ONCE()</code>}}; busy-wait loops use {{c3::<code>cpu_relax()</code>}}; counters use {{c4::<code>atomic_t</code>/<code>refcount_t</code>}}.",
+   "text": "Kernel replacements for <code>volatile</code>: memory-mapped I/O (MMIO) uses {{c1::<code>readl()</code>/<code>writel()</code> on <code>__iomem</code> pointers}}; a single lockless access uses {{c2::<code>READ_ONCE()</code>/<code>WRITE_ONCE()</code>}}; busy-wait loops use {{c3::<code>cpu_relax()</code>}}; counters use {{c4::<code>atomic_t</code>/<code>refcount_t</code>}}.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -2933,7 +2933,7 @@
     "volatile"
    ],
    "front": "What do <code>READ_ONCE()</code>/<code>WRITE_ONCE()</code> do?",
-   "back": "Access the variable through a volatile lvalue so exactly one full-width load or store is emitted at that point, and document (to readers and KCSAN) that the access is deliberately lockless.",
+   "back": "Access the variable through a volatile lvalue so exactly one full-width load or store is emitted at that point, and document (to readers and Kernel Concurrency Sanitizer (KCSAN)) that the access is deliberately lockless.",
    "text": "",
    "image": "",
    "analogy": "Taking one photo of a changing display instead of glancing twice and stitching the halves together.",
@@ -3007,7 +3007,7 @@
     "kernel"
    ],
    "front": "How do memory barriers differ between x86 and ARM?",
-   "back": "x86 (TSO) only reorders a store followed by a load, so <code>smp_rmb()</code>/<code>smp_wmb()</code> are compiler barriers and <code>smp_mb()</code> a locked instruction. ARM, PowerPC and RISC-V are weakly ordered: all emit real instructions (<code>dmb</code>/<code>dsb</code>).",
+   "back": "x86 (TSO) only reorders a store followed by a load, so <code>smp_rmb()</code>/<code>smp_wmb()</code> are compiler barriers and <code>smp_mb()</code> a locked instruction. ARM, PowerPC and reduced instruction set computer (RISC)-V are weakly ordered: all emit real instructions (<code>dmb</code>/<code>dsb</code>).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3153,7 +3153,7 @@
     "drivers"
    ],
    "front": "When is <code>spin_lock_irqsave()</code> required?",
-   "back": "When the lock is also taken in an IRQ handler. Otherwise the IRQ can arrive on the same CPU while process context holds the lock and spin forever: self-deadlock. <code>spin_lock_bh()</code> suffices against softirqs.",
+   "back": "When the lock is also taken in an interrupt request (IRQ) handler. Otherwise the IRQ can arrive on the same CPU while process context holds the lock and spin forever: self-deadlock. <code>spin_lock_bh()</code> suffices against softirqs.",
    "text": "",
    "image": "",
    "analogy": "You hold the only key to a room, an interrupt sends you to that same room, and you wait at the door for yourself forever.",
@@ -3191,7 +3191,7 @@
     "drivers"
    ],
    "front": "Which kernel execution contexts may sleep?",
-   "back": "Only process context (syscalls, kernel threads, workqueues, threaded IRQ handlers), and only with no spinlock held and preemption/IRQs enabled. Softirqs, tasklets, timer callbacks, hard IRQs and NMIs may not.",
+   "back": "Only process context (syscalls, kernel threads, workqueues, threaded interrupt request (IRQ) handlers), and only with no spinlock held and preemption/IRQs enabled. Softirqs, tasklets, timer callbacks, hard IRQs and non-maskable interrupts (NMIs) may not.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3263,7 +3263,7 @@
     "concurrency",
     "kernel"
    ],
-   "front": "How does an RCU updater free the old version?",
+   "front": "How does a read-copy-update (RCU) updater free the old version?",
    "back": "<code>synchronize_rcu()</code> (waits for a grace period) followed by <code>kfree(old)</code>, or asynchronously with <code>kfree_rcu(old, rcu_head_field)</code>.",
    "text": "",
    "image": "",
@@ -3338,7 +3338,7 @@
     "debugging"
    ],
    "front": "How does lockdep find deadlocks before they happen?",
-   "back": "It records the order in which lock <i>classes</i> are taken and reports the first inverse order observed, even if no deadlock occurred; it also catches IRQ-safety violations and sleeping under spinlocks (<code>CONFIG_PROVE_LOCKING</code>).",
+   "back": "It records the order in which lock <i>classes</i> are taken and reports the first inverse order observed, even if no deadlock occurred; it also catches interrupt request (IRQ)-safety violations and sleeping under spinlocks (<code>CONFIG_PROVE_LOCKING</code>).",
    "text": "",
    "image": "",
    "analogy": "A building inspector who flags a fire risk from the wiring plan, before anything has ever caught fire.",
@@ -3356,7 +3356,7 @@
     "drivers"
    ],
    "front": "How does a driver put a reader to sleep until the hardware has data?",
-   "back": "<code>wait_event_interruptible(dev-&gt;wq, dev-&gt;data_ready)</code> in <code>read()</code>; the IRQ handler sets the flag and calls <code>wake_up_interruptible(&amp;dev-&gt;wq)</code>. A non-zero return (<code>-ERESTARTSYS</code>) means a signal arrived.",
+   "back": "<code>wait_event_interruptible(dev-&gt;wq, dev-&gt;data_ready)</code> in <code>read()</code>; the interrupt request (IRQ) handler sets the flag and calls <code>wake_up_interruptible(&amp;dev-&gt;wq)</code>. A non-zero return (<code>-ERESTARTSYS</code>) means a signal arrived.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3410,7 +3410,7 @@
     "embedded",
     "volatile"
    ],
-   "front": "8-bit AVR: a <code>volatile uint32_t</code> tick counter is incremented in an ISR and read in <code>main()</code>. What is still wrong?",
+   "front": "8-bit AVR: a <code>volatile uint32_t</code> tick counter is incremented in an interrupt service routine (ISR) and read in <code>main()</code>. What is still wrong?",
    "back": "The read takes four byte loads and the ISR can fire between them: a torn read (0x0000FFFF &rarr; 0x00010000 may read as 0x0001FFFF). <code>volatile</code> doesn't make it atomic.",
    "text": "",
    "image": "",
@@ -3430,7 +3430,7 @@
     "volatile"
    ],
    "front": "How do you fix torn reads of a wide shared variable on bare metal?",
-   "back": "Read it inside a critical section (save IRQ state, disable, copy, restore), or read it repeatedly until two consecutive reads agree.",
+   "back": "Read it inside a critical section (save interrupt request (IRQ) state, disable, copy, restore), or read it repeatedly until two consecutive reads agree.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3467,7 +3467,7 @@
     "embedded",
     "kernel"
    ],
-   "front": "Why size an SPSC ring buffer as a power of two with free-running indices?",
+   "front": "Why size a single-producer single-consumer (SPSC) ring buffer as a power of two with free-running indices?",
    "back": "<code>idx &amp; (N - 1)</code> replaces modulo, and unsigned wrap keeps <code>head - tail</code> correct, so all N slots are usable.",
    "text": "",
    "image": "",
@@ -3486,7 +3486,7 @@
     "embedded",
     "kernel"
    ],
-   "front": "SPSC ring buffer: which ordering rule applies, and what is needed on multicore?",
+   "front": "Single-producer single-consumer (SPSC) ring buffer: which ordering rule applies, and what is needed on multicore?",
    "back": "Write the data before advancing the index. On multicore, add memory barriers between the two (<code>kfifo</code> contains them).",
    "text": "",
    "image": "",
@@ -3560,7 +3560,7 @@
     "concurrency",
     "embedded"
    ],
-   "front": "Why is a lock-based thread-safe function such as <code>malloc()</code> unsafe to call from an ISR?",
+   "front": "Why is a lock-based thread-safe function such as <code>malloc()</code> unsafe to call from an interrupt service routine (ISR)?",
    "back": "If the ISR interrupts the lock holder and calls it, it waits for a lock the interrupted code can never release: deadlock. Hence FreeRTOS's separate <code>...FromISR()</code> APIs.",
    "text": "",
    "image": "",
@@ -3766,7 +3766,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Kernel return conventions: actions return {{c1::0 on success, a negative errno on failure}}; predicates return {{c2::non-zero/true for \"yes\"}}; <code>read()</code>/<code>write()</code> handlers return {{c3::a byte count &ge; 0 or a negative errno}}; IRQ handlers return {{c4::<code>IRQ_HANDLED</code> or <code>IRQ_NONE</code>}}.",
+   "text": "Kernel return conventions: actions return {{c1::0 on success, a negative errno on failure}}; predicates return {{c2::non-zero/true for \"yes\"}}; <code>read()</code>/<code>write()</code> handlers return {{c3::a byte count &ge; 0 or a negative errno}}; interrupt request (IRQ) handlers return {{c4::<code>IRQ_HANDLED</code> or <code>IRQ_NONE</code>}}.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -4253,7 +4253,7 @@
     "modules"
    ],
    "front": "Which macros make up a minimal loadable kernel module?",
-   "back": "<code>module_init(fn)</code>/<code>module_exit(fn)</code> (entry points for insmod/rmmod), <code>__init</code>/<code>__exit</code> section markers, and <code>MODULE_LICENSE(\"GPL\")</code>, which governs access to GPL-only symbols and tainting.",
+   "back": "<code>module_init(fn)</code>/<code>module_exit(fn)</code> (entry points for insmod/rmmod), <code>__init</code>/<code>__exit</code> section markers, and <code>MODULE_LICENSE(\"GPL\")</code>, which governs access to GNU General Public License (GPL)-only symbols and tainting.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -4490,7 +4490,7 @@
     "devicemodel"
    ],
    "front": "When does the driver core call <code>probe()</code> and <code>remove()</code>?",
-   "back": "<code>probe()</code> when a device and driver on the same bus match (PCI/USB IDs, DT <code>compatible</code>, ACPI ID, name). <code>remove()</code> on unbind, module unload or hot-unplug.",
+   "back": "<code>probe()</code> when a device and driver on the same bus match (Peripheral Component Interconnect (PCI)/USB IDs, device tree (DT) <code>compatible</code>, Advanced Configuration and Power Interface (ACPI) ID, name). <code>remove()</code> on unbind, module unload or hot-unplug.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -4543,7 +4543,7 @@
     "drivers",
     "devicetree"
    ],
-   "front": "In a Device Tree platform driver's <code>probe()</code>, how do you map the registers and get the IRQ?",
+   "front": "In a Device Tree platform driver's <code>probe()</code>, how do you map the registers and get the interrupt request (IRQ)?",
    "back": "<code>regs = devm_platform_ioremap_resource(pdev, 0);</code> (check <code>IS_ERR</code>) and <code>irq = platform_get_irq(pdev, 0);</code> (negative means error).",
    "text": "",
    "image": "",
@@ -4580,7 +4580,7 @@
     "devicetree"
    ],
    "front": "Why does a platform driver call <code>platform_set_drvdata(pdev, foo)</code>?",
-   "back": "So <code>remove()</code>, PM callbacks and others can retrieve the per-device state with <code>platform_get_drvdata()</code>.",
+   "back": "So <code>remove()</code>, power management (PM) callbacks and others can retrieve the per-device state with <code>platform_get_drvdata()</code>.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -4599,7 +4599,7 @@
     "embedded"
    ],
    "front": "What is the Device Tree?",
-   "back": "A data structure describing non-discoverable hardware (SoC peripherals, I2C/SPI devices). <code>.dts</code> is compiled by <code>dtc</code> into a <code>.dtb</code> that the bootloader passes to the kernel, so one kernel binary serves many boards.",
+   "back": "A data structure describing non-discoverable hardware (system on chip (SoC) peripherals, Inter-Integrated Circuit (I2C)/Serial Peripheral Interface (SPI) devices). <code>.dts</code> is compiled by <code>dtc</code> into a <code>.dtb</code> that the bootloader passes to the kernel, so one kernel binary serves many boards.",
    "text": "",
    "image": "",
    "analogy": "A floor plan handed to the electrician on arrival: the same electrician (kernel) can work in any building that comes with a plan.",
@@ -4618,7 +4618,7 @@
     "embedded"
    ],
    "front": "How does a driver read a custom Device Tree property in a firmware-agnostic way?",
-   "back": "<code>device_property_read_u32(dev, \"acme,fifo-depth\", &amp;depth)</code>, which also works with ACPI.",
+   "back": "<code>device_property_read_u32(dev, \"acme,fifo-depth\", &amp;depth)</code>, which also works with Advanced Configuration and Power Interface (ACPI).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -4656,7 +4656,7 @@
     "devicemodel"
    ],
    "front": "What are <code>devm_*</code> managed resources?",
-   "back": "Resources (memory, ioremap, IRQs, clocks) tied to the device binding and released automatically, in reverse order, when <code>probe()</code> fails or after <code>remove()</code>. Most goto unwinding disappears.",
+   "back": "Resources (memory, ioremap, interrupt requests (IRQs), clocks) tied to the device binding and released automatically, in reverse order, when <code>probe()</code> fails or after <code>remove()</code>. Most goto unwinding disappears.",
    "text": "",
    "image": "",
    "analogy": "Hotel charges billed to the room: checkout (unbind) settles them all automatically, in reverse order.",
@@ -4693,7 +4693,7 @@
     "lifetime",
     "devicemodel"
    ],
-   "front": "Why can a devm-requested IRQ handler still run during <code>remove()</code>?",
+   "front": "Why can a devm-requested interrupt request (IRQ) handler still run during <code>remove()</code>?",
    "back": "devm frees the IRQ only after <code>remove()</code> returns. Quiesce the hardware first, or free the IRQ explicitly.",
    "text": "",
    "image": "",
@@ -4712,7 +4712,7 @@
     "mmio",
     "volatile"
    ],
-   "front": "Why access MMIO with <code>readl()</code>/<code>writel()</code> on an <code>__iomem</code> pointer rather than a plain dereference?",
+   "front": "Why access memory-mapped I/O (MMIO) with <code>readl()</code>/<code>writel()</code> on an <code>__iomem</code> pointer rather than a plain dereference?",
    "back": "They guarantee a single access of exactly that width with the required barriers; a plain dereference may be merged, split, reordered or widened. They also port to architectures where MMIO isn't a normal load/store, and sparse checks <code>__iomem</code>.",
    "text": "",
    "image": "",
@@ -4770,7 +4770,7 @@
     "mmio"
    ],
    "front": "When is read-modify-write on a device register valid?",
-   "back": "Only for plain read/write registers. Check every field's access type in the datasheet: W1C, read-to-clear, write-only, self-clearing.",
+   "back": "Only for plain read/write registers. Check every field's access type in the datasheet: write-1-to-clear (W1C), read-to-clear, write-only, self-clearing.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -4787,7 +4787,7 @@
     "drivers",
     "interrupts"
    ],
-   "front": "What must an IRQ handler on a shared line (<code>IRQF_SHARED</code>) do first?",
+   "front": "What must an interrupt request (IRQ) handler on a shared line (<code>IRQF_SHARED</code>) do first?",
    "back": "Check whether its own device raised the interrupt and return <code>IRQ_NONE</code> if not; the core uses this to detect and disable stuck \"nobody cared\" lines.",
    "text": "",
    "image": "",
@@ -4805,7 +4805,7 @@
     "drivers",
     "interrupts"
    ],
-   "front": "Why must a level-triggered IRQ handler clear the device-side source before returning?",
+   "front": "Why must a level-triggered interrupt request (IRQ) handler clear the device-side source before returning?",
    "back": "Otherwise the line is still asserted and the interrupt fires again immediately.",
    "text": "",
    "image": "",
@@ -4841,7 +4841,7 @@
     "drivers",
     "interrupts"
    ],
-   "front": "When in <code>probe()</code> should a driver request its IRQ?",
+   "front": "When in <code>probe()</code> should a driver request its interrupt request (IRQ)?",
    "back": "Only after everything the handler uses is initialised: the interrupt can fire immediately.",
    "text": "",
    "image": "",
@@ -4860,7 +4860,7 @@
     "interrupts",
     "concurrency"
    ],
-   "front": "What should a hard IRQ handler (top half) do?",
+   "front": "What should a hard interrupt request (IRQ) handler (top half) do?",
    "back": "Acknowledge the hardware, capture volatile state, and defer everything else.",
    "text": "",
    "image": "",
@@ -4880,7 +4880,7 @@
     "concurrency"
    ],
    "front": "What is a threaded interrupt, and why is it the default choice for new drivers?",
-   "back": "<code>request_threaded_irq(irq, hard_fn, thread_fn, IRQF_ONESHOT, ...)</code>: <code>thread_fn</code> runs in a kernel thread and may sleep (mutexes, I2C/SPI transfers). Mandatory for devices behind slow buses.",
+   "back": "<code>request_threaded_irq(irq, hard_fn, thread_fn, IRQF_ONESHOT, ...)</code>: <code>thread_fn</code> runs in a kernel thread and may sleep (mutexes, Inter-Integrated Circuit (I2C)/Serial Peripheral Interface (SPI) transfers). Mandatory for devices behind slow buses.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -4900,7 +4900,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Deferral mechanisms: {{c1::workqueues}} run in process context and may sleep; {{c2::softirqs}} are a fixed set for core subsystems (network drivers use them via NAPI); {{c3::tasklets}} run in atomic context and are deprecated.",
+   "text": "Deferral mechanisms: {{c1::workqueues}} run in process context and may sleep; {{c2::softirqs}} are a fixed set for core subsystems (network drivers use them via New API (NAPI)); {{c3::tasklets}} run in atomic context and are deprecated.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -4935,7 +4935,7 @@
     "drivers",
     "dma"
    ],
-   "front": "DMA API: coherent vs streaming mappings?",
+   "front": "Direct memory access (DMA) API: coherent vs streaming mappings?",
    "back": "Coherent (<code>dma_alloc_coherent()</code>): long-lived memory both CPU and device may access at any time without syncing, e.g. descriptor rings; possibly uncached. Streaming (<code>dma_map_single()</code>/<code>dma_map_sg()</code>): maps an existing buffer for one transfer, with a direction.",
    "text": "",
    "image": "",
@@ -4953,7 +4953,7 @@
     "drivers",
     "dma"
    ],
-   "front": "What is the ownership rule for a streaming DMA mapping?",
+   "front": "What is the ownership rule for a streaming direct memory access (DMA) mapping?",
    "back": "Between map and unmap the buffer belongs to the device and the CPU must not touch it; map/unmap do the cache flush/invalidate. To peek without unmapping: <code>dma_sync_single_for_cpu()</code>/<code>_for_device()</code>.",
    "text": "",
    "image": "",
@@ -4972,7 +4972,7 @@
     "dma"
    ],
    "front": "What must you check after <code>dma_map_single()</code>?",
-   "back": "<code>dma_mapping_error(dev, addr)</code>: mapping can fail, e.g. when IOMMU or bounce-buffer space is exhausted.",
+   "back": "<code>dma_mapping_error(dev, addr)</code>: mapping can fail, e.g. when input-output memory management unit (IOMMU) or bounce-buffer space is exhausted.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -4990,7 +4990,7 @@
     "dma",
     "memory"
    ],
-   "front": "Which memory must NOT be used for streaming DMA?",
+   "front": "Which memory must NOT be used for streaming direct memory access (DMA)?",
    "back": "Stack memory, vmalloc memory via <code>dma_map_single()</code>, module globals and <code>.rodata</code>, and small buffers sharing cache lines with fields the CPU keeps using. kmalloc and page-allocator memory are fine.",
    "text": "",
    "image": "",
@@ -5009,8 +5009,8 @@
     "dma",
     "memory"
    ],
-   "front": "What does the DMA mask (<code>dma_set_mask_and_coherent(dev, DMA_BIT_MASK(32))</code>) do?",
-   "back": "Declares how many address bits the device can drive; buffers beyond that are reached via IOMMU mappings or swiotlb bounce buffers. Set it in <code>probe()</code> and check the result.",
+   "front": "What does the direct memory access (DMA) mask (<code>dma_set_mask_and_coherent(dev, DMA_BIT_MASK(32))</code>) do?",
+   "back": "Declares how many address bits the device can drive; buffers beyond that are reached via input-output memory management unit (IOMMU) mappings or swiotlb bounce buffers. Set it in <code>probe()</code> and check the result.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -5028,7 +5028,7 @@
     "mmio",
     "pci"
    ],
-   "front": "A driver writes a reset bit, then calls <code>udelay(10)</code>; on PCIe the device sometimes isn't reset in time. Why?",
+   "front": "A driver writes a reset bit, then calls <code>udelay(10)</code>; on Peripheral Component Interconnect Express (PCIe) the device sometimes isn't reset in time. Why?",
    "back": "PCIe memory writes are posted: the CPU moves on once the write is queued, so the delay can start before the device sees it. Read back any register of that device (reads are non-posted) to flush it first.",
    "text": "",
    "image": "",
@@ -5102,7 +5102,7 @@
     "timing"
    ],
    "front": "What rule applies to every wait on hardware in a driver?",
-   "back": "It needs a timeout and an error path, because hardware does hang. Prefer an IRQ plus completion, or <code>readl_poll_timeout()</code>, over fixed delays.",
+   "back": "It needs a timeout and an error path, because hardware does hang. Prefer an interrupt request (IRQ) plus completion, or <code>readl_poll_timeout()</code>, over fixed delays.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -5119,7 +5119,7 @@
     "drivers",
     "buses"
    ],
-   "front": "What is <code>regmap</code>, and why use it in I2C/SPI device drivers?",
+   "front": "What is <code>regmap</code>, and why use it in Inter-Integrated Circuit (I2C)/Serial Peripheral Interface (SPI) device drivers?",
    "back": "A bus-independent register API (<code>regmap_read/write/update_bits()</code>): one driver core for I2C and SPI variants, locked read-modify-write, a register cache (fewer bus transfers, restore after suspend), and debugfs dumps.",
    "text": "",
    "image": "",
@@ -5137,7 +5137,7 @@
     "drivers",
     "buses"
    ],
-   "front": "Why do I2C/SPI device drivers need threaded IRQs and mutexes rather than hard handlers and spinlocks?",
+   "front": "Why do Inter-Integrated Circuit (I2C)/Serial Peripheral Interface (SPI) device drivers need threaded interrupt requests (IRQs) and mutexes rather than hard handlers and spinlocks?",
    "back": "Bus transfers sleep, so they can't run in hard-IRQ context or under a spinlock.",
    "text": "",
    "image": "",
@@ -5177,7 +5177,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "mmap backends: a coherent DMA buffer uses {{c1::<code>dma_mmap_coherent()</code>}}; vmalloc memory uses {{c2::<code>remap_vmalloc_range()</code>}}; individual pages use {{c3::<code>vm_insert_page()</code>}}.",
+   "text": "mmap backends: a coherent direct memory access (DMA) buffer uses {{c1::<code>dma_mmap_coherent()</code>}}; vmalloc memory uses {{c2::<code>remap_vmalloc_range()</code>}}; individual pages use {{c3::<code>vm_insert_page()</code>}}.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -5213,7 +5213,7 @@
     "devicemodel"
    ],
    "front": "What does returning <code>-EPROBE_DEFER</code> from <code>probe()</code> mean?",
-   "back": "A dependency (clock, regulator, GPIO, PHY...) isn't available yet because its provider hasn't probed; the core retries after other drivers bind.",
+   "back": "A dependency (clock, regulator, general-purpose input/output (GPIO), physical layer transceiver (PHY)...) isn't available yet because its provider hasn't probed; the core retries after other drivers bind.",
    "text": "",
    "image": "",
    "analogy": "A guest who arrives before the host waits in the lobby and is let in once the host shows up.",
@@ -5267,7 +5267,7 @@
     "abi"
    ],
    "front": "What is the first choice for a driver's user-space interface?",
-   "back": "An existing subsystem (IIO, hwmon, input, V4L2, netdev, tty, GPIO), for which user space already has tools, rather than a custom character device.",
+   "back": "An existing subsystem (industrial I/O (IIO), hwmon, input, Video4Linux 2 (V4L2), netdev, tty, general-purpose input/output (GPIO)), for which user space already has tools, rather than a custom character device.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -5321,7 +5321,7 @@
     "kernel",
     "abi"
    ],
-   "front": "What stability does Linux promise for the in-kernel driver API vs the user-space ABI?",
+   "front": "What stability does Linux promise for the in-kernel driver API vs the user-space application binary interface (ABI)?",
    "back": "In-kernel API/ABI: none; signatures and structs change every release (stable-api-nonsense.rst). User-space ABI (syscalls, ioctls, sysfs): stable indefinitely; \"we do not break user space\".",
    "text": "",
    "image": "",
@@ -5341,7 +5341,7 @@
     "abi"
    ],
    "front": "What is the practical consequence for embedded products with out-of-tree drivers?",
-   "back": "Upstream the driver or budget to forward-port it at every kernel upgrade. Vendor BSP kernels full of out-of-tree drivers are why devices stay on old, unpatched kernels.",
+   "back": "Upstream the driver or budget to forward-port it at every kernel upgrade. Vendor board support package (BSP) kernels full of out-of-tree drivers are why devices stay on old, unpatched kernels.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -5358,7 +5358,7 @@
     "drivers",
     "embedded"
    ],
-   "front": "When is a user-space driver (UIO, spidev, i2c-dev, libgpiod, VFIO) appropriate?",
+   "front": "When is a user-space driver (userspace I/O (UIO), spidev, i2c-dev, libgpiod, virtual function I/O (VFIO)) appropriate?",
    "back": "Simple or one-off devices, modest latency needs, nothing else in the kernel depends on it, or the logic is proprietary or needs floating point. Crashes don't take the kernel down and there is no dependence on the in-kernel API.",
    "text": "",
    "image": "",
@@ -5377,7 +5377,7 @@
     "embedded"
    ],
    "front": "When is a user-space driver NOT suitable?",
-   "back": "When the device is needed during boot, other drivers depend on it (clocks, regulators), a standard interface is expected, interrupt latency is critical, or DMA is needed without an IOMMU.",
+   "back": "When the device is needed during boot, other drivers depend on it (clocks, regulators), a standard interface is expected, interrupt latency is critical, or direct memory access (DMA) is needed without an input-output memory management unit (IOMMU).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -5395,7 +5395,7 @@
     "embedded"
    ],
    "front": "What does VFIO enable?",
-   "back": "Safe, DMA-capable device access from user space, isolated by the IOMMU; used by DPDK/SPDK and for passing devices through to VMs.",
+   "back": "Safe, direct memory access (DMA)-capable device access from user space, isolated by the input-output memory management unit (IOMMU); used by DPDK/SPDK and for passing devices through to VMs.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -5412,7 +5412,7 @@
     "drivers",
     "power"
    ],
-   "front": "Runtime PM: what pattern must surround every hardware access?",
+   "front": "Runtime power management (PM): what pattern must surround every hardware access?",
    "back": "<code>pm_runtime_resume_and_get(dev)</code> before (fail if &lt; 0), then <code>pm_runtime_mark_last_busy()</code> and <code>pm_runtime_put_autosuspend()</code> after. Touching a block whose clock or power domain is off gives a bus error or a hang.",
    "text": "",
    "image": "",
@@ -5448,7 +5448,7 @@
     "drivers",
     "power"
    ],
-   "front": "What do the <code>runtime_suspend</code>/<code>runtime_resume</code> callbacks do, and how is runtime PM switched on?",
+   "front": "What do the <code>runtime_suspend</code>/<code>runtime_resume</code> callbacks do, and how is runtime power management (PM) switched on?",
    "back": "Gate/ungate clocks and save/restore register context. <code>pm_runtime_enable()</code> in <code>probe()</code>, <code>pm_runtime_disable()</code> in <code>remove()</code>.",
    "text": "",
    "image": "",
@@ -5524,7 +5524,7 @@
     "concurrency",
     "mmio"
    ],
-   "front": "<code>GPIOA-&gt;ODR |= 1u &lt;&lt; 5;</code> runs in <code>main()</code> while an ISR also changes GPIOA pins. What is the bug?",
+   "front": "<code>GPIOA-&gt;ODR |= 1u &lt;&lt; 5;</code> runs in <code>main()</code> while an interrupt service routine (ISR) also changes GPIOA pins. What is the bug?",
    "back": "<code>|=</code> is load, OR, store. An ISR between the load and the store has its change undone by the stale write-back: rare and very hard to reproduce.",
    "text": "",
    "image": "",
@@ -5543,7 +5543,7 @@
     "concurrency",
     "mmio"
    ],
-   "front": "Which hardware features avoid read-modify-write races on GPIO outputs?",
+   "front": "Which hardware features avoid read-modify-write races on general-purpose input/output (GPIO) outputs?",
    "back": "Set/clear registers where only written 1-bits take effect (STM32 <code>BSRR</code>, others OUTSET/OUTCLR), or Cortex-M3/M4 bit-banding; otherwise a critical section.",
    "text": "",
    "image": "",
@@ -5581,8 +5581,8 @@
     "interrupts",
     "abi"
    ],
-   "front": "Why can a Cortex-M ISR be a plain <code>void f(void)</code> C function?",
-   "back": "The hardware-pushed set is exactly the AAPCS caller-saved registers, and an ordinary <code>bx lr</code> to <code>EXC_RETURN</code> triggers unstacking. No assembly wrapper or interrupt attribute needed (unlike classic ARM, RISC-V, AVR).",
+   "front": "Why can a Cortex-M interrupt service routine (ISR) be a plain <code>void f(void)</code> C function?",
+   "back": "The hardware-pushed set is exactly the Arm Architecture Procedure Call Standard (AAPCS) caller-saved registers, and an ordinary <code>bx lr</code> to <code>EXC_RETURN</code> triggers unstacking. No assembly wrapper or interrupt attribute needed (unlike classic ARM, reduced instruction set computer (RISC)-V, AVR).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -5602,7 +5602,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Cortex-M {{c1::tail-chaining}} lets back-to-back interrupts skip the pop/push pair; {{c2::late arrival}} services a higher-priority IRQ that arrives during stacking first.",
+   "text": "Cortex-M {{c1::tail-chaining}} lets back-to-back interrupts skip the pop/push pair; {{c2::late arrival}} services a higher-priority interrupt request (IRQ) that arrives during stacking first.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -5619,7 +5619,7 @@
     "interrupts",
     "rtos"
    ],
-   "front": "In the Cortex-M NVIC, does a lower priority number mean higher or lower priority?",
+   "front": "In the Cortex-M nested vectored interrupt controller (NVIC), does a lower priority number mean higher or lower priority?",
    "back": "Higher. Only the top N bits of the 8-bit field are implemented (often 3 or 4); <code>NVIC_SetPriority()</code> shifts for you, and writing raw unshifted values is a classic bug.",
    "text": "",
    "image": "",
@@ -5639,7 +5639,7 @@
     "rtos"
    ],
    "front": "<code>PRIMASK</code> vs <code>BASEPRI</code> on Cortex-M?",
-   "back": "PRIMASK (<code>__disable_irq()</code>) masks everything except NMI and HardFault. BASEPRI (ARMv7-M and later, not M0) masks only priorities at or below a threshold, so critical high-priority IRQs keep running.",
+   "back": "PRIMASK (<code>__disable_irq()</code>) masks everything except non-maskable interrupt (NMI) and HardFault. BASEPRI (ARMv7-M and later, not M0) masks only priorities at or below a threshold, so critical high-priority interrupt requests (IRQs) keep running.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -5657,7 +5657,7 @@
     "interrupts",
     "rtos"
    ],
-   "front": "How does FreeRTOS use BASEPRI, and what is the rule for very high-priority ISRs?",
+   "front": "How does FreeRTOS use BASEPRI, and what is the rule for very high-priority interrupt service routines (ISRs)?",
    "back": "Its critical sections mask only up to <code>configMAX_SYSCALL_INTERRUPT_PRIORITY</code>. ISRs above it (numerically lower) are never masked by the kernel, but must not call any FreeRTOS API.",
    "text": "",
    "image": "",
@@ -5675,7 +5675,7 @@
     "embedded",
     "interrupts"
    ],
-   "front": "What are the core design rules for a firmware ISR?",
+   "front": "What are the core design rules for a firmware interrupt service routine (ISR)?",
    "back": "Short and bounded: acknowledge, move data, set a flag or notify a task, return. No blocking, delays, <code>printf()</code>, <code>malloc()</code> or non-reentrant calls.",
    "text": "",
    "image": "",
@@ -5693,7 +5693,7 @@
     "embedded",
     "interrupts"
    ],
-   "front": "Why should an ISR clear its interrupt source early rather than as its last instruction?",
+   "front": "Why should an interrupt service routine (ISR) clear its interrupt source early rather than as its last instruction?",
    "back": "A clearing write at the very end may not have propagated through the bus before exception return, causing a spurious second entry. Clear early, or read back / <code>__DSB()</code>.",
    "text": "",
    "image": "",
@@ -5711,7 +5711,7 @@
     "embedded",
     "interrupts"
    ],
-   "front": "How does an ISR's worst-case execution time affect the rest of the system?",
+   "front": "How does an interrupt service routine (ISR)'s worst-case execution time affect the rest of the system?",
    "back": "It adds directly to the latency of every lower-priority interrupt.",
    "text": "",
    "image": "",
@@ -5730,7 +5730,7 @@
     "debugging"
    ],
    "front": "Cortex-M HardFault: which stacked value identifies the faulting instruction, and how do you find it?",
-   "back": "The stacked <code>pc</code>. Bit 2 of <code>EXC_RETURN</code> in <code>lr</code> says whether MSP or PSP was active; read the frame from that stack and look up the pc with <code>addr2line</code> or the map file.",
+   "back": "The stacked <code>pc</code>. Bit 2 of <code>EXC_RETURN</code> in <code>lr</code> says whether main stack pointer (MSP) or process stack pointer (PSP) was active; read the frame from that stack and look up the pc with <code>addr2line</code> or the map file.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -5766,7 +5766,7 @@
     "debugging"
    ],
    "front": "What are common causes of a Cortex-M HardFault?",
-   "back": "NULL or wild pointers, a peripheral with its clock off, stack overflow, calling a function pointer without the Thumb bit (INVSTATE), trapped unaligned access or divide by zero, returning from an RTOS task.",
+   "back": "NULL or wild pointers, a peripheral with its clock off, stack overflow, calling a function pointer without the Thumb bit (INVSTATE), trapped unaligned access or divide by zero, returning from a real-time operating system (RTOS) task.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -5802,7 +5802,7 @@
     "stack",
     "debugging"
    ],
-   "front": "How does a stack overflow show up on a microcontroller without an MMU?",
+   "front": "How does a stack overflow show up on a microcontroller without a memory management unit (MMU)?",
    "back": "Silently: the stack grows into <code>.bss</code>, the heap or another task's stack, and symptoms (globals changing, faults in unrelated code) appear far from the cause.",
    "text": "",
    "image": "",
@@ -5822,7 +5822,7 @@
     "debugging"
    ],
    "front": "How can you detect stack overflow on a microcontroller?",
-   "back": "<code>-fstack-usage</code> analysis, stack painting with high-water marks, FreeRTOS <code>configCHECK_FOR_STACK_OVERFLOW</code>, an MPU guard region, or ARMv8-M <code>MSPLIM</code>/<code>PSPLIM</code> limit registers.",
+   "back": "<code>-fstack-usage</code> analysis, stack painting with high-water marks, FreeRTOS <code>configCHECK_FOR_STACK_OVERFLOW</code>, a memory protection unit (MPU) guard region, or ARMv8-M <code>MSPLIM</code>/<code>PSPLIM</code> limit registers.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -5840,7 +5840,7 @@
     "stack",
     "debugging"
    ],
-   "front": "Why place an MCU's main stack at the bottom of RAM?",
+   "front": "Why place a microcontroller unit (MCU)'s main stack at the bottom of RAM?",
    "back": "It grows downward, so an overflow runs off the start of RAM into unmapped space and faults immediately instead of corrupting data.",
    "text": "",
    "image": "",
@@ -5987,7 +5987,7 @@
     "debugging"
    ],
    "front": "A new peripheral driver reads zeros from every register and its writes have no effect. Most likely cause?",
-   "back": "The peripheral's clock is gated off (or it is held in reset / its power domain is down): most MCU peripherals are unclocked after reset. Enable its clock first, plus the GPIO port clock and pin alternate function.",
+   "back": "The peripheral's clock is gated off (or it is held in reset / its power domain is down): most microcontroller unit (MCU) peripherals are unclocked after reset. Enable its clock first, plus the general-purpose input/output (GPIO) port clock and pin alternate function.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -6006,7 +6006,7 @@
     "debugging"
    ],
    "front": "What is the Linux equivalent of \"enable the peripheral clock first\"?",
-   "back": "<code>devm_clk_get_enabled()</code>, the reset-controller API and runtime PM in <code>probe()</code>. Forgetting them gives a synchronous external abort on the first <code>readl()</code>.",
+   "back": "<code>devm_clk_get_enabled()</code>, the reset-controller API and runtime power management (PM) in <code>probe()</code>. Forgetting them gives a synchronous external abort on the first <code>readl()</code>.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -6024,7 +6024,7 @@
     "dma",
     "memory"
    ],
-   "front": "On a Cortex-M7 with a data cache, why is DMA data sometimes stale or wrong?",
+   "front": "On a Cortex-M7 with a data cache, why is direct memory access (DMA) data sometimes stale or wrong?",
    "back": "The DMA engine uses RAM while the CPU sees its cache. Before TX, <b>clean</b> (flush) the buffer to RAM; after RX, <b>invalidate</b> the range before reading.",
    "text": "",
    "image": "",
@@ -6043,8 +6043,8 @@
     "dma",
     "memory"
    ],
-   "front": "Why must DMA buffers on a cached MCU be cache-line aligned and padded?",
-   "back": "Cache maintenance works on whole lines (32 B on Cortex-M7); if a line is shared, invalidating it corrupts neighbouring variables. Alternative: an MPU-marked non-cacheable region.",
+   "front": "Why must direct memory access (DMA) buffers on a cached microcontroller unit (MCU) be cache-line aligned and padded?",
+   "back": "Cache maintenance works on whole lines (32 B on Cortex-M7); if a line is shared, invalidating it corrupts neighbouring variables. Alternative: a memory protection unit (MPU)-marked non-cacheable region.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -6062,7 +6062,7 @@
     "architecture"
    ],
    "front": "Microcontroller vs application processor: what are the key software-visible differences?",
-   "back": "MCU (Cortex-M): no MMU, KiB&ndash;MiB of on-chip memory, execute-in-place flash, deterministic interrupt latency; runs bare metal or an RTOS. Application processor (Cortex-A, x86): MMU, DRAM, caches, multicore; runs Linux with virtual memory and isolation.",
+   "back": "Microcontroller unit (MCU) (Cortex-M): no memory management unit (MMU), KiB&ndash;MiB of on-chip memory, execute-in-place flash, deterministic interrupt latency; runs bare metal or a real-time operating system (RTOS). Application processor (Cortex-A, x86): MMU, dynamic random-access memory (DRAM), caches, multicore; runs Linux with virtual memory and isolation.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -6079,7 +6079,7 @@
     "embedded",
     "architecture"
    ],
-   "front": "What common SoC architecture combines both kinds of core?",
+   "front": "What common system on chip (SoC) architecture combines both kinds of core?",
    "back": "Linux on application cores for connectivity and UI, plus a microcontroller core for hard real-time control, talking over RPMsg or shared memory.",
    "text": "",
    "image": "",
@@ -6100,7 +6100,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Embedded Linux boot chain: {{c1::Boot ROM}} (loads the first stage, verifies secure boot) &rarr; {{c2::SPL / first-stage loader}} (initialises DRAM) &rarr; {{c3::U-Boot}} (loads kernel, DTB and initramfs; sets bootargs) &rarr; {{c4::Linux kernel}} &rarr; init.",
+   "text": "Embedded Linux boot chain: {{c1::Boot ROM}} (loads the first stage, verifies secure boot) &rarr; {{c2::SPL / first-stage loader}} (initialises dynamic random-access memory (DRAM)) &rarr; {{c3::U-Boot}} (loads kernel, device tree blob (DTB) and initramfs; sets bootargs) &rarr; {{c4::Linux kernel}} &rarr; init.",
    "image": "",
    "analogy": "A relay race where each runner is only strong enough to carry the next, bigger runner to the start line.",
    "extra": "",
@@ -6117,8 +6117,8 @@
     "linux",
     "boot"
    ],
-   "front": "Why does the embedded boot chain need an SPL before U-Boot?",
-   "back": "At reset only on-chip SRAM is usable; the SPL is small enough to fit there and initialises the DRAM controller so the full bootloader can be loaded into DRAM.",
+   "front": "Why does the embedded boot chain need a secondary program loader (SPL) before U-Boot?",
+   "back": "At reset only on-chip static random-access memory (SRAM) is usable; the SPL is small enough to fit there and initialises the dynamic random-access memory (DRAM) controller so the full bootloader can be loaded into DRAM.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -6155,7 +6155,7 @@
     "rtos",
     "concurrency"
    ],
-   "front": "Super-loop vs RTOS: what are the trade-offs?",
+   "front": "Super-loop vs real-time operating system (RTOS): what are the trade-offs?",
    "back": "Super-loop: simple, one stack, but any function's worst-case response is the sum of all the others. RTOS: preemptive priority tasks and blocking calls, at the cost of RAM per stack plus races, deadlock and priority inversion.",
    "text": "",
    "image": "",
@@ -6174,7 +6174,7 @@
     "rtos",
     "concurrency"
    ],
-   "front": "In FreeRTOS, how does an ISR hand work to a task?",
+   "front": "In FreeRTOS, how does an interrupt service routine (ISR) hand work to a task?",
    "back": "<code>xQueueSendFromISR(q, &amp;c, &amp;woken)</code>, then <code>portYIELD_FROM_ISR(woken)</code> to switch immediately if a higher-priority task woke; the task blocks in <code>xQueueReceive()</code>.",
    "text": "",
    "image": "",
@@ -6194,7 +6194,7 @@
     "power"
    ],
    "front": "Low-power loop <code>if (!event_flag) __WFI();</code>: what is the race, and the correct Cortex-M idiom?",
-   "back": "If the IRQ fires after the test but before WFI, the core sleeps with the flag set: a lost wake-up. Fix: <code>__disable_irq(); if (!flag) __WFI(); __enable_irq();</code>. WFI still wakes on a <i>pending</i> IRQ with PRIMASK set, so there's no window.",
+   "back": "If the interrupt request (IRQ) fires after the test but before wait for interrupt (WFI), the core sleeps with the flag set: a lost wake-up. Fix: <code>__disable_irq(); if (!flag) __WFI(); __enable_irq();</code>. WFI still wakes on a <i>pending</i> IRQ with PRIMASK set, so there's no window.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -6212,7 +6212,7 @@
     "boot"
    ],
    "front": "What must a Cortex-M bootloader do to jump to an application?",
-   "back": "Validate the image; disable IRQs, stop SysTick and the peripherals/DMA it used, clear pending IRQs; set <code>SCB-&gt;VTOR</code> to the app base; load MSP from the app's word 0; jump to the reset handler in word 1.",
+   "back": "Validate the image; disable interrupt requests (IRQs), stop SysTick and the peripherals/direct memory access (DMA) it used, clear pending IRQs; set <code>SCB-&gt;VTOR</code> to the app base; load main stack pointer (MSP) from the app's word 0; jump to the reset handler in word 1.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -6381,7 +6381,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Cortex-M debug: {{c1::SWD/JTAG}} gives halt, step, hardware breakpoints and data watchpoints; {{c2::ITM over SWO}} gives cheap printf-style output; {{c3::RTT}} uses a RAM ring buffer read by the probe, fast enough for ISRs; {{c4::semihosting}} runs printf on the host, very slow and hangs without a debugger.",
+   "text": "Cortex-M debug: {{c1::SWD/JTAG}} gives halt, step, hardware breakpoints and data watchpoints; {{c2::ITM over SWO}} gives cheap printf-style output; {{c3::RTT}} uses a RAM ring buffer read by the probe, fast enough for interrupt service routines (ISRs); {{c4::semihosting}} runs printf on the host, very slow and hangs without a debugger.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -6398,7 +6398,7 @@
     "debugging"
    ],
    "front": "What is the best tool for finding who corrupts a memory location in firmware?",
-   "back": "A data watchpoint (DWT comparator) via SWD/JTAG: the core halts on the offending write.",
+   "back": "A data watchpoint (a data watchpoint and trace (DWT) comparator) via serial wire debug (SWD)/Joint Test Action Group (JTAG): the core halts on the offending write.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -6434,7 +6434,7 @@
     "debugging"
    ],
    "front": "What is the most accurate way to measure firmware timing?",
-   "back": "Toggle a GPIO and watch it on an oscilloscope or logic analyser (or read the DWT cycle counter).",
+   "back": "Toggle a general-purpose input/output (GPIO) and watch it on an oscilloscope or logic analyser (or read the data watchpoint and trace (DWT) cycle counter).",
    "text": "",
    "image": "",
    "analogy": "",
