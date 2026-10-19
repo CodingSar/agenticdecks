@@ -22,3 +22,17 @@
 ## Product-content review
 
 Reviewed all cards for product-catered content (vendor feature lists, tool plugs, certification marketing, dated news, promotional phrasing): nothing applied, no changes made.
+
+## Abbreviations expanded
+
+Notes touched: 25
+
+- ADM → Architecture Development Method
+- EA → enterprise architecture
+- ADD → Architecture Definition Document
+- ARS → Architecture Requirements Specification
+- ABB → Architecture Building Block
+- SBB → Solution Building Block
+- TRM → Technical Reference Model
+- SIB → Standards Information Base
+- CMM → Capability Maturity Model

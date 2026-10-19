@@ -39,3 +39,27 @@ All "In practice" / "Example" fields kept as short `extra` (trimmed to the singl
 ## Product-content review
 
 - Reviewed card by card: no product-catered content found; nothing changed. Tool names present (Kubernetes, Argo CD, Cilium, MetalLB, FreeRTOS, CMSIS, k6, Playwright …) are open-source subjects or short examples.
+
+## Abbreviations expanded
+
+Notes touched: 29
+
+- ADR → Architecture Decision Record
+- CFO → chief financial officer
+- CTO → chief technology officer
+- CIO → chief information officer
+- DORA → DevOps Research and Assessment
+- CNI → container network interface
+- HPA → horizontal pod autoscaler
+- VPA → vertical pod autoscaler
+- PDB → pod disruption budget
+- FTE → full-time equivalent
+- P50 → 50th percentile
+- P90 → 90th percentile
+- IDP → internal developer platform
+- CRD → custom resource definition
+- SRE → site reliability engineer
+- CQRS → command query responsibility segregation
+- SLO → service level objective
+- EV → expected value
+- PoC → proof of concept

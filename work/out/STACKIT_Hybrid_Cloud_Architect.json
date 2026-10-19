@@ -2060,10 +2060,10 @@
    ],
    "front": "",
    "back": "",
-   "text": "New STACKIT Kubernetes Engine (SKE) workload cluster, fully automated: a {{c1::Terraform module}} creates the cluster + extensions (observability, access control list (ACL)) → Terraform gets the kubeconfig and {{c2::installs the GitOps agent}}, registering the cluster with labels (env, tier, tenant) → {{c3::ApplicationSets match the labels}} and roll in the golden stack → {{c4::ESO pulls secrets}}, tenant apps sync and external-dns publishes records.",
+   "text": "New STACKIT Kubernetes Engine (SKE) workload cluster, fully automated: a {{c1::Terraform module}} creates the cluster + extensions (observability, access control list (ACL)) → Terraform gets the kubeconfig and {{c2::installs the GitOps agent}}, registering the cluster with labels → {{c3::ApplicationSets match the labels}} and roll in the golden stack → {{c4::ESO pulls secrets}}, tenant apps sync and external-dns publishes records.",
    "image": "",
    "analogy": "",
-   "extra": "Deletion = <code>terraform destroy</code>; backups and metrics survive in Object Storage and central stores.",
+   "extra": "Labels: env, tier, tenant. Deletion = <code>terraform destroy</code>; backups and metrics survive in Object Storage and central stores.",
    "source": "multicluster · iac · gitops · fleet",
    "reverse": false
   },
@@ -2802,10 +2802,10 @@
    ],
    "front": "",
    "back": "",
-   "text": "\"Centrally managed from on-prem\" pillars (1/2): {{c1::landing zone}} — org/folders/projects via Terraform, STACKIT Network Area (SNA) with clean IP address management (IPAM); {{c2::connectivity}} — virtual private network (VPN) (border gateway protocol (BGP), active-active) or multiprotocol label switching (MPLS), non-overlapping classless inter-domain routing ranges (CIDRs); {{c3::identity}} — Active Directory (AD) → PingFederate → clusters (Pinniped/native) + Argo single sign-on (SSO), OpenID Connect (OIDC) federation for machines.",
+   "text": "\"Centrally managed from on-prem\" pillars (1/2): {{c1::landing zone}} — org/folders/projects via Terraform, STACKIT Network Area (SNA) with clean IP address management (IPAM); {{c2::connectivity}} — virtual private network (VPN) or multiprotocol label switching (MPLS), non-overlapping classless inter-domain routing ranges (CIDRs); {{c3::identity}} — Active Directory (AD) → PingFederate → clusters (Pinniped/native) + Argo single sign-on (SSO), OpenID Connect (OIDC) federation for machines.",
    "image": "",
    "analogy": "",
-   "extra": "",
+   "extra": "The VPN runs border gateway protocol (BGP) in active-active mode.",
    "source": "hybrid · architecture · synthesis",
    "reverse": false
   },
@@ -2820,10 +2820,10 @@
    ],
    "front": "",
    "back": "",
-   "text": "\"Centrally managed from on-prem\" pillars (2/2): {{c1::delivery}} — Git on-prem as source of truth, pull-based GitOps, Terraform for infra only; {{c2::distribution}} — in-region registry replicas, secrets via central store + External Secrets Operator (ESO); {{c3::operations}} — in-region observability + security information and event management (SIEM) forwarding, backups, upgrade rings; {{c4::governance}} — tenancy per trust zone, quotas at every layer, policy + image signing fleet-wide.",
+   "text": "\"Centrally managed from on-prem\" pillars (2/2): {{c1::delivery}} — Git on-prem as source of truth, pull-based GitOps; {{c2::distribution}} — in-region registry replicas, secrets via central store + External Secrets Operator (ESO); {{c3::operations}} — in-region observability + security information and event management (SIEM) forwarding, backups, upgrade rings; {{c4::governance}} — tenancy per trust zone, quotas, fleet-wide policy and image signing.",
    "image": "",
    "analogy": "",
-   "extra": "",
+   "extra": "Terraform is used for infrastructure only.",
    "source": "hybrid · architecture · synthesis",
    "reverse": false
   }

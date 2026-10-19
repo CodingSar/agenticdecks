@@ -56,3 +56,20 @@ The pesticide paradox no longer says bugs "adapt" (inaccurate). It now says the 
 
 **Rewritten** (guid kept; product moved to a short example in `extra`)
 - "Why are hooks better than CLAUDE.md instructions for test discipline?" → "Why are hooks better than instruction-file guidance (CLAUDE.md / AGENTS.md) for test discipline?"
+
+## Abbreviations expanded
+
+Notes touched: 26
+
+- E2E → end-to-end
+- TDD → test-driven development
+- BDD → behaviour-driven development
+- SAST → static application security testing
+- DAST → dynamic application security testing
+- SCA → software composition analysis
+- UAT → user acceptance testing
+- ISTQB → International Software Testing Qualifications Board
+- WCAG → Web Content Accessibility Guidelines
+- GA → general availability
+- DRY → don't repeat yourself
+- RTL → right-to-left

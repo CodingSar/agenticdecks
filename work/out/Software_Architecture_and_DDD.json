@@ -47,7 +47,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "The rationale outlives the implementation; this is why ADRs record context and consequences.",
+   "extra": "The rationale outlives the implementation; this is why Architecture Decision Records (ADRs) record context and consequences.",
    "source": "FoSA · Foundations",
    "reverse": false
   },
@@ -459,7 +459,7 @@
     "SoftwareArchitecture::Styles"
    ],
    "front": "<b>Monolithic</b> vs <b>distributed</b> architecture styles: which are which?",
-   "back": "<b>Monolithic</b> (one deployment unit): layered, pipeline, microkernel. <b>Distributed</b>: service-based, event-driven, space-based, SOA, microservices.",
+   "back": "<b>Monolithic</b> (one deployment unit): layered, pipeline, microkernel. <b>Distributed</b>: service-based, event-driven, space-based, service-oriented architecture (SOA), microservices.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -810,8 +810,8 @@
    "tags": [
     "SoftwareArchitecture::Styles"
    ],
-   "front": "<b>Orchestration-driven SOA</b>: structure?",
-   "back": "A hierarchical service taxonomy (business, enterprise, application, infrastructure services) mediated by a central orchestration engine / ESB.",
+   "front": "<b>Orchestration-driven service-oriented architecture (SOA)</b>: structure?",
+   "back": "A hierarchical service taxonomy (business, enterprise, application, infrastructure services) mediated by a central orchestration engine / enterprise service bus (ESB).",
    "text": "",
    "image": "<img src=\"soa.png\">",
    "analogy": "",
@@ -826,8 +826,8 @@
    "tags": [
     "SoftwareArchitecture::Styles"
    ],
-   "front": "Why did orchestration-driven SOA fall out of favour?",
-   "back": "Maximising <b>reuse</b> plus central ESB mediation coupled everything: one change rippled widely, killing evolvability and deployability.",
+   "front": "Why did orchestration-driven service-oriented architecture (SOA) fall out of favour?",
+   "back": "Maximising <b>reuse</b> plus central enterprise service bus (ESB) mediation coupled everything: one change rippled widely, killing evolvability and deployability.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -875,7 +875,7 @@
     "SoftwareArchitecture::Styles"
    ],
    "front": "Why do microservices prefer <b>duplication over coupling</b>?",
-   "back": "Shared code or data couples deployments; duplicating small things keeps services independently changeable. The opposite of SOA's reuse goal.",
+   "back": "Shared code or data couples deployments; duplicating small things keeps services independently changeable. The opposite of service-oriented architecture's (SOA's) reuse goal.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -955,7 +955,7 @@
     "SoftwareArchitecture::Styles"
    ],
    "front": "<b>Saga</b> pattern?",
-   "back": "Keeps data consistent across services without distributed ACID transactions: a sequence of local transactions, with <b>compensating</b> transactions to undo work on failure.",
+   "back": "Keeps data consistent across services without distributed atomicity, consistency, isolation and durability (ACID) transactions: a sequence of local transactions, with <b>compensating</b> transactions to undo work on failure.",
    "text": "",
    "image": "",
    "analogy": "Booking a trip: if the hotel fails, you cancel the flight you already booked.",
@@ -988,7 +988,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Typical ADR sections: title, {{c1::status}}, {{c2::context}}, {{c3::decision}}, {{c4::consequences}}.",
+   "text": "Typical Architecture Decision Record (ADR) sections: title, {{c1::status}}, {{c2::context}}, {{c3::decision}}, {{c4::consequences}}.",
    "image": "",
    "analogy": "",
    "extra": "<b>Status</b> values: proposed, accepted, superseded (link to the replacing ADR, never delete).",
@@ -1435,7 +1435,7 @@
     "DDD::Supple"
    ],
    "front": "<b>Side-Effect-Free Functions</b>: why push logic into them?",
-   "back": "Functions that return results without changing state are safe to combine and test; keep state-changing commands small and separate (cf. CQS).",
+   "back": "Functions that return results without changing state are safe to combine and test; keep state-changing commands small and separate (cf. command-query separation (CQS)).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1595,7 +1595,7 @@
     "DDD::ContextMap"
    ],
    "front": "Context mapping: <b>upstream</b> vs <b>downstream</b>?",
-   "back": "Upstream's changes affect downstream, not the reverse. The power balance decides the pattern: Customer/Supplier, Conformist or ACL.",
+   "back": "Upstream's changes affect downstream, not the reverse. The power balance decides the pattern: Customer/Supplier, Conformist or anticorruption layer (ACL).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1947,7 +1947,7 @@
     "DDD::LargeScale"
    ],
    "front": "<b>System Metaphor</b>: when to use it?",
-   "back": "A shared analogy for how the whole system works (from XP). Use it only if it genuinely fits; a forced metaphor misleads.",
+   "back": "A shared analogy for how the whole system works (from extreme programming (XP)). Use it only if it genuinely fits; a forced metaphor misleads.",
    "text": "",
    "image": "",
    "analogy": "",

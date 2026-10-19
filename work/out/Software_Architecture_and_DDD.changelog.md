@@ -30,3 +30,15 @@ Service-based vs microservices; upstream vs downstream; Conformist vs Anticorrup
 ## Product-content review
 
 Reviewed all cards for product-catered content (vendor feature lists, tool plugs, certification marketing, dated news, promotional phrasing): nothing applied, no changes made.
+
+## Abbreviations expanded
+
+Notes touched: 10
+
+- SOA → service-oriented architecture
+- ESB → enterprise service bus
+- ADR → Architecture Decision Record
+- ACID → atomicity, consistency, isolation and durability
+- ACL → anticorruption layer
+- CQS → command-query separation
+- XP → extreme programming
