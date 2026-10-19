@@ -27,3 +27,13 @@ temporality, spanmetrics, memory_limiter ordering, k8sattributes, Operator/Targe
 Little's law and utilisation curves stay in *Quantitative Foundations* 09 (also "percentiles vs mean", so here only
 "why percentiles don't average"). Progressive-delivery and GitOps mechanics stay in *Platform Engineering*; here only
 canary statistics, bake time and feature flags as mitigation.
+
+## Abbreviations expanded
+91 notes touched.
+- SRE → Site Reliability Engineering; SLO → Service Level Objective; SLI → Service Level Indicator; SLA → Service Level Agreement
+- OTel → OpenTelemetry; OTLP → OpenTelemetry Protocol; SDK → software development kit; W3C → World Wide Web Consortium
+- p99 → 99th percentile; OOM → out of memory; RED → rate, errors, duration; USE → utilisation, saturation, errors
+- PII → personally identifiable information; RUM → real user monitoring; CDN → content delivery network; HA → high availability
+- MTTR → mean time to recover; MTBF → mean time between failures; DiRT → Disaster Recovery Testing; KPI → key performance indicator
+- JIT → just-in-time; WAL → write-ahead log (card 191, in extra because it is inside a cloze deletion); CRD → custom resource definition
+- eBPF → extended Berkeley Packet Filter; GC → garbage collection; FEMA → Federal Emergency Management Agency

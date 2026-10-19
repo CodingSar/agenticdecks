@@ -49,4 +49,4 @@ MCS → multi-category security; DDoS → distributed denial of service; BTF →
 NAT → network address translation; ARP → Address Resolution Protocol; GA → general availability; LPE → local privilege escalation;
 CIS → Center for Internet Security; PCI-DSS → Payment Card Industry Data Security Standard; CNCF → Cloud Native Computing Foundation;
 SELinux → Security-Enhanced Linux; RHEL → Red Hat Enterprise Linux.
-(EEVDF is in the map but did not need expansion: note 11 only mentions CFS.)
+(EEVDF was already expanded on its only card, so it was left alone.)

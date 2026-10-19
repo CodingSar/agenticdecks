@@ -368,7 +368,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>Pitfall:</b> <code>A &larr; 'a' / 'ab'</code> never matches <code>ab</code>; with control-flow graph (CFG) alternation it would. Put the longer alternative first. <b>Packrat:</b> memoising every (rule, position) makes parsing expression grammar (PEG) backtracking linear; CPython's parser (Python Enhancement Proposal (PEP) 617) is PEG/packrat.",
+   "extra": "<b>Pitfall:</b> <code>A &larr; 'a' / 'ab'</code> never matches <code>ab</code>; with context-free grammar (CFG) alternation it would. Put the longer alternative first. <b>Packrat:</b> memoising every (rule, position) makes parsing expression grammar (PEG) backtracking linear; CPython's parser (PEP 617) is PEG/packrat.",
    "source": "Front end · Parsing",
    "reverse": false
   },
@@ -1759,7 +1759,7 @@
    ],
    "front": "",
    "back": "",
-   "text": "Executable and Linkable Format (ELF) TLS access models, from fastest to most general: {{c1::local-exec}} (<code>mov %fs:x@tpoff</code>, variable in the executable); {{c2::initial-exec}} (offset loaded from the global offset table (GOT), variable in a library present at startup); {{c3::local-dynamic}} (one <code>__tls_get_addr</code> call for the module, then offsets); {{c4::global-dynamic}} (<code>__tls_get_addr</code> per variable, works after <code>dlopen</code>).",
+   "text": "Executable and Linkable Format (ELF) thread-local storage (TLS) access models, from fastest to most general: {{c1::local-exec}} (<code>mov %fs:x@tpoff</code>, variable in the executable); {{c2::initial-exec}} (offset loaded from the global offset table (GOT), variable in a library present at startup); {{c3::local-dynamic}} (one <code>__tls_get_addr</code> call for the module, then offsets); {{c4::global-dynamic}} (<code>__tls_get_addr</code> per variable, works after <code>dlopen</code>).",
    "image": "",
    "analogy": "",
    "extra": "<b>In practice:</b> the compiler picks by <code>-fPIC</code>/<code>-fPIE</code>; <code>-ftls-model=initial-exec</code> speeds up a library you promise never to <code>dlopen</code>.",
@@ -1793,7 +1793,7 @@
     "linking",
     "ifunc"
    ],
-   "front": "How does one <code>libc.so</code> run an Advanced Vector Extensions 2 (AVX2) <code>memcpy</code> on new CPUs and an Streaming SIMD Extensions 2 (SSE2) one on old CPUs?",
+   "front": "How does one <code>libc.so</code> run an Advanced Vector Extensions 2 (AVX2) <code>memcpy</code> on new CPUs and a Streaming SIMD Extensions 2 (SSE2) one on old CPUs?",
    "back": "GNU <b>indirect function (IFUNC)</b>: the symbol points at a resolver that the dynamic loader runs once (checking <code>cpuid</code>) and whose chosen implementation is written into the global offset table (GOT) slot. All callers are then dispatched at full speed.",
    "text": "",
    "image": "",
@@ -1909,7 +1909,7 @@
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "<b>In practice:</b> the free-threaded build (Python Enhancement Proposal (PEP) 703) is an opt-in alternative interpreter; I/O-bound code already releases the GIL around blocking calls.",
+   "extra": "<b>In practice:</b> the free-threaded build (PEP 703) is an opt-in alternative interpreter; I/O-bound code already releases the GIL around blocking calls.",
    "source": "Runtimes",
    "reverse": false
   },
@@ -2531,7 +2531,7 @@
    "text": "x86-64 instruction layout, in order: optional {{c1::legacy prefixes}} (up to 4), optional {{c2::REX}} prefix, {{c3::opcode}} (1&ndash;3 bytes), optional {{c4::ModRM}} byte, optional scale-index-base (SIB) byte, optional displacement, optional immediate. Hard maximum: 15 bytes.",
    "image": "<img src=\"s2s_x86_encoding.svg\">",
    "analogy": "",
-   "extra": "<b>Example:</b> <code>48 8B 44 24 08</code> = <code>mov rax, [rsp+8]</code>: Register extension (REX).W, opcode, mode-register-memory (ModRM), SIB, disp8. <b>Prefix magic:</b> <code>F3 0F 10</code> is <code>movss</code>, <code>F2 0F 10</code> <code>movsd</code>, <code>66 0F 10</code> <code>movupd</code>: same opcode, the prefix picks the instruction; <code>F0</code> is LOCK.",
+   "extra": "<b>Example:</b> <code>48 8B 44 24 08</code> = <code>mov rax, [rsp+8]</code>: REX.W, opcode, mode-register-memory (ModRM), SIB, disp8. <b>Prefix magic:</b> <code>F3 0F 10</code> is <code>movss</code>, <code>F2 0F 10</code> <code>movsd</code>, <code>66 0F 10</code> <code>movupd</code>: same opcode, the prefix picks the instruction; <code>F0</code> is LOCK.",
    "source": "ISA · x86-64",
    "reverse": false
   },
@@ -2960,7 +2960,7 @@
     "sve",
     "predication"
    ],
-   "front": "How does an Scalable Vector Extension (SVE) loop process the last partial chunk without a scalar remainder loop?",
+   "front": "How does a Scalable Vector Extension (SVE) loop process the last partial chunk without a scalar remainder loop?",
    "back": "With <b>predicate registers</b> <code>p0&ndash;p15</code>: <code>whilelt p0.s, x_i, x_n</code> sets one mask bit per remaining element; predicated loads, ops and stores skip inactive lanes.",
    "text": "",
    "image": "",
@@ -3224,7 +3224,7 @@
     "ziip",
     "licensing"
    ],
-   "front": "IBM Z: a central processor (CP) vs a IBM Z Integrated Information Processor (zIIP): what is the difference, and why does it matter commercially?",
+   "front": "IBM Z: a central processor (CP) vs an IBM Z Integrated Information Processor (zIIP): what is the difference, and why does it matter commercially?",
    "back": "Same silicon. A <b>zIIP</b> is firmware-restricted to eligible work (Db2 Distributed Relational Database Architecture (DRDA) and utilities, Java, some z/OS services). Time on zIIPs is <b>not counted</b> in the MSU-based software charges, so eligible workloads run cheaper.",
    "text": "",
    "image": "",
@@ -3301,7 +3301,7 @@
     "contrast"
    ],
    "front": "Microcoded vs hardwired decode: how do x86, ARM/RISC-V and IBM Z each handle complex instructions?",
-   "back": "ARM/RISC-V: nearly everything hardwired into a few &micro;ops. x86: hardwired fast path plus an microcode sequencer ROM (MSROM) for the long tail. IBM Z: <b>millicode</b>, a vertical microcode written in z instructions plus privileged extras, for storage-to-storage (SS), decimal and start interpretive execution (SIE) work.",
+   "back": "ARM/RISC-V: nearly everything hardwired into a few &micro;ops. x86: hardwired fast path plus a microcode sequencer ROM (MSROM) for the long tail. IBM Z: <b>millicode</b>, a vertical microcode written in z instructions plus privileged extras, for storage-to-storage (SS), decimal and start interpretive execution (SIE) work.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -4393,7 +4393,7 @@
     "gpu",
     "occupancy"
    ],
-   "front": "What is occupancy on an streaming multiprocessor (SM)?",
+   "front": "What is occupancy on a streaming multiprocessor (SM)?",
    "back": "Resident warps divided by the maximum the SM can hold (e.g. 64 warps). It is limited by registers per thread, shared memory per block and the block-count cap.",
    "text": "",
    "image": "",
@@ -4429,7 +4429,7 @@
     "gpu",
     "shared-memory"
    ],
-   "front": "What is shared memory on an streaming multiprocessor (SM), and why is it faster than hitting L1?",
+   "front": "What is shared memory on a streaming multiprocessor (SM), and why is it faster than hitting L1?",
    "back": "A programmer-managed scratchpad per block (tens to ~200 KB per SM, carved from the same static RAM (SRAM) as L1). You decide what to stage, so there are no tags, no misses, and data is reused by all threads in the block.",
    "text": "",
    "image": "",
@@ -5000,7 +5000,7 @@
     "inference"
    ],
    "front": "Why is <b>8-bit integer (INT8)</b> so attractive for inference hardware, and what must software add to make it work?",
-   "back": "Integer multipliers are much smaller and 8-bit values halve bandwidth versus bfloat16 (brain floating point) (BF16). Software must supply a <b>scale</b> (and sometimes zero-point) per tensor or channel, chosen by calibration or training-aware quantisation.",
+   "back": "Integer multipliers are much smaller and 8-bit values halve bandwidth versus brain floating point 16 (BF16). Software must supply a <b>scale</b> (and sometimes zero-point) per tensor or channel, chosen by calibration or training-aware quantisation.",
    "text": "",
    "image": "",
    "analogy": "Shipping prices in whole cents with the currency noted once on the invoice: the unit (scale) travels separately from the numbers.",
