@@ -41,3 +41,17 @@ Reviewed card by card for vendor-catered content: 0 deleted, 6 rewritten to the 
 - "Azure Storage redundancy: {{c1::LRS}} = 3 sync copies in one datacenter; {{c2::ZRS}} = 3 sync copies across 3 AZs; {{c3::GRS}} = LRS + async copy to the paired region; {{c4::RA-GRS}} = GRS with readable (stale) secondary." → "Storage redundancy levels: {{c1::sync copies in one datacenter}} (Azure LRS, S3 One Zone-IA) → {{c2::sync copies across AZs}} (ZRS, S3 Standard) → {{c3::plus an async copy to a distant region}} (GRS, S3 cross-region replication) → optionally a {{c4::readable, stale secondary}} (RA-GRS)."
 - "Azure Service Fabric stateful services: what is quorum loss?" → "What is quorum loss in a replicated stateful partition, and what are the options?"
 - "Azure SQL failover groups: replication mode, and what must the app handle?" → "Asynchronously geo-replicated databases (Azure SQL failover groups, Aurora Global): what must the app handle?"
+
+## Abbreviations expanded
+Notes touched: 68. Each expanded at first occurrence per note as "full name (ABBR)".
+- AZ → availability zone; CAP → consistency, availability, partition tolerance; PACELC → partition, availability, consistency, else latency, consistency
+- CP → consistent and partition-tolerant; AP → available and partition-tolerant; FLP → Fischer-Lynch-Paterson; CALM → consistency as logical monotonicity (in `extra`)
+- LSM → log-structured merge; WAL → write-ahead log; SSTable → sorted string table; GC → garbage collection
+- RPO → recovery point objective; RTT → round-trip time; TTL → time to live; SLA → service level agreement
+- CRDT → conflict-free replicated data type; LWW → last-writer-wins; MVCC → multi-version concurrency control; SSI → serializable snapshot isolation; 2PC → two-phase commit
+- OLTP → online transaction processing; OLAP → online analytical processing; CDC → change data capture; CQRS → command query responsibility segregation (in `extra`)
+- DDIA → Designing Data-Intensive Applications; PBFT → practical Byzantine fault tolerance; NTP → network time protocol; RPC → remote procedure call
+- WCU → write capacity unit; RCU → read capacity unit; RU → request unit; GSI → global secondary index; ETag → entity tag
+- LRS → locally redundant storage; ZRS → zone-redundant storage; GRS → geo-redundant storage; RA-GRS → read-access geo-redundant storage
+- FIFO → first in, first out; AMQP → Advanced Message Queuing Protocol; JMS → Java Message Service; JVM → Java virtual machine; SDK → software development kit
+- FS → file system; CR → custom resource; K8s → Kubernetes; KRaft → Kafka Raft; ARC → Application Recovery Controller
