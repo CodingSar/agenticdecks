@@ -10,7 +10,7 @@ A network protocol stack splits the job of moving data into layers, each offerin
 
 ## Core tenets
 
-1. **Each layer turns a weaker service into a stronger one.** The physical layer delivers noisy bits; the link layer delivers checked frames to a neighbour; the network layer delivers packets to any host, maybe; the transport layer delivers an ordered byte stream to a process. Each layer only has to solve one problem, and can be replaced without disturbing the others, as long as it keeps its promise.
+1. **Each layer turns a weaker service into a stronger one.** The physical layer delivers noisy bits; the link layer delivers checked frames to a neighbour; the network layer delivers packets to any host, maybe; the transport layer delivers an ordered byte stream to a process. Each layer solves one problem and can be replaced without disturbing the others if it keeps its promise.
 
 2. **Encapsulation makes layers independent.** On the way down, each layer prepends a header (and sometimes a trailer) that only its peer reads. A router reads the link and Internet Protocol (IP) headers and ignores everything inside. That is why a router built in 1995 can forward a QUIC packet invented in 2021.
 

@@ -10,7 +10,7 @@ A scheduler decides which runnable thread runs on each Central Processing Unit (
 
 ## Core tenets
 
-1. **No single policy optimizes every metric.** Shortest Job First (SJF) and its preemptive form, Shortest Remaining Time First (SRTF), provably minimize average turnaround time, because running a short job first delays every long job by little while running a long job first delays every short job by a lot. Round Robin (RR), which gives each job a short time slice in turn, gives good response time but poor turnaround. First In, First Out (FIFO) suffers the convoy effect: short jobs queue behind a long one.
+1. **No single policy optimizes every metric.** Shortest Job First (SJF) and its preemptive form, Shortest Remaining Time First (SRTF), provably minimize mean turnaround, because running a short job first delays every long job by little while running a long job first delays every short job by a lot. Round Robin (RR), which gives each job a short time slice in turn, gives good response time but poor turnaround. First In, First Out (FIFO) suffers the convoy effect: short jobs queue behind a long one.
 
 2. **The scheduler does not know the future, so it learns from the past.** SJF needs job lengths in advance, which an Operating System (OS) does not have. The Multi-Level Feedback Queue (MLFQ), from Corbató's Compatible Time-Sharing System (CTSS, 1962), infers them: a new job starts at high priority; if it uses its whole slice it is moved down (it looks CPU-bound); if it blocks early it stays high (it looks interactive). Periodic priority boosts prevent starvation and let jobs that change behaviour move back up. Variants of this idea underlie the Windows NT and classic Berkeley Software Distribution (BSD) Unix schedulers.
 

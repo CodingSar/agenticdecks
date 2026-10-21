@@ -1,7 +1,7 @@
 # Sampling and Quantization
 
 > **Layer:** [00 Engineering Foundations](../README.md) › [Signals and Systems](README.md)
-> **Builds on:** [Analog vs Digital](analog-vs-digital.md), [Calculus](../../01-mathematical-foundations/05-continuous-mathematics/calculus.md), [Linear Algebra](../../01-mathematical-foundations/04-algebra/linear-algebra.md)
+> **Builds on:** [Analog vs Digital](analog-vs-digital.md), [Fourier Analysis](../../01-mathematical-foundations/05-continuous-mathematics/fourier-analysis.md), [Calculus](../../01-mathematical-foundations/05-continuous-mathematics/calculus.md), [Linear Algebra](../../01-mathematical-foundations/04-algebra/linear-algebra.md)
 > **Enables:** [Digital Media and Compression](../../14-human-and-visual-computing/03-media-and-vision/digital-media-and-compression.md), [Source Coding and Compression](../../02-theory-of-computation/01-information-theory/source-coding-and-compression.md), [Wireless Networks](../../08-networking/02-link-layer/wireless-networks.md)
 
 ## Essence
@@ -40,7 +40,7 @@ To compute on a real-world signal, a system must turn a continuous function of t
 
 ## How it fits
 
-- **Below:** It formalises the boundary described in [analog vs digital](analog-vs-digital.md) using Fourier analysis from [calculus](../../01-mathematical-foundations/05-continuous-mathematics/calculus.md) and vector spaces from [linear algebra](../../01-mathematical-foundations/04-algebra/linear-algebra.md).
+- **Below:** It formalises the boundary described in [analog vs digital](analog-vs-digital.md) using [Fourier analysis](../../01-mathematical-foundations/05-continuous-mathematics/fourier-analysis.md) and [calculus](../../01-mathematical-foundations/05-continuous-mathematics/calculus.md) and vector spaces from [linear algebra](../../01-mathematical-foundations/04-algebra/linear-algebra.md).
 - **Above:** Every audio, image and video format starts here ([digital media and compression](../../14-human-and-visual-computing/03-media-and-vision/digital-media-and-compression.md)); rate and resolution limits connect to [source coding](../../02-theory-of-computation/01-information-theory/source-coding-and-compression.md). Radios in [wireless networks](../../08-networking/02-link-layer/wireless-networks.md) sample and process signals digitally. Aliasing reappears in [the rasterization pipeline](../../14-human-and-visual-computing/02-computer-graphics/rasterization-pipeline.md), and convolution in [convolutional networks](../../13-artificial-intelligence/03-deep-learning/convolutional-networks.md).
 - **Siblings:** [Analog vs digital](analog-vs-digital.md) explains why we discretise at all; [feedback and control](feedback-and-control.md) uses sampled measurements to steer systems, and sigma-delta converters are themselves feedback loops.
 

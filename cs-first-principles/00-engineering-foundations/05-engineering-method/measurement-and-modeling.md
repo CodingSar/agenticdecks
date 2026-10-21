@@ -12,7 +12,7 @@ Engineers do not reason about reality directly; they reason about models of it, 
 
 1. **Every model has a domain of validity.** The lumped circuit model holds while wires are short compared with signal wavelength; the square-law transistor model holds for long channels; the Random Access Machine (RAM) model of algorithms holds while data fits in fast memory. Using a model outside its domain gives confident, wrong answers. A good engineer knows a model's assumptions as well as its equations. As George Box put it, all models are wrong, but some are useful.
 
-2. **Estimate before you build or measure.** Back-of-the-envelope calculation, with orders of magnitude and known reference numbers, catches impossible designs early and tells you what a measurement *should* show. Knowing that a main-memory access takes on the order of 100 ns, a level-1 (L1) cache hit about 1 ns, a data-centre round trip about 0.5 ms and a cross-continent round trip tens of milliseconds (2020s hardware) is enough to rule out many designs in minutes.
+2. **Estimate before you build or measure.** Back-of-the-envelope calculation, with orders of magnitude and known reference numbers, catches impossible designs early and tells you what a measurement *should* show. Knowing that a main-memory access takes on the order of 100 ns, a level-1 (L1) cache hit about 1 ns, a round trip within a data centre roughly 0.1 to 0.5 ms and a cross-continent round trip tens of milliseconds (2020s hardware) is enough to rule out many designs in minutes.
 
 3. **Units and dimensions check reasoning.** Every equation must balance in units: seconds equal resistance times capacitance (ohms × farads), bandwidth times delay equals bits in flight. Dimensional analysis catches algebra mistakes and often suggests the form of an answer before you derive it.
 
@@ -56,4 +56,4 @@ Engineers do not reason about reality directly; they reason about models of it, 
 
 - Raj Jain, *The Art of Computer Systems Performance Analysis* (1991): measurement, simulation and queueing for computer systems.
 - Jon Bentley, *Programming Pearls* (1986): back-of-the-envelope estimation for programmers.
-- George Box, "Science and Statistics" (1976): the source of "all models are wrong" and the case for iterative modelling.
+- George Box, "Science and Statistics" (1976): the argument that all models are wrong, and the case for iterative modelling (the "but some are useful" wording appears in his 1979 work on robustness).

@@ -7,7 +7,7 @@
 
 Hardware stores and moves only fixed-width strings of bits. Programs need integers, real numbers and text. This area answers: *how do we encode mathematical and human objects as finite bit patterns, and what do those encodings make cheap, expensive or impossible?* It sits in Digital Logic rather than Mathematical Foundations because these are engineering encodings: their quirks, such as overflow, rounding, an asymmetric integer range or a string whose length depends on how you count, come from the finiteness of hardware, not from the mathematics they approximate.
 
-The unifying idea is that **a bit pattern has no meaning until an encoding gives it one, and the encoding decides which operations are cheap**. Positional binary makes counting and shifting cheap. Two's complement makes signed and unsigned addition the same circuit. Floating point makes huge ranges cheap at the cost of exactness. UTF-8 (Unicode Transformation Format, 8-bit) makes byte-oriented text processing that is compatible with the American Standard Code for Information Interchange (ASCII) cheap text processing cheap at the cost of random access by character.
+The unifying idea is that **a bit pattern has no meaning until an encoding gives it one, and the encoding decides which operations are cheap**. Positional binary makes counting and shifting cheap. Two's complement makes signed and unsigned addition the same circuit. Floating point makes huge ranges cheap at the cost of exactness. UTF-8 (Unicode Transformation Format, 8-bit) makes byte-oriented text processing that is compatible with the American Standard Code for Information Interchange (ASCII) cheap, at the cost of random access by character.
 
 ## How the children fit together
 

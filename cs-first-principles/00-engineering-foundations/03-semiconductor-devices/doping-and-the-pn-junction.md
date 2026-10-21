@@ -10,7 +10,7 @@ Pure silicon conducts poorly, but adding a tiny, precisely controlled amount of 
 
 ## Core tenets
 
-1. **A few impurity atoms control conductivity.** Replacing a silicon atom (four valence electrons) with phosphorus or arsenic (five) adds an electron that is only weakly bound and is freed at room temperature: a donor, making n-type silicon. Boron (three) leaves a hole: an acceptor, making p-type silicon. Typical doping is about one dopant per 10⁴ to 10⁸ silicon atoms, yet this raises the carrier count from about 10¹⁰ to 10¹⁵ to 10²⁰ per cubic centimetre.
+1. **A few impurity atoms control conductivity.** Replacing a silicon atom (four valence electrons) with phosphorus or arsenic (five) adds an electron that is only weakly bound and is freed at room temperature: a donor, making n-type silicon. Boron (three) leaves a hole: an acceptor, making p-type silicon. Typical doping ranges from about one dopant per 10⁸ silicon atoms (lightly doped channels) to about one per 10³ (heavily doped contacts), yet this raises the carrier count from about 10¹⁰ to roughly 10¹⁴ to 10¹⁹ per cubic centimetre, and higher still in the most heavily doped regions.
 
 2. **Electrons and holes are linked by the mass-action law.** In thermal equilibrium the product of electron and hole concentrations is fixed: `n · p = ni²`. Adding donors raises `n` and suppresses `p` by the same factor. The abundant type is the majority carrier and the scarce type the minority carrier. Many device behaviours, including the junction's forward current, are carried by minority carriers.
 

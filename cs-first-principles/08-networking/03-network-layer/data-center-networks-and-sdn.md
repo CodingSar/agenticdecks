@@ -10,9 +10,9 @@ A large data center holds tens to hundreds of thousands of servers owned by one 
 
 ## Core tenets
 
-1. **East-west traffic dominates, so the network must look like one big switch.** Requests fan out to many backend services, and storage, batch jobs and machine learning training shuffle data among thousands of machines. The goal is high *bisection bandwidth*: if any half of the servers sends to the other half, the network carries it at close to full rate. A classic tree under a few big core routers cannot: inter-rack traffic funnels through the top.
+1. **East-west traffic dominates, so the network must look like one big switch.** Request fan-out, storage, batch jobs and machine learning training move data among thousands of machines. The goal is high *bisection bandwidth*: if any half of the servers sends to the other half, the network carries it at close to full rate. A classic tree under a few big core routers cannot: inter-rack traffic funnels through the top.
 
-2. **A Clos topology builds a big non-blocking fabric from small identical switches.** Clos (1953) showed that multistage networks of small crossbars can act as one large non-blocking switch. In a data center this becomes leaf-spine or a three-tier fat-tree: every top-of-rack (leaf) switch connects to every spine, so any two racks are a few hops apart over many parallel paths. A fat-tree of k-port commodity switches connects k³/4 hosts at full bisection bandwidth (27,648 hosts with 48-port switches; Al-Fares et al., 2008). Losing one switch removes only a fraction of the paths.
+2. **A Clos topology builds a big non-blocking fabric from small identical switches.** Charles Clos (1953) showed that multistage networks of small crossbars can act as one large non-blocking switch. In a data center this becomes leaf-spine or a three-tier fat-tree: every top-of-rack (leaf) switch connects to every spine, so any two racks are a few hops apart over many parallel paths. A fat-tree of k-port commodity switches connects k³/4 hosts (27,648 for k = 48) at full bisection bandwidth (Al-Fares et al., 2008). Losing one switch removes only a fraction of the paths.
 
 3. **Equal-Cost Multi-Path (ECMP) routing spreads flows by hashing.** Each switch hashes a packet's flow identifier (addresses, ports, protocol) to pick one of several next hops. A flow stays on one path, avoiding reordering that would confuse the Transmission Control Protocol (TCP). But hashing ignores load: two large "elephant" flows can collide on one link while others sit idle.
 
@@ -24,7 +24,7 @@ A large data center holds tens to hundreds of thousands of servers owned by one 
 
 7. **Programmable data planes make forwarding itself software.** Fixed-function chips understand only the protocols their designers chose. P4 (Bosshart et al., 2014) describes how a programmable switch, network card or software switch parses headers and applies a pipeline of match-action tables. Programs have no unbounded loops and fixed per-stage work, so they run at line rate, enabling new headers and in-network telemetry without new silicon.
 
-8. **Virtualization runs tenant networks on top of the physical fabric.** Each cloud tenant wants private addresses and isolation. Overlays wrap tenant packets in an outer header (Virtual Extensible Local Area Network (VXLAN) carries a 24-bit network identifier, about 16 million segments), and virtual switches in the hypervisor or Network Interface Card (NIC) apply tenant policy. The fabric routes outer addresses only.
+8. **Virtualization runs tenant networks on top of the physical fabric.** For private, isolated tenant networks, overlays wrap tenant packets in an outer header (Virtual Extensible Local Area Network (VXLAN) carries a 24-bit network identifier, about 16 million segments), and virtual switches in the hypervisor or Network Interface Card (NIC) apply tenant policy. The fabric routes outer addresses only.
 
 9. **RDMA removes the host's software from the fast path.** Remote Direct Memory Access (RDMA) lets a NIC read or write another machine's registered memory directly, bypassing both kernels and the remote Central Processing Unit (CPU), for microsecond-scale latency. RDMA over Converged Ethernet (RoCE) brings it from InfiniBand clusters to data centers but needs a nearly lossless fabric, enforced by link-level pause frames that can spread congestion or deadlock.
 
@@ -55,7 +55,6 @@ A large data center holds tens to hundreds of thousands of servers owned by one 
 
 ## Go deeper
 
-- C. Clos, *A Study of Non-Blocking Switching Networks* (Bell System Technical Journal, 1953): the multistage idea.
 - M. Al-Fares, A. Loukissas, A. Vahdat, *A Scalable, Commodity Data Center Network Architecture* (SIGCOMM 2008): commodity fat-trees.
 - N. McKeown et al., *OpenFlow: Enabling Innovation in Campus Networks* (ACM SIGCOMM Computer Communication Review, 2008): the interface that launched SDN.
 - A. Singh et al., *Jupiter Rising: A Decade of Clos Topologies and Centralized Control in Google's Datacenter Network* (SIGCOMM 2015): both ideas in production.
