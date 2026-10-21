@@ -41,7 +41,7 @@ Knowledge Representation and Reasoning (KR&R) asks how to write down what an age
 ## How it fits
 
 - **Below:** The languages are [propositional](../../01-mathematical-foundations/01-logic/propositional-logic.md) and [predicate logic](../../01-mathematical-foundations/01-logic/predicate-logic.md); the limits are [undecidability](../../02-theory-of-computation/03-computability/halting-problem-and-undecidability.md) results; the execution model is [logic programming](../../06-programming-languages/01-paradigms/logic-and-declarative.md).
-- **Above:** Datalog-style rules power [query languages](../../09-data-management/01-data-models/relational-algebra-and-sql.md), static analysers and access-control policies. Knowledge graphs feed retrieval systems around [large language models](../04-advanced-paradigms/large-language-models.md).
+- **Above:** Datalog-style rules power [query languages](../../09-data-management/01-data-models/relational-algebra-and-sql.md), static analysers and access-control policies. Knowledge graphs feed [retrieval systems](../04-advanced-paradigms/retrieval-and-embeddings.md) around [large language models](../04-advanced-paradigms/large-language-models.md).
 - **Siblings:** [Constraint satisfaction](constraint-satisfaction.md) is the engine many reasoners compile into. [Probabilistic reasoning](probabilistic-reasoning.md) replaces true/false with degrees of belief. [Planning](search-and-planning.md) uses logical state descriptions.
 
 ## Common misconceptions

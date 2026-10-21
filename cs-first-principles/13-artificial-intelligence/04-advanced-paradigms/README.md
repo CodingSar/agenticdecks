@@ -1,13 +1,13 @@
 # Advanced Paradigms
 
 > **Layer:** [13 Artificial Intelligence](../README.md) › Advanced paradigms
-> **Children:** [Reinforcement learning](reinforcement-learning.md) · [Generative models](generative-models.md) · [Large language models](large-language-models.md) · [Alignment and safety](alignment-and-safety.md)
+> **Children:** [Reinforcement learning](reinforcement-learning.md) · [Generative models](generative-models.md) · [Large language models](large-language-models.md) · [Retrieval and embeddings](retrieval-and-embeddings.md) · [Alignment and safety](alignment-and-safety.md)
 
 ## What this area is about
 
-The foundations of Machine Learning (ML) assume a fixed dataset of inputs and labels and a model that predicts. This area covers what happens when those assumptions are dropped. **Reinforcement learning** (RL) drops the labels: an agent learns from rewards earned by acting. **Generative models** drop the single right answer: the model learns a whole distribution and samples new data from it. **Large language models** (LLMs) combine both at unprecedented scale: a generative model of text, refined by reinforcement learning, used as a general-purpose reasoning and interface engine. **Alignment and safety** asks the question that arises once systems are this capable and this indirectly specified: are they doing what we actually want?
+The foundations of Machine Learning (ML) assume a fixed dataset of inputs and labels and a model that predicts. This area covers what happens when those assumptions are dropped. **Reinforcement learning** (RL) drops the labels: an agent learns from rewards earned by acting. **Generative models** drop the single right answer: the model learns a whole distribution and samples new data from it. **Large language models** (LLMs) combine both at unprecedented scale: a generative model of text, refined by reinforcement learning, used as a general-purpose reasoning and interface engine. **Retrieval and embeddings** gives models a memory they can look up: learned vectors in which nearness means relatedness, searched approximately at scale and fed to language models as context. **Alignment and safety** asks the question that arises once systems are this capable and this indirectly specified: are they doing what we actually want?
 
-The unifying idea is **optimisation of an objective that is only a proxy for the goal**. Reward is a proxy for desired behaviour; likelihood is a proxy for realism; next-token loss is a proxy for usefulness; human ratings are a proxy for human values. Each child exploits the power of optimising a proxy, and the last child deals with what happens when the proxy and the goal come apart.
+The unifying idea is **optimisation of an objective that is only a proxy for the goal**. Reward is a proxy for desired behaviour; likelihood is a proxy for realism; next-token loss is a proxy for usefulness; embedding similarity is a proxy for relevance; human ratings are a proxy for human values. Each child exploits the power of optimising a proxy, and the last child deals with what happens when the proxy and the goal come apart.
 
 ## How the children fit together
 
@@ -16,25 +16,29 @@ The unifying idea is **optimisation of an objective that is only a proxy for the
 | [Reinforcement learning](reinforcement-learning.md) | Learning behaviour from reward through interaction; the Bellman equation | Dynamic programming, deep networks |
 | [Generative models](generative-models.md) | Learning and sampling high-dimensional distributions: autoregressive, Variational Autoencoder (VAE), Generative Adversarial Network (GAN), diffusion | Unsupervised learning, deep networks |
 | [Large language models](large-language-models.md) | Autoregressive generation of text at scale, post-trained with RL, including Reinforcement Learning from Human Feedback (RLHF) | Transformers, generative models, reinforcement learning |
-| [Alignment and safety](alignment-and-safety.md) | Making capable optimised systems pursue intended goals and resist misuse | All three above |
+| [Retrieval and embeddings](retrieval-and-embeddings.md) | Learned vector representations, approximate nearest-neighbour search, Retrieval-Augmented Generation (RAG) | Unsupervised learning, transformers, nearest-neighbour structures |
+| [Alignment and safety](alignment-and-safety.md) | Making capable optimised systems pursue intended goals and resist misuse | All of the above |
 
 ```
-   reinforcement learning ----(RLHF, RL on verifiable rewards)----+
-                                                                   v
-   generative models ----(autoregressive text model at scale)--> large language models
-          \                                                        |
-           \--------------------------+----------------------------+
+   reinforcement learning ----(RLHF, RL on verifiable rewards)---------+
+                                                                       v
+   generative models -----(autoregressive text model at scale)--> large language models
+                                                                       ^
+   retrieval and embeddings ----(RAG: documents into the context)------+
+                                                                       |
+            all of the above, deployed --------------------------------+
+                                      |
                                       v
                            alignment and safety
-               (reward hacking, misuse, robustness, oversight)
+     (reward hacking, misuse, prompt injection, robustness, oversight)
 ```
 
-Read reinforcement learning and generative models in either order; they are independent foundations. Large language models then combine them: pre-training is generative modelling, post-training is reinforcement learning. Alignment comes last because its problems are visible in all three and most pressing in the last.
+Read reinforcement learning and generative models in either order; they are independent foundations. Large language models then combine them: pre-training is generative modelling, post-training is reinforcement learning. Retrieval and embeddings comes next because its main modern use is to ground language models in documents they were not trained on, although embeddings predate LLMs and also drive search and recommendation. Alignment comes last because its problems are visible in all of these and most pressing in deployed language-model systems, where retrieved text is also a channel for prompt injection.
 
 ## Connections to sibling areas
 
 - **[Classical AI](../01-classical-ai/README.md):** Classical Artificial Intelligence (AI) supplies the foundations here. Reinforcement learning formalises sequential decisions as Markov Decision Processes, an extension of probabilistic reasoning; game-playing systems combine it with classical tree search. LLM agents rediscover planning and frequently call classical solvers as tools.
-- **[Machine learning foundations](../02-machine-learning-foundations/README.md):** Generative models are unsupervised density estimation; self-supervised pre-training is the reason LLMs exist; evaluation and generalisation problems reappear here in their hardest forms (open-ended outputs, distribution shift, contaminated benchmarks).
+- **[Machine learning foundations](../02-machine-learning-foundations/README.md):** Generative models are unsupervised density estimation; embeddings are learned representations from self-supervised and contrastive training, and approximate search revives nearest-neighbour methods; self-supervised pre-training is the reason LLMs exist; evaluation and generalisation problems reappear here in their hardest forms (open-ended outputs, distribution shift, contaminated benchmarks).
 - **[Deep learning](../03-deep-learning/README.md):** Every paradigm here uses deep networks as its function approximator: convolutional networks and transformers as diffusion denoisers, transformers as LLMs, value and policy networks in deep RL. Training at scale is what makes frontier models possible.
 
 ## Connections across layers

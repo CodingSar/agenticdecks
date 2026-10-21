@@ -133,3 +133,4 @@ Collected from writer reports, to be resolved in the review pass.
 - 01 relations-and-orders.md: "union–find" link → 05/02/union-find.md.
 - 06 polymorphism-and-type-inference.md: link union-find for unification.
 - 07 kernel-architectures.md + 01 README: seL4 ~8,700 lines (07 reviewer briefed).
+- 13 training-at-scale.md tenet 7: doubled comma ',,'.

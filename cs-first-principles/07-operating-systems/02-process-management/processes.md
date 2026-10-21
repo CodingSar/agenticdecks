@@ -24,7 +24,7 @@ A process is a program in execution: an isolated address space holding code, dat
 
 4. **Unix separates creating a process from loading a program.** `fork()` creates a near-identical child; `exec()` replaces the caller's memory image with a new program; `wait()` lets the parent collect the child's result. The gap between `fork` and `exec` is where a shell sets up redirection and pipes by rearranging file descriptors, without any special system call. `fork` is cheap because pages are shared copy-on-write rather than copied. Windows NT instead offers `CreateProcess`, which builds the new process and loads the program in one call; Linux also offers `posix_spawn` and `clone` for finer control.
 
-5. **Isolation comes from separate address spaces; sharing must be explicit.** Each process has its own page table, so the same virtual address in two processes refers to different physical memory. Processes communicate only through kernel-mediated channels: pipes, sockets, signals, files, or shared memory regions they both map deliberately. This default of isolation is why a crash in one browser tab's process does not take down the others, which is the design behind Chrome's multi-process architecture.
+5. **Isolation comes from separate address spaces; sharing must be explicit.** Each process has its own page table, so the same virtual address in two processes refers to different physical memory. Processes communicate only through kernel-mediated channels ([inter-process communication](inter-process-communication.md)): pipes, sockets, signals, files, or deliberately shared memory. This default of isolation is why a crash in one browser tab's process does not take down the others, which is the design behind Chrome's multi-process architecture.
 
 6. **Processes form a tree, and the kernel tracks parentage for cleanup and control.** Every process except the first has a parent; on Linux the first user process (`init`, usually systemd) adopts orphans and reaps them. Signals, process groups and sessions build job control on this tree (Ctrl-C sends `SIGINT` to the foreground group). Resource accounting and limits in modern kernels attach to groups of processes (control groups, or cgroups), the basis of containers.
 
@@ -48,7 +48,7 @@ A process is a program in execution: an isolated address space holding code, dat
 
 - **Below:** a process is a [loaded program image](../../06-programming-languages/04-runtime-systems/linking-and-loading.md) run under the [protection boundary](../01-kernel-and-abstractions/kernel-mode-and-system-calls.md); its context is the register file of the [datapath](../../04-computer-architecture/02-processor-microarchitecture/datapath-and-control.md).
 - **Above:** containers are process groups with private namespaces ([containers](../07-virtualization/containers.md)); distributed systems model nodes as processes that crash ([system models and failures](../../10-distributed-and-parallel-computing/02-distributed-foundations/system-models-and-failures.md)); sandboxing builds on process isolation ([isolation and sandboxing](../../11-security-and-cryptography/03-system-security/isolation-and-sandboxing.md)).
-- **Siblings:** [threads](threads.md) split execution from ownership; [scheduling](scheduling.md) decides which ready process or thread runs.
+- **Siblings:** [threads](threads.md) split execution from ownership; [scheduling](scheduling.md) decides which ready process runs; [IPC](inter-process-communication.md) crosses the isolation.
 
 ## Common misconceptions
 
