@@ -1,7 +1,7 @@
 # Probability and Statistics
 
 > **Layer:** [01 Mathematical Foundations](../README.md) › Probability and Statistics
-> **Children:** [Probability](probability.md) · [Random Variables and Distributions](random-variables-and-distributions.md) · [Statistical Inference](statistical-inference.md)
+> **Children:** [Probability](probability.md) · [Random Variables and Distributions](random-variables-and-distributions.md) · [Statistical Inference](statistical-inference.md) · [Markov Chains](markov-chains.md)
 
 ## What this area is about
 
@@ -16,8 +16,9 @@ The unifying idea is that *uncertainty can be quantified and combined by fixed r
 | [Probability](probability.md) | Axioms, conditioning, independence, Bayes' rule, union bound; randomness as a tool | Sets, combinatorics |
 | [Random Variables and Distributions](random-variables-and-distributions.md) | Numbers attached to outcomes; expectation, variance, tail bounds, standard and heavy-tailed distributions | Probability, calculus |
 | [Statistical Inference](statistical-inference.md) | From data back to models: estimation, likelihood, confidence, testing, bias–variance | Both of the above, optimization |
+| [Markov Chains](markov-chains.md) | Random processes that evolve step by step: transition matrices, stationary distributions, mixing, MCMC, queues | Probability, distributions, linear algebra |
 
-Read them in order. Probability defines events and how their likelihoods combine. Random variables make outcomes numeric, so you can average, bound tails, and recognise the mechanisms (independent trials, memoryless waiting, sums of many effects, rich-get-richer growth) that produce standard distributions. Inference reverses the arrow.
+Read the first three in order. Probability defines events and how their likelihoods combine. Random variables make outcomes numeric, so you can average, bound tails, and recognise the mechanisms (independent trials, memoryless waiting, sums of many effects, rich-get-richer growth) that produce standard distributions. Inference reverses the arrow. Markov chains can be read after random variables: they string single random experiments into a *process* in time, where the next state depends only on the current one. They supply the models behind queues and reinforcement learning, and, through Markov Chain Monte Carlo (MCMC), the sampling engine that makes Bayesian inference computable.
 
 ```
    model ──── probability, distributions ────► data
@@ -32,13 +33,13 @@ Two results tie the area together. The law of large numbers and the Central Limi
 
 - **[Logic](../01-logic/README.md):** Events combine with AND, OR and NOT; probability generalises truth values to degrees of belief.
 - **[Sets, Relations and Functions](../02-sets-relations-functions/README.md):** Events are subsets of a sample space and random variables are functions on it.
-- **[Discrete Mathematics](../03-discrete-mathematics/README.md):** Finite probability is [counting](../03-discrete-mathematics/combinatorics.md); the birthday bound and union bound are shared tools.
-- **[Algebra](../04-algebra/README.md):** Markov chains are matrices whose dominant eigenvector is the long-run distribution; covariance matrices drive Principal Component Analysis (PCA).
-- **[Continuous Mathematics](../05-continuous-mathematics/README.md):** Densities and expectations are integrals; maximum-likelihood estimation and model training are optimisation problems.
+- **[Discrete Mathematics](../03-discrete-mathematics/README.md):** Finite probability is [counting](../03-discrete-mathematics/combinatorics.md); the birthday bound and union bound are shared tools. A Markov chain is a random walk on a [graph](../03-discrete-mathematics/graph-theory.md).
+- **[Algebra](../04-algebra/README.md):** [Markov chains](markov-chains.md) are matrices whose dominant eigenvector is the long-run distribution, and their mixing speed is an eigenvalue gap; covariance matrices drive Principal Component Analysis (PCA).
+- **[Continuous Mathematics](../05-continuous-mathematics/README.md):** Densities and expectations are integrals; maximum-likelihood estimation and model training are optimisation problems; the density of a sum of independent variables is a convolution, which [Fourier analysis](../05-continuous-mathematics/fourier-analysis.md) turns into a product.
 
 ## Connections across layers
 
-The area underlies [information theory](../../02-theory-of-computation/01-information-theory/README.md) (entropy is an expected value), [randomized algorithms](../../05-algorithms-and-data-structures/03-design-paradigms/randomized-algorithms.md) and [streaming sketches](../../05-algorithms-and-data-structures/07-advanced-topics/streaming-and-online-algorithms.md), [queueing and latency](../../08-networking/01-principles/latency-bandwidth-and-queueing.md), the definition of security in [modern cryptography](../../11-security-and-cryptography/02-cryptography/foundations-of-modern-cryptography.md), [reliability engineering](../../12-software-engineering/04-operations/reliability-engineering.md) and [observability](../../12-software-engineering/04-operations/observability.md), nearly all of [artificial intelligence](../../13-artificial-intelligence/README.md), and the evaluation methods of [human-computer interaction](../../14-human-and-visual-computing/01-human-computer-interaction/README.md).
+The area underlies [information theory](../../02-theory-of-computation/01-information-theory/README.md) (entropy is an expected value), [randomized algorithms](../../05-algorithms-and-data-structures/03-design-paradigms/randomized-algorithms.md) and [streaming sketches](../../05-algorithms-and-data-structures/07-advanced-topics/streaming-and-online-algorithms.md), [queueing and latency](../../08-networking/01-principles/latency-bandwidth-and-queueing.md) (Markov models of queues), the definition of security in [modern cryptography](../../11-security-and-cryptography/02-cryptography/foundations-of-modern-cryptography.md), [reliability engineering](../../12-software-engineering/04-operations/reliability-engineering.md) and [observability](../../12-software-engineering/04-operations/observability.md), nearly all of [artificial intelligence](../../13-artificial-intelligence/README.md) (including the Markov decision processes of [reinforcement learning](../../13-artificial-intelligence/04-advanced-paradigms/reinforcement-learning.md)), and the evaluation methods of [human-computer interaction](../../14-human-and-visual-computing/01-human-computer-interaction/README.md).
 
 ## Cross-cutting threads
 

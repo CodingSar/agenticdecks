@@ -6,7 +6,7 @@
 
 ## Essence
 
-A Large Language Model (LLM) is a transformer, typically with billions to trillions of parameters, trained to predict the next token of text over a corpus of trillions of tokens. That single self-supervised objective turns out to require learning grammar, facts, translation, arithmetic, coding patterns and multi-step reasoning, because all of them help predict what comes next. Pre-training produces a model of text; further training with demonstrations, human preferences and reinforcement learning turns it into an assistant that follows instructions. At use time the model generates by repeatedly sampling a token and appending it to its input. As of the mid-2020s, LLMs are the most general-purpose Artificial Intelligence (AI) systems in wide use, and also systems whose failure modes (confident errors, sensitivity to phrasing, vulnerability to manipulation) are still being mapped.
+A Large Language Model (LLM) is a transformer, typically with billions to trillions of parameters, trained to predict the next token of text over a corpus of trillions of tokens. That single self-supervised objective turns out to require learning grammar, facts, translation, arithmetic, coding patterns and multi-step reasoning, because all of them help predict what comes next. Pre-training produces a model of text; further training with demonstrations, human preferences and reinforcement learning turns it into an assistant that follows instructions. At use time the model generates by repeatedly sampling a token and appending it to its input. As of the mid-2020s, LLMs are the most general-purpose Artificial Intelligence (AI) systems in wide use, with failure modes (confident errors, sensitivity to phrasing, manipulation) still being mapped.
 
 ## Core tenets
 
@@ -57,4 +57,3 @@ A Large Language Model (LLM) is a transformer, typically with billions to trilli
 - Tom Brown et al., "Language Models are Few-Shot Learners" (2020): GPT-3 and in-context learning.
 - Long Ouyang et al., "Training Language Models to Follow Instructions with Human Feedback" (2022): the SFT-plus-RLHF recipe.
 - Jason Wei et al., "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models" (2022): intermediate steps as extra computation.
-- Patrick Lewis et al., "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks" (2020): grounding generation in retrieved text for Natural Language Processing (NLP) tasks.

@@ -46,7 +46,7 @@ Optimization is the problem of choosing the input that minimises (or maximises) 
 
 - **Below:** [Calculus](calculus.md) supplies gradients and Hessians; [linear algebra](../04-algebra/linear-algebra.md) supplies the geometry of curvature and the machinery for LPs; [probability](../06-probability-and-statistics/probability.md) justifies stochastic gradients.
 - **Above:** [Learning as optimization](../../13-artificial-intelligence/02-machine-learning-foundations/learning-as-optimization.md) and [training at scale](../../13-artificial-intelligence/03-deep-learning/training-at-scale.md) are applied gradient methods. [Network flow](../../05-algorithms-and-data-structures/05-graph-algorithms/network-flow.md) and [approximation algorithms](../../05-algorithms-and-data-structures/07-advanced-topics/approximation-algorithms.md) use LP and duality. [Congestion control](../../08-networking/04-transport-layer/congestion-control.md) is distributed optimization with feedback. [Query optimizers](../../09-data-management/03-query-processing/query-optimization.md) and [register allocators](../../06-programming-languages/03-compilers/code-generation-and-register-allocation.md) search discrete spaces for low-cost plans.
-- **Siblings:** [Calculus](calculus.md) gives the local picture; optimization turns it into an algorithm with step sizes, stopping rules and guarantees.
+- **Siblings:** [Calculus](calculus.md) gives the local picture; optimization turns it into an algorithm with step sizes, stopping rules and guarantees. [Fourier analysis](fourier-analysis.md) decouples least-squares filtering problems frequency by frequency.
 
 ## Common misconceptions
 

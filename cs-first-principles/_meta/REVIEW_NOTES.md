@@ -136,3 +136,5 @@ Collected from writer reports, to be resolved in the review pass.
 - 13 training-at-scale.md tenet 7: doubled comma ',,'.
 - 10 cloud-computing.md: 'data-centre networks' link → 08/03/data-center-networks-and-sdn.md.
 - 09 query-optimization.md: Enables link points down to 06 optimization; move to body.
+- 13 probabilistic-reasoning, reinforcement-learning: link markov-chains. 13 convolutional-networks, 14 digital-media: link fourier-analysis.
+- 14 Ware Information Visualization 4th ed: 2020 vs 2021 (publisher lists 2020/2021) — leave.

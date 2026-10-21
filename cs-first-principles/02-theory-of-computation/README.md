@@ -23,7 +23,7 @@ The abstraction this layer contributes to the stack is **the model of computatio
 
 | Child | Its role in the whole | Depends on |
 |---|---|---|
-| [Information Theory](01-information-theory/README.md) | Measures information; proves limits of compression and reliable transmission | Probability, algebra |
+| [Information Theory](01-information-theory/README.md) | Measures information; proves limits of compression and reliable transmission; defines the information in a single string | Probability, algebra (and Turing machines, for Kolmogorov complexity) |
 | [Automata and Formal Languages](02-automata-and-formal-languages/README.md) | Machines with restricted memory; what each memory form can recognise | Sets, logic, induction |
 | [Computability](03-computability/README.md) | The general model (Turing machines, lambda calculus); the thesis; undecidability | Automata, cardinality |
 | [Complexity](04-complexity/README.md) | Cost of decidable problems; P (polynomial time) vs NP (nondeterministic polynomial time); the map of classes | Computability, asymptotics |
@@ -42,7 +42,7 @@ The abstraction this layer contributes to the stack is **the model of computatio
                                  quantum computation
 ```
 
-Information theory stands slightly apart: it studies data rather than machines, and its child leaves can be read first or last. The other four form a chain. Automata show that memory structure determines power and introduce the proof style (pumping, closure, reductions). Computability removes the memory limit and finds the absolute boundary. Complexity puts a budget back and finds the practical boundary. Quantum computation changes the physical assumptions underneath and shows which boundaries move (some complexity ones) and which do not (computability ones). Information and computation meet in Kolmogorov complexity and in cryptography, where security is defined as "indistinguishable from high entropy to every efficient algorithm".
+Information theory stands slightly apart: it studies data rather than machines, and its leaves can be read first or last, except [Kolmogorov complexity](01-information-theory/kolmogorov-complexity.md), which needs Turing machines and the halting problem. The other four form a chain. Automata show that memory structure determines power and introduce the proof style (pumping, closure, reductions). Computability removes the memory limit and finds the absolute boundary. Complexity puts a budget back and finds the practical boundary. Quantum computation changes the physical assumptions underneath and shows which boundaries move (some complexity ones) and which do not (computability ones). Information and computation meet in [Kolmogorov complexity](01-information-theory/kolmogorov-complexity.md) (the shortest program for a string, uncomputable by a reduction from halting) and in cryptography, where security is defined as "indistinguishable from high entropy to every efficient algorithm".
 
 ## Connections to neighbouring layers
 

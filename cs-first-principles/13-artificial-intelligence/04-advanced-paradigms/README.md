@@ -50,5 +50,5 @@ From below, these paradigms need [probability](../../01-mathematical-foundations
 - [Feedback and control](../../CROSS-CUTTING.md#feedback-and-control): reinforcement learning is learned closed-loop control; RLHF closes a loop through human judgement.
 - [Recursion and self-reference](../../CROSS-CUTTING.md#recursion-and-self-reference): the Bellman equation defines value in terms of itself; models critique and train models.
 - [Trust and verification](../../CROSS-CUTTING.md#trust-and-verification): evaluating and controlling systems whose internal goals cannot be read directly.
-- [Tradeoffs](../../CROSS-CUTTING.md#tradeoffs): exploration versus exploitation; diversity versus fidelity; helpfulness versus harmlessness.
+- [Tradeoffs](../../CROSS-CUTTING.md#tradeoffs): exploration versus exploitation; diversity versus fidelity; recall versus latency and memory in vector search; helpfulness versus harmlessness.
 - [Limits and impossibility](../../CROSS-CUTTING.md#limits-and-impossibility): testing can show a capability is present, never that it is absent.

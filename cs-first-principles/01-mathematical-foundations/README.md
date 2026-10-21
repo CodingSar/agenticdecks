@@ -23,8 +23,8 @@ The one interface this layer contributes is **a shared formal vocabulary with pr
 | [Sets, relations, functions](02-sets-relations-functions/README.md) | [Automata and formal languages](../02-theory-of-computation/02-automata-and-formal-languages/README.md), the [relational model](../09-data-management/01-data-models/the-relational-model.md), event ordering in [distributed systems](../10-distributed-and-parallel-computing/02-distributed-foundations/README.md) |
 | [Discrete mathematics](03-discrete-mathematics/README.md) | [Algorithms and data structures](../05-algorithms-and-data-structures/README.md) (counting, graphs, recurrences), [complexity](../02-theory-of-computation/04-complexity/README.md), [routing](../08-networking/03-network-layer/routing-algorithms.md) |
 | [Number theory](03-discrete-mathematics/number-theory.md), [abstract algebra](04-algebra/abstract-algebra.md) | [Cryptography](../11-security-and-cryptography/02-cryptography/README.md) (groups, finite fields, one-way functions), [error correction](../02-theory-of-computation/01-information-theory/channel-capacity-and-error-correction.md) (codes over finite fields), machine integer arithmetic |
-| [Linear algebra](04-algebra/linear-algebra.md), [calculus](05-continuous-mathematics/calculus.md), [optimization](05-continuous-mathematics/optimization.md) | [Machine learning](../13-artificial-intelligence/README.md) (training is gradient-based optimisation of matrix computations), [graphics](../14-human-and-visual-computing/02-computer-graphics/README.md) (transforms, light-transport integrals), [Graphics Processing Unit (GPU) design](../04-computer-architecture/04-parallel-architecture/simd-and-gpus.md) |
-| [Probability and statistics](06-probability-and-statistics/README.md) | [Information theory](../02-theory-of-computation/01-information-theory/README.md), [randomized algorithms](../05-algorithms-and-data-structures/03-design-paradigms/randomized-algorithms.md), [networking performance and queueing](../08-networking/01-principles/latency-bandwidth-and-queueing.md), [reliability](../12-software-engineering/04-operations/reliability-engineering.md), machine learning evaluation |
+| [Linear algebra](04-algebra/linear-algebra.md), [calculus](05-continuous-mathematics/calculus.md), [optimization](05-continuous-mathematics/optimization.md), [Fourier analysis](05-continuous-mathematics/fourier-analysis.md) | [Sampling](../00-engineering-foundations/04-signals-and-systems/sampling-and-quantization.md) and [media compression](../14-human-and-visual-computing/03-media-and-vision/digital-media-and-compression.md) (frequency domain, FFT), [Machine learning](../13-artificial-intelligence/README.md) (training is gradient-based optimisation of matrix computations), [graphics](../14-human-and-visual-computing/02-computer-graphics/README.md) (transforms, light-transport integrals), [Graphics Processing Unit (GPU) design](../04-computer-architecture/04-parallel-architecture/simd-and-gpus.md) |
+| [Probability and statistics](06-probability-and-statistics/README.md), [Markov chains](06-probability-and-statistics/markov-chains.md) | [Information theory](../02-theory-of-computation/01-information-theory/README.md), [randomized algorithms](../05-algorithms-and-data-structures/03-design-paradigms/randomized-algorithms.md), [networking performance and queueing](../08-networking/01-principles/latency-bandwidth-and-queueing.md), [reinforcement learning](../13-artificial-intelligence/04-advanced-paradigms/reinforcement-learning.md), [reliability](../12-software-engineering/04-operations/reliability-engineering.md), machine learning evaluation |
 
 ## How the children fit together
 
@@ -34,8 +34,8 @@ The one interface this layer contributes is **a shared formal vocabulary with pr
 | [Sets, Relations and Functions](02-sets-relations-functions/README.md) | The building blocks of all mathematical objects; sizes of infinite sets | Logic |
 | [Discrete Mathematics](03-discrete-mathematics/README.md) | Counting, graphs, induction and recurrences, number theory | Logic, sets |
 | [Algebra](04-algebra/README.md) | Boolean, abstract and linear algebra: operations defined by laws | Logic, sets, number theory |
-| [Continuous Mathematics](05-continuous-mathematics/README.md) | Calculus and optimisation | Functions, linear algebra |
-| [Probability and Statistics](06-probability-and-statistics/README.md) | Uncertainty, randomness and inference | Sets, combinatorics, calculus, optimisation |
+| [Continuous Mathematics](05-continuous-mathematics/README.md) | Calculus, optimisation and Fourier analysis | Functions, linear algebra |
+| [Probability and Statistics](06-probability-and-statistics/README.md) | Uncertainty, randomness, inference and random processes (Markov chains) | Sets, combinatorics, calculus, optimisation, linear algebra |
 
 The reading order is itself a dependency order:
 
@@ -48,16 +48,16 @@ The reading order is itself a dependency order:
           discrete    algebra ◄── number theory
           mathematics   │  (Boolean, abstract, linear)
                │        ▼
-               │   continuous mathematics (calculus, optimisation)
+               │   continuous mathematics (calculus, optimisation, Fourier)
                │        │
                └──► probability and statistics ◄┘
 ```
 
-Logic and sets come first because everything else is defined with them. Discrete mathematics and algebra then split the work: discrete mathematics counts and recurses, algebra abstracts operations. Linear algebra feeds calculus in many variables, and calculus feeds optimisation. Probability sits last because it uses all of them: counting for finite cases, integrals for continuous ones, linear algebra for Markov chains and covariance, and optimisation for estimation.
+Logic and sets come first because everything else is defined with them. Discrete mathematics and algebra then split the work: discrete mathematics counts and recurses, algebra abstracts operations. Linear algebra feeds calculus in many variables, and calculus feeds optimisation and Fourier analysis, which re-expresses signals in a basis of sinusoids. Probability sits last because it uses all of them: counting for finite cases, integrals for continuous ones, linear algebra for Markov chains and covariance, and optimisation for estimation.
 
 ## Connections to neighbouring layers
 
-- **[00 Engineering Foundations](../00-engineering-foundations/README.md):** The parallel root. Engineering *uses* calculus (circuit dynamics, signals), linear algebra (circuit analysis) and probability (noise, reliability) as tools, but neither root is built from the other.
+- **[00 Engineering Foundations](../00-engineering-foundations/README.md):** The parallel root. Engineering *uses* calculus and Fourier analysis (circuit dynamics, signals, sampling), linear algebra (circuit analysis) and probability (noise, reliability) as tools, but neither root is built from the other.
 - **[02 Theory of Computation](../02-theory-of-computation/README.md):** The direct heir. Automata are sets and functions; undecidability is diagonalisation; complexity is counting and asymptotics; information theory is probability; quantum computation is linear algebra over complex numbers.
 - **[03 Digital Logic](../03-digital-logic/README.md):** Where the two roots meet. Boolean algebra and modular arithmetic become gates, adders and two's-complement integers.
 - **[05 Algorithms and Data Structures](../05-algorithms-and-data-structures/README.md):** Runs on discrete mathematics: invariants and induction for correctness, recurrences and counting for cost, graph theory for structure, probability for randomized methods.

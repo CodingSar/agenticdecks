@@ -24,7 +24,7 @@ Information theory measures *how much uncertainty a message removes*, independen
 
 7. **Processing cannot create information.** The data-processing inequality says that if X → Y → Z form a Markov chain (Z depends on X only through Y), then I(X; Z) ≤ I(X; Y). No computation on Y, however clever, recovers information about X that Y did not already carry. This bounds what any decoder, estimator or neural network can extract.
 
-8. **Shannon entropy is not the whole story for individual strings.** Kolmogorov complexity K(s), the length of the shortest program that prints s, measures the information in one particular string. For strings drawn from a computable source, the expected K is within a constant of the source entropy, which ties information theory to [computability](../03-computability/README.md). But K itself is uncomputable, a consequence of the [halting problem](../03-computability/halting-problem-and-undecidability.md).
+8. **Shannon entropy is not the whole story for individual strings.** [Kolmogorov complexity](kolmogorov-complexity.md) K(s), the length of the shortest program that prints s, measures the information in one particular string. For strings drawn from a computable source, the expected K is within a constant of the source entropy, which ties information theory to [computability](../03-computability/README.md). But K itself is uncomputable, a consequence of the [halting problem](../03-computability/halting-problem-and-undecidability.md).
 
 ## Key concepts
 
@@ -44,7 +44,7 @@ Information theory measures *how much uncertainty a message removes*, independen
 
 - **Below:** It rests entirely on [probability](../../01-mathematical-foundations/06-probability-and-statistics/probability.md): random variables, expectations, independence and conditional distributions. Its inequalities come from convexity (Jensen's inequality), a piece of [continuous mathematics](../../01-mathematical-foundations/05-continuous-mathematics/calculus.md).
 - **Above:** Entropy sets the limits for [compression of media](../../14-human-and-visual-computing/03-media-and-vision/digital-media-and-compression.md), the capacity of [links](../../08-networking/02-link-layer/encoding-and-framing.md), the key lengths and randomness requirements of [cryptography](../../11-security-and-cryptography/02-cryptography/foundations-of-modern-cryptography.md), and the loss functions of [machine learning](../../13-artificial-intelligence/02-machine-learning-foundations/learning-as-optimization.md). Physically, Landauer's principle links erasing one bit to a minimum heat cost of kT ln 2 ([thermodynamics](../../00-engineering-foundations/01-physics-of-computation/thermodynamics-and-energy.md)).
-- **Siblings:** This leaf defines the measures. [Source coding](source-coding-and-compression.md) shows entropy is achievable as a compression rate; [channel coding](channel-capacity-and-error-correction.md) shows mutual information is achievable as a transmission rate.
+- **Siblings:** This leaf defines the measures. [Source coding](source-coding-and-compression.md) shows entropy is achievable as a compression rate; [channel coding](channel-capacity-and-error-correction.md) shows mutual information is achievable as a transmission rate; [Kolmogorov complexity](kolmogorov-complexity.md) is the model-free, per-string counterpart of entropy.
 
 ## Common misconceptions
 

@@ -37,7 +37,7 @@ Read the two models first, in either order: Turing machines model the *machine*,
 
 ## Connections to sibling areas
 
-- **[Information Theory](../01-information-theory/README.md):** Kolmogorov complexity defines the information in a single string as its shortest program, linking entropy to computability. It is uncomputable, by a reduction from the halting problem.
+- **[Information Theory](../01-information-theory/README.md):** [Kolmogorov complexity](../01-information-theory/kolmogorov-complexity.md) defines the information in a single string as its shortest program, linking entropy to computability. It is uncomputable, by a reduction from the halting problem.
 - **[Automata and Formal Languages](../02-automata-and-formal-languages/README.md):** Turing machines are the top of the Chomsky hierarchy. Undecidability explains why grammar equivalence and similar questions fail for context-free languages.
 - **[Complexity](../04-complexity/README.md):** Complexity theory restricts attention to decidable problems and asks what they cost. It reuses this area's tools: Turing machines as the cost model, diagonalisation for the hierarchy theorems, and reductions for completeness.
 - **[Quantum Computation](../05-quantum-computation/README.md):** Quantum computers compute exactly the Turing-computable functions; they challenge only the *extended* thesis about efficiency, not computability.
