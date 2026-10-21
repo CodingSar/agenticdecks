@@ -29,7 +29,7 @@ A network protocol stack splits the job of moving data into layers, each offerin
 
 7. **Layering has costs.** Headers add overhead, each layer copies or inspects data, and a layer cannot see information hidden below it (the Transmission Control Protocol (TCP) cannot tell loss caused by congestion from loss caused by radio noise). High-performance systems sometimes break layering on purpose: TCP offload to the Network Interface Card (NIC), kernel bypass, or QUIC merging transport and encryption into one layer.
 
-8. **Middleboxes erode the principle.** Network Address Translators (NATs), firewalls and load balancers inspect and rewrite transport headers. They work, but they freeze protocols in place: a new transport protocol that middleboxes do not recognise gets dropped. QUIC runs over the User Datagram Protocol (UDP) and encrypts its headers precisely to escape this "ossification".
+8. **Middleboxes erode the principle.** Network Address Translators (NATs), firewalls and load balancers inspect and rewrite transport headers. They work, but freeze protocols: a transport they do not recognise gets dropped. QUIC runs over the User Datagram Protocol (UDP) and encrypts its headers precisely to escape this "ossification".
 
 ## Key concepts
 
@@ -47,8 +47,8 @@ A network protocol stack splits the job of moving data into layers, each offerin
 
 ## How it fits
 
-- **Below:** takes the idea of a layer boundary as a contract, first met in the [Instruction Set Architecture (ISA)](../../04-computer-architecture/01-instruction-set-architecture/the-isa-contract.md) that hides the microarchitecture, and the role of the Operating System (OS) as a provider of clean abstractions over messy hardware ([the role of the OS](../../07-operating-systems/01-kernel-and-abstractions/the-role-of-the-os.md)). Relies on the assumption that lower layers can fail, which [reliability engineering](../../00-engineering-foundations/05-engineering-method/reliability-and-redundancy.md) takes as given.
-- **Above:** every protocol in this layer is placed by these rules. [Transport Layer Security (TLS)](../../11-security-and-cryptography/02-cryptography/secure-protocols-and-tls.md) is end-to-end security for the same reason TCP is end-to-end reliability. Distributed systems inherit the endpoint-centric view, and software engineering generalises layering into [abstraction and interfaces](../../12-software-engineering/01-design/abstraction-and-interfaces.md) for any large system.
+- **Below:** takes the layer boundary as contract from the [Instruction Set Architecture (ISA)](../../04-computer-architecture/01-instruction-set-architecture/the-isa-contract.md) and the Operating System (OS) as provider of clean abstractions over messy hardware ([the role of the OS](../../07-operating-systems/01-kernel-and-abstractions/the-role-of-the-os.md)). Relies on the assumption that lower layers can fail, which [reliability engineering](../../00-engineering-foundations/05-engineering-method/reliability-and-redundancy.md) takes as given.
+- **Above:** every protocol in this layer is placed by these rules. [Transport Layer Security (TLS)](../../11-security-and-cryptography/02-cryptography/secure-protocols-and-tls.md) is end-to-end security for the same reason TCP is end-to-end reliability. Distributed systems inherit the endpoint-centric view; software engineering generalises layering into [abstraction and interfaces](../../12-software-engineering/01-design/abstraction-and-interfaces.md).
 - **Siblings:** [packet switching](packet-switching.md) is the minimal service the core provides; [latency, bandwidth and queueing](latency-bandwidth-and-queueing.md) measures what that minimalism costs.
 
 ## Common misconceptions

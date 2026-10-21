@@ -42,7 +42,7 @@ A file system gives programs two abstractions over raw storage. A **file** is a 
 
 ## How it fits
 
-- **Below:** implemented in the kernel behind [system calls](../01-kernel-and-abstractions/kernel-mode-and-system-calls.md), over block devices whose properties are set by [storage hardware](../../04-computer-architecture/03-memory-hierarchy/dram-and-storage-devices.md). Permission bits are the OS's instance of what layer 11 generalizes as [access control](../../11-security-and-cryptography/03-system-security/access-control.md).
+- **Below:** implemented in the kernel behind [system calls](../01-kernel-and-abstractions/kernel-mode-and-system-calls.md), over [storage devices](../../04-computer-architecture/03-memory-hierarchy/dram-and-storage-devices.md); permissions are an instance of [access control](../../11-security-and-cryptography/03-system-security/access-control.md).
 - **Above:** databases build tables and logs on files and `fsync` ([storage layouts](../../09-data-management/02-storage-and-indexing/storage-layouts.md), [recovery and logging](../../09-data-management/04-transactions/recovery-and-logging.md)); hierarchical naming reappears in the [Domain Name System (DNS)](../../08-networking/05-application-layer/naming-and-dns.md) and Uniform Resource Locator (URL) paths; [version control](../../12-software-engineering/02-process/version-control.md) is built on file trees.
 - **Siblings:** [file system implementation](file-system-implementation.md) realizes these abstractions on blocks; [crash consistency and journaling](crash-consistency-and-journaling.md) explains what the durability promises cost.
 

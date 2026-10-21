@@ -10,7 +10,7 @@ Memory allocation hands out pieces of memory on request and takes them back. It 
 
 ## Core tenets
 
-1. **Fragmentation is inevitable without moving objects.** *External* fragmentation is free memory scattered in holes between live objects; *internal* fragmentation is space wasted inside allocated blocks (rounding a 33-byte request up to 48). Robson (1971) showed that for any non-moving allocator there are request sequences that force it to use memory proportional to the live data times the logarithm of the ratio of largest to smallest object size. Allocators therefore cannot be optimal for every program and are tuned for typical ones.
+1. **Fragmentation is inevitable without moving objects.** *External* fragmentation is free memory scattered in holes between live objects; *internal* fragmentation is space wasted inside allocated blocks (rounding a 33-byte request up to 48). Robson (1971) showed that for any non-moving allocator there are request sequences that force memory use proportional to live data times the logarithm of the ratio of largest to smallest object size. Allocators therefore cannot be optimal for every program and are tuned for typical ones.
 
 2. **Free-list placement policies trade speed against fragmentation.** A simple allocator keeps a linked list of free blocks and chooses by *first fit* (first big-enough block), *best fit* (smallest big-enough) or *next fit*. Adjacent free blocks must be *coalesced* on free, or fragmentation grows; boundary tags (size fields at both ends of each block) let the allocator find neighbours in constant time. Studies (Wilson et al., 1995) found that first fit and best fit with coalescing waste little memory on real programs.
 
