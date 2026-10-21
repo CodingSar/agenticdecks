@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360" font-family="Helvetica, Arial, sans-serif">
+<rect width="640" height="360" fill="#ffffff"/>
+<text x="320" y="30" text-anchor="middle" font-size="20" font-weight="bold" fill="#222">Railway-oriented programming</text>
+<!-- tracks -->
+<line x1="30" y1="120" x2="610" y2="120" stroke="#2e7d32" stroke-width="6"/>
+<line x1="30" y1="250" x2="610" y2="250" stroke="#c62828" stroke-width="6"/>
+<text x="34" y="82" font-size="15" fill="#2e7d32" font-weight="bold">Success track: Ok(value)</text>
+<text x="34" y="280" font-size="15" fill="#c62828" font-weight="bold">Failure track: Error(reason)</text>
+<!-- switches -->
+<g font-size="15" text-anchor="middle" fill="#222">
+<rect x="110" y="95" width="110" height="50" rx="8" fill="#e3f2fd" stroke="#222" stroke-width="2"/>
+<text x="165" y="126">validate</text>
+<rect x="265" y="95" width="110" height="50" rx="8" fill="#e3f2fd" stroke="#222" stroke-width="2"/>
+<text x="320" y="126">price</text>
+<rect x="420" y="95" width="110" height="50" rx="8" fill="#e3f2fd" stroke="#222" stroke-width="2"/>
+<text x="475" y="126">save</text>
+</g>
+<!-- diversion lines -->
+<g stroke="#c62828" stroke-width="3" fill="none" stroke-dasharray="7 5">
+<path d="M190 145 C 200 200, 215 230, 240 250"/>
+<path d="M345 145 C 355 200, 370 230, 395 250"/>
+<path d="M500 145 C 510 200, 525 230, 550 250"/>
+</g>
+<text x="320" y="52" text-anchor="middle" font-size="14" fill="#444">any step can switch to the failure track</text>
+<text x="320" y="312" text-anchor="middle" font-size="14" fill="#444">bind: run the next step only on Ok; once on Error, skip the rest</text>
+<text x="320" y="342" text-anchor="middle" font-size="14" fill="#444">map: lift a step that cannot fail onto both tracks</text>
+</svg>

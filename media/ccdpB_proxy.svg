@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400" font-family="Helvetica, Arial, sans-serif">
+<rect width="600" height="400" fill="#fff"/>
+<defs><marker id="tri" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0,0 L10,6 L0,12 z" fill="#fff" stroke="#222"/></marker>
+<marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L9,5 L0,10" fill="none" stroke="#222"/></marker></defs>
+<text x="300" y="26" text-anchor="middle" font-size="17" font-weight="bold" fill="#222">Proxy: a stand-in that controls access</text>
+<rect x="225" y="48" width="150" height="46" fill="#f3f4f6" stroke="#222"/><text x="300" y="66" text-anchor="middle" font-size="13" font-weight="bold" fill="#222">Image «interface»</text><text x="300" y="84" text-anchor="middle" font-size="11" fill="#333">draw()</text>
+<rect x="20" y="160" width="100" height="40" fill="#f3f4f6" stroke="#222"/><text x="70" y="185" text-anchor="middle" font-size="13" fill="#222">Client</text>
+<rect x="190" y="150" width="150" height="60" fill="#ede9fe" stroke="#6d28d9" stroke-width="1.5"/><text x="265" y="174" text-anchor="middle" font-size="13" font-weight="bold" fill="#222">ImageProxy</text><text x="265" y="194" text-anchor="middle" font-size="11" fill="#333">real: HighResImage?</text>
+<rect x="420" y="150" width="160" height="60" fill="#dcfce7" stroke="#15803d" stroke-width="1.5"/><text x="500" y="174" text-anchor="middle" font-size="13" font-weight="bold" fill="#222">HighResImage</text><text x="500" y="194" text-anchor="middle" font-size="11" fill="#333">40 MB, slow to load</text>
+<line x1="120" y1="180" x2="188" y2="180" stroke="#222" marker-end="url(#arr)"/><text x="154" y="172" text-anchor="middle" font-size="10" fill="#333">draw()</text>
+<line x1="340" y1="180" x2="418" y2="180" stroke="#222" stroke-dasharray="5 3" marker-end="url(#arr)"/><text x="379" y="172" text-anchor="middle" font-size="10" fill="#333">delegates</text>
+<line x1="265" y1="150" x2="285" y2="96" stroke="#222" marker-end="url(#tri)"/><line x1="500" y1="150" x2="330" y2="96" stroke="#222" marker-end="url(#tri)"/>
+<text x="70" y="140" text-anchor="middle" font-size="10" fill="#555">cannot tell which</text>
+<text x="70" y="152" text-anchor="middle" font-size="10" fill="#555">one it holds</text>
+<text x="300" y="248" text-anchor="middle" font-size="13" font-weight="bold" fill="#222">Same interface, different reason to stand in front:</text>
+<g font-size="12" fill="#222">
+<rect x="20" y="262" width="275" height="44" fill="#ede9fe" stroke="#6d28d9"/><text x="30" y="280" font-weight="bold">Virtual</text><text x="30" y="298">create the real object on first use</text>
+<rect x="305" y="262" width="275" height="44" fill="#ede9fe" stroke="#6d28d9"/><text x="315" y="280" font-weight="bold">Protection</text><text x="315" y="298">check permissions before forwarding</text>
+<rect x="20" y="314" width="275" height="44" fill="#ede9fe" stroke="#6d28d9"/><text x="30" y="332" font-weight="bold">Remote</text><text x="30" y="350">local stub; the real object is over the network</text>
+<rect x="305" y="314" width="275" height="44" fill="#ede9fe" stroke="#6d28d9"/><text x="315" y="332" font-weight="bold">Caching</text><text x="315" y="350">return a stored result, skip the real call</text>
+</g>
+<text x="300" y="386" text-anchor="middle" font-size="12" fill="#333">The proxy usually manages the real subject's lifecycle; a decorator is handed one.</text>
+</svg>

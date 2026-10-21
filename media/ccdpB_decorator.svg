@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400" font-family="Helvetica, Arial, sans-serif">
+<rect width="600" height="400" fill="#fff"/>
+<text x="300" y="26" text-anchor="middle" font-size="17" font-weight="bold" fill="#222">Decorator: wrappers with the same interface</text>
+<text x="300" y="48" text-anchor="middle" font-size="12" fill="#555">Every layer is an OutputStream; each adds one behaviour, then delegates inward.</text>
+<rect x="20" y="70" width="560" height="230" rx="8" fill="#fef3c7" stroke="#b45309" stroke-width="1.5"/>
+<text x="34" y="90" font-size="13" font-weight="bold" fill="#92400e">BufferedOutputStream</text><text x="566" y="90" text-anchor="end" font-size="11" fill="#92400e">batches small writes</text>
+<rect x="45" y="102" width="510" height="182" rx="8" fill="#ede9fe" stroke="#6d28d9" stroke-width="1.5"/>
+<text x="59" y="122" font-size="13" font-weight="bold" fill="#5b21b6">GZIPOutputStream</text><text x="541" y="122" text-anchor="end" font-size="11" fill="#5b21b6">compresses</text>
+<rect x="70" y="134" width="460" height="134" rx="8" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1.5"/>
+<text x="84" y="154" font-size="13" font-weight="bold" fill="#1e40af">CipherOutputStream</text><text x="516" y="154" text-anchor="end" font-size="11" fill="#1e40af">encrypts</text>
+<rect x="95" y="168" width="410" height="84" rx="8" fill="#dcfce7" stroke="#15803d" stroke-width="1.5"/>
+<text x="300" y="200" text-anchor="middle" font-size="14" font-weight="bold" fill="#166534">FileOutputStream</text>
+<text x="300" y="222" text-anchor="middle" font-size="12" fill="#166534">the real component: writes bytes to disk</text>
+<text x="300" y="240" text-anchor="middle" font-size="11" fill="#555">(no idea it is wrapped)</text>
+<text x="20" y="328" font-size="12" fill="#222" font-family="Courier New, monospace">new BufferedOutputStream(new GZIPOutputStream(</text>
+<text x="20" y="346" font-size="12" fill="#222" font-family="Courier New, monospace" xml:space="preserve">    new CipherOutputStream(new FileOutputStream(f), c)))</text>
+<text x="300" y="384" text-anchor="middle" font-size="12" fill="#333">Order matters: compress before encrypting, or gzip finds nothing to squeeze.</text>
+</svg>

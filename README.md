@@ -1,6 +1,8 @@
 # Agentic Decks
 
-Anki decks for a cloud / Kubernetes platform and enterprise architect, consolidated from 44 source decks into 32, plus new decks written from scratch (The Pragmatic Programmer, the general-education series, Identity & Zero Trust, SRE & Observability, Software Engineering Classics, Chemistry, From Source to Silicon).
+> Also in this repository: **[Computer Science from First Principles](cs-first-principles/README.md)**, a layered knowledge base of Computer Science from engineering foundations up to AI and society (16 layers, 263 leaf topics, plus a cross-cutting principles index).
+
+Anki decks for a cloud / Kubernetes platform and enterprise architect, consolidated from 44 source decks into 32, plus new decks written from scratch (The Pragmatic Programmer, the general-education series, Identity & Zero Trust, SRE & Observability, Software Engineering Classics, Chemistry, From Source to Silicon, Clean Code & Design Patterns).
 
 - **Import:** `decks/*.apkg`
 - **Editable source of truth:** `work/out/*.json` (one file per deck) + `media/`
@@ -10,10 +12,10 @@ Anki decks for a cloud / Kubernetes platform and enterprise architect, consolida
 
 | | Before | After |
 |---|---|---|
-| Decks | 44 | 43 |
-| Notes | 4,506 | 7,188 |
-| Cards | 4,684 | 9,099 |
-| Notes with an analogy | 126 | 1,510 |
+| Decks | 44 | 44 |
+| Notes | 4,506 | 7,646 |
+| Cards | 4,684 | 9,610 |
+| Notes with an analogy | 126 | 1,625 |
 | Answers > 60 words | many (avg. note 300–950 chars) | 0 (validator-enforced) |
 
 There are more cards because long, multi-part cards were split into atomic ones (minimum information principle). Each card now takes seconds to review instead of a paragraph.
@@ -28,6 +30,8 @@ The **general-education decks** (Art History, Philosophy, Music History, Archite
 **Professional gap-fillers** (Oct 2026): **Identity & Zero Trust** (OAuth 2.0, OIDC, SAML, JWT, PKI, authorization models, NIST 800-207, SPIFFE, cloud IAM patterns), **SRE & Observability** (SLIs/SLOs, error budgets and burn-rate alerting, Prometheus model, tracing, OpenTelemetry, incident response, postmortems) and **Software Engineering Classics**, a composition deck of the enduring ideas in the canonical books and papers (Brooks, Parnas, Ousterhout, McConnell, Fowler, GoF, Feathers, SICP, Bentley, Raymond, Peopleware, Accelerate, Nygard, Humble & Farley, Beck, Kent, Norman, Google SWE, Dijkstra, Lampson, Saltzer et al.), organised by idea with the source work on each card. They were written to the same brief and deduplicated against the existing decks (`work/out/INTEGRATION.changelog.md`).
 
 **From Source to Silicon** (Oct 2026) is a zero-to-hero deck on how a program becomes electrons: lexing and parsing, type systems, IR and optimisation, codegen, ABI and linking, interpreters, JITs and GC, x86-64 / ARM64 / RISC-V / IBM Z assembly, pipelines, out-of-order cores and microcode, caches and memory models, GPU SIMT, TPU systolic arrays and ML compilers, with a twelfth subdeck that explicitly maps one program through every layer. Six research-and-writer agents drafted two subdecks each from primary sources; a composer agent merged them, removed duplicates, added bridge and contrast cards across layers, normalised the `Link:` cross-references and deduplicated against Deep C, Cloud Architecture, Linux Internals, Go and LLMs (`work/out/From_Source_to_Silicon.changelog.md`). 21 hand-drawn SVG diagrams (`media/s2s_*.svg`).
+
+**Clean Code & Design Patterns** (Oct 2026) covers Clean Code, SOLID and all 23 Gang of Four patterns, plus what came after: Fowler and Kerievsky (smell → refactoring → pattern), Effective Java, Game Programming Patterns, functional and type-driven design (parse, don't validate; railway-oriented programming; functional core, imperative shell) and anti-patterns. Every pattern is taught through concrete scenarios: which pattern for this situation, the smell that calls for it, its cost and when not to use it, and where it lives in real libraries. A dedicated *Choosing a Pattern* subdeck drills scenario → pattern across the whole catalogue with cross-category contrast cards. Four writer agents drafted three subdecks each; a composer merged and deduplicated them within the deck and against Software Engineering Classics, Pragmatic Programmer, Software Architecture & DDD and Software Testing (`work/out/Clean_Code_and_Design_Patterns.changelog.md`). 19 hand-drawn SVG diagrams (`media/ccdp*.svg`).
 
 **Merges** (same topic, different book or exam → one concept-organised deck):
 Kubernetes in Action + Golden Kubestronaut → **Kubernetes** ·
@@ -72,6 +76,7 @@ Original note GUIDs are kept on every card that descends from an original note. 
 | `BPMN_and_Business_Architecture.apkg` | BPMN & Business Architecture | 64 | 69 | 8 |
 | `CISSP_Cloud_K8s.apkg` | CISSP (Cloud & Kubernetes Grounded) | 141 | 243 | 8 |
 | `Chemistry.apkg` | Chemistry | 304 | 346 | 12 |
+| `Clean_Code_and_Design_Patterns.apkg` | Clean Code & Design Patterns | 458 | 511 | 12 |
 | `Cloud_Architecture.apkg` | Cloud Architecture | 113 | 178 | 10 |
 | `Data_Engineering.apkg` | Data Engineering | 79 | 99 | 6 |
 | `Deep_C_Kernel_Drivers_Embedded.apkg` | Deep C: Kernel, Drivers, Embedded | 350 | 430 | 8 |

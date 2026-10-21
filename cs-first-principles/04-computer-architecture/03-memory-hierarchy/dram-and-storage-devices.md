@@ -1,0 +1,62 @@
+# DRAM and Storage Devices
+
+> **Layer:** [04 Computer Architecture](../README.md) › [Memory Hierarchy](README.md)
+> **Builds on:** [Capacitance and timing](../../00-engineering-foundations/02-electrical-circuits/capacitance-and-timing.md), [Memory cells](../../03-digital-logic/03-sequential-logic/memory-cells.md), [The MOSFET](../../00-engineering-foundations/03-semiconductor-devices/the-mosfet.md), [Quantum mechanics and band theory](../../00-engineering-foundations/01-physics-of-computation/quantum-mechanics-and-band-theory.md), [Locality and caching](locality-and-caching.md)
+> **Enables:** [File system implementation](../../07-operating-systems/05-storage-and-file-systems/file-system-implementation.md), [Crash consistency and journaling](../../07-operating-systems/05-storage-and-file-systems/crash-consistency-and-journaling.md), [LSM trees](../../09-data-management/02-storage-and-indexing/lsm-trees.md), [B-trees](../../09-data-management/02-storage-and-indexing/b-trees.md)
+
+## Essence
+
+Below the caches sit the memories that hold most of the data: Dynamic Random-Access Memory (DRAM) for working memory, and non-volatile storage (NAND flash in Solid-State Drives (SSDs), and magnetic Hard Disk Drives (HDDs)) for everything that must survive power loss. Each is cheap per bit because it stores a bit in a very simple physical structure, and each pays for that simplicity with access behaviour that is far from uniform: DRAM rows must be opened before they are read, flash must be erased in large blocks before it is rewritten, and disks must move a head mechanically. The levels above, and the software that uses them, are designed around these quirks: reading and writing in large, sequential, aligned units is fast everywhere, and small random access is slow everywhere.
+
+## Core tenets
+
+1. **A DRAM bit is a capacitor and a transistor, which is why it is dense and why it forgets.** One transistor and one capacitor (1T1C) per bit makes DRAM roughly ten times denser than six-transistor Static Random-Access Memory (SRAM) ([memory cells](../../03-digital-logic/03-sequential-logic/memory-cells.md) compares them). The charge leaks, so every row is refreshed about every 64 ms, and reads are destructive and must be written back.
+
+2. **DRAM is organised in banks of rows, and the row buffer is a cache.** Accessing data means activating a row (typically 1–8 KiB) into the bank's row buffer, then reading columns from it. A hit in an already-open row takes roughly 15 ns of column access; opening a different row first requires closing (precharging) the old one, so a row conflict can take 40–50 ns at the device. Memory controllers reorder requests to maximise row hits.
+
+3. **DRAM latency has barely improved while bandwidth has soared.** Raw device latency has stayed around 10–15 ns per timing step for decades, and a full load-to-use miss is still about 80–100 ns on 2020s servers. Bandwidth, meanwhile, rose from about 1.6 GB/s per channel (DDR-200, 2000) to about 50 GB/s (DDR5-6400). Stacked High Bandwidth Memory (HBM) beside Graphics Processing Units (GPUs) reaches several TB/s. Designs therefore hide latency with parallelism rather than reduce it.
+
+4. **NAND flash stores charge on an insulated gate and cannot be overwritten in place.** Electrons tunnel into a floating gate or charge-trap layer and shift the transistor's threshold voltage; storing 2, 3 or 4 bits per cell (multi-, triple- and quad-level cells: MLC, TLC, QLC) means distinguishing 4, 8 or 16 levels. Reads and writes happen in pages (around 4–16 KiB), but erasure happens only in much larger blocks (megabytes). Each cell survives a limited number of erase cycles (on the order of 1,000–3,000 for TLC, often under 1,000 for QLC).
+
+5. **The flash translation layer makes flash look like a disk.** Because pages cannot be rewritten in place, the SSD controller writes new data to fresh pages, keeps a mapping from logical block addresses to physical pages, and garbage-collects blocks with mostly stale pages. This causes write amplification (more physical writes than logical ones) and makes performance depend on free space. Log-structured file systems and Log-Structured Merge (LSM) trees match this behaviour.
+
+6. **Disks are dominated by mechanical motion.** An HDD reads magnetised regions on spinning platters. A random access needs a seek (moving the arm, several ms) and rotational latency (half a revolution: 4.2 ms at 7,200 revolutions per minute (RPM)). Once positioned, sequential transfer runs at roughly 100–250 MB/s, fastest on outer tracks. So a disk does roughly 100–200 random operations per second but streams well, which is why disk-era data structures (B-trees, extent-based file systems) read and write large contiguous blocks.
+
+7. **The interface matters as much as the medium.** Non-Volatile Memory Express (NVMe) over Peripheral Component Interconnect Express (PCIe) gives SSDs up to 65,535 parallel queues, each up to 65,536 commands deep, versus the single 32-entry queue and higher overheads of the older Serial Advanced Technology Attachment (SATA) and Advanced Host Controller Interface (AHCI) design built for disks. With flash reads taking tens of microseconds (and low-latency media around 10 µs), Operating System (OS) software overhead per Input/Output (I/O) operation becomes a significant fraction of the total.
+
+| Device (2020s) | Random read latency | Sequential bandwidth | Unit of efficient access |
+|---|---|---|---|
+| DRAM (DDR5) | ~80–100 ns (load-to-use) | ~50 GB/s per channel | 64-byte line, open row |
+| NVMe TLC SSD | ~50–100 µs | 3–14 GB/s | 4–16 KiB page, large writes |
+| HDD (7,200 RPM) | ~5–10 ms | 0.1–0.25 GB/s | Large sequential extents |
+
+## Key concepts
+
+| Term | Meaning |
+|---|---|
+| DRAM | Dynamic RAM: one transistor and capacitor per bit, needs periodic refresh |
+| Row buffer | Per-bank latch holding the currently open DRAM row |
+| Refresh | Periodic rewriting of DRAM rows to restore leaking charge |
+| NAND flash | Non-volatile memory storing charge in transistor gates, erased in blocks |
+| Erase block | Smallest unit of flash that can be erased, much larger than a page |
+| Flash Translation Layer (FTL) | SSD firmware mapping logical blocks to physical flash pages |
+| Write amplification | Ratio of physical writes to logical writes caused by garbage collection |
+| Seek time / rotational latency | Time to move a disk head / wait for the sector to rotate under it |
+
+## How it fits
+
+- **Below:** DRAM cells rely on [capacitance](../../00-engineering-foundations/02-electrical-circuits/capacitance-and-timing.md) and [Metal-Oxide-Semiconductor Field-Effect Transistor (MOSFET)](../../00-engineering-foundations/03-semiconductor-devices/the-mosfet.md) switches; flash on [quantum tunnelling](../../00-engineering-foundations/01-physics-of-computation/quantum-mechanics-and-band-theory.md); reliability on [error-correcting codes](../../02-theory-of-computation/01-information-theory/channel-capacity-and-error-correction.md) built into memory and SSD controllers.
+- **Above:** [file systems](../../07-operating-systems/05-storage-and-file-systems/file-system-implementation.md), [journaling](../../07-operating-systems/05-storage-and-file-systems/crash-consistency-and-journaling.md), [B-trees](../../09-data-management/02-storage-and-indexing/b-trees.md) and [LSM trees](../../09-data-management/02-storage-and-indexing/lsm-trees.md) are shaped by these devices; Rowhammer, where repeated DRAM row activation flips bits in neighbouring rows, is a hardware fault turned [security attack](../../11-security-and-cryptography/03-system-security/side-channels.md).
+- **Siblings:** these are the lowest levels of the hierarchy described in [locality and caching](locality-and-caching.md); [virtual memory](virtual-memory-hardware.md) uses DRAM as a page cache for storage; storage is reached through [Direct Memory Access (DMA) and device interfaces](../05-io-and-interconnect/dma-and-devices.md).
+
+## Common misconceptions
+
+- **"RAM is random access, so every address costs the same."** DRAM latency depends on whether the row is open, which bank is busy and how far away the memory controller is; sequential access is much faster.
+- **"SSDs have no penalty for random writes."** Random small writes cause garbage collection and write amplification; sustained random-write throughput can be far below the advertised peak.
+- **"Data written is data saved."** DRAM is volatile, and SSDs and disks buffer writes in volatile caches; until an explicit flush completes, data can be lost on power failure. This is the root problem of crash consistency.
+
+## Go deeper
+
+- Jacob, Ng and Wang, *Memory Systems: Cache, DRAM, Disk* (2008): the comprehensive reference across all three.
+- Arpaci-Dusseau and Arpaci-Dusseau, *Operating Systems: Three Easy Pieces* (2018), chapters on hard disks and flash-based SSDs.
+- Kim et al., *Flipping Bits in Memory Without Accessing Them* (ISCA 2014): the Rowhammer paper.
