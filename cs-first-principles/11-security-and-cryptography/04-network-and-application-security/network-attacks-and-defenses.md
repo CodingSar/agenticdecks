@@ -1,7 +1,7 @@
 # Network Attacks and Defenses
 
 > **Layer:** [11 Security and Cryptography](../README.md) › [Network and application security](README.md)
-> **Builds on:** [Layering and the end-to-end principle](../../08-networking/01-principles/layering-and-the-end-to-end-principle.md), [Internet routing and BGP](../../08-networking/03-network-layer/internet-routing-and-bgp.md), [Naming and DNS](../../08-networking/05-application-layer/naming-and-dns.md), [Secure protocols and Transport Layer Security](../02-cryptography/secure-protocols-and-tls.md)
+> **Builds on:** [Layering and the end-to-end principle](../../08-networking/01-principles/layering-and-the-end-to-end-principle.md), [Internet routing and the Border Gateway Protocol](../../08-networking/03-network-layer/internet-routing-and-bgp.md), [Naming and the Domain Name System](../../08-networking/05-application-layer/naming-and-dns.md), [Secure protocols and Transport Layer Security](../02-cryptography/secure-protocols-and-tls.md)
 > **Enables:** [Reliability engineering](../../12-software-engineering/04-operations/reliability-engineering.md), [Scalability patterns](../../10-distributed-and-parallel-computing/05-large-scale-systems/scalability-patterns.md), [Cloud computing](../../10-distributed-and-parallel-computing/05-large-scale-systems/cloud-computing.md)
 
 ## Essence
@@ -18,7 +18,7 @@ The Internet's core protocols were designed for a cooperative network of researc
 
 4. **Denial of service exploits asymmetry.** An attack succeeds when it costs the attacker less to send than the victim to handle. Volumetric floods from botnets of compromised devices reached about 1 terabit per second with the Mirai botnet in 2016, and attacks of several terabits per second have since been reported. Reflection and amplification make it worse: the attacker sends small queries with the victim's spoofed source address to open servers (DNS, the Network Time Protocol (NTP), memcached) that reply with much larger responses, amplification factors from tens to tens of thousands.
 
-5. **State exhaustion is cheaper than bandwidth exhaustion.** A Transmission Control Protocol (TCP) SYN flood sends connection requests without completing the handshake, filling the server's table of half-open connections. SYN cookies defeat it by encoding the connection state into the server's initial sequence number, so the server keeps no state until the client proves it received the reply. The general lesson: do not commit resources to an unauthenticated peer.
+5. **State exhaustion is cheaper than bandwidth exhaustion.** A Transmission Control Protocol (TCP) SYN (synchronise) flood sends connection requests without completing the handshake, filling the server's table of half-open connections. SYN cookies defeat it by encoding the connection state into the server's initial sequence number, so the server keeps no state until the client proves it received the reply. The general lesson: do not commit resources to an unauthenticated peer.
 
 6. **Ingress filtering would stop spoofing at the source, but deployment is partial.** If every network dropped outgoing packets whose source addresses did not belong to it (BCP 38, "Best Current Practice 38", 2000), spoofed reflection attacks would largely disappear. Because the benefit goes to others and the cost to the deployer, adoption remains incomplete, which is a reminder that network security is partly an economic coordination problem.
 
@@ -51,7 +51,7 @@ The Internet's core protocols were designed for a cooperative network of researc
 ## Common misconceptions
 
 - **"A firewall makes the internal network safe."** Phishing, compromised devices and insiders are already inside; internal traffic needs authentication too.
-- **"DNSSEC encrypts DNS."** It authenticates records; confidentiality needs DNS over TLS or over HTTPS.
+- **"DNSSEC encrypts DNS."** It authenticates records; confidentiality needs DNS over TLS or over HTTPS (the Hypertext Transfer Protocol Secure).
 - **"Blocking an attacking IP address stops a DDoS."** Distributed attacks use many thousands of addresses, often spoofed or belonging to innocent reflectors.
 
 ## Go deeper

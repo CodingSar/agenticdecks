@@ -41,9 +41,9 @@ Partitioning (also called sharding) splits a dataset into disjoint pieces stored
 
 ## How it fits
 
-- **Below:** hash partitioning is a [hash table](../../05-algorithms-and-data-structures/02-fundamental-data-structures/hash-tables.md) whose buckets are machines; range partitioning is the top level of a [search tree](../../05-algorithms-and-data-structures/02-fundamental-data-structures/search-trees.md) or [B-tree](../../09-data-management/02-storage-and-indexing/b-trees.md); each partition stores data in [B-trees or LSM-trees](../../09-data-management/02-storage-and-indexing/lsm-trees.md); each partition is a [replicated group](../03-consensus-and-replication/replication.md).
+- **Below:** hash partitioning is a [hash table](../../05-algorithms-and-data-structures/02-fundamental-data-structures/hash-tables.md) whose buckets are machines; range partitioning is the top level of a [search tree](../../05-algorithms-and-data-structures/02-fundamental-data-structures/search-trees.md) or [B-tree](../../09-data-management/02-storage-and-indexing/b-trees.md); each partition stores data in [B-trees or log-structured merge (LSM) trees](../../09-data-management/02-storage-and-indexing/lsm-trees.md); each partition is a [replicated group](../03-consensus-and-replication/replication.md).
 - **Above:** [distributed transactions](distributed-transactions.md) handle operations spanning partitions; [batch and stream engines](../05-large-scale-systems/batch-and-stream-processing.md) shuffle data by key between stages; [scalability patterns](../05-large-scale-systems/scalability-patterns.md) treat sharding as the main way to scale writes; [content delivery networks](../../08-networking/05-application-layer/content-delivery-and-caching.md) use consistent hashing to pick cache servers.
-- **Siblings:** [distributed transactions](distributed-transactions.md) pay for coordination across partitions; [CRDTs](eventual-consistency-and-crdts.md) avoid coordination among replicas within one.
+- **Siblings:** [distributed transactions](distributed-transactions.md) pay for coordination across partitions; [conflict-free replicated data types (CRDTs)](eventual-consistency-and-crdts.md) avoid coordination among replicas within one.
 
 ## Common misconceptions
 

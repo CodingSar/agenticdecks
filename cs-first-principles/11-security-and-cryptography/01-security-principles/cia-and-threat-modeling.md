@@ -6,7 +6,7 @@
 
 ## Essence
 
-Security goals are usually stated as the CIA triad: **confidentiality** (information is disclosed only to those authorised), **integrity** (information and systems are changed only in authorised ways, and changes are detectable), and **availability** (authorised users can use the system when they need it). Goals alone are meaningless without an adversary, so a **threat model** states what the attacker wants, what they can do (read the network, run code on your machine, bribe an insider), and what you assume they cannot do. Threat modeling is the systematic process of listing assets, drawing trust boundaries, enumerating threats across those boundaries and deciding which to mitigate. Its value is that it converts "is this secure?" into questions that have answers.
+Security goals are usually stated as the CIA triad, named for its three goals: **confidentiality** (information is disclosed only to those authorised), **integrity** (information and systems are changed only in authorised ways, and changes are detectable), and **availability** (authorised users can use the system when they need it). Goals alone are meaningless without an adversary, so a **threat model** states what the attacker wants, what they can do (read the network, run code on your machine, bribe an insider), and what you assume they cannot do. Threat modeling is the systematic process of listing assets, drawing trust boundaries, enumerating threats across those boundaries and deciding which to mitigate. Its value is that it converts "is this secure?" into questions that have answers.
 
 ## Core tenets
 
@@ -44,7 +44,7 @@ Security goals are usually stated as the CIA triad: **confidentiality** (informa
 ## How it fits
 
 - **Below:** risk assessment applies [probability](../../01-mathematical-foundations/06-probability-and-statistics/probability.md) and [engineering trade-offs](../../00-engineering-foundations/05-engineering-method/tradeoffs-and-constraints.md); stating a threat model is like stating a [failure model](../../10-distributed-and-parallel-computing/02-distributed-foundations/system-models-and-failures.md), with the Byzantine model as the adversarial case.
-- **Above:** threat models become security [requirements](../../12-software-engineering/02-process/requirements.md); [privacy law](../../15-computing-in-context/law-privacy-and-policy.md) adds obligations that shape the model; [alignment and safety](../../13-artificial-intelligence/04-advanced-paradigms/alignment-and-safety.md) applies threat modeling to AI systems.
+- **Above:** threat models become security [requirements](../../12-software-engineering/02-process/requirements.md); [privacy law](../../15-computing-in-context/law-privacy-and-policy.md) adds obligations that shape the model; [alignment and safety](../../13-artificial-intelligence/04-advanced-paradigms/alignment-and-safety.md) applies threat modeling to artificial intelligence (AI) systems.
 - **Siblings:** [design principles](security-design-principles.md) tell you how to build mitigations for the threats found here; [cryptography](../02-cryptography/foundations-of-modern-cryptography.md) formalises threat models as precise adversary games.
 
 ## Common misconceptions

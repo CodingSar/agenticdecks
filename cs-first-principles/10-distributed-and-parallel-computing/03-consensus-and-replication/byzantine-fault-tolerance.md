@@ -1,8 +1,8 @@
 # Byzantine Fault Tolerance
 
 > **Layer:** [10 Distributed and Parallel Computing](../README.md) › [Consensus and replication](README.md)
-> **Builds on:** [Consensus](consensus.md), [Impossibility results](../02-distributed-foundations/impossibility-results.md), [Public-key cryptography](../../11-security-and-cryptography/02-cryptography/public-key-cryptography.md), [Hash functions and MACs](../../11-security-and-cryptography/02-cryptography/hash-functions-and-macs.md)
-> **Enables:** [CIA and threat modeling](../../11-security-and-cryptography/01-security-principles/cia-and-threat-modeling.md), [Distributed transactions](../04-distributed-data/distributed-transactions.md)
+> **Builds on:** [Consensus](consensus.md), [Impossibility results](../02-distributed-foundations/impossibility-results.md), [Public-key cryptography](../../11-security-and-cryptography/02-cryptography/public-key-cryptography.md), [Hash functions and message authentication codes](../../11-security-and-cryptography/02-cryptography/hash-functions-and-macs.md)
+> **Enables:** [Security goals and threat modeling](../../11-security-and-cryptography/01-security-principles/cia-and-threat-modeling.md), [Distributed transactions](../04-distributed-data/distributed-transactions.md)
 
 ## Essence
 

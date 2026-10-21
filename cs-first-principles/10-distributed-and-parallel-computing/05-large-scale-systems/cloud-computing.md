@@ -12,7 +12,7 @@ Cloud computing turns data centres into pooled resources (compute, storage, netw
 
 1. **Pooling works because demand is bursty and uncorrelated.** A single company sized for its peak leaves most servers idle most of the time; aggregating many independent workloads smooths the total, raising utilisation. This is the same statistical multiplexing that makes [packet switching](../../08-networking/01-principles/packet-switching.md) more efficient than reserved circuits. It also explains the limits: correlated demand (a global event) or correlated failure (a region outage) breaks the averaging.
 
-2. **Service models differ by what the customer still manages.** Infrastructure as a Service (IaaS) rents virtual machines, disks and networks; the customer runs the OS and everything above. Platform as a Service (PaaS) and managed services (databases, queues) take over the runtime and operations. Function as a Service (FaaS), often called serverless, runs short functions on demand and bills per invocation, so idle code costs nothing; the price is cold-start latency and limits on state and run time. Each step up trades control for less operational work.
+2. **Service models differ by what the customer still manages.** Infrastructure as a Service (IaaS) rents virtual machines, disks and networks; the customer runs the operating system (OS) and everything above. Platform as a Service (PaaS) and managed services (databases, queues) take over the runtime and operations. Function as a Service (FaaS), often called serverless, runs short functions on demand and bills per invocation, so idle code costs nothing; the price is cold-start latency and limits on state and run time. Each step up trades control for less operational work.
 
 3. **Separating control plane from data plane is the core architecture.** The control plane decides (where a virtual machine runs, which servers back a load balancer, what the routing tables say) and keeps its state in consensus-backed stores. The data plane does the work (forwarding packets, serving reads) using the latest decisions, and keeps working from cached configuration if the control plane is down. This keeps expensive coordination out of the per-request path and limits the damage a control-plane outage causes.
 
@@ -34,7 +34,7 @@ Cloud computing turns data centres into pooled resources (compute, storage, netw
 | Control plane | Components that decide configuration and placement |
 | Data plane | Components that carry the actual traffic or requests |
 | Region / availability zone | Geographic area / independent failure domain within it |
-| Object storage | Flat, replicated, HTTP-accessed store of immutable blobs |
+| Object storage | Flat, replicated, web-accessed store of immutable blobs |
 | Orchestrator | System that schedules containers and reconciles desired with actual state |
 | Multi-tenancy | Many customers sharing the same physical infrastructure |
 

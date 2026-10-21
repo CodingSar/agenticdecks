@@ -13,7 +13,7 @@ The unifying idea is **enforcing boundaries between principals**. Access control
 
 | Child | Its role in the whole | Depends on |
 |---|---|---|
-| [Access control](access-control.md) | The policy: who (subject) may do what (right) to which object; how policies are stored and checked | Design principles, OS abstractions |
+| [Access control](access-control.md) | The policy: who (subject) may do what (right) to which object; how policies are stored and checked | Design principles, operating system abstractions |
 | [Isolation and sandboxing](isolation-and-sandboxing.md) | The enforcement: processes, virtual machines, containers, sandboxes and enclaves that confine code | Virtual memory, kernel mode, virtualization |
 | [Memory safety vulnerabilities](memory-safety-vulnerabilities.md) | The most common way code inside a boundary is subverted, and the mitigations | Languages, compilers, memory layout |
 | [Side channels](side-channels.md) | Leaks across boundaries through timing, caches, power and speculation | Microarchitecture, caches |

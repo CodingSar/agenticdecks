@@ -42,7 +42,7 @@ A distributed transaction reads and writes data on several nodes and must still 
 
 - **Below:** extends [ACID](../../09-data-management/04-transactions/acid.md), [concurrency control](../../09-data-management/04-transactions/concurrency-control.md) and [recovery logging](../../09-data-management/04-transactions/recovery-and-logging.md) to many nodes; uses [consensus](../03-consensus-and-replication/consensus.md) to make the decision fault-tolerant and [clocks](../02-distributed-foundations/time-clocks-and-ordering.md) for timestamp ordering; distributed deadlock is [deadlock](../../07-operating-systems/03-concurrency/deadlock.md) across machines.
 - **Above:** [scalability patterns](../05-large-scale-systems/scalability-patterns.md) such as microservices replace distributed transactions with sagas and events; [cloud](../05-large-scale-systems/cloud-computing.md) databases sell globally consistent transactions as a managed service.
-- **Siblings:** [partitioning](partitioning.md) decides how often transactions must span nodes; [CRDTs](eventual-consistency-and-crdts.md) are the opposite strategy, avoiding coordination altogether.
+- **Siblings:** [partitioning](partitioning.md) decides how often transactions must span nodes; [conflict-free replicated data types (CRDTs)](eventual-consistency-and-crdts.md) are the opposite strategy, avoiding coordination altogether.
 
 ## Common misconceptions
 

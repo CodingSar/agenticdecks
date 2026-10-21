@@ -24,7 +24,7 @@ A handful of theorems mark the boundaries of what distributed systems can do. Th
 
 7. **Some costs are lower bounds, not impossibilities.** Any linearizable replicated register needs a round trip to a quorum on some operations, so its latency is at least the network distance to a majority. Crash-tolerant consensus needs n ≥ 2f + 1 so that any two quorums intersect. Synchronous consensus with f crash failures needs at least f + 1 rounds in the worst case. These numbers fix what any implementation costs.
 
-8. **Impossibility results are design tools.** They say: do not look for a protocol that is always safe, always live and fully asynchronous; state which guarantee bends under a partition; and read claims of a "CA system" as assuming partitions away.
+8. **Impossibility results are design tools.** They say: do not look for a protocol that is always safe, always live and fully asynchronous; state which guarantee bends under a partition; and read claims of a "CA" (consistent and available) system as assuming partitions away.
 
 ## Key concepts
 

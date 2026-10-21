@@ -1,7 +1,7 @@
 # Security Design Principles
 
 > **Layer:** [11 Security and Cryptography](../README.md) › [Security principles](README.md)
-> **Builds on:** [CIA and threat modeling](cia-and-threat-modeling.md), [Modularity and information hiding](../../12-software-engineering/01-design/modularity-and-information-hiding.md), [Kernel mode and system calls](../../07-operating-systems/01-kernel-and-abstractions/kernel-mode-and-system-calls.md)
+> **Builds on:** [Security goals and threat modeling](cia-and-threat-modeling.md), [Modularity and information hiding](../../12-software-engineering/01-design/modularity-and-information-hiding.md), [Kernel mode and system calls](../../07-operating-systems/01-kernel-and-abstractions/kernel-mode-and-system-calls.md)
 > **Enables:** [Access control](../03-system-security/access-control.md), [Isolation and sandboxing](../03-system-security/isolation-and-sandboxing.md), [Foundations of modern cryptography](../02-cryptography/foundations-of-modern-cryptography.md), [Software architecture](../../12-software-engineering/01-design/software-architecture.md)
 
 ## Essence
@@ -24,7 +24,7 @@ Security design principles are rules for structuring a system so that it resists
 
 7. **Separation of privilege and least common mechanism.** Requiring two independent conditions (two keys, two people approving, a password and a hardware token) means one compromise is not enough. Minimising mechanisms shared between users (shared temporary directories, shared caches, shared processes) removes channels through which one user can attack or observe another; modern cache side channels are a failure of this principle.
 
-8. **Psychological acceptability: secure must be the easy path.** If the secure way is harder than the insecure way, people will route around it: passwords on sticky notes, disabled certificate checks, shared accounts. Security mechanisms must fit how people actually work, and secure defaults in libraries and APIs matter more than documentation telling developers to opt in.
+8. **Psychological acceptability: secure must be the easy path.** If the secure way is harder than the insecure way, people will route around it: passwords on sticky notes, disabled certificate checks, shared accounts. Security mechanisms must fit how people actually work, and secure defaults in libraries and application programming interfaces (APIs) matter more than documentation telling developers to opt in.
 
 ## Key concepts
 

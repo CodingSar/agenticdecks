@@ -1,8 +1,8 @@
 # Secure Protocols and TLS
 
 > **Layer:** [11 Security and Cryptography](../README.md) › [Cryptography](README.md)
-> **Builds on:** [Public-key cryptography](public-key-cryptography.md), [Symmetric encryption](symmetric-encryption.md), [Hash functions and message authentication codes](hash-functions-and-macs.md), [UDP and TCP](../../08-networking/04-transport-layer/udp-and-tcp.md)
-> **Enables:** [Web security](../04-network-and-application-security/web-security.md), [HTTP and the web](../../08-networking/05-application-layer/http-and-the-web.md), [Network attacks and defenses](../04-network-and-application-security/network-attacks-and-defenses.md)
+> **Builds on:** [Public-key cryptography](public-key-cryptography.md), [Symmetric encryption](symmetric-encryption.md), [Hash functions and message authentication codes](hash-functions-and-macs.md), [User Datagram Protocol and Transmission Control Protocol](../../08-networking/04-transport-layer/udp-and-tcp.md)
+> **Enables:** [Web security](../04-network-and-application-security/web-security.md), [Hypertext Transfer Protocol and the web](../../08-networking/05-application-layer/http-and-the-web.md), [Network attacks and defenses](../04-network-and-application-security/network-attacks-and-defenses.md)
 
 ## Essence
 
@@ -18,7 +18,7 @@ A secure channel protocol combines primitives into a connection that gives **con
 
 4. **Negotiation is an attack surface: prevent downgrades.** When peers negotiate versions and algorithms, an active attacker can tamper with the offers to push both sides to the weakest common option. Defences are to authenticate the whole negotiation transcript, to remove weak options entirely rather than merely disfavour them, and to add explicit downgrade signals (TLS 1.3 servers embed a sentinel value in their random nonce when negotiating an older version).
 
-5. **Keys are derived, separated and updated.** From the Diffie–Hellman secret, TLS 1.3 uses HKDF (the HMAC-based Key Derivation Function) to derive separate keys for each direction and each phase (handshake, application data, resumption). Using one key for two purposes can let an attack on one purpose spill into the other. Records carry implicit sequence numbers in their nonces, which detects reordering, replay and deletion within a connection.
+5. **Keys are derived, separated and updated.** From the Diffie–Hellman secret, TLS 1.3 uses HKDF (the key derivation function built on the hash-based message authentication code, HMAC) to derive separate keys for each direction and each phase (handshake, application data, resumption). Using one key for two purposes can let an attack on one purpose spill into the other. Records carry implicit sequence numbers in their nonces, which detects reordering, replay and deletion within a connection.
 
 6. **0-RTT resumption trades replay protection for latency.** TLS 1.3 lets a returning client send data in its first flight using a key from a previous session (zero round-trip time, 0-RTT). That early data can be replayed by an attacker, so it must only carry requests that are safe to repeat (idempotent), or the server must deduplicate. This is a deliberate, documented weakening, and an example of every protocol optimisation needing a security review.
 
@@ -51,7 +51,7 @@ A secure channel protocol combines primitives into a connection that gives **con
 
 - **"HTTPS means the site is trustworthy."** It means your connection is to whoever controls that domain name; phishing sites have valid certificates too.
 - **"Encryption is enough; authentication is optional."** Encryption to an unauthenticated peer may be encryption to the attacker.
-- **"Rolling our own protocol on top of AES is fine."** Most broken protocols used sound primitives; the composition is the hard part.
+- **"Rolling our own protocol on top of the Advanced Encryption Standard (AES) is fine."** Most broken protocols used sound primitives; the composition is the hard part.
 
 ## Go deeper
 

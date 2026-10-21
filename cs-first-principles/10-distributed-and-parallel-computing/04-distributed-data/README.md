@@ -1,7 +1,7 @@
 # Distributed Data
 
 > **Layer:** [10 Distributed and Parallel Computing](../README.md) › Distributed data
-> **Children:** [Partitioning](partitioning.md) · [Distributed transactions](distributed-transactions.md) · [Eventual consistency and CRDTs](eventual-consistency-and-crdts.md)
+> **Children:** [Partitioning](partitioning.md) · [Distributed transactions](distributed-transactions.md) · [Eventual consistency and conflict-free replicated data types](eventual-consistency-and-crdts.md)
 
 ## What this area is about
 
@@ -14,7 +14,7 @@ The unifying idea is **minimising coordination**. Every operation that needs sev
 | Child | Its role in the whole | Depends on |
 |---|---|---|
 | [Partitioning](partitioning.md) | Splitting data across nodes by key range or hash; rebalancing; routing | Hash tables, search trees, replication |
-| [Distributed transactions](distributed-transactions.md) | Atomic, isolated operations across partitions: two-phase commit, distributed concurrency control | Partitioning, consensus, ACID |
+| [Distributed transactions](distributed-transactions.md) | Atomic, isolated operations across partitions: two-phase commit, distributed concurrency control | Partitioning, consensus, single-node transactions |
 | [Eventual consistency and CRDTs](eventual-consistency-and-crdts.md) | Coordination-free replication where merges are guaranteed to converge | Clocks, consistency models |
 
 ```
@@ -33,13 +33,13 @@ Read partitioning first, since it creates the problem the other two solve. Distr
 ## Connections to sibling areas
 
 - **[Consensus and replication](../03-consensus-and-replication/README.md):** each partition is typically a replicated group running Raft or Paxos; modern distributed databases put two-phase commit on top of those groups so a coordinator crash cannot block forever.
-- **[Distributed foundations](../02-distributed-foundations/README.md):** version vectors come from vector clocks; the CAP theorem explains why the strong and available paths differ.
+- **[Distributed foundations](../02-distributed-foundations/README.md):** version vectors come from vector clocks; the CAP (Consistency, Availability, Partition tolerance) theorem explains why the strong and available paths differ.
 - **[Parallel computing](../01-parallel-computing/README.md):** partitioning data so most work is local is the same goal as data-parallel decomposition with good locality.
 - **[Large-scale systems](../05-large-scale-systems/README.md):** batch and stream engines repartition (shuffle) data between stages; scalability patterns such as sharding and caching are this area applied.
 
 ## Connections across layers
 
-From [09 Data Management](../../09-data-management/README.md): [transactions](../../09-data-management/04-transactions/acid.md), [concurrency control](../../09-data-management/04-transactions/concurrency-control.md), [isolation levels](../../09-data-management/04-transactions/isolation-levels.md), [B-trees](../../09-data-management/02-storage-and-indexing/b-trees.md) and [LSM-trees](../../09-data-management/02-storage-and-indexing/lsm-trees.md), and [join algorithms](../../09-data-management/03-query-processing/join-algorithms.md) that become distributed joins. From [05 Algorithms](../../05-algorithms-and-data-structures/README.md): [hash tables](../../05-algorithms-and-data-structures/02-fundamental-data-structures/hash-tables.md) and [search trees](../../05-algorithms-and-data-structures/02-fundamental-data-structures/search-trees.md). From [01 Mathematics](../../01-mathematical-foundations/README.md): the [lattices and semilattices](../../01-mathematical-foundations/02-sets-relations-functions/relations-and-orders.md) that make CRDT merges sound. Upward, it supports [machine learning data pipelines](../../13-artificial-intelligence/03-deep-learning/training-at-scale.md) and collaborative applications in [human-computer interaction](../../14-human-and-visual-computing/01-human-computer-interaction/README.md).
+From [09 Data Management](../../09-data-management/README.md): [transactions](../../09-data-management/04-transactions/acid.md), [concurrency control](../../09-data-management/04-transactions/concurrency-control.md), [isolation levels](../../09-data-management/04-transactions/isolation-levels.md), [B-trees](../../09-data-management/02-storage-and-indexing/b-trees.md) and [log-structured merge (LSM) trees](../../09-data-management/02-storage-and-indexing/lsm-trees.md), and [join algorithms](../../09-data-management/03-query-processing/join-algorithms.md) that become distributed joins. From [05 Algorithms](../../05-algorithms-and-data-structures/README.md): [hash tables](../../05-algorithms-and-data-structures/02-fundamental-data-structures/hash-tables.md) and [search trees](../../05-algorithms-and-data-structures/02-fundamental-data-structures/search-trees.md). From [01 Mathematics](../../01-mathematical-foundations/README.md): the [lattices and semilattices](../../01-mathematical-foundations/02-sets-relations-functions/relations-and-orders.md) that make CRDT merges sound. Upward, it supports [machine learning data pipelines](../../13-artificial-intelligence/03-deep-learning/training-at-scale.md) and collaborative applications in [human-computer interaction](../../14-human-and-visual-computing/01-human-computer-interaction/README.md).
 
 ## Cross-cutting threads
 

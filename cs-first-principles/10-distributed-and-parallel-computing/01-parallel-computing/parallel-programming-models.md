@@ -50,7 +50,7 @@ A parallel programming model is the contract between the programmer and the para
 ## Common misconceptions
 
 - **"Shared memory is easier than message passing."** It is easier to start and harder to get right. Data races and memory-ordering bugs are among the hardest bugs to find.
-- **"A GPU is just a CPU with many cores."** A GPU core is a lane in a lock-step group with tiny caches per thread; code designed for independent Central Processing Unit (CPU) threads usually runs poorly on it.
+- **"A GPU is just a central processing unit (CPU) with many cores."** A GPU core is a lane in a lock-step group with tiny caches per thread; code designed for independent CPU threads usually runs poorly on it.
 - **"`volatile` makes shared variables thread-safe."** In C and C++ it neither makes accesses atomic nor orders them across threads; proper atomics or locks are required.
 
 ## Go deeper

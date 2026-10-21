@@ -22,7 +22,7 @@ A parallel computation is a directed acyclic graph (DAG) of operations, where an
 
 6. **Communication, not arithmetic, usually dominates.** Moving a word between cores, sockets or machines costs far more time and energy than an arithmetic operation on it (a floating-point operation costs on the order of picojoules; fetching its operand from Dynamic Random-Access Memory (DRAM) costs hundreds of times more, circa 2020s hardware). Work–span ignores this. The BSP model (Valiant, 1990) charges each superstep for computation, for the largest message volume h times a per-word cost g, and for a barrier cost L. LogP (Culler et al., 1993) charges latency L, overhead o, gap g and processor count P. The lesson of both: reduce data movement and the number of synchronisations, not just operations.
 
-7. **The PRAM is the idealised baseline, not a machine.** The Parallel Random Access Machine (PRAM) gives P processors unit-time access to a shared memory in lock-step. It is useful for discovering what is inherently sequential (problems that are P-complete, such as circuit value, are believed to have no polylogarithmic-span algorithm). It hides contention and memory latency, so a PRAM-optimal algorithm can be slow in practice.
+7. **The Parallel Random Access Machine (PRAM) is the idealised baseline, not a machine.** The PRAM gives P processors unit-time access to a shared memory in lock-step. It is useful for discovering what is inherently sequential (problems that are P-complete, such as circuit value, are believed to have no polylogarithmic-span algorithm). It hides contention and memory latency, so a PRAM-optimal algorithm can be slow in practice.
 
 ## Key concepts
 

@@ -47,16 +47,19 @@ Every path below is fixed. Writers create exactly these files, so cross-links be
   05-continuous-mathematics/
     calculus.md
     optimization.md
+    fourier-analysis.md
   06-probability-and-statistics/
     probability.md
     random-variables-and-distributions.md
     statistical-inference.md
+    markov-chains.md
 
 02-theory-of-computation/
   01-information-theory/
     entropy-and-information.md
     source-coding-and-compression.md
     channel-capacity-and-error-correction.md
+    kolmogorov-complexity.md
   02-automata-and-formal-languages/
     finite-automata-and-regular-languages.md
     context-free-grammars-and-pushdown-automata.md
@@ -88,6 +91,7 @@ Every path below is fixed. Writers create exactly these files, so cross-links be
     latches-and-flip-flops.md
     clocking-and-synchronous-design.md
     finite-state-machines.md
+    memory-cells.md
   04-hardware-design/
     hardware-description-languages.md
     fpga-and-asic.md
@@ -132,6 +136,7 @@ Every path below is fixed. Writers create exactly these files, so cross-links be
     hash-tables.md
     search-trees.md
     heaps-and-priority-queues.md
+    union-find.md
   03-design-paradigms/
     divide-and-conquer.md
     greedy-algorithms.md
@@ -192,6 +197,7 @@ Every path below is fixed. Writers create exactly these files, so cross-links be
     processes.md
     threads.md
     scheduling.md
+    inter-process-communication.md
   03-concurrency/
     race-conditions-and-critical-sections.md
     locks-and-semaphores.md
@@ -226,6 +232,7 @@ Every path below is fixed. Writers create exactly these files, so cross-links be
     ip-addressing-and-forwarding.md
     routing-algorithms.md
     internet-routing-and-bgp.md
+    data-center-networks-and-sdn.md
   04-transport-layer/
     udp-and-tcp.md
     reliable-delivery.md
@@ -333,12 +340,14 @@ Every path below is fixed. Writers create exactly these files, so cross-links be
   03-deep-learning/
     neural-networks-and-backpropagation.md
     convolutional-networks.md
+    recurrent-networks-and-sequence-models.md
     attention-and-transformers.md
     training-at-scale.md
   04-advanced-paradigms/
     reinforcement-learning.md
     generative-models.md
     large-language-models.md
+    retrieval-and-embeddings.md
     alignment-and-safety.md
 
 14-human-and-visual-computing/
@@ -346,6 +355,7 @@ Every path below is fixed. Writers create exactly these files, so cross-links be
     perception-and-cognition.md
     interaction-design-principles.md
     usability-evaluation.md
+    information-visualization.md
   02-computer-graphics/
     geometry-and-transformations.md
     rasterization-pipeline.md
@@ -358,6 +368,7 @@ Every path below is fixed. Writers create exactly these files, so cross-links be
   history-of-computing.md
   ethics-and-professional-responsibility.md
   law-privacy-and-policy.md
+  environmental-impact.md
 ```
 
 Root files: `README.md` (entry point and map of the whole tree), `CROSS-CUTTING.md` (principles that recur across layers), `_meta/` (plan, brief, taxonomy, checker).

@@ -1,7 +1,7 @@
 # Security Principles
 
 > **Layer:** [11 Security and Cryptography](../README.md) › Security principles
-> **Children:** [CIA and threat modeling](cia-and-threat-modeling.md) · [Security design principles](security-design-principles.md)
+> **Children:** [Confidentiality, integrity, availability (CIA) and threat modeling](cia-and-threat-modeling.md) · [Security design principles](security-design-principles.md)
 
 ## What this area is about
 
