@@ -1,6 +1,6 @@
 # 13 Artificial Intelligence
 
-> **Layer:** [CS from first principles](../README.md) › 13 Artificial Intelligence
+> **Layer:** 13 Artificial Intelligence
 > **Children:** [Classical AI](01-classical-ai/README.md) · [Machine learning foundations](02-machine-learning-foundations/README.md) · [Deep learning](03-deep-learning/README.md) · [Advanced paradigms](04-advanced-paradigms/README.md)
 
 ## What this area is about
@@ -45,7 +45,7 @@ Read the children in order. Classical AI introduces the agent, the model and the
 ## Connections to neighbouring layers
 
 - **[01 Mathematical foundations](../01-mathematical-foundations/README.md):** Logic for classical AI; linear algebra, calculus, optimisation and probability for everything learned. AI is applied mathematics more directly than any other layer above 05.
-- **[02 Theory of computation](../02-theory-of-computation/README.md):** NP-hardness explains why search needs heuristics; undecidability bounds logical reasoners; information theory explains why prediction is compression and why language-model loss is a code length.
+- **[02 Theory of computation](../02-theory-of-computation/README.md):** Hardness for nondeterministic polynomial time (NP-hardness) explains why search needs heuristics; undecidability bounds logical reasoners; information theory explains why prediction is compression and why language-model loss is a code length.
 - **[04 Computer architecture](../04-computer-architecture/README.md):** Deep learning is co-designed with hardware. GPUs made it practical, and demand for it now drives tensor cores, high-bandwidth memory and dedicated accelerators.
 - **[05 Algorithms and data structures](../05-algorithms-and-data-structures/README.md):** Classical AI is algorithm design under exponential state spaces; backpropagation and the Bellman equation are dynamic programming.
 - **[09 Data management](../09-data-management/README.md) and [10 Distributed and parallel computing](../10-distributed-and-parallel-computing/README.md):** Training data pipelines and feature stores come from 09, and [vector search](04-advanced-paradigms/retrieval-and-embeddings.md) extends its indexing ideas to learned embeddings; data, tensor and pipeline parallelism and fault-tolerant clusters come from 10.

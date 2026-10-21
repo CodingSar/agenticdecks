@@ -57,7 +57,7 @@ Read 01 first: it isolates the cost of coordination before failures enter. Then 
 
 ## Connections across layers
 
-The layer converts two lower-level facts into design constraints. From physics ([00](../00-engineering-foundations/README.md)): signals travel at most at the speed of light, about 5 µs per kilometre of fibre, so a cross-continent round trip costs tens of milliseconds and no protocol can hide it. From probability ([01](../01-mathematical-foundations/06-probability-and-statistics/probability.md)): with thousands of machines, some machine is always failing, so failure is the normal case. From theory ([02](../02-theory-of-computation/README.md)): some agreement problems are provably unsolvable under weak assumptions, just as some functions are uncomputable.
+The layer converts three lower-level facts into design constraints. From physics ([00](../00-engineering-foundations/README.md)): signals travel at most at the speed of light, about 5 µs per kilometre of fibre, so a cross-continent round trip costs tens of milliseconds and no protocol can hide it. From probability ([01](../01-mathematical-foundations/06-probability-and-statistics/probability.md)): with thousands of machines, some machine is always failing, so failure is the normal case. From theory ([02](../02-theory-of-computation/README.md)): some agreement problems are provably unsolvable under weak assumptions, just as some functions are uncomputable.
 
 ## Cross-cutting threads
 

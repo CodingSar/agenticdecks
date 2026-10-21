@@ -1,6 +1,6 @@
 # 14 Human and Visual Computing
 
-> **Layer:** [CS from first principles](../README.md) › 14 Human and Visual Computing
+> **Layer:** 14 Human and Visual Computing
 > **Children:** [Human-computer interaction](01-human-computer-interaction/README.md) · [Computer graphics](02-computer-graphics/README.md) · [Media and vision](03-media-and-vision/README.md)
 
 ## What this area is about

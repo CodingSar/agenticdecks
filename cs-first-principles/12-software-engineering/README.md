@@ -19,7 +19,7 @@ Software engineering uses every technical layer below it, because a real system 
 - It treats [security](../11-security-and-cryptography/README.md) as a practice applied at every step (threat models in design, memory-safe languages, review, patching), which is why it sits above layer 11.
 - It borrows its limits from [theory](../02-theory-of-computation/README.md): [undecidability](../02-theory-of-computation/03-computability/halting-problem-and-undecidability.md) is why no tool can find every bug and why testing can only sample behaviour.
 
-What the layers above need from it: [machine learning](../13-artificial-intelligence/README.md) systems are software systems with extra data dependencies, and they inherit every problem here (versioning, testing, monitoring) plus new ones. [Human and visual computing](../14-human-and-visual-computing/README.md) supplies the user-facing half of [requirements](02-process/requirements.md), and [computing in context](../15-computing-in-context/README.md) asks who is responsible when engineered systems fail.
+What the layers above need from it: [machine learning](../13-artificial-intelligence/README.md) systems are software systems with extra data dependencies, and they inherit every problem here (versioning, testing, monitoring) plus new ones. [Human and visual computing](../14-human-and-visual-computing/README.md) builds its interfaces with the same practice and feeds what users need back into [requirements](02-process/requirements.md), and [computing in context](../15-computing-in-context/README.md) asks who is responsible when engineered systems fail.
 
 The abstraction this layer contributes is **the change**: a reviewed, tested, versioned, deployable delta to a running system. Design makes changes local, process coordinates who makes them, quality checks them, and operations ships and observes them.
 
@@ -27,7 +27,7 @@ The abstraction this layer contributes is **the change**: a reviewed, tested, ve
 
 | Child | Its role in the whole | Depends on |
 |---|---|---|
-| [Design](01-design/README.md) | Decide the structure so that most changes touch one module | Languages (06), the theory of complexity |
+| [Design](01-design/README.md) | Decide the structure so that most changes touch one module | Languages (06), engineering method (00) |
 | [Process](02-process/README.md) | Decide what to build, in what order, by whom, and record every change | Design (structure mirrors teams) |
 | [Quality](03-quality/README.md) | Gain confidence that a change is correct before it ships | Design (testable seams), Process (review, history) |
 | [Operations](04-operations/README.md) | Build, ship and run the change, and learn from production | All three above |

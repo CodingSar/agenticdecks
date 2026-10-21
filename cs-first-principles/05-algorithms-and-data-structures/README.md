@@ -7,7 +7,7 @@
 
 An algorithm is a finite, precisely specified procedure that turns any valid input into the correct output. A data structure is a way of laying out information in memory so that the operations an algorithm needs are cheap. This layer asks two questions about every problem: *is the procedure correct for every input?* and *how do its costs (time, memory, memory transfers) grow as the input grows?*
 
-The unifying idea is that **representation decides cost**. The same set of numbers stored as an unsorted array, a sorted array, a hash table, a balanced tree or a heap supports different operations at very different prices. Algorithm design is the art of choosing a representation and an invariant (a property that every step preserves) so that the work you must do is small and provably enough. Theory then tells you when you have hit a wall: some problems need Ω(n log n) comparisons, some need to look at every input bit, and some (the NP-hard ones) probably have no efficient exact algorithm at all.
+The unifying idea is that **representation decides cost**. The same set of numbers stored as an unsorted array, a sorted array, a hash table, a balanced tree or a heap supports different operations at very different prices. Algorithm design is the art of choosing a representation and an invariant (a property that every step preserves) so that the work you must do is small and provably enough. Theory then tells you when you have hit a wall: some problems need Ω(n log n) comparisons, some need to look at every input bit, and some (the NP-hard ones, where NP is nondeterministic polynomial time) probably have no efficient exact algorithm at all.
 
 ## Why this layer sits here
 

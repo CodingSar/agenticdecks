@@ -39,7 +39,7 @@ Upward, this layer contributes **trust boundaries with stated guarantees**: auth
 
 | Child | Its role in the whole | Depends on |
 |---|---|---|
-| [Security principles](01-security-principles/README.md) | Defines the goals (confidentiality, integrity, availability, privacy), the adversary (threat model) and the design rules | Engineering method, probability |
+| [Security principles](01-security-principles/README.md) | Defines the goals (confidentiality, integrity, availability, privacy), the adversary (threat model), the design rules and the [privacy-enhancing technologies](01-security-principles/privacy-enhancing-technologies.md) that limit what data reveals | Engineering method, probability |
 | [Cryptography](02-cryptography/README.md) | Mathematical tools for secrecy and authenticity over untrusted channels and storage | Number theory, complexity, probability |
 | [System security](03-system-security/README.md) | Protecting computation inside a machine: who may access what, and keeping components isolated | Architecture, languages, operating systems |
 | [Network and application security](04-network-and-application-security/README.md) | Protecting communication and applications across networks: identity, the web, network protocols, the software supply chain | All three above, networking |
@@ -59,7 +59,7 @@ Start with the principles, because every later topic is judged against a threat 
 
 ## Connections across layers
 
-The layer's mathematical floor is complexity theory: modern cryptography assumes certain problems (factoring, discrete logarithms, finding hash collisions) cannot be solved efficiently, which is unproved: a proof that P = NP (every problem whose solutions can be checked in polynomial time can also be solved in polynomial time) would break it, and large [quantum computers](../02-theory-of-computation/05-quantum-computation/quantum-algorithms.md), if built, would break today's public-key schemes, since Shor's algorithm solves factoring and discrete logarithms efficiently. Its physical floor is that computation leaks: [energy use](../00-engineering-foundations/01-physics-of-computation/thermodynamics-and-energy.md), timing and electromagnetic emission all carry information about secrets.
+The layer's mathematical floor is complexity theory: modern cryptography assumes certain problems (factoring, discrete logarithms, finding hash collisions) cannot be solved efficiently. That is unproved. A proof that P (polynomial time) equals NP (nondeterministic polynomial time), meaning every problem whose solutions can be checked in polynomial time can also be solved in polynomial time, would break it. Large [quantum computers](../02-theory-of-computation/05-quantum-computation/quantum-algorithms.md), if built, would break today's public-key schemes, since Shor's algorithm solves factoring and discrete logarithms efficiently. Its physical floor is that computation leaks: [energy use](../00-engineering-foundations/01-physics-of-computation/thermodynamics-and-energy.md), timing and electromagnetic emission all carry information about secrets.
 
 ## Cross-cutting threads
 
