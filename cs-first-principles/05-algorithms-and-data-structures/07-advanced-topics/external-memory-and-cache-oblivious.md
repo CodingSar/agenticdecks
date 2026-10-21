@@ -6,7 +6,7 @@
 
 ## Essence
 
-The Random Access Machine (RAM) model charges one unit for any memory access, but real memory is a hierarchy in which each level is larger and slower than the one above and moves data in blocks: ~1 ns for an L1 cache hit, ~100 ns for Dynamic Random-Access Memory (DRAM), ~10–100 µs for a Solid-State Drive (SSD) read, ~5–10 ms for a disk seek (circa 2020s hardware). When data exceeds a level, the number of block transfers, not the number of instructions, decides running time. The external-memory (I/O) model makes this explicit: fast memory of M words, slow memory read and written in blocks of B words, cost = number of block transfers. Cache-oblivious algorithms go further: they achieve optimal transfer counts for *every* level of the hierarchy at once, without knowing M or B, typically by recursive divide and conquer.
+The Random Access Machine (RAM) model charges one unit for any memory access, but real memory is a hierarchy in which each level is larger and slower than the one above and moves data in blocks: ~1 ns for a Level 1 (L1) cache hit, ~100 ns for Dynamic Random-Access Memory (DRAM), ~10–100 µs for a Solid-State Drive (SSD) read, ~5–10 ms for a disk seek (circa 2020s hardware). When data exceeds a level, the number of block transfers, not the number of instructions, decides running time. The external-memory (I/O) model makes this explicit: fast memory of M words, slow memory read and written in blocks of B words, cost = number of block transfers. Cache-oblivious algorithms go further: they achieve optimal transfer counts for *every* level of the hierarchy at once, without knowing M or B, typically by recursive divide and conquer.
 
 ## Core tenets
 

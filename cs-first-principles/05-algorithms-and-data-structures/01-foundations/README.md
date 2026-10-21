@@ -7,7 +7,7 @@
 
 Before you can say an algorithm is "good" you need two things: a proof that it is right and a way to count what it costs. This area supplies both. It fixes a *cost model* (which operations count as one step, and what counts as memory), a *proof method* (invariants and induction), and a refinement of worst-case counting (*amortized* analysis) that matches how data structures are actually used: as long sequences of operations, not single calls.
 
-The unifying idea is that an algorithmic claim is always relative to a model. "Sorting takes Θ(n log n)" is true for comparison sorts on a RAM. It is false for integer keys with radix sort, and incomplete on a machine where memory transfers, not instructions, dominate. Naming the model is what turns a claim into a theorem.
+The unifying idea is that an algorithmic claim is always relative to a model. "Sorting takes Θ(n log n)" is true for comparison sorts on a Random Access Machine (RAM). It is false for integer keys with radix sort, and incomplete on a machine where memory transfers, not instructions, dominate. Naming the model is what turns a claim into a theorem.
 
 ## How the children fit together
 

@@ -10,7 +10,7 @@ There are only two ways to organise a sequence in memory. An **array** puts elem
 
 ## Core tenets
 
-1. **Array indexing is O(1) because address arithmetic is O(1).** The hardware computes `base + i × size` with a multiply (often a shift) and an add, usually folded into a single load instruction's addressing mode. This is the RAM model's unit-cost random access made concrete, and it is why arrays underpin hash tables, heaps, matrices and nearly every fast structure.
+1. **Array indexing is O(1) because address arithmetic is O(1).** The hardware computes `base + i × size` with a multiply (often a shift) and an add, usually folded into a single load instruction's addressing mode. This is the Random Access Machine (RAM) model's unit-cost random access made concrete, and it is why arrays underpin hash tables, heaps, matrices and nearly every fast structure.
 
 2. **Inserting into the middle of an array costs O(n) because order is position.** To insert at index i, every element after i must shift one slot right. Deleting shifts them left. Appending at the end is the exception: it costs O(1) if there is spare capacity.
 

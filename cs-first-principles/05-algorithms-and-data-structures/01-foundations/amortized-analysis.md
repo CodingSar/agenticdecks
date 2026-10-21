@@ -38,7 +38,7 @@ Some data structures do a little work most of the time and a lot of work occasio
 
 ## How it fits
 
-- **Below:** uses the RAM cost model from [models of computation](models-of-computation.md) and the telescoping sums of [recurrences](../../01-mathematical-foundations/03-discrete-mathematics/induction-and-recurrences.md).
+- **Below:** uses the Random Access Machine (RAM) cost model from [models of computation](models-of-computation.md) and the telescoping sums of [recurrences](../../01-mathematical-foundations/03-discrete-mathematics/induction-and-recurrences.md).
 - **Above:** justifies standard-library containers in every language, [garbage collector](../../06-programming-languages/04-runtime-systems/memory-management-and-garbage-collection.md) cost analysis, [LSM-tree](../../09-data-management/02-storage-and-indexing/lsm-trees.md) compaction, and [Transmission Control Protocol (TCP)](../../08-networking/04-transport-layer/udp-and-tcp.md) buffer growth. The same idea, applied to fixed overheads instead of credit, is [batching](../../CROSS-CUTTING.md#batching-and-amortization).
 - **Siblings:** an amortized proof is an [invariant proof](correctness-and-invariants.md) where the invariant is "credit ≥ 0". It is distinct from expected-time analysis in [randomized algorithms](../03-design-paradigms/randomized-algorithms.md), which averages over coin flips.
 

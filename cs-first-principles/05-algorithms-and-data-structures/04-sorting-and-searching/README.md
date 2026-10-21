@@ -14,7 +14,7 @@ The unifying idea is **information**. A comparison yields at most one bit about 
 | Child | Its role in the whole | Depends on |
 |---|---|---|
 | [Comparison Sorting](comparison-sorting.md) | Merge sort, quicksort, heapsort; the Ω(n log n) lower bound | [Divide and conquer](../03-design-paradigms/divide-and-conquer.md), [heaps](../02-fundamental-data-structures/heaps-and-priority-queues.md), [randomization](../03-design-paradigms/randomized-algorithms.md) |
-| [Non-Comparison Sorting](non-comparison-sorting.md) | Counting, radix and bucket sort: linear time by using key structure | Comparison sorting (to see what it escapes), [word RAM](../01-foundations/models-of-computation.md) |
+| [Non-Comparison Sorting](non-comparison-sorting.md) | Counting, radix and bucket sort: linear time by using key structure | Comparison sorting (to see what it escapes), [word Random Access Machine (RAM)](../01-foundations/models-of-computation.md) |
 | [Searching and Selection](searching-and-selection.md) | Binary search, interpolation search, selection of the k-th smallest in linear time | Sorting, [search trees](../02-fundamental-data-structures/search-trees.md), randomization |
 
 ```

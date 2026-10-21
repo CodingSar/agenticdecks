@@ -16,7 +16,7 @@ A digital design described in a Hardware Description Language (HDL) can become p
 
 3. **Hard blocks recover efficiency for common functions.** Modern FPGAs embed fixed-function blocks: Digital Signal Processing (DSP) slices with multipliers and accumulators, block memories, high-speed serial transceivers, memory controllers and sometimes whole processor cores. Designs that map their arithmetic and storage onto these blocks close much of the gap to ASICs for those parts.
 
-4. **The FPGA-ASIC gap is large and measurable.** Kuon and Rose (2007) measured FPGAs needing roughly 20 to 40 times the area, running about 3 to 4 times slower and consuming around 10 times or more dynamic power than standard-cell ASICs for the same logic, with hard blocks narrowing the gap. Configurability is paid for in every transistor of the programmable fabric.
+4. **The FPGA-ASIC gap is large and measurable.** Kuon and Rose (2007) measured FPGAs needing about 35 times the area of a standard-cell ASIC for the same logic (about 18 times when hard multipliers and memories are used), with critical paths roughly 3 to 4 times slower and around 14 times the dynamic power (about 7 times with hard blocks). Configurability is paid for in every transistor of the programmable fabric.
 
 5. **ASICs trade huge fixed cost for low unit cost.** An ASIC requires a full physical design flow (synthesis to standard cells, floorplanning, placement, clock-tree synthesis, routing, timing closure, verification) and a set of photomasks that at leading-edge nodes costs millions of dollars. These Non-Recurring Engineering (NRE) costs are paid once; each additional chip is cheap. FPGAs have almost no NRE but a high unit price.
 

@@ -6,7 +6,7 @@
 
 ## Essence
 
-Modern chips contain billions of transistors, far too many to draw. Designers instead write text in a Hardware Description Language (HDL), such as Verilog, VHDL or SystemVerilog, describing registers and the logic between them at the Register-Transfer Level (RTL). Two very different programs consume that text. A simulator executes it to predict behaviour, and a synthesis tool compiles it into a netlist of gates and flip-flops to be built. An HDL looks like a programming language but describes something fundamentally different: many pieces of hardware that all exist and operate at the same time. The central discipline is writing code whose simulated meaning and synthesised hardware agree.
+Modern chips contain billions of transistors, far too many to draw. Designers instead write text in a Hardware Description Language (HDL), such as Verilog, VHDL (the Very High Speed Integrated Circuit Hardware Description Language) or SystemVerilog, describing registers and the logic between them at the Register-Transfer Level (RTL). Two very different programs consume that text. A simulator executes it to predict behaviour, and a synthesis tool compiles it into a netlist of gates and flip-flops to be built. An HDL looks like a programming language but describes something fundamentally different: many pieces of hardware that all exist and operate at the same time. The central discipline is writing code whose simulated meaning and synthesised hardware agree.
 
 ## Core tenets
 
@@ -29,7 +29,7 @@ always @(posedge clk)
 
 6. **Higher-level generators raise abstraction further.** High-Level Synthesis (HLS) compiles C or C++ functions into RTL, scheduling operations into cycles and choosing hardware resources. Hardware construction languages such as Chisel (embedded in Scala, 2012) use a general-purpose language to *generate* RTL, making parameterised designs (a cache of any size, a processor with any number of pipelines) practical. These trade some control over the result for productivity.
 
-7. **HDLs history reflects two traditions.** Verilog (1984, standardised as IEEE 1364 in 1995) came from industry simulators and has C-like syntax. VHDL (the Very High Speed Integrated Circuit Hardware Description Language; IEEE 1076, 1987) came from a United States defence programme and is strongly typed in the style of Ada. SystemVerilog (IEEE 1800, 2005) extended Verilog with verification features and is now the dominant language in industry.
+7. **HDL history reflects two traditions.** Verilog (1984, standardised by the Institute of Electrical and Electronics Engineers (IEEE) as IEEE 1364 in 1995) came from industry simulators and has C-like syntax. VHDL (IEEE 1076, 1987) came from a United States defence programme and is strongly typed in the style of Ada. SystemVerilog (IEEE 1800, 2005) extended Verilog with verification features and is now the dominant language in industry.
 
 ## Key concepts
 

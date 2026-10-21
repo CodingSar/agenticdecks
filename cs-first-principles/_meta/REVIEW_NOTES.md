@@ -88,3 +88,12 @@ Collected from writer reports, to be resolved in the review pass.
 - Citations: Giesen 2011 blog; Catmull 1974 z-buffer (Straßer 1974 independently); AlphaZero 2017 preprint/2018 Science; Lazar 2nd ed 2017; Sayood 5th 2017; Shneiderman 6th 2016.
 - Loose links: electromagnetism for light; hash tables for attention (analogy); search trees for decision trees/BVH.
 - Candidate leaves: recurrent/sequence models; retrieval & vector search; data/feature engineering; visualization; AR/VR; audio & speech.
+
+### 05 Algorithms
+- Random BST height ≈ 4.311 ln n (Reed 2003); STP shortest-path tree; EEVDF still rbtree.
+- Median selection ≥ (2+ε)n (Dor–Zwick); HLL ~2% in ~1.5 KB; Bloom 1% at 9.6 bits/elt, k=7.
+- Max-flow almost-linear Chen et al. 2022; Karlin–Klein–Oveis Gharan STOC 2021; ω < 2.372.
+- Bentley binary search ~10%; Java overflow bug 2006 (Bloch).
+- Union-find tightness: Tarjan 1975, Fredman–Saks 1989.
+- CLRS 4th ed chapter numbers (RAM model ch 2; amortized analysis ch 16) — verify.
+- Candidate leaf: union-find.
