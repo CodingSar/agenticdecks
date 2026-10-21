@@ -15,7 +15,7 @@ Today this area is most visible in machine learning, where a model with billions
 |---|---|---|
 | [Calculus](calculus.md) | Limits, derivatives, gradients, integrals, Taylor approximation, the chain rule | Functions, linear algebra |
 | [Optimization](optimization.md) | Finding minima: gradient descent, convexity, constraints and duality, linear and integer programming | Calculus, linear algebra |
-| [Fourier Analysis](fourier-analysis.md) | Signals as sums of sinusoids; convolution theorem; DFT and FFT; sampling and aliasing | Calculus, linear algebra, recurrences |
+| [Fourier Analysis](fourier-analysis.md) | Signals as sums of sinusoids; convolution theorem; discrete and fast Fourier transforms; sampling and aliasing | Calculus, linear algebra, recurrences |
 
 Read calculus first. It answers "which way is downhill and how curved is the ground?". Optimisation answers "how far should I step, when should I stop, and can I trust that the answer is the best one?". Fourier analysis can be read after calculus, in parallel with optimisation: it asks "in which coordinates does this signal or operator become simple?".
 

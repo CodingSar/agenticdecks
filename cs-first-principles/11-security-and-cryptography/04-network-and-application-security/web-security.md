@@ -24,7 +24,7 @@ The web runs code from millions of mutually distrusting sources inside one progr
 
 7. **Authorisation bugs are the most common serious flaws.** The OWASP (Open Worldwide Application Security Project) Top 10 list of 2021 ranks broken access control first: endpoints that check that a user is logged in but not that they own the record requested. These are logic errors no framework can fix automatically, which is why authorisation must be enforced centrally on the server and tested explicitly.
 
-8. **Dependencies and the browser supply chain extend the trust boundary.** A typical web application includes hundreds of third-party packages and often loads scripts from other domains; any of them runs with the page's full authority. Subresource Integrity (a hash in the script tag), pinned and audited dependencies, and minimal third-party scripts limit what one compromised supplier can do.
+8. **Dependencies extend the trust boundary.** A typical web application includes hundreds of third-party packages and loads scripts from other domains; any of them runs with the page's full authority. Subresource Integrity (a hash in the script tag), pinned dependencies and few third-party scripts limit what one compromised supplier can do ([supply chain security](software-supply-chain-security.md)).
 
 ## Key concepts
 
@@ -43,7 +43,7 @@ The web runs code from millions of mutually distrusting sources inside one progr
 
 - **Below:** built on [HTTP and the web](../../08-networking/05-application-layer/http-and-the-web.md), [Transport Layer Security (TLS)](../02-cryptography/secure-protocols-and-tls.md) for HTTPS, browser process [sandboxing](../03-system-security/isolation-and-sandboxing.md), [session authentication](authentication.md) and [access control](../03-system-security/access-control.md); injection is a [parsing](../../06-programming-languages/03-compilers/lexing-and-parsing.md) failure, and SQL injection targets [relational query languages](../../09-data-management/01-data-models/relational-algebra-and-sql.md).
 - **Above:** shapes [software architecture](../../12-software-engineering/01-design/software-architecture.md) and [testing](../../12-software-engineering/03-quality/testing.md) practice; tracking and cookie rules are governed by [privacy law](../../15-computing-in-context/law-privacy-and-policy.md); prompt injection against [large language models](../../13-artificial-intelligence/04-advanced-paradigms/large-language-models.md) is the same data-as-instructions failure in a new medium.
-- **Siblings:** [authentication](authentication.md) creates the sessions attacked here; [network attacks](network-attacks-and-defenses.md) such as interception are why HTTPS and HSTS matter.
+- **Siblings:** [authentication](authentication.md) creates the sessions attacked here; [network attacks](network-attacks-and-defenses.md) are why HTTPS and HSTS matter; [supply chain security](software-supply-chain-security.md) covers the code a site imports.
 
 ## Common misconceptions
 

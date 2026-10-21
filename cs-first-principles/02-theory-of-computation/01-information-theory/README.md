@@ -16,7 +16,7 @@ The area sits in the theory layer, not in networking, because its limits bind ev
 | [Entropy and Information](entropy-and-information.md) | Defines the measures: entropy, conditional entropy, mutual information, relative entropy | Probability |
 | [Source Coding and Compression](source-coding-and-compression.md) | Proves entropy is the exact limit of lossless compression; covers practical codes and lossy rate–distortion | Entropy |
 | [Channel Capacity and Error Correction](channel-capacity-and-error-correction.md) | Proves mutual information (maximised) is the exact limit of reliable transmission; covers practical codes | Entropy, mutual information, algebra |
-| [Kolmogorov Complexity](kolmogorov-complexity.md) | Information in a single string as its shortest program; incompressibility, uncomputability, MDL (Minimum Description Length) | Entropy, Turing machines, the halting problem |
+| [Kolmogorov Complexity](kolmogorov-complexity.md) | Information in a single string as its shortest program; incompressibility, uncomputability, Minimum Description Length (MDL) | Entropy, Turing machines, the halting problem |
 
 Read the first three in order. The first leaf is the vocabulary; the next two are the two coding theorems that give that vocabulary operational meaning. Kolmogorov complexity comes last because it also needs [Turing machines](../03-computability/turing-machines.md): it drops the probability model and asks how much information one particular string contains. On average it agrees with entropy, which shows that Shannon's measure is not an artefact of probabilistic modelling, but it is uncomputable, so practical compression always works with an explicit or learned model.
 

@@ -14,7 +14,7 @@ Security goals are usually stated as the CIA triad, named for its three goals: *
 
 2. **The three goals conflict and must be balanced.** Encrypting everything and requiring several approvals improves confidentiality and integrity but harms availability; replicating data widely improves availability but multiplies the places it can leak. Denial of service is an availability attack that cryptography alone cannot stop. Treating the goals separately makes these trade-offs explicit.
 
-3. **The triad is often extended because it misses things.** *Authenticity* (the data or party is who it claims to be) and *non-repudiation* (an author cannot later deny an action) are integrity of origin. *Accountability* (actions can be traced to a principal) needs authentication and audit logs. *Privacy* concerns whether data should be collected or used at all, not just who can read it, and is shaped by law as well as engineering.
+3. **The triad is often extended because it misses things.** *Authenticity* (the data or party is who it claims to be) and *non-repudiation* (an author cannot later deny an action) are integrity of origin. *Accountability* (actions can be traced to a principal) needs authentication and audit logs. *Privacy* concerns what may be learned or done about a person, even by authorised parties, and needs its own [technologies](privacy-enhancing-technologies.md).
 
 4. **Trust boundaries are where threats live.** Draw the system as a data-flow diagram and mark every place where data crosses from a less trusted to a more trusted zone: from the internet to a web server, from a user process to the kernel, from a plug-in to its host. Every such crossing needs authentication of the source, validation of the data, and authorisation of the action. Bugs that let data cross a boundary unchecked (injection, deserialisation, confused deputy) are the most common vulnerability classes.
 
@@ -24,7 +24,7 @@ Security goals are usually stated as the CIA triad, named for its three goals: *
 
 7. **The attacker chooses, so the defender must assume adaptivity.** Random failures follow distributions; attackers do not. They find the one input that triggers an edge case, wait for the moment a defence is down, and combine small weaknesses into a chain. So the right question is not "how likely is this input?" but "can an attacker produce it?", and security testing (fuzzing, penetration testing, red teams) plays the attacker's role deliberately.
 
-8. **Insiders and the supply chain are part of the model.** Many serious incidents come from people with legitimate access or from compromised dependencies: a malicious library update, a tampered build server, a stolen developer credential. A model that only considers outside network attackers misses these, which is why principles such as separation of privilege and reproducible, verified builds exist.
+8. **Insiders and the supply chain are part of the model.** Many serious incidents come from people with legitimate access or from compromised dependencies: a malicious library update, a tampered build server, a stolen developer credential. A model that only considers outside network attackers misses these; [supply chain security](../04-network-and-application-security/software-supply-chain-security.md) answers with verified builds and provenance.
 
 ## Key concepts
 
@@ -45,7 +45,7 @@ Security goals are usually stated as the CIA triad, named for its three goals: *
 
 - **Below:** risk assessment applies [probability](../../01-mathematical-foundations/06-probability-and-statistics/probability.md) and [engineering trade-offs](../../00-engineering-foundations/05-engineering-method/tradeoffs-and-constraints.md); stating a threat model is like stating a [failure model](../../10-distributed-and-parallel-computing/02-distributed-foundations/system-models-and-failures.md), with the Byzantine model as the adversarial case.
 - **Above:** threat models become security [requirements](../../12-software-engineering/02-process/requirements.md); [privacy law](../../15-computing-in-context/law-privacy-and-policy.md) adds obligations that shape the model; [alignment and safety](../../13-artificial-intelligence/04-advanced-paradigms/alignment-and-safety.md) applies threat modeling to artificial intelligence (AI) systems.
-- **Siblings:** [design principles](security-design-principles.md) tell you how to build mitigations for the threats found here; [cryptography](../02-cryptography/foundations-of-modern-cryptography.md) formalises threat models as precise adversary games.
+- **Siblings:** [design principles](security-design-principles.md) shape mitigations for the threats found here; [privacy-enhancing technologies](privacy-enhancing-technologies.md) address adversaries who are authorised to see data; [cryptography](../02-cryptography/foundations-of-modern-cryptography.md) formalises threat models as adversary games.
 
 ## Common misconceptions
 
