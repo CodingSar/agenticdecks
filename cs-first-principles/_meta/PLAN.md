@@ -129,7 +129,7 @@ Engineering foundations (00) are beyond CS2023, which assumes them. They are her
 
 | Pass | Work | Result |
 |---|---|---|
-| 1. Draft | 11 writer agents, one or two layers each, to `WRITER_BRIEF.md` | 340 files: 262 leaves, 78 parent READMEs |
+| 1. Draft | 11 writer agents, one or two layers each, to `WRITER_BRIEF.md` | 340 files: 250 leaves, 90 READMEs |
 | 2. Review | 10 reviewer agents to `REVIEW_BRIEF.md`: fact-check every number, date and citation; fix upward links; write the 13 new leaves; strengthen sibling connections | About 80 factual corrections (listed in each reviewer's report and summarised in `REVIEW_NOTES.md`); 13 new leaves |
 | 3. Index | `CROSS-CUTTING.md`: 18 principles traced bottom-up through 173 links | Every anchor resolves |
 | 4. Coherence | Audit of the 16 layer READMEs as one bottom-up story | Neighbouring layers agree on what each gives and takes |
