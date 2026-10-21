@@ -95,6 +95,25 @@ def main():
                 if frag not in anchor_cache[dest]:
                     errors.append(f"ANCHOR   {rel} -> {target}")
 
+    # "Builds on" must never point to a higher layer: that would break bottom-up reading.
+    for rel in sorted(actual - ROOT_FILES):
+        if not selected(rel):
+            continue
+        p = ROOT / rel
+        src_layer = int(rel[:2])
+        for line in p.read_text().splitlines():
+            if line.startswith("> **Builds on:**"):
+                for target in LINK.findall(line):
+                    dest = (p.parent / target.partition("#")[0]).resolve()
+                    try:
+                        dest_rel = str(dest.relative_to(ROOT))
+                    except ValueError:
+                        continue
+                    dst_layer = int(dest_rel[:2]) if dest_rel[:2].isdigit() else -1
+                    # 00 and 01 are twin roots: engineering is written in mathematics.
+                    if dst_layer > src_layer and not (src_layer == 0 and dst_layer == 1):
+                        errors.append(f"UPWARD   {rel} builds on {dest_rel}")
+
     for e in errors:
         print(e)
     if words:

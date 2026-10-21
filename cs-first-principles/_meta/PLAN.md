@@ -118,3 +118,8 @@ Engineering foundations (00) are beyond CS2023, which assumes them. They are her
 4. **Review.** A separate pass reads each layer for factual errors, missing load-bearing tenets, and weak sibling connections, and fixes them.
 5. **Cross-cutting index.** Build `CROSS-CUTTING.md` from the finished leaves.
 6. **Iterate.** Repeat steps 3 and 4 until the checker is clean and the review finds nothing load-bearing.
+
+## 8. Lessons from the first draft
+
+- **00 and 01 are twin roots, not a strict order.** The engineering writers needed calculus, linear algebra and probability to state Ohm's and Kirchhoff's laws, RC timing, band theory and reliability. Mathematics does not need engineering, but engineering is *written in* mathematics. The checker allows 00 → 01 "builds on" links as the only upward exception. Engineering stays at 00 because the stack is ordered by *what the machine is made of*, and 01 is the notation used to describe it.
+- **"Builds on" must point down; everything else goes in the body.** A mechanical check (`UPWARD`) found that writers sometimes listed a higher layer as a prerequisite when they meant "related to" (for example scheduling → networking's queueing theory, which really belongs to probability in 01). Real forward dependencies, such as Byzantine fault tolerance (10) using digital signatures (11), are mentioned in the text with a link, not listed as prerequisites.

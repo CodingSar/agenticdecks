@@ -61,7 +61,7 @@ One paragraph (3–6 sentences): what this is, the problem it solves, and the si
 (2–4 canonical sources.)
 ```
 
-"Builds on" and "Enables" each list 1–5 links to other leaves or READMEs, *anywhere* in the tree (cross-layer links are the point). At least one of them should cross a layer boundary.
+"Builds on" may only link to the same layer or lower layers (exception: layer 00 may build on 01). A related idea in a higher layer is mentioned in the body text with a link, never listed as a prerequisite. The checker reports violations as `UPWARD`. "Builds on" and "Enables" each list 1–5 links to other leaves or READMEs, *anywhere* in the tree (cross-layer links are the point). At least one of them should cross a layer boundary.
 
 ## Parent README template (directories below the top level)
 
