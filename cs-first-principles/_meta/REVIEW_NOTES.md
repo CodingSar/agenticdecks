@@ -58,3 +58,12 @@ Collected from writer reports, to be resolved in the review pass.
 - Generalised chess EXP-complete; Go with Japanese ko EXP-complete; some games PSPACE-complete (Hex, Go without ko as Lichtenstein–Sipser ladder). Check wording.
 - Universal TM log-factor overhead (Hennie–Stearns).
 - Candidate leaf: Kolmogorov complexity.
+
+### 07 Operating Systems
+- **Inconsistent:** seL4 size ~9k (06) vs ~10k (07). Klein et al. 2009: ~8,700 lines C + 600 asm. Harmonise to "~8,700 lines of C".
+- Linux syscalls ~350–450; ~100 ns syscall (more with KPTI).
+- EEVDF in 6.6 (2023); MGLRU 6.1; cgroups 2.6.24 (2008), v2 stable 4.5; epoll 2.5.44/2.6; kqueue FreeBSD 4.1 (2000); io_uring 5.1 (2019).
+- Robson 1971 bound; nested page walk up to 24 refs.
+- Chou et al. 2001 driver error rates; Mars Pathfinder 1997; ext4 2009 delayed allocation; VENOM 2015; L1TF SMT.
+- HDD 5–10 ms, 100–250 MB/s; dirty writeback ~30 s; O_NONBLOCK no effect on regular files.
+- Candidate leaf: IPC under 02-process-management.
