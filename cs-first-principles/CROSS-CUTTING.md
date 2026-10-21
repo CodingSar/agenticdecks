@@ -183,7 +183,7 @@ This file is the index of those ideas. Each section states one principle as a cl
 | 07 | [Crash consistency and journaling](07-operating-systems/05-storage-and-file-systems/crash-consistency-and-journaling.md) | A consistent file system can still hold a half-updated application file; applications must `fsync` and check their own data. |
 | 08 | [Layering and the end-to-end principle](08-networking/01-principles/layering-and-the-end-to-end-principle.md) | Where it was first argued: reliability lives in the hosts, and the network core stays simple and stateless. |
 | 08 | [Wireless networks](08-networking/02-link-layer/wireless-networks.md) | Wi-Fi retransmits lost frames locally: a valid optimisation on a lossy hop, never a guarantee. |
-| 08 | [UDP and TCP](08-networking/04-transport-layer/udp-and-tcp.md) | TCP builds reliable, ordered delivery in the end hosts on top of best-effort Internet Protocol (IP) packets. |
+| 08 | [UDP and TCP](08-networking/04-transport-layer/udp-and-tcp.md) | TCP builds reliable, ordered delivery in the end hosts on top of best-effort Internet Protocol (IP) packets; the User Datagram Protocol (UDP) leaves even that to the application. |
 | 10 | [Batch and stream processing](10-distributed-and-parallel-computing/05-large-scale-systems/batch-and-stream-processing.md) | "Exactly-once" effects come from idempotent processing at the endpoints, not from perfectly reliable links. |
 | 11 | [Secure protocols and TLS](11-security-and-cryptography/02-cryptography/secure-protocols-and-tls.md) | Transport Layer Security (TLS) encrypts and authenticates at the endpoints that hold the keys. |
 | 11 | [Network attacks and defences](11-security-and-cryptography/04-network-and-application-security/network-attacks-and-defenses.md) | Firewalls help, but only endpoint authentication and encryption are sufficient. |
@@ -320,12 +320,12 @@ This file is the index of those ideas. Each section states one principle as a cl
 
 | Layer | Where it appears | How it shows up |
 |---|---|---|
-| 00 | [Thermodynamics and energy](00-engineering-foundations/01-physics-of-computation/thermodynamics-and-energy.md) | Erasing a bit dissipates at least `kT ln 2` of energy (the Landauer bound), and heat removal caps power density. |
+| 00 | [Thermodynamics and energy](00-engineering-foundations/01-physics-of-computation/thermodynamics-and-energy.md) | Erasing a bit dissipates at least `kT ln 2` of energy, where `k` is Boltzmann's constant and `T` the temperature (the Landauer bound), and heat removal caps power density. |
 | 00 | [Sampling and quantization](00-engineering-foundations/04-signals-and-systems/sampling-and-quantization.md) | The Nyquist rate and quantization noise are hard bounds on digitising a signal. |
 | 01 | [Predicate logic](01-mathematical-foundations/01-logic/predicate-logic.md) | First-order validity is undecidable, and Gödel showed rich theories are incomplete. |
 | 02 | [Entropy and information](02-theory-of-computation/01-information-theory/entropy-and-information.md) | No lossless code beats the entropy of its source on average. |
 | 02 | [Halting problem and undecidability](02-theory-of-computation/03-computability/halting-problem-and-undecidability.md) | Halting and, by Rice's theorem, every non-trivial question about program behaviour is undecidable. |
-| 02 | [P, NP and NP-completeness](02-theory-of-computation/04-complexity/p-np-and-np-completeness.md) | NP-complete problems are believed to need super-polynomial time in the worst case. |
+| 02 | [P, NP and NP-completeness](02-theory-of-computation/04-complexity/p-np-and-np-completeness.md) | NP-complete problems (the hardest in NP, the class of problems whose answers can be checked in polynomial time) are believed to need super-polynomial time in the worst case. |
 | 04 | [Amdahl's law](04-computer-architecture/06-performance/amdahls-law.md) | The serial fraction caps the speed-up from any amount of parallel hardware. |
 | 04 | [Power and the end of scaling](04-computer-architecture/06-performance/power-and-the-end-of-scaling.md) | Power density means not all of a chip can switch at full speed at once. |
 | 05 | [Comparison sorting](05-algorithms-and-data-structures/04-sorting-and-searching/comparison-sorting.md) | Any comparison sort needs Ω(n log n) comparisons, because there are n! orders to distinguish. |
@@ -362,7 +362,7 @@ This file is the index of those ideas. Each section states one principle as a cl
 
 | Layer | Where it appears | How it shows up |
 |---|---|---|
-| 00 | [CMOS](00-engineering-foundations/03-semiconductor-devices/cmos.md) | Transistors in series and parallel compose into AND and OR, with a predictable dual network. |
+| 00 | [CMOS](00-engineering-foundations/03-semiconductor-devices/cmos.md) | Complementary Metal-Oxide-Semiconductor (CMOS) transistors in series and parallel compose into AND and OR, with a predictable dual network. |
 | 01 | [Calculus](01-mathematical-foundations/05-continuous-mathematics/calculus.md) | The chain rule differentiates any composition of differentiable pieces. |
 | 01 | [Linear algebra](01-mathematical-foundations/04-algebra/linear-algebra.md) | Composing linear maps is multiplying their matrices. |
 | 02 | [Finite automata and regular languages](02-theory-of-computation/02-automata-and-formal-languages/finite-automata-and-regular-languages.md) | The product construction combines automata with predictable results. |
@@ -386,7 +386,7 @@ This file is the index of those ideas. Each section states one principle as a cl
 | 00 | [Measurement and modeling](00-engineering-foundations/05-engineering-method/measurement-and-modeling.md) | Measure what you can rather than trusting models or intuition. |
 | 01 | [Proof techniques](01-mathematical-foundations/01-logic/proof-techniques.md) | A proof lets a reader check a claim without trusting its author. |
 | 02 | [P, NP and NP-completeness](02-theory-of-computation/04-complexity/p-np-and-np-completeness.md) | NP is exactly the problems whose answers can be checked quickly. |
-| 03 | [FPGA and ASIC](03-digital-logic/04-hardware-design/fpga-and-asic.md) | An Application-Specific Integrated Circuit (ASIC) cannot be patched after fabrication, so verification dominates the effort. |
+| 03 | [FPGA and ASIC](03-digital-logic/04-hardware-design/fpga-and-asic.md) | Unlike a Field-Programmable Gate Array (FPGA), an Application-Specific Integrated Circuit (ASIC) cannot be patched after fabrication, so verification dominates the effort. |
 | 06 | [Proof assistants and dependent types](06-programming-languages/05-formal-methods/proof-assistants-and-dependent-types.md) | A small trusted proof kernel makes enormous machine-made proofs believable. |
 | 07 | [Kernel architectures](07-operating-systems/01-kernel-and-abstractions/kernel-architectures.md) | The kernel is the trusted computing base; seL4's machine-checked proof shows a small one can be verified. |
 | 08 | [Internet routing and BGP](08-networking/03-network-layer/internet-routing-and-bgp.md) | BGP accepts neighbours' route claims, and route hijacks exploit that trust. |
@@ -406,7 +406,7 @@ The principles above are not a checklist to apply all at once. Many of them pull
 | Tension | Why they conflict | Where you meet it |
 |---|---|---|
 | [Caching](#caching-and-locality) vs [state and time](#state-and-time) | A copy is fast because it is not checked against the original, so it can go stale. | Cache coherence, DNS time-to-live values, CDN invalidation, read replicas. |
-| [Abstraction](#abstraction-and-layering) vs [tradeoffs](#tradeoffs) of performance | Hiding detail hides the detail you need to go fast. | The RAM model versus caches, ORMs versus hand-written SQL, `O_DIRECT` and kernel bypass. |
+| [Abstraction](#abstraction-and-layering) vs [tradeoffs](#tradeoffs) of performance | Hiding detail hides the detail you need to go fast. | The RAM model versus caches, Object-Relational Mappers (ORMs) versus hand-written SQL, `O_DIRECT` and kernel bypass. |
 | [Layering](#abstraction-and-layering) vs [the end-to-end argument](#the-end-to-end-argument) | Layers want each function in one place; correctness says the ends must check anyway. | Link versus transport retransmission, file-system versus application consistency. |
 | [Redundancy](#redundancy-and-fault-tolerance) vs cost and [state and time](#state-and-time) | Every copy costs money, and every writable copy must be kept in agreement. | Replication factor, quorum size, the CAP theorem. |
 | [Batching](#batching-and-amortization) vs [feedback](#feedback-and-control) and latency | Big batches are efficient but slow to complete and slow to learn from. | Group commit, mini-batch size, release size. |

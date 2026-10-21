@@ -16,7 +16,7 @@ Number theory studies the integers: divisibility, primes, remainders and the ari
 
 3. **Euclid's algorithm computes the greatest common divisor in logarithmic steps.** gcd(a, b) = gcd(b, a mod b), and the remainders shrink at least by half every two steps, so the number of steps is O(log min(a, b)). The *extended* version also finds integers *x, y* with *ax + by = gcd(a, b)*. When gcd(a, n) = 1, this gives *x* with *ax ≡ 1 (mod n)*, the modular inverse that Rivest–Shamir–Adleman (RSA) key generation needs.
 
-4. **Primes are the multiplicative atoms, and factorisation is unique.** Every integer above 1 is a product of primes in exactly one way (the fundamental theorem of arithmetic). Primes are plentiful: about n/ln n of them lie below *n*, so a random 1,024-bit odd number is prime with probability about 1/355. Primality is testable quickly (Miller–Rabin in randomized polynomial time; the Agrawal–Kayal–Saxena (AKS) test deterministically, 2002), but no known classical algorithm factors large products of two primes quickly. RSA's security rests on that gap.
+4. **Primes are the multiplicative atoms, and factorisation is unique.** Every integer above 1 is a product of primes in exactly one way (the fundamental theorem of arithmetic). Primes are plentiful: about n/ln n of them lie below *n*, so a random 1,024-bit odd number is prime with probability about 1/355. Primality is testable quickly (Miller–Rabin with randomness; the Agrawal–Kayal–Saxena (AKS) test deterministically, 2002), but no known classical algorithm factors large products of two primes quickly. RSA's security rests on that gap.
 
 5. **Arithmetic mod a prime is a field.** When *p* is prime, every non-zero residue has a multiplicative inverse, so you can divide. Fermat's little theorem says *a^(p−1) ≡ 1 (mod p)* for *a* not divisible by *p*; Euler's theorem generalises it to *a^φ(n) ≡ 1 (mod n)* when gcd(a, n) = 1. RSA works because encryption *m^e* and decryption *c^d* with *ed ≡ 1 (mod φ(n))* undo each other. Finite fields also underlie Reed–Solomon codes and elliptic-curve cryptography (see [abstract algebra](../04-algebra/abstract-algebra.md)).
 
@@ -24,7 +24,7 @@ Number theory studies the integers: divisibility, primes, remainders and the ari
 
 7. **The Chinese Remainder Theorem splits one modulus into several.** If *n = n₁n₂* with gcd(n₁, n₂) = 1, then a residue mod *n* corresponds exactly to a pair of residues mod *n₁* and mod *n₂*. Computations can be done in the smaller moduli in parallel and recombined. RSA implementations use it to speed decryption roughly three- to fourfold, by working modulo each prime factor separately.
 
-8. **Remainders spread values, if the modulus is chosen well.** Hashing by *k mod m* distributes keys evenly only if *m* shares no structure with the keys: a power-of-two *m* uses only the low bits, so keys that differ only in high bits all collide. Linear congruential generators *x' = (ax + c) mod m* are fast but predictable, so they are unacceptable for cryptography.
+8. **Remainders spread values, if the modulus is chosen well.** Hashing by *k mod m* spreads keys evenly only if *m* shares no structure with them: a power-of-two *m* keeps only the low bits, so keys differing only in high bits collide. Linear congruential generators *x' = (ax + c) mod m* are fast but predictable, so never cryptographic.
 
 ## Key concepts
 
@@ -50,7 +50,7 @@ Number theory studies the integers: divisibility, primes, remainders and the ari
 
 - **"Factoring is proven hard."** It is not known to be NP-hard (as hard as everything in Nondeterministic Polynomial time) or even outside P (polynomial time) classically; RSA relies on decades of failed attempts, not on a proof.
 - **"`a % n` is always non-negative."** In C, C++, Java and Go it takes the sign of the dividend.
-- **"Big primes are rare, so finding them is slow."** Density about 1/ln n plus fast probabilistic tests makes generating a 2,048-bit prime a matter of well under a second to a few seconds on one core.
+- **"Big primes are rare, so finding them is slow."** Density about 1/ln n plus fast probabilistic tests makes generating a 2,048-bit prime take at most seconds.
 
 ## Go deeper
 
