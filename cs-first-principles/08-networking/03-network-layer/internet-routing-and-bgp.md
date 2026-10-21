@@ -47,7 +47,7 @@ The Internet is not one network but about 75,000 independently operated networks
 
 - **Below:** uses [IP prefixes](ip-addressing-and-forwarding.md) as the unit of routing and relies on an interior [routing algorithm](routing-algorithms.md) within each AS. The AS-level Internet is a [graph](../../01-mathematical-foundations/03-discrete-mathematics/graph-theory.md) with labelled edge types.
 - **Above:** anycast underpins [content delivery](../05-application-layer/content-delivery-and-caching.md) and DNS; [cloud providers](../../10-distributed-and-parallel-computing/05-large-scale-systems/cloud-computing.md) run their own global backbones connected by BGP. Hijacks and route leaks are major [network attacks](../../11-security-and-cryptography/04-network-and-application-security/network-attacks-and-defenses.md).
-- **Siblings:** [routing algorithms](routing-algorithms.md) optimise a shared metric inside one trust domain; BGP coordinates mutually distrustful parties with private objectives.
+- **Siblings:** [routing algorithms](routing-algorithms.md) optimise a shared metric inside one trust domain; BGP coordinates mutually distrustful parties with private objectives; [data center networks](data-center-networks-and-sdn.md) sit at the other extreme, one owner with a global view, though many still run BGP inside the fabric.
 
 ## Common misconceptions
 

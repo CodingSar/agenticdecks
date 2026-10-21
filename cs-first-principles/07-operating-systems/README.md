@@ -30,7 +30,7 @@ What the layers above need is **the process abstraction behind a system-call int
 | Child | Its role in the whole | Depends on |
 |---|---|---|
 | [01 Kernel and abstractions](01-kernel-and-abstractions/README.md) | The protection boundary, system calls, and how the kernel is structured | 04 privilege modes |
-| [02 Process management](02-process-management/README.md) | Virtualizing the CPU: processes, threads, scheduling | 01 |
+| [02 Process management](02-process-management/README.md) | Virtualizing the CPU: processes, threads, scheduling; communication between processes | 01 |
 | [03 Concurrency](03-concurrency/README.md) | Making shared-memory interleavings correct | 02 (threads) |
 | [04 Memory management](04-memory-management/README.md) | Virtualizing memory: address spaces, paging, allocation | 01, 02 |
 | [05 Storage and file systems](05-storage-and-file-systems/README.md) | Persistence: files, directories, crash consistency | 03, 04 (page cache), 06 |

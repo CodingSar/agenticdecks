@@ -46,7 +46,7 @@ Interaction design decides how people tell a computer what they want and how the
 
 - **Below:** Principles derive from [perception and cognition](perception-and-cognition.md); the interface is an [abstraction](../../12-software-engineering/01-design/abstraction-and-interfaces.md) over the system's internals; the interaction loop is a human-in-the-loop [feedback system](../../00-engineering-foundations/04-signals-and-systems/feedback-and-control.md); response-time goals depend on [operating-system scheduling](../../07-operating-systems/02-process-management/scheduling.md) and [network latency](../../08-networking/01-principles/latency-bandwidth-and-queueing.md).
 - **Above:** Security warnings, phishing resistance and [authentication](../../11-security-and-cryptography/04-network-and-application-security/authentication.md) flows succeed or fail on interaction design; dark patterns and accessibility are topics of [ethics](../../15-computing-in-context/ethics-and-professional-responsibility.md) and [law](../../15-computing-in-context/law-privacy-and-policy.md).
-- **Siblings:** [Usability evaluation](usability-evaluation.md) tests whether a design actually follows these principles for real users.
+- **Siblings:** [Perception and cognition](perception-and-cognition.md) supplies the limits these principles respect; [usability evaluation](usability-evaluation.md) tests whether a design actually follows them for real users; [information visualization](information-visualization.md) applies direct manipulation and feedback to exploring data (overview, zoom, filter, details on demand).
 
 ## Common misconceptions
 

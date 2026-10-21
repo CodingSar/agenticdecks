@@ -16,7 +16,7 @@ A generative model learns the probability distribution p(x) that a dataset was d
 
 3. **Latent-variable models generate through a hidden code.** Sample a simple latent z ~ N(0, I) and map it through a decoder to x. The Variational Autoencoder (VAE, 2013) trains the decoder jointly with an encoder q(z | x) by maximising the Evidence Lower Bound (ELBO): reconstruction quality minus the KL divergence of q(z | x) from the prior. VAEs train stably and give a useful latent space but tend to produce blurry samples.
 
-4. **Adversarial training replaces likelihood with a learned critic.** A Generative Adversarial Network (GAN, 2014) pits a generator against a discriminator that tries to tell real from generated samples; the generator learns to fool it. GANs produced the first photorealistic faces (StyleGAN, 2019) and sample in one pass, but the two-player game is unstable and prone to mode collapse, where the generator covers only part of the data distribution.
+4. **Adversarial training replaces likelihood with a learned critic.** A Generative Adversarial Network (GAN, 2014) pits a generator against a discriminator that tries to tell real from generated samples; the generator learns to fool it. GANs were the first models to generate high-resolution photorealistic faces (Progressive GAN, 2017; StyleGAN, 2019) and sample in one pass, but the two-player game is unstable and prone to mode collapse, where the generator covers only part of the data distribution.
 
 5. **Diffusion models learn to reverse gradual noising.** A fixed forward process adds Gaussian noise to data over many steps until only noise remains. A network ε_θ(x_t, t) is trained to predict the noise added at each step, a simple regression loss:
 

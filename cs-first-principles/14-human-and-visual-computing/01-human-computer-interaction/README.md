@@ -1,7 +1,7 @@
 # Human-Computer Interaction
 
 > **Layer:** [14 Human and Visual Computing](../README.md) › Human-computer interaction
-> **Children:** [Perception and cognition](perception-and-cognition.md) · [Interaction design principles](interaction-design-principles.md) · [Usability evaluation](usability-evaluation.md)
+> **Children:** [Perception and cognition](perception-and-cognition.md) · [Interaction design principles](interaction-design-principles.md) · [Usability evaluation](usability-evaluation.md) · [Information visualization](information-visualization.md)
 
 ## What this area is about
 
@@ -16,6 +16,7 @@ HCI is also an empirical discipline. Because human behaviour cannot be derived f
 | [Perception and cognition](perception-and-cognition.md) | The human "hardware specification": vision, colour, timing, memory, attention, movement | Signals, information theory |
 | [Interaction design principles](interaction-design-principles.md) | Rules for shaping the interaction loop so the human side succeeds | Perception and cognition |
 | [Usability evaluation](usability-evaluation.md) | Methods for measuring whether a design works for real users | Statistics; design principles |
+| [Information visualization](information-visualization.md) | Encoding data in visual channels so people can see patterns: channel rankings, colour scales, interactive exploration | Perception and cognition; interaction design |
 
 ```
      perception & cognition  --constrains-->  interaction design
@@ -24,13 +25,16 @@ HCI is also an empirical discipline. Because human behaviour cannot be derived f
                +------ explains failures ----- usability evaluation
                                                       |
                                     redesign <--------+   (iterate)
+
+     perception & cognition --channel rankings, pop-out--> information visualization
+                                                  (design + evaluation applied to data)
 ```
 
-Read perception and cognition first: it gives the numbers (100 ms feels instant, about four chunks of working memory, Fitts's law) that the design principles rely on. Interaction design turns those constraints into guidance: visibility, feedback, consistency, error prevention and recovery. Usability evaluation closes the loop: designs are hypotheses about human behaviour, and evaluation tests them. The three form a cycle rather than a stack.
+Read perception and cognition first: it gives the numbers (100 ms feels instant, about four chunks of working memory, Fitts's law) that the design principles rely on. Interaction design turns those constraints into guidance: visibility, feedback, consistency, error prevention and recovery. Usability evaluation closes the loop: designs are hypotheses about human behaviour, and evaluation tests them. These three form a cycle rather than a stack. Information visualization, read last, is the cycle applied to one task: showing data. Its channel rankings and pop-out effects are perception and cognition made quantitative, its zoom-and-filter interaction follows the design principles, and whether a chart conveys its insight is a question for usability evaluation.
 
 ## Connections to sibling areas
 
-- **[Computer graphics](../02-computer-graphics/README.md):** Graphics produces the pixels that interfaces are made of, and its performance targets (frame rate, latency, colour accuracy) come from human perception. Interactive 3D, games and virtual reality are where HCI and graphics overlap most, and where perceptual shortcuts such as foveated rendering save the most work.
+- **[Computer graphics](../02-computer-graphics/README.md):** Graphics produces the pixels that interfaces and visualizations are made of, and its performance targets (frame rate, latency, colour accuracy) come from human perception. Interactive 3D, games and virtual reality are where HCI and graphics overlap most, and where perceptual shortcuts such as foveated rendering save the most work.
 - **[Media and vision](../03-media-and-vision/README.md):** Perceptual codecs are designed around the same visual and auditory limits HCI studies. Computer vision lets interfaces perceive users in turn, through gesture, gaze, face and handwriting recognition.
 
 ## Connections across layers

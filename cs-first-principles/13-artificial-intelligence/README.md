@@ -25,8 +25,8 @@ The abstraction this layer contributes to the stack is the **learned function**:
 |---|---|---|
 | [Classical AI](01-classical-ai/README.md) | Hand-written models plus general algorithms: search, constraints, logic, probabilistic inference | Logic, algorithms, probability |
 | [Machine learning foundations](02-machine-learning-foundations/README.md) | Learning functions from data: loss, optimisation, generalisation, evaluation | Calculus, linear algebra, statistics |
-| [Deep learning](03-deep-learning/README.md) | Deep neural networks that learn their own representations; architectures; scale | ML foundations, parallel hardware |
-| [Advanced paradigms](04-advanced-paradigms/README.md) | Reinforcement Learning (RL), generative models, Large Language Models (LLMs), alignment | All of the above |
+| [Deep learning](03-deep-learning/README.md) | Deep neural networks that learn their own representations; convolutional, recurrent and attention architectures; scale | ML foundations, parallel hardware |
+| [Advanced paradigms](04-advanced-paradigms/README.md) | Reinforcement Learning (RL), generative models, Large Language Models (LLMs), retrieval and embeddings, alignment | All of the above |
 
 ```
    01 logic, 05 search ----------> [01 classical AI]  hand-written knowledge
@@ -37,7 +37,7 @@ The abstraction this layer contributes to the stack is the **learned function**:
    09 data, 10 training at scale        |
                                          v
                                [04 advanced paradigms]
-          RL (reward)  ·  generative models (distributions)  ·  LLMs  ·  alignment
+   RL (reward) · generative models (distributions) · LLMs · retrieval · alignment
 ```
 
 Read the children in order. Classical AI introduces the agent, the model and the combinatorial explosion that every method must fight. ML foundations replaces hand-written models with learned ones and introduces the central tension between fitting data and generalising beyond it. Deep learning supplies the function family and the engineering that made learning work on raw signals. Advanced paradigms changes the objective (reward, likelihood, human preference) and confronts what happens when highly capable systems optimise a proxy for what we want. Probabilistic reasoning is the hinge: it is classical AI's language for uncertainty and ML's language for models.
@@ -48,7 +48,7 @@ Read the children in order. Classical AI introduces the agent, the model and the
 - **[02 Theory of computation](../02-theory-of-computation/README.md):** NP-hardness explains why search needs heuristics; undecidability bounds logical reasoners; information theory explains why prediction is compression and why language-model loss is a code length.
 - **[04 Computer architecture](../04-computer-architecture/README.md):** Deep learning is co-designed with hardware. GPUs made it practical, and demand for it now drives tensor cores, high-bandwidth memory and dedicated accelerators.
 - **[05 Algorithms and data structures](../05-algorithms-and-data-structures/README.md):** Classical AI is algorithm design under exponential state spaces; backpropagation and the Bellman equation are dynamic programming.
-- **[09 Data management](../09-data-management/README.md) and [10 Distributed and parallel computing](../10-distributed-and-parallel-computing/README.md):** Training data pipelines, feature stores and vector search come from 09; data, tensor and pipeline parallelism and fault-tolerant clusters come from 10.
+- **[09 Data management](../09-data-management/README.md) and [10 Distributed and parallel computing](../10-distributed-and-parallel-computing/README.md):** Training data pipelines and feature stores come from 09, and [vector search](04-advanced-paradigms/retrieval-and-embeddings.md) extends its indexing ideas to learned embeddings; data, tensor and pipeline parallelism and fault-tolerant clusters come from 10.
 - **[11 Security and cryptography](../11-security-and-cryptography/README.md):** Models are attack surfaces (adversarial examples, prompt injection, data poisoning) and tools for attack and defence; alignment borrows threat modelling.
 - **[14 Human and visual computing](../14-human-and-visual-computing/README.md):** Computer vision is now mostly deep learning; LLMs are becoming a primary user interface; generative models create images and media.
 - **[15 Computing in context](../15-computing-in-context/README.md):** Bias, privacy, accountability, labour and regulation of AI are central topics of ethics and law.

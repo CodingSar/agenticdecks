@@ -16,7 +16,7 @@ Designers cannot judge the usability of their own work: they know how it is supp
 
 3. **Formative and summative evaluation answer different questions.** Formative studies, run during design, aim to *find* problems and explain why they occur; small samples and qualitative observation suffice. Summative studies, run on a finished design, aim to *measure* performance or compare alternatives; they need larger samples and statistics. Confusing the two leads either to under-powered comparisons or to over-engineered problem-finding.
 
-4. **Small qualitative tests find most problems cheaply.** Nielsen and Landauer's model suggests that about five users find roughly 80% of the problems that a given task set and user group expose, because common problems recur quickly. The point is not that five is always enough, but that several small rounds of testing and fixing beat one large study. Different user groups and tasks need their own rounds.
+4. **Small qualitative tests find most problems cheaply.** Nielsen and Landauer's model suggests that about five users find roughly 85% of the problems that a given task set and user group expose, because common problems recur quickly (the model assumes each user reveals about 31% of the problems, an average across their projects). The point is not that five is always enough, but that several small rounds of testing and fixing beat one large study. Different user groups and tasks need their own rounds.
 
 5. **Think-aloud reveals the mental model.** Asking participants to verbalise while they work exposes what they expected, where they looked and why they chose an action. It turns an observed error into an explanation of which gulf, execution or evaluation, caused it. The facilitator must not lead or help, or the data reflects the facilitator's model.
 
@@ -44,7 +44,7 @@ Designers cannot judge the usability of their own work: they know how it is supp
 
 - **Below:** Experimental design, significance and power come from [statistical inference](../../01-mathematical-foundations/06-probability-and-statistics/statistical-inference.md); the discipline of controlled measurement from [engineering method](../../00-engineering-foundations/05-engineering-method/measurement-and-modeling.md).
 - **Above:** Findings feed [requirements](../../12-software-engineering/02-process/requirements.md) and iterative [development lifecycles](../../12-software-engineering/02-process/development-lifecycles.md); production analytics connect to [observability](../../12-software-engineering/04-operations/observability.md). Evaluating Artificial Intelligence (AI) systems with people, such as whether users over-trust model advice, extends [machine-learning evaluation](../../13-artificial-intelligence/02-machine-learning-foundations/evaluation-and-experimentation.md).
-- **Siblings:** [Interaction design principles](interaction-design-principles.md) generate hypotheses; [perception and cognition](perception-and-cognition.md) explain observed failures; evaluation decides which designs survive.
+- **Siblings:** [Interaction design principles](interaction-design-principles.md) generate hypotheses; [perception and cognition](perception-and-cognition.md) explain observed failures; evaluation decides which designs survive, including whether an [information visualization](information-visualization.md) lets readers find the intended insight.
 
 ## Common misconceptions
 

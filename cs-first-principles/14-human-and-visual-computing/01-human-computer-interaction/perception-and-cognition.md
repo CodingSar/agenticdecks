@@ -20,7 +20,7 @@ Every interactive system ends at a human, and the human is a fixed piece of hard
 
 5. **Working memory is tiny; recognition beats recall.** People hold roughly four chunks in working memory (Cowan's revision of Miller's "seven plus or minus two"). Recognising an option on screen is far easier than recalling a command. Menus, autocomplete and visible state exist because of this limit; command lines trade it for speed once commands are memorised.
 
-6. **Attention is selective and serial.** Pre-attentive features (colour, motion, orientation) pop out in parallel across the visual field in under about 250 ms; combinations of features need serial search. Good visual design uses pop-out for what matters and avoids competing signals. Interruptions cost time to recover the interrupted task.
+6. **Attention is selective and serial.** Pre-attentive features (colour, motion, orientation) pop out in parallel across the visual field in under about 250 ms; combinations of features need serial search. Good visual design uses pop-out for what matters and avoids competing signals; [information visualization](information-visualization.md) builds its channel choices on this. Interruptions cost time to recover the interrupted task.
 
 7. **Movement time is predictable.** Fitts's law: the time to point at a target is T = a + b · log₂(D/W + 1), where D is distance and W is target width. Big, near targets are fast; screen edges and corners are effectively infinite in size because the pointer stops there. The Hick–Hyman law says choice time grows with the logarithm of the number of equally likely options.
 
@@ -44,7 +44,7 @@ Every interactive system ends at a human, and the human is a fixed piece of hard
 
 - **Below:** Human senses are samplers and quantisers in the sense of [signals and systems](../../00-engineering-foundations/04-signals-and-systems/sampling-and-quantization.md); perceptual limits set the information a channel must carry, connecting to [entropy](../../02-theory-of-computation/01-information-theory/entropy-and-information.md); responsiveness budgets meet [network latency](../../08-networking/01-principles/latency-bandwidth-and-queueing.md).
 - **Above:** [Interaction design](interaction-design-principles.md) turns these limits into rules; [media compression](../03-media-and-vision/digital-media-and-compression.md) discards what perception cannot detect; [graphics](../02-computer-graphics/rasterization-pipeline.md) targets frame rates and colour spaces set here.
-- **Siblings:** [Usability evaluation](usability-evaluation.md) measures how real people, with these limits, actually perform.
+- **Siblings:** [Interaction design principles](interaction-design-principles.md) turn these limits into rules, [usability evaluation](usability-evaluation.md) measures how real people, with these limits, actually perform, and [information visualization](information-visualization.md) applies them to encoding data.
 
 ## Common misconceptions
 

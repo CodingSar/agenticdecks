@@ -24,7 +24,7 @@ The abstraction this layer contributes is the **perceptual interface**: the scre
 
 | Child | Its role in the whole | Depends on |
 |---|---|---|
-| [Human-computer interaction](01-human-computer-interaction/README.md) | The human side: perception, cognition, design principles, evaluation with users | Statistics, signals; informs the other two |
+| [Human-computer interaction](01-human-computer-interaction/README.md) | The human side: perception, cognition, design principles, evaluation with users, visualization of data | Statistics, signals; informs the other two |
 | [Computer graphics](02-computer-graphics/README.md) | Scene to image: geometry, rasterisation, ray tracing | Linear algebra, GPUs |
 | [Media and vision](03-media-and-vision/README.md) | Signals as data: compression for people, understanding for machines | Information theory, deep learning |
 
@@ -40,7 +40,7 @@ The abstraction this layer contributes is the **perceptual interface**: the scre
                                                   input --> program <---+
 ```
 
-Read HCI first: it supplies the numbers about human perception that the other two use as design targets. Graphics and media and vision can be read in either order. Graphics goes forward from scene to pixels; vision goes backward from pixels to scene; compression sits between them, carrying pixels efficiently from where they are made to where they are seen. All three share the camera model, colour representation and sampling theory.
+Read HCI first: it supplies the numbers about human perception that the other two use as design targets, and its visualization leaf shows those numbers applied to presenting data, drawn by the graphics pipeline. Graphics and media and vision can be read in either order. Graphics goes forward from scene to pixels; vision goes backward from pixels to scene; compression sits between them, carrying pixels efficiently from where they are made to where they are seen. All three share the camera model, colour representation and sampling theory.
 
 ## Connections to neighbouring layers
 

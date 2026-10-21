@@ -10,7 +10,7 @@ An input/output (I/O) model is the contract for how a program waits for I/O. In 
 
 ## Core tenets
 
-1. **Blocking I/O plus threads is the simplest correct model, and it scales to a point.** Each connection gets a thread that runs straight-line code (`read`, process, `write`), blocking freely; the kernel's scheduler does the multiplexing. This is easy to write and debug. Its limit is per-thread cost: kilobytes to megabytes of stack, kernel structures, and context switches. Tens of thousands of mostly idle connections, the "C10K problem" (Kegel, 1999), made this expensive on servers of that era.
+1. **Blocking I/O plus threads is the simplest correct model, and it scales to a point.** Each connection gets a thread that runs straight-line code (`read`, process, `write`), blocking freely; the kernel's scheduler does the multiplexing. This is easy to write and debug. Its limit is per-thread cost: kilobytes to megabytes of stack, kernel structures, and context switches. Ten thousand mostly idle connections, the "C10K problem" (Kegel, 1999), made this expensive on servers of that era.
 
 2. **Readiness multiplexing lets one thread serve many connections.** `select` and `poll` take the full set of descriptors on every call and scan it, costing O(n) per call. `epoll` (Linux 2.5.44 in 2002, stable in 2.6) and `kqueue` (FreeBSD, 2000) keep the interest set in the kernel and return only descriptors that are ready, so cost scales with activity rather than with connections. An event loop waits on `epoll_wait`, then performs non-blocking reads and writes on ready sockets, and never blocks.
 
