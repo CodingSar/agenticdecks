@@ -20,11 +20,11 @@ The Internet's core protocols were designed for a cooperative network of researc
 
 5. **State exhaustion is cheaper than bandwidth exhaustion.** A Transmission Control Protocol (TCP) SYN (synchronise) flood sends connection requests without completing the handshake, filling the server's table of half-open connections. SYN cookies defeat it by encoding the connection state into the server's initial sequence number, so the server keeps no state until the client proves it received the reply. The general lesson: do not commit resources to an unauthenticated peer.
 
-6. **Ingress filtering would stop spoofing at the source, but deployment is partial.** If every network dropped outgoing packets whose source addresses did not belong to it (BCP 38, "Best Current Practice 38", 2000), spoofed reflection attacks would largely disappear. Because the benefit goes to others and the cost to the deployer, adoption remains incomplete, which is a reminder that network security is partly an economic coordination problem.
+6. **Ingress filtering would stop spoofing at the source, but deployment is partial.** If every network dropped outgoing packets whose source addresses did not belong to it (Best Current Practice 38 (BCP 38), 2000), spoofed reflection attacks would largely disappear. Because the benefit goes to others and the cost to the deployer, adoption remains incomplete, which is a reminder that network security is partly an economic coordination problem.
 
 7. **Perimeter defences are necessary but not sufficient.** Firewalls filter traffic by address, port and connection state; intrusion detection systems look for known attack signatures or anomalies. They reduce attack surface but assume the inside is trustworthy, and attackers who phish one employee are inside. "Zero trust" architectures drop that assumption: every request is authenticated, authorised and encrypted regardless of network location, applying complete mediation to the network.
 
-8. **Large-scale absorption is the practical defence against floods.** Since an attacker can out-send any single site, large services rely on anycast routing to spread attack traffic over many data centres, on content delivery networks with huge aggregate capacity, and on upstream scrubbing that filters attack traffic before it reaches the origin.
+8. **Large-scale absorption is the practical defence against floods.** Since attackers can out-send any single site, large services rely on anycast routing to spread attack traffic over many data centres, on content delivery networks with huge aggregate capacity, and on upstream scrubbing that filters attack traffic before it reaches the origin.
 
 ## Key concepts
 
