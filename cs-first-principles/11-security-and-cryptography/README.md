@@ -39,10 +39,10 @@ Upward, this layer contributes **trust boundaries with stated guarantees**: auth
 
 | Child | Its role in the whole | Depends on |
 |---|---|---|
-| [Security principles](01-security-principles/README.md) | Defines the goals (confidentiality, integrity, availability), the adversary (threat model) and the design rules | Engineering method |
+| [Security principles](01-security-principles/README.md) | Defines the goals (confidentiality, integrity, availability, privacy), the adversary (threat model) and the design rules | Engineering method, probability |
 | [Cryptography](02-cryptography/README.md) | Mathematical tools for secrecy and authenticity over untrusted channels and storage | Number theory, complexity, probability |
 | [System security](03-system-security/README.md) | Protecting computation inside a machine: who may access what, and keeping components isolated | Architecture, languages, operating systems |
-| [Network and application security](04-network-and-application-security/README.md) | Protecting communication and applications across networks: identity, the web, network protocols | All three above, networking |
+| [Network and application security](04-network-and-application-security/README.md) | Protecting communication and applications across networks: identity, the web, network protocols, the software supply chain | All three above, networking |
 
 Start with the principles, because every later topic is judged against a threat model. Cryptography and system security can then be read in either order: cryptography protects data that leaves your control (on a wire, on someone else's disk), system security protects computation on a machine you partly control. Network and application security combines them in the place most attacks happen.
 
@@ -53,9 +53,9 @@ Start with the principles, because every later topic is judged against a threat 
 - **[07 Operating Systems](../07-operating-systems/README.md):** the kernel is the reference monitor for files and processes; containers and hypervisors are the isolation boundaries of the cloud.
 - **[08 Networking](../08-networking/README.md):** Transport Layer Security (TLS) secures the transport layer; the Domain Name System (DNS) and the Border Gateway Protocol (BGP) are attack targets; the end-to-end argument explains why encryption belongs at the endpoints.
 - **[10 Distributed and Parallel Computing](../10-distributed-and-parallel-computing/README.md):** Byzantine faults are the distributed-systems name for adversarial behaviour; consensus protocols use signatures and hashes.
-- **[12 Software Engineering](../12-software-engineering/README.md):** secure design, [code review and static analysis](../12-software-engineering/03-quality/static-analysis-and-code-review.md), [testing](../12-software-engineering/03-quality/testing.md) (including fuzzing) and patch delivery are how security is achieved in practice.
+- **[12 Software Engineering](../12-software-engineering/README.md):** secure design, [code review and static analysis](../12-software-engineering/03-quality/static-analysis-and-code-review.md), [testing](../12-software-engineering/03-quality/testing.md) (including fuzzing) and patch delivery are how security is achieved in practice; [build pipelines](../12-software-engineering/04-operations/build-and-continuous-delivery.md) are a prime target of [supply chain attacks](04-network-and-application-security/software-supply-chain-security.md).
 - **[13 Artificial Intelligence](../13-artificial-intelligence/README.md):** machine-learning systems introduce adversarial examples, data poisoning and prompt injection.
-- **[15 Computing in Context](../15-computing-in-context/README.md):** privacy, surveillance and disclosure are legal and ethical questions as much as technical ones.
+- **[15 Computing in Context](../15-computing-in-context/README.md):** privacy, surveillance and disclosure are legal and ethical questions as much as technical ones; [privacy-enhancing technologies](01-security-principles/privacy-enhancing-technologies.md) supply the technical half.
 
 ## Connections across layers
 

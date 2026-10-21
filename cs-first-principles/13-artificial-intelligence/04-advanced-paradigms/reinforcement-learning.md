@@ -10,7 +10,7 @@ Reinforcement Learning (RL) is learning to act from trial and error. An agent ob
 
 ## Core tenets
 
-1. **The problem is a Markov Decision Process.** An MDP has states S, actions A, transition probabilities P(s' | s, a), rewards R(s, a) and a discount γ ∈ [0, 1). The Markov property says the next state depends only on the current state and action, not on history. The agent seeks a policy π(a | s) maximising expected discounted return G_t = Σ_k γ^k r_{t+k+1}. Discounting keeps infinite sums finite.
+1. **The problem is a Markov Decision Process.** An MDP has states S, actions A, transition probabilities P(s' | s, a), rewards R(s, a) and a discount γ ∈ [0, 1). The Markov property says the next state depends only on the current state and action, not on history; fix a policy and the MDP becomes an ordinary [Markov chain](../../01-mathematical-foundations/06-probability-and-statistics/markov-chains.md). The agent seeks a policy π(a | s) maximising expected discounted return G_t = Σ_k γ^k r_{t+k+1}. Discounting keeps infinite sums finite.
 
 2. **The Bellman equation makes value recursive.** The optimal action value satisfies
 

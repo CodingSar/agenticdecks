@@ -2,7 +2,7 @@
 
 > **Layer:** [09 Data Management](../README.md) › [Query Processing](README.md)
 > **Builds on:** [Relational Algebra and SQL](../01-data-models/relational-algebra-and-sql.md), [Join Algorithms](join-algorithms.md), [B-Trees](../02-storage-and-indexing/b-trees.md), [Dynamic Programming](../../05-algorithms-and-data-structures/03-design-paradigms/dynamic-programming.md), [Statistical Inference](../../01-mathematical-foundations/06-probability-and-statistics/statistical-inference.md)
-> **Enables:** [Batch and Stream Processing](../../10-distributed-and-parallel-computing/05-large-scale-systems/batch-and-stream-processing.md), [Optimization (Compilers)](../../06-programming-languages/03-compilers/optimization.md), [Learning as Optimization](../../13-artificial-intelligence/02-machine-learning-foundations/learning-as-optimization.md)
+> **Enables:** [Batch and Stream Processing](../../10-distributed-and-parallel-computing/05-large-scale-systems/batch-and-stream-processing.md), [Learning as Optimization](../../13-artificial-intelligence/02-machine-learning-foundations/learning-as-optimization.md)
 
 ## Essence
 

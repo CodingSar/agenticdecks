@@ -41,7 +41,7 @@ Polymorphism lets one piece of code work for values of many types. Without it, a
 
 ## How it fits
 
-- **Below:** Unification is a [logic-programming](../01-paradigms/logic-and-declarative.md) primitive with roots in [predicate logic](../../01-mathematical-foundations/01-logic/predicate-logic.md); constraint solving is a [graph](../../05-algorithms-and-data-structures/05-graph-algorithms/graph-traversal.md) problem over type terms, often implemented with union-find. Subtyping is a [partial order](../../01-mathematical-foundations/02-sets-relations-functions/relations-and-orders.md).
+- **Below:** Unification is a [logic-programming](../01-paradigms/logic-and-declarative.md) primitive with roots in [predicate logic](../../01-mathematical-foundations/01-logic/predicate-logic.md); constraint solving is a [graph](../../05-algorithms-and-data-structures/05-graph-algorithms/graph-traversal.md) problem over type terms, often implemented with [union-find](../../05-algorithms-and-data-structures/02-fundamental-data-structures/union-find.md). Subtyping is a [partial order](../../01-mathematical-foundations/02-sets-relations-functions/relations-and-orders.md).
 - **Above:** Generic libraries (collections, algorithms) depend on parametric polymorphism; [design patterns](../../12-software-engineering/01-design/design-patterns.md) depend on subtyping; [just-in-time compilers](../04-runtime-systems/jit-compilation.md) specialise polymorphic code at run time much as monomorphisation does ahead of time.
 - **Siblings:** Extends [type systems](type-systems.md) with generality; uses the environments of [binding and scope](binding-scope-and-closures.md); inference is part of [semantic analysis](../03-compilers/semantic-analysis.md) in compilers.
 

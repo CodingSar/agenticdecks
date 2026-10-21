@@ -48,7 +48,7 @@ Divide and conquer solves a problem by splitting it into smaller independent ins
 ## Common misconceptions
 
 - **"Recursion makes it divide and conquer."** Naive recursive Fibonacci is recursive but exponential, because its subproblems overlap.
-- **"Lower asymptotic exponent means faster."** Strassen and the newer "galactic" matrix-multiplication algorithms (exponent below 2.372) have constants so large that they never pay off in practice.
+- **"Lower asymptotic exponent means faster."** Strassen's algorithm pays off only for large matrices and is used selectively; the newer "galactic" matrix-multiplication algorithms (exponent below 2.372) have constants so large that they never pay off in practice.
 - **"The Master Theorem solves every recurrence."** It needs equal-size subproblems and polynomially separated cases; others need the recursion tree or Akra–Bazzi.
 
 ## Go deeper

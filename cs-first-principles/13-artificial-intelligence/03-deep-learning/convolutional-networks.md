@@ -20,7 +20,7 @@ A Convolutional Neural Network (CNN) is a neural network built for data on a gri
 
 5. **CNNs triggered the deep learning revolution.** LeNet (LeCun et al., 1989–1998) read handwritten digits for bank cheques. AlexNet (2012) cut the ImageNet top-5 error from about 26% to about 15% using Graphics Processing Units (GPUs), Rectified Linear Units (ReLU) and dropout. VGG, GoogLeNet and ResNet followed within three years, and by 2015 ResNet surpassed the commonly cited human-level estimate on that benchmark.
 
-6. **Convolution maps efficiently onto hardware.** Convolutions are reorganised into matrix multiplications (im2col) or computed with fast algorithms (Winograd, Fast Fourier Transform (FFT)). High data reuse (each weight is used at every position) gives high arithmetic intensity, ideal for GPUs and systolic-array accelerators.
+6. **Convolution maps efficiently onto hardware.** Convolutions are reorganised into matrix multiplications (im2col) or computed with fast algorithms (Winograd, Fast Fourier Transform (FFT), via the convolution theorem in [Fourier analysis](../../01-mathematical-foundations/05-continuous-mathematics/fourier-analysis.md)). High data reuse (each weight is used at every position) gives high arithmetic intensity, ideal for GPUs and systolic-array accelerators.
 
 7. **Built-in bias helps with little data and hurts with a lot.** Vision Transformers (2020), which split images into patches and use attention with no convolutional prior, underperform CNNs on modest datasets but match or exceed them when pre-trained on hundreds of millions of images. As of the mid-2020s both are in wide use, often in hybrid designs, and convolutional U-Nets remain common inside diffusion image generators.
 
