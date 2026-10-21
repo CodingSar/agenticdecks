@@ -33,7 +33,7 @@ Read neural networks first: everything else is a specialisation of it. Convoluti
 
 ## Connections to sibling areas
 
-- **[Classical AI](../01-classical-ai/README.md):** Deep networks replaced hand-written perception and heuristics. In hybrids such as AlphaGo, learned networks supply the evaluation function that classical tree search uses.
+- **[Classical AI](../01-classical-ai/README.md):** Deep networks replaced the hand-written perception and heuristics of classical Artificial Intelligence (AI), wherever explicit models had failed. In hybrids such as AlphaGo, learned networks supply the evaluation function that classical tree search uses.
 - **[Machine learning foundations](../02-machine-learning-foundations/README.md):** Deep learning inherits the loss-optimise-evaluate loop unchanged. It also strains classical theory: over-parameterised networks generalise better than capacity bounds predict.
 - **[Advanced paradigms](../04-advanced-paradigms/README.md):** Deep networks are the function approximators inside deep reinforcement learning, diffusion models and large language models. The paradigms change the objective and data; the machinery here stays the same.
 

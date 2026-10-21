@@ -78,3 +78,13 @@ Collected from writer reports, to be resolved in the review pass.
 - DRAM row conflict 40–50 ns; leakage ×10 per ~60–100 mV; per-core perf ~10–20%/yr post-2005 (Hennessy & Patterson give ~3.5%/yr 2015–18; check).
 - NVMe 64K queues × 64K cmds; PCIe 5.0 32 GT/s ≈ 3.94 GB/s/lane/dir.
 - Candidate leaves: SMT, roofline, trusted execution / virtualization extensions.
+
+### 13 AI / 14 Human & Visual Computing
+- 10^24–10^26 FLOPs frontier; ~16 B/param Adam mixed precision; 80–192 GB HBM; MFU 30–60%; Chinchilla ~20 tok/param; C≈6ND.
+- Vocab 30k–250k; >1M context; RLVR reasoning 2024–25.
+- Codec 30–50%/generation; Nielsen–Landauer 5 users ~80%(actually ~85%); JPEG ~10:1.
+- AlexNet top-5 ~26%→~15.3%; ResNet 2015 below human ~5.1%; RT cores 2018.
+- Fovea ~2°; Cowan ~4 chunks; preattentive <200–250 ms; HMD ≥90 Hz.
+- Citations: Giesen 2011 blog; Catmull 1974 z-buffer (Straßer 1974 independently); AlphaZero 2017 preprint/2018 Science; Lazar 2nd ed 2017; Sayood 5th 2017; Shneiderman 6th 2016.
+- Loose links: electromagnetism for light; hash tables for attention (analogy); search trees for decision trees/BVH.
+- Candidate leaves: recurrent/sequence models; retrieval & vector search; data/feature engineering; visualization; AR/VR; audio & speech.

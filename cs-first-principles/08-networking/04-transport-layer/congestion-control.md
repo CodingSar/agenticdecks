@@ -10,15 +10,15 @@ When senders inject packets faster than a bottleneck link can drain them, queues
 
 ## Core tenets
 
-1. **Uncontrolled retransmission causes congestion collapse.** In October 1986, throughput between Lawrence Berkeley Laboratory and UC Berkeley, a few hundred metres apart, dropped from 32 kbit/s to 40 bit/s. Senders were retransmitting packets that were merely queued, so most link capacity carried duplicates. Jacobson's 1988 algorithms for TCP fixed this, and they are why the Internet scaled.
+1. **Uncontrolled retransmission causes congestion collapse.** In October 1986, throughput between Lawrence Berkeley Laboratory and UC Berkeley, a few hundred metres apart, dropped from 32 kbit/s to 40 bit/s. Senders were retransmitting packets that were merely queued, so most link capacity carried duplicates. Jacobson's 1988 algorithms for Transmission Control Protocol (TCP) fixed this, and they are why the Internet scaled.
 
-2. **The sender keeps a congestion window.** In addition to the receiver's window (rwnd), the sender maintains a congestion window (cwnd) and keeps at most min(cwnd, rwnd) bytes unacknowledged. Rate is roughly cwnd / RTT, where RTT is the Round-Trip Time. Congestion control is the rule for updating cwnd.
+2. **The sender keeps a congestion window.** In addition to the receiver's window (rwnd), the sender maintains a congestion window (cwnd) and keeps at most min(cwnd, rwnd) bytes unacknowledged. Rate is roughly cwnd / Round-Trip Time (RTT), where RTT is the Round-Trip Time. Congestion control is the rule for updating cwnd.
 
 3. **Acknowledgements clock the sender.** In steady state, a new packet is sent only when an acknowledgement shows an old one has left the network. Because acknowledgements return at the bottleneck's rate, this "self-clocking" automatically paces the sender to the bottleneck without measuring it explicitly.
 
 4. **AIMD converges to fairness.** In congestion avoidance, cwnd grows by about one segment per RTT (additive increase) and halves on loss (multiplicative decrease). Chiu and Jain (1989) showed that for two flows sharing a link, additive increase moves both rates equally while multiplicative decrease shrinks the larger one more, so repeated cycles drive them toward equal shares. Other combinations (such as multiplicative increase with additive decrease) do not converge.
 
-5. **Slow start finds capacity quickly.** A new connection does not know the path's capacity. It starts with a small cwnd (commonly 10 segments today) and doubles it every RTT until it sees loss or reaches a threshold, then switches to additive increase. Despite the name, this is exponential growth; it reaches a 10,000-segment window in about ten RTTs.
+5. **Slow start finds capacity quickly.** A new connection does not know the path's capacity. It starts with a small cwnd (commonly 10 segments today) and doubles it every RTT until it sees loss or reaches a threshold, then switches to additive increase. Despite the name, this is exponential growth; it reaches a 10,000-segment window in about ten Round-Trip Times (RTTs).
 
 6. **Loss is an imperfect signal.** Classic TCP (Reno, and CUBIC, the Linux default since 2006) treats packet loss as congestion. That works when buffers are modest and loss is rare otherwise. It fails on wireless links where loss comes from noise, and with very large buffers, where loss only occurs after queues have added large delays. Explicit Congestion Notification (ECN) lets routers mark packets instead of dropping them.
 
@@ -26,7 +26,7 @@ When senders inject packets faster than a bottleneck link can drain them, queues
 
 8. **Throughput depends on RTT and loss rate.** For Reno-style AIMD, steady-state throughput is roughly (MSS / RTT) × 1.22 / √p, where MSS is the Maximum Segment Size and p the loss rate (Mathis et al., 1997). Flows with longer RTT get less throughput at the same loss rate, and very high-speed long-distance paths need extremely low loss rates, which motivated more aggressive growth curves such as CUBIC.
 
-9. **Congestion control is a social contract.** Nothing in IP enforces it. A sender that ignores it grabs more bandwidth. The Internet works because almost all traffic uses compatible algorithms implemented in a few operating systems and browsers. Router-side fair queueing and active queue management add some enforcement.
+9. **Congestion control is a social contract.** Nothing in Internet Protocol (IP) enforces it. A sender that ignores it grabs more bandwidth. The Internet works because almost all traffic uses compatible algorithms implemented in a few operating systems and browsers. Router-side fair queueing and active queue management add some enforcement.
 
 ## Key concepts
 
@@ -36,7 +36,7 @@ When senders inject packets faster than a bottleneck link can drain them, queues
 | cwnd | Congestion window: sender's estimate of what the network can absorb |
 | AIMD | Additive Increase Multiplicative Decrease |
 | Slow start | Exponential growth of cwnd at connection start |
-| Self-clocking | ACK arrivals pacing new transmissions |
+| Self-clocking | acknowledgement (ACK) arrivals pacing new transmissions |
 | ECN | Router marks packets to signal congestion without dropping |
 | CUBIC | Loss-based algorithm with cubic window growth; default in Linux |
 | BBR | Model-based algorithm estimating bottleneck bandwidth and RTT |

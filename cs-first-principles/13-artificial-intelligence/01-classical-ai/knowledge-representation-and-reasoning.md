@@ -6,7 +6,7 @@
 
 ## Essence
 
-Knowledge Representation and Reasoning (KR&R) asks how to write down what an agent knows so that a machine can derive what follows from it. The bet of classical AI, the "physical symbol system" hypothesis, was that intelligence is the manipulation of explicit symbols according to sound rules of inference. A representation is a formal language with a precise semantics (what each sentence says about the world) and an inference procedure (how to derive new sentences). The central tension is **expressiveness versus tractability**: the more a language can say, the harder, and eventually impossible, it becomes to answer questions in it. Practical systems such as rule engines, description logics and knowledge graphs each pick a point on that curve.
+Knowledge Representation and Reasoning (KR&R) asks how to write down what an agent knows so that a machine can derive what follows from it. The bet of classical Artificial Intelligence (AI), the "physical symbol system" hypothesis, was that intelligence is the manipulation of explicit symbols according to sound rules of inference. A representation is a formal language with a precise semantics (what each sentence says about the world) and an inference procedure (how to derive new sentences). The central tension is **expressiveness versus tractability**: the more a language can say, the harder, and eventually impossible, it becomes to answer questions in it. Practical systems such as rule engines, description logics and knowledge graphs each pick a point on that curve.
 
 ## Core tenets
 
@@ -46,7 +46,7 @@ Knowledge Representation and Reasoning (KR&R) asks how to write down what an age
 
 ## Common misconceptions
 
-- **"Symbolic AI failed."** It did not scale to open-ended perception and common sense, but its descendants (SAT and SMT solvers, type checkers, databases, rule engines) run everywhere, usually no longer called AI.
+- **"Symbolic AI failed."** It did not scale to open-ended perception and common sense, but its descendants (Boolean satisfiability (SAT) and Satisfiability Modulo Theories (SMT) solvers, type checkers, databases, rule engines) run everywhere, usually no longer called AI.
 - **"More expressive is always better."** Each gain in expressiveness can push reasoning from linear time to exponential time to undecidable. The right language is the weakest one that says what you need.
 - **"A database is just a store, not a reasoner."** A relational database under the closed-world assumption with recursive queries is a restricted logic engine.
 

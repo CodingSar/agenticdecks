@@ -18,11 +18,11 @@ People and programs want stable, meaningful names such as `www.example.com`; net
 
 4. **Caching is what makes DNS scale.** Every record carries a Time To Live (TTL), in seconds. Resolvers cache answers, including referrals and negative answers, until the TTL expires. Because `.com`'s servers are cached for days, a typical lookup needs at most one query to an authoritative server, and popular names are answered from cache in under a millisecond.
 
-5. **TTL trades freshness for load and latency.** A long TTL (a day) means few queries but slow changes: a moved server keeps receiving traffic from cached old addresses until TTLs expire. A short TTL (30 seconds) lets operators steer traffic quickly, which CDNs and failover systems rely on, at the cost of more queries and lookup latency. DNS is therefore *eventually consistent* by design.
+5. **TTL trades freshness for load and latency.** A long TTL (a day) means few queries but slow changes: a moved server keeps receiving traffic from cached old addresses until Time To Live values (TTLs) expire. A short TTL (30 seconds) lets operators steer traffic quickly, which Content Delivery Networks (CDNs) and failover systems rely on, at the cost of more queries and lookup latency. DNS is therefore *eventually consistent* by design.
 
 6. **Records hold more than addresses.** A (IPv4 address), AAAA (IPv6 address), CNAME (alias to another name), MX (mail server for a domain), NS (delegation), TXT (arbitrary text, used for domain verification and email policy) and others. DNS is a general-purpose, read-mostly, globally replicated key-value store.
 
-7. **DNS runs mostly over UDP for speed.** A query and answer usually fit in one User Datagram Protocol (UDP) packet each, so a lookup costs one round trip with no handshake. Large responses and zone transfers fall back to the Transmission Control Protocol (TCP). Encrypted variants (DNS over HTTPS, DNS over TLS) protect privacy from on-path observers at the cost of extra handshakes.
+7. **DNS runs mostly over UDP for speed.** A query and answer usually fit in one User Datagram Protocol (UDP) packet each, so a lookup costs one round trip with no handshake. Large responses and zone transfers fall back to the Transmission Control Protocol (TCP). Encrypted variants (DNS over HTTPS, DNS over Transport Layer Security (TLS)) protect privacy from on-path observers at the cost of extra handshakes.
 
 8. **Classic DNS trusts whatever answer arrives.** An attacker who can guess a query's ID and source port can inject a forged answer that resolvers will cache (cache poisoning; the 2008 Kaminsky attack made this practical). Randomised source ports raise the bar. The Domain Name System Security Extensions (DNSSEC) sign records along the delegation chain so resolvers can verify them, but deployment is partial.
 
@@ -46,7 +46,7 @@ People and programs want stable, meaningful names such as `www.example.com`; net
 
 - **Below:** queries ride on [UDP and TCP](../04-transport-layer/udp-and-tcp.md); answers are [IP addresses](../03-network-layer/ip-addressing-and-forwarding.md). Hierarchical naming mirrors [file system paths](../../07-operating-systems/05-storage-and-file-systems/file-system-abstractions.md); TTL caches are [caching](../../04-computer-architecture/03-memory-hierarchy/locality-and-caching.md) with a time-based coherence rule.
 - **Above:** every [HTTP](http-and-the-web.md) request begins with DNS; [CDNs](content-delivery-and-caching.md) use DNS answers to steer users; DNS is a canonical example of [eventual consistency](../../10-distributed-and-parallel-computing/04-distributed-data/eventual-consistency-and-crdts.md). Browser security relies on domain names as the basis of the same-origin policy ([web security](../../11-security-and-cryptography/04-network-and-application-security/web-security.md)), and TLS certificates are issued for names.
-- **Siblings:** [HTTP](http-and-the-web.md) names resources with URLs whose host part is a DNS name; [content delivery](content-delivery-and-caching.md) is DNS indirection put to work for latency.
+- **Siblings:** [HTTP](http-and-the-web.md) names resources with Uniform Resource Locators (URLs) whose host part is a DNS name; [content delivery](content-delivery-and-caching.md) is DNS indirection put to work for latency.
 
 ## Common misconceptions
 

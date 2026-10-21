@@ -24,7 +24,7 @@ To say an algorithm "takes O(n log n) time" you must first say what one unit of 
 
 7. **Worst-case, average-case, expected and amortized are different questions.** Worst case bounds the slowest input. Average case assumes a distribution over inputs, which is fragile because real inputs are rarely random. Expected time averages over the algorithm's own coin flips on a worst-case input, which is robust. Amortized time averages over a worst-case sequence of operations. Quicksort is Θ(n²) worst case but Θ(n log n) expected with random pivots.
 
-8. **Constant factors and memory behaviour decide practice.** Asymptotics hide constants and ignore which accesses are sequential. Insertion sort beats merge sort below roughly 10–50 elements, which is why real libraries switch to it for small subarrays. Linked structures that chase pointers often lose to arrays with a worse bound because each miss costs about a hundred instructions' worth of time.
+8. **Constant factors and memory behaviour decide practice.** Asymptotics hide constants and ignore which accesses are sequential. Insertion sort beats merge sort below roughly 10–50 elements, which is why real libraries switch to it for small subarrays. Pointer-chasing structures often lose to arrays with a worse bound, because each cache miss costs about a hundred instructions' worth of time.
 
 ## Key concepts
 

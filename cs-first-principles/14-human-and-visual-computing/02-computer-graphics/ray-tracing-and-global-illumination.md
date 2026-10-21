@@ -20,7 +20,7 @@ Ray tracing renders an image by following light backwards: from the camera throu
 
 3. **Whitted ray tracing handles mirrors and shadows, not diffuse bounces.** Whitted's 1980 algorithm traces shadow rays to each light, plus recursive rays for perfect reflection and refraction. It produces crisp mirrors and glass but treats indirect diffuse light as a constant ambient term, missing soft shadows and colour bleeding.
 
-4. **Path tracing estimates the integral with random samples.** At each hit, choose one random incoming direction, trace it, and weight the result by f_r · cos θ / p(ω), where p is the sampling probability. Averaging N such paths gives an unbiased estimate whose error falls as 1/√N: halving noise costs four times the samples. Russian roulette ends paths randomly without bias. Path tracing produces soft shadows, caustics and colour bleeding with no special cases, at the price of noise.
+4. **Path tracing estimates the integral with random samples.** At each hit, choose one random incoming direction, trace it, and weight the result by f_r · cos θ / p(ω), where p is the sampling probability. Averaging N such paths gives an unbiased estimate whose error falls as 1/√N: halving noise costs four times the samples. Path tracing produces soft shadows, caustics and colour bleeding with no special cases, at the price of noise.
 
 5. **Importance sampling puts samples where the integrand is large.** Variance falls when p(ω) resembles the integrand. Sampling directions according to the BRDF (glossy lobes), sampling lights directly (next-event estimation), and combining strategies with multiple importance sampling (Veach, 1997) cut noise by orders of magnitude for the same sample count.
 

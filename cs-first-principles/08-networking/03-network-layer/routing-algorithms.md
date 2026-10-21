@@ -20,7 +20,7 @@ A routing algorithm fills every router's forwarding table so that hop-by-hop dec
 
 5. **Link-state trades memory and flooding for fast, consistent convergence.** Every router stores the whole topology and recomputes on any change, which costs more memory and Central Processing Unit (CPU) time, but convergence takes roughly the flooding time plus one Dijkstra run. Large link-state networks are divided into areas so that each router holds the detailed map of its own area and summaries of others: hierarchy again.
 
-6. **Transient inconsistency causes loops and black holes.** Between a failure and full convergence, some routers use the old map and some the new. A packet can loop between two routers that disagree. The IP Time To Live (TTL) bounds the damage. Fast-reroute techniques precompute backup next hops so traffic moves within milliseconds while the protocol reconverges.
+6. **Transient inconsistency causes loops and black holes.** Between a failure and full convergence, some routers use the old map and some the new. A packet can loop between two routers that disagree. The Internet Protocol (IP) Time To Live (TTL) bounds the damage. Fast-reroute techniques precompute backup next hops so traffic moves within milliseconds while the protocol reconverges.
 
 7. **Link cost choice encodes the operator's goal.** Hop count, delay, inverse capacity and administrative weights all give different "shortest" paths. Making costs depend on current load seems attractive but causes oscillation: traffic moves to the lightly loaded path, which then becomes heavy, so traffic moves back. The ARPANET saw this in the 1980s. Stable routing uses mostly static costs and leaves load response to traffic engineering and congestion control.
 

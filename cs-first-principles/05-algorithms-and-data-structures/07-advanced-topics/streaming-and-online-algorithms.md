@@ -12,9 +12,9 @@ Classical algorithms see their whole input before deciding anything. Two importa
 
 1. **Competitive analysis compares against a clairvoyant optimum.** An online algorithm is c-competitive if, for every request sequence σ, ALG(σ) ≤ c · OPT(σ) + b for a constant b, where OPT knows σ in advance. This is a worst-case game against an adversary who chooses σ knowing the algorithm. It answers "how much does not knowing the future cost?" with a number.
 
-2. **Ski rental is the archetype: hedge between renting and buying.** Renting costs 1 per day, buying costs B. Not knowing how many days you will ski, rent for B − 1 days then buy. If you stop before buying you paid the optimum; otherwise you paid at most 2B − 1 versus the optimum B: a ratio below 2, which is the best any deterministic strategy can do. The same reasoning decides when to spin versus block on a lock, and when to power down an idle disk.
+2. **Ski rental is the archetype: hedge between renting and buying.** Renting costs 1 per day, buying costs B. Not knowing how many days you will ski, rent for B − 1 days then buy. If you stop before buying you paid the optimum; otherwise you paid at most 2B − 1 versus the optimum B: a ratio below 2, which is the best any deterministic strategy can do. The same reasoning decides when to stop spinning on a lock and block.
 
-3. **Paging: LRU is k-competitive, and nothing deterministic does better.** With a cache of k pages, Least Recently Used (LRU) and First-In First-Out (FIFO) incur at most k times the misses of Belady's optimal offline policy (evict the page used farthest in the future), and Sleator and Tarjan (1985) showed no deterministic algorithm beats k. Randomized marking algorithms achieve O(log k) against an oblivious adversary. In practice LRU does much better than k times optimal because real access streams have locality, which competitive analysis ignores; this gap motivated analysis with resource augmentation and locality models.
+3. **Paging: LRU is k-competitive, and nothing deterministic does better.** With a cache of k pages, Least Recently Used (LRU) and First-In First-Out (FIFO) incur at most k times the misses of Belady's optimal offline policy (evict the page used farthest in the future), and Sleator and Tarjan (1985) showed no deterministic algorithm beats k. Randomized marking algorithms achieve O(log k) against an oblivious adversary. In practice LRU does far better than k times optimal because real access streams have locality, which competitive analysis ignores.
 
 4. **Streaming lower bounds come from information.** Answering some queries exactly requires remembering nearly the whole stream. Counting distinct elements exactly needs Ω(n) bits in the worst case, as does exact frequency of every item. The way out is approximation plus randomness: estimate within a factor 1 ± ε with probability 1 − δ, which needs only O((1/ε²) log(1/δ)) counters for many problems.
 
@@ -24,7 +24,7 @@ Classical algorithms see their whole input before deciding anything. Two importa
 
 7. **Sampling and quantile sketches summarise distributions.** Reservoir sampling keeps a uniform random sample of k items from a stream of unknown length in O(k) memory: keep item i with probability k/i, replacing a random current member. Quantile sketches (Greenwald–Khanna, t-digest, KLL) answer "what is the 99th percentile latency?" within rank error ε using space roughly O((1/ε) log(εN)) or better, which is why monitoring systems can report tail latency across billions of requests.
 
-8. **Sketches are mergeable, which makes them distributed.** Many sketches (HyperLogLog, Count-Min, KLL) can be combined: merge sketches from 1,000 servers and you get the sketch of the union. This lets distributed systems compute approximate global statistics in one round of communication, a key property for stream processors and observability pipelines.
+8. **Sketches are mergeable, which makes them distributed.** Many sketches (HyperLogLog, Count-Min, KLL) can be combined: merge sketches from 1,000 servers and you get the sketch of the union. Distributed systems thus get approximate global statistics in one round of communication.
 
 ## Key concepts
 
@@ -32,7 +32,6 @@ Classical algorithms see their whole input before deciding anything. Two importa
 |---|---|
 | Online algorithm | Makes irrevocable decisions on each request without knowledge of future requests |
 | Competitive ratio | Worst-case ratio of online cost to optimal offline cost |
-| Belady's algorithm (OPT) | Offline paging that evicts the page used farthest in the future |
 | Streaming algorithm | One pass over data with memory much smaller than the input |
 | Sketch | Compact randomized summary supporting approximate queries |
 | (ε, δ)-approximation | Error at most ε with probability at least 1 − δ |
@@ -43,18 +42,17 @@ Classical algorithms see their whole input before deciding anything. Two importa
 ## How it fits
 
 - **Below:** analysis rests on [probability](../../01-mathematical-foundations/06-probability-and-statistics/probability.md) and [universal hashing](../02-fundamental-data-structures/hash-tables.md); space lower bounds come from [information theory](../../02-theory-of-computation/01-information-theory/entropy-and-information.md); paging models the [cache hierarchy](../../04-computer-architecture/03-memory-hierarchy/cache-design.md).
-- **Above:** [page replacement](../../07-operating-systems/04-memory-management/page-replacement.md) in operating systems, [CDN and web caching](../../08-networking/05-application-layer/content-delivery-and-caching.md), [stream processing](../../10-distributed-and-parallel-computing/05-large-scale-systems/batch-and-stream-processing.md), approximate distinct counts in [databases](../../09-data-management/03-query-processing/query-optimization.md), latency percentiles in [observability](../../12-software-engineering/04-operations/observability.md), Bloom filters in [LSM-trees](../../09-data-management/02-storage-and-indexing/lsm-trees.md), and [network traffic monitoring](../../11-security-and-cryptography/04-network-and-application-security/network-attacks-and-defenses.md) for heavy hitters and attacks.
+- **Above:** [page replacement](../../07-operating-systems/04-memory-management/page-replacement.md) in operating systems, [Content Delivery Network (CDN) and web caching](../../08-networking/05-application-layer/content-delivery-and-caching.md), [stream processing](../../10-distributed-and-parallel-computing/05-large-scale-systems/batch-and-stream-processing.md), approximate distinct counts in [databases](../../09-data-management/03-query-processing/query-optimization.md), latency percentiles in [observability](../../12-software-engineering/04-operations/observability.md), Bloom filters in [Log-Structured Merge (LSM) trees](../../09-data-management/02-storage-and-indexing/lsm-trees.md), and [network traffic monitoring](../../11-security-and-cryptography/04-network-and-application-security/network-attacks-and-defenses.md) for heavy hitters and attacks.
 - **Siblings:** competitive ratios parallel [approximation ratios](approximation-algorithms.md) (one measures ignorance of the future, the other intractability); paging connects to [external-memory algorithms](external-memory-and-cache-oblivious.md), which assume an ideal cache close to LRU.
 
 ## Common misconceptions
 
 - **"A sketch is just a sample."** Sketches like HyperLogLog and Count-Min are hash-based summaries that see every item; they beat sampling for counts and frequencies.
 - **"LRU being k-competitive means it is bad."** The bound is against an adversary; on real workloads with locality, LRU is near-optimal. The point is that no deterministic algorithm can do better in the worst case.
-- **"Bloom filters can say an item is absent when it is present."** They never give false negatives (absent deletions); they give occasional false positives.
+- **"Bloom filters can say an item is absent when it is present."** They never give false negatives (provided items are never deleted); they give occasional false positives.
 
 ## Go deeper
 
 - Allan Borodin and Ran El-Yaniv, *Online Computation and Competitive Analysis* (1998): the standard text.
 - Daniel D. Sleator and Robert E. Tarjan, "Amortized Efficiency of List Update and Paging Rules" (1985): founded competitive analysis.
-- Philippe Flajolet, Éric Fusy, Olivier Gandouet, Frédéric Meunier, "HyperLogLog: the analysis of a near-optimal cardinality estimation algorithm" (2007).
 - Graham Cormode and S. Muthukrishnan, "An Improved Data Stream Summary: The Count-Min Sketch and its Applications" (2005).

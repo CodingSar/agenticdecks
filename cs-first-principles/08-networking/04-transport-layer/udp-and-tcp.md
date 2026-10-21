@@ -6,21 +6,21 @@
 
 ## Essence
 
-The Internet offers two classic transport services on top of the Internet Protocol (IP). The User Datagram Protocol (UDP) adds only port numbers and a checksum: each message is an independent datagram that may be lost, duplicated or reordered. The Transmission Control Protocol (TCP) builds a connection between two processes and delivers a reliable, ordered, flow-controlled and congestion-controlled stream of bytes. Most applications use TCP because it hides the network's failures; applications that care more about timeliness than completeness, or that want to build their own reliability, use UDP. QUIC, now the transport under HTTP/3, is a modern reliable transport built on UDP in user space.
+The Internet offers two classic transport services on top of the Internet Protocol (IP). The User Datagram Protocol (UDP) adds only port numbers and a checksum: each message is an independent datagram that may be lost, duplicated or reordered. The Transmission Control Protocol (TCP) builds a connection between two processes and delivers a reliable, ordered, flow-controlled and congestion-controlled stream of bytes. Most applications use TCP because it hides the network's failures; applications that care more about timeliness than completeness, or that want to build their own reliability, use UDP. QUIC, now the transport under Hypertext Transfer Protocol (HTTP)/3, is a modern reliable transport built on UDP in user space.
 
 ## Core tenets
 
-1. **Ports turn host-to-host delivery into process-to-process delivery.** IP gets a packet to a host. A 16-bit port number in the transport header tells the OS which socket should receive it. A TCP connection is identified by the 4-tuple (source IP, source port, destination IP, destination port), so one server port (443) can hold millions of distinct connections.
+1. **Ports turn host-to-host delivery into process-to-process delivery.** IP gets a packet to a host. A 16-bit port number in the transport header tells the Operating System (OS) which socket should receive it. A TCP connection is identified by the 4-tuple (source IP, source port, destination IP, destination port), so one server port (443) can hold millions of distinct connections.
 
 2. **UDP is a thin veneer over IP.** Its 8-byte header holds source port, destination port, length and checksum. No connection setup, no acknowledgement, no retransmission, no rate control. That makes it right for small request/response exchanges (DNS lookups), for real-time media where late data is useless, and as a substrate for new protocols that cannot get through middleboxes any other way.
 
 3. **TCP provides a byte stream, not messages.** The sender writes bytes; TCP chooses how to split them into segments; the receiver reads bytes, possibly in different chunk sizes. Applications must frame their own messages (length prefixes, delimiters). Treating one `send()` as one `recv()` is a classic bug.
 
-4. **Connections start with a three-way handshake.** Client sends SYN with an initial sequence number; server replies SYN-ACK with its own; client sends ACK. This synchronises both sides' sequence numbers and confirms each can hear the other. It costs one Round-Trip Time (RTT) before data flows. Random initial sequence numbers stop old packets from earlier connections and blind attackers from being accepted as current data.
+4. **Connections start with a three-way handshake.** Client sends SYN with an initial sequence number; server replies SYN-ACK with its own; client sends acknowledgement (ACK). This synchronises both sides' sequence numbers and confirms each can hear the other. It costs one Round-Trip Time (RTT) before data flows. Random initial sequence numbers stop old packets from earlier connections and blind attackers from being accepted as current data.
 
 5. **Connection teardown is per direction and leaves a residue.** Each side sends FIN to close its half; the connection is fully closed after both. The side that closes first waits in TIME_WAIT for twice the maximum segment lifetime (often 60 seconds in total) so that late duplicates of old segments die out before the same 4-tuple can be reused. Busy servers that close connections can accumulate many TIME_WAIT entries.
 
-6. **TCP is a state machine in each endpoint.** States such as LISTEN, SYN_SENT, ESTABLISHED, FIN_WAIT, CLOSE_WAIT and TIME_WAIT govern how each arriving segment is treated. The state lives only in the two endpoints; routers keep none, which is the end-to-end design. Middleboxes such as NATs and firewalls do track it, which is why long-idle connections through them get silently dropped.
+6. **TCP is a state machine in each endpoint.** States such as LISTEN, SYN_SENT, ESTABLISHED, FIN_WAIT, CLOSE_WAIT and TIME_WAIT govern how each arriving segment is treated. The state lives only in the two endpoints; routers keep none, which is the end-to-end design. Middleboxes such as Network Address Translators (NATs) and firewalls do track it, which is why long-idle connections through them get silently dropped.
 
 7. **In-order delivery causes head-of-line blocking.** If one segment is lost, all bytes after it wait in the receiver's buffer until it is retransmitted, even if they belong to logically independent requests. HTTP/2 multiplexes many streams over one TCP connection, so one loss stalls every stream.
 
@@ -45,7 +45,7 @@ The Internet offers two classic transport services on top of the Internet Protoc
 ## How it fits
 
 - **Below:** relies on [IP](../03-network-layer/ip-addressing-and-forwarding.md) for host-to-host delivery. The kernel implements both protocols and exposes them through [I/O models](../../07-operating-systems/06-io-and-devices/io-models.md); TCP endpoints are [finite-state machines](../../03-digital-logic/03-sequential-logic/finite-state-machines.md).
-- **Above:** [HTTP](../05-application-layer/http-and-the-web.md) runs over TCP or QUIC; [DNS](../05-application-layer/naming-and-dns.md) over UDP with TCP fallback; [TLS](../../11-security-and-cryptography/02-cryptography/secure-protocols-and-tls.md) secures TCP streams. Database clients and RPC frameworks use TCP connections.
+- **Above:** [HTTP](../05-application-layer/http-and-the-web.md) runs over TCP or QUIC; [DNS](../05-application-layer/naming-and-dns.md) over UDP with TCP fallback; [TLS](../../11-security-and-cryptography/02-cryptography/secure-protocols-and-tls.md) secures TCP streams. Database clients and Remote Procedure Call (RPC) frameworks use TCP connections.
 - **Siblings:** [reliable delivery](reliable-delivery.md) explains how TCP's guarantees are achieved; [congestion control](congestion-control.md) explains how it decides its rate.
 
 ## Common misconceptions

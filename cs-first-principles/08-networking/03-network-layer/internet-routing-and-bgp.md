@@ -18,7 +18,7 @@ The Internet is not one network but about 75,000 independently operated networks
 
 4. **Route selection is a ranked list of rules.** A BGP router picks among candidate routes by local preference (set by policy, typically customer > peer > provider), then shortest AS path, then several tie-breakers. AS path length counts ASes, not hops or delay, so BGP paths are often longer than the best possible path in latency.
 
-5. **BGP has two halves: external and internal.** External BGP (eBGP) sessions run between neighbouring ASes. Internal BGP (iBGP) distributes those external routes to all border routers inside one AS, while an interior protocol such as OSPF or IS-IS (see [routing algorithms](routing-algorithms.md)) computes paths to reach those borders. The two layers of routing mirror the two levels of address hierarchy.
+5. **BGP has two halves: external and internal.** External BGP (eBGP) sessions run between neighbouring ASes. Internal BGP (iBGP) distributes those external routes to all border routers inside one AS, while an interior protocol such as Open Shortest Path First (OSPF) or Intermediate System to Intermediate System (IS-IS) (see [routing algorithms](routing-algorithms.md)) computes paths to reach those borders. The two layers of routing mirror the two levels of address hierarchy.
 
 6. **Arbitrary policies can make BGP oscillate forever.** Policy preferences are not guaranteed to have a stable solution. Griffin, Shepherd and Wilfong showed that deciding whether a BGP configuration has a stable outcome is NP-complete, and some configurations ("dispute wheels") oscillate indefinitely. In practice, economic incentives push ASes toward Gao-Rexford-like policies that do converge.
 
@@ -26,7 +26,7 @@ The Internet is not one network but about 75,000 independently operated networks
 
 8. **Convergence is slow and the table is big.** A global BGP change can take tens of seconds to minutes to propagate, and routers damp rapidly flapping routes to protect themselves. A full table holds around a million IPv4 prefixes plus a growing IPv6 table (circa mid-2020s), stressing router memory. Address aggregation is the main tool to keep it bounded.
 
-9. **Anycast uses BGP for load distribution.** Announcing the same prefix from many locations makes each user's traffic go to the "closest" site in BGP terms. Root DNS servers and content delivery networks rely on this to serve users from nearby and to absorb attacks.
+9. **Anycast uses BGP for load distribution.** Announcing the same prefix from many locations makes each user's traffic go to the "closest" site in BGP terms. Root Domain Name System (DNS) servers and content delivery networks rely on this to serve users from nearby and to absorb attacks.
 
 ## Key concepts
 
@@ -41,7 +41,7 @@ The Internet is not one network but about 75,000 independently operated networks
 | Valley-free path | Path consistent with economic export rules |
 | Route hijack | Announcing a prefix one does not legitimately hold |
 | RPKI | Signed attestations of which AS may originate a prefix |
-| IXP | Internet Exchange Point: facility where many ASes interconnect |
+| Internet Exchange Point (IXP) | Internet Exchange Point: facility where many ASes interconnect |
 
 ## How it fits
 

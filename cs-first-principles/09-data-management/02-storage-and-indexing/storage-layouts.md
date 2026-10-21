@@ -14,7 +14,7 @@ A database stores relations as records packed into fixed-size pages (typically 4
 
 2. **Slotted pages hold variable-length records.** A page header holds a slot array of offsets; records grow from the other end of the page. A Record Identifier (RID) is (page number, slot number). Records can move within a page (when resized or compacted) without changing their RID, because only the slot entry changes. This is indirection used to keep references stable.
 
-3. **A heap file is the default, unordered table.** Records go wherever there is space. Inserts are cheap; finding a record by value requires a full scan. Indexes (B-trees, hash indexes) are separate structures mapping key values to RIDs. A *clustered* (or index-organised) table instead stores the records in key order inside the index itself, making range scans on that key sequential.
+3. **A heap file is the default, unordered table.** Records go wherever there is space. Inserts are cheap; finding a record by value requires a full scan. Indexes (B-trees, hash indexes) are separate structures mapping key values to Record Identifiers (RIDs). A *clustered* (or index-organised) table instead stores the records in key order inside the index itself, making range scans on that key sequential.
 
 4. **The buffer pool is the database's own cache.** It holds a fixed number of page frames, maps page identifiers to frames with a hash table, pins pages in use and evicts unpinned ones with an LRU-like (Least Recently Used) policy. Databases often bypass the Operating System (OS) page cache (with direct I/O) because they know their access patterns better (a sequential scan should not evict the hot index root) and must control exactly when dirty pages reach disk for recovery.
 
@@ -24,7 +24,7 @@ A database stores relations as records packed into fixed-size pages (typically 4
 
 7. **Columnar execution exploits the processor.** Processing a column as a tight loop over an array of same-typed values uses Single Instruction, Multiple Data (SIMD) instructions and keeps caches and branch predictors happy. Vectorised engines process batches of a few thousand values per operator call, amortising interpretation overhead. Updating single rows in a column store is costly, so writes are usually buffered and merged in bulk.
 
-8. **Hybrid and in-memory layouts blur the line.** Some systems keep a row-oriented write store and a column-oriented read store and merge between them. When the working set fits in DRAM (Dynamic Random-Access Memory), page-based indirection costs more than it saves and in-memory engines use pointers and cache-conscious structures instead; but durability still needs a log on persistent storage.
+8. **Hybrid and in-memory layouts blur the line.** Some systems keep a row-oriented write store and a column-oriented read store and merge between them. When the working set fits in Dynamic Random-Access Memory (DRAM) (Dynamic Random-Access Memory), page-based indirection costs more than it saves and in-memory engines use pointers and cache-conscious structures instead; but durability still needs a log on persistent storage.
 
 ## Key concepts
 
@@ -51,7 +51,7 @@ A database stores relations as records packed into fixed-size pages (typically 4
 
 - **"The OS page cache makes a buffer pool unnecessary."** The database needs control over eviction and write ordering for performance and for correct recovery; double caching also wastes memory.
 - **"Column stores are just transposed tables."** Their advantage comes from compression and vectorised execution as much as from reading fewer bytes.
-- **"SSDs make layout irrelevant."** SSDs narrow the random/sequential gap but still read in pages and wear out with writes, so layout and write patterns still matter.
+- **"Solid-State Drives (SSDs) make layout irrelevant."** SSDs narrow the random/sequential gap but still read in pages and wear out with writes, so layout and write patterns still matter.
 
 ## Go deeper
 

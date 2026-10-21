@@ -14,13 +14,13 @@ A Large Language Model (LLM) is a transformer, typically with billions to trilli
 
 2. **Pre-training absorbs the corpus; post-training shapes behaviour.** A pre-trained base model continues any text plausibly, including unhelpful or harmful continuations. Supervised Fine-Tuning (SFT) on example dialogues teaches the assistant format. Reinforcement Learning from Human Feedback (RLHF) trains a reward model on human comparisons of responses and optimises the LLM against it; Direct Preference Optimization (DPO) and AI-feedback variants reach similar ends more cheaply. Post-training uses a tiny fraction of pre-training compute but changes behaviour dramatically.
 
-3. **Capabilities improve predictably with scale, but not uniformly.** Loss follows [scaling laws](../03-deep-learning/training-at-scale.md) in parameters, data and compute. Specific skills (multi-digit arithmetic, following complex instructions) can look as if they appear suddenly, partly because accuracy metrics are all-or-nothing while underlying loss improves smoothly.
+3. **Capabilities improve predictably with scale, but not uniformly.** Loss follows [scaling laws](../03-deep-learning/training-at-scale.md) in parameters, data and compute. Specific skills can look as if they appear suddenly, partly because all-or-nothing accuracy metrics hide smoothly improving loss.
 
 4. **In-context learning: the prompt is a program.** Given a few examples in its input, an LLM performs the new task without any weight update (Brown et al., 2020). The context window, ranging from a few thousand to over a million tokens in mid-2020s models, is the model's working memory; everything the model "knows" about the current task beyond its weights must be in it.
 
 5. **Thinking out loud buys computation.** Each generated token costs a fixed amount of computation, so a model that writes intermediate reasoning ("chain of thought") before answering spends more computation on harder problems. Models trained with reinforcement learning on verifiable tasks (maths, code with tests) to produce long reasoning traces improved sharply on such tasks in 2024–2025. This "test-time compute" is now a scaling axis alongside model size.
 
-6. **Retrieval and tools ground the model in external facts and actions.** Weights hold knowledge frozen at training time and imprecisely. Retrieval-Augmented Generation (RAG) fetches relevant documents into the context; tool use lets the model emit structured calls to search engines, code interpreters or Application Programming Interfaces (APIs) and read the results. Wrapping this in a loop of plan, act, observe gives "agents", which reintroduce classical [planning](../01-classical-ai/search-and-planning.md) problems: error accumulation over long horizons, verification of intermediate steps, and safe action.
+6. **Retrieval and tools ground the model in external facts and actions.** Weights hold knowledge frozen at training time and imprecisely. Retrieval-Augmented Generation (RAG) fetches relevant documents into the context; tool use lets the model emit structured calls to search engines, code interpreters or Application Programming Interfaces (APIs) and read the results. A loop of plan, act and observe gives "agents", which reintroduce classical [planning](../01-classical-ai/search-and-planning.md) problems: error accumulation, verification and safe action.
 
 7. **Fluency is not reliability.** Because training rewards plausible continuations, models can produce fluent, confident statements that are false ("hallucinations"), particularly about rare facts. They can be steered by text in their input that the user did not write (prompt injection), which is a security problem when they read untrusted web pages or emails. These properties make evaluation and [alignment](alignment-and-safety.md) central engineering concerns rather than afterthoughts.
 
@@ -50,7 +50,7 @@ A Large Language Model (LLM) is a transformer, typically with billions to trilli
 
 - **"It is just autocomplete, so it cannot reason."** The training objective is next-token prediction, but predicting text well requires internal computation that, measurably, solves novel problems. Its reasoning is real but unreliable in ways human reasoning is not.
 - **"It looks facts up in a database."** Unless retrieval is used, knowledge is stored diffusely in weights, which is why recall of rare facts is lossy and can be confidently wrong.
-- **"The model learns from each conversation."** Weights are fixed at deployment. Within a conversation it adapts only through its context; any lasting change requires separate training.
+- **"The model learns from each conversation."** Weights are fixed at deployment; within a conversation it adapts only through its context.
 
 ## Go deeper
 

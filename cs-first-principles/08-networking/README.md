@@ -7,7 +7,7 @@
 
 Networking answers one question: how do programs on different machines exchange data reliably and efficiently when the only thing connecting them is a shared, lossy, delay-prone physical medium owned by many parties? The answer is a stack of protocols, each turning a weak service into a slightly stronger one. A wire carries noisy voltages; the link layer turns them into frames between neighbours; the network layer turns frames into best-effort packets between any two hosts on Earth; the transport layer turns packets into ordered, reliable byte streams between processes; and the application layer turns streams into names, documents and services.
 
-The unifying idea is that networking *extends the Operating System's (OS's) abstractions across machines*. A socket looks like a file descriptor. A Transmission Control Protocol (TCP) connection looks like a pipe. A Uniform Resource Locator (URL) looks like a file path. Behind each familiar interface sits a mechanism that must survive loss, reordering, congestion, failure and the fact that no single party controls the whole system.
+The unifying idea is that networking *extends the Operating System's (Operating System (OS)'s) abstractions across machines*. A socket looks like a file descriptor. A Transmission Control Protocol (TCP) connection looks like a pipe. A Uniform Resource Locator (URL) looks like a file path. Behind each familiar interface sits a mechanism that must survive loss, reordering, congestion, failure and the fact that no single party controls the whole system.
 
 ## Why this layer sits here
 
@@ -65,7 +65,7 @@ Networking takes bits-on-a-medium from 00, coding theory from 02, graph algorith
 - [Abstraction and layering](../CROSS-CUTTING.md#abstraction-and-layering): the protocol stack is the textbook case of layers that each use only the one below.
 - [The end-to-end argument](../CROSS-CUTTING.md#the-end-to-end-argument): reliability and security belong at the endpoints; the network core stays simple.
 - [Indirection and naming](../CROSS-CUTTING.md#indirection-and-naming): DNS names map to addresses, addresses map to link-layer addresses.
-- [Caching and locality](../CROSS-CUTTING.md#caching-and-locality): DNS caches, HTTP caches and CDNs move data closer to readers.
+- [Caching and locality](../CROSS-CUTTING.md#caching-and-locality): DNS caches, HTTP caches and Content Delivery Networks (CDNs) move data closer to readers.
 - [Feedback and control](../CROSS-CUTTING.md#feedback-and-control): TCP congestion control infers network state from loss and delay and adjusts its rate.
 - [Redundancy and fault tolerance](../CROSS-CUTTING.md#redundancy-and-fault-tolerance): checksums, retransmission and multipath routing survive damage and failure.
 - [Pipelining and parallelism](../CROSS-CUTTING.md#pipelining-and-parallelism): sliding windows keep many packets in flight to fill the pipe.

@@ -14,7 +14,7 @@ Three jobs unify the children. *Multiplexing*: port numbers let many conversatio
 | Child | Its role in the whole | Depends on |
 |---|---|---|
 | [UDP and TCP](udp-and-tcp.md) | The two classic service models: bare datagrams with ports, or a reliable connection-oriented byte stream; plus QUIC | Network layer |
-| [Reliable Delivery](reliable-delivery.md) | The mechanisms inside TCP: sequence numbers, acknowledgements, timeouts, sliding windows, flow control | UDP and TCP, latency |
+| [Reliable Delivery](reliable-delivery.md) | The mechanisms inside Transmission Control Protocol (TCP): sequence numbers, acknowledgements, timeouts, sliding windows, flow control | User Datagram Protocol (UDP) and TCP, latency |
 | [Congestion Control](congestion-control.md) | The feedback loop that sets sending rate from loss and delay signals | Reliable delivery, queueing |
 
 ```
@@ -32,8 +32,8 @@ Start with UDP and TCP to see what each promises. Reliable delivery explains how
 
 - **[Principles](../01-principles/README.md):** transport is the end-to-end argument in action; windows are sized by the bandwidth-delay product; congestion is the queueing cost of packet switching.
 - **[Link Layer](../02-link-layer/README.md):** link-layer retransmission on wireless hides loss that TCP would otherwise misread as congestion.
-- **[Network Layer](../03-network-layer/README.md):** IP delivers to a host; transport adds ports to reach a process. NATs and firewalls rewrite or filter transport headers, which ossifies protocols.
-- **[Application Layer](../05-application-layer/README.md):** HTTP runs over TCP or QUIC; DNS mostly over UDP. Application performance is dominated by transport handshakes and slow start.
+- **[Network Layer](../03-network-layer/README.md):** Internet Protocol (IP) delivers to a host; transport adds ports to reach a process. Network Address Translators (NATs) and firewalls rewrite or filter transport headers, which ossifies protocols.
+- **[Application Layer](../05-application-layer/README.md):** Hypertext Transfer Protocol (HTTP) runs over TCP or QUIC; Domain Name System (DNS) mostly over UDP. Application performance is dominated by transport handshakes and slow start.
 
 ## Connections across layers
 

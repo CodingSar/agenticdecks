@@ -16,7 +16,7 @@ Concurrency control lets many transactions run at once while guaranteeing the re
 
 3. **Two-phase locking (2PL) guarantees serializability.** Each transaction acquires a shared lock to read and an exclusive lock to write, and never acquires a lock after releasing one: a growing phase, then a shrinking phase. At the lock point (when it holds all its locks), each transaction can be placed in the serial order. *Strict* 2PL holds write locks until commit, which also prevents others from reading uncommitted data and avoids cascading aborts. Most locking databases use strict 2PL.
 
-4. **Locking brings deadlock, which databases detect and break.** T1 holds x and waits for y while T2 holds y and waits for x. Databases build a waits-for graph and search it for cycles, aborting a victim, or use timeouts or timestamp-based prevention (wait-die, wound-wait). Unlike most OS deadlock handling, aborting is cheap and safe because transactions can be rolled back and retried.
+4. **Locking brings deadlock, which databases detect and break.** T1 holds x and waits for y while T2 holds y and waits for x. Databases build a waits-for graph and search it for cycles, aborting a victim, or use timeouts or timestamp-based prevention (wait-die, wound-wait). Unlike most Operating System (OS) deadlock handling, aborting is cheap and safe because transactions can be rolled back and retried.
 
 5. **Phantoms require locking predicates, not just rows.** If T1 counts rows `WHERE dept = 7` and T2 inserts a new row with `dept = 7`, locking existing rows cannot stop the insert. Serializable systems lock ranges in an index (key-range or next-key locking on B-trees) or predicates, so that new rows matching a read's condition are blocked too.
 
@@ -38,7 +38,7 @@ Concurrency control lets many transactions run at once while guaranteeing the re
 | Shared / exclusive lock | Lock compatible with other readers / incompatible with all others |
 | Waits-for graph | Graph of transactions blocked on each other; a cycle is a deadlock |
 | Phantom | Row inserted by another transaction that matches an earlier read's predicate |
-| OCC | Optimistic concurrency control: validate at commit, abort on conflict |
+| Optimistic Concurrency Control (OCC) | Optimistic concurrency control: validate at commit, abort on conflict |
 | MVCC | Multiversion concurrency control: readers see snapshots of committed versions |
 | Write skew | Anomaly where concurrent transactions write disjoint items based on overlapping reads |
 

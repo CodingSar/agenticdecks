@@ -32,7 +32,7 @@ Read optimisation first (how parameters move), then generalisation (why that mov
 
 ## Connections to sibling areas
 
-- **[Classical AI](../01-classical-ai/README.md):** Classical AI hand-writes the model and reasons with it; ML learns the model from data. Probabilistic reasoning is shared ground: a Bayesian network can be hand-built or learned, and maximum likelihood is the common training principle.
+- **[Classical AI](../01-classical-ai/README.md):** Classical Artificial Intelligence (AI) hand-writes the model and reasons with it; ML learns the model from data. Probabilistic reasoning is shared ground: a Bayesian network can be hand-built or learned, and maximum likelihood is the common training principle.
 - **[Deep learning](../03-deep-learning/README.md):** Deep learning is ML with deep neural networks as the function family, so every principle here applies unchanged. What changes is that features are learned rather than designed, and scale changes the practical behaviour of optimisation and generalisation.
 - **[Advanced paradigms](../04-advanced-paradigms/README.md):** Reinforcement learning drops fixed labelled data in favour of rewards from interaction; generative models are unsupervised density estimation you can sample; language models are self-supervised learning at the largest scale. Each inherits the evaluation problems here in harder forms.
 

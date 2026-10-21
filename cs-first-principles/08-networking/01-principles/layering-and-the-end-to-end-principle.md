@@ -38,8 +38,8 @@ A network protocol stack splits the job of moving data into layers, each offerin
 | Protocol | Agreed format and rules for messages between peers at the same layer |
 | Service | What a layer promises to the layer above (e.g. "best-effort datagram") |
 | Encapsulation | Wrapping a higher layer's data unit in a lower layer's header |
-| PDU | Protocol Data Unit: frame (link), packet (network), segment (transport), message (application) |
-| OSI model | Open Systems Interconnection seven-layer reference model; the Internet uses a simpler four- or five-layer stack |
+| Protocol Data Unit (PDU) | Protocol Data Unit: frame (link), packet (network), segment (transport), message (application) |
+| Open Systems Interconnection (OSI) model | Open Systems Interconnection seven-layer reference model; the Internet uses a simpler four- or five-layer stack |
 | Narrow waist | The single shared layer (IP) that decouples technologies above from those below |
 | End-to-end argument | Put a function where it can be done completely and correctly: usually the endpoints |
 | Fate-sharing | Keep state only at entities that fail together with what the state describes |
@@ -47,7 +47,7 @@ A network protocol stack splits the job of moving data into layers, each offerin
 
 ## How it fits
 
-- **Below:** takes the general idea of [abstraction and interfaces](../../12-software-engineering/01-design/abstraction-and-interfaces.md) and the OS's role as a provider of clean abstractions over messy hardware ([the role of the OS](../../07-operating-systems/01-kernel-and-abstractions/the-role-of-the-os.md)). Relies on the assumption that lower layers can fail, which [reliability engineering](../../00-engineering-foundations/05-engineering-method/reliability-and-redundancy.md) takes as given.
+- **Below:** takes the general idea of [abstraction and interfaces](../../12-software-engineering/01-design/abstraction-and-interfaces.md) and the Operating System (OS)'s role as a provider of clean abstractions over messy hardware ([the role of the OS](../../07-operating-systems/01-kernel-and-abstractions/the-role-of-the-os.md)). Relies on the assumption that lower layers can fail, which [reliability engineering](../../00-engineering-foundations/05-engineering-method/reliability-and-redundancy.md) takes as given.
 - **Above:** every protocol in this layer is placed by these rules. [TLS](../../11-security-and-cryptography/02-cryptography/secure-protocols-and-tls.md) is end-to-end security for the same reason TCP is end-to-end reliability. Distributed systems inherit the endpoint-centric view.
 - **Siblings:** [packet switching](packet-switching.md) is the minimal service the core provides; [latency, bandwidth and queueing](latency-bandwidth-and-queueing.md) measures what that minimalism costs.
 
@@ -55,7 +55,7 @@ A network protocol stack splits the job of moving data into layers, each offerin
 
 - **"The OSI seven-layer model describes the Internet."** The Internet was built on the TCP/IP model; OSI's session and presentation layers have no distinct counterpart and live inside applications.
 - **"End-to-end means the network should do nothing."** It means the network should not be *relied on* for functions only endpoints can complete. Performance aids in the network are fine.
-- **"Layers are strictly isolated in real systems."** Practical stacks routinely peek across layers (TCP checksums cover parts of the IP header; NICs offload segmentation).
+- **"Layers are strictly isolated in real systems."** Practical stacks routinely peek across layers (TCP checksums cover parts of the IP header; Network Interface Cards (NICs) offload segmentation).
 
 ## Go deeper
 

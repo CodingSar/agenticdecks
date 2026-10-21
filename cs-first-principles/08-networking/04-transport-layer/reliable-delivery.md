@@ -16,7 +16,7 @@ Reliable delivery turns a channel that can lose, corrupt, duplicate and reorder 
 
 3. **Stop-and-wait wastes the pipe; sliding windows fill it.** Sending one packet per Round-Trip Time (RTT) on a 1 Gbit/s path with 50 ms RTT and 1,500-byte packets uses 240 kbit/s, 0.024% of capacity. A sliding window lets the sender have up to W bytes unacknowledged. Throughput is about W / RTT, so filling the path needs W ≥ bandwidth × RTT (the bandwidth-delay product).
 
-4. **Go-Back-N and Selective Repeat differ in what is resent.** With cumulative acknowledgements ("I have everything up to byte n"), a single loss can force resending the whole window after it (Go-Back-N). Selective acknowledgements (TCP SACK) report which later blocks arrived, so the sender resends only the gaps. Selective Repeat needs receiver buffering for out-of-order data and a sequence space at least twice the window to avoid ambiguity.
+4. **Go-Back-N and Selective Repeat differ in what is resent.** With cumulative acknowledgements ("I have everything up to byte n"), a single loss can force resending the whole window after it (Go-Back-N). Selective acknowledgements (TCP Selective Acknowledgement (SACK)) report which later blocks arrived, so the sender resends only the gaps. Selective Repeat needs receiver buffering for out-of-order data and a sequence space at least twice the window to avoid ambiguity.
 
 5. **Timeout choice is an estimation problem.** Too short and the sender retransmits packets that were only delayed, adding load exactly when the network is busy. Too long and recovery stalls. TCP keeps a smoothed RTT and its mean deviation and sets the Retransmission Timeout (RTO) ≈ SRTT + 4 × RTTVAR (Jacobson, 1988), doubling it after each timeout. It also ignores RTT samples from retransmitted segments, whose acknowledgements are ambiguous (Karn's algorithm).
 
@@ -32,18 +32,18 @@ Reliable delivery turns a channel that can lose, corrupt, duplicate and reorder 
 |---|---|
 | ARQ | Automatic Repeat reQuest: detect loss, retransmit |
 | Sequence number | Position of data in the stream, used to order and deduplicate |
-| Cumulative ACK | Acknowledges all data up to a point |
+| Cumulative acknowledgement (ACK) | Acknowledges all data up to a point |
 | SACK | Selective Acknowledgement: reports out-of-order blocks received |
 | Sliding window | Bound on unacknowledged data in flight |
 | Go-Back-N / Selective Repeat | Resend everything after a loss / resend only lost pieces |
 | RTO | Retransmission Timeout, adapted from measured RTT |
-| Fast retransmit | Retransmit after three duplicate ACKs, before RTO expires |
+| Fast retransmit | Retransmit after three duplicate acknowledgements (ACKs), before RTO expires |
 | rwnd | Receiver's advertised window for flow control |
 | Idempotent | Applying an operation twice has the same effect as once |
 
 ## How it fits
 
-- **Below:** sits on the unreliable service of [UDP and TCP's](udp-and-tcp.md) underlying IP; checksums extend the [link-layer error detection](../02-link-layer/encoding-and-framing.md) end to end; window sizing comes from [latency and bandwidth](../01-principles/latency-bandwidth-and-queueing.md). Correctness is argued with [invariants](../../05-algorithms-and-data-structures/01-foundations/correctness-and-invariants.md) such as "everything below the cumulative ACK has been delivered in order".
+- **Below:** sits on the unreliable service of [UDP and TCP's](udp-and-tcp.md) underlying Internet Protocol (IP); checksums extend the [link-layer error detection](../02-link-layer/encoding-and-framing.md) end to end; window sizing comes from [latency and bandwidth](../01-principles/latency-bandwidth-and-queueing.md). Correctness is argued with [invariants](../../05-algorithms-and-data-structures/01-foundations/correctness-and-invariants.md) such as "everything below the cumulative ACK has been delivered in order".
 - **Above:** retry, deduplication and idempotency reappear in every [distributed system](../../10-distributed-and-parallel-computing/02-distributed-foundations/system-models-and-failures.md); log shipping in [replication](../../10-distributed-and-parallel-computing/03-consensus-and-replication/replication.md) uses the same sequence-and-acknowledge pattern.
 - **Siblings:** [congestion control](congestion-control.md) adds a second window (cwnd) that protects the network; the effective window is min(cwnd, rwnd).
 

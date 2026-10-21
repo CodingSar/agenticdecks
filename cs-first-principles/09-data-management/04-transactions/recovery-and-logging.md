@@ -26,7 +26,7 @@ Recovery provides atomicity and durability when the system crashes and loses eve
 
 8. **The log is the database's ground truth.** Data pages are a cache of the log's effects. This view underlies replication (ship the log to replicas and replay it), point-in-time recovery (replay up to a chosen moment), change data capture (stream the log to other systems) and LSM-trees (where the log plus sorted runs is the storage). Durability against device loss comes from copying the log elsewhere.
 
-9. **Durability depends on the storage stack telling the truth.** Flushing the log means calling fsync or using direct, synchronous writes and trusting that drive caches honour flush commands. Bugs and misconfigurations at the OS (Operating System) or device layer have caused committed data loss in production databases; PostgreSQL's 2018 discovery that failed fsync calls could silently drop dirty pages is a well-known example.
+9. **Durability depends on the storage stack telling the truth.** Flushing the log means calling fsync or using direct, synchronous writes and trusting that drive caches honour flush commands. Bugs and misconfigurations at the Operating System (OS) (Operating System) or device layer have caused committed data loss in production databases; PostgreSQL's 2018 discovery that failed fsync calls could silently drop dirty pages is a well-known example.
 
 ## Key concepts
 
@@ -40,7 +40,7 @@ Recovery provides atomicity and durability when the system crashes and loses eve
 | pageLSN | LSN of the last change applied to a page |
 | Checkpoint | Recorded state that bounds how far back recovery must read |
 | ARIES | Analysis, redo (repeating history), undo with compensation records |
-| CLR | Compensation Log Record: logs an undo action so it is never repeated |
+| Compensation Log Record (CLR) | Compensation Log Record: logs an undo action so it is never repeated |
 | Group commit | One log flush shared by many committing transactions |
 
 ## How it fits

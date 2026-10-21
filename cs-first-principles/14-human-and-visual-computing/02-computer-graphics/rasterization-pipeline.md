@@ -47,7 +47,7 @@ Rasterisation draws a 3D scene by projecting each triangle onto the screen and f
 
 ## Common misconceptions
 
-- **"GPUs were designed for AI."** They were designed for this pipeline; their throughput on dense, independent arithmetic later made them ideal for neural networks.
+- **"GPUs were designed for artificial intelligence."** They were designed for this pipeline; their throughput on dense, independent arithmetic later made them ideal for neural networks.
 - **"More triangles is the main cost."** Pixel shading, overdraw and memory bandwidth usually dominate; tiny triangles are inefficient because hardware shades pixels in 2×2 groups.
 - **"Rasterisation is physically accurate if the shaders are."** Local shading cannot capture light bouncing between surfaces without additional approximations.
 

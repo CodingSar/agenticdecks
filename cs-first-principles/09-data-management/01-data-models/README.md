@@ -18,13 +18,13 @@ The unifying idea is that a good model is *declarative and mathematical*. The re
 | [Normalization](normalization.md) | Schema design theory: how to split relations to avoid redundancy and update anomalies | Relational model, functional dependencies |
 | [Non-Relational Models](non-relational-models.md) | Document, key-value, wide-column and graph models: what they trade away and why | All of the above |
 
-Read the relational model first. Relational algebra and SQL show how querying works on it. Normalization shows how to design schemas within it. Non-relational models are a contrast: they relax schema, joins or transactions to fit particular access patterns or scale-out needs, and recent history has seen many of them add those features back.
+Read the relational model first. Relational algebra and Structured Query Language (SQL) show how querying works on it. Normalization shows how to design schemas within it. Non-relational models are a contrast: they relax schema, joins or transactions to fit particular access patterns or scale-out needs, and recent history has seen many of them add those features back.
 
 ## Connections to sibling areas
 
 - **[Storage and Indexing](../02-storage-and-indexing/README.md):** the logical model says nothing about layout; storage chooses rows or columns, heaps or trees. Physical data independence is what lets the two evolve separately.
 - **[Query Processing](../03-query-processing/README.md):** the algebra defined here is the optimizer's working language: query plans are trees of relational operators, and equivalence rules come from algebraic identities.
-- **[Transactions](../04-transactions/README.md):** integrity constraints defined in the model are the invariants that transactions must preserve; the "C" in ACID refers to them.
+- **[Transactions](../04-transactions/README.md):** integrity constraints defined in the model are the invariants that transactions must preserve; the "C" in Atomicity, Consistency, Isolation, Durability (ACID) refers to them.
 
 ## Connections across layers
 

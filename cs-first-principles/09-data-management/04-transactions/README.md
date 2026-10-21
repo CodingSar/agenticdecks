@@ -14,9 +14,9 @@ The unifying idea is that two mechanisms deliver the abstraction. *Concurrency c
 | Child | Its role in the whole | Depends on |
 |---|---|---|
 | [ACID](acid.md) | The contract: what each property means and what it costs | Data model constraints |
-| [Concurrency Control](concurrency-control.md) | Mechanisms for isolation: serializability, two-phase locking, optimistic and multiversion schemes | ACID, OS locking |
+| [Concurrency Control](concurrency-control.md) | Mechanisms for isolation: serializability, two-phase locking, optimistic and multiversion schemes | Atomicity, Consistency, Isolation, Durability (ACID), Operating System (OS) locking |
 | [Isolation Levels](isolation-levels.md) | The weaker guarantees systems actually offer, and the anomalies each permits | Concurrency control |
-| [Recovery and Logging](recovery-and-logging.md) | Mechanisms for atomicity and durability: write-ahead logging, ARIES, checkpoints | ACID, storage, crash consistency |
+| [Recovery and Logging](recovery-and-logging.md) | Mechanisms for atomicity and durability: write-ahead logging, Algorithm for Recovery and Isolation Exploiting Semantics (ARIES), checkpoints | ACID, storage, crash consistency |
 
 ```
              ACID contract

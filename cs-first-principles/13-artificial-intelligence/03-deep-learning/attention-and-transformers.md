@@ -26,7 +26,7 @@ Attention lets every element of a sequence look at every other element and pull 
 
 6. **Masking turns the same machinery into an autoregressive generator.** A decoder-only transformer applies a causal mask so position t attends only to positions ≤ t, then trains to predict token t+1 at every position simultaneously. One sequence of length n gives n training examples in a single parallel pass, a large efficiency gain over RNNs, which must process tokens one after another.
 
-7. **Cost is quadratic in sequence length, and inference is memory-bound.** The n × n score matrix costs O(n² d) compute and naively O(n²) memory. FlashAttention (2022) avoids materialising it by tiling the computation to fit in on-chip memory, an application of cache blocking. At generation time, keys and values of previous tokens are cached (the KV cache) so each new token costs O(n), but that cache grows with context and batch size and often dominates GPU memory. Many variants (sparse, linear, sliding-window attention; state-space models) trade some quality for sub-quadratic cost.
+7. **Cost is quadratic in sequence length, and inference is memory-bound.** The n × n score matrix costs O(n² d) compute and naively O(n²) memory. FlashAttention (2022) avoids materialising it by tiling the computation to fit in on-chip memory, an application of cache blocking. At generation time, keys and values of previous tokens are cached (the key-value (KV) cache) so each new token costs O(n), but that cache grows with context and batch size and often dominates GPU memory. Many variants (sparse, linear, sliding-window attention; state-space models) trade some quality for sub-quadratic cost.
 
 ## Key concepts
 

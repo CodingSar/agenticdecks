@@ -33,7 +33,7 @@ Read reinforcement learning and generative models in either order; they are inde
 
 ## Connections to sibling areas
 
-- **[Classical AI](../01-classical-ai/README.md):** Reinforcement learning formalises sequential decisions as Markov Decision Processes, an extension of probabilistic reasoning; game-playing systems combine it with classical tree search. LLM agents rediscover planning and frequently call classical solvers as tools.
+- **[Classical AI](../01-classical-ai/README.md):** Classical Artificial Intelligence (AI) supplies the foundations here. Reinforcement learning formalises sequential decisions as Markov Decision Processes, an extension of probabilistic reasoning; game-playing systems combine it with classical tree search. LLM agents rediscover planning and frequently call classical solvers as tools.
 - **[Machine learning foundations](../02-machine-learning-foundations/README.md):** Generative models are unsupervised density estimation; self-supervised pre-training is the reason LLMs exist; evaluation and generalisation problems reappear here in their hardest forms (open-ended outputs, distribution shift, contaminated benchmarks).
 - **[Deep learning](../03-deep-learning/README.md):** Every paradigm here uses deep networks as its function approximator: convolutional networks and transformers as diffusion denoisers, transformers as LLMs, value and policy networks in deep RL. Training at scale is what makes frontier models possible.
 

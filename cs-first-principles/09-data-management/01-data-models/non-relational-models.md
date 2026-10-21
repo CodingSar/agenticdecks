@@ -6,7 +6,7 @@
 
 ## Essence
 
-Non-relational data models (often grouped under the label "NoSQL") give up some part of the relational design (fixed schema, joins, general transactions or declarative queries) in exchange for a better fit to a particular access pattern or easier horizontal scaling. Key-value stores reduce the interface to get and put by key. Document stores keep nested, self-describing records. Wide-column stores organise sparse rows by partition and sort keys. Graph databases make relationships first-class and traversals cheap. Each is a different answer to "which queries must be fast, and which may be slow or impossible?" The trade is real, and the history since about 2010 shows many systems adding back schemas, SQL and transactions once they hit the problems relational systems had already solved.
+Non-relational data models (often grouped under the label "NoSQL") give up some part of the relational design (fixed schema, joins, general transactions or declarative queries) in exchange for a better fit to a particular access pattern or easier horizontal scaling. Key-value stores reduce the interface to get and put by key. Document stores keep nested, self-describing records. Wide-column stores organise sparse rows by partition and sort keys. Graph databases make relationships first-class and traversals cheap. Each is a different answer to "which queries must be fast, and which may be slow or impossible?" The trade is real, and the history since about 2010 shows many systems adding back schemas, Structured Query Language (SQL) and transactions once they hit the problems relational systems had already solved.
 
 ## Core tenets
 
@@ -42,14 +42,14 @@ Non-relational data models (often grouped under the label "NoSQL") give up some 
 ## How it fits
 
 - **Below:** key-value stores are [hash tables](../../05-algorithms-and-data-structures/02-fundamental-data-structures/hash-tables.md) spread across machines; graph models are [graph theory](../../01-mathematical-foundations/03-discrete-mathematics/graph-theory.md) with properties attached; the trade-offs are measured against [the relational model](the-relational-model.md) and [normalization](normalization.md).
-- **Above:** wide-column and key-value stores typically use [LSM-trees](../02-storage-and-indexing/lsm-trees.md); they are designed around [partitioning](../../10-distributed-and-parallel-computing/04-distributed-data/partitioning.md) and often [eventual consistency](../../10-distributed-and-parallel-computing/04-distributed-data/eventual-consistency-and-crdts.md). Knowledge graphs connect to [knowledge representation](../../13-artificial-intelligence/01-classical-ai/knowledge-representation-and-reasoning.md) in AI.
+- **Above:** wide-column and key-value stores typically use [LSM-trees](../02-storage-and-indexing/lsm-trees.md); they are designed around [partitioning](../../10-distributed-and-parallel-computing/04-distributed-data/partitioning.md) and often [eventual consistency](../../10-distributed-and-parallel-computing/04-distributed-data/eventual-consistency-and-crdts.md). Knowledge graphs connect to [knowledge representation](../../13-artificial-intelligence/01-classical-ai/knowledge-representation-and-reasoning.md) in Artificial Intelligence (AI).
 - **Siblings:** [relational algebra and SQL](relational-algebra-and-sql.md) is what these models give up and often later re-adopt; [normalization](normalization.md) explains the anomalies embedding reintroduces.
 
 ## Common misconceptions
 
 - **"NoSQL is faster than SQL."** It is faster for the access patterns it was designed around and slower or unable for others; a relational system with the right index is often as fast for key lookups.
 - **"Schemaless means no schema."** The schema moves into application code, where it is harder to see and enforce.
-- **"Non-relational systems cannot do transactions."** Many now support single-document or multi-document ACID transactions; the original absence was a scaling choice.
+- **"Non-relational systems cannot do transactions."** Many now support single-document or multi-document Atomicity, Consistency, Isolation, Durability (ACID) transactions; the original absence was a scaling choice.
 
 ## Go deeper
 

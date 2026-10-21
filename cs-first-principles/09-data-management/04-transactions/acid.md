@@ -6,7 +6,7 @@
 
 ## Essence
 
-ACID names the four guarantees of a database transaction: Atomicity (all of its effects happen or none do), Consistency (it moves the database from one state satisfying the integrity constraints to another), Isolation (concurrent transactions do not see each other's partial work; the result is as if they ran one at a time) and Durability (once committed, its effects survive crashes). Together they let a programmer write a sequence of operations as if it were the only thing running on a machine that never fails. The acronym was coined by Härder and Reuter in 1983, building on Jim Gray's work on the transaction concept. The four letters are not equally fundamental: A, I and D are mechanisms the system provides; C is the application's invariants, which those mechanisms protect.
+Atomicity, Consistency, Isolation, Durability (ACID) names the four guarantees of a database transaction: Atomicity (all of its effects happen or none do), Consistency (it moves the database from one state satisfying the integrity constraints to another), Isolation (concurrent transactions do not see each other's partial work; the result is as if they ran one at a time) and Durability (once committed, its effects survive crashes). Together they let a programmer write a sequence of operations as if it were the only thing running on a machine that never fails. The acronym was coined by Härder and Reuter in 1983, building on Jim Gray's work on the transaction concept. The four letters are not equally fundamental: A, I and D are mechanisms the system provides; C is the application's invariants, which those mechanisms protect.
 
 ## Core tenets
 
@@ -14,7 +14,7 @@ ACID names the four guarantees of a database transaction: Atomicity (all of its 
 
 2. **Atomicity removes partial failure from the programmer's view.** Transferring money is two writes: debit one account, credit another. A crash between them would destroy money. Atomicity guarantees that after any failure, either both writes are visible or neither is. The mechanism is logging: the system records enough to undo uncommitted changes.
 
-3. **Consistency is the application's invariants, preserved by construction.** The database enforces declared constraints (keys, foreign keys, checks); the application ensures each transaction, run alone on a consistent state, leaves a consistent state (total money unchanged by a transfer). Atomicity and isolation then guarantee the invariant holds under failures and concurrency. This "C" is unrelated to the "C" in the CAP theorem, which concerns replica agreement.
+3. **Consistency is the application's invariants, preserved by construction.** The database enforces declared constraints (keys, foreign keys, checks); the application ensures each transaction, run alone on a consistent state, leaves a consistent state (total money unchanged by a transfer). Atomicity and isolation then guarantee the invariant holds under failures and concurrency. This "C" is unrelated to the "C" in the Consistency, Availability, Partition tolerance (CAP) theorem, which concerns replica agreement.
 
 4. **Isolation makes concurrency invisible.** The ideal is *serializability*: the outcome of concurrent execution equals the outcome of some serial execution of the same transactions. Then any invariant preserved by each transaction alone is preserved by all of them together. Without isolation, two concurrent "read balance, add 10, write balance" transactions can lose one update, the classic race condition.
 

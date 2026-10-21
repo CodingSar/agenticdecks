@@ -13,16 +13,13 @@ A finite state machine (FSM) is the hardware realisation of a finite automaton: 
 1. **An FSM is state register plus next-state logic plus output logic.** On each clock edge the register loads `next = f(state, input)`; outputs are `g(state)` or `g(state, input)`. With `n` flip-flops a machine has at most `2ⁿ` states, so the state register is the circuit's entire memory of the past. Everything else is a pure function, built from combinational logic.
 
 ```
-             inputs ──────────────┐
-                                  ▼
-          ┌──────────┐      ┌───────────┐
-          │  state   │─────►│ next-state│──┐
-          │ register │      │   logic   │  │
-          └──────────┘      └───────────┘  │
-             ▲    │                         │
-     clock ──┘    └─────► output logic ──► outputs
-             ▲                              │
-             └──────────────────────────────┘ (next state)
+               ┌──────────────────┐   next    ┌────────────────┐
+  inputs x ───►│ next-state logic ├──────────►│ state register │◄── clock
+           │   │     f(s, x)      │           └───────┬────────┘
+           │   └────────▲─────────┘                   │ s
+           │            └─────────────────────────────┤
+           │                                          ▼
+           └ ─ ─ ─ ─ (Mealy only) ─ ─ ─ ─ ─ ─►  output logic g ───► outputs
 ```
 
 2. **Moore and Mealy machines differ in when outputs react.** In a Moore machine (Edward Moore, 1956) outputs depend only on the state, so they change only after a clock edge and are glitch-free. In a Mealy machine (George Mealy, 1955) outputs depend on state and current inputs, so they react within the same cycle and often need fewer states, but inputs can ripple straight through to outputs. The choice trades latency against timing cleanliness.

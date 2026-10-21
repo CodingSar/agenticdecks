@@ -16,7 +16,7 @@ A B-tree is a balanced search tree whose nodes are disk pages, each holding hund
 
 3. **The invariant is ordered keys with separators bounding subtrees.** Within a node, keys are sorted; for separator k_i between children c_i and c_{i+1}, every key in c_i is less than k_i and every key in c_{i+1} is greater or equal. Search at each node is a binary search within the page, then descent into one child. Every operation must restore this invariant before it finishes.
 
-4. **B+-trees put data only in leaves and chain the leaves.** Interior nodes hold only separator keys and pointers, maximising fan-out. Leaves hold keys with records or RIDs (Record Identifiers), and each leaf points to its right neighbour. A range query `WHERE x BETWEEN a AND b` descends once to `a` and then walks leaves until `b`, reading consecutive pages.
+4. **B+-trees put data only in leaves and chain the leaves.** Interior nodes hold only separator keys and pointers, maximising fan-out. Leaves hold keys with records or Record Identifiers (RIDs) (Record Identifiers), and each leaf points to its right neighbour. A range query `WHERE x BETWEEN a AND b` descends once to `a` and then walks leaves until `b`, reading consecutive pages.
 
 5. **Clustered vs secondary indexes differ in what the leaves hold.** A clustered (primary) index stores the rows themselves in key order, so a range scan reads contiguous data. A secondary index stores (key, pointer) pairs; each matching entry may require a random read of the base table. That is why a query matching 20% of rows through a secondary index can be slower than a full sequential scan, and why optimizers estimate selectivity before choosing an index.
 

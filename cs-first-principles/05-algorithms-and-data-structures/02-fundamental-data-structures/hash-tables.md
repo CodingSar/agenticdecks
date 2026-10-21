@@ -24,7 +24,7 @@ A hash table stores key–value pairs so that lookup, insert and delete by exact
 
 7. **Hash tables give up order, and with it range queries.** A good hash function scatters similar keys deliberately. So iterating in key order, finding the predecessor of a key, or answering "all keys between a and b" requires scanning everything. When you need order, use a [search tree](search-trees.md) or B-tree; databases offer both hash and tree indexes for this reason.
 
-8. **Hashing generalises far beyond dictionaries.** The same idea, a fast function that spreads inputs uniformly, gives Bloom filters (approximate set membership with no false negatives), consistent hashing (assigning keys to servers so adding a server moves only about 1/k of the keys), hash joins, deduplication, and sketches for counting in streams. Cryptographic hash functions add collision resistance against adversaries, which ordinary table hashes do not provide and do not need.
+8. **Hashing generalises far beyond dictionaries.** The same idea, a fast function that spreads inputs uniformly, gives Bloom filters (approximate set membership with no false negatives), consistent hashing (assigning keys to servers so adding a server moves only about 1/k of the keys), hash joins, deduplication, and sketches for counting in streams. Cryptographic hash functions add collision resistance against adversaries, which table hashes do not need.
 
 ## Key concepts
 

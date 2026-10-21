@@ -45,7 +45,7 @@ Relational algebra is a small set of operators that each take one or two relatio
 | Relational calculus | Declarative, logic-based query formalism equivalent to the algebra |
 | Bag semantics | Multisets: duplicates retained unless explicitly removed |
 | Aggregation | Grouping rows and computing summaries per group |
-| Recursive CTE | Common Table Expression that references itself to compute a fixpoint |
+| Recursive Common Table Expression (CTE) | Common Table Expression that references itself to compute a fixpoint |
 | Prepared statement | Query compiled with placeholders; parameters bound separately |
 
 ## How it fits

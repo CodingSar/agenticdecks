@@ -22,7 +22,7 @@ A trie (prefix tree) stores a set of strings by sharing common prefixes: each ed
 
 6. **The Burrows–Wheeler Transform makes a text both compressible and searchable.** Sort all rotations of T and output the last column. Characters that precede similar contexts end up adjacent, producing long runs that compress well (bzip2 uses this). The transform is reversible from the last column alone via the LF-mapping. Adding small rank tables gives the FM-index (named for Ferragina and Manzini, 2000), which counts pattern occurrences in O(m) time using space close to the compressed size of the text. Genome read aligners such as the Burrows–Wheeler Aligner (BWA) and Bowtie are built on it.
 
-7. **Tries organise vocabularies for tokenizers and autocomplete.** Language-model tokenizers find the longest vocabulary match at each position, a trie walk. Search engines' term dictionaries and spelling correctors often use tries or their minimised form (finite-state transducers), sharing both prefixes and suffixes.
+7. **Tries organise vocabularies.** Language-model tokenizers and autocomplete find the longest vocabulary match at a position, a trie walk. Search engines' term dictionaries often use minimised tries (finite-state transducers) that share suffixes as well as prefixes.
 
 8. **Theory and practice diverge on memory.** Suffix trees have optimal O(n) time but pointer-heavy nodes that thrash caches and can exhaust Random-Access Memory (RAM) for gigabyte texts. Suffix arrays, compressed tries and FM-indexes are usually preferred in practice, not for better asymptotics but because they fit in memory and scan sequentially.
 

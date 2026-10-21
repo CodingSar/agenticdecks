@@ -10,7 +10,7 @@ The relational model represents all data as *relations*: named sets of tuples, w
 
 ## Core tenets
 
-1. **A relation is a set of tuples over a schema.** Formally, given attribute domains D1, ..., Dn, a relation is a subset of D1 × ... × Dn. As a table: columns are attributes, rows are tuples. Because it is a set, rows have no order and no duplicates, and columns are identified by name, not position. SQL tables relax this (they allow duplicates and expose order), which is a source of subtle bugs and optimisation limits.
+1. **A relation is a set of tuples over a schema.** Formally, given attribute domains D1, ..., Dn, a relation is a subset of D1 × ... × Dn. As a table: columns are attributes, rows are tuples. Because it is a set, rows have no order and no duplicates, and columns are identified by name, not position. Structured Query Language (SQL) tables relax this (they allow duplicates and expose order), which is a source of subtle bugs and optimisation limits.
 
 2. **All information is represented as values.** Codd's "information principle": the only way data is represented is as values in attributes of tuples. There are no hidden pointers or record positions that carry meaning. An employee's department is a department identifier stored in the employee row, not a physical link. This makes every relationship visible to, and queryable by, the same operations.
 

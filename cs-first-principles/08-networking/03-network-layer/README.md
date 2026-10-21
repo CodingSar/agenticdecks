@@ -13,7 +13,7 @@ The unifying idea is the Internet Protocol (IP): one global address space with h
 
 | Child | Its role in the whole | Depends on |
 |---|---|---|
-| [IP Addressing and Forwarding](ip-addressing-and-forwarding.md) | The data plane: address structure, the packet format, longest-prefix-match forwarding, NAT, fragmentation | Link layer, principles |
+| [IP Addressing and Forwarding](ip-addressing-and-forwarding.md) | The data plane: address structure, the packet format, longest-prefix-match forwarding, Network Address Translation (NAT), fragmentation | Link layer, principles |
 | [Routing Algorithms](routing-algorithms.md) | The control plane within one domain: link-state and distance-vector shortest paths | Forwarding, graph algorithms |
 | [Internet Routing and BGP](internet-routing-and-bgp.md) | The control plane between domains: policy-based path-vector routing that glues ~75,000 networks together | Routing algorithms |
 
@@ -23,14 +23,14 @@ The unifying idea is the Internet Protocol (IP): one global address space with h
   (OSPF, IS-IS inside; BGP between)              (longest prefix match)
 ```
 
-Read addressing first: it defines what routing must produce, a table mapping address prefixes to next hops. Routing algorithms show how to compute that table from a graph when everyone cooperates. BGP shows what changes when the graph is owned by competing businesses who will not reveal their internals and choose routes by money, not distance.
+Read addressing first: it defines what routing must produce, a table mapping address prefixes to next hops. Routing algorithms show how to compute that table from a graph when everyone cooperates. Border Gateway Protocol (BGP) shows what changes when the graph is owned by competing businesses who will not reveal their internals and choose routes by money, not distance.
 
 ## Connections to sibling areas
 
 - **[Principles](../01-principles/README.md):** IP is the narrow waist and the purest embodiment of best-effort datagram service; routers are store-and-forward switches with queues.
-- **[Link Layer](../02-link-layer/README.md):** every hop is a link-layer frame; ARP maps the next-hop IP address to a link address. Switches handle forwarding within a LAN; routers between them.
-- **[Transport Layer](../04-transport-layer/README.md):** the network layer delivers to a host; transport demultiplexes to a process using ports. Routers usually ignore transport headers, except NATs and firewalls that rewrite them.
-- **[Application Layer](../05-application-layer/README.md):** DNS maps names to IP addresses; content delivery networks use routing tricks (anycast) to send users to nearby servers.
+- **[Link Layer](../02-link-layer/README.md):** every hop is a link-layer frame; Address Resolution Protocol (ARP) maps the next-hop IP address to a link address. Switches handle forwarding within a Local Area Network (LAN); routers between them.
+- **[Transport Layer](../04-transport-layer/README.md):** the network layer delivers to a host; transport demultiplexes to a process using ports. Routers usually ignore transport headers, except Network Address Translators (NATs) and firewalls that rewrite them.
+- **[Application Layer](../05-application-layer/README.md):** Domain Name System (DNS) maps names to IP addresses; content delivery networks use routing tricks (anycast) to send users to nearby servers.
 
 ## Connections across layers
 

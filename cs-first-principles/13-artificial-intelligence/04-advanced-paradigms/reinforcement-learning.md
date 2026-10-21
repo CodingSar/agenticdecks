@@ -10,7 +10,7 @@ Reinforcement Learning (RL) is learning to act from trial and error. An agent ob
 
 ## Core tenets
 
-1. **The problem is a Markov Decision Process.** An MDP has states S, actions A, transition probabilities P(s' | s, a), rewards R(s, a) and a discount γ ∈ [0, 1). The Markov property says the next state depends only on the current state and action, not on history. The agent seeks a policy π(a | s) maximising expected discounted return G_t = Σ_k γ^k r_{t+k+1}. Discounting keeps infinite sums finite and expresses preference for sooner rewards.
+1. **The problem is a Markov Decision Process.** An MDP has states S, actions A, transition probabilities P(s' | s, a), rewards R(s, a) and a discount γ ∈ [0, 1). The Markov property says the next state depends only on the current state and action, not on history. The agent seeks a policy π(a | s) maximising expected discounted return G_t = Σ_k γ^k r_{t+k+1}. Discounting keeps infinite sums finite.
 
 2. **The Bellman equation makes value recursive.** The optimal action value satisfies
 
@@ -55,7 +55,7 @@ Reinforcement Learning (RL) is learning to act from trial and error. An agent ob
 
 ## Common misconceptions
 
-- **"RL is how all AI learns."** Most deployed machine learning is supervised or self-supervised. RL is used where labelled actions do not exist and feedback is evaluative.
+- **"RL is how all artificial intelligence learns."** Most deployed machine learning is supervised or self-supervised. RL is used where labelled actions do not exist and feedback is evaluative.
 - **"The agent learns what the designer wants."** It learns what the reward rewards. Misspecified rewards produce competent but unintended behaviour.
 - **"AlphaGo learned Go purely by RL."** The original AlphaGo bootstrapped from human games by supervised learning and relied on tree search at play time; AlphaZero removed human data but kept search.
 
