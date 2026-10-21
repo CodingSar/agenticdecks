@@ -28,7 +28,7 @@ An **address space** is the range of virtual addresses a process can use, togeth
 
 7. **Virtual memory overcommits physical memory, so something must give.** Because allocation is lazy, the sum of address spaces can far exceed physical memory. When frames run out, the kernel must evict pages ([page replacement](page-replacement.md)) or, on Linux, invoke the Out-Of-Memory (OOM) killer to terminate a process. Linux's default heuristic overcommit lets `malloc` succeed for memory that may never be backed.
 
-8. **Changing mappings on a multicore is expensive.** Each core caches translations in its own TLB, and hardware does not keep TLBs coherent on x86. When the kernel unmaps or downgrades a page used by several threads, it must send inter-processor interrupts to make other cores invalidate their entries, a TLB shootdown costing microseconds. This is a reason `munmap` and `mprotect` are slow and why allocators avoid returning memory to the kernel too often.
+8. **Changing mappings on a multicore is expensive.** Each core caches translations in its own TLB, and hardware does not keep TLBs coherent on x86. When the kernel unmaps or downgrades a page used by several threads, it must send inter-processor interrupts to make other cores invalidate their entries, a TLB shootdown costing microseconds.
 
 ## Key concepts
 
@@ -39,9 +39,7 @@ An **address space** is the range of virtual addresses a process can use, togeth
 | Page table entry (PTE) | Maps one virtual page: frame number, present, permission, accessed and dirty bits |
 | TLB | Translation Lookaside Buffer: a small cache of recent translations |
 | Page fault | Trap raised when a translation is missing or an access is not permitted |
-| Demand paging | Loading or allocating a page only when it is first accessed |
 | Copy-on-write | Share a page read-only and copy it on the first write |
-| Huge page | A large page (2 MiB, 1 GiB) that increases TLB reach |
 | TLB shootdown | Invalidating stale translations on other cores via inter-processor interrupts |
 
 ## How it fits
@@ -54,10 +52,8 @@ An **address space** is the range of virtual addresses a process can use, togeth
 
 - **"Virtual memory means swapping to disk."** Swapping is one use. The core of virtual memory is translation, which gives isolation, sharing and lazy allocation even on machines with no swap (most phones).
 - **"`malloc` returning non-NULL means the memory exists."** Under overcommit, physical frames are assigned on first touch; a process can be killed later when it uses memory it was "given".
-- **"Each process has its own copy of shared libraries."** Code pages are shared physically; only writable data pages are private (and copied on write).
 
 ## Go deeper
 
 - Remzi H. Arpaci-Dusseau and Andrea C. Arpaci-Dusseau, *Operating Systems: Three Easy Pieces* (2018), the memory virtualization chapters.
 - Peter J. Denning, "Virtual Memory" (ACM Computing Surveys, 1970): the classic survey.
-- Mel Gorman, *Understanding the Linux Virtual Memory Manager* (2004): how a real kernel implements it.

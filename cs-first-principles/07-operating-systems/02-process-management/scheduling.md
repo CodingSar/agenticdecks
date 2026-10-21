@@ -22,7 +22,7 @@ A scheduler decides which runnable thread runs on each Central Processing Unit (
 
 6. **Multicore scheduling is a tension between balance and affinity.** A single global run queue balances load perfectly but becomes a lock contention point and moves threads between cores, losing their cache contents. Per-core run queues (Linux, Windows) keep threads near their caches and scale, but need periodic load balancing and work stealing to keep cores busy. Non-Uniform Memory Access (NUMA) machines add a further reason to keep threads near their memory.
 
-7. **Priority creates the risk of priority inversion.** If a low-priority thread holds a lock that a high-priority thread needs, and medium-priority threads keep the low one from running, the high one waits indefinitely. This hung the Mars Pathfinder lander's software in 1997 until priority inheritance (temporarily raising the lock holder's priority) was enabled. Real-time schedulers (Linux `SCHED_FIFO`, `SCHED_DEADLINE`) give hard priorities and need such protocols.
+7. **Priority creates the risk of priority inversion.** If a low-priority thread holds a lock that a high-priority thread needs, and medium-priority threads keep the low one from running, the high one waits indefinitely. This hung the Mars Pathfinder lander's software in 1997 until priority inheritance (temporarily raising the lock holder's priority) was enabled.
 
 8. **Scheduling is a queueing system, so utilization near 100% means long waits.** When arrivals are random, average waiting time grows sharply as utilization approaches one; in the simplest single-server model it scales as 1/(1 − ρ) for utilization ρ ([latency, bandwidth and queueing](../../08-networking/01-principles/latency-bandwidth-and-queueing.md)). Interactive systems therefore keep headroom, and control groups (cgroups) let administrators cap or reserve CPU shares for groups of processes.
 
@@ -37,7 +37,6 @@ A scheduler decides which runnable thread runs on each Central Processing Unit (
 | MLFQ | Multi-Level Feedback Queue; priorities adjusted from observed behaviour |
 | Virtual runtime | CPU time used, scaled by weight; fair schedulers run the smallest |
 | Load balancing | Moving threads between per-core run queues to keep cores busy |
-| Processor affinity | Preferring to run a thread on the core whose cache it has warmed |
 | Priority inversion | A high-priority thread waits on a lock held by a low-priority one |
 
 ## How it fits
@@ -57,4 +56,3 @@ A scheduler decides which runnable thread runs on each Central Processing Unit (
 - Remzi H. Arpaci-Dusseau and Andrea C. Arpaci-Dusseau, *Operating Systems: Three Easy Pieces* (2018), scheduling chapters (MLFQ, proportional share, multiprocessor).
 - Fernando J. Corbató, Marjorie Merwin-Daggett and Robert C. Daley, "An Experimental Time-Sharing System" (1962): the origin of multilevel feedback.
 - Carl A. Waldspurger and William E. Weihl, "Lottery Scheduling: Flexible Proportional-Share Resource Management" (OSDI 1994).
-- Ion Stoica and Hussein Abdel-Wahab, "Earliest Eligible Virtual Deadline First" (technical report, 1995): the algorithm behind Linux's current scheduler.

@@ -12,7 +12,7 @@ Information theory measures *how much uncertainty a message removes*, independen
 
 1. **Information is surprise, measured on a log scale.** An outcome of probability p carries −log₂ p bits of "self-information". The log makes information from independent events add: two independent fair coin flips have probability 1/4 and carry 2 bits, exactly 1 + 1. Rare events are informative; a certain event (p = 1) tells you nothing.
 
-2. **Entropy is the average surprise of a source.** H(X) = E[−log₂ p(X)]. A fair coin has H = 1 bit; a coin that lands heads 99% of the time has H ≈ 0.08 bits. Entropy is maximised by the uniform distribution (H = log₂ n for n outcomes) and is zero only when one outcome is certain. Meaning is deliberately ignored: a random string and a poem of the same statistics have the same entropy.
+2. **Entropy is the average surprise of a source.** H(X) = E[−log₂ p(X)]. A fair coin has H = 1 bit; a coin that lands heads 99% of the time has H ≈ 0.08 bits. Entropy is maximised by the uniform distribution (H = log₂ n for n outcomes) and is zero only when one outcome is certain.
 
 3. **Entropy is the floor for lossless description.** No uniquely decodable code can have an average length below H(X) bits per symbol, and codes exist within 1 bit of it. That is why entropy is the currency of [compression](source-coding-and-compression.md): it is the irreducible part of the data once all predictable structure is removed.
 
@@ -56,4 +56,3 @@ Information theory measures *how much uncertainty a message removes*, independen
 
 - Claude E. Shannon, "A Mathematical Theory of Communication" (1948): the founding paper, still readable.
 - Thomas M. Cover and Joy A. Thomas, *Elements of Information Theory* (2nd ed., 2006): the standard rigorous text.
-- David J. C. MacKay, *Information Theory, Inference, and Learning Algorithms* (2003): connects entropy to coding and machine learning with many examples.

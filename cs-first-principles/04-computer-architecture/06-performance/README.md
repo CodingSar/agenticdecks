@@ -27,7 +27,7 @@ Read the [performance equation](the-performance-equation.md) first: it is the fr
 
 ## Connections to sibling areas
 
-- **[Instruction Set Architecture](../01-instruction-set-architecture/README.md)**: the ISA, together with the compiler, sets instruction count; RISC vs CISC is a debate about trading instruction count against cycles per instruction.
+- **[Instruction Set Architecture](../01-instruction-set-architecture/README.md)**: the ISA, together with the compiler, sets instruction count; Reduced vs Complex Instruction Set Computer (RISC vs CISC) design is a debate about trading instruction count against cycles per instruction.
 - **[Processor Microarchitecture](../02-processor-microarchitecture/README.md)**: pipelining shortens the clock period, and superscalar and out-of-order execution lower cycles per instruction; their power cost is what hit the wall.
 - **[Memory Hierarchy](../03-memory-hierarchy/README.md)**: memory stalls are often the largest component of cycles per instruction; the roofline model asks whether a program is limited by memory bandwidth or by compute.
 - **[Parallel Architecture](../04-parallel-architecture/README.md)**: the response to the power wall, and the main domain of Amdahl's law.
@@ -35,7 +35,7 @@ Read the [performance equation](the-performance-equation.md) first: it is the fr
 
 ## Connections across layers
 
-The power equation comes from [timing and power](../../03-digital-logic/04-hardware-design/timing-and-power.md) in digital logic and from [CMOS](../../00-engineering-foundations/03-semiconductor-devices/cmos.md) and [fabrication and scaling](../../00-engineering-foundations/03-semiconductor-devices/fabrication-and-scaling.md); measuring performance well is an instance of [measurement and modeling](../../00-engineering-foundations/05-engineering-method/measurement-and-modeling.md). Upward, [asymptotic analysis](../../02-theory-of-computation/04-complexity/asymptotic-analysis.md) ignores constant factors that this area measures; [work–span analysis](../../10-distributed-and-parallel-computing/01-parallel-computing/work-span-and-parallel-models.md) generalises Amdahl's law; [scalability patterns](../../10-distributed-and-parallel-computing/05-large-scale-systems/scalability-patterns.md) and [observability](../../12-software-engineering/04-operations/observability.md) apply the same quantitative thinking to whole services.
+The power equation comes from [timing and power](../../03-digital-logic/04-hardware-design/timing-and-power.md) in digital logic and from [Complementary Metal-Oxide-Semiconductor (CMOS)](../../00-engineering-foundations/03-semiconductor-devices/cmos.md) and [fabrication and scaling](../../00-engineering-foundations/03-semiconductor-devices/fabrication-and-scaling.md); measuring performance well is an instance of [measurement and modeling](../../00-engineering-foundations/05-engineering-method/measurement-and-modeling.md). Upward, [asymptotic analysis](../../02-theory-of-computation/04-complexity/asymptotic-analysis.md) ignores constant factors that this area measures; [work–span analysis](../../10-distributed-and-parallel-computing/01-parallel-computing/work-span-and-parallel-models.md) generalises Amdahl's law; [scalability patterns](../../10-distributed-and-parallel-computing/05-large-scale-systems/scalability-patterns.md) and [observability](../../12-software-engineering/04-operations/observability.md) apply the same quantitative thinking to whole services.
 
 ## Cross-cutting threads
 

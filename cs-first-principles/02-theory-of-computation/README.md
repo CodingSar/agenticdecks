@@ -7,7 +7,7 @@
 
 Theory of computation asks what information is, what machines can do with it, and at what cost, *before any machine is built*. It answers with mathematical models and proved limits: how few bits can describe a source and how many can cross a noisy channel; which patterns a machine with a given kind of memory can recognise; which problems no program can ever solve; which solvable problems need astronomically more time than others; and how much of this changes if the machine obeys quantum mechanics.
 
-The single idea that unifies the layer is that **computation and information can be studied as mathematical objects, independent of any hardware**. A Turing machine, a finite automaton or a probability distribution over messages is defined with nothing more than sets, functions, logic and probability. That is why the results are permanent. Faster chips do not make the halting problem decidable, do not compress random data, and do not turn an exponential algorithm into a polynomial one.
+The single idea that unifies the layer is that **computation and information can be studied as mathematical objects, independent of any hardware**. A Turing machine, a finite automaton or a probability distribution over messages is defined with nothing more than sets, functions, logic and probability. That is why the results are permanent. Faster chips do not make the halting problem decidable or compress random data.
 
 ## Why this layer sits here
 

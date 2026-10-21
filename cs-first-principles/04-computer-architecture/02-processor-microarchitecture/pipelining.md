@@ -10,11 +10,11 @@ Pipelining splits the execution of each instruction into stages and runs differe
 
 ## Core tenets
 
-1. **Throughput, not latency, is what improves.** The classic five-stage RISC pipeline (Fetch, Decode, Execute, Memory, Write-back) still takes five cycles per instruction, but completes one instruction per cycle once full. For a long run of instructions, Cycles Per Instruction (CPI) approaches 1 while the cycle time drops to about one fifth. Programs are long, so throughput is what matters.
+1. **Throughput, not latency, is what improves.** The classic five-stage Reduced Instruction Set Computer (RISC) pipeline (Fetch, Decode, Execute, Memory, Write-back) still takes five cycles per instruction, but completes one instruction per cycle once full. For a long run of instructions, Cycles Per Instruction (CPI) approaches 1 while the cycle time drops to about one fifth. Programs are long, so throughput is what matters.
 
 2. **Pipeline registers are what make overlap possible.** Between stages sit registers that hold each instruction's intermediate results and control signals. They isolate stages from each other so that each stage works on a different instruction in the same cycle. They also cost time: each adds setup time and clock-to-output delay, typically tens of picoseconds in modern processes, which is pure overhead.
 
-3. **The slowest stage sets the clock.** If one stage takes 400 ps and the others 200 ps, the clock must be 400 ps and the fast stages idle half the time. Designers balance stages by moving logic between them or splitting slow ones. The cache access stage is often the hardest to shorten, which is why L1 caches are kept small (32–64 KiB per core in 2020s designs).
+3. **The slowest stage sets the clock.** If one stage takes 400 ps and the others 200 ps, the clock must be 400 ps and the fast stages idle half the time. Designers balance stages by moving logic between them or splitting slow ones. The cache access stage is often the hardest to shorten, which is why level-1 (L1) caches are kept small (32–64 KiB per core in 2020s designs).
 
 4. **Deeper pipelines have diminishing and then negative returns.** Splitting into more stages shortens each, but the fixed register overhead per stage grows as a fraction, and every stall or flush throws away more work. The Intel Pentium 4 (2000–2006) pushed to 20 and then 31 stages to reach 3.8 GHz, but its high misprediction cost and power led Intel back to roughly 14-stage designs (Core, 2006). Most 2020s high-performance cores have roughly 10–20 stages.
 
@@ -48,7 +48,7 @@ i4                 F  D  E  M  W   <- one instruction completes per cycle from c
 ## How it fits
 
 - **Below:** each stage is combinational logic bounded by [clocked registers](../../03-digital-logic/03-sequential-logic/clocking-and-synchronous-design.md); stage timing comes from [timing and power](../../03-digital-logic/04-hardware-design/timing-and-power.md) analysis.
-- **Above:** [compilers](../../06-programming-languages/03-compilers/code-generation-and-register-allocation.md) schedule instructions to fill load and branch delays; the throughput–latency distinction reappears in [networking](../../08-networking/01-principles/latency-bandwidth-and-queueing.md) and in [GPU rasterization pipelines](../../14-human-and-visual-computing/02-computer-graphics/rasterization-pipeline.md).
+- **Above:** [compilers](../../06-programming-languages/03-compilers/code-generation-and-register-allocation.md) schedule instructions to fill load and branch delays; the throughput–latency distinction reappears in [networking](../../08-networking/01-principles/latency-bandwidth-and-queueing.md) and in [Graphics Processing Unit (GPU) rasterization pipelines](../../14-human-and-visual-computing/02-computer-graphics/rasterization-pipeline.md).
 - **Siblings:** builds on the [datapath](datapath-and-control.md); creates the problems solved by [hazard handling and branch prediction](hazards-and-branch-prediction.md); [superscalar](superscalar-and-out-of-order.md) cores run several pipelines side by side.
 
 ## Common misconceptions

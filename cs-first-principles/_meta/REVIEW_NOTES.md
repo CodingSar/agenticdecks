@@ -47,3 +47,14 @@ Collected from writer reports, to be resolved in the review pass.
 - Alpern & Schneider 1985 safety ∩ liveness.
 - Newcombe et al. 2015 TLA+ at AWS; Coq renamed Rocq; HACL* in Firefox; Gonthier 2005, Flyspeck 2014.
 - Gödel incompleteness has no home leaf (linked to halting problem).
+
+### 02 Theory of Computation
+- Best explicit circuit lower bound ~ (3 + 1/86)n (Find et al. 2016), later ~3.1n (Li & Yang 2022).
+- Quantum: two-qubit error ~10⁻³, surface-code threshold ~1%, ~1M physical qubits for RSA-2048 (Gidney 2025 estimate <1M).
+- Earley: O(n²) unambiguous; linear on LR(k) only with Leo's (1991) optimisation — check wording.
+- 1-way QFA (Kondacs–Watrous) bounded-error recognise a proper subset of regular languages.
+- Hamiltonian simulation BQP-complete (decision version).
+- NIST FIPS 203/204/205 (ML-KEM, ML-DSA, SLH-DSA) Aug 2024.
+- Generalised chess EXP-complete; Go with Japanese ko EXP-complete; some games PSPACE-complete (Hex, Go without ko as Lichtenstein–Sipser ladder). Check wording.
+- Universal TM log-factor overhead (Hennie–Stearns).
+- Candidate leaf: Kolmogorov complexity.

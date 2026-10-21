@@ -22,7 +22,7 @@ A bus or interconnect is the shared or point-to-point communication path that li
 
 6. **Interrupts have a cost that becomes visible at high rates.** Taking an interrupt and returning costs roughly a microsecond or more once cache and pipeline disruption is counted. At a million packets per second that is the whole processor. High-speed devices therefore coalesce interrupts (one per batch), and high-performance networking and storage often switch to polling under load (Linux's New API (NAPI) for network drivers, and user-space frameworks such as the Data Plane Development Kit (DPDK) and the Storage Performance Development Kit (SPDK)).
 
-7. **Shared parallel buses gave way to serial point-to-point links.** Early systems (the Unibus of 1970, ISA and PCI in PCs) used a shared set of parallel wires with arbitration. As clock rates rose, skew between parallel wires, reflections and capacitive loading of many attached devices limited speed. Peripheral Component Interconnect Express (PCIe, 2003) replaced shared buses with switched serial lanes using embedded clocking: PCIe 5.0 runs 32 GT/s per lane, about 4 GB/s per direction per lane, or about 64 GB/s for a 16-lane slot. The same shift happened on chip: cores now talk over rings and meshes, not a single bus.
+7. **Shared parallel buses gave way to serial point-to-point links.** Early systems (the Unibus of 1970, and the Industry Standard Architecture and Peripheral Component Interconnect (PCI) buses in PCs) used a shared set of parallel wires with arbitration. As clock rates rose, skew between parallel wires, reflections and capacitive loading of many attached devices limited speed. Peripheral Component Interconnect Express (PCIe, 2003) replaced shared buses with switched serial lanes using embedded clocking: PCIe 5.0 runs 32 GT/s per lane, about 4 GB/s per direction per lane, or about 64 GB/s for a 16-lane slot. The same shift happened on chip: cores now talk over rings and meshes, not a single bus.
 
 8. **Interconnects are packet networks.** PCIe has physical, data link (with Cyclic Redundancy Checks (CRCs) and retries) and transaction layers. Coherent links such as Compute Express Link (CXL) extend this to shared memory between processors and accelerators: networking's ideas at nanosecond scale.
 
@@ -44,7 +44,7 @@ A bus or interconnect is the shared or point-to-point communication path that li
 
 - **Below:** fast serial links depend on [signal integrity](../../00-engineering-foundations/02-electrical-circuits/noise-and-signal-integrity.md) and line coding; crossing clock domains uses [synchronous design](../../03-digital-logic/03-sequential-logic/clocking-and-synchronous-design.md) techniques; interrupts are part of [the ISA contract's](../01-instruction-set-architecture/the-isa-contract.md) exception model.
 - **Above:** [device drivers and interrupt handling](../../07-operating-systems/06-io-and-devices/device-drivers-and-interrupt-handling.md), [preemptive scheduling](../../07-operating-systems/02-process-management/scheduling.md) and [I/O models](../../07-operating-systems/06-io-and-devices/io-models.md) are built on these mechanisms; the layered link design mirrors [network layering](../../08-networking/01-principles/layering-and-the-end-to-end-principle.md).
-- **Siblings:** [DMA and devices](dma-and-devices.md) uses the same links for bulk data and interrupts for completion.
+- **Siblings:** [Direct Memory Access (DMA) and devices](dma-and-devices.md) uses the same links for bulk data and interrupts for completion.
 
 ## Common misconceptions
 

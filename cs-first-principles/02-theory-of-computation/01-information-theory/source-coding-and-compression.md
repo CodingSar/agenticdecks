@@ -55,4 +55,3 @@ Source coding is the problem of representing the output of a source in as few bi
 
 - Thomas M. Cover and Joy A. Thomas, *Elements of Information Theory* (2nd ed., 2006), chapters 3, 5, 10 and 13: typical sets, codes, rate–distortion and universal coding.
 - David A. Huffman, "A Method for the Construction of Minimum-Redundancy Codes" (1952): the original two-page construction.
-- Jacob Ziv and Abraham Lempel, "A Universal Algorithm for Sequential Data Compression" (1977): the LZ77 paper.

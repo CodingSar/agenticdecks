@@ -55,5 +55,4 @@ P is the class of decision problems that can be *solved* in polynomial time; NP 
 ## Go deeper
 
 - Stephen A. Cook, "The Complexity of Theorem-Proving Procedures" (1971): the first NP-completeness proof.
-- Richard M. Karp, "Reducibility Among Combinatorial Problems" (1972): the 21 problems that showed NP-completeness is everywhere.
 - Michael R. Garey and David S. Johnson, *Computers and Intractability: A Guide to the Theory of NP-Completeness* (1979): the classic catalogue and method.

@@ -25,7 +25,7 @@ A file system implementation is a data structure laid out on a block device. Its
 
 5. **The page cache is where most file input/output (I/O) actually happens.** Reads are served from cached pages when possible, and the kernel reads ahead when it detects sequential access. Writes dirty pages in memory and return; background writeback flushes them later, coalescing many small writes into fewer large ones. In Linux the page cache is unified with virtual memory, so the same frames serve `read`, `mmap` and executable loading, and [page replacement](../04-memory-management/page-replacement.md) decides which file pages stay.
 
-6. **A virtual file system layer lets many implementations share one interface.** Linux's Virtual File System (VFS) defines generic objects (superblock, inode, dentry, file) with operation tables that each concrete file system (ext4, XFS, Btrfs, NFS client, `procfs`, Filesystem in Userspace (FUSE)) fills in. System calls operate on the generic objects, so programs work identically on any of them. This is [interface vs implementation](../../CROSS-CUTTING.md#interface-vs-implementation) at kernel scale; Windows NT achieves the same with its I/O manager and file system drivers.
+6. **A virtual file system layer lets many implementations share one interface.** Linux's Virtual File System (VFS) defines generic objects (superblock, inode, dentry, file) with operation tables that each concrete file system (ext4, XFS, Btrfs, Network File System (NFS) client, `procfs`, Filesystem in Userspace (FUSE)) fills in. System calls operate on the generic objects, so programs work identically on any of them. This is [interface vs implementation](../../CROSS-CUTTING.md#interface-vs-implementation) at kernel scale; Windows NT achieves the same with its I/O manager and file system drivers.
 
 7. **Integrity needs end-to-end checksums because devices fail silently.** Disks and SSDs occasionally return wrong data without reporting an error (bit rot, misdirected writes, firmware bugs). Traditional file systems trust the device. ZFS and Btrfs store a checksum of every block in its parent pointer, so corruption is detected on read and, with redundant copies (mirroring or parity), repaired automatically.
 
@@ -38,10 +38,8 @@ A file system implementation is a data structure laid out on a block device. Its
 | Superblock | Block describing the file system's size, layout and state |
 | Inode | Per-file metadata and map from file offsets to blocks |
 | Extent | A contiguous run of blocks described by start and length |
-| Indirect block | A block of pointers to further blocks, extending an inode's map |
 | Bitmap | One bit per block or inode recording allocated or free |
 | Page cache | In-memory cache of file data, unified with virtual memory |
-| Read-ahead | Prefetching file blocks on detecting sequential access |
 | VFS | Virtual File System: the kernel's generic file interface |
 | Checksum | Hash of a block's contents used to detect corruption |
 

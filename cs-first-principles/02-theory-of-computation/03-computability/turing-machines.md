@@ -6,11 +6,11 @@
 
 ## Essence
 
-A Turing Machine (TM) is a finite automaton given an unbounded tape it can read, write and move along in both directions. Alan Turing designed it in 1936 by analysing what a human clerk does when computing with pencil and paper: look at a few symbols, consult a finite set of instructions, change a symbol, shift attention, repeat. The model is deliberately primitive, yet it can simulate every other reasonable model of computation, and one fixed machine (the universal TM) can simulate *any* TM given its description as input. That universal machine is the mathematical blueprint of the stored-program computer: a program is just data that a general machine interprets.
+A Turing Machine (TM) is a finite automaton given an unbounded tape it can read, write and move along in both directions. Alan Turing designed it in 1936 by analysing what a human clerk does when computing with pencil and paper: look at a few symbols, consult a finite set of instructions, change a symbol, shift attention, repeat. The model is primitive, yet it can simulate every other reasonable model of computation, and one fixed machine (the universal TM) can simulate *any* TM given its description as input. That universal machine is the mathematical blueprint of the stored-program computer: a program is just data that a general machine interprets.
 
 ## Core tenets
 
-1. **The definition is tiny.** A TM is (Q, Σ, Γ, δ, q₀, q_accept, q_reject): finite states Q, input alphabet Σ, tape alphabet Γ ⊇ Σ ∪ {blank}, and a transition function δ: Q × Γ → Q × Γ × {L, R}. Each step reads the symbol under the head, writes a symbol, moves one cell, and changes state. A *configuration* (state, tape contents, head position) captures everything about the computation at one instant, so a run is a sequence of configurations.
+1. **The definition is tiny.** A TM is (Q, Σ, Γ, δ, q₀, q_accept, q_reject): finite states Q, input alphabet Σ, tape alphabet Γ ⊇ Σ ∪ {blank}, and a transition function δ: Q × Γ → Q × Γ × {L, R}. Each step reads the symbol under the head, writes one, moves one cell and changes state. A *configuration* (state, tape contents, head position) captures everything about the computation at one instant.
 
 2. **There are three outcomes, not two.** On a given input a TM may accept, reject, or run forever. A language is *decidable* (recursive) if some TM halts on every input with the right answer. It is *recognisable* (recursively enumerable) if some TM accepts exactly its members but may loop on non-members. The gap between those two notions is where [undecidability](halting-problem-and-undecidability.md) lives.
 
@@ -20,7 +20,7 @@ A Turing Machine (TM) is a finite automaton given an unbounded tape it can read,
 
 5. **A universal TM exists.** There is a single machine U such that U(⟨M⟩, w) behaves exactly like M on w: it accepts, rejects or loops when M does. U keeps M's description on one part of its tape and M's simulated tape on another, and repeatedly looks up the transition to apply. The overhead is small (a logarithmic factor in time for a multitape U, with constants depending on M), so one general machine plus software replaces all special-purpose machines.
 
-6. **Turing completeness is easy to reach.** Any system that can simulate a universal TM, given unbounded memory, is Turing complete. Very small systems qualify: two-counter machines, the lambda calculus, Conway's Game of Life, Rule 110 cellular automata, and accidentally even C++ templates and some configuration languages. The ingredients are conditional branching plus unbounded, rewritable storage.
+6. **Turing completeness is easy to reach.** Any system that can simulate a universal TM, given unbounded memory, is Turing complete. Very small systems qualify: two-counter machines, the lambda calculus, Conway's Game of Life, Rule 110, and accidentally C++ templates. The ingredients are conditional branching plus unbounded, rewritable storage.
 
 7. **Real computers are TMs with finite tapes, and that is the right idealisation.** A physical machine has finitely many states, so strictly it is a finite automaton. But the number of states (2 to the number of memory bits) is so large that the TM model, which ignores the bound, predicts real behaviour far better. Theory proves lower bounds on the TM; engineering runs programs on approximations of it.
 
@@ -47,7 +47,7 @@ A Turing Machine (TM) is a finite automaton given an unbounded tape it can read,
 
 ## Common misconceptions
 
-- **"A Turing machine is a practical design."** It is a mathematical definition chosen for easy proofs. Nobody builds one; its value is that anything built can be reduced to it.
+- **"A Turing machine is a practical design."** It is a mathematical definition chosen for easy proofs. Its value is that anything built reduces to it.
 - **"Nondeterministic TMs can compute more."** They compute exactly the same functions. Whether they compute them *faster* by more than a polynomial is the P versus NP (polynomial versus nondeterministic polynomial time) question.
 - **"Turing complete means powerful or useful."** It only means general. Many Turing-complete systems are hopeless to program, and many useful languages (Structured Query Language (SQL) without recursion, regular expressions) are deliberately not Turing complete so they always terminate.
 

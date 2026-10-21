@@ -6,7 +6,7 @@
 
 ## Essence
 
-Every physical channel (a wire, a radio link, a flash cell, a disk sector) corrupts some of what passes through it. Shannon's channel coding theorem says that, despite this, reliable communication is possible: each channel has a capacity C, and at any rate below C there exist codes whose error probability can be made as small as you like, while above C it cannot. The price of reliability is not a rate falling toward zero, as engineers before 1948 assumed, but longer blocks and more computation. Error-correcting codes realise this by adding structured redundancy, so that valid codewords sit far apart and noise rarely pushes one into another's neighbourhood.
+Every physical channel (wire, radio link, flash cell) corrupts some of what passes through it. Shannon's channel coding theorem says that, despite this, reliable communication is possible: each channel has a capacity C, and at any rate below C there exist codes whose error probability can be made as small as you like, while above C it cannot. The price of reliability is not a rate falling toward zero, as engineers before 1948 assumed, but longer blocks and more computation. Error-correcting codes realise this by adding structured redundancy, so that valid codewords sit far apart and noise rarely pushes one into another's neighbourhood.
 
 ## Core tenets
 
@@ -22,7 +22,7 @@ Every physical channel (a wire, a radio link, a flash cell, a disk sector) corru
 
 6. **Algebra makes codes efficient to encode and decode.** Linear codes are subspaces of a vector space over a finite field: encoding is a matrix multiply and decoding starts by computing a syndrome. Reed–Solomon codes treat data as polynomial coefficients over a finite field and correct burst errors (optical discs, two-dimensional barcodes, storage arrays). Low-density parity-check (LDPC) codes and turbo codes, decoded iteratively by belief propagation, operate within a fraction of a decibel of capacity and are used in Wi-Fi, 5G and solid-state drives; polar codes provably achieve capacity.
 
-7. **Detection is cheaper than correction, so systems mix them.** A Cyclic Redundancy Check (CRC) uses polynomial division to detect bursts with a few bytes of overhead, but cannot fix them. When a return path exists, it is often cheaper to detect and retransmit (Automatic Repeat reQuest, ARQ) than to correct. When it does not (deep-space probes, storage read back years later, real-time streams), Forward Error Correction (FEC) is the only option.
+7. **Detection is cheaper than correction, so systems mix them.** A Cyclic Redundancy Check (CRC) detects bursts with a few bytes of polynomial-division checksum, but cannot fix them. When a return path exists, it is often cheaper to detect and retransmit (Automatic Repeat reQuest, ARQ) than to correct. When it does not (deep space, storage, real-time streams), Forward Error Correction (FEC) is the only option.
 
 8. **Feedback does not increase the capacity of a memoryless channel.** Shannon proved letting the sender see what the receiver got leaves C unchanged; retransmission protocols buy simplicity, not capacity.
 

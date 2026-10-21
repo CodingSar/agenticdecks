@@ -38,7 +38,6 @@ When physical memory is full and a process touches a page that is not resident, 
 | Accessed / dirty bit | Hardware-set page table entry (PTE) bits recording use and modification |
 | Working set | Pages a process referenced in a recent time window |
 | Thrashing | Constant paging because working sets exceed memory |
-| Swap space | Disk area that holds evicted anonymous pages |
 
 ## How it fits
 
@@ -57,4 +56,3 @@ When physical memory is full and a process touches a page that is not resident, 
 - L. A. Bélády, "A Study of Replacement Algorithms for a Virtual-Storage Computer" (1966): MIN and the anomaly.
 - Peter J. Denning, "The Working Set Model for Program Behavior" (1968).
 - Nimrod Megiddo and Dharmendra S. Modha, "ARC: A Self-Tuning, Low Overhead Replacement Cache" (FAST 2003).
-- Remzi H. Arpaci-Dusseau and Andrea C. Arpaci-Dusseau, *Operating Systems: Three Easy Pieces* (2018), "Beyond Physical Memory: Policies".

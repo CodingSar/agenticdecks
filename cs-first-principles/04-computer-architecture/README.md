@@ -17,7 +17,7 @@ The second half of the story is that the contract hides a brutal physical realit
 
 - [05 Algorithms and Data Structures](../05-algorithms-and-data-structures/README.md) analyses programs on the Random Access Machine (RAM) model, an idealised ISA with unit-cost memory access and word-sized arithmetic. The memory hierarchy explains when that model lies, which is why cache-aware and external-memory algorithms exist.
 - [06 Programming Languages](../06-programming-languages/README.md) needs a target. Compilers lower source code to ISA instructions, allocate the ISA's registers, and obey its calling conventions and memory model.
-- [07 Operating Systems](../07-operating-systems/README.md) is built on mechanisms only hardware can provide: privilege modes (user vs kernel), the Memory Management Unit (MMU) for address translation and protection, interrupts and exceptions for regaining control, and atomic instructions for synchronisation. An OS cannot enforce isolation that the ISA does not support.
+- [07 Operating Systems](../07-operating-systems/README.md) is built on mechanisms only hardware can provide: privilege modes (user vs kernel), the Memory Management Unit (MMU) for address translation and protection, interrupts and exceptions for regaining control, and atomic instructions for synchronisation. An Operating System (OS) cannot enforce isolation that the ISA does not support.
 
 The single abstraction this layer contributes is **the sequential execution of an instruction stream over a flat, protected address space**: each instruction appears to finish before the next begins, and each load returns the last value stored. Every other layer stands on that illusion.
 
@@ -27,7 +27,7 @@ The single abstraction this layer contributes is **the sequential execution of a
 |---|---|---|
 | [Instruction Set Architecture](01-instruction-set-architecture/README.md) | Defines the contract: what software sees | 03 Digital Logic |
 | [Processor Microarchitecture](02-processor-microarchitecture/README.md) | Implements the contract fast: datapath, pipelining, speculation | ISA |
-| [Memory Hierarchy](03-memory-hierarchy/README.md) | Makes memory look large and fast: caches, virtual memory, DRAM | ISA, microarchitecture |
+| [Memory Hierarchy](03-memory-hierarchy/README.md) | Makes memory look large and fast: caches, virtual memory, Dynamic Random-Access Memory (DRAM) | ISA, microarchitecture |
 | [Parallel Architecture](04-parallel-architecture/README.md) | Many cores, vector units, GPUs, accelerators, and what shared memory means | All three above |
 | [I/O and Interconnect](05-io-and-interconnect/README.md) | Connects the processor to devices and the outside world | ISA (interrupts), memory hierarchy (DMA) |
 | [Performance](06-performance/README.md) | The quantitative laws that judge every design choice | All of the above |
@@ -60,10 +60,10 @@ Read the ISA first, because it states what must be preserved. Microarchitecture 
 
 - [Abstraction and layering](../CROSS-CUTTING.md#abstraction-and-layering): the ISA is the textbook example of an interface that has outlived dozens of implementations (x86 code from 1978 still runs).
 - [Interface vs implementation](../CROSS-CUTTING.md#interface-vs-implementation): architecture (ISA) vs microarchitecture is where the distinction was first named, by the IBM System/360 team in 1964.
-- [Caching and locality](../CROSS-CUTTING.md#caching-and-locality): register file, L1/L2/L3 caches, TLBs, branch predictors and DRAM row buffers are all caches.
+- [Caching and locality](../CROSS-CUTTING.md#caching-and-locality): register file, level-1/2/3 (L1/L2/L3) caches, TLBs, branch predictors and DRAM row buffers are all caches.
 - [Pipelining and parallelism](../CROSS-CUTTING.md#pipelining-and-parallelism): instruction pipelines, superscalar issue, SIMD, multicore and GPUs.
 - [Indirection and naming](../CROSS-CUTTING.md#indirection-and-naming): virtual addresses are names resolved by page tables; register renaming resolves architectural names to physical registers.
 - [State and time](../CROSS-CUTTING.md#state-and-time): memory consistency models define the order in which stores from different cores become visible.
 - [Limits and impossibility](../CROSS-CUTTING.md#limits-and-impossibility): the memory wall, the power wall and Amdahl's law.
-- [Tradeoffs](../CROSS-CUTTING.md#tradeoffs): latency vs throughput (CPU vs GPU), generality vs efficiency (CPU vs accelerator).
+- [Tradeoffs](../CROSS-CUTTING.md#tradeoffs): latency vs throughput (CPU vs Graphics Processing Unit (GPU)), generality vs efficiency (CPU vs accelerator).
 - [Virtualization](../CROSS-CUTTING.md#virtualization): virtual memory gives every process its own address space; hardware virtualisation extensions let one machine look like many.

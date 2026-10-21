@@ -44,7 +44,7 @@ A memory consistency model is the part of the Instruction Set Architecture (ISA)
 
 - **Below:** program order and visibility order are [partial and total orders](../../01-mathematical-foundations/02-sets-relations-functions/relations-and-orders.md); the reorderings come from [store buffers and out-of-order cores](../02-processor-microarchitecture/superscalar-and-out-of-order.md).
 - **Above:** [lock-free algorithms](../../07-operating-systems/03-concurrency/lock-free-synchronization.md) and [locks](../../07-operating-systems/03-concurrency/locks-and-semaphores.md) must be written against it; language [semantics](../../06-programming-languages/02-semantics-and-types/syntax-and-semantics.md) and [compiler optimizations](../../06-programming-languages/03-compilers/optimization.md) must respect it; distributed [consistency models](../../10-distributed-and-parallel-computing/03-consensus-and-replication/consistency-models.md) (linearizability, causal, eventual) are the same idea across a network.
-- **Siblings:** builds directly on [coherence](multicore-and-cache-coherence.md); GPUs ([SIMD and GPUs](simd-and-gpus.md)) use scoped, even weaker models.
+- **Siblings:** builds directly on [coherence](multicore-and-cache-coherence.md); Graphics Processing Units (GPUs; see [SIMD and GPUs](simd-and-gpus.md)) use scoped, even weaker models.
 
 ## Common misconceptions
 

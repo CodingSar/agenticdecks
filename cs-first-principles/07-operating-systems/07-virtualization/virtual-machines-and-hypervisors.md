@@ -29,14 +29,12 @@ A **hypervisor** (virtual machine monitor, VMM) runs several **virtual machines*
 | Term | Meaning |
 |---|---|
 | Hypervisor (VMM) | Software that creates and runs virtual machines and controls real hardware |
-| Guest / host | The OS running inside a VM / the system running the hypervisor |
 | Trap-and-emulate | Run guest code natively; trap sensitive operations and emulate them |
 | Sensitive instruction | An instruction that reads or alters privileged machine state |
 | VM exit | Hardware-assisted transfer of control from guest to hypervisor |
 | Paravirtualization | Modifying the guest to cooperate with the hypervisor via hypercalls or virtual devices |
 | Nested paging (EPT/NPT) | Hardware two-level translation, guest-virtual to host-physical |
 | virtio | Standard paravirtual device interface using shared-memory queues |
-| Live migration | Moving a running VM between hosts with brief downtime |
 
 ## How it fits
 
@@ -48,11 +46,9 @@ A **hypervisor** (virtual machine monitor, VMM) runs several **virtual machines*
 
 - **"VMs are slow because everything is emulated."** With hardware assists, CPU-bound code runs within a few percent of native; overhead concentrates in VM exits, TLB misses and I/O.
 - **"A Java Virtual Machine is the same kind of thing."** A language VM implements an abstract instruction set for programs; a system VM replicates real hardware for whole OSs.
-- **"VM isolation is absolute."** Shared microarchitectural state and hypervisor bugs have both allowed cross-VM leaks and escapes.
 
 ## Go deeper
 
 - Gerald J. Popek and Robert P. Goldberg, "Formal Requirements for Virtualizable Third Generation Architectures" (1974).
 - Paul Barham et al., "Xen and the Art of Virtualization" (SOSP 2003).
-- Keith Adams and Ole Agesen, "A Comparison of Software and Hardware Techniques for x86 Virtualization" (ASPLOS 2006).
 - Christopher Clark et al., "Live Migration of Virtual Machines" (NSDI 2005).

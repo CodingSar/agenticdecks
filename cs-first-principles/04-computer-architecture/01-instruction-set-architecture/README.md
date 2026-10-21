@@ -14,7 +14,7 @@ The unifying idea of this area is that **an ISA is a design for longevity**. Mic
 | Child | Its role in the whole | Depends on |
 |---|---|---|
 | [The ISA contract](the-isa-contract.md) | What an ISA promises and what it leaves free: architectural state, sequential semantics, privilege, exceptions | 03 Digital Logic |
-| [RISC vs CISC](risc-vs-cisc.md) | The central design debate: simple fixed-format instructions vs rich variable-format ones, and why it converged | The ISA contract |
+| [RISC vs CISC](risc-vs-cisc.md) | The central design debate: Reduced Instruction Set Computer (RISC) vs Complex Instruction Set Computer (CISC), and why it converged | The ISA contract |
 | [Instruction encoding and addressing](instruction-encoding-and-addressing.md) | How instructions become bits, and how operands name registers and memory | The ISA contract, RISC vs CISC |
 
 Read [the ISA contract](the-isa-contract.md) first: it explains the architecture/microarchitecture split that everything else relies on. [RISC vs CISC](risc-vs-cisc.md) then shows the two philosophies for filling in the contract, and why the debate was largely settled by the 1990s once pipelining made instruction regularity decisive and x86 learned to translate its complex instructions into simple internal ones. [Instruction encoding and addressing](instruction-encoding-and-addressing.md) is the concrete layer: the bit layouts and addressing modes that a decoder must parse and a compiler must emit.
@@ -32,8 +32,8 @@ Read [the ISA contract](the-isa-contract.md) first: it explains the architecture
 ## Connections to sibling areas
 
 - **[Processor Microarchitecture](../02-processor-microarchitecture/README.md)**: implements the ISA. ISA choices directly decide how hard that is: fixed-length instructions make wide parallel decode easy, while x86's 1-to-15-byte instructions need predecoders and a micro-op cache.
-- **[Memory Hierarchy](../03-memory-hierarchy/README.md)**: the ISA defines the address space and, for privileged software, the page-table format that the MMU walks. Load/store architectures make every memory access an explicit instruction, which simplifies cache and TLB handling.
-- **[Parallel Architecture](../04-parallel-architecture/README.md)**: the ISA must specify atomic instructions (compare-and-swap, load-linked/store-conditional), fences, the memory consistency model, and vector or SIMD extensions.
+- **[Memory Hierarchy](../03-memory-hierarchy/README.md)**: the ISA defines the address space and, for privileged software, the page-table format that the Memory Management Unit (MMU) walks. Load/store architectures make every memory access an explicit instruction, which simplifies cache and Translation Lookaside Buffer (TLB) handling.
+- **[Parallel Architecture](../04-parallel-architecture/README.md)**: the ISA must specify atomic instructions (compare-and-swap, load-linked/store-conditional), fences, the memory consistency model, and vector or Single Instruction, Multiple Data (SIMD) extensions.
 - **[I/O and Interconnect](../05-io-and-interconnect/README.md)**: the ISA defines how devices are reached (memory-mapped I/O or port I/O instructions) and how interrupts enter the processor.
 - **[Performance](../06-performance/README.md)**: the ISA sets instruction count, one of the three factors in the performance equation; compact encodings also affect instruction-cache misses.
 

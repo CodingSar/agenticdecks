@@ -14,7 +14,7 @@ Virtual memory gives every program its own private address space by inserting a 
 
 2. **Page tables are trees to keep them small.** A flat table for a 48-bit address space with 4 KiB pages would need 2^36 entries per process. x86-64 instead uses a four-level radix tree (five levels for 57-bit addresses since Intel Ice Lake): each level indexes 9 bits of the virtual page number into a 512-entry, 4 KiB table. Unmapped regions need no lower-level tables, so sparse address spaces are cheap. One register (CR3 on x86) holds the root, so switching processes means switching that register.
 
-3. **The TLB makes translation fast.** Walking four levels of tables costs up to four memory accesses per load, which would be ruinous. A TLB is a small cache of recent translations (typically 64 entries for the L1 data TLB and 1,000–3,000 entries for the L2 TLB on 2020s cores); hit rates are usually above 99% because of locality. On a miss, a hardware page-table walker (x86, ARM, most RISC-V) reads the tables, often finding them in the data caches.
+3. **The TLB makes translation fast.** Walking four levels of tables costs up to four memory accesses per load, which would be ruinous. A TLB is a small cache of recent translations (typically 64 entries for the level-1 (L1) data TLB and 1,000–3,000 entries for the level-2 (L2) TLB on 2020s cores); hit rates are usually above 99% because of locality. On a miss, a hardware page-table walker (x86, ARM, most RISC-V) reads the tables, often finding them in the data caches.
 
 4. **Permission bits turn translation into protection.** Each entry carries bits for present, writable, user-accessible, and no-execute (NX, introduced to x86-64 by AMD in 2003). The MMU checks them on every access. A user-mode program cannot even name another process's memory, because it has no mapping to it, and cannot touch kernel pages because they are marked supervisor-only. This is the hardware basis of process isolation.
 
@@ -24,7 +24,7 @@ Virtual memory gives every program its own private address space by inserting a 
 
 7. **Caches and translation must be designed together.** To overlap TLB lookup with L1 access, many L1 caches are virtually indexed, physically tagged: the index comes from the page-offset bits, which are the same in virtual and physical addresses, while the tag check uses the translated address. This is why an L1 of 32 KiB with 8 ways (4 KiB per way) fits exactly with 4 KiB pages, and why L1 size grows by adding ways or using larger pages rather than more sets.
 
-8. **Tags and nesting support many contexts.** Address Space Identifiers (ASIDs; PCIDs on x86) tag TLB entries so a context switch need not flush them. For virtual machines, hardware nested paging (around 2008) adds a second translation, guest-physical to host-physical, making TLB misses costlier.
+8. **Tags and nesting support many contexts.** Address Space Identifiers (ASIDs; Process-Context Identifiers (PCIDs) on x86) tag TLB entries so a context switch need not flush them. For virtual machines, hardware nested paging (around 2008) adds a second translation, guest-physical to host-physical, making TLB misses costlier.
 
 ```
  virtual address (48 bits, x86-64, 4 KiB pages)
@@ -49,9 +49,9 @@ Virtual memory gives every program its own private address space by inserting a 
 
 ## How it fits
 
-- **Below:** translation is a [function](../../01-mathematical-foundations/02-sets-relations-functions/functions-and-cardinality.md) from virtual to physical pages, partial and not necessarily injective (shared pages); the TLB is built like any [cache](cache-design.md); faults rely on [the ISA's](../01-instruction-set-architecture/the-isa-contract.md) precise exceptions and privilege modes.
+- **Below:** translation is a [function](../../01-mathematical-foundations/02-sets-relations-functions/functions-and-cardinality.md) from virtual to physical pages, partial and not necessarily injective (shared pages); the TLB is built like any [cache](cache-design.md); faults rely on the [Instruction Set Architecture's (ISA's)](../01-instruction-set-architecture/the-isa-contract.md) precise exceptions and privilege modes.
 - **Above:** the OS builds [address spaces and paging](../../07-operating-systems/04-memory-management/address-spaces-and-paging.md), [processes](../../07-operating-systems/02-process-management/processes.md) and [page replacement](../../07-operating-systems/04-memory-management/page-replacement.md) on this; hypervisors use nested paging for [virtual machines](../../07-operating-systems/07-virtualization/virtual-machines-and-hypervisors.md); [sandboxing](../../11-security-and-cryptography/03-system-security/isolation-and-sandboxing.md) depends on page permissions.
-- **Siblings:** DRAM acts as a cache for pages stored on [storage devices](dram-and-storage-devices.md); [locality](locality-and-caching.md) is what makes both the TLB and demand paging work.
+- **Siblings:** Dynamic Random-Access Memory (DRAM) acts as a cache for pages stored on [storage devices](dram-and-storage-devices.md); [locality](locality-and-caching.md) is what makes both the TLB and demand paging work.
 
 ## Common misconceptions
 

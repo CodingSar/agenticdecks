@@ -6,7 +6,7 @@
 
 ## Essence
 
-A processor core divides into two parts. The **datapath** holds and transforms data: the register file, the Arithmetic Logic Unit (ALU), adders for addresses, memory interfaces and the multiplexers and wires between them. The **control** decides, for each instruction, which paths through the datapath are active: which registers are read, which ALU operation runs, whether memory is read or written, and where the result goes. Executing an instruction means the control unit decodes its bits into a set of control signals that configure the datapath for one operation. Every faster design, from pipelines to out-of-order cores, is this same split with more overlap.
+A processor core divides into two parts. The **datapath** holds and transforms data: the register file, the Arithmetic Logic Unit (ALU), adders for addresses, memory interfaces and the multiplexers and wires between them. The **control** decides, for each instruction, which paths through the datapath are active: which registers are read, which ALU operation runs, whether memory is read or written, and where the result goes. Executing an Instruction Set Architecture (ISA) instruction means the control unit decodes its bits into a set of control signals that configure the datapath for one operation. Every faster design, from pipelines to out-of-order cores, is this same split with more overlap.
 
 ## Core tenets
 
@@ -14,7 +14,7 @@ A processor core divides into two parts. The **datapath** holds and transforms d
 
 2. **The datapath is combinational logic between state elements.** State lives in the PC, the register file and memory, all clocked. Between them is combinational logic whose outputs settle some time after the inputs change. In a single-cycle design, one clock edge latches the results of a whole instruction, so the clock period must cover the slowest instruction's full path (usually a load: fetch, decode, register read, address add, memory read, write-back).
 
-3. **Control is a function from instruction bits to signals.** In a simple RISC core, control is combinational: the opcode and function fields map to signals such as `RegWrite`, `MemRead`, `ALUSrc` and `ALUOp`. Regular encodings make this table small. In a multi-cycle design, control becomes a finite-state machine that steps through the phases of each instruction, reusing the same ALU in different cycles.
+3. **Control is a function from instruction bits to signals.** In a simple Reduced Instruction Set Computer (RISC) core, control is combinational: the opcode and function fields map to signals such as `RegWrite`, `MemRead`, `ALUSrc` and `ALUOp`. Regular encodings make this table small. In a multi-cycle design, control becomes a finite-state machine that steps through the phases of each instruction, reusing the same ALU in different cycles.
 
 4. **Hardwired and microcoded control are two implementations of the same function.** Hardwired control builds the decode table directly in gates: fast, but hard to change. Microcoded control stores a small program per instruction in a Read-Only Memory (ROM), which made complex Complex Instruction Set Computer (CISC) instructions practical (IBM System/360, 1964). Modern x86 cores hardwire the common instructions into simple micro-operations and keep a microcode ROM for rare, complex ones, such as string operations and some system instructions; microcode can also be patched after shipping to fix bugs.
 

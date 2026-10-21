@@ -6,7 +6,7 @@
 
 ## Essence
 
-A finite automaton is the simplest model of a computer: a machine with a fixed, finite amount of memory that reads its input once, left to right, and then says yes or no. The set of strings it accepts is a *language*, and the languages that some finite automaton accepts are called *regular*. Three very different descriptions (deterministic automata, nondeterministic automata and regular expressions) turn out to define exactly the same class, which is a sign that the class is natural. The defining limitation is equally clean: a finite machine cannot count without bound, so languages such as "n a's followed by n b's" are out of reach. Everything with bounded memory, from a vending machine controller to a network protocol state machine, lives here.
+A finite automaton is the simplest model of a computer: a machine with a fixed, finite amount of memory that reads its input once, left to right, and then says yes or no. The set of strings it accepts is a *language*, and the languages that some finite automaton accepts are called *regular*. Three very different descriptions (deterministic automata, nondeterministic automata and regular expressions) define exactly the same class. The defining limitation is equally clean: a finite machine cannot count without bound, so languages such as "n a's followed by n b's" are out of reach. Everything with bounded memory, from a vending machine controller to a network protocol state machine, lives here.
 
 ## Core tenets
 
@@ -14,7 +14,7 @@ A finite automaton is the simplest model of a computer: a machine with a fixed, 
 
 2. **Nondeterminism adds convenience, not power.** A Nondeterministic Finite Automaton (NFA) may have several possible next states (or ε-moves that consume no input) and accepts if *any* path accepts. The subset construction simulates it with a DFA whose states are *sets* of NFA states, so every NFA has an equivalent DFA. The price is size: an n-state NFA can require 2ⁿ DFA states (for example, "the n-th symbol from the end is 1").
 
-3. **Regular expressions, NFAs and DFAs are equivalent (Kleene's theorem).** Regular expressions build languages from single symbols using union (|), concatenation and Kleene star (*). Thompson's construction turns any regular expression into an NFA of linear size, and state elimination turns any automaton back into a regular expression. This is why `grep` and lexer generators can compile patterns into fast automata.
+3. **Regular expressions, NFAs and DFAs are equivalent (Kleene's theorem).** Regular expressions build languages from single symbols using union (|), concatenation and Kleene star (*). Thompson's construction turns any regular expression into an NFA of linear size, and state elimination turns any automaton back into a regular expression. This is how `grep` and lexer generators compile patterns.
 
 4. **Regular languages are closed under the Boolean operations and more.** Union, intersection, complement, concatenation, star and reversal of regular languages are regular. Complement is easy for a DFA (swap accepting and non-accepting states); intersection uses the product construction, running two DFAs in lock-step on pairs of states. Closure lets you prove a language regular by building it from known regular pieces, and is the basis of automata-based verification.
 

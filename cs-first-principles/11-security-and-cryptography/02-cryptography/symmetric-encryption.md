@@ -6,7 +6,7 @@
 
 ## Essence
 
-Symmetric encryption protects confidentiality when sender and receiver share a secret key. It is fast (gigabytes per second per core with hardware support) and does nearly all bulk encryption in practice; public-key methods are used mainly to agree on symmetric keys. The building blocks are **block ciphers**, which are keyed permutations on fixed-size blocks (the Advanced Encryption Standard (AES) uses 128-bit blocks), and **stream ciphers**, which generate a keystream to XOR (exclusive-or) with the message. A block cipher alone encrypts only one block, so a **mode of operation** turns it into an encryption scheme for long messages. The modern rule is simple: always use **authenticated encryption** (AE) such as AES-GCM or ChaCha20-Poly1305, which provides confidentiality and integrity together, and never reuse a nonce with the same key.
+Symmetric encryption protects confidentiality when sender and receiver share a secret key. It is fast (gigabytes per second per core with hardware support) and does nearly all bulk encryption in practice; public-key methods are used mainly to agree on symmetric keys. The building blocks are **block ciphers**, which are keyed permutations on fixed-size blocks (the Advanced Encryption Standard (AES) uses 128-bit blocks), and **stream ciphers**, which generate a keystream to XOR (exclusive-or) with the message. A block cipher alone encrypts only one block, so a **mode of operation** turns it into an encryption scheme for long messages. The modern rule is simple: always use **authenticated encryption** such as AES-GCM or ChaCha20-Poly1305, which provides confidentiality and integrity together, and never reuse a nonce with the same key.
 
 ## Core tenets
 
@@ -43,8 +43,8 @@ Symmetric encryption protects confidentiality when sender and receiver share a s
 
 ## How it fits
 
-- **Below:** AES's S-box is inversion in the finite field GF(2⁸), and GCM's MAC is polynomial evaluation over GF(2¹²⁸), both from [abstract algebra](../../01-mathematical-foundations/04-algebra/abstract-algebra.md); rounds are built from XOR and table lookups that map onto [logic gates](../../03-digital-logic/02-combinational-logic/logic-gates.md) and dedicated CPU instructions; definitions come from [foundations](foundations-of-modern-cryptography.md).
-- **Above:** [TLS](secure-protocols-and-tls.md) uses AEAD for every record; [file systems](../../07-operating-systems/05-storage-and-file-systems/file-system-implementation.md) and disks use block-cipher modes for encryption at rest; [digital media](../../14-human-and-visual-computing/03-media-and-vision/digital-media-and-compression.md) protection uses it for content.
+- **Below:** AES's S-box is inversion in the finite (Galois) field GF(2⁸), and GCM's MAC is polynomial evaluation over GF(2¹²⁸), both from [abstract algebra](../../01-mathematical-foundations/04-algebra/abstract-algebra.md); rounds are built from XOR and table lookups that map onto [logic gates](../../03-digital-logic/02-combinational-logic/logic-gates.md) and dedicated processor instructions; definitions come from [foundations](foundations-of-modern-cryptography.md).
+- **Above:** [Transport Layer Security (TLS)](secure-protocols-and-tls.md) uses AEAD for every record; [file systems](../../07-operating-systems/05-storage-and-file-systems/file-system-implementation.md) and disks use block-cipher modes for encryption at rest; [digital media](../../14-human-and-visual-computing/03-media-and-vision/digital-media-and-compression.md) protection uses it for content.
 - **Siblings:** [hash functions and MACs](hash-functions-and-macs.md) supply integrity; [public-key cryptography](public-key-cryptography.md) agrees on the symmetric keys; [side channels](../03-system-security/side-channels.md) attack table-based AES implementations.
 
 ## Common misconceptions

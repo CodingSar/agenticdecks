@@ -13,7 +13,7 @@ Two ideas unify the answer. First, **devices look like memory**: the processor c
 
 | Child | Its role in the whole | Depends on |
 |---|---|---|
-| [Buses and interrupts](buses-and-interrupts.md) | How components are connected and addressed, and how devices get the processor's attention | ISA (exceptions, privilege), digital logic (signalling) |
+| [Buses and interrupts](buses-and-interrupts.md) | How components are connected and addressed, and how devices get the processor's attention | Instruction Set Architecture (ISA) (exceptions, privilege), digital logic (signalling) |
 | [DMA and devices](dma-and-devices.md) | How devices move data without the processor, and how a device's interface is structured | Buses and interrupts, memory hierarchy |
 
 Read [buses and interrupts](buses-and-interrupts.md) first: it covers the physical and logical connection (from shared parallel buses to point-to-point serial links such as Peripheral Component Interconnect Express (PCIe)) and the interrupt mechanism that ties devices into the processor's exception model. [DMA and devices](dma-and-devices.md) builds on this: once a device can be addressed and can interrupt, Direct Memory Access (DMA) lets it transfer whole buffers into memory and signal only on completion, which is how all high-bandwidth I/O works.
@@ -46,4 +46,4 @@ Signalling relies on [noise and signal integrity](../../00-engineering-foundatio
 - [Batching and amortization](../../CROSS-CUTTING.md#batching-and-amortization): DMA and interrupt coalescing amortise per-event cost over large transfers.
 - [Indirection and naming](../../CROSS-CUTTING.md#indirection-and-naming): devices are named by addresses in the memory map; the IOMMU adds translation.
 - [State and time](../../CROSS-CUTTING.md#state-and-time): interrupts are asynchronous events that arrive at arbitrary points in a program.
-- [Tradeoffs](../../CROSS-CUTTING.md#tradeoffs): polling vs interrupts trades CPU time for latency.
+- [Tradeoffs](../../CROSS-CUTTING.md#tradeoffs): polling vs interrupts trades Central Processing Unit (CPU) time for latency.

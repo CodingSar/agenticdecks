@@ -56,4 +56,3 @@ A quantum computer stores information in qubits, whose state is a unit vector in
 
 - Michael A. Nielsen and Isaac L. Chuang, *Quantum Computation and Quantum Information* (10th anniversary ed., 2010): the standard reference.
 - N. David Mermin, *Quantum Computer Science: An Introduction* (2007): written for computer scientists, minimal physics.
-- John Preskill, "Quantum Computing in the NISQ Era and Beyond" (2018): realistic view of noisy near-term hardware.

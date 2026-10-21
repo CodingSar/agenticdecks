@@ -24,7 +24,7 @@ Asymptotic analysis describes how the resources an algorithm uses (time, memory,
 
 7. **Lower bounds are about the problem, not one algorithm.** An upper bound needs one algorithm; a lower bound must defeat all of them. In restricted models we can prove them: any comparison sort needs Ω(n log n) comparisons, because a decision tree distinguishing n! orderings has depth at least log₂ n! ≈ n log₂ n. In general models, proving strong lower bounds is extraordinarily hard: for Boolean circuits, the best proven lower bound for any explicit function in NP (nondeterministic polynomial time) is only about 3n gates.
 
-8. **Asymptotics can mislead at real sizes.** Big-O hides constants and lower-order terms, and real machines have caches. Fast matrix-multiplication algorithms with exponents near 2.37 are never used because their constants are astronomical ("galactic algorithms"), and an O(n) linked-list scan can lose to an O(n) array scan by 10–100× because of [cache misses](../../04-computer-architecture/03-memory-hierarchy/locality-and-caching.md). Use asymptotics to choose a class, then measure.
+8. **Asymptotics can mislead at real sizes.** Big-O hides constants and lower-order terms, and real machines have caches. Fast matrix-multiplication algorithms with exponents near 2.37 are never used because their constants are astronomical ("galactic algorithms"), and an O(n) linked-list scan can lose to an O(n) array scan by 10–100× because of [cache misses](../../04-computer-architecture/03-memory-hierarchy/locality-and-caching.md). Choose a class asymptotically, then measure.
 
 ## Key concepts
 

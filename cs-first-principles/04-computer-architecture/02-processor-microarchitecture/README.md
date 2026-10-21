@@ -31,15 +31,15 @@ Read in order. Each child exists because the previous design leaves performance 
 
 ## Connections to sibling areas
 
-- **[Instruction Set Architecture](../01-instruction-set-architecture/README.md)**: the specification this area implements. Regular RISC encodings make wide decode cheap; precise exceptions force in-order commit.
-- **[Memory Hierarchy](../03-memory-hierarchy/README.md)**: the pipeline's memory stage is only fast if the L1 cache hits (about 4–5 cycles on 2020s cores). Out-of-order execution exists largely to keep working while a cache miss (hundreds of cycles to DRAM) is outstanding.
+- **[Instruction Set Architecture](../01-instruction-set-architecture/README.md)**: the specification this area implements. Regular Reduced Instruction Set Computer (RISC) encodings make wide decode cheap; precise exceptions force in-order commit.
+- **[Memory Hierarchy](../03-memory-hierarchy/README.md)**: the pipeline's memory stage is only fast if the level-1 (L1) cache hits (about 4–5 cycles on 2020s cores). Out-of-order execution exists largely to keep working while a cache miss (hundreds of cycles to Dynamic Random-Access Memory (DRAM)) is outstanding.
 - **[Parallel Architecture](../04-parallel-architecture/README.md)**: when ILP ran out (around 2005), designers replicated whole cores instead of widening one. Simultaneous multithreading reuses an out-of-order core's resources across two threads.
 - **[I/O and Interconnect](../05-io-and-interconnect/README.md)**: interrupts must enter the pipeline at a precise point, which is one more reason for in-order commit.
 - **[Performance](../06-performance/README.md)**: every technique here attacks cycles per instruction or clock period in the performance equation, and each pays in power, which the power wall eventually capped.
 
 ## Connections across layers
 
-Pipeline stages are combinational logic between registers, so the clock period comes from [timing and power](../../03-digital-logic/04-hardware-design/timing-and-power.md) analysis and [clocking](../../03-digital-logic/03-sequential-logic/clocking-and-synchronous-design.md). Upward, [compiler optimization](../../06-programming-languages/03-compilers/optimization.md) schedules instructions to avoid stalls, and [JIT compilers](../../06-programming-languages/04-runtime-systems/jit-compilation.md) tune for specific cores. Speculative execution leaves traces in caches, which is the basis of the Spectre family of [side channels](../../11-security-and-cryptography/03-system-security/side-channels.md).
+Pipeline stages are combinational logic between registers, so the clock period comes from [timing and power](../../03-digital-logic/04-hardware-design/timing-and-power.md) analysis and [clocking](../../03-digital-logic/03-sequential-logic/clocking-and-synchronous-design.md). Upward, [compiler optimization](../../06-programming-languages/03-compilers/optimization.md) schedules instructions to avoid stalls, and [Just-In-Time (JIT) compilers](../../06-programming-languages/04-runtime-systems/jit-compilation.md) tune for specific cores. Speculative execution leaves traces in caches, which is the basis of the Spectre family of [side channels](../../11-security-and-cryptography/03-system-security/side-channels.md).
 
 ## Cross-cutting threads
 

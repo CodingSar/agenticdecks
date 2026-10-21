@@ -12,11 +12,11 @@ The gap it bridges is enormous and has grown. Since the 1980s processor speed im
 | Level | Typical size | Latency | Relative to an L1 hit |
 |---|---|---|---|
 | Registers | ~1 KiB architectural, a few KiB physical | 0 cycles (operand) | n/a |
-| L1 cache | 32–64 KiB per core (data), similar for instructions | ~1 ns (4–5 cycles) | 1x |
-| L2 cache | 256 KiB – 2 MiB per core (more on some designs) | ~3–5 ns | ~4x |
-| L3 (last-level) cache | 8–100+ MiB shared | ~10–20 ns | ~15x |
+| Level-1 (L1) cache | 32–64 KiB per core (data), similar for instructions | ~1 ns (4–5 cycles) | 1x |
+| Level-2 (L2) cache | 256 KiB – 2 MiB per core (more on some designs) | ~3–5 ns | ~4x |
+| Level-3 (L3, last-level) cache | 8–100+ MiB shared | ~10–20 ns | ~15x |
 | DRAM | 8 GiB – several TiB | ~60–120 ns | ~100x |
-| NVMe flash SSD | 0.5–30 TB | ~10–100 µs | ~10^4–10^5x |
+| Non-Volatile Memory Express (NVMe) flash Solid-State Drive (SSD) | 0.5–30 TB | ~10–100 µs | ~10^4–10^5x |
 | Hard disk | 1–30 TB | ~5–10 ms | ~10^7x |
 
 The unifying idea is **caching driven by locality**, applied at every level, plus **virtual memory**, which adds a layer of naming so that each program sees its own private address space that the hardware and Operating System (OS) map onto physical memory.
@@ -25,9 +25,9 @@ The unifying idea is **caching driven by locality**, applied at every level, plu
 
 | Child | Its role in the whole | Depends on |
 |---|---|---|
-| [Locality and caching](locality-and-caching.md) | Why a hierarchy works at all: temporal and spatial locality, and the average memory access time model | ISA |
+| [Locality and caching](locality-and-caching.md) | Why a hierarchy works at all: temporal and spatial locality, and the average memory access time model | Instruction Set Architecture (ISA) |
 | [Cache design](cache-design.md) | How hardware caches are organised: lines, associativity, replacement, write policy, the 3 Cs of misses | Locality and caching |
-| [Virtual memory hardware](virtual-memory-hardware.md) | Address translation and protection: page tables, the MMU and TLB | Cache design, ISA privilege |
+| [Virtual memory hardware](virtual-memory-hardware.md) | Address translation and protection: page tables, the Memory Management Unit (MMU) and TLB | Cache design, ISA privilege |
 | [DRAM and storage devices](dram-and-storage-devices.md) | The bottom levels: how DRAM, flash and disks work and why they are slow in the ways they are | Locality and caching |
 
 Start with [locality and caching](locality-and-caching.md): everything else is an application of it. [Cache design](cache-design.md) gives the concrete mechanisms. [Virtual memory hardware](virtual-memory-hardware.md) is a second hierarchy layered on the first: a Translation Lookaside Buffer (TLB) caches translations, and DRAM acts as a cache for pages on storage. [DRAM and storage devices](dram-and-storage-devices.md) explains the physical behaviour (rows, banks, erase blocks, seeks) that the upper levels are designed to hide.
@@ -42,7 +42,7 @@ Start with [locality and caching](locality-and-caching.md): everything else is a
 
 ## Connections across layers
 
-SRAM cells and DRAM capacitors come from [00 Engineering Foundations](../../00-engineering-foundations/03-semiconductor-devices/cmos.md) and [capacitance](../../00-engineering-foundations/02-electrical-circuits/capacitance-and-timing.md). Upward, the hierarchy is why [external-memory and cache-oblivious algorithms](../../05-algorithms-and-data-structures/07-advanced-topics/external-memory-and-cache-oblivious.md) and [B-trees](../../09-data-management/02-storage-and-indexing/b-trees.md) exist, why [arrays beat linked lists](../../05-algorithms-and-data-structures/02-fundamental-data-structures/arrays-and-linked-lists.md) in practice, and what the OS manages in [address spaces and paging](../../07-operating-systems/04-memory-management/address-spaces-and-paging.md) and [page replacement](../../07-operating-systems/04-memory-management/page-replacement.md). Storage device behaviour shapes [file systems](../../07-operating-systems/05-storage-and-file-systems/file-system-implementation.md) and [LSM trees](../../09-data-management/02-storage-and-indexing/lsm-trees.md).
+SRAM cells and DRAM capacitors come from [00 Engineering Foundations](../../00-engineering-foundations/03-semiconductor-devices/cmos.md) and [capacitance](../../00-engineering-foundations/02-electrical-circuits/capacitance-and-timing.md). Upward, the hierarchy is why [external-memory and cache-oblivious algorithms](../../05-algorithms-and-data-structures/07-advanced-topics/external-memory-and-cache-oblivious.md) and [B-trees](../../09-data-management/02-storage-and-indexing/b-trees.md) exist, why [arrays beat linked lists](../../05-algorithms-and-data-structures/02-fundamental-data-structures/arrays-and-linked-lists.md) in practice, and what the OS manages in [address spaces and paging](../../07-operating-systems/04-memory-management/address-spaces-and-paging.md) and [page replacement](../../07-operating-systems/04-memory-management/page-replacement.md). Storage device behaviour shapes [file systems](../../07-operating-systems/05-storage-and-file-systems/file-system-implementation.md) and [Log-Structured Merge (LSM) trees](../../09-data-management/02-storage-and-indexing/lsm-trees.md).
 
 ## Cross-cutting threads
 

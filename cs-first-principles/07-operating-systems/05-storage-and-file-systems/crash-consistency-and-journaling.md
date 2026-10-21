@@ -12,7 +12,7 @@ Most file system operations change several blocks: appending to a file updates a
 
 1. **Atomicity across blocks must be constructed; the device gives at most single-sector atomicity.** Drives guarantee (at best) that a single 512-byte or 4 KiB sector write is all-or-nothing. Any invariant spanning blocks (bitmap agrees with inodes, directory entries point at allocated inodes) can be broken by a crash in mid-update. The file system's job is to build multi-block atomic updates from single-block ones, the same problem databases solve for transactions.
 
-2. **The old answer was to repair after the fact.** Early Unix file systems wrote in place and ran `fsck` at boot to scan every inode, bitmap and directory, find inconsistencies and fix them. This only restores *metadata* consistency (it cannot know what data was intended), and its cost grows with disk size: hours on multi-terabyte volumes. It was abandoned as the default when disks grew.
+2. **The old answer was to repair after the fact.** Early Unix file systems wrote in place and ran `fsck` at boot to scan every inode, bitmap and directory, find inconsistencies and fix them. This only restores *metadata* consistency (it cannot know what data was intended), and its cost grows with disk size: hours on multi-terabyte volumes.
 
 3. **Journaling turns many writes into one atomic commit.** To update blocks B1..Bn: write their new contents (or a description) into the journal, then write a commit record, wait for it to reach the device, then *checkpoint* by writing B1..Bn to their home locations, then mark the journal entry free. If a crash happens before the commit record is durable, recovery ignores the partial entry; after it, recovery replays the entry. Either way, the update is all or nothing. ext3/ext4, XFS and NTFS all journal.
 
@@ -21,7 +21,7 @@ Most file system operations change several blocks: appending to a file updates a
    crash before commit durable: discard     crash after: replay
    ```
 
-4. **Ordering, enforced by flushes, is what makes a journal correct.** The commit record must not reach the platter before the blocks it commits, or recovery would replay garbage. Devices reorder writes in their caches for speed, so the file system issues cache-flush or Force Unit Access (FUA) commands as barriers. A device that ignores flushes (some consumer drives have) silently defeats journaling. This is the persistence analogue of a memory fence.
+4. **Ordering, enforced by flushes, is what makes a journal correct.** The commit record must not reach the platter before the blocks it commits, or recovery would replay garbage. Devices reorder writes in their caches for speed, so the file system issues cache-flush or Force Unit Access (FUA) commands as barriers. A device that ignores flushes (some consumer drives have) silently defeats journaling.
 
 5. **Most file systems journal only metadata, by default, to save bandwidth.** Full data journaling writes every data block twice. ext4's default *ordered* mode journals only metadata but writes the data blocks to their final location *before* committing the metadata that points to them, so a file never points at stale blocks. The structure stays consistent, but recently written file *contents* may still be lost, which is why applications need `fsync`.
 
@@ -42,8 +42,6 @@ Most file system operations change several blocks: appending to a file updates a
 | Checkpoint | Writing journaled blocks to their home locations and freeing the log space |
 | Ordered mode | Data written before the metadata that refers to it is committed |
 | Copy-on-write (COW) | Never overwrite live blocks; write new copies and switch a root pointer |
-| Log-structured file system | All writes appended to a log, which is the only copy of the data |
-| Write barrier / flush | Device command ensuring earlier writes are durable before later ones |
 
 ## How it fits
 
@@ -54,12 +52,10 @@ Most file system operations change several blocks: appending to a file updates a
 ## Common misconceptions
 
 - **"A journaling file system never loses data."** It keeps metadata consistent; in the default ordered mode, recent file contents not yet `fsync`ed can be lost.
-- **"Journaling halves write performance."** Metadata-only journaling adds little; the journal is written sequentially and checkpoints are batched.
 - **"Copy-on-write file systems do not need `fsync`."** They guarantee a consistent snapshot, but the latest writes are durable only after the next commit, which `fsync` forces.
 
 ## Go deeper
 
 - Remzi H. Arpaci-Dusseau and Andrea C. Arpaci-Dusseau, *Operating Systems: Three Easy Pieces* (2018), "Crash Consistency: FSCK and Journaling" and "Log-structured File Systems".
 - Mendel Rosenblum and John K. Ousterhout, "The Design and Implementation of a Log-Structured File System" (1991).
-- Vijayan Prabhakaran, Andrea C. Arpaci-Dusseau and Remzi H. Arpaci-Dusseau, "Analysis and Evolution of Journaling File Systems" (USENIX ATC 2005).
 - C. Mohan et al., "ARIES: A Transaction Recovery Method Supporting Fine-Granularity Locking and Partial Rollbacks Using Write-Ahead Logging" (1992): the database counterpart.

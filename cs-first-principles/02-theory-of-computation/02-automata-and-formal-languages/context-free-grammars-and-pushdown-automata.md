@@ -6,13 +6,13 @@
 
 ## Essence
 
-Context-free grammars describe nested structure: balanced parentheses, arithmetic expressions, blocks inside blocks. A grammar is a set of rewrite rules such as `E → E + T | T`, each replacing a single symbol regardless of its surroundings (hence "context-free"). The machines that recognise these languages are pushdown automata: finite automata equipped with an unbounded stack, which is exactly the memory needed to match each opener with its closer. This class is where the syntax of nearly every programming language lives, and parsing theory is the engineering of fast, unambiguous recognisers for useful subsets of it.
+Context-free grammars describe nested structure: balanced parentheses, expressions, blocks inside blocks. A grammar is a set of rewrite rules such as `E → E + T | T`, each replacing a single symbol regardless of its surroundings (hence "context-free"). The machines that recognise these languages are pushdown automata: finite automata equipped with an unbounded stack, which is exactly the memory needed to match each opener with its closer. This class is where the syntax of nearly every programming language lives, and parsing theory is the engineering of fast, unambiguous recognisers for useful subsets of it.
 
 ## Core tenets
 
-1. **A Context-Free Grammar (CFG) generates strings by recursive substitution.** G = (V, Σ, R, S): variables V, terminals Σ, rules R of the form A → α (one variable on the left, any string of variables and terminals on the right) and a start variable S. A derivation repeatedly replaces a variable by a right-hand side until only terminals remain. Because the left side is a single variable, each variable expands independently, which makes every derivation a tree.
+1. **A Context-Free Grammar (CFG) generates strings by recursive substitution.** G = (V, Σ, R, S): variables V, terminals Σ, rules R of the form A → α (one variable on the left, any string of variables and terminals on the right) and a start variable S. A derivation rewrites variables until only terminals remain. A single-variable left side means each variable expands independently, so every derivation is a tree.
 
-2. **The parse tree, not the string, carries meaning.** A parse tree shows which rule produced which substring, and compilers attach semantics to tree nodes. A grammar is *ambiguous* if some string has two parse trees: `E → E + E | E * E | n` gives `1 + 2 * 3` two readings. Ambiguity is fixed by stratifying the grammar (expression, term, factor) to encode precedence and associativity. Whether an arbitrary CFG is ambiguous is undecidable, and some languages are *inherently* ambiguous (every grammar for them is ambiguous).
+2. **The parse tree, not the string, carries meaning.** A parse tree shows which rule produced which substring, and compilers attach semantics to tree nodes. A grammar is *ambiguous* if some string has two parse trees: `E → E + E | E * E | n` gives `1 + 2 * 3` two readings. Ambiguity is fixed by stratifying the grammar (expression, term, factor) to encode precedence and associativity. Ambiguity of an arbitrary CFG is undecidable, and some languages are *inherently* ambiguous.
 
 3. **Pushdown Automata (PDA) recognise exactly the context-free languages.** A PDA is a nondeterministic finite automaton that can push and pop symbols on a stack on each move. To simulate a grammar, keep the yet-to-be-matched part of a derivation on the stack; to build a grammar from a PDA, introduce a variable for each "go from state p to state q with net-zero stack change". The stack is the right memory because nested structure is last-opened, first-closed.
 
@@ -24,7 +24,7 @@ Context-free grammars describe nested structure: balanced parentheses, arithmeti
 
 7. **Closure is weaker than for regular languages.** CFLs are closed under union, concatenation, star and intersection with a regular language, but *not* under intersection or complement: {aⁿbⁿcᵐ} ∩ {aᵐbⁿcⁿ} = {aⁿbⁿcⁿ}. Many questions also become undecidable: whether two CFGs generate the same language, or whether a CFG generates every string, has no algorithm.
 
-8. **Real language syntax is context-free plus checks.** "Every variable is declared before use" and "the call has as many arguments as the function has parameters" are not context-free. Compilers therefore parse with a CFG and enforce such rules afterwards in [semantic analysis](../../06-programming-languages/03-compilers/semantic-analysis.md), using symbol tables.
+8. **Real language syntax is context-free plus checks.** "Every variable is declared before use" and "the call has as many arguments as the function has parameters" are not context-free. Compilers parse with a CFG and enforce such rules later in [semantic analysis](../../06-programming-languages/03-compilers/semantic-analysis.md), using symbol tables.
 
 ## Key concepts
 
@@ -47,7 +47,7 @@ Context-free grammars describe nested structure: balanced parentheses, arithmeti
 
 ## Common misconceptions
 
-- **"Programming languages are context-free."** Their *grammars* are, but the full set of legal programs is not; declaration, typing and scoping rules are checked outside the grammar. Some languages (C with typedef names, C++) even need semantic feedback during parsing.
+- **"Programming languages are context-free."** Their *grammars* are, but the full set of legal programs is not; declaration, typing and scoping rules are checked outside the grammar. C even needs symbol-table feedback while parsing.
 - **"A regular expression can parse HyperText Markup Language (HTML) or balanced parentheses."** Pure regular expressions cannot match unbounded nesting; that needs a stack.
 - **"Two stacks are just a bigger stack."** Two stacks can simulate a Turing machine's tape (one holds the left half, one the right), so a two-stack PDA is as powerful as any computer.
 

@@ -28,7 +28,7 @@ An input/output (I/O) model is the contract for how a program waits for I/O. In 
 
 5. **`io_uring` amortizes the boundary crossing with shared rings.** Introduced in Linux 5.1 (2019), `io_uring` shares two ring buffers between the application and kernel: a submission queue and a completion queue. The program writes many requests into the submission ring and makes one system call (or none, with kernel-side polling); the kernel posts results in the completion ring. This batches system calls, works uniformly for files and sockets, and mirrors how Non-Volatile Memory Express (NVMe) hardware queues work. It also enlarged the kernel attack surface, and some environments disable it for that reason.
 
-6. **Copying costs dominate at high bandwidth, so zero-copy paths exist.** A naive file-to-socket transfer copies data from the page cache into user space and back into the kernel. `sendfile` and `splice` move data between descriptors inside the kernel; `mmap` avoids a copy for reads; registered buffers in `io_uring` and kernel-bypass stacks let devices use Direct Memory Access (DMA) straight into application memory. The general principle is to avoid touching data more times than necessary.
+6. **Copying costs dominate at high bandwidth, so zero-copy paths exist.** A naive file-to-socket transfer copies data from the page cache into user space and back into the kernel. `sendfile` and `splice` move data between descriptors inside the kernel; `mmap` avoids a copy for reads; registered buffers in `io_uring` and kernel-bypass stacks let devices use Direct Memory Access (DMA) straight into application memory.
 
 7. **Choose the model by concurrency level and latency needs.** A handful of concurrent operations: blocking I/O with threads is simplest. Thousands to millions of mostly idle connections: an event loop or lightweight threads on epoll/kqueue. Very high operation rates on fast storage or networks: completion-based submission queues, or polling from dedicated cores. The model is a tradeoff among programmer effort, Central Processing Unit (CPU) efficiency and tail latency.
 
@@ -42,7 +42,6 @@ An input/output (I/O) model is the contract for how a program waits for I/O. In 
 | Readiness notification | Report that an operation would not block now |
 | Completion notification | Report that a submitted operation has finished |
 | Event loop | A single thread that waits for events and dispatches non-blocking handlers |
-| Edge- vs level-triggered | Notify on a change of state vs whenever the state holds |
 | `io_uring` | Linux shared submission/completion ring interface for asynchronous I/O |
 | Zero-copy | Moving data without copying it through user-space buffers |
 
@@ -56,11 +55,9 @@ An input/output (I/O) model is the contract for how a program waits for I/O. In 
 
 - **"Asynchronous means faster."** Async improves concurrency and CPU efficiency under many waiting operations; for a few operations, blocking code is as fast and simpler.
 - **"Non-blocking file reads work like non-blocking socket reads."** On Linux, `O_NONBLOCK` has no effect on regular files; a read can still wait for the disk. Use a thread pool or `io_uring`.
-- **"An event loop needs no synchronization."** Handlers on one loop do not run in parallel, but state shared with other threads or loops still needs it, and long handlers starve others.
 
 ## Go deeper
 
 - W. Richard Stevens, Bill Fenner and Andrew M. Rudoff, *UNIX Network Programming, Volume 1* (3rd ed., 2003): the five I/O models compared.
 - Dan Kegel, "The C10K problem" (1999, web article): the motivation for scalable event notification.
-- Jonathan Lemon, "Kqueue: A Generic and Scalable Event Notification Facility" (USENIX 2001).
 - Jens Axboe, "Efficient IO with io_uring" (2019): the design document by its author.

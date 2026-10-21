@@ -38,7 +38,7 @@ Read race conditions first: it states the correctness requirements (mutual exclu
 - **[Memory management](../04-memory-management/README.md):** page tables and allocator free lists are shared kernel structures protected by these primitives; Linux's read-copy-update (RCU) is heavily used in memory management.
 - **[Storage and file systems](../05-storage-and-file-systems/README.md):** inode and directory locks, and the ordering of writes for crash consistency, are concurrency problems against a device.
 - **[Input/output (I/O) and devices](../06-io-and-devices/README.md):** producer-consumer queues between interrupt handlers and drivers are the classic condition-variable pattern.
-- **[Virtualization](../07-virtualization/README.md):** a virtual CPU can be descheduled while its guest holds a spinlock (lock-holder preemption), so hypervisors and guests cooperate with paravirtual spinlocks.
+- **[Virtualization](../07-virtualization/README.md):** a virtual Central Processing Unit (CPU) can be descheduled while its guest holds a spinlock (lock-holder preemption), so hypervisors and guests cooperate with paravirtual spinlocks.
 
 ## Connections across layers
 
