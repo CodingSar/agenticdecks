@@ -6,7 +6,7 @@
 
 ## Essence
 
-A **hypervisor** (virtual machine monitor, VMM) runs several **virtual machines** (VMs), each a faithful copy of the real hardware on which an unmodified Operating System (OS) can run. It works like an OS one level down: guest code runs directly on the Central Processing Unit (CPU) at full speed, but every operation that would let a guest observe or control real hardware (changing page tables, disabling interrupts, touching devices) must trap to the hypervisor, which emulates its effect on the guest's *virtual* hardware. Popek and Goldberg (1974) stated when this trap-and-emulate approach works; x86 originally failed their test, which led to binary translation, then paravirtualization, and finally hardware support (Intel VT-x, AMD-V, 2005–2006) that today's hypervisors such as KVM, Xen, Hyper-V and VMware ESXi rely on.
+A **hypervisor** (virtual machine monitor, VMM) runs several **virtual machines** (VMs), each a faithful copy of the real hardware on which an unmodified Operating System (OS) can run. It works like an OS one level down: guest code runs directly on the Central Processing Unit (CPU) at full speed, but every operation that would let a guest observe or control real hardware (changing page tables, disabling interrupts, touching devices) must trap to the hypervisor, which emulates its effect on the guest's *virtual* hardware. Popek and Goldberg (1974) stated when this trap-and-emulate approach works; x86 originally failed their test, which led to binary translation, then paravirtualization, and finally hardware support (Intel VT-x, AMD-V, 2005–2006) that today's hypervisors such as the Kernel-based Virtual Machine (KVM), Xen, Hyper-V and VMware ESXi rely on.
 
 ## Core tenets
 

@@ -37,7 +37,7 @@ Read VMs first: they show the classical theory (Popek and Goldberg) and the hard
 - **[Concurrency](../03-concurrency/README.md):** a descheduled virtual CPU holding a guest spinlock stalls other virtual CPUs, which paravirtual spinlocks address.
 - **[Memory management](../04-memory-management/README.md):** nested page tables add a second level of translation; memory ballooning and page sharing manage overcommit between guests.
 - **[Storage and file systems](../05-storage-and-file-systems/README.md):** virtual disks are files; container images are stacks of read-only layers merged by overlay file systems.
-- **[I/O and devices](../06-io-and-devices/README.md):** device emulation is the slowest part of virtualization; virtio and IOMMU passthrough fix it.
+- **[I/O and devices](../06-io-and-devices/README.md):** device emulation is the slowest part of virtualization; virtio and passthrough guarded by an Input-Output Memory Management Unit (IOMMU) fix it.
 
 ## Connections across layers
 

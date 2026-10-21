@@ -14,7 +14,7 @@ Digital hardware can reliably distinguish only two voltage levels, so everything
 
 2. **Base 2 is chosen for physics, not mathematics.** Any base works mathematically. Two levels give the largest noise margin for a given voltage swing and map directly onto a transistor that is on or off. Multi-level encodings are used where density matters more than margin: flash cells store 3 or 4 bits by distinguishing 8 or 16 charge levels, and fast links send 2 bits per symbol with four-level Pulse-Amplitude Modulation (PAM4).
 
-3. **`n` bits name exactly `2ⁿ` things, and that is all they can name.** This is pure counting. A 32-bit address can reach 2³² bytes (4 GiB); an 8-bit colour channel has 256 shades. To represent `k` distinct values you need at least `⌈log₂ k⌉` bits. Every encoding is a choice of which `2ⁿ` things the patterns stand for.
+3. **`n` bits name exactly `2ⁿ` things, and that is all they can name.** This is pure counting. A 32-bit address can reach 2³² bytes (4 gibibytes, GiB); an 8-bit colour channel has 256 shades. To represent `k` distinct values you need at least `⌈log₂ k⌉` bits. Every encoding is a choice of which `2ⁿ` things the patterns stand for.
 
 4. **Bits have no intrinsic meaning; interpretation is everything.** The byte `0x41` is the integer 65, the character "A" in the American Standard Code for Information Interchange (ASCII), or part of an instruction. Hardware applies an interpretation by which circuit receives the bits: the integer adder, the floating-point unit, the instruction decoder. Many bugs and security holes are type confusions: bits written under one interpretation and read under another.
 
