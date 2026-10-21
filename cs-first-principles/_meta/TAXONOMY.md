@@ -1,0 +1,363 @@
+# Taxonomy: full path list
+
+Every path below is fixed. Writers create exactly these files, so cross-links between layers can be written before the target exists. Directories hold a `README.md`; `*.md` entries are leaves. Paths are relative to `cs-first-principles/`.
+
+```
+00-engineering-foundations/
+  01-physics-of-computation/
+    electromagnetism-and-charge.md
+    quantum-mechanics-and-band-theory.md
+    thermodynamics-and-energy.md
+  02-electrical-circuits/
+    circuit-laws.md
+    capacitance-and-timing.md
+    noise-and-signal-integrity.md
+  03-semiconductor-devices/
+    doping-and-the-pn-junction.md
+    the-mosfet.md
+    cmos.md
+    fabrication-and-scaling.md
+  04-signals-and-systems/
+    analog-vs-digital.md
+    sampling-and-quantization.md
+    feedback-and-control.md
+  05-engineering-method/
+    tradeoffs-and-constraints.md
+    reliability-and-redundancy.md
+    measurement-and-modeling.md
+
+01-mathematical-foundations/
+  01-logic/
+    propositional-logic.md
+    predicate-logic.md
+    proof-techniques.md
+  02-sets-relations-functions/
+    sets.md
+    relations-and-orders.md
+    functions-and-cardinality.md
+  03-discrete-mathematics/
+    combinatorics.md
+    graph-theory.md
+    induction-and-recurrences.md
+    number-theory.md
+  04-algebra/
+    boolean-algebra.md
+    abstract-algebra.md
+    linear-algebra.md
+  05-continuous-mathematics/
+    calculus.md
+    optimization.md
+  06-probability-and-statistics/
+    probability.md
+    random-variables-and-distributions.md
+    statistical-inference.md
+
+02-theory-of-computation/
+  01-information-theory/
+    entropy-and-information.md
+    source-coding-and-compression.md
+    channel-capacity-and-error-correction.md
+  02-automata-and-formal-languages/
+    finite-automata-and-regular-languages.md
+    context-free-grammars-and-pushdown-automata.md
+    chomsky-hierarchy.md
+  03-computability/
+    turing-machines.md
+    lambda-calculus.md
+    church-turing-thesis.md
+    halting-problem-and-undecidability.md
+  04-complexity/
+    asymptotic-analysis.md
+    p-np-and-np-completeness.md
+    complexity-classes.md
+  05-quantum-computation/
+    qubits-and-quantum-circuits.md
+    quantum-algorithms.md
+
+03-digital-logic/
+  01-number-representation/
+    binary-and-positional-notation.md
+    integers-and-twos-complement.md
+    floating-point.md
+    character-encoding.md
+  02-combinational-logic/
+    logic-gates.md
+    logic-minimization.md
+    arithmetic-and-building-blocks.md
+  03-sequential-logic/
+    latches-and-flip-flops.md
+    clocking-and-synchronous-design.md
+    finite-state-machines.md
+  04-hardware-design/
+    hardware-description-languages.md
+    fpga-and-asic.md
+    timing-and-power.md
+
+04-computer-architecture/
+  01-instruction-set-architecture/
+    the-isa-contract.md
+    risc-vs-cisc.md
+    instruction-encoding-and-addressing.md
+  02-processor-microarchitecture/
+    datapath-and-control.md
+    pipelining.md
+    hazards-and-branch-prediction.md
+    superscalar-and-out-of-order.md
+  03-memory-hierarchy/
+    locality-and-caching.md
+    cache-design.md
+    virtual-memory-hardware.md
+    dram-and-storage-devices.md
+  04-parallel-architecture/
+    multicore-and-cache-coherence.md
+    memory-consistency-models.md
+    simd-and-gpus.md
+    domain-specific-accelerators.md
+  05-io-and-interconnect/
+    buses-and-interrupts.md
+    dma-and-devices.md
+  06-performance/
+    the-performance-equation.md
+    amdahls-law.md
+    power-and-the-end-of-scaling.md
+
+05-algorithms-and-data-structures/
+  01-foundations/
+    models-of-computation.md
+    correctness-and-invariants.md
+    amortized-analysis.md
+  02-fundamental-data-structures/
+    arrays-and-linked-lists.md
+    stacks-and-queues.md
+    hash-tables.md
+    search-trees.md
+    heaps-and-priority-queues.md
+  03-design-paradigms/
+    divide-and-conquer.md
+    greedy-algorithms.md
+    dynamic-programming.md
+    backtracking-and-branch-and-bound.md
+    randomized-algorithms.md
+  04-sorting-and-searching/
+    comparison-sorting.md
+    non-comparison-sorting.md
+    searching-and-selection.md
+  05-graph-algorithms/
+    graph-traversal.md
+    shortest-paths.md
+    minimum-spanning-trees.md
+    network-flow.md
+  06-string-algorithms/
+    string-matching.md
+    tries-and-suffix-structures.md
+  07-advanced-topics/
+    approximation-algorithms.md
+    streaming-and-online-algorithms.md
+    external-memory-and-cache-oblivious.md
+    computational-geometry.md
+
+06-programming-languages/
+  01-paradigms/
+    imperative-and-procedural.md
+    object-oriented.md
+    functional.md
+    logic-and-declarative.md
+  02-semantics-and-types/
+    syntax-and-semantics.md
+    binding-scope-and-closures.md
+    type-systems.md
+    polymorphism-and-type-inference.md
+  03-compilers/
+    lexing-and-parsing.md
+    semantic-analysis.md
+    intermediate-representations.md
+    optimization.md
+    code-generation-and-register-allocation.md
+  04-runtime-systems/
+    linking-and-loading.md
+    interpreters-and-virtual-machines.md
+    jit-compilation.md
+    memory-management-and-garbage-collection.md
+  05-formal-methods/
+    hoare-logic-and-program-proofs.md
+    model-checking.md
+    proof-assistants-and-dependent-types.md
+
+07-operating-systems/
+  01-kernel-and-abstractions/
+    the-role-of-the-os.md
+    kernel-mode-and-system-calls.md
+    kernel-architectures.md
+  02-process-management/
+    processes.md
+    threads.md
+    scheduling.md
+  03-concurrency/
+    race-conditions-and-critical-sections.md
+    locks-and-semaphores.md
+    condition-variables-and-monitors.md
+    deadlock.md
+    lock-free-synchronization.md
+  04-memory-management/
+    address-spaces-and-paging.md
+    page-replacement.md
+    memory-allocation.md
+  05-storage-and-file-systems/
+    file-system-abstractions.md
+    file-system-implementation.md
+    crash-consistency-and-journaling.md
+  06-io-and-devices/
+    device-drivers-and-interrupt-handling.md
+    io-models.md
+  07-virtualization/
+    virtual-machines-and-hypervisors.md
+    containers.md
+
+08-networking/
+  01-principles/
+    layering-and-the-end-to-end-principle.md
+    packet-switching.md
+    latency-bandwidth-and-queueing.md
+  02-link-layer/
+    encoding-and-framing.md
+    media-access-and-ethernet.md
+    wireless-networks.md
+  03-network-layer/
+    ip-addressing-and-forwarding.md
+    routing-algorithms.md
+    internet-routing-and-bgp.md
+  04-transport-layer/
+    udp-and-tcp.md
+    reliable-delivery.md
+    congestion-control.md
+  05-application-layer/
+    naming-and-dns.md
+    http-and-the-web.md
+    content-delivery-and-caching.md
+
+09-data-management/
+  01-data-models/
+    the-relational-model.md
+    relational-algebra-and-sql.md
+    normalization.md
+    non-relational-models.md
+  02-storage-and-indexing/
+    storage-layouts.md
+    b-trees.md
+    lsm-trees.md
+  03-query-processing/
+    join-algorithms.md
+    query-optimization.md
+  04-transactions/
+    acid.md
+    concurrency-control.md
+    isolation-levels.md
+    recovery-and-logging.md
+
+10-distributed-and-parallel-computing/
+  01-parallel-computing/
+    work-span-and-parallel-models.md
+    data-and-task-parallelism.md
+    parallel-programming-models.md
+  02-distributed-foundations/
+    system-models-and-failures.md
+    time-clocks-and-ordering.md
+    impossibility-results.md
+  03-consensus-and-replication/
+    replication.md
+    consensus.md
+    consistency-models.md
+    byzantine-fault-tolerance.md
+  04-distributed-data/
+    partitioning.md
+    distributed-transactions.md
+    eventual-consistency-and-crdts.md
+  05-large-scale-systems/
+    batch-and-stream-processing.md
+    cloud-computing.md
+    scalability-patterns.md
+
+11-security-and-cryptography/
+  01-security-principles/
+    cia-and-threat-modeling.md
+    security-design-principles.md
+  02-cryptography/
+    foundations-of-modern-cryptography.md
+    symmetric-encryption.md
+    hash-functions-and-macs.md
+    public-key-cryptography.md
+    secure-protocols-and-tls.md
+  03-system-security/
+    access-control.md
+    memory-safety-vulnerabilities.md
+    isolation-and-sandboxing.md
+    side-channels.md
+  04-network-and-application-security/
+    authentication.md
+    web-security.md
+    network-attacks-and-defenses.md
+
+12-software-engineering/
+  01-design/
+    essential-and-accidental-complexity.md
+    modularity-and-information-hiding.md
+    abstraction-and-interfaces.md
+    design-patterns.md
+    software-architecture.md
+  02-process/
+    requirements.md
+    development-lifecycles.md
+    version-control.md
+    conways-law-and-teams.md
+  03-quality/
+    testing.md
+    debugging.md
+    static-analysis-and-code-review.md
+  04-operations/
+    build-and-continuous-delivery.md
+    reliability-engineering.md
+    observability.md
+
+13-artificial-intelligence/
+  01-classical-ai/
+    search-and-planning.md
+    constraint-satisfaction.md
+    knowledge-representation-and-reasoning.md
+    probabilistic-reasoning.md
+  02-machine-learning-foundations/
+    learning-as-optimization.md
+    generalization-and-bias-variance.md
+    supervised-learning.md
+    unsupervised-learning.md
+    evaluation-and-experimentation.md
+  03-deep-learning/
+    neural-networks-and-backpropagation.md
+    convolutional-networks.md
+    attention-and-transformers.md
+    training-at-scale.md
+  04-advanced-paradigms/
+    reinforcement-learning.md
+    generative-models.md
+    large-language-models.md
+    alignment-and-safety.md
+
+14-human-and-visual-computing/
+  01-human-computer-interaction/
+    perception-and-cognition.md
+    interaction-design-principles.md
+    usability-evaluation.md
+  02-computer-graphics/
+    geometry-and-transformations.md
+    rasterization-pipeline.md
+    ray-tracing-and-global-illumination.md
+  03-media-and-vision/
+    digital-media-and-compression.md
+    computer-vision.md
+
+15-computing-in-context/
+  history-of-computing.md
+  ethics-and-professional-responsibility.md
+  law-privacy-and-policy.md
+```
+
+Root files: `README.md` (entry point and map of the whole tree), `CROSS-CUTTING.md` (principles that recur across layers), `_meta/` (plan, brief, taxonomy, checker).
