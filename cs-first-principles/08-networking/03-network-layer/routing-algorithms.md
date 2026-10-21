@@ -24,7 +24,7 @@ A routing algorithm fills every router's forwarding table so that hop-by-hop dec
 
 7. **Link cost choice encodes the operator's goal.** Hop count, delay, inverse capacity and administrative weights all give different "shortest" paths. Making costs depend on current load seems attractive but causes oscillation: traffic moves to the lightly loaded path, which then becomes heavy, so traffic moves back. The ARPANET saw this in the 1980s. Stable routing uses mostly static costs and leaves load response to traffic engineering and congestion control.
 
-8. **Centralised computation is an alternative.** Software-Defined Networking (SDN) moves route computation to a logically central controller that sees the whole network and installs forwarding entries in switches. It simplifies policy and traffic engineering inside data centres and wide-area backbones, at the cost of making the controller a critical, replicated service.
+8. **Centralised computation is an alternative.** Software-Defined Networking (SDN) moves route computation to a logically central controller that sees the whole network and installs forwarding entries in switches. It simplifies policy and traffic engineering inside data centres and wide-area backbones, at the cost of making the controller a critical, replicated service ([data center networks and SDN](data-center-networks-and-sdn.md)).
 
 ## Key concepts
 
@@ -44,7 +44,7 @@ A routing algorithm fills every router's forwarding table so that hop-by-hop dec
 
 - **Below:** routing is [graph theory](../../01-mathematical-foundations/03-discrete-mathematics/graph-theory.md) plus [shortest-path algorithms](../../05-algorithms-and-data-structures/05-graph-algorithms/shortest-paths.md); distance-vector is [dynamic programming](../../05-algorithms-and-data-structures/03-design-paradigms/dynamic-programming.md) executed by many processors asynchronously. It produces the table used by [IP forwarding](ip-addressing-and-forwarding.md).
 - **Above:** routing protocols are among the first widely deployed distributed algorithms; their convergence problems foreshadow [system models and failures](../../10-distributed-and-parallel-computing/02-distributed-foundations/system-models-and-failures.md). SDN controllers are replicated with [consensus](../../10-distributed-and-parallel-computing/03-consensus-and-replication/consensus.md).
-- **Siblings:** these algorithms optimise one shared metric inside one organisation; [BGP](internet-routing-and-bgp.md) handles many organisations with private policies, where "shortest" is not the goal.
+- **Siblings:** these algorithms optimise one shared metric inside one organisation; [BGP](internet-routing-and-bgp.md) handles many organisations with private policies, where "shortest" is not the goal; [data center networks](data-center-networks-and-sdn.md) replace per-router computation with a central controller and spread traffic over many equal-cost paths.
 
 ## Common misconceptions
 

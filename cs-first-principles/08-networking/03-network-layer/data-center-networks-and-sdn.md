@@ -24,7 +24,7 @@ A large data center holds tens to hundreds of thousands of servers owned by one 
 
 7. **Programmable data planes make forwarding itself software.** Fixed-function chips understand only the protocols their designers chose. P4 (Bosshart et al., 2014) describes how a programmable switch, network card or software switch parses headers and applies a pipeline of match-action tables. Programs have no unbounded loops and fixed per-stage work, so they run at line rate, enabling new headers and in-network telemetry without new silicon.
 
-8. **Virtualization runs tenant networks on top of the physical fabric.** For private, isolated tenant networks, overlays wrap tenant packets in an outer header (Virtual Extensible Local Area Network (VXLAN) carries a 24-bit network identifier, about 16 million segments), and virtual switches in the hypervisor or Network Interface Card (NIC) apply tenant policy. 
+8. **Virtualization runs tenant networks on top of the physical fabric.** For private, isolated tenant networks, overlays wrap tenant packets in an outer header (Virtual Extensible Local Area Network (VXLAN) carries a 24-bit network identifier, about 16 million segments), and virtual switches in the hypervisor or Network Interface Card (NIC) apply tenant policy.
 
 9. **RDMA removes the host's software from the fast path.** Remote Direct Memory Access (RDMA) lets a NIC read or write another machine's registered memory directly, bypassing both kernels and the remote Central Processing Unit (CPU), for microsecond-scale latency. RDMA over Converged Ethernet (RoCE) brings it from InfiniBand clusters to data centers but needs a nearly lossless fabric, enforced by link-level pause frames that can spread congestion or deadlock.
 

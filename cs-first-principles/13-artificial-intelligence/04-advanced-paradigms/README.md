@@ -25,8 +25,8 @@ The unifying idea is **optimisation of an objective that is only a proxy for the
    generative models -----(autoregressive text model at scale)--> large language models
                                                                        ^
    retrieval and embeddings ----(RAG: documents into the context)------+
-                                                                       |
-            all of the above, deployed --------------------------------+
+
+                 all four, once deployed and optimised against proxies
                                       |
                                       v
                            alignment and safety

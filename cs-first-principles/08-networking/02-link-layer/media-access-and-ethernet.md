@@ -44,7 +44,7 @@ When several stations share one transmission medium, two frames sent at once col
 ## How it fits
 
 - **Below:** uses [framing](encoding-and-framing.md) to delimit and check frames; the throughput analysis is [probability](../../01-mathematical-foundations/06-probability-and-statistics/probability.md) over Poisson arrivals; backoff is a [randomized algorithm](../../05-algorithms-and-data-structures/03-design-paradigms/randomized-algorithms.md) for symmetry breaking.
-- **Above:** IP packets travel between routers inside Ethernet frames; ARP glues [IP addressing](../03-network-layer/ip-addressing-and-forwarding.md) to MAC addresses. ARP spoofing and MAC flooding are classic [local network attacks](../../11-security-and-cryptography/04-network-and-application-security/network-attacks-and-defenses.md). Data-centre fabrics are built from Ethernet switches.
+- **Above:** IP packets travel between routers inside Ethernet frames; ARP glues [IP addressing](../03-network-layer/ip-addressing-and-forwarding.md) to MAC addresses. ARP spoofing and MAC flooding are classic [local network attacks](../../11-security-and-cryptography/04-network-and-application-security/network-attacks-and-defenses.md). [Data-centre fabrics](../03-network-layer/data-center-networks-and-sdn.md) are built from Ethernet switches.
 - **Siblings:** [wireless networks](wireless-networks.md) still face true shared-medium contention and cannot detect collisions, so they use avoidance instead.
 
 ## Common misconceptions
