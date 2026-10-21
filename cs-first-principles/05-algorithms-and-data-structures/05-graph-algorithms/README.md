@@ -15,7 +15,7 @@ The unifying idea is **systematic exploration with a frontier**. Breadth-First S
 |---|---|---|
 | [Graph Traversal](graph-traversal.md) | BFS, DFS, topological sort, connected and strongly connected components | [Stacks and queues](../02-fundamental-data-structures/stacks-and-queues.md), [graph theory](../../01-mathematical-foundations/03-discrete-mathematics/graph-theory.md) |
 | [Shortest Paths](shortest-paths.md) | Dijkstra, Bellman–Ford, Floyd–Warshall, A* | Traversal, [heaps](../02-fundamental-data-structures/heaps-and-priority-queues.md), [dynamic programming](../03-design-paradigms/dynamic-programming.md) |
-| [Minimum Spanning Trees](minimum-spanning-trees.md) | Kruskal, Prim, Borůvka; cut property; union-find | Traversal, [greedy](../03-design-paradigms/greedy-algorithms.md), heaps, [amortized analysis](../01-foundations/amortized-analysis.md) |
+| [Minimum Spanning Trees](minimum-spanning-trees.md) | Kruskal, Prim, Borůvka; cut property | Traversal, [greedy](../03-design-paradigms/greedy-algorithms.md), heaps, [union–find](../02-fundamental-data-structures/union-find.md), [amortized analysis](../01-foundations/amortized-analysis.md) |
 | [Network Flow](network-flow.md) | Max-flow min-cut, augmenting paths, matching | Traversal (to find augmenting paths), shortest paths |
 
 ```
@@ -32,8 +32,8 @@ Read traversal first; everything else is traversal with a different frontier or 
 
 ## Connections to sibling areas
 
-- **[Foundations](../01-foundations/README.md):** Dijkstra's correctness is a textbook invariant proof; union-find's near-constant cost is a textbook amortized bound.
-- **[Fundamental Data Structures](../02-fundamental-data-structures/README.md):** graphs are stored as adjacency lists (arrays of lists) or matrices; frontiers are queues, stacks and heaps.
+- **[Foundations](../01-foundations/README.md):** Dijkstra's correctness is a textbook invariant proof; union–find's near-constant cost is a textbook amortized bound.
+- **[Fundamental Data Structures](../02-fundamental-data-structures/README.md):** graphs are stored as adjacency lists (arrays of lists) or matrices; frontiers are queues, stacks and heaps; Kruskal's component tests use [union–find](../02-fundamental-data-structures/union-find.md).
 - **[Design Paradigms](../03-design-paradigms/README.md):** Dijkstra, Prim and Kruskal are greedy; Bellman–Ford and Floyd–Warshall are dynamic programming; graph colouring and Hamiltonian paths need backtracking.
 - **[Sorting and Searching](../04-sorting-and-searching/README.md):** Kruskal sorts edges; topological sort orders a partial order.
 - **[String Algorithms](../06-string-algorithms/README.md):** automata are graphs; string matching with automata is a walk on a graph.
@@ -49,4 +49,4 @@ Graphs come from [graph theory](../../01-mathematical-foundations/03-discrete-ma
 - [Invariants and correctness](../../CROSS-CUTTING.md#invariants-and-correctness): the finished set in Dijkstra, the cut property in Minimum Spanning Trees (MSTs), flow conservation.
 - [Limits and impossibility](../../CROSS-CUTTING.md#limits-and-impossibility): max-flow equals min-cut; many neighbouring problems are NP-hard.
 - [Composition](../../CROSS-CUTTING.md#composition): complex algorithms are built from traversal plus a frontier policy.
-- [Batching and amortization](../../CROSS-CUTTING.md#batching-and-amortization): union-find with path compression.
+- [Batching and amortization](../../CROSS-CUTTING.md#batching-and-amortization): union–find with path compression.

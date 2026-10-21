@@ -22,7 +22,7 @@ The largest neural networks as of the mid-2020s have hundreds of billions to tri
 
 6. **At scale, failure is routine and stability is fragile.** With 10,000+ devices, some hardware fails every few hours, so jobs checkpoint frequently and restart automatically. Training can also diverge as loss spikes; practitioners use learning-rate warm-up and decay, gradient clipping and normalisation choices, and roll back to an earlier checkpoint when it happens.
 
-7. **The goal is high utilisation of very expensive hardware.** Model FLOPs Utilisation (MFU), where FLOPs means floating-point operations,, the fraction of peak floating-point throughput spent on useful model arithmetic, is typically 30–60% in well-tuned large runs. The rest is lost to communication, pipeline bubbles, memory stalls and recomputation. Overlapping communication with computation is the main lever.
+7. **The goal is high utilisation of very expensive hardware.** Model FLOPs Utilisation (MFU), where FLOPs means floating-point operations, is the fraction of peak floating-point throughput spent on useful model arithmetic, and is typically 30–60% in well-tuned large runs. The rest is lost to communication, pipeline bubbles, memory stalls and recomputation. Overlapping communication with computation is the main lever.
 
 ## Key concepts
 

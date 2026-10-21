@@ -10,7 +10,7 @@ Direct Memory Access (DMA) lets a device read and write main memory itself, with
 
 ## Core tenets
 
-1. **Programmed I/O does not scale.** If the processor moves every word with a load from a device register and a store to memory, a 10 GB/s device would occupy several cores just copying. DMA moves the copying to the device (or a DMA engine), so the processor's cost per transfer is fixed (set up, take one interrupt) rather than proportional to the bytes moved.
+1. **Programmed I/O does not scale.** If the processor moves every word itself (programmed Input/Output (I/O)), with a load from a device register and a store to memory, a 10 GB/s device would occupy several cores just copying. DMA moves the copying to the device (or a DMA engine), so the processor's cost per transfer is fixed (set up, take one interrupt) rather than proportional to the bytes moved.
 
 2. **Descriptor rings are the standard device interface.** The driver allocates a circular array of descriptors in memory, each pointing to a buffer and recording its length and status. The processor fills descriptors and writes a "tail" index to a device doorbell register; the device consumes them, performs DMA, writes back status, and advances a "head". Network interface cards, Non-Volatile Memory Express (NVMe) SSDs and GPUs all use variants of this producer-consumer queue, often with one pair of queues per core so cores do not contend.
 
@@ -20,7 +20,7 @@ Direct Memory Access (DMA) lets a device read and write main memory itself, with
 
 5. **Devices need address translation and protection too.** A buggy or malicious device that can DMA anywhere can overwrite the kernel. An Input/Output Memory Management Unit (IOMMU; Intel VT-d, AMD-Vi, ARM's System MMU) translates device addresses through per-device page tables, so each device can reach only the buffers the Operating System (OS) mapped for it. The IOMMU also lets a virtual machine own a device directly (device pass-through) without being able to corrupt the host.
 
-6. **Devices are computers too.** A modern SSD controller runs firmware on several embedded cores to manage its flash translation layer; a network card may offload checksums, segmentation and encryption, or run whole programs (SmartNICs and Data Processing Units). From the host's view they are still devices behind registers, rings and interrupts, but the boundary of "what the OS controls" has moved.
+6. **Devices are computers too.** A modern SSD controller runs firmware on several embedded cores to manage its flash translation layer; a network card may offload checksums, segmentation and encryption, or run whole programs (SmartNICs, that is smart network interface cards, and Data Processing Units). From the host's view they are still devices behind registers, rings and interrupts, but the boundary of "what the OS controls" has moved.
 
 7. **Virtualising devices puts the mechanism in hardware.** Single Root I/O Virtualization (SR-IOV) lets one physical device present many virtual functions, each with its own queues and interrupts, assigned to different virtual machines through the IOMMU. This gives near-native I/O performance to guests, where software emulation would cost a trap per register access.
 

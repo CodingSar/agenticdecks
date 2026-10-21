@@ -36,7 +36,7 @@ Complementary Metal-Oxide-Semiconductor (CMOS) is the circuit style used by almo
 
 6. **The inverter has high gain, which makes logic restoring.** The CMOS inverter's voltage transfer curve switches sharply around the midpoint: a small input change there causes a large output change, while inputs near either rail produce outputs pinned to the opposite rail. That gain is what restores degraded signals at every stage, the property on which the whole digital abstraction depends.
 
-7. **Two cross-coupled inverters remember a bit.** Feeding an inverter's output into a second inverter and back again creates two stable states. With access transistors added, this becomes the six-transistor Static Random-Access Memory (SRAM) cell used in caches and register files, and the core of latches and flip-flops.
+7. **Two cross-coupled inverters remember a bit.** Feeding an inverter's output into a second inverter and back again creates two stable states. With access transistors added, this becomes the six-transistor Static Random-Access Memory (SRAM) cell used in caches and register files ([memory cells](../../03-digital-logic/03-sequential-logic/memory-cells.md)), and the core of latches and flip-flops.
 
 8. **CMOS has its own failure modes.** The parasitic structure of adjacent n and p regions forms a thyristor that can latch a short circuit between supply and ground (latch-up), prevented by layout rules and well contacts. Leakage, once negligible, now accounts for a large share of total power in many designs.
 

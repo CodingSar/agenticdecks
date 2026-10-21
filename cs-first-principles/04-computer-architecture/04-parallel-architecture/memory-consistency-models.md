@@ -38,7 +38,7 @@ A memory consistency model is the part of the Instruction Set Architecture (ISA)
 | Fence (barrier) | Instruction that prevents reordering of memory operations across it |
 | Acquire / release | One-directional orderings attached to a load / store, used for synchronisation |
 | Data race | Conflicting unsynchronised accesses to one location, at least one a write |
-| SC-for-DRF | Guarantee that data-race-free programs behave sequentially consistently |
+| SC-for-DRF | SC for Data-Race-Free (DRF) programs: race-free programs behave as if under SC |
 
 ## How it fits
 
@@ -56,5 +56,5 @@ A memory consistency model is the part of the Instruction Set Architecture (ISA)
 
 - Lamport, *How to Make a Multiprocessor Computer That Correctly Executes Multiprocess Programs* (IEEE Transactions on Computers, 1979): the definition of sequential consistency.
 - Adve and Gharachorloo, *Shared Memory Consistency Models: A Tutorial* (IEEE Computer, 1996): the standard introduction.
-- Sorin, Hill and Wood, *A Primer on Memory Consistency and Cache Coherence* (2nd ed., 2020): SC, TSO and relaxed models side by side.
+- Nagarajan, Sorin, Hill and Wood, *A Primer on Memory Consistency and Cache Coherence* (2nd ed., 2020): SC, TSO and relaxed models side by side.
 - Boehm and Adve, *Foundations of the C++ Concurrency Memory Model* (PLDI 2008): how a language model is built on hardware models.

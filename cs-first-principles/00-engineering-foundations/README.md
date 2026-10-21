@@ -28,7 +28,7 @@ The two roots grow separately for one layer: 01 leads to [02 Theory of Computati
    (physical root: this layer)
 ```
 
-What the layers above need from this one: switches with known delay and energy ([capacitance and timing](02-electrical-circuits/capacitance-and-timing.md), [thermodynamics and energy](01-physics-of-computation/thermodynamics-and-energy.md)); reliable discrete levels ([analog vs digital](04-signals-and-systems/analog-vs-digital.md)); a way to remember a bit ([feedback and control](04-signals-and-systems/feedback-and-control.md), via positive feedback); physical media for storage ([electromagnetism and charge](01-physics-of-computation/electromagnetism-and-charge.md)); and the scaling trends that set the economics of every chip ([fabrication and scaling](03-semiconductor-devices/fabrication-and-scaling.md)).
+What the layers above need from this one: switches with known delay and energy ([capacitance and timing](02-electrical-circuits/capacitance-and-timing.md), [thermodynamics and energy](01-physics-of-computation/thermodynamics-and-energy.md)); reliable discrete levels ([analog vs digital](04-signals-and-systems/analog-vs-digital.md)); a way to remember a bit ([feedback and control](04-signals-and-systems/feedback-and-control.md), via positive feedback); physical media for storage ([electromagnetism and charge](01-physics-of-computation/electromagnetism-and-charge.md), turned into static, dynamic and flash [memory cells](../03-digital-logic/03-sequential-logic/memory-cells.md) in layer 03); and the scaling trends that set the economics of every chip ([fabrication and scaling](03-semiconductor-devices/fabrication-and-scaling.md)).
 
 ## How the children fit together
 

@@ -5,7 +5,7 @@
 
 ## What this area is about
 
-Quality engineering asks: **how do we gain justified confidence that software does what it should, and find out quickly when it does not?** Proof of correctness is possible for small, critical parts, but for most code it is too expensive, and for arbitrary programs it is impossible in general: by [Rice's theorem](../../02-theory-of-computation/03-computability/halting-problem-and-undecidability.md), no algorithm decides any non-trivial property of what every program does. So quality comes from layering several imperfect checks, each catching a different kind of fault at a different cost.
+Quality engineering asks: **how do we gain justified confidence that software does what it should, and find out quickly when it does not?** Proof of correctness is possible for small, critical parts, but for most code it is too expensive, and for arbitrary programs it is impossible in general: by [Rice's theorem](../../02-theory-of-computation/03-computability/halting-problem-and-undecidability.md), no algorithm can decide a non-trivial property of program behaviour for all programs. So quality comes from layering several imperfect checks, each catching a different kind of fault at a different cost.
 
 The unifying idea is **defence in depth against defects**. Static analysis and type checking examine code without running it and catch whole classes of errors cheaply. Code review brings human judgement about design and intent. Testing runs the code on chosen inputs and compares results with expectations. Debugging is what happens when a defect gets through: a systematic search from symptom back to cause. Each layer misses things the others catch, and the earlier a defect is caught, the cheaper it is.
 

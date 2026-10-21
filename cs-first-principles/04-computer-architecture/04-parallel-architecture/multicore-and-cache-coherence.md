@@ -22,7 +22,7 @@ A multicore processor puts several complete cores on one chip, each with private
 
 6. **Sharing is expensive even when correct.** Transferring a line from another core's cache costs tens of nanoseconds on the same chip and over 100 ns across sockets. A lock or counter written by many cores becomes a hot line that serialises them. Scalable software minimises shared writes: per-core counters, partitioned data, read-mostly structures.
 
-7. **Atomic read-modify-write instructions are built on coherence.** Compare-and-swap (x86 `lock cmpxchg`), fetch-and-add, and load-linked/store-conditional (ARM, RISC-V `lr`/`sc`) work by obtaining the line in an exclusive state and holding it for the duration of the operation. Every lock, semaphore and lock-free data structure rests on these instructions.
+7. **Atomic read-modify-write instructions are built on coherence.** Compare-and-swap (x86 `lock cmpxchg`), fetch-and-add, and load-linked/store-conditional (ARM `ldxr`/`stxr`, RISC-V `lr`/`sc`) work by obtaining the line in an exclusive state and holding it for the duration of the operation. Every lock, semaphore and lock-free data structure rests on these instructions.
 
 8. **Memory access is often non-uniform.** In multi-socket systems and large chips, each core is closer to some memory controllers than others. Non-Uniform Memory Access (NUMA) means local Dynamic Random-Access Memory (DRAM) may take about 80–100 ns while remote DRAM takes 1.5–2 times longer. Operating systems and runtimes try to place threads near their data.
 
@@ -54,6 +54,6 @@ A multicore processor puts several complete cores on one chip, each with private
 
 ## Go deeper
 
-- Sorin, Hill and Wood, *A Primer on Memory Consistency and Cache Coherence* (2nd ed., 2020): the clearest modern treatment of both topics.
+- Nagarajan, Sorin, Hill and Wood, *A Primer on Memory Consistency and Cache Coherence* (2nd ed., 2020): the clearest modern treatment of both topics.
 - Papamarcos and Patel, *A Low-Overhead Coherence Solution for Multiprocessors with Private Cache Memories* (ISCA 1984): the Illinois protocol, essentially MESI.
 - Culler, Singh and Gupta, *Parallel Computer Architecture: A Hardware/Software Approach* (1999): snooping and directory designs in depth.

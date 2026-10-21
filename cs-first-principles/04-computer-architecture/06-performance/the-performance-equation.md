@@ -30,7 +30,7 @@ The only honest measure of a computer's speed is the time it takes to run the pr
 
 | Term | Meaning |
 |---|---|
-| CPU time | Time the processor spends executing a program (excluding waiting for I/O or other programs) |
+| CPU time | Time the processor spends executing a program (excluding waiting for Input/Output (I/O) or other programs) |
 | Instruction count | Number of instructions executed (dynamic count, not lines of code) |
 | CPI / IPC | Average cycles per instruction / its reciprocal, instructions per cycle |
 | Clock period / frequency | Duration of one cycle / cycles per second |

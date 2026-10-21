@@ -1,7 +1,7 @@
 # Deep Learning
 
 > **Layer:** [13 Artificial Intelligence](../README.md) › Deep learning
-> **Children:** [Neural networks and backpropagation](neural-networks-and-backpropagation.md) · [Convolutional networks](convolutional-networks.md) · [Attention and transformers](attention-and-transformers.md) · [Training at scale](training-at-scale.md)
+> **Children:** [Neural networks and backpropagation](neural-networks-and-backpropagation.md) · [Convolutional networks](convolutional-networks.md) · [Recurrent networks and sequence models](recurrent-networks-and-sequence-models.md) · [Attention and transformers](attention-and-transformers.md) · [Training at scale](training-at-scale.md)
 
 ## What this area is about
 
@@ -15,21 +15,24 @@ Three forces made it work after decades of false starts: large labelled and unla
 |---|---|---|
 | [Neural networks and backpropagation](neural-networks-and-backpropagation.md) | The universal mechanism: layers, composition, and the chain-rule algorithm that trains them | Calculus, optimisation |
 | [Convolutional networks](convolutional-networks.md) | Architecture with a locality and translation prior for grid data | Neural networks |
+| [Recurrent networks and sequence models](recurrent-networks-and-sequence-models.md) | Architecture that carries a state through time; gating, sequence-to-sequence, state-space models | Neural networks |
 | [Attention and transformers](attention-and-transformers.md) | Architecture where connectivity is computed from content; the basis of modern language models | Neural networks |
 | [Training at scale](training-at-scale.md) | Running the training loop on thousands of accelerators; scaling laws | All of the above; parallel hardware |
 
 ```
                  neural networks + backpropagation
                     (composition, chain rule)
-                     /                     \
-         architecture: what to share   architecture: what to connect
-           convolution (locality)        attention (content)
-                     \                     /
-                      training at scale
+                /              |                 \
+   share across space   share across time    connect by content
+     convolution          recurrence  ---------> attention
+     (locality)        (fixed-size state)  bottleneck relieved,
+                \              |          recurrence dropped
+                 \             |                 /
+                          training at scale
           (data, model and pipeline parallelism; scaling laws)
 ```
 
-Read neural networks first: everything else is a specialisation of it. Convolutional networks and transformers are the two main answers to "which inductive bias should the architecture build in?". Convolution assumes nearby inputs interact and patterns repeat across positions; attention assumes nothing about distance and learns which positions interact. Transformers' weaker prior needs more data, which is why the last child, scale, mattered so much to their rise. Training at scale is where deep learning becomes a distributed-systems problem.
+Read neural networks first: everything else is a specialisation of it. The three architecture leaves answer "which inductive bias should the architecture build in?". Convolution assumes nearby inputs interact and patterns repeat across positions; recurrence assumes the past can be summarised in a fixed-size state carried forward one step at a time; attention assumes nothing about distance and learns which positions interact. Read recurrent networks before attention: attention was invented to relieve the recurrent encoder-decoder's bottleneck, and the transformer then dropped recurrence because sequential steps cannot be parallelised. State-space models, covered in the same leaf, are recurrence redesigned to train in parallel. Transformers' weaker prior needs more data, which is why the last child, scale, mattered so much to their rise. Training at scale is where deep learning becomes a distributed-systems problem.
 
 ## Connections to sibling areas
 
@@ -44,7 +47,7 @@ Deep learning is matrix arithmetic from [linear algebra](../../01-mathematical-f
 ## Cross-cutting threads
 
 - [Composition](../../CROSS-CUTTING.md#composition): deep networks are compositions of simple layers whose gradients compose by the chain rule.
-- [Pipelining and parallelism](../../CROSS-CUTTING.md#pipelining-and-parallelism): data, tensor and pipeline parallelism; transformers process all positions at once.
+- [Pipelining and parallelism](../../CROSS-CUTTING.md#pipelining-and-parallelism): data, tensor and pipeline parallelism; transformers process all positions at once, where recurrent networks must step through time.
 - [Caching and locality](../../CROSS-CUTTING.md#caching-and-locality): convolution exploits spatial locality; the key-value (KV) cache and tiled attention exploit the memory hierarchy.
 - [Batching and amortization](../../CROSS-CUTTING.md#batching-and-amortization): mini-batches amortise weight loads across many examples.
 - [Encoding and representation](../../CROSS-CUTTING.md#encoding-and-representation): the network's whole job is learning a representation; low-precision number formats trade accuracy for throughput.

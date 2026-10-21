@@ -2,7 +2,7 @@
 
 > **Layer:** [05 Algorithms and Data Structures](../README.md) › [Foundations](README.md)
 > **Builds on:** [Models of Computation](models-of-computation.md), [Correctness and Invariants](correctness-and-invariants.md), [Induction and Recurrences](../../01-mathematical-foundations/03-discrete-mathematics/induction-and-recurrences.md)
-> **Enables:** [Arrays and Linked Lists](../02-fundamental-data-structures/arrays-and-linked-lists.md), [Hash Tables](../02-fundamental-data-structures/hash-tables.md), [Minimum Spanning Trees](../05-graph-algorithms/minimum-spanning-trees.md), [LSM-Trees](../../09-data-management/02-storage-and-indexing/lsm-trees.md), [Memory Management and Garbage Collection](../../06-programming-languages/04-runtime-systems/memory-management-and-garbage-collection.md)
+> **Enables:** [Arrays and Linked Lists](../02-fundamental-data-structures/arrays-and-linked-lists.md), [Hash Tables](../02-fundamental-data-structures/hash-tables.md), [Union–Find](../02-fundamental-data-structures/union-find.md), [LSM-Trees](../../09-data-management/02-storage-and-indexing/lsm-trees.md), [Memory Management and Garbage Collection](../../06-programming-languages/04-runtime-systems/memory-management-and-garbage-collection.md)
 
 ## Essence
 
@@ -16,9 +16,9 @@ Some data structures do a little work most of the time and a lot of work occasio
 
 3. **Accounting method: charge each operation a fixed fee and bank the surplus.** Charge each append 3 units: 1 pays for the write, 2 are stored as credit on the new element. When the array doubles from k to 2k, the k/2 elements added since the last doubling each hold 2 credits, which pay for copying all k elements. The invariant "bank balance ≥ 0" proves the fee covers everything.
 
-4. **Potential method: store credit as a function of the state.** Define a potential Φ(state) ≥ Φ(initial). Amortized cost = actual cost + ΔΦ. Summed over a sequence, the potentials telescope, so total actual cost ≤ total amortized cost. For the dynamic array, Φ = 2·size − capacity works. The art is choosing Φ so expensive operations release potential that cheap ones built up. This method proves splay trees, Fibonacci heaps and union-find bounds.
+4. **Potential method: store credit as a function of the state.** Define a potential Φ(state) ≥ Φ(initial). Amortized cost = actual cost + ΔΦ. Summed over a sequence, the potentials telescope, so total actual cost ≤ total amortized cost. For the dynamic array, Φ = 2·size − capacity works. The art is choosing Φ so expensive operations release potential that cheap ones built up. This method proves splay trees, Fibonacci heaps and union–find bounds.
 
-5. **Amortized bounds can be astonishingly small.** Union-find with union by rank and path compression runs m operations on n elements in O(m·α(n)) time, where α is the inverse Ackermann function, at most 4 for any n that fits in the physical universe (Tarjan, 1975). Fibonacci heaps give O(1) amortized decrease-key, which improves Dijkstra's algorithm to O(m + n log n). Splay trees give O(log n) amortized search with no balance information stored.
+5. **Amortized bounds can be astonishingly small.** [Union–find](../02-fundamental-data-structures/union-find.md) with union by rank and path compression runs m operations on n elements in O(m·α(n)) time, where α is the inverse Ackermann function, at most 4 for any n that fits in the physical universe (Tarjan, 1975); Fredman and Saks (1989) proved no structure can do asymptotically better. Fibonacci heaps give O(1) amortized decrease-key, which improves Dijkstra's algorithm to O(m + n log n). Splay trees give O(log n) amortized search with no balance information stored.
 
 6. **Amortized guarantees do not bound individual latency.** A dynamic array resize, a hash table rehash, a garbage-collection pause or a Log-Structured Merge (LSM) tree compaction can stall one operation for a long time. Real-time and interactive systems care about the worst single operation (tail latency), so they use *de-amortized* variants that spread the expensive work incrementally (incremental rehashing, incremental or concurrent garbage collection).
 

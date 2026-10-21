@@ -14,7 +14,7 @@ Amdahl's law says that the overall speedup from improving part of a system is li
 
 2. **Make the common case fast.** The law turns into a design rule: put effort where time is spent. Speeding up something that takes 2% of run time by any factor gains at most 2%. This is why architects measure instruction mixes before adding instructions, why profilers exist, and why a 2x improvement in a hot loop beats a 100x improvement in start-up code.
 
-3. **Parallel speedup is bounded by the serial fraction.** With p processors and a parallel fraction f, speedup = 1 / ((1 − f) + f/p). For f = 0.95, 8 cores give 5.9x, 64 cores give 15.4x and 1,024 cores give 19.6x, against a ceiling of 20x. Serial sections include start-up, I/O, synchronisation, reductions and any code nobody parallelised.
+3. **Parallel speedup is bounded by the serial fraction.** With p processors and a parallel fraction f, speedup = 1 / ((1 − f) + f/p). For f = 0.95, 8 cores give 5.9x, 64 cores give 15.4x and 1,024 cores give 19.6x, against a ceiling of 20x. Serial sections include start-up, Input/Output (I/O), synchronisation, reductions and any code nobody parallelised.
 
 4. **Overheads make reality worse than the formula.** The basic law assumes the parallel part divides perfectly. In practice communication, load imbalance, lock contention and cache coherence traffic grow with the number of processors, so speedup often peaks and then declines as more processors are added. The law is an upper bound, not a prediction.
 

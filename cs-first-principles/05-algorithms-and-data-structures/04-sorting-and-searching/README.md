@@ -5,7 +5,7 @@
 
 ## What this area is about
 
-Sorting puts n items in order; searching finds an item or a rank in a collection. They are the most studied problems in algorithms because nearly everything else uses them: sorted data makes search logarithmic, duplicates adjacent, merges linear and ranges contiguous. Knuth estimated in the 1970s that a quarter of all computer time was spent sorting. This area is also where theory first gives *tight* answers: we know matching upper and lower bounds, so we know exactly how hard these problems are in each model.
+Sorting puts n items in order; searching finds an item or a rank in a collection. They are the most studied problems in algorithms because nearly everything else uses them: sorted data makes search logarithmic, duplicates adjacent, merges linear and ranges contiguous. Knuth reported that computer manufacturers in the 1960s estimated over a quarter of all computer time went to sorting. This area is also where theory first gives *tight* answers: we know matching upper and lower bounds, so we know exactly how hard these problems are in each model.
 
 The unifying idea is **information**. A comparison yields at most one bit about the input. Sorting must identify one of n! orderings, which needs log₂(n!) ≈ n log₂ n bits, hence Ω(n log n) comparisons. Searching a sorted list must identify one of n + 1 positions, hence Ω(log n). Algorithms that beat these bounds do so by extracting more than one bit per step, by looking at key digits (radix sort) or computing addresses (hashing), which is a change of model, not a refutation.
 

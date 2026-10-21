@@ -17,7 +17,7 @@ The unifying idea is that an algorithmic claim is always relative to a model. "S
 | [Correctness and Invariants](correctness-and-invariants.md) | Proves an algorithm meets its specification on every input | [Induction](../../01-mathematical-foundations/03-discrete-mathematics/induction-and-recurrences.md), [predicate logic](../../01-mathematical-foundations/01-logic/predicate-logic.md) |
 | [Amortized Analysis](amortized-analysis.md) | Bounds the total cost of a sequence of operations, not each one alone | Models of computation, invariants (the potential is an invariant on stored credit) |
 
-Read them in order. The model tells you what to count. Correctness tells you the count is of a procedure worth running. Amortization tells you how to count when costs are uneven over time, which is the normal case for dynamic arrays, hash tables, union-find and self-adjusting trees.
+Read them in order. The model tells you what to count. Correctness tells you the count is of a procedure worth running. Amortization tells you how to count when costs are uneven over time, which is the normal case for dynamic arrays, hash tables, [union–find](../02-fundamental-data-structures/union-find.md) and self-adjusting trees.
 
 ```
   specification ──► algorithm ──► invariant proof ──► correct
@@ -27,10 +27,10 @@ Read them in order. The model tells you what to count. Correctness tells you the
 
 ## Connections to sibling areas
 
-- **[Fundamental Data Structures](../02-fundamental-data-structures/README.md):** every structure is a representation invariant plus operations that preserve it; amortized analysis justifies dynamic arrays and resizing hash tables.
+- **[Fundamental Data Structures](../02-fundamental-data-structures/README.md):** every structure is a representation invariant plus operations that preserve it; amortized analysis justifies dynamic arrays, resizing hash tables and union–find.
 - **[Design Paradigms](../03-design-paradigms/README.md):** each paradigm comes with a characteristic correctness argument (exchange argument for greedy, optimal substructure for dynamic programming) and a characteristic cost analysis (recurrences for divide and conquer).
 - **[Sorting and Searching](../04-sorting-and-searching/README.md):** the comparison model defined here is exactly what makes the Ω(n log n) sorting lower bound provable.
-- **[Graph Algorithms](../05-graph-algorithms/README.md):** Dijkstra and union-find are the classic examples where invariants and amortized bounds do the heavy lifting.
+- **[Graph Algorithms](../05-graph-algorithms/README.md):** Dijkstra's algorithm is the classic invariant proof, and Kruskal's near-linear scan rests on union–find's amortized bound.
 - **[String Algorithms](../06-string-algorithms/README.md):** Knuth–Morris–Pratt's linear time is an amortized argument on a pointer that never moves backwards.
 - **[Advanced Topics](../07-advanced-topics/README.md):** external-memory and cache-oblivious algorithms replace the RAM model with the I/O model; streaming algorithms change the resource from time to space.
 

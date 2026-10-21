@@ -14,7 +14,7 @@ Real programs do not touch memory at random. They reuse data they touched recent
 
 2. **Temporal locality comes from program structure.** Loops execute the same instructions repeatedly; local variables, loop counters and stack frames are touched again and again; hot data structures (a hash table's bucket array, a tree's root) are revisited. Keeping recently used data close therefore pays off: if it was used once, it is likely to be used again soon.
 
-3. **Spatial locality comes from data layout and sequential code.** Instructions execute mostly in sequence; arrays are traversed element by element; structure fields sit next to each other. Caches therefore fetch whole blocks (lines of 64 bytes on nearly all 2020s CPUs), so one miss brings in the neighbours that are likely to be needed next. This is why traversing a two-dimensional array in the wrong order runs many times slower.
+3. **Spatial locality comes from data layout and sequential code.** Instructions execute mostly in sequence; arrays are traversed element by element; structure fields sit next to each other. Caches therefore fetch whole blocks (lines of 64 bytes on nearly all 2020s Central Processing Units (CPUs)), so one miss brings in the neighbours that are likely to be needed next. This is why traversing a two-dimensional array in the wrong order runs many times slower.
 
 4. **Average Memory Access Time (AMAT) is the governing equation.** AMAT = hit time + miss rate × miss penalty, applied recursively per level. With a 1 ns level-1 (L1) cache, 5% miss rate, 4 ns level-2 (L2) cache, 20% L2 local miss rate and 80 ns DRAM: AMAT = 1 + 0.05 × (4 + 0.2 × 80) = 2 ns. Small changes in miss rate matter enormously because the penalty is so large: with a 1 ns hit time and a 100 ns penalty, dropping from a 99% to a 98% hit rate raises AMAT from 2 ns to 3 ns, a 50% slowdown from a one-point change.
 
@@ -30,7 +30,7 @@ Real programs do not touch memory at random. They reuse data they touched recent
 |---|---|
 | Temporal locality | Tendency to reuse recently accessed data soon |
 | Spatial locality | Tendency to access addresses near recently accessed ones |
-| Cache line (block) | Unit of transfer between levels, typically 64 bytes in Central Processing Unit (CPU) caches |
+| Cache line (block) | Unit of transfer between levels, typically 64 bytes in CPU caches |
 | Hit / miss | Whether the requested data is present in the cache |
 | Hit time | Time to access data when it is in the cache |
 | Miss penalty | Additional time to fetch data from the next level |

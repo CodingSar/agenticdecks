@@ -20,7 +20,7 @@ A stack and a queue are collections that restrict *which* element you may remove
 
 5. **Both are O(1) per operation with either arrays or linked lists.** A stack is an array plus a top index. A queue on an array uses a *circular buffer*: head and tail indices that wrap modulo the capacity, so neither end ever shifts data. With geometric resizing, all operations are O(1) amortized. Array versions are usually faster than linked ones for the cache reasons in [arrays and linked lists](arrays-and-linked-lists.md).
 
-6. **A deque generalises both.** A double-ended queue allows push and pop at both ends in O(1). Work-stealing schedulers (Cilk, Java's ForkJoinPool, Go's runtime, Rust's Rayon) give each worker a deque: the owner pushes and pops at one end (LIFO, good locality), and idle workers steal from the other end (FIFO, taking older and usually larger tasks).
+6. **A deque generalises both.** A double-ended queue allows push and pop at both ends in O(1). Work-stealing schedulers (Cilk, Java's ForkJoinPool, Rust's Rayon) give each worker a deque: the owner pushes and pops at one end (LIFO, good locality), and idle workers steal from the other end (FIFO, taking older and usually larger tasks).
 
 7. **Bounded queues create back-pressure, unbounded queues hide overload.** In real systems a queue decouples a producer from a consumer running at different rates. If the producer is faster on average, an unbounded queue grows without limit and latency rises with it; a bounded queue forces the producer to slow down or drop work. Queueing theory says that as utilisation approaches 100%, mean waiting time grows without bound (for an M/M/1 queue, waiting time is proportional to ρ/(1 − ρ)).
 

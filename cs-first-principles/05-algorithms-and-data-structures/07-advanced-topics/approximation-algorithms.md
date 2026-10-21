@@ -22,7 +22,7 @@ For NP-hard optimisation problems (vertex cover, set cover, travelling salespers
 
 6. **Others cannot be approximated beyond a threshold unless P = NP.** The Probabilistically Checkable Proofs (PCP) theorem, proved in the early 1990s, implies that for MAX-3SAT, satisfying more than a 7/8 + ε fraction of clauses is NP-hard (Håstad, 2001), while a random assignment achieves 7/8. Set cover cannot be approximated within (1 − ε) ln n (Dinur and Steurer, 2014), so greedy is essentially optimal. General travelling salesperson without the triangle inequality cannot be approximated within any polynomial-time computable factor, because such an algorithm would decide Hamiltonian cycle.
 
-7. **Problem structure decides approximability.** Metric travelling salesperson (distances obey the triangle inequality) has a 2-approximation via doubled Minimum Spanning Trees (MSTs) and 1.5 via Christofides (1976), slightly improved in 2020 by Karlin, Klein and Oveis Gharan. Without the triangle inequality it is inapproximable. Recognising which structural property your instance has (metric, planar, bounded degree, small integers) often decides whether a good guarantee exists.
+7. **Problem structure decides approximability.** Metric travelling salesperson (distances obey the triangle inequality) has a 2-approximation via doubled Minimum Spanning Trees (MSTs) and 1.5 via Christofides (1976), slightly improved by Karlin, Klein and Oveis Gharan (2021). Without the triangle inequality it is inapproximable. Recognising which structural property your instance has (metric, planar, bounded degree, small integers) often decides whether a good guarantee exists.
 
 8. **In practice, approximation guarantees are floors, not predictions.** Real instances typically come out far closer to optimal than the worst-case ratio, and practitioners combine approximation algorithms with local search, integer-programming solvers and heuristics. The guarantee's value is that it rules out catastrophic outcomes and provides a starting incumbent for [branch and bound](../03-design-paradigms/backtracking-and-branch-and-bound.md).
 
@@ -37,7 +37,7 @@ For NP-hard optimisation problems (vertex cover, set cover, travelling salespers
 | Integrality gap | Worst-case ratio between integer and LP optima |
 | PTAS / FPTAS | 1 + ε approximation for any ε; polynomial in n / in n and 1/ε |
 | Inapproximability | Proof that a better ratio than some threshold is NP-hard |
-| PCP theorem | Every NP proof can be checked by reading a constant number of random bits of it |
+| PCP theorem | Every NP statement has proofs a verifier can check by reading a constant number of proof bits chosen with O(log n) random bits |
 
 ## How it fits
 

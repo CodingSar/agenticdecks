@@ -2,7 +2,7 @@
 
 > **Layer:** [00 Engineering Foundations](../README.md) › [Semiconductor Devices](README.md)
 > **Builds on:** [Doping and the PN Junction](doping-and-the-pn-junction.md), [Electromagnetism and Charge](../01-physics-of-computation/electromagnetism-and-charge.md), [Quantum Mechanics and Band Theory](../01-physics-of-computation/quantum-mechanics-and-band-theory.md)
-> **Enables:** [CMOS](cmos.md), [Logic Gates](../../03-digital-logic/02-combinational-logic/logic-gates.md), [DRAM and Storage Devices](../../04-computer-architecture/03-memory-hierarchy/dram-and-storage-devices.md)
+> **Enables:** [CMOS](cmos.md), [Logic Gates](../../03-digital-logic/02-combinational-logic/logic-gates.md), [Memory Cells](../../03-digital-logic/03-sequential-logic/memory-cells.md), [DRAM and Storage Devices](../../04-computer-architecture/03-memory-hierarchy/dram-and-storage-devices.md)
 
 ## Essence
 
@@ -42,7 +42,7 @@ The Metal-Oxide-Semiconductor Field-Effect Transistor (MOSFET) is a voltage-cont
 ## How it fits
 
 - **Below:** Source and drain are [doped regions and junctions](doping-and-the-pn-junction.md). Gate control is the field effect from [electromagnetism](../01-physics-of-computation/electromagnetism-and-charge.md), and tunnelling through the oxide is from [quantum mechanics](../01-physics-of-computation/quantum-mechanics-and-band-theory.md).
-- **Above:** Pairs of nMOS and pMOS make [CMOS](cmos.md) gates, which are the [logic gates](../../03-digital-logic/02-combinational-logic/logic-gates.md) of digital design. MOSFETs as access switches form memory cells in [DRAM and storage devices](../../04-computer-architecture/03-memory-hierarchy/dram-and-storage-devices.md). Leakage and threshold limits explain [power and the end of scaling](../../04-computer-architecture/06-performance/power-and-the-end-of-scaling.md).
+- **Above:** Pairs of nMOS and pMOS make [CMOS](cmos.md) gates, which are the [logic gates](../../03-digital-logic/02-combinational-logic/logic-gates.md) of digital design. MOSFETs as access switches and charge-storing gates form the Static Random-Access Memory (SRAM), DRAM and flash cells of [memory cells](../../03-digital-logic/03-sequential-logic/memory-cells.md), organised into systems in [DRAM and storage devices](../../04-computer-architecture/03-memory-hierarchy/dram-and-storage-devices.md). Leakage and threshold limits explain [power and the end of scaling](../../04-computer-architecture/06-performance/power-and-the-end-of-scaling.md).
 - **Siblings:** [Doping](doping-and-the-pn-junction.md) supplies the materials, [CMOS](cmos.md) combines MOSFETs into logic, and [fabrication and scaling](fabrication-and-scaling.md) explains how they are made smaller each generation.
 
 ## Common misconceptions

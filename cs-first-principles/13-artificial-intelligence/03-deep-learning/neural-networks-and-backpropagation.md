@@ -18,7 +18,7 @@ A neural network is a function built by composing many simple layers, each a lin
 
 4. **Memory, not arithmetic, often limits training.** The backward pass needs the activations stored during the forward pass, so training memory grows with depth × batch size × layer width. Activation checkpointing trades this back by recomputing some activations, a classic time-space trade-off.
 
-5. **Gradients vanish or explode through many layers.** The gradient at an early layer is a product of many Jacobians. If their typical magnitude is below 1 the product shrinks exponentially (vanishing); above 1 it grows (exploding). This blocked deep networks before about 2010. The fixes are careful initialisation (scaling weights by 1/√fan-in), non-saturating activations, normalisation layers, and residual connections.
+5. **Gradients vanish or explode through many layers.** The gradient at an early layer is a product of many Jacobians. If their typical magnitude is below 1 the product shrinks exponentially (vanishing); above 1 it grows (exploding). This blocked deep networks before about 2010. The fixes are careful initialisation (scaling weights by 1/√fan-in), non-saturating activations, normalisation layers, and residual connections. Recurrent networks face the same problem across time steps rather than layers ([recurrent networks](recurrent-networks-and-sequence-models.md)).
 
 6. **Residual connections make depth trainable.** A residual block computes h_{l+1} = h_l + F(h_l). The identity path carries both signal and gradient unchanged through the network, so gradients reach early layers even through hundreds of blocks. Residual Networks (ResNets, 2015) made 100+ layer networks routine, and every transformer uses the same structure.
 
@@ -42,7 +42,7 @@ A neural network is a function built by composing many simple layers, each a lin
 
 - **Below:** Backpropagation is the multivariate chain rule from [calculus](../../01-mathematical-foundations/05-continuous-mathematics/calculus.md), organised like [dynamic programming](../../05-algorithms-and-data-structures/03-design-paradigms/dynamic-programming.md). Layers are [linear algebra](../../01-mathematical-foundations/04-algebra/linear-algebra.md); throughput comes from [GPUs](../../04-computer-architecture/04-parallel-architecture/simd-and-gpus.md) and [accelerators](../../04-computer-architecture/04-parallel-architecture/domain-specific-accelerators.md); low-precision arithmetic comes from [floating point](../../03-digital-logic/01-number-representation/floating-point.md).
 - **Above:** [Convolutional networks](convolutional-networks.md) and [transformers](attention-and-transformers.md) are neural networks with specific weight-sharing structure; every model in [advanced paradigms](../04-advanced-paradigms/README.md) is trained by backpropagation.
-- **Siblings:** This file is the base the other three refine: architecture (convolution, attention) chooses the structure, and [training at scale](training-at-scale.md) runs the same loop on thousands of devices.
+- **Siblings:** This file is the base the other leaves refine: architecture ([convolution](convolutional-networks.md), [recurrence](recurrent-networks-and-sequence-models.md), [attention](attention-and-transformers.md)) chooses the structure, and [training at scale](training-at-scale.md) runs the same loop on thousands of devices.
 
 ## Common misconceptions
 

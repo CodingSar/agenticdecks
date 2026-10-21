@@ -16,7 +16,7 @@ Two ideas unify the children. First, **parallelism trades generality for efficie
 | [Multicore and cache coherence](multicore-and-cache-coherence.md) | Several cores with private caches that agree on the value of each location | Cache design |
 | [Memory consistency models](memory-consistency-models.md) | The contract for the order of memory operations across cores | Multicore and coherence, out-of-order execution |
 | [SIMD and GPUs](simd-and-gpus.md) | Data parallelism: one instruction, many data elements; thousands of threads hiding latency | Pipelining, memory hierarchy |
-| [Domain-specific accelerators](domain-specific-accelerators.md) | Hardware specialised for one class of computation (TPUs, codecs, crypto engines) | SIMD and GPUs, power limits |
+| [Domain-specific accelerators](domain-specific-accelerators.md) | Hardware specialised for one class of computation (Tensor Processing Units (TPUs), codecs, crypto engines) | SIMD and GPUs, power limits |
 
 ```
    generality  <-----------------------------------------------------> efficiency (ops/joule)
@@ -32,7 +32,7 @@ Read [multicore and cache coherence](multicore-and-cache-coherence.md) and [memo
 - **[Instruction Set Architecture](../01-instruction-set-architecture/README.md)**: parallel features enter the contract as atomic instructions, fences, the memory model and vector extensions (x86 Advanced Vector Extensions (AVX-512), ARM Scalable Vector Extension (SVE), RISC-V V).
 - **[Processor Microarchitecture](../02-processor-microarchitecture/README.md)**: each core is still an out-of-order engine; its store buffer is the reason weak memory models exist; simultaneous multithreading is parallelism inside one core.
 - **[Memory Hierarchy](../03-memory-hierarchy/README.md)**: coherence protocols extend cache design; GPUs and accelerators depend on high-bandwidth memory because their arithmetic outruns any ordinary Dynamic Random-Access Memory (DRAM) interface.
-- **[I/O and Interconnect](../05-io-and-interconnect/README.md)**: accelerators attach over Peripheral Component Interconnect Express (PCIe) or coherent links (Compute Express Link (CXL), NVIDIA's NVLink); on-chip networks connect cores and cache slices.
+- **[I/O and Interconnect](../05-io-and-interconnect/README.md)**: accelerators are Input/Output (I/O) devices that attach over Peripheral Component Interconnect Express (PCIe) or coherent links (Compute Express Link (CXL), NVIDIA's NVLink); on-chip networks connect cores and cache slices.
 - **[Performance](../06-performance/README.md)**: Amdahl's law limits what more cores can deliver; the power wall explains why parallelism became the only path.
 
 ## Connections across layers
@@ -44,5 +44,5 @@ The physical reason for this area is in [power and the end of scaling](../06-per
 - [Pipelining and parallelism](../../CROSS-CUTTING.md#pipelining-and-parallelism): parallelism in space (cores, lanes) replaces speed in time (clock rate).
 - [State and time](../../CROSS-CUTTING.md#state-and-time): consistency models define what "before" means for memory shared by cores.
 - [Caching and locality](../../CROSS-CUTTING.md#caching-and-locality): coherence is the cost of having many caches of one memory.
-- [Tradeoffs](../../CROSS-CUTTING.md#tradeoffs): generality vs efficiency, latency (CPU) vs throughput (GPU).
+- [Tradeoffs](../../CROSS-CUTTING.md#tradeoffs): generality vs efficiency, latency-optimised Central Processing Units (CPUs) vs throughput-optimised GPUs.
 - [Limits and impossibility](../../CROSS-CUTTING.md#limits-and-impossibility): Amdahl's law and dark silicon bound what parallel hardware can deliver.

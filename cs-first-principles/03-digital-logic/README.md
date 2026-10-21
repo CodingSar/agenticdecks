@@ -31,7 +31,7 @@ Digital logic needs both roots, which is why it sits at 03, after each has had i
                               04 Computer Architecture and above
 ```
 
-What the layers above need from it: a menu of standard parts (adders, multiplexers, register files, Static Random-Access Memory (SRAM) arrays), a timing model (critical path sets clock period), a power model (`αCV²f` plus leakage), number formats with known behaviour, and a design flow that can produce custom hardware. [04 Computer Architecture](../04-computer-architecture/README.md) assembles these into processors; it is the first layer that can assume both pillars entirely.
+What the layers above need from it: a menu of standard parts (adders, multiplexers, register files, and Static Random-Access Memory (SRAM), Dynamic Random-Access Memory (DRAM) and flash [memory cells](03-sequential-logic/memory-cells.md)), a timing model (critical path sets clock period), a power model (`αCV²f` plus leakage), number formats with known behaviour, and a design flow that can produce custom hardware. [04 Computer Architecture](../04-computer-architecture/README.md) assembles these into processors; it is the first layer that can assume both pillars entirely.
 
 ## How the children fit together
 
@@ -39,7 +39,7 @@ What the layers above need from it: a menu of standard parts (adders, multiplexe
 |---|---|---|
 | [Number Representation](01-number-representation/README.md) | What bits mean: binary, two's complement, floating point, text encodings | Digital abstraction, number theory |
 | [Combinational Logic](02-combinational-logic/README.md) | Computing functions of bits: gates, minimisation, adders, multiplexers, the Arithmetic Logic Unit (ALU) | Boolean algebra, CMOS, representation |
-| [Sequential Logic](03-sequential-logic/README.md) | Remembering and stepping through time: flip-flops, clocking, finite state machines | Combinational logic, feedback |
+| [Sequential Logic](03-sequential-logic/README.md) | Remembering and stepping through time: flip-flops, clocking, finite state machines, memory cells | Combinational logic, feedback, transistors |
 | [Hardware Design](04-hardware-design/README.md) | Building real chips: Hardware Description Languages (HDLs), Field-Programmable Gate Array (FPGA) and Application-Specific Integrated Circuit (ASIC) implementation, timing and power sign-off | All three above, fabrication |
 
 Representation comes first because it defines what the circuits operate on; the adder is designed around two's complement, not the other way round. Combinational logic then provides stateless computation. Sequential logic adds state, and with it the ability to implement any finite state machine, and, given enough memory, a programmable computer. Hardware design is the practical capstone: it shows how the previous three are written down, implemented on FPGAs or as ASICs, and checked against physical limits.

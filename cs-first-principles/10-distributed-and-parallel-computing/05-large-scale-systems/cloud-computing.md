@@ -52,7 +52,7 @@ Cloud computing turns data centres into pooled resources (compute, storage, netw
 
 ## Go deeper
 
-- Barroso, Clidaras and Hölzle, *The Datacenter as a Computer* (3rd ed., 2018): warehouse-scale computing from first principles.
+- Barroso, Hölzle and Ranganathan, *The Datacenter as a Computer* (3rd ed., 2018): warehouse-scale computing from first principles.
 - Armbrust et al., "A View of Cloud Computing", *Communications of the ACM* (2010): the economic argument.
 - Verma et al., "Large-scale Cluster Management at Google with Borg", EuroSys (2015).
 - Burns et al., "Borg, Omega, and Kubernetes", *ACM Queue* (2016): the reconciliation pattern.

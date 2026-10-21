@@ -1,13 +1,13 @@
 # 15 Computing in Context
 
 > **Layer:** 15 Computing in Context
-> **Children:** [History of computing](history-of-computing.md) · [Ethics and professional responsibility](ethics-and-professional-responsibility.md) · [Law, privacy and policy](law-privacy-and-policy.md)
+> **Children:** [History of computing](history-of-computing.md) · [Ethics and professional responsibility](ethics-and-professional-responsibility.md) · [Law, privacy and policy](law-privacy-and-policy.md) · [Environmental impact](environmental-impact.md)
 
 ## What this area is about
 
 Every layer below this one asks how to make computation correct, fast, reliable or useful. This layer asks what computation does to the people and societies that build and use it, and what they in turn do to it. It is the top of the stack because it is where all the technical layers meet the world at once: a single product decision can involve energy use in [silicon](../00-engineering-foundations/README.md), surveillance through [networks](../08-networking/README.md), bias in [Artificial Intelligence (AI) and machine learning](../13-artificial-intelligence/README.md) and liability in [software engineering](../12-software-engineering/README.md).
 
-The unifying idea is that **technical choices are also social choices**. An encryption default, a data-retention period, a ranking objective or a recommendation threshold decides who benefits, who bears the risk and who decides. Lawrence Lessig put it as "code is law" (*Code and Other Laws of Cyberspace*, 1999): the architecture of a system regulates behaviour as surely as statutes do, but without public debate unless engineers bring it. The three children look at this from three angles: how we got here (history), what engineers owe others (ethics), and what society requires of systems (law and policy).
+The unifying idea is that **technical choices are also social choices**. An encryption default, a data-retention period, a ranking objective or a recommendation threshold decides who benefits, who bears the risk and who decides. Lawrence Lessig put it as "code is law" (*Code and Other Laws of Cyberspace*, 1999): the architecture of a system regulates behaviour as surely as statutes do, but without public debate unless engineers bring it. The four children look at this from four angles: how we got here (history), what engineers owe others (ethics), what society requires of systems (law and policy), and what computing costs the physical world (environmental impact).
 
 ## Why this layer sits here
 
@@ -15,7 +15,7 @@ This layer depends on every other layer, because each one raises its own societa
 
 | Layer | Societal question it raises |
 |---|---|
-| [00 Engineering foundations](../00-engineering-foundations/README.md) | Energy use of data centres and chips, mining of materials, e-waste from short device lifetimes |
+| [00 Engineering foundations](../00-engineering-foundations/README.md) | [Energy use](environmental-impact.md) of data centres and chips, mining of materials, e-waste from short device lifetimes |
 | [02 Theory of computation](../02-theory-of-computation/README.md) | Limits of automated verification, so who is accountable when software cannot be proven safe |
 | [05 Algorithms](../05-algorithms-and-data-structures/README.md) | Ranking, matching and allocation algorithms that decide access to jobs, housing and information |
 | [07 Operating systems](../07-operating-systems/README.md) | Platform control: who may install software on a device they own |
@@ -35,8 +35,9 @@ What the layer contributes back to the stack is a set of **constraints and value
 | [History of computing](history-of-computing.md) | Explains why the stack has its current shape and which forces (war, markets, physics, research funding) shaped it | All technical layers |
 | [Ethics and professional responsibility](ethics-and-professional-responsibility.md) | States what engineers owe users, the public and each other, and how to reason about harm | History (case studies), all layers (the harms) |
 | [Law, privacy and policy](law-privacy-and-policy.md) | Describes how societies turn some ethical expectations into enforceable rules | Ethics (the values), history (how rules lagged technology) |
+| [Environmental impact](environmental-impact.md) | Accounts for the energy, carbon, water and materials that computing consumes, and where the levers to reduce them lie | Physics and architecture (00, 04), cloud (10), AI training (13); ethics and law for who bears the cost |
 
-Read history first. It shows that today's architecture was not inevitable: the stored-program design, the end-to-end Internet and the dominance of a few platforms were choices made under particular pressures. Ethics then asks what responsibilities follow from the power those choices created, using cases such as the Therac-25 radiation overdoses. Law and policy show how some of those responsibilities become binding, through data-protection law such as the General Data Protection Regulation (GDPR), intellectual-property law and sector regulation, and why law tends to lag the technology it regulates.
+Read history first. It shows that today's architecture was not inevitable: the stored-program design, the end-to-end Internet and the dominance of a few platforms were choices made under particular pressures. Ethics then asks what responsibilities follow from the power those choices created, using cases such as the Therac-25 radiation overdoses. Law and policy show how some of those responsibilities become binding, through data-protection law such as the General Data Protection Regulation (GDPR), intellectual-property law and sector regulation, and why law tends to lag the technology it regulates. Environmental impact applies all three to the physical cost of computing: history shows each cost drop expanding total use (the Jevons rebound), ethics asks who bears the energy, water and e-waste burdens, and law has begun to require disclosure and repairability.
 
 ## Connections to neighbouring layers
 
@@ -46,7 +47,8 @@ Read history first. It shows that today's architecture was not inevitable: the s
 - **[14 Human and Visual Computing](../14-human-and-visual-computing/README.md):** [interaction design](../14-human-and-visual-computing/01-human-computer-interaction/interaction-design-principles.md) can respect or exploit [human cognition](../14-human-and-visual-computing/01-human-computer-interaction/perception-and-cognition.md); accessibility is both an ethical and a legal requirement.
 - **[09 Data Management](../09-data-management/README.md):** most privacy law is in effect law about databases: what may be stored, for how long, linked to what, and deleted when.
 - **[08 Networking](../08-networking/README.md):** the [end-to-end design](../08-networking/01-principles/layering-and-the-end-to-end-principle.md) of the Internet made it open to innovation and hard to control, which underlies debates on neutrality and censorship.
-- **[00 Engineering Foundations](../00-engineering-foundations/README.md):** the [thermodynamics](../00-engineering-foundations/01-physics-of-computation/thermodynamics-and-energy.md) of computation becomes a climate question at data-centre scale.
+- **[00 Engineering Foundations](../00-engineering-foundations/README.md) and [04 Computer Architecture](../04-computer-architecture/README.md):** the [thermodynamics](../00-engineering-foundations/01-physics-of-computation/thermodynamics-and-energy.md) of computation and the [end of Dennard scaling](../04-computer-architecture/06-performance/power-and-the-end-of-scaling.md) become a climate question at data-centre scale; see [environmental impact](environmental-impact.md).
+- **[10 Distributed and Parallel Computing](../10-distributed-and-parallel-computing/README.md):** [cloud computing](../10-distributed-and-parallel-computing/05-large-scale-systems/cloud-computing.md) concentrates servers, which raises efficiency, makes energy use visible to grids, and places data under particular jurisdictions.
 
 ## Connections across layers
 
@@ -58,4 +60,4 @@ This layer takes facts from every layer and gives back values and rules. The flo
 - [Trust and verification](../CROSS-CUTTING.md#trust-and-verification): audits, certification and transparency reports as social verification of systems.
 - [Limits and impossibility](../CROSS-CUTTING.md#limits-and-impossibility): fairness criteria that cannot all hold at once; anonymisation that cannot fully protect rich data.
 - [Abstraction and layering](../CROSS-CUTTING.md#abstraction-and-layering): abstraction hides harms as well as details, spreading responsibility across many hands.
-- [Feedback and control](../CROSS-CUTTING.md#feedback-and-control): regulation and public response act as a slow feedback loop on technology.
+- [Feedback and control](../CROSS-CUTTING.md#feedback-and-control): regulation and public response act as a slow feedback loop on technology; efficiency gains feed back into demand (the rebound effect).

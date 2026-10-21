@@ -31,7 +31,7 @@ Read the [performance equation](the-performance-equation.md) first: it is the fr
 - **[Processor Microarchitecture](../02-processor-microarchitecture/README.md)**: pipelining shortens the clock period, and superscalar and out-of-order execution lower cycles per instruction; their power cost is what hit the wall.
 - **[Memory Hierarchy](../03-memory-hierarchy/README.md)**: memory stalls are often the largest component of cycles per instruction; the roofline model asks whether a program is limited by memory bandwidth or by compute.
 - **[Parallel Architecture](../04-parallel-architecture/README.md)**: the response to the power wall, and the main domain of Amdahl's law.
-- **[I/O and Interconnect](../05-io-and-interconnect/README.md)**: end-to-end performance often depends more on I/O latency and bandwidth than on the processor; Amdahl's law applies to the whole system.
+- **[I/O and Interconnect](../05-io-and-interconnect/README.md)**: end-to-end performance often depends more on Input/Output (I/O) latency and bandwidth than on the processor; Amdahl's law applies to the whole system.
 
 ## Connections across layers
 

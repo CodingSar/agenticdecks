@@ -24,10 +24,10 @@ The layer contributes one abstraction to the stack: **the algorithmic contract**
 | Child | Its role in the whole | Depends on |
 |---|---|---|
 | [01 Foundations](01-foundations/README.md) | Cost models, correctness proofs, amortized analysis | 01, 02, 04 |
-| [02 Fundamental Data Structures](02-fundamental-data-structures/README.md) | The containers: arrays, lists, stacks, queues, hash tables, trees, heaps | 01 Foundations |
+| [02 Fundamental Data Structures](02-fundamental-data-structures/README.md) | The containers: arrays, lists, stacks, queues, hash tables, trees, heaps, union–find | 01 Foundations |
 | [03 Design Paradigms](03-design-paradigms/README.md) | Reusable strategies: divide and conquer, greedy, dynamic programming, search, randomization | Foundations, data structures |
 | [04 Sorting and Searching](04-sorting-and-searching/README.md) | The canonical problems; first tight lower bounds | Paradigms, structures |
-| [05 Graph Algorithms](05-graph-algorithms/README.md) | Traversal, shortest paths, spanning trees, flow | Queues, heaps, union-find, paradigms |
+| [05 Graph Algorithms](05-graph-algorithms/README.md) | Traversal, shortest paths, spanning trees, flow | Queues, heaps, [union–find](02-fundamental-data-structures/union-find.md), paradigms |
 | [06 String Algorithms](06-string-algorithms/README.md) | Pattern matching and text indexes | Automata, hashing, sorting |
 | [07 Advanced Topics](07-advanced-topics/README.md) | Beyond exact, in-RAM, offline: approximation, streaming, external memory, geometry | Everything above |
 
@@ -65,7 +65,7 @@ This layer takes discrete mathematics, probability and complexity theory from 01
 - [Encoding and representation](../CROSS-CUTTING.md#encoding-and-representation): the choice of data structure decides which operations are cheap.
 - [Invariants and correctness](../CROSS-CUTTING.md#invariants-and-correctness): every algorithm here is justified by an invariant (loop invariant, heap order, balance condition, cut property).
 - [Recursion and self-reference](../CROSS-CUTTING.md#recursion-and-self-reference): divide and conquer and dynamic programming define solutions by smaller instances.
-- [Batching and amortization](../CROSS-CUTTING.md#batching-and-amortization): dynamic arrays, union-find and splay trees pay rare large costs that average out.
+- [Batching and amortization](../CROSS-CUTTING.md#batching-and-amortization): dynamic arrays, union–find and splay trees pay rare large costs that average out.
 - [Caching and locality](../CROSS-CUTTING.md#caching-and-locality): memoization, and the gap between RAM-model and real performance.
 - [Limits and impossibility](../CROSS-CUTTING.md#limits-and-impossibility): comparison-sort and search lower bounds, NP-hardness, streaming space bounds.
 - [Tradeoffs](../CROSS-CUTTING.md#tradeoffs): time vs space, worst case vs expected, exact vs approximate.

@@ -128,3 +128,8 @@ Collected from writer reports, to be resolved in the review pass.
 - Citations: HotStuff PODC 2019; Bailis et al. HAT PVLDB 7 (2013/2014); Kleppmann & Beresford TPDS 2017; Hellerstein & Alvaro CACM 2020; Ristić 2nd ed 2022.
 - BFT 3f+1 statement (oral messages synchronous; partial synchrony even with signatures) — check.
 - New leaves: privacy-enhancing-technologies, software-supply-chain-security.
+
+## Cross-layer follow-ups (coordinator, after review pass)
+- 01 relations-and-orders.md: "union–find" link → 05/02/union-find.md.
+- 06 polymorphism-and-type-inference.md: link union-find for unification.
+- 07 kernel-architectures.md + 01 README: seL4 ~8,700 lines (07 reviewer briefed).

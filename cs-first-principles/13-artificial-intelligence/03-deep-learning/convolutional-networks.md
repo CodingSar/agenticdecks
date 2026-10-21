@@ -42,7 +42,7 @@ A Convolutional Neural Network (CNN) is a neural network built for data on a gri
 
 - **Below:** Images are [sampled and quantised](../../00-engineering-foundations/04-signals-and-systems/sampling-and-quantization.md) signals; convolution is the linear-filtering operation of signal processing with learned instead of designed filters; training is [backpropagation](neural-networks-and-backpropagation.md); speed comes from [GPUs](../../04-computer-architecture/04-parallel-architecture/simd-and-gpus.md).
 - **Above:** CNNs are the workhorse of [computer vision](../../14-human-and-visual-computing/03-media-and-vision/computer-vision.md) (classification, detection, segmentation), appear in learned image and video codecs in [media compression](../../14-human-and-visual-computing/03-media-and-vision/digital-media-and-compression.md), and form the denoisers in many [generative models](../04-advanced-paradigms/generative-models.md).
-- **Siblings:** [Attention](attention-and-transformers.md) replaces fixed local connectivity with content-dependent global connectivity; convolution is the stronger prior, attention the more flexible one. Both scale with the techniques in [training at scale](training-at-scale.md).
+- **Siblings:** [Recurrent networks](recurrent-networks-and-sequence-models.md) share weights across time as CNNs share them across space. [Attention](attention-and-transformers.md) replaces fixed local connectivity with content-dependent global connectivity; convolution is the stronger prior, attention the more flexible one. Both scale with the techniques in [training at scale](training-at-scale.md).
 
 ## Common misconceptions
 

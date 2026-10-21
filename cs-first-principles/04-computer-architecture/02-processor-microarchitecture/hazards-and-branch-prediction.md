@@ -49,7 +49,7 @@ A hazard is any situation in which the next instruction in a pipeline cannot pro
 ## Common misconceptions
 
 - **"Branch prediction is a minor optimisation."** On a deep, wide core, a mispredicted branch costs on the order of 15–20 cycles; code with random branches can run several times slower than the same code with predictable ones.
-- **"Speculation is invisible because it is rolled back."** Architectural state is rolled back; microarchitectural state (caches, TLBs, predictors) is not, which is exactly what Spectre exploits.
+- **"Speculation is invisible because it is rolled back."** Architectural state is rolled back; microarchitectural state (caches, Translation Lookaside Buffers (TLBs), predictors) is not, which is exactly what Spectre exploits.
 - **"Data hazards always stall."** With forwarding, back-to-back dependent ALU instructions run without a stall; only loads and multi-cycle operations stall dependents.
 
 ## Go deeper
