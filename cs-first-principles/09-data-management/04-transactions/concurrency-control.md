@@ -26,7 +26,7 @@ Concurrency control lets many transactions run at once while guaranteeing the re
 
 8. **MVCC alone gives snapshot isolation, not serializability.** Two transactions can each read a snapshot, check a constraint, and write different items, together violating the constraint (write skew). Serializable Snapshot Isolation (Cahill et al., 2008) tracks read/write dependencies between concurrent snapshot transactions and aborts one when a dangerous pattern appears, giving serializability with MVCC's read performance; PostgreSQL implements it.
 
-9. **Granularity trades overhead for concurrency.** Locking whole tables is cheap but serialises everything; locking rows allows concurrency but costs memory and lock-manager time. Multigranularity locking with intention locks (IS, IX) lets a transaction lock a table coarsely or rows finely while others can still detect conflicts at either level.
+9. **Granularity trades overhead for concurrency.** Locking whole tables is cheap but serialises everything; locking rows allows concurrency but costs memory and lock-manager time. Multigranularity locking with intention locks (intention-shared, IS; intention-exclusive, IX) lets a transaction lock a table coarsely or rows finely while others can still detect conflicts at either level.
 
 ## Key concepts
 
