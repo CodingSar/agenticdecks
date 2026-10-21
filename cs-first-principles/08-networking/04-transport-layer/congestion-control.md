@@ -12,7 +12,7 @@ When senders inject packets faster than a bottleneck link can drain them, queues
 
 1. **Uncontrolled retransmission causes congestion collapse.** In October 1986, throughput between Lawrence Berkeley Laboratory and UC Berkeley, a few hundred metres apart, dropped from 32 kbit/s to 40 bit/s. Senders were retransmitting packets that were merely queued, so most link capacity carried duplicates. Jacobson's 1988 algorithms for Transmission Control Protocol (TCP) fixed this, and they are why the Internet scaled.
 
-2. **The sender keeps a congestion window.** In addition to the receiver's window (rwnd), the sender maintains a congestion window (cwnd) and keeps at most min(cwnd, rwnd) bytes unacknowledged. Rate is roughly cwnd / Round-Trip Time (RTT), where RTT is the Round-Trip Time. Congestion control is the rule for updating cwnd.
+2. **The sender keeps a congestion window.** In addition to the receiver's window (rwnd), the sender maintains a congestion window (cwnd) and keeps at most min(cwnd, rwnd) bytes unacknowledged. Rate is roughly cwnd / RTT, where RTT is the Round-Trip Time. Congestion control is the rule for updating cwnd.
 
 3. **Acknowledgements clock the sender.** In steady state, a new packet is sent only when an acknowledgement shows an old one has left the network. Because acknowledgements return at the bottleneck's rate, this "self-clocking" automatically paces the sender to the bottleneck without measuring it explicitly.
 

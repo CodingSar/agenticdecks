@@ -5,7 +5,7 @@
 
 ## What this area is about
 
-Many users change a shared database at once, and the machine can crash at any moment. Without help, every application would have to reason about every possible interleaving with every other program and every possible point of failure. A transaction is the abstraction that removes that burden: a group of reads and writes that appears to execute alone (isolation) and entirely or not at all (atomicity), whose effects survive crashes once committed (durability), and which takes the database from one valid state to another (consistency). The programmer writes sequential code; the system makes it safe.
+Many users change a shared database at once, and the machine can crash at any moment. Without help, every application would have to reason about every possible interleaving with every other program and every possible point of failure. A transaction is the abstraction that removes that burden: a group of reads and writes that appears to execute alone (isolation) and entirely or not at all (atomicity), whose effects survive crashes once committed (durability), and which takes the database from one valid state to another (consistency). Together they are known by the acronym Atomicity, Consistency, Isolation, Durability (ACID). The programmer writes sequential code; the system makes it safe.
 
 The unifying idea is that two mechanisms deliver the abstraction. *Concurrency control* decides which interleavings of concurrent transactions are allowed, so the result equals some serial order. *Recovery*, built on a write-ahead log, undoes the effects of transactions that did not commit and redoes those that did but had not reached disk when the crash happened. Isolation levels are the dial between correctness and throughput that practical systems expose.
 
@@ -14,7 +14,7 @@ The unifying idea is that two mechanisms deliver the abstraction. *Concurrency c
 | Child | Its role in the whole | Depends on |
 |---|---|---|
 | [ACID](acid.md) | The contract: what each property means and what it costs | Data model constraints |
-| [Concurrency Control](concurrency-control.md) | Mechanisms for isolation: serializability, two-phase locking, optimistic and multiversion schemes | Atomicity, Consistency, Isolation, Durability (ACID), Operating System (OS) locking |
+| [Concurrency Control](concurrency-control.md) | Mechanisms for isolation: serializability, two-phase locking, optimistic and multiversion schemes | ACID, operating-system locking |
 | [Isolation Levels](isolation-levels.md) | The weaker guarantees systems actually offer, and the anomalies each permits | Concurrency control |
 | [Recovery and Logging](recovery-and-logging.md) | Mechanisms for atomicity and durability: write-ahead logging, Algorithm for Recovery and Isolation Exploiting Semantics (ARIES), checkpoints | ACID, storage, crash consistency |
 

@@ -27,7 +27,7 @@ Read in order. Framing gives a single link the ability to carry checked frames. 
 ## Connections to sibling areas
 
 - **[Principles](../01-principles/README.md):** media access is statistical multiplexing on a single shared channel; per-hop retransmission in Wi-Fi is the "performance exception" allowed by the end-to-end argument.
-- **[Network Layer](../03-network-layer/README.md):** Internet Protocol (IP) packets ride inside link frames; the Address Resolution Protocol maps IP addresses to link-layer addresses for the next hop. Switches forward within a LAN; routers forward between Local Area Networks (LANs).
+- **[Network Layer](../03-network-layer/README.md):** Internet Protocol (IP) packets ride inside link frames; the Address Resolution Protocol maps IP addresses to link-layer addresses for the next hop. Switches forward within a LAN; routers forward between LANs.
 - **[Transport Layer](../04-transport-layer/README.md):** link-layer loss on wireless confuses loss-based congestion control, which assumes loss means congestion.
 - **[Application Layer](../05-application-layer/README.md):** largely isolated from link details, which is the point of layering; it sees only the resulting rate, latency and loss.
 

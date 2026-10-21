@@ -38,7 +38,7 @@ Concurrency control lets many transactions run at once while guaranteeing the re
 | Shared / exclusive lock | Lock compatible with other readers / incompatible with all others |
 | Waits-for graph | Graph of transactions blocked on each other; a cycle is a deadlock |
 | Phantom | Row inserted by another transaction that matches an earlier read's predicate |
-| Optimistic Concurrency Control (OCC) | Optimistic concurrency control: validate at commit, abort on conflict |
+| OCC | Optimistic concurrency control: validate at commit, abort on conflict |
 | MVCC | Multiversion concurrency control: readers see snapshots of committed versions |
 | Write skew | Anomaly where concurrent transactions write disjoint items based on overlapping reads |
 

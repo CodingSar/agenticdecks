@@ -5,7 +5,7 @@
 
 ## What this area is about
 
-A declarative query says what result is wanted. Query processing turns it into a program that computes that result efficiently over the actual storage. The gap is large: the same Structured Query Language (SQL) (Structured Query Language) query can run in milliseconds or in days depending on the order of joins, the algorithms chosen and the indexes used. Closing that gap automatically, without the user's help, is the central achievement of database systems and the reason declarative querying is practical.
+A declarative query says what result is wanted. Query processing turns it into a program that computes that result efficiently over the actual storage. The gap is large: the same Structured Query Language (SQL) query can run in milliseconds or in days depending on the order of joins, the algorithms chosen and the indexes used. Closing that gap automatically, without the user's help, is the central achievement of database systems and the reason declarative querying is practical.
 
 The unifying idea is *plans as trees of physical operators, chosen by estimated cost*. A query is parsed into a relational algebra tree, rewritten using algebraic equivalences, and then mapped to physical operators (index scan, hash join, sort) whose costs depend on input sizes. The optimizer searches the space of equivalent plans and picks the one with the lowest estimated cost. The executor then runs it, usually by pulling tuples (or batches of tuples) through the operator tree.
 

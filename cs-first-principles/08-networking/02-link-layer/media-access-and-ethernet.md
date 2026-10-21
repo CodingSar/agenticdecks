@@ -10,7 +10,7 @@ When several stations share one transmission medium, two frames sent at once col
 
 ## Core tenets
 
-1. **Shared media need a way to take turns without a scheduler.** The three families are: *channel partitioning* (divide by time or frequency, as in Time-Division and Frequency-Division Multiple Access, Time-Division Multiple Access (TDMA) and Frequency-Division Multiple Access (FDMA)), *taking turns* (polling, token passing), and *random access* (send and recover from collisions). Partitioning wastes idle slots under bursty load; turn-taking adds latency and a single point of failure; random access is simple and efficient at low load.
+1. **Shared media need a way to take turns without a scheduler.** The three families are: *channel partitioning* (divide by time or frequency, as in Time-Division Multiple Access (TDMA) and Frequency-Division Multiple Access (FDMA)), *taking turns* (polling, token passing), and *random access* (send and recover from collisions). Partitioning wastes idle slots under bursty load; turn-taking adds latency and a single point of failure; random access is simple and efficient at low load.
 
 2. **Pure random access has low peak efficiency.** In ALOHA (University of Hawaii, 1970), a station sends whenever it has a frame. Two frames overlap if either starts within one frame time of the other, so peak throughput is 1/(2e) ≈ 18% of capacity. Slotted ALOHA, which aligns sends to slot boundaries, halves the vulnerable window and reaches 1/e ≈ 37%.
 
@@ -38,7 +38,7 @@ When several stations share one transmission medium, two frames sent at once col
 | Switch | Device forwarding frames between ports based on learned MAC addresses |
 | Full duplex | Both directions transmit simultaneously on separate paths |
 | Spanning tree | Protocol that disables links to make a switched LAN loop-free |
-| Virtual LAN (VLAN) | Virtual LAN: logical partition of a switched network into separate broadcast domains |
+| VLAN | Virtual LAN: logical partition of a switched network into separate broadcast domains |
 | ARP | Address Resolution Protocol: maps an IP address to a MAC address on a LAN |
 
 ## How it fits

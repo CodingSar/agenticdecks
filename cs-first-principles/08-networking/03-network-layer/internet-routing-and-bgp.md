@@ -41,7 +41,7 @@ The Internet is not one network but about 75,000 independently operated networks
 | Valley-free path | Path consistent with economic export rules |
 | Route hijack | Announcing a prefix one does not legitimately hold |
 | RPKI | Signed attestations of which AS may originate a prefix |
-| Internet Exchange Point (IXP) | Internet Exchange Point: facility where many ASes interconnect |
+| IXP | Internet Exchange Point: facility where many ASes interconnect |
 
 ## How it fits
 

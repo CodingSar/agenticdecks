@@ -6,7 +6,7 @@
 
 ## Essence
 
-The Internet offers two classic transport services on top of the Internet Protocol (IP). The User Datagram Protocol (UDP) adds only port numbers and a checksum: each message is an independent datagram that may be lost, duplicated or reordered. The Transmission Control Protocol (TCP) builds a connection between two processes and delivers a reliable, ordered, flow-controlled and congestion-controlled stream of bytes. Most applications use TCP because it hides the network's failures; applications that care more about timeliness than completeness, or that want to build their own reliability, use UDP. QUIC, now the transport under Hypertext Transfer Protocol (HTTP)/3, is a modern reliable transport built on UDP in user space.
+The Internet offers two classic transport services on top of the Internet Protocol (IP). The User Datagram Protocol (UDP) adds only port numbers and a checksum: each message is an independent datagram that may be lost, duplicated or reordered. The Transmission Control Protocol (TCP) builds a connection between two processes and delivers a reliable, ordered, flow-controlled and congestion-controlled stream of bytes. Most applications use TCP because it hides the network's failures; applications that care more about timeliness than completeness, or that want to build their own reliability, use UDP. QUIC, now the transport under version 3 of the Hypertext Transfer Protocol (HTTP/3), is a modern reliable transport built on UDP in user space.
 
 ## Core tenets
 
@@ -16,7 +16,7 @@ The Internet offers two classic transport services on top of the Internet Protoc
 
 3. **TCP provides a byte stream, not messages.** The sender writes bytes; TCP chooses how to split them into segments; the receiver reads bytes, possibly in different chunk sizes. Applications must frame their own messages (length prefixes, delimiters). Treating one `send()` as one `recv()` is a classic bug.
 
-4. **Connections start with a three-way handshake.** Client sends SYN with an initial sequence number; server replies SYN-ACK with its own; client sends acknowledgement (ACK). This synchronises both sides' sequence numbers and confirms each can hear the other. It costs one Round-Trip Time (RTT) before data flows. Random initial sequence numbers stop old packets from earlier connections and blind attackers from being accepted as current data.
+4. **Connections start with a three-way handshake.** Client sends SYN with an initial sequence number; server replies SYN-ACK with its own; client sends an acknowledgement (ACK). This synchronises both sides' sequence numbers and confirms each can hear the other. It costs one Round-Trip Time (RTT) before data flows. Random initial sequence numbers stop old packets from earlier connections and blind attackers from being accepted as current data.
 
 5. **Connection teardown is per direction and leaves a residue.** Each side sends FIN to close its half; the connection is fully closed after both. The side that closes first waits in TIME_WAIT for twice the maximum segment lifetime (often 60 seconds in total) so that late duplicates of old segments die out before the same 4-tuple can be reused. Busy servers that close connections can accumulate many TIME_WAIT entries.
 

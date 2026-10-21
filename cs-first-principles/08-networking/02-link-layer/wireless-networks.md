@@ -14,7 +14,7 @@ Radio is a shared broadcast medium whose quality changes from moment to moment. 
 
 2. **A transmitter cannot detect collisions.** Its own signal at the antenna is billions of times stronger than a distant station's, so it cannot listen while it sends. And what matters is interference at the *receiver*, which the sender cannot observe. So wireless uses Carrier Sense Multiple Access with Collision Avoidance (CSMA/CA): sense the channel, wait a random backoff even when idle, send the whole frame, and treat a missing acknowledgement as a collision.
 
-3. **Hidden and exposed terminals break carrier sense.** If A and C are both in range of access point B but not of each other, they each sense an idle channel and collide at B (hidden terminal). Conversely, a station may defer unnecessarily because it hears a transmission that would not interfere with its own receiver (exposed terminal). Wi-Fi offers optional Request-to-Send/Clear-to-Send (RTS/CTS) handshakes, where B's Clear-to-Send (CTS) reserves the channel for everyone who can hear B.
+3. **Hidden and exposed terminals break carrier sense.** If A and C are both in range of access point B but not of each other, they each sense an idle channel and collide at B (hidden terminal). Conversely, a station may defer unnecessarily because it hears a transmission that would not interfere with its own receiver (exposed terminal). Wi-Fi offers optional Request-to-Send/Clear-to-Send (RTS/CTS) handshakes, where B's CTS reserves the channel for everyone who can hear B.
 
 4. **Every frame is acknowledged and retransmitted at the link layer.** Because loss is common, waiting for end-to-end recovery would be far too slow and would mislead transport protocols. Wi-Fi retransmits a frame several times before giving up. This is the end-to-end argument's permitted performance optimisation, and it is essential for wireless to be usable.
 
@@ -32,7 +32,7 @@ Radio is a shared broadcast medium whose quality changes from moment to moment. 
 |---|---|
 | Path loss | Decline of received power with distance |
 | Multipath fading | Constructive and destructive interference of reflected copies |
-| Signal-to-Noise Ratio (SNR) | Signal-to-Noise Ratio: received signal power over noise power, sets achievable rate |
+| SNR | Signal-to-Noise Ratio: received signal power over noise power, sets achievable rate |
 | CSMA/CA | Carrier sense with random backoff and acknowledgements; Wi-Fi's Medium Access Control (MAC) |
 | Hidden terminal | Two senders that cannot hear each other collide at a common receiver |
 | RTS/CTS | Short reservation handshake to mitigate hidden terminals |

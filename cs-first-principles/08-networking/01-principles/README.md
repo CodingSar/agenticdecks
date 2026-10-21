@@ -7,7 +7,7 @@
 
 Before any specific protocol, three ideas decide the shape of every network built since the 1970s. First, *where* should a function live: in the network or at its edges? Second, *how* should a shared link be divided among many conversations: by reserving capacity in advance or by sending self-describing packets on demand? Third, *what* limits how fast data gets from one end to the other: distance, link rate, or waiting in line?
 
-The unifying idea is that a network is a shared resource with no central controller, and every design choice trades simplicity in the core for work at the edges. The Internet chose a dumb, best-effort, packet-switched core with smart endpoints. That choice explains why IP drops packets without apology, why TCP lives in end hosts, and why queueing delay, not wire speed, dominates latency on a busy path.
+The unifying idea is that a network is a shared resource with no central controller, and every design choice trades simplicity in the core for work at the edges. The Internet chose a dumb, best-effort, packet-switched core with smart endpoints. That choice explains why the Internet Protocol (IP) drops packets without apology, why the Transmission Control Protocol (TCP) lives in end hosts, and why queueing delay, not wire speed, dominates latency on a busy path.
 
 ## How the children fit together
 

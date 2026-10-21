@@ -18,7 +18,7 @@ The Internet Protocol (IP) gives every network interface an address and defines 
 
 4. **Fast forwarding needs special data structures and hardware.** A 400 Gbit/s port receives a minimum-size packet every few nanoseconds. Software routers use compressed binary tries (one level per address bit, collapsed for speed) to find the longest match in a handful of memory accesses. Hardware routers use Ternary Content-Addressable Memory (TCAM), which compares the address against all entries in parallel in one cycle at significant power cost.
 
-5. **Each hop rewrites the link header but not the IP addresses.** The router decrements the Time To Live (TTL) field (discarding the packet at zero, which stops loops from circulating forever), recomputes the header checksum, and wraps the packet in a new link-layer frame addressed to the next hop's link address. Source and destination IP stay the same end to end, barring NAT.
+5. **Each hop rewrites the link header but not the IP addresses.** The router decrements the Time To Live (TTL) field (discarding the packet at zero, which stops loops from circulating forever), recomputes the header checksum, and wraps the packet in a new link-layer frame addressed to the next hop's link address. Source and destination IP stay the same end to end, barring address translation.
 
 6. **IPv4 exhaustion produced NAT, which broke end-to-end addressing.** 2^32 ≈ 4.3 billion addresses ran out at the regional registries in the 2010s. Network Address Translation (NAT) lets a whole home or company share one public address: the NAT rewrites outgoing source addresses and ports and keeps a table to reverse the mapping for replies. Hosts behind a NAT cannot easily accept incoming connections, which complicates peer-to-peer applications and requires traversal tricks.
 
@@ -45,7 +45,7 @@ The Internet Protocol (IP) gives every network interface an address and defines 
 
 ## How it fits
 
-- **Below:** packets ride in [link-layer frames](../02-link-layer/media-access-and-ethernet.md), with Address Resolution Protocol (ARP) (IPv4) or Neighbor Discovery (IPv6) finding the next hop's link address. Prefix arithmetic is [binary notation](../../03-digital-logic/01-number-representation/binary-and-positional-notation.md); lookup is a [trie](../../05-algorithms-and-data-structures/06-string-algorithms/tries-and-suffix-structures.md).
+- **Below:** packets ride in [link-layer frames](../02-link-layer/media-access-and-ethernet.md), with the Address Resolution Protocol (ARP) for IPv4 or Neighbor Discovery for IPv6 finding the next hop's link address. Prefix arithmetic is [binary notation](../../03-digital-logic/01-number-representation/binary-and-positional-notation.md); lookup is a [trie](../../05-algorithms-and-data-structures/06-string-algorithms/tries-and-suffix-structures.md).
 - **Above:** [routing algorithms](routing-algorithms.md) fill the forwarding table; [TCP and UDP](../04-transport-layer/udp-and-tcp.md) add ports to reach processes; [DNS](../05-application-layer/naming-and-dns.md) maps names to addresses. Source-address spoofing and denial of service are [network attacks](../../11-security-and-cryptography/04-network-and-application-security/network-attacks-and-defenses.md) that exploit IP's lack of authentication.
 - **Siblings:** this leaf is the data plane; [routing algorithms](routing-algorithms.md) and [BGP](internet-routing-and-bgp.md) are the control plane that decides what the table says.
 

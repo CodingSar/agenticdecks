@@ -6,7 +6,7 @@
 
 ## Essence
 
-Full serializability costs concurrency, so databases offer weaker *isolation levels* that permit specific anomalies in exchange for throughput. The Structured Query Language (SQL) (Structured Query Language) standard defines four levels by which anomalies they forbid: Read Uncommitted, Read Committed, Repeatable Read and Serializable. In practice, implementations differ from the standard and from each other, and the most widely used level, Snapshot Isolation, is not in the standard's list at all. An isolation level is a contract about which interleavings the application must tolerate. Choosing one means knowing which anomalies your code could be exposed to and whether its invariants survive them.
+Full serializability costs concurrency, so databases offer weaker *isolation levels* that permit specific anomalies in exchange for throughput. The Structured Query Language (SQL) standard defines four levels by which anomalies they forbid: Read Uncommitted, Read Committed, Repeatable Read and Serializable. In practice, implementations differ from the standard and from each other, and the most widely used level, Snapshot Isolation, is not in the standard's list at all. An isolation level is a contract about which interleavings the application must tolerate. Choosing one means knowing which anomalies your code could be exposed to and whether its invariants survive them.
 
 ## Core tenets
 

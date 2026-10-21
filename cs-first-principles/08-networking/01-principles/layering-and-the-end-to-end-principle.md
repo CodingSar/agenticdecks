@@ -12,14 +12,14 @@ A network protocol stack splits the job of moving data into layers, each offerin
 
 1. **Each layer turns a weaker service into a stronger one.** The physical layer delivers noisy bits; the link layer delivers checked frames to a neighbour; the network layer delivers packets to any host, maybe; the transport layer delivers an ordered byte stream to a process. Each layer only has to solve one problem, and can be replaced without disturbing the others, as long as it keeps its promise.
 
-2. **Encapsulation makes layers independent.** On the way down, each layer prepends a header (and sometimes a trailer) that only its peer reads. A router reads the link and IP headers and ignores everything inside. That is why a router built in 1995 can forward a QUIC packet invented in 2021.
+2. **Encapsulation makes layers independent.** On the way down, each layer prepends a header (and sometimes a trailer) that only its peer reads. A router reads the link and Internet Protocol (IP) headers and ignores everything inside. That is why a router built in 1995 can forward a QUIC packet invented in 2021.
 
    ```
    [ Eth hdr | IP hdr | TCP hdr | HTTP request ... | Eth FCS ]
      link      network  transport  application
    ```
 
-3. **The narrow waist buys evolvability.** The Internet Protocol (IP) is the single common layer. Anything that can carry IP packets (Ethernet, Wi-Fi, fibre, cellular, carrier pigeon per Request for Comments (RFC) 1149) joins the Internet; anything that runs over IP reaches every host. Innovation happens above and below the waist, while the waist itself is extremely hard to change, which is why IPv6 deployment has taken decades.
+3. **The narrow waist buys evolvability.** IP is the single common layer. Anything that can carry IP packets (Ethernet, Wi-Fi, fibre, cellular, carrier pigeon per Request for Comments (RFC) 1149) joins the Internet; anything that runs over IP reaches every host. Innovation happens above and below the waist, while the waist itself is extremely hard to change, which is why IPv6 deployment has taken decades.
 
 4. **Functions that need endpoint knowledge must be done at the endpoints.** Consider reliable file transfer. Each link can check its own frames, but a file can still be corrupted in a router's memory, on a disk, or by a buggy program. Only the receiving application can compare what it got with what was sent. So the end-to-end check is necessary, and once it exists, per-hop reliability is only an optimisation (Saltzer, Reed and Clark, 1984).
 
@@ -38,8 +38,8 @@ A network protocol stack splits the job of moving data into layers, each offerin
 | Protocol | Agreed format and rules for messages between peers at the same layer |
 | Service | What a layer promises to the layer above (e.g. "best-effort datagram") |
 | Encapsulation | Wrapping a higher layer's data unit in a lower layer's header |
-| Protocol Data Unit (PDU) | Protocol Data Unit: frame (link), packet (network), segment (transport), message (application) |
-| Open Systems Interconnection (OSI) model | Open Systems Interconnection seven-layer reference model; the Internet uses a simpler four- or five-layer stack |
+| PDU | Protocol Data Unit: frame (link), packet (network), segment (transport), message (application) |
+| OSI model | Open Systems Interconnection seven-layer reference model; the Internet uses a simpler four- or five-layer stack |
 | Narrow waist | The single shared layer (IP) that decouples technologies above from those below |
 | End-to-end argument | Put a function where it can be done completely and correctly: usually the endpoints |
 | Fate-sharing | Keep state only at entities that fail together with what the state describes |
@@ -47,7 +47,7 @@ A network protocol stack splits the job of moving data into layers, each offerin
 
 ## How it fits
 
-- **Below:** takes the general idea of [abstraction and interfaces](../../12-software-engineering/01-design/abstraction-and-interfaces.md) and the Operating System (OS)'s role as a provider of clean abstractions over messy hardware ([the role of the OS](../../07-operating-systems/01-kernel-and-abstractions/the-role-of-the-os.md)). Relies on the assumption that lower layers can fail, which [reliability engineering](../../00-engineering-foundations/05-engineering-method/reliability-and-redundancy.md) takes as given.
+- **Below:** takes the general idea of [abstraction and interfaces](../../12-software-engineering/01-design/abstraction-and-interfaces.md) and the role of the Operating System (OS) as a provider of clean abstractions over messy hardware ([the role of the OS](../../07-operating-systems/01-kernel-and-abstractions/the-role-of-the-os.md)). Relies on the assumption that lower layers can fail, which [reliability engineering](../../00-engineering-foundations/05-engineering-method/reliability-and-redundancy.md) takes as given.
 - **Above:** every protocol in this layer is placed by these rules. [TLS](../../11-security-and-cryptography/02-cryptography/secure-protocols-and-tls.md) is end-to-end security for the same reason TCP is end-to-end reliability. Distributed systems inherit the endpoint-centric view.
 - **Siblings:** [packet switching](packet-switching.md) is the minimal service the core provides; [latency, bandwidth and queueing](latency-bandwidth-and-queueing.md) measures what that minimalism costs.
 

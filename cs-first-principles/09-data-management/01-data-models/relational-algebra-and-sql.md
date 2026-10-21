@@ -29,7 +29,7 @@ Relational algebra is a small set of operators that each take one or two relatio
    GROUP  BY d.name;
    ```
 
-7. **Pure relational algebra cannot express recursion.** Questions such as "all managers above this employee, at any depth" (transitive closure) cannot be written as a fixed algebra expression, because each expression joins a bounded number of times. SQL:1999 added recursive common table expressions (WITH RECURSIVE), which compute a fixpoint, the same idea as Datalog's recursive rules.
+7. **Pure relational algebra cannot express recursion.** Questions such as "all managers above this employee, at any depth" (transitive closure) cannot be written as a fixed algebra expression, because each expression joins a bounded number of times. SQL:1999 added recursive Common Table Expressions (CTEs, written WITH RECURSIVE), which compute a fixpoint, the same idea as Datalog's recursive rules.
 
 8. **Declarative queries must be parameterised, not concatenated.** Because SQL is a language, building a query by pasting user input into a string lets that input become code: SQL injection. Prepared statements send the query structure and the parameter values separately, so data can never change the query's meaning.
 
@@ -45,7 +45,7 @@ Relational algebra is a small set of operators that each take one or two relatio
 | Relational calculus | Declarative, logic-based query formalism equivalent to the algebra |
 | Bag semantics | Multisets: duplicates retained unless explicitly removed |
 | Aggregation | Grouping rows and computing summaries per group |
-| Recursive Common Table Expression (CTE) | Common Table Expression that references itself to compute a fixpoint |
+| Recursive CTE | Common Table Expression that references itself to compute a fixpoint |
 | Prepared statement | Query compiled with placeholders; parameters bound separately |
 
 ## How it fits

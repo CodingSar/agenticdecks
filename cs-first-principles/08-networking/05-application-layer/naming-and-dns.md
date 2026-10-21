@@ -18,7 +18,7 @@ People and programs want stable, meaningful names such as `www.example.com`; net
 
 4. **Caching is what makes DNS scale.** Every record carries a Time To Live (TTL), in seconds. Resolvers cache answers, including referrals and negative answers, until the TTL expires. Because `.com`'s servers are cached for days, a typical lookup needs at most one query to an authoritative server, and popular names are answered from cache in under a millisecond.
 
-5. **TTL trades freshness for load and latency.** A long TTL (a day) means few queries but slow changes: a moved server keeps receiving traffic from cached old addresses until Time To Live values (TTLs) expire. A short TTL (30 seconds) lets operators steer traffic quickly, which Content Delivery Networks (CDNs) and failover systems rely on, at the cost of more queries and lookup latency. DNS is therefore *eventually consistent* by design.
+5. **TTL trades freshness for load and latency.** A long TTL (a day) means few queries but slow changes: a moved server keeps receiving traffic from cached old addresses until their TTLs expire. A short TTL (30 seconds) lets operators steer traffic quickly, which Content Delivery Networks (CDNs) and failover systems rely on, at the cost of more queries and lookup latency. DNS is therefore *eventually consistent* by design.
 
 6. **Records hold more than addresses.** A (IPv4 address), AAAA (IPv6 address), CNAME (alias to another name), MX (mail server for a domain), NS (delegation), TXT (arbitrary text, used for domain verification and email policy) and others. DNS is a general-purpose, read-mostly, globally replicated key-value store.
 

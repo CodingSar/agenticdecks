@@ -12,13 +12,13 @@ Reliable delivery turns a channel that can lose, corrupt, duplicate and reorder 
 
 1. **Detection plus retransmission gives reliability over any lossy channel.** The receiver discards corrupted packets (checksum) and acknowledges good ones. The sender retransmits anything not acknowledged within a timeout. As long as each attempt has some nonzero chance of success, every packet eventually arrives. This is Automatic Repeat reQuest (ARQ).
 
-2. **Sequence numbers make retransmission safe.** If an acknowledgement is lost, the sender resends a packet the receiver already has. Without numbering, the receiver would deliver it twice. Sequence numbers let the receiver discard duplicates and put reordered packets back in order. TCP numbers bytes, not packets, so retransmissions can be re-segmented.
+2. **Sequence numbers make retransmission safe.** If an acknowledgement is lost, the sender resends a packet the receiver already has. Without numbering, the receiver would deliver it twice. Sequence numbers let the receiver discard duplicates and put reordered packets back in order. The Transmission Control Protocol (TCP) numbers bytes, not packets, so retransmissions can be re-segmented.
 
 3. **Stop-and-wait wastes the pipe; sliding windows fill it.** Sending one packet per Round-Trip Time (RTT) on a 1 Gbit/s path with 50 ms RTT and 1,500-byte packets uses 240 kbit/s, 0.024% of capacity. A sliding window lets the sender have up to W bytes unacknowledged. Throughput is about W / RTT, so filling the path needs W ≥ bandwidth × RTT (the bandwidth-delay product).
 
-4. **Go-Back-N and Selective Repeat differ in what is resent.** With cumulative acknowledgements ("I have everything up to byte n"), a single loss can force resending the whole window after it (Go-Back-N). Selective acknowledgements (TCP Selective Acknowledgement (SACK)) report which later blocks arrived, so the sender resends only the gaps. Selective Repeat needs receiver buffering for out-of-order data and a sequence space at least twice the window to avoid ambiguity.
+4. **Go-Back-N and Selective Repeat differ in what is resent.** With cumulative acknowledgements ("I have everything up to byte n"), a single loss can force resending the whole window after it (Go-Back-N). Selective Acknowledgements (SACK) report which later blocks arrived, so the sender resends only the gaps. Selective Repeat needs receiver buffering for out-of-order data and a sequence space at least twice the window to avoid ambiguity.
 
-5. **Timeout choice is an estimation problem.** Too short and the sender retransmits packets that were only delayed, adding load exactly when the network is busy. Too long and recovery stalls. TCP keeps a smoothed RTT and its mean deviation and sets the Retransmission Timeout (RTO) ≈ SRTT + 4 × RTTVAR (Jacobson, 1988), doubling it after each timeout. It also ignores RTT samples from retransmitted segments, whose acknowledgements are ambiguous (Karn's algorithm).
+5. **Timeout choice is an estimation problem.** Too short and the sender retransmits packets that were only delayed, adding load exactly when the network is busy. Too long and recovery stalls. TCP keeps a smoothed RTT (SRTT) and its mean deviation (RTTVAR) and sets the Retransmission Timeout (RTO) ≈ SRTT + 4 × RTTVAR (Jacobson, 1988), doubling it after each timeout. It also ignores RTT samples from retransmitted segments, whose acknowledgements are ambiguous (Karn's algorithm).
 
 6. **Duplicate acknowledgements detect loss faster than timers.** When the receiver gets segments after a gap, it repeats its last cumulative acknowledgement. Three duplicate acknowledgements signal that one segment is probably lost while later ones arrive, so the sender retransmits immediately ("fast retransmit") rather than waiting a full RTO.
 
@@ -32,7 +32,7 @@ Reliable delivery turns a channel that can lose, corrupt, duplicate and reorder 
 |---|---|
 | ARQ | Automatic Repeat reQuest: detect loss, retransmit |
 | Sequence number | Position of data in the stream, used to order and deduplicate |
-| Cumulative acknowledgement (ACK) | Acknowledges all data up to a point |
+| Cumulative ACK | Acknowledges all data up to a point |
 | SACK | Selective Acknowledgement: reports out-of-order blocks received |
 | Sliding window | Bound on unacknowledged data in flight |
 | Go-Back-N / Selective Repeat | Resend everything after a loss / resend only lost pieces |

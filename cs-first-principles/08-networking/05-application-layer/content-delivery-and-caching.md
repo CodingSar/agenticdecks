@@ -10,11 +10,11 @@ Most Internet traffic is a small set of popular objects (videos, images, scripts
 
 ## Core tenets
 
-1. **Distance, not bandwidth, limits most transfers.** A user in Sydney fetching from Virginia pays roughly 200 ms per round trip, and a small page needs several round trips (DNS, Transmission Control Protocol (TCP), TLS, request). Moving a copy to a server 10 ms away cuts the load time far more than any bandwidth upgrade. CDNs exist because the speed of light cannot be optimised.
+1. **Distance, not bandwidth, limits most transfers.** A user in Sydney fetching from Virginia pays roughly 200 ms per round trip, and a small page needs several round trips (name lookup, transport handshake, encryption handshake, request). Moving a copy to a server 10 ms away cuts the load time far more than any bandwidth upgrade. CDNs exist because the speed of light cannot be optimised.
 
 2. **Popularity is skewed, so caching works.** Requests for web objects roughly follow a Zipf-like distribution: a small fraction of objects receives most requests. Even a cache holding a small fraction of all content serves a large majority of requests ("hit ratio"). Long-tail objects miss and go back to the origin.
 
-3. **Steering users to a nearby cache uses indirection.** Two main mechanisms: *DNS-based* steering, where the Content Delivery Network (CDN)'s authoritative DNS server returns the address of a cache near the resolver that asked; and *anycast*, where many cache sites announce the same Internet Protocol (IP) prefix via the Border Gateway Protocol (BGP) and routing delivers each user to the closest one. Both depend on naming and routing, not on the application.
+3. **Steering users to a nearby cache uses indirection.** Two main mechanisms: *DNS-based* steering, where the CDN's authoritative Domain Name System (DNS) server returns the address of a cache near the resolver that asked; and *anycast*, where many cache sites announce the same Internet Protocol (IP) prefix via the Border Gateway Protocol (BGP) and routing delivers each user to the closest one. Both depend on naming and routing, not on the application.
 
 4. **Correctness of cached copies is governed by HTTP semantics.** The Hypertext Transfer Protocol (HTTP) lets origins say how long a response stays fresh (Cache-Control: max-age), whether shared caches may store it (public vs private), and how to revalidate cheaply (ETag and If-None-Match: the cache asks "has it changed?" and gets a short 304 Not Modified if not). The origin, not the cache, decides the freshness policy.
 
@@ -24,7 +24,7 @@ Most Internet traffic is a small set of popular objects (videos, images, scripts
 
 7. **Eviction policy matters because capacity is finite.** Edge caches use Least Recently Used (LRU) variants and admission filters that avoid caching one-hit wonders, because a single scan of rarely requested objects can flush the popular ones. This is the page-replacement problem from operating systems, with object sizes that vary by six orders of magnitude.
 
-8. **CDNs also terminate connections and absorb attacks.** By ending TCP and Transport Layer Security (TLS) at the edge, a CDN shortens handshake round trips even for uncacheable dynamic content, and then reuses warm long-lived connections to the origin. Its huge aggregate capacity and anycast distribution spread Distributed Denial-of-Service (DDoS) traffic across many sites, making CDNs a standard defence.
+8. **CDNs also terminate connections and absorb attacks.** By ending Transmission Control Protocol (TCP) and Transport Layer Security (TLS) sessions at the edge, a CDN shortens handshake round trips even for uncacheable dynamic content, and then reuses warm long-lived connections to the origin. Its huge aggregate capacity and anycast distribution spread Distributed Denial-of-Service (DDoS) traffic across many sites, making CDNs a standard defence.
 
 9. **Video and large files dominate the bytes.** Video streaming is the majority of Internet traffic by volume (circa 2020s). Streams are cut into small segments at several bitrates, each an ordinary cacheable HTTP object, and the player switches bitrate to match measured throughput (adaptive bitrate streaming). This reduces streaming to the same caching problem as static files.
 

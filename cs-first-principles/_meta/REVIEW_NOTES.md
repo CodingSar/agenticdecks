@@ -97,3 +97,16 @@ Collected from writer reports, to be resolved in the review pass.
 - Union-find tightness: Tarjan 1975, Fredman–Saks 1989.
 - CLRS 4th ed chapter numbers (RAM model ch 2; amortized analysis ch 16) — verify.
 - Candidate leaf: union-find.
+
+### 08 Networking / 09 Data Management
+- Packet switching 35 users 10% activity P(>10) ≈ 0.0004; 1986 collapse 32 kbit/s→40 bit/s; Mathis 1.22; CUBIC default 2.6.19 (2006); IW10 (RFC 6928).
+- CRC-32 detection guarantees (softened).
+- BGP ~75k ASes, ~1M IPv4 prefixes; Pakistan/YouTube 2008 ~2 h; Griffin et al. stable-paths NP-complete.
+- Dyn 2016; Saltzer naming RFC 1498.
+- HTTPS >90%; video majority of volume; Zipf hit ratio log growth.
+- MACAW 1994; Heusse et al. 2003.
+- LSM write amp 10–30x; Bloom 10 bits ~1%.
+- Default isolation: PG/Oracle/SQL Server RC; InnoDB RR; Oracle "Serializable" = SI; Berenson et al.
+- PostgreSQL fsyncgate 2018; System R DP ~10–15 relations.
+- **Rule violation:** `layering-and-the-end-to-end-principle.md` "Builds on" links up to layer 12. Builds-on must point downward. Add mechanical check.
+- Candidate leaves: SDN / data-centre networks; hash indexes; analytical warehouses.
