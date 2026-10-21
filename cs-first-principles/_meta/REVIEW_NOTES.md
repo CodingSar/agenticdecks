@@ -134,3 +134,5 @@ Collected from writer reports, to be resolved in the review pass.
 - 06 polymorphism-and-type-inference.md: link union-find for unification.
 - 07 kernel-architectures.md + 01 README: seL4 ~8,700 lines (07 reviewer briefed).
 - 13 training-at-scale.md tenet 7: doubled comma ',,'.
+- 10 cloud-computing.md: 'data-centre networks' link → 08/03/data-center-networks-and-sdn.md.
+- 09 query-optimization.md: Enables link points down to 06 optimization; move to body.
