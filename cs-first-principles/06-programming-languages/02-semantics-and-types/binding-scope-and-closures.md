@@ -64,5 +64,5 @@ A binding connects a name to the thing it denotes: a value, a memory location, a
 ## Go deeper
 
 - Harold Abelson and Gerald Jay Sussman, *Structure and Interpretation of Computer Programs* (2nd ed., 1996), section 3.2: the environment model of evaluation.
-- Shriram Krishnamurthi, *Programming Languages: Application and Interpretation* (2nd ed., 2017): builds interpreters that make scope and closures concrete.
+- Shriram Krishnamurthi, *Programming Languages: Application and Interpretation* (first edition 2007, freely available online): builds interpreters that make scope and closures concrete.
 - Peter J. Landin, "The Mechanical Evaluation of Expressions" (1964): introduced closures and the environment-based abstract machine.

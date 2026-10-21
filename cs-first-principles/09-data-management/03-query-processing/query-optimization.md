@@ -6,7 +6,7 @@
 
 ## Essence
 
-A query optimizer takes a declarative query and chooses, among the many equivalent ways to execute it, one that is cheap. It works in three parts. A *plan space*: all algebra trees equivalent to the query, crossed with choices of access path and join algorithm for each node. A *cost model*: an estimate of each plan's I/O and processor work, which depends on estimates of how many rows each operator produces. A *search strategy*: usually dynamic programming over join orders, as introduced by IBM's System R in 1979. The optimizer rarely finds the true best plan; its job is to avoid catastrophically bad ones, and its main weakness is that cardinality estimates can be wrong by orders of magnitude.
+A query optimizer takes a declarative query and chooses, among the many equivalent ways to execute it, one that is cheap. It works in three parts. A *plan space*: all algebra trees equivalent to the query, crossed with choices of access path and join algorithm for each node. A *cost model*: an estimate of each plan's Input/Output (I/O) and processor work, which depends on estimates of how many rows each operator produces. A *search strategy*: usually dynamic programming over join orders, as introduced by IBM's System R in 1979. The optimizer rarely finds the true best plan; its job is to avoid catastrophically bad ones, and its main weakness is that cardinality estimates can be wrong by orders of magnitude.
 
 ## Core tenets
 

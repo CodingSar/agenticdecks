@@ -65,5 +65,5 @@ An interpreter executes a program directly, reading its representation and perfo
 ## Go deeper
 
 - Robert Nystrom, *Crafting Interpreters* (2021): builds a tree-walker and a bytecode VM from scratch.
-- Tim Lindholm, Frank Yellin, Gilad Bracha and Alex Buckley, *The Java Virtual Machine Specification*: the canonical example of a defined VM.
+- Tim Lindholm, Frank Yellin, Gilad Bracha and Alex Buckley, *The Java Virtual Machine Specification* (Java SE 8 edition, 2014): the canonical example of a defined VM.
 - Yunhe Shi, Kevin Casey, M. Anton Ertl and David Gregg, "Virtual Machine Showdown: Stack Versus Registers" (2005/2008): the measured trade-off.

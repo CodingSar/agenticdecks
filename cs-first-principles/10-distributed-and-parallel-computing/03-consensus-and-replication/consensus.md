@@ -10,21 +10,21 @@ Consensus is the problem of getting a group of processes to agree on one value e
 
 ## Core tenets
 
-1. **Consensus is equivalent to total-order broadcast and to a replicated log.** If you can agree on one value, you can agree on the value in slot 1, then slot 2, and so on. Conversely, a total-order broadcast lets everyone take the first proposal delivered. So leader election, atomic commit with a coordinator replaced by a group, distributed locks and linearizable storage all reduce to consensus, and none is easier.
+1. **Consensus is equivalent to total-order broadcast and to a replicated log.** If you can agree on one value, you can agree on the value in slot 1, then slot 2, and so on. Conversely, a total-order broadcast lets everyone take the first proposal delivered. So leader election, distributed locks and linearizable storage all reduce to consensus.
 
 2. **Majority quorums carry decisions forward.** With n = 2f + 1 nodes, any two majorities (f + 1 nodes each) share at least one node. A value is chosen only when a majority accepts it, so any later leader that consults a majority hears about it from the overlapping node. This is why the system tolerates f crashes and no more: with more than f down, no majority can form and the group must stop rather than risk disagreement.
 
 3. **Paxos is two phases of "promise, then accept", ordered by ballot numbers.** In Phase 1, a proposer picks a unique ballot number b and asks acceptors to promise to ignore lower ballots; each acceptor replies with the highest-ballot value it has already accepted, if any. In Phase 2, the proposer must propose the value from the highest ballot reported (or its own if none) and asks acceptors to accept it under b. A value accepted by a majority is chosen. The rule "adopt the highest reported value" is the invariant that makes competing proposers converge rather than conflict (Lamport, "The Part-Time Parliament", 1998; "Paxos Made Simple", 2001).
 
-4. **Multi-Paxos and Raft amortise Phase 1 with a stable leader.** Once one leader has won Phase 1 for all future slots, each new log entry needs only one round trip to a majority. Raft (Ongaro and Ousterhout, 2014) packages this as leader election with randomised timeouts and terms, log replication with a consistency check on the previous entry, and a rule that only a node whose log is at least as up to date as a majority's can win election. Raft and Multi-Paxos are close relatives; Raft was designed to be easier to understand and implement correctly.
+4. **Multi-Paxos and Raft amortise Phase 1 with a stable leader.** Once one leader has won Phase 1 for all future slots, each new log entry needs only one round trip to a majority. Raft (Ongaro and Ousterhout, 2014) packages this as leader election with randomised timeouts and terms, log replication with a consistency check on the previous entry, and a rule that only a node whose log is at least as up to date as a majority's can win election.
 
-5. **Safety never depends on timing; liveness does.** Paxos and Raft never let two nodes decide differently, whatever the delays, crashes or message losses. They can, however, fail to make progress: two proposers can keep pre-empting each other with higher ballots, or elections can keep splitting votes. Leader election with randomised timeouts makes this rare once the network is stable. This is exactly the escape from the [Fischer–Lynch–Paterson (FLP) result](../02-distributed-foundations/impossibility-results.md) through partial synchrony.
+5. **Safety never depends on timing; liveness does.** Paxos and Raft never let two nodes decide differently, whatever the delays, crashes or message losses. They can, however, fail to make progress: two proposers can keep pre-empting each other with higher ballots, or elections can keep splitting votes. Randomised election timeouts make this rare once the network is stable. This is the escape from the [Fischer–Lynch–Paterson (FLP) result](../02-distributed-foundations/impossibility-results.md) through partial synchrony.
 
 6. **Durability is part of correctness.** An acceptor's promise and accepted value must be written to stable storage before it replies; otherwise a crash and restart could let it forget a promise and accept a conflicting value. So each consensus step costs a disk flush (often batched) as well as a network round trip, typically around a millisecond inside one data centre and tens of milliseconds across regions.
 
 7. **Real systems need more than the core algorithm.** Membership changes (adding or removing replicas) must themselves go through consensus, using joint consensus or one-at-a-time changes, so that old and new majorities cannot decide independently. Logs must be compacted with snapshots. Reads must be linearizable too, which needs either a round to a majority or a leader lease that relies on bounded clock drift. Most production bugs live in these extensions, not in the core protocol.
 
-8. **Consensus is expensive, so systems use it sparingly.** A consensus group is limited by its leader and its quorum round trips, roughly thousands to hundreds of thousands of operations per second depending on batching. Large systems therefore keep metadata and leadership in a small consensus group (ZooKeeper, etcd, Chubby) and let the bulk data path use cheaper replication under the leaders that group appoints.
+8. **Consensus is expensive, so systems use it sparingly.** A consensus group is limited by its leader and quorum round trips, so large systems keep metadata and leadership in a small consensus group (ZooKeeper, etcd, Chubby) and let the bulk data path use cheaper replication under the leaders that group appoints.
 
 ## Key concepts
 
@@ -37,8 +37,6 @@ Consensus is the problem of getting a group of processes to agree on one value e
 | Multi-Paxos | Repeated Paxos with a stable leader skipping Phase 1 |
 | Raft term | Election period with at most one leader |
 | Log matching | Raft invariant: same index and term implies identical prefixes |
-| Total-order broadcast | Delivering the same messages in the same order everywhere |
-| Joint consensus | Membership change where both old and new majorities must agree |
 
 ## How it fits
 

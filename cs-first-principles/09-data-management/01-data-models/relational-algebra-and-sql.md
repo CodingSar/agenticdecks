@@ -64,4 +64,4 @@ Relational algebra is a small set of operators that each take one or two relatio
 
 - E. F. Codd, *Relational Completeness of Data Base Sublanguages* (1972): algebra and calculus equivalence.
 - D. D. Chamberlin, R. F. Boyce, *SEQUEL: A Structured English Query Language* (1974): the origin of SQL.
-- J. Widom, H. Garcia-Molina, J. D. Ullman, *Database Systems: The Complete Book* (2nd ed., 2008): algebra, SQL and their connection in depth.
+- H. Garcia-Molina, J. D. Ullman, J. Widom, *Database Systems: The Complete Book* (2nd ed., 2008): algebra, SQL and their connection in depth.

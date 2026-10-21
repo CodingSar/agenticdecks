@@ -20,7 +20,7 @@ A Log-Structured Merge-tree (LSM-tree) makes writes cheap by never updating data
 
 5. **Compaction policy sets the read/write/space balance.** *Leveled* compaction (LevelDB, RocksDB default) keeps each level a single sorted run about 10× larger than the previous, giving few files per lookup and little dead space but rewriting data many times (write amplification of 10–30×). *Tiered* (size-tiered) compaction merges several similar-sized runs at once, writing each byte fewer times but leaving more runs to search and more temporary space. No policy minimises all three amplifications.
 
-6. **Write amplification is the hidden cost.** Each logical byte written may be rewritten at every level it passes through. On flash, this consumes device endurance and bandwidth. Compaction also competes with foreground work for I/O, producing latency spikes if it falls behind; production systems throttle writes when compaction debt grows.
+6. **Write amplification is the hidden cost.** Each logical byte written may be rewritten at every level it passes through. On flash, this consumes device endurance and bandwidth. Compaction also competes with foreground work for Input/Output (I/O), producing latency spikes if it falls behind; production systems throttle writes when compaction debt grows.
 
 7. **LSM-trees and B-trees occupy opposite corners of the trade-off.** B-trees: about one read per lookup, in-place writes with higher random I/O. LSM-trees: more read work, much lower write cost, better compression (files are dense and immutable). Write-heavy workloads (logging, time series, messaging, large key-value stores) favour LSM; read-heavy transactional workloads with range scans have traditionally favoured B-trees.
 

@@ -16,7 +16,7 @@ A parallel computation is a directed acyclic graph (DAG) of operations, where an
 
 3. **Greedy scheduling is nearly optimal: T_P ≤ T1/P + T∞.** A greedy scheduler never leaves a processor idle while ready work exists. Each step either keeps all P processors busy (at most T1/P such steps) or runs every ready node, shortening the remaining critical path (at most T∞ such steps). This is Brent's theorem (1974), and it means that when parallelism greatly exceeds P, near-linear speed-up follows automatically. Work-stealing schedulers achieve this bound in expectation.
 
-4. **Amdahl's law is the span law for a fixed serial fraction.** If a fraction s of the work must run serially, speed-up is at most 1 / (s + (1 − s)/P), which tends to 1/s. With s = 5%, no machine gets more than 20×. Gustafson's law (1988) is the complementary view: if the problem grows with the machine, the serial fraction of the *larger* problem often shrinks, so scaled speed-up keeps rising. Both are true; they answer different questions (strong scaling with a fixed problem versus weak scaling with a growing one).
+4. **Amdahl's law is the span law for a fixed serial fraction.** If a fraction s of the work must run serially, speed-up is at most 1 / (s + (1 − s)/P), which tends to 1/s. With s = 5%, no machine gets more than 20×. Gustafson's law (1988) is the complementary view: if the problem grows with the machine, the serial fraction of the *larger* problem often shrinks, so scaled speed-up keeps rising. Both are true: one fixes the problem (strong scaling), the other grows it (weak scaling).
 
 5. **A good parallel algorithm is work-efficient first.** If the parallel algorithm does asymptotically more work than the best serial one, then for large inputs it loses to the serial algorithm on any fixed number of cores. The goal is work equal to the best serial algorithm with polylogarithmic span. Parallel prefix sum (scan) shows the pattern: a naive version does Θ(n log n) work; the Blelloch scan does Θ(n) work with Θ(log n) span.
 
@@ -32,7 +32,6 @@ A parallel computation is a directed acyclic graph (DAG) of operations, where an
 | Span T∞ | Longest dependency chain; running time with unlimited processors |
 | Parallelism | T1 / T∞; the maximum useful number of processors |
 | Speed-up | T1 / T_P; linear when it equals P |
-| Efficiency | Speed-up / P; the fraction of processor time doing useful work |
 | Strong scaling | Fixed problem size, more processors (Amdahl regime) |
 | Weak scaling | Problem size grows with processors (Gustafson regime) |
 | Work-efficient | Parallel work is within a constant of the best serial algorithm |

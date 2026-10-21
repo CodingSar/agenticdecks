@@ -10,7 +10,7 @@ A B-tree is a balanced search tree whose nodes are disk pages, each holding hund
 
 ## Core tenets
 
-1. **High fan-out makes trees shallow, and shallowness is what matters on block devices.** A binary tree over 10^9 keys has depth ~30, each level potentially a separate page read. A B-tree node of 16 KB holding ~500 keys has depth log_500(10^9) ≈ 3.3, so four levels suffice. Since a page read costs the same whether it holds 1 key or 500, packing a node to the page size minimises I/O per lookup: O(log_B N) transfers, where B is keys per page.
+1. **High fan-out makes trees shallow, and shallowness is what matters on block devices.** A binary tree over 10^9 keys has depth ~30, each level potentially a separate page read. A B-tree node of 16 KB holding ~500 keys has depth log_500(10^9) ≈ 3.3, so four levels suffice. Since a page read costs the same whether it holds 1 key or 500, packing a node to the page size minimises Input/Output (I/O) per lookup: O(log_B N) transfers, where B is keys per page.
 
 2. **Balance is maintained by splitting and merging at the leaves upward.** Insert into the correct leaf; if it overflows, split it into two half-full nodes and insert the separator key into the parent, which may split in turn. When the root splits, the tree grows one level, at the top. So all leaves stay at the same depth without any rotations. Deletions borrow from or merge with siblings to keep nodes at least half full (many systems relax this and let nodes underflow).
 

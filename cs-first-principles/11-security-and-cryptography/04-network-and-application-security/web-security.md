@@ -18,7 +18,7 @@ The web runs code from millions of mutually distrusting sources inside one progr
 
 4. **Cross-site request forgery (CSRF) abuses ambient cookies.** A malicious page can submit a form to `bank.example/transfer`; the browser attaches the user's bank cookie, and the bank sees an authenticated request. This is a confused-deputy attack. Defences: `SameSite` cookies (which modern browsers default to `Lax`, withholding cookies on most cross-site subrequests), anti-forgery tokens that a cross-site page cannot read, and checking the `Origin` header on state-changing requests.
 
-5. **Transport security must be enforced, not offered.** A site reachable over the plain Hypertext Transfer Protocol (HTTP) can be intercepted and rewritten before the user ever reaches the HTTPS (HTTP Secure) version (SSL stripping). HTTP Strict Transport Security (HSTS) tells browsers to use only HTTPS for a domain, and preload lists build that in. Cookies must carry the `Secure` flag so they never travel unencrypted. Mixed content, HTTPS pages loading HTTP scripts, would let a network attacker inject code.
+5. **Transport security must be enforced, not offered.** A site reachable over the plain Hypertext Transfer Protocol (HTTP) can be intercepted and rewritten before the user ever reaches the HTTPS (HTTP Secure) version (SSL stripping). HTTP Strict Transport Security (HSTS) tells browsers to use only HTTPS for a domain, and preload lists build that in. Cookies must carry the `Secure` flag so they never travel unencrypted.
 
 6. **Server-side request forgery (SSRF) turns the server into a proxy.** If a server fetches a URL (Uniform Resource Locator) supplied by the user (to render a preview, import a file), an attacker can point it at internal addresses the attacker cannot reach directly, such as cloud metadata services that hand out credentials. Allow-lists of destinations and network-level blocking of internal ranges are the defences.
 
@@ -37,8 +37,6 @@ The web runs code from millions of mutually distrusting sources inside one progr
 | XSS | Attacker script executed in the context of a trusted site |
 | CSRF | Cross-site request forgery: forged request carrying the victim's cookies |
 | CSP | Header restricting which scripts and resources a page may load |
-| HSTS | Header forcing browsers to use HTTPS for a domain |
-| SameSite | Cookie attribute limiting when cookies attach to cross-site requests |
 | SSRF | Server-side request forgery: making a server fetch attacker-chosen URLs |
 
 ## How it fits

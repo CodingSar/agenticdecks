@@ -1,7 +1,7 @@
 # Object-Oriented Programming
 
 > **Layer:** [06 Programming Languages](../README.md) › [Paradigms](README.md)
-> **Builds on:** [Imperative and procedural programming](imperative-and-procedural.md), [Binding, scope and closures](../02-semantics-and-types/binding-scope-and-closures.md), [Abstract algebra](../../01-mathematical-foundations/04-algebra/abstract-algebra.md)
+> **Builds on:** [Imperative and procedural programming](imperative-and-procedural.md), [Binding, scope and closures](../02-semantics-and-types/binding-scope-and-closures.md), [Hazards and branch prediction](../../04-computer-architecture/02-processor-microarchitecture/hazards-and-branch-prediction.md)
 > **Enables:** [Design patterns](../../12-software-engineering/01-design/design-patterns.md), [Abstraction and interfaces](../../12-software-engineering/01-design/abstraction-and-interfaces.md), [Just-in-time compilation](../04-runtime-systems/jit-compilation.md)
 
 ## Essence

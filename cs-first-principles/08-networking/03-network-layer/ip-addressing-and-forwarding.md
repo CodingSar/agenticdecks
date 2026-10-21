@@ -10,7 +10,7 @@ The Internet Protocol (IP) gives every network interface an address and defines 
 
 ## Core tenets
 
-1. **Addresses are locations, not identities.** An IP version 4 (IPv4) address is 32 bits, written as four decimal bytes (192.0.2.17); IPv6 uses 128 bits. The address says *where* an interface attaches to the network. A laptop that moves to a new network gets a new address, which is why addresses are poor long-term identifiers and why naming (DNS) sits above them.
+1. **Addresses are locations, not identities.** An IP version 4 (IPv4) address is 32 bits, written as four decimal bytes (192.0.2.17); IPv6 uses 128 bits. The address says *where* an interface attaches to the network. A laptop that moves to a new network gets a new address, which is why addresses are poor long-term identifiers and why naming (the Domain Name System, DNS) sits above them.
 
 2. **Hierarchical prefixes make routing tables small.** Classless Inter-Domain Routing (CIDR) writes a block of addresses as prefix/length: 203.0.113.0/24 covers 256 addresses whose first 24 bits match. An Internet Service Provider (ISP) holding 198.51.0.0/16 advertises one route for all its customers. This aggregation is what keeps the global table around a million IPv4 prefixes (circa mid-2020s) instead of billions of hosts.
 

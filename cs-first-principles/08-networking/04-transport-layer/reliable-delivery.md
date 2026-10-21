@@ -20,7 +20,7 @@ Reliable delivery turns a channel that can lose, corrupt, duplicate and reorder 
 
 5. **Timeout choice is an estimation problem.** Too short and the sender retransmits packets that were only delayed, adding load exactly when the network is busy. Too long and recovery stalls. TCP keeps a smoothed RTT (SRTT) and its mean deviation (RTTVAR) and sets the Retransmission Timeout (RTO) ≈ SRTT + 4 × RTTVAR (Jacobson, 1988), doubling it after each timeout. It also ignores RTT samples from retransmitted segments, whose acknowledgements are ambiguous (Karn's algorithm).
 
-6. **Duplicate acknowledgements detect loss faster than timers.** When the receiver gets segments after a gap, it repeats its last cumulative acknowledgement. Three duplicate acknowledgements signal that one segment is probably lost while later ones arrive, so the sender retransmits immediately ("fast retransmit") rather than waiting a full RTO.
+6. **Duplicate acknowledgements detect loss faster than timers.** When the receiver gets segments after a gap, it repeats its last cumulative acknowledgement. Three duplicate acknowledgements (ACKs) signal that one segment is probably lost while later ones arrive, so the sender retransmits immediately ("fast retransmit") rather than waiting a full RTO.
 
 7. **Flow control protects the receiver.** Each acknowledgement carries the receiver's advertised window (rwnd): how much free buffer it has. The sender never has more than rwnd unacknowledged bytes outstanding. A slow application reading slowly shrinks rwnd to zero and pauses the sender, so a fast sender cannot overrun a slow receiver.
 
@@ -37,7 +37,7 @@ Reliable delivery turns a channel that can lose, corrupt, duplicate and reorder 
 | Sliding window | Bound on unacknowledged data in flight |
 | Go-Back-N / Selective Repeat | Resend everything after a loss / resend only lost pieces |
 | RTO | Retransmission Timeout, adapted from measured RTT |
-| Fast retransmit | Retransmit after three duplicate acknowledgements (ACKs), before RTO expires |
+| Fast retransmit | Retransmit after three duplicate ACKs, before RTO expires |
 | rwnd | Receiver's advertised window for flow control |
 | Idempotent | Applying an operation twice has the same effect as once |
 

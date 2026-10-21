@@ -56,6 +56,6 @@ Hoare logic (Hoare, 1969, building on Floyd, 1967) is a formal system for provin
 
 ## Go deeper
 
-- C. A. R. Hoare, "An Axiomatic Basis for Computer Programming" (1969): the original eight-page paper.
+- C. A. R. Hoare, "An Axiomatic Basis for Computer Programming" (1969): the short original paper.
 - Edsger W. Dijkstra, *A Discipline of Programming* (1976): weakest preconditions and deriving programs from specifications.
 - John C. Reynolds, "Separation Logic: A Logic for Shared Mutable Data Structures" (2002): the extension that made heap reasoning modular.

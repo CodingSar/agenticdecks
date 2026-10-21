@@ -30,8 +30,6 @@ A cryptographic hash function maps input of any length to a short fixed-length d
 
 | Term | Meaning |
 |---|---|
-| Digest | Fixed-length output of a hash function |
-| Preimage resistance | Cannot find an input for a given digest |
 | Collision resistance | Cannot find any two inputs with the same digest |
 | Birthday bound | Collisions appear after about 2^(n/2) n-bit outputs |
 | SHA-2 / SHA-3 | Current standard hash families |

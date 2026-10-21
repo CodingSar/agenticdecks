@@ -1,7 +1,7 @@
 # Context-Free Grammars and Pushdown Automata
 
 > **Layer:** [02 Theory of Computation](../README.md) › [Automata and Formal Languages](README.md)
-> **Builds on:** [Finite Automata and Regular Languages](finite-automata-and-regular-languages.md), [Induction and Recurrences](../../01-mathematical-foundations/03-discrete-mathematics/induction-and-recurrences.md), [Stacks and Queues](../../05-algorithms-and-data-structures/02-fundamental-data-structures/stacks-and-queues.md)
+> **Builds on:** [Finite Automata and Regular Languages](finite-automata-and-regular-languages.md), [Induction and Recurrences](../../01-mathematical-foundations/03-discrete-mathematics/induction-and-recurrences.md), [Graph Theory](../../01-mathematical-foundations/03-discrete-mathematics/graph-theory.md)
 > **Enables:** [Lexing and Parsing](../../06-programming-languages/03-compilers/lexing-and-parsing.md), [Syntax and Semantics](../../06-programming-languages/02-semantics-and-types/syntax-and-semantics.md), [Dynamic Programming](../../05-algorithms-and-data-structures/03-design-paradigms/dynamic-programming.md)
 
 ## Essence
@@ -18,7 +18,7 @@ Context-free grammars describe nested structure: balanced parentheses, expressio
 
 4. **Determinism matters here, unlike for finite automata.** Deterministic PDAs recognise a strict subset of context-free languages (CFLs), the deterministic CFLs. Palindromes {wwᴿ} need nondeterminism, because the machine must guess where the middle is. Practical parsers, LL(k) and LR(k) (reading Left to right, building a Leftmost or Rightmost derivation, with k tokens of lookahead), are deterministic and run in linear time, which is why language designers keep grammars within these classes.
 
-5. **Every CFG can be parsed in polynomial time.** Put the grammar in Chomsky Normal Form (rules A → BC or A → a) and the Cocke–Younger–Kasami (CYK) algorithm fills a table of "which variables derive substring i..j" by [dynamic programming](../../05-algorithms-and-data-structures/03-design-paradigms/dynamic-programming.md) in O(n³) time. Earley's algorithm handles any CFG in O(n³) and is faster on unambiguous grammars (O(n²)) and on most deterministic ones (O(n)). The best known general bound ties to matrix multiplication (Valiant, 1975).
+5. **Every CFG can be parsed in polynomial time.** Put the grammar in Chomsky Normal Form (rules A → BC or A → a) and the Cocke–Younger–Kasami (CYK) algorithm fills a table of "which variables derive substring i..j" by [dynamic programming](../../05-algorithms-and-data-structures/03-design-paradigms/dynamic-programming.md) in O(n³) time. Earley's algorithm handles any CFG in O(n³), runs in O(n²) on unambiguous grammars, and is linear on most deterministic (LR(k)) grammars, and on all of them with Leo's 1991 refinement. The best known general bound ties to matrix multiplication (Valiant, 1975).
 
 6. **The pumping lemma for CFLs exposes the limit of one stack.** If L is context-free, there is p such that every w ∈ L with |w| ≥ p splits as w = uvxyz with |vxy| ≤ p, |vy| ≥ 1, and uvⁱxyⁱz ∈ L for all i ≥ 0. Why: a long string has a tall parse tree, so some root-to-leaf path repeats a variable, and the subtree between the repeats can be copied or removed. Consequence: {aⁿbⁿcⁿ} is not context-free, because one stack can match two counts but not three.
 

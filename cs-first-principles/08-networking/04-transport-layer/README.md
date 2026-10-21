@@ -37,7 +37,7 @@ Start with UDP and TCP to see what each promises. Reliable delivery explains how
 
 ## Connections across layers
 
-Transport protocols are [finite-state machines](../../03-digital-logic/03-sequential-logic/finite-state-machines.md) at each endpoint, implemented in the kernel behind [sockets and I/O models](../../07-operating-systems/06-io-and-devices/io-models.md). Congestion control is [feedback control](../../00-engineering-foundations/04-signals-and-systems/feedback-and-control.md) applied to a distributed system. Reliable delivery is the template for every retry protocol in [distributed systems](../../10-distributed-and-parallel-computing/02-distributed-foundations/system-models-and-failures.md), including their duplicate-suppression and idempotency problems. [TLS](../../11-security-and-cryptography/02-cryptography/secure-protocols-and-tls.md) sits directly on top of TCP (and inside QUIC).
+Transport protocols are [finite-state machines](../../03-digital-logic/03-sequential-logic/finite-state-machines.md) at each endpoint, implemented in the kernel behind [sockets and Input/Output (I/O) models](../../07-operating-systems/06-io-and-devices/io-models.md). Congestion control is [feedback control](../../00-engineering-foundations/04-signals-and-systems/feedback-and-control.md) applied to a distributed system. Reliable delivery is the template for every retry protocol in [distributed systems](../../10-distributed-and-parallel-computing/02-distributed-foundations/system-models-and-failures.md), including their duplicate-suppression and idempotency problems. [Transport Layer Security (TLS)](../../11-security-and-cryptography/02-cryptography/secure-protocols-and-tls.md) sits directly on top of TCP (and inside QUIC).
 
 ## Cross-cutting threads
 

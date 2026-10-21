@@ -44,7 +44,7 @@ Radio is a shared broadcast medium whose quality changes from moment to moment. 
 ## How it fits
 
 - **Below:** radio propagation is [electromagnetism](../../00-engineering-foundations/01-physics-of-computation/electromagnetism-and-charge.md); rate limits and coding are [channel capacity and error correction](../../02-theory-of-computation/01-information-theory/channel-capacity-and-error-correction.md); framing and Cyclic Redundancy Checks (CRCs) come from [encoding and framing](encoding-and-framing.md).
-- **Above:** wireless loss and variable delay challenge [congestion control](../04-transport-layer/congestion-control.md). Because anyone in range can receive frames, wireless needs link-layer encryption (WPA2/WPA3) and is a prime venue for [network attacks](../../11-security-and-cryptography/04-network-and-application-security/network-attacks-and-defenses.md).
+- **Above:** wireless loss and variable delay challenge [congestion control](../04-transport-layer/congestion-control.md). Because anyone in range can receive frames, wireless needs link-layer encryption (Wi-Fi Protected Access, WPA2/WPA3) and is a prime venue for [network attacks](../../11-security-and-cryptography/04-network-and-application-security/network-attacks-and-defenses.md).
 - **Siblings:** [media access and Ethernet](media-access-and-ethernet.md) solved contention by switching; radio cannot be switched into private wires, so contention remains.
 
 ## Common misconceptions

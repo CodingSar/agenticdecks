@@ -1,8 +1,8 @@
 # Layering and the End-to-End Principle
 
 > **Layer:** [08 Networking](../README.md) › [Principles](README.md)
-> **Builds on:** [Abstraction and Interfaces](../../12-software-engineering/01-design/abstraction-and-interfaces.md), [The Role of the OS](../../07-operating-systems/01-kernel-and-abstractions/the-role-of-the-os.md), [Reliability and Redundancy](../../00-engineering-foundations/05-engineering-method/reliability-and-redundancy.md)
-> **Enables:** [Packet Switching](packet-switching.md), [IP Addressing and Forwarding](../03-network-layer/ip-addressing-and-forwarding.md), [UDP and TCP](../04-transport-layer/udp-and-tcp.md), [Secure Protocols and TLS](../../11-security-and-cryptography/02-cryptography/secure-protocols-and-tls.md)
+> **Builds on:** [The ISA Contract](../../04-computer-architecture/01-instruction-set-architecture/the-isa-contract.md), [The Role of the OS](../../07-operating-systems/01-kernel-and-abstractions/the-role-of-the-os.md), [Reliability and Redundancy](../../00-engineering-foundations/05-engineering-method/reliability-and-redundancy.md)
+> **Enables:** [Packet Switching](packet-switching.md), [IP Addressing and Forwarding](../03-network-layer/ip-addressing-and-forwarding.md), [UDP and TCP](../04-transport-layer/udp-and-tcp.md), [Abstraction and Interfaces](../../12-software-engineering/01-design/abstraction-and-interfaces.md), [Secure Protocols and TLS](../../11-security-and-cryptography/02-cryptography/secure-protocols-and-tls.md)
 
 ## Essence
 
@@ -47,15 +47,15 @@ A network protocol stack splits the job of moving data into layers, each offerin
 
 ## How it fits
 
-- **Below:** takes the general idea of [abstraction and interfaces](../../12-software-engineering/01-design/abstraction-and-interfaces.md) and the role of the Operating System (OS) as a provider of clean abstractions over messy hardware ([the role of the OS](../../07-operating-systems/01-kernel-and-abstractions/the-role-of-the-os.md)). Relies on the assumption that lower layers can fail, which [reliability engineering](../../00-engineering-foundations/05-engineering-method/reliability-and-redundancy.md) takes as given.
-- **Above:** every protocol in this layer is placed by these rules. [TLS](../../11-security-and-cryptography/02-cryptography/secure-protocols-and-tls.md) is end-to-end security for the same reason TCP is end-to-end reliability. Distributed systems inherit the endpoint-centric view.
+- **Below:** takes the idea of a layer boundary as a contract, first met in the [Instruction Set Architecture (ISA)](../../04-computer-architecture/01-instruction-set-architecture/the-isa-contract.md) that hides the microarchitecture, and the role of the Operating System (OS) as a provider of clean abstractions over messy hardware ([the role of the OS](../../07-operating-systems/01-kernel-and-abstractions/the-role-of-the-os.md)). Relies on the assumption that lower layers can fail, which [reliability engineering](../../00-engineering-foundations/05-engineering-method/reliability-and-redundancy.md) takes as given.
+- **Above:** every protocol in this layer is placed by these rules. [Transport Layer Security (TLS)](../../11-security-and-cryptography/02-cryptography/secure-protocols-and-tls.md) is end-to-end security for the same reason TCP is end-to-end reliability. Distributed systems inherit the endpoint-centric view, and software engineering generalises layering into [abstraction and interfaces](../../12-software-engineering/01-design/abstraction-and-interfaces.md) for any large system.
 - **Siblings:** [packet switching](packet-switching.md) is the minimal service the core provides; [latency, bandwidth and queueing](latency-bandwidth-and-queueing.md) measures what that minimalism costs.
 
 ## Common misconceptions
 
 - **"The OSI seven-layer model describes the Internet."** The Internet was built on the TCP/IP model; OSI's session and presentation layers have no distinct counterpart and live inside applications.
 - **"End-to-end means the network should do nothing."** It means the network should not be *relied on* for functions only endpoints can complete. Performance aids in the network are fine.
-- **"Layers are strictly isolated in real systems."** Practical stacks routinely peek across layers (TCP checksums cover parts of the IP header; Network Interface Cards (NICs) offload segmentation).
+- **"Layers are strictly isolated in real systems."** Practical stacks routinely peek across layers (TCP checksums cover parts of the IP header; NICs offload segmentation).
 
 ## Go deeper
 

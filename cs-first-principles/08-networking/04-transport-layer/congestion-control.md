@@ -45,7 +45,7 @@ When senders inject packets faster than a bottleneck link can drain them, queues
 ## How it fits
 
 - **Below:** it is a distributed [feedback control](../../00-engineering-foundations/04-signals-and-systems/feedback-and-control.md) loop with delayed, noisy measurements; queue behaviour comes from [latency, bandwidth and queueing](../01-principles/latency-bandwidth-and-queueing.md); it rides on the acknowledgement machinery of [reliable delivery](reliable-delivery.md).
-- **Above:** slow start dominates the load time of short [HTTP](../05-application-layer/http-and-the-web.md) transfers, which is why connection reuse and [CDNs](../05-application-layer/content-delivery-and-caching.md) (shorter RTT) help so much. The same AIMD and backoff ideas reappear in load shedding and retry policies in [scalability patterns](../../10-distributed-and-parallel-computing/05-large-scale-systems/scalability-patterns.md).
+- **Above:** slow start dominates the load time of short [HTTP](../05-application-layer/http-and-the-web.md) transfers, which is why connection reuse and [Content Delivery Networks (CDNs)](../05-application-layer/content-delivery-and-caching.md) (shorter RTT) help so much. The same AIMD and backoff ideas reappear in load shedding and retry policies in [scalability patterns](../../10-distributed-and-parallel-computing/05-large-scale-systems/scalability-patterns.md).
 - **Siblings:** [reliable delivery](reliable-delivery.md) protects the receiver with rwnd; congestion control protects the network with cwnd; [UDP](udp-and-tcp.md) has neither, so UDP-based protocols (QUIC, media) must implement their own.
 
 ## Common misconceptions

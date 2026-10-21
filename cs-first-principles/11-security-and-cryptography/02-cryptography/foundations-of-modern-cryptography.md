@@ -20,25 +20,23 @@ Modern cryptography, as developed from the late 1970s onward, rests on three ste
 
 5. **Pseudorandomness is the core building block.** A pseudorandom generator stretches a short random seed into a long output no efficient test can distinguish from uniform. A pseudorandom function (PRF) is a keyed function that looks like a random function to anyone without the key; a pseudorandom permutation (PRP) is the invertible version and is the idealisation of a block cipher. Most symmetric constructions are proved secure assuming their underlying primitive is a PRF or PRP.
 
-6. **Everything rests on one-way functions, whose existence is unproved.** A one-way function is easy to compute and hard to invert on random inputs. Their existence would imply P ≠ NP (some problems whose answers are easy to check are hard to solve), which is itself unproved, so all computational cryptography is conditional. In practice, assumptions are ranked by how much study they have survived: factoring and discrete logarithms (decades), the Advanced Encryption Standard (AES) as a PRP (since 1998), lattice problems (the basis of post-quantum schemes). Reductions also give concrete parameters: a loose reduction may require larger keys.
+6. **Everything rests on one-way functions, whose existence is unproved.** A one-way function is easy to compute and hard to invert on random inputs. Their existence would imply P ≠ NP (some problems whose answers are easy to check are hard to solve), which is itself unproved, so all computational cryptography is conditional. In practice, assumptions are ranked by how much study they have survived: factoring and discrete logarithms (decades), the Advanced Encryption Standard (AES) as a PRP (since 1998), lattice problems (the basis of post-quantum schemes).
 
 7. **Randomness quality is a security assumption.** Keys, nonces and many algorithms need unpredictable bits. A weak random number generator breaks otherwise perfect cryptography: the Debian OpenSSL bug (2006–2008) left only 32,768 possible keys per architecture and key type. Systems use the operating system's cryptographically secure generator, seeded from hardware events and entropy sources, never a general-purpose generator like `rand()`.
 
-8. **Idealised models are useful but are not proofs about real functions.** The random oracle model treats a hash function as a truly random function available to all parties, which makes many practical schemes provable. Canetti, Goldreich and Halevi (1998) showed contrived schemes secure in this model but insecure with any real hash. Random-oracle proofs are strong heuristic evidence, and widely used schemes rely on them, but they are a weaker guarantee than a standard-model proof.
+8. **Idealised models are useful but are not proofs about real functions.** The random oracle model treats a hash function as a truly random function available to all parties, which makes many practical schemes provable. Canetti, Goldreich and Halevi (1998) showed contrived schemes secure in this model but insecure with any real hash. Random-oracle proofs are strong heuristic evidence, but weaker than standard-model proofs.
 
 ## Key concepts
 
 | Term | Meaning |
 |---|---|
 | Perfect secrecy | Ciphertext gives zero information about plaintext |
-| Security parameter | Size parameter (key length) against which efficiency and advantage are measured |
 | Negligible function | Smaller than 1/p(n) for every polynomial p, for large n |
 | Advantage | Adversary's success probability minus that of guessing |
 | Reduction | Algorithm converting a scheme-breaker into an assumption-breaker |
 | IND-CPA / IND-CCA | Indistinguishability under chosen-plaintext / chosen-ciphertext attack |
 | EUF-CMA | Existential unforgeability under chosen-message attack |
 | PRF / PRP | Keyed function / permutation indistinguishable from a random one |
-| One-way function | Easy to compute, hard to invert on average |
 | Random oracle model | Analysis treating a hash as a public truly random function |
 
 ## How it fits

@@ -25,7 +25,7 @@ The unifying idea is that abstraction plus enforcement equals an operating syste
      trap handler --> kernel service --> (maybe) scheduler
 ```
 
-Read in order. The first file sets the goals; the second shows the one hardware mechanism that achieves them; the third asks a design question that every real kernel answers differently: how big should the privileged part be? Linux and Windows NT put most services in kernel mode for speed; seL4 keeps about ten thousand lines there so that it can be formally verified.
+Read in order. The first file sets the goals; the second shows the one hardware mechanism that achieves them; the third asks a design question that every real kernel answers differently: how big should the privileged part be? Linux and Windows NT put most services in kernel mode for speed; seL4 keeps about 8,700 lines of C there so that it can be formally verified.
 
 ## Connections to sibling areas
 

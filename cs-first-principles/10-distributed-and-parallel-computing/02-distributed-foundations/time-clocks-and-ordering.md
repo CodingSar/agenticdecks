@@ -12,7 +12,7 @@ Machines in a distributed system have no shared clock. Each has a quartz oscilla
 
 1. **Physical clocks drift and can only be synchronised approximately.** Typical crystal oscillators drift on the order of 10–100 parts per million, which is up to about 9 seconds per day at the high end. The Network Time Protocol (NTP) corrects them by exchanging timestamps with a server and assuming the network delay is symmetric; asymmetric or variable delay leaves error from under a millisecond on a local network to tens of milliseconds on the internet. Clocks can also jump backward when corrected, so wall-clock time is not even monotonic unless the operating system (OS) provides a separate monotonic clock.
 
-2. **Happened-before (→) is a partial order defined by causality.** Event a → b if a and b are on the same process and a comes first, or a is the sending of a message and b its receipt, or there is a chain of such steps (transitivity). If neither a → b nor b → a, the events are *concurrent* (a ∥ b): neither could have affected the other. This is the same idea as the light cone in physics: information cannot travel faster than messages.
+2. **Happened-before (→) is a partial order defined by causality.** Event a → b if a and b are on the same process and a comes first, or a is the sending of a message and b its receipt, or there is a chain of such steps (transitivity). If neither a → b nor b → a, the events are *concurrent* (a ∥ b): neither could have affected the other.
 
 3. **Lamport clocks give a total order consistent with causality.** Each process keeps a counter. It increments the counter before each event and attaches it to each message; on receipt it sets its counter to max(local, received) + 1. Then a → b implies L(a) < L(b). Breaking ties by process identifier gives a total order every node agrees on, which is enough to build a replicated state machine or a mutual-exclusion algorithm. The converse fails: L(a) < L(b) does not imply a → b, so Lamport clocks cannot detect concurrency.
 
@@ -29,9 +29,7 @@ Machines in a distributed system have no shared clock. Each has a quartz oscilla
 | Term | Meaning |
 |---|---|
 | Clock drift | Rate at which a clock diverges from true time |
-| Clock skew | Difference between two clocks' readings at one instant |
 | NTP | Protocol that estimates offset from a time server using round-trip timestamps |
-| Monotonic clock | Clock that never goes backward; good for durations, not for cross-node comparison |
 | Happened-before (→) | Causal partial order on events defined by process order and messages |
 | Concurrent events | Events with no causal path between them |
 | Lamport clock | Scalar counter consistent with →, giving a total order with tie-breaking |

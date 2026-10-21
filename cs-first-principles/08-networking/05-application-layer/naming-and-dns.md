@@ -22,7 +22,7 @@ People and programs want stable, meaningful names such as `www.example.com`; net
 
 6. **Records hold more than addresses.** A (IPv4 address), AAAA (IPv6 address), CNAME (alias to another name), MX (mail server for a domain), NS (delegation), TXT (arbitrary text, used for domain verification and email policy) and others. DNS is a general-purpose, read-mostly, globally replicated key-value store.
 
-7. **DNS runs mostly over UDP for speed.** A query and answer usually fit in one User Datagram Protocol (UDP) packet each, so a lookup costs one round trip with no handshake. Large responses and zone transfers fall back to the Transmission Control Protocol (TCP). Encrypted variants (DNS over HTTPS, DNS over Transport Layer Security (TLS)) protect privacy from on-path observers at the cost of extra handshakes.
+7. **DNS runs mostly over UDP for speed.** A query and answer usually fit in one User Datagram Protocol (UDP) packet each, so a lookup costs one round trip with no handshake. Large responses and zone transfers fall back to the Transmission Control Protocol (TCP). Encrypted variants (DNS over Transport Layer Security (TLS), and DNS over HTTPS, which carries queries inside ordinary secure web requests) protect privacy from on-path observers at the cost of extra handshakes.
 
 8. **Classic DNS trusts whatever answer arrives.** An attacker who can guess a query's ID and source port can inject a forged answer that resolvers will cache (cache poisoning; the 2008 Kaminsky attack made this practical). Randomised source ports raise the bar. The Domain Name System Security Extensions (DNSSEC) sign records along the delegation chain so resolvers can verify them, but deployment is partial.
 

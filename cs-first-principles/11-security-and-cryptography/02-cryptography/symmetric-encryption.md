@@ -14,7 +14,7 @@ Symmetric encryption protects confidentiality when sender and receiver share a s
 
 2. **Key length sets the brute-force cost, and 128 bits is enough classically.** Trying all 2¹²⁸ keys is beyond any conceivable classical computation. Grover's quantum search algorithm gives only a quadratic speed-up, reducing a 128-bit key to about 2⁶⁴ quantum operations in theory, and those operations are far more expensive and harder to parallelise than classical ones; 256-bit keys are used where a wide margin against future quantum computers is wanted. The Data Encryption Standard (DES), with 56-bit keys, was brute-forced in 1998 and must not be used.
 
-3. **Electronic Codebook (ECB) mode is insecure.** ECB encrypts each block independently with the same key, so identical plaintext blocks give identical ciphertext blocks, and patterns in the data show through (the well-known encrypted penguin image). It is deterministic and fails IND-CPA (indistinguishability under chosen-plaintext attack). It should never be used for more than one block of data.
+3. **Electronic Codebook (ECB) mode is insecure.** ECB encrypts each block independently with the same key, so identical plaintext blocks give identical ciphertext blocks, and patterns in the data show through (the well-known encrypted penguin image). It is deterministic, so it fails IND-CPA (indistinguishability under chosen-plaintext attack).
 
 4. **Secure modes randomise with an initialisation vector or nonce.** Cipher Block Chaining (CBC) XORs each plaintext block with the previous ciphertext block before encrypting, starting with a random, unpredictable initialisation vector (IV). Counter (CTR) mode encrypts successive counter values (nonce ‖ counter) and XORs the result with the plaintext, turning a block cipher into a stream cipher that is parallelisable and needs no padding. Both are IND-CPA secure when used correctly, but neither provides integrity.
 
@@ -24,17 +24,14 @@ Symmetric encryption protects confidentiality when sender and receiver share a s
 
 7. **Nonce reuse can be catastrophic.** In CTR-based modes, reusing a nonce with the same key reuses the keystream, so XORing two ciphertexts gives the XOR of the two plaintexts, often enough to recover both. In AES-GCM, nonce reuse also leaks the authentication key, allowing forgeries. With 96-bit random nonces, NIST (the US National Institute of Standards and Technology) limits a single GCM key to about 2³² random-nonce encryptions to keep collision probability negligible, a birthday-bound effect. Nonce-misuse-resistant modes such as AES-GCM-SIV degrade gracefully when nonces repeat.
 
-8. **Ciphertext length and metadata still leak.** Encryption hides content, not size, timing or who talks to whom. Compressing before encrypting can leak secrets through ciphertext length when attacker-controlled and secret data are compressed together (the CRIME and BREACH attacks on web traffic). Padding and traffic shaping hide some of this, at a cost.
+8. **Ciphertext length and metadata still leak.** Encryption hides content, not size, timing or who talks to whom. Compressing before encrypting can leak secrets through ciphertext length when attacker-controlled and secret data are compressed together (the CRIME and BREACH attacks on web traffic).
 
 ## Key concepts
 
 | Term | Meaning |
 |---|---|
 | Block cipher | Keyed permutation on fixed-size blocks; ideally a PRP (pseudorandom permutation) |
-| Stream cipher | Generates a keystream XORed with the plaintext |
-| AES | Standard 128-bit block cipher with 128-, 192- or 256-bit keys |
 | Mode of operation | Rule for using a block cipher on multi-block messages |
-| ECB | Insecure mode encrypting each block independently |
 | CBC | Chains blocks via XOR with previous ciphertext; needs an unpredictable IV |
 | CTR | Encrypts counters to make a keystream |
 | Nonce | Value that must never repeat under one key |

@@ -14,7 +14,7 @@ Non-relational data models (often grouped under the label "NoSQL") give up some 
 
 2. **Key-value stores are distributed hash tables.** The only operations are get, put and delete by key, sometimes with range scans if keys are sorted. Because each operation touches one key, data can be partitioned across many machines by hashing the key, and each request goes to one partition. This gives near-linear scale-out and predictable latency, at the cost of no queries over values.
 
-3. **Document models trade joins for locality.** A document (usually JSON, JavaScript Object Notation, or a binary variant) nests related data in one record. Reading a whole aggregate is one lookup and one contiguous read. But data shared across documents must be duplicated (with update anomalies) or referenced by identifier (with application-side joins). The model fits one-to-many tree-shaped data; it strains on many-to-many relationships.
+3. **Document models trade joins for locality.** A document (usually JavaScript Object Notation (JSON), or a binary variant) nests related data in one record. Reading a whole aggregate is one lookup and one contiguous read. But data shared across documents must be duplicated (with update anomalies) or referenced by identifier (with application-side joins). The model fits one-to-many tree-shaped data; it strains on many-to-many relationships.
 
 4. **"Schemaless" means schema-on-read.** The database does not enforce a structure, but the application still assumes one. Schema changes move from a migration at write time to code that handles every historical shape at read time. This is flexible for evolving or heterogeneous data, and risky when many programs share the data.
 

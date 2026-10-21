@@ -1,7 +1,7 @@
 # Byzantine Fault Tolerance
 
 > **Layer:** [10 Distributed and Parallel Computing](../README.md) › [Consensus and replication](README.md)
-> **Builds on:** [Consensus](consensus.md), [Impossibility results](../02-distributed-foundations/impossibility-results.md), [Public-key cryptography](../../11-security-and-cryptography/02-cryptography/public-key-cryptography.md), [Hash functions and message authentication codes](../../11-security-and-cryptography/02-cryptography/hash-functions-and-macs.md)
+> **Builds on:** [Consensus](consensus.md), [Impossibility results](../02-distributed-foundations/impossibility-results.md), [System models and failures](../02-distributed-foundations/system-models-and-failures.md), [Number theory](../../01-mathematical-foundations/03-discrete-mathematics/number-theory.md)
 > **Enables:** [Security goals and threat modeling](../../11-security-and-cryptography/01-security-principles/cia-and-threat-modeling.md), [Distributed transactions](../04-distributed-data/distributed-transactions.md)
 
 ## Essence
@@ -52,7 +52,7 @@ Byzantine fault tolerance (BFT) is consensus and replication when faulty nodes m
 
 ## Go deeper
 
-- Lamport, Shostak and Pease, "The Byzantine Generals Problem", *ACM TOPLAS* (1982): the problem and the 3f + 1 bound.
+- Lamport, Shostak and Pease, "The Byzantine Generals Problem", *ACM Transactions on Programming Languages and Systems* (1982): the problem and the 3f + 1 bound.
 - Castro and Liskov, "Practical Byzantine Fault Tolerance", OSDI (1999): the protocol that made BFT practical.
 - Yin et al., "HotStuff: BFT Consensus with Linearity and Responsiveness", PODC (2019).
 - Cachin, Guerraoui and Rodrigues, *Introduction to Reliable and Secure Distributed Programming* (2nd ed., 2011): Byzantine abstractions treated rigorously.

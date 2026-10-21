@@ -22,7 +22,7 @@ A system model is the precise list of assumptions a distributed algorithm is all
 
 6. **Every specification separates safety from liveness.** Safety properties ("two nodes never decide different values", "a committed write is never lost") can be violated in a finite prefix of an execution. Liveness properties ("every request eventually gets a response") can only be violated by infinite executions. The usual design stance is to keep safety under all asynchrony and failures, and to accept that liveness depends on the network calming down.
 
-7. **In large systems, failure is constant, and partial failures are the hard ones.** With 10,000 servers, each failing once every few years, several fail each day. The worst failures are not clean crashes but grey failures: a disk that is slow but not dead, a node that answers health checks but drops real requests, a network that loses 1% of packets in one direction. Such failures defeat simple detectors and are a main source of real outages.
+7. **In large systems, failure is constant, and partial failures are the hard ones.** With 10,000 servers, each failing once every few years, several fail each day. The worst failures are not clean crashes but grey failures: a disk that is slow but not dead, a node that answers health checks but drops real requests, a network that loses 1% of packets in one direction. Such failures defeat simple detectors.
 
 8. **Fail-stop behaviour is engineered, not given.** Systems often convert messy failures into simple ones: a node that detects an internal inconsistency kills itself (crash rather than corrupt), checksums turn silent data corruption into detected omissions, and fencing tokens stop a node that was wrongly declared dead from acting on stale authority.
 
@@ -40,7 +40,6 @@ A system model is the precise list of assumptions a distributed algorithm is all
 | Failure detector | Module that outputs (possibly wrong) suspicions of crashed nodes |
 | Safety | Nothing bad happens; violations are finite and observable |
 | Liveness | Something good eventually happens |
-| Idempotent operation | Applying it twice has the same effect as applying it once |
 
 ## How it fits
 
@@ -57,6 +56,5 @@ A system model is the precise list of assumptions a distributed algorithm is all
 ## Go deeper
 
 - Cachin, Guerraoui and Rodrigues, *Introduction to Reliable and Secure Distributed Programming* (2nd ed., 2011): precise models and abstractions.
-- Lynch, *Distributed Algorithms* (1996): the formal treatment of timing and failure models.
 - Dwork, Lynch and Stockmeyer, "Consensus in the Presence of Partial Synchrony", *Journal of the ACM* (1988): the model that real protocols use.
 - Kleppmann, *Designing Data-Intensive Applications* (2017), chapter "The Trouble with Distributed Systems": the practitioner's view.

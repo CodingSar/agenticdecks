@@ -10,7 +10,7 @@ A join combines two relations by matching tuples on a condition, usually equalit
 
 ## Core tenets
 
-1. **Cost is dominated by I/O and by how often each input is read.** For relations R and S of M and N pages with B buffer pages available, the question is how many times each page must be read from storage. Naive nested-loop join reads S once per tuple of R; good algorithms read each input a small constant number of times. Central Processing Unit (CPU) cost matters too once data fits in memory.
+1. **Cost is dominated by Input/Output (I/O) and by how often each input is read.** For relations R and S of M and N pages with B buffer pages available, the question is how many times each page must be read from storage. Naive nested-loop join reads S once per tuple of R; good algorithms read each input a small constant number of times. Central Processing Unit (CPU) cost matters too once data fits in memory.
 
 2. **Nested-loop join is general but quadratic unless helped.** Simple tuple-at-a-time nested loops cost about M + (tuples in R) × N page reads. *Block* nested loops read a chunk of R that fills memory and scan S once per chunk: M + ⌈M/(B−2)⌉ × N. It is the only algorithm that handles arbitrary join conditions (inequalities, functions), and it is fine when one side is tiny.
 

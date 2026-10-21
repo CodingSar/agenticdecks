@@ -52,7 +52,7 @@ A consistency model is a contract between a replicated store and its clients: it
 
 ## Go deeper
 
-- Herlihy and Wing, "Linearizability: A Correctness Condition for Concurrent Objects", *ACM TOPLAS* (1990).
+- Herlihy and Wing, "Linearizability: A Correctness Condition for Concurrent Objects", *ACM Transactions on Programming Languages and Systems* (1990).
 - Terry et al., "Session Guarantees for Weakly Consistent Replicated Data", PDIS (1994).
 - Viotti and Vukolić, "Consistency in Non-Transactional Distributed Storage Systems", *ACM Computing Surveys* (2016): a map of more than 50 models.
 - Bailis et al., "Highly Available Transactions: Virtues and Limitations", VLDB (2014): which isolation levels survive partitions.

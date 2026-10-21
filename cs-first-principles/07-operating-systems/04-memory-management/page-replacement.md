@@ -53,6 +53,6 @@ When physical memory is full and a process touches a page that is not resident, 
 
 ## Go deeper
 
-- L. A. Bélády, "A Study of Replacement Algorithms for a Virtual-Storage Computer" (1966): MIN and the anomaly.
+- L. A. Bélády, "A Study of Replacement Algorithms for a Virtual-Storage Computer" (1966): the MIN algorithm. The FIFO anomaly came later (Bélády, Nelson and Shedler, 1969).
 - Peter J. Denning, "The Working Set Model for Program Behavior" (1968).
 - Nimrod Megiddo and Dharmendra S. Modha, "ARC: A Self-Tuning, Low Overhead Replacement Cache" (FAST 2003).

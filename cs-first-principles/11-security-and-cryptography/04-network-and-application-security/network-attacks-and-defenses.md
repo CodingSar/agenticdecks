@@ -24,7 +24,7 @@ The Internet's core protocols were designed for a cooperative network of researc
 
 7. **Perimeter defences are necessary but not sufficient.** Firewalls filter traffic by address, port and connection state; intrusion detection systems look for known attack signatures or anomalies. They reduce attack surface but assume the inside is trustworthy, and attackers who phish one employee are inside. "Zero trust" architectures drop that assumption: every request is authenticated, authorised and encrypted regardless of network location, applying complete mediation to the network.
 
-8. **Large-scale absorption is the practical defence against floods.** Since a determined attacker can out-send any single site, large services rely on anycast routing to spread attack traffic over many data centres, on content delivery networks with huge aggregate capacity, and on upstream scrubbing that filters attack traffic before it reaches the origin. These are the same tools used to handle legitimate load spikes.
+8. **Large-scale absorption is the practical defence against floods.** Since a determined attacker can out-send any single site, large services rely on anycast routing to spread attack traffic over many data centres, on content delivery networks with huge aggregate capacity, and on upstream scrubbing that filters attack traffic before it reaches the origin.
 
 ## Key concepts
 
@@ -34,12 +34,10 @@ The Internet's core protocols were designed for a cooperative network of researc
 | ARP spoofing | Claiming another host's IP address on a local network |
 | BGP hijack | Announcing routes for address space one does not own |
 | DNS cache poisoning | Inserting forged records into a resolver's cache |
-| Man-in-the-middle | Attacker relaying and possibly altering traffic between two parties |
 | DDoS | Distributed denial of service from many sources |
 | Amplification | Small spoofed requests causing large replies to a victim |
 | SYN cookie | Stateless encoding of handshake state to resist SYN floods |
 | RPKI / DNSSEC | Signed route origins / signed DNS records |
-| Firewall | Filter allowing or blocking traffic by rules |
 | Zero trust | Authenticating every request regardless of network location |
 
 ## How it fits

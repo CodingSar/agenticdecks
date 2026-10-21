@@ -24,7 +24,7 @@ A parallel programming model is the contract between the programmer and the para
 
 7. **Partitioned global address space (PGAS) and actors sit between the extremes.** PGAS languages (Unified Parallel C, Chapel) give one global address space but expose which part is local, so programmers can reason about locality. Actor systems (Erlang, Akka) give each actor private state and a mailbox, which is message passing inside one program; they map naturally onto distributed systems and their failure handling.
 
-8. **Determinism is a property of the model, not just the program.** Pure data-parallel and dataflow models without shared mutable state produce the same answer on every run (up to floating-point reduction order). Threads with locks do not: the interleaving is chosen at run time, so bugs can be rare and unrepeatable. Models that restrict sharing trade expressiveness for easier reasoning.
+8. **Determinism is a property of the model, not just the program.** Pure data-parallel and dataflow models without shared mutable state produce the same answer on every run (up to floating-point reduction order). Threads with locks do not: the interleaving is chosen at run time, so bugs can be rare and unrepeatable.
 
 ## Key concepts
 
@@ -37,8 +37,6 @@ A parallel programming model is the contract between the programmer and the para
 | SIMT | Many scalar threads run in lock-step groups on a GPU |
 | Warp divergence | Threads of one warp taking different branches, serialising them |
 | Data race | Two unsynchronised accesses to the same location, at least one a write |
-| Barrier | Point every worker must reach before any proceeds |
-| Work stealing | Idle workers take tasks from other workers' queues |
 | Actor | Unit with private state that reacts to messages in its mailbox |
 
 ## How it fits

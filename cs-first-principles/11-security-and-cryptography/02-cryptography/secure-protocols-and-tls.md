@@ -20,9 +20,9 @@ A secure channel protocol combines primitives into a connection that gives **con
 
 5. **Keys are derived, separated and updated.** From the Diffie–Hellman secret, TLS 1.3 uses HKDF (the key derivation function built on the hash-based message authentication code, HMAC) to derive separate keys for each direction and each phase (handshake, application data, resumption). Using one key for two purposes can let an attack on one purpose spill into the other. Records carry implicit sequence numbers in their nonces, which detects reordering, replay and deletion within a connection.
 
-6. **0-RTT resumption trades replay protection for latency.** TLS 1.3 lets a returning client send data in its first flight using a key from a previous session (zero round-trip time, 0-RTT). That early data can be replayed by an attacker, so it must only carry requests that are safe to repeat (idempotent), or the server must deduplicate. This is a deliberate, documented weakening, and an example of every protocol optimisation needing a security review.
+6. **0-RTT resumption trades replay protection for latency.** TLS 1.3 lets a returning client send data in its first flight using a key from a previous session (zero round-trip time, 0-RTT). That early data can be replayed by an attacker, so it must only carry requests that are safe to repeat (idempotent), or the server must deduplicate. It is a deliberate, documented weakening.
 
-7. **Protocols are state machines, and their analysis should be formal.** Bugs such as accepting messages in the wrong order (the 2015 SMACK and SKIP-TLS attacks) or Apple's 2014 "goto fail" bug, which skipped signature verification, came from implementations, not the specification. TLS 1.3 was designed alongside formal analysis with tools such as Tamarin and ProVerif, and verified implementations exist. For new needs, use an established protocol and library; Noise (a framework of Diffie–Hellman-based handshakes) and the Signal protocol show the same principles applied to other settings.
+7. **Protocols are state machines, and their analysis should be formal.** Bugs such as accepting messages in the wrong order (the 2015 SMACK and SKIP-TLS attacks) or Apple's 2014 "goto fail" bug, which skipped signature verification, came from implementations, not the specification. TLS 1.3 was designed alongside formal analysis with tools such as Tamarin and ProVerif, and verified implementations exist. For new needs, use an established protocol and library, such as the Noise framework or the Signal protocol.
 
 8. **TLS protects the channel, not the endpoints or the metadata.** It hides contents from the network, but a compromised server sees everything, and the server name (unless Encrypted Client Hello is used), addresses, timing and sizes remain visible. End-to-end encrypted messaging moves the trust boundary from the server to the users' devices, which is the [end-to-end argument](../../08-networking/01-principles/layering-and-the-end-to-end-principle.md) applied to secrecy.
 
@@ -31,13 +31,10 @@ A secure channel protocol combines primitives into a connection that gives **con
 | Term | Meaning |
 |---|---|
 | TLS | Protocol giving an authenticated, confidential channel over a byte stream |
-| Handshake | Phase that authenticates peers and establishes keys |
-| Record layer | Phase that protects application data with authenticated encryption |
 | Cipher suite | Negotiated set of algorithms for a connection |
 | Certificate chain | Sequence of certificates from the server's up to a trusted root |
 | Forward secrecy | Recorded sessions stay safe if long-term keys later leak |
 | Downgrade attack | Forcing peers to negotiate a weaker option |
-| Transcript hash | Hash of all handshake messages, signed or MACed to detect tampering |
 | HKDF | Standard function to derive multiple keys from one secret |
 | 0-RTT | Sending early data before the handshake completes; replayable |
 

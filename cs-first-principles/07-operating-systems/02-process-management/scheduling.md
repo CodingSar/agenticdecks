@@ -1,7 +1,7 @@
 # Scheduling
 
 > **Layer:** [07 Operating Systems](../README.md) › [Process management](README.md)
-> **Builds on:** [Processes](processes.md), [Threads](threads.md), [Heaps and priority queues](../../05-algorithms-and-data-structures/02-fundamental-data-structures/heaps-and-priority-queues.md), [Latency, bandwidth and queueing](../../08-networking/01-principles/latency-bandwidth-and-queueing.md)
+> **Builds on:** [Processes](processes.md), [Threads](threads.md), [Heaps and priority queues](../../05-algorithms-and-data-structures/02-fundamental-data-structures/heaps-and-priority-queues.md), [Random variables and distributions](../../01-mathematical-foundations/06-probability-and-statistics/random-variables-and-distributions.md), [Markov chains](../../01-mathematical-foundations/06-probability-and-statistics/markov-chains.md)
 > **Enables:** [Virtual machines and hypervisors](../07-virtualization/virtual-machines-and-hypervisors.md), [Containers](../07-virtualization/containers.md), [Cloud computing](../../10-distributed-and-parallel-computing/05-large-scale-systems/cloud-computing.md)
 
 ## Essence
@@ -12,7 +12,7 @@ A scheduler decides which runnable thread runs on each Central Processing Unit (
 
 1. **No single policy optimizes every metric.** Shortest Job First (SJF) and its preemptive form, Shortest Remaining Time First (SRTF), provably minimize average turnaround time, because running a short job first delays every long job by little while running a long job first delays every short job by a lot. Round Robin (RR), which gives each job a short time slice in turn, gives good response time but poor turnaround. First In, First Out (FIFO) suffers the convoy effect: short jobs queue behind a long one. The choice of metric decides the "best" scheduler.
 
-2. **The scheduler does not know the future, so it learns from the past.** SJF needs job lengths in advance, which an Operating System (OS) does not have. The Multi-Level Feedback Queue (MLFQ), from Corbató's Compatible Time-Sharing System (CTSS, 1962), infers them: a new job starts at high priority; if it uses its whole slice it is moved down (it looks CPU-bound); if it blocks early it stays high (it looks interactive). Periodic priority boosts prevent starvation and let jobs that change behaviour move back up. Variants of this idea underlie the Windows NT and classic BSD schedulers.
+2. **The scheduler does not know the future, so it learns from the past.** SJF needs job lengths in advance, which an Operating System (OS) does not have. The Multi-Level Feedback Queue (MLFQ), from Corbató's Compatible Time-Sharing System (CTSS, 1962), infers them: a new job starts at high priority; if it uses its whole slice it is moved down (it looks CPU-bound); if it blocks early it stays high (it looks interactive). Periodic priority boosts prevent starvation and let jobs that change behaviour move back up. Variants of this idea underlie the Windows NT and classic Berkeley Software Distribution (BSD) Unix schedulers.
 
 3. **Proportional-share scheduling trades prediction for fairness.** Instead of guessing lengths, give each thread a share of CPU time proportional to its weight. Linux's Completely Fair Scheduler (CFS, 2007–2023) tracked each task's weighted *virtual runtime* in a red-black tree and always ran the task with the least, so CPU time converged to the weights; picking the next task is O(log n). Since kernel 6.6 (2023) Linux uses Earliest Eligible Virtual Deadline First (EEVDF), which keeps proportional shares but also gives latency-sensitive tasks earlier deadlines.
 
@@ -24,7 +24,7 @@ A scheduler decides which runnable thread runs on each Central Processing Unit (
 
 7. **Priority creates the risk of priority inversion.** If a low-priority thread holds a lock that a high-priority thread needs, and medium-priority threads keep the low one from running, the high one waits indefinitely. This hung the Mars Pathfinder lander's software in 1997 until priority inheritance (temporarily raising the lock holder's priority) was enabled.
 
-8. **Scheduling is a queueing system, so utilization near 100% means long waits.** When arrivals are random, average waiting time grows sharply as utilization approaches one; in the simplest single-server model it scales as 1/(1 − ρ) for utilization ρ ([latency, bandwidth and queueing](../../08-networking/01-principles/latency-bandwidth-and-queueing.md)). Interactive systems therefore keep headroom, and control groups (cgroups) let administrators cap or reserve CPU shares for groups of processes.
+8. **Scheduling is a queueing system, so utilization near 100% means long waits.** When arrivals are random, average waiting time grows sharply as utilization approaches one. In the simplest single-server model, a [Markov chain](../../01-mathematical-foundations/06-probability-and-statistics/markov-chains.md) over queue length with exponential arrival and service times, mean time in the system scales as 1/(1 − ρ) for utilization ρ; networking applies the same law to router buffers ([latency, bandwidth and queueing](../../08-networking/01-principles/latency-bandwidth-and-queueing.md)). Interactive systems therefore keep headroom, and control groups (cgroups) let administrators cap or reserve CPU shares for groups of processes.
 
 ## Key concepts
 

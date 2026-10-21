@@ -11,7 +11,7 @@ Code generation is the compiler's back end: it maps the machine-independent Inte
 ## Core tenets
 
 1. **Instruction selection is tree pattern matching.** Each machine instruction covers a small pattern of IR operations: on x86, `mov eax, [rbx + rcx*4 + 8]` covers an add, a multiply, another add and a load. Selection tiles the IR tree with such patterns at minimum total cost. On trees this is solvable optimally by [dynamic programming](../../05-algorithms-and-data-structures/03-design-paradigms/dynamic-programming.md) (as in Bottom-Up Rewrite System (BURS) generators); on general directed acyclic graphs it is NP-hard, so compilers split them into trees or use greedy matching.
-2. **Register allocation is graph colouring.** Compute liveness: two values that are live at the same time *interfere* and cannot share a register. Build the interference graph (values as nodes, interference as edges). Assigning k registers is colouring the graph with k colours. Chaitin (1981) made this the standard approach; colouring is NP-complete, but a simplify-and-select heuristic works very well in practice.
+2. **Register allocation is graph colouring.** Compute liveness: two values that are live at the same time *interfere* and cannot share a register. Build the interference graph (values as nodes, interference as edges). Assigning k registers is colouring the graph with k colours. Chaitin and colleagues at IBM (1981–82) made this the standard approach; colouring is NP-complete, but a simplify-and-select heuristic works very well in practice.
 
    ```
    a = ...        live: {a}

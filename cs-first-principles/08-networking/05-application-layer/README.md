@@ -36,7 +36,7 @@ Read DNS first: every web request begins with a name lookup. HTTP then defines w
 
 ## Connections across layers
 
-The application layer reuses [hash tables and caching](../../04-computer-architecture/03-memory-hierarchy/locality-and-caching.md) ideas, and [tree-structured naming](../../07-operating-systems/05-storage-and-file-systems/file-system-abstractions.md) like file paths. Above it, [distributed systems](../../10-distributed-and-parallel-computing/README.md) borrow DNS's eventual consistency and HTTP's statelessness for service design; [web security](../../11-security-and-cryptography/04-network-and-application-security/web-security.md) protects the browser's execution model; [software architecture](../../12-software-engineering/01-design/software-architecture.md) uses Representational State Transfer (REST) as a style for services.
+The application layer reuses [caching](../../04-computer-architecture/03-memory-hierarchy/locality-and-caching.md) ideas, and [tree-structured naming](../../07-operating-systems/05-storage-and-file-systems/file-system-abstractions.md) like file paths. Above it, [distributed systems](../../10-distributed-and-parallel-computing/README.md) borrow DNS's eventual consistency and HTTP's statelessness for service design; [web security](../../11-security-and-cryptography/04-network-and-application-security/web-security.md) protects the browser's execution model; [software architecture](../../12-software-engineering/01-design/software-architecture.md) uses Representational State Transfer (REST) as a style for services.
 
 ## Cross-cutting threads
 

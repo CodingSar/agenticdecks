@@ -1,7 +1,7 @@
 # Security Design Principles
 
 > **Layer:** [11 Security and Cryptography](../README.md) › [Security principles](README.md)
-> **Builds on:** [Security goals and threat modeling](cia-and-threat-modeling.md), [Modularity and information hiding](../../12-software-engineering/01-design/modularity-and-information-hiding.md), [Kernel mode and system calls](../../07-operating-systems/01-kernel-and-abstractions/kernel-mode-and-system-calls.md)
+> **Builds on:** [Security goals and threat modeling](cia-and-threat-modeling.md), [Reliability and redundancy](../../00-engineering-foundations/05-engineering-method/reliability-and-redundancy.md), [Kernel architectures](../../07-operating-systems/01-kernel-and-abstractions/kernel-architectures.md), [Kernel mode and system calls](../../07-operating-systems/01-kernel-and-abstractions/kernel-mode-and-system-calls.md)
 > **Enables:** [Access control](../03-system-security/access-control.md), [Isolation and sandboxing](../03-system-security/isolation-and-sandboxing.md), [Foundations of modern cryptography](../02-cryptography/foundations-of-modern-cryptography.md), [Software architecture](../../12-software-engineering/01-design/software-architecture.md)
 
 ## Essence

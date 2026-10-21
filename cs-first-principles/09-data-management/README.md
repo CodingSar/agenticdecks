@@ -24,7 +24,7 @@ It sits above [08 Networking](../08-networking/README.md) because modern databas
 | Child | Its role in the whole | Depends on |
 |---|---|---|
 | [01 Data Models](01-data-models/README.md) | The logical interface: what data looks like, how it is queried, how redundancy is avoided | Sets, logic (01) |
-| [02 Storage and Indexing](02-storage-and-indexing/README.md) | The physical layer: pages, row vs column layout, B-trees, LSM-trees | Data structures (05), file systems (07) |
+| [02 Storage and Indexing](02-storage-and-indexing/README.md) | The physical layer: pages, row vs column layout, B-trees, Log-Structured Merge (LSM) trees | Data structures (05), file systems (07) |
 | [03 Query Processing](03-query-processing/README.md) | The bridge: turns a declarative query into an efficient plan over storage | Data models, storage |
 | [04 Transactions](04-transactions/README.md) | Correctness under concurrency and failure: Atomicity, Consistency, Isolation, Durability (ACID), concurrency control, isolation, recovery | Storage, Operating System (OS) concurrency and crash consistency |
 
@@ -43,7 +43,7 @@ Read data models first: they define the contract. Storage and indexing show how 
 ## Connections to neighbouring layers
 
 - **[01 Mathematical Foundations](../01-mathematical-foundations/README.md):** relational algebra and calculus; functional dependencies are a theory of [relations](../01-mathematical-foundations/02-sets-relations-functions/relations-and-orders.md) and [functions](../01-mathematical-foundations/02-sets-relations-functions/functions-and-cardinality.md); cardinality estimation uses [statistics](../01-mathematical-foundations/06-probability-and-statistics/statistical-inference.md).
-- **[04 Computer Architecture](../04-computer-architecture/README.md):** the gap between [DRAM and storage devices](../04-computer-architecture/03-memory-hierarchy/dram-and-storage-devices.md) shapes everything; column stores exploit [SIMD](../04-computer-architecture/04-parallel-architecture/simd-and-gpus.md) and caches.
+- **[04 Computer Architecture](../04-computer-architecture/README.md):** the gap between [Dynamic Random-Access Memory (DRAM) and storage devices](../04-computer-architecture/03-memory-hierarchy/dram-and-storage-devices.md) shapes everything; column stores exploit [Single Instruction, Multiple Data (SIMD)](../04-computer-architecture/04-parallel-architecture/simd-and-gpus.md) and caches.
 - **[05 Algorithms and Data Structures](../05-algorithms-and-data-structures/README.md):** B-trees, hashing, external sorting and graph search underlie storage and execution.
 - **[06 Programming Languages](../06-programming-languages/README.md):** Structured Query Language (SQL) is the most successful [declarative language](../06-programming-languages/01-paradigms/logic-and-declarative.md); query compilers use [compiler techniques](../06-programming-languages/03-compilers/optimization.md).
 - **[07 Operating Systems](../07-operating-systems/README.md):** buffer pools duplicate and often bypass the OS page cache; logging generalises journaling.
@@ -60,7 +60,7 @@ This layer takes logic and sets from 01, external-memory algorithms from 05 and 
 - [Abstraction and layering](../CROSS-CUTTING.md#abstraction-and-layering): logical and physical data independence.
 - [Interface vs implementation](../CROSS-CUTTING.md#interface-vs-implementation): SQL states what; the optimizer chooses how.
 - [Caching and locality](../CROSS-CUTTING.md#caching-and-locality): the buffer pool and index node caching.
-- [Batching and amortization](../CROSS-CUTTING.md#batching-and-amortization): group commit, Log-Structured Merge (LSM) compaction, vectorised execution.
+- [Batching and amortization](../CROSS-CUTTING.md#batching-and-amortization): group commit, LSM compaction, vectorised execution.
 - [Invariants and correctness](../CROSS-CUTTING.md#invariants-and-correctness): integrity constraints and serializability.
 - [State and time](../CROSS-CUTTING.md#state-and-time): concurrency control and multiversioning.
 - [Redundancy and fault tolerance](../CROSS-CUTTING.md#redundancy-and-fault-tolerance): write-ahead logs and replicas.

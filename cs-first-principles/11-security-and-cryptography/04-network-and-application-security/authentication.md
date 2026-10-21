@@ -1,7 +1,7 @@
 # Authentication
 
 > **Layer:** [11 Security and Cryptography](../README.md) › [Network and application security](README.md)
-> **Builds on:** [Hash functions and message authentication codes](../02-cryptography/hash-functions-and-macs.md), [Public-key cryptography](../02-cryptography/public-key-cryptography.md), [Access control](../03-system-security/access-control.md), [Perception and cognition](../../14-human-and-visual-computing/01-human-computer-interaction/perception-and-cognition.md)
+> **Builds on:** [Hash functions and message authentication codes](../02-cryptography/hash-functions-and-macs.md), [Public-key cryptography](../02-cryptography/public-key-cryptography.md), [Access control](../03-system-security/access-control.md), [Secure protocols and Transport Layer Security](../02-cryptography/secure-protocols-and-tls.md)
 > **Enables:** [Web security](web-security.md), [Network attacks and defenses](network-attacks-and-defenses.md), [Cloud computing](../../10-distributed-and-parallel-computing/05-large-scale-systems/cloud-computing.md)
 
 ## Essence
@@ -14,7 +14,7 @@ Authentication is establishing that a party is who it claims to be, so that acce
 
 2. **Never send a reusable secret if you can prove knowledge instead.** In challenge-response, the verifier sends a fresh random challenge and the claimant returns a function of the challenge and its secret, such as a signature. An eavesdropper learns nothing reusable, and a replayed response fails because the next challenge differs. This is the pattern behind Kerberos tickets, Secure Shell (SSH) public-key login, and modern hardware keys.
 
-3. **Multi-factor authentication works only if the factors fail independently.** Combining a password with a second factor defeats attacks on passwords alone. But one-time codes sent by SMS (Short Message Service) can be intercepted by SIM (subscriber identity module) swapping, and both SMS and authenticator-app codes can be typed into a phishing page and relayed in real time. Push approvals can be defeated by flooding users with prompts until one is accepted.
+3. **Multi-factor authentication works only if the factors fail independently.** Combining a password with a second factor defeats attacks on passwords alone. But one-time codes sent by SMS (Short Message Service) can be intercepted by SIM (subscriber identity module) swapping, and both SMS and authenticator-app codes can be typed into a phishing page and relayed in real time. Push approvals fall to prompt flooding.
 
 4. **Origin-bound public-key credentials resist phishing.** FIDO2/WebAuthn (from the FIDO, Fast IDentity Online, Alliance and the World Wide Web Consortium) creates a key pair per website on the user's device or security key; the browser includes the site's origin in what is signed, so a credential for `bank.example` cannot be used by `bank-example.evil`. Nothing reusable is stored on the server (only the public key), and the private key never leaves the device. Passkeys are such credentials synchronised across a user's devices.
 
@@ -34,13 +34,11 @@ Authentication is establishing that a party is who it claims to be, so that acce
 | Credential stuffing | Trying leaked username–password pairs on other services |
 | Challenge-response | Proving possession of a secret by answering a fresh challenge |
 | MFA | Multi-factor authentication: requiring two or more independent factors |
-| Phishing | Tricking a user into giving credentials to an impostor |
 | WebAuthn / passkey | Origin-bound public-key credential standard / synchronised credential |
 | Session token | Bearer secret representing an authenticated session |
 | Session fixation | Forcing a victim to use a session identifier the attacker knows |
 | OAuth 2.0 | Delegated authorisation via access tokens |
 | OpenID Connect | Authentication layer on OAuth 2.0 using signed ID tokens |
-| Kerberos | Ticket-based authentication with a trusted key distribution centre |
 
 ## How it fits
 

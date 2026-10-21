@@ -39,8 +39,6 @@ In languages such as C and C++, the program is trusted to keep every memory acce
 | ASLR | Randomising memory layout so addresses are unpredictable |
 | ROP | Chaining existing code fragments to compute without injecting code |
 | CFI | Restricting indirect control transfers to valid targets |
-| Undefined behaviour | Program state the language standard leaves unconstrained |
-| Fuzzing | Automated testing with generated or mutated inputs |
 
 ## How it fits
 

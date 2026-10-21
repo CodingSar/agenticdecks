@@ -12,11 +12,11 @@ The Internet offers two classic transport services on top of the Internet Protoc
 
 1. **Ports turn host-to-host delivery into process-to-process delivery.** IP gets a packet to a host. A 16-bit port number in the transport header tells the Operating System (OS) which socket should receive it. A TCP connection is identified by the 4-tuple (source IP, source port, destination IP, destination port), so one server port (443) can hold millions of distinct connections.
 
-2. **UDP is a thin veneer over IP.** Its 8-byte header holds source port, destination port, length and checksum. No connection setup, no acknowledgement, no retransmission, no rate control. That makes it right for small request/response exchanges (DNS lookups), for real-time media where late data is useless, and as a substrate for new protocols that cannot get through middleboxes any other way.
+2. **UDP is a thin veneer over IP.** Its 8-byte header holds source port, destination port, length and checksum. No connection setup, no acknowledgement, no retransmission, no rate control. That makes it right for small request/response exchanges (Domain Name System (DNS) lookups), for real-time media where late data is useless, and as a substrate for new protocols that cannot get through middleboxes any other way.
 
 3. **TCP provides a byte stream, not messages.** The sender writes bytes; TCP chooses how to split them into segments; the receiver reads bytes, possibly in different chunk sizes. Applications must frame their own messages (length prefixes, delimiters). Treating one `send()` as one `recv()` is a classic bug.
 
-4. **Connections start with a three-way handshake.** Client sends SYN with an initial sequence number; server replies SYN-ACK with its own; client sends an acknowledgement (ACK). This synchronises both sides' sequence numbers and confirms each can hear the other. It costs one Round-Trip Time (RTT) before data flows. Random initial sequence numbers stop old packets from earlier connections and blind attackers from being accepted as current data.
+4. **Connections start with a three-way handshake.** Client sends SYN (synchronise) with an initial sequence number; server replies SYN-ACK with its own; client sends an acknowledgement (ACK). This synchronises both sides' sequence numbers and confirms each can hear the other. It costs one Round-Trip Time (RTT) before data flows. Random initial sequence numbers stop old packets from earlier connections and blind attackers from being accepted as current data.
 
 5. **Connection teardown is per direction and leaves a residue.** Each side sends FIN to close its half; the connection is fully closed after both. The side that closes first waits in TIME_WAIT for twice the maximum segment lifetime (often 60 seconds in total) so that late duplicates of old segments die out before the same 4-tuple can be reused. Busy servers that close connections can accumulate many TIME_WAIT entries.
 
@@ -26,7 +26,7 @@ The Internet offers two classic transport services on top of the Internet Protoc
 
 8. **QUIC moves transport into user space over UDP.** QUIC provides multiple independent streams (loss in one does not block others), integrates Transport Layer Security (TLS) 1.3 so a new connection needs one RTT and a resumed one can send data immediately, encrypts most of its headers so middleboxes cannot ossify it, and identifies connections by an ID so they survive address changes. Running in user space lets applications deploy new versions without operating-system upgrades.
 
-9. **Sockets are the interface.** The Berkeley sockets Application Programming Interface (API) (`socket`, `bind`, `listen`, `accept`, `connect`, `send`, `recv`) exposes both protocols as file descriptors, so the OS's I/O models (blocking, non-blocking with `epoll`/`kqueue`, asynchronous) apply directly to network connections.
+9. **Sockets are the interface.** The Berkeley sockets Application Programming Interface (API) (`socket`, `bind`, `listen`, `accept`, `connect`, `send`, `recv`) exposes both protocols as file descriptors, so the OS's Input/Output (I/O) models (blocking, non-blocking with `epoll`/`kqueue`, asynchronous) apply directly to network connections.
 
 ## Key concepts
 
