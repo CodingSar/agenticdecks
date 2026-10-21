@@ -118,3 +118,13 @@ Collected from writer reports, to be resolved in the review pass.
 - Unicode ~150k chars (v15–16); Rust overflow debug panic / release wrap.
 - Citations to verify: Pike & Thompson UTF-8 1993 title; Box 1976 "Science and Statistics"; Sarpeshkar 1998; Ginosar 2011; Kogge & Stone 1973.
 - Candidate leaf: memory cells (SRAM/DRAM/flash) in 03 or 00.
+
+### 10 Distributed / 11 Security
+- ~70% high-severity bugs memory safety; causal consistency strongest available (Mahajan et al. 2011, hedged).
+- AES-GCM random nonce 2³² limit (NIST SP 800-38D); FIPS 203/204/205 2024.
+- TrueTime ε a few ms (Spanner paper: typically <7 ms); drift 10–100 ppm.
+- Mirai ~1 Tbps (OVH 2016); memcached amplification up to ~50,000x.
+- Ring all-reduce 2(P−1)/P; OWASP 2021 A01 broken access control.
+- Citations: HotStuff PODC 2019; Bailis et al. HAT PVLDB 7 (2013/2014); Kleppmann & Beresford TPDS 2017; Hellerstein & Alvaro CACM 2020; Ristić 2nd ed 2022.
+- BFT 3f+1 statement (oral messages synchronous; partial synchrony even with signatures) — check.
+- New leaves: privacy-enhancing-technologies, software-supply-chain-security.

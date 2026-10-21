@@ -288,6 +288,7 @@ Every path below is fixed. Writers create exactly these files, so cross-links be
   01-security-principles/
     cia-and-threat-modeling.md
     security-design-principles.md
+    privacy-enhancing-technologies.md
   02-cryptography/
     foundations-of-modern-cryptography.md
     symmetric-encryption.md
@@ -303,6 +304,7 @@ Every path below is fixed. Writers create exactly these files, so cross-links be
     authentication.md
     web-security.md
     network-attacks-and-defenses.md
+    software-supply-chain-security.md
 
 12-software-engineering/
   01-design/
