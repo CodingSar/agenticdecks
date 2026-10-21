@@ -46,12 +46,12 @@ The Internet's core protocols were designed for a cooperative network of researc
 
 - **Below:** attacks target [Ethernet and ARP](../../08-networking/02-link-layer/media-access-and-ethernet.md), [wireless links](../../08-networking/02-link-layer/wireless-networks.md), [IP forwarding](../../08-networking/03-network-layer/ip-addressing-and-forwarding.md), [BGP](../../08-networking/03-network-layer/internet-routing-and-bgp.md), [TCP](../../08-networking/04-transport-layer/udp-and-tcp.md) and [DNS](../../08-networking/05-application-layer/naming-and-dns.md); defences rest on [TLS](../02-cryptography/secure-protocols-and-tls.md) and [signatures](../02-cryptography/public-key-cryptography.md); the [end-to-end principle](../../08-networking/01-principles/layering-and-the-end-to-end-principle.md) says where protection belongs.
 - **Above:** [reliability engineering](../../12-software-engineering/04-operations/reliability-engineering.md) plans for attacks as for outages; [scalability patterns](../../10-distributed-and-parallel-computing/05-large-scale-systems/scalability-patterns.md) and [content delivery](../../08-networking/05-application-layer/content-delivery-and-caching.md) absorb floods; [cloud](../../10-distributed-and-parallel-computing/05-large-scale-systems/cloud-computing.md) networks implement zero-trust access; [policy](../../15-computing-in-context/law-privacy-and-policy.md) governs interception and lawful access.
-- **Siblings:** [authentication](authentication.md) replaces address-based trust; [web security](web-security.md) relies on HTTPS to survive interception.
+- **Siblings:** [authentication](authentication.md) replaces address-based trust; [web security](web-security.md) relies on HTTPS (the Hypertext Transfer Protocol Secure) to survive interception.
 
 ## Common misconceptions
 
 - **"A firewall makes the internal network safe."** Phishing, compromised devices and insiders are already inside; internal traffic needs authentication too.
-- **"DNSSEC encrypts DNS."** It authenticates records; confidentiality needs DNS over TLS or over HTTPS (the Hypertext Transfer Protocol Secure).
+- **"DNSSEC encrypts DNS."** It authenticates records; confidentiality needs DNS over TLS or over HTTPS.
 - **"Blocking an attacking IP address stops a DDoS."** Distributed attacks use many thousands of addresses, often spoofed or belonging to innocent reflectors.
 
 ## Go deeper
