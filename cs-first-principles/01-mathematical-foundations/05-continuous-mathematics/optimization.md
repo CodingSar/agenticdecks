@@ -10,7 +10,7 @@ Optimization is the problem of choosing the input that minimises (or maximises) 
 
 ## Core tenets
 
-1. **Every optimization problem has the same parts.** A decision variable *x*, an objective *f(x)*, and a feasible set defined by constraints *g(x) ≤ 0*, *h(x) = 0*. Writing a problem in this form forces clarity about what is being traded off. Many engineering disputes are really disagreements about the objective (latency versus throughput, accuracy versus fairness).
+1. **Every optimization problem has the same parts.** A decision variable *x*, an objective *f(x)*, and a feasible set defined by constraints *g(x) ≤ 0*, *h(x) = 0*. Writing a problem in this form forces clarity about what is traded off; many engineering disputes are really disagreements about the objective.
 
 2. **At an unconstrained smooth minimum the gradient is zero; curvature tells you what kind of point it is.** ∇f(x*) = 0 is necessary for a local minimum. The Hessian's eigenvalues then classify the point: all positive is a minimum, mixed signs is a saddle. In high-dimensional neural network losses, saddle points and flat regions vastly outnumber bad local minima, which helps explain why simple gradient methods work as well as they do.
 

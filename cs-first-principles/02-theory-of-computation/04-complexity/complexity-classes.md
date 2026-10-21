@@ -6,7 +6,7 @@
 
 ## Essence
 
-A complexity class is the set of problems solvable within a given budget of a given resource on a given kind of machine: polynomial time on a deterministic machine (P), polynomial space (PSPACE), polynomial time with random bits (BPP), polynomial time on a quantum computer (BQP), and so on. Classifying problems this way turns a zoo of algorithms into a map, where each problem's position says what kind of effort it fundamentally needs. Two kinds of result shape the map. Hierarchy theorems, proved by diagonalisation, show that more of the same resource lets you solve strictly more. Containments and completeness results relate different resources. Strikingly few separations are proved: we know P ≠ EXP (exponential time), but not whether P ≠ PSPACE.
+A complexity class is the set of problems solvable within a given budget of a given resource on a given kind of machine: polynomial time on a deterministic machine (P), polynomial space (PSPACE), polynomial time with random bits (BPP), polynomial time on a quantum computer (BQP), and so on. Classifying problems this way turns a zoo of algorithms into a map. Two kinds of result shape the map. Hierarchy theorems, proved by diagonalisation, show that more of the same resource lets you solve strictly more. Containments and completeness results relate different resources. Strikingly few separations are proved: we know P ≠ EXP (exponential time), but not whether P ≠ PSPACE.
 
 ## Core tenets
 
@@ -36,21 +36,19 @@ A complexity class is the set of problems solvable within a given budget of a gi
 | BPP | Randomised polynomial time with error ≤ 1/3 on every input |
 | BQP | Quantum polynomial time with error ≤ 1/3 on every input |
 | Time-constructible | f(n) can be computed in O(f(n)) time, so a machine can run a clock |
-| Hierarchy theorem | Strictly more of a resource decides strictly more problems |
 | Complete problem | In the class, and every problem in the class reduces to it |
 | NC | Problems solvable by polynomial-size, polylog-depth circuits |
 
 ## How it fits
 
 - **Below:** It generalises [P and NP](p-np-and-np-completeness.md) to space, randomness, alternation and quantum computation. Hierarchy proofs reuse diagonalisation from [computability](../03-computability/halting-problem-and-undecidability.md); randomised classes need [probability](../../01-mathematical-foundations/06-probability-and-statistics/probability.md).
-- **Above:** P-completeness and NC guide [parallel algorithm design](../../10-distributed-and-parallel-computing/01-parallel-computing/work-span-and-parallel-models.md). PSPACE-hardness of planning and games explains why [search and planning](../../13-artificial-intelligence/01-classical-ai/search-and-planning.md) relies on heuristics. Model checking is PSPACE-complete for many temporal logics, which explains state-space explosion in [model checking](../../06-programming-languages/05-formal-methods/model-checking.md). BPP vs P is the theory behind [randomized algorithms](../../05-algorithms-and-data-structures/03-design-paradigms/randomized-algorithms.md); average-case hardness assumptions are the theory behind [cryptography](../../11-security-and-cryptography/02-cryptography/foundations-of-modern-cryptography.md).
+- **Above:** P-completeness and NC guide [parallel algorithm design](../../10-distributed-and-parallel-computing/01-parallel-computing/work-span-and-parallel-models.md). PSPACE-hardness of planning explains why [search and planning](../../13-artificial-intelligence/01-classical-ai/search-and-planning.md) uses heuristics, and of linear temporal logic checking why [model checking](../../06-programming-languages/05-formal-methods/model-checking.md) fights state explosion. BPP vs P underlies [randomized algorithms](../../05-algorithms-and-data-structures/03-design-paradigms/randomized-algorithms.md); average-case hardness underlies [cryptography](../../11-security-and-cryptography/02-cryptography/foundations-of-modern-cryptography.md).
 - **Siblings:** [Asymptotic analysis](asymptotic-analysis.md) gives the bounds; [P vs NP](p-np-and-np-completeness.md) is the most famous open edge of this map; [quantum computation](../05-quantum-computation/README.md) adds BQP to it.
 
 ## Common misconceptions
 
 - **"We know P ≠ PSPACE (or L ≠ P)."** Neither is proved. Only separations given by hierarchy theorems, such as P ≠ EXP and L ≠ PSPACE, are known.
 - **"Randomised algorithms are unreliable."** BPP algorithms can be made to fail with probability below 2⁻¹⁰⁰, far less than the chance of a hardware fault during the run.
-- **"BQP contains NP."** No evidence supports this, and there are oracle results suggesting the opposite. Quantum speedups are known only for problems with special structure.
 
 ## Go deeper
 

@@ -22,9 +22,9 @@ Number theory studies the integers: divisibility, primes, remainders and the ari
 
 6. **Modular exponentiation is fast; its inverse appears hard.** Computing *g^x mod p* takes O(log x) multiplications by repeated squaring, so a 2,048-bit exponent needs only a few thousand modular multiplications. Recovering *x* from *g^x mod p* (the discrete logarithm problem) has no known efficient classical algorithm for well-chosen groups. This one-way asymmetry powers Diffie–Hellman key exchange and digital signatures. Shor's algorithm (1994) solves both factoring and discrete logarithm in polynomial time on a large quantum computer, which is why [post-quantum cryptography](../../11-security-and-cryptography/02-cryptography/public-key-cryptography.md) exists.
 
-7. **The Chinese Remainder Theorem splits one modulus into several.** If *n = n₁n₂* with gcd(n₁, n₂) = 1, then a residue mod *n* corresponds exactly to a pair of residues mod *n₁* and mod *n₂*. Computations can be done in the smaller moduli in parallel and recombined. RSA implementations use it to speed decryption roughly fourfold, and residue number systems use it for carry-free arithmetic.
+7. **The Chinese Remainder Theorem splits one modulus into several.** If *n = n₁n₂* with gcd(n₁, n₂) = 1, then a residue mod *n* corresponds exactly to a pair of residues mod *n₁* and mod *n₂*. Computations can be done in the smaller moduli in parallel and recombined. RSA implementations use it to speed decryption roughly fourfold.
 
-8. **Remainders spread values, if the modulus is chosen well.** Hashing by *k mod m* distributes keys evenly only if *m* shares no structure with the keys: a power-of-two *m* uses only the low bits, so keys that differ only in high bits all collide. Linear congruential generators *x' = (ax + c) mod m* are fast but have strong lattice structure, which makes them fine for simulations and unacceptable for cryptography.
+8. **Remainders spread values, if the modulus is chosen well.** Hashing by *k mod m* distributes keys evenly only if *m* shares no structure with the keys: a power-of-two *m* uses only the low bits, so keys that differ only in high bits all collide. Linear congruential generators *x' = (ax + c) mod m* are fast but predictable, so they are unacceptable for cryptography.
 
 ## Key concepts
 
