@@ -123,3 +123,21 @@ Engineering foundations (00) are beyond CS2023, which assumes them. They are her
 
 - **00 and 01 are twin roots, not a strict order.** The engineering writers needed calculus, linear algebra and probability to state Ohm's and Kirchhoff's laws, RC timing, band theory and reliability. Mathematics does not need engineering, but engineering is *written in* mathematics. The checker allows 00 → 01 "builds on" links as the only upward exception. Engineering stays at 00 because the stack is ordered by *what the machine is made of*, and 01 is the notation used to describe it.
 - **"Builds on" must point down; everything else goes in the body.** A mechanical check (`UPWARD`) found that writers sometimes listed a higher layer as a prerequisite when they meant "related to" (for example scheduling → networking's queueing theory, which really belongs to probability in 01). Real forward dependencies, such as Byzantine fault tolerance (10) using digital signatures (11), are mentioned in the text with a link, not listed as prerequisites.
+- **Gaps found by writers became new leaves.** Writers reported thirteen load-bearing topics with no home. All were added in pass 2: Fourier analysis, Markov chains, Kolmogorov complexity, memory cells, union–find, inter-process communication, data-centre networks and Software-Defined Networking (SDN), recurrent networks, retrieval and embeddings, information visualisation, privacy-enhancing technologies, software supply-chain security, and environmental impact.
+
+## 9. What was done
+
+| Pass | Work | Result |
+|---|---|---|
+| 1. Draft | 11 writer agents, one or two layers each, to `WRITER_BRIEF.md` | 340 files: 262 leaves, 78 parent READMEs |
+| 2. Review | 10 reviewer agents to `REVIEW_BRIEF.md`: fact-check every number, date and citation; fix upward links; write the 13 new leaves; strengthen sibling connections | About 80 factual corrections (listed in each reviewer's report and summarised in `REVIEW_NOTES.md`); 13 new leaves |
+| 3. Index | `CROSS-CUTTING.md`: 18 principles traced bottom-up through 173 links | Every anchor resolves |
+| 4. Coherence | Audit of the 16 layer READMEs as one bottom-up story | Neighbouring layers agree on what each gives and takes |
+
+`python3 _meta/check.py` reports 0 problems: every taxonomy path exists, every link and anchor resolves, every leaf has the required sections, and no "Builds on" link points upward.
+
+## 10. Known limits and next iterations
+
+- Fast-moving figures (AI compute and energy, hardware specifications, data-centre electricity) are dated in the text and will need refreshing.
+- Leaves are capped at about 1,100 words, so each one is an essence, not a textbook chapter. The "Go deeper" sources are the next step.
+- Candidate leaves not yet added: simultaneous multithreading and the roofline model (now tenets inside existing leaves), trusted execution environments, hash indexes and analytical warehouses, audio and speech, Augmented and Virtual Reality (AR/VR), Gödel's incompleteness theorems (currently derived inside the halting-problem leaf).

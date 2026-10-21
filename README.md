@@ -1,5 +1,7 @@
 # Agentic Decks
 
+> Also in this repository: **[Computer Science from First Principles](cs-first-principles/README.md)**, a layered knowledge base of Computer Science from engineering foundations up to AI and society (16 layers, 275 leaf topics, plus a cross-cutting principles index).
+
 Anki decks for a cloud / Kubernetes platform and enterprise architect, consolidated from 44 source decks into 32, plus new decks written from scratch (The Pragmatic Programmer, the general-education series, Identity & Zero Trust, SRE & Observability, Software Engineering Classics, Chemistry, From Source to Silicon, Clean Code & Design Patterns).
 
 - **Import:** `decks/*.apkg`
