@@ -10,9 +10,9 @@ A hardware cache is a fixed-size table of recently used memory lines, searched b
 
 ## Core tenets
 
-1. **An address splits into tag, index and offset.** With 64-byte lines, the low 6 bits are the offset within a line. The next bits select a set (the index): a 32 KiB, 8-way cache with 64-byte lines has 32768 / (64 × 8) = 64 sets, so 6 index bits. The remaining high bits are the tag, stored with the line and compared on every access to confirm a hit. Because sizes are powers of two, this split is just wiring, with no arithmetic.
+1. **An address splits into tag, index and offset.** With 64-byte lines, the low 6 bits are the offset within a line. The next bits select a set (the index): a 32 KiB, 8-way cache with 64-byte lines has 32768 / (64 × 8) = 64 sets, so 6 index bits. The remaining high bits are the tag, stored with the line and compared on every access to confirm a hit. With power-of-two sizes, the split is just wiring.
 
-2. **Associativity trades conflict misses against hit time and energy.** A direct-mapped cache allows each line in exactly one place: fast and simple, but two hot addresses that share an index evict each other repeatedly. An n-way set-associative cache allows n places per set and compares n tags in parallel; fully associative allows anywhere. Typical 2020s choices are 8–12 ways for L1, 8–16 for L2 and 12–20 for L3. Beyond about 8 ways the miss-rate gain is small.
+2. **Associativity trades conflict misses against hit time and energy.** A direct-mapped cache allows each line in exactly one place: fast and simple, but two hot addresses that share an index evict each other repeatedly. An n-way set-associative cache allows n places per set and compares n tags in parallel; fully associative allows anywhere. Typical 2020s choices are 8–12 ways for L1, 8–16 for L2 and 12–20 for L3.
 
 3. **Misses come in three kinds (the 3 Cs).** Compulsory misses are first touches; larger lines and prefetching reduce them. Capacity misses happen because the working set is larger than the cache; only a bigger cache or better locality helps. Conflict misses happen because too many hot lines map to one set; higher associativity helps. A fourth C, coherence misses, appears in multiprocessors when another core invalidates a line.
 

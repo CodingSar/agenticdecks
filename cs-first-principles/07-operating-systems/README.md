@@ -17,7 +17,7 @@ All three jobs rest on a single mechanism: the **protection boundary**. The kern
 
 ## Why this layer sits here
 
-The OS needs three things from [04 Computer Architecture](../04-computer-architecture/README.md): privilege modes in the [ISA contract](../04-computer-architecture/01-instruction-set-architecture/the-isa-contract.md), a Memory Management Unit (MMU) that translates every address through tables the kernel controls ([virtual memory hardware](../04-computer-architecture/03-memory-hierarchy/virtual-memory-hardware.md)), and [interrupts](../04-computer-architecture/05-io-and-interconnect/buses-and-interrupts.md) that let a timer or device take the CPU away from running code. Without a timer interrupt the OS could never take back a CPU from a program that loops forever; without an MMU it could not stop one program from writing another's memory.
+The OS needs three things from [04 Computer Architecture](../04-computer-architecture/README.md): privilege modes in the [Instruction Set Architecture (ISA) contract](../04-computer-architecture/01-instruction-set-architecture/the-isa-contract.md), a Memory Management Unit (MMU) that translates every address through tables the kernel controls ([virtual memory hardware](../04-computer-architecture/03-memory-hierarchy/virtual-memory-hardware.md)), and [interrupts](../04-computer-architecture/05-io-and-interconnect/buses-and-interrupts.md) that let a timer or device take the CPU away from running code. Without a timer interrupt the OS could never take back a CPU from a program that loops forever; without an MMU it could not stop one program from writing another's memory.
 
 It needs [06 Programming Languages](../06-programming-languages/README.md) because kernels are programs: written mostly in C (Linux, Windows NT) or verified C (seL4), compiled, and linked ([linking and loading](../06-programming-languages/04-runtime-systems/linking-and-loading.md)). Language runtimes and the OS co-depend: a garbage collector asks the OS for pages, and the OS loads the runtime.
 
@@ -34,7 +34,7 @@ What the layers above need is **the process abstraction behind a system-call int
 | [03 Concurrency](03-concurrency/README.md) | Making shared-memory interleavings correct | 02 (threads) |
 | [04 Memory management](04-memory-management/README.md) | Virtualizing memory: address spaces, paging, allocation | 01, 02 |
 | [05 Storage and file systems](05-storage-and-file-systems/README.md) | Persistence: files, directories, crash consistency | 03, 04 (page cache), 06 |
-| [06 I/O and devices](06-io-and-devices/README.md) | Drivers, interrupts and how programs wait for I/O | 01, 03 |
+| [06 Input/output (I/O) and devices](06-io-and-devices/README.md) | Drivers, interrupts and how programs wait for I/O | 01, 03 |
 | [07 Virtualization](07-virtualization/README.md) | Applying the OS's own tricks to whole machines and OS instances | all of the above |
 
 ```

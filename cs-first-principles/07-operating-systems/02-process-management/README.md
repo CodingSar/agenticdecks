@@ -32,7 +32,7 @@ Read processes first: they are the container. Threads split "who owns resources"
 - **[Concurrency](../03-concurrency/README.md):** threads sharing memory create races; preemption at arbitrary instructions is why synchronization is needed even on one core.
 - **[Memory management](../04-memory-management/README.md):** each process's address space is a page table; `fork` is cheap because of copy-on-write pages.
 - **[Storage and file systems](../05-storage-and-file-systems/README.md):** a process's open-file table holds descriptors that name files, pipes and sockets.
-- **[I/O and devices](../06-io-and-devices/README.md):** threads block on I/O and become runnable when the device interrupts; the scheduler is the bridge.
+- **[Input/output (I/O) and devices](../06-io-and-devices/README.md):** threads block on I/O and become runnable when the device interrupts; the scheduler is the bridge.
 - **[Virtualization](../07-virtualization/README.md):** a virtual CPU is scheduled like a thread by the hypervisor; containers are groups of processes with restricted views.
 
 ## Connections across layers

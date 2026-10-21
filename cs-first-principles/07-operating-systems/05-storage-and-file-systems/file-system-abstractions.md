@@ -24,7 +24,7 @@ A file system gives programs two abstractions over raw storage. A **file** is a 
 
 7. **The namespace can unify many file systems and non-files.** Mounting grafts one file system's tree onto a directory of another, so one path space covers disks, network shares (Network File System (NFS), Server Message Block (SMB)) and virtual file systems like `/proc` and `/sys` that expose kernel state as files. Plan 9 took "everything is a file" furthest. Per-process mount namespaces, the basis of containers, let different processes see different trees.
 
-8. **Memory-mapped files make the file and memory abstractions meet.** `mmap` maps a file's pages into an address space, so loads and stores read and write the file through the page cache with no system calls per access. It suits random access to large files and is how executables and shared libraries are loaded. Durability still needs `msync`, and I/O errors surface as signals rather than return codes.
+8. **Memory-mapped files make the file and memory abstractions meet.** `mmap` maps a file's pages into an address space, so loads and stores read and write the file through the page cache with no system calls per access. It suits random access to large files and is how executables and shared libraries are loaded. Durability still needs `msync`, and input/output (I/O) errors surface as signals rather than return codes.
 
 ## Key concepts
 

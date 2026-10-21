@@ -6,7 +6,7 @@
 
 ## Essence
 
-Single Instruction, Multiple Data (SIMD) execution applies one instruction to many data elements at once: one fetch, one decode and one scheduling decision drive 4, 8, 16 or more arithmetic lanes. CPUs add SIMD as wide vector registers (x86 SSE, AVX, AVX-512; ARM NEON and SVE; RISC-V V). Graphics Processing Units (GPUs) take the idea to the extreme: thousands of simple lanes organised as groups of 32 or 64 threads executing in lockstep, with so many threads resident that whenever one group waits for memory, another is ready to run. The CPU optimises latency for a few threads; the GPU optimises throughput for many. That design choice, more than anything else, made GPUs the engine of graphics, scientific computing and deep learning.
+Single Instruction, Multiple Data (SIMD) execution applies one instruction to many data elements at once: one fetch, decode and scheduling decision drives 4, 8, 16 or more arithmetic lanes. CPUs add SIMD as wide vector registers (x86 SSE, AVX, AVX-512; ARM NEON and SVE; RISC-V V). Graphics Processing Units (GPUs) take the idea to the extreme: thousands of simple lanes organised as groups of 32 or 64 threads executing in lockstep, with so many threads resident that whenever one group waits for memory, another is ready to run. The CPU optimises latency for a few threads; the GPU optimises throughput for many. That choice made GPUs the engine of graphics, scientific computing and deep learning.
 
 ## Core tenets
 

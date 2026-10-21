@@ -26,7 +26,7 @@ Hoare logic (Hoare, 1969, building on Floyd, 1967) is a formal system for provin
 5. **Weakest preconditions make proofs computable.** Dijkstra (1975) defined `wp(C, Q)`, the weakest precondition guaranteeing that `C` terminates in a state satisfying `Q`. For loop-free code `wp` is computed mechanically by working backwards. Given annotated loop invariants, a verifier computes verification conditions and hands them to a Satisfiability Modulo Theories (SMT) solver such as Z3. Tools such as Dafny, Why3, Frama-C and SPARK work this way.
 6. **Aliasing breaks the simple rules; separation logic restores modularity.** The assignment axiom assumes that changing `x` changes nothing else. With pointers, a write through `p` may change what `*q` means. Separation logic (Reynolds, O'Hearn and others, around 2000–2002) adds a separating conjunction `P * Q` meaning "P and Q hold for disjoint parts of the heap", and a frame rule that lets a proof about one part of the heap ignore the rest. Facebook's Infer analyser and many verified systems are built on it.
 7. **Concurrency needs reasoning about interference.** When threads share state, an assertion one thread relies on may be invalidated by another. Owicki–Gries (1976) checks that each thread's assertions are stable under the other threads' actions; rely–guarantee and concurrent separation logic make this modular. This is how lock-free algorithms and kernels are proved.
-8. **Design by contract is Hoare logic used at run time.** Eiffel, and assertion libraries in many languages, state preconditions, postconditions and class invariants in code and check them during execution. This gives no proof, but it makes specifications executable, documents intent and catches violations near their cause.
+8. **Design by contract is Hoare logic used at run time.** Eiffel, and assertion libraries in many languages, state preconditions, postconditions and class invariants in code and check them during execution. This proves nothing, but catches violations near their cause.
 
 ## Key concepts
 
@@ -58,5 +58,4 @@ Hoare logic (Hoare, 1969, building on Floyd, 1967) is a formal system for provin
 
 - C. A. R. Hoare, "An Axiomatic Basis for Computer Programming" (1969): the original eight-page paper.
 - Edsger W. Dijkstra, *A Discipline of Programming* (1976): weakest preconditions and deriving programs from specifications.
-- David Gries, *The Science of Programming* (1981): the classic practical guide to invariants and proof.
 - John C. Reynolds, "Separation Logic: A Logic for Shared Mutable Data Structures" (2002): the extension that made heap reasoning modular.

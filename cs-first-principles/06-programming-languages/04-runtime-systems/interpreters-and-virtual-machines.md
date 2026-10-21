@@ -10,7 +10,7 @@ An interpreter executes a program directly, reading its representation and perfo
 
 ## Core tenets
 
-1. **An interpreter is an executable semantics.** A tree-walking interpreter is a recursive function `eval(node, env)` with one case per syntax construct, mirroring the language's operational semantics almost line for line. This makes interpreters the fastest way to implement a language correctly, and the usual reference against which compilers are tested.
+1. **An interpreter is an executable semantics.** A tree-walking interpreter is a recursive function `eval(node, env)` with one case per syntax construct, mirroring the language's operational semantics almost line for line. This makes an interpreter the quickest correct implementation of a language.
 
    ```python
    def eval(e, env):
@@ -67,4 +67,3 @@ An interpreter executes a program directly, reading its representation and perfo
 - Robert Nystrom, *Crafting Interpreters* (2021): builds a tree-walker and a bytecode VM from scratch.
 - Tim Lindholm, Frank Yellin, Gilad Bracha and Alex Buckley, *The Java Virtual Machine Specification*: the canonical example of a defined VM.
 - Yunhe Shi, Kevin Casey, M. Anton Ertl and David Gregg, "Virtual Machine Showdown: Stack Versus Registers" (2005/2008): the measured trade-off.
-- Yoshihiko Futamura, "Partial Evaluation of Computation Process: An Approach to a Compiler-Compiler" (1971): interpreters as compilers in disguise.

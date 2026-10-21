@@ -47,8 +47,8 @@ Most file system operations change several blocks: appending to a file updates a
 
 ## How it fits
 
-- **Below:** relies on device guarantees about sector atomicity and flush ordering ([DRAM and storage devices](../../04-computer-architecture/03-memory-hierarchy/dram-and-storage-devices.md)) and on stating [invariants](../../05-algorithms-and-data-structures/01-foundations/correctness-and-invariants.md) that must survive any crash point.
-- **Above:** databases use the same write-ahead principle for transactions ([recovery and logging](../../09-data-management/04-transactions/recovery-and-logging.md), [ACID](../../09-data-management/04-transactions/acid.md)); log-structured storage became [LSM-trees](../../09-data-management/02-storage-and-indexing/lsm-trees.md); replicated logs are the heart of [replication](../../10-distributed-and-parallel-computing/03-consensus-and-replication/replication.md).
+- **Below:** relies on device guarantees about sector atomicity and flush ordering ([Dynamic Random-Access Memory (DRAM) and storage devices](../../04-computer-architecture/03-memory-hierarchy/dram-and-storage-devices.md)) and on stating [invariants](../../05-algorithms-and-data-structures/01-foundations/correctness-and-invariants.md) that must survive any crash point.
+- **Above:** databases use the same write-ahead principle for transactions ([recovery and logging](../../09-data-management/04-transactions/recovery-and-logging.md), [atomicity, consistency, isolation and durability (ACID)](../../09-data-management/04-transactions/acid.md)); log-structured storage became [LSM-trees](../../09-data-management/02-storage-and-indexing/lsm-trees.md); replicated logs are the heart of [replication](../../10-distributed-and-parallel-computing/03-consensus-and-replication/replication.md).
 - **Siblings:** protects the structures described in [file system implementation](file-system-implementation.md) and gives meaning to the durability promises in [file system abstractions](file-system-abstractions.md).
 
 ## Common misconceptions

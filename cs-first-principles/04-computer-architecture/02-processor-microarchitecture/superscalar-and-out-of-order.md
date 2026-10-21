@@ -14,7 +14,7 @@ A superscalar core fetches, decodes and executes several instructions per cycle.
 
 2. **Register renaming removes false dependences.** With only 16 or 32 architectural registers, compilers reuse names, creating write-after-read and write-after-write conflicts that are not real data flow. The core maps each architectural destination to a fresh physical register (several hundred physical registers in 2020s cores) using a Register Alias Table. After renaming, only true read-after-write dependences remain, and the hardware can run independent instructions in any order.
 
-3. **Instructions wait in a scheduler until their operands are ready.** After renaming, instructions enter issue queues (reservation stations, after Tomasulo's 1967 algorithm). When a producer finishes, it broadcasts its physical register tag; waiting instructions whose inputs are now all ready become eligible and are issued to free functional units, oldest first. This "wakeup and select" loop must run every cycle and is one of the timing-critical circuits in the core.
+3. **Instructions wait in a scheduler until their operands are ready.** After renaming, instructions enter issue queues (reservation stations, after Tomasulo's 1967 algorithm). When a producer finishes, it broadcasts its physical register tag; waiting instructions whose inputs are now all ready become eligible and are issued to free functional units, oldest first. This "wakeup and select" loop runs every cycle and is timing-critical.
 
 4. **The reorder buffer restores the sequential illusion.** Every instruction gets an entry in a circular Reorder Buffer (ROB) in program order. Instructions may complete in any order, but they *retire* (commit) only from the head, in order, and only when all older instructions have retired. Exceptions and mispredictions are handled at retirement: everything younger is discarded. This gives precise exceptions and makes all speculation invisible to software.
 
@@ -24,7 +24,7 @@ A superscalar core fetches, decodes and executes several instructions per cycle.
 
 7. **Width is limited by dependences and by physics.** Doubling issue width does not double performance: typical integer code sustains two to four Instructions Per Cycle (IPC) even on six-to-eight-wide cores. The structures that make out-of-order work (rename tables, wakeup logic, register-file ports, bypass networks) grow faster than linearly with width and consume much of the core's power. This diminishing return, combined with the power wall around 2005, is why the industry turned from wider cores to more cores.
 
-8. **Simultaneous multithreading reuses the machinery.** Because one thread rarely fills all functional units, Simultaneous Multithreading (SMT; Intel Hyper-Threading, 2002) lets two hardware threads share one out-of-order core, each with its own architectural registers and rename map. It typically adds tens of percent of throughput for a few percent of area, but the threads share caches and predictors, which also creates side channels.
+8. **Simultaneous multithreading reuses the machinery.** Because one thread rarely fills all functional units, Simultaneous Multithreading (SMT; Intel Hyper-Threading, 2002) lets two hardware threads share one out-of-order core, each with its own architectural registers and rename map. It adds tens of percent of throughput for a few percent of area, but shared caches and predictors create side channels.
 
 ```
  fetch/decode (in order) -> rename -> issue queues -> execute (out of order) -> ROB -> commit (in order)
@@ -62,5 +62,4 @@ A superscalar core fetches, decodes and executes several instructions per cycle.
 
 - Tomasulo, *An Efficient Algorithm for Exploiting Multiple Arithmetic Units* (IBM Journal, 1967): the original dynamic scheduling algorithm.
 - Smith and Sohi, *The Microarchitecture of Superscalar Processors* (Proceedings of the IEEE, 1995): a clear survey of the whole mechanism.
-- Shen and Lipasti, *Modern Processor Design: Fundamentals of Superscalar Processors* (2005): textbook treatment in depth.
 - Hennessy and Patterson, *Computer Architecture: A Quantitative Approach* (6th ed., 2017), Chapter 3: ILP and its limits with measurements.

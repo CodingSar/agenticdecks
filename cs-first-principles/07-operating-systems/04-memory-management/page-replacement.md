@@ -16,7 +16,7 @@ When physical memory is full and a process touches a page that is not resident, 
 
 3. **The clock algorithm approximates LRU with one bit per page.** Frames are arranged in a circle with a hand. On eviction, the hand advances: if the frame's accessed bit is set, clear it and move on (a "second chance"); if clear, evict it. Pages that are used keep getting their bit set and survive. Preferring clean pages (dirty bit clear) to dirty ones avoids a disk write before reuse.
 
-4. **FIFO can get worse with more memory; stack algorithms cannot.** First In, First Out (FIFO) eviction exhibits Bélády's anomaly: on some reference strings, adding frames increases faults. LRU and MIN are *stack algorithms* (the set of pages resident with k frames is always a subset of those with k+1), so more memory never hurts them. This inclusion property is why LRU-like policies are preferred.
+4. **First-in-first-out eviction can get worse with more memory; stack algorithms cannot.** First In, First Out (FIFO) eviction exhibits Bélády's anomaly: on some reference strings, adding frames increases faults. LRU and MIN are *stack algorithms* (the set of pages resident with k frames is always a subset of those with k+1), so more memory never hurts them. This inclusion property is why LRU-like policies are preferred.
 
 5. **Plain LRU is fooled by scans, so real systems use multiple lists.** A one-time sequential read of a large file would flush every hot page under LRU. Linux therefore keeps *active* and *inactive* lists (newly read pages enter inactive and are promoted only on a second access) and, since kernel 6.1, offers a Multi-Generational LRU. Database and research policies like LRU-K, 2Q and the Adaptive Replacement Cache (ARC, used in ZFS) balance recency against frequency for the same reason.
 
@@ -30,7 +30,7 @@ When physical memory is full and a process touches a page that is not resident, 
 
 | Term | Meaning |
 |---|---|
-| Page fault (major / minor) | A miss needing disk I/O / one satisfiable from memory (e.g. a page already in the page cache) |
+| Page fault (major / minor) | A miss needing disk input/output (I/O) / one satisfiable from memory (e.g. a page already in the page cache) |
 | Victim | The page chosen for eviction |
 | MIN (Bélády's optimal) | Evict the page used furthest in the future |
 | LRU | Least Recently Used: evict the page untouched for longest |

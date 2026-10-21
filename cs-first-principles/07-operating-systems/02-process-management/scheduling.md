@@ -18,7 +18,7 @@ A scheduler decides which runnable thread runs on each Central Processing Unit (
 
 4. **The time slice sets the tradeoff between responsiveness and overhead.** Shorter slices make the system feel more responsive but spend a larger fraction of time switching and refilling caches. With switch costs of a few microseconds plus cache effects, slices of roughly 1–10 ms keep overhead small while staying below human perception thresholds (around 100 ms for interactive feedback).
 
-5. **I/O-bound threads should run first when they wake.** A thread that runs briefly then blocks on I/O keeps devices busy; running it promptly overlaps device work with CPU work and improves total throughput. Both MLFQ (favouring jobs that block early) and fair schedulers (a sleeping task's virtual runtime falls behind, so it runs soon after waking) give this behaviour without special cases.
+5. **Threads that mostly wait for input/output (I/O) should run first when they wake.** A thread that runs briefly then blocks on I/O keeps devices busy; running it promptly overlaps device work with CPU work and improves total throughput. Both MLFQ (favouring jobs that block early) and fair schedulers (a sleeping task's virtual runtime falls behind, so it runs soon after waking) give this behaviour without special cases.
 
 6. **Multicore scheduling is a tension between balance and affinity.** A single global run queue balances load perfectly but becomes a lock contention point and moves threads between cores, losing their cache contents. Per-core run queues (Linux, Windows) keep threads near their caches and scale, but need periodic load balancing and work stealing to keep cores busy. Non-Uniform Memory Access (NUMA) machines add a further reason to keep threads near their memory.
 

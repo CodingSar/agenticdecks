@@ -10,7 +10,7 @@ Model checking (Clarke and Emerson, 1981; Queille and Sifakis, 1982) verifies a 
 
 ## Core tenets
 
-1. **Finite state spaces make verification decidable.** General program verification is undecidable, but whether a finite graph has a path to a bad state is just [graph search](../../05-algorithms-and-data-structures/05-graph-algorithms/graph-traversal.md). Model checking buys full automation by restricting to finite models, or finite abstractions of infinite systems. The price is that the model, not the code, is what gets verified, unless the model is extracted from the code.
+1. **Finite state spaces make verification decidable.** General program verification is undecidable, but whether a finite graph has a path to a bad state is just [graph search](../../05-algorithms-and-data-structures/05-graph-algorithms/graph-traversal.md). Model checking buys full automation by restricting to finite models, or finite abstractions of infinite systems. The price is that the model, not the code, is usually what gets verified.
 2. **Temporal logic states properties over executions, not single states.** Linear Temporal Logic (LTL) (Pnueli, 1977) talks about each execution path: `G ¬(crit1 ∧ crit2)` ("globally, never both critical"), `G (req → F ack)` ("every request is eventually acknowledged"). Computation Tree Logic (CTL) quantifies over branching futures: `AG EF reset` ("from every reachable state, a reset is always possible").
 3. **Safety and liveness are the two fundamental kinds of property.** A safety property says nothing bad ever happens; any violation has a finite counterexample (a trace to the bad state). A liveness property says something good eventually happens; a violation is an infinite trace in which it never does, shown as a lasso (a path into a cycle). Every property is the intersection of a safety and a liveness property (Alpern and Schneider, 1985).
 4. **Concurrency causes state explosion.** A system of n components, each with k local states, can have up to kⁿ global states, and interleavings multiply paths further. Ten processes with ten states each give ten billion combinations. This exponential growth is the central problem of the field, and every major technique is a way to fight it.
@@ -54,6 +54,5 @@ Model checking (Clarke and Emerson, 1981; Queille and Sifakis, 1982) verifies a 
 ## Go deeper
 
 - Edmund M. Clarke, Orna Grumberg and Doron A. Peled, *Model Checking* (1999): the standard textbook.
-- Christel Baier and Joost-Pieter Katoen, *Principles of Model Checking* (2008): rigorous and comprehensive.
 - Leslie Lamport, *Specifying Systems* (2002): TLA+ for engineers designing concurrent and distributed systems.
 - Chris Newcombe et al., "How Amazon Web Services Uses Formal Methods" (2015): industrial experience.

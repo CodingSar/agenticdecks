@@ -5,7 +5,7 @@
 
 ## What this area is about
 
-The Operating System (OS) virtualizes the Central Processing Unit (CPU) and memory for processes. This area applies the same trick one level further, to isolate whole software environments from each other on shared hardware. Two designs dominate. A **virtual machine** (VM) virtualizes the *hardware interface*: a hypervisor gives each guest the illusion of a complete computer, so each can run its own kernel (Linux next to Windows). A **container** virtualizes the *OS interface*: one kernel gives each group of processes its own view of process IDs, file systems, network interfaces and resource limits, so each looks like a separate machine while sharing the kernel.
+The Operating System (OS) virtualizes the Central Processing Unit (CPU) and memory for processes. This area applies the same trick one level further, to isolate whole software environments from each other on shared hardware. Two designs dominate. A **virtual machine** (VM) virtualizes the *hardware interface*: a hypervisor gives each guest the illusion of a complete computer, so each can run its own kernel (Linux next to Windows). A **container** virtualizes the *OS interface*: one kernel gives each group of processes its own view of process identifiers (IDs), file systems, network interfaces and resource limits, so each looks like a separate machine while sharing the kernel.
 
 The unifying idea is the one that runs through this whole layer: **interpose on every access to a resource, and you can multiplex it, isolate it and move it.** VMs interpose at the hardware boundary (privileged instructions, page tables, devices); containers interpose at the system-call boundary (namespaces and control groups inside the kernel).
 
@@ -13,7 +13,7 @@ The unifying idea is the one that runs through this whole layer: **interpose on 
 
 | Child | Its role in the whole | Depends on |
 |---|---|---|
-| [Virtual machines and hypervisors](virtual-machines-and-hypervisors.md) | Running multiple OS kernels on one machine: trap-and-emulate, hardware assists, nested paging, paravirtual I/O | [Kernel mode and system calls](../01-kernel-and-abstractions/kernel-mode-and-system-calls.md), [address spaces and paging](../04-memory-management/address-spaces-and-paging.md) |
+| [Virtual machines and hypervisors](virtual-machines-and-hypervisors.md) | Running multiple OS kernels on one machine: trap-and-emulate, hardware assists, nested paging, paravirtual input/output (I/O) | [Kernel mode and system calls](../01-kernel-and-abstractions/kernel-mode-and-system-calls.md), [address spaces and paging](../04-memory-management/address-spaces-and-paging.md) |
 | [Containers](containers.md) | Isolating process groups under one kernel: namespaces, cgroups, layered images | [Processes](../02-process-management/processes.md), [file system abstractions](../05-storage-and-file-systems/file-system-abstractions.md) |
 
 ```
@@ -41,7 +41,7 @@ Read VMs first: they show the classical theory (Popek and Goldberg) and the hard
 
 ## Connections across layers
 
-Hardware support comes from [04 Computer Architecture](../../04-computer-architecture/README.md) ([the ISA contract](../../04-computer-architecture/01-instruction-set-architecture/the-isa-contract.md), [virtual memory hardware](../../04-computer-architecture/03-memory-hierarchy/virtual-memory-hardware.md)). Language VMs in [06](../../06-programming-languages/04-runtime-systems/interpreters-and-virtual-machines.md) are a different kind of virtual machine (a virtual instruction set rather than a virtual copy of real hardware). Upward, virtualization is the foundation of [cloud computing](../../10-distributed-and-parallel-computing/05-large-scale-systems/cloud-computing.md) and of [isolation and sandboxing](../../11-security-and-cryptography/03-system-security/isolation-and-sandboxing.md), and containers underpin [build and continuous delivery](../../12-software-engineering/04-operations/build-and-continuous-delivery.md).
+Hardware support comes from [04 Computer Architecture](../../04-computer-architecture/README.md) ([the Instruction Set Architecture (ISA) contract](../../04-computer-architecture/01-instruction-set-architecture/the-isa-contract.md), [virtual memory hardware](../../04-computer-architecture/03-memory-hierarchy/virtual-memory-hardware.md)). Language VMs in [06](../../06-programming-languages/04-runtime-systems/interpreters-and-virtual-machines.md) are a different kind of virtual machine (a virtual instruction set rather than a virtual copy of real hardware). Upward, virtualization is the foundation of [cloud computing](../../10-distributed-and-parallel-computing/05-large-scale-systems/cloud-computing.md) and of [isolation and sandboxing](../../11-security-and-cryptography/03-system-security/isolation-and-sandboxing.md), and containers underpin [build and continuous delivery](../../12-software-engineering/04-operations/build-and-continuous-delivery.md).
 
 ## Cross-cutting threads
 

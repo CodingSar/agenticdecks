@@ -48,13 +48,13 @@ Read paradigms first to see what languages are trying to express. Semantics and 
 ## Connections to neighbouring layers
 
 - **[02 Theory of Computation](../02-theory-of-computation/README.md).** Lexers are finite automata; parsers are pushdown automata. Every general-purpose language is Turing complete, so undecidability limits every analysis a compiler or verifier can perform.
-- **[03 Digital Logic](../03-digital-logic/README.md).** Integer types inherit [two's complement](../03-digital-logic/01-number-representation/integers-and-twos-complement.md) overflow and floating-point types inherit [IEEE 754 rounding](../03-digital-logic/01-number-representation/floating-point.md). Hardware description languages apply language ideas to circuits.
+- **[03 Digital Logic](../03-digital-logic/README.md).** Integer types inherit [two's complement](../03-digital-logic/01-number-representation/integers-and-twos-complement.md) overflow and floating-point types inherit [Institute of Electrical and Electronics Engineers (IEEE) 754 rounding](../03-digital-logic/01-number-representation/floating-point.md). Hardware description languages apply language ideas to circuits.
 - **[04 Computer Architecture](../04-computer-architecture/README.md).** Compilers are the bridge back down to 04: register allocation, instruction selection and scheduling exist because of how processors are built, and much of a modern processor's design assumes compiled code.
 - **[05 Algorithms and Data Structures](../05-algorithms-and-data-structures/README.md).** Algorithms are expressed in languages, and language implementations are heavy users of algorithms: graph colouring for registers, dataflow fixed points, tracing for garbage collection.
-- **[07 Operating Systems](../07-operating-systems/README.md).** Kernels are programs written in languages and built by compilers and linkers. Runtimes rely on the OS for virtual memory, threads and loading; the OS relies on the language's ability to express low-level, unsafe operations.
+- **[07 Operating Systems](../07-operating-systems/README.md).** Kernels are programs written in languages and built by compilers and linkers. Runtimes rely on the Operating System (OS) for virtual memory, threads and loading; the OS relies on the language's ability to express low-level, unsafe operations.
 - **[11 Security and Cryptography](../11-security-and-cryptography/README.md).** [Memory-safety vulnerabilities](../11-security-and-cryptography/03-system-security/memory-safety-vulnerabilities.md) are a property of language design: undefined behaviour in C and C++ is the root of most exploitable bugs, and safe languages remove whole classes of them.
 - **[12 Software Engineering](../12-software-engineering/README.md).** Modules, interfaces, types and static analysis are the tools that let large teams build large systems.
-- **[13 Artificial Intelligence](../13-artificial-intelligence/README.md).** Logic programming grew out of AI, and machine-learning frameworks rely on compiler techniques such as automatic differentiation and tensor compilers.
+- **[13 Artificial Intelligence](../13-artificial-intelligence/README.md).** Logic programming grew out of artificial intelligence research, and machine-learning frameworks rely on compiler techniques such as automatic differentiation and tensor compilers.
 
 ## Connections across layers
 

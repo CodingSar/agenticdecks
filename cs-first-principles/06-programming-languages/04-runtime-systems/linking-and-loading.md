@@ -10,11 +10,11 @@ Large programs are compiled one file at a time, so each object file refers to fu
 
 ## Core tenets
 
-1. **Separate compilation creates unresolved symbols on purpose.** Compiling `main.c`, which calls `printf`, produces an object file with an *undefined* reference to `printf` and a *defined* symbol `main`. Each object file has a symbol table (what it defines and needs) and sections (`.text` for code, `.data` for initialised data, `.bss` for zero-initialised data). This lets a million-line program rebuild only the files that changed.
+1. **Separate compilation creates unresolved symbols on purpose.** Compiling `main.c`, which calls `printf`, produces an object file with an *undefined* reference to `printf` and a *defined* symbol `main`. Each object file has a symbol table (what it defines and needs) and sections (`.text` for code, `.data` for initialised data, `.bss` for zero-initialised data). Only changed files need recompiling.
 2. **Symbol resolution enforces one definition per name.** The linker builds a global map from names to definitions. Two strong definitions of the same symbol are an error; an undefined symbol with no definition anywhere is an error ("undefined reference"). Static libraries (`.a` archives) are searched only for symbols still undefined, which is why the order of libraries on the command line can matter.
 3. **Relocation patches addresses once layout is known.** The compiler cannot know where `printf` or even its own function will end up, so it emits placeholder bytes plus relocation entries ("put the address of symbol S plus offset A here, as a 32-bit value relative to the program counter"). After assigning every section an address, the linker walks the relocations and writes the real values.
 4. **Position-independent code makes sharing possible.** A shared library loaded at different addresses in different processes must not contain absolute addresses in its code, or each process would need a patched private copy. Position-Independent Code (PIC) addresses its own data relative to the program counter and reaches external symbols through a Global Offset Table (GOT), a data table the loader fills in. The code pages stay identical and are shared by every process through [virtual memory](../../04-computer-architecture/03-memory-hierarchy/virtual-memory-hardware.md).
-5. **Dynamic linking binds library calls late, often lazily.** Calls to shared-library functions go through stubs in the Procedure Linkage Table (PLT). On ELF (Executable and Linkable Format) systems the first call can jump into the dynamic linker, which looks up the symbol, writes its address into the GOT, and transfers control; later calls go straight through. This adds one indirect jump per call in exchange for shared memory, smaller binaries and library updates without relinking.
+5. **Dynamic linking binds library calls late, often lazily.** Calls to shared-library functions go through stubs in the Procedure Linkage Table (PLT). On Executable and Linkable Format (ELF) systems the first call can jump into the dynamic linker, which looks up the symbol, writes its address into the GOT, and transfers control; later calls go straight through. This adds one indirect jump per call in exchange for shared memory, smaller binaries and library updates without relinking.
 
    ```
    call printf@plt  -->  PLT stub: jmp *GOT[printf]
@@ -24,7 +24,7 @@ Large programs are compiled one file at a time, so each object file refers to fu
 
 6. **The loader turns a file into a process.** The Operating System (OS) reads the executable's headers, creates an address space, maps code read-only and executable, maps data read-write, sets up the stack with arguments and environment, maps the dynamic linker if needed, and jumps to the entry point. Mapping is lazy: pages are read from disk only when first touched (demand paging), so starting a large program is fast.
 7. **Address Space Layout Randomisation (ASLR) depends on relocatability.** Because code is position-independent, the loader can place the executable, libraries, heap and stack at random addresses each run. Attackers who exploit a [memory-safety bug](../../11-security-and-cryptography/03-system-security/memory-safety-vulnerabilities.md) then cannot hard-code addresses. The cost is a small amount of indirection, which is why PIC and position-independent executables became the default.
-8. **Static versus dynamic linking is a real trade-off.** Static linking gives one self-contained file, no version conflicts and slightly faster calls, at the cost of larger binaries and having to rebuild to pick up a security fix. Dynamic linking shares memory and updates, at the cost of "dependency hell" when installed versions do not match. Containers and languages such as Go lean back towards static linking.
+8. **Static versus dynamic linking is a real trade-off.** Static linking gives one self-contained file, no version conflicts and slightly faster calls, at the cost of larger binaries and having to rebuild to pick up a security fix. Dynamic linking shares memory and updates, at the cost of "dependency hell" when installed versions do not match. Go and container images lean back towards static linking.
 
 ## Key concepts
 
@@ -51,10 +51,8 @@ Large programs are compiled one file at a time, so each object file refers to fu
 
 - **"The compiler produces the executable."** The compiler produces object files; the linker produces the executable, and for dynamic executables the dynamic linker finishes the job at every start.
 - **"Dynamic linking is just slower."** The per-call cost is an indirect jump; the benefit is shared physical memory across hundreds of processes and security patches without rebuilding.
-- **"Link errors are compiler errors."** "Undefined reference" means every file compiled fine but some name has no definition in anything given to the linker.
 
 ## Go deeper
 
 - John R. Levine, *Linkers and Loaders* (2000): the standard book on the subject.
 - Randal E. Bryant and David R. O'Hallaron, *Computer Systems: A Programmer's Perspective* (3rd ed., 2015), chapter 7: linking explained from the programmer's side, with ELF examples.
-- Ulrich Drepper, "How To Write Shared Libraries" (2011): the practical mechanics and costs of dynamic linking.

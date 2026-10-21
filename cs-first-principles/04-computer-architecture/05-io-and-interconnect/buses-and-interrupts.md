@@ -24,7 +24,7 @@ A bus or interconnect is the shared or point-to-point communication path that li
 
 7. **Shared parallel buses gave way to serial point-to-point links.** Early systems (the Unibus of 1970, ISA and PCI in PCs) used a shared set of parallel wires with arbitration. As clock rates rose, skew between parallel wires, reflections and capacitive loading of many attached devices limited speed. Peripheral Component Interconnect Express (PCIe, 2003) replaced shared buses with switched serial lanes using embedded clocking: PCIe 5.0 runs 32 GT/s per lane, about 4 GB/s per direction per lane, or about 64 GB/s for a 16-lane slot. The same shift happened on chip: cores now talk over rings and meshes, not a single bus.
 
-8. **Interconnects are packet networks with protocols.** PCIe has a physical layer, a data link layer with retries and Cyclic Redundancy Checks (CRCs), and a transaction layer with read, write and completion packets. Coherent links such as Compute Express Link (CXL) and AMD Infinity Fabric extend this to share memory between processors and accelerators. Inside a computer, the same design ideas as in networking reappear at nanosecond scale.
+8. **Interconnects are packet networks.** PCIe has physical, data link (with Cyclic Redundancy Checks (CRCs) and retries) and transaction layers. Coherent links such as Compute Express Link (CXL) extend this to shared memory between processors and accelerators: networking's ideas at nanosecond scale.
 
 ## Key concepts
 
@@ -55,5 +55,4 @@ A bus or interconnect is the shared or point-to-point communication path that li
 ## Go deeper
 
 - Patterson and Hennessy, *Computer Organization and Design* (RISC-V edition, 2017), Chapters 5–6 and appendices on I/O: interrupts, buses and their performance.
-- Budruk, Anderson and Shanley, *PCI Express System Architecture* (2003): the layered design of PCIe.
 - Arpaci-Dusseau and Arpaci-Dusseau, *Operating Systems: Three Easy Pieces* (2018), chapter on I/O devices: polling, interrupts and DMA from the OS side.

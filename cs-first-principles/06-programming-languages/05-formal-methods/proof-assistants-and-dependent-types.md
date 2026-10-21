@@ -20,10 +20,10 @@ A proof assistant (interactive theorem prover) is a program in which a human wri
    ```
 
 4. **Termination is required for logical consistency.** If any function could loop forever, a non-terminating term could inhabit every type, including `False`, and every proposition would be "provable". Proof assistants therefore only accept functions they can show terminate, typically by structural recursion or a supplied well-founded measure. This makes their programming languages deliberately not Turing complete in their core.
-5. **Type checking requires deciding equality of terms.** To check that a `Vec A (2 + 3)` is a `Vec A 5`, the checker must compute. Definitional equality (equality by evaluation) is checked automatically; propositional equality (equality that needs a proof) must be proved by the user. Where this line falls determines how pleasant a system is to use.
+5. **Type checking requires deciding equality of terms.** To check that a `Vec A (2 + 3)` is a `Vec A 5`, the checker must compute. Definitional equality (equality by evaluation) is checked automatically; propositional equality (equality that needs a proof) must be proved by the user.
 6. **Induction is the workhorse, and tactics automate the routine.** Most proofs about programs go by [structural induction](../../01-mathematical-foundations/03-discrete-mathematics/induction-and-recurrences.md) over data types or derivations. Tactics (`induction`, `simp`, `omega`, `auto`) handle bookkeeping, arithmetic and rewriting, and "hammers" call external automated provers and reconstruct their answers as kernel-checkable proofs.
 7. **Verified software is real, and it costs a lot of proof.** CompCert (Leroy, 2009) is a C compiler proved in Coq to preserve semantics; Csmith random testing found many wrong-code bugs in the GNU Compiler Collection and LLVM but none in CompCert's verified middle end (Yang et al., 2011). seL4 (Klein et al., 2009) is an operating-system microkernel with a machine-checked proof of functional correctness in Isabelle/HOL; its roughly 9,000 lines of C needed about 20 person-years of proof work. Proof-to-code ratios of 10:1 or more are typical.
-8. **Proof assistants now check mathematics as well as software.** The Four Colour Theorem (Gonthier, 2005) and the Kepler conjecture (Flyspeck project, completed 2014) were formally verified, and Lean's mathlib library holds a large, growing body of formalised mathematics. Machine-checked proofs remove the question of whether a long proof has a hidden error.
+8. **Proof assistants now check mathematics as well as software.** The Four Colour Theorem (Gonthier, 2005) and the Kepler conjecture (Flyspeck project, completed 2014) were formally verified, and Lean's mathlib library holds a large, growing body of formalised mathematics.
 
 ## Key concepts
 
@@ -55,6 +55,5 @@ A proof assistant (interactive theorem prover) is a program in which a human wri
 ## Go deeper
 
 - Benjamin C. Pierce et al., *Software Foundations* (online, ongoing since 2007): learning Coq by proving properties of programs.
-- Adam Chlipala, *Certified Programming with Dependent Types* (2013): practical dependently typed programming and proof automation.
 - Xavier Leroy, "Formal Verification of a Realistic Compiler" (2009): the CompCert project.
 - Gerwin Klein et al., "seL4: Formal Verification of an OS Kernel" (2009): full functional verification of a microkernel.

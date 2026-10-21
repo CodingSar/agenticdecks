@@ -14,7 +14,7 @@ The unifying idea is **interference**. An n-qubit register carries 2ⁿ amplitud
 | Child | Its role in the whole | Depends on |
 |---|---|---|
 | [Qubits and Quantum Circuits](qubits-and-quantum-circuits.md) | The machine model: states, unitary gates, entanglement, measurement, noise and error correction | Linear algebra, probability, quantum physics |
-| [Quantum Algorithms](quantum-algorithms.md) | What the model buys: bounded-error quantum polynomial time (BQP), the Quantum Fourier Transform, Shor, Grover, simulation, and the limits of speedup | Circuits, complexity classes, number theory |
+| [Quantum Algorithms](quantum-algorithms.md) | What the model buys: bounded-error quantum polynomial time (BQP), the Quantum Fourier Transform (QFT), Shor, Grover, simulation, and the limits of speedup | Circuits, complexity classes, number theory |
 
 Read the circuit model first. It establishes the three facts that algorithms must work around: amplitudes can cancel, measurement is destructive and returns little, and states cannot be copied.
 
@@ -30,7 +30,7 @@ Read the circuit model first. It establishes the three facts that algorithms mus
 - **[Information Theory](../01-information-theory/README.md):** Quantum information theory generalises Shannon entropy to von Neumann entropy. Holevo's bound (n qubits carry at most n retrievable bits) is the information-theoretic reason quantum parallelism cannot be read out directly.
 - **[Automata and Formal Languages](../02-automata-and-formal-languages/README.md):** Quantum finite automata exist, but bounded memory still bounds power; the interesting quantum effects need unbounded registers.
 - **[Computability](../03-computability/README.md):** Quantum computers compute exactly the Turing-computable functions. They are the main test case for the *physical* and *extended* forms of the Church–Turing thesis.
-- **[Complexity](../04-complexity/README.md):** BQP sits between BPP (bounded-error probabilistic polynomial time) and PSPACE (polynomial space). Its relationship to NP, believed to be incomparable, is the precise statement of "quantum computers are not magic".
+- **[Complexity](../04-complexity/README.md):** BQP sits between BPP (bounded-error probabilistic polynomial time) and PSPACE (polynomial space). Its relationship to NP (nondeterministic polynomial time), believed to be incomparable, is the precise statement of "quantum computers are not magic".
 
 ## Connections across layers
 

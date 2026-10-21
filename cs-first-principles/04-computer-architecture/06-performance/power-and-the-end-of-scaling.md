@@ -24,7 +24,6 @@ For about thirty years, each new chip generation gave more transistors, faster t
 
 7. **Parallelism converts transistors into performance at better energy.** Because power rises much faster than frequency once voltage must rise with it, two cores at a lower frequency and voltage can deliver more throughput than one core at higher frequency for the same power. This is why multicore arrived across the industry in 2005–2006 (AMD Athlon 64 X2, Intel Core Duo) and why GPUs and accelerators, which spend energy mostly on arithmetic, dominate throughput computing.
 
-8. **The constraint reaches up to data centres and down to phones.** A phone is limited by battery and by skin temperature (a few watts sustained); a large data centre by tens to hundreds of megawatts of electrical and cooling capacity. Turbo modes run briefly above sustainable power when thermal headroom exists. Large AI training clusters are now planned around power availability as much as chip supply.
 
 ```
  era              transistors    frequency         power density   source of speedup
@@ -45,7 +44,6 @@ For about thirty years, each new chip generation gave more transistors, faster t
 | Power wall | The limit on chip performance set by the heat that can be removed |
 | Dark silicon | Portion of a chip that cannot be powered at full speed at the same time as the rest |
 | DVFS | Dynamic Voltage and Frequency Scaling: lowering V and f when full speed is not needed |
-| Thermal Design Power (TDP) | Sustained power a cooling system is designed to remove |
 
 ## How it fits
 
@@ -57,7 +55,7 @@ For about thirty years, each new chip generation gave more transistors, faster t
 
 - **"Moore's law ended in 2005."** Dennard scaling ended; transistor counts kept growing for two more decades, though more slowly and at rising cost per new process.
 - **"Clock speed stopped rising because transistors stopped getting faster."** Transistors kept getting faster; chips could not afford the power to switch all of them faster.
-- **"Power is only an issue for batteries."** The largest systems are the most power-limited: data centres are built around megawatts of supply and cooling.
+- **"Power is only an issue for batteries."** Phones are limited to a few watts sustained by skin temperature, but data centres are limited too, by tens to hundreds of megawatts of supply and cooling.
 
 ## Go deeper
 

@@ -54,5 +54,4 @@ Asymptotic analysis describes how the resources an algorithm uses (time, memory,
 ## Go deeper
 
 - Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest and Clifford Stein, *Introduction to Algorithms* (4th ed., 2022), chapters 3–4: notation and recurrences.
-- Donald E. Knuth, "Big Omicron and Big Omega and Big Theta" (1976): why the notation is defined as it is.
 - Robert Sedgewick and Philippe Flajolet, *An Introduction to the Analysis of Algorithms* (2nd ed., 2013): precise analysis beyond Big-O.

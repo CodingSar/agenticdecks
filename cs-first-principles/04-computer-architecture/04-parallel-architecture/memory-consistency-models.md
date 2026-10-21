@@ -16,13 +16,13 @@ A memory consistency model is the part of the Instruction Set Architecture (ISA)
 
 3. **Store buffering breaks Dekker-style code under TSO.** Total Store Order (TSO, the model of x86 and SPARC) allows exactly one relaxation: a load may complete before an earlier store to a *different* address becomes visible. In the classic test, thread 1 runs `x = 1; r1 = y` and thread 2 runs `y = 1; r2 = x`, both starting at zero; under TSO both `r1` and `r2` can be 0, an outcome impossible under SC. Peterson's and Dekker's mutual exclusion algorithms fail unless a fence (`mfence`) separates the store from the load.
 
-4. **Weak models allow almost any reordering of independent accesses.** ARMv8, RISC-V's RVWMO and IBM POWER let loads and stores to different addresses be reordered in most ways, as seen by other cores. This permits simpler, lower-power hardware and more aggressive speculation. Programs that share data must state the ordering they need explicitly.
+4. **Weak models allow almost any reordering of independent accesses.** ARMv8, RISC-V's RVWMO and IBM POWER let loads and stores to different addresses be reordered in most ways, as seen by other cores. This permits simpler, faster hardware. Programs that share data must state the ordering they need explicitly.
 
 5. **Fences and ordered atomics restore order at a price.** A full fence forces all earlier memory operations to complete before any later one; it can cost tens to hundreds of cycles. Lighter primitives express only what is needed: acquire (no later access may move before this load) and release (no earlier access may move after this store), provided on ARMv8 as `ldar`/`stlr`. A lock acquire is an acquire, a lock release is a release, and that pairing is enough to make a critical section behave as if under SC.
 
 6. **Languages define models that compilers and hardware must jointly implement.** The compiler also reorders memory operations, so a hardware model alone is not enough. The Java Memory Model (2004) and the C/C++11 model define atomics with orderings (`seq_cst`, `acquire`, `release`, `relaxed`) and promise "SC for data-race-free programs": if all conflicting accesses are synchronised, the program behaves sequentially consistently. Compilers translate each atomic to the appropriate fences for each ISA.
 
-7. **Data races are the boundary of the guarantee.** A data race is two unsynchronised accesses to the same location, at least one a write. In C and C++ a racy program has undefined behaviour; in Java its behaviour is constrained but surprising. The practical rule follows: protect shared data with locks or atomics, and leave the rest to the model.
+7. **Data races are the boundary of the guarantee.** A data race is two unsynchronised accesses to the same location, at least one a write. In C and C++ a racy program has undefined behaviour; in Java its behaviour is constrained but surprising.
 
 8. **Consistency is not coherence.** Coherence guarantees agreement on the order of writes to a single location; consistency governs the order of operations across different locations. A system can be fully coherent and still show the TSO store-buffering outcome above.
 

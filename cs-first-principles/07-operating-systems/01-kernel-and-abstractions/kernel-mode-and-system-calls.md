@@ -10,7 +10,7 @@ The Central Processing Unit (CPU) has at least two privilege modes. In **kernel 
 
 ## Core tenets
 
-1. **Limited direct execution: run user code natively, but keep a way back.** Interpreting every instruction would be safe but slow. Instead the OS lets the program run directly on the CPU in user mode, and relies on two hardware guarantees to regain control: sensitive actions trap, and a timer interrupt fires periodically regardless of what the program does. Without the timer, a program in an infinite loop would own the CPU forever.
+1. **Limited direct execution: run user code natively, but keep a way back.** Interpreting every instruction would be safe but slow. Instead the Operating System (OS) lets the program run directly on the CPU in user mode, and relies on two hardware guarantees to regain control: sensitive actions trap, and a timer interrupt fires periodically regardless of what the program does. Without the timer, a program in an infinite loop would own the CPU forever.
 
 2. **Entry points are fixed by the kernel, not chosen by the caller.** At boot the kernel fills a trap table (the Interrupt Descriptor Table on x86, the exception vector table on ARM, `stvec` on RISC-V) and sets the system-call entry register (`IA32_LSTAR` for x86-64 `syscall`). These registers are themselves privileged. So a user program can say "do system call 0 with these arguments" but can never jump into the middle of kernel code.
 
@@ -18,7 +18,7 @@ The Central Processing Unit (CPU) has at least two privilege modes. In **kernel 
 
    ```
    user:   mov rax, 1 ; rdi=fd ; rsi=buf ; rdx=len ; syscall
-   kernel: save regs -> switch stack -> sys_call_table[rax](...) -> restore -> sysret
+   kernel: save regs -> switch stack -> sys_call_table[rax] (args) -> restore -> sysret
    ```
 
 4. **Three kinds of trap share one mechanism.** *System calls* are deliberate and synchronous. *Exceptions* are synchronous but unintended (divide by zero, page fault, illegal instruction); the kernel may fix the cause and retry, or kill the process. *Interrupts* are asynchronous, raised by devices or timers, and unrelated to the running instruction. All three save state, raise privilege and vector to a kernel handler.
@@ -44,8 +44,8 @@ The Central Processing Unit (CPU) has at least two privilege modes. In **kernel 
 
 ## How it fits
 
-- **Below:** uses the privilege levels and trap mechanisms defined in [the ISA contract](../../04-computer-architecture/01-instruction-set-architecture/the-isa-contract.md) and the interrupt controller from [buses and interrupts](../../04-computer-architecture/05-io-and-interconnect/buses-and-interrupts.md).
-- **Above:** processes, I/O, files and sockets are all reached through system calls. Sandboxes like seccomp ([isolation and sandboxing](../../11-security-and-cryptography/03-system-security/isolation-and-sandboxing.md)) filter them; hypervisors add a still more privileged mode beneath.
+- **Below:** uses the privilege levels and trap mechanisms defined in [the Instruction Set Architecture (ISA) contract](../../04-computer-architecture/01-instruction-set-architecture/the-isa-contract.md) and the interrupt controller from [buses and interrupts](../../04-computer-architecture/05-io-and-interconnect/buses-and-interrupts.md).
+- **Above:** processes, input/output (I/O), files and sockets are all reached through system calls. Sandboxes like seccomp ([isolation and sandboxing](../../11-security-and-cryptography/03-system-security/isolation-and-sandboxing.md)) filter them; hypervisors add a still more privileged mode beneath.
 - **Siblings:** [The role of the OS](the-role-of-the-os.md) explains why the boundary exists; [kernel architectures](kernel-architectures.md) decides how much code lives on the privileged side.
 
 ## Common misconceptions

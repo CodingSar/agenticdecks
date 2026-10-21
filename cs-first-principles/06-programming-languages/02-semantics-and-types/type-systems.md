@@ -25,7 +25,7 @@ A type system is a set of rules that assigns a type to each expression in a prog
 5. **Strong versus weak is about loopholes, not about static versus dynamic.** C is statically typed but weakly typed: casts and pointer arithmetic let you treat any bytes as any type, which is how buffer overflows become exploits. Python is dynamically typed but strongly typed: `"1" + 1` raises an error. A memory-safe language is one whose type system (static plus run-time checks) has no such loopholes in safe code.
 6. **Types are propositions, and programs are proofs.** The Curry–Howard correspondence matches type constructors to logical connectives: a function type `A → B` corresponds to implication, a pair `A × B` to conjunction, a sum `A + B` to disjunction. A term of type `A → B` is a constructive proof that A implies B. This is the bridge from type systems to [proof assistants](../05-formal-methods/proof-assistants-and-dependent-types.md).
 7. **More precise types state more, and cost more.** Plain types say "this is an integer". Refinement and dependent types can say "this is an integer between 0 and the array's length". Linear and affine types say "this value is used exactly once", which is how Rust's ownership rules guarantee memory and thread safety without a garbage collector. Each step adds guarantees and makes checking or annotation harder.
-8. **Gradual and optional typing mix the two disciplines.** TypeScript, Python's type hints and Typed Racket let typed and untyped code coexist, inserting checks (or not) at the boundary. This lets teams add types to large existing codebases incrementally.
+8. **Gradual and optional typing mix the two disciplines.** TypeScript and Python's type hints let typed and untyped code coexist, so large codebases can gain types incrementally.
 
 ## Key concepts
 
@@ -58,5 +58,4 @@ A type system is a set of rules that assigns a type to each expression in a prog
 
 - Benjamin C. Pierce, *Types and Programming Languages* (2002): the standard text, from untyped lambda calculus to subtyping and recursive types.
 - Robin Milner, "A Theory of Type Polymorphism in Programming" (1978): the source of "well-typed programs cannot go wrong".
-- Luca Cardelli and Peter Wegner, "On Understanding Types, Data Abstraction, and Polymorphism" (1985): a clear survey of the design space.
 - Philip Wadler, "Propositions as Types" (2015): an accessible account of Curry–Howard.

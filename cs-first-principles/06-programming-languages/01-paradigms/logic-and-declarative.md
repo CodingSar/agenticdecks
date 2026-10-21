@@ -2,7 +2,7 @@
 
 > **Layer:** [06 Programming Languages](../README.md) › [Paradigms](README.md)
 > **Builds on:** [Predicate logic](../../01-mathematical-foundations/01-logic/predicate-logic.md), [Backtracking and branch and bound](../../05-algorithms-and-data-structures/03-design-paradigms/backtracking-and-branch-and-bound.md), [Relations and orders](../../01-mathematical-foundations/02-sets-relations-functions/relations-and-orders.md)
-> **Enables:** [Relational algebra and SQL](../../09-data-management/01-data-models/relational-algebra-and-sql.md), [Knowledge representation and reasoning](../../13-artificial-intelligence/01-classical-ai/knowledge-representation-and-reasoning.md), [Constraint satisfaction](../../13-artificial-intelligence/01-classical-ai/constraint-satisfaction.md)
+> **Enables:** [Relational algebra and query languages](../../09-data-management/01-data-models/relational-algebra-and-sql.md), [Knowledge representation and reasoning](../../13-artificial-intelligence/01-classical-ai/knowledge-representation-and-reasoning.md), [Constraint satisfaction](../../13-artificial-intelligence/01-classical-ai/constraint-satisfaction.md)
 
 ## Essence
 
@@ -41,7 +41,7 @@ Declarative programming states *what* result is wanted and leaves *how* to compu
 ## How it fits
 
 - **Below:** The semantics comes from [predicate logic](../../01-mathematical-foundations/01-logic/predicate-logic.md) and [proof techniques](../../01-mathematical-foundations/01-logic/proof-techniques.md); the execution strategy is [backtracking search](../../05-algorithms-and-data-structures/03-design-paradigms/backtracking-and-branch-and-bound.md). The limit comes from [undecidability](../../02-theory-of-computation/03-computability/halting-problem-and-undecidability.md): no complete strategy can always terminate for full first-order logic.
-- **Above:** SQL and the [relational model](../../09-data-management/01-data-models/the-relational-model.md) are the most widely deployed declarative languages. Classical AI built [knowledge representation](../../13-artificial-intelligence/01-classical-ai/knowledge-representation-and-reasoning.md) and [constraint satisfaction](../../13-artificial-intelligence/01-classical-ai/constraint-satisfaction.md) on these ideas. Static analysers use Datalog to express program facts.
+- **Above:** SQL and the [relational model](../../09-data-management/01-data-models/the-relational-model.md) are the most widely deployed declarative languages. Classical artificial intelligence built [knowledge representation](../../13-artificial-intelligence/01-classical-ai/knowledge-representation-and-reasoning.md) and [constraint satisfaction](../../13-artificial-intelligence/01-classical-ai/constraint-satisfaction.md) on these ideas. Static analysers use Datalog to express program facts.
 - **Siblings:** [Imperative](imperative-and-procedural.md) code fixes both logic and control. [Functional](functional.md) code fixes the dependency structure but lets the compiler choose order. Logic code fixes only the logic, and that is why it is both the most flexible and the hardest to predict for performance.
 
 ## Common misconceptions

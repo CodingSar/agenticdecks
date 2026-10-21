@@ -48,11 +48,10 @@ Context-free grammars describe nested structure: balanced parentheses, arithmeti
 ## Common misconceptions
 
 - **"Programming languages are context-free."** Their *grammars* are, but the full set of legal programs is not; declaration, typing and scoping rules are checked outside the grammar. Some languages (C with typedef names, C++) even need semantic feedback during parsing.
-- **"A regular expression can parse HTML or balanced parentheses."** Pure regular expressions cannot match unbounded nesting; that needs a stack.
+- **"A regular expression can parse HyperText Markup Language (HTML) or balanced parentheses."** Pure regular expressions cannot match unbounded nesting; that needs a stack.
 - **"Two stacks are just a bigger stack."** Two stacks can simulate a Turing machine's tape (one holds the left half, one the right), so a two-stack PDA is as powerful as any computer.
 
 ## Go deeper
 
 - Michael Sipser, *Introduction to the Theory of Computation* (3rd ed., 2012), chapter 2: CFGs, PDAs and the pumping lemma.
 - Alfred V. Aho, Monica S. Lam, Ravi Sethi and Jeffrey D. Ullman, *Compilers: Principles, Techniques, and Tools* (2nd ed., 2006), chapter 4: LL and LR parsing in practice.
-- Noam Chomsky, "Three Models for the Description of Language" (1956): the origin of phrase-structure grammars.

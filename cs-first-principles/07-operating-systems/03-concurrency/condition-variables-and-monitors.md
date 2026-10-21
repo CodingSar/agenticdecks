@@ -28,7 +28,7 @@ Locks stop threads from interfering, but threads also need to **wait for somethi
 
 4. **The condition lives in shared state, not in the condition variable.** A condition variable has no memory: signalling with nobody waiting does nothing (unlike a semaphore's `V`, which is remembered in its count). The truth of "queue non-empty" is in the shared data, which is why the waiter checks the data under the lock, and the signaller changes the data under the lock before signalling.
 
-5. **Producer-consumer is the canonical use.** A bounded buffer has two conditions: "not full" (producers wait) and "not empty" (consumers wait). Using two condition variables lets each side wake only the threads that can make progress. This pattern appears everywhere: kernel pipes, I/O request queues between drivers and interrupt handlers, thread-pool work queues, and channels in Go.
+5. **Producer-consumer is the canonical use.** A bounded buffer has two conditions: "not full" (producers wait) and "not empty" (consumers wait). Using two condition variables lets each side wake only the threads that can make progress. This pattern appears everywhere: kernel pipes, input/output (I/O) request queues between drivers and interrupt handlers, thread-pool work queues, and channels in Go.
 
 6. **Use broadcast when you cannot tell which waiter should wake.** If waiters wait for different conditions on the same variable (for example, allocators waiting for different amounts of memory), signalling one may wake a thread that cannot proceed while the right one sleeps. `broadcast` wakes all; each re-checks its own condition. It is always correct under Mesa semantics, at the cost of a thundering herd of wake-ups.
 

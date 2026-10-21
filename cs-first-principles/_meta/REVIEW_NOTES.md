@@ -32,3 +32,18 @@ Collected from writer reports, to be resolved in the review pass.
 - Sweeney 87% (2000); GDPR details (six lawful bases, Art. 5, €20M/4%, 72 h); Google v. Oracle 2021 fair use; Schrems II 2020; EU AI Act Regulation (EU) 2024/1689.
 - Shannon 1937 thesis; Manchester Baby June 1948; TCP/IP flag day 1 Jan 1983; Moore 1975 revision.
 - Kernighan quote in *The Elements of Programming Style*.
+
+### 06 Programming Languages
+- Shi et al. register vs stack VM: ~47% fewer instructions, ~25% larger code.
+- Interpreters ~3–30x slower than optimised native code.
+- seL4 ~9k lines C, ~20 person-years (Klein et al. 2009).
+- Csmith found no wrong-code bugs in CompCert's verified middle end.
+- ~70% of serious security bugs are memory safety (Google/Microsoft).
+- HM inference DEXPTIME-complete (Mairson 1990; Kfoury/Tiuryn/Urzyczyn); System F inference undecidable (Wells 1999).
+- PGO ~10%.
+- **Suspect:** "~1 ms or less pauses for G1, ZGC, Go": true for ZGC/Go, not G1 (default pause target 200 ms). Fix.
+- x86-64 16 GPRs, AArch64 31.
+- Generational hypothesis: Lieberman & Hewitt 1983, Ungar 1984.
+- Alpern & Schneider 1985 safety ∩ liveness.
+- Newcombe et al. 2015 TLA+ at AWS; Coq renamed Rocq; HACL* in Firefox; Gonthier 2005, Flyspeck 2014.
+- Gödel incompleteness has no home leaf (linked to halting problem).

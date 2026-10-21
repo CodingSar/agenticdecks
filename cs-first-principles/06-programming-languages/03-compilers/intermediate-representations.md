@@ -1,7 +1,7 @@
 # Intermediate Representations
 
 > **Layer:** [06 Programming Languages](../README.md) › [Compilers](README.md)
-> **Builds on:** [Semantic analysis](semantic-analysis.md), [Graph theory](../../01-mathematical-foundations/03-discrete-mathematics/graph-theory.md), [The ISA contract](../../04-computer-architecture/01-instruction-set-architecture/the-isa-contract.md)
+> **Builds on:** [Semantic analysis](semantic-analysis.md), [Graph theory](../../01-mathematical-foundations/03-discrete-mathematics/graph-theory.md), [The instruction set contract](../../04-computer-architecture/01-instruction-set-architecture/the-isa-contract.md)
 > **Enables:** [Optimization](optimization.md), [Code generation and register allocation](code-generation-and-register-allocation.md), [Just-in-time compilation](../04-runtime-systems/jit-compilation.md)
 
 ## Essence

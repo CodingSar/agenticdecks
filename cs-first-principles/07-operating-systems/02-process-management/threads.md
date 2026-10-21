@@ -6,7 +6,7 @@
 
 ## Essence
 
-A thread is a single sequential flow of control: a program counter, a register set and a stack. A process may contain many threads that share its address space, heap, global variables and open files, while each has its own stack and registers. Threads exist to separate *who owns resources* (the process) from *who executes* (the thread). That separation gives two things: **parallelism**, because threads of one process can run on several cores at once, and **overlap**, because one thread can block on I/O while another computes. The price is that shared memory without isolation makes every shared variable a potential race.
+A thread is a single sequential flow of control: a program counter, a register set and a stack. A process may contain many threads that share its address space, heap, global variables and open files, while each has its own stack and registers. Threads exist to separate *who owns resources* (the process) from *who executes* (the thread). That separation gives two things: **parallelism**, because threads of one process can run on several cores at once, and **overlap**, because one thread can block on input/output (I/O) while another computes. The price is that shared memory without isolation makes every shared variable a potential race.
 
 ## Core tenets
 

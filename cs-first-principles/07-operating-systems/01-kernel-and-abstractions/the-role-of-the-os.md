@@ -40,7 +40,7 @@ An Operating System (OS) is the software that sits between hardware and programs
 ## How it fits
 
 - **Below:** relies on [privilege modes](../../04-computer-architecture/01-instruction-set-architecture/the-isa-contract.md), [address translation](../../04-computer-architecture/03-memory-hierarchy/virtual-memory-hardware.md) and [interrupts](../../04-computer-architecture/05-io-and-interconnect/buses-and-interrupts.md). It assumes the hardware enforces these faithfully.
-- **Above:** language runtimes ([interpreters and virtual machines](../../06-programming-languages/04-runtime-systems/interpreters-and-virtual-machines.md)), networking ([sockets and TCP](../../08-networking/04-transport-layer/udp-and-tcp.md)), databases and distributed systems all program against OS abstractions. Security's [access control](../../11-security-and-cryptography/03-system-security/access-control.md) is enforced by the kernel.
+- **Above:** language runtimes ([interpreters and virtual machines](../../06-programming-languages/04-runtime-systems/interpreters-and-virtual-machines.md)), networking ([sockets and Transmission Control Protocol (TCP)](../../08-networking/04-transport-layer/udp-and-tcp.md)), databases and distributed systems all program against OS abstractions. Security's [access control](../../11-security-and-cryptography/03-system-security/access-control.md) is enforced by the kernel.
 - **Siblings:** [Kernel mode and system calls](kernel-mode-and-system-calls.md) is the mechanism behind these goals; [kernel architectures](kernel-architectures.md) decides how much code is trusted to pursue them.
 
 ## Common misconceptions

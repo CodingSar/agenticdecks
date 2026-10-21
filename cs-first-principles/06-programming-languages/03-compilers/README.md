@@ -59,4 +59,4 @@ Lexers are [finite automata](../../02-theory-of-computation/02-automata-and-form
 - [Pipelining and parallelism](../../CROSS-CUTTING.md#pipelining-and-parallelism): the compiler is a pipeline, and it schedules instructions for the processor's pipeline.
 - [Invariants and correctness](../../CROSS-CUTTING.md#invariants-and-correctness): every pass must preserve observable behaviour.
 - [Recursion and self-reference](../../CROSS-CUTTING.md#recursion-and-self-reference): compilers compile themselves (bootstrapping).
-- [Limits and impossibility](../../CROSS-CUTTING.md#limits-and-impossibility): optimal code generation is undecidable in general, and its parts (register allocation, scheduling) are NP-hard.
+- [Limits and impossibility](../../CROSS-CUTTING.md#limits-and-impossibility): optimal code generation is undecidable in general, and its parts (register allocation, scheduling) are NP-hard (at least as hard as every problem in NP, the class of nondeterministic polynomial-time problems).

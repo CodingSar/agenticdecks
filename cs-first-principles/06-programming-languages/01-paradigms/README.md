@@ -13,7 +13,7 @@ All four are equally powerful: each can simulate the others, because each is Tur
 
 | Child | Its role in the whole | Depends on |
 |---|---|---|
-| [Imperative and Procedural](imperative-and-procedural.md) | The baseline: commands over mutable memory, mirroring the machine | The ISA and Turing machines |
+| [Imperative and Procedural](imperative-and-procedural.md) | The baseline: commands over mutable memory, mirroring the machine | The Instruction Set Architecture (ISA) and Turing machines |
 | [Object-Oriented](object-oriented.md) | Groups state with the code allowed to touch it; dispatches by run-time type | Imperative (state), plus indirection |
 | [Functional](functional.md) | Programs as expressions and pure functions; state made explicit | The lambda calculus |
 | [Logic and Declarative](logic-and-declarative.md) | Programs as specifications; an engine chooses the evaluation strategy | Predicate logic, search |
@@ -24,13 +24,13 @@ All four are equally powerful: each can simulate the others, because each is Tur
    (Turing machine)                   (lambda calculus)  (predicate logic)
 ```
 
-Read imperative first, because it is closest to the hardware and every other paradigm is eventually compiled into it. Object orientation is a disciplined way to organise imperative state. Functional programming starts from a different root (Church's lambda calculus rather than Turing's machine), and declarative programming moves further still, from "how" to "what". Real languages mix paradigms: Python, Scala, Rust, C# and modern Java combine imperative, object and functional features, and SQL embeds a declarative core inside imperative applications.
+Read imperative first, because it is closest to the hardware and every other paradigm is eventually compiled into it. Object orientation is a disciplined way to organise imperative state. Functional programming starts from a different root (Church's lambda calculus rather than Turing's machine), and declarative programming moves further still, from "how" to "what". Real languages mix paradigms: Python, Scala, Rust, C# and modern Java combine imperative, object and functional features, and Structured Query Language (SQL) embeds a declarative core inside imperative applications.
 
 ## Connections to sibling areas
 
 - **[Semantics and Types](../02-semantics-and-types/README.md).** Each paradigm has a natural semantics: state transitions for imperative code, substitution for functional code, proof search for logic code. Type systems are richest in functional languages, where they began.
 - **[Compilers](../03-compilers/README.md).** Compilers lower every paradigm to the same imperative machine code. Closures, dynamic dispatch and unification each need specific compilation techniques.
-- **[Runtime Systems](../04-runtime-systems/README.md).** Object-oriented and functional languages allocate many short-lived objects, which is why they almost always rely on garbage collection; dynamic dispatch is a main target of JIT compilation.
+- **[Runtime Systems](../04-runtime-systems/README.md).** Object-oriented and functional languages allocate many short-lived objects, which is why they almost always rely on garbage collection; dynamic dispatch is a main target of Just-In-Time (JIT) compilation.
 - **[Formal Methods](../05-formal-methods/README.md).** Pure functional code is easiest to prove, because equals can be replaced by equals; imperative code needs Hoare logic to reason about state.
 
 ## Connections across layers

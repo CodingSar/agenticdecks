@@ -6,13 +6,13 @@
 
 ## Essence
 
-Virtual memory gives every program its own private address space by inserting a translation between the addresses a program uses (virtual) and the locations in physical memory. Memory is divided into fixed-size pages (4 KiB by default on x86-64 and most ARM and RISC-V systems), and a page table maps each virtual page to a physical frame, together with permission bits. A hardware Memory Management Unit (MMU) performs this translation on every instruction fetch, load and store, and a Translation Lookaside Buffer (TLB) caches recent translations so that the lookup usually costs nothing extra. If a page is not mapped or the access is not permitted, the hardware raises a page fault and hands control to the Operating System (OS). This single mechanism provides isolation, protection, sharing, and the illusion of more memory than physically exists.
+Virtual memory gives every program its own private address space by inserting a translation between the addresses a program uses (virtual) and the locations in physical memory. Memory is divided into fixed-size pages (4 KiB by default on x86-64 and most ARM and RISC-V systems), and a page table maps each virtual page to a physical frame, together with permission bits. A hardware Memory Management Unit (MMU) performs this translation on every instruction fetch, load and store, and a Translation Lookaside Buffer (TLB) caches recent translations so that the lookup usually costs nothing extra. If a page is not mapped or the access is not permitted, the hardware raises a page fault and hands control to the Operating System (OS). This one mechanism provides isolation, protection, sharing and the illusion of more memory than exists.
 
 ## Core tenets
 
-1. **Translation is indirection on every access.** A virtual address splits into a virtual page number and a page offset (12 bits for 4 KiB pages). The page number is translated; the offset passes through unchanged. Because translation happens below the Instruction Set Architecture's (ISA's) view of addresses, programs are compiled as if they owned the whole address space starting at the same addresses, and the OS can place them anywhere in physical memory.
+1. **Translation is indirection on every access.** A virtual address splits into a virtual page number and a page offset (12 bits for 4 KiB pages). The page number is translated; the offset passes through unchanged. Programs are therefore compiled as if each owned the whole address space, and the OS can place them anywhere in physical memory.
 
-2. **Page tables are trees to keep them small.** A flat table for a 48-bit address space with 4 KiB pages would need 2^36 entries per process. x86-64 instead uses a four-level radix tree (five levels for 57-bit addresses since Intel Ice Lake): each level indexes 9 bits of the virtual page number into a 512-entry, 4 KiB table. Unmapped regions need no lower-level tables, so sparse address spaces are cheap. The CR3 register (x86) or SATP (RISC-V) or TTBR (ARM) holds the root, and switching processes means switching this one register.
+2. **Page tables are trees to keep them small.** A flat table for a 48-bit address space with 4 KiB pages would need 2^36 entries per process. x86-64 instead uses a four-level radix tree (five levels for 57-bit addresses since Intel Ice Lake): each level indexes 9 bits of the virtual page number into a 512-entry, 4 KiB table. Unmapped regions need no lower-level tables, so sparse address spaces are cheap. One register (CR3 on x86) holds the root, so switching processes means switching that register.
 
 3. **The TLB makes translation fast.** Walking four levels of tables costs up to four memory accesses per load, which would be ruinous. A TLB is a small cache of recent translations (typically 64 entries for the L1 data TLB and 1,000–3,000 entries for the L2 TLB on 2020s cores); hit rates are usually above 99% because of locality. On a miss, a hardware page-table walker (x86, ARM, most RISC-V) reads the tables, often finding them in the data caches.
 
@@ -20,11 +20,11 @@ Virtual memory gives every program its own private address space by inserting a 
 
 5. **A page fault is a precise exception that the OS turns into a feature.** When an entry is not present or a permission check fails, the hardware stops the instruction, saves its address, and traps to the kernel. The OS can then load the page from disk (demand paging), allocate a zeroed page (lazy allocation), copy a shared page (copy-on-write after `fork`), or kill the program (segmentation fault). The faulting instruction is then restarted, which requires precise exceptions.
 
-6. **Large pages trade flexibility for TLB reach.** A TLB with 1,536 entries of 4 KiB covers only 6 MiB. Using 2 MiB or 1 GiB pages (x86-64), or 16 KiB and 64 KiB pages on ARM, extends reach by orders of magnitude and shortens page walks, which matters for databases and large in-memory workloads. The cost is coarser allocation and harder memory management.
+6. **Large pages trade flexibility for TLB reach.** A TLB with 1,536 entries of 4 KiB covers only 6 MiB. Using 2 MiB or 1 GiB pages (x86-64), or 16 KiB and 64 KiB pages on ARM, extends reach by orders of magnitude and shortens page walks, which matters for databases and large in-memory workloads.
 
 7. **Caches and translation must be designed together.** To overlap TLB lookup with L1 access, many L1 caches are virtually indexed, physically tagged: the index comes from the page-offset bits, which are the same in virtual and physical addresses, while the tag check uses the translated address. This is why an L1 of 32 KiB with 8 ways (4 KiB per way) fits exactly with 4 KiB pages, and why L1 size grows by adding ways or using larger pages rather than more sets.
 
-8. **Address-space identifiers and nested paging support many contexts.** Without tags, a context switch must flush the TLB. Address Space Identifiers (ASIDs; Process-Context Identifiers, PCIDs, on x86) tag entries so translations from several processes coexist. For virtual machines, hardware nested paging (Intel EPT, AMD NPT, around 2008) adds a second translation from guest-physical to host-physical, at the cost of much longer page walks on a TLB miss.
+8. **Tags and nesting support many contexts.** Address Space Identifiers (ASIDs; PCIDs on x86) tag TLB entries so a context switch need not flush them. For virtual machines, hardware nested paging (around 2008) adds a second translation, guest-physical to host-physical, making TLB misses costlier.
 
 ```
  virtual address (48 bits, x86-64, 4 KiB pages)
@@ -43,7 +43,6 @@ Virtual memory gives every program its own private address space by inserting a 
 | Page table | Data structure mapping virtual pages to physical frames and permissions |
 | MMU | Memory Management Unit: hardware that translates and checks every access |
 | TLB | Translation Lookaside Buffer: cache of recent page translations |
-| Page-table walk | Reading the page-table levels to resolve a TLB miss |
 | Page fault | Exception raised when a translation is missing or an access is not permitted |
 | Huge page | Larger page size (2 MiB, 1 GiB) that increases TLB reach |
 | ASID / PCID | Tag that lets TLB entries from different address spaces coexist |
@@ -64,5 +63,4 @@ Virtual memory gives every program its own private address space by inserting a 
 
 - Denning, *Virtual Memory* (ACM Computing Surveys, 1970): the classic account of why and how.
 - Kilburn et al., *One-Level Storage System* (IRE Transactions, 1962): the Atlas computer, the first virtual memory.
-- Arpaci-Dusseau and Arpaci-Dusseau, *Operating Systems: Three Easy Pieces* (2018), chapters on paging and TLBs: clear hardware–OS division of labour.
 - Bhattacharjee and Lustig, *Architectural and Operating System Support for Virtual Memory* (2017): modern TLB and page-walk design.

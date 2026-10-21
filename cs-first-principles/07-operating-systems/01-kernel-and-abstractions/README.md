@@ -33,12 +33,12 @@ Read in order. The first file sets the goals; the second shows the one hardware 
 - **[Concurrency](../03-concurrency/README.md):** the kernel is entered by many CPUs and interrupts at once, so it is itself a concurrent program that needs locks.
 - **[Memory management](../04-memory-management/README.md):** the page tables the kernel installs are what make the protection boundary cover memory, not just instructions.
 - **[Storage and file systems](../05-storage-and-file-systems/README.md):** files are the OS's persistence abstraction, reached through system calls like `open`, `read` and `fsync`.
-- **[I/O and devices](../06-io-and-devices/README.md):** device drivers are the largest part of a monolithic kernel and the reason microkernels move drivers out.
+- **[Input/output (I/O) and devices](../06-io-and-devices/README.md):** device drivers are the largest part of a monolithic kernel and the reason microkernels move drivers out.
 - **[Virtualization](../07-virtualization/README.md):** a hypervisor adds one more privilege level beneath the kernel and plays the same game one level down.
 
 ## Connections across layers
 
-From [04 Computer Architecture](../../04-computer-architecture/README.md) this area takes privilege levels ([the ISA contract](../../04-computer-architecture/01-instruction-set-architecture/the-isa-contract.md)) and [interrupts](../../04-computer-architecture/05-io-and-interconnect/buses-and-interrupts.md). It gives [11 Security](../../11-security-and-cryptography/README.md) its foundational reference monitor and the trusted computing base idea ([security design principles](../../11-security-and-cryptography/01-security-principles/security-design-principles.md)), and gives [12 Software Engineering](../../12-software-engineering/README.md) a classic case of [modularity](../../12-software-engineering/01-design/modularity-and-information-hiding.md) versus performance.
+From [04 Computer Architecture](../../04-computer-architecture/README.md) this area takes privilege levels ([the Instruction Set Architecture (ISA) contract](../../04-computer-architecture/01-instruction-set-architecture/the-isa-contract.md)) and [interrupts](../../04-computer-architecture/05-io-and-interconnect/buses-and-interrupts.md). It gives [11 Security](../../11-security-and-cryptography/README.md) its foundational reference monitor and the trusted computing base idea ([security design principles](../../11-security-and-cryptography/01-security-principles/security-design-principles.md)), and gives [12 Software Engineering](../../12-software-engineering/README.md) a classic case of [modularity](../../12-software-engineering/01-design/modularity-and-information-hiding.md) versus performance.
 
 ## Cross-cutting threads
 

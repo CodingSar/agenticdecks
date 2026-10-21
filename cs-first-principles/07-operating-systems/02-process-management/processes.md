@@ -10,11 +10,11 @@ A process is a program in execution: an isolated address space holding code, dat
 
 ## Core tenets
 
-1. **A process is defined by its state, and all of that state can be saved and restored.** The CPU context (program counter, stack pointer, general registers, flags), the address space (a page-table root), and the kernel bookkeeping (open files, current directory, user ID, signal mask, parent) together are the process. The kernel keeps the bookkeeping in a Process Control Block (PCB) (`task_struct` in Linux, `EPROCESS` in Windows NT). Anything not in that state is not part of the process, which is why a process can be stopped, resumed, migrated or checkpointed.
+1. **A process is defined by its state, and all of that state can be saved and restored.** The CPU context (program counter, stack pointer, general registers, flags), the address space (a page-table root), and the kernel bookkeeping (open files, current directory, user identifier (ID), signal mask, parent) together are the process. The kernel keeps the bookkeeping in a Process Control Block (PCB) (`task_struct` in Linux, `EPROCESS` in Windows NT). Anything not in that state is not part of the process, which is why a process can be stopped, resumed, migrated or checkpointed.
 
 2. **Context switching is how one core runs many processes.** On a timer interrupt, a blocking system call or a yield, the kernel saves the current registers into the PCB, picks the next process, loads its page-table root and registers, and returns to user mode. The direct cost is around a microsecond; the indirect cost (cold caches and, without address-space tags, a flushed Translation Lookaside Buffer (TLB)) is often larger. This cost is the floor on how finely the OS can time-slice.
 
-3. **Processes move through a small state machine.** A process is *running* on a core, *ready* (runnable, waiting for a core), or *blocked* (waiting for an event such as I/O or a lock). Blocking happens when a process asks for something not yet available; waking happens when an interrupt or another process supplies it. After exit, it is a *zombie* until its parent collects the exit status.
+3. **Processes move through a small state machine.** A process is *running* on a core, *ready* (runnable, waiting for a core), or *blocked* (waiting for an event such as input/output (I/O) or a lock). Blocking happens when a process asks for something not yet available; waking happens when an interrupt or another process supplies it. After exit, it is a *zombie* until its parent collects the exit status.
 
    ```
    new -> ready <--schedule/preempt--> running -> exit -> zombie -> reaped

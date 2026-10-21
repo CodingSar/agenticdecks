@@ -6,7 +6,7 @@
 
 ## Essence
 
-A **deadlock** is a state in which a set of threads each waits for a resource held by another thread in the set, so none can ever proceed. The classic case is two threads and two locks: T1 holds A and wants B, T2 holds B and wants A. Coffman and colleagues (1971) showed deadlock requires four conditions at once: mutual exclusion, hold-and-wait, no preemption and circular wait. Every strategy for handling deadlock works by breaking one of the four (prevention), steering around unsafe states (avoidance), or letting it happen and recovering (detection). In practice, operating systems mostly prevent deadlock in their own code by **lock ordering**, and leave application deadlocks to the application.
+A **deadlock** is a state in which a set of threads each waits for a resource held by another thread in the set, so none can ever proceed. The classic case is two threads and two locks: T1 holds A and wants B, T2 holds B and wants A. Coffman and colleagues (1971) showed deadlock requires four conditions at once: mutual exclusion, hold-and-wait, no preemption and circular wait. Every strategy for handling deadlock works by breaking one of the four (prevention), steering around unsafe states (avoidance), or letting it happen and recovering (detection). In practice, Operating Systems (OSs) mostly prevent deadlock in their own code by **lock ordering**, and leave application deadlocks to the application.
 
 ## Core tenets
 
@@ -24,7 +24,7 @@ A **deadlock** is a state in which a set of threads each waits for a resource he
 
 4. **The other conditions can be broken too, at a price.** Breaking *hold and wait*: acquire all locks at once, or release everything and retry if any lock is busy (`trylock` with backoff), which can livelock. Breaking *no preemption*: let the system abort a holder and roll it back, which needs a way to undo work, as database transactions have. Breaking *mutual exclusion*: use lock-free data structures or immutable data, so there is nothing to hold.
 
-5. **Avoidance needs knowledge the OS rarely has.** Dijkstra's banker's algorithm grants a request only if the system remains in a *safe state*, one from which some order lets every thread finish given its declared maximum claims. It is elegant but requires every thread to declare its maximum needs in advance and a fixed set of resources, so general-purpose Operating Systems (OSs) do not use it.
+5. **Avoidance needs knowledge the OS rarely has.** Dijkstra's banker's algorithm grants a request only if the system remains in a *safe state*, one from which some order lets every thread finish given its declared maximum claims. It is elegant but requires every thread to declare its maximum needs in advance and a fixed set of resources, so general-purpose OSs do not use it.
 
 6. **Detection and recovery is the database approach.** A database lock manager lets transactions block freely, periodically searches the wait-for graph or uses timeouts, and on finding a cycle aborts one victim, whose effects are undone using the log. This works because transactions are designed to be abortable. Distributed systems often use timeouts instead, since a global wait-for graph is costly to assemble.
 

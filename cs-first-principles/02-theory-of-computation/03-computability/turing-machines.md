@@ -2,7 +2,7 @@
 
 > **Layer:** [02 Theory of Computation](../README.md) › [Computability](README.md)
 > **Builds on:** [The Chomsky Hierarchy](../02-automata-and-formal-languages/chomsky-hierarchy.md), [Finite Automata and Regular Languages](../02-automata-and-formal-languages/finite-automata-and-regular-languages.md), [Functions and Cardinality](../../01-mathematical-foundations/02-sets-relations-functions/functions-and-cardinality.md)
-> **Enables:** [Church–Turing Thesis](church-turing-thesis.md), [Halting Problem and Undecidability](halting-problem-and-undecidability.md), [Complexity Classes](../04-complexity/complexity-classes.md), [Models of Computation](../../05-algorithms-and-data-structures/01-foundations/models-of-computation.md), [The ISA Contract](../../04-computer-architecture/01-instruction-set-architecture/the-isa-contract.md)
+> **Enables:** [Church–Turing Thesis](church-turing-thesis.md), [Halting Problem and Undecidability](halting-problem-and-undecidability.md), [Complexity Classes](../04-complexity/complexity-classes.md), [Models of Computation](../../05-algorithms-and-data-structures/01-foundations/models-of-computation.md), [The Instruction Set Architecture Contract](../../04-computer-architecture/01-instruction-set-architecture/the-isa-contract.md)
 
 ## Essence
 
@@ -48,7 +48,7 @@ A Turing Machine (TM) is a finite automaton given an unbounded tape it can read,
 ## Common misconceptions
 
 - **"A Turing machine is a practical design."** It is a mathematical definition chosen for easy proofs. Nobody builds one; its value is that anything built can be reduced to it.
-- **"Nondeterministic TMs can compute more."** They compute exactly the same functions. Whether they compute them *faster* by more than a polynomial is the P versus NP question.
+- **"Nondeterministic TMs can compute more."** They compute exactly the same functions. Whether they compute them *faster* by more than a polynomial is the P versus NP (polynomial versus nondeterministic polynomial time) question.
 - **"Turing complete means powerful or useful."** It only means general. Many Turing-complete systems are hopeless to program, and many useful languages (Structured Query Language (SQL) without recursion, regular expressions) are deliberately not Turing complete so they always terminate.
 
 ## Go deeper
@@ -56,4 +56,3 @@ A Turing Machine (TM) is a finite automaton given an unbounded tape it can read,
 - Alan M. Turing, "On Computable Numbers, with an Application to the Entscheidungsproblem" (1936): the original paper; section 9 is the clerk argument.
 - Michael Sipser, *Introduction to the Theory of Computation* (3rd ed., 2012), chapter 3: the definitions and robustness results.
 - Marvin L. Minsky, *Computation: Finite and Infinite Machines* (1967): small universal machines and counter machines.
-- Charles Petzold, *The Annotated Turing* (2008): Turing's paper read line by line.

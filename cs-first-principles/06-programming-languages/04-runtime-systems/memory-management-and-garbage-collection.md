@@ -10,7 +10,7 @@ Programs create data whose lifetime does not follow the call stack: objects shar
 
 ## Core tenets
 
-1. **Stack, static and heap storage exist because lifetimes differ.** Static data lives for the whole run; stack data lives exactly as long as its procedure call, so last-in first-out allocation is free. Heap data has lifetimes known only at run time, and that is the only part that needs a manager. Escape analysis lets compilers move heap objects that never escape a function back onto the stack.
+1. **Stack, static and heap storage exist because lifetimes differ.** Static data lives for the whole run; stack data lives exactly as long as its procedure call, so last-in first-out allocation is free. Heap data has lifetimes known only at run time, and that is the only part that needs a manager. Escape analysis moves non-escaping objects back onto the stack.
 2. **Manual management fails in characteristic ways.** Use-after-free, double free and leaks are the classic bugs. The first two are among the most exploited [memory-safety vulnerabilities](../../11-security-and-cryptography/03-system-security/memory-safety-vulnerabilities.md): about 70% of serious security bugs in large C and C++ codebases such as Chrome and Windows have been memory-safety bugs, according to both Google and Microsoft. GC eliminates use-after-free and double free by construction.
 3. **Reference counting reclaims immediately but cannot collect cycles.** Each object counts the references to it and is freed when the count reaches zero. Reclamation is prompt and incremental, which suits Python, Swift and C++'s `shared_ptr`. But two objects that point to each other never reach zero, so cycles leak unless a backup tracing collector or weak references handle them, and every pointer update costs a counter update (an atomic one, if threads share objects).
 4. **Tracing collectors find the live set by graph traversal.** Starting from roots (registers, stack slots, globals), mark every reachable object, then reclaim the rest. Mark-sweep frees unmarked objects in place, which can fragment memory. Copying collectors (Cheney, 1970) move live objects into a fresh space, compacting them for free; their cost is proportional to live data, not heap size, but they need spare space.
@@ -52,10 +52,8 @@ Programs create data whose lifetime does not follow the call stack: objects shar
 
 - **"Garbage collection is slow."** With enough heap headroom, generational GC can match or beat manual allocation in throughput; its real costs are memory overhead and pause unpredictability.
 - **"GC prevents memory leaks."** It reclaims unreachable objects; objects kept reachable by mistake (a growing cache, a forgotten listener) leak just as in manual code.
-- **"Reference counting is not garbage collection."** It is one of the two fundamental families of automatic memory management; modern designs often combine both.
 
 ## Go deeper
 
 - Richard Jones, Antony Hosking and Eliot Moss, *The Garbage Collection Handbook* (2nd ed., 2023): the definitive reference.
 - David Bacon, Perry Cheng and V. T. Rajan, "A Unified Theory of Garbage Collection" (2004): tracing and reference counting as duals.
-- Paul R. Wilson, "Uniprocessor Garbage Collection Techniques" (1992): a concise survey of the core algorithms.

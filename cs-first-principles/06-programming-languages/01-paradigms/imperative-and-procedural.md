@@ -1,7 +1,7 @@
 # Imperative and Procedural Programming
 
 > **Layer:** [06 Programming Languages](../README.md) › [Paradigms](README.md)
-> **Builds on:** [The ISA contract](../../04-computer-architecture/01-instruction-set-architecture/the-isa-contract.md), [Turing machines](../../02-theory-of-computation/03-computability/turing-machines.md), [Stacks and queues](../../05-algorithms-and-data-structures/02-fundamental-data-structures/stacks-and-queues.md)
+> **Builds on:** [The instruction set contract](../../04-computer-architecture/01-instruction-set-architecture/the-isa-contract.md), [Turing machines](../../02-theory-of-computation/03-computability/turing-machines.md), [Stacks and queues](../../05-algorithms-and-data-structures/02-fundamental-data-structures/stacks-and-queues.md)
 > **Enables:** [Object-oriented programming](object-oriented.md), [Hoare logic and program proofs](../05-formal-methods/hoare-logic-and-program-proofs.md), [Kernel architectures](../../07-operating-systems/01-kernel-and-abstractions/kernel-architectures.md)
 
 ## Essence
@@ -39,7 +39,7 @@ Imperative programming describes computation as a sequence of commands that chan
 
 ## How it fits
 
-- **Below:** Imperative languages are a named, structured view of the [ISA](../../04-computer-architecture/01-instruction-set-architecture/the-isa-contract.md): variables map to registers and memory, loops to conditional branches, calls to the hardware's call and return instructions. The theoretical model is the [Turing machine](../../02-theory-of-computation/03-computability/turing-machines.md), a state machine with mutable tape.
+- **Below:** Imperative languages are a named, structured view of the [Instruction Set Architecture (ISA)](../../04-computer-architecture/01-instruction-set-architecture/the-isa-contract.md): variables map to registers and memory, loops to conditional branches, calls to the hardware's call and return instructions. The theoretical model is the [Turing machine](../../02-theory-of-computation/03-computability/turing-machines.md), a state machine with mutable tape.
 - **Above:** Operating systems are written imperatively (C, increasingly Rust), and most [algorithms](../../05-algorithms-and-data-structures/README.md) are stated imperatively. [Hoare logic](../05-formal-methods/hoare-logic-and-program-proofs.md) was invented to reason about exactly this style.
 - **Siblings:** [Object-oriented](object-oriented.md) programming organises imperative state into objects. [Functional](functional.md) programming removes assignment. [Logic and declarative](logic-and-declarative.md) programming removes explicit control flow.
 

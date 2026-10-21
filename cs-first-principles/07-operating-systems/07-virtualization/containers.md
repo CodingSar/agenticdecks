@@ -6,7 +6,7 @@
 
 ## Essence
 
-A container is a group of ordinary processes that the kernel shows a private view of the system: their own process IDs, mount tree, network interfaces, hostname and users, with limits on how much Central Processing Unit (CPU), memory and I/O they may consume. It virtualizes the **Operating System (OS) interface** rather than the hardware: there is one shared kernel, and isolation is enforced inside it. On Linux the building blocks are **namespaces** (what a process can see), **control groups** (cgroups: how much it can use) and security filters (seccomp, capabilities, Linux Security Modules (LSMs)), combined with a **layered image** of the application's files. Docker (2013) packaged these existing kernel features into a convenient tool and image format; the Open Container Initiative (OCI) now standardizes it.
+A container is a group of ordinary processes that the kernel shows a private view of the system: their own process identifiers (IDs), mount tree, network interfaces, hostname and users, with limits on how much Central Processing Unit (CPU), memory and input/output (I/O) they may consume. It virtualizes the **Operating System (OS) interface** rather than the hardware: there is one shared kernel, and isolation is enforced inside it. On Linux the building blocks are **namespaces** (what a process can see), **control groups** (cgroups: how much it can use) and security filters (seccomp, capabilities, Linux Security Modules (LSMs)), combined with a **layered image** of the application's files. Docker (2013) packaged these existing kernel features into a convenient tool and image format; the Open Container Initiative (OCI) now standardizes it.
 
 ## Core tenets
 
