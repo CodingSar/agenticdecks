@@ -48,7 +48,7 @@ An embedding is a learned map from an object (a word, passage, image or user) to
 ## Common misconceptions
 
 - **"Embedding similarity means semantic equivalence."** It means similarity under the training objective; negation, numbers and entity names are often weakly represented.
-- **"A vector database makes RAG accurate."** The index only finds what the embedding ranks highly; chunking, the encoder and re-ranking usually matter more than the index.
+- **"A vector database makes RAG accurate."** The index finds only what the embedding ranks highly; chunking, encoder and re-ranking usually matter more.
 
 ## Go deeper
 
