@@ -67,3 +67,14 @@ Collected from writer reports, to be resolved in the review pass.
 - Chou et al. 2001 driver error rates; Mars Pathfinder 1997; ext4 2009 delayed allocation; VENOM 2015; L1TF SMT.
 - HDD 5–10 ms, 100–250 MB/s; dirty writeback ~30 s; O_NONBLOCK no effect on regular files.
 - Candidate leaf: IPC under 02-process-management.
+
+### 04 Computer Architecture
+- ROB sizes (Pentium Pro 40, Golden Cove 512, M1 ~600+); M1 8-wide decode.
+- Apple 128-byte lines; TLB 64 L1 / 1–3k L2.
+- RVC ~25–30% code shrink (Waterman).
+- Intel APX 32 GPRs (2023 announcement); 5-level paging Ice Lake (server); AMD NX 2003.
+- H100 SXM 132 SMs, 16,896 FP32 lanes, ~67 TF FP32, ~989 TF dense FP16 — "~60" should read "~60–67".
+- Horowitz 2014 ISSCC energy numbers; TPU v1 15–30x perf, 30–80x perf/W (Jouppi 2017).
+- DRAM row conflict 40–50 ns; leakage ×10 per ~60–100 mV; per-core perf ~10–20%/yr post-2005 (Hennessy & Patterson give ~3.5%/yr 2015–18; check).
+- NVMe 64K queues × 64K cmds; PCIe 5.0 32 GT/s ≈ 3.94 GB/s/lane/dir.
+- Candidate leaves: SMT, roofline, trusted execution / virtualization extensions.

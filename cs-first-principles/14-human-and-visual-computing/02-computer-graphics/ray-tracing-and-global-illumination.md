@@ -28,7 +28,7 @@ Ray tracing renders an image by following light backwards: from the camera throu
 
 7. **Real-time ray tracing depends on denoising.** At 60 frames per second and high resolution, the budget is about one to a few rays per pixel, far too few for clean path tracing. Real-time engines combine sparse ray tracing with spatial and temporal denoisers, increasingly neural networks, that reconstruct a clean image from noisy samples. Offline film rendering still uses hundreds to thousands of samples per pixel.
 
-8. **Physically based means measured units and energy conservation.** Radiance, BRDFs that never reflect more energy than arrives, and measured material and light data let one renderer produce consistent results across scenes. This is what makes path-traced images, standard in film visual effects since the 2010s, match photographs.
+8. **Physically based means measured units and energy conservation.** Radiance, BRDFs that never reflect more energy than arrives, and measured material and light data let one renderer produce consistent results across scenes. This is why path-traced images, standard in film since the 2010s, match photographs.
 
 ## Key concepts
 
@@ -42,7 +42,6 @@ Ray tracing renders an image by following light backwards: from the camera throu
 | Importance sampling | Choosing samples with probability proportional to their expected contribution |
 | BVH | Tree of nested bounding boxes used to cull ray-object tests |
 | Denoising | Reconstructing a clean image from a noisy low-sample estimate |
-| Caustic | Focused light pattern from reflection or refraction, such as light through a glass |
 
 ## How it fits
 

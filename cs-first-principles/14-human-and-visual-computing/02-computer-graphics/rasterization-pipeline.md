@@ -6,7 +6,7 @@
 
 ## Essence
 
-Rasterisation draws a 3D scene by projecting each triangle onto the screen and filling in the pixels it covers. It answers the visibility question object by object: for each triangle, which pixels does it touch, and is it nearer than whatever is already drawn there? A depth buffer settles the second question with one comparison per pixel. Because every triangle and every pixel can be processed independently, the algorithm is a deep, wide pipeline that maps perfectly onto massively parallel hardware. The Graphics Processing Unit (GPU) was built for exactly this pipeline, and it renders millions of triangles at 60 frames per second or more. Its weakness is that each triangle is shaded locally, so shadows, reflections and indirect light must be faked or approximated.
+Rasterisation draws a 3D scene by projecting each triangle onto the screen and filling in the pixels it covers. It answers the visibility question object by object: for each triangle, which pixels does it touch, and is it nearer than whatever is already drawn there? A depth buffer settles the second question with one comparison per pixel. Because every triangle and every pixel can be processed independently, the algorithm is a deep, wide pipeline that maps perfectly onto massively parallel hardware. The Graphics Processing Unit (GPU) was built for exactly this pipeline, and it renders millions of triangles at 60 frames per second or more. Its weakness: each triangle is shaded locally, so shadows, reflections and indirect light must be approximated.
 
 ## Core tenets
 
@@ -38,7 +38,6 @@ Rasterisation draws a 3D scene by projecting each triangle onto the screen and f
 | Mipmap | Pyramid of pre-filtered, successively half-resolution texture copies |
 | BRDF | Function giving how much light arriving from one direction leaves in another |
 | Shadow map | Depth image from the light's viewpoint used to test whether points are lit |
-| Anti-aliasing | Techniques that reduce artefacts from sampling edges and detail too coarsely |
 
 ## How it fits
 

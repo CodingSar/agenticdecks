@@ -12,7 +12,7 @@ Images, audio and video are continuous signals that must be sampled and quantise
 
 1. **Digitisation is sampling plus quantisation.** By the Nyquist–Shannon theorem, a signal with no frequencies above B can be reconstructed from samples taken at more than 2B per second; Compact Disc (CD) audio samples at 44.1 kHz to cover hearing up to about 20 kHz. Quantising each sample to n bits adds noise roughly 6 dB lower for every extra bit. Images sample space (pixels) instead of time.
 
-2. **Lossless compression is bounded by entropy.** Shannon's source coding theorem: no lossless code averages fewer bits per symbol than the source's entropy H. Huffman coding approaches H to within one bit per symbol; arithmetic coding and its variants approach it arbitrarily closely. The Portable Network Graphics (PNG) format and FLAC (Free Lossless Audio Codec) use prediction plus entropy coding and typically achieve 1.5–3× on natural images and audio. Lossless is the only option when every bit matters (text, medical images, archives).
+2. **Lossless compression is bounded by entropy.** Shannon's source coding theorem: no lossless code averages fewer bits per symbol than the source's entropy H. Huffman coding approaches H to within one bit per symbol; arithmetic coding and its variants approach it arbitrarily closely. The Portable Network Graphics (PNG) format and FLAC (Free Lossless Audio Codec) use prediction plus entropy coding and typically achieve 1.5–3× on natural images and audio.
 
 3. **Lossy compression trades rate against distortion.** Rate-distortion theory gives, for a chosen distortion measure, the minimum bits needed to stay within a distortion level D. The practical question is which distortion measure to use: mean squared error is easy to compute but poorly matched to perception, so codecs are tuned with perceptual metrics and human viewing tests.
 
@@ -24,7 +24,7 @@ Images, audio and video are continuous signals that must be sampled and quantise
 
 7. **Encoders are searches, decoders are specifications.** Standards define the bitstream and the decoder exactly, so any compliant decoder produces the same output. The encoder is free to choose motion vectors, block sizes and quantisation by any method, which is why encoder quality keeps improving within a fixed standard. Encoding is often 10–100× more expensive than decoding, which suits broadcast and streaming (encode once, decode millions of times).
 
-8. **Rate adapts to the network.** Adaptive bitrate streaming stores each video at several quality levels in short segments; the player measures throughput and switches levels segment by segment. Real-time calls instead adjust encoder rate continuously and favour low latency over quality. As of the mid-2020s, learned (neural) codecs match or beat traditional ones on some image benchmarks, but decoding cost and standardisation have so far limited their deployment.
+8. **Rate adapts to the network.** Adaptive bitrate streaming stores each video at several quality levels in short segments; the player measures throughput and switches levels segment by segment. As of the mid-2020s, learned (neural) codecs match or beat traditional ones on some image benchmarks, but decoding cost and standardisation have so far limited their deployment.
 
 ## Key concepts
 
@@ -38,7 +38,6 @@ Images, audio and video are continuous signals that must be sampled and quantise
 | Quantisation step | Coarseness with which a coefficient is rounded; the main lossy knob |
 | Chroma subsampling | Storing colour channels at lower resolution than brightness |
 | Motion compensation | Predicting blocks from shifted blocks of previous frames |
-| Group of pictures | Sequence of frames between independently coded I-frames |
 | Bitrate | Bits per second of the encoded stream |
 
 ## How it fits
@@ -57,5 +56,4 @@ Images, audio and video are continuous signals that must be sampled and quantise
 
 - Claude Shannon, "A Mathematical Theory of Communication" (1948): entropy and the source coding limit.
 - Khalid Sayood, *Introduction to Data Compression* (5th ed., 2017): lossless and lossy techniques with derivations.
-- Gregory Wallace, "The JPEG Still Picture Compression Standard" (1991): a readable account of the transform-quantise-code pipeline.
 - Iain Richardson, *The H.264 Advanced Video Compression Standard* (2nd ed., 2010): how modern video coding works.
