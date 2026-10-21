@@ -22,7 +22,7 @@ Propositional logic is the study of statements that are either true or false, co
 
 6. **Proof systems recover truth syntactically.** A proof system (natural deduction, resolution) derives formulas by rules that manipulate symbols, without truth tables. *Soundness* says everything provable is valid; *completeness* says everything valid is provable. Propositional logic has both, so "provable" and "true in every assignment" coincide. Resolution, which derives `(A ∨ B)` from `(A ∨ x)` and `(B ∨ ¬x)`, is the basis of modern Conflict-Driven Clause Learning (CDCL) SAT solvers.
 
-7. **Deciding satisfiability is easy in principle and hard in the worst case.** A truth table with 2^n rows always decides it, so propositional logic is decidable. But SAT is the first problem proven NP-complete (Cook 1971), so no known algorithm avoids exponential worst-case time. In practice, CDCL solvers handle industrial instances with millions of variables because real formulas have structure the worst case lacks.
+7. **Deciding satisfiability is easy in principle and hard in the worst case.** A truth table with 2^n rows always decides it, so propositional logic is decidable. But SAT is the first problem proven NP-complete (Cook 1971; NP is Nondeterministic Polynomial time), so no known algorithm avoids exponential worst-case time. In practice, CDCL solvers handle industrial instances with millions of variables because real formulas have structure the worst case lacks.
 
 ## Key concepts
 
