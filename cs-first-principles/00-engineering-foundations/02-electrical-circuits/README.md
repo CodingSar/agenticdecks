@@ -7,13 +7,13 @@
 
 Electromagnetism is too detailed to design with directly. Circuit theory is the first abstraction that makes design tractable: it replaces continuous fields with a graph of idealised elements, each described by a simple relation between voltage and current, and lets two conservation laws determine the rest. This area answers: *how do we reason about networks of conductors and devices precisely enough to build them, and what do the simplifications cost?*
 
-The unifying idea is **the lumped abstraction and its limits**. Within its domain (circuits small relative to signal wavelengths), Kirchhoff's laws and element equations predict behaviour exactly enough to design billions of transistors. Its first refinement adds time: every node has capacitance, so changes take RC time, which becomes gate delay and clock speed. Its boundary is noise and signal integrity: at high speed or over long wires, coupling, reflection and fundamental noise break the ideal picture, and engineers must either restore the assumptions (termination, shielding) or design with margins that tolerate their violation.
+The unifying idea is **the lumped abstraction and its limits**. Within its domain (circuits small relative to signal wavelengths), Kirchhoff's laws and element equations predict behaviour exactly enough to design billions of transistors. Its first refinement adds time: every node has capacitance, so changes take resistance-capacitance (RC) time, which becomes gate delay and clock speed. Its boundary is noise and signal integrity: at high speed or over long wires, coupling, reflection and fundamental noise break the ideal picture, and engineers must either restore the assumptions (termination, shielding) or design with margins that tolerate their violation.
 
 ## How the children fit together
 
 | Child | Its role in the whole | Depends on |
 |---|---|---|
-| [Circuit Laws](circuit-laws.md) | The static model: KCL, KVL, Ohm's law, power, Thévenin equivalents, the voltage divider | Electromagnetism |
+| [Circuit Laws](circuit-laws.md) | The static model: Kirchhoff's Current and Voltage Laws (KCL, KVL), Ohm's law, power, Thévenin equivalents, the voltage divider | Electromagnetism |
 | [Capacitance and Timing](capacitance-and-timing.md) | The dynamic model: RC delay, gate and wire delay, critical paths, `CV²` energy | Circuit laws |
 | [Noise and Signal Integrity](noise-and-signal-integrity.md) | Where the model fails: noise sources, noise margins, transmission lines, differential signalling | Circuit laws, capacitance |
 
@@ -31,7 +31,7 @@ Read them in order. Circuit laws give a timeless snapshot: which voltage each no
 ## Connections to sibling areas
 
 - **[Physics of Computation](../01-physics-of-computation/README.md):** Circuit laws are the low-frequency limit of electromagnetism; thermal noise and `CV²` energy come from thermodynamics.
-- **[Semiconductor Devices](../03-semiconductor-devices/README.md):** Transistors enter circuit analysis as nonlinear elements, simplified for logic to switches with on-resistance and capacitance. CMOS (Complementary Metal-Oxide-Semiconductor) gate design is voltage-divider reasoning plus RC timing.
+- **[Semiconductor Devices](../03-semiconductor-devices/README.md):** Transistors enter circuit analysis as nonlinear elements, simplified for logic to switches with on-resistance and capacitance. Complementary Metal-Oxide-Semiconductor (CMOS) gate design is voltage-divider reasoning plus RC timing.
 - **[Signals and Systems](../04-signals-and-systems/README.md):** Noise margins are what make the digital abstraction possible, and feedback circuits (amplifiers, oscillators, latches) are circuits analysed as systems.
 - **[Engineering Method](../05-engineering-method/README.md):** The lumped model is the textbook case of a model with a domain of validity; speed against energy against noise margin is a classic tradeoff.
 

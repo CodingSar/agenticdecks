@@ -13,7 +13,7 @@ The unifying idea is **a design flow that compiles a description into hardware u
 
 | Child | Its role in the whole | Depends on |
 |---|---|---|
-| [Hardware Description Languages](hardware-description-languages.md) | The front end: describing concurrent hardware at RTL (Register-Transfer Level); simulation versus synthesis; verification | Sequential and combinational logic |
+| [Hardware Description Languages](hardware-description-languages.md) | The front end: describing concurrent hardware at Register-Transfer Level (RTL); simulation versus synthesis; verification | Sequential and combinational logic |
 | [FPGA and ASIC](fpga-and-asic.md) | The back ends: configurable lookup-table fabric versus custom silicon, and the economics of choosing | HDLs, fabrication |
 | [Timing and Power](timing-and-power.md) | Sign-off: static timing analysis, process corners, dynamic and leakage power, voltage scaling | Clocking, physical delay and energy |
 

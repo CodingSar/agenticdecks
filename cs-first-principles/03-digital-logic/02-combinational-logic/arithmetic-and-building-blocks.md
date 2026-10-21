@@ -1,7 +1,7 @@
 # Arithmetic and Building Blocks
 
 > **Layer:** [03 Digital Logic](../README.md) › [Combinational Logic](README.md)
-> **Builds on:** [Logic Gates](logic-gates.md), [Integers and Two's Complement](../01-number-representation/integers-and-twos-complement.md), [Divide and Conquer](../../05-algorithms-and-data-structures/03-design-paradigms/divide-and-conquer.md)
+> **Builds on:** [Logic Gates](logic-gates.md), [Integers and Two's Complement](../01-number-representation/integers-and-twos-complement.md), [Abstract Algebra](../../01-mathematical-foundations/04-algebra/abstract-algebra.md)
 > **Enables:** [Datapath and Control](../../04-computer-architecture/02-processor-microarchitecture/datapath-and-control.md), [FPGA and ASIC](../04-hardware-design/fpga-and-asic.md), [Work, Span and Parallel Models](../../10-distributed-and-parallel-computing/01-parallel-computing/work-span-and-parallel-models.md)
 
 ## Essence
@@ -42,8 +42,8 @@ Processors are not designed gate by gate. They are assembled from a small set of
 
 ## How it fits
 
-- **Below:** Built from [logic gates](logic-gates.md); the adder's dual signed/unsigned role relies on [two's complement](../01-number-representation/integers-and-twos-complement.md). Fast adders are [divide and conquer](../../05-algorithms-and-data-structures/03-design-paradigms/divide-and-conquer.md) and prefix computation in hardware.
-- **Above:** ALUs, register-file decoders and operand muxes form the [datapath and control](../../04-computer-architecture/02-processor-microarchitecture/datapath-and-control.md) of a processor. Floating-point units extend these blocks to [floating point](../01-number-representation/floating-point.md). Multiply-accumulate arrays are the heart of [domain-specific accelerators](../../04-computer-architecture/04-parallel-architecture/domain-specific-accelerators.md). The work and depth of a prefix tree are exactly the work and span of [work, span and parallel models](../../10-distributed-and-parallel-computing/01-parallel-computing/work-span-and-parallel-models.md).
+- **Below:** Built from [logic gates](logic-gates.md); the adder's dual signed/unsigned role relies on [two's complement](../01-number-representation/integers-and-twos-complement.md). Parallel-prefix adders work because carry combination is associative, a fact from [abstract algebra](../../01-mathematical-foundations/04-algebra/abstract-algebra.md).
+- **Above:** ALUs, register-file decoders and operand muxes form the [datapath and control](../../04-computer-architecture/02-processor-microarchitecture/datapath-and-control.md) of a processor. Floating-point units extend these blocks to [floating point](../01-number-representation/floating-point.md). Multiply-accumulate arrays are the heart of [domain-specific accelerators](../../04-computer-architecture/04-parallel-architecture/domain-specific-accelerators.md). Fast adders are hardware instances of [divide and conquer](../../05-algorithms-and-data-structures/03-design-paradigms/divide-and-conquer.md), and the work and depth of a prefix tree are exactly the work and span of [work, span and parallel models](../../10-distributed-and-parallel-computing/01-parallel-computing/work-span-and-parallel-models.md).
 - **Siblings:** [Logic minimization](logic-minimization.md) optimises irregular logic; these blocks are regular structures whose best designs come from algorithmic insight rather than minimisation.
 
 ## Common misconceptions

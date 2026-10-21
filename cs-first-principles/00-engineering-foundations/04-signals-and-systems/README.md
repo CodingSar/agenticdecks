@@ -13,7 +13,7 @@ The unifying idea is **controlling information against noise and time**. The dig
 
 | Child | Its role in the whole | Depends on |
 |---|---|---|
-| [Analog vs Digital](analog-vs-digital.md) | The founding bargain: discrete levels, the static discipline and restoration make errors non-cumulative | Noise margins, CMOS gain |
+| [Analog vs Digital](analog-vs-digital.md) | The founding bargain: discrete levels, the static discipline and restoration make errors non-cumulative | Noise margins, Complementary Metal-Oxide-Semiconductor (CMOS) gain |
 | [Sampling and Quantization](sampling-and-quantization.md) | Crossing the boundary: Nyquist-Shannon sampling, aliasing, quantisation noise, converters | Analog vs digital, Fourier analysis |
 | [Feedback and Control](feedback-and-control.md) | Loops: negative feedback for precision, positive feedback for bistability and oscillation, stability and delay | Circuits, differential equations |
 

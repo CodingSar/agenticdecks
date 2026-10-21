@@ -110,3 +110,11 @@ Collected from writer reports, to be resolved in the review pass.
 - PostgreSQL fsyncgate 2018; System R DP ~10–15 relations.
 - **Rule violation:** `layering-and-the-end-to-end-principle.md` "Builds on" links up to layer 12. Builds-on must point downward. Add mechanical check.
 - Candidate leaves: SDN / data-centre networks; hash indexes; analytical warehouses.
+
+### 00 Engineering / 03 Digital Logic
+- Kuon & Rose 2007: FPGA ~35x area (~18x w/ hard blocks), 3–4x delay, ~14x dynamic power (~7x).
+- Elmore ~0.5 rcL²; cooling ~100 W/cm²; CMOS fJ/op ~10⁶× Landauer; Bérut et al. 2012.
+- GAA ~2022 (Samsung 3nm); EUV HVM ~2019; high-k 2007 (Intel 45nm).
+- Unicode ~150k chars (v15–16); Rust overflow debug panic / release wrap.
+- Citations to verify: Pike & Thompson UTF-8 1993 title; Box 1976 "Science and Statistics"; Sarpeshkar 1998; Ginosar 2011; Kogge & Stone 1973.
+- Candidate leaf: memory cells (SRAM/DRAM/flash) in 03 or 00.

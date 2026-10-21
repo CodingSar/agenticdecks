@@ -6,7 +6,7 @@
 
 ## Essence
 
-Complementary Metal-Oxide-Semiconductor (CMOS) is the circuit style used by almost every digital chip made since the late 1980s. Each logic gate has two networks of transistors: a pull-up network of p-channel Metal-Oxide-Semiconductor Field-Effect Transistors (pMOS) connecting the output to the supply, and a pull-down network of n-channel MOSFETs (nMOS) connecting it to ground. The two networks are logical duals, so for any input exactly one of them conducts. The output is therefore always firmly driven to one rail or the other, and in steady state there is no path from supply to ground, so an idle gate draws almost no power. CMOS is where Boolean algebra becomes physical: series transistors compute AND, parallel transistors compute OR, and De Morgan's laws relate the two networks.
+Complementary Metal-Oxide-Semiconductor (CMOS) is the circuit style used by almost every digital chip made since the late 1980s. Each logic gate has two networks of transistors: a pull-up network of p-channel Metal-Oxide-Semiconductor Field-Effect Transistors (MOSFETs), called pMOS, connecting the output to the supply, and a pull-down network of n-channel MOSFETs (nMOS) connecting it to ground. The two networks are logical duals, so for any input exactly one of them conducts. The output is therefore always firmly driven to one rail or the other, and in steady state there is no path from supply to ground, so an idle gate draws almost no power. CMOS is where Boolean algebra becomes physical: series transistors compute AND, parallel transistors compute OR, and De Morgan's laws relate the two networks.
 
 ## Core tenets
 

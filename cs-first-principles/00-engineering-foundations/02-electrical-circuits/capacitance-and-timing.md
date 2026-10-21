@@ -6,7 +6,7 @@
 
 ## Essence
 
-A digital signal cannot change instantly, because every wire and every transistor gate is a capacitor that must be filled or drained through some resistance. The product of that resistance and capacitance, the RC time constant, sets how fast a node can move from one logic level to another. Gate delays, wire delays, maximum clock frequency and dynamic energy all follow from this one mechanism. Understanding it explains why gates have limited fan-out, why long wires need repeaters, and why on-chip communication is often slower than computation.
+A digital signal cannot change instantly, because every wire and every transistor gate is a capacitor that must be filled or drained through some resistance. The product of that resistance and capacitance, the resistance-capacitance (RC) time constant, sets how fast a node can move from one logic level to another. Gate delays, wire delays, maximum clock frequency and dynamic energy all follow from this one mechanism. Understanding it explains why gates have limited fan-out, why long wires need repeaters, and why on-chip communication is often slower than computation.
 
 ## Core tenets
 

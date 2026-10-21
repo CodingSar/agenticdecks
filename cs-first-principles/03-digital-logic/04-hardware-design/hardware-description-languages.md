@@ -1,7 +1,7 @@
 # Hardware Description Languages
 
 > **Layer:** [03 Digital Logic](../README.md) › [Hardware Design](README.md)
-> **Builds on:** [Finite State Machines](../03-sequential-logic/finite-state-machines.md), [Logic Minimization](../02-combinational-logic/logic-minimization.md), [Syntax and Semantics](../../06-programming-languages/02-semantics-and-types/syntax-and-semantics.md)
+> **Builds on:** [Finite State Machines](../03-sequential-logic/finite-state-machines.md), [Logic Minimization](../02-combinational-logic/logic-minimization.md), [Clocking and Synchronous Design](../03-sequential-logic/clocking-and-synchronous-design.md)
 > **Enables:** [FPGA and ASIC](fpga-and-asic.md), [Timing and Power](timing-and-power.md), [Datapath and Control](../../04-computer-architecture/02-processor-microarchitecture/datapath-and-control.md)
 
 ## Essence
@@ -47,8 +47,8 @@ always @(posedge clk)
 
 ## How it fits
 
-- **Below:** HDLs express [finite state machines](../03-sequential-logic/finite-state-machines.md), [combinational building blocks](../02-combinational-logic/arithmetic-and-building-blocks.md) and [synchronous design](../03-sequential-logic/clocking-and-synchronous-design.md); synthesis runs [logic minimization](../02-combinational-logic/logic-minimization.md). As languages, they have a [syntax and semantics](../../06-programming-languages/02-semantics-and-types/syntax-and-semantics.md) like any other.
-- **Above:** The netlist is implemented on [FPGA or ASIC](fpga-and-asic.md) and checked by [timing and power](timing-and-power.md) analysis. Processors, from their [datapath and control](../../04-computer-architecture/02-processor-microarchitecture/datapath-and-control.md) to [domain-specific accelerators](../../04-computer-architecture/04-parallel-architecture/domain-specific-accelerators.md), are written in HDLs. Synthesis is a compiler problem ([intermediate representations](../../06-programming-languages/03-compilers/intermediate-representations.md)), and HDL verification draws on [model checking](../../06-programming-languages/05-formal-methods/model-checking.md) and [testing](../../12-software-engineering/03-quality/testing.md).
+- **Below:** HDLs express [finite state machines](../03-sequential-logic/finite-state-machines.md), [combinational building blocks](../02-combinational-logic/arithmetic-and-building-blocks.md) and [synchronous design](../03-sequential-logic/clocking-and-synchronous-design.md); synthesis runs [logic minimization](../02-combinational-logic/logic-minimization.md).
+- **Above:** The netlist is implemented on a [Field-Programmable Gate Array (FPGA) or Application-Specific Integrated Circuit (ASIC)](fpga-and-asic.md) and checked by [timing and power](timing-and-power.md) analysis. Processors, from their [datapath and control](../../04-computer-architecture/02-processor-microarchitecture/datapath-and-control.md) to [domain-specific accelerators](../../04-computer-architecture/04-parallel-architecture/domain-specific-accelerators.md), are written in HDLs. As languages, HDLs have a [syntax and semantics](../../06-programming-languages/02-semantics-and-types/syntax-and-semantics.md) like any other, and synthesis is a compiler problem ([intermediate representations](../../06-programming-languages/03-compilers/intermediate-representations.md)), and HDL verification draws on [model checking](../../06-programming-languages/05-formal-methods/model-checking.md) and [testing](../../12-software-engineering/03-quality/testing.md).
 - **Siblings:** HDLs are the front end of the design flow; [FPGA and ASIC](fpga-and-asic.md) are the two back ends; [timing and power](timing-and-power.md) is the analysis that decides whether the result meets its targets.
 
 ## Common misconceptions
