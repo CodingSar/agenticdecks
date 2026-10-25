@@ -29,7 +29,6 @@ Excitable cells generate currents when they depolarise, and the body is a conduc
 | Lead | A voltage measured between two points; records the projection of the cardiac vector onto its axis |
 | P wave, QRS complex, T wave | Atrial depolarisation, ventricular depolarisation, ventricular repolarisation |
 | PR and QT intervals | Atrioventricular conduction time; duration of ventricular activation and recovery |
-| Cardiac axis | The mean direction of ventricular depolarisation in the frontal plane |
 | ST segment | Interval between depolarisation and repolarisation; displaced by injury currents |
 | Q wave | Initial negative deflection; pathological when it marks electrically dead muscle |
 | Electroencephalogram (EEG) | Scalp recording of summed cortical synaptic activity |
@@ -40,7 +39,7 @@ Excitable cells generate currents when they depolarise, and the body is a conduc
 ## How it fits
 
 - **Below:** the signals are the extracellular currents of [excitable membranes](../../00-physical-and-chemical-foundations/01-physics-of-the-body/electricity-and-excitable-membranes.md); the sequence is [cardiac electrophysiology](../../06-physiology/03-cardiovascular-system/cardiac-electrophysiology.md) and the [action potential](../../06-physiology/02-nervous-system/membrane-potential-and-the-action-potential.md); extracting a microvolt EEG from muscle and mains interference is a [signal-and-noise](../../01-quantitative-and-scientific-foundations/03-systems-and-models/information-signals-and-noise.md) problem.
-- **Above:** [arrhythmias](../../12-organ-system-specialties/01-cardiology/arrhythmias.md) and [ischaemic heart disease](../../12-organ-system-specialties/01-cardiology/ischemic-heart-disease.md) are diagnosed on the ECG; [epilepsy](../../12-organ-system-specialties/10-neurology/epilepsy.md) and [neuromuscular disease](../../12-organ-system-specialties/10-neurology/demyelinating-and-neuromuscular-disease.md) on EEG and nerve studies; [resuscitation](../../13-acute-perioperative-and-procedural-care/04-emergency-medicine/resuscitation-and-cardiac-arrest.md) is directed by the rhythm; [electrolyte disorders](../../12-organ-system-specialties/03-nephrology/electrolyte-and-acid-base-disorders.md) are read from the T wave.
+- **Above:** [arrhythmias](../../12-organ-system-specialties/01-cardiology/arrhythmias.md) and [ischaemic heart disease](../../12-organ-system-specialties/01-cardiology/ischemic-heart-disease.md) are diagnosed on the ECG; [epilepsy](../../12-organ-system-specialties/10-neurology/epilepsy.md) and [neuromuscular disease](../../12-organ-system-specialties/10-neurology/demyelinating-and-neuromuscular-disease.md) on EEG and nerve studies; [resuscitation](../../13-acute-perioperative-and-procedural-care/04-emergency-medicine/resuscitation-and-cardiac-arrest.md) is directed by the rhythm.
 - **Siblings:** [echocardiography](ultrasound.md) shows the mechanical consequence of what the ECG shows electrically; [functional testing](functional-testing-spirometry-exercise-and-sleep.md) records the ECG under exercise and the EEG during sleep; the ECG is the [pulse](../01-the-clinical-encounter/physical-examination-and-signs.md) written down.
 
 ## Common misconceptions

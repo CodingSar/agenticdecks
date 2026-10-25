@@ -22,7 +22,7 @@ Extracellular hydrogen ion concentration is held at ~40 nmol/L (pH 7.40, range 7
 
 6. **The anion gap sorts metabolic acidosis by mechanism.** Plasma is electroneutral; the gap, [Na+] − ([Cl−] + [HCO3−]), normally ~8–12 mmol/L, is the unmeasured anions, mostly albumin and phosphate. Add an acid whose anion is not chloride (lactate in shock, ketoacids, sulphate in renal failure, metabolites of methanol) and bicarbonate falls while the gap rises by the same amount. Lose bicarbonate (diarrhoea, renal tubular acidosis) or gain chloride (saline) and the gap stays normal. Low albumin lowers the gap by ~2.5 mmol/L per 10 g/L and can hide a raised-gap acidosis.
 
-7. **Acid–base and potassium are coupled through the cell membrane and the kidney.** Acidosis shifts H+ into cells and K+ out, raising plasma potassium; alkalosis does the reverse. In the distal nephron H+ and K+ compete for secretion, so hypokalaemia sustains metabolic alkalosis and hyperkalaemia impairs ammonium production and causes acidosis.
+7. **Acid–base and potassium are coupled.** Acidosis shifts H+ into cells and K+ out, raising plasma potassium; alkalosis does the reverse. In the distal nephron H+ and K+ compete for secretion, so hypokalaemia sustains alkalosis and hyperkalaemia impairs ammonium production and causes acidosis.
 
 8. **An alternative accounting (Stewart) treats bicarbonate as dependent, and makes the chloride effects explicit.** In Stewart's model the independent variables are PCO2, the strong ion difference (mainly [Na+] − [Cl−]) and total weak acid (albumin, phosphate); [H+] and [HCO3−] adjust to satisfy electroneutrality. It shows at once why saline causes acidosis and hypoalbuminaemia a mild alkalosis. Both accounts describe the same chemistry.
 
@@ -30,8 +30,7 @@ Extracellular hydrogen ion concentration is held at ~40 nmol/L (pH 7.40, range 7
 
 | Term | Meaning |
 |---|---|
-| Volatile acid | Carbon dioxide (as carbonic acid), ~15,000 mmol/day, excreted by the lungs |
-| Non-volatile (fixed) acid | Sulphuric, phosphoric and organic acids, ~50–100 mmol/day, excreted by the kidney |
+| Volatile / fixed acid | Carbon dioxide (~15,000 mmol/day, lungs) / sulphuric, phosphoric and organic acids (~50–100 mmol/day, kidney) |
 | Metabolic disorder | Primary change in bicarbonate |
 | Respiratory disorder | Primary change in PCO2 |
 | Compensation | Secondary change in the other term that returns pH toward, never beyond, normal |
@@ -47,7 +46,6 @@ Extracellular hydrogen ion concentration is held at ~40 nmol/L (pH 7.40, range 7
 ## Common misconceptions
 
 - **"Bicarbonate is low, so give bicarbonate."** It is low because it has done its job; the cause (poor perfusion, insulin lack) needs correcting, and infused bicarbonate generates carbon dioxide that must be breathed out.
-- **"A normal pH rules out an acid–base disorder."** Two opposing disorders (vomiting plus lactic acidosis, salicylate poisoning) can meet at 7.40 with both terms far from normal.
 - **"The lungs can compensate for anything."** The lung adjusts PCO2 only; it cannot fix a primary respiratory disorder, and its compensation of metabolic acidosis is limited by the work of breathing.
 
 ## Go deeper

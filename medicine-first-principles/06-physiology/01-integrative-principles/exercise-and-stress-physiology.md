@@ -16,7 +16,7 @@ Exercise raises oxygen consumption from ~250 mL/min at rest to 3–5 L/min, an i
 
 3. **Ventilation tracks carbon dioxide production so well that arterial gases stay normal in health.** Minute ventilation rises linearly with oxygen uptake to ~100–150 L/min, driven by feedforward from motor cortex and muscle afferents as much as by chemoreceptors, which is why it jumps at the first step. Above the lactate threshold (~50–70% of maximum) buffering of lactic acid releases extra carbon dioxide and ventilation rises out of proportion, marking the shift to unsustainable work. The lungs are not the limit in health; the pump is.
 
-4. **Three energy systems hand over in sequence, by time.** Phosphocreatine regenerates ATP for the first ~10 s. Anaerobic glycolysis supplies the next ~1–2 min at the price of lactate and hydrogen ions. Oxidative phosphorylation, of glycogen and then increasingly of fat, supplies everything longer, limited by oxygen delivery and mitochondrial density ([oxidative phosphorylation](../../02-biochemistry-and-molecular-biology/02-metabolism/glycolysis-tca-cycle-and-oxidative-phosphorylation.md)). Lactate is a fuel shuttled to heart, liver and other muscle, not a waste.
+4. **Three energy systems hand over in sequence.** Phosphocreatine regenerates ATP for the first ~10 s; anaerobic glycolysis supplies the next ~1–2 min at the price of lactate and hydrogen ions. Oxidative phosphorylation, of glycogen and then increasingly of fat, supplies everything longer, limited by oxygen delivery and mitochondrial density ([oxidative phosphorylation](../../02-biochemistry-and-molecular-biology/02-metabolism/glycolysis-tca-cycle-and-oxidative-phosphorylation.md)). Lactate is a fuel shuttled to heart, liver and other muscle, not a waste.
 
 5. **The limit of maximal aerobic capacity is central (delivery), and the limit of endurance is peripheral (fuel).** Maximal oxygen uptake rises with training because stroke volume and blood volume rise; it falls with anaemia, heart failure and lung disease in proportion to delivery. Endurance depends on glycogen stores and the muscle's capacity to oxidise fat, which rise with training (more mitochondria and capillaries). A cardiopulmonary exercise test watches which system reaches its ceiling first.
 
@@ -34,7 +34,6 @@ Exercise raises oxygen consumption from ~250 mL/min at rest to 3–5 L/min, an i
 | Maximal oxygen uptake (VO2max) | The ceiling of aerobic metabolism, ~35–45 mL/kg/min untrained |
 | Functional sympatholysis | Local metabolites overriding sympathetic vasoconstriction in working muscle |
 | Lactate (ventilatory) threshold | Intensity above which lactate accumulates and ventilation rises disproportionately |
-| Oxygen debt | Elevated oxygen uptake after exercise while stores and temperature are restored |
 | Sympatho-adrenal response | Seconds-fast mobilisation by noradrenaline and adrenaline |
 | Hypothalamic–pituitary–adrenal axis | Minutes-to-hours response ending in cortisol |
 | Allostatic load | Cumulative cost of a chronically activated stress response |
@@ -43,12 +42,11 @@ Exercise raises oxygen consumption from ~250 mL/min at rest to 3–5 L/min, an i
 
 - **Below:** the ATP-producing pathways are in [oxidative phosphorylation](../../02-biochemistry-and-molecular-biology/02-metabolism/glycolysis-tca-cycle-and-oxidative-phosphorylation.md); fibre types in [muscle tissue](../../05-tissues-and-anatomy/01-tissues/muscle-tissue.md); the heat load in [thermoregulation](thermoregulation-and-energy-balance.md).
 - **Above:** the muscle side is [skeletal muscle contraction and energetics](../10-musculoskeletal-system-and-skin/skeletal-muscle-contraction-and-energetics.md); [exercise testing](../../11-clinical-method-and-diagnostics/03-imaging-and-physiological-measurement/functional-testing-spirometry-exercise-and-sleep.md) uses tenet 5 to find the failing link; [ischaemic heart disease](../../12-organ-system-specialties/01-cardiology/ischemic-heart-disease.md) is demand outrunning coronary supply; [lifestyle medicine](../../14-life-course-mind-and-integrative-care/05-primary-care-and-integration/sports-occupational-and-lifestyle-medicine.md) applies tenet 7; [shock](../../08-pathology/02-hemodynamic-disorders/hemorrhage-shock-and-sepsis.md) is the stress response failing to restore delivery.
-- **Siblings:** the pump is in [the cardiac cycle](../03-cardiovascular-system/the-cardiac-cycle-and-pump-function.md), the pressure response in [hemodynamics](../03-cardiovascular-system/hemodynamics-and-blood-pressure-regulation.md), the breathing response in [control of breathing](../04-respiratory-system/control-of-breathing.md).
+- **Siblings:** the pump is [the cardiac cycle](../03-cardiovascular-system/the-cardiac-cycle-and-pump-function.md), the breathing response [control of breathing](../04-respiratory-system/control-of-breathing.md).
 
 ## Common misconceptions
 
 - **"Lactic acid causes the burn and the fatigue."** Lactate itself is a fuel; the hydrogen ions, inorganic phosphate and potassium shifts of heavy work are the proximate causes of fatigue, and the next-day soreness is muscle damage, not lactate.
-- **"Blood pressure goes up in exercise because resistance goes up."** Resistance falls; pressure rises because output rises more than resistance falls.
 - **"Stress hormones are bad."** The acute response is what keeps a bleeding patient conscious; it is the chronic, unresolved response that does harm.
 
 ## Go deeper

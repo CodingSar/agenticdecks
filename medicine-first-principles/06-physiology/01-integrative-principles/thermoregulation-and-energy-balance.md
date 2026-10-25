@@ -24,7 +24,7 @@ The body is a heat engine that converts chemical energy from food into work, sto
 
 7. **Body weight is regulated, loosely, by signals from the stores to the hypothalamus.** Leptin from adipose tissue and insulin report long-term stores; ghrelin and gut peptides such as glucagon-like peptide 1 report the meal. The arcuate nucleus integrates them through appetite-stimulating (neuropeptide Y) and appetite-suppressing (pro-opiomelanocortin) neurons. The loop defends against loss harder than against gain: when weight falls, leptin falls, appetite rises and resting expenditure drops below what the new mass predicts (adaptive thermogenesis), which is why lost weight tends to return.
 
-8. **Fuel choice follows the fed–fasted switch, and temperature and fuel are linked through thyroid hormone and catecholamines.** Thyroid hormone sets basal heat production (hyperthyroidism: heat intolerance, weight loss; hypothyroidism: cold intolerance, weight gain). Catecholamines raise both lipolysis and thermogenesis. Starvation lowers thyroid hormone and resting metabolism to spare protein, at the cost of a lower core temperature and tolerance of cold ([fed–fasted cycle](../../02-biochemistry-and-molecular-biology/02-metabolism/metabolic-integration-and-the-fed-fasted-cycle.md)).
+8. **Temperature and fuel are linked through thyroid hormone and catecholamines.** Thyroid hormone sets basal heat production (hyperthyroidism: heat intolerance, weight loss; hypothyroidism: the reverse); catecholamines raise both lipolysis and thermogenesis. Starvation lowers thyroid hormone and resting metabolism to spare protein, at the cost of cold tolerance ([fed–fasted cycle](../../02-biochemistry-and-molecular-biology/02-metabolism/metabolic-integration-and-the-fed-fasted-cycle.md)).
 
 ## Key concepts
 
@@ -36,20 +36,18 @@ The body is a heat engine that converts chemical energy from food into work, sto
 | Fever vs hyperthermia | Raised set point (regulated) vs heat gain exceeding loss (unregulated) |
 | Non-shivering thermogenesis | Heat from uncoupled oxidation in brown fat (UCP1) |
 | Basal metabolic rate | Resting energy expenditure, ~1 kcal/kg/h; ~60–70% of the total |
-| Adaptive thermogenesis | Fall in expenditure below prediction after weight loss |
 | Leptin | Adipose hormone proportional to fat mass; low leptin drives appetite and conserves energy |
 
 ## How it fits
 
 - **Below:** energy conservation and heat transfer come from [thermodynamics](../../00-physical-and-chemical-foundations/01-physics-of-the-body/energy-and-thermodynamics.md); why small bodies lose heat fast from [scale and allometry](../../00-physical-and-chemical-foundations/01-physics-of-the-body/scale-and-allometry.md); the fuel switches from [metabolic integration](../../02-biochemistry-and-molecular-biology/02-metabolism/metabolic-integration-and-the-fed-fasted-cycle.md).
-- **Above:** the [skin](../10-musculoskeletal-system-and-skin/the-skin-as-barrier-and-sensor.md) is the effector; [fever](../../12-organ-system-specialties/08-infectious-diseases/fever-and-sepsis.md) is tenet 4 in disease; [obesity](../../08-pathology/04-genetic-metabolic-and-environmental-disease/nutritional-disease-obesity-and-malnutrition.md) and the [metabolic syndrome](../../12-organ-system-specialties/05-endocrinology/obesity-lipids-and-metabolic-syndrome.md) are tenets 6 and 7 over years; the [newborn](../../14-life-course-mind-and-integrative-care/01-paediatrics/the-newborn-and-neonatology.md) is the body in which heat loss is the first emergency.
+- **Above:** the [skin](../10-musculoskeletal-system-and-skin/the-skin-as-barrier-and-sensor.md) is the effector; [fever](../../12-organ-system-specialties/08-infectious-diseases/fever-and-sepsis.md) is tenet 4; [obesity](../../08-pathology/04-genetic-metabolic-and-environmental-disease/nutritional-disease-obesity-and-malnutrition.md) and the [metabolic syndrome](../../12-organ-system-specialties/05-endocrinology/obesity-lipids-and-metabolic-syndrome.md) are tenets 6 and 7 over years; in the [newborn](../../14-life-course-mind-and-integrative-care/01-paediatrics/the-newborn-and-neonatology.md) heat loss is the first emergency.
 - **Siblings:** [exercise](exercise-and-stress-physiology.md) is the largest heat load the body meets; [circadian rhythms](sleep-and-circadian-rhythms.md) schedule the temperature set point; [fluid compartments](body-fluid-compartments-and-electrolytes.md) pay for sweat.
 
 ## Common misconceptions
 
 - **"Fever is dangerous because of the temperature."** Fever is regulated and rarely exceeds ~41 °C; the danger is the cause. Hyperthermia is unregulated and can exceed that, and it is the heat that kills.
 - **"Obesity is simply eating more than you burn."** The arithmetic is true but the two terms are coupled by a loop that defends stored fat, which is why sustained loss is hard and why the loop, not willpower, is the target of effective treatment.
-- **"Alcohol warms you."** It dilates skin vessels, which feels warm and loses core heat faster.
 
 ## Go deeper
 

@@ -49,7 +49,6 @@ Homeostasis is the maintenance of the internal environment within limits that ce
 ## Common misconceptions
 
 - **"Homeostasis means constancy."** It means regulation. Regulated variables vary with the clock, with exertion and with state; what is constant is that error is corrected.
-- **"A normal value means the system is normal."** A normal pressure with a racing heart and cold skin is a loop at full stretch. Look at the effectors, not only the variable.
 - **"Compensation is good."** It is necessary and costly: the sodium retention that keeps a failing heart's output is the process that drowns the lungs, and blocking it is treatment.
 
 ## Go deeper

@@ -20,7 +20,7 @@ Screening is the application of a test to people without symptoms in order to fi
 
 5. **At low prevalence, most positive screening results are false.** A test with 90% sensitivity and 95% specificity applied where the prevalence is 0.5% gives, per 10,000 people, 45 true positives and about 498 false positives: more than ten false alarms per case found. Each false positive costs anxiety, further tests and sometimes an invasive procedure. The [positive predictive value](../02-evidence-based-medicine/diagnostic-accuracy-studies.md) governs the harm side of screening, and it is low because the screened population is overwhelmingly healthy.
 
-6. **Screening harms the healthy majority to help a minority, so it is a population policy, not a clinical decision.** Benefit accrues to the few whose disease is caught in a treatable window; harm (false positives, overdiagnosis, overtreatment, radiation, cost) accrues to everyone screened. Mammography is the standard case: estimates vary widely between analyses, but a widely cited 2012 United Kingdom review estimated about three overdiagnosed cancers for every breast-cancer death prevented over twenty years of invitation. Whether that trade is worth it is a judgement for the population and the individual, which is why screening invitations now carry decision aids rather than exhortation.
+6. **Screening harms the healthy majority to help a minority, so it is a population policy, not a clinical decision.** Benefit accrues to the few whose disease is caught in a treatable window; harm (false positives, overdiagnosis, overtreatment, radiation, cost) accrues to everyone screened. Mammography is the standard case: the 2012 United Kingdom independent review estimated about three overdiagnosed cancers for every breast-cancer death prevented over twenty years of invitation. Whether that trade is worth it is a value judgement, which is why screening invitations now carry decision aids rather than exhortation.
 
 ## Key concepts
 
@@ -33,7 +33,6 @@ Screening is the application of a test to people without symptoms in order to fi
 | Overdiagnosis | Detection of disease that would never have caused symptoms or death |
 | Interval cancer | Disease presenting with symptoms between screening rounds |
 | Positive predictive value at screening | Proportion of positives that are true; low because prevalence is low |
-| Sojourn time | The duration of the detectable preclinical phase |
 | Disease-specific mortality | Deaths from the target disease per population, the valid outcome of a screening trial |
 
 ## How it fits

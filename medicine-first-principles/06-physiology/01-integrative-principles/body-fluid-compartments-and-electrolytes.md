@@ -10,7 +10,7 @@ About 60% of an adult's mass is water, divided by two barriers into three compar
 
 ## Core tenets
 
-1. **The compartments have fixed proportions and a fixed hierarchy of barriers.** In a 70 kg adult: total body water ~42 L (60%); intracellular ~28 L (two-thirds); extracellular ~14 L (one-third), of which interstitial ~10–11 L and plasma ~3 L (blood volume ~5 L once red cells are added). Fat holds little water, so the fraction is lower in women, the obese and the old, higher in infants (~75%).
+1. **The compartments have fixed proportions.** In a 70 kg adult: total body water ~42 L (60%); intracellular ~28 L (two-thirds); extracellular ~14 L (one-third), of which interstitial ~10–11 L and plasma ~3 L (blood volume ~5 L with red cells). Fat holds little water, so the fraction is lower in women, the obese and the old, higher in infants (~75%).
 
    ```
    total body water 42 L
@@ -45,19 +45,17 @@ About 60% of an adult's mass is water, divided by two barriers into three compar
 | Effective osmole | Sodium, glucose (without insulin), mannitol; moves water across cells |
 | Ineffective osmole | Urea, ethanol; raise osmolality without moving water |
 | Oncotic (colloid osmotic) pressure | Osmotic pull of plasma proteins across the capillary wall, ~25 mmHg |
-| Insensible loss | Water lost through skin and breath (~0.7–0.9 L/day), not regulated |
 
 ## How it fits
 
 - **Below:** osmosis from [diffusion, osmosis and transport](../../00-physical-and-chemical-foundations/01-physics-of-the-body/diffusion-osmosis-and-transport.md); units from [water and solutions](../../00-physical-and-chemical-foundations/02-chemistry-of-life/water-solutions-and-concentration.md); the pump from [membrane transport and ion gradients](../../02-biochemistry-and-molecular-biology/04-cell-signalling/membrane-transport-and-ion-gradients.md).
-- **Above:** [renal sodium and water handling](../05-renal-system/sodium-water-and-volume-regulation.md) closes the loop; [capillary exchange](../03-cardiovascular-system/microcirculation-and-capillary-exchange.md) applies tenet 4; [oedema](../../08-pathology/02-hemodynamic-disorders/edema-and-fluid-imbalance.md), [intravenous fluids](../../09-pharmacology-and-therapeutics/04-non-drug-therapeutics/fluids-nutrition-and-blood-products.md) and [electrolyte disorders](../../12-organ-system-specialties/03-nephrology/electrolyte-and-acid-base-disorders.md) are the uses.
+- **Above:** [renal sodium and water handling](../05-renal-system/sodium-water-and-volume-regulation.md) closes the loop; [capillary exchange](../03-cardiovascular-system/microcirculation-and-capillary-exchange.md), [oedema](../../08-pathology/02-hemodynamic-disorders/edema-and-fluid-imbalance.md), [intravenous fluids](../../09-pharmacology-and-therapeutics/04-non-drug-therapeutics/fluids-nutrition-and-blood-products.md) and [electrolyte disorders](../../12-organ-system-specialties/03-nephrology/electrolyte-and-acid-base-disorders.md) apply it.
 - **Siblings:** [acid–base physiology](acid-base-physiology.md) treats the hydrogen ion as one more solute of the bath; [homeostasis](homeostasis-and-set-points.md) explains why osmolality is defended fast and volume slowly.
 
 ## Common misconceptions
 
 - **"Plasma sodium measures body sodium."** It measures water relative to sodium. A patient with gross oedema (sodium excess) can have a low sodium concentration (greater water excess).
 - **"Dehydration and volume depletion are the same."** Dehydration is water loss (hypernatraemia, cells shrink); volume depletion is sodium-and-water loss (pressure falls). They need different fluids.
-- **"Isotonic saline expands blood volume litre for litre."** About a quarter stays in plasma; the rest enters the interstitium.
 
 ## Go deeper
 

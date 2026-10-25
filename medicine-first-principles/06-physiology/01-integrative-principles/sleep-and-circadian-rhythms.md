@@ -14,7 +14,7 @@ The body keeps time. A master clock in the hypothalamus, built from a transcript
 
 2. **The suprachiasmatic nucleus is the master clock, and light through the eye is its main resetting signal.** The ~20,000 neurons of the suprachiasmatic nucleus (SCN) synchronise each other and the peripheral clocks of liver, muscle, kidney and gut. They receive light from melanopsin-containing retinal ganglion cells, most sensitive to blue, via the retinohypothalamic tract. Evening light delays the clock, morning light advances it; a person with no melanopsin input free-runs at ~24.2 h. Meal timing resets peripheral clocks and can desynchronise them from the SCN, as in shift work.
 
-3. **The clock schedules set points across the day, so "normal" has a time of day.** Core temperature is lowest at ~04:00–05:00 and ~1 °C higher in the early evening; cortisol peaks before waking and troughs near midnight; pineal melatonin rises at dusk and is suppressed by light; blood pressure dips ~10–20% in sleep and surges on waking, when myocardial infarction and stroke cluster; growth hormone is released in early slow-wave sleep. Drug effects and laboratory values vary by time of day for the same reason.
+3. **The clock schedules set points, so "normal" has a time of day.** Core temperature is lowest at ~04:00–05:00 and ~1 °C higher in the early evening; cortisol peaks before waking; melatonin rises at dusk and is suppressed by light; blood pressure dips ~10–20% in sleep and surges on waking, when myocardial infarction and stroke cluster; growth hormone is released in early slow-wave sleep.
 
 4. **Sleep timing is set by two processes: a homeostatic pressure and the circadian signal.** In Borbély's two-process model, Process S, sleep pressure, builds during waking (adenosine accumulating in the basal forebrain is one substrate; caffeine blocks its receptors) and discharges in slow-wave sleep. Process C, the circadian alerting signal, rises through the day and falls in the evening. Sleep comes when S is high and C low; the afternoon dip and the evening "second wind" are the two curves crossing. Jet lag and shift work are misalignment of C with the sleep opportunity.
 
@@ -31,25 +31,22 @@ The body keeps time. A master clock in the hypothalamus, built from a transcript
 | Term | Meaning |
 |---|---|
 | Circadian rhythm | An endogenous ~24 h oscillation that persists without external cues |
-| Zeitgeber | An external signal that entrains the clock: light above all, then meals and activity |
 | Suprachiasmatic nucleus | Hypothalamic master clock, light-entrained through melanopsin ganglion cells |
 | Melatonin | Pineal hormone marking biological night; a darkness signal more than a hypnotic |
 | Process S / Process C | Homeostatic sleep pressure / circadian alerting signal (Borbély) |
 | Slow-wave sleep (N3) | Deepest NREM stage: delta waves, lowest metabolic rate, memory consolidation |
 | REM sleep | Active brain, paralysed body, unstable autonomic control, dreaming |
-| Orexin (hypocretin) | Lateral hypothalamic peptide that stabilises waking; lost in narcolepsy |
 
 ## How it fits
 
 - **Below:** the oscillator mathematics comes from [nonlinear dynamics](../../01-quantitative-and-scientific-foundations/03-systems-and-models/nonlinear-dynamics-oscillations-and-networks.md); the clock genes are an instance of [gene regulation](../../02-biochemistry-and-molecular-biology/03-genetic-information-flow/gene-regulation-and-epigenetic-mechanisms.md); the switch is built from [nervous tissue](../../05-tissues-and-anatomy/01-tissues/nervous-tissue.md).
-- **Above:** [memory and consciousness](../02-nervous-system/higher-functions-memory-language-and-consciousness.md) depend on sleep; [sleep studies](../../11-clinical-method-and-diagnostics/03-imaging-and-physiological-measurement/functional-testing-spirometry-exercise-and-sleep.md) measure the stages and breathing; [mood disorders](../../14-life-course-mind-and-integrative-care/03-psychiatry/mood-and-anxiety-disorders.md) disturb sleep and are disturbed by it; [hypnotics and stimulants](../../09-pharmacology-and-therapeutics/03-drug-classes-by-mechanism/central-nervous-system-drugs.md) act on the switch.
+- **Above:** [memory](../02-nervous-system/higher-functions-memory-language-and-consciousness.md) depends on sleep; [sleep studies](../../11-clinical-method-and-diagnostics/03-imaging-and-physiological-measurement/functional-testing-spirometry-exercise-and-sleep.md) measure stages and breathing; [mood disorders](../../14-life-course-mind-and-integrative-care/03-psychiatry/mood-and-anxiety-disorders.md) disturb sleep and are disturbed by it; [hypnotics](../../09-pharmacology-and-therapeutics/03-drug-classes-by-mechanism/central-nervous-system-drugs.md) act on the switch.
 - **Siblings:** [homeostasis](homeostasis-and-set-points.md) supplies the scheduled set point; [thermoregulation](thermoregulation-and-energy-balance.md) shifts in sleep; the stress axis of [exercise and stress](exercise-and-stress-physiology.md) is gated by the clock.
 
 ## Common misconceptions
 
 - **"Sleep is the brain switched off."** Cortical activity in REM resembles waking, slow-wave sleep is highly organised, and the sleeping brain does work (consolidation, clearance) that cannot be done awake.
 - **"You can adapt to short sleep."** Performance keeps falling across nights of restriction while the sense of sleepiness levels off; people adapt to feeling tired, not to being impaired.
-- **"Melatonin is a sleeping pill."** It is a darkness signal that shifts the clock; its direct hypnotic effect is modest, and timing matters more than dose.
 
 ## Go deeper
 

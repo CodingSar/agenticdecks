@@ -54,7 +54,7 @@ Read the encounter first and in full: it supplies the frame in which every resul
 
 ## Connections across layers
 
-This layer is the point at which the knowledge of the lower layers is brought to bear on one person and turned into a decision. Below it, the tree describes how bodies work and fail and how populations are studied; above it, the specialties apply the method to particular organs, ages and settings. It carries two things upward: a method of reasoning under uncertainty that is the same in every specialty, and a set of instruments, each explained once by its physics and physiology, that every specialty orders and interprets.
+This layer is where the lower layers' knowledge of how bodies work and fail is brought to bear on one person and turned into a decision. It carries two things upward: a method of reasoning under uncertainty that is the same in every specialty, and a set of instruments, each explained once by its physics and physiology, that every specialty orders and interprets.
 
 ## Cross-cutting threads
 
@@ -64,4 +64,3 @@ This layer is the point at which the knowledge of the lower layers is brought to
 - [Structure determines function](../CROSS-CUTTING.md#structure-determines-function): imaging infers function from structure, histopathology reads function from architecture, functional tests infer structure from function.
 - [Compensation and decompensation](../CROSS-CUTTING.md#compensation-and-decompensation): reserve hides disease at rest, which is why stress tests exist and why creatinine stays normal until half the nephrons are gone.
 - [Time courses](../CROSS-CUTTING.md#time-courses): tempo of onset is the most discriminating feature of a history; antibody kinetics, marker half-lives and tracer decay decide when a test can be positive.
-- [Specificity and recognition](../CROSS-CUTTING.md#specificity-and-recognition): antibodies, probes, primers and radiotracers recognise their targets imperfectly; sensitivity and specificity are the measure of that imperfection.
