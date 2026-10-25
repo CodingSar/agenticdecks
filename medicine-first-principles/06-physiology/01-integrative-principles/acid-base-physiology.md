@@ -6,7 +6,7 @@
 
 ## Essence
 
-The hydrogen ion concentration of extracellular fluid is held at ~40 nmol/L (pH 7.40, range 7.35–7.45), a millionth of the concentration of sodium, because proteins change shape and enzymes change rate with small shifts in pH. Metabolism produces ~15,000 mmol/day of carbon dioxide, which is volatile and leaves through the lungs, and ~50–100 mmol/day of non-volatile acid (sulphuric from sulphur amino acids, phosphoric, organic) that only the kidney can remove. The defence has three speeds: buffers in seconds, ventilation in minutes, renal excretion over days. pH is set by the *ratio* of bicarbonate to dissolved carbon dioxide, and the two terms are controlled by different organs, so a disorder is read as which term moved and which organ then compensated.
+Extracellular hydrogen ion concentration is held at ~40 nmol/L (pH 7.40, range 7.35–7.45), a millionth of the sodium concentration, because proteins change shape with small shifts in pH. Metabolism produces ~15,000 mmol/day of carbon dioxide, which is volatile and leaves through the lungs, and ~50–100 mmol/day of non-volatile acid (sulphuric from sulphur amino acids, phosphoric, organic) that only the kidney can remove. The defence has three speeds: buffers in seconds, ventilation in minutes, renal excretion over days. pH is set by the *ratio* of bicarbonate to dissolved carbon dioxide, and the two terms are controlled by different organs, so a disorder is read as which term moved and which organ then compensated.
 
 ## Core tenets
 
@@ -14,9 +14,9 @@ The hydrogen ion concentration of extracellular fluid is held at ~40 nmol/L (pH 
 
 2. **The bicarbonate buffer is powerful not because of its pKa (6.1, far from 7.4) but because it is open.** A closed buffer saturates as it accepts acid; here the product, carbonic acid, becomes carbon dioxide and is breathed out, so the denominator is held constant by ventilation and the system absorbs far more acid than its concentration suggests. Haemoglobin, plasma proteins, phosphate and bone take the rest; roughly half of an acid load is buffered inside cells, which is why acidosis moves potassium out of them.
 
-3. **The lungs are the fast controller of the denominator, and they are driven by pH itself.** Chemoreceptors raise ventilation when arterial [H+] rises ([control of breathing](../04-respiratory-system/control-of-breathing.md)), lowering PCO2 within minutes. For a metabolic acidosis the expected PCO2 (mmHg) is ~1.5 × [HCO3−] + 8 (±2): with bicarbonate 12, PCO2 should be ~26; higher means the lungs are failing too, lower means a second, respiratory disorder.
+3. **The lungs are the fast controller of the denominator, driven by pH itself.** Chemoreceptors raise ventilation when arterial [H+] rises ([control of breathing](../04-respiratory-system/control-of-breathing.md)), lowering PCO2 within minutes. For a metabolic acidosis the expected PCO2 (mmHg) is ~1.5 × [HCO3−] + 8 (±2): with bicarbonate 12, PCO2 should be ~26; higher means the lungs are failing too, lower means a second, respiratory disorder.
 
-4. **The kidney is the slow controller of the numerator, and it does two jobs: reclaim every filtered bicarbonate and generate new bicarbonate to replace what buffered the day's acid.** It filters ~4,300 mmol of bicarbonate a day and reabsorbs essentially all of it (mostly proximally, via secreted H+ and carbonic anhydrase). It then excretes the ~70 mmol of fixed acid as titratable acid on phosphate and, with far more capacity, as ammonium made from glutamine; each H+ excreted returns one new bicarbonate to blood. Urine pH cannot fall below ~4.5, so without these carriers the load could not be excreted. The response takes 2–5 days, which is why chronic respiratory acidosis has a much higher bicarbonate (~3.5–4 mmol/L per 10 mmHg of PCO2) than acute (~1 per 10).
+4. **The kidney is the slow controller of the numerator: it reclaims every filtered bicarbonate and generates new bicarbonate to replace what buffered the day's acid.** It filters ~4,300 mmol of bicarbonate a day and reabsorbs essentially all of it (mostly proximally, via secreted H+ and carbonic anhydrase). It then excretes the ~70 mmol of fixed acid as titratable acid on phosphate and, with far more capacity, as ammonium made from glutamine; each H+ excreted returns one new bicarbonate to blood. Urine pH cannot fall below ~4.5, so without these carriers the load could not be excreted. The response takes 2–5 days, which is why chronic respiratory acidosis has a much higher bicarbonate (~3.5–4 mmol/L per 10 mmHg of PCO2) than acute (~1 per 10).
 
 5. **Compensation moves pH toward normal but never past it, so the primary disorder is always visible.** Low pH with low PCO2 is metabolic acidosis with respiratory compensation; low pH with high PCO2 is respiratory. Overcorrection does not occur because the compensating organ is driven by the residual error ([homeostasis](homeostasis-and-set-points.md)); a normal pH with grossly abnormal bicarbonate and PCO2 means two opposing primary disorders.
 
@@ -36,14 +36,13 @@ The hydrogen ion concentration of extracellular fluid is held at ~40 nmol/L (pH 
 | Respiratory disorder | Primary change in PCO2 |
 | Compensation | Secondary change in the other term that returns pH toward, never beyond, normal |
 | Anion gap | [Na+] − ([Cl−] + [HCO3−]), ~8–12 mmol/L; raised when an unmeasured acid anion is added |
-| Titratable acid | H+ excreted on urinary buffers, mainly phosphate |
 | Ammoniagenesis | Renal production of NH4+ from glutamine; the adaptable route of acid excretion |
 
 ## How it fits
 
 - **Below:** buffer chemistry, pKa and the open–closed distinction are in [acids, bases and buffers](../../00-physical-and-chemical-foundations/02-chemistry-of-life/acids-bases-and-buffers.md); the sources of fixed acid in [amino acid and nitrogen metabolism](../../02-biochemistry-and-molecular-biology/02-metabolism/amino-acid-and-nitrogen-metabolism.md); the compartments in [body fluids](body-fluid-compartments-and-electrolytes.md).
 - **Above:** the effectors are [control of breathing](../04-respiratory-system/control-of-breathing.md) and [renal acid–base](../05-renal-system/potassium-calcium-phosphate-and-renal-acid-base.md); the blood gas as a test is [clinical chemistry](../../11-clinical-method-and-diagnostics/02-laboratory-medicine/clinical-chemistry-and-reference-ranges.md); the disorders are in [nephrology](../../12-organ-system-specialties/03-nephrology/electrolyte-and-acid-base-disorders.md) and the lactic acidosis of [sepsis](../../13-acute-perioperative-and-procedural-care/03-critical-care/sepsis-and-multi-organ-failure.md).
-- **Siblings:** the hydrogen ion is one more solute of the bath described in [fluid compartments](body-fluid-compartments-and-electrolytes.md); [exercise](exercise-and-stress-physiology.md) is the everyday acute acid load.
+- **Siblings:** the hydrogen ion is one more solute of the bath in [fluid compartments](body-fluid-compartments-and-electrolytes.md); [exercise](exercise-and-stress-physiology.md) is the everyday acid load.
 
 ## Common misconceptions
 

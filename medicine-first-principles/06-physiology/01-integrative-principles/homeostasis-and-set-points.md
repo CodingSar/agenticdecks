@@ -6,7 +6,7 @@
 
 ## Essence
 
-Homeostasis is the maintenance of the internal environment within limits that cells can tolerate, by negative feedback: a sensor measures a variable, a comparator holds it against a set point, and an effector acts to shrink the difference. Arterial pressure, arterial carbon dioxide, plasma osmolality, glucose, ionised calcium and core temperature are each held this way, often by several loops at once with different speeds and gains. The idea that makes it work is that the body acts on *error*, not on the disturbance: it need not know why pressure fell, only that it did. The idea that makes it fail is that every loop has finite gain, reserve and range, so compensation hides damage until the loop saturates and the variable then collapses quickly.
+Homeostasis is the maintenance of the internal environment within limits that cells can tolerate, by negative feedback: a sensor measures a variable, a comparator holds it against a set point, and an effector acts to shrink the difference. Arterial pressure, arterial carbon dioxide, osmolality, glucose, ionised calcium and core temperature are each held this way, often by several loops with different speeds and gains. The idea that makes it work is that the body acts on *error*, not on the disturbance: it need not know why pressure fell, only that it did. The idea that makes it fail is that every loop has finite gain, reserve and range, so compensation hides damage until the loop saturates and the variable then collapses quickly.
 
 ## Core tenets
 
@@ -39,7 +39,6 @@ Homeostasis is the maintenance of the internal environment within limits that ce
 | Positive feedback | Output amplifies the error; used for all-or-none events |
 | Compensation | The loop holding the variable near normal despite damage |
 | Decompensation | Failure of the variable once the loop's range or reserve is exhausted |
-| Reserve | Capacity above resting need; the margin that compensation spends |
 
 ## How it fits
 

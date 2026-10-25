@@ -29,7 +29,6 @@ A diagnostic test is a measurement whose result is used to change the probabilit
 
 6. **The reference standard is the ceiling, and verification bias is the commonest leak.** No test can be shown more accurate than the standard it is compared with. When the reference standard is applied only to test-positive patients (because it is invasive), the false negatives go unverified and sensitivity is overestimated (partial verification bias). When the test result influences the reference (the pathologist knows the scan), incorporation bias follows. Blinded, complete verification is to a diagnostic study what concealment and blinding are to a trial.
 
-7. **Accuracy is not benefit.** A test that classifies correctly changes outcomes only if the result alters a decision and that decision alters the course of disease. Many accurate tests detect conditions for which nothing can be done, or that would never have mattered, which is the [overdiagnosis](../03-screening-and-prevention/screening-principles-and-biases.md) problem. The strongest evidence for a test is a trial of testing versus not testing with patient outcomes, which almost no test has; the next best is showing that the test moves probabilities across a [treatment threshold](../../11-clinical-method-and-diagnostics/01-the-clinical-encounter/using-tests-pretest-probability-and-thresholds.md).
 
 ## Key concepts
 
@@ -55,7 +54,7 @@ A diagnostic test is a measurement whose result is used to change the probabilit
 
 - **"A 90% sensitive test rules disease out when negative."**: only if the pre-test probability was modest; at 50% pre-test probability a negative result with likelihood ratio 0.11 still leaves a 10% probability of disease.
 - **"Sensitivity and specificity are fixed properties of a test."**: they are fixed given the threshold and the spectrum of patients; both move when either changes.
-- **"A high positive predictive value means the test is good."**: it may mean the prevalence was high; the same test in a low-prevalence setting produces mostly false positives.
+- **"An accurate test is a useful test."**: a test helps only if its result crosses a decision threshold and the decision changes the course of disease; many accurate tests detect conditions that would never have mattered, which is the overdiagnosis problem of [screening](../03-screening-and-prevention/screening-principles-and-biases.md).
 
 ## Go deeper
 

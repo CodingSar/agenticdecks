@@ -22,7 +22,6 @@ Clinical chemistry measures the concentrations of substances in blood, urine and
 
 6. **Patterns across analytes carry more information than any one.** The liver panel separates hepatocellular injury (transaminases high, out of proportion to alkaline phosphatase) from cholestasis (the reverse); the anion gap separates acidoses that add an unmeasured acid from those that lose bicarbonate ([acid–base](../../06-physiology/01-integrative-principles/acid-base-physiology.md)); urea rising faster than creatinine suggests volume depletion or gut bleeding. The panel exists because the analytes are coupled by physiology, and the clinician reads the coupling.
 
-7. **Sensitivity bought by lowering a threshold is paid for in specificity, and the newest assays show it most.** High-sensitivity troponin detects myocardial injury from many causes (sepsis, renal failure, tachycardia), so a detectable value is no longer specific for infarction, and the diagnosis rests on the magnitude and the change over hours. The same holds for natriuretic peptides and D-dimer: excellent for ruling out when negative, weak for ruling in when positive. These are [likelihood-ratio](../01-the-clinical-encounter/using-tests-pretest-probability-and-thresholds.md) facts about continuous tests, and the threshold chosen decides which error dominates.
 
 ## Key concepts
 

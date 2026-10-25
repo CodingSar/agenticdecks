@@ -6,7 +6,7 @@
 
 ## Essence
 
-The environment injures through chemicals, physical agents and the substances people choose to consume. Roughly a quarter of global deaths are attributed to modifiable environmental factors, air pollution and tobacco foremost. Whatever the agent, the damage reaches the cell by the routes described in cell injury: free radicals, covalent binding to proteins and DNA, loss of Adenosine Triphosphate (ATP), membrane disruption and inflammation. What toxicology adds is the arithmetic of exposure: dose, duration, route, and the body's own metabolism, which detoxifies most xenobiotics but converts some into the very species that harm. The organ that is hit is usually the one that absorbs, concentrates or metabolises the agent.
+The environment injures through chemicals, physical agents and the substances people choose to consume. Roughly a quarter of global deaths are attributed to modifiable environmental factors, air pollution and tobacco foremost. Whatever the agent, the damage reaches the cell by the routes described in cell injury: free radicals, covalent binding to proteins and Deoxyribonucleic Acid (DNA), loss of Adenosine Triphosphate (ATP), membrane disruption and inflammation. What toxicology adds is the arithmetic of exposure: dose, duration, route, and the body's own metabolism, which detoxifies most xenobiotics but converts some into the very species that harm. The organ that is hit is usually the one that absorbs, concentrates or metabolises the agent.
 
 ## Core tenets
 

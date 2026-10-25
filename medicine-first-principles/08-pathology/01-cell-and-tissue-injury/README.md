@@ -46,7 +46,7 @@ From below, this area takes the cell's death programmes and stress responses ([0
 ## Cross-cutting threads
 
 - [Injury and repair](../../CROSS-CUTTING.md#injury-and-repair): this area is the thread's home; inflammation, regeneration and fibrosis stated once.
-- [Supply and demand](../../CROSS-CUTTING.md#supply-and-demand): hypoxic injury is demand for ATP outrunning supply of oxygen.
+- [Supply and demand](../../CROSS-CUTTING.md#supply-and-demand): hypoxic injury is demand for Adenosine Triphosphate (ATP) outrunning supply of oxygen.
 - [Time courses](../../CROSS-CUTTING.md#time-courses): the same stimulus gives acute inflammation over days and chronic inflammation over years; wound strength accrues over months.
 - [Trade-offs and evolutionary legacy](../../CROSS-CUTTING.md#trade-offs-and-evolutionary-legacy): a response tuned for wounds and infection becomes harmful when applied for decades to a sterile stimulus.
 - [Compensation and decompensation](../../CROSS-CUTTING.md#compensation-and-decompensation): hypertrophy and hyperplasia are compensation; their limits are where failure begins.

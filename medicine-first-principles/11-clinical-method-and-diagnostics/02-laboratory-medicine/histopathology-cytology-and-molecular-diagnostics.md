@@ -22,7 +22,6 @@ Histopathology is the examination of tissue under the microscope, and for most c
 
 6. **Cytology trades context for access.** Cells scraped (cervical screening), aspirated through a fine needle (thyroid, breast, lymph node) or shed into fluid (urine, effusions) can be examined without a tissue biopsy. Nuclear features reveal malignancy, but without architecture the pathologist cannot judge invasion, and cellularity depends on who took the sample. Cervical cytology is the model [screening test](../../10-epidemiology-and-evidence/03-screening-and-prevention/screening-principles-and-biases.md): moderately sensitive, repeatable, and effective because the disease has a long preclinical phase.
 
-7. **The report is a diagnostic opinion with stated confidence, and inter-observer variation is real.** Pathologists agree closely on unequivocal cancer and poorly on borderline lesions, grading and some dysplasias. Structured, synoptic reports, second review of malignant diagnoses and multidisciplinary meetings exist because the diagnosis commits the patient to major treatment ([principles of cancer care](../../12-organ-system-specialties/07-oncology/principles-of-cancer-care.md)). Digital slide scanning and machine-learning classifiers now assist with screening and quantification, and inherit the problems of the training set described in [health informatics](../../15-medicine-in-society/01-health-systems/health-informatics-and-artificial-intelligence.md).
 
 ## Key concepts
 

@@ -33,7 +33,7 @@ Read aetiology and natural history first: it defines the vocabulary and shows th
 ## Connections to sibling areas
 
 - **[Cell and tissue injury](../01-cell-and-tissue-injury/README.md):** supplies the pathogenesis step for nearly every chain; acute and chronic inflammation are the archetypes of the acute and chronic tempos described here.
-- **[Haemodynamic disorders](../02-hemodynamic-disorders/README.md):** atherosclerosis is the model multifactorial disease, and its risk factors (LDL, blood pressure, smoking, diabetes) are the examples through which risk arithmetic is usually taught.
+- **[Haemodynamic disorders](../02-hemodynamic-disorders/README.md):** atherosclerosis is the model multifactorial disease, and its risk factors (Low-Density Lipoprotein (LDL), blood pressure, smoking, diabetes) are the examples through which risk arithmetic is usually taught.
 - **[Neoplasia](../03-neoplasia/README.md):** cancer's long latency, preclinical phase and staging illustrate natural history and the biases of screening; its causes range from single carcinogens to polygenic liability.
 - **[Genetic, metabolic and environmental disease](../04-genetic-metabolic-and-environmental-disease/README.md):** single-gene disorders are the deterministic contrast to multifactorial disease; environmental and nutritional exposures are the modifiable components; aging is the slowest natural history of all.
 

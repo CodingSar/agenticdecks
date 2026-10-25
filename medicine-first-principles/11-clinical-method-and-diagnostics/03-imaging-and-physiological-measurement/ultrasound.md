@@ -22,7 +22,6 @@ Ultrasound is echolocation. A transducer sends a short pulse of sound at megaher
 
 6. **Safety and portability made ultrasound the imaging of pregnancy and the bedside.** No ionising radiation and no known harm at diagnostic intensities make it the method for dating, screening and monitoring [pregnancy](../../14-life-course-mind-and-integrative-care/02-obstetrics-and-gynaecology/pregnancy-and-its-complications.md), and for children. Hand-held machines have made point-of-care ultrasound part of the examination in emergency medicine, critical care and anaesthesia: looking for free fluid after trauma, a collapsed lung, a distended bladder, or guiding a needle into a vessel or a nerve.
 
-7. **Ultrasound is operator-dependent, and its accuracy is a property of the examination rather than the machine.** The image exists only in the plane the operator chooses, and a structure not swept is not seen; the report describes what was found, and the quality of what was looked for depends on skill, patient habitus and gas. Artefacts (shadowing, enhancement behind fluid, reverberation, mirror images) are physics that the trained eye reads as information and the untrained eye reads as pathology. This is why sensitivity figures for ultrasound vary more between studies than for other modalities.
 
 ## Key concepts
 

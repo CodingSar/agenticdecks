@@ -27,7 +27,6 @@ A test is worth ordering only if its result could change what you do. That singl
 
 6. **Harms of testing are real and compound.** Every test has false positives, each of which generates further tests, anxiety, procedures and sometimes treatment; imaging exposes to radiation and finds incidental lesions in a large fraction of adults; a reference range defines 5% of healthy people as abnormal by construction ([reference ranges](../02-laboratory-medicine/clinical-chemistry-and-reference-ranges.md)). A panel of twenty independent tests in a healthy person has roughly a 64% chance of at least one "abnormal" result. Testing in low-probability patients manufactures disease, which is the [overdiagnosis](../../10-epidemiology-and-evidence/03-screening-and-prevention/screening-principles-and-biases.md) of the clinic.
 
-7. **The same framework prices a test for a population.** Health economics asks what a strategy of testing costs per correct decision or per outcome improved, which is the threshold analysis with money attached ([health economics](../../15-medicine-in-society/01-health-systems/health-economics-and-priority-setting.md)). Clinical decision rules (for pulmonary embolism, ankle fracture, head injury) are pre-computed versions of this reasoning: a score estimates pre-test probability and specifies which band needs which test, and they outperform unstructured judgement because they apply the thresholds consistently.
 
 ## Key concepts
 
