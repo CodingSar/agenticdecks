@@ -14,7 +14,7 @@ Cells move proteins and lipids between compartments and across the plasma membra
 
 2. **Budding is driven by coats that select cargo and bend the membrane.** Clathrin (plasma membrane and Golgi to endosome), COPII (ER to Golgi) and COPI (Golgi to ER) polymerise into lattices that capture adaptor proteins bound to cargo and deform the patch into a bud; dynamin pinches it off. Cargo is chosen by short sorting signals read by adaptors, so trafficking is an information system: the coat only packages tagged proteins.
 
-3. **Fusion is specific because of matching Soluble N-ethylmaleimide-sensitive factor Attachment protein Receptors (SNAREs) and Rab GTPases.** Each compartment displays its own Rab proteins, which recruit tethers, and its own SNAREs; a vesicle SNARE zips up with a target SNARE to pull two bilayers close enough to merge, paying the cost of removing water from between charged surfaces. Botulinum and tetanus toxins are proteases that cleave neuronal SNAREs, which is why one causes flaccid and the other spastic paralysis: no SNARE, no transmitter release ([toxins](../../07-microbiology-and-immunology/01-microbes-and-infection/pathogenesis-virulence-and-toxins.md)).
+3. **Fusion is specific because of matching Soluble N-ethylmaleimide-sensitive factor Attachment protein Receptors (SNAREs) and Rab GTPases.** Each compartment displays its own Rab proteins, which recruit tethers, and its own SNAREs; a vesicle SNARE zips up with a target SNARE to pull two bilayers close enough to merge, paying the cost of removing water from between charged surfaces. Botulinum and tetanus toxins are proteases that cleave neuronal SNAREs: no SNARE, no transmitter release ([toxins](../../07-microbiology-and-immunology/01-microbes-and-infection/pathogenesis-virulence-and-toxins.md)).
 
 4. **Constitutive secretion is the default; regulated secretion waits for calcium.** Neurons, beta cells, mast cells and exocrine glands also store cargo in granules and release it when cytosolic calcium rises: synaptotagmin on synaptic vesicles triggers fusion within ~1 ms of calcium entry. Insulin follows the same logic on a slower clock: glucose metabolism raises Adenosine Triphosphate (ATP), closes a potassium channel, depolarises the cell, opens calcium channels and granules fuse. Sulfonylureas act on that potassium channel.
 
@@ -48,7 +48,6 @@ Cells move proteins and lipids between compartments and across the plasma membra
 
 - **"Secreted proteins are pushed through the plasma membrane."** They never cross a bilayer after entering the ER; a vesicle carrying them merges with the surface.
 - **"A disease mutation must destroy a protein's function."** Many only change where it goes; a working channel stuck in the ER is as absent as a deleted one.
-- **"Endocytosis is for eating."** Its larger role is regulatory: recovering membrane after exocytosis and switching receptors off by removing them from the surface.
 
 ## Go deeper
 

@@ -17,6 +17,7 @@ Collected from writer reports, to be resolved in the review pass.
 - 12 (01–05): no disease leaf for sleep apnoea / sleep medicine; endocrine emergencies (DKA, adrenal crisis, thyroid storm, hypercalcaemia) have no acute-care leaf in 13; clinical nutrition as a service has no home.
 - 14: delirium and dementia split between geriatric-syndromes (14) and neurodegenerative-disease (12); child/adolescent, perinatal and old-age psychiatry only as interface paragraphs; urology referenced often but has no node (candidate under 13/01 or own parent in 12); pain medicine and sexual health referenced without a node.
 - 00: no leaf on imaging physics (MRI gets two sentences in waves-sound-light-and-radiation); supports PLAN §10 candidate. 01: no home for decision analysis / expected utility beyond one tenet in probability; 11 prognosis-and-shared-decision-making should own it.
+- 08: no leaf on hypertensive vascular disease / arteriolosclerosis and aneurysm (aneurysm folded into atherosclerosis); amyloidosis and protein-misfolding split between cell-injury and aging; no owner for autopsy and disease classification (ICD/nosology); 12 rheumatology writer should confirm immune-complex disease and vasculitis patterns are covered between 07/04 and 12/09.
 
 ## Links to confirm fit
 
@@ -29,6 +30,7 @@ Collected from writer reports, to be resolved in the review pass.
 - 12 (01–05): urology, vascular, cardiac, thoracic, transplant, endocrine, bariatric, hepatobiliary, colorectal and neurosurgery all point to 13/01 surgical-subspecialties; interventional radiology → 11/03 README; clinical genetics → 04/01 README; occupational/sleep medicine → 14/05 sports-occupational-and-lifestyle-medicine.
 - 14: 12/01 valvular-and-structural-heart-disease used as the adult-congenital-heart-disease home (check it covers congenital lesions); 13/03 organ-support-and-icu-syndromes linked for post-intensive-care syndrome and ICU delirium.
 - 00/01: feedback-and-control Enables → 08 hemorrhage-shock-and-sepsis as the compensation/decompensation target; nonlinear-dynamics Enables → 14 frailty (network cascade); mechanics-and-materials builds on carbon-chemistry for collagen/elastin; probability and the-scientific-method-and-models build on each other (same-layer mutual reference; reviewer may prefer one direction).
+- 08: parent READMEs link many directory READMEs in other layers (allowed); thrombosis leaf cites 13/02 perioperative-risk for VTE prophylaxis (alternative 13/01 surgery).
 
 ## Claims to verify
 
@@ -104,3 +106,10 @@ Collected from writer reports, to be resolved in the review pass.
 
 ### 01 Quantitative and Scientific Foundations
 - RCV 2.8·√(CVa²+CVi²); creatinine CVa ~3%, CVi ~5% → ~16%; K within-person ~5%; cortisol AM 2–3× PM; 1−0.95²⁰ ≈ 64%; mammography example (prevalence ~0.4%, sens 85%, spec 90% → PPV ~3%); Na −100 mmol/day → ~4–5 mmHg; CAST 1989; WHI 2002; NICE-SUGAR 2009; Berkson bias phrasing; ten events per predictor; Hill 1965; Kleiber 1932; Du Bois 1916; Mosteller 1987; Shannon 1948; Pauker & Kassirer 1980; Swets 2000; one smoker in six lung cancer; herd immunity 1−1/R₀; 30 doublings at 100 days ≈ 8 years to 1 cm³; Cheyne–Stokes period ~1 min. Textbook editions in Go deeper to verify.
+
+### 08 Pathology
+- Cell injury: reversible ischaemic window 20–40 min myocytes, minutes for neurons; glycolysis ~1/15 of oxphos ATP; wound strength ~10% at 1 week, 70–80% at 3 months, max ~80%; liver regains mass within weeks after ⅔ resection; re-epithelialisation within 48 h.
+- Haemodynamic: capillary hydrostatic ~35 → ~15 mmHg, oncotic ~25; lymph return 2–4 L/day; pulmonary oedema threshold ~25 mmHg; factor V Leiden 2–7% of Europeans; infarct histology 4–12 h; lactate >~2 mmol/L; 15% loss tolerated, pressure falls at 30–40%; CO ~200× affinity (07/13 say ~250×/>200×: harmonise); ~¼ of global deaths IHD + stroke; lifelong LDL <1.5–2 mmol/L rarely causes disease; most fatal plaques <50% stenosis; remodelling preserves lumen to ~40% wall area; flow-limiting ~70%.
+- Neoplasia: RAS ~¼, TP53 ~½, telomerase ~90% of cancers; 40–60 doublings; vessels needed beyond 1–2 mm; Hanahan & Weinberg 2000/2011, Hanahan 2022; drivers 2–8 per tumour; MMR deficiency ~100× mutation rate; inherited high-penetrance 5–10%; Knudson 1971; metastasis ~90% of cancer deaths; <0.01% of CTCs form metastases; 30–50% attributable to modifiable exposures; tobacco ~20% of cancer deaths; infections ~13% (de Martel); incidence ∝ age^4–6; Doll & Peto 1981; colorectal 5-yr >90% stage I vs 10–15% stage IV; TNM 8th 2017.
+- Genetic/metabolic/environmental: trisomy 21 ~1 in 700; ~half of first-trimester miscarriages aneuploid; ~1% single-gene, ~0.5% chromosomal at birth; CF carriers ~1 in 25 N. Europeans; IEM ~1 in 2,000 (14 says 1 in 1,500–2,500); G6PD ~400 million; Garrod 1908/1909; undernutrition ~45% of under-5 deaths (Black 2013); >1 billion obese (2024); BMI heritability 40–70%; obesity 4–8% of cancers HIC; iron-deficiency anaemia ~1.2 billion (uncertain; total anaemia ~1.9 billion); tobacco >8 million deaths/yr, kills ~half of long-term smokers; ~¼ of deaths environmental (WHO 2016); trauma leading cause under 45; GFR −1 mL/min/yr after 40; dementia ~55 million, doubling every ~5 yr after 65; López-Otín 2023; cleft/NTD recurrence 3–5%; ~10-yr life-expectancy gap; Rose 1992.
+- Length: leaves 1,166–1,315 raw.
