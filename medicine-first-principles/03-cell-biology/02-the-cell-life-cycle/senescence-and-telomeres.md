@@ -10,7 +10,7 @@ A normal human cell in culture divides a limited number of times (the Hayflick l
 
 ## Core tenets
 
-1. **Linear chromosomes shorten at every replication, and telomeres absorb the loss.** The lagging strand is made in fragments primed by RNA; when the last primer is removed there is no upstream end from which to fill the gap ([DNA replication](../../02-biochemistry-and-molecular-biology/03-genetic-information-flow/dna-replication-and-repair.md)). Each division loses ~50–100 base pairs from telomeres of ~10–15 kilobases of TTAGGG repeats at birth. Shelterin proteins cap the end so repair machinery does not read it as a break; a telomere too short to be capped is read as exactly that.
+1. **Linear chromosomes shorten at every replication, and telomeres absorb the loss.** The lagging strand is made in fragments primed by Ribonucleic Acid (RNA); when the last primer is removed there is no upstream end from which to fill the gap ([DNA replication](../../02-biochemistry-and-molecular-biology/03-genetic-information-flow/dna-replication-and-repair.md)). Each division loses ~50–100 base pairs from telomeres of ~10–15 kilobases of TTAGGG repeats at birth. Shelterin proteins cap the end so repair machinery does not read it as a break; a telomere too short to be capped is read as exactly that.
 
 2. **Senescence is a DNA damage response made permanent.** A critically short telomere activates ATM and p53, inducing the Cyclin-Dependent Kinase (CDK) inhibitor p21; the p16 pathway locks the retinoblastoma protein in its active state ([checkpoints](the-cell-cycle-and-its-checkpoints.md)). A telomere cannot be repaired, so unlike a checkpoint arrest the stop is stable, reinforced by heterochromatin over proliferation genes.
 

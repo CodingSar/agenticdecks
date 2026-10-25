@@ -6,7 +6,7 @@
 
 ## Essence
 
-Any two unrelated human genomes differ at roughly 4–5 million positions, about one base in 1,000, and every person carries ~60–100 new mutations that neither parent had. Variation is the raw material of inheritance, evolution and individuality; mutation is its source: errors in Deoxyribonucleic Acid (DNA) replication and repair, damage by chemicals and radiation, and the mobile elements that make up almost half the genome. The idea that makes the subject tractable is **classification by consequence**: a variant matters according to what it does to a protein or to a gene's control, not according to its size, and most variants do nothing. Telling the pathogenic variant from the benign background is the central task of clinical genomics.
+Any two unrelated human genomes differ at roughly 4–5 million positions, and every person carries ~60–100 new mutations that neither parent had. Variation is the raw material of inheritance, evolution and individuality; mutation is its source: errors in Deoxyribonucleic Acid (DNA) replication and repair, damage by chemicals and radiation, and the mobile elements that make up almost half the genome. The idea that makes the subject tractable is **classification by consequence**: a variant matters according to what it does to a protein or to a gene's control, not according to its size, and most variants do nothing. Telling the pathogenic variant from the benign background is the central task of clinical genomics.
 
 ## Core tenets
 
@@ -24,7 +24,7 @@ Any two unrelated human genomes differ at roughly 4–5 million positions, about
 
 7. **Repeat expansions and mobile elements are mutational mechanisms of their own.** Microsatellites slip during replication; once a trinucleotide repeat passes a threshold (~36 CAG repeats in the Huntington gene) it expands in each generation, producing [anticipation](mendelian-inheritance-and-pedigrees.md). Transposable elements (~45% of the genome) occasionally insert into genes, and their repeats are the substrate for the misaligned recombination behind recurrent deletions such as 22q11.2.
 
-8. **Variation also underlies individual differences in drug response.** Common variants in drug-metabolising enzymes (CYP2D6, CYP2C19, TPMT) make a standard dose toxic in one person and ineffective in another ([pharmacogenomics](../../09-pharmacology-and-therapeutics/02-pharmacodynamics/pharmacogenomics-and-individual-variation.md)); HLA variants set the risk of severe drug hypersensitivity (HLA-B*57:01 and abacavir). Thousands of variants of tiny effect sum into the polygenic risk of [complex traits](complex-traits-and-heritability.md).
+8. **Variation also underlies individual differences in drug response.** Common variants in drug-metabolising enzymes (CYP2D6, CYP2C19, TPMT) make a standard dose toxic in one person and ineffective in another ([pharmacogenomics](../../09-pharmacology-and-therapeutics/02-pharmacodynamics/pharmacogenomics-and-individual-variation.md)); Human Leukocyte Antigen (HLA) variants set the risk of severe drug hypersensitivity (HLA-B*57:01 and abacavir). Thousands of variants of tiny effect sum into the polygenic risk of [complex traits](complex-traits-and-heritability.md).
 
 ## Key concepts
 

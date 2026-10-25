@@ -51,6 +51,7 @@ Every path below is fixed. Writers create exactly these files, so cross-links be
     amino-acid-and-nitrogen-metabolism.md
     metabolic-integration-and-the-fed-fasted-cycle.md
     vitamins-minerals-and-cofactors.md
+    nucleotide-metabolism.md
   03-genetic-information-flow/
     dna-replication-and-repair.md
     transcription-and-rna-processing.md
@@ -87,6 +88,7 @@ Every path below is fixed. Writers create exactly these files, so cross-links be
     genomic-variation-and-mutation.md
     complex-traits-and-heritability.md
     epigenetic-inheritance-and-imprinting.md
+    mitochondrial-genetics.md
   02-evolution/
     natural-selection-and-population-genetics.md
     evolutionary-medicine.md
@@ -98,6 +100,7 @@ Every path below is fixed. Writers create exactly these files, so cross-links be
     morphogens-patterning-and-developmental-genes.md
     congenital-malformations-and-teratogens.md
     growth-puberty-and-aging.md
+    sex-determination-and-differentiation.md
 
 05-tissues-and-anatomy/
   01-tissues/
@@ -139,11 +142,13 @@ Every path below is fixed. Writers create exactly these files, so cross-links be
     cardiac-electrophysiology.md
     hemodynamics-and-blood-pressure-regulation.md
     microcirculation-and-capillary-exchange.md
+    the-lymphatic-system.md
   04-respiratory-system/
     ventilation-and-lung-mechanics.md
     gas-exchange-and-transport.md
     ventilation-perfusion-matching.md
     control-of-breathing.md
+    the-pulmonary-circulation.md
   05-renal-system/
     glomerular-filtration-and-clearance.md
     tubular-transport-and-the-countercurrent-system.md
@@ -172,6 +177,7 @@ Every path below is fixed. Writers create exactly these files, so cross-links be
     skeletal-muscle-contraction-and-energetics.md
     bone-remodelling-and-joints.md
     the-skin-as-barrier-and-sensor.md
+    smooth-muscle.md
 
 07-microbiology-and-immunology/
   01-microbes-and-infection/
@@ -191,6 +197,7 @@ Every path below is fixed. Writers create exactly these files, so cross-links be
     b-cells-and-antibodies.md
     immunological-memory-and-vaccination.md
     tolerance-and-self-recognition.md
+    lymphoid-organs-and-lymphocyte-trafficking.md
   04-immunity-in-disease/
     hypersensitivity-and-allergy.md
     autoimmunity.md
@@ -208,6 +215,7 @@ Every path below is fixed. Writers create exactly these files, so cross-links be
     thrombosis-embolism-and-infarction.md
     hemorrhage-shock-and-sepsis.md
     atherosclerosis.md
+    hypertensive-vascular-disease-and-aneurysm.md
   03-neoplasia/
     hallmarks-of-cancer.md
     oncogenes-tumour-suppressors-and-genomic-instability.md
@@ -220,6 +228,7 @@ Every path below is fixed. Writers create exactly these files, so cross-links be
     nutritional-disease-obesity-and-malnutrition.md
     environmental-and-toxic-injury.md
     diseases-of-aging-and-degeneration.md
+    amyloidosis-and-protein-misfolding-disease.md
   05-disease-as-process/
     etiology-pathogenesis-and-natural-history.md
     multifactorial-disease-and-risk.md
@@ -230,6 +239,7 @@ Every path below is fixed. Writers create exactly these files, so cross-links be
     distribution-and-protein-binding.md
     drug-metabolism-and-interactions.md
     elimination-half-life-and-dosing.md
+    pharmacokinetics-across-the-life-course.md
   02-pharmacodynamics/
     receptor-theory-agonists-and-antagonists.md
     dose-response-and-therapeutic-index.md
@@ -335,6 +345,7 @@ Every path below is fixed. Writers create exactly these files, so cross-links be
     hiv-and-chronic-viral-infections.md
     tuberculosis-and-tropical-infections.md
     infection-control-and-healthcare-associated-infection.md
+    common-bacterial-infections-by-site.md
   09-rheumatology-and-clinical-immunology/
     inflammatory-arthritis.md
     connective-tissue-disease-and-vasculitis.md
@@ -358,6 +369,8 @@ Every path below is fixed. Writers create exactly these files, so cross-links be
     trauma-and-haemorrhage-control.md
     orthopaedics-fractures-and-joints.md
     surgical-subspecialties.md
+    urology.md
+    burns.md
   02-anaesthesia-and-perioperative-medicine/
     general-and-regional-anaesthesia.md
     airway-and-ventilation-management.md
@@ -372,6 +385,7 @@ Every path below is fixed. Writers create exactly these files, so cross-links be
     resuscitation-and-cardiac-arrest.md
     poisoning-and-overdose.md
     prehospital-and-disaster-medicine.md
+    altered-consciousness-and-head-injury.md
   05-ophthalmology-and-ent/
     the-eye-and-vision-loss.md
     the-ear-hearing-and-balance.md
@@ -395,6 +409,7 @@ Every path below is fixed. Writers create exactly these files, so cross-links be
     psychosis.md
     addiction-and-substance-use.md
     neurodevelopmental-personality-and-eating-disorders.md
+    psychiatry-across-the-life-course.md
   04-geriatrics-and-palliative-care/
     frailty-multimorbidity-and-polypharmacy.md
     geriatric-syndromes.md

@@ -10,7 +10,7 @@ Cells die in two fundamentally different ways. Apoptosis is a programme: the cel
 
 ## Core tenets
 
-1. **Apoptosis is executed by caspases, a protease cascade that is irreversible once started.** Initiator caspases (8, 9) are activated by dimerisation on a scaffold; they cleave executioner caspases (3, 7), which cut hundreds of substrates: the nuclear lamina, cytoskeletal proteins, the inhibitor of a DNA-cutting nuclease. The cascade makes the decision fast and all-or-none and produces the morphology a pathologist recognises: shrinkage, chromatin condensation, blebbing, apoptotic bodies.
+1. **Apoptosis is executed by caspases, a protease cascade that is irreversible once started.** Initiator caspases (8, 9) are activated by dimerisation on a scaffold; they cleave executioner caspases (3, 7), which cut hundreds of substrates: the nuclear lamina, cytoskeletal proteins, the inhibitor of a Deoxyribonucleic Acid (DNA)-cutting nuclease. The cascade makes the decision fast and all-or-none and produces the morphology a pathologist recognises: shrinkage, chromatin condensation, blebbing, apoptotic bodies.
 
 2. **The mitochondrion is the intrinsic switch, and the Bcl-2 family sets its threshold.** Stress (DNA damage via p53, growth factor withdrawal, unfolded protein, loss of adhesion) tips the balance between pro-apoptotic (Bax, Bak, BH3-only sensors) and anti-apoptotic (Bcl-2, Bcl-xL, Mcl-1) members. When Bax and Bak win they form pores in the outer membrane, cytochrome c leaks out, assembles the apoptosome and activates caspase-9. Bcl-2 was discovered as the oncogene of follicular lymphoma: a cell that cannot die accumulates without dividing faster. BH3 mimetics (venetoclax) kill leukaemia cells that depend on Bcl-2.
 

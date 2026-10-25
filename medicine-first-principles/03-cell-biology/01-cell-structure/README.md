@@ -12,7 +12,7 @@ This area asks how a cell is built so that chemistry, energy and information can
 | Child | Its role in the whole | Depends on |
 |---|---|---|
 | [Organelles and compartmentalization](organelles-and-compartmentalization.md) | The static map: which compartments exist, what chemistry each holds, why barriers need pumps | 02 membranes and transport; 00 diffusion and scale |
-| [The cytoskeleton and cell motility](the-cytoskeleton-and-cell-motility.md) | The mechanical system: shape, stiffness, tracks, motors and movement | 02 protein structure and ATP; 00 mechanics |
+| [The cytoskeleton and cell motility](the-cytoskeleton-and-cell-motility.md) | The mechanical system: shape, stiffness, tracks, motors and movement | 02 protein structure and Adenosine Triphosphate (ATP); 00 mechanics |
 | [Membrane trafficking and secretion](membrane-trafficking-and-secretion.md) | The flow of membrane and cargo between compartments and across the surface | Organelles, cytoskeleton, 02 protein targeting |
 | [Protein quality control and degradation](protein-quality-control-and-degradation.md) | The maintenance system: fold, inspect, destroy, recycle | Organelles, 02 protein folding |
 

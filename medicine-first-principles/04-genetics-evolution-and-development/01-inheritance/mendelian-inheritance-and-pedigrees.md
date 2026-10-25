@@ -24,7 +24,7 @@ Mendel's insight (1866) was that heredity is particulate: each parent passes one
 
 7. **Genotype–phenotype relations are rarely one-to-one.** The same gene causes several diseases depending on the mutation (different cystic fibrosis alleles give classic disease, isolated male infertility or pancreatitis), and the same disease results from many genes (retinitis pigmentosa has more than 80). "One gene, one disease" was always an approximation of "one gene, one protein, many contexts".
 
-8. **Mendelian disease is the proving ground for mechanism and therapy.** Because a single defect produces the phenotype, Mendelian disorders reveal gene functions: familial hypercholesterolaemia gave the LDL receptor pathway and the statins; cystic fibrosis gave the chloride channel and, in the 2010s, small-molecule correctors. The path from rare disease to common treatment recurs in [drug development](../../09-pharmacology-and-therapeutics/05-drug-development-and-toxicology/from-target-to-approval.md).
+8. **Mendelian disease is the proving ground for mechanism and therapy.** Because a single defect produces the phenotype, Mendelian disorders reveal gene functions: familial hypercholesterolaemia gave the Low-Density Lipoprotein (LDL) receptor pathway and the statins; cystic fibrosis gave the chloride channel and, in the 2010s, small-molecule correctors. The path from rare disease to common treatment recurs in [drug development](../../09-pharmacology-and-therapeutics/05-drug-development-and-toxicology/from-target-to-approval.md).
 
 ## Key concepts
 

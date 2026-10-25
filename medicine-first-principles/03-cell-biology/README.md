@@ -19,7 +19,7 @@ What the layers above need from it is **the cell as a unit with a repertoire**: 
 
 | Child | Its role in the whole | Depends on |
 |---|---|---|
-| [01 Cell structure](01-cell-structure/README.md) | The built cell: organelles as maintained compartments, the cytoskeleton as mechanics and transport, trafficking as flow, quality control as maintenance | 00 physics; 02 membranes, folding, targeting, ATP |
+| [01 Cell structure](01-cell-structure/README.md) | The built cell: organelles as maintained compartments, the cytoskeleton as mechanics and transport, trafficking as flow, quality control as maintenance | 00 physics; 02 membranes, folding, targeting, Adenosine Triphosphate (ATP) |
 | [02 The cell life cycle](02-the-cell-life-cycle/README.md) | The deciding cell: the cycle and its checkpoints, mitosis and meiosis, apoptosis and necrosis, senescence, stem cells | 01 feedback; 02 replication and kinase cascades; cell structure |
 | [03 Cells in community](03-cells-in-community/README.md) | The social cell: adhesion and matrix, communication and junctions, the stress response | Cell structure, cell life cycle; 02 receptors; 00 mechanics and diffusion |
 
@@ -49,7 +49,7 @@ Read structure first, because the life cycle and the community both assume a cel
 - **[06 Physiology](../06-physiology/README.md):** secretion is exocytosis, conduction is gap junctions and channels, muscle is the cytoskeleton.
 - **[07 Microbiology and Immunology](../07-microbiology-and-immunology/README.md):** pathogens enter by endocytosis, cleave SNAREs and block apoptosis; the immune system kills by apoptosis, reads trafficking through antigen presentation and is summoned by alarmins.
 - **[08 Pathology](../08-pathology/README.md):** is the closest consumer. Cell injury, adaptation and death ([08.01](../08-pathology/01-cell-and-tissue-injury/README.md)) is the stress response and the death pathways read in tissue; [neoplasia](../08-pathology/03-neoplasia/README.md) is the cell cycle, apoptosis, senescence, adhesion and stem cell biology each subverted; storage diseases and amyloidosis are organelles and quality control failing.
-- **[09 Pharmacology and Therapeutics](../09-pharmacology-and-therapeutics/README.md):** antimitotics, proteasome inhibitors, BH3 mimetics, CDK inhibitors, senolytics and cell therapies each aim at a leaf of this layer.
+- **[09 Pharmacology and Therapeutics](../09-pharmacology-and-therapeutics/README.md):** antimitotics, proteasome inhibitors, BH3 mimetics, cell-cycle kinase inhibitors, senolytics and cell therapies each aim at a leaf of this layer.
 - **[12 Organ-system Specialties](../12-organ-system-specialties/README.md)** and **[14 Life Course, Mind and Integrative Care](../14-life-course-mind-and-integrative-care/README.md):** [neurodegeneration](../12-organ-system-specialties/10-neurology/neurodegenerative-disease.md) is protein quality control failing in cells that cannot divide; [haematological malignancies](../12-organ-system-specialties/06-haematology/haematological-malignancies.md) are stem cell hierarchies gone wrong; [frailty](../14-life-course-mind-and-integrative-care/04-geriatrics-and-palliative-care/frailty-multimorbidity-and-polypharmacy.md) is senescence and stem cell exhaustion seen in a person.
 
 ## Connections across layers

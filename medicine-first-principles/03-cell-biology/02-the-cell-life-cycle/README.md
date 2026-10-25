@@ -11,7 +11,7 @@ A tissue is a population of cells, and its size and composition are set by four 
 
 | Child | Its role in the whole | Depends on |
 |---|---|---|
-| [The cell cycle and its checkpoints](the-cell-cycle-and-its-checkpoints.md) | The oscillator that drives division and the surveillance that halts it | 02 DNA replication, kinase cascades; 01 feedback; cell structure (proteolysis) |
+| [The cell cycle and its checkpoints](the-cell-cycle-and-its-checkpoints.md) | The oscillator that drives division and the surveillance that halts it | 02 Deoxyribonucleic Acid (DNA) replication, kinase cascades; 01 feedback; cell structure (proteolysis) |
 | [Mitosis, meiosis and chromosome segregation](mitosis-meiosis-and-chromosome-segregation.md) | How the copied genome is shared exactly, and halved for sex | Cell cycle; cytoskeleton |
 | [Cell death: apoptosis, necrosis and autophagy](cell-death-apoptosis-necrosis-and-autophagy.md) | The regulated and the catastrophic ways a cell ends | Organelles (mitochondria), quality control, bioenergetics |
 | [Senescence and telomeres](senescence-and-telomeres.md) | The permanent exit, its clock and its cost | Cell cycle, cell death, DNA replication |
@@ -42,7 +42,7 @@ Upward: meiosis gives [04 inheritance](../../04-genetics-evolution-and-developme
 
 ## Cross-cutting threads
 
-- [Feedback and homeostasis](../../CROSS-CUTTING.md#feedback-and-homeostasis): the cyclin–CDK oscillator and the checkpoints are feedback loops; tissue size is division balanced against death.
+- [Feedback and homeostasis](../../CROSS-CUTTING.md#feedback-and-homeostasis): the cyclin–kinase oscillator and the checkpoints are feedback loops; tissue size is division balanced against death.
 - [Time courses](../../CROSS-CUTTING.md#time-courses): a cell cycle of hours, a transit-amplifying life of days, a stem cell life of decades, a telomere clock of ~50 divisions.
 - [Trade-offs and evolutionary legacy](../../CROSS-CUTTING.md#trade-offs-and-evolutionary-legacy): senescence and apoptosis suppress cancer at the cost of ageing and tissue loss.
 - [Injury and repair](../../CROSS-CUTTING.md#injury-and-repair): regeneration versus scar is decided by a tissue's stem cell organisation.

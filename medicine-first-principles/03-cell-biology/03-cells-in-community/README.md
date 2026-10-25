@@ -13,7 +13,7 @@ A human is ~3 × 10^13 cells that must act as one organism. This area asks what 
 |---|---|---|
 | [Cell adhesion and the extracellular matrix](cell-adhesion-and-the-extracellular-matrix.md) | The scaffold and the grip: collagen, elastin, proteoglycans, integrins, cadherins; force transmission and mechanosensing | 02 protein structure and glycobiology; 00 mechanics; cytoskeleton |
 | [Cell-to-cell communication and junctions](cell-to-cell-communication-and-junctions.md) | The conversation: contact, paracrine, endocrine and synaptic ranges; tight, anchoring and gap junctions | Adhesion; 02 receptors and transport; 00 diffusion |
-| [The cellular stress response](the-cellular-stress-response.md) | The repertoire of defence: heat shock, unfolded protein, antioxidant, hypoxia, DNA damage, nutrient sensing; adaptation versus death | Quality control; cell death; 02 gene regulation; 00 redox |
+| [The cellular stress response](the-cellular-stress-response.md) | The repertoire of defence: heat shock, unfolded protein, antioxidant, hypoxia, Deoxyribonucleic Acid (DNA) damage, nutrient sensing; adaptation versus death | Quality control; cell death; 02 gene regulation; 00 redox |
 
 ```
    matrix (collagen, elastin, proteoglycans)

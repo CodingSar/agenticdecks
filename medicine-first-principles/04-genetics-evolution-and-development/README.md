@@ -64,4 +64,4 @@ This layer turns the cell's repertoire into an organism with a history and a ris
 - [Time courses](../CROSS-CUTTING.md#time-courses): critical periods in the embryo, generation times in the arms race, the growth curve and the Gompertz law of mortality.
 - [Cause and mechanism](../CROSS-CUTTING.md#cause-and-mechanism): Mendelian disease as clean causation; Mendelian randomisation; proving a teratogen; ultimate alongside proximate explanation.
 - [Dose–response](../CROSS-CUTTING.md#dose-response): gene dosage in aneuploidy and imprinting; morphogen thresholds; teratogen thresholds.
-- [Redundancy and reserve](../CROSS-CUTTING.md#redundancy-and-reserve): MHC and immune diversity against unpredictable pathogens; the physiological reserve that ageing consumes.
+- [Redundancy and reserve](../CROSS-CUTTING.md#redundancy-and-reserve): Major Histocompatibility Complex (MHC) and immune diversity against unpredictable pathogens; the physiological reserve that ageing consumes.

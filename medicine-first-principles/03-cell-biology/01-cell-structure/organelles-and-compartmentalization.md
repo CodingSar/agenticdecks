@@ -10,7 +10,7 @@ A eukaryotic cell is not a bag of enzymes but a set of membrane-bounded compartm
 
 ## Core tenets
 
-1. **A barrier is useful only with selective transport.** The bilayer blocks ions and most polar molecules, so the two sides can differ. Pumps and channels (layer 02) then make each lumen distinct: a proton Adenosine Triphosphatase (ATPase) acidifies the lysosome, the endoplasmic reticulum holds ~100-fold more calcium than the cytosol, the mitochondrial matrix is alkaline relative to the intermembrane space. Each difference is stored free energy that costs ATP to hold and can be released as a signal or as work.
+1. **A barrier is useful only with selective transport.** The bilayer blocks ions and most polar molecules, so the two sides can differ. Pumps and channels (layer 02) then make each lumen distinct: a proton Adenosine Triphosphatase (ATPase) acidifies the lysosome, the endoplasmic reticulum holds ~100-fold more calcium than the cytosol, the mitochondrial matrix is alkaline relative to the intermembrane space. Each difference is stored free energy that costs Adenosine Triphosphate (ATP) to hold and can be released as a signal or as work.
 
 2. **The nucleus separates the genome from the machinery that reads it, and the separation is regulatory.** Messenger Ribonucleic Acid (mRNA) is transcribed and spliced inside, exported through nuclear pores (selective gates for cargo above ~40 kDa) and translated outside. The gap permits splicing before translation and lets the cell decide which transcription factors reach the Deoxyribonucleic Acid (DNA). Nuclear envelope defects (laminopathies) cause premature ageing and muscular dystrophy.
 
@@ -34,7 +34,7 @@ A eukaryotic cell is not a bag of enzymes but a set of membrane-bounded compartm
 | Lumen | The inside of an organelle; for ER and Golgi, equivalent to the outside of the cell |
 | Cristae | Folds of the inner mitochondrial membrane multiplying surface for the respiratory chain |
 | Heteroplasmy | Mixture of normal and mutant mitochondrial genomes; sets disease severity |
-| Nuclear pore complex | Protein gate controlling traffic of RNA and proteins across the nuclear envelope |
+| Nuclear pore complex | Protein gate controlling traffic of transcripts and proteins across the nuclear envelope |
 | Lysosomal storage disease | Substrate accumulation because one lysosomal hydrolase is missing |
 | Signal sequence | Short peptide directing a protein to a compartment |
 | Smooth ER | Lipid synthesis, calcium storage and (in liver) drug metabolism |
