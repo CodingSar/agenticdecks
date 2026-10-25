@@ -14,7 +14,7 @@ Immunodeficiency is the absence or failure of a component of immunity, and it is
 
    | Missing component | Typical infections | Why |
    |---|---|---|
-   | Antibody (B cells) | *Streptococcus pneumoniae*, *Haemophilus influenzae*, *Giardia*, enteroviruses; sinopulmonary infection | Encapsulated bacteria need opsonising antibody; IgA guards mucosa |
+   | Antibody (B cells) | *Streptococcus pneumoniae*, *Haemophilus influenzae*, *Giardia*, enteroviruses; sinopulmonary infection | Encapsulated bacteria need opsonising antibody; Immunoglobulin A (IgA) guards mucosa |
    | T cells | Viruses (cytomegalovirus, herpes), *Candida*, *Pneumocystis*, mycobacteria, *Cryptococcus*; plus poor antibody | Intracellular pathogens need cytotoxic and helper cells; B cells need help |
    | Neutrophils (number or function) | *Staphylococcus aureus*, Gram-negative gut bacteria, *Aspergillus*, *Candida*; abscesses | Extracellular bacteria and fungi are killed by phagocytosis |
    | Early complement (C3) | Pyogenic bacteria | Opsonisation lost |
@@ -42,7 +42,7 @@ Immunodeficiency is the absence or failure of a component of immunity, and it is
 |---|---|
 | Primary immunodeficiency | Inborn, usually monogenic, defect in an immune component |
 | Secondary immunodeficiency | Acquired loss of immune function from disease, malnutrition or treatment |
-| Severe combined immunodeficiency | Absence of functional T cells, with or without B and NK cells |
+| Severe combined immunodeficiency | Absence of functional T cells, with or without B and Natural Killer (NK) cells |
 | Opportunistic infection | Disease from an organism controlled asymptomatically by normal immunity |
 | Neutropenia | Neutrophil count below 1.5 x 10^9/L; severe below 0.5 |
 | Reactivation | Return of a latent virus when T-cell surveillance falls |

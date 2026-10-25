@@ -6,7 +6,7 @@
 
 ## Essence
 
-T cells are the adaptive immune system's decision-makers and its assassins. Each carries a single receptor, assembled by random gene rearrangement, that recognises one peptide-MHC combination; antigen selects the few clones that fit and drives them to divide thousands-fold. Helper (CD4) T cells read the cytokine context of their activation and commit to one of several programmes that direct macrophages, B cells, neutrophils or eosinophils; cytotoxic (CD8) T cells kill infected cells by inducing apoptosis. Two costs are inherent in the design: random receptors must be purged of those that bind self, which the thymus does imperfectly, and an exponential response must be shut down, so most effector cells die and a few remain as memory.
+T cells are the adaptive immune system's decision-makers and its assassins. Each carries a single receptor, assembled by random gene rearrangement, that recognises one peptide-Major Histocompatibility Complex (MHC) combination; antigen selects the few clones that fit and drives them to divide thousands-fold. Helper (CD4) T cells read the cytokine context of their activation and commit to one of several programmes that direct macrophages, B cells, neutrophils or eosinophils; cytotoxic (CD8) T cells kill infected cells by inducing apoptosis. Two costs are inherent in the design: random receptors must be purged of those that bind self, which the thymus does imperfectly, and an exponential response must be shut down, so most effector cells die and a few remain as memory.
 
 ## Core tenets
 

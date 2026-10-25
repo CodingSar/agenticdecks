@@ -14,9 +14,9 @@ Nervous tissue is built to carry information fast and far, and every structural 
 
 2. **The axon is a supply line, and length is a liability.** A motor neuron to the foot has a body ~50 micrometres across and an axon about a metre long, kept alive by motor proteins hauling vesicles, mitochondria and enzymes along microtubules at a few hundred millimetres a day (fast transport) or about a millimetre a day (slow). Anything that impairs metabolism or transport (diabetes, alcohol, many drugs) fails the longest axons first, so neuropathy begins in the feet and spreads in a stocking, then glove, pattern.
 
-3. **Glia are half the tissue and do the housekeeping.** Human brain holds roughly 86 billion neurons and a similar number of glia. Astrocytes buffer potassium, take up glutamate, wrap capillaries and form the scar after injury. Oligodendrocytes make central myelin, each wrapping segments of many axons; Schwann cells make peripheral myelin, one cell per segment. Most primary brain tumours are gliomas, because glia keep dividing and neurons do not.
+3. **Glia are half the tissue and do the housekeeping.** Human brain holds roughly 86 billion neurons and a similar number of glia. Astrocytes buffer potassium, take up glutamate, wrap capillaries and form the scar after injury. Oligodendrocytes make central myelin (many axons per cell); Schwann cells make peripheral myelin (one segment per cell). Most primary brain tumours are gliomas, because glia keep dividing and neurons do not.
 
-4. **Myelin buys speed and economy at the cost of a new vulnerability.** Wrapping an axon in lipid membrane raises its resistance and lowers its capacitance, so the action potential jumps between bare nodes of Ranvier instead of regenerating along every micrometre. Conduction rises from about 1 m/s in a thin unmyelinated fibre to around 100 m/s in a large myelinated one, roughly 6 m/s per micrometre of diameter, with far less ion pumping per metre. Strip the myelin (multiple sclerosis centrally, Guillain–Barré syndrome peripherally) and the axon survives but conducts slowly or not at all, worse with warmth; function returns if the sheath is remade.
+4. **Myelin buys speed and economy at the cost of a new vulnerability.** Wrapping an axon in lipid membrane raises its resistance and lowers its capacitance, so the action potential jumps between bare nodes of Ranvier instead of regenerating along every micrometre. Conduction rises from about 1 m/s in a thin unmyelinated fibre to around 100 m/s in a large myelinated one, roughly 6 m/s per micrometre of diameter, with far less ion pumping per metre. Strip the myelin (multiple sclerosis centrally, Guillain–Barré syndrome peripherally) and the axon survives but conducts slowly or not at all; function returns if the sheath is remade.
 
 5. **Peripheral nerves regrow; central axons do not.** A cut peripheral axon degenerates distally, but Schwann cells and their basement-membrane tubes persist and guide sprouts from the stump at about 1 mm a day, so a nerve cut at the wrist can recover hand function over months. In brain and cord, myelin debris is inhibitory, astrocytes wall off the injury, no tubes guide regrowth and the neurons are post-mitotic. Cord injury and stroke are therefore permanent at the level of the lost axons; recovery is reorganisation of what remains.
 
@@ -32,7 +32,7 @@ Nervous tissue is built to carry information fast and far, and every structural 
 | Axonal transport | Motor-protein movement of cargo along microtubules in both directions |
 | Myelin | Multilayered glial membrane wrapping an axon; oligodendrocytes (CNS), Schwann cells (periphery) |
 | Node of Ranvier | Gap in the myelin where the action potential is regenerated |
-| Astrocyte | Glial cell that buffers ions and transmitters, feeds neurons and forms the glial scar |
+| Astrocyte | Glial cell that buffers ions and transmitters and forms the glial scar |
 | Microglia | Resident macrophages of the CNS, of mesodermal origin |
 | Grey / white matter | Regions of cell bodies and synapses versus regions of myelinated tracts |
 | Blood–brain barrier | Tight-junctioned endothelium with astrocyte support controlling what enters the CNS |
@@ -48,7 +48,7 @@ Nervous tissue is built to carry information fast and far, and every structural 
 
 - **"Nerves carry electricity like wires."** An axon carries a self-regenerating ionic wave at metres per second; myelin speeds it by making the axon more wire-like between nodes.
 - **"Glia are packing material."** They set the extracellular environment, make myelin, defend the tissue and form its scars; most brain tumours and multiple sclerosis are diseases of glia.
-- **"Neurons cannot be replaced, so the brain cannot recover."** Surviving circuits reorganise; rehabilitation after stroke works on that plasticity, not on regrowth.
+- **"Neurons cannot be replaced, so the brain cannot recover."** Surviving circuits reorganise; rehabilitation after stroke works on that plasticity.
 
 ## Go deeper
 

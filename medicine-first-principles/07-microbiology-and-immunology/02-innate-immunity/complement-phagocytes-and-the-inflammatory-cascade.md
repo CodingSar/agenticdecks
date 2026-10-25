@@ -32,7 +32,7 @@ Once a microbe is recognised, the innate system must deliver killers to it. Two 
 |---|---|
 | Complement | Plasma protease cascade that opsonises, recruits and lyses |
 | Alternative pathway | Spontaneous, continuous complement activation checked only by host regulators |
-| Opsonin | Molecule (C3b, IgG, mannose-binding lectin) that coats a particle to promote phagocytosis |
+| Opsonin | Molecule (C3b, Immunoglobulin G (IgG), mannose-binding lectin) that coats a particle to promote phagocytosis |
 | Anaphylatoxin | C3a or C5a: fragments that recruit cells and degranulate mast cells |
 | Membrane attack complex | C5b-9 pore that lyses susceptible organisms |
 | Respiratory burst | NADPH-oxidase generation of reactive oxygen species inside the phagosome |
