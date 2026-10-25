@@ -49,7 +49,6 @@ Valvular and structural heart disease is cardiology as plumbing. A valve that wi
 - **"A loud murmur means a severe lesion."** Loudness depends on flow and chest wall; critical stenosis with failing output can be nearly silent.
 - **"Valve disease should be fixed as soon as it is found."** Most lesions are watched for years; the risk of intervention is justified only once symptoms or ventricular change appear.
 - **"Rheumatic heart disease has disappeared."** It has declined in high-income countries but remains the leading cause of valve disease worldwide.
-- **"A hole in the heart makes a child blue."** A simple left-to-right shunt causes breathlessness and lung flooding; cyanosis needs right-to-left flow.
 
 ## Go deeper
 

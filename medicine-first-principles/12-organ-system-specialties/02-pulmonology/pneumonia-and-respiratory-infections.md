@@ -51,7 +51,6 @@ The lung inhales about 10,000 litres of unsterile air a day across a surface the
 - **"A chest infection needs an antibiotic."** Most acute bronchitis and much pneumonia in children is viral; antibiotics add resistance and side effects without benefit.
 - **"The radiograph should clear before the patient is better."** Clinical recovery precedes radiographic clearing by weeks; a persistent opacity at six weeks, not at one, raises concern about tumour.
 - **"More oxygen fixes the hypoxaemia of pneumonia."** Shunted blood never meets the oxygen; beyond a point only recruiting the alveoli (positive pressure) or time helps.
-- **"Pneumonia is a disease of the old and frail."** It is commonest and deadliest there, but it kills more children under five worldwide than any other infection.
 
 ## Go deeper
 

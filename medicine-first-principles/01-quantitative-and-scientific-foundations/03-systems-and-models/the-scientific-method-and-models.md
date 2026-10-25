@@ -14,7 +14,7 @@ Medicine was practised for two thousand years on theories that were coherent, ta
 
 2. **Models are deliberate simplifications, judged by their predictions, not their completeness.** A one-compartment model of a drug ignores every organ and still predicts the right dosing interval; a verbal model ("heart failure is the heart's output falling short of demand") organises thousands of facts. Box's remark that all models are wrong but some are useful is exact: the question is whether the model captures the behaviour that matters for the decision at hand. A model's assumptions are its boundaries, and it fails where they do.
 
-3. **Uncontrolled observation confirms what the observer expects.** Patients improve on their own (natural history), regress toward their usual state after being seen at their worst, and improve from the encounter itself (placebo and attention); the observer remembers the successes and reinterprets the failures. Hundreds of treatments survived centuries of "clinical experience" on this basis. The control group, blinding and pre-specified outcomes exist to remove the observer's expectation from the result, and they were resisted for exactly as long as they threatened authority.
+3. **Uncontrolled observation confirms what the observer expects.** Patients improve on their own (natural history), regress toward their usual state after being seen at their worst, and improve from the encounter itself (placebo and attention); the observer remembers the successes and reinterprets the failures. The control group, blinding and pre-specified outcomes exist to remove the observer's expectation from the result, and they were resisted for exactly as long as they threatened authority.
 
 4. **Mechanism and empirical test are both required, and each checks the other.** A plausible mechanism without a demonstrated effect has repeatedly misled: antiarrhythmic drugs that suppressed ectopic beats and increased deaths (1989), hormone replacement that improved lipids and increased heart attacks (2002), tight glucose control in intensive care that raised mortality. An effect without a mechanism is suspected of confounding until one is found, as with smoking and lung cancer before the carcinogens were identified. Medicine advances when the two lines of evidence converge.
 
@@ -22,9 +22,7 @@ Medicine was practised for two thousand years on theories that were coherent, ta
 
 6. **Levels of description are not rivals; the right level is the one that predicts.** Disease can be described as molecular (a mutated channel), cellular (abnormal repolarisation), organ-level (an arrhythmia), personal (syncope) or social (a family with sudden deaths). None is more real than the others; each predicts different things and is tested differently. Reductionism is the strategy of explaining a level by the one below it, and it works until the lower level's parts interact in ways only visible above, which is why physiology is not just biochemistry and epidemiology is not just physiology.
 
-7. **Quantitative models make predictions sharp enough to fail.** "Blood pressure rises with salt" survives almost any data; "a 100 mmol/day reduction in sodium lowers systolic pressure by ~4–5 mmHg in hypertensive adults" can be checked and refined. Equations also expose hidden assumptions and let models be combined, which is why this layer treats feedback, compartments and signals mathematically before physiology uses them. A model that cannot be made quantitative is not wrong, but it is weaker.
-
-8. **Scientific knowledge is graded, not binary, and medicine must act before it is settled.** Evidence ranges from mechanism and case reports through observational studies to randomised trials and their syntheses, with each level removing more alternative explanations. Clinicians act on the best available level while stating the uncertainty, and update when better evidence arrives. The method does not promise truth; it promises error correction, and a field that stops correcting stops being scientific.
+7. **Scientific knowledge is graded, not binary, and medicine must act before it is settled.** Evidence ranges from mechanism and case reports through observational studies to randomised trials and their syntheses, with each level removing more alternative explanations. Clinicians act on the best available level while stating the uncertainty, and update when better evidence arrives. The method does not promise truth; it promises error correction, and a field that stops correcting stops being scientific.
 
 ## Key concepts
 
@@ -33,19 +31,17 @@ Medicine was practised for two thousand years on theories that were coherent, ta
 | Model | A simplified representation (verbal, diagrammatic, mathematical) that makes predictions |
 | Hypothesis | A specific, testable claim derived from a model |
 | Falsifiability | The property of being refutable by some possible observation |
-| Prediction | What the model says will be observed under stated conditions |
 | Control | A comparison that differs only in the factor under test |
 | Blinding | Keeping participants or observers unaware of allocation to remove expectation |
 | Natural history | The course of a condition without intervention |
 | Replication | Reproducing a finding in new data by independent investigators |
 | Reductionism | Explaining a level by the behaviour of the level below |
-| Emergence | Behaviour of a whole not predictable from its parts in isolation |
 | Levels of evidence | A hierarchy of study types by how many alternative explanations they exclude |
 
 ## How it fits
 
 - **Below:** nothing; this is a root leaf. It uses [probability](../01-probability-and-measurement/probability.md) to state what a model predicts about an uncertain outcome and [measurement theory](../01-probability-and-measurement/measurement-error-and-biological-variation.md) to explain why uncontrolled observation deceives.
-- **Above:** [hypothesis testing](../02-inference-and-causation/hypothesis-testing-and-confidence-intervals.md) and [causal inference](../02-inference-and-causation/causal-inference.md) formalise tenets 1, 3 and 5; [randomised trials](../../10-epidemiology-and-evidence/02-evidence-based-medicine/randomized-controlled-trials.md) and [grading evidence](../../10-epidemiology-and-evidence/02-evidence-based-medicine/grading-evidence-and-guidelines.md) are tenets 3 and 8 institutionalised; [research integrity](../../10-epidemiology-and-evidence/02-evidence-based-medicine/research-integrity-and-publication-bias.md) is the defence of tenet 5; the [placebo effect](../../09-pharmacology-and-therapeutics/04-non-drug-therapeutics/behaviour-change-and-the-placebo-effect.md) is tenet 3's mechanism; the [history of medicine](../../15-medicine-in-society/03-populations-and-the-future/history-of-medicine.md) is the record of this method arriving late.
+- **Above:** [hypothesis testing](../02-inference-and-causation/hypothesis-testing-and-confidence-intervals.md) and [causal inference](../02-inference-and-causation/causal-inference.md) formalise tenets 1, 3 and 5; [randomised trials](../../10-epidemiology-and-evidence/02-evidence-based-medicine/randomized-controlled-trials.md) and [grading evidence](../../10-epidemiology-and-evidence/02-evidence-based-medicine/grading-evidence-and-guidelines.md) are tenets 3 and 8 institutionalised; the [placebo effect](../../09-pharmacology-and-therapeutics/04-non-drug-therapeutics/behaviour-change-and-the-placebo-effect.md) is tenet 3's mechanism; the [history of medicine](../../15-medicine-in-society/03-populations-and-the-future/history-of-medicine.md) is the record of this method arriving late.
 - **Siblings:** the other four leaves in this parent are models of specific kinds, [feedback](feedback-and-control.md), [compartments](compartment-models-and-exponential-processes.md), [nonlinear dynamics](nonlinear-dynamics-oscillations-and-networks.md) and [signals](information-signals-and-noise.md); this leaf says what a model is and how it is judged.
 
 ## Common misconceptions
@@ -59,4 +55,3 @@ Medicine was practised for two thousand years on theories that were coherent, ta
 - Karl Popper, *Conjectures and Refutations* (1963): falsifiability stated by its author.
 - Druin Burch, *Taking the Medicine* (2009): how medicine learned, slowly, to test its treatments.
 - Thomas S. Kuhn, *The Structure of Scientific Revolutions* (1962): how models are replaced wholesale when their anomalies accumulate.
-- Imre Lakatos, "Falsification and the Methodology of Scientific Research Programmes" (1970): why theories are abandoned only when a better one exists.

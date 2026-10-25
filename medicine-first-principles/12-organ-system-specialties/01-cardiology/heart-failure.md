@@ -51,7 +51,6 @@ Heart failure is not a disease but a syndrome: the heart cannot deliver the outp
 - **"Heart failure means the heart has stopped or is about to."** It is a chronic syndrome, often stable for years; cardiac arrest is a different event, though failure raises its risk.
 - **"A normal ejection fraction excludes heart failure."** Half of patients have preserved ejection fraction; their problem is filling, not emptying.
 - **"Diuretics treat heart failure."** They treat congestion and relieve symptoms; the drugs that prolong life are the ones that block neurohormonal compensation.
-- **"Fluid overload means too much fluid was given."** Most congestion is fluid the kidney retained under hormonal instruction, not fluid administered.
 
 ## Go deeper
 

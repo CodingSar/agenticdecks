@@ -25,7 +25,7 @@ The unifying idea is **supply, demand and compensation applied to one muscle**. 
   valve stenosis / regurgitation --> pressure or volume load ---+        ^              |
                                                                  |        |              v
                                                      neurohormonal compensation      sudden death
-                                                      (sympathetic, RAAS, ADH)
+                                                      (sympathetic, renin-angiotensin, antidiuretic hormone)
 ```
 
 Read hypertension and ischaemic heart disease first: they are the two commonest inputs. Heart failure is the common output and should be read next, because its neurohormonal story explains why drugs that lower blood pressure or block the sympathetic system also prolong life in failure. Arrhythmias follow, since most dangerous rhythms arise in ischaemic or failing muscle. Valvular disease stands slightly apart: it is the one place where the fix is mostly mechanical and the specialty meets cardiac surgery.

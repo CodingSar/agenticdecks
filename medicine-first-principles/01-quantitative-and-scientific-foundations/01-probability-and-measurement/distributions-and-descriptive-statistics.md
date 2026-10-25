@@ -20,11 +20,9 @@ A distribution is the shape that probability takes over the possible values of a
 
 5. **The standard error is the standard deviation of a sample statistic, and it shrinks with `√n`.** If individual values have standard deviation σ, the mean of n of them has standard deviation `σ/√n`, the standard error of the mean. Quadrupling the sample halves it. This is the bridge from description to inference: the spread of individuals (SD) describes the population; the spread of the estimate (SE) describes how well a study has pinned down its mean, and the two are routinely confused in papers and talks.
 
-6. **Percentiles describe position and are the language of growth and development.** A child on the 10th centile for weight is heavier than 10% of children of the same age and sex; crossing centiles over time matters more than any single position. Centile charts are empirical distributions by age, and the z-score (how many standard deviations from the mean) is the same idea standardised, used for bone density, body mass index in children and fetal growth. Both inherit the problem of the reference population: a chart built from one population misclassifies another.
+6. **Percentiles describe position and are the language of growth and development.** A child on the 10th centile for weight is heavier than 10% of children of the same age and sex; crossing centiles over time matters more than any single position. Centile charts are empirical distributions by age, and the z-score (how many standard deviations from the mean) is the same idea standardised, used for bone density, body mass index in children and fetal growth.
 
-7. **The shape of the distribution carries biological information.** A bimodal distribution suggests two populations (a single-gene polymorphism in drug metabolism, a mixed sample of diseased and healthy); heavy tails suggest a process with occasional large events (bleeding, seizures); a truncated distribution suggests selection (patients referred only above a threshold). Looking at the histogram before computing a summary is the single habit that prevents most statistical errors.
-
-8. **Correlation measures linear association between two distributions and nothing else.** The correlation coefficient r runs from −1 to 1 and its square is the fraction of variance in one variable explained linearly by the other. An r of 0.3 (common in biology) explains 9% of variance. Correlation says nothing about cause, nothing about agreement, is inflated by outliers and deflated by restricted range, and is zero for a strong U-shaped relation such as mortality against body mass index.
+7. **Correlation measures linear association between two distributions and nothing else.** The correlation coefficient r runs from −1 to 1 and its square is the fraction of variance in one variable explained linearly by the other. An r of 0.3 (common in biology) explains 9% of variance. It says nothing about cause or agreement, and is zero for a U-shaped relation such as mortality against body mass index.
 
 ## Key concepts
 
@@ -45,14 +43,13 @@ A distribution is the shape that probability takes over the possible values of a
 ## How it fits
 
 - **Below:** a distribution is a [probability](probability.md) spread over values; this is a root leaf.
-- **Above:** [measurement error](measurement-error-and-biological-variation.md) uses the normal curve to define reference ranges; [hypothesis tests and confidence intervals](../02-inference-and-causation/hypothesis-testing-and-confidence-intervals.md) rest on the standard error; [complex traits](../../04-genetics-evolution-and-development/01-inheritance/complex-traits-and-heritability.md) are the normal distribution produced by many genes; [allometry](../../00-physical-and-chemical-foundations/01-physics-of-the-body/scale-and-allometry.md) is a power law fitted on log scales; [growth charts](../../14-life-course-mind-and-integrative-care/01-paediatrics/growth-development-and-the-child-as-patient.md) are tenet 6; [measures of frequency](../../10-epidemiology-and-evidence/01-epidemiology/measures-of-frequency-and-association.md) are binomial and Poisson quantities.
+- **Above:** [measurement error](measurement-error-and-biological-variation.md) uses the normal curve to define reference ranges; [hypothesis tests and confidence intervals](../02-inference-and-causation/hypothesis-testing-and-confidence-intervals.md) rest on the standard error; [complex traits](../../04-genetics-evolution-and-development/01-inheritance/complex-traits-and-heritability.md) are the normal distribution produced by many genes; [allometry](../../00-physical-and-chemical-foundations/01-physics-of-the-body/scale-and-allometry.md) is a power law fitted on log scales.
 - **Siblings:** [probability](probability.md) gives the rules; [measurement error](measurement-error-and-biological-variation.md) applies the spread to one patient's repeated values; [Bayesian reasoning](bayesian-reasoning.md) treats a distribution as a state of belief to be updated.
 
 ## Common misconceptions
 
 - **"Most biological variables are normally distributed."** Many are log-normal or skewed; assuming normality for length of stay, cost or hormone levels gives absurd ranges and wrong tests.
 - **"Standard deviation and standard error are interchangeable."** SD describes individuals; SE describes the precision of an estimate and shrinks with sample size. Error bars showing SE make variable data look tight.
-- **"A correlation of 0.7 is strong."** It explains half the variance; prediction for an individual from such a correlation is poor.
 
 ## Go deeper
 

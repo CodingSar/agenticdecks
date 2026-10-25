@@ -5,7 +5,7 @@
 
 ## What this area is about
 
-Physiology is the account of how a body of some 37 trillion cells, each needing oxygen, fuel and a narrow range of temperature, pH and ionic composition, keeps every one of them alive while the whole organism runs, fasts, sleeps or fights an infection. Anatomy (layer 05) describes the machine at rest; physiology describes it running, in numbers, with the forces that drive it and the loops that steer it.
+Physiology is the account of how a body of some 37 trillion cells, each needing oxygen, fuel and a narrow range of temperature, pH and ionic composition, keeps every one of them alive while the whole organism runs, fasts, sleeps or fights an infection. Anatomy (layer 05) describes the machine at rest; physiology describes it running, in numbers.
 
 Three ideas from the layers below, applied over and over, make up almost all of it. **Gradients and flow:** oxygen, carbon dioxide, ions, water, heat and blood move down gradients of concentration, pressure, charge or temperature, and the body spends about a fifth of its resting energy on pumps that make the gradients it later uses. **Supply and demand:** every tissue consumes oxygen and substrate at a rate that varies many-fold between rest and work, and delivery must track consumption or the tissue fails within minutes (brain, heart) or hours (kidney, gut). **Feedback:** nearly every regulated variable (arterial pressure, arterial carbon dioxide, osmolality, glucose, calcium, core temperature) is sensed, compared with a set point and corrected by an effector, with the gain, delay and oscillation that control theory predicts. Ask of any physiological quantity "what is its value, what gradient drives it and what loop controls it?" and most of clinical medicine becomes the study of a quantity, a gradient or a loop that has failed.
 
@@ -51,7 +51,7 @@ Read 01 first: it names the variables everything else defends. Then 02, the fast
 ## Connections to neighbouring layers
 
 - **[00 Physical and chemical foundations](../00-physical-and-chemical-foundations/README.md):** Nernst, Poiseuille, Starling, Laplace and Fick are physics with physiological constants inserted.
-- **[01 Quantitative and scientific foundations](../01-quantitative-and-scientific-foundations/README.md):** homeostasis is negative feedback; washout curves are exponential decay; periodic breathing is a loop with delay oscillating.
+- **[01 Quantitative and scientific foundations](../01-quantitative-and-scientific-foundations/README.md):** homeostasis is negative feedback; periodic breathing is a loop with delay oscillating.
 - **[02 Biochemistry and molecular biology](../02-biochemistry-and-molecular-biology/README.md):** channels, pumps and receptors are the parts list; metabolism is what the endocrine system regulates.
 - **[08 Pathology](../08-pathology/README.md):** oedema, shock and infarction are this layer's equations with one term pushed out of range.
 - **[09 Pharmacology and therapeutics](../09-pharmacology-and-therapeutics/README.md):** drug classes are named for the control point they act on; the autonomic nervous system alone explains much of the cardiovascular formulary.

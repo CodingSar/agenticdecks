@@ -22,9 +22,7 @@ Every number in medicine is a measurement of a quantity that was already varying
 
 6. **A change between two measurements is real only when it exceeds the combined noise.** If analytical and within-person coefficients of variation are `CVa` and `CVi`, the difference between two results must exceed roughly `2.8 × √(CVa² + CVi²)` to be significant at the usual 95% level (the reference change value). For creatinine (CVa ~3%, CVi ~5%) that is about 16%; a rise from 80 to 88 µmol/L is noise, a rise to 100 is signal. Trends over several points beat any single pair.
 
-7. **Agreement between observers and methods must be measured, not assumed.** Two clinicians examining the same chest, two radiologists reading the same film and two laboratory methods for the same analyte disagree more than intuition expects. Kappa statistics quantify agreement beyond chance for categories; Bland–Altman plots show the bias and limits of agreement between two methods. Correlation is the wrong tool: two methods can correlate at 0.99 and differ systematically by 20%.
-
-8. **Regression to the mean is a consequence of measuring with noise, and it mimics treatment effect.** Patients are enrolled or treated when a value is high; their next value is, on average, lower whether or not anything was done, because part of the high reading was noise that does not recur. This explains much of the apparent benefit of untested remedies and the fall in blood pressure seen after any intervention, and it is the reason trials need a control group measured the same way.
+7. **Regression to the mean is a consequence of measuring with noise, and it mimics treatment effect.** Patients are enrolled or treated when a value is high; their next value is, on average, lower whether or not anything was done, because part of the high reading was noise that does not recur. This explains much of the apparent benefit of untested remedies and the fall in blood pressure seen after any intervention, and it is the reason trials need a control group measured the same way.
 
 ## Key concepts
 
@@ -38,24 +36,20 @@ Every number in medicine is a measurement of a quantity that was already varying
 | Pre-analytical error | Error introduced before the sample reaches the analyser |
 | Reference range (interval) | Central 95% of values in a reference population |
 | Reference change value | The minimum difference between two results that exceeds expected noise |
-| Kappa | Agreement between observers corrected for chance |
-| Bland–Altman plot | Difference between two methods plotted against their mean, with limits of agreement |
 | Regression to the mean | Extreme values tend to be followed by less extreme ones |
 
 ## How it fits
 
 - **Below:** random error is a random variable with a [distribution](distributions-and-descriptive-statistics.md), and the `1/√n` rule and the 95% interval come from [probability](probability.md). This leaf has no layer beneath it.
-- **Above:** [clinical chemistry and reference ranges](../../11-clinical-method-and-diagnostics/02-laboratory-medicine/clinical-chemistry-and-reference-ranges.md) is tenets 3–6 as a discipline; [physical examination](../../11-clinical-method-and-diagnostics/01-the-clinical-encounter/physical-examination-and-signs.md) is a measurement with observer error; [diagnostic accuracy studies](../../10-epidemiology-and-evidence/02-evidence-based-medicine/diagnostic-accuracy-studies.md) quantify how well a noisy measurement separates disease; [homeostasis](../../06-physiology/01-integrative-principles/homeostasis-and-set-points.md) is the source of within-person variation; [randomised trials](../../10-epidemiology-and-evidence/02-evidence-based-medicine/randomized-controlled-trials.md) exist partly because of tenet 8.
+- **Above:** [clinical chemistry and reference ranges](../../11-clinical-method-and-diagnostics/02-laboratory-medicine/clinical-chemistry-and-reference-ranges.md) is tenets 3–6 as a discipline; [physical examination](../../11-clinical-method-and-diagnostics/01-the-clinical-encounter/physical-examination-and-signs.md) is a measurement with observer error; [diagnostic accuracy studies](../../10-epidemiology-and-evidence/02-evidence-based-medicine/diagnostic-accuracy-studies.md) quantify how well a noisy measurement separates disease; [homeostasis](../../06-physiology/01-integrative-principles/homeostasis-and-set-points.md) is the source of within-person variation.
 - **Siblings:** [probability](probability.md) supplies the rules; [distributions](distributions-and-descriptive-statistics.md) describe the spread; [Bayesian reasoning](bayesian-reasoning.md) turns an imperfect measurement into a revised belief about the patient.
 
 ## Common misconceptions
 
 - **"A result outside the reference range is abnormal."** One in twenty healthy results falls outside it by definition; the more tests ordered, the more false alarms.
-- **"Two methods that correlate strongly agree."** Correlation measures whether they move together, not whether they give the same number; a constant bias leaves correlation perfect.
 - **"The patient improved after treatment, so the treatment worked."** Values selected for being extreme regress toward the mean on their own; only a comparison group shows the treatment's share.
 
 ## Go deeper
 
 - Callum G. Fraser, *Biological Variation: From Principles to Practice* (2001): the quantitative basis of reference change values.
-- J. Martin Bland and Douglas G. Altman, "Statistical methods for assessing agreement between two methods of clinical measurement" (*The Lancet*, 1986): the method-comparison paper every laboratory cites.
 - Douglas G. Altman, *Practical Statistics for Medical Research* (1991): measurement, agreement and reference ranges, written for clinicians.

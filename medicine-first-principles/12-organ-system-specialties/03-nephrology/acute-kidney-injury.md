@@ -51,7 +51,6 @@ Acute Kidney Injury (AKI) is a fall in glomerular filtration over hours to days,
 - **"A normal creatinine means normal kidneys."** Creatinine rises only after half or more of filtration is lost and lags by a day or more; it also depends on muscle mass, so a frail old woman with a "normal" value may have severely reduced filtration.
 - **"AKI is a kidney disease."** Most AKI is the kidney's correct response to a circulatory, septic, obstructive or pharmacological insult elsewhere; the treatment is of the cause.
 - **"Giving fluid always helps the kidneys."** It helps a hypovolaemic kidney and drowns an overloaded one; in established tubular injury the kidney cannot excrete what is given.
-- **"Full recovery of creatinine means no harm done."** Survivors of AKI have a substantially raised lifetime risk of chronic kidney disease.
 
 ## Go deeper
 

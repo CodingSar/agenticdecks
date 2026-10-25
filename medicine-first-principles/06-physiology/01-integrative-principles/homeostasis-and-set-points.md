@@ -10,21 +10,21 @@ Homeostasis is the maintenance of the internal environment within limits that ce
 
 ## Core tenets
 
-1. **A homeostatic loop has four parts, and clinical reasoning names each one.** Sensor (baroreceptor, osmoreceptor, chemoreceptor, thermoreceptor), set point and comparator (usually hypothalamus or brainstem), effector (heart, vessel, kidney, sweat gland, muscle) and the regulated variable. Disease can break any part: sensor (autonomic neuropathy), comparator (fever resets it), effector (a failing heart cannot answer the baroreflex) or connection (a receptor-blocking drug). Postural dizziness can come from any of the four.
+1. **A homeostatic loop has four parts, and clinical reasoning names each one.** Sensor (baroreceptor, osmoreceptor, chemoreceptor), comparator with its set point (hypothalamus or brainstem), effector (heart, vessel, kidney, gland, muscle) and the regulated variable. Disease can break any part: sensor (autonomic neuropathy), comparator (fever resets it), effector (a failing heart cannot answer the baroreflex) or connection (a receptor-blocking drug). Postural dizziness can come from any of the four.
 
 2. **Proportional feedback never fully corrects; the residual error equals the disturbance divided by (1 + gain).** If haemorrhage would drop pressure by 40 mmHg and the baroreflex has a gain of 3, pressure settles ~10 mmHg low, not at normal. High gain gives small error but risks oscillation when there is delay; the body adds slow integral control (the kidney for pressure, over days) to remove the residual. So a normal value during a large disturbance means the loop is working hard, not that nothing is wrong.
 
 3. **The body regulates what it can sense, which is not always what matters.** It senses pressure, not flow, so it will constrict vessels and starve the kidney and gut to keep pressure when cardiac output falls. When both volume and osmolality are threatened it sacrifices osmolality, diluting the plasma to keep volume. Every paradox of the kind "overloaded yet retaining sodium" is a loop defending the variable it can see.
 
-4. **Set points are not constants; they are signals that can be moved.** Fever is the hypothalamic thermostat set higher by prostaglandin E2 (the patient shivers at 38 °C because the error is negative). Pregnancy lowers the osmotic set point by ~10 mOsm/kg; chronic hypertension resets the baroreceptors upward within days, so they defend the high pressure; the clock moves temperature and cortisol across the day. Pathology often begins with a shifted set point rather than a broken effector.
+4. **Set points are not constants; they are signals that can be moved.** Fever is the thermostat set higher by prostaglandin E2 (the patient shivers at 38 °C because the error is negative). Pregnancy lowers the osmotic set point by ~10 mOsm/kg; chronic hypertension resets the baroreceptors upward within days, so they defend the high pressure; the clock moves temperature and cortisol across the day. Pathology often begins with a shifted set point rather than a broken effector.
 
 5. **Delay plus high gain produces oscillation.** A loop that reacts strongly to a value measured some time ago overshoots. Cheyne–Stokes breathing in heart failure (long lung-to-chemoreceptor circulation time) is a loop ringing; [nonlinear dynamics](../../01-quantitative-and-scientific-foundations/03-systems-and-models/nonlinear-dynamics-oscillations-and-networks.md) supplies the mathematics, physiology the delays.
 
-6. **Variables are ranked, and the body sacrifices the low to defend the high.** Brain and heart perfusion outrank kidney and gut; pressure outranks volume; arterial carbon dioxide outranks oxygen in driving breathing (until oxygen is very low); ionised calcium outranks bone. The ranking predicts which organ fails first: in shock the kidney and gut are sacrificed early, so acute kidney injury follows almost any severe circulatory insult.
+6. **Variables are ranked, and the body sacrifices the low to defend the high.** Brain and heart perfusion outrank kidney and gut; pressure outranks volume; arterial carbon dioxide outranks oxygen in driving breathing; ionised calcium outranks bone. The ranking predicts which organ fails first: in shock the kidney and gut are sacrificed early, so acute kidney injury follows almost any severe circulatory insult.
 
 7. **Feedforward anticipates error that feedback would answer too late.** Insulin rises on seeing food, ventilation rises at the start of exercise before carbon dioxide has changed. Feedforward needs a predictor and can be wrong; feedback needs an error and is always late.
 
-8. **Positive feedback is reserved for events that must go to completion.** The action potential, platelet activation, the oestrogen surge that triggers ovulation and the oxytocin loop of labour all amplify a small start into an all-or-nothing outcome and are ended by a separate mechanism. Positive feedback that escapes its terminator is catastrophe: falling pressure reduces coronary flow, which weakens the heart, which lowers pressure further (decompensated shock).
+8. **Positive feedback is reserved for events that must go to completion.** The action potential, platelet activation, ovulation and the oxytocin loop of labour amplify a small start into an all-or-nothing outcome and are ended by a separate mechanism. Positive feedback that escapes its terminator is catastrophe: falling pressure reduces coronary flow, which weakens the heart, which lowers pressure further (decompensated shock).
 
 9. **Reserve hides damage; decompensation is reserve running out.** A kidney with half its nephrons has a normal creatinine; a heart with a quarter of its myocardium scarred has a normal resting output; an older person with reduced reserve in every loop (frailty) is well until a minor insult exhausts the smallest. Compensation is why patients look well and why they collapse abruptly.
 
@@ -32,7 +32,7 @@ Homeostasis is the maintenance of the internal environment within limits that ce
 
 | Term | Meaning |
 |---|---|
-| Regulated variable | A quantity the body senses and defends (pressure, PCO2, osmolality); contrast a controlled variable, which it adjusts to do so (heart rate, urine volume) |
+| Regulated variable | A quantity the body senses and defends; contrast a controlled variable, adjusted to do so (heart rate, urine volume) |
 | Set point | The value the comparator aims for; can be shifted by signals |
 | Gain | Correction produced per unit of error; sets residual error and stability |
 | Negative feedback | Output opposes the error that produced it |
@@ -57,4 +57,3 @@ Homeostasis is the maintenance of the internal environment within limits that ce
 
 - Walter B. Cannon, *The Wisdom of the Body* (1932): the original statement of homeostasis, still readable.
 - Arthur C. Guyton and John E. Hall, *Textbook of Medical Physiology* (14th ed., 2020), chapter 1: gain, set points and the systems view of regulation.
-- Bruce S. McEwen, "Stress, adaptation, and disease: allostasis and allostatic load" (*Annals of the New York Academy of Sciences*, 1998): why moving set points has a cost.

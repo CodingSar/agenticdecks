@@ -23,7 +23,7 @@ It sits above [12 Organ-system Specialties](../12-organ-system-specialties/READM
 | [02 Anaesthesia and perioperative medicine](02-anaesthesia-and-perioperative-medicine/README.md) | Reversible pharmacological control of consciousness, pain, reflexes and breathing so that surgery is survivable; risk before, complications after | 06 nervous and respiratory physiology, 09 anaesthetic pharmacology |
 | [03 Critical care](03-critical-care/README.md) | Organ support while supply is made to meet demand again: shock, ventilation, sepsis, the failing kidney and gut | 01, 02, 12 cardiology, pulmonology, nephrology |
 | [04 Emergency medicine](04-emergency-medicine/README.md) | Triage of time-critical physiology in the undifferentiated patient; arrest, poisoning, the prehospital phase | 11 clinical method, 12 everything, 01–03 as destinations |
-| [05 Ophthalmology and ENT](05-ophthalmology-and-ent/README.md) | The sense organs: optics, hearing and balance, the upper airway; procedure-centred specialties with their own emergencies | 06 sensory systems, 05 head and neck anatomy, 01–02 for operating |
+| [05 Ophthalmology and Ear, Nose and Throat (ENT)](05-ophthalmology-and-ent/README.md) | The sense organs: optics, hearing and balance, the upper airway; procedure-centred specialties with their own emergencies | 06 sensory systems, 05 head and neck anatomy, 01–02 for operating |
 
 ```
                       time since insult

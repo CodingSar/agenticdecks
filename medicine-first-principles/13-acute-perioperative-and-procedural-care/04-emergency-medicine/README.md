@@ -35,7 +35,7 @@ Read triage first; it is the method every other leaf uses. Cardiac arrest is the
 - **[Surgery](../01-surgery/README.md):** the emergency department is the front door for [the acute abdomen](../01-surgery/the-acute-abdomen.md) and [trauma](../01-surgery/trauma-and-haemorrhage-control.md); the primary survey decides who goes to theatre without a scan.
 - **[Anaesthesia and perioperative medicine](../02-anaesthesia-and-perioperative-medicine/README.md):** shares the [airway](../02-anaesthesia-and-perioperative-medicine/airway-and-ventilation-management.md), procedural sedation and the emergency induction of the unfasted, unassessed patient.
 - **[Critical care](../03-critical-care/README.md):** receives the resuscitated patient; the first hour of [shock](../03-critical-care/shock-and-haemodynamic-support.md) and [sepsis](../03-critical-care/sepsis-and-multi-organ-failure.md) happens in the emergency department, and post-arrest care is shared.
-- **[Ophthalmology and ENT](../05-ophthalmology-and-ent/README.md):** the painful red eye, sudden vision loss, epistaxis, the foreign body and the obstructed upper airway all present first to emergency medicine.
+- **[Ophthalmology and Ear, Nose and Throat (ENT)](../05-ophthalmology-and-ent/README.md):** the painful red eye, sudden vision loss, epistaxis, the foreign body and the obstructed upper airway all present first to emergency medicine.
 
 ## Interfaces with other specialties
 

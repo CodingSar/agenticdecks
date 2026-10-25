@@ -38,7 +38,7 @@ Read the surgical decision first; it supplies the cost side of every later equat
 - **[Anaesthesia and perioperative medicine](../02-anaesthesia-and-perioperative-medicine/README.md):** the two are one team. The anaesthetist's [preoperative risk assessment](../02-anaesthesia-and-perioperative-medicine/perioperative-risk-and-complications.md) is half of the surgical decision, and most deaths after surgery are medical (myocardial infarction, pneumonia, thromboembolism) rather than technical.
 - **[Critical care](../03-critical-care/README.md):** receives the patient after major or emergency surgery; [damage-control surgery](trauma-and-haemorrhage-control.md) exists because the intensive care unit can correct physiology better than the operating theatre can.
 - **[Emergency medicine](../04-emergency-medicine/README.md):** the front door for the acute abdomen and for trauma; the [primary survey](../04-emergency-medicine/triage-and-the-abcde-approach.md) decides who goes straight to theatre.
-- **[Ophthalmology and ENT](../05-ophthalmology-and-ent/README.md):** surgical specialties in their own right, built on the same wound-healing and anaesthetic principles applied to small, functionally dense organs.
+- **[Ophthalmology and Ear, Nose and Throat (ENT)](../05-ophthalmology-and-ent/README.md):** surgical specialties in their own right, built on the same wound-healing and anaesthetic principles applied to small, functionally dense organs.
 
 ## Interfaces with other specialties
 

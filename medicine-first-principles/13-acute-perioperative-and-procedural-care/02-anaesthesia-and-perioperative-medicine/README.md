@@ -35,7 +35,7 @@ Read the drugs first: everything else follows from what they switch off. The air
 - **[Surgery](../01-surgery/README.md):** the two halves of one procedure. The anaesthetist's assessment of reserve is the cost side of [the surgical decision](../01-surgery/the-surgical-decision.md); the surgeon's injury is what the anaesthetic has to make tolerable.
 - **[Critical care](../03-critical-care/README.md):** grew out of anaesthesia (the 1952 Copenhagen polio epidemic, when anaesthetists hand-ventilated patients for weeks) and uses the same airway skills, ventilators, sedatives and vasoactive drugs for days rather than hours.
 - **[Emergency medicine](../04-emergency-medicine/README.md):** shares the airway and the [resuscitation](../04-emergency-medicine/resuscitation-and-cardiac-arrest.md); the emergency anaesthetic in a patient who is bleeding, full of food and unassessed is the hardest case of the specialty.
-- **[Ophthalmology and ENT](../05-ophthalmology-and-ent/README.md):** the shared airway: ENT operates inside the space the anaesthetist needs, and the obstructed upper airway is a joint emergency.
+- **[Ophthalmology and Ear, Nose and Throat (ENT)](../05-ophthalmology-and-ent/README.md):** the shared airway: ENT operates inside the space the anaesthetist needs, and the obstructed upper airway is a joint emergency.
 
 ## Interfaces with other specialties
 

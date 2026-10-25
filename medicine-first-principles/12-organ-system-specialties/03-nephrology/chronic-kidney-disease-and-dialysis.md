@@ -51,7 +51,6 @@ Chronic Kidney Disease (CKD) is the loss of nephrons over months to years, with 
 - **"Kidney disease ends in dialysis."** Most patients with CKD die of cardiovascular disease with their kidneys still working; fewer than one in fifty reach dialysis.
 - **"A small rise in creatinine after starting an ACE inhibitor means it is harming the kidney."** A modest fall in filtration is the drug lowering glomerular pressure, which is how it protects the kidney over years.
 - **"Dialysis replaces the kidney."** It replaces a fraction of one function intermittently; patients on dialysis remain anaemic, hypertensive, bone-diseased and at high cardiovascular risk.
-- **"Older patients should always be offered dialysis."** In the frail over-80s, conservative management often gives similar survival with fewer hospital days; the choice is the patient's.
 
 ## Go deeper
 

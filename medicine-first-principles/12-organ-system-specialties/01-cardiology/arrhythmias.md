@@ -51,7 +51,6 @@ An arrhythmia is a failure of the heart's timing system: too slow, too fast, or 
 - **"An irregular pulse is always abnormal."** Sinus rate normally varies with breathing, especially in the young; irregularity is diagnosed on the ECG, not the wrist.
 - **"Suppressing extra beats prevents sudden death."** Ectopic beats are a marker, not a cause; suppressing them with sodium-channel blockers after infarction increased deaths.
 - **"A defibrillator restarts a stopped heart."** It stops a fibrillating one; a heart with no electrical activity (asystole) cannot be shocked into rhythm.
-- **"Atrial fibrillation is a nuisance rhythm."** Its stroke risk, not its symptoms, is what kills and disables.
 
 ## Go deeper
 

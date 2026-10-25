@@ -51,7 +51,6 @@ Restrictive lung disease is the mirror of obstruction: the lung can empty but ca
 - **"Fibrosis is inflammation, so steroids treat it."** In idiopathic pulmonary fibrosis inflammation is minimal and steroids were shown to harm; antifibrotic drugs act on fibroblast signalling instead.
 - **"A normal chest radiograph excludes interstitial disease."** Early disease is often invisible on plain film and needs high-resolution computed tomography and gas transfer.
 - **"Restriction means the airways are blocked."** The airways are open; the lung or chest wall cannot expand. The FEV1/FVC ratio is normal or high.
-- **"Asbestos disease is history."** Latency is 20–40 years, so disease from exposures of the 1970s–1990s is still presenting in the 2020s.
 
 ## Go deeper
 

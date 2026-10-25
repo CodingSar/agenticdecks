@@ -6,7 +6,7 @@
 
 ## Essence
 
-Once the circulation and the lungs are supported, the rest of the body still has to be kept alive for days or weeks: the kidney that stopped, the gut that will not absorb, the brain that must tolerate a tube, the muscles that waste while the patient lies still. Each support (dialysis, feeding, sedation, immobilisation) replaces a function and causes a syndrome of its own, so an intensive care stay is a second illness layered on the first. The organising idea is the bridge: support is justified only while there is a far side, recovery of the function being replaced, and the longer the bridge the more it costs in infection, weakness, delirium and lasting disability. Deciding when the far side has disappeared, and saying so, is as much a part of critical care as starting the machine.
+Once the circulation and the lungs are supported, the rest of the body still has to be kept alive for days or weeks: the kidney that stopped, the gut that will not absorb, the brain that must tolerate a tube, the muscles that waste while the patient lies still. Each support (dialysis, feeding, sedation, immobilisation) replaces a function and causes a syndrome of its own, so an Intensive Care Unit (ICU) stay is a second illness layered on the first. The organising idea is the bridge: support is justified only while there is a far side, recovery of the function being replaced, and the longer the bridge the more it costs in infection, weakness, delirium and lasting disability. Deciding when the far side has disappeared, and saying so, is as much a part of critical care as starting the machine.
 
 ## Core tenets
 

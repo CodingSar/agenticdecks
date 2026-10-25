@@ -22,9 +22,7 @@ Diagnosis is the revision of belief by evidence, and Bayes' theorem is the arith
 
 6. **Decisions are made against thresholds, not at certainty.** A test is worth doing only if its result could cross a threshold: below the *test threshold* the disease is too unlikely to pursue; above the *treatment threshold* one treats without testing. The thresholds depend on the harm of a missed diagnosis, the harm of unnecessary treatment and the cost of the test. A test that cannot move the probability across a threshold changes nothing and should not be ordered; this is the formal reason "routine" investigations waste money and generate false positives.
 
-7. **The prior itself comes from evidence and can be formalised.** Bayesian statistics treats parameters (a treatment effect, a prevalence) as having probability distributions that data update: posterior ∝ likelihood × prior. A small trial showing a dramatic effect is tempered by a sceptical prior that large effects are rare; a biologically implausible association needs more data than a plausible one. This is how an experienced clinician reads a surprising result, and how adaptive trials and meta-analyses now combine evidence.
-
-8. **Bayesian reasoning is what good clinical judgement already does, with the errors removed.** Experienced clinicians form a short list of diagnoses weighted by prior probability and update as findings arrive, which is Bayes done intuitively. The known failures (anchoring on a first diagnosis, overweighting a vivid test result, neglecting prevalence, stopping once a plausible answer appears) are failures to update correctly. Making the arithmetic explicit does not replace judgement; it checks it.
+7. **The prior itself comes from evidence and can be formalised.** Bayesian statistics treats parameters (a treatment effect, a prevalence) as having probability distributions that data update: posterior ∝ likelihood × prior. A small trial showing a dramatic effect is tempered by a sceptical prior that large effects are rare; a biologically implausible association needs more data than a plausible one. This is how an experienced clinician reads a surprising result.
 
 ## Key concepts
 
@@ -38,20 +36,17 @@ Diagnosis is the revision of belief by evidence, and Bayes' theorem is the arith
 | Positive / negative predictive value | `P(disease | positive)` / `P(no disease | negative)`; depend on prevalence |
 | Base-rate fallacy | Judging a result's meaning without regard to prevalence |
 | Test threshold / treatment threshold | Probabilities below which one does not test and above which one treats without testing |
-| Conditional independence | Findings whose likelihood ratios may be multiplied because they do not share a cause |
-| Posterior ∝ likelihood × prior | The general Bayesian rule for updating any belief with data |
 
 ## How it fits
 
 - **Below:** the theorem is a rearrangement of [conditional probability](probability.md); sensitivity and specificity are tail areas of two [distributions](distributions-and-descriptive-statistics.md) (test values in diseased and healthy) split at a cut-off.
-- **Above:** [using tests at the bedside](../../11-clinical-method-and-diagnostics/01-the-clinical-encounter/using-tests-pretest-probability-and-thresholds.md) and [clinical reasoning](../../11-clinical-method-and-diagnostics/01-the-clinical-encounter/clinical-reasoning-and-cognitive-bias.md) are this leaf in practice; [diagnostic accuracy studies](../../10-epidemiology-and-evidence/02-evidence-based-medicine/diagnostic-accuracy-studies.md) measure the likelihood ratios; [screening](../../10-epidemiology-and-evidence/03-screening-and-prevention/screening-principles-and-biases.md) is tenet 3 at population scale; [risk prediction](../../10-epidemiology-and-evidence/03-screening-and-prevention/risk-prediction-and-stratification.md) estimates priors; [health informatics and artificial intelligence](../../15-medicine-in-society/01-health-systems/health-informatics-and-artificial-intelligence.md) automates the update and inherits its base-rate problem.
+- **Above:** [using tests at the bedside](../../11-clinical-method-and-diagnostics/01-the-clinical-encounter/using-tests-pretest-probability-and-thresholds.md) and [clinical reasoning](../../11-clinical-method-and-diagnostics/01-the-clinical-encounter/clinical-reasoning-and-cognitive-bias.md) are this leaf in practice; [diagnostic accuracy studies](../../10-epidemiology-and-evidence/02-evidence-based-medicine/diagnostic-accuracy-studies.md) measure the likelihood ratios; [screening](../../10-epidemiology-and-evidence/03-screening-and-prevention/screening-principles-and-biases.md) is tenet 3 at population scale.
 - **Siblings:** [probability](probability.md) supplies the rules; [measurement error](measurement-error-and-biological-variation.md) explains why a test result is uncertain evidence in the first place; [distributions](distributions-and-descriptive-statistics.md) show that a cut-off trades sensitivity against specificity.
 
 ## Common misconceptions
 
 - **"A sensitive test rules in; a specific test rules out."** The reverse: a highly sensitive test that is negative rules out (few diseased are missed); a highly specific test that is positive rules in (few healthy are flagged).
 - **"A positive result from a 95%-accurate test means 95% chance of disease."** Only if the prior was 50%; at 1% prevalence most positives are false.
-- **"More tests always help."** A test whose result cannot cross a decision threshold changes nothing and adds a 5% false-positive risk per test.
 
 ## Go deeper
 

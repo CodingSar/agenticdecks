@@ -51,7 +51,6 @@ Hypertension is a regulated variable set too high. Arterial pressure is cardiac 
 - **"High blood pressure causes headaches and you can feel it."** Hypertension is almost always symptomless until it damages an organ; that is why it is screened for.
 - **"Normal blood pressure is a fixed threshold."** Risk rises continuously from about 115/75 mmHg; treatment thresholds are decisions about harm and benefit, not biological boundaries.
 - **"The drug class matters more than the pressure achieved."** For most patients the benefit tracks the fall in pressure; class choice matters mainly for coexisting conditions and side effects.
-- **"Secondary causes are rare, so not worth looking for."** Primary aldosteronism alone is found in perhaps 5–10% of hypertensives when sought, and is treatable.
 
 ## Go deeper
 
