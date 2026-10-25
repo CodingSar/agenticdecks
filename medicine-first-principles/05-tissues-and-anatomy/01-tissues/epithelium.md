@@ -12,7 +12,7 @@ An epithelium is a sheet of cells, sealed to one another and standing on a basem
 
 1. **An epithelium is a sealed sheet on a basement membrane, with no vessels of its own.** Cells are packed with almost no matrix between them and rest on a thin layer of type IV collagen and laminin. Every cell is fed by diffusion from capillaries beneath that membrane, which caps epithelial thickness at a few hundred micrometres and means scarring of the underlying tissue starves the surface.
 
-2. **Junctions set what the sheet lets through.** Tight junctions near the apical surface are the gate for the paracellular route; their claudin composition makes some epithelia leaky (the proximal renal tubule, with a transepithelial resistance of tens of ohm-square-centimetres) and others nearly impermeable (the bladder, thousands). Desmosomes bind cells against shear and hemidesmosomes bind them to the basement membrane. Autoantibodies against desmosomal cadherins split the epidermis into the blisters of pemphigus; loss of E-cadherin is one of the first steps by which a carcinoma cell leaves its sheet.
+2. **Junctions set what the sheet lets through.** Tight junctions near the apical surface are the gate for the paracellular route; their claudin composition makes some epithelia leaky (the proximal renal tubule, with a transepithelial resistance of tens of ohm-square-centimetres) and others nearly impermeable (the bladder, thousands). Desmosomes bind cells against shear, hemidesmosomes bind them to the basement membrane. Autoantibodies against desmosomal cadherins split the epidermis into the blisters of pemphigus; loss of E-cadherin is one of the first steps by which a carcinoma cell leaves its sheet.
 
 3. **Polarity turns a sheet into a pump.** The tight junction is also a fence that keeps apical and basolateral proteins apart. The sodium–potassium pump sits basolaterally in nearly every transporting epithelium; apical channels and cotransporters admit sodium, glucose or chloride down the gradient it makes, the solute leaves on the far side and water follows osmotically. With different apical proteins, this one arrangement is intestinal absorption, renal reabsorption, sweat, tears and gastric acid. Cholera toxin locks open apical chloride channels in the small intestine, so machinery that absorbs several litres a day secretes them instead.
 
@@ -22,7 +22,7 @@ An epithelium is a sheet of cells, sealed to one another and standing on a basem
 
 6. **The basement membrane is the line that defines invasion.** A carcinoma whose cells have not crossed it (carcinoma in situ) cannot reach lymphatics or vessels and cannot metastasise; once it crosses, staging and prognosis change. The same membrane, specialised, is the filter of the glomerulus, and antibodies against its collagen attack lung and kidney together because both share the antigen.
 
-7. **Vessel and cavity linings are epithelia by form though they come from mesoderm.** Endothelium, one cell thick, is the body's largest epithelium and the one through which all exchange with blood occurs; its tight junctions in the brain make the blood–brain barrier, and its fenestrations in glomerulus and endocrine glands allow bulk filtration. Mesothelium lines pleura, pericardium and peritoneum.
+7. **Vessel and cavity linings are epithelia by form though they come from mesoderm.** Endothelium, one cell thick, is the body's largest epithelium and the one through which all exchange with blood occurs; its tight junctions in the brain make the blood–brain barrier, and its fenestrations in glomerulus and endocrine glands allow bulk filtration.
 
 ## Key concepts
 
@@ -54,4 +54,3 @@ An epithelium is a sheet of cells, sealed to one another and standing on a basem
 
 - Anthony L. Mescher, *Junqueira's Basic Histology* (16th ed., 2021): concise, mechanism-first histology with the best diagrams of junctions and glands.
 - Bruce Alberts et al., *Molecular Biology of the Cell* (7th ed., 2022), chapters on cell junctions and specialised tissues: how polarity and junctions are built.
-- Barbara Young et al., *Wheater's Functional Histology* (6th ed., 2014): tissues as micrographs with their function alongside.

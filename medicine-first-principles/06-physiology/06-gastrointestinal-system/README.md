@@ -49,7 +49,7 @@ From below, this area takes enzyme kinetics and lipid chemistry from [macromolec
 ## Cross-cutting threads
 
 - [Feedback and homeostasis](../../CROSS-CUTTING.md#feedback-and-homeostasis): every secretion is released by the substrate it processes and shut off by its own product.
-- [Barriers and compartments](../../CROSS-CUTTING.md#barriers-and-compartments): the lumen is outside the body; the epithelium, mucus, IgA and liver are successive filters between it and the blood.
+- [Barriers and compartments](../../CROSS-CUTTING.md#barriers-and-compartments): the lumen is outside the body; the epithelium, mucus, Immunoglobulin A (IgA) and liver are successive filters between it and the blood.
 - [Gradients and flow](../../CROSS-CUTTING.md#gradients-and-flow): the gastric proton pump's million-fold gradient; sodium-coupled uptake dragging water; the portal pressure gradient.
 - [The host and its environment](../../CROSS-CUTTING.md#the-host-and-its-environment): diet and microbes are environment internalised; the microbiome is shaped by birth, food and antibiotics.
 - [Compensation and decompensation](../../CROSS-CUTTING.md#compensation-and-decompensation): the liver's reserve hides 70–80% loss; the colon's water-salvage reserve hides small-bowel disease.

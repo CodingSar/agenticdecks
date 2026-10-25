@@ -25,7 +25,7 @@ The unifying idea is **physiology rebuilt for a purpose and then rebuilt back**.
                                           lactation: prolactin (make) + oxytocin (eject), suckling as the controller
 ```
 
-Read in order: the cycle supplies the egg and the prepared endometrium that pregnancy requires; pregnancy describes the organ the fetus depends on; fetal physiology is what that organ makes possible and what must be undone at birth. The hormonal control of all three (the GnRH pulse generator, the oestrogen feedback switch, the placental takeover) lives in [reproductive endocrinology](../07-endocrine-system/reproductive-endocrinology.md), which should be read first.
+Read in order: the cycle supplies the egg and the prepared endometrium that pregnancy requires; pregnancy describes the organ the fetus depends on; fetal physiology is what that organ makes possible and what must be undone at birth. The hormonal control of all three, the Gonadotropin-Releasing Hormone (GnRH) pulse generator, the oestrogen feedback switch and the placental takeover, lives in [reproductive endocrinology](../07-endocrine-system/reproductive-endocrinology.md), which should be read first.
 
 ## Connections to sibling areas
 
@@ -33,9 +33,9 @@ Read in order: the cycle supplies the egg and the prepared endometrium that preg
 - **[Nervous system](../02-nervous-system/README.md):** the hypothalamus runs the pulse generator; suckling and cervical stretch are neuroendocrine reflexes; the fetal brain develops its myelination and connectivity around birth and is the organ most vulnerable to hypoxia and bilirubin.
 - **[Cardiovascular system](../03-cardiovascular-system/README.md):** pregnancy is the largest physiological rise in cardiac output outside exercise; the fetal circulation is the cardiac cycle with the two ventricles in parallel; the transition at birth is a resistance switch.
 - **[Respiratory system](../04-respiratory-system/README.md):** progesterone drives maternal hyperventilation; the fetal lung is a fluid-secreting gland until birth; surfactant sufficiency sets the limit of viability at prematurity.
-- **[Renal system](../05-renal-system/README.md):** maternal GFR rises ~50% and the threshold for glycosuria falls; the fetal kidney makes amniotic fluid; the neonatal kidney filters and concentrates poorly.
+- **[Renal system](../05-renal-system/README.md):** maternal Glomerular Filtration Rate (GFR) rises ~50% and the threshold for glycosuria falls; the fetal kidney makes amniotic fluid; the neonatal kidney filters and concentrates poorly.
 - **[Gastrointestinal system](../06-gastrointestinal-system/README.md):** progesterone slows gut motility (reflux, constipation); the newborn liver conjugates bilirubin poorly; the newborn gut is colonised from the birth canal and milk; milk composition is designed for that gut.
-- **[Endocrine system](../07-endocrine-system/README.md):** this area is applied reproductive endocrinology; the placenta is a temporary gland making hCG, progesterone, oestrogens and lactogen; gestational diabetes is the beta cell failing a placental stress test.
+- **[Endocrine system](../07-endocrine-system/README.md):** this area is applied reproductive endocrinology; the placenta is a temporary gland making human chorionic gonadotropin (hCG), progesterone, oestrogens and lactogen; gestational diabetes is the beta cell failing a placental stress test.
 - **[Blood](../08-blood/README.md):** fetal haemoglobin's left-shifted curve; physiological dilutional anaemia and the hypercoagulability of pregnancy; Rhesus sensitisation at delivery; the iron cost of menstruation and pregnancy.
 - **[Musculoskeletal system and skin](../10-musculoskeletal-system-and-skin/README.md):** relaxin loosens pelvic ligaments; the uterus is the largest smooth muscle performance of the body; pregnancy and lactation draw calcium from maternal bone; oestrogen loss at menopause starts bone loss.
 

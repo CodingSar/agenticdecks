@@ -18,7 +18,7 @@ Connective tissue is the tissue in which the cells are few and the product betwe
 
 4. **Bone is a composite that neither component could be alone.** Type I collagen (about a third by weight) is tough but flexible; hydroxyapatite deposited on it (about two thirds) is stiff but brittle. Together they bear weight yet absorb energy before breaking. Remove the mineral (rickets, osteomalacia) and bones bend; make the collagen defective (osteogenesis imperfecta) and they break under trivial load despite normal mineral; stop resorption so old bone is never renewed (osteopetrosis) and they are dense but brittle.
 
-5. **Bone is alive, vascular and in constant turnover.** Its structure is dictated by the ~0.1–0.2 mm diffusion limit: in compact bone, osteocytes sit in concentric lamellae around a central vessel (the osteon) and communicate through canaliculi, so no cell is far from blood. Osteoclasts resorb, osteoblasts rebuild, replacing a few per cent of the adult skeleton a year, and osteocytes act as strain gauges directing the work to where load is highest (Wolff's law). Vascularity is why bone heals by regeneration rather than scar, why it is a common site of blood-borne infection and metastasis, and why a femoral fracture can bleed a litre. Bone is also the body's calcium store (about 1 kg, 99% of the total): when plasma calcium falls, parathyroid hormone dissolves bone whatever the mechanical cost.
+5. **Bone is alive, vascular and in constant turnover.** Its structure is dictated by the ~0.1–0.2 mm diffusion limit: in compact bone, osteocytes sit in concentric lamellae around a central vessel (the osteon) and communicate through canaliculi, so no cell is far from blood. Osteoclasts resorb, osteoblasts rebuild, replacing a few per cent of the adult skeleton a year, and osteocytes act as strain gauges directing the work to where load is highest (Wolff's law). Vascularity is why bone heals by regeneration rather than scar, hosts blood-borne infection and metastasis, and bleeds a litre when the femur breaks. Bone is also the body's calcium store (about 1 kg, 99% of the total): when plasma calcium falls, parathyroid hormone dissolves bone whatever the mechanical cost.
 
 6. **Bone forms in two ways, and the difference locates growth and its disorders.** Flat skull bones and the clavicle form directly from mesenchyme (intramembranous). Long bones and the skull base form as a cartilage model replaced from the centre outward (endochondral), leaving a growth plate near each end that adds length until puberty closes it. Achondroplasia, where a mutant growth factor receptor brakes growth-plate chondrocytes, shortens limbs and skull base but leaves the vault large; a child's growth-plate fracture can stop or deform growth.
 
@@ -29,7 +29,7 @@ Connective tissue is the tissue in which the cells are few and the product betwe
 | Term | Meaning |
 |---|---|
 | Extracellular matrix | Fibres (collagen, elastin) plus ground substance (proteoglycans, water) that do the mechanical work |
-| Collagen types | I (bone, tendon, skin), II (cartilage), III (reticular fibres, early scar), IV (basement membrane) |
+| Collagen types | I (bone, tendon, skin), II (cartilage), III (early scar), IV (basement membrane) |
 | Hydroxyapatite | Calcium phosphate crystal on collagen that makes bone stiff |
 | Osteon | Cylinder of lamellar bone around a vessel; the unit of compact bone |
 | Osteoblast / osteoclast / osteocyte | Bone-forming cell; bone-resorbing cell of monocyte origin; embedded cell that senses strain |
@@ -54,4 +54,3 @@ Connective tissue is the tissue in which the cells are few and the product betwe
 
 - John D. Currey, *Bones: Structure and Mechanics* (2002): why bone is built as a composite and what that buys.
 - Anthony L. Mescher, *Junqueira's Basic Histology* (16th ed., 2021), chapters on connective tissue, cartilage and bone.
-- Margareta Nordin and Victor H. Frankel, *Basic Biomechanics of the Musculoskeletal System* (4th ed., 2012): measured material properties of bone, cartilage, tendon and ligament.

@@ -16,7 +16,7 @@ The unifying idea is **the controlled variable and the loop around it**. For eac
 | [Hormone classes, axes and feedback](hormone-classes-axes-and-feedback.md) | The grammar: hormone chemistry, free fraction, receptors, three-tier axes, pulsatility, how to read a loop | Receptors, feedback and control |
 | [Glucose homeostasis](glucose-homeostasis.md) | The push–pull loop of insulin and glucagon around the liver; the asymmetry that fears hypoglycaemia | Metabolism, the liver |
 | [Thyroid, adrenal and stress hormones](thyroid-adrenal-and-stress-hormones.md) | The tempo-setters: metabolic rate over weeks, cortisol over hours, adrenaline over seconds | Autonomic nervous system, energy balance |
-| [Calcium and bone mineral metabolism](calcium-and-bone-mineral-metabolism.md) | The direct-sensing loop of PTH and vitamin D defending ionised calcium at the skeleton's expense | Renal ion handling, bone tissue |
+| [Calcium and bone mineral metabolism](calcium-and-bone-mineral-metabolism.md) | The direct-sensing loop of Parathyroid Hormone (PTH) and vitamin D defending ionised calcium at the skeleton's expense | Renal ion handling, bone tissue |
 | [Reproductive endocrinology](reproductive-endocrinology.md) | The one axis whose feedback changes sign and whose signal is a pulse frequency | Development, oscillations |
 
 ```
@@ -38,9 +38,9 @@ Read the first leaf first; it supplies the vocabulary (free fraction, trophic ho
 
 - **[Integrative principles](../01-integrative-principles/README.md):** hormones are the effectors of most set points; thyroid hormone and leptin set energy balance; cortisol, growth hormone and melatonin follow the circadian clock; the stress response is defined there and run from here.
 - **[Nervous system](../02-nervous-system/README.md):** the hypothalamus is where the two systems are one organ; the adrenal medulla is a sympathetic ganglion; neurones secrete the releasing hormones and read the steroids back.
-- **[Cardiovascular system](../03-cardiovascular-system/README.md):** thyroid hormone and catecholamines set heart rate and contractility; cortisol is permissive for vascular tone; the heart secretes natriuretic peptides; aldosterone and ADH set the volume the heart pumps.
+- **[Cardiovascular system](../03-cardiovascular-system/README.md):** thyroid hormone and catecholamines set heart rate and contractility; cortisol is permissive for vascular tone; the heart secretes natriuretic peptides; aldosterone and Antidiuretic Hormone (ADH) set the volume the heart pumps.
 - **[Respiratory system](../04-respiratory-system/README.md):** metabolic rate set by thyroid hormone sets the carbon dioxide load the lung must clear; progesterone drives the hyperventilation of pregnancy; angiotensin-converting enzyme sits in lung endothelium.
-- **[Renal system](../05-renal-system/README.md):** the kidney is target (ADH, aldosterone, PTH, FGF23) and gland (renin, erythropoietin, calcitriol); its failure disorders calcium, phosphate and red cell production.
+- **[Renal system](../05-renal-system/README.md):** the kidney is the target of ADH, aldosterone, PTH and Fibroblast Growth Factor 23 (FGF23), and itself a gland (renin, erythropoietin, calcitriol); its failure disorders calcium, phosphate and red cell production.
 - **[Gastrointestinal system](../06-gastrointestinal-system/README.md):** the gut is the largest endocrine organ by cell number (gastrin, secretin, cholecystokinin, incretins, ghrelin); the liver is the main target of insulin and glucagon and the source of IGF-1 and binding globulins.
 - **[Blood](../08-blood/README.md):** erythropoietin, thyroid hormone and androgens drive red cell production; the liver's binding proteins carry hormones; cortisol and adrenaline change white cell counts.
 - **[Reproduction and the life course](../09-reproduction-and-the-life-course/README.md):** reproductive endocrinology is the control layer for the cycle, pregnancy and lactation; the placenta is a temporary endocrine gland; puberty and menopause are the axis switching on and running out.
@@ -53,7 +53,7 @@ From below, this area takes receptor theory and transduction from [cell signalli
 ## Cross-cutting threads
 
 - [Feedback and homeostasis](../../CROSS-CUTTING.md#feedback-and-homeostasis): every leaf is a loop with a sensor, a gain and a brake; disease is a loop element failing.
-- [Signalling and information](../../CROSS-CUTTING.md#signalling-and-information): amplification from nanograms to milligrams down an axis; frequency coding in GnRH pulses; specificity by receptor expression.
+- [Signalling and information](../../CROSS-CUTTING.md#signalling-and-information): amplification from nanograms to milligrams down an axis; frequency coding in Gonadotropin-Releasing Hormone (GnRH) pulses; specificity by receptor expression.
 - [Specificity and recognition](../../CROSS-CUTTING.md#specificity-and-recognition): receptor affinity, binding globulins, and antibodies that mimic or block a hormone.
 - [Time courses](../../CROSS-CUTTING.md#time-courses): adrenaline in seconds, cortisol in hours, thyroxine in weeks; circadian and monthly rhythms.
 - [Compensation and decompensation](../../CROSS-CUTTING.md#compensation-and-decompensation): the beta cell hypersecreting for years before type 2 diabetes; bone resorbed for decades before a fracture.
