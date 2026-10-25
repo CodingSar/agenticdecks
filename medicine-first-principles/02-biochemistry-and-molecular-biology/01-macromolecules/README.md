@@ -7,7 +7,7 @@
 
 A cell is built from four kinds of large molecule, and each kind is the answer to a different problem. Proteins solve the problem of doing things: with twenty chemically distinct side chains they fold into shapes that bind, catalyse, pump, pull and signal. Nucleic acids solve the problem of remembering and copying: a four-letter sequence with built-in complementarity stores the instructions for every protein and templates its own duplication. Lipids solve the problem of enclosure: molecules that water rejects assemble themselves into a sealed, fluid, selective barrier. Carbohydrates solve the problems of fuel, hydrated structure and surface identity.
 
-The unifying idea is that each macromolecule's function follows from the physical chemistry of layer 00 acting on a polymer: the hydrophobic effect folds proteins and assembles membranes, hydrogen-bond geometry makes base pairing specific, base stacking makes the helix stable, and electrostatics keep DNA and glycosaminoglycans hydrated. Nothing here needs a new force; it needs only chains long enough for weak interactions to add up into shapes.
+The unifying idea is that each macromolecule's function follows from the physical chemistry of layer 00 acting on a polymer: the hydrophobic effect folds proteins and assembles membranes, hydrogen-bond geometry makes base pairing specific, base stacking makes the helix stable, and electrostatics keep Deoxyribonucleic Acid (DNA) and glycosaminoglycans hydrated. Nothing here needs a new force; it needs only chains long enough for weak interactions to add up into shapes.
 
 ## How the children fit together
 
@@ -35,7 +35,7 @@ Read proteins first, then enzymes, because enzymes are proteins with a job and t
 ## Connections to sibling areas
 
 - **[Metabolism](../02-metabolism/README.md):** every pathway is a chain of enzymes acting on carbohydrates, lipids and amino acids, driven by nucleotide currencies. The macromolecules are the substrates and the catalysts; metabolism is the traffic.
-- **[Genetic information flow](../03-genetic-information-flow/README.md):** DNA replication, transcription and translation are the processes that read and copy nucleic acids and produce proteins. The ribosome and spliceosome, being RNA machines, belong to both areas.
+- **[Genetic information flow](../03-genetic-information-flow/README.md):** DNA replication, transcription and translation are the processes that read and copy nucleic acids and produce proteins. The ribosome and spliceosome, being Ribonucleic Acid (RNA) machines, belong to both areas.
 - **[Cell signalling](../04-cell-signalling/README.md):** receptors, channels and transporters are membrane proteins; second messengers include lipids and nucleotides; recognition of a ligand is the same chemistry as an enzyme recognising its substrate.
 
 ## Connections across layers

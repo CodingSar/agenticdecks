@@ -30,7 +30,7 @@ Blood is the one tissue that can be sampled from every patient in a minute, and 
 | Mean cell volume | Average red cell size; sorts anaemia into microcytic, normocytic and macrocytic |
 | Reticulocyte count | Young red cells in circulation; a measure of marrow output |
 | Blood film | Microscopic examination of stained blood for cell morphology |
-| Prothrombin time / INR | Clotting time via tissue factor; standardised as the International Normalised Ratio for warfarin |
+| Prothrombin time / International Normalised Ratio (INR) | Clotting time via tissue factor; standardised across reagents for warfarin monitoring |
 | Activated partial thromboplastin time | Clotting time via surface activation; intrinsic and common pathways; heparin monitoring |
 | Mixing study | Adding normal plasma to distinguish factor deficiency from an inhibitor |
 | D-dimer | Fibrin degradation product; sensitive, non-specific marker of clot formation and lysis |

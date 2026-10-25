@@ -30,7 +30,7 @@ Diagnosis says what is wrong; prognosis says what will happen, with and without 
 | Survival curve, median survival | Probability of surviving to each time; the time by which half have died |
 | Hazard ratio | Ratio of instantaneous event rates between groups, from a survival model |
 | Natural history | The course of the untreated disease; the comparator for every treatment |
-| Absolute risk reduction and NNT | The difference in event probability between options; its reciprocal |
+| Absolute risk reduction and Number Needed to Treat (NNT) | The difference in event probability between options; its reciprocal |
 | Natural frequency | Risk expressed as "x of 100 people like you," the format people understand best |
 | Framing effect | The same probability chosen differently when stated as gain or loss |
 | Preference-sensitive decision | A choice whose best answer depends on how the patient values the outcomes |

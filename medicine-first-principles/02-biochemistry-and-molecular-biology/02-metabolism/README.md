@@ -38,7 +38,7 @@ Read bioenergetics first; it supplies the units everything else is measured in. 
 ## Connections to sibling areas
 
 - **[Macromolecules](../01-macromolecules/README.md):** metabolism is enzymes acting on carbohydrates, lipids and amino acids; the macromolecules leaves describe the substrates and catalysts, this area the flows.
-- **[Genetic information flow](../03-genetic-information-flow/README.md):** metabolism supplies the nucleotides, amino acids and ATP that replication, transcription and translation consume, and nutrient state regulates gene expression through transcription factors such as SREBP and the sirtuins, which read NADH.
+- **[Genetic information flow](../03-genetic-information-flow/README.md):** metabolism supplies the nucleotides, amino acids and ATP that replication, transcription and translation consume, and nutrient state regulates gene expression through transcription factors such as Sterol Regulatory Element-Binding Protein (SREBP) and the sirtuins, which read reduced Nicotinamide Adenine Dinucleotide (NADH).
 - **[Cell signalling](../04-cell-signalling/README.md):** insulin and glucagon act through receptors, second messengers and kinase cascades; the fed–fasted switch is a signalling circuit whose effectors are metabolic enzymes. Ion gradients are metabolism's largest customer.
 
 ## Connections across layers

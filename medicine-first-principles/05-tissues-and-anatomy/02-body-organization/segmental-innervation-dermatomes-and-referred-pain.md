@@ -6,13 +6,13 @@
 
 ## Essence
 
-The body is built in segments, and the nervous system keeps the plan long after the body has hidden it. Each of the 31 pairs of spinal nerves grew out to one block of embryonic tissue (a somite) that formed a strip of skin, a set of muscles and a slice of vertebra, and the nerve follows those tissues wherever they migrate. The result is a fixed map: every spinal segment owns a dermatome, a myotome and a set of viscera. That is why one damaged root gives a predictable band of numbness, why a reflex tests one cord level, and why heart pain is felt in the arm: referred pain is the map read by a brain that learnt the skin before the organs.
+The body is built in segments, and the nervous system keeps the plan long after the body has hidden it. Each of the 31 pairs of spinal nerves grew out to one somite that formed a strip of skin, a set of muscles and a slice of vertebra, and the nerve follows those tissues wherever they migrate. The result is a fixed map: every spinal segment owns a dermatome, a myotome and a set of viscera. That is why one damaged root gives a predictable band of numbness, why a reflex tests one cord level, and why heart pain is felt in the arm: referred pain is the map read by a brain that learnt the skin before the organs.
 
 ## Core tenets
 
-1. **Segmentation is embryological and permanent.** Paired somites along the neural tube each split into dermatome (dermis), myotome (muscle) and sclerotome (vertebra), and each receives the spinal nerve of its level, C1–C8, T1–T12, L1–L5, S1–S5, Co1. Migrating muscles drag their nerve with them: the diaphragm descends from cervical somites, so the phrenic nerve (C3–C5) runs the length of the chest.
+1. **Segmentation is embryological and permanent.** Each somite splits into dermatome, myotome and sclerotome and receives the spinal nerve of its level (C1–C8, T1–T12, L1–L5, S1–S5, Co1). Migrating muscles drag their nerve with them: the diaphragm descends from cervical somites, so the phrenic nerve (C3–C5) runs the length of the chest.
 
-2. **A dermatome is the skin of one root, and the bands are drawn by development.** On the trunk they are horizontal strips: T4 crosses the nipple, T10 the umbilicus, L1 the groin. On the limbs they are stretched and twisted by limb-bud rotation: C6 reaches the thumb, C7 the middle finger, C8 the little finger; L4 the medial leg, L5 the dorsum of the foot and great toe, S1 the lateral foot; S2–S4 the perineum. Adjacent dermatomes overlap, so one cut root blurs sensation rather than abolishing it. Shingles, reactivating in one dorsal root ganglion, paints its dermatome exactly.
+2. **A dermatome is the skin of one root, and the bands are drawn by development.** On the trunk they are horizontal strips: T4 crosses the nipple, T10 the umbilicus, L1 the groin. On the limbs they spiral with limb-bud rotation: C6 the thumb, C7 the middle finger, C8 the little finger; L4 the medial leg, L5 the great toe, S1 the lateral foot; S2–S4 the perineum. Adjacent dermatomes overlap, so one cut root blurs sensation rather than abolishing it. Shingles, reactivating in one dorsal root ganglion, paints its dermatome exactly.
 
 3. **A root pattern is not a nerve pattern, and telling them apart is the first task of localisation.** Plexuses reshuffle roots so each peripheral nerve carries several roots and each root feeds several nerves. A C8 root lesion numbs the little finger and medial forearm; an ulnar nerve lesion numbs the little finger but spares the medial forearm, which belongs to a different nerve of the same root. Root loss follows the dermatome; nerve loss follows the nerve's territory.
 
@@ -20,7 +20,7 @@ The body is built in segments, and the nervous system keeps the plan long after 
 
 5. **The autonomic outflow is segmental too, and carries the viscera's pain fibres.** Sympathetic neurons leave the cord only from T1 to L2; parasympathetic fibres leave with cranial nerves III, VII, IX and X and from S2–S4. Visceral pain afferents travel back along these routes, so each organ reports to a known set of segments: heart T1–T4, foregut about T5–T9, midgut T10–T11, hindgut T12–L2, kidney and ureter T10–L1.
 
-6. **Referred pain is convergence read by a brain trained on skin.** Sparse visceral afferents share dorsal-horn neurons with the far more numerous somatic afferents of the same segments, and the cortex, which has learnt that activity there means skin, places visceral pain in the dermatome: cardiac ischaemia in the left chest, inner arm and jaw; gallbladder disease at the right scapula; renal colic from loin to groin. The diaphragm's centre is supplied by C3–C5, so blood or pus beneath it hurts at the shoulder tip and not in the abdomen. Appendicitis tells the whole story: dull periumbilical pain (midgut, T10) until the inflammation reaches the somatically innervated parietal peritoneum, when pain moves to a sharp point in the right iliac fossa.
+6. **Referred pain is convergence read by a brain trained on skin.** Sparse visceral afferents share dorsal-horn neurons with the far more numerous somatic afferents of the same segments, and the cortex, which has learnt that activity there means skin, places visceral pain in the dermatome: cardiac ischaemia in the left chest, inner arm and jaw; gallbladder disease at the right scapula; renal colic from loin to groin. The diaphragm's centre is supplied by C3–C5, so blood or pus beneath it hurts at the shoulder tip and not in the abdomen. Appendicitis tells the story: dull periumbilical pain (midgut, T10) until inflammation reaches the somatically innervated parietal peritoneum and pain moves to a sharp point in the right iliac fossa.
 
 7. **The segment and the vertebra are not at the same level.** The cord stops growing before the column, so in adults it ends at L1–L2 and the lower roots descend as the cauda equina. A cervical segment lies about one vertebra above its number, thoracic two to three, and the whole lumbosacral cord sits behind T11–L1, so a sensory level at the umbilicus (T10) points to a lesion opposite about T7–T8, and a lumbar puncture below L2 meets only roots floating in fluid.
 
@@ -47,7 +47,7 @@ The body is built in segments, and the nervous system keeps the plan long after 
 ## Common misconceptions
 
 - **"Referred pain means the patient is mistaken."** The pain is genuinely felt in the dermatome; the nervous system has no separate channel for the organ.
-- **"Numbness in one finger means a nerve was cut."** Each finger belongs to a root and to a nerve; the muscles involved decide which, and a cervical disc is a commoner cause of a numb thumb than a cut nerve.
+- **"Numbness in one finger means a nerve was cut."** Each finger belongs to a root and to a nerve; the muscles involved decide which.
 - **"The vertebra tells you the cord segment."** Below the neck the segment lies one to three vertebrae above the bone of the same number, and below L2 there is no cord at all.
 
 ## Go deeper

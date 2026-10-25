@@ -13,10 +13,10 @@ The one idea that unifies the children is **comparison under a known denominator
 
 | Child | Its role in the whole | Depends on |
 |---|---|---|
-| [Measures of frequency and association](measures-of-frequency-and-association.md) | The quantities: prevalence, incidence, relative risk, risk difference, number needed to treat | [Probability](../../01-quantitative-and-scientific-foundations/01-probability-and-measurement/probability.md) |
+| [Measures of frequency and association](measures-of-frequency-and-association.md) | The quantities: prevalence, incidence, Relative Risk (RR), Risk Difference (RD), Odds Ratio (OR), Number Needed to Treat (NNT) | [Probability](../../01-quantitative-and-scientific-foundations/01-probability-and-measurement/probability.md) |
 | [Observational study designs](observational-study-designs.md) | The sampling schemes that estimate those quantities when experiment is impossible | Measures; [causal inference](../../01-quantitative-and-scientific-foundations/02-inference-and-causation/causal-inference.md) |
 | [Bias, confounding and chance](bias-confounding-and-chance.md) | The three non-causal explanations of any association, and how design defends against them | Designs; [hypothesis testing](../../01-quantitative-and-scientific-foundations/02-inference-and-causation/hypothesis-testing-and-confidence-intervals.md) |
-| [Infectious disease dynamics](infectious-disease-dynamics.md) | What changes when one person's risk depends on another's: R0, herd immunity, epidemic curves | Measures; [compartment models](../../01-quantitative-and-scientific-foundations/03-systems-and-models/compartment-models-and-exponential-processes.md) |
+| [Infectious disease dynamics](infectious-disease-dynamics.md) | What changes when one person's risk depends on another's: the basic reproduction number (R0), herd immunity, epidemic curves | Measures; [compartment models](../../01-quantitative-and-scientific-foundations/03-systems-and-models/compartment-models-and-exponential-processes.md) |
 | [Surveillance and outbreak investigation](surveillance-and-outbreak-investigation.md) | The method run continuously and in the field, linked to action | All four |
 
 ```

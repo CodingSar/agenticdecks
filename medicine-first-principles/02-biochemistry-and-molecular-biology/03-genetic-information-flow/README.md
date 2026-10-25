@@ -38,7 +38,7 @@ Read replication, transcription and translation in that order; it is the order o
 ## Connections to sibling areas
 
 - **[Macromolecules](../01-macromolecules/README.md):** nucleic acids and proteins are the substrates and products; the ribosome and spliceosome are RNA enzymes; protein folding is the last step of translation and the first subject of quality control.
-- **[Metabolism](../02-metabolism/README.md):** replication, transcription and translation consume nucleotides, amino acids and a large share of the cell's ATP; nutrient state feeds back on expression through transcription factors and on translation through mTOR, and antimetabolite drugs starve nucleotide synthesis.
+- **[Metabolism](../02-metabolism/README.md):** replication, transcription and translation consume nucleotides, amino acids and a large share of the cell's Adenosine Triphosphate (ATP); nutrient state feeds back on expression through transcription factors and on translation through mechanistic Target Of Rapamycin (mTOR), and antimetabolite drugs starve nucleotide synthesis.
 - **[Cell signalling](../04-cell-signalling/README.md):** almost every signalling cascade ends at a transcription factor; nuclear receptors are both receptors and transcription factors; the time course of a hormone's effect is the time course of transcription and protein turnover.
 
 ## Connections across layers

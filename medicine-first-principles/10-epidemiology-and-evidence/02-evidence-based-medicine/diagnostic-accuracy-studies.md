@@ -59,5 +59,5 @@ A diagnostic test is a measurement whose result is used to change the probabilit
 ## Go deeper
 
 - David L. Sackett and R. Brian Haynes, "The architecture of diagnostic research", *British Medical Journal* (2002): the phases a diagnostic test should pass through before use.
-- Patrick M. Bossuyt et al., "STARD 2015: an updated list of essential items for reporting diagnostic accuracy studies", *British Medical Journal* (2015): the reporting standard, which doubles as a checklist of biases.
+- Patrick M. Bossuyt et al., "STARD 2015 (Standards for Reporting Diagnostic Accuracy): an updated list of essential items for reporting diagnostic accuracy studies", *British Medical Journal* (2015): the reporting standard, which doubles as a checklist of biases.
 - Steven McGee, *Evidence-Based Physical Diagnosis* (4th ed., 2018): likelihood ratios for hundreds of symptoms and signs, with the studies behind them.

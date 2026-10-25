@@ -12,7 +12,7 @@ The body is not one bag but a nested set of compartments: the skull, the spinal 
 
 1. **An inextensible wall converts volume into pressure.** In the skull, brain, blood and cerebrospinal fluid share a fixed volume, so a growing haematoma is first paid for by squeezing out venous blood and fluid, then by a steep rise in intracranial pressure that cuts perfusion and pushes brain through the dural openings (the Monro–Kellie doctrine). The fibrous pericardium behaves the same way: 150–200 mL of blood arriving fast stops the heart filling (tamponade), whereas a litre over weeks is tolerated. A fascial limb compartment follows the same curve; once its pressure comes within about 30 mmHg of diastolic the muscle and nerve inside are ischaemic while the distal pulse persists.
 
-2. **Serous cavities are closed sacs into which organs are pushed, not boxes they sit in.** The pleural, pericardial and peritoneal cavities derive from the embryonic coelom and are lined by mesothelium. The organ invaginates the sac like a fist pushed into a balloon, so visceral and parietal layers are continuous and the cavity is a potential space holding a film of lubricant; in disease that space fills with blood, pus, air or transudate and presses on its neighbours. The parietal layer is supplied by somatic nerves of the body wall and signals sharp, localised pain; the visceral layer has only autonomic afferents and signals dull, midline pain. Pleuritic chest pain and the two phases of the acute abdomen are this distinction in action.
+2. **Serous cavities are closed sacs into which organs are pushed, not boxes they sit in.** The pleural, pericardial and peritoneal cavities derive from the embryonic coelom and are lined by mesothelium. The organ invaginates the sac like a fist pushed into a balloon, so visceral and parietal layers are continuous and the cavity is a potential space holding a film of lubricant; in disease that space fills with blood, pus, air or transudate and presses on its neighbours. The parietal layer has somatic innervation and signals sharp, localised pain; the visceral layer has only autonomic afferents and signals dull, midline pain, the distinction behind pleuritic pain and the two phases of the acute abdomen.
 
 3. **The peritoneal cavity has a geography that decides where fluid goes.** Retroperitoneal organs (kidneys, pancreas, most of the duodenum, ascending and descending colon) bleed or leak behind the sac, where peritoneal signs are late. Blood, pus and ascites follow gravity into the pelvis when upright or the right subhepatic space when supine, and collect under the diaphragm, whose phrenic-supplied peritoneum refers pain to the shoulder tip. Metastases shed into the fluid implant along the same paths.
 
@@ -26,7 +26,7 @@ The body is not one bag but a nested set of compartments: the skull, the spinal 
 
 | Term | Meaning |
 |---|---|
-| Compliance | Volume change per unit pressure change; falls as a compartment's reserve is used |
+| Compliance | Volume change per unit pressure change |
 | Monro–Kellie doctrine | Within the rigid skull, brain, blood and cerebrospinal fluid share a fixed volume |
 | Compartment syndrome | Pressure within a closed compartment high enough to stop capillary perfusion of its contents |
 | Serous membrane | Mesothelium-lined sac with a parietal layer on the wall and a visceral layer on the organ |

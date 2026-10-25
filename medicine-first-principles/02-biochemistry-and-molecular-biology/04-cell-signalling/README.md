@@ -34,7 +34,7 @@ Read transport first; the gradients it describes are what channels spend and wha
 ## Connections to sibling areas
 
 - **[Macromolecules](../01-macromolecules/README.md):** channels, receptors and kinases are proteins whose conformational changes are the signal; the bilayer's impermeability is what makes transport and gradients necessary; several messengers are lipids.
-- **[Metabolism](../02-metabolism/README.md):** the sodium pump is metabolism's largest customer; insulin and glucagon signalling is the switch that integrates metabolism; AMP and NADH are metabolic signals read by kinases and transcription factors.
+- **[Metabolism](../02-metabolism/README.md):** the sodium pump is metabolism's largest customer; insulin and glucagon signalling is the switch that integrates metabolism; Adenosine Monophosphate (AMP) and reduced Nicotinamide Adenine Dinucleotide (NADH) are metabolic signals read by kinases and transcription factors.
 - **[Genetic information flow](../03-genetic-information-flow/README.md):** most cascades end at a transcription factor, nuclear receptors are transcription factors, and the slow time course of steroid action is the time course of transcription and protein turnover.
 
 ## Connections across layers
