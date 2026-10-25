@@ -2,7 +2,7 @@
 
 > **Layer:** [01 Quantitative and Scientific Foundations](../README.md) › [Systems and Models](README.md)
 > **Builds on:** [The scientific method and models](the-scientific-method-and-models.md), [Compartment models and exponential processes](compartment-models-and-exponential-processes.md)
-> **Enables:** [Homeostasis and set points](../../06-physiology/01-integrative-principles/homeostasis-and-set-points.md), [Hormone classes, axes and feedback](../../06-physiology/07-endocrine-system/hormone-classes-axes-and-feedback.md), [Haemodynamics and blood pressure regulation](../../06-physiology/03-cardiovascular-system/hemodynamics-and-blood-pressure-regulation.md), [Compensation and decompensation](../../08-pathology/02-hemodynamic-disorders/hemorrhage-shock-and-sepsis.md)
+> **Enables:** [Homeostasis and set points](../../06-physiology/01-integrative-principles/homeostasis-and-set-points.md), [Hormone classes, axes and feedback](../../06-physiology/07-endocrine-system/hormone-classes-axes-and-feedback.md), [Haemodynamics and blood pressure regulation](../../06-physiology/03-cardiovascular-system/hemodynamics-and-blood-pressure-regulation.md), [Haemorrhage, shock and sepsis](../../08-pathology/02-hemodynamic-disorders/hemorrhage-shock-and-sepsis.md)
 
 ## Essence
 

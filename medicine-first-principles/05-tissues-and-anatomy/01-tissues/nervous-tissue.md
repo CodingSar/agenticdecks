@@ -6,7 +6,7 @@
 
 ## Essence
 
-Nervous tissue is built to carry information fast and far, and every structural feature follows from that demand. A neuron is a cell stretched into a receiving tree, an integrating body and a transmitting cable that may be a metre long; glia insulate, feed and police it; the whole tissue is sealed behind a barrier that keeps its ionic environment constant. The governing constraint is that a neuron is an obligate aerobe with no fuel store, no capacity to divide and a geometry so extreme that it depends on active transport along its axon for everything. That is why nervous tissue is the fastest tissue to die, the slowest to recover, and the one whose diseases are explained by anatomy more than any other.
+Nervous tissue is built to carry information fast and far, and every structural feature follows from that demand. A neuron is a cell stretched into a receiving tree, an integrating body and a transmitting cable that may be a metre long; glia insulate, feed and police it; the whole tissue is sealed behind a barrier that keeps its ionic environment constant. A neuron is an obligate aerobe with no fuel store, no capacity to divide and a geometry so extreme that it depends on active transport along its axon for everything, which is why nervous tissue is the fastest tissue to die, the slowest to recover, and the one whose diseases are most explained by anatomy.
 
 ## Core tenets
 
@@ -22,7 +22,7 @@ Nervous tissue is built to carry information fast and far, and every structural 
 
 6. **Nervous tissue has no reserve of oxygen or fuel.** The brain is about 2% of body mass and uses about 20% of resting oxygen and glucose, nearly all to pump ions. Consciousness is lost within about ten seconds of stopped cerebral flow and neurons begin to die within minutes, the most active first (hippocampal CA1, cerebellar Purkinje cells). This sets the time limits of resuscitation and stroke treatment.
 
-7. **The tissue is sealed, and its wrappings organise its diseases.** Brain capillaries have continuous tight junctions backed by astrocyte end-feet and pericytes, forming the blood–brain barrier that keeps ions and transmitters constant, excludes most water-soluble drugs and antibodies, and makes the Central Nervous System (CNS) immunologically privileged. Peripheral nerves have their own barrier: endoneurium around fibres, a tight perineurium around each fascicle, epineurium around the nerve. Fibres are classed by diameter, and diameter decides which a pressure lesion (large first) or a local anaesthetic (small pain fibres among the first) silences.
+7. **The tissue is sealed, and its wrappings organise its diseases.** Brain capillaries have continuous tight junctions backed by astrocyte end-feet and pericytes, forming the blood–brain barrier that keeps ions and transmitters constant, excludes most water-soluble drugs and antibodies, and makes the Central Nervous System (CNS) immunologically privileged. Peripheral nerves have their own barrier, the perineurium around each fascicle. Fibres are classed by diameter, and diameter decides which a pressure lesion (large first) or a local anaesthetic (small pain fibres among the first) silences.
 
 ## Key concepts
 
