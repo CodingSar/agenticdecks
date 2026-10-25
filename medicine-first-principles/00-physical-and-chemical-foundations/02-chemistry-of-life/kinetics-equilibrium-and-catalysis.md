@@ -10,7 +10,7 @@ Thermodynamics says which way a reaction can go; kinetics says how fast it gets 
 
 ## Core tenets
 
-1. **Equilibrium is where forward and reverse rates are equal, and the equilibrium constant is set by free energy.** For `A ⇌ B`, `K = [B]/[A]` at equilibrium and `ΔG° = −RT ln K`: a ΔG° of −5.7 kJ/mol corresponds to K = 10 at 37 °C. A reaction's position does not depend on the path or on any catalyst, only on the energies of reactants and products and on their concentrations (Le Chatelier: adding product pushes it back). The cell keeps most reactions far from equilibrium by removing products, which is why metabolic pathways have direction.
+1. **Equilibrium is where forward and reverse rates are equal, and the equilibrium constant is set by free energy.** For `A ⇌ B`, `K = [B]/[A]` at equilibrium and `ΔG° = −RT ln K`: a ΔG° of −5.9 kJ/mol corresponds to K = 10 at 37 °C. A reaction's position does not depend on the path or on any catalyst, only on the energies of reactants and products and on their concentrations (Le Chatelier: adding product pushes it back). The cell keeps most reactions far from equilibrium by removing products, which is why metabolic pathways have direction.
 
 2. **Rate depends on the activation energy, exponentially: Arrhenius.** `k = A · e^(−Ea/RT)`. Only the fraction of molecules with energy above `Ea` react on collision, and that fraction rises steeply with temperature (the Q10 of 2–3 for biological processes) and falls steeply with barrier height.
 
@@ -22,7 +22,7 @@ Thermodynamics says which way a reaction can go; kinetics says how fast it gets 
 
 6. **Binding is an equilibrium described by a dissociation constant, which is the ligand concentration at half-occupancy.** For `R + L ⇌ RL`, `Kd = [R][L]/[RL]`, and fractional occupancy is `[L]/(Kd + [L])`, the same hyperbola as Michaelis–Menten. A drug with Kd of 1 nM occupies half its receptors at 1 nM and 90% at 9 nM; ten times more raises occupancy only to 99%. Affinity (low Kd) says how little drug is needed; it says nothing about what binding does. Competitive inhibitors and antagonists raise the apparent Kd or Km without changing the maximum; non-competitive ones lower the maximum.
 
-7. **The slowest step controls the pathway, and that is where regulation acts.** In a sequence of reactions the rate-limiting step sets the throughput, and enzymes at these steps are the ones controlled by feedback inhibition, phosphorylation and hormones (phosphofructokinase in glycolysis, HMG-CoA reductase in cholesterol synthesis, the target of statins). This is why drug targets are chosen at control points.
+7. **The slowest step controls the pathway, and that is where regulation acts.** In a sequence of reactions the rate-limiting step sets the throughput, and enzymes at these steps are the ones controlled by feedback inhibition, phosphorylation and hormones (phosphofructokinase in glycolysis, 3-hydroxy-3-methylglutaryl-coenzyme A (HMG-CoA) reductase in cholesterol synthesis, the target of statins). This is why drug targets are chosen at control points.
 
 ## Key concepts
 

@@ -1,8 +1,8 @@
 # The Scientific Method and Models
 
 > **Layer:** [01 Quantitative and Scientific Foundations](../README.md) › [Systems and Models](README.md)
-> **Builds on:** [Probability](../01-probability-and-measurement/probability.md), [Measurement error and biological variation](../01-probability-and-measurement/measurement-error-and-biological-variation.md)
-> **Enables:** [Hypothesis testing and confidence intervals](../02-inference-and-causation/hypothesis-testing-and-confidence-intervals.md), [Causal inference](../02-inference-and-causation/causal-inference.md), [Grading evidence and guidelines](../../10-epidemiology-and-evidence/02-evidence-based-medicine/grading-evidence-and-guidelines.md), [History of medicine](../../15-medicine-in-society/03-populations-and-the-future/history-of-medicine.md)
+> **Builds on:** [Measurement error and biological variation](../01-probability-and-measurement/measurement-error-and-biological-variation.md)
+> **Enables:** [Probability](../01-probability-and-measurement/probability.md), [Hypothesis testing and confidence intervals](../02-inference-and-causation/hypothesis-testing-and-confidence-intervals.md), [Causal inference](../02-inference-and-causation/causal-inference.md), [Grading evidence and guidelines](../../10-epidemiology-and-evidence/02-evidence-based-medicine/grading-evidence-and-guidelines.md), [History of medicine](../../15-medicine-in-society/03-populations-and-the-future/history-of-medicine.md)
 
 ## Essence
 
@@ -40,8 +40,8 @@ Medicine was practised for two thousand years on theories that were coherent, ta
 
 ## How it fits
 
-- **Below:** nothing; this is a root leaf. It uses [probability](../01-probability-and-measurement/probability.md) to state what a model predicts about an uncertain outcome and [measurement theory](../01-probability-and-measurement/measurement-error-and-biological-variation.md) to explain why uncontrolled observation deceives.
-- **Above:** [hypothesis testing](../02-inference-and-causation/hypothesis-testing-and-confidence-intervals.md) and [causal inference](../02-inference-and-causation/causal-inference.md) formalise tenets 1, 3 and 5; [randomised trials](../../10-epidemiology-and-evidence/02-evidence-based-medicine/randomized-controlled-trials.md) and [grading evidence](../../10-epidemiology-and-evidence/02-evidence-based-medicine/grading-evidence-and-guidelines.md) are tenets 3 and 7 institutionalised; the [placebo effect](../../09-pharmacology-and-therapeutics/04-non-drug-therapeutics/behaviour-change-and-the-placebo-effect.md) is tenet 3's mechanism; the [history of medicine](../../15-medicine-in-society/03-populations-and-the-future/history-of-medicine.md) is the record of this method arriving late.
+- **Below:** nothing; this is a root leaf. It uses [measurement theory](../01-probability-and-measurement/measurement-error-and-biological-variation.md) to explain why uncontrolled observation deceives.
+- **Above:** [probability](../01-probability-and-measurement/probability.md) presupposes only this leaf's idea that a model is a checkable claim about an uncertain world; [hypothesis testing](../02-inference-and-causation/hypothesis-testing-and-confidence-intervals.md) and [causal inference](../02-inference-and-causation/causal-inference.md) formalise tenets 1, 3 and 5; [randomised trials](../../10-epidemiology-and-evidence/02-evidence-based-medicine/randomized-controlled-trials.md) and [grading evidence](../../10-epidemiology-and-evidence/02-evidence-based-medicine/grading-evidence-and-guidelines.md) are tenets 3 and 7 institutionalised; the [placebo effect](../../09-pharmacology-and-therapeutics/04-non-drug-therapeutics/behaviour-change-and-the-placebo-effect.md) is tenet 3's mechanism; the [history of medicine](../../15-medicine-in-society/03-populations-and-the-future/history-of-medicine.md) is the record of this method arriving late.
 - **Siblings:** the other four leaves in this parent are models of specific kinds, [feedback](feedback-and-control.md), [compartments](compartment-models-and-exponential-processes.md), [nonlinear dynamics](nonlinear-dynamics-oscillations-and-networks.md) and [signals](information-signals-and-noise.md); this leaf says what a model is and how it is judged.
 
 ## Common misconceptions

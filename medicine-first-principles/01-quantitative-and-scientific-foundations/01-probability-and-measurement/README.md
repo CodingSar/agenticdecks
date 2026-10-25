@@ -13,8 +13,8 @@ The unifying idea is **variation is the rule, and every number is a sample from 
 
 | Child | Its role in the whole | Depends on |
 |---|---|---|
-| [Probability](probability.md) | The rules of uncertainty: axioms, independence, conditional probability, odds, expected value | Nothing (root) |
-| [Distributions and descriptive statistics](distributions-and-descriptive-statistics.md) | The shapes probability takes over values: normal, log-normal, binomial, Poisson; mean, SD, SE, percentiles | Probability |
+| [Probability](probability.md) | The rules of uncertainty: axioms, independence, conditional probability, odds, expected value | Only the idea of a checkable model ([scientific method](../03-systems-and-models/the-scientific-method-and-models.md)) |
+| [Distributions and descriptive statistics](distributions-and-descriptive-statistics.md) | The shapes probability takes over values: normal, log-normal, binomial, Poisson; mean, standard deviation, standard error, percentiles | Probability |
 | [Measurement error and biological variation](measurement-error-and-biological-variation.md) | Precision, bias, within-person variation, reference ranges, agreement, regression to the mean | Probability, distributions |
 | [Bayesian reasoning](bayesian-reasoning.md) | Updating belief with evidence: prior, likelihood ratio, posterior, thresholds | Probability, distributions |
 
