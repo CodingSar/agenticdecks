@@ -10,7 +10,7 @@ Linear models, in which effects add and doubling the cause doubles the effect, d
 
 ## Core tenets
 
-1. **Nonlinearity means the response to a cause depends on the state the system is already in.** The same fall in oxygen barely changes saturation at the top of the haemoglobin curve and changes it steeply on the slope; the same stress is shrugged off at one point and provokes collapse at another. Superposition fails, so effects cannot be studied one at a time and added. This is the formal reason why drug interactions, multimorbidity and critical illness resist simple prediction.
+1. **Nonlinearity means the response to a cause depends on the state the system is already in.** The same fall in oxygen barely changes saturation at the top of the haemoglobin curve and changes it steeply on the slope; the same stress is shrugged off at one point and provokes collapse at another. Superposition fails, which is the formal reason drug interactions, multimorbidity and critical illness resist simple prediction.
 
 2. **Stable states are attractors; recovery is a return to one, and disease can be another.** A system left alone settles into a state it returns to after small disturbances, like a ball in a valley. Health is such a state, made attracting by [feedback](feedback-and-control.md). Some disease states are also attractors: a vicious circle of heart failure (low output, fluid retention, higher filling pressure, worse output) or of obesity and insulin resistance holds the patient in a new valley, and treatment must push far enough to cross the ridge, not merely nudge toward health.
 
@@ -22,7 +22,7 @@ Linear models, in which effects add and doubling the cause doubles the effect, d
 
 6. **Bifurcations are qualitative changes in behaviour at a critical parameter value, and most sudden clinical events are bifurcations.** As a parameter (potassium, conduction velocity, a drug level, a loop's gain) moves gradually, a system's behaviour can change discontinuously: a steady state becomes an oscillation, one rhythm becomes two, order becomes chaos. A slowly rising potassium produces nothing until the heart stops. The warning is rarely in the controlled variable; it is in the system's increasing slowness to recover from small perturbations (critical slowing down).
 
-7. **Networks fail differently from chains: hubs, cascades and the loss of reserve.** The body's systems form a network in which organs, hormones and cells each have many connections. Such networks tolerate random loss of nodes but are vulnerable at hubs (the liver, the kidney, the hypothalamus), and a failure can cascade when one node's loss pushes neighbours past their thresholds: multi-organ failure in critical illness, a fall leading to a fracture leading to pneumonia leading to delirium in frailty. Frailty is a network whose redundancy has been spent, so that small insults propagate where once they were absorbed.
+7. **Networks fail differently from chains: hubs, cascades and the loss of reserve.** The body's systems form a network in which organs, hormones and cells each have many connections. Such networks tolerate random loss of nodes but are vulnerable at hubs (liver, kidney, hypothalamus), and failure cascades when one node's loss pushes neighbours past their thresholds: multi-organ failure in critical illness, a fall leading to fracture, pneumonia and delirium in frailty. Frailty is a network whose redundancy has been spent, so that small insults propagate where once they were absorbed.
 
 ## Key concepts
 
