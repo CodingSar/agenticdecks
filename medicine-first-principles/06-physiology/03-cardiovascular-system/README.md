@@ -19,7 +19,7 @@ The unifying idea is **flow down a pressure gradient against a resistance**, Ohm
 | [Microcirculation and capillary exchange](microcirculation-and-capillary-exchange.md) | The purpose: diffusion, Starling forces, lymph, oedema, endothelium | Hemodynamics, [fluid compartments](../01-integrative-principles/body-fluid-compartments-and-electrolytes.md) |
 
 ```
-   SA node --> AV node --> His-Purkinje --> ventricular muscle   [electrophysiology]
+   sinoatrial node --> atrioventricular node --> His-Purkinje --> ventricle   [electrophysiology]
                                                   |
                                preload, afterload, contractility  [cardiac cycle]
                                                   |

@@ -10,7 +10,7 @@ A sensory system converts one form of physical energy (pressure, stretch, temper
 
 ## Core tenets
 
-1. **Transduction is a channel opened by the stimulus, and the receptor's protein decides the modality.** Force opens Piezo channels in touch receptors and stretches tip links on hair cells; warmth and cold open transient receptor potential channels (TRPV1 for heat and capsaicin, TRPM8 for cold and menthol); odorants bind G-protein-coupled receptors; light isomerises retinal in opsin, which through a G-protein cascade *closes* cyclic-GMP-gated channels, so photoreceptors hyperpolarise to light. The receptor potential is graded; spikes arise only at the first spiking node.
+1. **Transduction is a channel opened by the stimulus, and the receptor's protein decides the modality.** Force opens Piezo channels in touch receptors and stretches tip links on hair cells; warmth and cold open transient receptor potential channels (TRPV1 for heat and capsaicin, TRPM8 for cold and menthol); odorants bind G-protein-coupled receptors; light isomerises retinal in opsin, which through a G-protein cascade *closes* cyclic guanosine monophosphate (cGMP)-gated channels, so photoreceptors hyperpolarise to light. The receptor potential is graded; spikes arise only at the first spiking node.
 
 2. **Intensity is coded by firing rate and recruitment, and the code is compressive.** Firing rate rises roughly with the logarithm of intensity (Weber–Fechner), so the body distinguishes ratios, not differences: a just-noticeable change is a constant fraction of the starting value. Stronger stimuli also recruit higher-threshold receptors. Hearing spans twelve orders of magnitude of intensity (hence the decibel scale); vision spans ten.
 

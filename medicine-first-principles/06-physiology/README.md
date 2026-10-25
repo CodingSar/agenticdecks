@@ -36,7 +36,7 @@ The one abstraction this layer contributes is **the regulated variable**: a quan
           brain and autonomic nerves (02)        hormones (07)
                      \                              /
    fast control  ----->   REGULATED VARIABLES   <-----  slow control
-                      pressure, PCO2, pH, osmolality,
+                      pressure, carbon dioxide, pH, osmolality,
                       glucose, Ca2+, temperature (01)
                      /          |           \
        heart and vessels (03)  lungs (04)   kidney (05)   gut and liver (06)

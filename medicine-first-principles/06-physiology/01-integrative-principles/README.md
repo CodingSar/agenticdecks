@@ -27,8 +27,8 @@ The unifying idea is Claude Bernard's *milieu intérieur*, made quantitative by 
      ^                                                   |
      +----------------- measured value <-----------------+
 
-   regulated variables: ECF volume and osmolality, [H+], temperature,
-   energy stores, and (via the organ systems) PO2, PCO2, pressure, glucose, Ca2+
+   regulated variables: extracellular volume and osmolality, [H+], temperature,
+   energy stores, and (via the organ systems) oxygen, carbon dioxide, pressure, glucose, calcium
 ```
 
 Read [homeostasis](homeostasis-and-set-points.md) first; it supplies the vocabulary (set point, gain, compensation) for every leaf in this layer. [Fluid compartments](body-fluid-compartments-and-electrolytes.md) and [acid–base](acid-base-physiology.md) describe the bath and its most tightly held property; they are the physiology behind every blood test. [Thermoregulation and energy balance](thermoregulation-and-energy-balance.md) treats the body as a heat engine. [Exercise and stress](exercise-and-stress-physiology.md) shows all the loops working at once under load, and is the best single test of whether the reader has understood the cardiovascular and respiratory leaves. [Sleep and circadian rhythms](sleep-and-circadian-rhythms.md) adds the time axis: set points are not constants but scheduled.

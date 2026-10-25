@@ -6,7 +6,7 @@
 
 ## Essence
 
-The inflammatory skin diseases are what happens when the skin's two jobs, barrier and immune sentinel, go wrong together. Atopic eczema is a leaky barrier that lets antigens in and an immune system biased to respond with the allergic (type 2) arm; psoriasis is an intact barrier with an immune system driven by the interleukin-23 and interleukin-17 axis to make the epidermis proliferate ten times too fast; urticaria is mast-cell release in the dermis; contact dermatitis is a T-cell response to a chemical that has crossed the barrier and bound to self-proteins. Each is chronic and relapsing, and each is now treatable at the level of its mechanism, because the cytokines that drive them have been identified and blocked one at a time. The skin was the first organ in which immunology became targeted therapy at scale, and quality of life, not survival, is the outcome that matters.
+The inflammatory skin diseases are the skin's two jobs, barrier and immune sentinel, going wrong together. Atopic eczema is a leaky barrier plus an immune system biased to the allergic (type 2) arm; psoriasis is an intact barrier plus an interleukin-23/17 drive that makes the epidermis proliferate ten times too fast; urticaria is mast-cell release in the dermis; contact dermatitis is a T-cell response to a chemical that has crossed the barrier. Each is chronic and relapsing, and each is now treatable at the level of its mechanism, because the cytokines that drive them have been identified and blocked one at a time. The skin was the first organ in which immunology became targeted therapy at scale, and quality of life, not survival, is the outcome that matters.
 
 ## Core tenets
 
@@ -47,7 +47,6 @@ The inflammatory skin diseases are what happens when the skin's two jobs, barrie
 
 - **"Eczema is an allergy."** It is a barrier defect with a type 2 immune bias; most flares are not caused by an identifiable allergen, and allergy testing rarely changes management.
 - **"Psoriasis is a skin disease."** It is a systemic inflammatory disease with joint, vascular and metabolic consequences, and it is treated accordingly.
-- **"Chronic urticaria means you are allergic to something."** Chronic spontaneous urticaria is autoimmune mast-cell activation; searching for an allergen is almost always futile.
 
 ## Go deeper
 
