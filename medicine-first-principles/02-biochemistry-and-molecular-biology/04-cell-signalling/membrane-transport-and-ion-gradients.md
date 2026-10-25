@@ -20,9 +20,9 @@ A lipid bilayer lets almost nothing charged or polar through, so every ion, suga
 
 5. **Water follows solute, and the pump is the osmotic engine.** Water crosses through aquaporins (the vasopressin-regulated aquaporin-2 sets urine concentration) and by leak, always toward the side with more solute. A cell full of impermeant anions would swell and burst if sodium leaked in unchecked; the pump's continuous export holds cell volume. When ATP fails in ischaemia the pump stops, sodium and water enter, and swelling is the first visible sign of injury.
 
-6. **An epithelium transports by putting different proteins on its two faces.** Tight junctions separate an apical membrane facing the lumen from a basolateral membrane facing blood. Sodium enters apically through a cotransporter or channel and is pumped out basolaterally, so salt and water cross the sheet; secretion runs the arrangement in reverse. The CFTR chloride channel on the apical face is what fails in cystic fibrosis, leaving secretions dehydrated, and what cholera toxin locks open through cyclic AMP, producing litres of secretory diarrhoea.
+6. **An epithelium transports by putting different proteins on its two faces.** Tight junctions separate an apical membrane facing the lumen from a basolateral membrane facing blood. Sodium enters apically through a cotransporter or channel and is pumped out basolaterally, so salt and water cross the sheet; secretion runs the arrangement in reverse. The apical CFTR chloride channel fails in cystic fibrosis, leaving secretions dehydrated, and is locked open by cholera toxin through cyclic AMP, producing litres of diarrhoea.
 
-7. **Channels are gated, and their mutations and drugs are the channelopathies.** Local anaesthetics block sodium channels; benzodiazepines enhance the GABA-A chloride channel; calcium-channel blockers relax vessels; sulfonylureas close the ATP-sensitive potassium channel through which glucose metabolism triggers insulin release, so neonatal diabetes from that channel's mutation is treated with a tablet. Inherited variants in cardiac potassium and sodium channels cause the long QT syndromes, and because many unrelated drugs block the hERG potassium channel, every new drug is screened for it.
+7. **Channels are gated, and their mutations and drugs are the channelopathies.** Local anaesthetics block sodium channels; benzodiazepines enhance the GABA-A chloride channel; calcium-channel blockers relax vessels; sulfonylureas close the ATP-sensitive potassium channel through which glucose metabolism triggers insulin release, so neonatal diabetes from that channel's mutation is treated with a tablet. Variants in cardiac potassium and sodium channels cause the long QT syndromes, and because many unrelated drugs block the hERG potassium channel, every new drug is screened for it.
 
 8. **Transporters are the pharmacokinetics of layer 09.** Hepatic uptake carriers (OATP1B1 for statins; a common variant causes simvastatin myopathy), efflux pumps at the blood–brain barrier, and the renal transporters that secrete penicillins and diuretics decide where a drug goes and how long it stays, and are the sites of many interactions.
 
@@ -36,7 +36,6 @@ A lipid bilayer lets almost nothing charged or polar through, so every ion, suga
 | Secondary active transport | Uphill transport powered by another solute's downhill gradient |
 | Electrochemical gradient | Combined concentration and voltage driving force on an ion |
 | Nernst (equilibrium) potential | Voltage at which an ion's net flux is zero |
-| Pump–leak balance | Steady state between active export and passive entry that sets cell volume |
 | Channelopathy | Disease caused by a mutated ion channel |
 
 ## How it fits
