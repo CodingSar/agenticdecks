@@ -340,6 +340,23 @@
    "reverse": false
   },
   {
+   "guid": "37f49ff075",
+   "type": "basic",
+   "deck": "Clean Code & Design Patterns::01 Clean Code: Names, Functions & Comments",
+   "tags": [
+    "ccdp::clean_code::comments",
+    "simplified"
+   ],
+   "front": "List the kinds of comments Clean Code accepts, and what they have in common.",
+   "back": "Legal headers, intent (why this choice was made), warnings of consequences, <code>TODO</code> notes, and public application programming interface (API) documentation. Common thread: each says something the code cannot say itself.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Clean Code · Comments",
+   "reverse": false
+  },
+  {
    "guid": "se_2bys)q-",
    "type": "basic",
    "deck": "Clean Code & Design Patterns::01 Clean Code: Names, Functions & Comments",
@@ -612,6 +629,40 @@
    "reverse": false
   },
   {
+   "guid": "d1ed5e5bac",
+   "type": "basic",
+   "deck": "Clean Code & Design Patterns::02 Clean Code: Objects, Errors, Boundaries & Tests",
+   "tags": [
+    "ccdp::clean_code::objects",
+    "simplified"
+   ],
+   "front": "Is <code>builder.name(\"x\").size(3).build()</code> a Law of Demeter violation?",
+   "back": "No. Each call returns the same builder (or a fluent step of it), so you are not reaching through different objects' internals. The law targets chains that navigate into the structure of other objects.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Clean Code · Objects & Data",
+   "reverse": false
+  },
+  {
+   "guid": "da23c911e7",
+   "type": "basic",
+   "deck": "Clean Code & Design Patterns::02 Clean Code: Objects, Errors, Boundaries & Tests",
+   "tags": [
+    "ccdp::clean_code::objects",
+    "simplified"
+   ],
+   "front": "Tell, don't ask: what does it mean, and what does it fix?",
+   "back": "Tell an object what to do instead of pulling its data out to decide elsewhere: <code>account.withdraw(x)</code> instead of checking <code>getBalance()</code> and then calling <code>setBalance()</code>. The rule stays next to its data, and callers stop duplicating checks.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Clean Code · Objects & Data",
+   "reverse": false
+  },
+  {
    "guid": "K0_o*xNO]]",
    "type": "basic",
    "deck": "Clean Code & Design Patterns::02 Clean Code: Objects, Errors, Boundaries & Tests",
@@ -688,6 +739,23 @@
    "image": "",
    "analogy": "A travel adapter: every foreign socket shape converted into the one plug your devices know.",
    "extra": "<b>Bonus:</b> the wrapper is also the single place to swap vendors or fake the port in tests.",
+   "source": "Clean Code · Error Handling",
+   "reverse": false
+  },
+  {
+   "guid": "3312843961",
+   "type": "basic",
+   "deck": "Clean Code & Design Patterns::02 Clean Code: Objects, Errors, Boundaries & Tests",
+   "tags": [
+    "ccdp::clean_code::errors",
+    "simplified"
+   ],
+   "front": "When you wrap a third-party exception in your own exception type, what must you keep, and why?",
+   "back": "Keep the original as the <b>cause</b>. Translating makes the interface clean for callers, but dropping the cause throws away the stack trace and root cause that you need when debugging.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "Clean Code · Error Handling",
    "reverse": false
   },
@@ -932,6 +1000,23 @@
    "reverse": false
   },
   {
+   "guid": "077ac00bb3",
+   "type": "basic",
+   "deck": "Clean Code & Design Patterns::02 Clean Code: Objects, Errors, Boundaries & Tests",
+   "tags": [
+    "ccdp::clean_code::tests",
+    "simplified"
+   ],
+   "front": "State Martin's three laws of test-driven development (TDD), and the rhythm they force.",
+   "back": "(1) No production code without a failing unit test. (2) Write only enough test to fail (not compiling counts). (3) Write only enough production code to pass that test. Result: a cycle of seconds, always close to green.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Clean Code · TDD",
+   "reverse": false
+  },
+  {
    "guid": "m4rG8B%Ivx",
    "type": "basic",
    "deck": "Clean Code & Design Patterns::02 Clean Code: Objects, Errors, Boundaries & Tests",
@@ -944,6 +1029,23 @@
    "image": "",
    "analogy": "",
    "extra": "<b>Middle path:</b> Beck himself varies step size: tiny when unsure, larger when confident.",
+   "source": "Clean Code · TDD (critique)",
+   "reverse": false
+  },
+  {
+   "guid": "9954df1f88",
+   "type": "basic",
+   "deck": "Clean Code & Design Patterns::02 Clean Code: Objects, Errors, Boundaries & Tests",
+   "tags": [
+    "ccdp::clean_code::tests",
+    "simplified"
+   ],
+   "front": "You refactor internals without changing behaviour and 30 tests fail. What does that reveal about the tests?",
+   "back": "They are coupled to the implementation (mocks of internal calls, tests of private steps) rather than to observable behaviour. Good tests fail only when behaviour changes, so refactoring stays safe.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "Clean Code · TDD (critique)",
    "reverse": false
   },
@@ -1236,6 +1338,23 @@
    "reverse": false
   },
   {
+   "guid": "6ab5030a1e",
+   "type": "basic",
+   "deck": "Clean Code & Design Patterns::03 SOLID & Design Principles",
+   "tags": [
+    "ccdp::solid::lsp",
+    "simplified"
+   ],
+   "front": "Why does \"favour composition over inheritance\" avoid fragile-base-class problems?",
+   "back": "Composition depends only on the part's public contract. Inheritance exposes a subclass to every base-class behaviour, including which methods call which, so a base change can silently break it (the <code>InstrumentedHashSet</code> double count).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SOLID · LSP",
+   "reverse": false
+  },
+  {
    "guid": "Pt>LN4kLf)",
    "type": "basic",
    "deck": "Clean Code & Design Patterns::03 SOLID & Design Principles",
@@ -1412,6 +1531,23 @@
    "reverse": false
   },
   {
+   "guid": "547b5b2910",
+   "type": "basic",
+   "deck": "Clean Code & Design Patterns::03 SOLID & Design Principles",
+   "tags": [
+    "ccdp::solid::dip",
+    "simplified"
+   ],
+   "front": "In the dependency inversion principle (DIP), the runtime call goes from <code>InvoiceService</code> to the MySQL repository. Which way do the source-code dependencies point?",
+   "back": "Both point at the <code>InvoiceRepository</code> interface owned by the domain: the service uses it, and the MySQL class implements it. The source arrow from implementation to interface is inverted relative to the runtime call.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SOLID · DIP",
+   "reverse": false
+  },
+  {
    "guid": "QM??aYAOkW",
    "type": "basic",
    "deck": "Clean Code & Design Patterns::03 SOLID & Design Principles",
@@ -1464,10 +1600,11 @@
    "type": "basic",
    "deck": "Clean Code & Design Patterns::03 SOLID & Design Principles",
    "tags": [
-    "ccdp::solid::contrast"
+    "ccdp::solid::contrast",
+    "simplified"
    ],
-   "front": "How does the Liskov substitution principle (LSP) relate to the open/closed principle (OCP)?",
-   "back": "OCP extends behaviour by adding new subtypes behind an abstraction; LSP is what makes that safe. A non-substitutable subtype forces callers to branch, re-opening them for modification.",
+   "front": "Why does a subtype that breaks the Liskov substitution principle (LSP) also break the open/closed principle (OCP)? What do callers end up doing?",
+   "back": "Callers must check which subtype they got (<code>instanceof</code>, special cases) before using it. Adding a subtype then means editing those callers, so they are no longer closed to modification. LSP is what makes OCP's \"extend by adding subtypes\" safe.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1588,6 +1725,23 @@
    "reverse": false
   },
   {
+   "guid": "6b72142131",
+   "type": "basic",
+   "deck": "Clean Code & Design Patterns::03 SOLID & Design Principles",
+   "tags": [
+    "ccdp::principles",
+    "simplified"
+   ],
+   "front": "Rule of three: when do you extract a shared abstraction from duplication, and what risk does waiting reduce?",
+   "back": "Wait for the third occurrence. Two cases rarely show what truly varies, so an early abstraction guesses wrong and then collects flags. Three cases reveal the real shared shape.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Metz · The Wrong Abstraction",
+   "reverse": false
+  },
+  {
    "guid": "m)D=%H0oI<",
    "type": "basic",
    "deck": "Clean Code & Design Patterns::03 SOLID & Design Principles",
@@ -1645,6 +1799,23 @@
    "front": "",
    "back": "",
    "text": "Constantine's cohesion scale, worst to best: {{c1::coincidental}} (a <code>utils.py</code> of unrelated helpers), logical (grouped by category, e.g. all input handlers), {{c2::temporal}} (things done at the same time, e.g. <code>initAll()</code>), procedural, communicational (same data), sequential (output feeds the next), {{c3::functional}} (all parts serve one well-defined task).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Structured Design · Cohesion",
+   "reverse": false
+  },
+  {
+   "guid": "0057185778",
+   "type": "basic",
+   "deck": "Clean Code & Design Patterns::03 SOLID & Design Principles",
+   "tags": [
+    "ccdp::principles",
+    "simplified"
+   ],
+   "front": "Why is temporal cohesion (an <code>initAll()</code> module) weaker than functional cohesion, in terms of how the module changes?",
+   "back": "Temporal cohesion groups parts only because they run at the same time, so each part changes for its own unrelated reason and the module is edited constantly. In functional cohesion all parts serve one task and change together.",
+   "text": "",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -1748,6 +1919,40 @@
    "reverse": false
   },
   {
+   "guid": "524c498980",
+   "type": "basic",
+   "deck": "Clean Code & Design Patterns::03 SOLID & Design Principles",
+   "tags": [
+    "ccdp::principles::connascence",
+    "simplified"
+   ],
+   "front": "Rank these from weakest to strongest connascence: Algorithm, Name, Position, Meaning (convention), Type. Why aim to move down the list?",
+   "back": "Name, Type, Meaning, Position, Algorithm. Weaker forms are cheaper to change and easier to spot with tools, so refactoring converts strong connascence into weaker forms.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Page-Jones · Connascence",
+   "reverse": false
+  },
+  {
+   "guid": "0962fc9fd8",
+   "type": "basic",
+   "deck": "Clean Code & Design Patterns::03 SOLID & Design Principles",
+   "tags": [
+    "ccdp::principles::connascence",
+    "simplified"
+   ],
+   "front": "Besides strength, which two properties of connascence decide what to refactor first?",
+   "back": "<b>Degree</b> (how many elements share it) and <b>locality</b> (how far apart they are). Fix connascence that is strong, widespread and spans distant modules before the local, weak kind.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Page-Jones · Connascence",
+   "reverse": false
+  },
+  {
    "guid": "Nt,As&S$W[",
    "type": "basic",
    "deck": "Clean Code & Design Patterns::03 SOLID & Design Principles",
@@ -1772,6 +1977,23 @@
    ],
    "front": "Scenario: an enum <code>Role</code> is checked with <code>if role == ADMIN</code> in 30 places, and a new <code>AUDITOR</code> role needs a subset of admin rights. Which principle is at stake, and what move helps?",
    "back": "DRY (don't repeat yourself): the knowledge \"who may do X\" is scattered. Centralise it in a policy, <code>can(user, Action.EXPORT)</code>, so a new role is one change.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Design Principles · DRY",
+   "reverse": false
+  },
+  {
+   "guid": "41f960f50a",
+   "type": "basic",
+   "deck": "Clean Code & Design Patterns::03 SOLID & Design Principles",
+   "tags": [
+    "ccdp::principles",
+    "simplified"
+   ],
+   "front": "Two functions contain identical code today, one for a shipping fee and one for a tax. Does merging them satisfy don't repeat yourself (DRY)?",
+   "back": "Not necessarily. DRY is about duplicated <b>knowledge</b>, not identical text. If the two rules change for different reasons, they match only by accident; merging couples them, and later changes force flags into the shared code.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2036,6 +2258,23 @@
    "image": "",
    "analogy": "Adding a new furniture style is one new catalogue; adding 'lamps' to every style means redesigning all catalogues.",
    "extra": "<b>Rule of thumb:</b> use it when the families grow, not the product list.",
+   "source": "GoF · Creational",
+   "reverse": false
+  },
+  {
+   "guid": "ea1beb7ba5",
+   "type": "basic",
+   "deck": "Clean Code & Design Patterns::04 GoF Creational Patterns",
+   "tags": [
+    "ccdp::gof::creational::abstract_factory",
+    "simplified"
+   ],
+   "front": "What breaks if client code calls <code>new MacButton()</code> directly instead of asking the Abstract Factory?",
+   "back": "The client can mix products from different families (a Mac button in a Windows dialog), which is exactly the inconsistency the factory exists to prevent. All creation must go through the factory.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "GoF · Creational",
    "reverse": false
   },
@@ -2533,6 +2772,23 @@
    "reverse": false
   },
   {
+   "guid": "ef97a81b44",
+   "type": "basic",
+   "deck": "Clean Code & Design Patterns::05 GoF Structural Patterns",
+   "tags": [
+    "ccdp::gof::structural::adapter",
+    "simplified"
+   ],
+   "front": "Facade vs Adapter: both wrap something. How do you tell them apart?",
+   "back": "Facade makes a complex subsystem easier by offering a new, simpler interface of your design. Adapter makes one existing class fit an interface the client already expects. Facade simplifies, Adapter converts.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "GoF · Structural",
+   "reverse": false
+  },
+  {
    "guid": "MqFQIy!ab]",
    "type": "basic",
    "deck": "Clean Code & Design Patterns::05 GoF Structural Patterns",
@@ -2561,6 +2817,23 @@
    "image": "",
    "analogy": "",
    "extra": "<b>Smell:</b> <code>LegacyToV2Adapter</code> wrapped by <code>V2ToV3Adapter</code>.",
+   "source": "GoF · Structural",
+   "reverse": false
+  },
+  {
+   "guid": "b66da97feb",
+   "type": "basic",
+   "deck": "Clean Code & Design Patterns::05 GoF Structural Patterns",
+   "tags": [
+    "ccdp::gof::structural::adapter",
+    "simplified"
+   ],
+   "front": "Besides method names, what else must an Adapter translate so the adaptee does not leak into your code?",
+   "back": "Data formats and units, and errors. Convert the adaptee's exceptions or error codes into the target's, otherwise callers still depend on vendor-specific types.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "GoF · Structural",
    "reverse": false
   },
@@ -2810,6 +3083,23 @@
    "reverse": false
   },
   {
+   "guid": "88c5d2be8f",
+   "type": "basic",
+   "deck": "Clean Code & Design Patterns::05 GoF Structural Patterns",
+   "tags": [
+    "ccdp::gof::structural::decorator",
+    "simplified"
+   ],
+   "front": "You wrap an output stream in both compression and encryption decorators. Why does the order matter?",
+   "back": "Compress, then encrypt. Encrypted bytes look random, so compressing after encryption saves almost nothing. Each decorator sees only the output of the one inside it, so order is part of the design.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "GoF · Structural",
+   "reverse": false
+  },
+  {
    "guid": "JTUJ![3G$L",
    "type": "basic",
    "deck": "Clean Code & Design Patterns::05 GoF Structural Patterns",
@@ -2834,6 +3124,23 @@
    ],
    "front": "Why not just subclass for each feature combination?",
    "back": "n independent features give up to <b>2ⁿ subclasses</b> (<code>LoggingRetryingCachingClient</code>…), fixed at compile time. Decorators combine n classes at run time.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "GoF · Structural",
+   "reverse": false
+  },
+  {
+   "guid": "f081831c14",
+   "type": "basic",
+   "deck": "Clean Code & Design Patterns::05 GoF Structural Patterns",
+   "tags": [
+    "ccdp::gof::structural::decorator",
+    "simplified"
+   ],
+   "front": "Which two SOLID principles does Decorator serve, and what does it cost?",
+   "back": "Open/closed principle (OCP): behaviour is added by wrapping, without editing the original. Single responsibility principle (SRP): each decorator handles one concern. Cost: many small objects, and order-dependent wiring.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2921,6 +3228,24 @@
    "image": "",
    "analogy": "Decorator: a phone case that adds a grip. Proxy: a receptionist who decides whether you see the director.",
    "extra": "<b>Ask:</b> is the wrapper there to enrich the object, or to guard and stand in for it?",
+   "source": "GoF · Structural",
+   "reverse": false
+  },
+  {
+   "guid": "3bfeefbb14",
+   "type": "basic",
+   "deck": "Clean Code & Design Patterns::05 GoF Structural Patterns",
+   "tags": [
+    "ccdp::gof::structural::decorator",
+    "ccdp::gof::structural::contrast",
+    "simplified"
+   ],
+   "front": "Adapter, Decorator and Proxy all wrap one object. What does each do to the interface and why?",
+   "back": "<b>Adapter</b> changes the interface (converts it to the one the client expects). <b>Decorator</b> keeps the interface and adds behaviour. <b>Proxy</b> keeps the interface and controls access to the real object.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "GoF · Structural",
    "reverse": false
   },
@@ -3121,6 +3446,23 @@
    "reverse": false
   },
   {
+   "guid": "f31c01b806",
+   "type": "basic",
+   "deck": "Clean Code & Design Patterns::05 GoF Structural Patterns",
+   "tags": [
+    "ccdp::gof::structural::flyweight",
+    "simplified"
+   ],
+   "front": "What breaks if a shared Flyweight's intrinsic state can be mutated?",
+   "back": "One client's change appears in every context using that flyweight (editing one tree changes every tree of that species). Intrinsic state must be immutable, and anything contextual passed in as extrinsic state.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "GoF · Structural",
+   "reverse": false
+  },
+  {
    "guid": "k/tO<hI9~Z",
    "type": "basic",
    "deck": "Clean Code & Design Patterns::05 GoF Structural Patterns",
@@ -3232,6 +3574,23 @@
    "image": "",
    "analogy": "",
    "extra": "<b>Python:</b> <code>@functools.lru_cache</code> applies the same idea to a function.",
+   "source": "GoF · Structural",
+   "reverse": false
+  },
+  {
+   "guid": "e4bc70ea14",
+   "type": "basic",
+   "deck": "Clean Code & Design Patterns::05 GoF Structural Patterns",
+   "tags": [
+    "ccdp::gof::structural::proxy",
+    "simplified"
+   ],
+   "front": "What goes wrong if a caching proxy caches a method with side effects or time-dependent results?",
+   "back": "Repeated calls skip the side effect (the email is not sent again) or return stale values after they stop being valid. Cache only pure reads, with explicit expiry and invalidation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "GoF · Structural",
    "reverse": false
   },
@@ -3394,6 +3753,23 @@
    "image": "",
    "analogy": "",
    "extra": "<b>Consequence:</b> middleware is a hybrid of Chain of Responsibility and Decorator, which is why the two are easy to confuse.",
+   "source": "GoF · Behavioural",
+   "reverse": false
+  },
+  {
+   "guid": "2a4949867b",
+   "type": "basic",
+   "deck": "Clean Code & Design Patterns::06 GoF Behavioural Patterns I",
+   "tags": [
+    "ccdp::behavioural::chain_of_responsibility",
+    "simplified"
+   ],
+   "front": "Why does the order of links in a middleware chain matter?",
+   "back": "Each link sees only what earlier links let through or changed. Put cheap rejecting checks (rate limit, authentication) before expensive work, and body parsing before anything that reads the body.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "GoF · Behavioural",
    "reverse": false
   },
@@ -3610,10 +3986,11 @@
    "type": "basic",
    "deck": "Clean Code & Design Patterns::06 GoF Behavioural Patterns I",
    "tags": [
-    "ccdp::behavioural::interpreter"
+    "ccdp::behavioural::interpreter",
+    "simplified"
    ],
-   "front": "How does <b>Interpreter</b> relate to Composite?",
-   "back": "Its expression tree <b>is</b> a Composite: non-terminal rules (<code>And</code>, <code>Plus</code>) hold child expressions; terminals (<code>Number</code>, <code>Variable</code>) are leaves.",
+   "front": "An Interpreter pattern evaluates <code>cart.total &gt; 100 AND tier == 'gold'</code>. What structure do its expression objects form, which Gang of Four (GoF) pattern is that, and which nodes are the leaves?",
+   "back": "A tree of expression objects, which is a <b>Composite</b>. Rules that combine others (<code>And</code>, <code>Plus</code>) hold child expressions; terminals (<code>Number</code>, <code>Variable</code>) are the leaves.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -4310,6 +4687,23 @@
    "reverse": false
   },
   {
+   "guid": "3bce3b0faa",
+   "type": "basic",
+   "deck": "Clean Code & Design Patterns::07 GoF Behavioural Patterns II",
+   "tags": [
+    "ccdp::behavioural::strategy",
+    "simplified"
+   ],
+   "front": "Which SOLID principles does Strategy apply, and how?",
+   "back": "Open/closed principle (OCP): a new algorithm is a new class, and the context is not edited. Dependency inversion principle (DIP): the context depends on a strategy interface, not a concrete algorithm.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "GoF · Behavioural",
+   "reverse": false
+  },
+  {
    "guid": "IPJSRMhFGc",
    "type": "basic",
    "deck": "Clean Code & Design Patterns::07 GoF Behavioural Patterns II",
@@ -4321,6 +4715,23 @@
    "text": "",
    "image": "",
    "analogy": "A franchise restaurant's recipe card: the order of steps is fixed by head office, each branch chooses its local sauce.",
+   "extra": "",
+   "source": "GoF · Behavioural",
+   "reverse": false
+  },
+  {
+   "guid": "fd6b2b26fe",
+   "type": "basic",
+   "deck": "Clean Code & Design Patterns::07 GoF Behavioural Patterns II",
+   "tags": [
+    "ccdp::behavioural::template_method",
+    "simplified"
+   ],
+   "front": "Why is the template method itself usually declared <code>final</code> (not overridable)?",
+   "back": "Its purpose is to fix the algorithm's order. If subclasses could override it, they could break the sequence and skip required steps. Subclasses should only fill in the steps and hooks.",
+   "text": "",
+   "image": "",
+   "analogy": "",
    "extra": "",
    "source": "GoF · Behavioural",
    "reverse": false
@@ -4618,11 +5029,12 @@
    "type": "cloze",
    "deck": "Clean Code & Design Patterns::08 Choosing a Pattern: Scenario to Pattern",
    "tags": [
-    "ccdp::selection::reading"
+    "ccdp::selection::reading",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Gang of Four (GoF) aspects that can vary, behavioural: objects that depend on another object, and how they stay up to date → {{c1::Observer}}; an object's behaviour as its state changes → {{c2::State}}; steps of an algorithm → {{c3::Template Method}}; operations applied to objects without changing their classes → {{c4::Visitor}}; how an aggregate's elements are traversed → {{c5::Iterator}}.",
+   "text": "Gang of Four (GoF) aspects that can vary, behavioural: objects that depend on another object, and how they stay up to date → {{c1::Observer}}; an object's behaviour changing with its internal mode → {{c2::State}}; steps of an algorithm → {{c3::Template Method}}; operations applied to objects without changing their classes → {{c4::Visitor}}; how an aggregate's elements are traversed → {{c5::Iterator}}.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -5038,6 +5450,23 @@
    ],
    "front": "Diagnose: \"Each new report format adds a method to all twelve node classes.\" What varies, and which pattern?",
    "back": "<b>Operations over a stable structure</b> vary → <b>Visitor</b> (or pattern matching over sealed types).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Pattern selection",
+   "reverse": false
+  },
+  {
+   "guid": "a2a71a4cc4",
+   "type": "basic",
+   "deck": "Clean Code & Design Patterns::08 Choosing a Pattern: Scenario to Pattern",
+   "tags": [
+    "ccdp::selection::diagnosis",
+    "simplified"
+   ],
+   "front": "A conditional keeps appearing. Which pattern removes it when the branch depends on: the object's current mode, the algorithm the client chose, the kind of request, or the element type in a stable structure?",
+   "back": "Current mode: <b>State</b>. Chosen algorithm: <b>Strategy</b>. Kind of request: <b>Command</b> (or Chain of Responsibility if handlers decide). Element type with many operations: <b>Visitor</b> or pattern matching on sealed types.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -5820,11 +6249,12 @@
    "type": "cloze",
    "deck": "Clean Code & Design Patterns::09 Refactoring: From Smell to Pattern",
    "tags": [
-    "ccdp::refactoring"
+    "ccdp::refactoring",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Kerievsky: you can refactor {{c1::towards}} a pattern (partly, stopping when the design is good enough), {{c2::to}} a pattern (fully), or {{c3::away from}} a pattern (when it is overkill).",
+   "text": "Kerievsky's three directions for patterns: refactor <b>towards</b> a pattern = {{c1::move partway and stop once the design is good enough}}; refactor <b>to</b> a pattern = {{c2::carry it through to the full pattern structure}}; refactor <b>away from</b> a pattern = {{c3::remove it because it is overkill}}.",
    "image": "",
    "analogy": "",
    "extra": "<b>Point:</b> a pattern is a destination you may only half-reach; the code, not the catalogue, decides how far.",
@@ -6111,11 +6541,12 @@
    "type": "cloze",
    "deck": "Clean Code & Design Patterns::10 Beyond GoF: Modern Object Patterns",
    "tags": [
-    "ccdp::modern_patterns"
+    "ccdp::modern_patterns",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Bloch's static-factory naming conventions: type conversion {{c1::<code>from</code>}}; aggregation {{c2::<code>of</code>}}; possibly cached instance {{c3::<code>getInstance</code> / <code>valueOf</code>}}; guaranteed fresh instance {{c4::<code>newInstance</code>}}.",
+   "text": "Bloch's static-factory naming conventions: <code>from</code> = {{c1::type conversion from one argument}}; <code>of</code> = {{c2::aggregation of several arguments}}; <code>getInstance</code> / <code>valueOf</code> = {{c3::an instance that may be cached or shared}}; <code>newInstance</code> = {{c4::a guaranteed fresh instance}}.",
    "image": "",
    "analogy": "",
    "extra": "<b>Examples:</b> <code>Date.from(instant)</code>, <code>List.of(a, b)</code>, <code>Boolean.valueOf(true)</code> (cached, never new).",
