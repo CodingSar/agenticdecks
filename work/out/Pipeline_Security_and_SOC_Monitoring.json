@@ -292,6 +292,23 @@
    "reverse": false
   },
   {
+   "guid": "b847dd0ada",
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::02 Source & Dependencies",
+   "tags": [
+    "pipeline::source",
+    "simplified"
+   ],
+   "front": "How do you defend against <b>dependency confusion</b>?",
+   "back": "Make internal package names resolve only from the internal registry (scoped or namespaced names, registry-source pinning, reserved public placeholders). Never let the resolver pick the highest version across public and private sources.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Source integrity",
+   "reverse": false
+  },
+  {
    "guid": "A6o-!&.uX@",
    "type": "basic",
    "deck": "Pipeline Security & SOC Monitoring::02 Source & Dependencies",
@@ -320,6 +337,23 @@
    "image": "",
    "analogy": "A pinned recipe lists the exact brand and batch; \"any flour\" lets the shop substitute whatever is on the shelf.",
    "extra": "<b>Pitfall:</b> a pull request that changes the lockfile deserves a close look; attackers hide version swaps there.",
+   "source": "Source integrity",
+   "reverse": false
+  },
+  {
+   "guid": "dac058d1c9",
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::02 Source & Dependencies",
+   "tags": [
+    "pipeline::source",
+    "simplified"
+   ],
+   "front": "A project has no lockfile and depends on <code>^1.2</code>. A maintainer account is hijacked and version 1.2.9 is published. What happens at the next CI build, and what prevents it?",
+   "back": "CI resolves the range to the newest match and silently installs the malicious 1.2.9. A lockfile with integrity hashes pins the exact reviewed version, so the build fails or keeps the old one until someone deliberately updates.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "Source integrity",
    "reverse": false
   },
@@ -485,6 +519,23 @@
    "reverse": false
   },
   {
+   "guid": "29ce9dd5e9",
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::03 Build & Workflow Attacks",
+   "tags": [
+    "pipeline::build",
+    "simplified"
+   ],
+   "front": "A third-party action used by two workflows is pinned to <code>@v3</code> in one and to a full commit SHA in the other. The publisher is compromised and moves <code>v3</code>. Which workflow is hit, and why?",
+   "back": "Only the <code>@v3</code> workflow. A tag is a movable pointer, so it now resolves to malicious code. A commit SHA is a content hash and cannot be repointed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Build integrity",
+   "reverse": false
+  },
+  {
    "guid": "E$Ej(W#9Pp",
    "type": "basic",
    "deck": "Pipeline Security & SOC Monitoring::03 Build & Workflow Attacks",
@@ -533,6 +584,23 @@
    "reverse": false
   },
   {
+   "guid": "43eadbdac9",
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::03 Build & Workflow Attacks",
+   "tags": [
+    "pipeline::build",
+    "simplified"
+   ],
+   "front": "If a <b>hermetic build</b> has no network, how does it still get its dependencies, and why is that safer?",
+   "back": "Dependencies are fetched beforehand, pinned and hash-verified (or vendored), then supplied as fixed inputs. The build can use only what was reviewed and cannot pull anything new mid-build.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Build integrity",
+   "reverse": false
+  },
+  {
    "guid": "o(a+TRa^lO",
    "type": "basic",
    "deck": "Pipeline Security & SOC Monitoring::03 Build & Workflow Attacks",
@@ -561,6 +629,23 @@
    "image": "",
    "analogy": "",
    "extra": "<b>Format:</b> a signed in-toto attestation (SLSA provenance); see Platform Engineering deck.",
+   "source": "Build integrity",
+   "reverse": false
+  },
+  {
+   "guid": "deb5c93ea5",
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::03 Build & Workflow Attacks",
+   "tags": [
+    "pipeline::build",
+    "simplified"
+   ],
+   "front": "<b>Signature vs provenance</b>: what does each prove about an artifact?",
+   "back": "A signature proves who vouches for it (a key or identity). Provenance records how it was made: source commit, builder and workflow. A signed artifact from a compromised builder verifies fine, so you need provenance to check the builder.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "Build integrity",
    "reverse": false
   },
@@ -665,10 +750,11 @@
    "type": "basic",
    "deck": "Pipeline Security & SOC Monitoring::04 Identity & Secrets in Pipelines",
    "tags": [
-    "pipeline::identity"
+    "pipeline::identity",
+    "simplified"
    ],
-   "front": "How does <b>OpenID Connect (OIDC) workload federation</b> remove static cloud keys from a pipeline?",
-   "back": "The CI provider issues the job a short-lived signed token with claims (repository, branch, workflow). The cloud trusts that issuer and exchanges it for temporary credentials.",
+   "front": "A job needs cloud access but holds no stored cloud key. Walk through the <b>OpenID Connect (OIDC) workload federation</b> exchange: what does the job present, and what must the cloud check?",
+   "back": "The CI provider issues the job a short-lived signed token with claims (repository, branch, workflow). The cloud trusts that issuer, checks the claims against its trust policy, then exchanges the token for temporary credentials.",
    "text": "",
    "image": "",
    "analogy": "Instead of lending employees a master key, the building issues a badge that only works for their shift and their floor.",
@@ -709,6 +795,23 @@
    "reverse": false
   },
   {
+   "guid": "acd40170b2",
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::04 Identity & Secrets in Pipelines",
+   "tags": [
+    "pipeline::identity",
+    "simplified"
+   ],
+   "front": "A compromised third-party step runs in a job whose job-scoped token kept the broad default permissions. What can the attacker do with it, and what limits the damage?",
+   "back": "Within the job window it can push code, tamper with releases or publish packages using that token. Setting <code>permissions:</code> to read-only by default and widening per job limits what a hijacked step can do.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Pipeline identity",
+   "reverse": false
+  },
+  {
    "guid": "evqrmC]<7<",
    "type": "basic",
    "deck": "Pipeline Security & SOC Monitoring::04 Identity & Secrets in Pipelines",
@@ -717,6 +820,40 @@
    ],
    "front": "<b>Personal Access Token (PAT) vs OpenID Connect (OIDC) federation</b> for deploy credentials: key difference?",
    "back": "A PAT is a long-lived bearer secret tied to a person; OIDC is an ephemeral token tied to a job identity. A leaked PAT works until revoked; an OIDC token dies in minutes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Pipeline identity",
+   "reverse": false
+  },
+  {
+   "guid": "9d8d298782",
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::04 Identity & Secrets in Pipelines",
+   "tags": [
+    "pipeline::identity",
+    "simplified"
+   ],
+   "front": "OpenID Connect (OIDC) removed static cloud keys from the pipeline. What attack path still remains, and how do you contain it?",
+   "back": "Code running inside the job can request the token and use it during the job. Contain it: keep untrusted code out of jobs that can mint production tokens, and bind the trust policy to specific branch, environment and workflow claims.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Pipeline identity",
+   "reverse": false
+  },
+  {
+   "guid": "ed36e67b1f",
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::04 Identity & Secrets in Pipelines",
+   "tags": [
+    "pipeline::identity",
+    "simplified"
+   ],
+   "front": "What happens if a cloud trust policy for OpenID Connect (OIDC) checks only the token <b>issuer</b> and not the <code>sub</code> claim?",
+   "back": "Any repository or branch on that CI provider can obtain a valid token and assume the role, including a fork or a feature branch reaching production. The issuer proves the provider, not which workflow is asking.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -858,10 +995,11 @@
    "type": "basic",
    "deck": "Pipeline Security & SOC Monitoring::04 Identity & Secrets in Pipelines",
    "tags": [
-    "pipeline::identity"
+    "pipeline::identity",
+    "simplified"
    ],
-   "front": "How does <b>SPIFFE/SPIRE-style workload identity</b> relate to pipeline identity?",
-   "back": "Both give a workload a verifiable, short-lived identity instead of a stored secret. Pipeline OpenID Connect (OIDC) tokens are the CI provider's version of a workload identity document.",
+   "front": "What do <b>Secure Production Identity Framework for Everyone (SPIFFE)</b>/SPIFFE Runtime Environment (SPIRE) workload identity and pipeline OpenID Connect (OIDC) tokens have in common, and what do both replace?",
+   "back": "Both give a workload a verifiable, short-lived identity document instead of a stored secret. A pipeline OIDC token is the CI provider's version of a workload identity.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1258,6 +1396,23 @@
    "reverse": false
   },
   {
+   "guid": "21c9183be8",
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::06 Artifacts, Registries & Deploy Gates",
+   "tags": [
+    "pipeline::deploy",
+    "simplified"
+   ],
+   "front": "How do a Software Bill of Materials (<b>SBOM</b>) and <b>provenance</b> complement each other during an incident?",
+   "back": "The SBOM says what is inside an artifact (which components and versions). Provenance says how and where it was built. The SBOM finds what is exposed to a new vulnerability; provenance finds what a compromised builder produced.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Distribution & deploy",
+   "reverse": false
+  },
+  {
    "guid": "ziC?{egF0)",
    "type": "basic",
    "deck": "Pipeline Security & SOC Monitoring::06 Artifacts, Registries & Deploy Gates",
@@ -1332,6 +1487,23 @@
    "front": "",
    "back": "",
    "text": "Detection use-case lifecycle: {{c1::identify the threat}} (what are we afraid of?) → {{c2::confirm the telemetry}} exists → write and test the rule → {{c3::tune}} on real data → attach a playbook → measure and retire.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SOC fundamentals",
+   "reverse": false
+  },
+  {
+   "guid": "fa05ec4d74",
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::07 SOC Basics for Pipelines",
+   "tags": [
+    "soc::basics",
+    "simplified"
+   ],
+   "front": "List the stages of the <b>detection use-case lifecycle</b> in order and say what each one gives you.",
+   "back": "Identify the threat (what we fear), confirm the telemetry exists (can we see it), write and test the rule (works on sample logs), tune on real data (acceptable noise), attach a playbook (action when it fires), measure and retire (keep the set relevant).",
+   "text": "",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -1547,6 +1719,23 @@
    "reverse": false
   },
   {
+   "guid": "bd43811a01",
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::08 Telemetry Sources",
+   "tags": [
+    "soc::telemetry",
+    "simplified"
+   ],
+   "front": "An attacker with admin rights on the CI platform deletes the audit trail. What do you still have if logs were exported, and what would you lose if not?",
+   "back": "With export, the Security Information and Event Management (SIEM) copy shows the admin's actions, including the deletion. Without it you lose the only record, and the attacker's cover-up succeeds.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Telemetry",
+   "reverse": false
+  },
+  {
    "guid": "A=4YZ=}J7;",
    "type": "basic",
    "deck": "Pipeline Security & SOC Monitoring::08 Telemetry Sources",
@@ -1671,6 +1860,23 @@
    "image": "",
    "analogy": "A parcel tracking number that follows the box from depot to van to doorstep.",
    "extra": "<b>Practice:</b> propagate the run ID into image labels, commit trailers and session names.",
+   "source": "Telemetry",
+   "reverse": false
+  },
+  {
+   "guid": "cfce0ab5e8",
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::08 Telemetry Sources",
+   "tags": [
+    "soc::telemetry",
+    "simplified"
+   ],
+   "front": "A cloud role session appears in cloud audit logs. How does a shared run identifier let you decide in seconds whether it was legitimate?",
+   "back": "Look up the run ID (or OpenID Connect subject) in the CI logs. A matching job that was triggered by a known actor means normal; no matching job means a forged or replayed token. Without the shared key you must guess from timestamps.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "Telemetry",
    "reverse": false
   },
@@ -2232,6 +2438,23 @@
    "reverse": false
   },
   {
+   "guid": "81fc644268",
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::11 Triage, Response & Recovery",
+   "tags": [
+    "soc::response",
+    "simplified"
+   ],
+   "front": "A Security Operations Center (SOC) alert shows a new self-hosted runner registered at 03:00. Walk through the triage using the first question and what follows.",
+   "back": "Ask whether an approved change explains it. If not, check the runner's network location and labels, isolate it, revoke its registration token, and look at which jobs and secrets it already received.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Response",
+   "reverse": false
+  },
+  {
    "guid": "D3v(Xl!qP)",
    "type": "basic",
    "deck": "Pipeline Security & SOC Monitoring::11 Triage, Response & Recovery",
@@ -2307,6 +2530,23 @@
    "text": "",
    "image": "",
    "analogy": "A kitchen with a confirmed rat infestation is gutted, not wiped down.",
+   "extra": "",
+   "source": "Response",
+   "reverse": false
+  },
+  {
+   "guid": "2de52d2913",
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::11 Triage, Response & Recovery",
+   "tags": [
+    "soc::response",
+    "simplified"
+   ],
+   "front": "Why is it a mistake to <b>clean a compromised persistent runner in place</b> instead of rebuilding it?",
+   "back": "Malware can hide in tools, cron entries, caches or kernel-level state you will not find. Only a rebuild from the hardened image gives a known-good state, which is why persistent runners are riskier than ephemeral ones.",
+   "text": "",
+   "image": "",
+   "analogy": "",
    "extra": "",
    "source": "Response",
    "reverse": false
@@ -2432,6 +2672,23 @@
    ],
    "front": "<b>True positive vs benign true positive</b> in pipeline alerts: what is the distinction?",
    "back": "True positive: malicious activity. Benign true positive: the rule fired correctly on an action that was legitimate but unregistered. The second improves process, not rules.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Response",
+   "reverse": false
+  },
+  {
+   "guid": "f352f319b8",
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::11 Triage, Response & Recovery",
+   "tags": [
+    "soc::response",
+    "simplified"
+   ],
+   "front": "An alert fires on a branch-protection change that was legitimate but not registered with the SOC. Which fix improves the system: tuning the rule or fixing the process?",
+   "back": "The process. It is a benign true positive: the rule worked, but change registration did not reach the SOC. Tuning the rule away would blind it to the real attack of the same shape.",
    "text": "",
    "image": "",
    "analogy": "",
