@@ -27,7 +27,7 @@ def main():
         lost = sorted(set(old) - set(cur)) if old else []
         print(f"{did}: {len(old) if old else '?'} -> {len(cur)} cards, {len(lost)} ids absent, {len(set(cur) - set(old or []))} new")
         gone[did] = lost
-        bad = [n for n in d["notes"] if n.get("guid") in set(old or []) and False]
-    json.dump(gone, open(os.path.join(SCRATCH, "absent_ids.json"), "w"))
+    os.makedirs(os.path.join(SCRATCH, "absent"), exist_ok=True)
+    for did, lost in gone.items(): json.dump(lost, open(os.path.join(SCRATCH, "absent", did + ".json"), "w"))
     print("OK" if ok else "FAILED"); sys.exit(0 if ok else 1)
 main()
