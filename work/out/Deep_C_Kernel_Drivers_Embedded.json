@@ -1476,11 +1476,12 @@
     "deepc",
     "abi",
     "integers",
-    "kernel"
+    "kernel",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "C data models: {{c1::ILP32}} has 32-bit int, long and pointer; {{c2::LP64}} has 64-bit long and pointer with 32-bit int (Linux, macOS); {{c3::LLP64}} has only long long and pointer at 64 bits (Windows).",
+   "text": "C data models: ILP32 has {{c1::32-bit int, long and pointer}}; LP64 has {{c2::64-bit long and pointer with a 32-bit int}} (Linux, macOS); LLP64 has {{c3::only long long and pointer at 64 bits, long stays 32}} (Windows).",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -2044,11 +2045,12 @@
    "deck": "Deep C: Kernel, Drivers, Embedded::04 Toolchain, Linking & Startup",
    "tags": [
     "deepc",
-    "toolchain"
+    "toolchain",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "C build stages: {{c1::preprocess}} (<code>gcc -E</code> &rarr; <code>.i</code>), {{c2::compile}} (<code>-S</code> &rarr; <code>.s</code>), {{c3::assemble}} (<code>-c</code> &rarr; Executable and Linkable Format (ELF) <code>.o</code>), {{c4::link}} (<code>ld</code>: resolve symbols, apply relocations, place sections).",
+   "text": "C build stages: preprocess (<code>gcc -E</code>) produces {{c1::<code>.i</code>, text with macros and includes expanded}}; compile (<code>-S</code>) produces {{c2::<code>.s</code>, assembly}}; assemble (<code>-c</code>) produces {{c3::an Executable and Linkable Format (ELF) <code>.o</code> object}}; link (<code>ld</code>) {{c4::resolves symbols, applies relocations and places sections}}.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -2471,11 +2473,12 @@
    "tags": [
     "deepc",
     "toolchain",
-    "debugging"
+    "debugging",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Binary tools: {{c1::<code>nm</code>}} lists symbols (T text, D data, B bss, U undefined, W weak); {{c2::<code>objdump -d</code>}} disassembles; {{c3::<code>readelf</code>}} shows sections, segments and relocations; {{c4::<code>size</code>}} prints text/data/bss totals.",
+   "text": "Binary tools: <code>nm</code> {{c1::lists symbols (T text, D data, B bss, U undefined, W weak)}}; <code>objdump -d</code> {{c2::disassembles}}; <code>readelf</code> {{c3::shows sections, segments and relocations}}; <code>size</code> {{c4::prints text/data/bss totals}}.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -3004,9 +3007,10 @@
    "tags": [
     "deepc",
     "concurrency",
-    "kernel"
+    "kernel",
+    "simplified"
    ],
-   "front": "How do memory barriers differ between x86 and ARM?",
+   "front": "You port lockless code from x86 to ARM and it breaks. What differs about memory ordering, and what does <code>smp_wmb()</code> compile to on each?",
    "back": "x86 (TSO) only reorders a store followed by a load, so <code>smp_rmb()</code>/<code>smp_wmb()</code> are compiler barriers and <code>smp_mb()</code> a locked instruction. ARM, PowerPC and reduced instruction set computer (RISC)-V are weakly ordered: all emit real instructions (<code>dmb</code>/<code>dsb</code>).",
    "text": "",
    "image": "",
@@ -3650,9 +3654,10 @@
    "tags": [
     "deepc",
     "kernel",
-    "idioms"
+    "idioms",
+    "simplified"
    ],
-   "front": "How does the kernel's <code>struct list_head</code> differ from a textbook linked list?",
+   "front": "Describe the structure of the kernel's <code>struct list_head</code>. What does it imply for an empty list and for how you embed it?",
    "back": "It is intrusive, circular and doubly linked: the node is embedded in your struct, and the head is a node too, so an empty list points to itself and no NULL checks are needed.",
    "text": "",
    "image": "",
@@ -4469,11 +4474,12 @@
    "tags": [
     "deepc",
     "drivers",
-    "devicemodel"
+    "devicemodel",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Linux device model: a {{c1::bus}} enumerates devices and matches them to drivers; a {{c2::device}} (<code>struct device</code>) represents one hardware instance; a {{c3::driver}} registers a match table and callbacks.",
+   "text": "Linux device model: a bus {{c1::enumerates devices and matches them to drivers}}; a device (<code>struct device</code>) represents {{c2::one hardware instance}}; a driver registers {{c3::a match table and callbacks}}.",
    "image": "",
    "analogy": "The bus is a dating agency: it knows the devices and each driver's match criteria, and introduces matching pairs (probe).",
    "extra": "",
@@ -5709,9 +5715,10 @@
    "tags": [
     "deepc",
     "embedded",
-    "interrupts"
+    "interrupts",
+    "simplified"
    ],
-   "front": "How does an interrupt service routine (ISR)'s worst-case execution time affect the rest of the system?",
+   "front": "Why does the worst-case run time of one interrupt service routine (ISR) matter to other, unrelated interrupts?",
    "back": "It adds directly to the latency of every lower-priority interrupt.",
    "text": "",
    "image": "",
@@ -6435,6 +6442,645 @@
    ],
    "front": "What is the most accurate way to measure firmware timing?",
    "back": "Toggle a general-purpose input/output (GPIO) and watch it on an oscilloscope or logic analyser (or read the data watchpoint and trace (DWT) cycle counter).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "07 Embedded Systems Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "c2dcdc2c35",
+   "type": "basic",
+   "deck": "Deep C: Kernel, Drivers, Embedded::01 Undefined Behaviour & Integers",
+   "tags": [
+    "deepc",
+    "integers",
+    "simplified"
+   ],
+   "front": "A checked access <code>if (idx &lt; len) use(a[idx])</code> uses signed <code>int idx</code>. What input defeats it, and what is the fix?",
+   "back": "A negative <code>idx</code> passes <code>idx &lt; len</code> (or a signed/unsigned comparison converts it to a huge value). Make the index unsigned or check <code>idx &gt;= 0</code> explicitly, and build with <code>-Wsign-compare</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour",
+   "reverse": false
+  },
+  {
+   "guid": "5e63d09082",
+   "type": "basic",
+   "deck": "Deep C: Kernel, Drivers, Embedded::01 Undefined Behaviour & Integers",
+   "tags": [
+    "deepc",
+    "ub",
+    "simplified"
+   ],
+   "front": "Why does the optimiser deleting an overflow check not count as a compiler bug?",
+   "back": "The check relies on undefined behaviour (UB). The standard lets the compiler assume UB never happens, so code that can only be true after UB is dead. The bug is in the source: test before the operation instead.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour",
+   "reverse": false
+  },
+  {
+   "guid": "29aa0ad020",
+   "type": "basic",
+   "deck": "Deep C: Kernel, Drivers, Embedded::01 Undefined Behaviour & Integers",
+   "tags": [
+    "deepc",
+    "integers",
+    "simplified"
+   ],
+   "front": "What does a wrapping <code>millis()</code> timeout like <code>(uint32_t)(now - start) &gt;= timeout</code> need to stay correct, and what breaks it?",
+   "back": "Unsigned subtraction, modulo 2<sup>32</sup>, gives the true elapsed time across a wrap, provided the real interval is under 2<sup>31</sup> ticks. Comparing absolute timestamps (<code>now &gt;= start + timeout</code>) fails at the wrap.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour",
+   "reverse": false
+  },
+  {
+   "guid": "3461d10d0c",
+   "type": "basic",
+   "deck": "Deep C: Kernel, Drivers, Embedded::02 Pointers, Qualifiers & Declarations",
+   "tags": [
+    "deepc",
+    "qualifiers",
+    "simplified"
+   ],
+   "front": "Why can a <code>const T *</code> parameter not be used by the compiler to cache the data across a call to unknown code?",
+   "back": "<code>const</code> only restricts writes through that pointer. Another alias, an interrupt service routine (ISR) or another thread may still change the data, so the compiler must reload it. Only <code>restrict</code> adds the no-alias promise.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour",
+   "reverse": false
+  },
+  {
+   "guid": "da12ae820c",
+   "type": "basic",
+   "deck": "Deep C: Kernel, Drivers, Embedded::02 Pointers, Qualifiers & Declarations",
+   "tags": [
+    "deepc",
+    "lifetime",
+    "drivers",
+    "simplified"
+   ],
+   "front": "A driver passes the address of a local buffer to a direct memory access (DMA) engine and returns before the transfer ends. What happens, and what is the fix?",
+   "back": "The stack frame is reused, so the device writes into whatever lives there now: random stack corruption. Use a buffer that outlives the transfer (heap or device state allocated in <code>probe()</code>) and wait for completion before freeing.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "01 Language Core and Undefined Behaviour",
+   "reverse": false
+  },
+  {
+   "guid": "d84a6f868c",
+   "type": "basic",
+   "deck": "Deep C: Kernel, Drivers, Embedded::03 Memory Layout & ABI",
+   "tags": [
+    "deepc",
+    "layout",
+    "simplified"
+   ],
+   "front": "Why does reordering struct members change what a driver sends over a wire or to hardware, and how do you guard against it?",
+   "back": "The compiler inserts padding to satisfy alignment, so layout depends on member order and the application binary interface (ABI). Hardware or wire formats fix exact offsets; pin them with <code>static_assert(offsetof(...) == N)</code> and <code>sizeof</code> checks, or use explicit reserved fields.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "02 Memory, Layout and the ABI",
+   "reverse": false
+  },
+  {
+   "guid": "e1319d9e39",
+   "type": "basic",
+   "deck": "Deep C: Kernel, Drivers, Embedded::03 Memory Layout & ABI",
+   "tags": [
+    "deepc",
+    "layout",
+    "security",
+    "simplified"
+   ],
+   "front": "A driver copies a stack struct to user space with every named member assigned. What can still leak, and why does it matter?",
+   "back": "Padding bytes (and any unassigned member) keep stale kernel stack data, so user space can read kernel pointers or secrets. That defeats kernel address space layout randomization (KASLR). Zero the whole struct with <code>memset()</code> before filling it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "02 Memory, Layout and the ABI",
+   "reverse": false
+  },
+  {
+   "guid": "a0efbcf685",
+   "type": "basic",
+   "deck": "Deep C: Kernel, Drivers, Embedded::03 Memory Layout & ABI",
+   "tags": [
+    "deepc",
+    "layout",
+    "endianness",
+    "simplified"
+   ],
+   "front": "You read a 32-bit little-endian field from a received packet buffer on a big-endian CPU, using <code>*(u32 *)p</code>. Name every way this can be wrong.",
+   "back": "It may be unaligned (fault on strict-alignment CPUs), it violates strict aliasing, and it ignores byte order (value byte-swapped). Use <code>get_unaligned_le32(p)</code>, which fixes alignment and endianness at once.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "02 Memory, Layout and the ABI",
+   "reverse": false
+  },
+  {
+   "guid": "b4e1faa1e6",
+   "type": "basic",
+   "deck": "Deep C: Kernel, Drivers, Embedded::04 Toolchain, Linking & Startup",
+   "tags": [
+    "deepc",
+    "startup",
+    "simplified"
+   ],
+   "front": "What goes wrong if a Cortex-M startup file skips copying <code>.data</code> from flash to RAM, but zeroes <code>.bss</code>?",
+   "back": "Initialised globals read as garbage or zero in RAM instead of their declared values (the initial values still sit unused in flash), while uninitialised globals look fine. Bugs appear only in code touching initialised globals, which makes them hard to spot.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "03 Compiler, Linker and Startup",
+   "reverse": false
+  },
+  {
+   "guid": "729bf89dee",
+   "type": "basic",
+   "deck": "Deep C: Kernel, Drivers, Embedded::04 Toolchain, Linking & Startup",
+   "tags": [
+    "deepc",
+    "volatile",
+    "toolchain",
+    "simplified"
+   ],
+   "front": "Why does a missing <code>volatile</code> only show up when you raise the optimisation level?",
+   "back": "At <code>-O0</code> every variable access goes to memory. At <code>-O2</code> the compiler may keep a value in a register, hoist a load out of a loop, or delete a loop with no visible side effect. <code>volatile</code> forbids exactly those optimisations.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "03 Compiler, Linker and Startup",
+   "reverse": false
+  },
+  {
+   "guid": "893e80ae0c",
+   "type": "basic",
+   "deck": "Deep C: Kernel, Drivers, Embedded::04 Toolchain, Linking & Startup",
+   "tags": [
+    "deepc",
+    "modules",
+    "simplified"
+   ],
+   "front": "A driver module loads, but calling it prints \"Unknown symbol in module\". Where is the problem and what are the two fixes?",
+   "back": "The module uses a kernel function that is not exported to modules (or is exported only with <code>EXPORT_SYMBOL_GPL</code> while the module declares a non-GNU General Public License (GPL)-compatible license). Fix: use a properly exported API, or change the license/export on the kernel side.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "03 Compiler, Linker and Startup",
+   "reverse": false
+  },
+  {
+   "guid": "124483c617",
+   "type": "basic",
+   "deck": "Deep C: Kernel, Drivers, Embedded::05 Concurrency & Interrupt Context",
+   "tags": [
+    "deepc",
+    "locking",
+    "simplified"
+   ],
+   "front": "Why does <code>spin_lock()</code> in process context deadlock if the same lock is also taken in a hard interrupt handler, and what is the fix?",
+   "back": "The interrupt can fire on the same CPU while the lock is held, and the handler spins forever on a lock its own CPU owns. Use <code>spin_lock_irqsave()</code> in process context so local interrupts are off while the lock is held.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "04 Concurrency, Atomics and Interrupt Context",
+   "reverse": false
+  },
+  {
+   "guid": "4d0985f20d",
+   "type": "basic",
+   "deck": "Deep C: Kernel, Drivers, Embedded::05 Concurrency & Interrupt Context",
+   "tags": [
+    "deepc",
+    "locking",
+    "irq",
+    "simplified"
+   ],
+   "front": "What breaks if a driver calls <code>mutex_lock()</code> from an interrupt request (IRQ) handler?",
+   "back": "Mutexes may sleep, but a hard IRQ handler has no process context to put to sleep: the kernel reports \"scheduling while atomic\" or deadlocks. Use a spinlock there, or move the work to a threaded handler or workqueue.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "04 Concurrency, Atomics and Interrupt Context",
+   "reverse": false
+  },
+  {
+   "guid": "368bef4be5",
+   "type": "basic",
+   "deck": "Deep C: Kernel, Drivers, Embedded::05 Concurrency & Interrupt Context",
+   "tags": [
+    "deepc",
+    "concurrency",
+    "embedded",
+    "simplified"
+   ],
+   "front": "What breaks if a Cortex-M critical section ends with <code>__enable_irq()</code> instead of restoring the saved <code>PRIMASK</code>?",
+   "back": "If the section was entered with interrupts already disabled (nested critical section, or called from an interrupt service routine (ISR)), it re-enables them too early, so the outer section is no longer protected. Save and restore the previous state.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "04 Concurrency, Atomics and Interrupt Context",
+   "reverse": false
+  },
+  {
+   "guid": "cea0682159",
+   "type": "basic",
+   "deck": "Deep C: Kernel, Drivers, Embedded::05 Concurrency & Interrupt Context",
+   "tags": [
+    "deepc",
+    "concurrency",
+    "ringbuffer",
+    "simplified"
+   ],
+   "front": "In a single-producer single-consumer ring buffer, what bug appears if the producer advances <code>head</code> before writing the data?",
+   "back": "The consumer sees the new index and reads a slot whose data has not been written yet, getting stale or garbage bytes. Write the data first, then publish the index (with a barrier on multicore).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "04 Concurrency, Atomics and Interrupt Context",
+   "reverse": false
+  },
+  {
+   "guid": "47dc1a2d2b",
+   "type": "basic",
+   "deck": "Deep C: Kernel, Drivers, Embedded::05 Concurrency & Interrupt Context",
+   "tags": [
+    "deepc",
+    "kernel",
+    "lifetime",
+    "simplified"
+   ],
+   "front": "Why is a refcount a better tool than a lock for keeping an object alive while another context uses it?",
+   "back": "A lock only protects access during the critical section, not the object after you release it. A reference count (<code>kref</code>) keeps the object allocated until the last user drops it, so the pointer stays valid across sleeps and context hand-offs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "04 Concurrency, Atomics and Interrupt Context",
+   "reverse": false
+  },
+  {
+   "guid": "15ea4475a7",
+   "type": "basic",
+   "deck": "Deep C: Kernel, Drivers, Embedded::06 Kernel C Idioms",
+   "tags": [
+    "deepc",
+    "kernel",
+    "errors",
+    "simplified"
+   ],
+   "front": "What goes wrong if you call <code>kfree(p)</code> on a pointer that holds an <code>ERR_PTR()</code> value?",
+   "back": "The value is a small negative errno disguised as an address, not a heap pointer, so the allocator crashes or corrupts memory. Check <code>IS_ERR(p)</code> first and propagate <code>PTR_ERR(p)</code> instead of freeing.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "05 Linux Kernel C Idioms",
+   "reverse": false
+  },
+  {
+   "guid": "65372b4b0c",
+   "type": "basic",
+   "deck": "Deep C: Kernel, Drivers, Embedded::06 Kernel C Idioms",
+   "tags": [
+    "deepc",
+    "kernel",
+    "errors",
+    "simplified"
+   ],
+   "front": "A <code>probe()</code> acquires A, B, C in order, and C fails. Which labels run, and what bug appears if the unwind order is not reversed?",
+   "back": "Only the cleanup for B then A runs, in reverse order of acquisition. Releasing in another order can free a resource that a later one still depends on (for example freeing memory before the interrupt that uses it), giving use-after-free or leaks.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "05 Linux Kernel C Idioms",
+   "reverse": false
+  },
+  {
+   "guid": "cd1ac7b053",
+   "type": "basic",
+   "deck": "Deep C: Kernel, Drivers, Embedded::06 Kernel C Idioms",
+   "tags": [
+    "deepc",
+    "kernel",
+    "lists",
+    "simplified"
+   ],
+   "front": "What goes wrong if you use <code>list_for_each_entry()</code> (not the <code>_safe</code> form) and call <code>list_del()</code> plus <code>kfree()</code> inside the loop?",
+   "back": "The iterator reads <code>pos-&gt;member.next</code> after the body to advance, but <code>pos</code> is freed and its pointers poisoned: use-after-free or a poison-address fault. The <code>_safe</code> variant saves the next entry first.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "05 Linux Kernel C Idioms",
+   "reverse": false
+  },
+  {
+   "guid": "bad30672d8",
+   "type": "basic",
+   "deck": "Deep C: Kernel, Drivers, Embedded::06 Kernel C Idioms",
+   "tags": [
+    "deepc",
+    "kernel",
+    "debugging",
+    "simplified"
+   ],
+   "front": "When is a <code>WARN_ON()</code> the wrong tool and an error return the right one?",
+   "back": "When the condition can be triggered by user input or by a misbehaving device. Warnings can reboot machines running with <code>panic_on_warn</code> and flood logs. Reserve <code>WARN_ON()</code> for conditions that indicate a kernel bug.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "05 Linux Kernel C Idioms",
+   "reverse": false
+  },
+  {
+   "guid": "10770d753f",
+   "type": "basic",
+   "deck": "Deep C: Kernel, Drivers, Embedded::07 Linux Driver Programming",
+   "tags": [
+    "deepc",
+    "irq",
+    "drivers",
+    "simplified"
+   ],
+   "front": "What goes wrong if a driver registers its interrupt handler with <code>request_irq()</code> before initialising the data the handler uses?",
+   "back": "The interrupt may fire immediately, so the handler dereferences uninitialised state (NULL pointer, uninitialised lock). Request the interrupt last in <code>probe()</code>, after all state is ready.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "06 Linux Driver Programming",
+   "reverse": false
+  },
+  {
+   "guid": "43cc76c21c",
+   "type": "basic",
+   "deck": "Deep C: Kernel, Drivers, Embedded::07 Linux Driver Programming",
+   "tags": [
+    "deepc",
+    "irq",
+    "drivers",
+    "simplified"
+   ],
+   "front": "What breaks if a shared-line interrupt handler always returns <code>IRQ_HANDLED</code>, even when its device did not raise the interrupt?",
+   "back": "The kernel cannot tell a spurious interrupt from a real one, so other devices on the line may lose their interrupts and a stuck line is never detected and disabled. Return <code>IRQ_NONE</code> when your device status shows nothing pending.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "06 Linux Driver Programming",
+   "reverse": false
+  },
+  {
+   "guid": "8db95e1446",
+   "type": "basic",
+   "deck": "Deep C: Kernel, Drivers, Embedded::07 Linux Driver Programming",
+   "tags": [
+    "deepc",
+    "dma",
+    "drivers",
+    "simplified"
+   ],
+   "front": "What breaks if you omit <code>dma_sync_single_for_cpu()</code> before the CPU reads a streaming direct memory access (DMA) receive buffer?",
+   "back": "On a non-coherent system the CPU cache may hold stale lines from before the transfer, so the CPU reads old data instead of what the device wrote. Sync (invalidate) gives the CPU ownership and a fresh view.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "06 Linux Driver Programming",
+   "reverse": false
+  },
+  {
+   "guid": "c1e1bb1705",
+   "type": "basic",
+   "deck": "Deep C: Kernel, Drivers, Embedded::07 Linux Driver Programming",
+   "tags": [
+    "deepc",
+    "dma",
+    "drivers",
+    "simplified"
+   ],
+   "front": "Why must a driver call <code>dma_mapping_error()</code> instead of assuming a mapping address is valid?",
+   "back": "Mapping can fail (input-output memory management unit (IOMMU) space or bounce buffers exhausted). Programming the device with an invalid address makes it write to a random location in memory.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "06 Linux Driver Programming",
+   "reverse": false
+  },
+  {
+   "guid": "428d5b89ae",
+   "type": "basic",
+   "deck": "Deep C: Kernel, Drivers, Embedded::07 Linux Driver Programming",
+   "tags": [
+    "deepc",
+    "drivers",
+    "lifetime",
+    "simplified"
+   ],
+   "front": "What goes wrong if <code>remove()</code> frees the driver state while a work item or timer is still pending?",
+   "back": "The deferred callback later runs on freed memory: use-after-free. In <code>remove()</code>, stop the source (interrupt, hardware), cancel work and timers synchronously, then free.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "06 Linux Driver Programming",
+   "reverse": false
+  },
+  {
+   "guid": "6ac2f31063",
+   "type": "basic",
+   "deck": "Deep C: Kernel, Drivers, Embedded::07 Linux Driver Programming",
+   "tags": [
+    "deepc",
+    "drivers",
+    "probe",
+    "simplified"
+   ],
+   "front": "A <code>probe()</code> returns <code>-EPROBE_DEFER</code> after registering a character device. What is the problem?",
+   "back": "The core will call <code>probe()</code> again, so the half-finished registration is repeated or leaked, and user space sees a device that does not work. Obtain all dependencies first and register interfaces only once nothing can defer.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "06 Linux Driver Programming",
+   "reverse": false
+  },
+  {
+   "guid": "e3fbaf567a",
+   "type": "basic",
+   "deck": "Deep C: Kernel, Drivers, Embedded::07 Linux Driver Programming",
+   "tags": [
+    "deepc",
+    "drivers",
+    "security",
+    "simplified"
+   ],
+   "front": "Why does a <code>copy_to_user()</code> of a whole kernel struct in an ioctl handler need the struct to be zeroed first?",
+   "back": "Uninitialised members and padding contain stale kernel memory, which user space then reads (information leak). Use <code>kzalloc()</code> or <code>memset()</code> before filling in the fields.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "06 Linux Driver Programming",
+   "reverse": false
+  },
+  {
+   "guid": "8b9b0de6b2",
+   "type": "basic",
+   "deck": "Deep C: Kernel, Drivers, Embedded::08 Embedded & Bare Metal",
+   "tags": [
+    "deepc",
+    "embedded",
+    "clocks",
+    "simplified"
+   ],
+   "front": "A new Cortex-M peripheral reads back zeros and ignores writes, but the code matches the datasheet. What is the first thing to check, and why?",
+   "back": "Whether its bus clock is enabled (and it is out of reset) in the clock-control registers. A gated peripheral does not respond on the bus, so registers read as zero and writes are dropped.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "07 Embedded Systems Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "8d9ae3f9b8",
+   "type": "basic",
+   "deck": "Deep C: Kernel, Drivers, Embedded::08 Embedded & Bare Metal",
+   "tags": [
+    "deepc",
+    "embedded",
+    "gpio",
+    "simplified"
+   ],
+   "front": "Why is writing a GPIO output with <code>BSRR</code> safe against an interrupt, while <code>ODR |= bit</code> is not?",
+   "back": "<code>|=</code> is load, OR, store, so an interrupt in between can change other pins and have its change overwritten. <code>BSRR</code> is a single write where only 1-bits act, so no read is needed and other pins are untouched.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "07 Embedded Systems Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "1afea5c4ef",
+   "type": "basic",
+   "deck": "Deep C: Kernel, Drivers, Embedded::08 Embedded & Bare Metal",
+   "tags": [
+    "deepc",
+    "embedded",
+    "stack",
+    "simplified"
+   ],
+   "front": "What happens if a Cortex-M interrupt handler needs more stack than budgeted?",
+   "back": "All handlers run on the main stack on top of the interrupted code, and nested interrupts add more. The overflow silently corrupts RAM below the stack (often <code>.bss</code> or the heap), so symptoms look unrelated to the stack.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "07 Embedded Systems Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "c9975474bb",
+   "type": "basic",
+   "deck": "Deep C: Kernel, Drivers, Embedded::08 Embedded & Bare Metal",
+   "tags": [
+    "deepc",
+    "embedded",
+    "watchdog",
+    "simplified"
+   ],
+   "front": "Why does a watchdog refreshed from a timer interrupt fail to protect against a hung main loop?",
+   "back": "The timer interrupt keeps running while the main loop is stuck, so the watchdog is fed forever. Feed it from the main loop or a supervisor task after confirming that all critical tasks made progress.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "07 Embedded Systems Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "f332423cc4",
+   "type": "basic",
+   "deck": "Deep C: Kernel, Drivers, Embedded::08 Embedded & Bare Metal",
+   "tags": [
+    "deepc",
+    "embedded",
+    "bootloader",
+    "simplified"
+   ],
+   "front": "What breaks if a microcontroller bootloader jumps to the application without disabling interrupts and stopping its peripherals?",
+   "back": "Pending or running peripherals raise interrupts that vector into the application handler table before the application has set it up, causing a fault or erratic behaviour. Quiesce hardware, clear pending interrupts and then set the vector table and stack pointer.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "07 Embedded Systems Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "69e095a875",
+   "type": "basic",
+   "deck": "Deep C: Kernel, Drivers, Embedded::08 Embedded & Bare Metal",
+   "tags": [
+    "deepc",
+    "embedded",
+    "lowpower",
+    "simplified"
+   ],
+   "front": "Why does <code>if (!flag) __WFI();</code> sometimes sleep forever even though the interrupt fired, and what fixes it?",
+   "back": "If the interrupt arrives between the test and wait for interrupt (WFI), the flag is set but the core sleeps anyway. Disable interrupts around the check; WFI still wakes on a pending interrupt even while masked, then re-enable.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "07 Embedded Systems Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "58795809cc",
+   "type": "basic",
+   "deck": "Deep C: Kernel, Drivers, Embedded::08 Embedded & Bare Metal",
+   "tags": [
+    "deepc",
+    "embedded",
+    "dma",
+    "cache",
+    "simplified"
+   ],
+   "front": "On a Cortex-M7 with a data cache, which maintenance operation goes before a direct memory access (DMA) transmit and which after a receive, and why?",
+   "back": "Before transmit, clean (flush) so the DMA reads what the CPU wrote. After receive, invalidate so the CPU reads what the DMA wrote, not stale cache lines. Buffers must be cache-line aligned so maintenance does not affect neighbouring data.",
    "text": "",
    "image": "",
    "analogy": "",
