@@ -52,6 +52,23 @@
    "reverse": false
   },
   {
+   "guid": "79b3bd2a3c",
+   "type": "basic",
+   "deck": "Go & Kubernetes Operators::01 Types & Interfaces",
+   "tags": [
+    "Go::fundamentals",
+    "simplified"
+   ],
+   "front": "A type <code>T</code> defines <code>func (t *T) String() string</code>. What does <code>fmt.Println(v)</code> print for a value <code>v</code> of type <code>T</code>, and why?",
+   "back": "The default struct formatting, not your <code>String()</code>. The method belongs only to <code>*T</code>'s method set, so a <code>T</code> value does not satisfy <code>fmt.Stringer</code>; <code>fmt.Println(&amp;v)</code> would call it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Fundamentals · Types & Values",
+   "reverse": false
+  },
+  {
    "guid": "Okyr(Cw$^o",
    "type": "basic",
    "deck": "Go & Kubernetes Operators::01 Types & Interfaces",
@@ -64,6 +81,23 @@
    "image": "",
    "analogy": "A labelled but empty box is still a box: only having no box at all counts as nil.",
    "extra": "<b>Fix:</b> return a literal <code>nil</code> on success, never a typed nil pointer variable (<code>var e *MyErr; return e</code>).",
+   "source": "Fundamentals · Types & Values",
+   "reverse": false
+  },
+  {
+   "guid": "744ba186e4",
+   "type": "basic",
+   "deck": "Go & Kubernetes Operators::01 Types & Interfaces",
+   "tags": [
+    "Go::fundamentals",
+    "simplified"
+   ],
+   "front": "How do you avoid the typed-nil <code>error</code> bug?",
+   "back": "Return a literal <code>nil</code> for the <code>error</code> result on success. Never declare <code>var e *MyError</code> and return it as <code>error</code>, because that wraps a nil pointer in a non-nil interface.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "Fundamentals · Types & Values",
    "reverse": false
   },
@@ -104,10 +138,11 @@
    "type": "basic",
    "deck": "Go & Kubernetes Operators::01 Types & Interfaces",
    "tags": [
-    "Go::fundamentals"
+    "Go::fundamentals",
+    "simplified"
    ],
-   "front": "How does Go struct embedding differ from inheritance?",
-   "back": "It is composition: the inner type's fields and methods are promoted to the outer type. No subtyping or virtual dispatch: the embedded type never calls the outer type's methods, and a same-named outer method only shadows the promoted one.",
+   "front": "Go has no inheritance. What does struct embedding do instead, and what can it NOT do that inheritance can?",
+   "back": "It promotes the inner type's fields and methods onto the outer type (composition). No subtyping or virtual dispatch: the embedded type never calls the outer type's overrides, and a same-named outer method only shadows the promoted one.",
    "text": "",
    "image": "",
    "analogy": "A shop that houses a post-office counter: customers can use the counter through the shop, but the counter doesn't know it's inside a shop.",
@@ -708,6 +743,23 @@
    "reverse": false
   },
   {
+   "guid": "06e9ec65fa",
+   "type": "basic",
+   "deck": "Go & Kubernetes Operators::04 Goroutines & Channels",
+   "tags": [
+    "Go::concurrency_goroutines",
+    "simplified"
+   ],
+   "front": "A function starts a goroutine that sends its result on an unbuffered channel, then returns early on an error without receiving. What breaks, and what are two fixes?",
+   "back": "The goroutine blocks on the send forever (a leak). Fixes: give the channel a buffer of 1 so the send always completes, or <code>select</code> on <code>ctx.Done()</code> in the goroutine.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency · Goroutines",
+   "reverse": false
+  },
+  {
    "guid": "j^Hzde0M;,",
    "type": "basic",
    "deck": "Go & Kubernetes Operators::04 Goroutines & Channels",
@@ -916,6 +968,23 @@
    "reverse": false
   },
   {
+   "guid": "3bbc01dac1",
+   "type": "basic",
+   "deck": "Go & Kubernetes Operators::04 Goroutines & Channels",
+   "tags": [
+    "Go::concurrency_channels",
+    "simplified"
+   ],
+   "front": "To stop many goroutines at once, why <code>close(done)</code> rather than sending a value on <code>done</code>?",
+   "back": "A send wakes exactly one receiver. A close is observed by every receiver, now and in the future, so it works as a broadcast.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency · Channels",
+   "reverse": false
+  },
+  {
    "guid": "vO{Y;i#Kx3",
    "type": "basic",
    "deck": "Go & Kubernetes Operators::04 Goroutines & Channels",
@@ -1076,6 +1145,23 @@
    "reverse": false
   },
   {
+   "guid": "f73bf311de",
+   "type": "basic",
+   "deck": "Go & Kubernetes Operators::05 sync & context",
+   "tags": [
+    "Go::concurrency_sync",
+    "simplified"
+   ],
+   "front": "What breaks if you pass a struct containing a <code>sync.Mutex</code> by value?",
+   "back": "The copy gets its own independent lock state, so goroutines using different copies no longer exclude each other. <code>go vet</code> (copylocks) flags it; pass a pointer instead.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency · sync & context",
+   "reverse": false
+  },
+  {
    "guid": "if4=qAzBT|",
    "type": "basic",
    "deck": "Go & Kubernetes Operators::05 sync & context",
@@ -1212,6 +1298,23 @@
    ],
    "front": "<code>context.Background()</code> vs <code>context.TODO()</code>?",
    "back": "Both are empty, never-cancelled roots. Background: deliberate top level (main, tests). TODO: placeholder where a real context should be plumbed in later.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Standard Library",
+   "reverse": false
+  },
+  {
+   "guid": "b62b441840",
+   "type": "basic",
+   "deck": "Go & Kubernetes Operators::05 sync & context",
+   "tags": [
+    "Go::stdlib",
+    "simplified"
+   ],
+   "front": "When a parent context is cancelled, what happens to contexts derived from it, and what happens when a child is cancelled?",
+   "back": "Cancelling a parent cancels all descendants. Cancelling a child affects only that child and its own descendants, never the parent.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1436,6 +1539,23 @@
    ],
    "front": "Why compare <code>time.Time</code> values with <code>Equal()</code> instead of <code>==</code>?",
    "back": "<code>==</code> also compares the monotonic reading and the location, which differ for the same instant (e.g. after serialisation). <code>Equal</code> compares the instant only.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Idioms & Common Mistakes",
+   "reverse": false
+  },
+  {
+   "guid": "2d2cb9c0a1",
+   "type": "basic",
+   "deck": "Go & Kubernetes Operators::01 Types & Interfaces",
+   "tags": [
+    "Go::mistakes",
+    "simplified"
+   ],
+   "front": "What happens if two goroutines write to the same Go map at once, and how do you prevent it?",
+   "back": "The runtime usually detects it and aborts with an unrecoverable fatal error (<code>concurrent map writes</code>); <code>recover</code> cannot catch it. Guard the map with a mutex, or use <code>sync.Map</code> for suitable access patterns.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1784,10 +1904,11 @@
    "type": "basic",
    "deck": "Go & Kubernetes Operators::07 Stdlib, Testing & Tooling",
    "tags": [
-    "Go::tooling"
+    "Go::tooling",
+    "simplified"
    ],
-   "front": "How does <code>go generate</code> differ from a build step?",
-   "back": "It runs the commands in <code>//go:generate</code> comments (stringer, mockgen, controller-gen) only when invoked explicitly; <code>go build</code> never runs it, so generated code is committed.",
+   "front": "Does <code>go build</code> run <code>//go:generate</code> commands? Why does that matter for generated code (stringer, mockgen, controller-gen)?",
+   "back": "No. <code>go generate</code> runs only when invoked explicitly, so you must rerun it after changing inputs and commit the generated files.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2196,6 +2317,23 @@
    "reverse": false
   },
   {
+   "guid": "4d534d179d",
+   "type": "basic",
+   "deck": "Go & Kubernetes Operators::09 controller-runtime & Kubebuilder",
+   "tags": [
+    "Go::operators_runtime",
+    "simplified"
+   ],
+   "front": "What goes wrong if you run two replicas of an operator without leader election?",
+   "back": "Both reconcile the same objects concurrently, causing conflicting writes and duplicate side effects. Leader election lets only one replica run the controllers while the others wait as hot standbys.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · controller-runtime",
+   "reverse": false
+  },
+  {
    "guid": "fMH|!qIENK",
    "type": "basic",
    "deck": "Go & Kubernetes Operators::09 controller-runtime & Kubebuilder",
@@ -2420,6 +2558,23 @@
    "reverse": false
   },
   {
+   "guid": "f74913e63e",
+   "type": "basic",
+   "deck": "Go & Kubernetes Operators::09 controller-runtime & Kubebuilder",
+   "tags": [
+    "Go::operators_patterns",
+    "simplified"
+   ],
+   "front": "What breaks if the child objects of a custom resource (CR) are created without an OwnerReference to it?",
+   "back": "Deleting the CR leaves the children orphaned (no cascading garbage collection), and <code>Owns()</code> cannot route child events back to the CR. Also, an owner must be in the same namespace as its dependents (or be cluster-scoped).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Patterns",
+   "reverse": false
+  },
+  {
    "guid": "PJDL5lR!CB",
    "type": "basic",
    "deck": "Go & Kubernetes Operators::09 controller-runtime & Kubebuilder",
@@ -2436,6 +2591,159 @@
    "reverse": false
   },
   {
+   "guid": "f46714935a",
+   "type": "basic",
+   "deck": "Go & Kubernetes Operators::09 controller-runtime & Kubebuilder",
+   "tags": [
+    "Go::operators_patterns",
+    "simplified"
+   ],
+   "front": "A Kubernetes controller must be level-triggered. What does that mean for <code>Reconcile</code>, and why can't it rely on the event that triggered it?",
+   "back": "It computes what to do from the current observed state versus the desired state, not from which event fired. Events can be missed, coalesced by the workqueue, or replayed after a resync, and Reconcile receives only a namespace/name.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Patterns",
+   "reverse": false
+  },
+  {
+   "guid": "713ebb6213",
+   "type": "basic",
+   "deck": "Go & Kubernetes Operators::09 controller-runtime & Kubebuilder",
+   "tags": [
+    "Go::operators_patterns",
+    "simplified"
+   ],
+   "front": "What breaks if a <code>Reconcile</code> function is not idempotent?",
+   "back": "It is invoked repeatedly for the same object (retries after errors, resyncs, operator restarts, duplicate events), so non-idempotent steps such as blind Create calls cause duplicates or <code>AlreadyExists</code> errors. Make each pass check-then-act.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Patterns",
+   "reverse": false
+  },
+  {
+   "guid": "13bf2bd911",
+   "type": "basic",
+   "deck": "Go & Kubernetes Operators::09 controller-runtime & Kubebuilder",
+   "tags": [
+    "Go::operators_patterns",
+    "simplified"
+   ],
+   "front": "Trace how a change in etcd ends up in your <code>Reconcile</code> call. List every hop.",
+   "back": "API server watch stream, informer reflector, local cache (store) updated, event handler, enqueue the <code>namespace/name</code> key, workqueue (deduplicates, rate-limits), a worker dequeues, <code>Reconcile(ctx, req)</code> reads the latest object from the cache.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Patterns",
+   "reverse": false
+  },
+  {
+   "guid": "d7ac284373",
+   "type": "basic",
+   "deck": "Go & Kubernetes Operators::09 controller-runtime & Kubebuilder",
+   "tags": [
+    "Go::operators_patterns",
+    "simplified"
+   ],
+   "front": "A controller creates a child object, then immediately reads it back with the default cached client and gets NotFound. Why, and how do you cope?",
+   "back": "The cache is fed by a watch and is eventually consistent, so it lags behind your own write. Tolerate NotFound (requeue and look again), or read through <code>mgr.GetAPIReader()</code> when a fresh read is required.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Patterns",
+   "reverse": false
+  },
+  {
+   "guid": "47c7319ebb",
+   "type": "basic",
+   "deck": "Go & Kubernetes Operators::09 controller-runtime & Kubebuilder",
+   "tags": [
+    "Go::operators_patterns",
+    "simplified"
+   ],
+   "front": "How do you safely modify an object that you got from an informer cache or Lister?",
+   "back": "Call <code>DeepCopy()</code> first and modify the copy, then Update or Patch. The cached object is shared by every consumer, so mutating it in place corrupts the cache for all of them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Patterns",
+   "reverse": false
+  },
+  {
+   "guid": "56d598825b",
+   "type": "basic",
+   "deck": "Go & Kubernetes Operators::09 controller-runtime & Kubebuilder",
+   "tags": [
+    "Go::operators_patterns",
+    "simplified"
+   ],
+   "front": "Why can <code>r.Update(ctx, obj)</code> fail with a 409 Conflict, and how should a controller respond?",
+   "back": "Updates use optimistic concurrency: the <code>resourceVersion</code> on your copy is stale because someone else wrote first. Return the error so the key is requeued and reconciled from fresh state (or use <code>Patch</code>, or <code>retry.RetryOnConflict</code>).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Patterns",
+   "reverse": false
+  },
+  {
+   "guid": "b86654bb8e",
+   "type": "basic",
+   "deck": "Go & Kubernetes Operators::09 controller-runtime & Kubebuilder",
+   "tags": [
+    "Go::operators_patterns",
+    "simplified"
+   ],
+   "front": "What breaks if a controller adds a finalizer to a custom resource (CR) but its cleanup path never removes it?",
+   "back": "The CR gets a <code>deletionTimestamp</code> but is never actually removed: it stays in <code>Terminating</code> forever, and its namespace cannot finish deleting either.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Patterns",
+   "reverse": false
+  },
+  {
+   "guid": "13bb06ab4f",
+   "type": "basic",
+   "deck": "Go & Kubernetes Operators::09 controller-runtime & Kubebuilder",
+   "tags": [
+    "Go::operators_patterns",
+    "simplified"
+   ],
+   "front": "Why should <code>Reconcile</code> not sleep or block while waiting for a Deployment to become ready, and what should it do instead?",
+   "back": "A blocked call occupies one of the few workers (<code>MaxConcurrentReconciles</code> defaults to 1), stalling every other object. Return promptly and let the <code>Owns()</code> watch or <code>RequeueAfter</code> trigger the next pass.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Patterns",
+   "reverse": false
+  },
+  {
+   "guid": "c20ebe233a",
+   "type": "basic",
+   "deck": "Go & Kubernetes Operators::09 controller-runtime & Kubebuilder",
+   "tags": [
+    "Go::operators_patterns",
+    "simplified"
+   ],
+   "front": "A controller updates its own custom resource's status on every pass and watches that resource. What reconcile storm can result, and how do you stop it?",
+   "back": "Each status write is itself an update event that enqueues another reconcile. Use <code>GenerationChangedPredicate</code> (status writes do not bump <code>metadata.generation</code>) and avoid writing when nothing changed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Patterns",
+   "reverse": false
+  },
+  {
    "guid": "fzSP8|i+i*",
    "type": "basic",
    "deck": "Go & Kubernetes Operators::09 controller-runtime & Kubebuilder",
@@ -2444,6 +2752,23 @@
    ],
    "front": "Why write CR status with <code>r.Status().Update()</code>/<code>Patch()</code> rather than <code>r.Update()</code>?",
    "back": "With the status subresource enabled, the main endpoint ignores status changes; <code>Status()</code> targets <code>/status</code> and avoids clobbering concurrent spec edits.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Operators · Patterns",
+   "reverse": false
+  },
+  {
+   "guid": "62b0bf372a",
+   "type": "basic",
+   "deck": "Go & Kubernetes Operators::09 controller-runtime & Kubebuilder",
+   "tags": [
+    "Go::operators_patterns",
+    "simplified"
+   ],
+   "front": "What is <code>status.observedGeneration</code> for?",
+   "back": "The controller records the <code>metadata.generation</code> (spec version) it last processed. If it differs from the current generation, the reported status is stale because the controller has not yet acted on the latest spec.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -2744,10 +3069,11 @@
    "type": "basic",
    "deck": "Go & Kubernetes Operators::10 Operator Testing & Observability",
    "tags": [
-    "Go::operators_observability"
+    "Go::operators_observability",
+    "simplified"
    ],
-   "front": "How do <code>klog</code> and <code>logr</code> relate in modern Kubernetes Go code?",
-   "back": "klog/v2 can act as a logr backend and accept a logr sink, so code written against logr works whether the output goes through klog, zap or another implementation.",
+   "front": "Code in a Kubernetes operator logs through <code>logr</code>. Where does <code>klog</code> fit, and why can the output backend change without touching that code?",
+   "back": "<code>logr</code> is only an interface; <code>klog/v2</code> can be one backend (or accept a logr sink), as can zap. Code written against logr is unaffected by which backend is chosen.",
    "text": "",
    "image": "",
    "analogy": "",
