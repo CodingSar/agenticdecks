@@ -164,6 +164,23 @@
    "reverse": false
   },
   {
+   "guid": "0244820436",
+   "type": "basic",
+   "deck": "Software Testing::01 Foundations & Principles",
+   "tags": [
+    "testing::fundamentals",
+    "simplified"
+   ],
+   "front": "Why are defects cheaper to fix the earlier they are found?",
+   "back": "Less depends on the faulty decision (fewer rework artefacts, fewer users affected), and the context is still fresh in the author's mind. This is the case for shift-left.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
    "guid": "A%u3{^{JtA",
    "type": "basic",
    "deck": "Software Testing::02 Test Types & Levels",
@@ -260,6 +277,23 @@
    "reverse": false
   },
   {
+   "guid": "b4515356cc",
+   "type": "basic",
+   "deck": "Software Testing::02 Test Types & Levels",
+   "tags": [
+    "testing::types",
+    "simplified"
+   ],
+   "front": "How do consumer-driven contract tests reduce the number of end-to-end (E2E) tests needed?",
+   "back": "Each side verifies the agreed API shape independently in its own pipeline, so breaking interface changes are caught early without deploying every service together. E2E can then focus on a few critical journeys.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
    "guid": "d54,5s~r:x",
    "type": "basic",
    "deck": "Software Testing::02 Test Types & Levels",
@@ -308,6 +342,23 @@
    "reverse": false
   },
   {
+   "guid": "bc48d1497d",
+   "type": "basic",
+   "deck": "Software Testing::02 Test Types & Levels",
+   "tags": [
+    "testing::types",
+    "simplified"
+   ],
+   "front": "A smoke test fails right after a build is deployed to staging. What should the pipeline do and why?",
+   "back": "Stop and reject the build: if the basics are broken, running deeper suites wastes time and produces noisy, misleading failures. Fix the build first.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
    "guid": "B|}:y0N;];",
    "type": "basic",
    "deck": "Software Testing::02 Test Types & Levels",
@@ -328,11 +379,12 @@
    "type": "cloze",
    "deck": "Software Testing::02 Test Types & Levels",
    "tags": [
-    "testing::types"
+    "testing::types",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Performance tests: {{c1::load}} = expected peak traffic; {{c2::stress}} = beyond capacity to find the breaking point and failure mode; {{c3::soak}} = sustained load for hours/days (leaks, exhaustion); {{c4::spike}} = sudden bursts.",
+   "text": "Performance tests: load = {{c1::expected peak traffic}}; stress = {{c2::beyond capacity, to find the breaking point and failure mode}}; soak = {{c3::sustained load for hours or days (finds leaks, exhaustion)}}; spike = {{c4::sudden bursts of traffic}}.",
    "image": "",
    "analogy": "",
    "extra": "<b>Tools:</b> k6, Gatling, JMeter, Locust.",
@@ -388,6 +440,23 @@
    "reverse": false
   },
   {
+   "guid": "f0c4c23654",
+   "type": "basic",
+   "deck": "Software Testing::06 Test Design & Edge Cases",
+   "tags": [
+    "testing::edge_cases",
+    "simplified"
+   ],
+   "front": "When is a property-based test a better choice than example-based tests, and what is its weakness?",
+   "back": "Better when a rule must hold for a whole input space (parsers, serialisers, sort, maths): it explores inputs you would not think of. Weakness: you must find a good property, and it is harder to read than a concrete example.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
    "guid": "uy<B~L7v^K",
    "type": "basic",
    "deck": "Software Testing::02 Test Types & Levels",
@@ -400,6 +469,40 @@
    "image": "",
    "analogy": "A fire drill for your test suite: start small fires and see whether the alarms go off.",
    "extra": "<b>Score</b> = killed / total. <b>Tools:</b> PIT, Stryker, mutmut, cargo-mutants.",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "b022f83ab8",
+   "type": "basic",
+   "deck": "Software Testing::07 Test Suite Quality",
+   "tags": [
+    "testing::quality",
+    "simplified"
+   ],
+   "front": "A suite has 95% line coverage but a low mutation score. What does that tell you?",
+   "back": "The tests execute the code but assert little: lines run without outputs being checked. Coverage measures execution, mutation score measures whether failures would be noticed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "b2c81d2301",
+   "type": "basic",
+   "deck": "Software Testing::07 Test Suite Quality",
+   "tags": [
+    "testing::quality",
+    "simplified"
+   ],
+   "front": "A mutation tool reports a surviving mutant. What are your two options?",
+   "back": "Either add or strengthen a test assertion that kills it (the suite had a gap), or recognise it as an <b>equivalent mutant</b> (behaviour is unchanged, so no test can tell) and ignore it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "",
    "reverse": false
   },
@@ -568,11 +671,12 @@
    "type": "cloze",
    "deck": "Software Testing::03 Unit Tests, Doubles & TDD",
    "tags": [
-    "testing::unit"
+    "testing::unit",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Test doubles: a {{c1::dummy}} is passed but never used; a {{c2::stub}} returns canned answers; a {{c3::spy}} is a stub that also records calls; a {{c4::mock}} is pre-programmed with expectations and verifies interactions; a {{c5::fake}} is a working lightweight implementation (in-memory DB).",
+   "text": "Test doubles: a dummy is {{c1::passed but never used}}; a stub {{c2::returns canned answers}}; a spy is {{c3::a stub that also records calls}}; a mock is {{c4::pre-programmed with expectations and verifies interactions}}; a fake is {{c5::a working lightweight implementation (e.g. in-memory database)}}.",
    "image": "",
    "analogy": "",
    "extra": "Terms from Meszaros, <i>xUnit Test Patterns</i>.",
@@ -591,6 +695,23 @@
    "text": "",
    "image": "",
    "analogy": "A stub is a cardboard cut-out receptionist; a mock is an inspector checking you signed in correctly.",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "7c30de3b77",
+   "type": "basic",
+   "deck": "Software Testing::03 Unit Tests, Doubles & TDD",
+   "tags": [
+    "testing::unit",
+    "simplified"
+   ],
+   "front": "A service's unit tests mock its database client and all pass, yet it fails against the real database. Why, and what closes the gap?",
+   "back": "The mock encodes your assumptions about the database (query syntax, constraints, transactions), not its real behaviour. Add narrow integration tests against a real database, for example in a container.",
+   "text": "",
+   "image": "",
+   "analogy": "",
    "extra": "",
    "source": "",
    "reverse": false
@@ -636,6 +757,23 @@
    ],
    "front": "The test-driven development (TDD) cycle?",
    "back": "<b>Red</b>: write a small failing test. <b>Green</b>: simplest code to pass. <b>Refactor</b>: clean up with tests green. Repeat in small steps.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "88ce3e961e",
+   "type": "basic",
+   "deck": "Software Testing::03 Unit Tests, Doubles & TDD",
+   "tags": [
+    "testing::unit",
+    "simplified"
+   ],
+   "front": "What goes wrong if a team does test-driven development (TDD) but skips the refactor step?",
+   "back": "Each green step adds the simplest code that passes, so duplication and awkward design pile up. Tests stay green but the code gets harder to change; refactoring under green tests is where the design improves.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -724,6 +862,23 @@
    "reverse": false
   },
   {
+   "guid": "c562e44298",
+   "type": "basic",
+   "deck": "Software Testing::04 Test Strategy & Portfolio",
+   "tags": [
+    "testing::strategy",
+    "simplified"
+   ],
+   "front": "Why is the test pyramid shaped with many unit tests and few end-to-end (E2E) tests?",
+   "back": "Cost and feedback speed: lower-level tests are fast, cheap and pinpoint the failure; higher-level tests are slow, flaky and say little about where the fault is. So buy most confidence cheaply and keep a few broad tests.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
    "guid": "KY1bA7CEeq",
    "type": "cloze",
    "deck": "Software Testing::04 Test Strategy & Portfolio",
@@ -788,6 +943,23 @@
    "reverse": false
   },
   {
+   "guid": "2202ab09db",
+   "type": "basic",
+   "deck": "Software Testing::04 Test Strategy & Portfolio",
+   "tags": [
+    "testing::strategy",
+    "simplified"
+   ],
+   "front": "A function has <code>if (x) { log(); }</code> and one test with <code>x = true</code>. What are its statement and branch coverage?",
+   "back": "Statement coverage is 100% (every line ran) but branch coverage is only 50% (the false branch never ran). Branch coverage is stricter.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
    "guid": "vR[PU)-oi~",
    "type": "basic",
    "deck": "Software Testing::04 Test Strategy & Portfolio",
@@ -815,6 +987,23 @@
    "text": "",
    "image": "",
    "analogy": "A sealed lab experiment: no outside air, so any change in the result comes from what you changed.",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "98162e38f7",
+   "type": "basic",
+   "deck": "Software Testing::07 Test Suite Quality",
+   "tags": [
+    "testing::quality",
+    "simplified"
+   ],
+   "front": "What are the common causes of flaky tests, and how does a hermetic test remove most of them?",
+   "back": "Shared state, wall-clock time, real network or async waits, test ordering, randomness. A hermetic test controls all of these (fakes, injected clock, seeded random, own data), so the result depends only on the code.",
+   "text": "",
+   "image": "",
+   "analogy": "",
    "extra": "",
    "source": "",
    "reverse": false
@@ -1156,6 +1345,23 @@
    "reverse": false
   },
   {
+   "guid": "d6e1444c3e",
+   "type": "basic",
+   "deck": "Software Testing::06 Test Design & Edge Cases",
+   "tags": [
+    "testing::edge_cases",
+    "simplified"
+   ],
+   "front": "A form accepts ages 18 to 65 inclusive. Which values do equivalence partitioning with boundary value analysis select?",
+   "back": "Partitions: below 18 (invalid), 18-65 (valid), above 65 (invalid). Boundary tests: <b>17, 18, 19</b> and <b>64, 65, 66</b>, plus a mid-range value.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
    "guid": "tPHFpB#r8g",
    "type": "basic",
    "deck": "Software Testing::06 Test Design & Edge Cases",
@@ -1204,6 +1410,23 @@
    "reverse": false
   },
   {
+   "guid": "0afc7497c7",
+   "type": "basic",
+   "deck": "Software Testing::06 Test Design & Edge Cases",
+   "tags": [
+    "testing::edge_cases",
+    "simplified"
+   ],
+   "front": "What kind of bug does pairwise testing miss?",
+   "back": "Faults triggered only by a combination of three or more parameters. Pairwise covers every pair of values, not every triple, so add targeted tests for known risky combinations.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
    "guid": "Lu@!wFXJoy",
    "type": "basic",
    "deck": "Software Testing::06 Test Design & Edge Cases",
@@ -1221,14 +1444,15 @@
   },
   {
    "guid": "bN/s*g)HJ~",
-   "type": "cloze",
+   "type": "basic",
    "deck": "Software Testing::06 Test Design & Edge Cases",
    "tags": [
-    "testing::edge_cases"
+    "testing::edge_cases",
+    "simplified"
    ],
-   "front": "",
-   "back": "",
-   "text": "ZOMBIES order for test-driving: {{c1::Zero}}, {{c2::One}}, {{c3::Many}}, {{c4::Boundaries}}, {{c5::Interface}}, {{c6::Exceptions}}, {{c7::Simple}} scenarios/solutions.",
+   "front": "In what order does ZOMBIES suggest test-driving a feature, and why that order?",
+   "back": "<b>Zero, One, Many, Boundaries, Interface, Exceptions, Simple</b> scenarios. Start with the simplest degenerate case and grow complexity, so each test forces only a small increment of code.",
+   "text": "",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -1240,11 +1464,12 @@
    "type": "cloze",
    "deck": "Software Testing::06 Test Design & Edge Cases",
    "tags": [
-    "testing::edge_cases"
+    "testing::edge_cases",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "CORRECT boundary checklist: {{c1::Conformance}} (format), {{c2::Ordering}}, {{c3::Range}}, {{c4::Reference}} (external dependencies), {{c5::Existence}} (null/empty), {{c6::Cardinality}} (0, 1, many), {{c7::Time}} (order, timeouts, zones).",
+   "text": "CORRECT boundary checklist: Conformance ({{c1::does the value match the expected format?}}), Ordering ({{c2::is the sequence or position right?}}), Range ({{c3::within min/max?}}), Reference ({{c4::external dependencies}}), Existence ({{c5::null/empty}}), Cardinality ({{c6::0, 1, many}}), Time ({{c7::order, timeouts, zones}}).",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -1256,11 +1481,12 @@
    "type": "cloze",
    "deck": "Software Testing::06 Test Design & Edge Cases",
    "tags": [
-    "testing::edge_cases"
+    "testing::edge_cases",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Right-BICEP: are the results {{c1::Right}}? {{c2::Boundary}} conditions, {{c3::Inverse}} relationships, {{c4::Cross-check}} by other means, force {{c5::Error}} conditions, {{c6::Performance}} within bounds.",
+   "text": "Right-BICEP checks: Right ({{c1::are the results correct per requirements?}}), Boundary ({{c2::conditions at the edges}}), Inverse ({{c3::apply the inverse and compare}}), Cross-check ({{c4::verify by another means}}), Error ({{c5::force error conditions}}), Performance ({{c6::stays within bounds}}).",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -1696,6 +1922,23 @@
    "image": "",
    "analogy": "",
    "extra": "Review test diffs as carefully as code diffs.",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "c8998525e3",
+   "type": "basic",
+   "deck": "Software Testing::08 Testing with Coding Agents",
+   "tags": [
+    "testing::agentic",
+    "simplified"
+   ],
+   "front": "An agent reports \"all tests pass\" after a fix. What is the first thing to check in the diff?",
+   "back": "Whether test files were changed: deleted, skipped or weakened tests make \"pass\" meaningless. Review test changes separately from the code changes, and run the original tests.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "",
    "reverse": false
   },
