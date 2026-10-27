@@ -5,14 +5,15 @@
  "notes": [
   {
    "guid": "JJ,`B`P[Ap",
-   "type": "cloze",
+   "type": "basic",
    "deck": "Adaptive Systems::01 Evolution & Selection",
    "tags": [
-    "adaptive_systems::evolution"
+    "adaptive_systems::evolution",
+    "simplified"
    ],
-   "front": "",
-   "back": "",
-   "text": "Lewontin's conditions for evolution by selection: {{c1::variation}} among units, {{c2::differential fitness}} (some variants reproduce more), and {{c3::heredity}} (offspring resemble parents). Any system with all three evolves: genes, products or code.",
+   "front": "Name <b>Lewontin's three conditions</b> for evolution by selection, and say what happens if one is missing.",
+   "back": "<b>Variation</b> among units, <b>differential fitness</b> (some variants reproduce more) and <b>heredity</b> (offspring resemble parents). Without variation nothing to select; without fitness differences, drift; without heredity, gains are not retained.",
+   "text": "",
    "image": "",
    "analogy": "",
    "extra": "<b>Connection:</b> Canaries and A/B tests supply variation + selection; version control supplies retention. Without a fitness signal you get drift, not adaptation.",
@@ -929,6 +930,210 @@
    "analogy": "",
    "extra": "<b>Connection:</b> Repos, issue trackers and queues are stigmergic media. Agent systems built on a shared workspace scale better than ones relying on agent-to-agent chat.",
    "source": "Grassé",
+   "reverse": false
+  },
+  {
+   "guid": "18b3946972",
+   "type": "basic",
+   "deck": "Adaptive Systems::01 Evolution & Selection",
+   "tags": [
+    "adaptive_systems::evolution",
+    "simplified"
+   ],
+   "front": "A team's incremental refactoring keeps stalling although every step looks reasonable. Using the fitness-landscape model, why, and what fixes it?",
+   "back": "The system sits on a <b>local optimum</b>: every small step lowers fitness before any gain. Fix with a bigger coordinated jump (migrate one bounded part) rather than more small steps.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "7ec2d0bf8d",
+   "type": "basic",
+   "deck": "Adaptive Systems::01 Evolution & Selection",
+   "tags": [
+    "adaptive_systems::evolution",
+    "simplified"
+   ],
+   "front": "In Kauffman's NK model, why does a highly interdependent (high K) codebase resist improvement by small local changes?",
+   "back": "Each change alters the fitness contribution of many other parts, so landscape becomes rugged with many poor local peaks. Reduce K (decouple modules) to make hill-climbing work again.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "2eb7e93d4e",
+   "type": "basic",
+   "deck": "Adaptive Systems::01 Evolution & Selection",
+   "tags": [
+    "adaptive_systems::evolution",
+    "simplified"
+   ],
+   "front": "What breaks if a system with strong buffering (canalization) never faces stress?",
+   "back": "Hidden neutral variation keeps accumulating unseen. When the buffer finally fails, a large pile of untested variation is exposed at once: sudden, hard-to-diagnose change.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "da3e7035de",
+   "type": "basic",
+   "deck": "Adaptive Systems::02 Ecology & Diversity",
+   "tags": [
+    "adaptive_systems::ecology",
+    "simplified"
+   ],
+   "front": "Why does a fleet of identical replicas give less robustness than a set of independently built implementations?",
+   "back": "Identical replicas share every bug and so fail together (only protects against uncorrelated failure). Different implementations doing the same function (degeneracy) fail in different ways.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "1b43aff33b",
+   "type": "basic",
+   "deck": "Adaptive Systems::02 Ecology & Diversity",
+   "tags": [
+    "adaptive_systems::ecology",
+    "simplified"
+   ],
+   "front": "Two internal tools both solve the same problem for the same users. What does the competitive exclusion principle predict, and what can you do about it?",
+   "back": "They cannot coexist stably: one displaces the other. Either choose a winner deliberately or force niche differentiation (distinct users or jobs).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "9c7549d6b6",
+   "type": "basic",
+   "deck": "Adaptive Systems::03 Feedback, Control & Dynamics",
+   "tags": [
+    "adaptive_systems::dynamics",
+    "simplified"
+   ],
+   "front": "A control loop with a correct set point and correct corrective action still oscillates wildly. What is the likely cause and the remedy?",
+   "back": "<b>Lag</b> between sensing and effect makes the controller correct stale state, causing overshoot. Shorten the delay or damp the response (smaller, slower corrections).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "11a3371c41",
+   "type": "basic",
+   "deck": "Adaptive Systems::03 Feedback, Control & Dynamics",
+   "tags": [
+    "adaptive_systems::dynamics",
+    "simplified"
+   ],
+   "front": "A retry policy is added to improve reliability, then a brief slowdown becomes a full outage. Which feedback type is at work and why?",
+   "back": "<b>Positive (amplifying) feedback</b>: slowness causes timeouts, retries add load, load causes more slowness. Break the loop with backoff, retry budgets or load shedding.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "fed3e3cc7f",
+   "type": "basic",
+   "deck": "Adaptive Systems::03 Feedback, Control & Dynamics",
+   "tags": [
+    "adaptive_systems::dynamics",
+    "simplified"
+   ],
+   "front": "What does Ashby's Law of Requisite Variety predict for a platform team with a small fixed set of golden paths serving very diverse workloads?",
+   "back": "Workloads outside the paths cannot be regulated, so teams route around the platform (shadow tooling). Add variety to the platform or reduce the variety of workloads it must absorb.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "1de10dbf73",
+   "type": "basic",
+   "deck": "Adaptive Systems::04 Networks, Cascades & Failure",
+   "tags": [
+    "adaptive_systems::networks",
+    "simplified"
+   ],
+   "front": "Why can adding more shared connectivity (e.g. one common cache or queue for all services) make a system less safe even if each link is reliable?",
+   "back": "Higher effective connectivity pushes the system past the percolation threshold: one local failure can spread through shared dependencies to everything. Isolation (bulkheads, cells) keeps clusters small.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "e50b464067",
+   "type": "basic",
+   "deck": "Adaptive Systems::05 Complexity & Architecture Evolution",
+   "tags": [
+    "adaptive_systems::architecture",
+    "simplified"
+   ],
+   "front": "A team proposes a ground-up rewrite of a working legacy system. Which two principles argue against it, and what is the alternative?",
+   "back": "Gall's law (working complex systems evolve from simple working ones) and Simon's stable intermediates. Alternative: strangler fig, migrating piece by piece so every intermediate state works.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "64c24b0f15",
+   "type": "basic",
+   "deck": "Adaptive Systems::05 Complexity & Architecture Evolution",
+   "tags": [
+    "adaptive_systems::architecture",
+    "simplified"
+   ],
+   "front": "A metric is used as the target for a team or optimizer and its value soars while real outcomes decline. Which principle explains this, and why is it hard to prevent?",
+   "back": "Goodhart's law: selection exploits any gap between proxy and intent, since it searches all paths. Hard to prevent because the optimizer is more inventive than the metric designer; use several metrics and audit outcomes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false
+  },
+  {
+   "guid": "af3d9c9287",
+   "type": "basic",
+   "deck": "Adaptive Systems::06 Adaptive Systems & AI",
+   "tags": [
+    "adaptive_systems::ai",
+    "simplified"
+   ],
+   "front": "Why does a model trained for several generations on its predecessors' outputs lose rare cases first?",
+   "back": "Each generation samples and re-fits the distribution, and low-probability tail items are under-sampled and then dropped, so tails shrink and errors compound. Mixing in fresh real data restores diversity.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
    "reverse": false
   }
  ]
