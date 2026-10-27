@@ -84,6 +84,23 @@
    "reverse": false
   },
   {
+   "guid": "c48adcb972",
+   "type": "basic",
+   "deck": "Software Engineering Classics::01 Complexity & Its Sources",
+   "tags": [
+    "classics::complexity",
+    "simplified"
+   ],
+   "front": "A file-format change forces edits in five classes. Which of Ousterhout's <b>symptoms</b> is this, and which <b>root cause</b> produced it?",
+   "back": "Symptom: <b>change amplification</b>. Root cause: <b>dependencies</b> (the five classes all know the format).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ousterhout · Philosophy of Software Design",
+   "reverse": false
+  },
+  {
    "guid": "sL]*QVybZ}",
    "type": "basic",
    "deck": "Software Engineering Classics::01 Complexity & Its Sources",
@@ -110,6 +127,23 @@
    "front": "",
    "back": "",
    "text": "Brooks' four essential difficulties of software: {{c1::complexity}} (no two parts alike; states explode), {{c2::conformity}} (must fit arbitrary human institutions), {{c3::changeability}} (software is pressured to change because it can), {{c4::invisibility}} (no geometric representation to reason with).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Brooks · No Silver Bullet",
+   "reverse": false
+  },
+  {
+   "guid": "1f432e0bf2",
+   "type": "basic",
+   "deck": "Software Engineering Classics::01 Complexity & Its Sources",
+   "tags": [
+    "classics::complexity",
+    "simplified"
+   ],
+   "front": "List Brooks' <b>four essential difficulties</b> of software and what each means.",
+   "back": "<b>Complexity</b>: no two parts alike, states explode. <b>Conformity</b>: must fit arbitrary human institutions. <b>Changeability</b>: pressure to change because it can. <b>Invisibility</b>: no geometric picture to reason with.",
+   "text": "",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -210,6 +244,23 @@
    "analogy": "",
    "extra": "<b>Ideal proposed:</b> functional relational programming — essential state as relations, logic as pure functions.",
    "source": "Moseley & Marks · Out of the Tar Pit",
+   "reverse": false
+  },
+  {
+   "guid": "57c4277da4",
+   "type": "basic",
+   "deck": "Software Engineering Classics::01 Complexity & Its Sources",
+   "tags": [
+    "classics::complexity",
+    "simplified"
+   ],
+   "front": "Why is a cache of derived data <b>accidental state</b> in <i>Out of the Tar Pit</i>, and what risk does maintaining it by hand carry?",
+   "back": "It can be recomputed from essential state, so it adds no information. Updating it by hand lets it drift out of sync with the source, which creates inconsistency bugs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Moseley &amp; Marks · Out of the Tar Pit",
    "reverse": false
   },
   {
@@ -360,6 +411,23 @@
    "reverse": false
   },
   {
+   "guid": "3c1a16c8ee",
+   "type": "basic",
+   "deck": "Software Engineering Classics::02 Modules, Abstraction & Information Hiding",
+   "tags": [
+    "classics::modules",
+    "simplified"
+   ],
+   "front": "Two modules both parse the same configuration file format. What goes wrong when the format changes, and what is the fix?",
+   "back": "Both must change together: <b>information leakage</b>. Fix: let one module own the format and expose parsed values, so the decision is hidden in one place.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ousterhout · Philosophy of Software Design",
+   "reverse": false
+  },
+  {
    "guid": "snw?VBTn3M",
    "type": "basic",
    "deck": "Software Engineering Classics::02 Modules, Abstraction & Information Hiding",
@@ -424,6 +492,23 @@
    "reverse": false
   },
   {
+   "guid": "95ee2183b7",
+   "type": "basic",
+   "deck": "Software Engineering Classics::02 Modules, Abstraction & Information Hiding",
+   "tags": [
+    "classics::modules",
+    "simplified"
+   ],
+   "front": "A file-reading class makes every caller choose buffer size, cache policy and retry count. Which Ousterhout principle does it break, and how do you fix it?",
+   "back": "<b>Pull complexity downward</b>: the class pushes its own complexity onto its many users. Choose sensible defaults inside the implementation and keep the interface small.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Ousterhout · Philosophy of Software Design",
+   "reverse": false
+  },
+  {
    "guid": "K^Om5QYcr{",
    "type": "basic",
    "deck": "Software Engineering Classics::02 Modules, Abstraction & Information Hiding",
@@ -436,6 +521,23 @@
    "image": "",
    "analogy": "Asking someone to open a door that is already open: the request simply succeeds.",
    "extra": "<b>Examples:</b> Tcl <code>unset</code> of a missing variable succeeds (goal already met); clamping <code>substring</code> ranges instead of throwing.",
+   "source": "Ousterhout · Philosophy of Software Design",
+   "reverse": false
+  },
+  {
+   "guid": "402003ee9c",
+   "type": "basic",
+   "deck": "Software Engineering Classics::02 Modules, Abstraction & Information Hiding",
+   "tags": [
+    "classics::modules",
+    "simplified"
+   ],
+   "front": "Give Ousterhout's example of <b>defining errors out of existence</b> using file deletion.",
+   "back": "Unix deletion just removes the name; the file persists until the last open handle closes. So there is no 'file in use' error, unlike Windows, which refuses to delete an open file.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "Ousterhout · Philosophy of Software Design",
    "reverse": false
   },
@@ -795,6 +897,23 @@
    "reverse": false
   },
   {
+   "guid": "0912b984ec",
+   "type": "basic",
+   "deck": "Software Engineering Classics::04 Code Evolution: Refactoring, Tidying & Legacy",
+   "tags": [
+    "classics::evolution",
+    "simplified"
+   ],
+   "front": "Why is restructuring code <b>without tests</b> not really refactoring?",
+   "back": "Refactoring means changing structure while <b>preserving behaviour</b>. Without tests you cannot verify that, so you are just editing and hoping.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Fowler · Refactoring",
+   "reverse": false
+  },
+  {
    "guid": "Z5v,#{ae]",
    "type": "basic",
    "deck": "Software Engineering Classics::04 Code Evolution: Refactoring, Tidying & Legacy",
@@ -806,6 +925,23 @@
    "text": "",
    "image": "",
    "analogy": "Once is chance, twice is coincidence, three times is a pattern worth a name.",
+   "extra": "",
+   "source": "Fowler · Refactoring",
+   "reverse": false
+  },
+  {
+   "guid": "d0ef6027f8",
+   "type": "basic",
+   "deck": "Software Engineering Classics::04 Code Evolution: Refactoring, Tidying & Legacy",
+   "tags": [
+    "classics::evolution",
+    "simplified"
+   ],
+   "front": "Why wait for the <b>third</b> occurrence before extracting a shared abstraction?",
+   "back": "Two cases rarely show what really varies, so the abstraction is likely to be wrong. A third example reveals the true common shape and what must be a parameter.",
+   "text": "",
+   "image": "",
+   "analogy": "",
    "extra": "",
    "source": "Fowler · Refactoring",
    "reverse": false
@@ -924,6 +1060,23 @@
    "reverse": false
   },
   {
+   "guid": "748b22cd0e",
+   "type": "basic",
+   "deck": "Software Engineering Classics::04 Code Evolution: Refactoring, Tidying & Legacy",
+   "tags": [
+    "classics::evolution",
+    "simplified"
+   ],
+   "front": "A method calls a static email-sending function directly, so you cannot test it. How does an <b>object seam</b> help?",
+   "back": "Extract the call into an overridable method, then subclass in the test and override it to record instead of send. Behaviour changes without editing the production call site.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Feathers · Working Effectively with Legacy Code",
+   "reverse": false
+  },
+  {
    "guid": "th1|+cj^5R",
    "type": "basic",
    "deck": "Software Engineering Classics::04 Code Evolution: Refactoring, Tidying & Legacy",
@@ -1009,11 +1162,12 @@
    "type": "cloze",
    "deck": "Software Engineering Classics::04 Code Evolution: Refactoring, Tidying & Legacy",
    "tags": [
-    "classics::evolution"
+    "classics::evolution",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Tidy First? options: {{c1::tidy first}} when it makes the change easier now; {{c2::tidy after}} when you'll return soon; {{c3::tidy later}} as a listed long-term investment; {{c4::never}} for code you won't touch again.",
+   "text": "Tidy First? options: tidy first when {{c1::it makes the change easier now}}; tidy after when {{c2::you will return to the code soon}}; tidy later as {{c3::a listed long-term investment}}; and {{c4::never}} for code you won't touch again.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -1029,6 +1183,23 @@
    ],
    "front": "Beck's empirical definition of <b>coupling</b>?",
    "back": "A and B are coupled with respect to change Δ if changing A for Δ requires changing B. Coupling is defined by changes, not by call graphs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Beck · Tidy First?",
+   "reverse": false
+  },
+  {
+   "guid": "3b953fed43",
+   "type": "basic",
+   "deck": "Software Engineering Classics::04 Code Evolution: Refactoring, Tidying & Legacy",
+   "tags": [
+    "classics::evolution",
+    "simplified"
+   ],
+   "front": "Two services never call each other, but a change to one always requires a change to the other. Are they coupled by Beck's definition?",
+   "back": "Yes. Coupling is defined by changes, not call graphs: changing A for a given change requires changing B. The coupling is hidden, e.g. a shared assumption.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1116,6 +1287,23 @@
    "analogy": "Leave a side door unlocked long enough and the delivery drivers will treat it as the entrance.",
    "extra": "<b>Examples:</b> hash ordering, timing, error-message text all become contracts.",
    "source": "Winters et al. · SWE at Google",
+   "reverse": false
+  },
+  {
+   "guid": "ad85e287d6",
+   "type": "basic",
+   "deck": "Software Engineering Classics::04 Code Evolution: Refactoring, Tidying & Legacy",
+   "tags": [
+    "classics::patterns",
+    "simplified"
+   ],
+   "front": "Why does Go deliberately <b>randomise map iteration order</b>, in terms of Hyrum's Law?",
+   "back": "If order were stable, users would come to depend on it though it is unspecified. Randomising stops accidental reliance, so the implementation stays free to change.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Winters et al. · Software Engineering at Google",
    "reverse": false
   },
   {
@@ -1213,6 +1401,23 @@
    "analogy": "Lego bricks (composition) vs a mould you must recast to change (inheritance).",
    "extra": "",
    "source": "GoF · Design Patterns",
+   "reverse": false
+  },
+  {
+   "guid": "bc63c65915",
+   "type": "basic",
+   "deck": "Software Engineering Classics::05 Design Patterns & Their Critics",
+   "tags": [
+    "classics::patterns",
+    "simplified"
+   ],
+   "front": "A class must switch between payment algorithms at run time. Which pattern fits, and why not subclass per algorithm?",
+   "back": "<b>Strategy</b>: hold the algorithm as a swappable object. Subclassing fixes the choice at compile time and multiplies classes; composition swaps it at run time.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Gamma et al. · Design Patterns",
    "reverse": false
   },
   {
@@ -1345,6 +1550,23 @@
    "reverse": false
   },
   {
+   "guid": "8a41c50e43",
+   "type": "basic",
+   "deck": "Software Engineering Classics::05 Design Patterns & Their Critics",
+   "tags": [
+    "classics::patterns",
+    "simplified"
+   ],
+   "front": "How do you make code that uses a <b>Singleton</b> testable?",
+   "back": "Pass the instance in as a dependency (constructor injection) and create the single instance once at the application's entry point. The code no longer reaches for a global.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Gamma et al. · Design Patterns",
+   "reverse": false
+  },
+  {
    "guid": "HM-r]Gr@bT",
    "type": "basic",
    "deck": "Software Engineering Classics::05 Design Patterns & Their Critics",
@@ -1439,6 +1661,23 @@
    "image": "",
    "analogy": "",
    "extra": "<b>Older name:</b> Fowler's Separated Interface in <i>Patterns of Enterprise Application Architecture</i> (PoEAA) — interface in one package, implementation in another.",
+   "source": "Martin · Clean Architecture",
+   "reverse": false
+  },
+  {
+   "guid": "8858021605",
+   "type": "basic",
+   "deck": "Software Engineering Classics::05 Design Patterns & Their Critics",
+   "tags": [
+    "classics::patterns",
+    "simplified"
+   ],
+   "front": "A domain class imports persistence-framework types. Which rule of Clean Architecture is broken, and what is the fix?",
+   "back": "The <b>Dependency Rule</b>: an inner ring names an outer one. Fix: the domain defines a repository interface and the persistence layer implements it (dependency inversion).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "Martin · Clean Architecture",
    "reverse": false
   },
@@ -1564,6 +1803,40 @@
    ],
    "front": "Rules of <b>Silence</b> and <b>Repair</b>: how do they fit together?",
    "back": "Silence: when there is nothing surprising to say, say nothing. Repair: when you must fail, fail noisily and as early as possible. Quiet success, loud failure.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Raymond · Art of Unix Programming",
+   "reverse": false
+  },
+  {
+   "guid": "a084762140",
+   "type": "basic",
+   "deck": "Software Engineering Classics::06 Unix Philosophy & Composition",
+   "tags": [
+    "classics::unix",
+    "simplified"
+   ],
+   "front": "Why is a program that silently swallows a parse error and carries on worse than one that crashes?",
+   "back": "Bad data spreads and the failure surfaces far from its cause, which is much harder to debug. The Rule of Repair: fail noisily and as early as possible.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Raymond · Art of Unix Programming",
+   "reverse": false
+  },
+  {
+   "guid": "aad52fe782",
+   "type": "basic",
+   "deck": "Software Engineering Classics::06 Unix Philosophy & Composition",
+   "tags": [
+    "classics::unix",
+    "simplified"
+   ],
+   "front": "Why does a tool that prints a friendly 'Done!' banner on success hurt in a pipeline?",
+   "back": "Its output is the next program's input, so the banner pollutes the data stream. The Rule of Silence: say nothing when there is nothing surprising to say.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1833,6 +2106,57 @@
    "reverse": false
   },
   {
+   "guid": "650d005578",
+   "type": "basic",
+   "deck": "Software Engineering Classics::07 Correctness, Errors & Robustness in Production",
+   "tags": [
+    "classics::robustness",
+    "simplified"
+   ],
+   "front": "What does a <b>bulkhead</b> protect against?",
+   "back": "One failing part exhausting shared resources and sinking everything. Partition resources (separate thread pools, instances) so a failure stays in its compartment, like ship bulkheads.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Nygard · Release It!",
+   "reverse": false
+  },
+  {
+   "guid": "13a00bbcb4",
+   "type": "basic",
+   "deck": "Software Engineering Classics::07 Correctness, Errors & Robustness in Production",
+   "tags": [
+    "classics::robustness",
+    "simplified"
+   ],
+   "front": "What does a <b>circuit breaker</b> do, and what are its three states?",
+   "back": "After repeated failures it stops calling the dependency and fails fast. States: <b>closed</b> (calls pass), <b>open</b> (calls rejected), <b>half-open</b> (a trial call tests recovery).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Nygard · Release It!",
+   "reverse": false
+  },
+  {
+   "guid": "666a5ed4dc",
+   "type": "basic",
+   "deck": "Software Engineering Classics::07 Correctness, Errors & Robustness in Production",
+   "tags": [
+    "classics::robustness",
+    "simplified"
+   ],
+   "front": "Why must every <b>integration point</b> have a timeout, and what happens without one?",
+   "back": "A hung dependency blocks the caller's threads indefinitely; the thread pool drains and the failure cascades upstream. A timeout converts a hang into a bounded, handleable error.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Nygard · Release It!",
+   "reverse": false
+  },
+  {
    "guid": "KGi51bjhzi",
    "type": "basic",
    "deck": "Software Engineering Classics::07 Correctness, Errors & Robustness in Production",
@@ -1997,6 +2321,23 @@
    "reverse": false
   },
   {
+   "guid": "7780be5fa4",
+   "type": "basic",
+   "deck": "Software Engineering Classics::07 Correctness, Errors & Robustness in Production",
+   "tags": [
+    "classics::robustness",
+    "simplified"
+   ],
+   "front": "Should you use an assertion to check user-supplied input? Why or why not?",
+   "back": "No. Bad input <i>will</i> happen, so it needs real error handling. Assertions guard conditions that should never occur, and may be compiled out in production.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "McConnell · Code Complete",
+   "reverse": false
+  },
+  {
    "guid": "neH}`F63&3",
    "type": "basic",
    "deck": "Software Engineering Classics::07 Correctness, Errors & Robustness in Production",
@@ -2008,6 +2349,23 @@
    "text": "",
    "image": "",
    "analogy": "Hospital: scrub at the door, not at every bed.",
+   "extra": "",
+   "source": "McConnell · Code Complete",
+   "reverse": false
+  },
+  {
+   "guid": "8682e41c5b",
+   "type": "basic",
+   "deck": "Software Engineering Classics::07 Correctness, Errors & Robustness in Production",
+   "tags": [
+    "classics::robustness",
+    "simplified"
+   ],
+   "front": "How do <b>barricades</b> and <b>assertions</b> work together?",
+   "back": "The barricade validates and sanitises data at the boundary (error handling). Inside it, assertions check that the data really is clean, so a violation reveals a bug rather than bad input.",
+   "text": "",
+   "image": "",
+   "analogy": "",
    "extra": "",
    "source": "McConnell · Code Complete",
    "reverse": false
@@ -2142,6 +2500,23 @@
    "reverse": false
   },
   {
+   "guid": "868b7b6ff5",
+   "type": "basic",
+   "deck": "Software Engineering Classics::08 Flow & Delivery: Brooks to Accelerate",
+   "tags": [
+    "classics::flow",
+    "simplified"
+   ],
+   "front": "Testing is the constraint, and management hires more developers. What does Theory of Constraints predict?",
+   "back": "No gain in throughput: extra output only grows the queue in front of testing. Improve the constraint first (exploit, then elevate it), not the stages upstream.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Goldratt · The Goal",
+   "reverse": false
+  },
+  {
    "guid": "kp@liYm@+,",
    "type": "cloze",
    "deck": "Software Engineering Classics::08 Flow & Delivery: Brooks to Accelerate",
@@ -2187,6 +2562,23 @@
    "analogy": "",
    "extra": "",
    "source": "Kim et al. · Phoenix Project",
+   "reverse": false
+  },
+  {
+   "guid": "f05c941c0a",
+   "type": "basic",
+   "deck": "Software Engineering Classics::08 Flow & Delivery: Brooks to Accelerate",
+   "tags": [
+    "classics::flow",
+    "simplified"
+   ],
+   "front": "A team keeps every developer at 95% utilisation 'to be efficient'. Using the wait-time formula, what happens to queues?",
+   "back": "Wait time ∝ % busy / % idle = 95/5 = 19 units, versus 1 at 50%. Any variance makes work pile up, so lead time explodes even though everyone is 'busy'.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kim et al. · The Phoenix Project",
    "reverse": false
   },
   {
@@ -2299,6 +2691,23 @@
    "analogy": "",
    "extra": "",
    "source": "Forsgren, Humble & Kim · Accelerate",
+   "reverse": false
+  },
+  {
+   "guid": "4f6d158206",
+   "type": "basic",
+   "deck": "Software Engineering Classics::08 Flow & Delivery: Brooks to Accelerate",
+   "tags": [
+    "classics::flow",
+    "simplified"
+   ],
+   "front": "Why do small batches of change raise stability in Accelerate's findings?",
+   "back": "A small change is easier to reason about, test, diagnose and revert, so failures are rarer and cheaper to fix. This is why speed and stability rise together.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Forsgren et al. · Accelerate",
    "reverse": false
   },
   {
@@ -3139,6 +3548,23 @@
    "reverse": false
   },
   {
+   "guid": "11ad53a2c0",
+   "type": "basic",
+   "deck": "Software Engineering Classics::11 People, Teams & Craft",
+   "tags": [
+    "classics::people",
+    "simplified"
+   ],
+   "front": "What is the <b>inverse Conway manoeuvre</b>?",
+   "back": "Shape the teams and their communication paths to match the architecture you want, since the system will mirror the organisation anyway.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Conway · How Do Committees Invent?",
+   "reverse": false
+  },
+  {
    "guid": "yi^j4|:`A[",
    "type": "basic",
    "deck": "Software Engineering Classics::11 People, Teams & Craft",
@@ -3319,11 +3745,12 @@
    "type": "cloze",
    "deck": "Software Engineering Classics::12 Classic Papers in One Line",
    "tags": [
-    "classics::papers"
+    "classics::papers",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Lampson 1983, <i>Hints for Computer System Design</i>: keep it simple, get it right, make it fast; interfaces should be {{c1::simple, complete, and admit a small fast implementation}}; {{c2::don't generalise}}; use {{c3::hints}} (cheaply checked, possibly wrong) and the end-to-end principle.",
+   "text": "Lampson 1983, <i>Hints for Computer System Design</i>: keep it simple, get it right, make it fast; interfaces should be {{c1::simple, complete, and admit a small fast implementation}}; {{c2::don't generalise}}; use {{c3::hints (cached answers that are cheap to check and may be wrong)}} and the end-to-end principle.",
    "image": "",
    "analogy": "",
    "extra": "",
