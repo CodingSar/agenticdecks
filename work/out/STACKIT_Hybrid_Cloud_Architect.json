@@ -143,6 +143,24 @@
    "reverse": false
   },
   {
+   "guid": "85e6acdfad",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::01 STACKIT Foundations",
+   "tags": [
+    "compute",
+    "selection",
+    "simplified"
+   ],
+   "front": "When do you choose Compute Engine VMs, STACKIT Kubernetes Engine (SKE) or Cloud Foundry for a workload?",
+   "back": "<b>VMs:</b> appliances, jump hosts, legacy software.<br><b>SKE:</b> containerised platform with your own tooling.<br><b>Cloud Foundry:</b> developers just push apps, no cluster operation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "foundations · compute",
+   "reverse": false
+  },
+  {
    "guid": "wEbfLae?h4",
    "type": "cloze",
    "deck": "STACKIT Hybrid Cloud Architect::01 STACKIT Foundations",
@@ -309,13 +327,32 @@
    "deck": "STACKIT Hybrid Cloud Architect::02 SKE Core",
    "tags": [
     "ske",
-    "gardener"
+    "gardener",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Gardener model: the {{c1::Garden}} cluster runs Gardener itself; {{c2::Seed}} clusters host customer control planes (apiserver, etcd) as pods; a {{c3::Shoot}} is your cluster — control plane in a STACKIT seed, only the worker nodes run as VMs in your project.",
+   "text": "Gardener model: the Garden cluster runs {{c1::Gardener itself}}; Seed clusters {{c2::host customer control planes (apiserver, etcd) as pods}}; a Shoot is {{c3::your cluster — control plane in a STACKIT seed, only the worker nodes run as VMs in your project}}.",
    "image": "",
    "analogy": "Kubernetes running Kubernetes: seeds are nurseries where the provider tends every shoot's control plane; you only see the leaves — the worker nodes.",
+   "extra": "",
+   "source": "ske · gardener",
+   "reverse": false
+  },
+  {
+   "guid": "f2b210d6cf",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::02 SKE Core",
+   "tags": [
+    "ske",
+    "gardener",
+    "simplified"
+   ],
+   "front": "On a STACKIT Kubernetes Engine (SKE) cluster, which part of the Gardener model do you pay for as VMs, and where does the control plane physically run?",
+   "back": "You pay for the <b>worker nodes</b> (VMs in your project). The control plane runs as pods in a STACKIT-operated <b>Seed</b> cluster.",
+   "text": "",
+   "image": "",
+   "analogy": "",
    "extra": "",
    "source": "ske · gardener",
    "reverse": false
@@ -690,6 +727,24 @@
    "reverse": false
   },
   {
+   "guid": "b0676bf11d",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::02 SKE Core",
+   "tags": [
+    "ske",
+    "storage",
+    "simplified"
+   ],
+   "front": "A StatefulSet pod using a zonal block volume must be rescheduled. Where can it start, and what does that demand of the node pool?",
+   "back": "Only on a node in the <b>same availability zone</b> as the volume. The node pool must span (and be able to scale in) every zone the StatefulSet uses.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ske · storage",
+   "reverse": false
+  },
+  {
    "guid": "szr]H#YgU|",
    "type": "basic",
    "deck": "STACKIT Hybrid Cloud Architect::02 SKE Core",
@@ -760,6 +815,24 @@
    "reverse": false
   },
   {
+   "guid": "e544ec61c1",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::02 SKE Core",
+   "tags": [
+    "ske",
+    "security",
+    "simplified"
+   ],
+   "front": "Your CI runner's egress IP is missing from the STACKIT Kubernetes Engine (SKE) access control list (ACL) extension. What do you observe, and why?",
+   "back": "Its kubectl/Terraform calls to the API server time out or are refused: the API endpoint is public but the ACL drops sources outside the allow-list. Add the runner's egress range.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ske · security",
+   "reverse": false
+  },
+  {
    "guid": "l4e2F%ogH]",
    "type": "basic",
    "deck": "STACKIT Hybrid Cloud Architect::02 SKE Core",
@@ -784,11 +857,12 @@
    "tags": [
     "ske",
     "extensions",
-    "iac"
+    "iac",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "STACKIT Kubernetes Engine (SKE) cluster extensions (e.g. toggled via Terraform): {{c1::observability}} wires the cluster to a STACKIT Observability instance (the old <code>argus</code> block is deprecated); {{c2::dns}} integrates STACKIT DNS; {{c3::acl}} allow-lists API-server access; {{c4::application_load_balancer}} gives managed L7 ingress.",
+   "text": "STACKIT Kubernetes Engine (SKE) cluster extensions (e.g. toggled via Terraform): <code>observability</code> {{c1::wires the cluster to a STACKIT Observability instance}} (the old <code>argus</code> block is deprecated); <code>dns</code> {{c2::integrates STACKIT DNS so records can be managed from the cluster}}; <code>acl</code> {{c3::allow-lists the callers of the API server}}; <code>application_load_balancer</code> {{c4::gives managed Layer 7 ingress}}.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -899,6 +973,25 @@
    ],
    "front": "NetworkPolicy on STACKIT Kubernetes Engine (SKE): what's the default, and what must the platform team ship?",
    "back": "SKE's Container Network Interface (CNI) enforces standard NetworkPolicy, but Kubernetes defaults to <b>allow-all</b>. Ship default-deny ingress and egress per tenant namespace, with explicit allows (kube-dns, ingress controller).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ske · networking · multitenancy",
+   "reverse": false
+  },
+  {
+   "guid": "be92d5b75d",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::02 SKE Core",
+   "tags": [
+    "ske",
+    "networking",
+    "multitenancy",
+    "simplified"
+   ],
+   "front": "A tenant namespace has no NetworkPolicy at all. What can its pods reach, and what is the consequence in a hybrid setup?",
+   "back": "Everything: pods in other namespaces and, via the virtual private network (VPN), on-prem ranges. Tenants can attack each other and abuse the shared link, so ship default-deny.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1119,6 +1212,24 @@
    "analogy": "",
    "extra": "",
    "source": "network · security",
+   "reverse": false
+  },
+  {
+   "guid": "c58f625e71",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::03 IaaS & Networking",
+   "tags": [
+    "networking",
+    "security",
+    "simplified"
+   ],
+   "front": "STACKIT security groups vs Kubernetes NetworkPolicy: where does each act?",
+   "back": "<b>Security groups:</b> cloud level, on VM/network interfaces (stateful, default-deny inbound).<br><b>NetworkPolicy:</b> inside a cluster, between pods and namespaces. Use both: they don't see each other's scope.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "networking · security",
    "reverse": false
   },
   {
@@ -1435,10 +1546,11 @@
    "tags": [
     "identity",
     "rbac",
-    "oidc"
+    "oidc",
+    "simplified"
    ],
-   "front": "How do OpenID Connect (OIDC) claims become Kubernetes identities?",
-   "back": "The API server maps the <b>username claim</b> (e.g. email) and <b>groups claim</b> to a user and groups, usually with a prefix like <code>oidc:</code> to avoid clashes with built-ins.",
+   "front": "The Kubernetes API server receives a valid OpenID Connect (OIDC) token. How does it derive the caller's identity, and why is a prefix usually configured?",
+   "back": "It maps the <b>username claim</b> (e.g. email) to the user and the <b>groups claim</b> to groups. A prefix like <code>oidc:</code> stops external names from clashing with built-in identities (e.g. <code>system:masters</code>).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1500,6 +1612,25 @@
    "analogy": "The Supervisor is a central passport office; each cluster's Concierge is a border desk that accepts the passport and stamps a short-lived local visa.",
    "extra": "",
    "source": "identity · oidc · multicluster · tradeoff",
+   "reverse": false
+  },
+  {
+   "guid": "3ec1fa5e38",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::04 Identity, Access & Secrets",
+   "tags": [
+    "identity",
+    "pinniped",
+    "oidc",
+    "simplified"
+   ],
+   "front": "Trace a kubectl login through Pinniped to a cluster that has no OpenID Connect (OIDC) flags set: who talks to whom?",
+   "back": "kubectl → Concierge (cluster) → Supervisor → PingFederate. Supervisor authenticates the user upstream and issues its own token; the Concierge verifies it and returns a <b>short-lived cluster credential</b> that kubectl presents to the API server.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "identity · pinniped",
    "reverse": false
   },
   {
@@ -1593,6 +1724,24 @@
    "reverse": false
   },
   {
+   "guid": "f08433b22f",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::04 Identity, Access & Secrets",
+   "tags": [
+    "identity",
+    "break-glass",
+    "simplified"
+   ],
+   "front": "List the full break-glass procedure for a STACKIT Kubernetes Engine (SKE) cluster and what each step protects.",
+   "back": "<ul><li>Fetch the sealed admin kubeconfig with dual control (no single insider)</li><li>Use it only for the outage</li><li>Alert and audit the use (accountability)</li><li>Rotate credentials (invalidates the exposed ones)</li><li>Re-seal the new kubeconfig and calendar its renewal (≤ 180-day certificate)</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "identity · break-glass",
+   "reverse": false
+  },
+  {
    "guid": "v6XboG&r72",
    "type": "basic",
    "deck": "STACKIT Hybrid Cloud Architect::04 Identity, Access & Secrets",
@@ -1608,6 +1757,24 @@
    "analogy": "",
    "extra": "",
    "source": "identity · operations · security",
+   "reverse": false
+  },
+  {
+   "guid": "c6b04cf524",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::04 Identity, Access & Secrets",
+   "tags": [
+    "identity",
+    "break-glass",
+    "simplified"
+   ],
+   "front": "After STACKIT Kubernetes Engine (SKE) credential rotation, why does the GitOps agent or CI job using a ServiceAccount token suddenly fail?",
+   "back": "Rotation invalidates <i>all</i> admin kubeconfigs <b>and ServiceAccount tokens</b> of that cluster, so every consumer needs fresh credentials.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "identity · break-glass",
    "reverse": false
   },
   {
@@ -1847,6 +2014,24 @@
    "reverse": false
   },
   {
+   "guid": "ed5d126ec8",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::05 Tenancy, Multi-Cluster & DR",
+   "tags": [
+    "multitenancy",
+    "quota",
+    "simplified"
+   ],
+   "front": "Why must a namespace with a ResourceQuota on CPU/memory requests also have a LimitRange?",
+   "back": "The quota rejects pods that don't declare requests. A LimitRange injects <b>default requests/limits</b>, so tenants' pods are admitted instead of failing.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "multitenancy · quota",
+   "reverse": false
+  },
+  {
    "guid": "E)A{3l%/@-",
    "type": "basic",
    "deck": "STACKIT Hybrid Cloud Architect::05 Tenancy, Multi-Cluster & DR",
@@ -2049,6 +2234,24 @@
    "reverse": false
   },
   {
+   "guid": "a6fd1476c0",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::06 Hybrid & Central Management",
+   "tags": [
+    "gitops",
+    "hybrid",
+    "simplified"
+   ],
+   "front": "Why use pull-based GitOps agents in the clusters rather than pushing from on-prem CI into cluster API servers?",
+   "back": "Agents need only an <b>outbound</b> connection and no cluster credentials stored in CI, and they keep reconciling the last known state through link outages.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "hybrid · gitops",
+   "reverse": false
+  },
+  {
    "guid": "v;A?]TOb$N",
    "type": "cloze",
    "deck": "STACKIT Hybrid Cloud Architect::05 Tenancy, Multi-Cluster & DR",
@@ -2064,6 +2267,25 @@
    "image": "",
    "analogy": "",
    "extra": "Labels: env, tier, tenant. Deletion = <code>terraform destroy</code>; backups and metrics survive in Object Storage and central stores.",
+   "source": "multicluster · iac · gitops · fleet",
+   "reverse": false
+  },
+  {
+   "guid": "c103b330cc",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::05 Tenancy, Multi-Cluster & DR",
+   "tags": [
+    "multicluster",
+    "gitops",
+    "fleet",
+    "simplified"
+   ],
+   "front": "List every step to bring up a new STACKIT Kubernetes Engine (SKE) workload cluster fully automatically, and what each step provides.",
+   "back": "<ul><li>Terraform module: cluster + extensions</li><li>Terraform installs the GitOps agent and registers the cluster with labels</li><li>ApplicationSets match labels: golden stack rolls out</li><li>External Secrets Operator (ESO) pulls secrets; tenant apps sync; external-dns publishes records</li></ul>",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "multicluster · iac · gitops · fleet",
    "reverse": false
   },
@@ -2144,6 +2366,24 @@
    "reverse": false
   },
   {
+   "guid": "f0b22d54f6",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::05 Tenancy, Multi-Cluster & DR",
+   "tags": [
+    "dr",
+    "hybrid",
+    "simplified"
+   ],
+   "front": "The virtual private network (VPN) link between on-prem and STACKIT goes down. What keeps working and what stops?",
+   "back": "<b>Works:</b> running pods, existing user sessions (cached JSON Web Key Set), existing Secrets, in-region registry pulls, API access over the internet.<br><b>Stops:</b> new PingFederate logins, secret rotation, corporate DNS lookups, on-prem to internal load balancers.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "hybrid · dr",
+   "reverse": false
+  },
+  {
    "guid": "z9p^O5~w0]",
    "type": "basic",
    "deck": "STACKIT Hybrid Cloud Architect::06 Hybrid & Central Management",
@@ -2210,6 +2450,25 @@
    "analogy": "Two cities merging their street maps: if both have a \"Main Street 1\", mail can't be delivered without renaming streets.",
    "extra": "",
    "source": "hybrid · networking · ipam",
+   "reverse": false
+  },
+  {
+   "guid": "bc43736e9f",
+   "type": "basic",
+   "deck": "STACKIT Hybrid Cloud Architect::06 Hybrid & Central Management",
+   "tags": [
+    "networking",
+    "hybrid",
+    "vpn",
+    "simplified"
+   ],
+   "front": "On-prem already uses 10.0.0.0/8 broadly and someone picks 10.1.0.0/16 for a STACKIT Network Area (SNA). What goes wrong with the managed virtual private network (VPN)?",
+   "back": "Overlapping ranges make routes ambiguous and the managed VPN cannot translate addresses (no NAT), so you must renumber or run a self-managed VPN with network address translation (NAT).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "hybrid · networking",
    "reverse": false
   },
   {
