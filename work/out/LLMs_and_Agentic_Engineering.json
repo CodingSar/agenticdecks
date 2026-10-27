@@ -132,6 +132,23 @@
    "reverse": false
   },
   {
+   "guid": "0d928ae88d",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::01 Tokens & Embeddings",
+   "tags": [
+    "llm::tokens",
+    "simplified"
+   ],
+   "front": "What breaks if you switch the embedding model for queries but keep the old document embeddings?",
+   "back": "Query and document vectors live in different spaces, so similarity scores become meaningless. You must re-embed the whole corpus whenever the embedding model changes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Tokens & Embeddings",
+   "reverse": false
+  },
+  {
    "guid": "K[ZL+k8GBO",
    "type": "basic",
    "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
@@ -244,6 +261,23 @@
    "reverse": false
   },
   {
+   "guid": "601f7e8987",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
+   "tags": [
+    "llm::architecture",
+    "simplified"
+   ],
+   "front": "FlashAttention is exact and much faster. Does it remove attention's quadratic cost in sequence length?",
+   "back": "No. Compute is still n² score calculations. It avoids writing the n×n matrix to graphics processing unit (GPU) memory, so memory use and memory traffic drop, which is what made attention slow.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Transformer Architecture",
+   "reverse": false
+  },
+  {
    "guid": "GP;a[I!Dl_",
    "type": "basic",
    "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
@@ -288,6 +322,23 @@
    "image": "",
    "analogy": "",
    "extra": "<b>Example:</b> \"400B total parameters\" may use ~20B active per token: compute like a 20B model, memory like a 400B model.",
+   "source": "Transformer Architecture",
+   "reverse": false
+  },
+  {
+   "guid": "3d4d1d0016",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
+   "tags": [
+    "llm::architecture",
+    "simplified"
+   ],
+   "front": "A mixture-of-experts (MoE) model has 100B total and 10B active parameters. How does it compare with a dense 10B and a dense 100B model for speed and memory?",
+   "back": "Per-token compute and speed are close to the dense 10B model; memory is about that of the dense 100B model, since every expert must be loaded.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "Transformer Architecture",
    "reverse": false
   },
@@ -452,6 +503,23 @@
    "reverse": false
   },
   {
+   "guid": "f1f6afd40c",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
+   "tags": [
+    "llm::inference",
+    "simplified"
+   ],
+   "front": "Why does batching many users' requests together make serving cheaper per token?",
+   "back": "Decode is memory-bound: each step must read all model weights from graphics processing unit (GPU) memory. One read can serve many sequences at once, so the cost is shared across the batch.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Transformer Architecture",
+   "reverse": false
+  },
+  {
    "guid": "v%1q@#K)!p",
    "type": "basic",
    "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
@@ -479,6 +547,23 @@
    "text": "",
    "image": "",
    "analogy": "Memoisation: like a build cache, work already done for earlier tokens is stored and reused instead of being recomputed on every step.",
+   "extra": "",
+   "source": "Inference & Serving",
+   "reverse": false
+  },
+  {
+   "guid": "83aa5ee86a",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::03 Inference & Serving",
+   "tags": [
+    "llm::inference",
+    "simplified"
+   ],
+   "front": "What would happen to generation cost if there were no key-value (KV) cache, and why?",
+   "back": "Each new token would recompute Keys and Values for the entire prefix, so total work over a response grows roughly quadratically with length instead of linearly.",
+   "text": "",
+   "image": "",
+   "analogy": "",
    "extra": "",
    "source": "Inference & Serving",
    "reverse": false
@@ -588,6 +673,23 @@
    ],
    "front": "What does \"70B parameters\" imply for serving memory?",
    "back": "70 billion weights; at 16-bit (2 bytes each) ≈ 140 GB just to load them, hence multi-GPU serving.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Inference & Serving",
+   "reverse": false
+  },
+  {
+   "guid": "29b975f035",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::03 Inference & Serving",
+   "tags": [
+    "llm::inference",
+    "simplified"
+   ],
+   "front": "A 70B-parameter model is quantized to 4 bits per weight. Roughly how much memory do the weights need, and what does that change?",
+   "back": "About 35 GB (70B x 0.5 byte), versus 140 GB at 16-bit. It can fit on a single large graphics processing unit (GPU) instead of several, at a small quality cost.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -852,6 +954,23 @@
    "reverse": false
   },
   {
+   "guid": "1bd4a5ba7b",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::04 Training & Adaptation",
+   "tags": [
+    "llm::training",
+    "simplified"
+   ],
+   "front": "By the Chinchilla rule, about how many training tokens suit a 7B-parameter model, and why do many models train far beyond that?",
+   "back": "About 140B tokens (20 per parameter). Models are over-trained because a smaller model trained longer is cheaper to serve, and inference cost over its lifetime dominates.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Training & Adaptation",
+   "reverse": false
+  },
+  {
    "guid": "JLs<}o:f<,",
    "type": "cloze",
    "deck": "LLMs & Agentic Engineering::04 Training & Adaptation",
@@ -1020,6 +1139,23 @@
    ],
    "front": "What are the offline and online steps of a standard retrieval-augmented generation (RAG) pipeline?",
    "back": "<b>Offline:</b> chunk documents → embed each chunk → store in a vector index.<br><b>Online:</b> embed the question → fetch the top-k similar chunks → put them in the prompt → generate.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "RAG & Context Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "775d9de97b",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::05 RAG & Context Engineering",
+   "tags": [
+    "llm::rag_context",
+    "simplified"
+   ],
+   "front": "In retrieval-augmented generation (RAG), what goes wrong if chunks are too large, and what if they are too small?",
+   "back": "Too large: each chunk is diluted, matching is vague and the prompt fills with irrelevant text. Too small: chunks lose surrounding context, so the retrieved piece can't answer on its own.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1348,6 +1484,40 @@
    "reverse": false
   },
   {
+   "guid": "74fadfd739",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::07 Agentic Patterns",
+   "tags": [
+    "llm::agentic_patterns",
+    "simplified"
+   ],
+   "front": "If a task needs 10 sequential agent steps, how can you raise end-to-end success without a better model?",
+   "back": "Compounding error means success is the product of step reliabilities. Shorten the chain, add verification checkpoints that catch and retry bad steps, or make risky steps deterministic code.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Agentic Patterns",
+   "reverse": false
+  },
+  {
+   "guid": "f5fe94e7a8",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::07 Agentic Patterns",
+   "tags": [
+    "llm::agentic_patterns",
+    "simplified"
+   ],
+   "front": "Support tickets must be sorted into five fixed categories, then a templated reply drafted for each. Agent or workflow, and why?",
+   "back": "A workflow (routing plus a fixed step). The path is known in advance, so predefined code is cheaper, faster and more predictable than letting a model choose steps.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Agentic Patterns",
+   "reverse": false
+  },
+  {
    "guid": "QcOV0>L5[/",
    "type": "cloze",
    "deck": "LLMs & Agentic Engineering::07 Agentic Patterns",
@@ -1391,6 +1561,23 @@
    "text": "",
    "image": "",
    "analogy": "A manager who gets a one-page brief from each analyst instead of reading all their notes.",
+   "extra": "",
+   "source": "Agentic Patterns",
+   "reverse": false
+  },
+  {
+   "guid": "d46b53f831",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::07 Agentic Patterns",
+   "tags": [
+    "llm::agentic_patterns",
+    "simplified"
+   ],
+   "front": "What is the cost of splitting work across sub-agents?",
+   "back": "Extra tokens (each sub-agent has its own context and prompt) and lost shared context: the lead sees only summaries, so coordination and hand-off errors appear. Use it where isolation pays off.",
+   "text": "",
+   "image": "",
+   "analogy": "",
    "extra": "",
    "source": "Agentic Patterns",
    "reverse": false
@@ -1604,6 +1791,23 @@
    "reverse": false
   },
   {
+   "guid": "832dd947df",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::08 Harness Engineering",
+   "tags": [
+    "llm::harness",
+    "simplified"
+   ],
+   "front": "An agent can read private files, browse untrusted web pages, and send emails. Why is that combination dangerous?",
+   "back": "A planted instruction on a web page can make the agent read private data and send it out. Private data + untrusted content + an outbound channel together enable exfiltration; removing any one of the three breaks the attack.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Harness Engineering",
+   "reverse": false
+  },
+  {
    "guid": "vm&p+(u#%:",
    "type": "basic",
    "deck": "LLMs & Agentic Engineering::08 Harness Engineering",
@@ -1632,6 +1836,23 @@
    "image": "",
    "analogy": "An elevator call button: pressing it twice still brings one elevator, because the request is idempotent.",
    "extra": "<b>Classic failure:</b> agent A times out and retries while agent B processes the payment: double charge despite \"correct\" retry logic.",
+   "source": "Harness Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "f2d4263100",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::08 Harness Engineering",
+   "tags": [
+    "llm::harness",
+    "simplified"
+   ],
+   "front": "An agent calls a payment tool, the request times out, and the agent retries. What happens without an idempotency token, and with one?",
+   "back": "Without: the first call may have succeeded, so the customer is charged twice. With: the tool recognises the repeated token and returns the original result instead of acting again.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "Harness Engineering",
    "reverse": false
   },
@@ -1796,6 +2017,23 @@
    "reverse": false
   },
   {
+   "guid": "6d4ad446a5",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::09 Evaluation & Reliability",
+   "tags": [
+    "llm::evaluation",
+    "simplified"
+   ],
+   "front": "If an agent succeeds 90% of the time on a task, what is pass^3, and what does it tell you?",
+   "back": "About 73% (0.9³, assuming independent attempts). Consistency drops quickly with k, so an agent that looks good on one try can be unreliable when users rely on it repeatedly.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Evaluation & Reliability",
+   "reverse": false
+  },
+  {
    "guid": "xm!2e3gIbY",
    "type": "basic",
    "deck": "LLMs & Agentic Engineering::09 Evaluation & Reliability",
@@ -1824,6 +2062,23 @@
    "image": "",
    "analogy": "",
    "extra": "<b>Mitigations:</b> swap answer order and average; give a rubric and reference answer; spot-check 5–10% with humans.",
+   "source": "Evaluation & Reliability",
+   "reverse": false
+  },
+  {
+   "guid": "ca1838d388",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::09 Evaluation & Reliability",
+   "tags": [
+    "llm::evaluation",
+    "simplified"
+   ],
+   "front": "How do you reduce position bias when using a large language model (LLM) as a judge to compare two answers?",
+   "back": "Run each comparison twice with the answer order swapped and count only consistent verdicts (or average them). A verdict that flips with order reflects position, not quality.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "Evaluation & Reliability",
    "reverse": false
   },
@@ -1896,11 +2151,12 @@
    "type": "cloze",
    "deck": "LLMs & Agentic Engineering::09 Evaluation & Reliability",
    "tags": [
-    "llm::evaluation"
+    "llm::evaluation",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Follow-ups for a \"99% accuracy\" claim: on {{c1::which task and dataset}}? measured by {{c2::whom}} (vendor or third party)? on how many examples ({{c3::N}})? what counts as {{c4::correct}}? under what {{c5::conditions}} (attempts, tools, latency, cost)?",
+   "text": "Follow-ups for a \"99% accuracy\" claim: on {{c1::which task and dataset}}? measured by {{c2::whom}} (vendor or third party)? on how many examples ({{c3::sample size}})? what counts as {{c4::correct}}? under what {{c5::conditions}} (attempts, tools, latency, cost)?",
    "image": "",
    "analogy": "",
    "extra": "99% of 100 examples is one error; the confidence interval is wide. A number without these answers is a slogan.",
