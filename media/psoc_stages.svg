@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360" font-family="Helvetica,Arial,sans-serif">
+<rect width="640" height="360" fill="#fff"/>
+<text x="320" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#1f2328">Pipeline stages and where attacks land</text>
+<g font-size="14" fill="#1f2328">
+<rect x="20" y="120" width="130" height="60" rx="8" fill="#e8f0fb" stroke="#4a78b5" stroke-width="2"/><text x="85" y="155" text-anchor="middle" font-weight="bold">Source</text>
+<rect x="180" y="120" width="130" height="60" rx="8" fill="#e8f0fb" stroke="#4a78b5" stroke-width="2"/><text x="245" y="155" text-anchor="middle" font-weight="bold">Build</text>
+<rect x="340" y="120" width="130" height="60" rx="8" fill="#e8f0fb" stroke="#4a78b5" stroke-width="2"/><text x="405" y="155" text-anchor="middle" font-weight="bold">Distribute</text>
+<rect x="500" y="120" width="120" height="60" rx="8" fill="#e8f0fb" stroke="#4a78b5" stroke-width="2"/><text x="560" y="155" text-anchor="middle" font-weight="bold">Deploy</text>
+<path d="M150 150h30M310 150h30M470 150h30" stroke="#4a78b5" stroke-width="2" fill="none" marker-end="url(#a)"/>
+</g>
+<defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#4a78b5"/></marker></defs>
+<g font-size="12" fill="#8a2d2d">
+<path d="M85 110V75M245 110V75M405 110V75M560 110V75" stroke="#c0392b" stroke-width="2" stroke-dasharray="4 3" fill="none"/>
+<text x="85" y="55" text-anchor="middle">malicious commit,</text><text x="85" y="70" text-anchor="middle">bad dependency</text>
+<text x="245" y="55" text-anchor="middle">poisoned pipeline,</text><text x="245" y="70" text-anchor="middle">compromised runner</text>
+<text x="405" y="55" text-anchor="middle">tag swap,</text><text x="405" y="70" text-anchor="middle">registry push</text>
+<text x="560" y="55" text-anchor="middle">stolen deploy creds,</text><text x="560" y="70" text-anchor="middle">manual drift</text>
+</g>
+<g font-size="12" fill="#2d6a2d">
+<path d="M85 190v35M245 190v35M405 190v35M560 190v35" stroke="#2e8b57" stroke-width="2" fill="none"/>
+<text x="85" y="245" text-anchor="middle">branch protection,</text><text x="85" y="260" text-anchor="middle">signed commits, lockfiles</text>
+<text x="245" y="245" text-anchor="middle">SHA pins, hermetic,</text><text x="245" y="260" text-anchor="middle">ephemeral runners</text>
+<text x="405" y="245" text-anchor="middle">digest, immutable tags,</text><text x="405" y="260" text-anchor="middle">signing + provenance</text>
+<text x="560" y="245" text-anchor="middle">admission verify,</text><text x="560" y="260" text-anchor="middle">GitOps, OIDC</text>
+</g>
+<rect x="20" y="290" width="600" height="50" rx="8" fill="#fff8e6" stroke="#d4a72c" stroke-width="2"/>
+<text x="320" y="312" text-anchor="middle" font-size="13" fill="#1f2328" font-weight="bold">SOC telemetry per stage</text>
+<text x="320" y="330" text-anchor="middle" font-size="12" fill="#1f2328">SCM audit log · CI job + runner telemetry · registry log · cloud + Kubernetes audit log</text>
+</svg>

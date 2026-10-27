@@ -1,0 +1,2651 @@
+{
+ "deck_name": "Pipeline Security & SOC Monitoring",
+ "file": "Pipeline_Security_and_SOC_Monitoring.apkg",
+ "description": "How CI/CD pipelines get attacked and defended (source, build, identity, runners, artifacts, deploy gates) and how a <b>Security Operations Center (SOC)</b> monitors them: telemetry sources, detection use-cases per stage, triage and response, maturity. For a cloud/Kubernetes platform architect working with a SOC.",
+ "notes": [
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::01 Why Pipelines Are Targets",
+   "tags": [
+    "pipeline::threat-model"
+   ],
+   "front": "Why is a CI/CD pipeline a <b>higher-value target</b> than any single production server?",
+   "back": "It holds write access to source, secrets for every environment and a trusted path to production. One compromise fans out to every deployment.",
+   "text": "",
+   "image": "",
+   "analogy": "Robbing one branch gets one vault; compromising the armoured-car company gets every branch's deposits, delivered on schedule.",
+   "extra": "<b>In practice:</b> attackers call it the \"keys to the kingdom\": the pipeline is the one system that legitimately touches everything.",
+   "source": "Threat model",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::01 Why Pipelines Are Targets",
+   "tags": [
+    "pipeline::threat-model"
+   ],
+   "front": "What made the <b>SolarWinds (SUNBURST)</b> attack a lesson about <i>build</i> security rather than code security?",
+   "back": "The source repository was clean. Malware was injected into the build process itself, so signed, official releases carried the backdoor.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Lesson:</b> reviewing source is not enough; the build environment and its provenance must be trustworthy and verifiable.",
+   "source": "Threat model",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::01 Why Pipelines Are Targets",
+   "tags": [
+    "pipeline::threat-model"
+   ],
+   "front": "What did the <b>Codecov bash-uploader</b> incident (2021) teach about third-party scripts in pipelines?",
+   "back": "A modified upload script silently exfiltrated environment variables (CI secrets) from thousands of pipelines for months.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Lesson:</b> pin third-party tooling by hash, give jobs minimal secrets, and monitor runner egress for unexpected destinations.",
+   "source": "Threat model",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::01 Why Pipelines Are Targets",
+   "tags": [
+    "pipeline::threat-model"
+   ],
+   "front": "What did the <b>xz-utils backdoor</b> (2024) show about the <i>human</i> side of the supply chain?",
+   "back": "A patient attacker earned maintainer trust over years, then hid a backdoor in build scripts and test files, not in the readable source.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Lesson:</b> trust in maintainers is an attack surface; builds should be reproducible from reviewed source, not from opaque tarballs.",
+   "source": "Threat model",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::01 Why Pipelines Are Targets",
+   "tags": [
+    "pipeline::threat-model"
+   ],
+   "front": "Pipeline attack surface: what are the four <b>stages</b> an attacker can target?",
+   "back": "<b>Source</b> (code, dependencies), <b>build</b> (runners, scripts), <b>distribution</b> (artifacts, registries) and <b>deploy</b> (credentials, cluster access).",
+   "text": "",
+   "image": "<img src=\"psoc_stages.svg\">",
+   "analogy": "",
+   "extra": "<b>Use:</b> this stage model is the backbone of both the controls and the Security Operations Center (SOC) detection use-cases in this deck.",
+   "source": "Threat model",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Pipeline Security & SOC Monitoring::01 Why Pipelines Are Targets",
+   "tags": [
+    "pipeline::threat-model"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Supply-chain threats by stage (SLSA model): tampering with source = {{c1::compromised source control or malicious commit}}; tampering during build = {{c2::compromised build platform or modified build process}}; after build = {{c3::compromised package registry or substituted artifact}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Note:</b> Supply-chain Levels for Software Artifacts (SLSA) names these threats A–H; the three groups above are what matters for defence planning.",
+   "source": "SLSA threats",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::01 Why Pipelines Are Targets",
+   "tags": [
+    "pipeline::threat-model"
+   ],
+   "front": "What is the <b>OWASP Top 10 CI/CD Security Risks</b> list, and what is its first entry?",
+   "back": "A catalogue of pipeline-specific risks. Number one is <b>insufficient flow control mechanisms</b>: an attacker with one credential can push code to production alone.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Others:</b> inadequate identity management, dependency chain abuse, poisoned pipeline execution, insufficient pipeline-based access controls, insecure configuration, ungoverned third-party services.",
+   "source": "OWASP CICD-SEC",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::01 Why Pipelines Are Targets",
+   "tags": [
+    "pipeline::threat-model"
+   ],
+   "front": "What is <b>Poisoned Pipeline Execution (PPE)</b>?",
+   "back": "Getting the pipeline to run attacker-controlled commands by modifying the pipeline definition or files it executes, without needing access to the build system itself.",
+   "text": "",
+   "image": "",
+   "analogy": "You don't break into the factory; you slip a new page into the recipe book the factory follows.",
+   "extra": "<b>Variants:</b> <i>direct</i> (edit the workflow file), <i>indirect</i> (edit a Makefile or script the workflow calls), <i>public</i> (via a pull request from a fork).",
+   "source": "OWASP CICD-SEC-4",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::01 Why Pipelines Are Targets",
+   "tags": [
+    "pipeline::threat-model"
+   ],
+   "front": "Why does a <b>developer laptop</b> compromise often end as a pipeline compromise?",
+   "back": "Laptops hold Git credentials, personal access tokens and cloud profiles. Pushing one commit or stealing one token turns endpoint access into pipeline access.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Control:</b> short-lived tokens, signed commits with hardware keys, and a required review before anything the pipeline executes changes.",
+   "source": "Threat model",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::01 Why Pipelines Are Targets",
+   "tags": [
+    "pipeline::threat-model"
+   ],
+   "front": "<b>Confidentiality vs integrity</b>: which matters more for a pipeline, and why?",
+   "back": "Integrity. A leaked build log is bad; a modified artifact shipped to every customer is catastrophic. Pipeline security is mostly about proving nothing was altered.",
+   "text": "",
+   "image": "",
+   "analogy": "A pharmacy worries less about someone reading the prescription than about someone swapping the pills.",
+   "extra": "",
+   "source": "Threat model",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::01 Why Pipelines Are Targets",
+   "tags": [
+    "pipeline::threat-model"
+   ],
+   "front": "What does <b>\"shift left\" security</b> miss that pipeline security must add?",
+   "back": "Shift-left scans the code developers write. Pipeline security protects the <i>machinery</i> that turns that code into a running system: runners, secrets, artifacts and deploy paths.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Threat model",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::01 Why Pipelines Are Targets",
+   "tags": [
+    "pipeline::threat-model"
+   ],
+   "front": "Why should the pipeline be treated as <b>production</b> rather than as a developer tool?",
+   "back": "It has production access and runs unreviewed third-party code. Anything with production privileges needs production-grade hardening, logging and on-call.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Consequence:</b> runner images, pipeline configuration and secrets belong in the change-management and monitoring scope of the Security Operations Center (SOC).",
+   "source": "Threat model",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::01 Why Pipelines Are Targets",
+   "tags": [
+    "pipeline::threat-model"
+   ],
+   "front": "What is the <b>blast radius</b> question to ask of every pipeline credential?",
+   "back": "\"If this one secret leaks, what can the attacker reach?\" The answer sizes both the hardening priority and the incident playbook.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Example:</b> a cluster-admin kubeconfig in a shared CI variable has a blast radius of every namespace; an OpenID Connect (OIDC)-issued, job-scoped token has one deployment.",
+   "source": "Threat model",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::02 Source & Dependencies",
+   "tags": [
+    "pipeline::source"
+   ],
+   "front": "What does <b>branch protection</b> on the main branch actually prevent?",
+   "back": "Direct pushes, force-pushes and merges without review or passing checks. It makes the review gate mandatory instead of a habit.",
+   "text": "",
+   "image": "",
+   "analogy": "A turnstile instead of a sign saying \"please check in\": nobody passes without the badge.",
+   "extra": "<b>Pitfall:</b> administrators are often exempt by default; include them, and alert when protection is changed.",
+   "source": "Source integrity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::02 Source & Dependencies",
+   "tags": [
+    "pipeline::source"
+   ],
+   "front": "Why is <b>\"require review\"</b> alone a weak control against an insider or a stolen account?",
+   "back": "A reviewer can be the attacker's own second account, or approvals can be given before a last-minute push. Require <i>fresh</i> approval after every push and <b>CODEOWNERS</b> from a different team.",
+   "text": "",
+   "image": "",
+   "analogy": "Two signatures on a cheque mean nothing if the same person holds both pens.",
+   "extra": "",
+   "source": "Source integrity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::02 Source & Dependencies",
+   "tags": [
+    "pipeline::source"
+   ],
+   "front": "What does a <b>signed commit</b> prove, and what does it not prove?",
+   "back": "It proves the commit was created by the holder of a key. It does not prove the content is safe or that the key owner was not compromised.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Pair with:</b> a <code>require signed commits</code> branch rule, so unsigned history cannot land on main.",
+   "source": "Source integrity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::02 Source & Dependencies",
+   "tags": [
+    "pipeline::source"
+   ],
+   "front": "<b>Commit author vs commit signer</b>: why can the two differ, and why does that matter?",
+   "back": "The author field is free text set by the client; anyone can write <code>author = ceo@company</code>. Only the signature ties the commit to a verified key.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Detection use:</b> an \"author\" that does not match the pushing account is a common spoofing signal.",
+   "source": "Source integrity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::02 Source & Dependencies",
+   "tags": [
+    "pipeline::source"
+   ],
+   "front": "What is <b>dependency confusion</b> (substitution attack)?",
+   "back": "Publishing a public package with the same name as an internal private one, with a higher version, so a resolver fetches the attacker's package instead.",
+   "text": "",
+   "image": "",
+   "analogy": "Someone registers your company's name as a public business and your mail starts going to them.",
+   "extra": "<b>Defence:</b> scoped namespaces, a private registry that never falls back to public, and lockfiles pinned by hash.",
+   "source": "Source integrity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::02 Source & Dependencies",
+   "tags": [
+    "pipeline::source"
+   ],
+   "front": "What is <b>typosquatting</b> in package registries?",
+   "back": "Publishing a malicious package under a near-miss name (<code>requets</code>, <code>lodash-utils</code>) hoping a developer or script mistypes or trusts the name.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Defence:</b> allow-lists or curated internal mirrors, and install-time hooks that flag first-time packages.",
+   "source": "Source integrity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::02 Source & Dependencies",
+   "tags": [
+    "pipeline::source"
+   ],
+   "front": "Why do <b>lockfiles</b> matter for security, not just reproducibility?",
+   "back": "They pin exact versions and integrity hashes, so a newly published malicious version is not pulled in silently by a loose range like <code>^1.2</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "A pinned recipe lists the exact brand and batch; \"any flour\" lets the shop substitute whatever is on the shelf.",
+   "extra": "<b>Pitfall:</b> a pull request that changes the lockfile deserves a close look; attackers hide version swaps there.",
+   "source": "Source integrity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::02 Source & Dependencies",
+   "tags": [
+    "pipeline::source"
+   ],
+   "front": "What is the risk of <b>install-time scripts</b> (npm <code>postinstall</code>, <code>setup.py</code>) and the mitigation?",
+   "back": "They run arbitrary code with the installer's privileges before any review. Mitigate with <code>--ignore-scripts</code> in CI and vetting of packages that need scripts.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Source integrity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::02 Source & Dependencies",
+   "tags": [
+    "pipeline::source"
+   ],
+   "front": "What is a <b>secret-scanning pre-receive (push protection) hook</b> and why is it better than scanning after commit?",
+   "back": "It rejects a push that contains a credential pattern before it lands. Once a secret is in history, it must be treated as leaked and rotated, even if the commit is removed.",
+   "text": "",
+   "image": "",
+   "analogy": "A metal detector at the door beats searching the building afterwards.",
+   "extra": "",
+   "source": "Source integrity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::02 Source & Dependencies",
+   "tags": [
+    "pipeline::source"
+   ],
+   "front": "A secret was committed and the commit was <b>force-pushed away</b>. Is the secret safe?",
+   "back": "No. Forks, clones, CI caches, pull-request refs and the provider's own storage keep it. Rotate it and treat it as compromised.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Source integrity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::02 Source & Dependencies",
+   "tags": [
+    "pipeline::source"
+   ],
+   "front": "What is <b>Software Composition Analysis (SCA)</b>, and what is its blind spot?",
+   "back": "Scanning dependencies for known Common Vulnerabilities and Exposures (CVEs). Blind spot: it finds <i>known bad</i> versions, not deliberately malicious packages with no CVE yet.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Complement:</b> behavioural checks on new packages (network calls at install time, obfuscated code, maintainer changes).",
+   "source": "Source integrity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::02 Source & Dependencies",
+   "tags": [
+    "pipeline::source"
+   ],
+   "front": "Why should <b>vendored or mirrored</b> dependencies be preferred for critical builds?",
+   "back": "The build no longer depends on a public registry being honest and available at build time; the mirror is a reviewed, immutable snapshot.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Cost:</b> someone must own updating the mirror; stale mirrors become a vulnerability source of their own.",
+   "source": "Source integrity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::02 Source & Dependencies",
+   "tags": [
+    "pipeline::source"
+   ],
+   "front": "What is the security reason for <b>pull requests from forks</b> being treated differently from branch pull requests?",
+   "back": "A fork pull request is untrusted code from anyone. If the pipeline runs it with repository secrets, any stranger can exfiltrate those secrets.",
+   "text": "",
+   "image": "",
+   "analogy": "A stranger's parcel is opened in the mailroom, not on the CEO's desk.",
+   "extra": "<b>Control:</b> run fork pull requests without secrets, or require a maintainer to approve the run first.",
+   "source": "Source integrity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::02 Source & Dependencies",
+   "tags": [
+    "pipeline::source",
+    "soc::detection"
+   ],
+   "front": "What should trigger an alert in a <b>repository's settings</b> history?",
+   "back": "Branch protection weakened or removed, a new deploy key or webhook, visibility changed to public, or a new collaborator with write access.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Why:</b> these are the quiet steps an attacker takes <i>before</i> pushing malicious code, so they are the earliest detection point.",
+   "source": "SOC detection",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::03 Build & Workflow Attacks",
+   "tags": [
+    "pipeline::build"
+   ],
+   "front": "What is <b>script injection</b> in a workflow definition?",
+   "back": "Interpolating untrusted input (branch name, pull-request title, issue body) directly into a shell step, so an attacker's text runs as commands.",
+   "text": "",
+   "image": "",
+   "analogy": "Writing \"and give him the keys\" on the visitor form because the guard reads it aloud as instructions.",
+   "extra": "<b>Example:</b> <code>run: echo \"${{ github.event.pull_request.title }}\"</code> with a title of <code>\"; curl evil | sh; #</code>.<br><b>Fix:</b> pass the value through an environment variable and quote it.",
+   "source": "Build integrity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::03 Build & Workflow Attacks",
+   "tags": [
+    "pipeline::build"
+   ],
+   "front": "What is a <b>\"pwn request\"</b>?",
+   "back": "A fork pull request that exploits a workflow configured to run on <code>pull_request_target</code> (with secrets and write access) while checking out the attacker's code.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Rule:</b> never check out and execute pull-request head code in a privileged workflow trigger.",
+   "source": "Build integrity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::03 Build & Workflow Attacks",
+   "tags": [
+    "pipeline::build"
+   ],
+   "front": "Why is <b>pinning a third-party action or plugin to a tag</b> (<code>@v3</code>) insufficient?",
+   "back": "Tags are mutable; the publisher, or anyone who compromises them, can move the tag to malicious code. Pin to a full commit SHA and update deliberately.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Lesson:</b> the 2025 <code>tj-actions/changed-files</code> compromise retagged every version to a secret-dumping payload.",
+   "source": "Build integrity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::03 Build & Workflow Attacks",
+   "tags": [
+    "pipeline::build"
+   ],
+   "front": "What is <b>cache poisoning</b> in a CI system?",
+   "back": "Writing malicious content into a shared build cache (dependency or Docker layer cache) from a low-privilege run, so a later privileged run restores and executes it.",
+   "text": "",
+   "image": "",
+   "analogy": "Someone swaps the ingredients in the shared pantry; the next cook uses them without looking.",
+   "extra": "<b>Control:</b> scope caches to branch and trust level; never share caches between fork runs and main-branch runs.",
+   "source": "Build integrity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::03 Build & Workflow Attacks",
+   "tags": [
+    "pipeline::build"
+   ],
+   "front": "Why can <b>build logs</b> be a secret-leak channel, and what does masking not fix?",
+   "back": "Scripts echo environment variables or tokens; logs are often readable widely. Masking hides exact matches only; encoded or split values pass through.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Control:</b> restrict log read access, and detect long high-entropy strings in logs.",
+   "source": "Build integrity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::03 Build & Workflow Attacks",
+   "tags": [
+    "pipeline::build"
+   ],
+   "front": "<b>Hermetic build</b>: what does it block that matters for pipeline security?",
+   "back": "Network access during the build. Without it, a build step cannot fetch an unpinned dependency, phone home or exfiltrate secrets.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>See also:</b> Platform Engineering deck for the full definition and Supply-chain Levels for Software Artifacts (SLSA) context.",
+   "source": "Build integrity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::03 Build & Workflow Attacks",
+   "tags": [
+    "pipeline::build"
+   ],
+   "front": "Why does a <b>reproducible build</b> matter for detecting a compromised build server?",
+   "back": "Two independent builders from the same source should produce byte-identical output. A difference reveals tampering that signatures from the compromised builder would hide.",
+   "text": "",
+   "image": "",
+   "analogy": "Two accountants doing the books independently; a mismatch exposes the one cooking them.",
+   "extra": "",
+   "source": "Build integrity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::03 Build & Workflow Attacks",
+   "tags": [
+    "pipeline::build"
+   ],
+   "front": "What does <b>build provenance</b> let a Security Operations Center (SOC) answer during an incident?",
+   "back": "\"Which source commit, builder and workflow produced this exact artifact?\" It links a deployed digest back to code, so scope and blame are traceable.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Format:</b> a signed in-toto attestation (SLSA provenance); see Platform Engineering deck.",
+   "source": "Build integrity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::03 Build & Workflow Attacks",
+   "tags": [
+    "pipeline::build"
+   ],
+   "front": "Why should the <b>workflow definition itself</b> be reviewed more strictly than application code?",
+   "back": "It is executable configuration with access to secrets and deploy rights. A one-line change can alter what runs, where, and with which credentials.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Control:</b> CODEOWNERS on <code>.github/workflows/</code>, <code>.gitlab-ci.yml</code>, <code>Jenkinsfile</code>; alert on any change by a non-platform user.",
+   "source": "Build integrity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::03 Build & Workflow Attacks",
+   "tags": [
+    "pipeline::build"
+   ],
+   "front": "What is <b>indirect Poisoned Pipeline Execution</b>, and why is it harder to catch?",
+   "back": "The workflow file is untouched; the attacker edits something it calls: a Makefile, test script, <code>Dockerfile</code> or linter configuration. Reviews focused on workflow files miss it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OWASP CICD-SEC-4",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::03 Build & Workflow Attacks",
+   "tags": [
+    "pipeline::build"
+   ],
+   "front": "Why is <b>\"run tests from the pull request\"</b> a privilege-escalation path?",
+   "back": "Test code is arbitrary code. If it runs on a runner that also holds deploy credentials or network access to production, the pull request author controls that runner.",
+   "text": "",
+   "image": "",
+   "analogy": "Letting the job applicant run their own demo on the payroll computer.",
+   "extra": "<b>Control:</b> separate untrusted (test) jobs from trusted (sign, deploy) jobs on different runners with different secrets.",
+   "source": "Build integrity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::03 Build & Workflow Attacks",
+   "tags": [
+    "pipeline::build"
+   ],
+   "front": "Trusted vs untrusted <b>pipeline stages</b>: what is the dividing rule?",
+   "back": "Anything that executes contributor-controlled code is untrusted and must hold no secrets; signing and deploying are trusted and must only consume artifacts, never run contributor code.",
+   "text": "",
+   "image": "<img src=\"psoc_trust_boundary.svg\">",
+   "analogy": "Kitchen and cash register are separate rooms; the cook never touches the till.",
+   "extra": "",
+   "source": "Build integrity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::03 Build & Workflow Attacks",
+   "tags": [
+    "pipeline::build"
+   ],
+   "front": "What is a <b>self-approving pipeline</b> smell?",
+   "back": "The pipeline can modify its own definition or the rules that gate it (for example, a bot token that can edit branch protection). An attacker who controls one run then controls future runs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Build integrity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::04 Identity & Secrets in Pipelines",
+   "tags": [
+    "pipeline::identity"
+   ],
+   "front": "Why are <b>long-lived static credentials</b> stored as CI variables the single biggest pipeline risk?",
+   "back": "They are readable by every job that can reference them, survive in logs and caches, and remain valid after a leak until someone notices and rotates them.",
+   "text": "",
+   "image": "",
+   "analogy": "A spare house key under the doormat: handy, and it stays there until someone else finds it.",
+   "extra": "",
+   "source": "Pipeline identity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::04 Identity & Secrets in Pipelines",
+   "tags": [
+    "pipeline::identity"
+   ],
+   "front": "How does <b>OpenID Connect (OIDC) workload federation</b> remove static cloud keys from a pipeline?",
+   "back": "The CI provider issues the job a short-lived signed token with claims (repository, branch, workflow). The cloud trusts that issuer and exchanges it for temporary credentials.",
+   "text": "",
+   "image": "",
+   "analogy": "Instead of lending employees a master key, the building issues a badge that only works for their shift and their floor.",
+   "extra": "<b>Result:</b> no secret is stored anywhere; credentials expire in minutes and are bound to a specific job identity.",
+   "source": "Pipeline identity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Pipeline Security & SOC Monitoring::04 Identity & Secrets in Pipelines",
+   "tags": [
+    "pipeline::identity"
+   ],
+   "front": "",
+   "back": "",
+   "text": "In OpenID Connect (OIDC) pipeline federation, the cloud trust policy should restrict on the token's {{c1::subject (<code>sub</code>)}} claim, which encodes repository, {{c2::branch or environment}}, and sometimes workflow, so a token from a feature branch cannot assume the production role.",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Pitfall:</b> a policy that matches only the issuer (<code>iss</code>) lets <i>every</i> repository on that CI provider assume the role.",
+   "source": "Pipeline identity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::04 Identity & Secrets in Pipelines",
+   "tags": [
+    "pipeline::identity"
+   ],
+   "front": "What does a <b>job-scoped token</b> (for example GitHub's <code>GITHUB_TOKEN</code>) protect against, and what is the default-permission pitfall?",
+   "back": "It expires when the job ends, limiting replay. Pitfall: the default grant is often broad (write to contents, packages); set <code>permissions:</code> to read-only and widen per job.",
+   "text": "",
+   "image": "",
+   "analogy": "A day pass that expires at the gate on the way out.",
+   "extra": "",
+   "source": "Pipeline identity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::04 Identity & Secrets in Pipelines",
+   "tags": [
+    "pipeline::identity"
+   ],
+   "front": "<b>Personal Access Token (PAT) vs OpenID Connect (OIDC) federation</b> for deploy credentials: key difference?",
+   "back": "A PAT is a long-lived bearer secret tied to a person; OIDC is an ephemeral token tied to a job identity. A leaked PAT works until revoked; an OIDC token dies in minutes.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Pipeline identity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::04 Identity & Secrets in Pipelines",
+   "tags": [
+    "pipeline::identity"
+   ],
+   "front": "Why should pipeline secrets be <b>scoped to environments</b> rather than to the repository?",
+   "back": "A repository-wide secret is available to every workflow, including untrusted ones. An environment secret (production) is released only to jobs targeting that environment, often after approval.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Pipeline identity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::04 Identity & Secrets in Pipelines",
+   "tags": [
+    "pipeline::identity"
+   ],
+   "front": "What is the role of a <b>secrets manager</b> (Vault, cloud secrets store) in a pipeline compared with CI variables?",
+   "back": "Secrets are fetched at run time by the job's identity, with audit logs per access, versioning and automatic rotation, instead of copied into CI configuration.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Monitoring win:</b> every secret read becomes an audit event the Security Operations Center (SOC) can baseline.",
+   "source": "Pipeline identity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::04 Identity & Secrets in Pipelines",
+   "tags": [
+    "pipeline::identity"
+   ],
+   "front": "What are <b>dynamic secrets</b>, and why do they suit pipelines?",
+   "back": "Credentials created on demand (a database user, a cloud role session) with a short time to live (TTL) and revoked afterwards. A leaked one is already dead by the time it is found.",
+   "text": "",
+   "image": "",
+   "analogy": "A single-use lock combination texted to the courier, useless once the delivery is done.",
+   "extra": "",
+   "source": "Pipeline identity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::04 Identity & Secrets in Pipelines",
+   "tags": [
+    "pipeline::identity"
+   ],
+   "front": "Why should a <b>bot or service account</b> used by the pipeline never be a human's account?",
+   "back": "Human accounts carry broad rights, multi-factor prompts and survive job changes. A dedicated identity has minimal permissions, clear ownership and an unambiguous audit trail.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Detection:</b> a human account acting from a runner IP range is itself a strong alert.",
+   "source": "Pipeline identity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::04 Identity & Secrets in Pipelines",
+   "tags": [
+    "pipeline::identity"
+   ],
+   "front": "What is <b>least privilege for a deploy job</b> in Kubernetes terms?",
+   "back": "A namespaced ServiceAccount or federated identity with Role rights only on the objects it deploys (Deployments, ConfigMaps), never <code>cluster-admin</code> and never Secrets it does not write.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Pipeline identity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::04 Identity & Secrets in Pipelines",
+   "tags": [
+    "pipeline::identity"
+   ],
+   "front": "What is <b>secret sprawl</b> in CI, and how do you measure it?",
+   "back": "The same credential copied into many repositories, variables and tools. Measure by inventorying where each secret's hash appears; each copy is a separate leak and rotation point.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Pipeline identity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::04 Identity & Secrets in Pipelines",
+   "tags": [
+    "pipeline::identity"
+   ],
+   "front": "Why does <b>rotation</b> not replace <b>short-lived credentials</b>?",
+   "back": "Rotation every 90 days leaves a leaked key valid for up to 90 days. Short-lived credentials shrink that window to minutes without anyone remembering to rotate.",
+   "text": "",
+   "image": "",
+   "analogy": "Changing the locks every quarter still leaves a stolen key working for three months.",
+   "extra": "",
+   "source": "Pipeline identity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::04 Identity & Secrets in Pipelines",
+   "tags": [
+    "pipeline::identity",
+    "soc::detection"
+   ],
+   "front": "What is a <b>deploy key</b>, and why does an unexpected new one deserve an alert?",
+   "back": "An SSH key granting a single repository access, usually for automation. A new one appearing outside change control is a classic persistence step after account compromise.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SOC detection",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::04 Identity & Secrets in Pipelines",
+   "tags": [
+    "pipeline::identity"
+   ],
+   "front": "How does <b>SPIFFE/SPIRE-style workload identity</b> relate to pipeline identity?",
+   "back": "Both give a workload a verifiable, short-lived identity instead of a stored secret. Pipeline OpenID Connect (OIDC) tokens are the CI provider's version of a workload identity document.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>See also:</b> Identity & Zero Trust deck for SPIFFE itself.",
+   "source": "Pipeline identity",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::05 Runners & Build Infrastructure",
+   "tags": [
+    "pipeline::runners"
+   ],
+   "front": "Why are <b>ephemeral runners</b> (one job, then destroyed) a security control, not just a cost choice?",
+   "back": "Nothing persists between jobs: no leftover credentials, no planted binaries, no poisoned caches. An attacker who compromises a job loses it minutes later.",
+   "text": "",
+   "image": "",
+   "analogy": "A hotel room cleaned and re-keyed after every guest; the last guest cannot leave a bug for the next.",
+   "extra": "",
+   "source": "Runner security",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::05 Runners & Build Infrastructure",
+   "tags": [
+    "pipeline::runners"
+   ],
+   "front": "What is the core danger of a <b>persistent self-hosted runner</b>?",
+   "back": "A compromised job can install persistence (cron, modified tools, stolen cached tokens) that silently affects every later job, including trusted deploy jobs.",
+   "text": "",
+   "image": "",
+   "analogy": "A shared workbench: a saboteur loosens one bolt and every later product is affected.",
+   "extra": "",
+   "source": "Runner security",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::05 Runners & Build Infrastructure",
+   "tags": [
+    "pipeline::runners"
+   ],
+   "front": "Why must a self-hosted runner <b>never be registered on a public repository</b>?",
+   "back": "Anyone can open a pull request, and the runner executes it. A public repository plus a self-hosted runner equals remote code execution on your network for strangers.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Runner security",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::05 Runners & Build Infrastructure",
+   "tags": [
+    "pipeline::runners"
+   ],
+   "front": "What is <b>runner network segmentation</b>, and what is the minimum?",
+   "back": "Runners live in their own network zone with egress limited to the registries, package mirrors and APIs they need. No route to production databases or the corporate LAN.",
+   "text": "",
+   "image": "",
+   "analogy": "The workshop has one door to the loading dock and none to the office.",
+   "extra": "<b>Detection:</b> any runner connection outside the allow-list is a high-fidelity alert because the legitimate destinations are few and known.",
+   "source": "Runner security",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::05 Runners & Build Infrastructure",
+   "tags": [
+    "pipeline::runners",
+    "soc::detection"
+   ],
+   "front": "Why is <b>egress monitoring</b> on runners more valuable than on ordinary servers?",
+   "back": "Builds have a small, predictable set of destinations. Exfiltration of secrets or a downloaded second-stage payload stands out as a new, unknown destination.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SOC detection",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::05 Runners & Build Infrastructure",
+   "tags": [
+    "pipeline::runners"
+   ],
+   "front": "What is the risk of running CI jobs on a <b>shared Kubernetes cluster with other workloads</b>?",
+   "back": "Build jobs run arbitrary code; a container escape or an over-permissive ServiceAccount reaches neighbouring workloads and the cluster API.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Control:</b> dedicated node pools, restricted Pod Security level, no default ServiceAccount token mounted, NetworkPolicy default-deny.",
+   "source": "Runner security",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::05 Runners & Build Infrastructure",
+   "tags": [
+    "pipeline::runners"
+   ],
+   "front": "Why is <b>Docker-in-Docker with a mounted Docker socket</b> on a runner equivalent to root on the host?",
+   "back": "Whoever controls the socket can start a privileged container with the host filesystem mounted. Any job can therefore take the runner host and everything on it.",
+   "text": "",
+   "image": "",
+   "analogy": "Handing a visitor the master key cabinet because they asked for one door.",
+   "extra": "<b>Alternatives:</b> rootless builders such as BuildKit rootless, kaniko or buildah, or a remote build service.",
+   "source": "Runner security",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::05 Runners & Build Infrastructure",
+   "tags": [
+    "pipeline::runners"
+   ],
+   "front": "What does <b>runner image hardening</b> involve, and why keep the image minimal?",
+   "back": "Pinned base image, only required toolchains, no interactive shells for untrusted jobs, regular rebuilds. Fewer tools mean fewer living-off-the-land options for an attacker.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Runner security",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::05 Runners & Build Infrastructure",
+   "tags": [
+    "pipeline::runners",
+    "soc::detection"
+   ],
+   "front": "What is the <b>runner-token</b> risk for self-hosted agents?",
+   "back": "The registration or agent token lets anyone attach a rogue runner that receives jobs, secrets and code. Treat it as a privileged secret and alert on new runner registrations.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SOC detection",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::05 Runners & Build Infrastructure",
+   "tags": [
+    "pipeline::runners"
+   ],
+   "front": "What is the difference in trust between the <b>CI provider's hosted runner</b> and your own self-hosted runner?",
+   "back": "Hosted: you trust the vendor's isolation, but it is ephemeral and patched for you. Self-hosted: you control the network and tooling, but you own isolation, patching and persistence risk.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Runner security",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::05 Runners & Build Infrastructure",
+   "tags": [
+    "pipeline::runners"
+   ],
+   "front": "Why should the <b>runner's own metadata endpoint</b> (cloud instance metadata) be blocked from jobs?",
+   "back": "The instance role credentials are available to any process on the runner. A job can curl the metadata service and inherit the runner's cloud permissions.",
+   "text": "",
+   "image": "",
+   "analogy": "The company credit card is taped under the desk every temp worker sits at.",
+   "extra": "<b>Control:</b> instance metadata service v2 (IMDSv2) with hop limit 1, or an egress rule blocking <code>169.254.169.254</code> from job containers.",
+   "source": "Runner security",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::05 Runners & Build Infrastructure",
+   "tags": [
+    "pipeline::runners"
+   ],
+   "front": "What is the security role of <b>build isolation per tenant</b> in a shared platform?",
+   "back": "Teams' jobs must not share runners, caches or credentials. Otherwise one team's compromised dependency can read another team's secrets.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Runner security",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::05 Runners & Build Infrastructure",
+   "tags": [
+    "pipeline::runners",
+    "soc::detection"
+   ],
+   "front": "How should <b>runtime security tooling</b> (Falco, Tetragon, endpoint detection and response (EDR)) treat a runner differently from an app server?",
+   "back": "Compilation, package installs and outbound fetches are normal on runners, so rules must baseline that, and instead flag credential-file reads, metadata access and unusual egress.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>See also:</b> Linux Internals for K8s Security deck for how these tools hook the kernel.",
+   "source": "SOC detection",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::06 Artifacts, Registries & Deploy Gates",
+   "tags": [
+    "pipeline::deploy"
+   ],
+   "front": "Why deploy by <b>image digest</b> rather than by tag?",
+   "back": "A tag (<code>:1.4</code>, <code>:latest</code>) can be repointed to a different image; a digest is a content hash that identifies exactly one image forever.",
+   "text": "",
+   "image": "",
+   "analogy": "A fingerprint, not a name tag: a name tag can be swapped between people.",
+   "extra": "<b>Rule:</b> the pipeline resolves tag → digest once at build time and writes the digest into the deployment manifest.",
+   "source": "Distribution & deploy",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::06 Artifacts, Registries & Deploy Gates",
+   "tags": [
+    "pipeline::deploy"
+   ],
+   "front": "What is <b>tag immutability</b> in a registry, and what attack does it stop?",
+   "back": "A registry setting that refuses to overwrite an existing tag. It stops an attacker with push rights from silently replacing a released image under its trusted name.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Distribution & deploy",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::06 Artifacts, Registries & Deploy Gates",
+   "tags": [
+    "pipeline::deploy"
+   ],
+   "front": "Why should <b>write access to the production registry</b> be limited to the trusted build job only?",
+   "back": "Anything that can push there can ship code to production. Developer accounts and untrusted jobs should only push to staging or scratch repositories.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Distribution & deploy",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::06 Artifacts, Registries & Deploy Gates",
+   "tags": [
+    "pipeline::deploy"
+   ],
+   "front": "What does <b>signature verification at admission</b> add that signing alone does not?",
+   "back": "Enforcement. Signing without verification is a label; an admission policy (Kyverno <code>verifyImages</code>, Sigstore policy-controller) refuses to run anything not signed by the trusted build identity.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>See also:</b> Platform Engineering deck for Cosign and policy-as-code details.",
+   "source": "Distribution & deploy",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::06 Artifacts, Registries & Deploy Gates",
+   "tags": [
+    "pipeline::deploy"
+   ],
+   "front": "What should an admission <b>verification policy</b> check beyond \"a valid signature exists\"?",
+   "back": "<i>Who</i> signed: the certificate identity (workflow and repository) and issuer must match the expected build pipeline. Any valid Sigstore signature is not enough.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Distribution & deploy",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::06 Artifacts, Registries & Deploy Gates",
+   "tags": [
+    "pipeline::deploy"
+   ],
+   "front": "What is a <b>pull-through cache / proxy registry</b>, and what are its two security benefits?",
+   "back": "An internal registry that fetches upstream images once and serves them from inside. Benefits: a single scan-and-allow point, and no runner or node reaching public registries directly.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Distribution & deploy",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::06 Artifacts, Registries & Deploy Gates",
+   "tags": [
+    "pipeline::deploy"
+   ],
+   "front": "Why does a <b>GitOps deploy model</b> improve pipeline security compared with CI pushing to the cluster?",
+   "back": "The CI job needs no cluster credentials at all; it only commits to Git. The cluster agent pulls, so the most sensitive credential never leaves the cluster.",
+   "text": "",
+   "image": "",
+   "analogy": "The warehouse collects orders from the mailbox; nobody outside ever gets a key to the warehouse.",
+   "extra": "<b>Bonus:</b> the desired state is reviewable, signed and auditable in Git.",
+   "source": "Distribution & deploy",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::06 Artifacts, Registries & Deploy Gates",
+   "tags": [
+    "pipeline::deploy",
+    "soc::detection"
+   ],
+   "front": "What is <b>drift</b> between Git and the cluster, and why is it a security signal?",
+   "back": "A live object differs from its declared state. Legitimate causes exist, but drift is also what a manual <code>kubectl edit</code> by an attacker looks like.",
+   "text": "",
+   "image": "",
+   "analogy": "The blueprint says one door; the building has two. Either the plans are stale or someone cut a hole.",
+   "extra": "<b>Response:</b> self-heal plus an alert, so the change is reverted <i>and</i> investigated.",
+   "source": "SOC detection",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::06 Artifacts, Registries & Deploy Gates",
+   "tags": [
+    "pipeline::deploy"
+   ],
+   "front": "What is an <b>environment protection rule</b> (required reviewers, wait timer, branch restriction)?",
+   "back": "A gate on the deploy stage: production secrets are released only after a named approver confirms and only from allowed branches. It enforces the four-eyes principle at deploy time.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Distribution & deploy",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::06 Artifacts, Registries & Deploy Gates",
+   "tags": [
+    "pipeline::deploy"
+   ],
+   "front": "What is <b>artifact promotion</b>, and why is it safer than rebuilding per environment?",
+   "back": "The exact tested artifact (by digest) moves from dev to staging to production. Rebuilding could introduce different dependencies, so what was tested is not what runs.",
+   "text": "",
+   "image": "",
+   "analogy": "You ship the inspected crate, not a new crate packed from the same list.",
+   "extra": "",
+   "source": "Distribution & deploy",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::06 Artifacts, Registries & Deploy Gates",
+   "tags": [
+    "pipeline::deploy"
+   ],
+   "front": "What should a Security Operations Center (SOC) be able to do with a <b>Software Bill of Materials (SBOM)</b> during a zero-day?",
+   "back": "Query every deployed artifact for the affected component and version in minutes, instead of asking each team to check. The SBOM must be indexed, not just stored.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Distribution & deploy",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::06 Artifacts, Registries & Deploy Gates",
+   "tags": [
+    "pipeline::deploy"
+   ],
+   "front": "Why should <b>vulnerability scanning</b> run on the registry continuously, not only in the pipeline?",
+   "back": "New Common Vulnerabilities and Exposures (CVEs) are published daily. An image that was clean at build time is vulnerable tomorrow; only re-scanning what is deployed reveals that.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Distribution & deploy",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::06 Artifacts, Registries & Deploy Gates",
+   "tags": [
+    "pipeline::deploy",
+    "soc::detection"
+   ],
+   "front": "What is a <b>break-glass deployment</b>, and what must always accompany it?",
+   "back": "A bypass of normal gates for emergencies. It must be rare, require a named person, be logged loudly, and trigger a Security Operations Center (SOC) review afterwards.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Detection:</b> break-glass used without a linked incident ticket is itself an alert.",
+   "source": "SOC detection",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::07 SOC Basics for Pipelines",
+   "tags": [
+    "soc::basics"
+   ],
+   "front": "What is a <b>Security Operations Center (SOC)</b>, in one line?",
+   "back": "The team and tooling that continuously collects security telemetry, detects suspicious activity, triages it and coordinates response.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SOC fundamentals",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::07 SOC Basics for Pipelines",
+   "tags": [
+    "soc::basics"
+   ],
+   "front": "What is a <b>detection use-case</b>?",
+   "back": "A documented, testable rule: the threat it covers, the log source it needs, the logic, expected false positives and the response playbook when it fires.",
+   "text": "",
+   "image": "",
+   "analogy": "A smoke detector spec: what it must sense, where it hangs, how it is tested, and who runs when it beeps.",
+   "extra": "<b>Not:</b> a bare query. Without the threat, the source and the playbook it cannot be maintained or measured.",
+   "source": "SOC fundamentals",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Pipeline Security & SOC Monitoring::07 SOC Basics for Pipelines",
+   "tags": [
+    "soc::basics"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Detection use-case lifecycle: {{c1::identify the threat}} (what are we afraid of?) → {{c2::confirm the telemetry}} exists → write and test the rule → {{c3::tune}} on real data → attach a playbook → measure and retire.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SOC fundamentals",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::07 SOC Basics for Pipelines",
+   "tags": [
+    "soc::basics"
+   ],
+   "front": "Why map pipeline detections to <b>MITRE ATT&CK</b> techniques?",
+   "back": "A shared vocabulary for coverage: it shows which attacker behaviours you can see and which are blind spots, and lets red-team findings map straight to missing rules.",
+   "text": "",
+   "image": "",
+   "analogy": "A map of the burglar's known routes, with your cameras drawn on it: the gaps are obvious.",
+   "extra": "<b>Example:</b> stolen CI token → <i>Valid Accounts</i>; modified workflow file → <i>Supply Chain Compromise</i>; runner egress → <i>Exfiltration over Web Service</i>.",
+   "source": "SOC fundamentals",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::07 SOC Basics for Pipelines",
+   "tags": [
+    "soc::basics"
+   ],
+   "front": "<b>Security Information and Event Management (SIEM) vs Security Orchestration, Automation and Response (SOAR)</b> in a pipeline context: who does what?",
+   "back": "SIEM ingests CI, registry and cloud logs and runs detection rules. SOAR runs the playbook when a rule fires: revoke the token, pause the pipeline, open the ticket.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SOC fundamentals",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::07 SOC Basics for Pipelines",
+   "tags": [
+    "soc::basics"
+   ],
+   "front": "What is <b>detection-as-code</b>?",
+   "back": "Detection rules kept in Git, reviewed, unit-tested against sample logs and deployed by a pipeline. The same discipline as application code, applied to the SOC's logic.",
+   "text": "",
+   "image": "",
+   "analogy": "The smoke detectors are built, tested and versioned like the building's software, not configured by hand on each floor.",
+   "extra": "",
+   "source": "SOC fundamentals",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::07 SOC Basics for Pipelines",
+   "tags": [
+    "soc::basics"
+   ],
+   "front": "What is <b>Sigma</b> in Security Operations Center (SOC) tooling?",
+   "back": "A vendor-neutral YAML format for detection rules, converted into each SIEM's query language. It makes rules portable and shareable.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SOC fundamentals",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::07 SOC Basics for Pipelines",
+   "tags": [
+    "soc::basics"
+   ],
+   "front": "<b>High-fidelity vs high-volume</b> detections: what is the difference and which should pipeline monitoring start with?",
+   "back": "High-fidelity rules almost never fire falsely (branch protection disabled); high-volume rules need baselining (unusual egress). Start with the high-fidelity ones to earn trust.",
+   "text": "",
+   "image": "",
+   "analogy": "A glass-break sensor versus a motion sensor in a house with a cat.",
+   "extra": "",
+   "source": "SOC fundamentals",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::07 SOC Basics for Pipelines",
+   "tags": [
+    "soc::basics"
+   ],
+   "front": "Why is <b>alert fatigue</b> especially likely when first onboarding CI logs?",
+   "back": "Pipelines legitimately do noisy things: install packages, open many connections, use tokens from changing IPs. Untuned rules fire constantly and the team starts ignoring them.",
+   "text": "",
+   "image": "",
+   "analogy": "A car alarm that goes off at every passing truck: soon nobody looks up.",
+   "extra": "",
+   "source": "SOC fundamentals",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::07 SOC Basics for Pipelines",
+   "tags": [
+    "soc::basics"
+   ],
+   "front": "What are <b>Mean Time To Detect (MTTD)</b> and <b>Mean Time To Respond (MTTR)</b>, and why track both for pipeline incidents?",
+   "back": "MTTD: time from malicious action to alert. MTTR: time from alert to containment. A fast MTTD with a slow MTTR still leaves a leaked token usable for hours.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SOC fundamentals",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::07 SOC Basics for Pipelines",
+   "tags": [
+    "soc::basics"
+   ],
+   "front": "<b>Preventive vs detective</b> controls in a pipeline: give one of each and explain why both are needed.",
+   "back": "Preventive: admission refuses unsigned images. Detective: alert on an attempted unsigned deploy. Prevention stops the act; detection reveals that someone tried.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SOC fundamentals",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::07 SOC Basics for Pipelines",
+   "tags": [
+    "soc::basics"
+   ],
+   "front": "What is the <b>SOC's role in change management</b> for pipelines?",
+   "back": "Approved changes (new runner, new secret, workflow rewrite) are registered so the corresponding alerts can be matched and closed fast; unregistered ones become incidents.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SOC fundamentals",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::07 SOC Basics for Pipelines",
+   "tags": [
+    "soc::basics"
+   ],
+   "front": "Why should the platform team and the Security Operations Center (SOC) <b>co-own</b> pipeline detections?",
+   "back": "The platform team knows what is normal and can fix root causes; the SOC knows attacker behaviour and runs 24/7 triage. Either alone produces rules that are wrong or ignored.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SOC fundamentals",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::08 Telemetry Sources",
+   "tags": [
+    "soc::telemetry"
+   ],
+   "front": "Which <b>four log families</b> does a pipeline monitoring programme need at minimum?",
+   "back": "Source-control audit logs, CI/CD job and system logs, artifact registry logs, and the deploy target's audit logs (cloud and Kubernetes).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>Fifth, when available:</b> runtime telemetry from the runners themselves (process, file, network).",
+   "source": "Telemetry",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::08 Telemetry Sources",
+   "tags": [
+    "soc::telemetry"
+   ],
+   "front": "What does a <b>source-control audit log</b> (GitHub/GitLab audit events) record that the Git history does not?",
+   "back": "Settings changes, token creation, membership changes, repository visibility, deploy keys, webhooks, and <i>who</i> read or cloned what. Git history only shows commits.",
+   "text": "",
+   "image": "",
+   "analogy": "The building's visitor log shows who was given keys; the whiteboard only shows what got written.",
+   "extra": "",
+   "source": "Telemetry",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::08 Telemetry Sources",
+   "tags": [
+    "soc::telemetry"
+   ],
+   "front": "Why must <b>audit logs be exported</b> out of the CI/SCM platform rather than viewed in its UI?",
+   "back": "Retention is short, search is weak, and an attacker with admin rights can delete them. The SIEM copy is longer-lived and outside the attacker's control.",
+   "text": "",
+   "image": "",
+   "analogy": "The camera footage goes to an off-site vault, not to the room being robbed.",
+   "extra": "",
+   "source": "Telemetry",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::08 Telemetry Sources",
+   "tags": [
+    "soc::telemetry"
+   ],
+   "front": "What fields make a <b>CI job event</b> useful for detection?",
+   "back": "Actor, trigger (push, pull request, schedule, manual), repository and ref, workflow and job name, runner identity, secrets referenced, outcome, and start and end times.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Telemetry",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::08 Telemetry Sources",
+   "tags": [
+    "soc::telemetry"
+   ],
+   "front": "What does the <b>Kubernetes audit log</b> show about a deploy that the CI log cannot?",
+   "back": "The actual API calls: which identity created or patched which object, from which IP, and whether it was admitted or denied. The CI log only shows what the job intended.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "<b>See also:</b> Kubernetes deck for audit levels and apiserver flags.",
+   "source": "Telemetry",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::08 Telemetry Sources",
+   "tags": [
+    "soc::telemetry"
+   ],
+   "front": "Why should <b>admission-controller denials</b> be sent to the Security Operations Center (SOC)?",
+   "back": "A denied unsigned or privileged deployment is an attempted bypass. Prevention stopped it, but the attempt tells you something is wrong upstream.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Telemetry",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::08 Telemetry Sources",
+   "tags": [
+    "soc::telemetry"
+   ],
+   "front": "What do <b>registry logs</b> contribute to detection?",
+   "back": "Pushes with actor and digest, pulls with identity and source IP, tag overwrites, and deletions. Together they show whether what is running was pushed by the pipeline.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Telemetry",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::08 Telemetry Sources",
+   "tags": [
+    "soc::telemetry"
+   ],
+   "front": "Why correlate <b>cloud audit logs</b> (CloudTrail, Azure Activity, GCP Audit) with CI logs?",
+   "back": "They show which cloud role was assumed via OpenID Connect (OIDC) and what it did. A role assumption with no matching CI job is a stolen or forged token.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Telemetry",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::08 Telemetry Sources",
+   "tags": [
+    "soc::telemetry"
+   ],
+   "front": "What is the detection value of <b>secrets-manager access logs</b>?",
+   "back": "Every secret read names the identity, time and secret. Reads from an unexpected job, outside working patterns, or in bulk, are strong compromise signals.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Telemetry",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::08 Telemetry Sources",
+   "tags": [
+    "soc::telemetry"
+   ],
+   "front": "What does <b>eBPF-based runtime telemetry</b> (Tetragon, Falco) on runners add that logs cannot?",
+   "back": "What the job's processes actually did: files opened, processes spawned, connections made. Build logs show only what the script chose to print.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Telemetry",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::08 Telemetry Sources",
+   "tags": [
+    "soc::telemetry"
+   ],
+   "front": "Why is a <b>common identity key</b> across log sources essential for pipeline detections?",
+   "back": "To join a workflow run to its cloud role session, registry push and cluster audit entry. Without a shared run ID or OpenID Connect (OIDC) subject, correlation is guesswork.",
+   "text": "",
+   "image": "",
+   "analogy": "A parcel tracking number that follows the box from depot to van to doorstep.",
+   "extra": "<b>Practice:</b> propagate the run ID into image labels, commit trailers and session names.",
+   "source": "Telemetry",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::08 Telemetry Sources",
+   "tags": [
+    "soc::telemetry"
+   ],
+   "front": "What is <b>log integrity</b> for pipeline telemetry, and how is it achieved?",
+   "back": "Logs cannot be altered after the fact. Use write-once or append-only storage, a separate account the platform admins cannot write to, and hashing or signing of batches.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Telemetry",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::08 Telemetry Sources",
+   "tags": [
+    "soc::telemetry"
+   ],
+   "front": "What is <b>Network Flow</b> data from the runner subnet used for?",
+   "back": "Baselining normal destinations (registries, mirrors, APIs) and alerting on new ones. It is cheap, complete and hard for a job to tamper with.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Telemetry",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Pipeline Security & SOC Monitoring::08 Telemetry Sources",
+   "tags": [
+    "soc::telemetry"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Telemetry maturity for pipelines: level 1 collects {{c1::job outcomes and audit logs}}; level 2 adds {{c2::identity correlation across CI, cloud and cluster}}; level 3 adds {{c3::runtime process and network telemetry from runners}}.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Telemetry",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::09 Detection Use-Cases: Source & Build",
+   "tags": [
+    "soc::use-case",
+    "pipeline::source"
+   ],
+   "front": "Use-case: <b>branch protection disabled or weakened</b>. Why high-fidelity, and what is the playbook?",
+   "back": "Legitimate changes are rare and planned, so almost every hit is real. Playbook: confirm with change record; if none, restore protection, review commits since, and suspend the actor.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Use-case · source & build",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::09 Detection Use-Cases: Source & Build",
+   "tags": [
+    "soc::use-case",
+    "pipeline::source"
+   ],
+   "front": "Use-case: <b>workflow or pipeline definition changed</b> by someone outside the platform team. What should the rule check?",
+   "back": "A change to <code>.github/workflows/</code>, <code>.gitlab-ci.yml</code> or <code>Jenkinsfile</code> where the author is not in the owning group, or where the change adds a new secret reference or external URL.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Use-case · source & build",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::09 Detection Use-Cases: Source & Build",
+   "tags": [
+    "soc::use-case",
+    "pipeline::source"
+   ],
+   "front": "Use-case: <b>force-push or history rewrite on a protected branch</b>. What does it usually mean?",
+   "back": "Either someone hid a mistake (a committed secret) or an attacker removed evidence. Both need review: compare the old and new history and check for secrets in the removed commits.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Use-case · source & build",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::09 Detection Use-Cases: Source & Build",
+   "tags": [
+    "soc::use-case",
+    "pipeline::source"
+   ],
+   "front": "Use-case: <b>new personal access token or deploy key created</b> with write scope. Why alert on creation rather than use?",
+   "back": "Creation is the persistence step; use may come weeks later. Catching it at creation lets you revoke before the attacker needs it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Use-case · source & build",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::09 Detection Use-Cases: Source & Build",
+   "tags": [
+    "soc::use-case",
+    "pipeline::source"
+   ],
+   "front": "Use-case: <b>repository made public</b> or a new outside collaborator added. What is the risk?",
+   "back": "Immediate exposure of history, including any secret ever committed, and (with a self-hosted runner) remote code execution for strangers.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Use-case · source & build",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::09 Detection Use-Cases: Source & Build",
+   "tags": [
+    "soc::use-case",
+    "pipeline::source"
+   ],
+   "front": "Use-case: <b>pipeline run triggered from a fork with secrets available</b>. What is being detected?",
+   "back": "A privileged trigger (<code>pull_request_target</code> or equivalent) executing on untrusted code: the precondition for a pwn request.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Use-case · source & build",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::09 Detection Use-Cases: Source & Build",
+   "tags": [
+    "soc::use-case",
+    "pipeline::source"
+   ],
+   "front": "Use-case: <b>high-entropy string in build logs</b>. What is the logic and the false-positive source?",
+   "back": "Scan logs for token-shaped strings (prefixes like <code>ghp_</code>, <code>AKIA</code>, long base64). False positives: hashes, digests, signatures; filter known formats.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Use-case · source & build",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::09 Detection Use-Cases: Source & Build",
+   "tags": [
+    "soc::use-case",
+    "pipeline::source"
+   ],
+   "front": "Use-case: <b>runner connects to a never-seen external destination</b>. How is \"never seen\" defined?",
+   "back": "Not in the allow-list and not observed in the last N days for that pipeline. Dynamic baselines per pipeline cut noise from legitimate new mirrors.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Use-case · source & build",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::09 Detection Use-Cases: Source & Build",
+   "tags": [
+    "soc::use-case",
+    "pipeline::source"
+   ],
+   "front": "Use-case: <b>job reads cloud metadata endpoint or credential files</b> (<code>~/.aws</code>, <code>~/.docker/config.json</code>, <code>/var/run/secrets</code>). Why is it reliable on runners?",
+   "back": "Build steps rarely need those paths; a package's install script or test touching them is almost always theft. Runtime telemetry (eBPF) sees it even if the script hides it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Use-case · source & build",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::09 Detection Use-Cases: Source & Build",
+   "tags": [
+    "soc::use-case",
+    "pipeline::source"
+   ],
+   "front": "Use-case: <b>new dependency from an unknown maintainer or published in the last days</b>. What is the signal and why?",
+   "back": "Freshly published packages, or ones whose maintainer just changed, are the typical vehicle for typosquatting and hijacks. Flag them for review before the lockfile change merges.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Use-case · source & build",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::09 Detection Use-Cases: Source & Build",
+   "tags": [
+    "soc::use-case",
+    "pipeline::source"
+   ],
+   "front": "Use-case: <b>third-party action or plugin changed from SHA pin to a mutable tag</b>. Why is this a detection, not just a lint?",
+   "back": "Loosening a pin is a prerequisite for a future tag-hijack attack. Catching it in review or in the audit stream prevents a whole attack class.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Use-case · source & build",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::09 Detection Use-Cases: Source & Build",
+   "tags": [
+    "soc::use-case",
+    "pipeline::source"
+   ],
+   "front": "Use-case: <b>pipeline run outside the pipeline's historical hours or from a new actor</b>. How to tune it?",
+   "back": "Baseline per repository: actors, trigger types, time-of-day. Alert on a first-seen actor with a manual trigger, and lower severity for scheduled runs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Use-case · source & build",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::09 Detection Use-Cases: Source & Build",
+   "tags": [
+    "soc::use-case",
+    "pipeline::source"
+   ],
+   "front": "Use-case: <b>secrets accessed in bulk</b> by one job. What distinguishes it from normal?",
+   "back": "A deploy job reads the two or three secrets it needs. A job enumerating many secrets, or reading ones no step references, is dumping the store.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Use-case · source & build",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::09 Detection Use-Cases: Source & Build",
+   "tags": [
+    "soc::use-case",
+    "pipeline::source"
+   ],
+   "front": "Use-case: <b>new self-hosted runner registered</b>. What should the analyst verify?",
+   "back": "That it matches a change request, that its network location is the runner subnet, and that its labels do not let it pick up trusted deploy jobs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Use-case · source & build",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::09 Detection Use-Cases: Source & Build",
+   "tags": [
+    "soc::use-case",
+    "pipeline::source"
+   ],
+   "front": "Use-case: <b>signed-commit policy violation</b>: unsigned commits appear on main. What does it indicate?",
+   "back": "Either branch protection failed, an administrator bypassed it, or a tool pushed with an unmanaged identity. All three are findings.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Use-case · source & build",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::10 Detection Use-Cases: Deploy & Runtime",
+   "tags": [
+    "soc::use-case",
+    "pipeline::deploy"
+   ],
+   "front": "Use-case: <b>image running in production whose digest was never pushed by the pipeline</b>. How is it built?",
+   "back": "Join cluster audit (image digests created) against registry logs (digests pushed by the build identity). Anything unmatched was deployed outside the pipeline.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Use-case · deploy & runtime",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::10 Detection Use-Cases: Deploy & Runtime",
+   "tags": [
+    "soc::use-case",
+    "pipeline::deploy"
+   ],
+   "front": "Use-case: <b>admission denial for unsigned or unverified image</b>. Why is one denial worth an alert?",
+   "back": "It means something tried to deploy an image the pipeline did not sign: a misconfiguration, a bypass attempt, or an attacker with cluster access.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Use-case · deploy & runtime",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::10 Detection Use-Cases: Deploy & Runtime",
+   "tags": [
+    "soc::use-case",
+    "pipeline::deploy"
+   ],
+   "front": "Use-case: <b>cloud role assumed via OpenID Connect (OIDC) with no matching CI run</b>. What does it reveal?",
+   "back": "A forged or replayed token, or a trust policy loose enough for another repository to assume the role. Correlate the session name or subject claim with the run ID.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Use-case · deploy & runtime",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::10 Detection Use-Cases: Deploy & Runtime",
+   "tags": [
+    "soc::use-case",
+    "pipeline::deploy"
+   ],
+   "front": "Use-case: <b>deploy credential used from an IP outside the runner range</b>. Why is it near-certain compromise?",
+   "back": "Pipeline identities only act from runners. A kubeconfig or cloud session used from a laptop or a foreign address means the credential was exfiltrated.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Use-case · deploy & runtime",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::10 Detection Use-Cases: Deploy & Runtime",
+   "tags": [
+    "soc::use-case",
+    "pipeline::deploy"
+   ],
+   "front": "Use-case: <b>manual <code>kubectl</code> change in a GitOps-managed namespace</b>. What is the detection source?",
+   "back": "Kubernetes audit log: a write by a human user or non-GitOps ServiceAccount to objects the GitOps controller owns. Drift reports from the controller are a second source.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Use-case · deploy & runtime",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::10 Detection Use-Cases: Deploy & Runtime",
+   "tags": [
+    "soc::use-case",
+    "pipeline::deploy"
+   ],
+   "front": "Use-case: <b>privileged or host-mounted pod created by the deploy identity</b>. Why alert even if admitted?",
+   "back": "A deploy identity normally creates ordinary workloads. A privileged pod, hostPath or hostNetwork from it suggests the pipeline was weaponised for a node escape.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Use-case · deploy & runtime",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::10 Detection Use-Cases: Deploy & Runtime",
+   "tags": [
+    "soc::use-case",
+    "pipeline::deploy"
+   ],
+   "front": "Use-case: <b>production deploy outside an approved change window without a linked ticket</b>. How to avoid noise?",
+   "back": "Emit the change or incident ID from the pipeline into the deploy annotation; the rule fires only when the annotation is missing or does not resolve.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Use-case · deploy & runtime",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::10 Detection Use-Cases: Deploy & Runtime",
+   "tags": [
+    "soc::use-case",
+    "pipeline::deploy"
+   ],
+   "front": "Use-case: <b>environment protection bypassed</b> (approval skipped, break-glass used). Who should be notified?",
+   "back": "The Security Operations Center (SOC) and the environment owner immediately, with the actor, reason and artifacts involved, for same-day review.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Use-case · deploy & runtime",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::10 Detection Use-Cases: Deploy & Runtime",
+   "tags": [
+    "soc::use-case",
+    "pipeline::deploy"
+   ],
+   "front": "Use-case: <b>registry tag overwritten or image deleted</b>. What do each of these indicate?",
+   "back": "Overwrite: possible substitution of a released image. Deletion: anti-forensics or ransom-style destruction. Both should be impossible with immutability and are alerts if they occur.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Use-case · deploy & runtime",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::10 Detection Use-Cases: Deploy & Runtime",
+   "tags": [
+    "soc::use-case",
+    "pipeline::deploy"
+   ],
+   "front": "Use-case: <b>container in production spawns a shell or package manager</b>. Why is this stronger for pipeline-built images?",
+   "back": "Pipeline images are minimal and known; a shell or <code>apt</code> running inside one has no legitimate reason. Runtime rules can be strict because the baseline is strict.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Use-case · deploy & runtime",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::10 Detection Use-Cases: Deploy & Runtime",
+   "tags": [
+    "soc::use-case",
+    "pipeline::deploy"
+   ],
+   "front": "Use-case: <b>Software Bill of Materials (SBOM) query hits a newly disclosed vulnerable component</b>. Is this a detection?",
+   "back": "Yes, an exposure detection: it tells the Security Operations Center (SOC) which running digests contain the component so response can prioritise patching and watch those workloads.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Use-case · deploy & runtime",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::10 Detection Use-Cases: Deploy & Runtime",
+   "tags": [
+    "soc::use-case",
+    "pipeline::deploy"
+   ],
+   "front": "Use-case: <b>GitOps controller credentials or repository changed</b>. Why is this the highest-impact deploy-side alert?",
+   "back": "The controller applies whatever its source repository says. Repointing it, or stealing its token, gives control over every namespace it manages.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Use-case · deploy & runtime",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::10 Detection Use-Cases: Deploy & Runtime",
+   "tags": [
+    "soc::use-case",
+    "pipeline::deploy"
+   ],
+   "front": "Use-case: <b>provenance attestation missing or failing verification</b> on a deployed artifact. What is the first triage question?",
+   "back": "\"Was it built by the expected builder from the expected repository?\" If not, isolate the workload and trace the digest back through registry logs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Use-case · deploy & runtime",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::10 Detection Use-Cases: Deploy & Runtime",
+   "tags": [
+    "soc::use-case",
+    "pipeline::deploy"
+   ],
+   "front": "How should detection use-cases be <b>prioritised</b> across the deploy stage?",
+   "back": "By blast radius: controller and registry integrity first, then credential misuse, then individual workload anomalies. The first two compromise everything downstream.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Use-case · deploy & runtime",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::11 Triage, Response & Recovery",
+   "tags": [
+    "soc::response"
+   ],
+   "front": "First <b>triage question</b> for any pipeline alert?",
+   "back": "\"Is there an approved change that explains this?\" Most true positives are unregistered changes; most false positives are registered ones the rule could not see.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Response",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::11 Triage, Response & Recovery",
+   "tags": [
+    "soc::response"
+   ],
+   "front": "What is the <b>containment order</b> when a CI credential is confirmed leaked?",
+   "back": "Revoke the credential, then pause the pipelines that used it, then rotate dependent secrets, then search logs for its use since the leak time.",
+   "text": "",
+   "image": "",
+   "analogy": "Cancel the stolen card before you review the statement.",
+   "extra": "<b>Why this order:</b> revoke first so the attacker's window closes while you investigate.",
+   "source": "Response",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::11 Triage, Response & Recovery",
+   "tags": [
+    "soc::response"
+   ],
+   "front": "Why <b>pause the pipeline</b> rather than delete the suspicious job during an incident?",
+   "back": "Pausing stops further damage while preserving logs, caches and the runner state for forensics. Deleting destroys evidence you need to size the compromise.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Response",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::11 Triage, Response & Recovery",
+   "tags": [
+    "soc::response"
+   ],
+   "front": "What does <b>scoping a build compromise</b> require?",
+   "back": "The list of artifacts built on the compromised runner or with the compromised credential since the earliest suspicious event, found via provenance and registry logs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Response",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::11 Triage, Response & Recovery",
+   "tags": [
+    "soc::response"
+   ],
+   "front": "How does <b>provenance</b> speed up recovery after a build compromise?",
+   "back": "Every artifact's attestation names its builder and run. Filter by the compromised builder and you have the recall list; rebuild those from clean source on a clean builder.",
+   "text": "",
+   "image": "",
+   "analogy": "A batch number on every tin tells the factory exactly which products to recall.",
+   "extra": "",
+   "source": "Response",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::11 Triage, Response & Recovery",
+   "tags": [
+    "soc::response"
+   ],
+   "front": "What is the <b>\"assume the runner is lost\"</b> rule?",
+   "back": "Once malicious code ran on a persistent runner, you cannot trust anything on it. Destroy and rebuild it from the hardened image; do not clean it in place.",
+   "text": "",
+   "image": "",
+   "analogy": "A kitchen with a confirmed rat infestation is gutted, not wiped down.",
+   "extra": "",
+   "source": "Response",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::11 Triage, Response & Recovery",
+   "tags": [
+    "soc::response"
+   ],
+   "front": "Which <b>evidence</b> should be captured from a runner before it is destroyed?",
+   "back": "Job logs, the workspace and caches, process and network telemetry for the window, environment variables (minus values), and any tokens' identifiers for revocation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Response",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::11 Triage, Response & Recovery",
+   "tags": [
+    "soc::response"
+   ],
+   "front": "After a malicious commit is found, why <b>rotate secrets even if the workflow never printed them</b>?",
+   "back": "The job had them in its environment; exfiltration via an encoded DNS query or a dependency's network call leaves no log line. Assume exposure.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Response",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::11 Triage, Response & Recovery",
+   "tags": [
+    "soc::response"
+   ],
+   "front": "What is a <b>playbook</b> for a detection use-case, and what must it contain?",
+   "back": "The steps an analyst follows when the rule fires: enrichment queries, decision points, containment actions with required approvals, and who to notify.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Response",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::11 Triage, Response & Recovery",
+   "tags": [
+    "soc::response"
+   ],
+   "front": "Which pipeline containment actions are safe to <b>automate</b> with Security Orchestration, Automation and Response (SOAR), and which need a human?",
+   "back": "Automate: revoke a token, pause a repository's workflows, block a runner's egress. Human: rolling back production, deleting artifacts, suspending user accounts.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Response",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::11 Triage, Response & Recovery",
+   "tags": [
+    "soc::response"
+   ],
+   "front": "Why should the <b>SOC be able to pause a pipeline</b> without the platform team?",
+   "back": "Attacks happen at 03:00; waiting for an owner extends the window. A pre-authorised, logged pause action is low-risk and reversible.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Response",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::11 Triage, Response & Recovery",
+   "tags": [
+    "soc::response"
+   ],
+   "front": "What is the <b>downstream notification</b> duty after a confirmed supply-chain compromise?",
+   "back": "Consumers of affected artifacts (internal teams, customers) must be told which digests to stop trusting, with the clean replacement. Silence turns your incident into theirs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Response",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::11 Triage, Response & Recovery",
+   "tags": [
+    "soc::response"
+   ],
+   "front": "What belongs in the <b>postmortem</b> of a pipeline incident beyond the timeline?",
+   "back": "Which detection fired (or should have), mean time to detect (MTTD) and respond (MTTR), the control that failed, and the new use-case or hardening added. Each incident should retire one blind spot.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Response",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::11 Triage, Response & Recovery",
+   "tags": [
+    "soc::response"
+   ],
+   "front": "<b>True positive vs benign true positive</b> in pipeline alerts: what is the distinction?",
+   "back": "True positive: malicious activity. Benign true positive: the rule fired correctly on an action that was legitimate but unregistered. The second improves process, not rules.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Response",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::12 Maturity & Governance",
+   "tags": [
+    "pipeline::governance"
+   ],
+   "front": "What does the <b>NIST Secure Software Development Framework (SSDF)</b> cover that Supply-chain Levels for Software Artifacts (SLSA) does not?",
+   "back": "The whole development practice: organisation, people, protecting software and responding to vulnerabilities. SLSA is narrower: the integrity of build and provenance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Governance",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::12 Maturity & Governance",
+   "tags": [
+    "pipeline::governance"
+   ],
+   "front": "What is the <b>CIS Software Supply Chain Security Guide</b> useful for?",
+   "back": "A checklist of concrete controls by stage (source, build, dependencies, artifacts, deploy) that can be turned into both hardening backlog items and audit questions.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Governance",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::12 Maturity & Governance",
+   "tags": [
+    "pipeline::governance"
+   ],
+   "front": "Why do regulations such as the <b>EU Cyber Resilience Act</b> make pipeline provenance a compliance topic?",
+   "back": "They require vendors to know and attest what is in their product and to report exploited vulnerabilities fast. Provenance and Software Bills of Materials (SBOMs) are how you answer.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Governance",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::12 Maturity & Governance",
+   "tags": [
+    "pipeline::governance"
+   ],
+   "front": "How is <b>detection coverage</b> for pipelines measured?",
+   "back": "Map each pipeline stage and MITRE ATT&CK technique to the use-cases that detect it; coverage is the share with a tested, tuned rule and the telemetry it needs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Governance",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::12 Maturity & Governance",
+   "tags": [
+    "pipeline::governance"
+   ],
+   "front": "What is a <b>purple-team exercise</b> for a pipeline, and why run one?",
+   "back": "Red simulates attacks (poisoned pull request, stolen token, runner egress) while blue watches which alerts fire. It proves rules work end-to-end on real telemetry.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Governance",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::12 Maturity & Governance",
+   "tags": [
+    "pipeline::governance"
+   ],
+   "front": "Why run <b>attack simulations in the real pipeline</b> rather than in a lab?",
+   "back": "The gaps are in the real configuration: a forgotten repository, an admin exemption, a log source not shipped. A lab reproduces the design, not the drift.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Governance",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::12 Maturity & Governance",
+   "tags": [
+    "pipeline::governance"
+   ],
+   "front": "What is a <b>pipeline inventory</b>, and why is it the first governance step?",
+   "back": "The list of every repository, pipeline, runner, registry and deploy target with its owner. You cannot protect or monitor what nobody knows exists.",
+   "text": "",
+   "image": "",
+   "analogy": "You cannot lock doors you don't know are there.",
+   "extra": "",
+   "source": "Governance",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::12 Maturity & Governance",
+   "tags": [
+    "pipeline::governance"
+   ],
+   "front": "<b>Golden path pipeline</b>: how does it help security scale?",
+   "back": "Teams use a platform-maintained, pre-hardened template (SHA-pinned actions, OpenID Connect (OIDC) auth, signing, scans). Security fixes propagate by updating one template.",
+   "text": "",
+   "image": "",
+   "analogy": "One well-maintained highway beats a hundred private dirt roads: fix a pothole once.",
+   "extra": "",
+   "source": "Governance",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::12 Maturity & Governance",
+   "tags": [
+    "pipeline::governance"
+   ],
+   "front": "What <b>key performance indicators</b> show pipeline-security maturity, beyond alert counts?",
+   "back": "Share of pipelines on the golden path, share using short-lived credentials, share of production images with verified provenance, and mean time to detect (MTTD) and respond (MTTR) on exercises.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Governance",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "cloze",
+   "deck": "Pipeline Security & SOC Monitoring::12 Maturity & Governance",
+   "tags": [
+    "pipeline::governance"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Maturity ladder: level 1 = {{c1::visibility}} (inventory, audit logs exported); level 2 = {{c2::hardening}} (branch protection, OpenID Connect (OIDC), pinning, signing); level 3 = {{c3::detection and response}} (use-cases, playbooks, exercises); level 4 = {{c4::verification}} (admission enforcement, provenance, reproducibility).",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Governance",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::12 Maturity & Governance",
+   "tags": [
+    "pipeline::governance"
+   ],
+   "front": "Why should <b>exceptions</b> (unpinned action, static secret, admin bypass) be time-boxed and tracked?",
+   "back": "Permanent exceptions become the attacker's path of least resistance. A registry with expiry dates forces re-justification and keeps the inventory honest.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Governance",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::12 Maturity & Governance",
+   "tags": [
+    "pipeline::governance"
+   ],
+   "front": "What is the <b>two-person rule</b> applied to pipelines, and where must it hold?",
+   "back": "No single identity can change code, pipeline definition and production alone. It must hold for merges to main, workflow changes, and production deploy approvals.",
+   "text": "",
+   "image": "",
+   "analogy": "Launch keys that need two officers turning at once.",
+   "extra": "",
+   "source": "Governance",
+   "reverse": false
+  },
+  {
+   "guid": null,
+   "type": "basic",
+   "deck": "Pipeline Security & SOC Monitoring::12 Maturity & Governance",
+   "tags": [
+    "pipeline::governance"
+   ],
+   "front": "How should a Security Operations Center (SOC) handle the <b>AI coding agent</b> era in pipelines?",
+   "back": "Agents open pull requests and run tools with tokens like any contributor. Treat them as untrusted automation: scoped tokens, no trusted-stage access, and review of what they change.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Governance",
+   "reverse": false
+  }
+ ]
+}

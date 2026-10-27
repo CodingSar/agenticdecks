@@ -35,6 +35,8 @@ The **general-education decks** (Art History, Philosophy, Music History, Archite
 
 **Clean Code & Design Patterns** (Oct 2026) covers Clean Code, SOLID and all 23 Gang of Four patterns, plus what came after: Fowler and Kerievsky (smell → refactoring → pattern), Effective Java, Game Programming Patterns, functional and type-driven design (parse, don't validate; railway-oriented programming; functional core, imperative shell) and anti-patterns. Every pattern is taught through concrete scenarios: which pattern for this situation, the smell that calls for it, its cost and when not to use it, and where it lives in real libraries. A dedicated *Choosing a Pattern* subdeck drills scenario → pattern across the whole catalogue with cross-category contrast cards. Four writer agents drafted three subdecks each; a composer merged and deduplicated them within the deck and against Software Engineering Classics, Pragmatic Programmer, Software Architecture & DDD and Software Testing (`work/out/Clean_Code_and_Design_Patterns.changelog.md`). 19 hand-drawn SVG diagrams (`media/ccdp*.svg`).
 
+**Pipeline Security & SOC Monitoring** (Oct 2026) covers how CI/CD pipelines are attacked and defended (source and dependencies, workflow and build attacks, identity and secrets with OIDC federation, runners, registries and deploy gates) and how a Security Operations Center (SOC) monitors them: telemetry sources per stage, 29 concrete detection use-cases from branch-protection changes to images never pushed by the pipeline, triage and containment, and a maturity ladder. Supply-chain primitives (Sigstore, SLSA, SBOM) are referenced from Platform Engineering rather than repeated (`work/out/Pipeline_Security_and_SOC_Monitoring.changelog.md`). 2 hand-drawn SVG diagrams (`media/psoc_*.svg`).
+
 **Merges** (same topic, different book or exam → one concept-organised deck):
 Kubernetes in Action + Golden Kubestronaut → **Kubernetes** ·
 platform_gitops + IaC + IDP + policy-as-code → **Platform Engineering** ·
@@ -99,6 +101,7 @@ Original note GUIDs are kept on every card that descends from an original note. 
 | `Philosophy.apkg` | Philosophy | 219 | 265 | 12 |
 | `Physics.apkg` | Physics | 219 | 260 | 12 |
 | `Physics_for_Datacenters.apkg` | Physics for Datacenters | 58 | 63 | 6 |
+| `Pipeline_Security_and_SOC_Monitoring.apkg` | Pipeline Security & SOC Monitoring | 163 | 173 | 12 |
 | `Platform_Engineering.apkg` | Platform Engineering | 240 | 316 | 13 |
 | `Pragmatic_Programmer.apkg` | The Pragmatic Programmer | 149 | 183 | 9 |
 | `Quantitative_Foundations.apkg` | Quantitative Foundations | 349 | 402 | 11 |
