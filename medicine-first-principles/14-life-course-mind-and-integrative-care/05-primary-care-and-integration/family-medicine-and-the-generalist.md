@@ -1,0 +1,62 @@
+# Family medicine and the generalist
+
+> **Layer:** [14 Life course, mind and integrative care](../README.md) › [Primary care and integration](README.md)
+> **Builds on:** [Using tests, pre-test probability and thresholds](../../11-clinical-method-and-diagnostics/01-the-clinical-encounter/using-tests-pretest-probability-and-thresholds.md), [Bayesian reasoning](../../01-quantitative-and-scientific-foundations/01-probability-and-measurement/bayesian-reasoning.md), [History taking and communication](../../11-clinical-method-and-diagnostics/01-the-clinical-encounter/history-taking-and-communication.md), [Levels of prevention](../../10-epidemiology-and-evidence/03-screening-and-prevention/levels-of-prevention.md), [Measures of frequency and association](../../10-epidemiology-and-evidence/01-epidemiology/measures-of-frequency-and-association.md)
+> **Enables:** [Chronic disease and self-management](chronic-disease-and-self-management.md), [How the specialties interact](how-the-specialties-interact.md), [Organisation and financing of health systems](../../15-medicine-in-society/01-health-systems/organisation-and-financing-of-health-systems.md)
+
+## Essence
+
+Family medicine (general practice) is the specialty defined not by an organ, a process, an age or a setting but by a relationship: one clinician, or one team, responsible for a person's whole health over time, for whatever they bring, as the first point of contact. Four properties follow and have been measured (Starfield): first contact, continuity, comprehensiveness and coordination. Because the generalist sees unselected patients in whom serious disease is rare, their diagnostic reasoning runs at low prior probabilities and uses time, the relationship and the social context as instruments the specialist does not have. Health systems built on strong primary care have better outcomes at lower cost. The unifying idea is **the generalist as medicine's integrator**: the one place where the person, not the disease, is the unit of care.
+
+## Core tenets
+
+1. **Most illness is managed where prevalence is low, and that changes the mathematics.** Of 1,000 adults in a month, roughly 800 have symptoms, about 200–250 consult a physician, around 8–10 are admitted to hospital and under one reaches an academic centre (the "ecology of medical care", White 1961, updated Green 2001). The generalist therefore sees the whole distribution of illness, in which a headache is almost never a tumour and chest pain is more often musculoskeletal than cardiac. The same test has a far lower positive predictive value at this prevalence than in a referral clinic ([using tests, pre-test probability and thresholds](../../11-clinical-method-and-diagnostics/01-the-clinical-encounter/using-tests-pretest-probability-and-thresholds.md); [Bayesian reasoning](../../01-quantitative-and-scientific-foundations/01-probability-and-measurement/bayesian-reasoning.md)), so indiscriminate testing generates false positives, over-diagnosis and harm, and the skill is to raise the prior with the history before testing at all.
+
+2. **Time and the safety net are diagnostic instruments.** Much illness is undifferentiated at first contact and self-limiting; watchful waiting with explicit instructions on what to watch for and when to return lets the natural history reveal the diagnosis at low cost ([etiology, pathogenesis and natural history](../../08-pathology/05-disease-as-process/etiology-pathogenesis-and-natural-history.md); [time-courses](../../CROSS-CUTTING.md#time-courses)). The generalist tolerates uncertainty that the specialist, seeing a selected and sicker population, cannot. Red flags (weight loss, night sweats, bleeding, neurological signs) mark the small set of presentations in which waiting is not safe. The pattern "a patient I know, presenting differently" is among the most sensitive signals in medicine, and only continuity makes it available.
+
+3. **Continuity has measurable effects on mortality, cost and satisfaction.** Seeing the same clinician over time is associated with lower mortality (a 2018 systematic review found it in most studies across countries), fewer emergency admissions, better adherence and more appropriate prescribing, through accumulated knowledge of the patient, trust that elicits the real agenda, and a clinician who notices change ([history taking and communication](../../11-clinical-method-and-diagnostics/01-the-clinical-encounter/history-taking-and-communication.md)). The relationship is a therapeutic agent: the placebo and expectation effects of layer 09 are largest where trust is greatest ([behaviour change and the placebo effect](../../09-pharmacology-and-therapeutics/04-non-drug-therapeutics/behaviour-change-and-the-placebo-effect.md)). Systems that fragment care into episodes lose this.
+
+4. **Comprehensiveness means the whole person is in the room.** A consultation about knee pain in a smoker with high blood pressure and a recent bereavement is three or four consultations at once, and the generalist's remit includes all of them: acute illness, chronic disease, prevention, mental health, the family and the social situation. Physical and mental illness co-exist and interact (depression doubles the risk of poor outcome in diabetes and heart disease, [mood and anxiety disorders](../03-psychiatry/mood-and-anxiety-disorders.md)), and a quarter or more of consultations have no organic explanation at the end; managing symptoms without a disease label is generalist work ([the host and its environment](../../CROSS-CUTTING.md#the-host-and-its-environment)).
+
+5. **Coordination and gatekeeping protect the patient from fragmentation and the system from itself.** In many systems the generalist refers to specialists and holds the record that every specialist's letter returns to; this "gatekeeping" limits unnecessary specialist use and keeps one clinician responsible for the whole picture, at the cost of delay when the gate is slow ([how the specialties interact](how-the-specialties-interact.md)). Coordination is the active version: reconciling the drugs prescribed by four clinics, deciding which of six guidelines applies to this multimorbid patient ([frailty, multimorbidity and polypharmacy](../04-geriatrics-and-palliative-care/frailty-multimorbidity-and-polypharmacy.md)), and translating specialist plans into something the patient can live with.
+
+6. **Prevention is delivered here or not at all.** Immunisation, cervical and bowel screening, cardiovascular risk assessment, smoking cessation and contraception reach the population through primary care, because it is where the healthy population is seen ([levels of prevention](../../10-epidemiology-and-evidence/03-screening-and-prevention/levels-of-prevention.md); [screening principles and biases](../../10-epidemiology-and-evidence/03-screening-and-prevention/screening-principles-and-biases.md)). The prevention paradox (Rose) applies: most cases of disease arise from the many at modest risk, not the few at high risk, so population measures delivered through primary care prevent more than specialist clinics treating the extreme.
+
+7. **Strong primary care improves population outcomes, and access to it follows the inverse care law.** Across countries and regions, more primary care physicians per head is associated with lower all-cause mortality, fewer hospitalisations and lower cost, after adjustment for income and other factors (Starfield, Shi and Macinko, 2005); it is also the most equitable part of a health system because it is local and first-contact ([organisation and financing of health systems](../../15-medicine-in-society/01-health-systems/organisation-and-financing-of-health-systems.md)). Yet the availability of good care tends to vary inversely with the need for it (Tudor Hart's inverse care law, 1971), because deprived areas attract fewer clinicians and generate more work ([social determinants and health inequity](../../15-medicine-in-society/03-populations-and-the-future/social-determinants-and-health-inequity.md)). In the United Kingdom general practice handles the large majority of patient contacts for around a tenth of health spending (2020s), a ratio typical of strong-primary-care systems.
+
+8. **Who else is involved.** Everyone: the generalist refers to and receives from every specialty in layers 12, 13 and 14, which is the subject of [how the specialties interact](how-the-specialties-interact.md). The primary care team itself is multidisciplinary (nurses, pharmacists, physiotherapists, mental health workers, social prescribers, health visitors, community midwives, district nurses), and its closest partners are [paediatrics](../01-paediatrics/README.md) for child health surveillance, [psychiatry](../03-psychiatry/README.md) for the mental illness it treats, [geriatrics and palliative care](../04-geriatrics-and-palliative-care/README.md) for the frail and dying at home, [obstetrics and gynaecology](../02-obstetrics-and-gynaecology/README.md) for antenatal, contraceptive and screening care, and [emergency medicine](../../13-acute-perioperative-and-procedural-care/04-emergency-medicine/README.md), which receives what primary care cannot see in time.
+
+## Key concepts
+
+| Term | Meaning |
+|---|---|
+| First contact | The point of entry to the health system for any new problem |
+| Continuity | Care from the same clinician or team over time, personal and informational |
+| Comprehensiveness | Responsibility for the whole range of a person's health needs, not one organ or problem |
+| Coordination | Integration of care across specialists, settings and time, held in one record and relationship |
+| Gatekeeping | The requirement for primary care referral before specialist access |
+| Ecology of medical care | The distribution of symptoms, consultations, admissions and referrals in a population per month |
+| Undifferentiated illness | Presentations without a diagnosis yet, whose natural history is part of the work-up |
+| Safety-netting | Explicit advice on what to watch for and when to return |
+| Prevention paradox | Most cases come from the many at modest risk, so population measures outperform targeting the few |
+| Inverse care law | The availability of good care varies inversely with the need for it (Tudor Hart) |
+
+## How it fits
+
+- **Below:** Bayesian reasoning (01) and test theory (11) explain why the generalist tests differently; epidemiology and prevention (10) supply the population view; communication and reasoning (11) supply the consultation; natural history (08) explains why time is a test.
+- **Above:** health systems (15) are built on or without primary care, with measurable consequences; health informatics holds the longitudinal record that continuity needs.
+- **Siblings:** [chronic disease and self-management](chronic-disease-and-self-management.md) is the generalist's largest workload; [rehabilitation](rehabilitation-and-disability.md) and [lifestyle medicine](sports-occupational-and-lifestyle-medicine.md) extend prevention and function; [how the specialties interact](how-the-specialties-interact.md) maps the referral graph of which primary care is the hub.
+
+## Common misconceptions
+
+- **"The generalist knows less about everything."** The generalist knows a different thing: the patient over time, the base rates of unselected illness, and how diseases and treatments combine in one person, none of which a single-organ specialist is trained in.
+- **"More testing is safer."** At low prevalence most positive results are false; testing without raising the prior produces over-diagnosis, anxiety and cascades of further tests.
+- **"Gatekeeping is just rationing."** It is also coordination: one clinician responsible for the whole, which prevents duplication, contradiction and the patient falling between specialties.
+
+## Go deeper
+
+- Starfield, *Primary Care: Balancing Health Needs, Services, and Technology* (1998): the definitive account of the four properties and their evidence.
+- Starfield, Shi and Macinko, "Contribution of primary care to health systems and health", *Milbank Quarterly* (2005): the outcome evidence.
+- Tudor Hart, "The inverse care law", *The Lancet* (1971): the original statement.
+- Green et al., "The ecology of medical care revisited", *New England Journal of Medicine* (2001): where illness is actually seen.
+- McWhinney and Freeman, *Textbook of Family Medicine* (3rd ed., 2009): the discipline's philosophy and method.

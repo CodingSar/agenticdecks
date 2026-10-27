@@ -1,0 +1,64 @@
+# Biologics and advanced therapies
+
+> **Layer:** [09 Pharmacology and Therapeutics](../README.md) › [Drug classes by mechanism](README.md)
+> **Builds on:** [B-cells and antibodies](../../07-microbiology-and-immunology/03-adaptive-immunity/b-cells-and-antibodies.md), [Proteins, structure and folding](../../02-biochemistry-and-molecular-biology/01-macromolecules/proteins-structure-and-folding.md), [Molecular techniques](../../02-biochemistry-and-molecular-biology/03-genetic-information-flow/molecular-techniques.md), [Stem cells, differentiation and regeneration](../../03-cell-biology/02-the-cell-life-cycle/stem-cells-differentiation-and-regeneration.md), [Distribution and protein binding](../01-pharmacokinetics/distribution-and-protein-binding.md)
+> **Enables:** [Systemic anticancer therapy](../../12-organ-system-specialties/07-oncology/systemic-anticancer-therapy.md), [Inflammatory arthritis](../../12-organ-system-specialties/09-rheumatology-and-clinical-immunology/inflammatory-arthritis.md), [Congenital and genetic disease in childhood](../../14-life-course-mind-and-integrative-care/01-paediatrics/congenital-and-genetic-disease-in-childhood.md), [Health economics and priority setting](../../15-medicine-in-society/01-health-systems/health-economics-and-priority-setting.md), [The future of medicine](../../15-medicine-in-society/03-populations-and-the-future/the-future-of-medicine.md)
+
+## Essence
+
+Small-molecule drugs are limited to targets with a pocket they can fit, roughly enzymes, channels and receptors with ligand sites, which is perhaps a tenth of the proteome. Biologics are drugs made by living cells: recombinant proteins that replace or mimic a hormone or enzyme, monoclonal antibodies that bind any surface or soluble protein with high specificity, and, in the advanced therapies, nucleic acids that silence or replace a gene and living cells engineered to do a job. They are large, so they do not cross membranes, are not metabolised by cytochrome P450 and are not filtered by the kidney; they are proteins, so the body can make antibodies against them; and they are specific, so they do exactly one thing to exactly one target. The single idea is that a biologic brings the specificity of the immune system or of the genetic code to therapeutics, with the kinetics and costs of a protein rather than a pill.
+
+## Core tenets
+
+1. **Recombinant proteins replace what the body cannot make, and their identity to the native protein is their virtue and their limit.** Human insulin (1982, the first recombinant drug), erythropoietin for the anaemia of kidney failure, growth hormone, clotting factors VIII and IX for haemophilia, and enzyme replacement for lysosomal storage diseases are produced in bacteria, yeast or mammalian cells from the cloned gene. They act as the hormone or enzyme would, so their effects are predictable from physiology; but enzymes delivered intravenously reach only the tissues the circulation serves (not the brain), and a patient who never had the protein may make antibodies that neutralise it (inhibitors in haemophilia). Engineering the sequence gives properties nature did not: long-acting insulin analogues, erythropoietin with extra glycosylation for a longer half-life.
+
+
+2. **Monoclonal antibodies are specificity for hire: one antibody, one epitope, any protein.** Köhler and Milstein's hybridoma method (1975) made unlimited quantities of a single B-cell's antibody; humanisation and fully human libraries then removed the mouse sequences that patients reacted against. An antibody can neutralise a soluble mediator (tumour necrosis factor; the PCSK9 that degrades LDL receptors; the amyloid in Alzheimer's disease), block a receptor (HER2, PD-1), or mark a cell for destruction by complement and Fc-receptor-bearing cells (rituximab against CD19-positive B-cells). The naming suffix encodes the origin: -omab (mouse), -ximab (chimeric), -zumab (humanised), -umab (human). Their actions are the actions of [antibodies](../../07-microbiology-and-immunology/03-adaptive-immunity/b-cells-and-antibodies.md) in physiology, aimed by design.
+
+
+3. **The pharmacokinetics of a protein are those of an antibody, not a drug.** Antibodies (~150 kDa) are given parenterally because the gut digests them; they distribute slowly into tissues through convective leak and lymphatics, so volume of distribution is near plasma volume; they are not filtered or metabolised by CYPs but catabolised in cells, and immunoglobulin G is rescued from degradation by the neonatal Fc receptor, giving half-lives of two to four weeks. Dosing is monthly or less often, onset and offset are slow, and the only drug interactions are indirect (a cytokine blocker that lowers inflammation can restore CYP activity that inflammation had suppressed). Target-mediated disposition, in which the target itself removes the drug, makes clearance fall as the target saturates. These are the [distribution](../01-pharmacokinetics/distribution-and-protein-binding.md) rules at the far end of molecular size.
+
+
+4. **Immunogenicity is the characteristic adverse effect, and it works by the mechanisms of the immune system itself.** Anti-drug antibodies form in a fraction of patients, neutralising the biologic (loss of response to anti-TNF agents) or accelerating its clearance, and they are more likely with intermittent dosing and without concurrent immunosuppression. Infusion reactions range from cytokine release (fever, hypotension) when a cell-binding antibody activates many cells at once, to anaphylaxis. Cytokine release syndrome is severe with T-cell-engaging therapies and is itself treated with an antibody against interleukin-6. The engineered part of a biologic is also a new antigen; the body does not know the drug is meant to help.
+
+
+5. **Nucleic-acid therapies act on the gene or its message rather than the protein, which reaches targets that have no pocket.** Antisense oligonucleotides (nusinersen for spinal muscular atrophy, delivered into the cerebrospinal fluid) and small interfering RNA (inclisiran against PCSK9) bind messenger RNA and reduce or alter the protein made from it; splice-switching oligonucleotides can restore a reading frame. Gene therapy delivers a working copy of a gene, usually in an adeno-associated virus vector, to cells that cannot make the protein: for inherited retinal dystrophy, spinal muscular atrophy and haemophilia. Messenger RNA in lipid nanoparticles, proven by the 2020 COVID-19 vaccines, instructs cells to make a protein transiently. The problems are delivery (getting the molecule into the right cell), durability (dividing cells dilute an episomal vector) and immune response to the vector, which also limits repeat dosing.
+
+
+6. **Cell therapies are living drugs that expand, persist and adapt.** Haematopoietic stem-cell transplantation, the oldest, replaces a marrow destroyed by disease or by ablative chemotherapy and, when allogeneic, brings a graft-versus-leukaemia effect and the risk of graft-versus-host disease. Chimeric antigen receptor (CAR) T-cells are the patient's own T-cells transduced with a receptor that recognises a tumour antigen and signals activation; they proliferate on contact, persist for years, and can produce durable remission of B-cell cancers, with cytokine release and neurotoxicity as the acute costs and loss of normal B-cells (the antigen is shared) as the chronic one. Gene editing of a patient's own stem cells (CRISPR-based therapy for sickle cell disease, approved 2023) joins the two approaches. A cell therapy is not a fixed dose: the dose grows after it is given, which no small molecule does.
+
+
+7. **Cost and manufacturing, not mechanism, decide who receives these drugs.** A monoclonal antibody is grown in mammalian cells, purified and tested batch by batch; a gene therapy or CAR T product is made for one patient. Biosimilars (approved copies of a biologic whose patent has expired) are not generics, because the process defines the product and small differences in glycosylation can change activity and immunogenicity, so they require comparative clinical data. Prices of single-dose gene therapies above a million dollars (2020s) have forced [health systems](../../15-medicine-in-society/01-health-systems/health-economics-and-priority-setting.md) to invent new payment models, and most of the world has no access, which the [future of medicine](../../15-medicine-in-society/03-populations-and-the-future/the-future-of-medicine.md) must reckon with.
+
+## Key concepts
+
+| Term | Meaning |
+|---|---|
+| Biologic | A therapeutic made by or from living cells: protein, antibody, nucleic acid or cell |
+| Monoclonal antibody | Antibody of a single specificity produced from one B-cell clone or its recombinant equivalent |
+| Humanisation | Replacing non-human antibody sequences with human ones to reduce immunogenicity |
+| Neonatal Fc receptor (FcRn) | Receptor that recycles immunoglobulin G and gives antibodies their long half-life |
+| Anti-drug antibody | Patient antibody against a biologic that neutralises it or hastens its clearance |
+| Cytokine release syndrome | Systemic inflammation from mass activation of immune cells by a therapy |
+| Antisense oligonucleotide / siRNA | Short nucleic acids that bind messenger RNA to reduce or alter protein production |
+| Viral vector | Modified virus (commonly adeno-associated virus) delivering a therapeutic gene |
+| CAR T-cell | Patient's T-cell engineered with a chimeric antigen receptor to recognise and kill target cells |
+| Biosimilar | Approved copy of an off-patent biologic shown to be comparable, not identical |
+
+## How it fits
+
+- **Below:** Antibody structure and function are in [B-cells and antibodies](../../07-microbiology-and-immunology/03-adaptive-immunity/b-cells-and-antibodies.md); recombinant production in [molecular techniques](../../02-biochemistry-and-molecular-biology/03-genetic-information-flow/molecular-techniques.md); protein behaviour in [proteins](../../02-biochemistry-and-molecular-biology/01-macromolecules/proteins-structure-and-folding.md); cell therapy in [stem cells](../../03-cell-biology/02-the-cell-life-cycle/stem-cells-differentiation-and-regeneration.md) and [transplant immunology](../../07-microbiology-and-immunology/04-immunity-in-disease/transplant-and-tumour-immunology.md). The assumption is that a protein made outside the body behaves as the native one; immunogenicity is where it fails.
+- **Above:** Biologics are now central to [oncology](../../12-organ-system-specialties/07-oncology/systemic-anticancer-therapy.md), [rheumatology](../../12-organ-system-specialties/09-rheumatology-and-clinical-immunology/inflammatory-arthritis.md), [haematology](../../12-organ-system-specialties/06-haematology/haematological-malignancies.md), [neurology](../../12-organ-system-specialties/10-neurology/demyelinating-and-neuromuscular-disease.md) and [paediatric genetic disease](../../14-life-course-mind-and-integrative-care/01-paediatrics/congenital-and-genetic-disease-in-childhood.md); their price is a defining problem of [health economics](../../15-medicine-in-society/01-health-systems/health-economics-and-priority-setting.md).
+- **Siblings:** The cytokine blockers are the biologic end of [anti-inflammatory drugs](anti-inflammatory-and-immunomodulatory-drugs.md); checkpoint inhibitors and CAR T-cells of [anticancer drugs](anticancer-drugs.md); insulin, GLP-1 analogues and denosumab of [endocrine drugs](endocrine-and-metabolic-drugs.md); antiviral antibodies of [antimicrobials](antimicrobials.md). This leaf holds what they share: how a protein drug behaves.
+
+## Common misconceptions
+
+- **"A biosimilar is a generic."** A generic is the same molecule; a biosimilar is a comparable product from a different cell line and process, approved on comparative data, because the process defines a protein.
+- **"Biologics have no side effects because they are natural."** They cause immunogenicity, infusion reactions, cytokine release, opportunistic infection and on-target toxicity in every normal cell carrying the antigen.
+- **"Gene therapy edits the patient's genome."** Most approved gene therapies add an episomal copy of a gene without altering the chromosome; only gene editing (CRISPR-based) changes the sequence, and so far only in cells removed from the body.
+
+## Go deeper
+
+- Georges Köhler and César Milstein, "Continuous cultures of fused cells secreting antibody of predefined specificity" (*Nature*, 1975): the hybridoma paper that began the field.
+- Laurence Brunton, Björn Knollmann (eds), *Goodman & Gilman's The Pharmacological Basis of Therapeutics* (14th ed., 2023), chapters on immunomodulators, protein therapeutics and gene and cell therapy.
+- Carl June and Michel Sadelain, "Chimeric antigen receptor therapy" (*New England Journal of Medicine*, 2018): a review of CAR T-cells by their inventors.

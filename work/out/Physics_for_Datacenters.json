@@ -285,11 +285,12 @@
    "deck": "Physics for Datacenters::03 Heat Transfer & Cooling",
    "tags": [
     "physics::cooling",
-    "physics::numbers"
+    "physics::numbers",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Volumetric heat capacity: water ≈ {{c1::4.2 MJ/(m³·K)}}; air ≈ {{c2::1.2 kJ/(m³·K)}}; ratio ≈ {{c3::3500}}.",
+   "text": "Water carries ~3500× more heat per m³·K than air. Volumetric heat capacity: water ≈ {{c1::4.2 MJ/(m³·K)}}; air ≈ {{c2::1.2 kJ/(m³·K)}}.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -382,6 +383,24 @@
    "type": "basic",
    "deck": "Physics for Datacenters::03 Heat Transfer & Cooling",
    "tags": [
+    "physics::cooling",
+    "physics::thermo",
+    "simplified"
+   ],
+   "front": "Why does a chiller's Coefficient of Performance (COP) fall when the outside air gets hotter?",
+   "back": "Carnot COP = T_cold/(T_hot − T_cold). A hotter outside raises the denominator (a bigger temperature lift), so each joule of work moves less heat.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false,
+   "guid": "589f06d744"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::03 Heat Transfer & Cooling",
+   "tags": [
     "physics::cooling"
    ],
    "front": "Besides better COP, what second saving does a warmer inlet set-point unlock?",
@@ -392,7 +411,7 @@
    "extra": "",
    "source": "Facility design",
    "reverse": false,
-   "guid": null
+   "guid": "bk3iC)Ft1m"
   },
   {
    "type": "basic",
@@ -459,6 +478,24 @@
    "source": "Fan affinity laws",
    "reverse": false,
    "guid": "N^l$/CucS!"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::03 Heat Transfer & Cooling",
+   "tags": [
+    "physics::cooling",
+    "physics::scaling",
+    "simplified"
+   ],
+   "front": "Fan speed is cut by 20%. Roughly what happens to airflow and fan power?",
+   "back": "Airflow falls 20%, but power ∝ speed³ so it falls to 0.8³ ≈ 0.51, i.e. about <b>half</b>. Small airflow cuts save large amounts of fan power.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false,
+   "guid": "c60e57b0b2"
   },
   {
    "type": "basic",
@@ -627,10 +664,11 @@
    "deck": "Physics for Datacenters::04 Entropy & Information",
    "tags": [
     "physics::entropy",
-    "physics::information"
+    "physics::information",
+    "simplified"
    ],
-   "front": "How do Shannon entropy and thermodynamic entropy relate?",
-   "back": "Same formula, −Σ p ln p, different units: bits vs J/K. One bit of uncertainty = <b>k ln 2</b> J/K of thermodynamic entropy.",
+   "front": "What is the relationship between Shannon entropy and thermodynamic entropy, and what does one bit correspond to?",
+   "back": "Same formula, −Σ p ln p, different units (bits vs J/K). One bit of uncertainty = <b>k ln 2</b> J/K of thermodynamic entropy.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -760,6 +798,24 @@
    "deck": "Physics for Datacenters::05 Chip Power & Scaling",
    "tags": [
     "physics::chips",
+    "physics::cooling",
+    "simplified"
+   ],
+   "front": "Why does better cooling reduce a chip's power draw, not just its temperature?",
+   "back": "Leakage power grows exponentially with temperature. A cooler die leaks less, so it draws less power for the same work, and the feedback loop runs in the good direction.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false,
+   "guid": "eb2baf0776"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::05 Chip Power & Scaling",
+   "tags": [
+    "physics::chips",
     "physics::scaling"
    ],
    "front": "What was Dennard scaling?",
@@ -804,7 +860,7 @@
    "extra": "<b>For datacenters:</b> power density (100+ W/cm²) made them cooling problems first.",
    "source": "Esmaeilzadeh et al. (2011)",
    "reverse": false,
-   "guid": null
+   "guid": "Ow)h=~1[wS"
   },
   {
    "type": "basic",
@@ -874,6 +930,24 @@
   },
   {
    "type": "basic",
+   "deck": "Physics for Datacenters::05 Chip Power & Scaling",
+   "tags": [
+    "physics::chips",
+    "physics::scaling",
+    "simplified"
+   ],
+   "front": "A job is 90% parallel. What speedup do 1000 processors give, and what does that say about buying more processors?",
+   "back": "Speedup = 1/(0.1 + 0.9/1000) ≈ <b>9.9×</b>. The serial 10% dominates, so beyond a few dozen processors extra hardware mostly adds power and cost, not speed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false,
+   "guid": "318b1978e6"
+  },
+  {
+   "type": "basic",
    "deck": "Physics for Datacenters::06 Facility Scaling & Metrics",
    "tags": [
     "physics::electrical",
@@ -888,6 +962,24 @@
    "source": "Joule heating",
    "reverse": false,
    "guid": "g~#g1to*=r"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::06 Facility Scaling & Metrics",
+   "tags": [
+    "physics::electrical",
+    "physics::facility",
+    "simplified"
+   ],
+   "front": "Rack power rises from 10 kW to 100 kW at the same voltage and the same cables. What happens to resistive loss in the cables, and why?",
+   "back": "Current rises 10× (I = P/V), so loss I²R rises <b>100×</b>. That is why high power density forces higher voltage or thicker conductors.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false,
+   "guid": "8dd9dc7ab9"
   },
   {
    "type": "basic",
@@ -911,6 +1003,24 @@
    "deck": "Physics for Datacenters::06 Facility Scaling & Metrics",
    "tags": [
     "physics::facility",
+    "physics::metrics",
+    "simplified"
+   ],
+   "front": "A facility has Power Usage Effectiveness (PUE) 1.2 and an Information Technology (IT) load of 10 MW. What is the total power draw, and how much heat must be removed in steady state?",
+   "back": "Total = 1.2 × 10 = <b>12 MW</b>. All of it ends up as heat, so the cooling plant must remove 12 MW, not just the 10 MW of IT load.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false,
+   "guid": "3b83ed07e8"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::06 Facility Scaling & Metrics",
+   "tags": [
+    "physics::facility",
     "physics::metrics"
    ],
    "front": "What is PUE's blind spot?",
@@ -921,7 +1031,7 @@
    "extra": "",
    "source": "The Green Grid",
    "reverse": false,
-   "guid": null
+   "guid": "uZ(Svq]gi,"
   },
   {
    "type": "basic",
@@ -956,6 +1066,24 @@
    "source": "Susskind · Special Relativity L1",
    "reverse": false,
    "guid": "nSc<!{6<.T"
+  },
+  {
+   "type": "basic",
+   "deck": "Physics for Datacenters::06 Facility Scaling & Metrics",
+   "tags": [
+    "physics::facility",
+    "physics::latency",
+    "simplified"
+   ],
+   "front": "Why can synchronous replication of every write between datacenters 1000 km apart not be fast, whatever the engineering?",
+   "back": "A round trip needs at least 2 × 5 ms = 10 ms because signals travel at ~⅔ c in fibre. Each synchronous commit waits at least that long, so distance sets a latency floor.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false,
+   "guid": "a6eec7ec6e"
   }
  ]
 }

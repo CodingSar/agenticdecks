@@ -1,0 +1,56 @@
+# HIV and chronic viral infections
+
+> **Layer:** [12 Organ-system specialties](../README.md) › [Infectious diseases](README.md)
+> **Builds on:** [Viruses](../../07-microbiology-and-immunology/01-microbes-and-infection/viruses.md), [T cells](../../07-microbiology-and-immunology/03-adaptive-immunity/t-cells.md), [Immunodeficiency](../../07-microbiology-and-immunology/04-immunity-in-disease/immunodeficiency.md), [Antimicrobials](../../09-pharmacology-and-therapeutics/03-drug-classes-by-mechanism/antimicrobials.md), [Infectious disease dynamics](../../10-epidemiology-and-evidence/01-epidemiology/infectious-disease-dynamics.md)
+> **Enables:** [Liver disease](../04-gastroenterology-and-hepatology/liver-disease.md), [Global health and pandemics](../../15-medicine-in-society/03-populations-and-the-future/global-health-and-pandemics.md), [Pregnancy and its complications](../../14-life-course-mind-and-integrative-care/02-obstetrics-and-gynaecology/pregnancy-and-its-complications.md), [Chronic disease and self-management](../../14-life-course-mind-and-integrative-care/05-primary-care-and-integration/chronic-disease-and-self-management.md)
+
+## Essence
+
+Some viruses are never cleared. Human Immunodeficiency Virus (HIV) integrates its genome into the host's helper T cells; hepatitis B persists as a stable circular DNA in hepatocytes; herpesviruses hide latent in neurons and lymphocytes; hepatitis C, which can be cured, outruns antibody by mutating. Chronic viral infection is a reservoir the immune system cannot reach, and disease comes from two sources: what the virus does (HIV destroys the cells that coordinate immunity) and what the host's response does over decades (hepatitis B and C cause cirrhosis and cancer through unending inflammation). The achievement of the last thirty years is that drugs suppress replication indefinitely, giving HIV a near-normal life expectancy, and cure hepatitis C outright, provided the infection is found.
+
+## Core tenets
+
+1. **HIV causes disease by destroying the conductor of the immune orchestra.** The virus binds CD4 and a chemokine co-receptor, enters helper T cells and macrophages, reverse-transcribes its RNA into DNA and integrates it into the host genome ([viruses](../../07-microbiology-and-immunology/01-microbes-and-infection/viruses.md)). Infected CD4 cells die and the count falls over years from about 500–1,500 cells/microlitre toward zero. Because CD4 cells license both antibody and cytotoxic responses ([T cells](../../07-microbiology-and-immunology/03-adaptive-immunity/t-cells.md)), the result is a global acquired immunodeficiency, and the opportunistic infections appear in a predictable order as the count crosses thresholds: tuberculosis and bacterial pneumonia early, *Pneumocystis* pneumonia and oesophageal candidiasis below about 200, cytomegalovirus and cryptococcal meningitis below about 50 ([immunodeficiency](../../07-microbiology-and-immunology/04-immunity-in-disease/immunodeficiency.md)).
+
+2. **The natural history has a long silent middle, which is why testing matters more than symptoms.** A flu-like seroconversion illness follows infection by weeks, then years of clinical latency during which the virus replicates at billions of particles a day and is transmissible, then the Acquired Immunodeficiency Syndrome (AIDS). Most transmission is from people who do not know they are infected. Antibody and antigen tests are highly accurate; viral load by polymerase chain reaction measures replication ([microbiological and serological diagnosis](../../11-clinical-method-and-diagnostics/02-laboratory-medicine/microbiological-and-serological-diagnosis.md)).
+
+3. **Combination antiretroviral therapy works because three drugs defeat an error-prone polymerase.** Reverse transcriptase makes about one error per genome per cycle, so every single-drug-resistant mutant exists within days ([genomic variation and mutation](../../04-genetics-evolution-and-development/01-inheritance/genomic-variation-and-mutation.md)). A variant resistant to three drugs with different targets (reverse transcriptase, integrase, protease) is vanishingly unlikely, so suppression is durable as long as adherence holds ([antimicrobials](../../09-pharmacology-and-therapeutics/03-drug-classes-by-mechanism/antimicrobials.md)). Suppression lets CD4 cells recover and makes the person non-infectious ("undetectable equals untransmittable"), turning treatment into prevention ([infectious disease dynamics](../../10-epidemiology-and-evidence/01-epidemiology/infectious-disease-dynamics.md)). The integrated provirus in resting memory cells is the reservoir that prevents cure.
+
+4. **Hepatitis B and C injure the liver through the immune response, not the virus.** Both viruses are barely cytopathic; cytotoxic T cells attacking infected hepatocytes cause the hepatitis, and decades of injury and repair produce cirrhosis and hepatocellular carcinoma ([tissue repair and fibrosis](../../08-pathology/01-cell-and-tissue-injury/tissue-repair-regeneration-and-fibrosis.md), [liver disease](../04-gastroenterology-and-hepatology/liver-disease.md)). Infant hepatitis B infection is almost always chronic because the immature immune system tolerates it, while adult infection usually clears, which is why infant vaccination has cut liver cancer ([immunological memory and vaccination](../../07-microbiology-and-immunology/03-adaptive-immunity/immunological-memory-and-vaccination.md)). Hepatitis C has no vaccine but direct-acting antivirals cure over 95% of cases in weeks (2020s), the first cure of a chronic viral infection by drugs.
+
+5. **Herpesviruses persist by latency and reactivate when surveillance lapses.** Herpes simplex and varicella-zoster hide in sensory ganglia, Epstein–Barr virus and cytomegalovirus in lymphocytes. The latent genome expresses almost nothing and is invisible to T cells; reactivation, as shingles along a dermatome ([segmental innervation and dermatomes](../../05-tissues-and-anatomy/02-body-organization/segmental-innervation-dermatomes-and-referred-pain.md)) or cytomegalovirus disease after transplantation, marks waning cellular immunity. Nucleoside analogues such as aciclovir act only on replicating virus and cannot clear latency.
+
+6. **Chronic viral infection is a cause of cancer.** Hepatitis B and C, human papillomavirus (cervical, anal and oropharyngeal carcinoma), Epstein–Barr virus (lymphomas, nasopharyngeal carcinoma) and human herpesvirus 8 (Kaposi sarcoma) together account for roughly one in ten cancers worldwide, more in low-income countries ([causes of cancer](../../08-pathology/03-neoplasia/causes-of-cancer.md)). The mechanism is viral oncoproteins disabling tumour suppressors or chronic inflammation; the prevention is vaccination and antiviral suppression.
+
+7. **Who else is involved.** HIV care is now chronic-disease medicine shared with [primary care](../../14-life-course-mind-and-integrative-care/05-primary-care-and-integration/README.md), with [cardiology](../01-cardiology/README.md) and [endocrinology](../05-endocrinology/README.md) for the accelerated vascular and metabolic disease of long-term infection, and with [psychiatry](../../14-life-course-mind-and-integrative-care/03-psychiatry/README.md) over the depression and substance use that drive non-adherence. Hepatitis belongs jointly to [hepatology](../04-gastroenterology-and-hepatology/README.md). [Obstetrics](../../14-life-course-mind-and-integrative-care/02-obstetrics-and-gynaecology/README.md) prevents mother-to-child transmission; [oncology](../07-oncology/README.md) and [haematology](../06-haematology/README.md) manage the virus-driven cancers; [rheumatology](../09-rheumatology-and-clinical-immunology/README.md) and transplant medicine screen for hepatitis B before immunosuppression, which can reactivate it fatally. [Public health](../../15-medicine-in-society/03-populations-and-the-future/global-health-and-pandemics.md) runs testing, pre-exposure prophylaxis and vaccination.
+
+## Key concepts
+
+| Term | Meaning |
+|---|---|
+| CD4 count | Number of helper T cells per microlitre; the measure of HIV-induced immunodeficiency |
+| Viral load | Copies of viral RNA per millilitre of plasma; measures replication and treatment success |
+| Opportunistic infection | Infection by an organism that healthy immunity controls, appearing when CD4 falls |
+| Antiretroviral therapy | Combination of drugs against different HIV enzymes giving durable suppression |
+| Reservoir | Latently infected cells carrying integrated provirus, invisible to drugs and immunity |
+| Latency | Persistence of a viral genome with minimal gene expression, allowing reactivation |
+| Chronic hepatitis | Persistent immune-mediated liver injury from hepatitis B or C |
+| Direct-acting antiviral | Drug targeting a specific viral enzyme; curative in hepatitis C |
+
+## How it fits
+
+- **Below:** [viruses](../../07-microbiology-and-immunology/01-microbes-and-infection/viruses.md) for replication and latency; [T cells](../../07-microbiology-and-immunology/03-adaptive-immunity/t-cells.md) and [immunodeficiency](../../07-microbiology-and-immunology/04-immunity-in-disease/immunodeficiency.md) for what is lost; [antimicrobials](../../09-pharmacology-and-therapeutics/03-drug-classes-by-mechanism/antimicrobials.md); [infectious disease dynamics](../../10-epidemiology-and-evidence/01-epidemiology/infectious-disease-dynamics.md) for treatment as prevention.
+- **Above:** [global health](../../15-medicine-in-society/03-populations-and-the-future/global-health-and-pandemics.md) frames HIV as the test case for drug access; [chronic disease and self-management](../../14-life-course-mind-and-integrative-care/05-primary-care-and-integration/chronic-disease-and-self-management.md) describes the adherence model.
+- **Siblings:** HIV multiplies the risk of [tuberculosis](tuberculosis-and-tropical-infections.md) and changes its presentation; advanced HIV is a common cause of [prolonged fever](fever-and-sepsis.md); bloodborne viruses are a central concern of [infection control](infection-control-and-healthcare-associated-infection.md).
+
+## Common misconceptions
+
+- **"HIV kills by itself."** It kills by removing the defence against other organisms; nearly every death is from an opportunistic infection or a virus-driven cancer, and treatment prevents them by restoring CD4 cells.
+- **"A chronic virus is a mild virus."** Hepatitis B and C are quiet for decades and then present as cirrhosis or liver cancer; the silence is the danger.
+- **"Antivirals eradicate the virus."** Most suppress replication and leave latency untouched; hepatitis C cure is the exception because it has no latent form.
+
+## Go deeper
+
+- Bennett, Dolin and Blaser (eds), *Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases* (9th ed., 2020): HIV, hepatitis and herpesvirus chapters.
+- Deeks, Overbaugh, Phillips and Buchbinder, "HIV infection" (*Nature Reviews Disease Primers*, 2015): pathogenesis, natural history and treatment in one review.
+- Cohen et al., "Antiretroviral therapy for the prevention of HIV-1 transmission" (*New England Journal of Medicine*, 2016, HPTN 052): the trial establishing treatment as prevention.

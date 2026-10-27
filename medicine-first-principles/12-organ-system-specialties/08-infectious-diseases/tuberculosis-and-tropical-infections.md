@@ -1,0 +1,57 @@
+# Tuberculosis and tropical infections
+
+> **Layer:** [12 Organ-system specialties](../README.md) › [Infectious diseases](README.md)
+> **Builds on:** [Chronic inflammation and granulomas](../../08-pathology/01-cell-and-tissue-injury/chronic-inflammation-and-granulomas.md), [Bacteria](../../07-microbiology-and-immunology/01-microbes-and-infection/bacteria.md), [Fungi, protozoa and helminths](../../07-microbiology-and-immunology/01-microbes-and-infection/fungi-protozoa-and-helminths.md), [Transmission and the chain of infection](../../07-microbiology-and-immunology/01-microbes-and-infection/transmission-and-the-chain-of-infection.md), [Antimicrobials](../../09-pharmacology-and-therapeutics/03-drug-classes-by-mechanism/antimicrobials.md)
+> **Enables:** [Global health and pandemics](../../15-medicine-in-society/03-populations-and-the-future/global-health-and-pandemics.md), [Social determinants and health inequity](../../15-medicine-in-society/03-populations-and-the-future/social-determinants-and-health-inequity.md), [Surveillance and outbreak investigation](../../10-epidemiology-and-evidence/01-epidemiology/surveillance-and-outbreak-investigation.md), [Pneumonia and respiratory infections](../02-pulmonology/pneumonia-and-respiratory-infections.md)
+
+## Essence
+
+Tuberculosis, malaria and the helminths are the infections of poverty, and together they kill or disable more people than any other group of pathogens outside pandemics. They share three features: they persist for years inside a host whose immunity contains but cannot clear them, their burden tracks crowding, nutrition and sanitation as closely as any microbe, and their treatment requires long drug combinations that fail through non-adherence and breed resistance. Tuberculosis is the model: a bacterium walled off in a granuloma, waiting for immunity to lapse, infecting about a quarter of humanity and killing over a million a year (2020s), nearly all preventable.
+
+## Core tenets
+
+1. **Tuberculosis is a disease of the granuloma, which is the host's compromise with a bacterium it cannot kill.** *Mycobacterium tuberculosis* has a waxy mycolic-acid wall that resists phagocyte killing and divides once a day rather than every twenty minutes ([bacteria](../../07-microbiology-and-immunology/01-microbes-and-infection/bacteria.md)). Macrophages ingest it and fail; T-helper cells then wall the infected macrophages into a granuloma with central caseous necrosis ([chronic inflammation and granulomas](../../08-pathology/01-cell-and-tissue-injury/chronic-inflammation-and-granulomas.md)). In most people this contains the infection for life (latent tuberculosis); in about 5–10% it reactivates when cellular immunity wanes with age, malnutrition, HIV, diabetes or anti-tumour-necrosis-factor drugs. Disease is a failure of containment.
+
+2. **The clinical picture is slow destruction plus the systemic cost of chronic inflammation.** Reactivation favours the lung apices, where oxygen tension is highest ([ventilation-perfusion matching](../../06-physiology/04-respiratory-system/ventilation-perfusion-matching.md)); cavities erode into airways, producing the chronic cough and haemoptysis that make the patient infectious. Fever, night sweats and weight loss are the cytokine burden of months of granulomatous inflammation. Blood-borne spread seeds bone, kidney and meninges. Diagnosis is by seeing or growing the organism (microscopy, culture over weeks, or nucleic-acid amplification that also detects rifampicin resistance), while interferon-gamma release assays detect only the immune memory of latent infection ([microbiological diagnosis](../../11-clinical-method-and-diagnostics/02-laboratory-medicine/microbiological-and-serological-diagnosis.md)).
+
+3. **Treatment is long and combined because the bacterium is slow and hides in three niches.** Actively dividing bacilli in cavities, intermittently dividing bacilli inside macrophages and dormant bacilli in caseum each respond to different drugs, so combinations of four agents over months are needed to sterilise all three ([antimicrobials](../../09-pharmacology-and-therapeutics/03-drug-classes-by-mechanism/antimicrobials.md)). Interrupted treatment selects resistant mutants, and multidrug-resistant tuberculosis is the consequence of poorly supervised programmes, not of the organism. Directly observed treatment exists because adherence over months is the limiting step ([antimicrobial stewardship](antimicrobial-stewardship.md)).
+
+4. **Malaria is a red-cell parasite whose life cycle dictates both its clinical course and its control.** *Plasmodium* sporozoites injected by an *Anopheles* mosquito multiply in the liver, then invade red cells, where cycles of replication and rupture produce periodic fevers; *P. vivax* leaves dormant liver forms that relapse ([fungi, protozoa and helminths](../../07-microbiology-and-immunology/01-microbes-and-infection/fungi-protozoa-and-helminths.md)). *P. falciparum* makes infected cells sticky, so they sequester in small vessels of brain, kidney and placenta: cerebral malaria, renal failure and severe anaemia kill, mostly African children under five. Sickle-cell trait and other red-cell variants persist in the population because they protect against severe malaria, the clearest case of balancing selection in humans ([natural selection](../../04-genetics-evolution-and-development/02-evolution/natural-selection-and-population-genetics.md)). Control attacks every stage: nets against the vector, artemisinin combinations against the blood stage, and now partially effective vaccines.
+
+5. **Helminths and other neglected tropical diseases cause disability more than death, through chronic burden.** Hookworm causes iron-deficiency anaemia by feeding on gut blood; schistosomiasis causes liver fibrosis and bladder cancer through the granulomatous response to eggs; onchocerciasis blinds. The response to large parasites is the immunoglobulin E and eosinophil arm ([hypersensitivity and allergy](../../07-microbiology-and-immunology/04-immunity-in-disease/hypersensitivity-and-allergy.md)), so eosinophilia in a migrant points to helminths. Mass drug administration with sanitation is the effective intervention.
+
+6. **These are diseases of place and poverty, so geography and social history are diagnostic tools.** Fever in a traveller from sub-Saharan Africa is malaria until a blood film says otherwise, because it kills within days. Incubation narrows the differential: dengue within two weeks, typhoid and malaria within months, tuberculosis years later ([transmission and the chain of infection](../../07-microbiology-and-immunology/01-microbes-and-infection/transmission-and-the-chain-of-infection.md), [time-courses](../../CROSS-CUTTING.md#time-courses)). Crowding transmits tuberculosis, standing water breeds mosquitoes, absent latrines transmit worms; tuberculosis incidence fell with rising incomes long before effective drugs existed, which is why these count among the [social determinants of health](../../15-medicine-in-society/03-populations-and-the-future/social-determinants-and-health-inequity.md).
+
+7. **Who else is involved.** Pulmonary tuberculosis is shared with [pulmonology](../02-pulmonology/README.md); meningitis with [neurology](../10-neurology/README.md); spinal disease with [orthopaedics](../../13-acute-perioperative-and-procedural-care/01-surgery/README.md). [Rheumatology](../09-rheumatology-and-clinical-immunology/README.md), [gastroenterology](../04-gastroenterology-and-hepatology/README.md) and [oncology](../07-oncology/README.md) screen for latent infection before immunosuppression; [HIV](hiv-and-chronic-viral-infections.md) co-infection is managed jointly. Severe malaria is a [critical care](../../13-acute-perioperative-and-procedural-care/03-critical-care/README.md) and [paediatric](../../14-life-course-mind-and-integrative-care/01-paediatrics/README.md) emergency; infection in pregnancy belongs with [obstetrics](../../14-life-course-mind-and-integrative-care/02-obstetrics-and-gynaecology/README.md). [Public health](../../15-medicine-in-society/03-populations-and-the-future/global-health-and-pandemics.md) owns contact tracing, vector control and mass drug administration, which matter more than any clinic.
+
+## Key concepts
+
+| Term | Meaning |
+|---|---|
+| Granuloma | Organised collection of macrophages and lymphocytes walling off a persistent pathogen |
+| Caseous necrosis | Cheese-like dead tissue at the centre of a tuberculous granuloma |
+| Latent tuberculosis | Contained infection with immune memory but no disease or infectivity |
+| Reactivation | Breakdown of containment when cellular immunity wanes |
+| Multidrug-resistant tuberculosis | Resistance to at least rifampicin and isoniazid, from inadequate treatment |
+| Sequestration | Adhesion of *P. falciparum*-infected red cells to small-vessel endothelium |
+| Eosinophilia | Raised eosinophil count; the signature of helminth infection and allergy |
+| Incubation period | Interval from exposure to symptoms; narrows the differential in a traveller |
+
+## How it fits
+
+- **Below:** [chronic inflammation and granulomas](../../08-pathology/01-cell-and-tissue-injury/chronic-inflammation-and-granulomas.md); [bacteria](../../07-microbiology-and-immunology/01-microbes-and-infection/bacteria.md) and [fungi, protozoa and helminths](../../07-microbiology-and-immunology/01-microbes-and-infection/fungi-protozoa-and-helminths.md); [T cells](../../07-microbiology-and-immunology/03-adaptive-immunity/t-cells.md); the legacy of malaria from [natural selection](../../04-genetics-evolution-and-development/02-evolution/natural-selection-and-population-genetics.md).
+- **Above:** [global health](../../15-medicine-in-society/03-populations-and-the-future/global-health-and-pandemics.md) and [social determinants](../../15-medicine-in-society/03-populations-and-the-future/social-determinants-and-health-inequity.md); [surveillance](../../10-epidemiology-and-evidence/01-epidemiology/surveillance-and-outbreak-investigation.md), which is how control programmes see themselves.
+- **Siblings:** [HIV](hiv-and-chronic-viral-infections.md) is the great amplifier of tuberculosis; [stewardship](antimicrobial-stewardship.md) explains drug resistance in both; [fever and sepsis](fever-and-sepsis.md) is where the returning traveller presents.
+
+## Common misconceptions
+
+- **"A positive tuberculin or interferon test means tuberculosis."** It means immune memory of the organism; most positives are latent infection and will never develop disease.
+- **"Tropical infections stay in the tropics."** Migration, travel and a warming climate bring them everywhere, and a fever within a year of travel is a tropical fever until excluded.
+- **"Tuberculosis was conquered by antibiotics."** Mortality in Europe fell by most of its total before streptomycin (1944), through housing, nutrition and isolation; drugs finished what living conditions began.
+
+## Go deeper
+
+- Bennett, Dolin and Blaser (eds), *Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases* (9th ed., 2020): tuberculosis, malaria and helminth chapters.
+- Farrar et al. (eds), *Manson's Tropical Diseases* (24th ed., 2023): the standard reference on diseases of the tropics.
+- Pai et al., "Tuberculosis" (*Nature Reviews Disease Primers*, 2016): pathogenesis, latency and the global programme in one review.
+- World Health Organization, *Global Tuberculosis Report* (annual): the current burden and resistance figures.

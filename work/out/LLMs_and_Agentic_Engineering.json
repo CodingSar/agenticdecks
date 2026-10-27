@@ -20,7 +20,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "q1P6bL#U?E",
    "type": "basic",
    "deck": "LLMs & Agentic Engineering::01 Tokens & Embeddings",
    "tags": [
@@ -116,7 +116,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "mj;i*F01F%",
    "type": "basic",
    "deck": "LLMs & Agentic Engineering::01 Tokens & Embeddings",
    "tags": [
@@ -124,6 +124,23 @@
    ],
    "front": "Why do serious retrieval systems combine vector search with keyword search (BM25)?",
    "back": "Embeddings blur exact identifiers: \"INC-48213\" and \"INC-48231\" look almost identical as vectors. Keyword search catches exact tokens; <b>hybrid search</b> gets both.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Tokens & Embeddings",
+   "reverse": false
+  },
+  {
+   "guid": "0d928ae88d",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::01 Tokens & Embeddings",
+   "tags": [
+    "llm::tokens",
+    "simplified"
+   ],
+   "front": "What breaks if you switch the embedding model for queries but keep the old document embeddings?",
+   "back": "Query and document vectors live in different spaces, so similarity scores become meaningless. You must re-embed the whole corpus whenever the embedding model changes.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -164,7 +181,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "L3KTln#nF:",
    "type": "basic",
    "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
    "tags": [
@@ -196,7 +213,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "beCah~riqq",
    "type": "basic",
    "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
    "tags": [
@@ -244,6 +261,23 @@
    "reverse": false
   },
   {
+   "guid": "601f7e8987",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
+   "tags": [
+    "llm::architecture",
+    "simplified"
+   ],
+   "front": "FlashAttention is exact and much faster. Does it remove attention's quadratic cost in sequence length?",
+   "back": "No. Compute is still n² score calculations. It avoids writing the n×n matrix to graphics processing unit (GPU) memory, so memory use and memory traffic drop, which is what made attention slow.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Transformer Architecture",
+   "reverse": false
+  },
+  {
    "guid": "GP;a[I!Dl_",
    "type": "basic",
    "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
@@ -276,7 +310,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "Lq,j].P9wb",
    "type": "basic",
    "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
    "tags": [
@@ -288,6 +322,23 @@
    "image": "",
    "analogy": "",
    "extra": "<b>Example:</b> \"400B total parameters\" may use ~20B active per token: compute like a 20B model, memory like a 400B model.",
+   "source": "Transformer Architecture",
+   "reverse": false
+  },
+  {
+   "guid": "3d4d1d0016",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
+   "tags": [
+    "llm::architecture",
+    "simplified"
+   ],
+   "front": "A mixture-of-experts (MoE) model has 100B total and 10B active parameters. How does it compare with a dense 10B and a dense 100B model for speed and memory?",
+   "back": "Per-token compute and speed are close to the dense 10B model; memory is about that of the dense 100B model, since every expert must be loaded.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "Transformer Architecture",
    "reverse": false
   },
@@ -324,7 +375,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "O!Cyp9,nX5",
    "type": "basic",
    "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
    "tags": [
@@ -356,7 +407,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "t!mwAzN3S#",
    "type": "basic",
    "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
    "tags": [
@@ -388,7 +439,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "yq!pDvl`Ru",
    "type": "basic",
    "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
    "tags": [
@@ -404,7 +455,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "e=qU/%:8zz",
    "type": "basic",
    "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
    "tags": [
@@ -436,7 +487,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "kHE8c(v#P^",
    "type": "basic",
    "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
    "tags": [
@@ -452,7 +503,24 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "f1f6afd40c",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
+   "tags": [
+    "llm::inference",
+    "simplified"
+   ],
+   "front": "Why does batching many users' requests together make serving cheaper per token?",
+   "back": "Decode is memory-bound: each step must read all model weights from graphics processing unit (GPU) memory. One read can serve many sequences at once, so the cost is shared across the batch.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Transformer Architecture",
+   "reverse": false
+  },
+  {
+   "guid": "v%1q@#K)!p",
    "type": "basic",
    "deck": "LLMs & Agentic Engineering::02 Transformer Architecture",
    "tags": [
@@ -484,6 +552,23 @@
    "reverse": false
   },
   {
+   "guid": "83aa5ee86a",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::03 Inference & Serving",
+   "tags": [
+    "llm::inference",
+    "simplified"
+   ],
+   "front": "What would happen to generation cost if there were no key-value (KV) cache, and why?",
+   "back": "Each new token would recompute Keys and Values for the entire prefix, so total work over a response grows roughly quadratically with length instead of linearly.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Inference & Serving",
+   "reverse": false
+  },
+  {
    "guid": "i^M,iGk!T-",
    "type": "basic",
    "deck": "LLMs & Agentic Engineering::03 Inference & Serving",
@@ -500,7 +585,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "i})P7SL?W#",
    "type": "basic",
    "deck": "LLMs & Agentic Engineering::03 Inference & Serving",
    "tags": [
@@ -516,7 +601,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "H$TU{VM)V&",
    "type": "basic",
    "deck": "LLMs & Agentic Engineering::03 Inference & Serving",
    "tags": [
@@ -564,7 +649,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "jGY`,t2~7m",
    "type": "basic",
    "deck": "LLMs & Agentic Engineering::03 Inference & Serving",
    "tags": [
@@ -596,7 +681,24 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "29b975f035",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::03 Inference & Serving",
+   "tags": [
+    "llm::inference",
+    "simplified"
+   ],
+   "front": "A 70B-parameter model is quantized to 4 bits per weight. Roughly how much memory do the weights need, and what does that change?",
+   "back": "About 35 GB (70B x 0.5 byte), versus 140 GB at 16-bit. It can fit on a single large graphics processing unit (GPU) instead of several, at a small quality cost.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Inference & Serving",
+   "reverse": false
+  },
+  {
+   "guid": "G7;O;U;j*[",
    "type": "basic",
    "deck": "LLMs & Agentic Engineering::03 Inference & Serving",
    "tags": [
@@ -644,7 +746,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "Kv0(l+YYOt",
    "type": "basic",
    "deck": "LLMs & Agentic Engineering::03 Inference & Serving",
    "tags": [
@@ -692,7 +794,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "FS<E^52~gC",
    "type": "basic",
    "deck": "LLMs & Agentic Engineering::04 Training & Adaptation",
    "tags": [
@@ -724,7 +826,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "lZsc#1ddZ7",
    "type": "basic",
    "deck": "LLMs & Agentic Engineering::04 Training & Adaptation",
    "tags": [
@@ -740,7 +842,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "HNGu&^>~<`",
    "type": "basic",
    "deck": "LLMs & Agentic Engineering::04 Training & Adaptation",
    "tags": [
@@ -836,7 +938,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "$uSx[e@Zq",
    "type": "basic",
    "deck": "LLMs & Agentic Engineering::04 Training & Adaptation",
    "tags": [
@@ -844,6 +946,23 @@
    ],
    "front": "What was the <b>Chinchilla</b> compute-optimal finding?",
    "back": "For a fixed compute budget \\(C\\approx6ND\\), scale parameters and data in equal proportion (about 20 training tokens per parameter). Earlier large models were undertrained.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Training & Adaptation",
+   "reverse": false
+  },
+  {
+   "guid": "1bd4a5ba7b",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::04 Training & Adaptation",
+   "tags": [
+    "llm::training",
+    "simplified"
+   ],
+   "front": "By the Chinchilla rule, about how many training tokens suit a 7B-parameter model, and why do many models train far beyond that?",
+   "back": "About 140B tokens (20 per parameter). Models are over-trained because a smaller model trained longer is cheaper to serve, and inference cost over its lifetime dominates.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -900,7 +1019,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "JuqX7O7wZW",
    "type": "basic",
    "deck": "LLMs & Agentic Engineering::05 RAG & Context Engineering",
    "tags": [
@@ -1028,7 +1147,24 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "775d9de97b",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::05 RAG & Context Engineering",
+   "tags": [
+    "llm::rag_context",
+    "simplified"
+   ],
+   "front": "In retrieval-augmented generation (RAG), what goes wrong if chunks are too large, and what if they are too small?",
+   "back": "Too large: each chunk is diluted, matching is vague and the prompt fills with irrelevant text. Too small: chunks lose surrounding context, so the retrieved piece can't answer on its own.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "RAG & Context Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "Pbdye+zZST",
    "type": "basic",
    "deck": "LLMs & Agentic Engineering::05 RAG & Context Engineering",
    "tags": [
@@ -1316,7 +1452,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "n`IxT5+g^#",
    "type": "basic",
    "deck": "LLMs & Agentic Engineering::07 Agentic Patterns",
    "tags": [
@@ -1340,6 +1476,40 @@
    ],
    "front": "What is the key trade-off of choosing an agent over a workflow?",
    "back": "Predictability for flexibility: each autonomous turn adds latency, cost and error propagation. Use the simplest pattern that passes eval; reserve agents for paths you can't hardcode but can verify.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Agentic Patterns",
+   "reverse": false
+  },
+  {
+   "guid": "74fadfd739",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::07 Agentic Patterns",
+   "tags": [
+    "llm::agentic_patterns",
+    "simplified"
+   ],
+   "front": "If a task needs 10 sequential agent steps, how can you raise end-to-end success without a better model?",
+   "back": "Compounding error means success is the product of step reliabilities. Shorten the chain, add verification checkpoints that catch and retry bad steps, or make risky steps deterministic code.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Agentic Patterns",
+   "reverse": false
+  },
+  {
+   "guid": "f5fe94e7a8",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::07 Agentic Patterns",
+   "tags": [
+    "llm::agentic_patterns",
+    "simplified"
+   ],
+   "front": "Support tickets must be sorted into five fixed categories, then a templated reply drafted for each. Agent or workflow, and why?",
+   "back": "A workflow (routing plus a fixed step). The path is known in advance, so predefined code is cheaper, faster and more predictable than letting a model choose steps.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1391,6 +1561,23 @@
    "text": "",
    "image": "",
    "analogy": "A manager who gets a one-page brief from each analyst instead of reading all their notes.",
+   "extra": "",
+   "source": "Agentic Patterns",
+   "reverse": false
+  },
+  {
+   "guid": "d46b53f831",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::07 Agentic Patterns",
+   "tags": [
+    "llm::agentic_patterns",
+    "simplified"
+   ],
+   "front": "What is the cost of splitting work across sub-agents?",
+   "back": "Extra tokens (each sub-agent has its own context and prompt) and lost shared context: the lead sees only summaries, so coordination and hand-off errors appear. Use it where isolation pays off.",
+   "text": "",
+   "image": "",
+   "analogy": "",
    "extra": "",
    "source": "Agentic Patterns",
    "reverse": false
@@ -1476,7 +1663,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "wzT^/Uvzi}",
    "type": "basic",
    "deck": "LLMs & Agentic Engineering::08 Harness Engineering",
    "tags": [
@@ -1604,6 +1791,23 @@
    "reverse": false
   },
   {
+   "guid": "832dd947df",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::08 Harness Engineering",
+   "tags": [
+    "llm::harness",
+    "simplified"
+   ],
+   "front": "An agent can read private files, browse untrusted web pages, and send emails. Why is that combination dangerous?",
+   "back": "A planted instruction on a web page can make the agent read private data and send it out. Private data + untrusted content + an outbound channel together enable exfiltration; removing any one of the three breaks the attack.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Harness Engineering",
+   "reverse": false
+  },
+  {
    "guid": "vm&p+(u#%:",
    "type": "basic",
    "deck": "LLMs & Agentic Engineering::08 Harness Engineering",
@@ -1632,6 +1836,23 @@
    "image": "",
    "analogy": "An elevator call button: pressing it twice still brings one elevator, because the request is idempotent.",
    "extra": "<b>Classic failure:</b> agent A times out and retries while agent B processes the payment: double charge despite \"correct\" retry logic.",
+   "source": "Harness Engineering",
+   "reverse": false
+  },
+  {
+   "guid": "f2d4263100",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::08 Harness Engineering",
+   "tags": [
+    "llm::harness",
+    "simplified"
+   ],
+   "front": "An agent calls a payment tool, the request times out, and the agent retries. What happens without an idempotency token, and with one?",
+   "back": "Without: the first call may have succeeded, so the customer is charged twice. With: the tool recognises the repeated token and returns the original result instead of acting again.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "Harness Engineering",
    "reverse": false
   },
@@ -1764,7 +1985,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "jeH`66L,Q=",
    "type": "basic",
    "deck": "LLMs & Agentic Engineering::09 Evaluation & Reliability",
    "tags": [
@@ -1796,7 +2017,24 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "6d4ad446a5",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::09 Evaluation & Reliability",
+   "tags": [
+    "llm::evaluation",
+    "simplified"
+   ],
+   "front": "If an agent succeeds 90% of the time on a task, what is pass^3, and what does it tell you?",
+   "back": "About 73% (0.9³, assuming independent attempts). Consistency drops quickly with k, so an agent that looks good on one try can be unreliable when users rely on it repeatedly.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Evaluation & Reliability",
+   "reverse": false
+  },
+  {
+   "guid": "xm!2e3gIbY",
    "type": "basic",
    "deck": "LLMs & Agentic Engineering::09 Evaluation & Reliability",
    "tags": [
@@ -1824,6 +2062,23 @@
    "image": "",
    "analogy": "",
    "extra": "<b>Mitigations:</b> swap answer order and average; give a rubric and reference answer; spot-check 5–10% with humans.",
+   "source": "Evaluation & Reliability",
+   "reverse": false
+  },
+  {
+   "guid": "ca1838d388",
+   "type": "basic",
+   "deck": "LLMs & Agentic Engineering::09 Evaluation & Reliability",
+   "tags": [
+    "llm::evaluation",
+    "simplified"
+   ],
+   "front": "How do you reduce position bias when using a large language model (LLM) as a judge to compare two answers?",
+   "back": "Run each comparison twice with the answer order swapped and count only consistent verdicts (or average them). A verdict that flips with order reflects position, not quality.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "Evaluation & Reliability",
    "reverse": false
   },
@@ -1876,7 +2131,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "MEC9Y5pg=M",
    "type": "basic",
    "deck": "LLMs & Agentic Engineering::09 Evaluation & Reliability",
    "tags": [
@@ -1896,11 +2151,12 @@
    "type": "cloze",
    "deck": "LLMs & Agentic Engineering::09 Evaluation & Reliability",
    "tags": [
-    "llm::evaluation"
+    "llm::evaluation",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Follow-ups for a \"99% accuracy\" claim: on {{c1::which task and dataset}}? measured by {{c2::whom}} (vendor or third party)? on how many examples ({{c3::N}})? what counts as {{c4::correct}}? under what {{c5::conditions}} (attempts, tools, latency, cost)?",
+   "text": "Follow-ups for a \"99% accuracy\" claim: on {{c1::which task and dataset}}? measured by {{c2::whom}} (vendor or third party)? on how many examples ({{c3::sample size}})? what counts as {{c4::correct}}? under what {{c5::conditions}} (attempts, tools, latency, cost)?",
    "image": "",
    "analogy": "",
    "extra": "99% of 100 examples is one error; the confidence interval is wide. A number without these answers is a slogan.",
@@ -1988,7 +2244,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "C+0u-P-3D+",
    "type": "basic",
    "deck": "LLMs & Agentic Engineering::09 Evaluation & Reliability",
    "tags": [

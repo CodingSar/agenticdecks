@@ -1,0 +1,72 @@
+# From target to approval
+
+> **Layer:** [09 Pharmacology and Therapeutics](../README.md) › [Drug development and toxicology](README.md)
+> **Builds on:** [Receptor theory, agonists and antagonists](../02-pharmacodynamics/receptor-theory-agonists-and-antagonists.md), [Dose–response and therapeutic index](../02-pharmacodynamics/dose-response-and-therapeutic-index.md), [Adverse drug reactions and pharmacovigilance](../02-pharmacodynamics/adverse-drug-reactions-and-pharmacovigilance.md), [Hypothesis testing and confidence intervals](../../01-quantitative-and-scientific-foundations/02-inference-and-causation/hypothesis-testing-and-confidence-intervals.md), [The scientific method and models](../../01-quantitative-and-scientific-foundations/03-systems-and-models/the-scientific-method-and-models.md)
+> **Enables:** [Randomized controlled trials](../../10-epidemiology-and-evidence/02-evidence-based-medicine/randomized-controlled-trials.md), [Grading evidence and guidelines](../../10-epidemiology-and-evidence/02-evidence-based-medicine/grading-evidence-and-guidelines.md), [Research integrity and publication bias](../../10-epidemiology-and-evidence/02-evidence-based-medicine/research-integrity-and-publication-bias.md), [Health economics and priority setting](../../15-medicine-in-society/01-health-systems/health-economics-and-priority-setting.md), [Medical ethics](../../15-medicine-in-society/02-ethics-law-and-the-profession/medical-ethics.md)
+
+## Essence
+
+A drug is a hypothesis: that changing the activity of one protein will change the course of a disease in people, safely, at a dose they can take. Drug development is the sequence of experiments that tests that hypothesis at rising cost and rising stakes, from a target in a test tube through animals to a few healthy volunteers, a few hundred patients and finally several thousand, with a regulator judging at the end whether the evidence of benefit outweighs the evidence of harm. Most hypotheses fail: of compounds entering human trials roughly one in ten reaches approval, and the whole process takes ten to fifteen years and, counting failures, costs of the order of a billion dollars or more (2010s estimates vary several-fold with method). The single idea is that each phase exists to answer one question that the previous phase could not, and that the questions are arranged so that the cheapest and least dangerous failures happen first.
+
+## Core tenets
+
+1. **A target is a protein whose modulation is predicted to alter disease, and the prediction rests on human evidence more than on mechanism.** Targets come from physiology (a receptor whose agonist is deficient), from pathology (an over-active kinase), from genetics (people with loss-of-function PCSK9 variants have low cholesterol and little coronary disease, which predicted that PCSK9 inhibitors would be safe and effective) and from serendipity (sildenafil's unintended effect). Targets with human genetic support are about twice as likely to succeed, because an animal model can be wrong about human disease in ways that a human mutation cannot. Validation asks whether the target is necessary for the disease process, whether it can be modulated by a molecule, and what the same protein does elsewhere, which forecasts the on-target side effects.
+
+
+2. **Preclinical studies measure toxicity in animals because that is the only way to find it before a human takes the drug, and they are imperfect.** Two species, dose escalation to find the toxic dose and the target organ, and studies of genotoxicity, carcinogenicity and reproductive toxicity precede the first human dose. Animal data predict human toxicity for about 70% of organ systems and fail notably for immune and idiosyncratic reactions: the anti-CD28 antibody TGN1412 (2006) caused cytokine storm in six volunteers at a dose 500 times below the safe dose in monkeys, because the human target behaved differently. The starting human dose is set far below the no-observed-adverse-effect level in the most sensitive species, scaled by body surface area.
+
+
+3. **Phase I asks whether the drug is tolerable and how the body handles it; phase II whether it does anything; phase III whether it does more good than harm against the standard.** Phase I (20–100 healthy volunteers, or patients for cytotoxics) finds the maximum tolerated dose and the kinetic parameters F, Vd and CL. Phase II (100–300 patients) tests for a biological effect, usually on a surrogate, and selects the dose from the [dose–response curve](../02-pharmacodynamics/dose-response-and-therapeutic-index.md). Phase III (several hundred to several thousand) is the [randomised controlled trial](../../10-epidemiology-and-evidence/02-evidence-based-medicine/randomized-controlled-trials.md) that regulators judge, powered to detect the expected benefit on an outcome that matters and large enough to see common harms. Attrition is highest at phase II, where the mechanism meets human disease for the first time; most failures are lack of efficacy, not toxicity.
+
+
+4. **A surrogate end-point is a bet that the mechanism's marker tracks the outcome, and the bet is sometimes lost.** Blood pressure, cholesterol, viral load and tumour shrinkage are measured quickly; stroke, infarction, death and survival take years. Surrogates make development feasible but have failed in both directions: flecainide suppressed ventricular ectopy and increased death (CAST, 1989); torcetrapib raised high-density lipoprotein cholesterol and increased death (2006); rosiglitazone lowered glucose and probably raised cardiac risk. A surrogate is valid only when the whole effect of the treatment on the outcome passes through it, which must be shown for each class, not assumed from the mechanism.
+
+
+5. **Approval is a judgement that benefit exceeds harm for a population, made on incomplete information, and it is reversible.** Regulators (the Food and Drug Administration, the European Medicines Agency and their counterparts) weigh efficacy on the chosen outcome, the harms seen, the quality of manufacturing and the needs of the indication; accelerated pathways accept surrogate evidence for serious diseases in exchange for confirmatory trials afterwards, which are not always completed. Approval begins phase IV: the [pharmacovigilance](../02-pharmacodynamics/adverse-drug-reactions-and-pharmacovigilance.md) that finds the rare harms no trial could, and the reason that about one in twenty new drugs acquires a serious safety warning or is withdrawn within a decade (United States, 2000s–2010s).
+
+
+6. **The economics shape what is developed, and the science alone does not.** A patent gives about twenty years from filing, of which half is consumed by development, so the commercial return must be earned in a decade; this favours chronic diseases of rich countries, drugs that follow proven mechanisms, and prices that [health systems](../../15-medicine-in-society/01-health-systems/health-economics-and-priority-setting.md) struggle to meet, while antibiotics (used briefly and held in reserve), rare diseases and tropical infections need orphan incentives, prizes or public funding. Publication bias, selective reporting of outcomes and industry-funded trials that favour the sponsor are documented and are the subject of [research integrity](../../10-epidemiology-and-evidence/02-evidence-based-medicine/research-integrity-and-publication-bias.md); trial registration (mandatory in many jurisdictions since 2005) exists to counter them.
+
+
+7. **Every phase is an experiment on people, and the ethics are not external to the science.** Volunteers in phase I accept risk with no prospect of benefit; patients in phase III may receive placebo or the inferior arm; populations in low-income countries have been enrolled in trials of drugs they will not afford. The Nuremberg Code (1947), the Declaration of Helsinki (1964, revised repeatedly) and independent ethics committees set the requirements of informed consent, equipoise (genuine uncertainty about which arm is better), a favourable risk–benefit balance and fair selection of participants, which [medical ethics](../../15-medicine-in-society/02-ethics-law-and-the-profession/medical-ethics.md) develops.
+
+```
+   target --> hit --> lead --> candidate --> phase I --> phase II --> phase III --> approval --> phase IV
+   (years)   screening  optimisation  animal tox   kinetics,   effect on    benefit vs    regulator     rare harms,
+                                                    tolerability  surrogate,  harm vs                    real patients
+                                                                  dose        standard
+   attrition: ~10,000 compounds -> ~10 candidates -> ~1 approved drug
+```
+
+## Key concepts
+
+| Term | Meaning |
+|---|---|
+| Target validation | Evidence that modulating a protein will alter disease in humans, ideally from human genetics |
+| Hit, lead, candidate | Successive stages of a molecule: binds; binds well with drug-like properties; chosen for human testing |
+| Lipinski's rule of five | Heuristic limits on size, lipid solubility and hydrogen bonding for an orally absorbable small molecule |
+| No-observed-adverse-effect level | Highest dose in animals without toxicity; basis for the first human dose |
+| Phases I–IV | Tolerability and kinetics; efficacy signal and dose; confirmatory benefit versus harm; post-marketing surveillance |
+| Maximum tolerated dose | Highest dose with acceptable toxicity, found by escalation in phase I |
+| Surrogate end-point | A measurable marker standing in for the clinical outcome |
+| Equipoise | Genuine uncertainty about which trial arm is better; the ethical precondition of randomisation |
+| Accelerated approval | Licensing on surrogate evidence with confirmatory trials required afterwards |
+| Orphan drug | A drug for a rare disease, developed under incentives that offset a small market |
+
+## How it fits
+
+- **Below:** Target and dose selection are [receptor theory](../02-pharmacodynamics/receptor-theory-agonists-and-antagonists.md) and [dose–response](../02-pharmacodynamics/dose-response-and-therapeutic-index.md); phase I measures the [kinetic parameters](../01-pharmacokinetics/README.md); the trial logic is [hypothesis testing](../../01-quantitative-and-scientific-foundations/02-inference-and-causation/hypothesis-testing-and-confidence-intervals.md) and the [scientific method](../../01-quantitative-and-scientific-foundations/03-systems-and-models/the-scientific-method-and-models.md). The assumption is that effect in a trial population predicts effect in the patient treated later, which [clinical reasoning](../../11-clinical-method-and-diagnostics/01-the-clinical-encounter/prognosis-and-shared-decision-making.md) must re-examine for each patient.
+- **Above:** The trial itself and its appraisal are in [randomised trials](../../10-epidemiology-and-evidence/02-evidence-based-medicine/randomized-controlled-trials.md), [grading evidence](../../10-epidemiology-and-evidence/02-evidence-based-medicine/grading-evidence-and-guidelines.md) and [research integrity](../../10-epidemiology-and-evidence/02-evidence-based-medicine/research-integrity-and-publication-bias.md); the price and access questions in [health economics](../../15-medicine-in-society/01-health-systems/health-economics-and-priority-setting.md) and [global health](../../15-medicine-in-society/03-populations-and-the-future/global-health-and-pandemics.md).
+- **Siblings:** [Toxicology](toxicology-and-poisoning.md) supplies the preclinical safety science and the far end of the dose–response curve; every leaf in [drug classes](../03-drug-classes-by-mechanism/README.md) is a target that passed through this pipeline, and the examples of failure above are its casualties.
+
+## Common misconceptions
+
+- **"A drug that works on the mechanism will work on the disease."** Phase II is where most candidates fail, because the mechanism does not translate; surrogate successes have repeatedly coexisted with harm on hard outcomes.
+- **"Approval means the drug has been proven safe and effective."** It means benefit exceeded harm on the evidence available for a defined population; rare harms, long-term effects and effects in excluded groups remain unknown at approval.
+- **"Animal testing reliably predicts human toxicity."** It predicts most organ toxicity and misses immune and idiosyncratic reactions; it is a necessary filter, not a guarantee.
+
+## Go deeper
+
+- Humphrey Rang and Raymond Hill (eds), *Drug Discovery and Development: Technology in Transition* (3rd ed., 2021): the whole pipeline from target to market by people who ran it.
+- Matthew Nelson and colleagues, "The support of human genetic evidence for approved drug indications" (*Nature Genetics*, 2015): why genetically supported targets succeed twice as often.
+- Ben Goldacre, *Bad Pharma* (2012): a documented account of how trial design, publication and marketing distort the evidence that approval rests on.

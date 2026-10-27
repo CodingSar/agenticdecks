@@ -23,7 +23,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "Cu`c;g&`Sg",
    "type": "basic",
    "deck": "Data Engineering::01 Cloud Storage & Table Formats",
    "tags": [
@@ -42,7 +42,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "nxr5?X5jRI",
    "type": "basic",
    "deck": "Data Engineering::01 Cloud Storage & Table Formats",
    "tags": [
@@ -77,7 +77,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "LFe?K`|8`s",
    "type": "basic",
    "deck": "Data Engineering::01 Cloud Storage & Table Formats",
    "tags": [
@@ -109,7 +109,24 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "ae1ff19c06",
+   "type": "basic",
+   "deck": "Data Engineering::01 Cloud Storage & Table Formats",
+   "tags": [
+    "DataEng::storage",
+    "simplified"
+   ],
+   "front": "Two jobs write to the same Parquet directory on S3 at once, with no table format. What can go wrong?",
+   "back": "Object storage has no multi-file atomic commit, so readers can see half-written output and the writers can overwrite each other. An open table format's metadata commit gives atomicity, consistency, isolation, durability (ACID) isolation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Data Eng · Storage",
+   "reverse": false
+  },
+  {
+   "guid": "o)+92vrcUv",
    "type": "cloze",
    "deck": "Data Engineering::01 Cloud Storage & Table Formats",
    "tags": [
@@ -160,7 +177,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "x`:cw@~uUg",
    "type": "basic",
    "deck": "Data Engineering::02 Stateful Data on Kubernetes",
    "tags": [
@@ -173,6 +190,23 @@
    "image": "",
    "analogy": "",
    "extra": "Azure also offers zone-redundant storage (ZRS) disks; AWS has no cross-availability-zone (AZ) Elastic Block Store (EBS).",
+   "source": "Data Eng · Storage",
+   "reverse": false
+  },
+  {
+   "guid": "2d3e0aeb62",
+   "type": "basic",
+   "deck": "Data Engineering::02 Stateful Data on Kubernetes",
+   "tags": [
+    "DataEng::k8s",
+    "simplified"
+   ],
+   "front": "What goes wrong if a zonal disk's storage class provisions the volume immediately, before the pod is scheduled?",
+   "back": "The volume is created in an arbitrary availability zone (AZ). The scheduler may then place the pod in a different zone where the disk cannot attach, leaving the pod stuck pending. <code>WaitForFirstConsumer</code> avoids this.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "Data Eng · Storage",
    "reverse": false
   },
@@ -230,7 +264,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "GfJoR4RWLr",
    "type": "basic",
    "deck": "Data Engineering::02 Stateful Data on Kubernetes",
    "tags": [
@@ -279,6 +313,23 @@
    "reverse": false
   },
   {
+   "guid": "c02f8ba91b",
+   "type": "basic",
+   "deck": "Data Engineering::03 Kafka Core",
+   "tags": [
+    "DataEng::kafka",
+    "simplified"
+   ],
+   "front": "A tombstone (a record with a null value) is written to a compacted Kafka topic. What happens to that key?",
+   "back": "Compaction eventually removes all earlier records for the key, and after the delete retention period the tombstone itself is removed too. The key is deleted from the topic's state.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Data Eng · Kafka",
+   "reverse": false
+  },
+  {
    "guid": "Lq@OYrZTz)",
    "type": "basic",
    "deck": "Data Engineering::03 Kafka Core",
@@ -311,7 +362,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "O?<,2+/FC<",
    "type": "basic",
    "deck": "Data Engineering::03 Kafka Core",
    "tags": [
@@ -327,7 +378,24 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "6d9daff517",
+   "type": "basic",
+   "deck": "Data Engineering::03 Kafka Core",
+   "tags": [
+    "DataEng::kafka",
+    "simplified"
+   ],
+   "front": "Consumer lag keeps growing on a topic with 6 partitions and 6 consumers in the group. Why does adding a 7th consumer not help, and what does?",
+   "back": "Each partition is read by at most one consumer in the group, so the 7th sits idle. Make each consumer faster, or add partitions (accepting the key-ordering break).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Data Eng · Kafka",
+   "reverse": false
+  },
+  {
+   "guid": "Q?{kSHZaz+",
    "type": "basic",
    "deck": "Data Engineering::03 Kafka Core",
    "tags": [
@@ -359,7 +427,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "poh`3Lz_fJ",
    "type": "cloze",
    "deck": "Data Engineering::03 Kafka Core",
    "tags": [
@@ -368,6 +436,23 @@
    "front": "",
    "back": "",
    "text": "Kafka durability: {{c1::<code>replication.factor=3</code>}} (three copies across availability zones (AZs)) + {{c2::<code>acks=all</code>}} (producer waits for the in-sync replica set (ISR)) + {{c3::<code>min.insync.replicas=2</code>}} (reject writes with fewer in sync) survives one broker/AZ loss without data loss.",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Data Eng · Kafka",
+   "reverse": false
+  },
+  {
+   "guid": "2fc54bf20b",
+   "type": "basic",
+   "deck": "Data Engineering::03 Kafka Core",
+   "tags": [
+    "DataEng::kafka",
+    "simplified"
+   ],
+   "front": "A Kafka topic uses <code>acks=all</code> but <code>min.insync.replicas=1</code>. What failure still loses acknowledged data?",
+   "back": "If the followers fall out of the in-sync replica set (ISR), the leader alone satisfies <code>acks=all</code>. If that leader then dies, writes it acknowledged exist nowhere else. Setting <code>min.insync.replicas=2</code> rejects such writes instead.",
+   "text": "",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -391,7 +476,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "rV,@s1GD~",
    "type": "basic",
    "deck": "Data Engineering::03 Kafka Core",
    "tags": [
@@ -407,7 +492,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "t[y@pYUm$W",
    "type": "basic",
    "deck": "Data Engineering::03 Kafka Core",
    "tags": [
@@ -537,7 +622,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "QPc,H5D,,q",
    "type": "basic",
    "deck": "Data Engineering::04 Kafka Ecosystem & Managed Streaming",
    "tags": [
@@ -569,7 +654,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "jSoUrdXGR$",
    "type": "cloze",
    "deck": "Data Engineering::04 Kafka Ecosystem & Managed Streaming",
    "tags": [
@@ -601,7 +686,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "L^jbaU:?DS",
    "type": "basic",
    "deck": "Data Engineering::04 Kafka Ecosystem & Managed Streaming",
    "tags": [
@@ -633,7 +718,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "O8<xl@RsK%",
    "type": "basic",
    "deck": "Data Engineering::04 Kafka Ecosystem & Managed Streaming",
    "tags": [
@@ -699,7 +784,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "s>/.U9obnA",
    "type": "basic",
    "deck": "Data Engineering::04 Kafka Ecosystem & Managed Streaming",
    "tags": [
@@ -748,7 +833,24 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "7a437fea08",
+   "type": "basic",
+   "deck": "Data Engineering::05 Analytics & Warehousing",
+   "tags": [
+    "DataEng::warehouse",
+    "simplified"
+   ],
+   "front": "Why does a columnar layout suit analytics, but a row layout suit transactions?",
+   "back": "Analytics scan a few columns across many rows, so columns read and compress only what is needed. Transactions read or write whole rows by key, so row layout with indexes touches one place.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Data Eng · OLAP vs OLTP",
+   "reverse": false
+  },
+  {
+   "guid": "L>L@6{C*m,",
    "type": "basic",
    "deck": "Data Engineering::05 Analytics & Warehousing",
    "tags": [
@@ -800,7 +902,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "tx}~Z+q~:y",
    "type": "basic",
    "deck": "Data Engineering::05 Analytics & Warehousing",
    "tags": [
@@ -808,6 +910,23 @@
    ],
    "front": "What is a <b>Slowly Changing Dimension Type 2</b>?",
    "back": "Keeping history in a dimension by adding a new versioned row (with validity dates) when an attribute changes, instead of overwriting it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Data Eng · OLAP vs OLTP",
+   "reverse": false
+  },
+  {
+   "guid": "608b966011",
+   "type": "basic",
+   "deck": "Data Engineering::05 Analytics & Warehousing",
+   "tags": [
+    "DataEng::warehouse",
+    "simplified"
+   ],
+   "front": "A customer moves region. How does a Slowly Changing Dimension Type 2 let you report last year's sales under the region they were in then?",
+   "back": "The old dimension row keeps its validity dates and key, and facts from that period point to it. The move creates a new row for later facts, so old facts keep the old region.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -833,7 +952,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "K24x_Wp3g,",
    "type": "basic",
    "deck": "Data Engineering::05 Analytics & Warehousing",
    "tags": [
@@ -850,7 +969,24 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "45439b1d14",
+   "type": "basic",
+   "deck": "Data Engineering::05 Analytics & Warehousing",
+   "tags": [
+    "DataEng::warehouse",
+    "simplified"
+   ],
+   "front": "Two huge tables in a massively parallel processing (MPP) warehouse are distributed on different columns, and you join them. What happens, and what avoids it?",
+   "back": "Matching rows live on different nodes, so the engine shuffles data across the network before joining. Distribute both tables on the join key so matching rows are co-located.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Data Eng · OLAP vs OLTP",
+   "reverse": false
+  },
+  {
+   "guid": "x3<=Dpl4bS",
    "type": "cloze",
    "deck": "Data Engineering::05 Analytics & Warehousing",
    "tags": [
@@ -885,7 +1021,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "mb^RV>;7IK",
    "type": "basic",
    "deck": "Data Engineering::05 Analytics & Warehousing",
    "tags": [
@@ -903,7 +1039,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "N8tFNnq4e|",
    "type": "basic",
    "deck": "Data Engineering::05 Analytics & Warehousing",
    "tags": [
@@ -935,7 +1071,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "vpf>bCyY{{",
    "type": "basic",
    "deck": "Data Engineering::05 Analytics & Warehousing",
    "tags": [
@@ -967,7 +1103,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "DbZq9|TRa8",
    "type": "basic",
    "deck": "Data Engineering::05 Analytics & Warehousing",
    "tags": [
@@ -1017,7 +1153,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "B|b>e4A$Rk",
    "type": "basic",
    "deck": "Data Engineering::06 Data Gravity & Cost",
    "tags": [
@@ -1027,6 +1163,23 @@
    ],
    "front": "Why can a chatty multi-availability-zone (AZ) microservice mesh or Kafka cluster surprise you on the bill?",
    "back": "Every cross-AZ hop is billed per GB (on both sides on AWS), so replication and chatty calls can quietly cost more than the compute.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Data Eng · Data gravity",
+   "reverse": false
+  },
+  {
+   "guid": "63789f0da3",
+   "type": "basic",
+   "deck": "Data Engineering::06 Data Gravity & Cost",
+   "tags": [
+    "DataEng::cost",
+    "simplified"
+   ],
+   "front": "Your Kafka cluster spans three availability zones (AZs) with replication factor 3. Roughly how many of each message's replica copies cross a zone boundary, and why does this matter for cost?",
+   "back": "Both followers sit in other zones from the leader, so each message crosses a zone boundary twice (plus consumer reads from another zone). It is billed per GB, so the traffic can rival compute cost.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1086,7 +1239,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "N&.uN?PScn",
    "type": "basic",
    "deck": "Data Engineering::06 Data Gravity & Cost",
    "tags": [
@@ -1121,7 +1274,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "yZ1E7tHmq%",
    "type": "cloze",
    "deck": "Data Engineering::06 Data Gravity & Cost",
    "tags": [
@@ -1157,7 +1310,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "Nxl/x3;,xS",
    "type": "basic",
    "deck": "Data Engineering::06 Data Gravity & Cost",
    "tags": [
@@ -1192,7 +1345,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "o}HSQs7y{H",
    "type": "basic",
    "deck": "Data Engineering::06 Data Gravity & Cost",
    "tags": [
@@ -1210,7 +1363,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "GV$$7pS:np",
    "type": "cloze",
    "deck": "Data Engineering::06 Data Gravity & Cost",
    "tags": [
@@ -1246,7 +1399,24 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "8ec3ad1ee5",
+   "type": "basic",
+   "deck": "Data Engineering::06 Data Gravity & Cost",
+   "tags": [
+    "DataEng::cost",
+    "simplified"
+   ],
+   "front": "Why is archive tier a poor choice for a dataset you reprocess monthly, even though storage per GB is cheapest?",
+   "back": "Each reprocess pays retrieval fees and hours of rehydration latency, and early deletion incurs a minimum storage period charge. Retrieval cost can outweigh the storage saving.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Data Eng · Data gravity",
+   "reverse": false
+  },
+  {
+   "guid": "u<k@=ttB+8",
    "type": "cloze",
    "deck": "Data Engineering::06 Data Gravity & Cost",
    "tags": [
@@ -1299,7 +1469,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "F&MO,/bbgu",
    "type": "basic",
    "deck": "Data Engineering::06 Data Gravity & Cost",
    "tags": [
@@ -1315,7 +1485,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "BLn|N]045f",
    "type": "basic",
    "deck": "Data Engineering::06 Data Gravity & Cost",
    "tags": [

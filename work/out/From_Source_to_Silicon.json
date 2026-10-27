@@ -4,7 +4,7 @@
  "description": "How a program becomes electrons: lexing and parsing, type systems, IR and optimisation, codegen, ABI and linking, interpreters, JITs and GC, x86-64 / ARM64 / RISC-V / IBM Z assembly, pipelines, out-of-order cores and microcode, caches and memory models, GPU SIMT, TPU systolic arrays and ML compilers, and the explicit mapping between all these layers. For a cloud/enterprise architect who programs and wants a lasting, zero-to-hero mental model of compilers, ISAs and accelerators.",
  "notes": [
   {
-   "guid": null,
+   "guid": "df.zt|^Y>4",
    "type": "basic",
    "deck": "From Source to Silicon::01 Lexing & Parsing",
    "tags": [
@@ -21,7 +21,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "gB:bj~OMB$",
    "type": "cloze",
    "deck": "From Source to Silicon::01 Lexing & Parsing",
    "tags": [
@@ -39,7 +39,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "GG>Rio~+!+",
    "type": "basic",
    "deck": "From Source to Silicon::01 Lexing & Parsing",
    "tags": [
@@ -57,7 +57,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "H%PvqbCz{U",
    "type": "basic",
    "deck": "From Source to Silicon::01 Lexing & Parsing",
    "tags": [
@@ -74,7 +74,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "uh~*JX+dI#",
    "type": "basic",
    "deck": "From Source to Silicon::01 Lexing & Parsing",
    "tags": [
@@ -92,7 +92,25 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "f02587d561",
+   "type": "basic",
+   "deck": "From Source to Silicon::01 Lexing & Parsing",
+   "tags": [
+    "s2s",
+    "application",
+    "simplified"
+   ],
+   "front": "A lexer used <i>shortest</i> match instead of maximal munch. Name two things that would break.",
+   "back": "<code>&lt;=</code> would lex as <code>&lt;</code> then <code>=</code>, and <code>foobar</code> as <code>f</code>, <code>o</code>, ... Every multi-character operator, identifier and number would be split.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Front end · Parsing",
+   "reverse": false
+  },
+  {
+   "guid": "I7-j+8?^1~",
    "type": "basic",
    "deck": "From Source to Silicon::01 Lexing & Parsing",
    "tags": [
@@ -110,7 +128,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "tWg@VA&-jj",
    "type": "basic",
    "deck": "From Source to Silicon::01 Lexing & Parsing",
    "tags": [
@@ -127,7 +145,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "nA-6diX2S:",
    "type": "basic",
    "deck": "From Source to Silicon::01 Lexing & Parsing",
    "tags": [
@@ -145,7 +163,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "jaC?8[7%j$",
    "type": "cloze",
    "deck": "From Source to Silicon::01 Lexing & Parsing",
    "tags": [
@@ -163,7 +181,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "y:ixsbTgVI",
    "type": "basic",
    "deck": "From Source to Silicon::01 Lexing & Parsing",
    "tags": [
@@ -181,7 +199,25 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "cbe910ad3d",
+   "type": "basic",
+   "deck": "From Source to Silicon::01 Lexing & Parsing",
+   "tags": [
+    "s2s",
+    "relational",
+    "simplified"
+   ],
+   "front": "Why can a bottom-up (LR) parser use the left-recursive rule <code>expr &rarr; expr + term</code> without trouble, when recursive descent cannot?",
+   "back": "An LR parser decides on a rule only <i>after</i> it has seen the right-hand side, so <code>expr</code> is already on the stack when <code>+</code> arrives; nothing recurses without consuming input. Left recursion also keeps the LR stack shallow.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Front end · Parsing",
+   "reverse": false
+  },
+  {
+   "guid": "-{]}tF{hc",
    "type": "basic",
    "deck": "From Source to Silicon::01 Lexing & Parsing",
    "tags": [
@@ -199,7 +235,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "C^sTDt.}m<",
    "type": "basic",
    "deck": "From Source to Silicon::01 Lexing & Parsing",
    "tags": [
@@ -216,7 +252,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "CJ^gWMU|e8",
    "type": "basic",
    "deck": "From Source to Silicon::01 Lexing & Parsing",
    "tags": [
@@ -233,7 +269,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "I;7QQ?RBUG",
    "type": "basic",
    "deck": "From Source to Silicon::01 Lexing & Parsing",
    "tags": [
@@ -252,7 +288,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "LElkt7R~W=",
    "type": "basic",
    "deck": "From Source to Silicon::01 Lexing & Parsing",
    "tags": [
@@ -269,17 +305,37 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "ebc40d8a71",
+   "type": "basic",
+   "deck": "From Source to Silicon::01 Lexing & Parsing",
+   "tags": [
+    "s2s",
+    "application",
+    "conflict",
+    "simplified"
+   ],
+   "front": "What is a <b>shift/reduce conflict</b>, with the dangling <code>else</code> as the example, and how is it usually resolved?",
+   "back": "With <code>if a if b x else y</code> the parser may <i>reduce</i> the inner <code>if</code> or <i>shift</i> the <code>else</code>. Parser generators default to shift, so <code>else</code> binds to the nearest <code>if</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Front end · Parsing",
+   "reverse": false
+  },
+  {
+   "guid": "A{V@Ug|q.T",
    "type": "cloze",
    "deck": "From Source to Silicon::01 Lexing & Parsing",
    "tags": [
     "s2s",
     "lr",
-    "lalr"
+    "lalr",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Left-to-right, rightmost-derivation (LR) table flavours: {{c1::SLR}} uses FOLLOW sets for reduce decisions (small, weak); {{c2::canonical LR(1)}} carries a lookahead in every item (strongest, huge tables); {{c3::LALR(1)}} merges LR(1) states with the same core, nearly as strong with SLR-sized tables, and is what yacc/bison build.",
+   "text": "Left-to-right, rightmost-derivation (LR) table flavours: SLR uses {{c1::FOLLOW sets}} for reduce decisions (small tables, weak); canonical LR(1) {{c2::carries a lookahead in every item}} (strongest, huge tables); LALR(1) {{c3::merges LR(1) states with the same core}}, nearly as strong with SLR-sized tables, and is what {{c4::yacc/bison}} build.",
    "image": "",
    "analogy": "",
    "extra": "<b>Pitfall:</b> merging states can introduce reduce/reduce conflicts that LR(1) would not have, a classic head-scratcher when bison rejects a grammar. <b>Terms:</b> simple LR (SLR); look-ahead LR (LALR)",
@@ -287,7 +343,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "dd1[V;-j!s",
    "type": "basic",
    "deck": "From Source to Silicon::01 Lexing & Parsing",
    "tags": [
@@ -304,7 +360,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "rV.{.m8l5$",
    "type": "basic",
    "deck": "From Source to Silicon::01 Lexing & Parsing",
    "tags": [
@@ -321,7 +377,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "bXs-ecS&HP",
    "type": "basic",
    "deck": "From Source to Silicon::01 Lexing & Parsing",
    "tags": [
@@ -338,7 +394,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "p27dlu}n{P",
    "type": "basic",
    "deck": "From Source to Silicon::01 Lexing & Parsing",
    "tags": [
@@ -356,7 +412,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "llPc:dgziA",
    "type": "basic",
    "deck": "From Source to Silicon::01 Lexing & Parsing",
    "tags": [
@@ -373,7 +429,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "JZJJtLOV`*",
    "type": "basic",
    "deck": "From Source to Silicon::01 Lexing & Parsing",
    "tags": [
@@ -391,7 +447,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "IEqFzRgG$m",
    "type": "basic",
    "deck": "From Source to Silicon::01 Lexing & Parsing",
    "tags": [
@@ -410,7 +466,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "Lt(3}91y8r",
    "type": "basic",
    "deck": "From Source to Silicon::01 Lexing & Parsing",
    "tags": [
@@ -428,7 +484,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "zdf!ImB+rM",
    "type": "basic",
    "deck": "From Source to Silicon::02 Semantic Analysis & Type Systems",
    "tags": [
@@ -445,7 +501,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "wX{z``Bb:B",
    "type": "basic",
    "deck": "From Source to Silicon::02 Semantic Analysis & Type Systems",
    "tags": [
@@ -462,7 +518,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "Rc?LBe#EM+",
    "type": "basic",
    "deck": "From Source to Silicon::02 Semantic Analysis & Type Systems",
    "tags": [
@@ -480,7 +536,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "lVN?&GcAT&",
    "type": "basic",
    "deck": "From Source to Silicon::02 Semantic Analysis & Type Systems",
    "tags": [
@@ -498,7 +554,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "gh@LUP_P5{",
    "type": "basic",
    "deck": "From Source to Silicon::02 Semantic Analysis & Type Systems",
    "tags": [
@@ -515,7 +571,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "fQQ{w>uOn!",
    "type": "basic",
    "deck": "From Source to Silicon::02 Semantic Analysis & Type Systems",
    "tags": [
@@ -533,7 +589,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "mH7@]NA,$-",
    "type": "basic",
    "deck": "From Source to Silicon::02 Semantic Analysis & Type Systems",
    "tags": [
@@ -551,7 +607,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "D-[dj?!|S",
    "type": "basic",
    "deck": "From Source to Silicon::02 Semantic Analysis & Type Systems",
    "tags": [
@@ -570,7 +626,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "sW@/CDQV3[",
    "type": "basic",
    "deck": "From Source to Silicon::02 Semantic Analysis & Type Systems",
    "tags": [
@@ -588,7 +644,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "D[,o.)uWyx",
    "type": "basic",
    "deck": "From Source to Silicon::02 Semantic Analysis & Type Systems",
    "tags": [
@@ -606,7 +662,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "xiTP{aKxed",
    "type": "basic",
    "deck": "From Source to Silicon::02 Semantic Analysis & Type Systems",
    "tags": [
@@ -624,7 +680,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "BrI5I/xok[",
    "type": "basic",
    "deck": "From Source to Silicon::02 Semantic Analysis & Type Systems",
    "tags": [
@@ -642,7 +698,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "hC*_YPvx-M",
    "type": "basic",
    "deck": "From Source to Silicon::02 Semantic Analysis & Type Systems",
    "tags": [
@@ -661,7 +717,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "P2A2K5z>!j",
    "type": "basic",
    "deck": "From Source to Silicon::02 Semantic Analysis & Type Systems",
    "tags": [
@@ -680,7 +736,26 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "0fffaa0ee4",
+   "type": "basic",
+   "deck": "From Source to Silicon::02 Semantic Analysis & Type Systems",
+   "tags": [
+    "s2s",
+    "application",
+    "alias",
+    "simplified"
+   ],
+   "front": "What does Rust's <code>&amp;mut</code> uniqueness give the optimiser, and what would break it?",
+   "back": "No other pointer can access the same data during the borrow, so the compiler may mark the parameter <code>noalias</code>, like C's <code>restrict</code>, and keep values in registers or vectorise. <code>unsafe</code> code that creates aliasing <code>&amp;mut</code> references breaks the promise: undefined behaviour (UB).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Types",
+   "reverse": false
+  },
+  {
+   "guid": "O8;Zb:Lo-e",
    "type": "cloze",
    "deck": "From Source to Silicon::02 Semantic Analysis & Type Systems",
    "tags": [
@@ -698,7 +773,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "L4y1&>1b&@",
    "type": "basic",
    "deck": "From Source to Silicon::02 Semantic Analysis & Type Systems",
    "tags": [
@@ -716,7 +791,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "E|knso0s1b",
    "type": "basic",
    "deck": "From Source to Silicon::02 Semantic Analysis & Type Systems",
    "tags": [
@@ -734,7 +809,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "MyvWSJx:pg",
    "type": "basic",
    "deck": "From Source to Silicon::02 Semantic Analysis & Type Systems",
    "tags": [
@@ -751,7 +826,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "bn#u^&P*:?",
    "type": "basic",
    "deck": "From Source to Silicon::02 Semantic Analysis & Type Systems",
    "tags": [
@@ -769,7 +844,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "iQ[p+pVi}9",
    "type": "basic",
    "deck": "From Source to Silicon::02 Semantic Analysis & Type Systems",
    "tags": [
@@ -786,7 +861,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "QHl*rbqcl[",
    "type": "basic",
    "deck": "From Source to Silicon::02 Semantic Analysis & Type Systems",
    "tags": [
@@ -804,7 +879,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "ha)DvLEF$#",
    "type": "basic",
    "deck": "From Source to Silicon::02 Semantic Analysis & Type Systems",
    "tags": [
@@ -821,7 +896,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "e^1G=T0M3*",
    "type": "basic",
    "deck": "From Source to Silicon::02 Semantic Analysis & Type Systems",
    "tags": [
@@ -839,7 +914,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "J`tSP^(sN}",
    "type": "basic",
    "deck": "From Source to Silicon::02 Semantic Analysis & Type Systems",
    "tags": [
@@ -857,7 +932,45 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "6e8c113311",
+   "type": "basic",
+   "deck": "From Source to Silicon::02 Semantic Analysis & Type Systems",
+   "tags": [
+    "s2s",
+    "application",
+    "ub",
+    "simplified"
+   ],
+   "front": "A function does <code>int v = *p;</code> and later <code>if (p == NULL) return;</code>. Why may the compiler delete the check?",
+   "back": "The dereference is undefined behaviour (UB) if <code>p</code> is null, so the optimiser assumes it is not null on every path that reaches the check; the test is always false and is removed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Types",
+   "reverse": false
+  },
+  {
+   "guid": "81791da080",
+   "type": "basic",
+   "deck": "From Source to Silicon::02 Semantic Analysis & Type Systems",
+   "tags": [
+    "s2s",
+    "application",
+    "ub",
+    "simplified"
+   ],
+   "front": "Why can a compiler vectorise <code>for (int i = 0; i &lt;= n; i++)</code> with a signed <code>i</code> but be more careful with an unsigned one?",
+   "back": "Signed overflow is undefined, so the compiler assumes <code>i</code> never wraps and the trip count is finite. Unsigned wraps by definition: if <code>n</code> is the maximum value the loop never ends, so the compiler must preserve that possibility.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Types",
+   "reverse": false
+  },
+  {
+   "guid": "A:6w&oT}~N",
    "type": "basic",
    "deck": "From Source to Silicon::03 IR & Optimisation",
    "tags": [
@@ -874,7 +987,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "zYbi)|[K4z",
    "type": "basic",
    "deck": "From Source to Silicon::03 IR & Optimisation",
    "tags": [
@@ -893,7 +1006,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "QJMei&~,KM",
    "type": "basic",
    "deck": "From Source to Silicon::03 IR & Optimisation",
    "tags": [
@@ -911,7 +1024,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "x)DiP1)@W&",
    "type": "basic",
    "deck": "From Source to Silicon::03 IR & Optimisation",
    "tags": [
@@ -929,7 +1042,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "tDgHvfUNc@",
    "type": "cloze",
    "deck": "From Source to Silicon::03 IR & Optimisation",
    "tags": [
@@ -947,7 +1060,26 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "4a845bc6db",
+   "type": "basic",
+   "deck": "From Source to Silicon::03 IR & Optimisation",
+   "tags": [
+    "s2s",
+    "application",
+    "ssa",
+    "simplified"
+   ],
+   "front": "What goes wrong in static single assignment (SSA) form if no &phi;-function is placed at a join block where <code>x</code> was assigned on both incoming paths?",
+   "back": "A use of <code>x</code> after the join would have two reaching definitions, but SSA requires exactly one. The &phi; supplies that single definition by choosing the value according to the edge taken.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IR & Opt",
+   "reverse": false
+  },
+  {
+   "guid": "f)0(>[@yPY",
    "type": "basic",
    "deck": "From Source to Silicon::03 IR & Optimisation",
    "tags": [
@@ -966,7 +1098,26 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "520f0b2fd0",
+   "type": "basic",
+   "deck": "From Source to Silicon::03 IR & Optimisation",
+   "tags": [
+    "s2s",
+    "relational",
+    "ssa",
+    "simplified"
+   ],
+   "front": "Why must a definition dominate all of its uses in valid static single assignment (SSA) form?",
+   "back": "If it did not, some path from the entry to the use would bypass the definition, leaving the use with an undefined value. The exception is a &phi; operand, which must be dominated by its definition at the end of the matching predecessor.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IR & Opt",
+   "reverse": false
+  },
+  {
+   "guid": "uUG;X^rQFd",
    "type": "basic",
    "deck": "From Source to Silicon::03 IR & Optimisation",
    "tags": [
@@ -985,7 +1136,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "i$?THNrl!z",
    "type": "basic",
    "deck": "From Source to Silicon::03 IR & Optimisation",
    "tags": [
@@ -1002,7 +1153,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "kNS)#kDoit",
    "type": "basic",
    "deck": "From Source to Silicon::03 IR & Optimisation",
    "tags": [
@@ -1020,7 +1171,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "i~>&kfErwX",
    "type": "basic",
    "deck": "From Source to Silicon::03 IR & Optimisation",
    "tags": [
@@ -1038,7 +1189,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "F0<P/yf3pL",
    "type": "basic",
    "deck": "From Source to Silicon::03 IR & Optimisation",
    "tags": [
@@ -1056,7 +1207,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "i)f<KGp&bx",
    "type": "basic",
    "deck": "From Source to Silicon::03 IR & Optimisation",
    "tags": [
@@ -1073,7 +1224,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "d/:X(iK{G<",
    "type": "basic",
    "deck": "From Source to Silicon::03 IR & Optimisation",
    "tags": [
@@ -1090,7 +1241,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "G=G&D=?-wj",
    "type": "basic",
    "deck": "From Source to Silicon::03 IR & Optimisation",
    "tags": [
@@ -1108,7 +1259,26 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "cc9ec9389c",
+   "type": "basic",
+   "deck": "From Source to Silicon::03 IR & Optimisation",
+   "tags": [
+    "s2s",
+    "application",
+    "licm",
+    "simplified"
+   ],
+   "front": "Why can't loop-invariant code motion (LICM) hoist <code>a / b</code> out of a loop that might run zero times?",
+   "back": "The division may trap (for example <code>b == 0</code>). Hoisting it into the preheader would execute it even when the loop body never would, adding a fault. It is hoistable only if proved safe or if the loop is known to run at least once.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "IR & Opt",
+   "reverse": false
+  },
+  {
+   "guid": "eLt}W4:=4U",
    "type": "basic",
    "deck": "From Source to Silicon::03 IR & Optimisation",
    "tags": [
@@ -1126,7 +1296,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "rkMy^W_{*I",
    "type": "basic",
    "deck": "From Source to Silicon::03 IR & Optimisation",
    "tags": [
@@ -1144,7 +1314,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "O-w>?p9$SY",
    "type": "basic",
    "deck": "From Source to Silicon::03 IR & Optimisation",
    "tags": [
@@ -1162,7 +1332,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "i9Ur>e=gG2",
    "type": "basic",
    "deck": "From Source to Silicon::03 IR & Optimisation",
    "tags": [
@@ -1180,7 +1350,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "B>smJH}%!I",
    "type": "basic",
    "deck": "From Source to Silicon::03 IR & Optimisation",
    "tags": [
@@ -1198,7 +1368,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "w,%I<s.4g2",
    "type": "basic",
    "deck": "From Source to Silicon::03 IR & Optimisation",
    "tags": [
@@ -1215,7 +1385,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "uGiEwwp-~9",
    "type": "cloze",
    "deck": "From Source to Silicon::03 IR & Optimisation",
    "tags": [
@@ -1232,7 +1402,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "HeunF}r^~O",
    "type": "basic",
    "deck": "From Source to Silicon::03 IR & Optimisation",
    "tags": [
@@ -1251,7 +1421,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "lUF^op@6V6",
    "type": "cloze",
    "deck": "From Source to Silicon::03 IR & Optimisation",
    "tags": [
@@ -1270,7 +1440,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "BK7B(yHYK?",
    "type": "basic",
    "deck": "From Source to Silicon::03 IR & Optimisation",
    "tags": [
@@ -1287,7 +1457,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "cEpS[u7*--",
    "type": "cloze",
    "deck": "From Source to Silicon::03 IR & Optimisation",
    "tags": [
@@ -1304,7 +1474,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "B[?v,BIwFX",
    "type": "basic",
    "deck": "From Source to Silicon::03 IR & Optimisation",
    "tags": [
@@ -1321,7 +1491,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "wUG<oYORS{",
    "type": "basic",
    "deck": "From Source to Silicon::04 Code Generation, ABI & Linking",
    "tags": [
@@ -1339,7 +1509,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "N5u-4sVY,M",
    "type": "basic",
    "deck": "From Source to Silicon::04 Code Generation, ABI & Linking",
    "tags": [
@@ -1357,7 +1527,26 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "fad929f240",
+   "type": "basic",
+   "deck": "From Source to Silicon::04 Code Generation, ABI & Linking",
+   "tags": [
+    "s2s",
+    "application",
+    "regalloc",
+    "simplified"
+   ],
+   "front": "What is a <b>spill</b>, and why does the allocator weigh spill cost by loop depth?",
+   "back": "A spill keeps a value in memory (stack) instead of a register, adding a store and loads wherever it is used. A spill inside a hot loop executes every iteration, so values used there are the last to be spilled.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Codegen & ABI",
+   "reverse": false
+  },
+  {
+   "guid": "w`+`)Wx=Od",
    "type": "basic",
    "deck": "From Source to Silicon::04 Code Generation, ABI & Linking",
    "tags": [
@@ -1375,7 +1564,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "G;0gG0$OfA",
    "type": "basic",
    "deck": "From Source to Silicon::04 Code Generation, ABI & Linking",
    "tags": [
@@ -1394,7 +1583,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "I:T@$_!BPX",
    "type": "basic",
    "deck": "From Source to Silicon::04 Code Generation, ABI & Linking",
    "tags": [
@@ -1414,7 +1603,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "sc={}z<mP",
    "type": "basic",
    "deck": "From Source to Silicon::04 Code Generation, ABI & Linking",
    "tags": [
@@ -1432,7 +1621,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "gsUs~$?EX=",
    "type": "basic",
    "deck": "From Source to Silicon::04 Code Generation, ABI & Linking",
    "tags": [
@@ -1450,7 +1639,26 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "1fe09c8483",
+   "type": "basic",
+   "deck": "From Source to Silicon::04 Code Generation, ABI & Linking",
+   "tags": [
+    "s2s",
+    "application",
+    "abi",
+    "simplified"
+   ],
+   "front": "Under System V (SysV) AMD64, a function uses <code>rbx</code> and <code>rax</code> internally. Which must it save and restore, and why?",
+   "back": "<code>rbx</code> is callee-saved, so the function must restore it before returning, because callers keep live values there across calls. <code>rax</code> is caller-saved scratch (it holds the return value), so the callee may clobber it freely.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Codegen & ABI",
+   "reverse": false
+  },
+  {
+   "guid": "A~kJ(l2X@A",
    "type": "basic",
    "deck": "From Source to Silicon::04 Code Generation, ABI & Linking",
    "tags": [
@@ -1469,17 +1677,18 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "w|SLiR)[@5",
    "type": "cloze",
    "deck": "From Source to Silicon::04 Code Generation, ABI & Linking",
    "tags": [
     "s2s",
     "abi",
-    "aarch64"
+    "aarch64",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "AAPCS64 register roles: {{c1::x0&ndash;x7}} arguments and results; {{c2::x8}} indirect-result (struct return) pointer; {{c3::x16/x17}} intra-procedure scratch (IP0/IP1, used by procedure linkage table (PLT)/veneers); {{c4::x18}} platform register (reserved by the OS); {{c5::x19&ndash;x28}} callee-saved; {{c6::x29}} frame pointer; {{c7::x30}} link register.",
+   "text": "Arm 64-bit Procedure Call Standard (AAPCS64) register roles: x0&ndash;x7 {{c1::arguments and results}}; x8 {{c2::indirect-result (struct return) pointer}}; x16/x17 {{c3::intra-procedure scratch (IP0/IP1), used by procedure linkage table (PLT) stubs and veneers}}; x18 {{c4::platform register (reserved by the OS)}}; x19&ndash;x28 {{c5::callee-saved}}; x29 {{c6::frame pointer}}; x30 {{c7::link register}}.",
    "image": "",
    "analogy": "",
    "extra": "<b>Link:</b> 07 ARM64/RISC-V/Z · registers, sp, xzr",
@@ -1487,7 +1696,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "j)e~{!:#wr",
    "type": "basic",
    "deck": "From Source to Silicon::04 Code Generation, ABI & Linking",
    "tags": [
@@ -1506,7 +1715,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "jjG`X,TyYl",
    "type": "basic",
    "deck": "From Source to Silicon::04 Code Generation, ABI & Linking",
    "tags": [
@@ -1525,7 +1734,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "M|JYavwz-A",
    "type": "basic",
    "deck": "From Source to Silicon::04 Code Generation, ABI & Linking",
    "tags": [
@@ -1544,7 +1753,26 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "5ca8082b6f",
+   "type": "basic",
+   "deck": "From Source to Silicon::04 Code Generation, ABI & Linking",
+   "tags": [
+    "s2s",
+    "abi",
+    "application",
+    "simplified"
+   ],
+   "front": "What is the x86-64 SysV <b>red zone</b>, and why must kernel code be compiled without it (<code>-mno-red-zone</code>)?",
+   "back": "The 128 bytes below <code>rsp</code> that a leaf function may use without adjusting <code>rsp</code>. User code is safe because the kernel skips the 128 bytes when delivering a signal; in the kernel itself an interrupt pushes onto the current stack and would overwrite the red zone.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Codegen & ABI",
+   "reverse": false
+  },
+  {
+   "guid": "J]F2D1OW.@",
    "type": "basic",
    "deck": "From Source to Silicon::04 Code Generation, ABI & Linking",
    "tags": [
@@ -1563,7 +1791,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "fFdk,u@A$6",
    "type": "basic",
    "deck": "From Source to Silicon::04 Code Generation, ABI & Linking",
    "tags": [
@@ -1582,7 +1810,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "u.x[x$eP-$",
    "type": "basic",
    "deck": "From Source to Silicon::04 Code Generation, ABI & Linking",
    "tags": [
@@ -1600,7 +1828,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "O0b-X5K>c5",
    "type": "basic",
    "deck": "From Source to Silicon::04 Code Generation, ABI & Linking",
    "tags": [
@@ -1618,7 +1846,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "pPJ}td>(vA",
    "type": "basic",
    "deck": "From Source to Silicon::04 Code Generation, ABI & Linking",
    "tags": [
@@ -1636,7 +1864,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "CSkJe:%:VI",
    "type": "basic",
    "deck": "From Source to Silicon::04 Code Generation, ABI & Linking",
    "tags": [
@@ -1656,7 +1884,26 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "89fa9a896f",
+   "type": "basic",
+   "deck": "From Source to Silicon::04 Code Generation, ABI & Linking",
+   "tags": [
+    "s2s",
+    "relational",
+    "got",
+    "simplified"
+   ],
+   "front": "Why can every process share one copy of a library's code pages while each needs its own global offset table (GOT)?",
+   "back": "Code is position-independent and read-only, so identical physical pages map at different addresses. The GOT holds absolute addresses valid only for that process's layout, so each process gets its own writable (copy-on-write) copy.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Codegen & ABI",
+   "reverse": false
+  },
+  {
+   "guid": "NZ}U86=LR@",
    "type": "basic",
    "deck": "From Source to Silicon::04 Code Generation, ABI & Linking",
    "tags": [
@@ -1675,7 +1922,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "z2sid%#Z:v",
    "type": "basic",
    "deck": "From Source to Silicon::04 Code Generation, ABI & Linking",
    "tags": [
@@ -1694,7 +1941,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "gJhBC8(/kM",
    "type": "basic",
    "deck": "From Source to Silicon::04 Code Generation, ABI & Linking",
    "tags": [
@@ -1712,7 +1959,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "m`6!xo1ke}",
    "type": "basic",
    "deck": "From Source to Silicon::04 Code Generation, ABI & Linking",
    "tags": [
@@ -1731,7 +1978,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "i/G:T@?mTz",
    "type": "cloze",
    "deck": "From Source to Silicon::04 Code Generation, ABI & Linking",
    "tags": [
@@ -1749,7 +1996,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "g95r`2=J,9",
    "type": "cloze",
    "deck": "From Source to Silicon::04 Code Generation, ABI & Linking",
    "tags": [
@@ -1767,7 +2014,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "f?bgE!LOfN",
    "type": "basic",
    "deck": "From Source to Silicon::04 Code Generation, ABI & Linking",
    "tags": [
@@ -1785,7 +2032,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "ddPJAY=BJV",
    "type": "basic",
    "deck": "From Source to Silicon::04 Code Generation, ABI & Linking",
    "tags": [
@@ -1803,7 +2050,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "B1PRRVpzGX",
    "type": "cloze",
    "deck": "From Source to Silicon::04 Code Generation, ABI & Linking",
    "tags": [
@@ -1821,7 +2068,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "5_dt[Q%XK",
    "type": "basic",
    "deck": "From Source to Silicon::05 Runtimes: Interpreters, VMs, JIT & GC",
    "tags": [
@@ -1839,7 +2086,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "dTGR<e<y%8",
    "type": "basic",
    "deck": "From Source to Silicon::05 Runtimes: Interpreters, VMs, JIT & GC",
    "tags": [
@@ -1858,7 +2105,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "dBwzd6{xAQ",
    "type": "basic",
    "deck": "From Source to Silicon::05 Runtimes: Interpreters, VMs, JIT & GC",
    "tags": [
@@ -1877,7 +2124,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "K2o!!YZq.P",
    "type": "cloze",
    "deck": "From Source to Silicon::05 Runtimes: Interpreters, VMs, JIT & GC",
    "tags": [
@@ -1895,7 +2142,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "g9Qi3vC4^Q",
    "type": "basic",
    "deck": "From Source to Silicon::05 Runtimes: Interpreters, VMs, JIT & GC",
    "tags": [
@@ -1914,7 +2161,26 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "cd775a8be1",
+   "type": "basic",
+   "deck": "From Source to Silicon::05 Runtimes: Interpreters, VMs, JIT & GC",
+   "tags": [
+    "s2s",
+    "application",
+    "gil",
+    "simplified"
+   ],
+   "front": "Why do Python threads still speed up I/O-bound programs despite the global interpreter lock (GIL)?",
+   "back": "A thread releases the GIL while it blocks in a system call (network, disk, sleep), so other threads run meanwhile. CPU-bound pure-Python threads gain nothing because only one may execute bytecode at a time.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Runtimes",
+   "reverse": false
+  },
+  {
+   "guid": "eyzL@zOLf=",
    "type": "basic",
    "deck": "From Source to Silicon::05 Runtimes: Interpreters, VMs, JIT & GC",
    "tags": [
@@ -1933,7 +2199,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "J:{.o*YJ|W",
    "type": "basic",
    "deck": "From Source to Silicon::05 Runtimes: Interpreters, VMs, JIT & GC",
    "tags": [
@@ -1952,7 +2218,26 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "8bd50b22d8",
+   "type": "basic",
+   "deck": "From Source to Silicon::05 Runtimes: Interpreters, VMs, JIT & GC",
+   "tags": [
+    "s2s",
+    "application",
+    "jit",
+    "simplified"
+   ],
+   "front": "What would go wrong if an inline-cache fast path loaded <code>[a + offset]</code> <i>without</i> the shape check?",
+   "back": "If <code>a</code> had a different shape, the cached offset would point at another property or past the object: wrong values or memory corruption. The guard keeps the specialised load correct; a failed guard falls back to the slow path.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Runtimes",
+   "reverse": false
+  },
+  {
+   "guid": "O6nAC}Yj&D",
    "type": "basic",
    "deck": "From Source to Silicon::05 Runtimes: Interpreters, VMs, JIT & GC",
    "tags": [
@@ -1971,18 +2256,19 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "x[aDc(N_Gk",
    "type": "cloze",
    "deck": "From Source to Silicon::05 Runtimes: Interpreters, VMs, JIT & GC",
    "tags": [
     "s2s",
     "runtime",
     "jit",
-    "jvm"
+    "jvm",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "HotSpot tiered compilation: level 0 is the {{c1::interpreter}}, levels 1&ndash;3 are {{c2::C1}} (3 = with full profiling), level 4 is {{c3::C2}}. The usual path of a hot method is 0 &rarr; 3 &rarr; 4.",
+   "text": "HotSpot tiered compilation: level 0 is the interpreter; levels 1&ndash;3 are C1, the {{c1::fast, lightly optimising compiler}} (level 3 adds {{c2::full profiling}}); level 4 is C2, the {{c3::slow, aggressively optimising compiler}} that uses that profile. The usual path of a hot method is 0 &rarr; {{c4::3}} &rarr; {{c5::4}}.",
    "image": "",
    "analogy": "A three-speed gearbox: start in first, use second while you learn the road, shift to top gear only on a straight you know well.",
    "extra": "<b>Why level 2 exists:</b> C1 without heavy profiling is ~30% faster than level 3, so it is used when the C2 queue is backed up. <b>Flag:</b> <code>-XX:+PrintCompilation</code>.",
@@ -1990,7 +2276,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "y32/L+%2`+",
    "type": "basic",
    "deck": "From Source to Silicon::05 Runtimes: Interpreters, VMs, JIT & GC",
    "tags": [
@@ -2009,7 +2295,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "w:|~%BU*rG",
    "type": "basic",
    "deck": "From Source to Silicon::05 Runtimes: Interpreters, VMs, JIT & GC",
    "tags": [
@@ -2028,7 +2314,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "JM~:c6oug8",
    "type": "basic",
    "deck": "From Source to Silicon::05 Runtimes: Interpreters, VMs, JIT & GC",
    "tags": [
@@ -2048,7 +2334,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "i<8{Ny(aNI",
    "type": "basic",
    "deck": "From Source to Silicon::05 Runtimes: Interpreters, VMs, JIT & GC",
    "tags": [
@@ -2067,7 +2353,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "voWm4)(p1a",
    "type": "basic",
    "deck": "From Source to Silicon::05 Runtimes: Interpreters, VMs, JIT & GC",
    "tags": [
@@ -2086,7 +2372,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "M0jmeP4E?g",
    "type": "basic",
    "deck": "From Source to Silicon::05 Runtimes: Interpreters, VMs, JIT & GC",
    "tags": [
@@ -2105,7 +2391,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "KlbZ/%%V!*",
    "type": "basic",
    "deck": "From Source to Silicon::05 Runtimes: Interpreters, VMs, JIT & GC",
    "tags": [
@@ -2124,7 +2410,26 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "4cf6c4b882",
+   "type": "basic",
+   "deck": "From Source to Silicon::05 Runtimes: Interpreters, VMs, JIT & GC",
+   "tags": [
+    "s2s",
+    "application",
+    "gc",
+    "simplified"
+   ],
+   "front": "Two objects reference each other and nothing else references either. What happens under reference counting versus tracing garbage collection (GC)?",
+   "back": "Reference counting: each count stays at 1, so neither is freed (a leak). Tracing: neither is reachable from the roots, so both are reclaimed. Reference-counted systems fix this with weak references or a cycle detector.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Runtimes",
+   "reverse": false
+  },
+  {
+   "guid": "p>V2}bU(!f",
    "type": "basic",
    "deck": "From Source to Silicon::05 Runtimes: Interpreters, VMs, JIT & GC",
    "tags": [
@@ -2143,7 +2448,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "nn,WC/mct]",
    "type": "basic",
    "deck": "From Source to Silicon::05 Runtimes: Interpreters, VMs, JIT & GC",
    "tags": [
@@ -2162,7 +2467,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "C?sBZB2E3`",
    "type": "basic",
    "deck": "From Source to Silicon::05 Runtimes: Interpreters, VMs, JIT & GC",
    "tags": [
@@ -2181,7 +2486,26 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "fee02ff1e7",
+   "type": "basic",
+   "deck": "From Source to Silicon::05 Runtimes: Interpreters, VMs, JIT & GC",
+   "tags": [
+    "s2s",
+    "application",
+    "gc",
+    "simplified"
+   ],
+   "front": "What breaks in a generational collector if a store of a young pointer into an old object skips the write barrier?",
+   "back": "A nursery collection does not scan the old generation, so the young object (reachable only through that old object) looks unreferenced. It is freed or moved while the old object still points to it: a dangling pointer.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Runtimes",
+   "reverse": false
+  },
+  {
+   "guid": "p@%_7RTR)K",
    "type": "basic",
    "deck": "From Source to Silicon::05 Runtimes: Interpreters, VMs, JIT & GC",
    "tags": [
@@ -2199,18 +2523,38 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "256f8f9e8f",
+   "type": "basic",
+   "deck": "From Source to Silicon::05 Runtimes: Interpreters, VMs, JIT & GC",
+   "tags": [
+    "s2s",
+    "application",
+    "gc",
+    "simplified"
+   ],
+   "front": "What does a copying collector have to do about a heap pointer held by native (non-managed) code, and why?",
+   "back": "Objects move, so the native pointer would dangle. The runtime must <b>pin</b> the object (forbid moving it) or give native code an indirect handle that the collector updates.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Runtimes",
+   "reverse": false
+  },
+  {
+   "guid": "OfM~T,$@Z[",
    "type": "cloze",
    "deck": "From Source to Silicon::05 Runtimes: Interpreters, VMs, JIT & GC",
    "tags": [
     "s2s",
     "runtime",
     "gc",
-    "tricolour"
+    "tricolour",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Tri-colour marking: {{c1::white}} objects are not yet reached (garbage if still white at the end), {{c2::grey}} objects are reached but their children are not yet scanned, {{c3::black}} objects are fully scanned. Marking pops a grey object, greys its white children and blackens it.",
+   "text": "Tri-colour marking: white = {{c1::not yet reached (garbage if still white at the end)}}; grey = {{c2::reached, but its children are not yet scanned}}; black = {{c3::fully scanned}}. Marking pops a grey object, greys its white children and blackens it.",
    "image": "<img src=\"s2s_tricolour.svg\">",
    "analogy": "",
    "extra": "<b>Why colours:</b> they let marking be interrupted and resumed, which is what incremental and concurrent collectors need.",
@@ -2218,7 +2562,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "k#-?z9yz}p",
    "type": "basic",
    "deck": "From Source to Silicon::05 Runtimes: Interpreters, VMs, JIT & GC",
    "tags": [
@@ -2237,7 +2581,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "*dE*a:uta",
    "type": "basic",
    "deck": "From Source to Silicon::05 Runtimes: Interpreters, VMs, JIT & GC",
    "tags": [
@@ -2256,7 +2600,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "KW%&j:z<Rt",
    "type": "basic",
    "deck": "From Source to Silicon::05 Runtimes: Interpreters, VMs, JIT & GC",
    "tags": [
@@ -2275,7 +2619,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "O7?C)=}ye|",
    "type": "basic",
    "deck": "From Source to Silicon::05 Runtimes: Interpreters, VMs, JIT & GC",
    "tags": [
@@ -2294,7 +2638,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "C0fL?T/;TV",
    "type": "basic",
    "deck": "From Source to Silicon::05 Runtimes: Interpreters, VMs, JIT & GC",
    "tags": [
@@ -2314,7 +2658,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "g(Q$z-WM;8",
    "type": "basic",
    "deck": "From Source to Silicon::05 Runtimes: Interpreters, VMs, JIT & GC",
    "tags": [
@@ -2333,7 +2677,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "C?=-DnXHfq",
    "type": "basic",
    "deck": "From Source to Silicon::06 ISA & Assembly: x86-64",
    "tags": [
@@ -2351,7 +2695,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "y-UApN`TB6",
    "type": "basic",
    "deck": "From Source to Silicon::06 ISA & Assembly: x86-64",
    "tags": [
@@ -2369,17 +2713,37 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "79433701f1",
+   "type": "basic",
+   "deck": "From Source to Silicon::06 ISA & Assembly: x86-64",
+   "tags": [
+    "s2s",
+    "application",
+    "x86",
+    "simplified"
+   ],
+   "front": "Why is zero-extending a 32-bit value to 64 bits free on x86-64, whereas sign-extending needs an instruction?",
+   "back": "Every 32-bit register write already zeroes bits 63&ndash;32, so unsigned <code>int</code> &rarr; <code>size_t</code> costs nothing. Sign extension must replicate the sign bit, which takes <code>movsxd</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "ISA · x86-64",
+   "reverse": false
+  },
+  {
+   "guid": "sDRAXI+y*k",
    "type": "cloze",
    "deck": "From Source to Silicon::06 ISA & Assembly: x86-64",
    "tags": [
     "s2s",
     "x86",
-    "flags"
+    "flags",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "The arithmetic flags: {{c1::ZF}} (result zero), {{c2::CF}} (unsigned carry/borrow), {{c3::SF}} (sign bit of result), {{c4::OF}} (signed overflow). Most arithmetic logic unit (ALU) instructions set them; <code>mov</code>, <code>lea</code> and <code>cmov</code> leave them untouched.",
+   "text": "The x86 arithmetic flags: ZF = {{c1::zero flag: the result was zero}}; CF = {{c2::carry flag: unsigned carry/borrow}}; SF = {{c3::sign flag: copy of the result's top bit}}; OF = {{c4::overflow flag: signed overflow}}. Most arithmetic logic unit (ALU) instructions set them; <code>mov</code>, <code>lea</code> and <code>cmov</code> leave them untouched.",
    "image": "",
    "analogy": "",
    "extra": "<b>Also:</b> parity flag (PF; parity of low byte) and auxiliary carry flag (AF; binary-coded decimal (BCD) half-carry) are legacy; <code>inc</code>/<code>dec</code> set everything but carry flag (CF). <b>Terms:</b> zero flag (ZF); sign flag (SF); overflow flag (OF)",
@@ -2387,7 +2751,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "s;ccxGygJx",
    "type": "basic",
    "deck": "From Source to Silicon::06 ISA & Assembly: x86-64",
    "tags": [
@@ -2406,7 +2770,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "h9]=d9tgGx",
    "type": "basic",
    "deck": "From Source to Silicon::06 ISA & Assembly: x86-64",
    "tags": [
@@ -2425,7 +2789,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "L7udEa5zx#",
    "type": "cloze",
    "deck": "From Source to Silicon::06 ISA & Assembly: x86-64",
    "tags": [
@@ -2443,7 +2807,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "fA.C}[PL(X",
    "type": "basic",
    "deck": "From Source to Silicon::06 ISA & Assembly: x86-64",
    "tags": [
@@ -2462,7 +2826,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "IsnTs4]0_@",
    "type": "basic",
    "deck": "From Source to Silicon::06 ISA & Assembly: x86-64",
    "tags": [
@@ -2481,7 +2845,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "k4Fk5z6<p3",
    "type": "basic",
    "deck": "From Source to Silicon::06 ISA & Assembly: x86-64",
    "tags": [
@@ -2500,7 +2864,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "cEew];Q`~k",
    "type": "basic",
    "deck": "From Source to Silicon::06 ISA & Assembly: x86-64",
    "tags": [
@@ -2518,7 +2882,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "c<~)D;Qj{@",
    "type": "cloze",
    "deck": "From Source to Silicon::06 ISA & Assembly: x86-64",
    "tags": [
@@ -2536,18 +2900,19 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "PR3iHbWvDe",
    "type": "cloze",
    "deck": "From Source to Silicon::06 ISA & Assembly: x86-64",
    "tags": [
     "s2s",
     "x86",
     "encoding",
-    "rex"
+    "rex",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "The register extension (REX) prefix is <code>0100WRXB</code>: {{c1::W}} selects 64-bit operand size, {{c2::R}} extends the mode-register-memory (ModRM) <i>reg</i> field, {{c3::X}} extends the scale-index-base (SIB) <i>index</i>, {{c4::B}} extends ModRM <i>rm</i> / SIB <i>base</i>, each adding the fourth bit needed to name <code>r8</code>&ndash;<code>r15</code>.",
+   "text": "The register extension (REX) prefix is <code>0100WRXB</code>. W = {{c1::selects 64-bit operand size}}; R = {{c2::extends the mode-register-memory (ModRM) <i>reg</i> field}}; X = {{c3::extends the scale-index-base (SIB) <i>index</i>}}; B = {{c4::extends ModRM <i>rm</i> / SIB <i>base</i>}}. R, X and B each add the fourth bit needed to name <code>r8</code>&ndash;<code>r15</code>.",
    "image": "",
    "analogy": "A fourth digit added to the room-number dial: without it the hotel's new wing (r8&ndash;r15) is unreachable.",
    "extra": "<b>Side effect:</b> any REX prefix also switches the byte registers from <code>ah/ch/dh/bh</code> to <code>spl/bpl/sil/dil</code>, so the two sets cannot be mixed in one instruction.",
@@ -2555,7 +2920,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "k=iJ!<6|vX",
    "type": "cloze",
    "deck": "From Source to Silicon::06 ISA & Assembly: x86-64",
    "tags": [
@@ -2574,7 +2939,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "vW,Pfd^cUc",
    "type": "basic",
    "deck": "From Source to Silicon::06 ISA & Assembly: x86-64",
    "tags": [
@@ -2593,7 +2958,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "JiVtH,`HNt",
    "type": "basic",
    "deck": "From Source to Silicon::06 ISA & Assembly: x86-64",
    "tags": [
@@ -2612,7 +2977,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "bN<$jLw.dr",
    "type": "basic",
    "deck": "From Source to Silicon::06 ISA & Assembly: x86-64",
    "tags": [
@@ -2631,7 +2996,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "vTy6(!Hw2e",
    "type": "cloze",
    "deck": "From Source to Silicon::06 ISA & Assembly: x86-64",
    "tags": [
@@ -2649,7 +3014,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "o62[Y#|Q)(",
    "type": "basic",
    "deck": "From Source to Silicon::06 ISA & Assembly: x86-64",
    "tags": [
@@ -2668,7 +3033,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "k+A<{L_NJB",
    "type": "basic",
    "deck": "From Source to Silicon::06 ISA & Assembly: x86-64",
    "tags": [
@@ -2687,7 +3052,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "o{4wV<u-bg",
    "type": "basic",
    "deck": "From Source to Silicon::06 ISA & Assembly: x86-64",
    "tags": [
@@ -2706,18 +3071,19 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "xWCj94O|]Z",
    "type": "cloze",
    "deck": "From Source to Silicon::06 ISA & Assembly: x86-64",
    "tags": [
     "s2s",
     "x86",
     "syscall",
-    "abi"
+    "abi",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Linux x86-64 <code>syscall</code> convention: number in {{c1::<code>rax</code>}}, arguments in {{c2::<code>rdi, rsi, rdx, r10, r8, r9</code>}}, result in <code>rax</code> (<code>-4095..-1</code> means <code>-errno</code>); the instruction clobbers {{c3::<code>rcx</code> and <code>r11</code>}}.",
+   "text": "Linux x86-64 <code>syscall</code> convention: the call number goes in <code>rax</code>; arguments go in {{c1::<code>rdi, rsi, rdx, r10, r8, r9</code>}} (<code>r10</code> replaces <code>rcx</code>); the result returns in {{c2::the same register as the call number}}, where <code>-4095..-1</code> means <code>-errno</code>; the instruction clobbers {{c3::<code>rcx</code> and <code>r11</code>}}.",
    "image": "",
    "analogy": "",
    "extra": "<b>Example:</b> <code>mov eax,1; mov edi,1; lea rsi,[rip+msg]; mov edx,len; syscall</code> is <code>write(1, msg, len)</code>.",
@@ -2725,7 +3091,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "C_@0>Gz82*",
    "type": "basic",
    "deck": "From Source to Silicon::06 ISA & Assembly: x86-64",
    "tags": [
@@ -2744,7 +3110,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "I@51qMx*g4",
    "type": "basic",
    "deck": "From Source to Silicon::06 ISA & Assembly: x86-64",
    "tags": [
@@ -2762,7 +3128,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "NRQrR[8~JT",
    "type": "basic",
    "deck": "From Source to Silicon::06 ISA & Assembly: x86-64",
    "tags": [
@@ -2781,7 +3147,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "FLlty{Yeq8",
    "type": "basic",
    "deck": "From Source to Silicon::06 ISA & Assembly: x86-64",
    "tags": [
@@ -2800,7 +3166,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "b-+n|vr5|H",
    "type": "basic",
    "deck": "From Source to Silicon::06 ISA & Assembly: x86-64",
    "tags": [
@@ -2819,17 +3185,18 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "FQQ=b|Yz$J",
    "type": "cloze",
    "deck": "From Source to Silicon::07 ISA & Assembly: ARM64, RISC-V & IBM Z",
    "tags": [
     "s2s",
     "arm64",
-    "registers"
+    "registers",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "AArch64 has {{c1::31}} general-purpose 64-bit registers <code>x0&ndash;x30</code>; <code>x30</code> is the {{c2::link register (lr)}}; register number 31 in an encoding means {{c3::<code>sp</code> or <code>xzr</code> (zero register)}} depending on the instruction.",
+   "text": "AArch64 has only 31 general-purpose 64-bit registers (<code>x0&ndash;x30</code>) because encoding number {{c1::31}} is spoken for: it means {{c2::<code>sp</code> or <code>xzr</code> (zero register), depending on the instruction}}. <code>x30</code> doubles as the {{c3::link register (lr)}} written by <code>bl</code>.",
    "image": "",
    "analogy": "",
    "extra": "<b>Pitfall:</b> the program counter (PC) is <i>not</i> a general register in AArch64 (it was <code>r15</code> in 32-bit ARM); you reach it only via <code>adr</code>/<code>adrp</code> and branches.",
@@ -2837,7 +3204,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "r[|C8=LoI%",
    "type": "basic",
    "deck": "From Source to Silicon::07 ISA & Assembly: ARM64, RISC-V & IBM Z",
    "tags": [
@@ -2855,7 +3222,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "IJGcZe4Ah",
    "type": "basic",
    "deck": "From Source to Silicon::07 ISA & Assembly: ARM64, RISC-V & IBM Z",
    "tags": [
@@ -2874,7 +3241,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "H&WAG4dRk{",
    "type": "basic",
    "deck": "From Source to Silicon::07 ISA & Assembly: ARM64, RISC-V & IBM Z",
    "tags": [
@@ -2893,7 +3260,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "j0#OW-P{]<",
    "type": "basic",
    "deck": "From Source to Silicon::07 ISA & Assembly: ARM64, RISC-V & IBM Z",
    "tags": [
@@ -2912,7 +3279,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "Cq=dn0H}EF",
    "type": "basic",
    "deck": "From Source to Silicon::07 ISA & Assembly: ARM64, RISC-V & IBM Z",
    "tags": [
@@ -2930,7 +3297,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "uY]JM&+sT_",
    "type": "basic",
    "deck": "From Source to Silicon::07 ISA & Assembly: ARM64, RISC-V & IBM Z",
    "tags": [
@@ -2950,7 +3317,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "o;_].*?#Tf",
    "type": "basic",
    "deck": "From Source to Silicon::07 ISA & Assembly: ARM64, RISC-V & IBM Z",
    "tags": [
@@ -2970,7 +3337,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "e*.h.KU/_V",
    "type": "basic",
    "deck": "From Source to Silicon::07 ISA & Assembly: ARM64, RISC-V & IBM Z",
    "tags": [
@@ -2989,7 +3356,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "N;bYTPIi_S",
    "type": "basic",
    "deck": "From Source to Silicon::07 ISA & Assembly: ARM64, RISC-V & IBM Z",
    "tags": [
@@ -3008,7 +3375,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "o>Yg{v[8>8",
    "type": "cloze",
    "deck": "From Source to Silicon::07 ISA & Assembly: ARM64, RISC-V & IBM Z",
    "tags": [
@@ -3026,7 +3393,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "fsTy0=iz2R",
    "type": "basic",
    "deck": "From Source to Silicon::07 ISA & Assembly: ARM64, RISC-V & IBM Z",
    "tags": [
@@ -3045,7 +3412,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "H.jWR&:E?=",
    "type": "basic",
    "deck": "From Source to Silicon::07 ISA & Assembly: ARM64, RISC-V & IBM Z",
    "tags": [
@@ -3064,7 +3431,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "N4a0[DSZE-",
    "type": "basic",
    "deck": "From Source to Silicon::07 ISA & Assembly: ARM64, RISC-V & IBM Z",
    "tags": [
@@ -3083,7 +3450,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "s(5?y][ZFX",
    "type": "cloze",
    "deck": "From Source to Silicon::07 ISA & Assembly: ARM64, RISC-V & IBM Z",
    "tags": [
@@ -3101,7 +3468,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "I,<eMt-Q,|",
    "type": "basic",
    "deck": "From Source to Silicon::07 ISA & Assembly: ARM64, RISC-V & IBM Z",
    "tags": [
@@ -3120,7 +3487,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "Mf}bTIf)~6",
    "type": "basic",
    "deck": "From Source to Silicon::07 ISA & Assembly: ARM64, RISC-V & IBM Z",
    "tags": [
@@ -3139,18 +3506,19 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "cYS{_<#%2e",
    "type": "cloze",
    "deck": "From Source to Silicon::07 ISA & Assembly: ARM64, RISC-V & IBM Z",
    "tags": [
     "s2s",
     "ibmz",
     "registers",
-    "encoding"
+    "encoding",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "z/Architecture has {{c1::16}} general registers of 64 bits (plus 16 floating-point, 16 access, 16 control and 32 vector registers); instructions are {{c2::2, 4 or 6}} bytes long, with the length given by the top two bits of the first opcode byte.",
+   "text": "z/Architecture has 16 general registers of 64 bits (plus 16 floating-point, 16 access, 16 control and 32 vector registers). Instructions are {{c1::2, 4 or 6}} bytes long; the length is given by {{c2::the top two bits of the first opcode byte}}.",
    "image": "<img src=\"s2s_isa_encoding.svg\">",
    "analogy": "",
    "extra": "<b>Why it matters:</b> length is known before decoding the rest, so despite being complex instruction set computer (CISC), Z decodes far more easily than x86. Big-endian, Extended Binary Coded Decimal Interchange Code (EBCDIC) by convention. <b>Link:</b> 06 x86-64 · variable-length decoding",
@@ -3158,7 +3526,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "qBUqw,{23f",
    "type": "basic",
    "deck": "From Source to Silicon::07 ISA & Assembly: ARM64, RISC-V & IBM Z",
    "tags": [
@@ -3177,7 +3545,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "i,_]j`^]vg",
    "type": "basic",
    "deck": "From Source to Silicon::07 ISA & Assembly: ARM64, RISC-V & IBM Z",
    "tags": [
@@ -3196,7 +3564,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "v9c/CVYvZZ",
    "type": "basic",
    "deck": "From Source to Silicon::07 ISA & Assembly: ARM64, RISC-V & IBM Z",
    "tags": [
@@ -3215,7 +3583,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "JcB_@FdC=|",
    "type": "basic",
    "deck": "From Source to Silicon::07 ISA & Assembly: ARM64, RISC-V & IBM Z",
    "tags": [
@@ -3234,7 +3602,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "vUb;ZW)5-n",
    "type": "basic",
    "deck": "From Source to Silicon::07 ISA & Assembly: ARM64, RISC-V & IBM Z",
    "tags": [
@@ -3253,7 +3621,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "(y_OQBeHG",
    "type": "basic",
    "deck": "From Source to Silicon::07 ISA & Assembly: ARM64, RISC-V & IBM Z",
    "tags": [
@@ -3271,7 +3639,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "y4F7W20G#h",
    "type": "basic",
    "deck": "From Source to Silicon::07 ISA & Assembly: ARM64, RISC-V & IBM Z",
    "tags": [
@@ -3291,7 +3659,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "IIl5c@3e.9",
    "type": "basic",
    "deck": "From Source to Silicon::07 ISA & Assembly: ARM64, RISC-V & IBM Z",
    "tags": [
@@ -3310,7 +3678,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "e,/g!flEkY",
    "type": "basic",
    "deck": "From Source to Silicon::08 Microarchitecture: Pipeline, Out-of-Order & Microcode",
    "tags": [
@@ -3329,7 +3697,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "DuSgybl.w",
    "type": "basic",
    "deck": "From Source to Silicon::08 Microarchitecture: Pipeline, Out-of-Order & Microcode",
    "tags": [
@@ -3347,7 +3715,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "x0Oq5RNQ.n",
    "type": "basic",
    "deck": "From Source to Silicon::08 Microarchitecture: Pipeline, Out-of-Order & Microcode",
    "tags": [
@@ -3366,7 +3734,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "/jMKP,8G.",
    "type": "basic",
    "deck": "From Source to Silicon::08 Microarchitecture: Pipeline, Out-of-Order & Microcode",
    "tags": [
@@ -3384,7 +3752,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "wvQTUbdBCc",
    "type": "basic",
    "deck": "From Source to Silicon::08 Microarchitecture: Pipeline, Out-of-Order & Microcode",
    "tags": [
@@ -3404,7 +3772,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "lWZ^&NQ2T?",
    "type": "basic",
    "deck": "From Source to Silicon::08 Microarchitecture: Pipeline, Out-of-Order & Microcode",
    "tags": [
@@ -3423,7 +3791,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "u!X_vZ9w1$",
    "type": "basic",
    "deck": "From Source to Silicon::08 Microarchitecture: Pipeline, Out-of-Order & Microcode",
    "tags": [
@@ -3443,7 +3811,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "p*0}i#/?J:",
    "type": "basic",
    "deck": "From Source to Silicon::08 Microarchitecture: Pipeline, Out-of-Order & Microcode",
    "tags": [
@@ -3462,7 +3830,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "E{MTKN<YZn",
    "type": "basic",
    "deck": "From Source to Silicon::08 Microarchitecture: Pipeline, Out-of-Order & Microcode",
    "tags": [
@@ -3481,7 +3849,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "CuGcj*]fbS",
    "type": "basic",
    "deck": "From Source to Silicon::08 Microarchitecture: Pipeline, Out-of-Order & Microcode",
    "tags": [
@@ -3500,7 +3868,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "c15:NE$I>w",
    "type": "basic",
    "deck": "From Source to Silicon::08 Microarchitecture: Pipeline, Out-of-Order & Microcode",
    "tags": [
@@ -3519,7 +3887,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "eD~h@wULBD",
    "type": "basic",
    "deck": "From Source to Silicon::08 Microarchitecture: Pipeline, Out-of-Order & Microcode",
    "tags": [
@@ -3538,7 +3906,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "G:8F:M-N3&",
    "type": "basic",
    "deck": "From Source to Silicon::08 Microarchitecture: Pipeline, Out-of-Order & Microcode",
    "tags": [
@@ -3557,7 +3925,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "KWG+(_XM5E",
    "type": "basic",
    "deck": "From Source to Silicon::08 Microarchitecture: Pipeline, Out-of-Order & Microcode",
    "tags": [
@@ -3577,7 +3945,26 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "68471f4166",
+   "type": "basic",
+   "deck": "From Source to Silicon::08 Microarchitecture: Pipeline, Out-of-Order & Microcode",
+   "tags": [
+    "s2s",
+    "application",
+    "rob",
+    "simplified"
+   ],
+   "front": "A load page-faults while younger instructions have already executed out of order. What does the core do with their results?",
+   "back": "Nothing becomes architectural: results commit only at the head of the reorder buffer (ROB), so when the faulting load reaches the head, everything younger is discarded and the exception is taken precisely, as if the program had run in order.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "µarch",
+   "reverse": false
+  },
+  {
+   "guid": "PqDNXRmZvQ",
    "type": "cloze",
    "deck": "From Source to Silicon::08 Microarchitecture: Pipeline, Out-of-Order & Microcode",
    "tags": [
@@ -3595,7 +3982,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "GL!zBjel,",
    "type": "basic",
    "deck": "From Source to Silicon::08 Microarchitecture: Pipeline, Out-of-Order & Microcode",
    "tags": [
@@ -3614,7 +4001,26 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "7250f441dd",
+   "type": "basic",
+   "deck": "From Source to Silicon::08 Microarchitecture: Pipeline, Out-of-Order & Microcode",
+   "tags": [
+    "s2s",
+    "application",
+    "branch",
+    "simplified"
+   ],
+   "front": "The same loop runs several times faster over sorted data than over random data, with identical instruction counts. Why?",
+   "back": "A data-dependent branch is predictable on sorted data (long runs of the same outcome) but a coin flip on random data. Each mispredict flushes the pipeline and wastes roughly 15&ndash;20 cycles. Branch-free code (<code>cmov</code>, <code>csel</code>) removes the difference.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "µarch",
+   "reverse": false
+  },
+  {
+   "guid": "fsx!)wpq%e",
    "type": "basic",
    "deck": "From Source to Silicon::08 Microarchitecture: Pipeline, Out-of-Order & Microcode",
    "tags": [
@@ -3633,7 +4039,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "vRZ!b5fVdV",
    "type": "basic",
    "deck": "From Source to Silicon::08 Microarchitecture: Pipeline, Out-of-Order & Microcode",
    "tags": [
@@ -3652,7 +4058,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "n]OY45=n9h",
    "type": "basic",
    "deck": "From Source to Silicon::08 Microarchitecture: Pipeline, Out-of-Order & Microcode",
    "tags": [
@@ -3671,7 +4077,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "Gb]sii52<~",
    "type": "basic",
    "deck": "From Source to Silicon::08 Microarchitecture: Pipeline, Out-of-Order & Microcode",
    "tags": [
@@ -3690,7 +4096,26 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "78264207eb",
+   "type": "basic",
+   "deck": "From Source to Silicon::08 Microarchitecture: Pipeline, Out-of-Order & Microcode",
+   "tags": [
+    "s2s",
+    "application",
+    "security",
+    "simplified"
+   ],
+   "front": "How does masking the index (for example Linux's <code>array_index_nospec</code>) mitigate Spectre v1 when the bounds-check branch is mispredicted?",
+   "back": "It clamps the index with branch-free arithmetic, so even on the speculative path the index is forced in range and the secret-dependent load cannot reach out-of-bounds memory. A fence (<code>lfence</code>) is the alternative, but costs more.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "µarch",
+   "reverse": false
+  },
+  {
+   "guid": "FAXp*i+M*6",
    "type": "basic",
    "deck": "From Source to Silicon::08 Microarchitecture: Pipeline, Out-of-Order & Microcode",
    "tags": [
@@ -3711,7 +4136,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "MnIXYzGi1$",
    "type": "basic",
    "deck": "From Source to Silicon::08 Microarchitecture: Pipeline, Out-of-Order & Microcode",
    "tags": [
@@ -3729,7 +4154,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "mJp~>xPvu-",
    "type": "cloze",
    "deck": "From Source to Silicon::08 Microarchitecture: Pipeline, Out-of-Order & Microcode",
    "tags": [
@@ -3748,7 +4173,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "Q2[<4dZ_fG",
    "type": "basic",
    "deck": "From Source to Silicon::08 Microarchitecture: Pipeline, Out-of-Order & Microcode",
    "tags": [
@@ -3768,7 +4193,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "s33t8wNA(a",
    "type": "basic",
    "deck": "From Source to Silicon::08 Microarchitecture: Pipeline, Out-of-Order & Microcode",
    "tags": [
@@ -3788,7 +4213,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "w3UAadoy4{",
    "type": "basic",
    "deck": "From Source to Silicon::08 Microarchitecture: Pipeline, Out-of-Order & Microcode",
    "tags": [
@@ -3807,7 +4232,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "wMWcHc&=iq",
    "type": "cloze",
    "deck": "From Source to Silicon::09 Memory Hierarchy, Caches & Coherence",
    "tags": [
@@ -3825,7 +4250,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "NviplP:CKZ",
    "type": "basic",
    "deck": "From Source to Silicon::09 Memory Hierarchy, Caches & Coherence",
    "tags": [
@@ -3844,7 +4269,45 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "bb77f282af",
+   "type": "basic",
+   "deck": "From Source to Silicon::09 Memory Hierarchy, Caches & Coherence",
+   "tags": [
+    "s2s",
+    "application",
+    "cache",
+    "simplified"
+   ],
+   "front": "A loop walks an array with a 4096-byte stride and runs far slower than with a 4160-byte stride. Why?",
+   "back": "Addresses 4096 bytes apart share the same cache index bits, so they map to the same set. Only 8 or 12 ways are available, so the lines evict each other (conflict misses) even though the cache is mostly empty. A small offset spreads them across sets.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Memory",
+   "reverse": false
+  },
+  {
+   "guid": "1585c43804",
+   "type": "basic",
+   "deck": "From Source to Silicon::09 Memory Hierarchy, Caches & Coherence",
+   "tags": [
+    "s2s",
+    "application",
+    "cache",
+    "simplified"
+   ],
+   "front": "Why is summing a large 2-D C array column by column much slower than row by row?",
+   "back": "C stores rows contiguously. Row order uses every byte of each 64-byte line it loads; column order touches one element per line, then moves on, so lines are evicted before their neighbours are used and the prefetcher sees a large stride.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Memory",
+   "reverse": false
+  },
+  {
+   "guid": "E1s~#A:QbF",
    "type": "basic",
    "deck": "From Source to Silicon::09 Memory Hierarchy, Caches & Coherence",
    "tags": [
@@ -3863,7 +4326,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "G&<IdIVUN`",
    "type": "basic",
    "deck": "From Source to Silicon::09 Memory Hierarchy, Caches & Coherence",
    "tags": [
@@ -3882,7 +4345,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "q>M:+%Gqvv",
    "type": "basic",
    "deck": "From Source to Silicon::09 Memory Hierarchy, Caches & Coherence",
    "tags": [
@@ -3902,7 +4365,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "gj|2vjZ|^Z",
    "type": "basic",
    "deck": "From Source to Silicon::09 Memory Hierarchy, Caches & Coherence",
    "tags": [
@@ -3922,7 +4385,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "gH)MgtFcs)",
    "type": "basic",
    "deck": "From Source to Silicon::09 Memory Hierarchy, Caches & Coherence",
    "tags": [
@@ -3941,7 +4404,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "OoWtV[e;7D",
    "type": "basic",
    "deck": "From Source to Silicon::09 Memory Hierarchy, Caches & Coherence",
    "tags": [
@@ -3961,7 +4424,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "MUq6=/06SY",
    "type": "basic",
    "deck": "From Source to Silicon::09 Memory Hierarchy, Caches & Coherence",
    "tags": [
@@ -3980,18 +4443,19 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "h:cw+)=@;&",
    "type": "cloze",
    "deck": "From Source to Silicon::09 Memory Hierarchy, Caches & Coherence",
    "tags": [
     "s2s",
     "memory",
     "cache",
-    "hierarchy"
+    "hierarchy",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Cache roles: {{c1::L1}} is split into instruction and data caches, private, tuned for latency; {{c2::L2}} is private and unified, hiding level 1 cache (L1) misses; {{c3::L3 (LLC)}} is shared by the cores, sliced per core and reached over a ring or mesh.",
+   "text": "Cache roles: L1 is {{c1::split into instruction and data caches, private to a core, tuned for latency}}; L2 is {{c2::private and unified, hiding level 1 cache (L1) misses}}; L3, the last-level cache (LLC), is {{c3::shared by the cores, sliced per core and reached over a ring or mesh}}.",
    "image": "",
    "analogy": "",
    "extra": "<b>Why it matters:</b> a level 3 cache (L3) hit costs ~40 cycles partly because the line may sit in another core's slice across the interconnect. <b>Terms:</b> level 2 cache (L2)",
@@ -3999,7 +4463,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "z0EmdS+,dp",
    "type": "basic",
    "deck": "From Source to Silicon::09 Memory Hierarchy, Caches & Coherence",
    "tags": [
@@ -4017,18 +4481,19 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "nb=hCAAP?B",
    "type": "cloze",
    "deck": "From Source to Silicon::09 Memory Hierarchy, Caches & Coherence",
    "tags": [
     "s2s",
     "memory",
     "coherence",
-    "mesi"
+    "mesi",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Modified-Exclusive-Shared-Invalid (MESI) line states: {{c1::Modified}} = dirty and the only copy; {{c2::Exclusive}} = clean and the only copy; {{c3::Shared}} = clean, other caches may hold it; {{c4::Invalid}} = no valid data.",
+   "text": "Modified-Exclusive-Shared-Invalid (MESI) line states: Modified = {{c1::dirty and the only copy}}; Exclusive = {{c2::clean and the only copy}}; Shared = {{c3::clean, other caches may hold it}}; Invalid = {{c4::no valid data}}.",
    "image": "<img src=\"s2s_mesi.svg\">",
    "analogy": "",
    "extra": "<b>Why E exists:</b> read-then-write of private data is the common case; from E the write becomes M silently, from S it would need an invalidation broadcast every time.",
@@ -4036,7 +4501,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "t%%(LRY=E7",
    "type": "basic",
    "deck": "From Source to Silicon::09 Memory Hierarchy, Caches & Coherence",
    "tags": [
@@ -4055,7 +4520,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "nqJ!-e]O}A",
    "type": "basic",
    "deck": "From Source to Silicon::09 Memory Hierarchy, Caches & Coherence",
    "tags": [
@@ -4074,7 +4539,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "k6n6sH3;u!",
    "type": "basic",
    "deck": "From Source to Silicon::09 Memory Hierarchy, Caches & Coherence",
    "tags": [
@@ -4094,7 +4559,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "jJtMijM|y8",
    "type": "cloze",
    "deck": "From Source to Silicon::09 Memory Hierarchy, Caches & Coherence",
    "tags": [
@@ -4113,7 +4578,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "L5I9`*IGVj",
    "type": "basic",
    "deck": "From Source to Silicon::09 Memory Hierarchy, Caches & Coherence",
    "tags": [
@@ -4133,7 +4598,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "JwdkEXPlhF",
    "type": "basic",
    "deck": "From Source to Silicon::09 Memory Hierarchy, Caches & Coherence",
    "tags": [
@@ -4153,7 +4618,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "kl~sRXwsqi",
    "type": "basic",
    "deck": "From Source to Silicon::09 Memory Hierarchy, Caches & Coherence",
    "tags": [
@@ -4172,7 +4637,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "uPG;bHT,-4",
    "type": "basic",
    "deck": "From Source to Silicon::09 Memory Hierarchy, Caches & Coherence",
    "tags": [
@@ -4192,7 +4657,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "QzgjNIjz+]",
    "type": "basic",
    "deck": "From Source to Silicon::09 Memory Hierarchy, Caches & Coherence",
    "tags": [
@@ -4211,7 +4676,26 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "0c535f51de",
+   "type": "basic",
+   "deck": "From Source to Silicon::09 Memory Hierarchy, Caches & Coherence",
+   "tags": [
+    "s2s",
+    "application",
+    "coherence",
+    "simplified"
+   ],
+   "front": "Two threads each increment their own counter, but the counters sit in the same 64-byte line. Why is this slow, and what is the fix?",
+   "back": "False sharing: each write takes the line in Modified state and invalidates the other core's copy, so it ping-pongs between caches although no data is shared. Pad or align each counter to its own cache line.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Memory",
+   "reverse": false
+  },
+  {
+   "guid": "oa?{|3BW_",
    "type": "basic",
    "deck": "From Source to Silicon::09 Memory Hierarchy, Caches & Coherence",
    "tags": [
@@ -4230,7 +4714,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "et]/^~{@b|",
    "type": "basic",
    "deck": "From Source to Silicon::09 Memory Hierarchy, Caches & Coherence",
    "tags": [
@@ -4249,7 +4733,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "h`t[W`!D`~",
    "type": "basic",
    "deck": "From Source to Silicon::09 Memory Hierarchy, Caches & Coherence",
    "tags": [
@@ -4268,7 +4752,26 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "a2d955b2d8",
+   "type": "basic",
+   "deck": "From Source to Silicon::09 Memory Hierarchy, Caches & Coherence",
+   "tags": [
+    "s2s",
+    "relational",
+    "dram",
+    "simplified"
+   ],
+   "front": "Why does streaming through memory sequentially beat random access even once caching is ignored?",
+   "back": "Sequential accesses mostly hit the open row in a Dynamic RAM (DRAM) bank (a cheap column read), while random accesses keep paying precharge plus activate for a new row.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Memory",
+   "reverse": false
+  },
+  {
+   "guid": "t5o)G@6G|=",
    "type": "basic",
    "deck": "From Source to Silicon::09 Memory Hierarchy, Caches & Coherence",
    "tags": [
@@ -4288,7 +4791,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "v6())Eg}%?",
    "type": "basic",
    "deck": "From Source to Silicon::09 Memory Hierarchy, Caches & Coherence",
    "tags": [
@@ -4307,7 +4810,26 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "07fefa81dd",
+   "type": "basic",
+   "deck": "From Source to Silicon::09 Memory Hierarchy, Caches & Coherence",
+   "tags": [
+    "s2s",
+    "application",
+    "roofline",
+    "simplified"
+   ],
+   "front": "For an N&times;N matrix multiply, how does arithmetic intensity change with N, and why does that make large matmuls compute-bound?",
+   "back": "FLOPs grow as 2N&sup3; while the data is only about 3N&sup2; elements, so floating-point operations (FLOPs) per byte grow roughly in proportion to N. Past the ridge point the kernel is limited by compute, not memory.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Memory",
+   "reverse": false
+  },
+  {
+   "guid": "D~%I7xI%:5",
    "type": "basic",
    "deck": "From Source to Silicon::10 GPU Architecture & Programming Model",
    "tags": [
@@ -4327,18 +4849,19 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "rx.L9:.^Hg",
    "type": "cloze",
    "deck": "From Source to Silicon::10 GPU Architecture & Programming Model",
    "tags": [
     "s2s",
     "gpu",
     "cuda",
-    "hierarchy"
+    "hierarchy",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "CUDA launch hierarchy: a kernel runs as a {{c1::grid}} of {{c2::thread blocks}}; each block runs entirely on one {{c3::SM}}, and its threads are executed 32 at a time as {{c4::warps}}.",
+   "text": "A CUDA kernel launch is a grid of thread blocks. Each block is pinned to one streaming multiprocessor (SM) so its threads can share {{c1::shared memory and <code>__syncthreads()</code> barriers}}; within a block, threads execute in lockstep groups of {{c2::32, called warps}}.",
    "image": "<img src=\"s2s_gpu_mapping.svg\">",
    "analogy": "",
    "extra": "<b>Terms:</b> streaming multiprocessor (SM) <b>Link:</b> Cloud Architecture · warp &amp; SM definitions",
@@ -4346,7 +4869,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "sQBZcYPnT3",
    "type": "basic",
    "deck": "From Source to Silicon::10 GPU Architecture & Programming Model",
    "tags": [
@@ -4365,7 +4888,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "JaynDw54i]",
    "type": "basic",
    "deck": "From Source to Silicon::10 GPU Architecture & Programming Model",
    "tags": [
@@ -4385,7 +4908,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "oM0lC#y1Cj",
    "type": "basic",
    "deck": "From Source to Silicon::10 GPU Architecture & Programming Model",
    "tags": [
@@ -4403,7 +4926,26 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "a071724fbc",
+   "type": "basic",
+   "deck": "From Source to Silicon::10 GPU Architecture & Programming Model",
+   "tags": [
+    "s2s",
+    "application",
+    "gpu",
+    "simplified"
+   ],
+   "front": "A kernel's register use per thread rises from 32 to 128. What happens to occupancy, and why?",
+   "back": "Occupancy drops: the streaming multiprocessor (SM) has a fixed register file shared by all resident threads, so with four times the registers per thread only about a quarter as many warps can be resident, leaving less latency hiding.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "GPU",
+   "reverse": false
+  },
+  {
+   "guid": "L9w8?QVxqr",
    "type": "basic",
    "deck": "From Source to Silicon::10 GPU Architecture & Programming Model",
    "tags": [
@@ -4421,7 +4963,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "Fs`k`JKLH!",
    "type": "basic",
    "deck": "From Source to Silicon::10 GPU Architecture & Programming Model",
    "tags": [
@@ -4439,7 +4981,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "nRZD)Fs,E3",
    "type": "basic",
    "deck": "From Source to Silicon::10 GPU Architecture & Programming Model",
    "tags": [
@@ -4458,7 +5000,26 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "fea5803c5b",
+   "type": "basic",
+   "deck": "From Source to Silicon::10 GPU Architecture & Programming Model",
+   "tags": [
+    "s2s",
+    "application",
+    "gpu",
+    "simplified"
+   ],
+   "front": "Why does declaring a shared tile as <code>[32][33]</code> instead of <code>[32][32]</code> speed up a matrix transpose?",
+   "back": "Reading a column of a 32-wide array puts all 32 threads in the same bank (32-way conflict). A row length of 33 shifts each row by one bank, so a column read hits 32 different banks and runs at full speed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "GPU",
+   "reverse": false
+  },
+  {
+   "guid": "Hl*855U~+)",
    "type": "basic",
    "deck": "From Source to Silicon::10 GPU Architecture & Programming Model",
    "tags": [
@@ -4476,7 +5037,26 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "741c3c6058",
+   "type": "basic",
+   "deck": "From Source to Silicon::10 GPU Architecture & Programming Model",
+   "tags": [
+    "s2s",
+    "application",
+    "gpu",
+    "simplified"
+   ],
+   "front": "What goes wrong if <code>__syncthreads()</code> sits inside an <code>if</code> that only some threads of a block take?",
+   "back": "The barrier waits for every thread in the block; threads that skipped it never arrive, so the block can deadlock or behave undefined. A barrier must be reached by all threads of the block.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "GPU",
+   "reverse": false
+  },
+  {
+   "guid": "wC;4pKNwO$",
    "type": "basic",
    "deck": "From Source to Silicon::10 GPU Architecture & Programming Model",
    "tags": [
@@ -4495,7 +5075,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "u+EepLR*y#",
    "type": "basic",
    "deck": "From Source to Silicon::10 GPU Architecture & Programming Model",
    "tags": [
@@ -4514,7 +5094,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "Ob0MrpH|m*",
    "type": "basic",
    "deck": "From Source to Silicon::10 GPU Architecture & Programming Model",
    "tags": [
@@ -4535,7 +5115,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "b2Z-o:uLp=",
    "type": "basic",
    "deck": "From Source to Silicon::10 GPU Architecture & Programming Model",
    "tags": [
@@ -4555,17 +5135,18 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "q6#}YE!:@0",
    "type": "cloze",
    "deck": "From Source to Silicon::10 GPU Architecture & Programming Model",
    "tags": [
     "s2s",
     "gpu",
-    "memory-spaces"
+    "memory-spaces",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "CUDA memory spaces: {{c1::global}} = device dynamic RAM (DRAM), visible to all blocks and the host; {{c2::shared}} = per-block on-chip scratchpad; {{c3::local}} = per-thread spills and indexed arrays, physically in global memory; {{c4::constant}} = 64 KB read-only, cached and broadcast.",
+   "text": "CUDA memory spaces: global = {{c1::device dynamic RAM (DRAM), visible to all blocks and the host}}; shared = {{c2::per-block on-chip scratchpad}}; local = {{c3::per-thread spills and indexed arrays, physically in global memory}}; constant = {{c4::64 KB read-only, cached and broadcast}}.",
    "image": "",
    "analogy": "",
    "extra": "<b>Pitfall:</b> constant memory is fast only when a warp reads the <i>same</i> address (one fetch broadcast); differing addresses serialise. Good for coefficients, bad for per-thread tables.",
@@ -4573,7 +5154,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "PPU`J-+w-d",
    "type": "basic",
    "deck": "From Source to Silicon::10 GPU Architecture & Programming Model",
    "tags": [
@@ -4593,7 +5174,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "B;f9~Sr%;",
    "type": "basic",
    "deck": "From Source to Silicon::10 GPU Architecture & Programming Model",
    "tags": [
@@ -4612,7 +5193,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "r`_3>d7-j|",
    "type": "basic",
    "deck": "From Source to Silicon::10 GPU Architecture & Programming Model",
    "tags": [
@@ -4632,7 +5213,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "B4V21M_)mz",
    "type": "basic",
    "deck": "From Source to Silicon::10 GPU Architecture & Programming Model",
    "tags": [
@@ -4652,7 +5233,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "M$A$R@$.dB",
    "type": "basic",
    "deck": "From Source to Silicon::10 GPU Architecture & Programming Model",
    "tags": [
@@ -4673,7 +5254,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "pEP!tTcWWN",
    "type": "basic",
    "deck": "From Source to Silicon::10 GPU Architecture & Programming Model",
    "tags": [
@@ -4692,7 +5273,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "s04@zY5H2L",
    "type": "basic",
    "deck": "From Source to Silicon::10 GPU Architecture & Programming Model",
    "tags": [
@@ -4713,7 +5294,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "tTIlmD1ocE",
    "type": "basic",
    "deck": "From Source to Silicon::10 GPU Architecture & Programming Model",
    "tags": [
@@ -4732,7 +5313,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "NY2/yo`iZO",
    "type": "basic",
    "deck": "From Source to Silicon::10 GPU Architecture & Programming Model",
    "tags": [
@@ -4750,7 +5331,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "hfl4tE56&f",
    "type": "basic",
    "deck": "From Source to Silicon::10 GPU Architecture & Programming Model",
    "tags": [
@@ -4768,7 +5349,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "KoQ4dQR;aH",
    "type": "basic",
    "deck": "From Source to Silicon::10 GPU Architecture & Programming Model",
    "tags": [
@@ -4786,7 +5367,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "rNqN}8-M.A",
    "type": "basic",
    "deck": "From Source to Silicon::10 GPU Architecture & Programming Model",
    "tags": [
@@ -4805,7 +5386,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "Q$DKhIVwk|",
    "type": "basic",
    "deck": "From Source to Silicon::10 GPU Architecture & Programming Model",
    "tags": [
@@ -4824,7 +5405,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "Q|.K:.oNZN",
    "type": "basic",
    "deck": "From Source to Silicon::10 GPU Architecture & Programming Model",
    "tags": [
@@ -4842,7 +5423,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "sN^ss:P#E4",
    "type": "basic",
    "deck": "From Source to Silicon::11 TPUs, AI Accelerators & their Compilers",
    "tags": [
@@ -4860,7 +5441,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "k]bQ9,)?b.",
    "type": "basic",
    "deck": "From Source to Silicon::11 TPUs, AI Accelerators & their Compilers",
    "tags": [
@@ -4878,7 +5459,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "q4)e3O(I4R",
    "type": "basic",
    "deck": "From Source to Silicon::11 TPUs, AI Accelerators & their Compilers",
    "tags": [
@@ -4896,7 +5477,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "owo%dfod[R",
    "type": "basic",
    "deck": "From Source to Silicon::11 TPUs, AI Accelerators & their Compilers",
    "tags": [
@@ -4915,7 +5496,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "KxXxX%6A.Q",
    "type": "basic",
    "deck": "From Source to Silicon::11 TPUs, AI Accelerators & their Compilers",
    "tags": [
@@ -4933,7 +5514,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "P.AJ0ypF=/",
    "type": "basic",
    "deck": "From Source to Silicon::11 TPUs, AI Accelerators & their Compilers",
    "tags": [
@@ -4952,7 +5533,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "i72;UDBDZ/",
    "type": "cloze",
    "deck": "From Source to Silicon::11 TPUs, AI Accelerators & their Compilers",
    "tags": [
@@ -4971,7 +5552,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "bU^HHp}k2H",
    "type": "basic",
    "deck": "From Source to Silicon::11 TPUs, AI Accelerators & their Compilers",
    "tags": [
@@ -4990,7 +5571,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "x}8OY9RdnT",
    "type": "basic",
    "deck": "From Source to Silicon::11 TPUs, AI Accelerators & their Compilers",
    "tags": [
@@ -5009,7 +5590,26 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "9877cbd0aa",
+   "type": "basic",
+   "deck": "From Source to Silicon::11 TPUs, AI Accelerators & their Compilers",
+   "tags": [
+    "s2s",
+    "application",
+    "quantization",
+    "simplified"
+   ],
+   "front": "What happens to an 8-bit integer (INT8) quantised tensor if the scale is set from one huge outlier value?",
+   "back": "The scale is stretched to cover the outlier, so the many ordinary values fall into only a few of the 256 levels and lose precision. Remedies: per-channel or block scales, clipping outliers, or handling them separately.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Accelerators",
+   "reverse": false
+  },
+  {
+   "guid": "A*zP%%3wLo",
    "type": "basic",
    "deck": "From Source to Silicon::11 TPUs, AI Accelerators & their Compilers",
    "tags": [
@@ -5028,7 +5628,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "u>b3,gy5$l",
    "type": "basic",
    "deck": "From Source to Silicon::11 TPUs, AI Accelerators & their Compilers",
    "tags": [
@@ -5047,7 +5647,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "IGm~U!TW[U",
    "type": "basic",
    "deck": "From Source to Silicon::11 TPUs, AI Accelerators & their Compilers",
    "tags": [
@@ -5066,7 +5666,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "o&[rp$mM1s",
    "type": "basic",
    "deck": "From Source to Silicon::11 TPUs, AI Accelerators & their Compilers",
    "tags": [
@@ -5085,7 +5685,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "kmG|~:)=f7",
    "type": "cloze",
    "deck": "From Source to Silicon::11 TPUs, AI Accelerators & their Compilers",
    "tags": [
@@ -5103,7 +5703,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "bLRORdKPzx",
    "type": "basic",
    "deck": "From Source to Silicon::11 TPUs, AI Accelerators & their Compilers",
    "tags": [
@@ -5121,7 +5721,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "sfpv|zZey&",
    "type": "basic",
    "deck": "From Source to Silicon::11 TPUs, AI Accelerators & their Compilers",
    "tags": [
@@ -5141,7 +5741,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "uYvmrt8fYm",
    "type": "basic",
    "deck": "From Source to Silicon::11 TPUs, AI Accelerators & their Compilers",
    "tags": [
@@ -5160,7 +5760,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "N1d43BO:+3",
    "type": "basic",
    "deck": "From Source to Silicon::11 TPUs, AI Accelerators & their Compilers",
    "tags": [
@@ -5178,7 +5778,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "wTs(=I.n6%",
    "type": "basic",
    "deck": "From Source to Silicon::11 TPUs, AI Accelerators & their Compilers",
    "tags": [
@@ -5197,7 +5797,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "rZX^_c)YFT",
    "type": "basic",
    "deck": "From Source to Silicon::11 TPUs, AI Accelerators & their Compilers",
    "tags": [
@@ -5215,7 +5815,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "Q-6Kp?4e~L",
    "type": "basic",
    "deck": "From Source to Silicon::11 TPUs, AI Accelerators & their Compilers",
    "tags": [
@@ -5233,18 +5833,19 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "G{sDyQiO!L",
    "type": "cloze",
    "deck": "From Source to Silicon::11 TPUs, AI Accelerators & their Compilers",
    "tags": [
     "s2s",
     "mlir",
     "linalg",
-    "affine"
+    "affine",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "A typical multi-level intermediate representation (MLIR) lowering for a matmul: {{c1::linalg}} (structured op with indexing maps: tile, fuse, vectorise here) → {{c2::affine / scf}} (explicit loops; affine maps allow polyhedral analysis of bounds and dependences) → {{c3::vector}} ops → {{c4::llvm}} dialect → LLVM intermediate representation (IR) → machine code.",
+   "text": "A typical multi-level intermediate representation (MLIR) lowering for a matmul: the linalg dialect holds {{c1::structured ops with indexing maps: tile, fuse and vectorise here}} &rarr; affine / scf hold {{c2::explicit loops; affine maps allow polyhedral analysis of bounds and dependences}} &rarr; the vector dialect holds {{c3::SIMD-shaped vector ops}} &rarr; the llvm dialect converts to {{c4::LLVM intermediate representation (IR)}} &rarr; machine code.",
    "image": "",
    "analogy": "",
    "extra": "<b>Why the order:</b> tiling on <code>linalg.matmul</code> is a one-line transform; recovering the same tiling from nested loops would need loop-nest analysis.",
@@ -5252,7 +5853,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "i1RWGLo}$4",
    "type": "basic",
    "deck": "From Source to Silicon::11 TPUs, AI Accelerators & their Compilers",
    "tags": [
@@ -5271,7 +5872,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "dRc]u/3&|T",
    "type": "basic",
    "deck": "From Source to Silicon::11 TPUs, AI Accelerators & their Compilers",
    "tags": [
@@ -5290,7 +5891,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "uXTlmdedq!",
    "type": "basic",
    "deck": "From Source to Silicon::11 TPUs, AI Accelerators & their Compilers",
    "tags": [
@@ -5309,7 +5910,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "h;gO|H,|t*",
    "type": "basic",
    "deck": "From Source to Silicon::11 TPUs, AI Accelerators & their Compilers",
    "tags": [
@@ -5327,7 +5928,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "tEXCbo0-)O",
    "type": "basic",
    "deck": "From Source to Silicon::11 TPUs, AI Accelerators & their Compilers",
    "tags": [
@@ -5346,7 +5947,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "H[%u${ayRW",
    "type": "basic",
    "deck": "From Source to Silicon::11 TPUs, AI Accelerators & their Compilers",
    "tags": [
@@ -5365,7 +5966,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "pqvX_qJ&-s",
    "type": "cloze",
    "deck": "From Source to Silicon::12 From Source to Silicon: the Mapping",
    "tags": [
@@ -5383,7 +5984,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "Gm<jDTry1}",
    "type": "basic",
    "deck": "From Source to Silicon::12 From Source to Silicon: the Mapping",
    "tags": [
@@ -5401,7 +6002,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "E+`kb{VJSj",
    "type": "basic",
    "deck": "From Source to Silicon::12 From Source to Silicon: the Mapping",
    "tags": [
@@ -5420,7 +6021,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "dm:?N>Y_S9",
    "type": "basic",
    "deck": "From Source to Silicon::12 From Source to Silicon: the Mapping",
    "tags": [
@@ -5438,7 +6039,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "O1R$O[5{RH",
    "type": "basic",
    "deck": "From Source to Silicon::12 From Source to Silicon: the Mapping",
    "tags": [
@@ -5457,7 +6058,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "F=)?`]^PDY",
    "type": "basic",
    "deck": "From Source to Silicon::12 From Source to Silicon: the Mapping",
    "tags": [
@@ -5476,7 +6077,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "GaqP5RT2zy",
    "type": "basic",
    "deck": "From Source to Silicon::12 From Source to Silicon: the Mapping",
    "tags": [
@@ -5495,7 +6096,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "iaUGlbw&9Y",
    "type": "basic",
    "deck": "From Source to Silicon::12 From Source to Silicon: the Mapping",
    "tags": [
@@ -5514,7 +6115,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "fcs2#^+j*`",
    "type": "basic",
    "deck": "From Source to Silicon::12 From Source to Silicon: the Mapping",
    "tags": [
@@ -5533,7 +6134,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "h4bQxl~zL.",
    "type": "basic",
    "deck": "From Source to Silicon::12 From Source to Silicon: the Mapping",
    "tags": [
@@ -5553,7 +6154,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "u.UyA;^87G",
    "type": "basic",
    "deck": "From Source to Silicon::12 From Source to Silicon: the Mapping",
    "tags": [
@@ -5573,7 +6174,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "A!kGANM>?F",
    "type": "basic",
    "deck": "From Source to Silicon::12 From Source to Silicon: the Mapping",
    "tags": [
@@ -5592,7 +6193,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "obyF?LE4K|",
    "type": "basic",
    "deck": "From Source to Silicon::12 From Source to Silicon: the Mapping",
    "tags": [
@@ -5611,7 +6212,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "sOhBV`SqRg",
    "type": "basic",
    "deck": "From Source to Silicon::12 From Source to Silicon: the Mapping",
    "tags": [
@@ -5630,7 +6231,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "O)VYhEFYii",
    "type": "basic",
    "deck": "From Source to Silicon::12 From Source to Silicon: the Mapping",
    "tags": [
@@ -5649,7 +6250,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "f#{(<t!I0W",
    "type": "basic",
    "deck": "From Source to Silicon::12 From Source to Silicon: the Mapping",
    "tags": [
@@ -5670,7 +6271,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "L7^r&{&:E[",
    "type": "basic",
    "deck": "From Source to Silicon::12 From Source to Silicon: the Mapping",
    "tags": [
@@ -5689,7 +6290,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "jJu!V#@2GU",
    "type": "cloze",
    "deck": "From Source to Silicon::12 From Source to Silicon: the Mapping",
    "tags": [
@@ -5707,7 +6308,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "u&zZ$kDy*E",
    "type": "basic",
    "deck": "From Source to Silicon::12 From Source to Silicon: the Mapping",
    "tags": [
@@ -5726,17 +6327,18 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "lm-3l(Y7;6",
    "type": "cloze",
    "deck": "From Source to Silicon::12 From Source to Silicon: the Mapping",
    "tags": [
     "s2s",
     "mapping",
-    "leaks"
+    "leaks",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Where abstractions leak: fast on sorted, slow on random data → {{c1::branch mispredict}} (08); a cliff at a size threshold → {{c2::cache misses}} (09); a 'working' program changes with -O2 → {{c3::UB}} (02/03); periodic stalls → {{c4::GC pauses}} (05); branchy GPU kernels at half speed → {{c5::warp divergence}} (10).",
+   "text": "Where abstractions leak: fast on sorted, slow on random data &rarr; {{c1::branch mispredict}} (08); a cliff at a size threshold &rarr; {{c2::cache misses}} (09); a 'working' program changes with -O2 &rarr; {{c3::undefined behaviour (UB) exploited by the optimiser}} (02/03); periodic stalls &rarr; {{c4::garbage collection (GC) pauses}} (05); branchy GPU kernels at half speed &rarr; {{c5::warp divergence}} (10).",
    "image": "",
    "analogy": "",
    "extra": "<b>Use:</b> each symptom names the layer to blame, so you profile with that layer's tool (perf counters, cache stats, undefined behaviour sanitizer (UBSan), garbage collection (GC) logs, Nsight). <b>Terms:</b> undefined behaviour (UB). <b>Link:</b> 08 Microarchitecture · branch prediction; 09 Memory · cache lines; 05 Runtimes · GC pauses; 10 GPU · divergence",
@@ -5744,7 +6346,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "KpFZq;5Fqc",
    "type": "basic",
    "deck": "From Source to Silicon::12 From Source to Silicon: the Mapping",
    "tags": [
@@ -5763,7 +6365,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "Q?x)$,)ATi",
    "type": "basic",
    "deck": "From Source to Silicon::12 From Source to Silicon: the Mapping",
    "tags": [
@@ -5782,7 +6384,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "fA2U&dy~%^",
    "type": "basic",
    "deck": "From Source to Silicon::12 From Source to Silicon: the Mapping",
    "tags": [
@@ -5802,7 +6404,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "HDGK)R2<j%",
    "type": "cloze",
    "deck": "From Source to Silicon::12 From Source to Silicon: the Mapping",
    "tags": [
@@ -5820,7 +6422,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "B#@JOC>9O]",
    "type": "basic",
    "deck": "From Source to Silicon::12 From Source to Silicon: the Mapping",
    "tags": [
@@ -5840,7 +6442,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "yzn;J$06dp",
    "type": "basic",
    "deck": "From Source to Silicon::12 From Source to Silicon: the Mapping",
    "tags": [
@@ -5862,7 +6464,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "rP<7o]~v4h",
    "type": "basic",
    "deck": "From Source to Silicon::12 From Source to Silicon: the Mapping",
    "tags": [
@@ -5882,7 +6484,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "D=lXEGGMhf",
    "type": "basic",
    "deck": "From Source to Silicon::12 From Source to Silicon: the Mapping",
    "tags": [
@@ -5901,7 +6503,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "Bo]B;eXnx`",
    "type": "cloze",
    "deck": "From Source to Silicon::12 From Source to Silicon: the Mapping",
    "tags": [
@@ -5919,7 +6521,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "xfDlh3(-/Q",
    "type": "basic",
    "deck": "From Source to Silicon::12 From Source to Silicon: the Mapping",
    "tags": [

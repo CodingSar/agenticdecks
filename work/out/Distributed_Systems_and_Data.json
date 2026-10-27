@@ -36,7 +36,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "QDthYp&h/`",
    "type": "basic",
    "deck": "Distributed Systems & Data::01 Foundations",
    "tags": [
@@ -48,6 +48,23 @@
    "image": "",
    "analogy": "",
    "extra": "<b>Example:</b> 100 parallel calls each with 1% chance of being slow → ~63% of requests hit at least one slow call.",
+   "source": "DDIA · Ch 1",
+   "reverse": false
+  },
+  {
+   "guid": "81c13241b8",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::01 Foundations",
+   "tags": [
+    "DistSys::foundations",
+    "simplified"
+   ],
+   "front": "A user request fans out to 100 backend calls in parallel, and each backend is slow 1% of the time. Roughly what fraction of user requests see at least one slow call, and why?",
+   "back": "About 63%: 1 - 0.99^100. Per-call rarity compounds across the fan-out, so the user request is as slow as its slowest call (tail latency amplification).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "DDIA · Ch 1",
    "reverse": false
   },
@@ -68,7 +85,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "Qor.ImAv33",
    "type": "basic",
    "deck": "Distributed Systems & Data::01 Foundations",
    "tags": [
@@ -176,6 +193,40 @@
    "image": "",
    "analogy": "Like tossing notes into an inbox and filing them into sorted folders later, instead of finding the right page every time.",
    "extra": "<b>Examples:</b> RocksDB, Cassandra, ScyllaDB, HBase; Kafka Streams state stores use RocksDB.",
+   "source": "DDIA · Ch 2–3",
+   "reverse": false
+  },
+  {
+   "guid": "fae3588fbb",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::02 Data Models & Storage Engines",
+   "tags": [
+    "DistSys::storage",
+    "simplified"
+   ],
+   "front": "How does a log-structured merge (LSM)-tree delete a key, and when is the space actually reclaimed?",
+   "back": "It writes a <b>tombstone</b> marker as a normal write; older versions and the tombstone are dropped only when compaction merges the files that contain them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 2–3",
+   "reverse": false
+  },
+  {
+   "guid": "6184034321",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::02 Data Models & Storage Engines",
+   "tags": [
+    "DistSys::storage",
+    "simplified"
+   ],
+   "front": "What breaks in a log-structured merge (LSM)-tree if writes skip the write-ahead log (WAL)?",
+   "back": "The memtable lives only in memory, so a crash loses every acknowledged write not yet flushed to a sorted string table (SSTable): durability is gone.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "DDIA · Ch 2–3",
    "reverse": false
   },
@@ -292,7 +343,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "AYGJ#8w}l#",
    "type": "basic",
    "deck": "Distributed Systems & Data::02 Data Models & Storage Engines",
    "tags": [
@@ -340,7 +391,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "Ly%P-HZ?;E",
    "type": "cloze",
    "deck": "Distributed Systems & Data::02 Data Models & Storage Engines",
    "tags": [
@@ -420,6 +471,23 @@
    "reverse": false
   },
   {
+   "guid": "286295bfe5",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::03 Encoding & Schema Evolution",
+   "tags": [
+    "DistSys::encoding",
+    "simplified"
+   ],
+   "front": "During a rolling upgrade, why do you need both backward and forward compatibility?",
+   "back": "Old and new code run side by side: new code must read data written by old code (backward), and old code must read or ignore data written by new code (forward).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 4",
+   "reverse": false
+  },
+  {
    "guid": "xVc8&Rryu?",
    "type": "basic",
    "deck": "Distributed Systems & Data::03 Encoding & Schema Evolution",
@@ -436,14 +504,32 @@
    "reverse": false
   },
   {
+   "guid": "8541edab4a",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::03 Encoding & Schema Evolution",
+   "tags": [
+    "DistSys::encoding",
+    "simplified"
+   ],
+   "front": "What breaks if you reuse a retired Protocol Buffers tag number for a new field with a different type?",
+   "back": "Old data or old readers still using that tag will misinterpret the bytes as the new field, causing corruption or decode errors. Retired tags must stay reserved.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 4",
+   "reverse": false
+  },
+  {
    "guid": "Mjfey~]^If",
    "type": "basic",
    "deck": "Distributed Systems & Data::03 Encoding & Schema Evolution",
    "tags": [
-    "DistSys::encoding"
+    "DistSys::encoding",
+    "simplified"
    ],
-   "front": "How does <b>Avro</b> schema evolution differ from Protobuf/Thrift?",
-   "back": "No field tags. The <b>writer's schema</b> and <b>reader's schema</b> are resolved by field name at read time; only add/remove fields that have defaults.",
+   "front": "Protobuf and Thrift identify fields by tag number. How does <b>Avro</b>, which has no tags, still manage schema evolution, and what constraint results?",
+   "back": "It resolves the <b>writer's schema</b> against the <b>reader's schema</b> by field name at read time, so you may only add or remove fields that have defaults.",
    "text": "",
    "image": "",
    "analogy": "Two people with different forms for the same data line up the boxes by label, not by box number.",
@@ -484,7 +570,24 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "b94d1c4b42",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::04 Replication & Quorums",
+   "tags": [
+    "DistSys::replication",
+    "simplified"
+   ],
+   "front": "With single-leader asynchronous replication, what can go wrong when the leader fails and a follower is promoted?",
+   "back": "Writes the leader acknowledged but had not yet replicated are lost (or conflict if the old leader returns), so acknowledged data can disappear.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 5",
+   "reverse": false
+  },
+  {
+   "guid": "Q2U2cq{e/V",
    "type": "cloze",
    "deck": "Distributed Systems & Data::04 Replication & Quorums",
    "tags": [
@@ -532,7 +635,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "c}x]:j]Fml",
    "type": "basic",
    "deck": "Distributed Systems & Data::04 Replication & Quorums",
    "tags": [
@@ -548,7 +651,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "NB#7|wHaf-",
    "type": "cloze",
    "deck": "Distributed Systems & Data::04 Replication & Quorums",
    "tags": [
@@ -596,6 +699,23 @@
    "reverse": false
   },
   {
+   "guid": "1b0272b5c9",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::04 Replication & Quorums",
+   "tags": [
+    "DistSys::replication",
+    "simplified"
+   ],
+   "front": "With n=5 replicas, w=2 and r=2, can a read miss the latest write? Why?",
+   "back": "Yes. w + r = 4, which is not greater than n, so the read set and write set can be disjoint.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 5",
+   "reverse": false
+  },
+  {
    "guid": "L)P.b.f8^c",
    "type": "cloze",
    "deck": "Distributed Systems & Data::04 Replication & Quorums",
@@ -628,7 +748,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "Kn[Abcb/}a",
    "type": "basic",
    "deck": "Distributed Systems & Data::04 Replication & Quorums",
    "tags": [
@@ -740,6 +860,23 @@
    "reverse": false
   },
   {
+   "guid": "6ec9ba38a1",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::05 Partitioning",
+   "tags": [
+    "DistSys::partitioning",
+    "simplified"
+   ],
+   "front": "Using many fixed partitions (e.g. 1000) spread over N nodes, roughly what fraction of data moves when you add one node, and why is that good?",
+   "back": "About 1/(N+1): the new node steals a few whole partitions from each existing node. Compare with hash(key) mod N, which moves almost everything.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 6",
+   "reverse": false
+  },
+  {
    "guid": "f;FZod&6Tj",
    "type": "basic",
    "deck": "Distributed Systems & Data::05 Partitioning",
@@ -792,7 +929,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "GG;;7ua1ID",
    "type": "basic",
    "deck": "Distributed Systems & Data::06 Transactions & Isolation",
    "tags": [
@@ -800,6 +937,23 @@
    ],
    "front": "Which ACID property is mostly the application's job, and why?",
    "back": "<b>Consistency</b>: the invariants are defined by your application. The database only provides atomicity and isolation so you can keep them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 7",
+   "reverse": false
+  },
+  {
+   "guid": "395d7a57ef",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::06 Transactions & Isolation",
+   "tags": [
+    "DistSys::transactions",
+    "simplified"
+   ],
+   "front": "Two transactions on read committed each do read-modify-write on a counter (read 5, write 6). What is the final value and what is this anomaly called?",
+   "back": "Possibly 6 instead of 7: a <b>lost update</b>. Read committed does not stop it; use atomic updates, explicit locks or snapshot isolation with conflict detection.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -872,6 +1026,23 @@
    "reverse": false
   },
   {
+   "guid": "e9bc92e75b",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::06 Transactions & Isolation",
+   "tags": [
+    "DistSys::transactions",
+    "simplified"
+   ],
+   "front": "Why does snapshot isolation not prevent write skew, in terms of what conflicts it detects?",
+   "back": "It detects only write-write conflicts on the <b>same</b> row. Write skew has two transactions writing <b>different</b> rows based on a stale shared read, so nothing conflicts.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDIA · Ch 7",
+   "reverse": false
+  },
+  {
    "guid": "IB6zFB^fwx",
    "type": "basic",
    "deck": "Distributed Systems & Data::06 Transactions & Isolation",
@@ -916,6 +1087,23 @@
    "image": "",
    "analogy": "",
    "extra": "2PL is pessimistic (wait); SSI is optimistic (proceed, maybe abort).",
+   "source": "DDIA · Ch 7",
+   "reverse": false
+  },
+  {
+   "guid": "517c146844",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::06 Transactions & Isolation",
+   "tags": [
+    "DistSys::transactions",
+    "simplified"
+   ],
+   "front": "Why can actual serial execution be fast, and what limits it?",
+   "back": "Whole transactions run as stored procedures on one thread with data in memory, so there is no lock or disk-wait overhead. Throughput is capped at one CPU core per partition, and cross-partition transactions are slow.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "DDIA · Ch 7",
    "reverse": false
   },
@@ -968,7 +1156,24 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "246e075893",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::07 Consistency Models & CAP",
+   "tags": [
+    "DistSys::consistency",
+    "simplified"
+   ],
+   "front": "Client A's write to x completes, then client B starts a read of x. What must B see under linearizability, and what may it see under sequential consistency?",
+   "back": "Linearizability: A's value (real-time order). Sequential consistency: possibly the older value, because only each client's own order and one shared total order are required, not real time.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consistency",
+   "reverse": false
+  },
+  {
+   "guid": "giA1PfHMRi",
    "type": "cloze",
    "deck": "Distributed Systems & Data::07 Consistency Models & CAP",
    "tags": [
@@ -1000,7 +1205,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "ht#,)_PjXS",
    "type": "basic",
    "deck": "Distributed Systems & Data::07 Consistency Models & CAP",
    "tags": [
@@ -1048,6 +1253,23 @@
    "reverse": false
   },
   {
+   "guid": "a6cf13bc6e",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::07 Consistency Models & CAP",
+   "tags": [
+    "DistSys::consistency",
+    "simplified"
+   ],
+   "front": "Why does a consistent and partition-tolerant (CP) system become unavailable on the minority side of a partition?",
+   "back": "Nodes there cannot confirm they are in the majority, so serving reads or writes could break linearizability. They refuse requests instead.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consistency",
+   "reverse": false
+  },
+  {
    "guid": "x(9/u?0LK*",
    "type": "basic",
    "deck": "Distributed Systems & Data::07 Consistency Models & CAP",
@@ -1064,7 +1286,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "nQoj<-mfg@",
    "type": "basic",
    "deck": "Distributed Systems & Data::07 Consistency Models & CAP",
    "tags": [
@@ -1112,7 +1334,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "N$NMax>-(o",
    "type": "basic",
    "deck": "Distributed Systems & Data::07 Consistency Models & CAP",
    "tags": [
@@ -1144,7 +1366,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "L>,7X;^0D*",
    "type": "cloze",
    "deck": "Distributed Systems & Data::07 Consistency Models & CAP",
    "tags": [
@@ -1219,11 +1441,31 @@
    "tags": [
     "DistSys::consistency",
     "AWS",
-    "Azure"
+    "Azure",
+    "simplified"
    ],
    "front": "Why replace 'eventually consistent' with a <b>number</b>?",
-   "back": "Then the business can check whether it tolerates that staleness. E.g. DynamoDB eventual reads ≈ 1 s; Aurora replicas tens of ms; Azure geo-redundant storage (GRS) recovery point objective (RPO) &lt; 15 min.",
+   "back": "Then the business can check whether the application tolerates that staleness: a testable requirement instead of a vague label.",
    "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consistency",
+   "reverse": false
+  },
+  {
+   "guid": "1707fce250",
+   "type": "cloze",
+   "deck": "Distributed Systems & Data::07 Consistency Models & CAP",
+   "tags": [
+    "DistSys::consistency",
+    "AWS",
+    "Azure",
+    "simplified"
+   ],
+   "front": "",
+   "back": "",
+   "text": "Typical staleness numbers: DynamoDB eventually consistent reads lag by about {{c1::1 second}}; Amazon Aurora replicas by {{c2::tens of milliseconds}}; Azure geo-redundant storage (GRS) has a recovery point objective (RPO) under {{c3::15 minutes}}.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -1265,7 +1507,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "PEXSrGjUZB",
    "type": "basic",
    "deck": "Distributed Systems & Data::07 Consistency Models & CAP",
    "tags": [
@@ -1313,7 +1555,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "dRsVlkD4?|",
    "type": "basic",
    "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
    "tags": [
@@ -1377,7 +1619,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "Grv3IlYS/w",
    "type": "basic",
    "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
    "tags": [
@@ -1442,7 +1684,25 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "f77f08a330",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus",
+    "Raft",
+    "simplified"
+   ],
+   "front": "What breaks in Raft if a candidate with an incomplete log can win an election?",
+   "back": "The new leader could overwrite entries that were already committed on a majority, violating State Machine Safety. The election restriction prevents this.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
+   "guid": "cO)N&KcE)<",
    "type": "basic",
    "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
    "tags": [
@@ -1476,6 +1736,24 @@
    "reverse": false
   },
   {
+   "guid": "4b818ea91a",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
+   "tags": [
+    "DistSys::consensus",
+    "Raft",
+    "simplified"
+   ],
+   "front": "What breaks if a Raft server does not persist its current term and vote before replying to RequestVote?",
+   "back": "After a restart it could vote again in the same term, letting two candidates each win a majority and produce two leaders in one term.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Consensus",
+   "reverse": false
+  },
+  {
    "guid": "Cpw|L[N+Qd",
    "type": "basic",
    "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
@@ -1493,7 +1771,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "Nb/u5IuNl8",
    "type": "basic",
    "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
    "tags": [
@@ -1527,7 +1805,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "Iv*sr2*fQ=",
    "type": "basic",
    "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
    "tags": [
@@ -1562,7 +1840,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "uiwF,=BNW[",
    "type": "basic",
    "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
    "tags": [
@@ -1596,7 +1874,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "Du@*h6w;P&",
    "type": "basic",
    "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
    "tags": [
@@ -1630,7 +1908,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "n/AD^]9v?",
    "type": "cloze",
    "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
    "tags": [
@@ -1682,7 +1960,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "fMTvd*Sfw.",
    "type": "basic",
    "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
    "tags": [
@@ -1715,7 +1993,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "g@eU<%[h~r",
    "type": "basic",
    "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
    "tags": [
@@ -1750,7 +2028,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "LAWufOxo%5",
    "type": "basic",
    "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
    "tags": [
@@ -1785,7 +2063,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "tBvHWOIf!~",
    "type": "basic",
    "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
    "tags": [
@@ -1837,7 +2115,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "cZ]xer1qFP",
    "type": "basic",
    "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
    "tags": [
@@ -1888,7 +2166,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "G-4NPyN1B+",
    "type": "basic",
    "deck": "Distributed Systems & Data::08 Consensus (Raft & Paxos)",
    "tags": [
@@ -2085,7 +2363,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "qHq-~urMm2",
    "type": "basic",
    "deck": "Distributed Systems & Data::09 Failure, Time & Fencing",
    "tags": [
@@ -2133,7 +2411,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "jFJQd(V&xz",
    "type": "basic",
    "deck": "Distributed Systems & Data::09 Failure, Time & Fencing",
    "tags": [
@@ -2177,6 +2455,24 @@
    "text": "",
    "image": "",
    "analogy": "A deli ticket counter: once ticket 34 has been served, the clerk won't serve someone waving ticket 33.",
+   "extra": "",
+   "source": "Dist Sys · Failure",
+   "reverse": false
+  },
+  {
+   "guid": "649e6649f9",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::09 Failure, Time & Fencing",
+   "tags": [
+    "DistSys::failure",
+    "K8s",
+    "simplified"
+   ],
+   "front": "What breaks if a lock service issues fencing tokens but the protected resource never checks them?",
+   "back": "Nothing is protected: a paused old holder's late write is accepted. The resource must reject any token lower than the highest it has seen.",
+   "text": "",
+   "image": "",
+   "analogy": "",
    "extra": "",
    "source": "Dist Sys · Failure",
    "reverse": false
@@ -2230,7 +2526,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "vDU$?^nTuh",
    "type": "basic",
    "deck": "Distributed Systems & Data::09 Failure, Time & Fencing",
    "tags": [
@@ -2262,15 +2558,16 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "CFr$^^T@tX",
    "type": "cloze",
    "deck": "Distributed Systems & Data::09 Failure, Time & Fencing",
    "tags": [
-    "DistSys::failure"
+    "DistSys::failure",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Preventing split brain: {{c1::quorum}} (only the majority side may act) plus {{c2::fencing}} (the old primary is blocked from writing, via fencing tokens or STONITH, 'shoot the other node in the head').",
+   "text": "Quorum stops the minority side of a partition from acting, but a paused old primary may still write. The mechanism that blocks it is {{c1::fencing}}, implemented by {{c2::a token checked by the protected resource}} or by {{c3::STONITH (Shoot The Other Node In The Head): cutting off the old node}}.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -2310,7 +2607,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "xH*o}5/t/E",
    "type": "basic",
    "deck": "Distributed Systems & Data::10 Resilience Patterns",
    "tags": [
@@ -2342,7 +2639,24 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "dbbeb760cd",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::10 Resilience Patterns",
+   "tags": [
+    "DistSys::resilience",
+    "simplified"
+   ],
+   "front": "Three layers of a service each make up to 3 retries (4 attempts per call). How many attempts can the bottom dependency see for one user request, and what does that teach?",
+   "back": "Up to 4^3 = 64. Retries multiply across layers, so retry at only one layer and use retry budgets.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Failure",
+   "reverse": false
+  },
+  {
+   "guid": "Q#3I&b]T4F",
    "type": "cloze",
    "deck": "Distributed Systems & Data::10 Resilience Patterns",
    "tags": [
@@ -2375,6 +2689,23 @@
    "reverse": false
   },
   {
+   "guid": "419580c995",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::10 Resilience Patterns",
+   "tags": [
+    "DistSys::resilience",
+    "simplified"
+   ],
+   "front": "Why does a circuit breaker or load shedding help escape a metastable failure while 'just waiting' does not?",
+   "back": "They cut offered load below capacity so the retry-amplified backlog can drain. The overload loop sustains itself and will not stop on its own.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · Failure",
+   "reverse": false
+  },
+  {
    "guid": "I6ZGDt46ei",
    "type": "basic",
    "deck": "Distributed Systems & Data::10 Resilience Patterns",
@@ -2391,7 +2722,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "q}*i9g8Pb4",
    "type": "cloze",
    "deck": "Distributed Systems & Data::10 Resilience Patterns",
    "tags": [
@@ -2425,7 +2756,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "hh{x_r`jJw",
    "type": "basic",
    "deck": "Distributed Systems & Data::10 Resilience Patterns",
    "tags": [
@@ -2532,11 +2863,12 @@
    "type": "cloze",
    "deck": "Distributed Systems & Data::11 Messaging, Streams & Batch",
    "tags": [
-    "DistSys::streams"
+    "DistSys::streams",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Delivery semantics: {{c1::at-most-once}} (send once, never retry: may lose); {{c2::at-least-once}} (retry until acked: may duplicate); 'exactly-once processing' = at-least-once + {{c3::an idempotent or deduplicating consumer}}.",
+   "text": "Delivery semantics by behaviour: send once and never retry = {{c1::at-most-once}} (may lose); retry until acknowledged = {{c2::at-least-once}} (may duplicate); 'exactly-once processing' = retries plus {{c3::an idempotent or deduplicating consumer}}.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -2544,7 +2876,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "N&`6j+&]+0",
    "type": "basic",
    "deck": "Distributed Systems & Data::11 Messaging, Streams & Batch",
    "tags": [
@@ -2571,6 +2903,23 @@
    "text": "",
    "image": "",
    "analogy": "Pressing a lift call button five times still calls one lift.",
+   "extra": "",
+   "source": "DDIA · Ch 10–12",
+   "reverse": false
+  },
+  {
+   "guid": "6de03274a0",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::11 Messaging, Streams & Batch",
+   "tags": [
+    "DistSys::streams",
+    "simplified"
+   ],
+   "front": "A consumer processes a message and then crashes before committing its offset or ack. What happens on restart, and what if it had committed first instead?",
+   "back": "Commit after processing: the message is redelivered, so effects may repeat (at-least-once). Commit before processing: a crash loses the message (at-most-once).",
+   "text": "",
+   "image": "",
+   "analogy": "",
    "extra": "",
    "source": "DDIA · Ch 10–12",
    "reverse": false
@@ -2834,7 +3183,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "fGa(EE1b8p",
    "type": "basic",
    "deck": "Distributed Systems & Data::11 Messaging, Streams & Batch",
    "tags": [
@@ -2883,7 +3232,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "Bs<p^c]Y*j",
    "type": "basic",
    "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
    "tags": [
@@ -2951,7 +3300,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "Kf3)C]Yxc2",
    "type": "basic",
    "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
    "tags": [
@@ -2985,7 +3334,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "FhfoLp@GGQ",
    "type": "basic",
    "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
    "tags": [
@@ -3019,7 +3368,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "Bejhlrn#oF",
    "type": "basic",
    "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
    "tags": [
@@ -3087,7 +3436,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "bkcf!ImlC4",
    "type": "basic",
    "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
    "tags": [
@@ -3138,7 +3487,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "F8}|&({1n!",
    "type": "basic",
    "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
    "tags": [
@@ -3240,7 +3589,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "L0g[@Qx%Bp",
    "type": "basic",
    "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
    "tags": [
@@ -3274,7 +3623,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "m#6&OJ&3^l",
    "type": "basic",
    "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
    "tags": [
@@ -3334,6 +3683,24 @@
    ],
    "front": "Amazon Aurora storage quorums: what are they, and why 6 copies?",
    "back": "6 copies over 3 availability zones (AZs); write 4/6, read 3/6. Survives an AZ loss with writes intact (4 left) and AZ + 1 more failure with reads intact (3 left).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Dist Sys · AWS",
+   "reverse": false
+  },
+  {
+   "guid": "c0b778b6ed",
+   "type": "basic",
+   "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
+   "tags": [
+    "DistSys::case-studies",
+    "AWS",
+    "simplified"
+   ],
+   "front": "In Amazon Aurora's 6-copy storage, which two inequalities make write quorum 4 and read quorum 3 correct?",
+   "back": "Read + write > 6 (4 + 3 = 7), so every read overlaps the latest write; write > 6/2, so two writes always overlap and cannot conflict.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -3445,7 +3812,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "iuY,XIzz>3",
    "type": "basic",
    "deck": "Distributed Systems & Data::12 Cloud & Kubernetes Case Studies",
    "tags": [

@@ -68,6 +68,23 @@
    "reverse": false
   },
   {
+   "guid": "49af5fb8d2",
+   "type": "basic",
+   "deck": "Linux Internals for Kubernetes & Security::01 Processes & Scheduling",
+   "tags": [
+    "Linux::process",
+    "simplified"
+   ],
+   "front": "Why is copy-on-write essential to the common <code>fork()</code> then <code>exec()</code> pattern?",
+   "back": "The child usually calls <code>exec()</code> at once and discards the memory image. Copying all parent pages would be wasted work; with copy-on-write almost nothing is copied.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Process & Scheduling",
+   "reverse": false
+  },
+  {
    "guid": "k8Vgqor6UV",
    "type": "basic",
    "deck": "Linux Internals for Kubernetes & Security::01 Processes & Scheduling",
@@ -92,6 +109,23 @@
    ],
    "front": "What happens to an <b>orphan</b> process?",
    "back": "It is re-parented, usually to process identifier (PID) 1 (init or the container's PID 1), which must reap it when it exits.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Process & Scheduling",
+   "reverse": false
+  },
+  {
+   "guid": "8c6f92938f",
+   "type": "basic",
+   "deck": "Linux Internals for Kubernetes & Security::01 Processes & Scheduling",
+   "tags": [
+    "Linux::process",
+    "simplified"
+   ],
+   "front": "A container's process identifier (PID) 1 never reaps children. What eventually fails, and which limit shows it?",
+   "back": "Zombies pile up and fill the PID table; once the cgroup <code>pids.max</code> (or the host limit) is hit, <code>fork()</code> fails with <code>EAGAIN</code>.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -132,7 +166,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "AyYFB!JNc4",
    "type": "basic",
    "deck": "Linux Internals for Kubernetes & Security::01 Processes & Scheduling",
    "tags": [
@@ -140,6 +174,23 @@
    ],
    "front": "Why is running a plain application as process identifier (PID) 1 in a container a problem?",
    "back": "It typically ignores SIGTERM (no handler), so pods only die at the grace-period SIGKILL, and it never reaps zombies.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Process & Scheduling",
+   "reverse": false
+  },
+  {
+   "guid": "9f5e0c1bd9",
+   "type": "basic",
+   "deck": "Linux Internals for Kubernetes & Security::01 Processes & Scheduling",
+   "tags": [
+    "Linux::process",
+    "simplified"
+   ],
+   "front": "A pod's entrypoint is <code>sh -c \"app\"</code> and takes the full grace period to stop. Why, and what is the fix?",
+   "back": "The shell is PID 1 and does not forward SIGTERM to the app, so the pod only dies at SIGKILL. Fix: <code>exec app</code> in the script, or use a minimal init such as <code>tini</code>.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -175,6 +226,23 @@
    "text": "",
    "image": "",
    "analogy": "A playground rule: whoever has had the fewest turns on the swing goes next.",
+   "extra": "",
+   "source": "Process & Scheduling",
+   "reverse": false
+  },
+  {
+   "guid": "c3ca4a0e39",
+   "type": "basic",
+   "deck": "Linux Internals for Kubernetes & Security::01 Processes & Scheduling",
+   "tags": [
+    "Linux::scheduler",
+    "simplified"
+   ],
+   "front": "Under the Completely Fair Scheduler (CFS), why does a nice -20 task get more CPU than a nice 19 task?",
+   "back": "Nice maps to a weight: a high-weight task's vruntime grows more slowly, so it stays leftmost in the tree and is picked more often.",
+   "text": "",
+   "image": "",
+   "analogy": "",
    "extra": "",
    "source": "Process & Scheduling",
    "reverse": false
@@ -344,9 +412,10 @@
    "type": "basic",
    "deck": "Linux Internals for Kubernetes & Security::02 Memory",
    "tags": [
-    "Linux::memory"
+    "Linux::memory",
+    "simplified"
    ],
-   "front": "How does the out of memory (OOM) killer choose a victim, and how can you influence it?",
+   "front": "What does the out of memory (OOM) killer score to choose a victim, and which per-process knob shifts that score?",
    "back": "It kills the process with the highest badness score (mostly memory use); bias it via <code>/proc/[pid]/oom_score_adj</code> (−1000 = never kill).",
    "text": "",
    "image": "",
@@ -383,6 +452,23 @@
    "text": "",
    "image": "",
    "analogy": "memory.high is the rumble strip on the road's edge; memory.max is the guard rail.",
+   "extra": "",
+   "source": "Memory Management",
+   "reverse": false
+  },
+  {
+   "guid": "8ce546dc43",
+   "type": "basic",
+   "deck": "Linux Internals for Kubernetes & Security::02 Memory",
+   "tags": [
+    "Linux::memory",
+    "simplified"
+   ],
+   "front": "Why set cgroup v2 <code>memory.high</code> below <code>memory.max</code>?",
+   "back": "A workload nearing its limit gets throttled and forced to reclaim memory first, which gives early warning and often avoids the out of memory (OOM) kill at <code>memory.max</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
    "extra": "",
    "source": "Memory Management",
    "reverse": false
@@ -708,6 +794,23 @@
    "reverse": false
   },
   {
+   "guid": "d6cd81f6cd",
+   "type": "basic",
+   "deck": "Linux Internals for Kubernetes & Security::03 Namespaces",
+   "tags": [
+    "Linux::namespaces",
+    "simplified"
+   ],
+   "front": "A container has its own network namespace but no cgroup limits. What can still go wrong for the node?",
+   "back": "One container can exhaust node CPU, memory, I/O or process slots (noisy neighbour or denial of service). Namespaces isolate visibility, not consumption.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Namespaces",
+   "reverse": false
+  },
+  {
    "guid": "Hy%|Sr0^%x",
    "type": "basic",
    "deck": "Linux Internals for Kubernetes & Security::03 Namespaces",
@@ -772,6 +875,23 @@
    "reverse": false
   },
   {
+   "guid": "9d90f0321e",
+   "type": "basic",
+   "deck": "Linux Internals for Kubernetes & Security::03 Namespaces",
+   "tags": [
+    "Linux::namespaces",
+    "simplified"
+   ],
+   "front": "A process escapes a pod with <code>hostUsers: false</code> while running as root inside it. What privilege does it have on the host?",
+   "back": "Only that of the unprivileged host user identifier (UID) its container root maps to. It cannot, for example, write root-owned host files.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Namespaces",
+   "reverse": false
+  },
+  {
    "guid": "qc{M7pN{(^",
    "type": "basic",
    "deck": "Linux Internals for Kubernetes & Security::03 Namespaces",
@@ -804,7 +924,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "D]q-/PTAKn",
    "type": "cloze",
    "deck": "Linux Internals for Kubernetes & Security::04 Cgroups",
    "tags": [
@@ -840,14 +960,15 @@
    "type": "basic",
    "deck": "Linux Internals for Kubernetes & Security::04 Cgroups",
    "tags": [
-    "Linux::cgroups"
+    "Linux::cgroups",
+    "simplified"
    ],
    "front": "Which cgroup version should current Kubernetes nodes run?",
-   "back": "<b>cgroup v2</b> (default on Red Hat Enterprise Linux (RHEL) 9+, Ubuntu 22.04+); Kubernetes treats v1 as legacy (maintenance mode).",
+   "back": "<b>cgroup v2</b> (default on Red Hat Enterprise Linux (RHEL) 9+, Ubuntu 22.04+); cgroup v1 has been in maintenance mode since Kubernetes 1.31, and from 1.35 the kubelet refuses to start on a v1 node unless failCgroupV1 is set to false.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "",
+   "extra": "https://kubernetes.io/blog/2026/10/06/kubernetes-cgroups-v2-shift/ ; https://kubernetes.io/blog/2024/08/14/kubernetes-1-31-moving-cgroup-v1-support-maintenance-mode/",
    "source": "Cgroups",
    "reverse": false
   },
@@ -860,6 +981,23 @@
    ],
    "front": "What does cgroup v2 <code>cpu.max</code> mean, e.g. <code>50000 100000</code>?",
    "back": "Quota per period: 50 ms of CPU per 100 ms = 0.5 CPU. Over quota, the cgroup is <b>throttled</b> until the next period.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cgroups",
+   "reverse": false
+  },
+  {
+   "guid": "1e6a0d723f",
+   "type": "basic",
+   "deck": "Linux Internals for Kubernetes & Security::04 Cgroups",
+   "tags": [
+    "Linux::cgroups",
+    "simplified"
+   ],
+   "front": "Why is a container that exceeds its CPU limit throttled, while one that exceeds its memory limit is killed?",
+   "back": "CPU is <b>compressible</b>: the kernel just delays the task to the next period. Memory is <b>incompressible</b>: it cannot be taken back without killing something.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -904,10 +1042,11 @@
    "type": "basic",
    "deck": "Linux Internals for Kubernetes & Security::04 Cgroups",
    "tags": [
-    "Linux::cgroups"
+    "Linux::cgroups",
+    "simplified"
    ],
-   "front": "How does systemd relate to cgroups?",
-   "back": "systemd owns the cgroup v2 tree (slices, scopes, per-service cgroups) and delegates subtrees to runtimes.",
+   "front": "Who owns the cgroup v2 tree on a systemd host, and what does it hand to container runtimes?",
+   "back": "systemd owns the tree (slices, scopes, one cgroup per service) and delegates subtrees to runtimes so they can create child cgroups.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -976,6 +1115,23 @@
    "image": "",
    "analogy": "",
    "extra": "<b>Lesson:</b> capabilities and mounts matter as much as namespaces. cgroup v2 closes this.",
+   "source": "Cgroups",
+   "reverse": false
+  },
+  {
+   "guid": "fca61dca2a",
+   "type": "basic",
+   "deck": "Linux Internals for Kubernetes & Security::04 Cgroups",
+   "tags": [
+    "Linux::cgroups",
+    "simplified"
+   ],
+   "front": "Why does moving a node to cgroup v2 remove the <code>release_agent</code> escape?",
+   "back": "cgroup v2 has no <code>release_agent</code> file, so there is no kernel-run, host-root helper path for a container to hijack.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "Cgroups",
    "reverse": false
   },
@@ -1060,6 +1216,23 @@
    "reverse": false
   },
   {
+   "guid": "7e7a44de9f",
+   "type": "basic",
+   "deck": "Linux Internals for Kubernetes & Security::05 Capabilities & Privilege",
+   "tags": [
+    "Linux::capabilities",
+    "simplified"
+   ],
+   "front": "A non-root container must listen on port 80. What is the simplest fix that adds no capability?",
+   "back": "Listen on a port of 1024 or above (e.g. 8080) and map it with the Service <code>targetPort</code>; no <code>CAP_NET_BIND_SERVICE</code> needed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Capabilities",
+   "reverse": false
+  },
+  {
    "guid": "F$szg+8:I5",
    "type": "basic",
    "deck": "Linux Internals for Kubernetes & Security::05 Capabilities & Privilege",
@@ -1112,11 +1285,12 @@
    "type": "cloze",
    "deck": "Linux Internals for Kubernetes & Security::05 Capabilities & Privilege",
    "tags": [
-    "Linux::capabilities"
+    "Linux::capabilities",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Linux capability sets: {{c1::effective}}: what the kernel checks right now; {{c2::permitted}}: the most the process may make effective; {{c3::bounding}}: a ceiling it and its children can never exceed. Inheritable and ambient sets carry capabilities across <code>execve()</code>.",
+   "text": "Linux capability sets: <i>effective</i> = {{c1::what the kernel checks right now}}; <i>permitted</i> = {{c2::the most the process may make effective}}; <i>bounding</i> = {{c3::a ceiling it and its children can never exceed}}. Inheritable and ambient sets carry capabilities across <code>execve()</code>.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -1212,6 +1386,23 @@
    ],
    "front": "Why is dropping capabilities more effective than only <code>runAsNonRoot</code>?",
    "back": "<code>runAsNonRoot</code> only changes the user identifier (UID); a non-root process can still hold dangerous capabilities unless they are dropped.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Capabilities",
+   "reverse": false
+  },
+  {
+   "guid": "688efd1d20",
+   "type": "basic",
+   "deck": "Linux Internals for Kubernetes & Security::05 Capabilities & Privilege",
+   "tags": [
+    "Linux::capabilities",
+    "simplified"
+   ],
+   "front": "Capabilities are dropped and the user is non-root, yet the image contains a setuid-root binary. What closes the remaining gap?",
+   "back": "<code>allowPrivilegeEscalation: false</code> (<code>no_new_privs</code>), so exec of setuid binaries or file-capability binaries cannot raise privileges.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1508,6 +1699,23 @@
    "reverse": false
   },
   {
+   "guid": "be4b7daef4",
+   "type": "basic",
+   "deck": "Linux Internals for Kubernetes & Security::06 LSM & Seccomp",
+   "tags": [
+    "Linux::seccomp",
+    "simplified"
+   ],
+   "front": "A syscall is allowed by seccomp, but the process lacks the capability. What happens, and what does this show about the layers?",
+   "back": "The call still fails (typically <code>EPERM</code>). Capabilities, seccomp and Linux Security Modules (LSMs) are independent checks; every layer must allow the operation.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "LSM & Seccomp",
+   "reverse": false
+  },
+  {
    "guid": "MjfMBMBr+T",
    "type": "cloze",
    "deck": "Linux Internals for Kubernetes & Security::06 LSM & Seccomp",
@@ -1615,6 +1823,23 @@
    "text": "",
    "image": "",
    "analogy": "Airport security for kernel code: nothing boards until it's been scanned and proven harmless.",
+   "extra": "",
+   "source": "eBPF",
+   "reverse": false
+  },
+  {
+   "guid": "05e9f89506",
+   "type": "basic",
+   "deck": "Linux Internals for Kubernetes & Security::07 eBPF",
+   "tags": [
+    "Linux::ebpf",
+    "simplified"
+   ],
+   "front": "If the extended Berkeley Packet Filter (eBPF) verifier makes programs safe, why does loading them still need <code>CAP_BPF</code> or more?",
+   "back": "The verifier is a safety net, not a security boundary: eBPF programs can observe kernel-wide activity, and verifier bugs have been exploited. Privilege limits who may load them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
    "extra": "",
    "source": "eBPF",
    "reverse": false
@@ -1796,7 +2021,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "r-2y.&DWV0",
    "type": "basic",
    "deck": "Linux Internals for Kubernetes & Security::07 eBPF",
    "tags": [
@@ -1892,6 +2117,23 @@
    "reverse": false
   },
   {
+   "guid": "dbf4019287",
+   "type": "basic",
+   "deck": "Linux Internals for Kubernetes & Security::08 Filesystems & Storage",
+   "tags": [
+    "Linux::filesystems",
+    "simplified"
+   ],
+   "front": "A container writes a 1 GB log inside its own filesystem. Where does the data live and when is it lost?",
+   "back": "In the OverlayFS <code>upperdir</code> on the node's disk; it is deleted with the container and counts toward ephemeral storage.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Filesystems & VFS",
+   "reverse": false
+  },
+  {
    "guid": "JJ&]}pl,|^",
    "type": "basic",
    "deck": "Linux Internals for Kubernetes & Security::08 Filesystems & Storage",
@@ -1936,6 +2178,23 @@
    "image": "",
    "analogy": "",
    "extra": "<b>Pitfall:</b> its usage counts against the container's memory limit.",
+   "source": "Filesystems & VFS",
+   "reverse": false
+  },
+  {
+   "guid": "6965969fa2",
+   "type": "basic",
+   "deck": "Linux Internals for Kubernetes & Security::08 Filesystems & Storage",
+   "tags": [
+    "Linux::filesystems",
+    "simplified"
+   ],
+   "front": "Does data in a memory-backed <code>emptyDir</code> count against the container's memory limit?",
+   "back": "Yes. It is tmpfs (RAM), so filling it consumes memory charged to the cgroup, and can trigger an out of memory (OOM) kill.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "Filesystems & VFS",
    "reverse": false
   },
@@ -2020,6 +2279,23 @@
    "reverse": false
   },
   {
+   "guid": "faa4c7896d",
+   "type": "basic",
+   "deck": "Linux Internals for Kubernetes & Security::09 Networking Internals",
+   "tags": [
+    "Linux::networking",
+    "simplified"
+   ],
+   "front": "What is a veth pair, and how does it connect a container to the host?",
+   "back": "Two virtual Ethernet interfaces that act like a cable: a packet sent into one end comes out the other. One end sits in the container's network namespace, the other on the host (e.g. attached to a bridge).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Networking Internals",
+   "reverse": false
+  },
+  {
    "guid": "w|if=y1?6g",
    "type": "basic",
    "deck": "Linux Internals for Kubernetes & Security::09 Networking Internals",
@@ -2056,14 +2332,15 @@
    "type": "cloze",
    "deck": "Linux Internals for Kubernetes & Security::09 Networking Internals",
    "tags": [
-    "Linux::networking"
+    "Linux::networking",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "kube-proxy modes: {{c1::iptables}}: long-time default, now maintenance mode; {{c2::IPVS}}: deprecated in 1.35; {{c3::nftables}}: general availability (GA) in 1.33, recommended on kernel 5.13+.",
+   "text": "kube-proxy modes: {{c1::iptables}}: long-time default on Linux; {{c2::IPVS}} (IP Virtual Server): deprecated in Kubernetes 1.35; {{c3::nftables}}: general availability (GA) in 1.33, recommended on kernel 5.13+.",
    "image": "",
    "analogy": "",
-   "extra": "",
+   "extra": "https://www.k8s.dev/resources/keps/5495/",
    "source": "Networking Internals",
    "reverse": false
   },
@@ -2229,14 +2506,15 @@
   },
   {
    "guid": "N=$Q_Ip[,l",
-   "type": "cloze",
+   "type": "basic",
    "deck": "Linux Internals for Kubernetes & Security::10 Syscalls, Signals & IPC",
    "tags": [
-    "Linux::syscalls"
+    "Linux::syscalls",
+    "simplified"
    ],
-   "front": "",
-   "back": "",
-   "text": "Syscalls usually signal failure by returning {{c1::-1}} and setting {{c2::<code>errno</code>}}.",
+   "front": "When a Linux system call fails, what does the C wrapper return and where does the caller find the reason?",
+   "back": "It returns <code>-1</code> and sets the thread's <code>errno</code> (e.g. <code>EPERM</code>, <code>ENOENT</code>); <code>errno</code> is meaningful only right after the failure.",
+   "text": "",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -2248,11 +2526,12 @@
    "type": "cloze",
    "deck": "Linux Internals for Kubernetes & Security::10 Syscalls, Signals & IPC",
    "tags": [
-    "Linux::syscalls"
+    "Linux::syscalls",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "man page sections: {{c1::2}} = system calls, {{c2::3}} = C library functions, {{c3::7}} = overviews such as <code>capabilities(7)</code>, <code>namespaces(7)</code>.",
+   "text": "To read about <code>open()</code> the syscall, use man section {{c1::2}}; for <code>fopen()</code> the C library function, section {{c2::3}}; for overviews such as <code>capabilities(7)</code> and <code>namespaces(7)</code>, section {{c3::7}}.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -2372,6 +2651,23 @@
    "reverse": false
   },
   {
+   "guid": "d4b7e013e6",
+   "type": "basic",
+   "deck": "Linux Internals for Kubernetes & Security::10 Syscalls, Signals & IPC",
+   "tags": [
+    "Linux::concurrency",
+    "simplified"
+   ],
+   "front": "Two threads lock mutex A then B, and B then A. Which Coffman condition does a fixed global lock order break?",
+   "back": "<b>Circular wait</b>: with one agreed order, a cycle of waiting threads cannot form.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Concurrency & IPC",
+   "reverse": false
+  },
+  {
    "guid": "D=F@v@c,2/",
    "type": "basic",
    "deck": "Linux Internals for Kubernetes & Security::10 Syscalls, Signals & IPC",
@@ -2484,7 +2780,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "OB]5KO`4]V",
    "type": "cloze",
    "deck": "Linux Internals for Kubernetes & Security::11 Container Runtimes & Breakouts",
    "tags": [
@@ -2548,6 +2844,23 @@
    "reverse": false
   },
   {
+   "guid": "a0abf4ae79",
+   "type": "basic",
+   "deck": "Linux Internals for Kubernetes & Security::11 Container Runtimes & Breakouts",
+   "tags": [
+    "Linux::runtimes",
+    "simplified"
+   ],
+   "front": "What does gVisor's extra isolation cost?",
+   "back": "Overhead on syscall-heavy workloads and compatibility gaps, since its user-space kernel reimplements only part of the Linux syscall surface.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Container Runtime",
+   "reverse": false
+  },
+  {
    "guid": "EqfxE;jt^q",
    "type": "basic",
    "deck": "Linux Internals for Kubernetes & Security::11 Container Runtimes & Breakouts",
@@ -2564,7 +2877,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "j~_MlGSiNb",
    "type": "basic",
    "deck": "Linux Internals for Kubernetes & Security::11 Container Runtimes & Breakouts",
    "tags": [
@@ -2596,6 +2909,23 @@
    "reverse": false
   },
   {
+   "guid": "369df57908",
+   "type": "basic",
+   "deck": "Linux Internals for Kubernetes & Security::11 Container Runtimes & Breakouts",
+   "tags": [
+    "Linux::runtimes",
+    "simplified"
+   ],
+   "front": "Name a threat where runc plus seccomp and Linux Security Modules (LSMs) is still weak, and the stronger option.",
+   "back": "A host-kernel vulnerability reachable from the container (e.g. via a permitted syscall) bypasses every kernel-enforced layer. Use gVisor or Kata for untrusted code.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Privilege Escalation & Breakouts",
+   "reverse": false
+  },
+  {
    "guid": "Bn1KFf|6$8",
    "type": "basic",
    "deck": "Linux Internals for Kubernetes & Security::11 Container Runtimes & Breakouts",
@@ -2607,6 +2937,23 @@
    "text": "",
    "image": "",
    "analogy": "Handing a stranger the remote control of the building's master-key cutting machine.",
+   "extra": "",
+   "source": "Privilege Escalation & Breakouts",
+   "reverse": false
+  },
+  {
+   "guid": "6a774ea197",
+   "type": "basic",
+   "deck": "Linux Internals for Kubernetes & Security::11 Container Runtimes & Breakouts",
+   "tags": [
+    "Linux::breakouts",
+    "simplified"
+   ],
+   "front": "Why does mounting the runtime socket matter more than mounting a normal data directory?",
+   "back": "The socket is an API to a root daemon: whoever can write to it can launch privileged containers, so it equals host root.",
+   "text": "",
+   "image": "",
+   "analogy": "",
    "extra": "",
    "source": "Privilege Escalation & Breakouts",
    "reverse": false
@@ -2632,9 +2979,10 @@
    "type": "basic",
    "deck": "Linux Internals for Kubernetes & Security::11 Container Runtimes & Breakouts",
    "tags": [
-    "Linux::privesc"
+    "Linux::privesc",
+    "simplified"
    ],
-   "front": "What usually enables a container-to-host escape?",
+   "front": "Name the four usual routes for a container-to-host escape.",
    "back": "<ul><li>An over-broad capability (often <code>CAP_SYS_ADMIN</code>)</li><li>Host resources exposed: hostPath, hostPID/hostNetwork, runtime socket</li><li>A mount/cgroup misconfiguration</li><li>A kernel vulnerability</li></ul>",
    "text": "",
    "image": "",
@@ -2680,11 +3028,12 @@
    "type": "cloze",
    "deck": "Linux Internals for Kubernetes & Security::12 systemd & Tools",
    "tags": [
-    "Linux::systemd"
+    "Linux::systemd",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "systemd unit types: {{c1::service}}: a process; {{c2::socket}}: listens and activates a service on first connection; {{c3::target}}: a grouping/sync point (replaces runlevels); {{c4::timer}}: scheduled activation (cron equivalent).",
+   "text": "systemd unit types: <code>.service</code> = {{c1::runs and supervises a process}}; <code>.socket</code> = {{c2::listens and activates a service on first connection}}; <code>.target</code> = {{c3::a grouping/sync point (replaces runlevels)}}; <code>.timer</code> = {{c4::scheduled activation (cron equivalent)}}.",
    "image": "",
    "analogy": "",
    "extra": "Also: mount, automount, slice, scope.",
@@ -2732,6 +3081,23 @@
    ],
    "front": "<code>systemctl start</code> vs <code>enable</code>?",
    "back": "<b>start:</b> run now, this boot only. <b>enable:</b> start on future boots, not now. <code>enable --now</code> does both.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "systemd & Init",
+   "reverse": false
+  },
+  {
+   "guid": "cd855e665c",
+   "type": "basic",
+   "deck": "Linux Internals for Kubernetes & Security::12 systemd & Tools",
+   "tags": [
+    "Linux::systemd",
+    "simplified"
+   ],
+   "front": "A service is started with <code>systemctl start</code> and is gone after reboot. What was missed?",
+   "back": "<code>systemctl enable</code> (or <code>enable --now</code>): <code>start</code> only affects the current boot.",
    "text": "",
    "image": "",
    "analogy": "",

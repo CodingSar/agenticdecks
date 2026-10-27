@@ -1,0 +1,58 @@
+# Stroke
+
+> **Layer:** [12 Organ-system specialties](../README.md) › [Neurology](README.md)
+> **Builds on:** [Thrombosis, embolism and infarction](../../08-pathology/02-hemodynamic-disorders/thrombosis-embolism-and-infarction.md), [Atherosclerosis](../../08-pathology/02-hemodynamic-disorders/atherosclerosis.md), [Motor control](../../06-physiology/02-nervous-system/motor-control.md), [Head, neck and spine](../../05-tissues-and-anatomy/03-regional-anatomy/head-neck-and-spine.md), [Radiography and computed tomography](../../11-clinical-method-and-diagnostics/03-imaging-and-physiological-measurement/radiography-and-computed-tomography.md)
+> **Enables:** [Rehabilitation and disability](../../14-life-course-mind-and-integrative-care/05-primary-care-and-integration/rehabilitation-and-disability.md), [Arrhythmias](../01-cardiology/arrhythmias.md), [Triage and the ABCDE approach](../../13-acute-perioperative-and-procedural-care/04-emergency-medicine/triage-and-the-abcde-approach.md), [Geriatric syndromes](../../14-life-course-mind-and-integrative-care/04-geriatrics-and-palliative-care/geriatric-syndromes.md)
+
+## Essence
+
+A stroke is a sudden focal loss of brain function caused by a blocked or burst blood vessel. The brain uses a fifth of the body's oxygen with almost no stored fuel, so neurons downstream of an occluded artery stop firing within seconds and die within minutes ([supply and demand](../../CROSS-CUTTING.md#supply-and-demand)). Each artery supplies a known territory with a known function, so the deficit tells the clinician which vessel is blocked. About 85% of strokes are ischaemic, the rest haemorrhagic; they look identical at the bedside, are treated in opposite ways, and are separated only by imaging. The organising idea of modern stroke care is that the infarct core is surrounded by a penumbra of salvageable tissue, and that reopening the vessel within hours saves it, so every minute of delay costs neurons.
+
+## Core tenets
+
+1. **Deficit maps onto vascular territory, so the examination localises the lesion.** The middle cerebral artery supplies the lateral hemisphere: its occlusion causes contralateral face and arm weakness and sensory loss, with aphasia if the dominant hemisphere, neglect if the non-dominant ([motor control](../../06-physiology/02-nervous-system/motor-control.md), [higher functions](../../06-physiology/02-nervous-system/higher-functions-memory-language-and-consciousness.md)). The anterior cerebral artery supplies the medial hemisphere, so leg weakness predominates. The posterior circulation supplies brainstem, cerebellum and occipital lobes, producing vertigo, diplopia, ataxia, crossed signs and visual field loss ([head, neck and spine](../../05-tissues-and-anatomy/03-regional-anatomy/head-neck-and-spine.md)). The sudden onset says "vascular"; the pattern says "where".
+
+2. **Ischaemic stroke has three main mechanisms, and the mechanism decides secondary prevention.** Large-artery atherosclerosis in the carotid or intracranial vessels sheds thrombus ([atherosclerosis](../../08-pathology/02-hemodynamic-disorders/atherosclerosis.md)); cardiac embolism, mostly from atrial fibrillation, throws clot from a fibrillating atrium ([arrhythmias](../01-cardiology/arrhythmias.md)); small-vessel disease from hypertension and diabetes occludes perforators ([thrombosis, embolism and infarction](../../08-pathology/02-hemodynamic-disorders/thrombosis-embolism-and-infarction.md)). Carotid stenosis is treated by endarterectomy, atrial fibrillation by anticoagulation, small-vessel disease by blood pressure and antiplatelet therapy, so the search for the cause continues after the acute phase. A transient ischaemic attack is the same process resolved, carries a high early risk of completed stroke, and is treated with the same urgency.
+
+3. **The penumbra is the therapeutic target, and collateral flow determines how long it survives.** Within the core, blood flow is below the threshold for membrane pump failure and cells die quickly ([cell injury](../../08-pathology/01-cell-and-tissue-injury/cell-injury-adaptation-and-death.md)). Around it, collateral flow from neighbouring arteries keeps tissue above the death threshold but below the firing threshold: silent but alive. Without reperfusion the core grows into the penumbra over hours; with it, the penumbra recovers. Perfusion imaging shows the mismatch and selects patients for reperfusion beyond fixed time windows ([compensation and decompensation](../../CROSS-CUTTING.md#compensation-and-decompensation)).
+
+4. **Imaging first, because the treatments for ischaemia and haemorrhage are opposites.** Non-contrast computed tomography shows blood immediately as a bright area and so excludes haemorrhage within minutes, while early infarction is often invisible ([radiography and computed tomography](../../11-clinical-method-and-diagnostics/03-imaging-and-physiological-measurement/radiography-and-computed-tomography.md)). Angiography shows the occluded vessel; diffusion-weighted magnetic resonance imaging shows infarction within minutes of onset ([magnetic resonance imaging](../../11-clinical-method-and-diagnostics/03-imaging-and-physiological-measurement/magnetic-resonance-imaging.md)).
+
+5. **Reperfusion reverses the mechanism, and its benefit decays by the minute.** Intravenous thrombolysis with a plasminogen activator such as alteplase dissolves fibrin; mechanical thrombectomy pulls a large-vessel clot out through a catheter ([autonomic and cardiovascular drugs](../../09-pharmacology-and-therapeutics/03-drug-classes-by-mechanism/autonomic-and-cardiovascular-drugs.md), [devices](../../09-pharmacology-and-therapeutics/04-non-drug-therapeutics/devices-implants-and-biomaterials.md)). Trials show the number who recover independence per hundred treated falls steadily with time from onset, and that thrombectomy for large-vessel occlusion is among the most effective treatments in medicine ([randomised controlled trials](../../10-epidemiology-and-evidence/02-evidence-based-medicine/randomized-controlled-trials.md)). The cost is haemorrhage into the infarct ([harm and benefit](../../CROSS-CUTTING.md#harm-and-benefit)).
+
+6. **Haemorrhagic stroke injures by pressure and by blood itself.** Intracerebral haemorrhage, from hypertensive small-artery damage or amyloid-weakened vessels in the old, tears tissue and raises pressure within a rigid skull; the haematoma expands over the first hours, so early blood-pressure lowering and reversal of anticoagulation limit growth ([bleeding and clotting disorders](../06-haematology/bleeding-and-clotting-disorders.md)). Subarachnoid haemorrhage from a ruptured aneurysm presents as a sudden severe headache ([headache](headache.md)) and threatens rebleeding and delayed vasospasm; the aneurysm is secured by coiling or clipping.
+
+7. **Recovery is plasticity, and it is driven by rehabilitation.** Neurons do not regenerate, but surviving cortex reorganises and stunned tissue recovers over weeks. Most functional gain occurs within three months and depends on early, intensive, task-specific practice; swallowing assessment, prevention of aspiration and thrombosis, and treatment of depression determine survival as much as the acute phase ([rehabilitation and disability](../../14-life-course-mind-and-integrative-care/05-primary-care-and-integration/rehabilitation-and-disability.md), [injury and repair](../../CROSS-CUTTING.md#injury-and-repair)).
+
+8. **Who else is involved.** [Emergency medicine](../../13-acute-perioperative-and-procedural-care/04-emergency-medicine/README.md) recognises stroke; [radiology](../../11-clinical-method-and-diagnostics/03-imaging-and-physiological-measurement/README.md) images and reperfuses; [neurosurgery](../../13-acute-perioperative-and-procedural-care/01-surgery/surgical-subspecialties.md) evacuates haematomas and secures aneurysms; [cardiology](../01-cardiology/README.md) treats atrial fibrillation and shares hypertension; vascular surgery operates on the carotid; [haematology](../06-haematology/README.md) advises on anticoagulation; [critical care](../../13-acute-perioperative-and-procedural-care/03-critical-care/README.md) manages the unconscious patient; [rehabilitation](../../14-life-course-mind-and-integrative-care/05-primary-care-and-integration/rehabilitation-and-disability.md), [geriatrics](../../14-life-course-mind-and-integrative-care/04-geriatrics-and-palliative-care/README.md) and [primary care](../../14-life-course-mind-and-integrative-care/05-primary-care-and-integration/README.md) own the months that follow and the prevention of the next one.
+
+## Key concepts
+
+| Term | Meaning |
+|---|---|
+| Ischaemic stroke | Infarction from arterial occlusion by thrombus or embolus |
+| Haemorrhagic stroke | Bleeding into brain (intracerebral) or around it (subarachnoid) |
+| Transient ischaemic attack | Focal ischaemic deficit that resolves, usually within an hour; a warning of stroke |
+| Penumbra | Hypoperfused but viable tissue around the infarct core, salvageable by reperfusion |
+| Collateral circulation | Alternative arterial supply that sustains the penumbra |
+| Thrombolysis | Drug dissolution of fibrin clot with a plasminogen activator |
+| Thrombectomy | Mechanical catheter removal of a large-vessel clot |
+| Neuroplasticity | Reorganisation of surviving cortex that underlies recovery |
+
+## How it fits
+
+- **Below:** [thrombosis, embolism and infarction](../../08-pathology/02-hemodynamic-disorders/thrombosis-embolism-and-infarction.md) and [atherosclerosis](../../08-pathology/02-hemodynamic-disorders/atherosclerosis.md); the brain's dependence on flow from [bioenergetics](../../02-biochemistry-and-molecular-biology/02-metabolism/bioenergetics-atp-and-redox-carriers.md); localisation from [motor control](../../06-physiology/02-nervous-system/motor-control.md) and [regional anatomy](../../05-tissues-and-anatomy/03-regional-anatomy/head-neck-and-spine.md).
+- **Above:** [triage](../../13-acute-perioperative-and-procedural-care/04-emergency-medicine/triage-and-the-abcde-approach.md); [rehabilitation](../../14-life-course-mind-and-integrative-care/05-primary-care-and-integration/rehabilitation-and-disability.md); stroke as a cause of [geriatric syndromes](../../14-life-course-mind-and-integrative-care/04-geriatrics-and-palliative-care/geriatric-syndromes.md).
+- **Siblings:** a seizure or migraine aura can mimic stroke ([epilepsy](epilepsy.md), [headache](headache.md)); vascular dementia links stroke to [neurodegeneration](neurodegenerative-disease.md).
+
+## Common misconceptions
+
+- **"A deficit that resolved needs no urgent action."** A transient ischaemic attack carries a risk of completed stroke of several percent within days; it is the best opportunity for prevention.
+- **"Lower the blood pressure in acute stroke."** In ischaemic stroke, raised pressure may be maintaining the penumbra through collaterals; aggressive lowering can extend the infarct. The rule differs in haemorrhage.
+- **"Stroke is a disease of the old."** A quarter of strokes occur under 65, and in the young the causes (dissection, patent foramen ovale, thrombophilia, drugs) are different and need a different search.
+
+## Go deeper
+
+- Caplan, *Caplan's Stroke: A Clinical Approach* (5th ed., 2016): localisation and mechanism, vessel by vessel.
+- Goyal et al., "Endovascular thrombectomy after large-vessel ischaemic stroke: a meta-analysis of individual patient data from five randomised trials" (*The Lancet*, 2016, HERMES): the evidence for thrombectomy and its time dependence.
+- Emberson et al., "Effect of treatment delay, age, and stroke severity on the effects of intravenous thrombolysis" (*The Lancet*, 2014): time is brain, quantified.

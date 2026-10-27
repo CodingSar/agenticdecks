@@ -1,0 +1,57 @@
+# Diseases of aging and degeneration
+
+> **Layer:** [08 Pathology](../README.md) › [Genetic, metabolic and environmental disease](README.md)
+> **Builds on:** [Senescence and telomeres](../../03-cell-biology/02-the-cell-life-cycle/senescence-and-telomeres.md), [Protein quality control and degradation](../../03-cell-biology/01-cell-structure/protein-quality-control-and-degradation.md), [Growth, puberty and aging](../../04-genetics-evolution-and-development/03-development/growth-puberty-and-aging.md), [Evolutionary medicine](../../04-genetics-evolution-and-development/02-evolution/evolutionary-medicine.md), [Chronic inflammation and granulomas](../01-cell-and-tissue-injury/chronic-inflammation-and-granulomas.md)
+> **Enables:** [Neurodegenerative disease](../../12-organ-system-specialties/10-neurology/neurodegenerative-disease.md), [Frailty, multimorbidity and polypharmacy](../../14-life-course-mind-and-integrative-care/04-geriatrics-and-palliative-care/frailty-multimorbidity-and-polypharmacy.md), [Geriatric syndromes](../../14-life-course-mind-and-integrative-care/04-geriatrics-and-palliative-care/geriatric-syndromes.md), [Osteoarthritis, gout and regional pain](../../12-organ-system-specialties/09-rheumatology-and-clinical-immunology/osteoarthritis-gout-and-regional-pain.md), [Bone and calcium disorders](../../12-organ-system-specialties/05-endocrinology/bone-and-calcium-disorders.md)
+
+## Essence
+
+Aging is the progressive loss of the capacity to maintain and repair, and it is the largest risk factor for most of the diseases in this knowledge base: cardiovascular disease, cancer, dementia, osteoporosis, osteoarthritis and type 2 diabetes all rise steeply after 60. The underlying biology is a set of interlinked processes (genomic damage, telomere attrition, epigenetic drift, loss of proteostasis, mitochondrial decline, cellular senescence, stem-cell exhaustion and chronic low-grade inflammation) that selection never tuned because they act after reproduction. Degeneration is the organ-level result: tissue lost faster than it is replaced, often with a misfolded protein as the visible lesion. Reserve, not age itself, decides how the old patient fares.
+
+## Core tenets
+
+1. **Aging exists because selection weakens with age.** Mutations that harm late in life are barely selected against, and alleles that help early reproduction at a late cost (antagonistic pleiotropy) spread. Growth and repair pathways that benefit the young (insulin and insulin-like growth factor signalling, mechanistic target of rapamycin) accelerate aging when they remain active, and damping them (caloric restriction, rapamycin, mutations in the pathway) extends lifespan in every organism tested. There is no programme for death, only an absence of maintenance where it no longer pays, which is why aging is universal and plausibly modifiable.
+
+2. **Damage accumulates in the genome, the epigenome and the proteome.** Somatic mutations accumulate linearly with age in every tissue, so that by 60 each blood stem cell carries hundreds and a few clones have expanded (clonal haematopoiesis, which raises risk of leukaemia and, through inflammatory mutant monocytes, of atherosclerosis). Methylation patterns drift, and "epigenetic clocks" built from them predict mortality better than chronological age does. Proteins misfold and are no longer cleared: the proteasome, chaperones and autophagy all decline, and aggregates of amyloid-beta, tau, alpha-synuclein, transthyretin and others accumulate in brain, heart and vessels. Each neurodegenerative disease is named by the protein that aggregates in it.
+
+3. **Senescent cells accumulate and poison their surroundings.** Cells with critically short telomeres, damaged Deoxyribonucleic Acid (DNA) or oncogenic stress arrest permanently, which protects against cancer, but they do not die: they secrete inflammatory cytokines, proteases and growth factors (the senescence-associated secretory phenotype) that disrupt tissue structure, drive the low-grade inflammation of age ("inflammaging"), and promote the growth of neighbouring pre-malignant cells. Clearing senescent cells in mice delays several age-related diseases at once: the tumour-suppressive brake of youth becomes a source of damage in age.
+
+4. **Reserve declines in every organ, and failure appears when reserve meets a load.** Renal filtration falls about 1 mL/min per year after 40, so an 80-year-old has half the clearance for drugs; maximal heart rate, ventricular compliance, vital capacity, bone mass, muscle mass (sarcopenia) and immune repertoire all decline. None of these alone causes disease. A young person tolerates an infection, an operation or a new drug because reserve absorbs it; the old person, with several reserves near the edge, decompensates: delirium from a urinary infection, acute kidney injury from a diuretic, a fall from a sedative. This is the mechanism of frailty, and why geriatric medicine treats the loss of reserve rather than any one disease.
+
+5. **Degeneration is tissue lost faster than it is replaced, in tissues that cannot regenerate.** Osteoarthritis is cartilage worn faster than chondrocytes remodel it; osteoporosis is bone resorbed faster than it is formed as oestrogen falls, until a vertebra or hip breaks under ordinary load. Lens proteins cross-link into cataract; hair cells and retinal cells are lost and not replaced; arterial elastin fragments and collagen cross-links, so vessels stiffen and systolic pressure rises. The pattern is the [repair](../01-cell-and-tissue-injury/tissue-repair-regeneration-and-fibrosis.md) leaf's limitation, permanent tissue without regenerative capacity, played out over decades.
+
+6. **Neurodegeneration is protein aggregation spreading through a network.** Alzheimer disease shows extracellular amyloid-beta plaques and intracellular tau tangles; Parkinson disease, alpha-synuclein in Lewy bodies; frontotemporal dementia and motor neuron disease, tau, TDP-43 or others; prion disease, a misfolded form of the prion protein that templates normal copies. In each, a misfolded protein seeds further misfolding, spreads along anatomical connections and kills neurons in an order that maps onto the clinical progression. Rare inherited forms with mutations in the aggregating protein (amyloid precursor protein, presenilins, SNCA) prove it causal; sporadic forms add age, vascular disease and risk alleles such as Apolipoprotein E (APOE) ε4. Dementia affects about 55 million people worldwide (2020s) and its prevalence doubles roughly every five years after 65.
+
+7. **Aging is modifiable, and the evidence is behavioural before it is pharmacological.** Exercise improves mitochondrial function, insulin sensitivity, muscle mass and brain perfusion together; not smoking, blood-pressure control and education reduce dementia incidence, which has fallen per age group in several high-income countries. Senolytics, metformin and rapamycin analogues extend health in animals and are in human trials. The target is healthspan, the years lived without disability; the measure of success is compression of morbidity, not extension of life.
+
+## Key concepts
+
+| Term | Meaning |
+|---|---|
+| Antagonistic pleiotropy | An allele beneficial early in life and harmful late, favoured by selection |
+| Hallmarks of aging | Interlinked processes: genomic instability, telomere attrition, epigenetic alteration, loss of proteostasis, mitochondrial dysfunction, senescence, stem-cell exhaustion, altered signalling, inflammation |
+| Cellular senescence | Permanent cell-cycle arrest with a pro-inflammatory secretory phenotype |
+| Inflammaging | Chronic low-grade inflammation of age, driven by senescent cells, visceral fat and clonal haematopoiesis |
+| Clonal haematopoiesis | Expansion of mutant blood stem-cell clones with age, raising leukaemia and vascular risk |
+| Proteostasis | Maintenance of correctly folded proteins by chaperones, proteasome and autophagy |
+| Physiological reserve | Capacity beyond resting need that absorbs stress; its loss defines frailty |
+| Proteinopathy | A degenerative disease defined by its aggregating protein (amyloid, tau, synuclein, prion) |
+| Healthspan | Years lived free of major disease and disability |
+
+## How it fits
+
+- **Below:** the cell biology is in [senescence and telomeres](../../03-cell-biology/02-the-cell-life-cycle/senescence-and-telomeres.md) and [protein quality control](../../03-cell-biology/01-cell-structure/protein-quality-control-and-degradation.md); the organism's trajectory in [growth, puberty and aging](../../04-genetics-evolution-and-development/03-development/growth-puberty-and-aging.md); the evolutionary logic in [evolutionary medicine](../../04-genetics-evolution-and-development/02-evolution/evolutionary-medicine.md).
+- **Above:** [neurodegenerative disease](../../12-organ-system-specialties/10-neurology/neurodegenerative-disease.md), [osteoarthritis](../../12-organ-system-specialties/09-rheumatology-and-clinical-immunology/osteoarthritis-gout-and-regional-pain.md) and [bone disorders](../../12-organ-system-specialties/05-endocrinology/bone-and-calcium-disorders.md) are its organ expressions; [frailty and multimorbidity](../../14-life-course-mind-and-integrative-care/04-geriatrics-and-palliative-care/frailty-multimorbidity-and-polypharmacy.md) and [geriatric syndromes](../../14-life-course-mind-and-integrative-care/04-geriatrics-and-palliative-care/geriatric-syndromes.md) are the clinical result of lost reserve; the shrinking renal clearance drives [dosing](../../09-pharmacology-and-therapeutics/01-pharmacokinetics/elimination-half-life-and-dosing.md).
+- **Siblings:** inflammaging is [chronic inflammation](../01-cell-and-tissue-injury/chronic-inflammation-and-granulomas.md) without a pathogen; accumulated mutation links to [causes of cancer](../03-neoplasia/causes-of-cancer.md); lifelong [environmental](environmental-and-toxic-injury.md) and [nutritional](nutritional-disease-obesity-and-malnutrition.md) exposures set the pace; rare progeroid syndromes are [single-gene disorders](single-gene-and-chromosomal-disorders.md) of DNA repair and nuclear structure.
+
+## Common misconceptions
+
+- **"Aging is a disease."** It is the substrate on which diseases act; a 90-year-old with no disease still has reduced reserve, and treating aging processes would delay many diseases at once rather than cure one.
+- **"Degeneration is wear and tear."** Tissues are actively maintained; degeneration is failure of maintenance and clearance (of misfolded protein, senescent cells, damaged matrix), not passive erosion.
+- **"Dementia is normal aging."** Most old people are not demented; dementia is specific proteinopathy and vascular disease, and its age-specific incidence can fall.
+
+## Go deeper
+
+- Carlos López-Otín and others, "Hallmarks of aging: an expanding universe" (*Cell*, 2023): the framework of interlinked processes.
+- Thomas B. L. Kirkwood, "Understanding the odd science of aging" (*Cell*, 2005): the evolutionary theory in short form.
+- Vinay Kumar, Abul K. Abbas and Jon C. Aster, *Robbins and Cotran Pathologic Basis of Disease* (10th ed., 2020), section on cellular aging in the chapter on cell injury.

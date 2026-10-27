@@ -73,7 +73,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "c&$,A:~f&1",
    "type": "basic",
    "deck": "Cloud Architecture::01 Cloud Models, Regions & Trade-offs",
    "tags": [
@@ -108,7 +108,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "kvAnu3&_P.",
    "type": "basic",
    "deck": "Cloud Architecture::01 Cloud Models, Regions & Trade-offs",
    "tags": [
@@ -218,7 +218,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "y;9HgNmTQm",
    "type": "basic",
    "deck": "Cloud Architecture::02 Identity & Governance",
    "tags": [
@@ -236,7 +236,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "t;YUSYYBs#",
    "type": "basic",
    "deck": "Cloud Architecture::02 Identity & Governance",
    "tags": [
@@ -775,11 +775,12 @@
    "deck": "Cloud Architecture::05 Storage",
    "tags": [
     "Storage",
-    "cloud::ai-infra"
+    "cloud::ai-infra",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Storage models:<br>{{c1::Block}}: raw addressable blocks, a virtual disk for one host (EBS)<br>{{c2::Object}}: immutable objects + metadata over an HTTP API (S3)<br>{{c3::File}}: shared hierarchical filesystem over the network (NFS/SMB)",
+   "text": "Storage models:<br>Block: {{c1::raw addressable blocks, a virtual disk attached to one host (Elastic Block Store (EBS))}}<br>Object: {{c2::immutable objects + metadata over a Hypertext Transfer Protocol (HTTP) API (Simple Storage Service (S3))}}<br>File: {{c3::shared hierarchical filesystem over the network (network file system (NFS) / server message block (SMB))}}",
    "image": "",
    "analogy": "",
    "extra": "<b>Acronyms:</b> EBS = Elastic Block Store; S3 = Simple Storage Service; NFS = network file system; SMB = server message block.",
@@ -927,7 +928,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "w5LT*P?TEn",
    "type": "basic",
    "deck": "Cloud Architecture::05 Storage",
    "tags": [
@@ -1313,18 +1314,19 @@
   },
   {
    "guid": "f-+F*[Zg?E",
-   "type": "cloze",
+   "type": "basic",
    "deck": "Cloud Architecture::08 CPU & Server Hardware",
    "tags": [
     "CPU",
-    "cloud::ai-infra"
+    "cloud::ai-infra",
+    "simplified"
    ],
-   "front": "",
-   "back": "",
-   "text": "CPU caches: {{c1::L1}} is smallest and fastest, per core; {{c2::L3}} is largest and slowest, usually shared across cores.",
+   "front": "Central processing unit (CPU) caches: how do L1 and L3 differ in size, speed and sharing, and why have a hierarchy at all?",
+   "back": "<b>L1:</b> smallest, fastest, private to a core.<br><b>L3:</b> largest, slowest, usually shared across cores.<br>Fast memory is expensive and small, so each level catches misses from the one above and hides dynamic random access memory (DRAM) latency.",
+   "text": "",
    "image": "",
    "analogy": "L1 is the tools on your desk, L2 the drawer, L3 the shared cupboard, RAM the warehouse down the street.",
-   "extra": "",
+   "extra": "<b>Acronyms:</b> DRAM = dynamic random access memory.",
    "source": "Cloud · AI infrastructure",
    "reverse": false
   },
@@ -1584,7 +1586,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "wk^&?.Tw:m",
    "type": "basic",
    "deck": "Cloud Architecture::09 AI Accelerators",
    "tags": [
@@ -1972,6 +1974,350 @@
    "analogy": "",
    "extra": "Uninterruptible power supply (UPS) batteries bridge outages until generators start; both tiers assume that path is redundant.",
    "source": "Cloud · AI infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "bb8366e753",
+   "type": "basic",
+   "deck": "Cloud Architecture::01 Cloud Models, Regions & Trade-offs",
+   "tags": [
+    "cloud",
+    "security",
+    "simplified"
+   ],
+   "front": "A team runs a database on virtual machines (Infrastructure as a Service (IaaS)) and an identical one on a managed Platform as a Service (PaaS) service. Who is responsible for patching the database engine in each case?",
+   "back": "<b>IaaS:</b> the customer patches the operating system and engine.<br><b>Managed PaaS:</b> the provider patches both; the customer still owns data, access and configuration.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Infrastructure as a Service (IaaS), Platform as a Service (PaaS).",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "06121bd4e5",
+   "type": "basic",
+   "deck": "Cloud Architecture::01 Cloud Models, Regions & Trade-offs",
+   "tags": [
+    "cloud",
+    "tradeoffs",
+    "simplified"
+   ],
+   "front": "Why can a multi-cloud design end up as a lowest-common-denominator architecture?",
+   "back": "To stay portable you avoid each cloud's differentiated managed services (e.g. DynamoDB, BigQuery) and use only features all clouds share, giving up the very services that justify using a cloud.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "692b219bf9",
+   "type": "basic",
+   "deck": "Cloud Architecture::01 Cloud Models, Regions & Trade-offs",
+   "tags": [
+    "cloud",
+    "reliability-regions",
+    "simplified"
+   ],
+   "front": "An app runs in 3 Availability Zones (AZs) of one region. Which failures does it survive, and which not?",
+   "back": "Survives loss of one datacenter/AZ (power, cooling, network). Does <b>not</b> survive a regional outage or region-wide control-plane failure; that needs a second region and a disaster recovery plan.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "8e249031ee",
+   "type": "basic",
+   "deck": "Cloud Architecture::02 Identity & Governance",
+   "tags": [
+    "cloud",
+    "iam-governance",
+    "simplified"
+   ],
+   "front": "Why is an attached role or managed identity safer than an access key stored in the app, and what attack does it limit?",
+   "back": "Credentials are short-lived, auto-rotated and never in code or config, so a leaked repo or image cannot hand out long-lived access. A stolen token expires quickly.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "bd376bf957",
+   "type": "basic",
+   "deck": "Cloud Architecture::02 Identity & Governance",
+   "tags": [
+    "cloud",
+    "iam-governance",
+    "simplified"
+   ],
+   "front": "On Google Cloud, a user is granted a role on a folder and has no role on a project inside it. Can they use that project's resources, and why?",
+   "back": "Yes. Role bindings are inherited down the resource hierarchy, so a grant on the folder applies to every project and resource beneath it. This is why grants should be made as low as practical (least privilege).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "674e0a45fa",
+   "type": "basic",
+   "deck": "Cloud Architecture::03 Networking",
+   "tags": [
+    "cloud",
+    "networking",
+    "simplified"
+   ],
+   "front": "Why use Private Link / Private Service Connect to reach a managed service instead of virtual private cloud (VPC) peering?",
+   "back": "It exposes only <b>one service</b> as a private endpoint in your network, so overlapping IP ranges are fine and the other side's whole network is not reachable. Peering connects entire networks and needs non-overlapping address ranges.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Virtual private cloud (VPC).",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "861b374221",
+   "type": "basic",
+   "deck": "Cloud Architecture::03 Networking",
+   "tags": [
+    "cloud",
+    "networking",
+    "tradeoffs",
+    "simplified"
+   ],
+   "front": "Why does a Dedicated line (Direct Connect, ExpressRoute, Cloud Interconnect) beat a virtual private network (VPN) to on-premises, and what does it not give you by default?",
+   "back": "Predictable latency and bandwidth, not shared with the public internet. It is <b>not encrypted</b> by default and is a single path unless you add redundant circuits, so critical links need two connections (often with a VPN as backup).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Virtual private network (VPN).",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "409339fde8",
+   "type": "basic",
+   "deck": "Cloud Architecture::04 Compute, Virtualization & Containers",
+   "tags": [
+    "cloud",
+    "compute",
+    "simplified"
+   ],
+   "front": "A workload is sporadic (a few requests per hour). When do functions beat a VM, and when do they lose?",
+   "back": "Functions win when idle time dominates: you pay per invocation and have no servers to run. They lose with sustained high load (per-request pricing exceeds a VM), long jobs, or latency-sensitive paths hit by cold starts.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "5e472e939d",
+   "type": "basic",
+   "deck": "Cloud Architecture::04 Compute, Virtualization & Containers",
+   "tags": [
+    "cloud",
+    "kubernetes",
+    "compute",
+    "simplified"
+   ],
+   "front": "What breaks if you run many tiny Kubernetes clusters instead of one shared cluster?",
+   "back": "Fixed costs multiply (control-plane fee, add-ons, load balancers), utilization drops from stranded node capacity, and operations multiply (upgrades, policies). Isolation needs can be met with namespaces and quotas first.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "33e8c07654",
+   "type": "basic",
+   "deck": "Cloud Architecture::05 Storage",
+   "tags": [
+    "cloud",
+    "storage",
+    "simplified"
+   ],
+   "front": "Why is object storage a poor fit for a database's data files, and what do you use instead?",
+   "back": "Objects are immutable and accessed over Hypertext Transfer Protocol (HTTP) with higher latency; changing a byte means rewriting the whole object. Databases need low-latency in-place random input/output (I/O), so use <b>block storage</b> (Elastic Block Store (EBS), Persistent Disk, Managed Disks).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Elastic Block Store (EBS), input/output (I/O).",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "30f44dc0bc",
+   "type": "basic",
+   "deck": "Cloud Architecture::05 Storage",
+   "tags": [
+    "cloud",
+    "storage",
+    "pricing",
+    "simplified"
+   ],
+   "front": "A bucket of rarely read logs is moved to an archive tier but one analyst now reads it daily. What goes wrong?",
+   "back": "Retrieval fees and per-request charges outweigh the saved storage cost, and access is slow (hours for deep archive). Tier by <b>access pattern</b>; lifecycle rules or auto-tiering handle shifting patterns.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "820666a33e",
+   "type": "basic",
+   "deck": "Cloud Architecture::06 Databases & Analytics",
+   "tags": [
+    "cloud",
+    "databases",
+    "tradeoffs",
+    "simplified"
+   ],
+   "front": "When do you choose a managed NoSQL store (DynamoDB, Cosmos DB) over a managed relational database, and what do you give up?",
+   "back": "Choose it for known key-based access patterns needing massive scale and predictable single-digit-millisecond latency. You give up ad hoc joins and flexible queries, and gain lock-in to that service's data model.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "80c3ce4d73",
+   "type": "basic",
+   "deck": "Cloud Architecture::07 Cost & Capacity",
+   "tags": [
+    "cloud",
+    "pricing",
+    "tradeoffs",
+    "simplified"
+   ],
+   "front": "Which workloads suit Spot/preemptible capacity, and what design makes them safe?",
+   "back": "Fault-tolerant, interruptible work (batch, continuous integration (CI), stateless workers, some training). Make it safe with checkpointing, idempotent tasks, diversification across instance types and handling the eviction notice.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Continuous integration (CI).",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "798e1a2174",
+   "type": "basic",
+   "deck": "Cloud Architecture::07 Cost & Capacity",
+   "tags": [
+    "cloud",
+    "pricing",
+    "tradeoffs",
+    "simplified"
+   ],
+   "front": "What is the risk of buying a 3-year commitment for a fixed instance type, and how do flexible commitments reduce it?",
+   "back": "Your needs may shift (architecture change, migration, smaller footprint) and unused commitment is still billed. Flexible spend-based commitments (Savings Plans, Azure Savings Plans, committed use discounts (CUDs) on spend) follow usage across sizes and families.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Committed use discounts (CUDs).",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "a147a626aa",
+   "type": "basic",
+   "deck": "Cloud Architecture::08 CPU & Server Hardware",
+   "tags": [
+    "CPU",
+    "cloud::ai-infra",
+    "simplified"
+   ],
+   "front": "A latency-sensitive database on a 2-socket VM has erratic latency spikes. How can non-uniform memory access (NUMA) explain it?",
+   "back": "Threads on one socket access memory attached to the other socket, which is slower. Pin the process and its memory to one NUMA node, or size the VM to fit one node.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "2f8c001340",
+   "type": "basic",
+   "deck": "Cloud Architecture::09 AI Accelerators",
+   "tags": [
+    "cloud::ai-infra",
+    "simplified"
+   ],
+   "front": "A graphics processing unit (GPU) training job runs out of memory with batch size 64. Name two ways to fit it without more GPUs.",
+   "back": "Reduce activation memory by lowering batch size or using activation (gradient) checkpointing, and use lower-precision formats such as brain floating point (BF16) to halve weights/activations. Sharding optimizer state across GPUs also helps once several are available.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Brain floating point (BF16), graphics processing unit (GPU).",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "6ac4df8ab0",
+   "type": "basic",
+   "deck": "Cloud Architecture::09 AI Accelerators",
+   "tags": [
+    "cloud::ai-infra",
+    "simplified"
+   ],
+   "front": "Why is large language model (LLM) token generation (decoding) usually memory-bandwidth-bound, while training is compute-bound?",
+   "back": "Decoding reads all model weights for each new token with little arithmetic per byte. Training processes large batches, reusing each weight read across many tokens, so Tensor Cores stay busy.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Large language model (LLM).",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "a63cdeac36",
+   "type": "basic",
+   "deck": "Cloud Architecture::10 AI Cluster Networking & Datacenter",
+   "tags": [
+    "cloud::ai-infra",
+    "simplified"
+   ],
+   "front": "A 1,000-graphics processing unit (GPU) training job scales poorly beyond 100 GPUs although each GPU is fast. Name the likely networking causes.",
+   "back": "All-reduce is gated by the slowest link: low bisection bandwidth, oversubscribed spine-leaf uplinks, congestion or packet loss (on remote direct memory access over converged Ethernet (RoCE)), or poor topology-aware placement of the job.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Remote direct memory access over converged Ethernet (RoCE).",
+   "source": "Cloud · Trade-offs",
+   "reverse": false
+  },
+  {
+   "guid": "73f83b145e",
+   "type": "basic",
+   "deck": "Cloud Architecture::10 AI Cluster Networking & Datacenter",
+   "tags": [
+    "cloud::ai-infra",
+    "simplified"
+   ],
+   "front": "Why does artificial intelligence (AI) rack power density force a move from air to liquid cooling?",
+   "back": "graphics processing unit (GPU) racks draw tens to 100+ kilowatts (kW); air cannot remove that heat per rack. Liquid carries far more heat per volume, so direct-to-chip or immersion cooling is needed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "Kilowatt (kW).",
+   "source": "Cloud · Trade-offs",
    "reverse": false
   }
  ]

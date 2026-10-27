@@ -197,14 +197,15 @@
   },
   {
    "guid": "u(+6!HNjNT",
-   "type": "cloze",
+   "type": "basic",
    "deck": "AZ-305 Solutions Architect Expert::01 Monitoring & Logging",
    "tags": [
-    "AZ305::Identity_Governance_Monitoring::Logging_Monitoring"
+    "AZ305::Identity_Governance_Monitoring::Logging_Monitoring",
+    "simplified"
    ],
-   "front": "",
-   "back": "",
-   "text": "Log Analytics default interactive retention is {{c1::30}} days, extendable to {{c2::2 years}}, with long-term (archive) retention beyond that.",
+   "front": "Log Analytics: how long is data kept for interactive queries by default, how far can that be extended, and where does older data go?",
+   "back": "<b>30 days</b> by default, extendable to <b>2 years</b>; beyond that it moves to <b>long-term (archive) retention</b>, queried with search jobs or restore.",
+   "text": "",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -324,7 +325,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "KjU(uQvTRo",
    "type": "basic",
    "deck": "AZ-305 Solutions Architect Expert::02 Identity & Access",
    "tags": [
@@ -340,7 +341,24 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "679e109595",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::02 Identity & Access",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Authentication_Authorization",
+    "simplified"
+   ],
+   "front": "On-premises Active Directory goes down. Which hybrid sign-in methods keep cloud sign-in working, and why?",
+   "back": "<b>Password hash synchronization (PHS)</b> keeps working because the hash is validated in the cloud. Pass-through authentication (PTA) and federation validate on-prem at sign-in, so they fail.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "texI5`f8aM",
    "type": "basic",
    "deck": "AZ-305 Solutions Architect Expert::02 Identity & Access",
    "tags": [
@@ -383,6 +401,23 @@
    "text": "",
    "image": "",
    "analogy": "Instead of hiding a key under the doormat, the building recognizes the resident's badge.",
+   "extra": "",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "f00219087c",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::02 Identity & Access",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Authentication_Authorization",
+    "simplified"
+   ],
+   "front": "An app on a VM must read a Key Vault secret with no secret in code. What are the steps?",
+   "back": "1. Enable a <b>managed identity</b> on the VM.<br>2. Grant it a Role-Based Access Control (RBAC) role on the vault (e.g. Key Vault Secrets User).<br>3. Code requests a token for the vault; no credential is stored.",
+   "text": "",
+   "image": "",
+   "analogy": "",
    "extra": "",
    "source": "AZ-305 · Identity, governance & monitoring",
    "reverse": false
@@ -549,6 +584,24 @@
    "reverse": false
   },
   {
+   "guid": "118ea58207",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::03 Governance",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Authentication_Authorization",
+    "AZ305::Identity_Governance_Monitoring::Governance",
+    "simplified"
+   ],
+   "front": "A user with Owner role deploys a VM in a region your Azure Policy forbids. What happens, and why?",
+   "back": "The deployment is <b>denied</b>. Role-Based Access Control (RBAC) only grants permission to act; Azure Policy is evaluated separately on the resource properties, so Owner does not bypass it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
    "guid": "JN(egF{5l)",
    "type": "cloze",
    "deck": "AZ-305 Solutions Architect Expert::03 Governance",
@@ -561,6 +614,23 @@
    "image": "",
    "analogy": "",
    "extra": "<code>modify</code> adds or changes properties such as tags; existing resources need a remediation task.",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "745bfe28f2",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::03 Governance",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Governance",
+    "simplified"
+   ],
+   "front": "You assign a <code>deny</code> policy to a subscription that already has non-compliant resources. What happens to them?",
+   "back": "Nothing is deleted or blocked. <code>deny</code> only affects new or updated resources; existing ones are reported <b>non-compliant</b> until remediated or fixed.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "AZ-305 · Identity, governance & monitoring",
    "reverse": false
   },
@@ -657,6 +727,23 @@
    "image": "",
    "analogy": "A glass case over the fire-alarm button: even the building owner has to lift it off first.",
    "extra": "<b>Pitfall:</b> ReadOnly can break operations that use POST (e.g. listing storage keys).",
+   "source": "AZ-305 · Identity, governance & monitoring",
+   "reverse": false
+  },
+  {
+   "guid": "f061a77be3",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::03 Governance",
+   "tags": [
+    "AZ305::Identity_Governance_Monitoring::Governance",
+    "simplified"
+   ],
+   "front": "What unexpected side effect can a <code>ReadOnly</code> resource lock have on a storage account?",
+   "back": "It can block operations that are really write-style calls, such as <b>listing account keys</b> (a POST), so tools that need them fail.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "AZ-305 · Identity, governance & monitoring",
    "reverse": false
   },
@@ -805,6 +892,23 @@
    "reverse": false
   },
   {
+   "guid": "7e5f3f7350",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::04 Relational Data",
+   "tags": [
+    "AZ305::Data_Storage::Relational",
+    "simplified"
+   ],
+   "front": "When is an elastic pool a poor fit for a set of Azure SQL databases?",
+   "back": "When the databases have <b>sustained, overlapping peaks</b>. They all draw on shared pooled compute at once, so nothing is saved and some may be throttled.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
    "guid": "EC`W.d@.cO",
    "type": "basic",
    "deck": "AZ-305 Solutions Architect Expert::04 Relational Data",
@@ -837,6 +941,23 @@
    "reverse": false
   },
   {
+   "guid": "098bd8cc79",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::04 Relational Data",
+   "tags": [
+    "AZ305::Data_Storage::Relational",
+    "simplified"
+   ],
+   "front": "Can an Azure SQL failover to a geo-secondary lose data, and why?",
+   "back": "Yes. Geo-replication is <b>asynchronous</b>, so transactions not yet replicated can be lost on a forced failover. Recovery point objective (RPO) is small but not zero.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
    "guid": "~|??eV?|5",
    "type": "basic",
    "deck": "AZ-305 Solutions Architect Expert::04 Relational Data",
@@ -854,14 +975,15 @@
   },
   {
    "guid": "M]7ELVD>cB",
-   "type": "cloze",
+   "type": "basic",
    "deck": "AZ-305 Solutions Architect Expert::04 Relational Data",
    "tags": [
-    "AZ305::Data_Storage::Relational"
+    "AZ305::Data_Storage::Relational",
+    "simplified"
    ],
-   "front": "",
-   "back": "",
-   "text": "Azure SQL Database point-in-time restore (PITR) retention defaults to {{c1::7}} days, configurable up to {{c2::35}} days.",
+   "front": "Azure SQL Database point-in-time restore (PITR): default retention, maximum, and what covers longer needs?",
+   "back": "<b>7 days</b> default, configurable up to <b>35 days</b>. For longer compliance needs use <b>long-term retention (LTR)</b>, up to 10 years.",
+   "text": "",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -965,18 +1087,54 @@
    "reverse": false
   },
   {
-   "guid": "L@qyR$;rBY",
-   "type": "cloze",
+   "guid": "f591be4f4d",
+   "type": "basic",
    "deck": "AZ-305 Solutions Architect Expert::05 Non-relational Data & Storage",
    "tags": [
-    "AZ305::Data_Storage::Semi_Unstructured"
+    "AZ305::Data_Storage::Semi_Unstructured",
+    "simplified"
    ],
-   "front": "",
-   "back": "",
-   "text": "Cosmos DB consistency, strongest → weakest: {{c1::Strong}} → {{c2::Bounded Staleness}} → {{c3::Session}} (default) → {{c4::Consistent Prefix}} → {{c5::Eventual}}.",
+   "front": "In Cosmos DB, why does partition key choice matter, and what is the symptom of a bad one?",
+   "back": "Data and throughput are spread by partition key. A key with skewed values creates a <b>hot partition</b> that is throttled while others sit idle; pick a high-cardinality, evenly accessed key.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
+   "guid": "L@qyR$;rBY",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::05 Non-relational Data & Storage",
+   "tags": [
+    "AZ305::Data_Storage::Semi_Unstructured",
+    "simplified"
+   ],
+   "front": "List the five Cosmos DB consistency levels from strongest to weakest, and name the default.",
+   "back": "<b>Strong → Bounded Staleness → Session (default) → Consistent Prefix → Eventual.</b>",
+   "text": "",
    "image": "",
    "analogy": "A dial from 'everyone sees the same newspaper instantly' to 'everyone gets the news eventually, in any order'.",
    "extra": "<b>Session</b> = read-your-own-writes per client; the usual right answer. Bounded staleness = lag capped by K versions or T time.",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
+   "guid": "b28cbbca4c",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::05 Non-relational Data & Storage",
+   "tags": [
+    "AZ305::Data_Storage::Semi_Unstructured",
+    "simplified",
+    "simplified"
+   ],
+   "front": "Users must always see their own writes, but Strong consistency is too costly. Which Cosmos DB level fits?",
+   "back": "<b>Session</b> consistency (the default): read-your-writes within a session, with lower latency and cost than Strong.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "AZ-305 · Data storage",
    "reverse": false
   },
@@ -1014,14 +1172,15 @@
   },
   {
    "guid": "LZ{`_#Cp`J",
-   "type": "cloze",
+   "type": "basic",
    "deck": "AZ-305 Solutions Architect Expert::05 Non-relational Data & Storage",
    "tags": [
-    "AZ305::Data_Storage::Semi_Unstructured"
+    "AZ305::Data_Storage::Semi_Unstructured",
+    "simplified"
    ],
-   "front": "",
-   "back": "",
-   "text": "Blob access tiers and minimum retention: Hot (none) → Cool ({{c1::30}} days) → Cold ({{c2::90}} days) → Archive ({{c3::180}} days, offline: hours of {{c4::rehydration}}).",
+   "front": "Blob access tiers: what is the minimum retention period of each, and which tier is offline?",
+   "back": "Hot: none · Cool: 30 days · Cold: 90 days · Archive: 180 days. <b>Archive</b> is offline: data needs hours of rehydration before it can be read.",
+   "text": "",
    "image": "",
    "analogy": "",
    "extra": "Colder = cheaper storage, more expensive access. Early deletion is charged for the remaining days.",
@@ -1074,6 +1233,24 @@
    "image": "",
    "analogy": "",
    "extra": "Same distinction for geo-zone-redundant storage (GZRS) vs RA-GZRS.",
+   "source": "AZ-305 · Data storage",
+   "reverse": false
+  },
+  {
+   "guid": "9a098a166a",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::05 Non-relational Data & Storage",
+   "tags": [
+    "AZ305::Data_Storage::Semi_Unstructured",
+    "AZ305::Business_Continuity::High_Availability",
+    "simplified"
+   ],
+   "front": "Is a failover to the secondary of geo-redundant storage (GRS) lossless?",
+   "back": "No. Replication to the paired region is <b>asynchronous</b>, so the latest writes may be missing; check the last sync time before failover.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "AZ-305 · Data storage",
    "reverse": false
   },
@@ -1430,6 +1607,23 @@
    "reverse": false
   },
   {
+   "guid": "d7480fda13",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::08 High Availability",
+   "tags": [
+    "AZ305::Business_Continuity::High_Availability",
+    "simplified"
+   ],
+   "front": "A zone-redundant design survives which failure, and which failure does it not cover?",
+   "back": "It survives the loss of a <b>datacenter (zone)</b>. It does not survive a <b>whole-region</b> outage; that needs a second region.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Business continuity",
+   "reverse": false
+  },
+  {
    "guid": "HDWG<d:tbn",
    "type": "cloze",
    "deck": "AZ-305 Solutions Architect Expert::08 High Availability",
@@ -1559,14 +1753,15 @@
   },
   {
    "guid": "n-F?sm}Pu{",
-   "type": "cloze",
+   "type": "basic",
    "deck": "AZ-305 Solutions Architect Expert::09 Compute",
    "tags": [
-    "AZ305::Infrastructure::Compute"
+    "AZ305::Infrastructure::Compute",
+    "simplified"
    ],
-   "front": "",
-   "back": "",
-   "text": "Azure VM series: {{c1::B}} burstable · {{c2::D}} general purpose · {{c3::E}} memory-optimized · {{c4::F}} compute-optimized",
+   "front": "What workload does each Azure VM series fit: B, D, E and F?",
+   "back": "<b>B:</b> burstable (low baseline, bursts). <b>D:</b> general purpose. <b>E:</b> memory-optimized. <b>F:</b> compute-optimized.",
+   "text": "",
    "image": "",
    "analogy": "",
    "extra": "Also: N = GPU, L = storage (local non-volatile memory express (NVMe)), M = very large memory (SAP HANA).",
@@ -1646,6 +1841,23 @@
    ],
    "front": "Nightly job on hundreds of parallel nodes, interruptible, cost-minimized. What do you recommend?",
    "back": "<b>Azure Batch</b> with a pool of Spot (low-priority) VMs that scales away when done.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "a4075d15b4",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::09 Compute",
+   "tags": [
+    "AZ305::Infrastructure::Compute",
+    "simplified"
+   ],
+   "front": "Why is a Spot VM a poor choice for an always-on domain controller or database?",
+   "back": "Spot VMs can be <b>evicted</b> when Azure needs capacity. Use them only for interruptible, restartable work.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1783,6 +1995,24 @@
    "reverse": false
   },
   {
+   "guid": "0b6988129d",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::10 Application Architecture",
+   "tags": [
+    "AZ305::Data_Storage::Integration",
+    "AZ305::Infrastructure::Application_Architecture",
+    "simplified"
+   ],
+   "front": "A new blob upload should trigger processing code. Event Grid or Event Hubs, and why?",
+   "back": "<b>Event Grid</b>: push-based routing of discrete reactive events to subscribers. Event Hubs is for high-throughput telemetry streams.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
    "guid": "s~=h-?A>#;",
    "type": "basic",
    "deck": "AZ-305 Solutions Architect Expert::10 Application Architecture",
@@ -1864,14 +2094,15 @@
   },
   {
    "guid": "Q|Cy7%s:,Z",
-   "type": "cloze",
+   "type": "basic",
    "deck": "AZ-305 Solutions Architect Expert::11 Migration",
    "tags": [
-    "AZ305::Infrastructure::Migration"
+    "AZ305::Infrastructure::Migration",
+    "simplified"
    ],
-   "front": "",
-   "back": "",
-   "text": "Cloud Adoption Framework phases: {{c1::Strategy}} → {{c2::Plan}} → {{c3::Ready}} → {{c4::Adopt}} (migrate / innovate), with Govern and Manage running throughout.",
+   "front": "List the Cloud Adoption Framework (CAF) phases in order, and say which ones run throughout.",
+   "back": "<b>Strategy → Plan → Ready → Adopt</b> (migrate / innovate). <b>Govern</b> and <b>Manage</b> run throughout.",
+   "text": "",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -1904,6 +2135,23 @@
    "front": "",
    "back": "",
    "text": "Cloud Adoption Framework (CAF) migration strategies: {{c1::Rehost}} (lift and shift) · {{c2::Refactor}} (small changes to fit PaaS) · {{c3::Rearchitect}} (redesign for cloud-native) · {{c4::Rebuild}} (rewrite) · {{c5::Replace}} (switch to SaaS)",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "fd722c860c",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::11 Migration",
+   "tags": [
+    "AZ305::Infrastructure::Migration",
+    "simplified"
+   ],
+   "front": "A legacy app has no source code and its vendor is gone, but the datacenter lease ends soon. Which migration strategy fits?",
+   "back": "<b>Rehost</b> (lift and shift): move the virtual machines (VMs) as-is; refactoring needs code you do not have.",
+   "text": "",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -2039,6 +2287,23 @@
    "reverse": false
   },
   {
+   "guid": "c7aaa5856b",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::12 Networking",
+   "tags": [
+    "AZ305::Infrastructure::Network",
+    "simplified"
+   ],
+   "front": "Is ExpressRoute traffic encrypted by default, and how do you add encryption?",
+   "back": "No: it is private but <b>not encrypted by default</b>. Add Media Access Control security (MACsec) on ExpressRoute Direct or run an Internet Protocol Security (IPsec) virtual private network (VPN) over the circuit.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
    "guid": "An5QnFz*q@",
    "type": "cloze",
    "deck": "AZ-305 Solutions Architect Expert::12 Networking",
@@ -2051,6 +2316,23 @@
    "image": "",
    "analogy": "A friend of a friend is not automatically your friend.",
    "extra": "Full mesh grows as n(n−1)/2 links, so at scale use hub-spoke or Virtual wide area network (WAN).",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "a9943b4bcd",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::12 Networking",
+   "tags": [
+    "AZ305::Infrastructure::Network",
+    "simplified"
+   ],
+   "front": "In a hub-spoke design, spoke A must reach spoke B but peerings are non-transitive. What are the options?",
+   "back": "Route via the hub with a <b>user-defined route (UDR)</b> to Azure Firewall or a network virtual appliance there, peer the spokes directly, or use Azure Virtual wide area network (WAN) for transitive routing.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "AZ-305 · Infrastructure",
    "reverse": false
   },
@@ -2211,6 +2493,23 @@
    "image": "",
    "analogy": "",
    "extra": "On-prem clients need a DNS forwarder / Private Resolver pointing at it.",
+   "source": "AZ-305 · Infrastructure",
+   "reverse": false
+  },
+  {
+   "guid": "bbe1a39483",
+   "type": "basic",
+   "deck": "AZ-305 Solutions Architect Expert::12 Networking",
+   "tags": [
+    "AZ305::Infrastructure::Network",
+    "simplified"
+   ],
+   "front": "After creating a private endpoint, why must you still restrict the Platform as a Service (PaaS) service's public access?",
+   "back": "A private endpoint adds a private path but <b>does not remove</b> the public endpoint. Disable public network access (or firewall it) or traffic can still arrive over the internet.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "AZ-305 · Infrastructure",
    "reverse": false
   },

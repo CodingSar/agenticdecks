@@ -1,0 +1,58 @@
+# Infection control and healthcare-associated infection
+
+> **Layer:** [12 Organ-system specialties](../README.md) › [Infectious diseases](README.md)
+> **Builds on:** [Transmission and the chain of infection](../../07-microbiology-and-immunology/01-microbes-and-infection/transmission-and-the-chain-of-infection.md), [Barriers and pattern recognition](../../07-microbiology-and-immunology/02-innate-immunity/barriers-and-pattern-recognition.md), [Devices, implants and biomaterials](../../09-pharmacology-and-therapeutics/04-non-drug-therapeutics/devices-implants-and-biomaterials.md), [Surveillance and outbreak investigation](../../10-epidemiology-and-evidence/01-epidemiology/surveillance-and-outbreak-investigation.md), [Antimicrobial stewardship](antimicrobial-stewardship.md)
+> **Enables:** [Patient safety and quality improvement](../../15-medicine-in-society/01-health-systems/patient-safety-and-quality-improvement.md), [Organ support and ICU syndromes](../../13-acute-perioperative-and-procedural-care/03-critical-care/organ-support-and-icu-syndromes.md), [Perioperative risk and complications](../../13-acute-perioperative-and-procedural-care/02-anaesthesia-and-perioperative-medicine/perioperative-risk-and-complications.md), [Global health and pandemics](../../15-medicine-in-society/03-populations-and-the-future/global-health-and-pandemics.md)
+
+## Essence
+
+A hospital concentrates the sickest, most immunosuppressed people in one building, pierces their barriers with cannulas, catheters and tubes, clears their protective flora with antibiotics, and moves staff between them hundreds of times a day. Roughly one in fifteen to twenty inpatients in high-income countries acquires an infection there (2010s–2020s). Infection control applies the chain of infection to this setting: every such infection has a reservoir, a route and a susceptible host, and each is a point of attack. The central discovery, made by Semmelweis in 1847 and relearned every generation, is that staff hands are the main route and the solution is behavioural and organisational, not pharmacological.
+
+## Core tenets
+
+1. **Healthcare-associated infection is a breach of barriers, and the devices are the breach.** Skin and mucosa are the first line of immunity ([barriers and pattern recognition](../../07-microbiology-and-immunology/02-innate-immunity/barriers-and-pattern-recognition.md)). A urinary catheter gives bacteria a highway past the urethra; a central line delivers skin flora into the blood; an endotracheal tube bypasses the cough and lets secretions pool into the lungs; an incision opens tissue. The four big categories, catheter-associated urinary infection, line-associated bloodstream infection, ventilator-associated pneumonia and surgical-site infection, are each named for their device, and the best prevention is to remove the device as soon as it is not needed.
+
+2. **Biofilm turns a device into a sanctuary.** Bacteria on a foreign surface switch to a sessile state, secrete a polysaccharide matrix and divide slowly ([devices, implants and biomaterials](../../09-pharmacology-and-therapeutics/04-non-drug-therapeutics/devices-implants-and-biomaterials.md)). Antibiotics penetrate biofilm poorly and act weakly on non-dividing cells, so an infected prosthetic joint, valve or line usually needs the device removed; antibiotics alone suppress and relapse. This is why source control is a principle ([fever and sepsis](fever-and-sepsis.md)).
+
+3. **Hands are the vector, and hand hygiene is the single most effective intervention.** Staff touch a colonised patient, then a surface, then the next patient; methicillin-resistant *Staphylococcus aureus* and resistant enterococci survive on skin and dry surfaces for hours to days ([transmission and the chain of infection](../../07-microbiology-and-immunology/01-microbes-and-infection/transmission-and-the-chain-of-infection.md)). Alcohol hand rub before and after every contact interrupts the route. Compliance in unobserved practice is well below 100%, and raising it is a problem of design, culture and feedback, not knowledge ([behaviour change](../../09-pharmacology-and-therapeutics/04-non-drug-therapeutics/behaviour-change-and-the-placebo-effect.md)).
+
+4. **Precautions are matched to the route of transmission.** Standard precautions assume every patient may carry something. Contact precautions (gloves, gown, single room) are added for organisms spread by touch; droplet precautions (mask within a metre or two) for pathogens in large droplets that fall quickly; airborne precautions (negative-pressure room, filtering respirator) for tuberculosis, measles and varicella, whose small particles stay suspended. The practical point is particle size and settling time, and the COVID-19 pandemic showed the droplet–airborne boundary is a continuum and ventilation an infection-control measure.
+
+5. **Antibiotic pressure creates the organisms that infection control then fights.** The resistant organisms that define hospital infection, methicillin-resistant staphylococci, extended-spectrum beta-lactamase producers, carbapenem-resistant Enterobacterales and *Clostridioides difficile*, exist because hospitals are where antibiotic use is most intense ([antimicrobial stewardship](antimicrobial-stewardship.md)). Stewardship reduces the reservoir, infection control reduces transmission, and neither works alone.
+
+6. **Surveillance is what makes an outbreak visible before it is obvious.** Two cases of the same unusual organism on one ward are a signal; without routine counting they are noise. Infection-control teams track device-associated infection per thousand device-days, feed rates back to units, and investigate clusters by case definition, time-place-person description and whole-genome sequencing of isolates, which now shows transmission chains between individual patients ([surveillance and outbreak investigation](../../10-epidemiology-and-evidence/01-epidemiology/surveillance-and-outbreak-investigation.md), [molecular techniques](../../02-biochemistry-and-molecular-biology/03-genetic-information-flow/molecular-techniques.md)).
+
+7. **Bundles work because reliability, not novelty, prevents infection.** Central-line infection rates fell by two thirds or more in programmes that simply ensured five known steps (hand hygiene, barrier precautions, skin antisepsis, avoiding the femoral site, daily review of need) were done every time, with a checklist and the authority to stop a procedure ([patient safety and quality improvement](../../15-medicine-in-society/01-health-systems/patient-safety-and-quality-improvement.md)). Most hospital infection is not a mystery but a failure to apply what is known.
+
+8. **Who else is involved.** Its sharpest interfaces are with [critical care](../../13-acute-perioperative-and-procedural-care/03-critical-care/README.md), where devices and resistant organisms concentrate; [surgery](../../13-acute-perioperative-and-procedural-care/01-surgery/README.md) and [anaesthesia](../../13-acute-perioperative-and-procedural-care/02-anaesthesia-and-perioperative-medicine/README.md), whose surgical-site infection rates measure their asepsis and prophylaxis; [haematology](../06-haematology/README.md) and [oncology](../07-oncology/README.md), whose neutropenic patients need protective isolation; [neonatology](../../14-life-course-mind-and-integrative-care/01-paediatrics/README.md), where outbreaks are devastating; [geriatrics](../../14-life-course-mind-and-integrative-care/04-geriatrics-and-palliative-care/README.md), because care homes are the community reservoir; and [public health](../../15-medicine-in-society/03-populations-and-the-future/global-health-and-pandemics.md), which in a pandemic turns society into a ward.
+
+## Key concepts
+
+| Term | Meaning |
+|---|---|
+| Healthcare-associated infection | Infection acquired during care that was not present or incubating at admission |
+| Chain of infection | Reservoir, portal of exit, route, portal of entry, susceptible host |
+| Biofilm | Matrix-enclosed bacterial community on a surface, highly tolerant of antibiotics |
+| Standard, contact, droplet and airborne precautions | Tiers of barrier measures matched to the route of spread |
+| Colonisation | Carriage of an organism without disease; the reservoir for transmission |
+| Care bundle | A small set of evidence-based steps performed reliably together |
+| Surgical-site infection | Infection of the wound or operated space within weeks of surgery |
+
+## How it fits
+
+- **Below:** [transmission and the chain of infection](../../07-microbiology-and-immunology/01-microbes-and-infection/transmission-and-the-chain-of-infection.md); [barriers and pattern recognition](../../07-microbiology-and-immunology/02-innate-immunity/barriers-and-pattern-recognition.md); [devices and biomaterials](../../09-pharmacology-and-therapeutics/04-non-drug-therapeutics/devices-implants-and-biomaterials.md) for biofilm; [surveillance and outbreak investigation](../../10-epidemiology-and-evidence/01-epidemiology/surveillance-and-outbreak-investigation.md).
+- **Above:** [ICU syndromes](../../13-acute-perioperative-and-procedural-care/03-critical-care/organ-support-and-icu-syndromes.md) and [perioperative complications](../../13-acute-perioperative-and-procedural-care/02-anaesthesia-and-perioperative-medicine/perioperative-risk-and-complications.md), where these infections occur; [patient safety](../../15-medicine-in-society/01-health-systems/patient-safety-and-quality-improvement.md), which made bundles work.
+- **Siblings:** [stewardship](antimicrobial-stewardship.md) controls the selection pressure; [fever and sepsis](fever-and-sepsis.md) is what a line infection becomes; [tuberculosis](tuberculosis-and-tropical-infections.md) is the model airborne pathogen.
+
+## Common misconceptions
+
+- **"Hospital infections are caused by dirty hospitals."** Visible dirt matters less than invisible hands and devices; a spotless ward with poor hand hygiene transmits more than a shabby one with good compliance.
+- **"Resistant organisms are more virulent."** They are usually equally virulent but harder to treat; their danger is the delay before an effective drug is found.
+- **"Prophylactic antibiotics prevent device infections."** Beyond a single peri-operative dose, prolonged prophylaxis selects resistant flora without reducing infection; removal of the device does.
+
+## Go deeper
+
+- Pronovost et al., "An intervention to decrease catheter-related bloodstream infections in the ICU" (*New England Journal of Medicine*, 2006): the Keystone study and the bundle.
+- World Health Organization, *Guidelines on Hand Hygiene in Health Care* (2009): the evidence and the "five moments".
+- Bennett, Dolin and Blaser (eds), *Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases* (9th ed., 2020): healthcare-associated infection section.
+- Semmelweis, *The Etiology, Concept, and Prophylaxis of Childbed Fever* (1861): the original demonstration that hands transmit disease.

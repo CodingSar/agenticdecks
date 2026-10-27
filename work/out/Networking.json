@@ -4,14 +4,15 @@
  "description": "Networking from the wire up to the Kubernetes datapath: layering, Ethernet, IP routing, BGP, TCP, DNS, TLS, load balancing, eBPF and triage. For cloud/Kubernetes platform architects who debug real clusters.",
  "notes": [
   {
-   "type": "cloze",
+   "type": "basic",
    "deck": "Networking::01 Models & Layering",
    "tags": [
-    "networking::models"
+    "networking::models",
+    "simplified"
    ],
-   "front": "",
-   "back": "",
-   "text": "OSI model, bottom → top:<br>L1 {{c1::Physical}}: raw bits on a medium<br>L2 {{c2::Data Link}}: frames on one link, medium access control (MAC) addressing, error detection<br>L3 {{c3::Network}}: routing packets end to end across networks<br>L4 {{c4::Transport}}: process-to-process delivery, reliability<br>L5 {{c5::Session}}: dialog control<br>L6 {{c6::Presentation}}: encoding, compression, encryption<br>L7 {{c7::Application}}: HTTP, DNS, Simple Mail Transfer Protocol (SMTP)",
+   "front": "List the seven Open Systems Interconnection (OSI) layers bottom to top, with the job of each.",
+   "back": "<ol><li><b>Physical</b>: raw bits on a medium</li><li><b>Data Link</b>: frames on one link, medium access control (MAC) addressing, error detection</li><li><b>Network</b>: routing packets end to end across networks</li><li><b>Transport</b>: process-to-process delivery, reliability</li><li><b>Session</b>: dialog control</li><li><b>Presentation</b>: encoding, compression, encryption</li><li><b>Application</b>: HTTP, Domain Name System (DNS), Simple Mail Transfer Protocol (SMTP)</li></ol>",
+   "text": "",
    "image": "",
    "analogy": "Mnemonic bottom-up: <i>Please Do Not Throw Sausage Pizza Away</i>.",
    "extra": "<b>In practice:</b> people say \"layer 4 (L4, transport)\" or \"layer 7 (L7, application) load balancer\" using Open Systems Interconnection (OSI) numbers, even though the internet runs the TCP/IP stack.",
@@ -969,11 +970,12 @@
    "type": "cloze",
    "deck": "Networking::04 IP, Addressing & Routing",
    "tags": [
-    "networking::ip"
+    "networking::ip",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "An Internet Protocol version 4 (IPv4) address is {{c1::32}} bits (dotted decimal); an Internet Protocol version 6 (IPv6) address is {{c2::128}} bits (eight groups of hex, <code>::</code> compresses zeros).",
+   "text": "An Internet Protocol version 6 (IPv6) address is 128 bits (Internet Protocol version 4 (IPv4): 32) written as eight groups of hex. The <code>::</code> shorthand may {{c1::appear only once}} and replaces {{c2::one run of consecutive all-zero groups}}, so <code>2001:db8::1</code> expands to {{c3::2001:0db8:0000:0000:0000:0000:0000:0001}}.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -1018,11 +1020,12 @@
    "type": "cloze",
    "deck": "Networking::04 IP, Addressing & Routing",
    "tags": [
-    "networking::ip"
+    "networking::ip",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Subnetting borrows host bits for network bits. A <code>/24</code> holds {{c1::256}} addresses ({{c2::254}} usable hosts); a <code>/26</code> holds {{c3::64}}; each extra prefix bit {{c4::halves}} the block.",
+   "text": "Subnetting borrows host bits for network bits. A <code>/N</code> Internet Protocol version 4 (IPv4) block holds {{c1::2^(32−N)}} addresses; usable hosts are {{c2::2 fewer}} because {{c3::the all-zeros address names the network and the all-ones address is the broadcast}}. So a <code>/26</code> has {{c4::62}} usable hosts, and each extra prefix bit {{c5::halves}} the block.",
    "image": "",
    "analogy": "",
    "extra": "<b>Cloud note:</b> AWS reserves 5 addresses per subnet, Azure 5, GCP 4.",
@@ -1081,14 +1084,15 @@
    "guid": "Lt!`cy2%fx"
   },
   {
-   "type": "cloze",
+   "type": "basic",
    "deck": "Networking::04 IP, Addressing & Routing",
    "tags": [
-    "networking::ip"
+    "networking::ip",
+    "simplified"
    ],
-   "front": "",
-   "back": "",
-   "text": "Dynamic Host Configuration Protocol (DHCP) lease exchange: {{c1::Discover}} → {{c2::Offer}} → {{c3::Request}} → {{c4::Acknowledge}} (DORA). It hands out IP, mask, gateway and DNS servers for a limited lease.",
+   "front": "Dynamic Host Configuration Protocol (DHCP): list the four messages of a lease exchange in order, and what the client ends up with.",
+   "back": "Discover → Offer → Request → Acknowledge (DORA). The client gets an IP address, subnet mask, gateway and DNS servers for a limited lease.",
+   "text": "",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -1161,7 +1165,7 @@
    "extra": "",
    "source": "Below CNI · Foundations",
    "reverse": false,
-   "guid": null
+   "guid": "r%wp7h@k1T"
   },
   {
    "type": "basic",
@@ -1275,7 +1279,7 @@
    "extra": "",
    "source": "Tanenbaum · Ch5",
    "reverse": false,
-   "guid": null
+   "guid": "Af;J/8|vgu"
   },
   {
    "type": "basic",
@@ -1491,11 +1495,12 @@
    "type": "cloze",
    "deck": "Networking::06 Transport & TCP",
    "tags": [
-    "networking::transport"
+    "networking::transport",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Port numbers are {{c1::16}} bits. {{c2::0–1023}} are well-known ports (need privilege to bind on Linux); Linux picks client ephemeral ports from <code>ip_local_port_range</code>, default {{c3::32768–60999}}.",
+   "text": "A port number is a 16-bit field, so the highest port is {{c1::65535}}. Ports {{c2::0–1023}} are well-known (need privilege to bind on Linux); Linux picks client ephemeral ports from <code>ip_local_port_range</code>, default {{c3::32768–60999}}.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -1534,7 +1539,7 @@
    "extra": "",
    "source": "Tanenbaum · Ch6",
    "reverse": false,
-   "guid": null
+   "guid": "OFgG{UO.[U"
   },
   {
    "type": "basic",
@@ -1615,7 +1620,7 @@
    "extra": "",
    "source": "Tanenbaum · Ch6",
    "reverse": false,
-   "guid": null
+   "guid": "Ebgs*^G9CX"
   },
   {
    "type": "basic",
@@ -1812,21 +1817,22 @@
    "extra": "<b>Incident:</b> DB pool hands out dead connections after a network blip.",
    "source": "Below CNI · Load balancing",
    "reverse": false,
-   "guid": null
+   "guid": "JZD$~H5ax>"
   },
   {
    "type": "basic",
    "deck": "Networking::06 Transport & TCP",
    "tags": [
     "networking::tcp",
-    "networking::troubleshooting"
+    "networking::troubleshooting",
+    "simplified"
    ],
-   "front": "Why does a TCP connect often time out after exactly 63 s?",
-   "back": "Synchronize (SYN) retries back off 1, 2, 4, 8, 16, 32 s; with <code>tcp_syn_retries=6</code> the total is 63 s (7 → 127 s). That pattern means packets are being silently <b>dropped</b>; an active reject fails at once with \"connection refused\".",
+   "front": "A TCP connect() fails after about 127 s instead of immediately. Explain the number and what it tells you about the network.",
+   "back": "Synchronize (SYN) retransmissions back off 1, 2, 4, 8, 16, 32 s, then the kernel waits one more 64 s before giving up. With the default <code>tcp_syn_retries=6</code>, the 6th retransmission is sent at 63 s and connect() fails at 127 s (with 5 retries it fails at 63 s, with 7 at 255 s). That pattern means packets are being silently <b>dropped</b>; an active reject fails at once with \"connection refused\".",
    "text": "",
    "image": "",
-   "analogy": "Knocking, waiting twice as long each time, and leaving after the sixth knock. A slammed door would have told you at once.",
-   "extra": "",
+   "analogy": "Knocking, waiting twice as long each time, and leaving after the sixth knock plus one last long wait. A slammed door would have told you at once.",
+   "extra": "Linux kernel docs, ip-sysctl (tcp_syn_retries): https://www.kernel.org/doc/html/latest/networking/ip-sysctl.html",
    "source": "Below CNI · Load balancing",
    "reverse": false,
    "guid": "t%k0|40R>%"
@@ -1867,11 +1873,12 @@
    "type": "cloze",
    "deck": "Networking::07 DNS & Application Protocols",
    "tags": [
-    "networking::dns"
+    "networking::dns",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "DNS record types: {{c1::A}} → Internet Protocol version 4 (IPv4) address; {{c2::AAAA}} → Internet Protocol version 6 (IPv6) address; {{c3::CNAME}} → alias to another name; {{c4::MX}} → mail server for the domain; {{c5::NS}} → delegates a zone to its name servers.",
+   "text": "DNS record types:<br>A: {{c1::Internet Protocol version 4 (IPv4) address}}<br>AAAA: {{c2::Internet Protocol version 6 (IPv6) address}}<br>Canonical name (CNAME): {{c3::alias to another name (not allowed at the zone apex)}}<br>Mail exchange (MX): {{c4::mail server for the domain}}<br>Name server (NS): {{c5::delegates a zone to its name servers}}",
    "image": "",
    "analogy": "",
    "extra": "<b>Pitfall:</b> a canonical name (CNAME) can't sit at the zone apex; providers offer ALIAS/ANAME for that.<br><b>Expansions:</b> mail exchange (MX); name server (NS)",
@@ -1893,7 +1900,7 @@
    "extra": "",
    "source": "Tanenbaum · Ch7",
    "reverse": false,
-   "guid": null
+   "guid": "oYPWt0jU$3"
   },
   {
    "type": "basic",
@@ -2310,10 +2317,11 @@
    "deck": "Networking::09 Load Balancing",
    "tags": [
     "networking::loadbalancing",
-    "networking::tcp"
+    "networking::tcp",
+    "simplified"
    ],
    "front": "Why does an idle-timeout mismatch cause <i>connection reset</i> on the first request after a quiet spell?",
-   "back": "The load balancer (LB) or network address translation (NAT) silently drops idle connections; the client's keep-alive pool still thinks they're open and gets a TCP reset (RST). Rule: client idle timeout &lt; LB idle timeout &lt; backend idle timeout.",
+   "back": "The load balancer (LB) or network address translation (NAT) silently drops idle connections; the client's keep-alive pool still thinks they are open and gets a TCP reset (RST) on first use.",
    "text": "",
    "image": "",
    "analogy": "The switchboard hangs up silent lines without telling anyone; you start talking and hear a dial tone.",
@@ -2530,11 +2538,12 @@
    "deck": "Networking::10 Linux & Kubernetes Datapath",
    "tags": [
     "networking::datapath",
-    "networking::ebpf"
+    "networking::ebpf",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Extended Berkeley Packet Filter (eBPF) networking hooks, earliest first: {{c1::XDP}} runs in the network interface card (NIC) driver before a socket buffer (skb) exists (fastest, drop/redirect); {{c2::TC}} ingress/egress runs on the skb with full metadata (Cilium on pod veths); {{c3::socket/cgroup}} hooks run at <code>connect()</code>/<code>sendmsg()</code>, before any packet exists.",
+   "text": "Extended Berkeley Packet Filter (eBPF) networking hooks, earliest first: Express Data Path (XDP) runs {{c1::in the network interface card (NIC) driver before a socket buffer (skb) exists (fastest, drop/redirect)}}; traffic control (TC) ingress/egress runs {{c2::on the skb with full metadata (Cilium on pod veths)}}; socket/cgroup hooks run {{c3::at <code>connect()</code>/<code>sendmsg()</code>, before any packet exists}}.",
    "image": "",
    "analogy": "XDP is the guard at the front gate, TC the loading dock, socket hooks the clerk who fixes the address before the letter is written.",
    "extra": "<b>Expansions:</b> Express Data Path (XDP); traffic control (TC)",
@@ -2691,6 +2700,472 @@
    "source": "Below CNI · Triage",
    "reverse": false,
    "guid": "P=Q_lGt+%h"
+  },
+  {
+   "type": "basic",
+   "deck": "Networking::01 Models & Layering",
+   "tags": [
+    "networking::models",
+    "simplified"
+   ],
+   "front": "A packet crosses a router. Which layer 2 (L2, data link) and layer 3 (L3, network) header fields change, and which stay the same?",
+   "back": "<b>L2</b>: source and destination medium access control (MAC) addresses are rewritten at every hop.<br><b>L3</b>: Internet Protocol (IP) source and destination stay end to end; only the time to live (TTL) drops (unless network address translation (NAT) rewrites them).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false,
+   "guid": "8823be5967"
+  },
+  {
+   "type": "basic",
+   "deck": "Networking::02 Physical Layer & Media",
+   "tags": [
+    "networking::performance",
+    "simplified"
+   ],
+   "front": "A 1 Gbit/s path has a 100 ms round-trip time (RTT) and the TCP window is fixed at 64 KB. What throughput can you get, and why?",
+   "back": "About 64 KB / 0.1 s ≈ 5 Mbit/s. A sender can have at most one window in flight per RTT, and the window is far below the bandwidth-delay product (12.5 MB), so the link sits mostly idle.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false,
+   "guid": "d77174d370"
+  },
+  {
+   "type": "basic",
+   "deck": "Networking::02 Physical Layer & Media",
+   "tags": [
+    "networking::physical",
+    "simplified"
+   ],
+   "front": "A channel has 3 kHz bandwidth and a 30 dB signal-to-noise ratio (SNR). Roughly what is its maximum data rate?",
+   "back": "Shannon: 30 dB means S/N = 1000, so C = 3000 × log<sub>2</sub>(1001) ≈ 30 kbit/s, however many signal levels you use.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false,
+   "guid": "1fb27ece97"
+  },
+  {
+   "type": "basic",
+   "deck": "Networking::03 Data Link & Ethernet",
+   "tags": [
+    "networking::datalink",
+    "networking::ethernet",
+    "simplified"
+   ],
+   "front": "In CSMA/CD, how do minimum frame size, link speed and maximum cable length constrain each other?",
+   "back": "The frame must take at least a round-trip propagation time to send, so the sender is still transmitting when a collision echo returns. Raising the speed with the same frame size, or lengthening the cable, breaks this, so one must shrink or the minimum frame grow.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false,
+   "guid": "005470ceee"
+  },
+  {
+   "type": "basic",
+   "deck": "Networking::03 Data Link & Ethernet",
+   "tags": [
+    "networking::datalink",
+    "networking::ethernet",
+    "simplified"
+   ],
+   "front": "How does a switch build its table, and what does it do with a frame for an unknown destination medium access control (MAC) address?",
+   "back": "It learns by reading the <b>source</b> MAC of each frame and recording the ingress port. For an unknown (or broadcast) destination it floods the frame out every port except the one it arrived on.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false,
+   "guid": "44c78cb29e"
+  },
+  {
+   "type": "basic",
+   "deck": "Networking::03 Data Link & Ethernet",
+   "tags": [
+    "networking::datalink",
+    "networking::reliability",
+    "simplified"
+   ],
+   "front": "With n-bit sequence numbers, what is the largest window for Go-Back-N vs Selective Repeat, and why is Selective Repeat smaller?",
+   "back": "Go-Back-N: 2<sup>n</sup> − 1. Selective Repeat: 2<sup>n−1</sup>. With a larger window, the receiver's new window would overlap the old one, so it could not tell a retransmitted old frame from a new frame with the same number.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false,
+   "guid": "113edf3807"
+  },
+  {
+   "type": "basic",
+   "deck": "Networking::04 IP, Addressing & Routing",
+   "tags": [
+    "networking::routing",
+    "simplified"
+   ],
+   "front": "A router has <code>10.0.0.0/8</code> via A, <code>10.1.0.0/16</code> via B and a default route via C. Where do packets for <code>10.1.5.9</code>, <code>10.2.0.1</code> and <code>192.0.2.1</code> go?",
+   "back": "<code>10.1.5.9</code> → B (the /16 is the longest match). <code>10.2.0.1</code> → A (only the /8 matches). <code>192.0.2.1</code> → C (only the default matches).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false,
+   "guid": "ae02a62c9e"
+  },
+  {
+   "type": "basic",
+   "deck": "Networking::04 IP, Addressing & Routing",
+   "tags": [
+    "networking::routing",
+    "simplified"
+   ],
+   "front": "How do split horizon and poison reverse limit count-to-infinity, and what do they not fix?",
+   "back": "<b>Split horizon</b>: do not advertise a route back out the interface you learned it from. <b>Poison reverse</b>: advertise it back with an infinite metric. They stop two-router loops but not loops across three or more routers.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false,
+   "guid": "55ea92a72a"
+  },
+  {
+   "type": "basic",
+   "deck": "Networking::04 IP, Addressing & Routing",
+   "tags": [
+    "networking::routing",
+    "simplified"
+   ],
+   "front": "What goes wrong in link-state routing if two routers hold different views of the topology?",
+   "back": "They compute inconsistent shortest-path trees and can forward packets in a loop until flooding makes their databases agree again.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false,
+   "guid": "b61a489731"
+  },
+  {
+   "type": "basic",
+   "deck": "Networking::04 IP, Addressing & Routing",
+   "tags": [
+    "networking::ip",
+    "networking::nat",
+    "simplified"
+   ],
+   "front": "Two hosts behind one NAT both use source port 50000 to the same server. How does NAT keep the flows apart?",
+   "back": "NAT also rewrites the source port (port address translation): each flow gets a unique public port, and the table maps (private IP, port, protocol) to (public IP, public port). Replies are matched on the public port and translated back.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false,
+   "guid": "ebaf9648a5"
+  },
+  {
+   "type": "basic",
+   "deck": "Networking::04 IP, Addressing & Routing",
+   "tags": [
+    "networking::ip",
+    "networking::arp",
+    "simplified"
+   ],
+   "front": "A host wants to reach an IP address outside its subnet. Whose medium access control (MAC) address goes in the frame, and why?",
+   "back": "The default gateway's. The host compares the destination with its own subnet mask, sees it is off-link, and uses Address Resolution Protocol (ARP) for the gateway's IP. The IP destination stays the real target; only the L2 destination is the gateway.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false,
+   "guid": "e95d256598"
+  },
+  {
+   "type": "basic",
+   "deck": "Networking::04 IP, Addressing & Routing",
+   "tags": [
+    "networking::ip",
+    "simplified"
+   ],
+   "front": "Are <code>10.0.0.60/26</code> and <code>10.0.0.70/26</code> on the same subnet? What happens when one sends to the other?",
+   "back": "No. A /26 has blocks of 64: <code>10.0.0.60</code> is in 0–63, <code>10.0.0.70</code> in 64–127. The sender treats the other as off-link and sends via its default gateway, which must route between the subnets.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false,
+   "guid": "73654f4f33"
+  },
+  {
+   "type": "basic",
+   "deck": "Networking::04 IP, Addressing & Routing",
+   "tags": [
+    "networking::ip",
+    "networking::ipv6",
+    "simplified"
+   ],
+   "front": "Why does Internet Protocol version 6 (IPv6) forbid fragmentation by routers, and what does the sender do instead?",
+   "back": "Routers drop an oversized packet and return an Internet Control Message Protocol version 6 (ICMPv6) \"Packet Too Big\". The sender learns the path maximum transmission unit (MTU) and fragments (or shrinks packets) at the source. This keeps routers fast and simple.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false,
+   "guid": "35ee68966d"
+  },
+  {
+   "type": "basic",
+   "deck": "Networking::05 BGP & Fabric Routing",
+   "tags": [
+    "networking::bgp",
+    "simplified"
+   ],
+   "front": "Why does Border Gateway Protocol (BGP) forbid passing a route from one internal BGP (iBGP) peer to another?",
+   "back": "AS_PATH is prepended only when crossing an autonomous system (AS) boundary, so within an AS it cannot reveal loops. The rule stops iBGP routes circulating, at the cost of needing a full mesh or route reflectors.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false,
+   "guid": "5e0cdb7f27"
+  },
+  {
+   "type": "basic",
+   "deck": "Networking::05 BGP & Fabric Routing",
+   "tags": [
+    "networking::bgp",
+    "simplified"
+   ],
+   "front": "LOCAL_PREF vs AS_PATH prepending: which steers your outbound traffic and which influences inbound?",
+   "back": "<b>LOCAL_PREF</b> is carried only inside your AS and sets which exit your routers prefer (outbound).<br><b>Prepending</b> lengthens AS_PATH on routes you advertise, making them less attractive to remote networks (inbound, a weaker hint).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false,
+   "guid": "39ecc312c1"
+  },
+  {
+   "type": "basic",
+   "deck": "Networking::05 BGP & Fabric Routing",
+   "tags": [
+    "networking::bgp",
+    "networking::ecmp",
+    "simplified"
+   ],
+   "front": "Why does equal-cost multi-path (ECMP) hash per flow rather than spray packets one by one?",
+   "back": "Per-packet spreading sends one TCP connection down paths with different delays, reordering packets. The receiver then sees duplicate acknowledgements and the sender retransmits needlessly. Per-flow hashing keeps each flow on one path.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false,
+   "guid": "cea5220ab8"
+  },
+  {
+   "type": "basic",
+   "deck": "Networking::06 Transport & TCP",
+   "tags": [
+    "networking::tcp",
+    "simplified"
+   ],
+   "front": "What would break if every TCP connection started with initial sequence number 0?",
+   "back": "Delayed segments from an earlier connection on the same 4-tuple could be accepted as valid data in the new one, and attackers could guess sequence numbers to spoof segments. Random initial sequence numbers avoid both.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false,
+   "guid": "2c8af7f20a"
+  },
+  {
+   "type": "basic",
+   "deck": "Networking::06 Transport & TCP",
+   "tags": [
+    "networking::tcp",
+    "simplified"
+   ],
+   "front": "Why can Nagle's algorithm plus delayed acknowledgements stall a request/response protocol, and what is the fix?",
+   "back": "The sender holds a small write until the previous data is acknowledged, while the receiver delays its acknowledgement hoping to piggyback on data. Both wait on each other until the delayed-ACK timer fires, adding tens of milliseconds. Fix: set <code>TCP_NODELAY</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false,
+   "guid": "02be2f016d"
+  },
+  {
+   "type": "basic",
+   "deck": "Networking::06 Transport & TCP",
+   "tags": [
+    "networking::tcp",
+    "simplified"
+   ],
+   "front": "How does a synchronize (SYN) flood exhaust a server, and how do SYN cookies help?",
+   "back": "Each SYN makes the server allocate half-open connection state, filling the backlog. With SYN cookies the server encodes the needed state in its initial sequence number and allocates nothing until a valid final ACK returns.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false,
+   "guid": "5fe54e7666"
+  },
+  {
+   "type": "basic",
+   "deck": "Networking::07 DNS & Application Protocols",
+   "tags": [
+    "networking::dns",
+    "simplified"
+   ],
+   "front": "Trace how a recursive resolver resolves <code>www.example.com</code> with an empty cache.",
+   "back": "Resolver asks a root server → referral to the <code>.com</code> top-level domain (TLD) servers → referral to example.com's authoritative name servers → they return the A/AAAA answer. The resolver caches every step for its time to live (TTL) and answers the client.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false,
+   "guid": "f1dfc27c2d"
+  },
+  {
+   "type": "basic",
+   "deck": "Networking::07 DNS & Application Protocols",
+   "tags": [
+    "networking::dns",
+    "simplified"
+   ],
+   "front": "Why does DNS sometimes switch from User Datagram Protocol (UDP) to TCP?",
+   "back": "When a response is too big for the UDP size limit the server sets the truncated (TC) flag and the client retries over TCP. Zone transfers also use TCP.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false,
+   "guid": "7c9267e34e"
+  },
+  {
+   "type": "basic",
+   "deck": "Networking::08 TLS & Crypto",
+   "tags": [
+    "networking::tls",
+    "simplified"
+   ],
+   "front": "What attack becomes possible if a TLS client validates the certificate chain but skips the hostname check?",
+   "back": "Man-in-the-middle: an attacker presents a perfectly valid certificate for a domain they own, and the client accepts it as the server it wanted.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false,
+   "guid": "da65ec842f"
+  },
+  {
+   "type": "basic",
+   "deck": "Networking::09 Load Balancing",
+   "tags": [
+    "networking::loadbalancing",
+    "simplified"
+   ],
+   "front": "Why must the client idle timeout be shorter than the load balancer's, and that shorter than the backend's?",
+   "back": "Whoever closes first must be the side that knows. If the LB or backend closes silently first, the client reuses a dead connection and gets a reset. Shorter on the client means it discards idle connections itself before anyone else drops them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false,
+   "guid": "815c3ce7e1"
+  },
+  {
+   "type": "basic",
+   "deck": "Networking::10 Linux & Kubernetes Datapath",
+   "tags": [
+    "networking::linux",
+    "simplified"
+   ],
+   "front": "What symptom does a full conntrack table cause?",
+   "back": "New connections are silently dropped (kernel log: \"nf_conntrack: table full, dropping packet\") while existing flows keep working, so failures look intermittent and random.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false,
+   "guid": "9d231ed78a"
+  },
+  {
+   "type": "basic",
+   "deck": "Networking::10 Linux & Kubernetes Datapath",
+   "tags": [
+    "networking::linux",
+    "simplified"
+   ],
+   "front": "Trace a packet from pod A to pod B on the same node.",
+   "back": "A's <code>eth0</code> → its veth peer on the host → host bridge (or route) → B's veth peer → B's <code>eth0</code>. Nothing is encapsulated and nothing leaves the node, so overlay and Border Gateway Protocol (BGP) issues cannot affect it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false,
+   "guid": "907dd79a5d"
+  },
+  {
+   "type": "basic",
+   "deck": "Networking::11 Troubleshooting & Triage",
+   "tags": [
+    "networking::triage",
+    "simplified"
+   ],
+   "front": "Triage: the TCP handshake succeeds and small requests work, but large responses hang. Suspect?",
+   "back": "A maximum transmission unit (MTU) problem: path MTU discovery black hole (Internet Control Message Protocol (ICMP) blocked) or an overlay adding header bytes. Test with ping at increasing sizes using don't-fragment.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false,
+   "guid": "3492251206"
+  },
+  {
+   "type": "basic",
+   "deck": "Networking::11 Troubleshooting & Triage",
+   "tags": [
+    "networking::triage",
+    "simplified"
+   ],
+   "front": "\"Connection refused\" vs a timeout: what does each tell you about the path?",
+   "back": "<b>Refused</b>: a reset (RST) came back, so the host is reachable and nothing listens on that port (or a firewall actively rejects).<br><b>Timeout</b>: packets are silently dropped (firewall drop, missing route, host down).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "",
+   "reverse": false,
+   "guid": "fe140cad17"
   }
  ]
 }

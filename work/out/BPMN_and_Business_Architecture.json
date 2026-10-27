@@ -164,7 +164,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "Or`9KCr/%i",
    "type": "basic",
    "deck": "BPMN & Business Architecture::02 BPMN Events",
    "tags": [
@@ -228,7 +228,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "H-|NpWg:cC",
    "type": "basic",
    "deck": "BPMN & Business Architecture::02 BPMN Events",
    "tags": [
@@ -240,6 +240,23 @@
    "text": "",
    "image": "",
    "analogy": "Interrupting: the fire alarm ends the meeting. Non-interrupting: a reminder ping you deal with while the meeting goes on.",
+   "extra": "",
+   "source": "BPMN · Events",
+   "reverse": false
+  },
+  {
+   "guid": "cab8036fcc",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::02 BPMN Events",
+   "tags": [
+    "bpmn::events",
+    "simplified"
+   ],
+   "front": "A review task must keep running, but a reminder should go out after 2 days. Which event do you attach?",
+   "back": "A <b>non-interrupting timer boundary event</b>: the reminder path starts in parallel and the review continues. An interrupting one would cancel the review.",
+   "text": "",
+   "image": "",
+   "analogy": "",
    "extra": "",
    "source": "BPMN · Events",
    "reverse": false
@@ -272,6 +289,23 @@
    "text": "",
    "image": "",
    "analogy": "Signal = a radio broadcast; message = a registered letter.",
+   "extra": "",
+   "source": "BPMN · Events",
+   "reverse": false
+  },
+  {
+   "guid": "a4c2c945c4",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::02 BPMN Events",
+   "tags": [
+    "bpmn::events",
+    "simplified"
+   ],
+   "front": "A system shutdown must cancel every pending order instance at once. Message or signal event, and why?",
+   "back": "A <b>signal</b>: it is broadcast to all listening instances. A message targets exactly one receiver, so you would need one per order.",
+   "text": "",
+   "image": "",
+   "analogy": "",
    "extra": "",
    "source": "BPMN · Events",
    "reverse": false
@@ -341,6 +375,40 @@
    "reverse": false
   },
   {
+   "guid": "d20ecda7b2",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::03 BPMN Gateways",
+   "tags": [
+    "bpmn::gateways",
+    "simplified"
+   ],
+   "front": "What goes wrong if an exclusive merge follows a parallel split?",
+   "back": "The merge passes on each arriving path separately, so everything after it runs <b>once per branch</b> instead of once.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BPMN · Gateways",
+   "reverse": false
+  },
+  {
+   "guid": "52c6033342",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::03 BPMN Gateways",
+   "tags": [
+    "bpmn::gateways",
+    "simplified"
+   ],
+   "front": "What goes wrong if a parallel join follows an exclusive split?",
+   "back": "The join waits for all incoming paths, but the split only activates one, so the process <b>deadlocks</b>. Match the join type to the split type.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BPMN · Gateways",
+   "reverse": false
+  },
+  {
    "guid": "lkv#+@f6X>",
    "type": "basic",
    "deck": "BPMN & Business Architecture::03 BPMN Gateways",
@@ -352,6 +420,23 @@
    "text": "",
    "image": "",
    "analogy": "Waiting at the door for either the courier or a 30-minute timeout — whichever comes first decides what you do next.",
+   "extra": "",
+   "source": "BPMN · Gateways",
+   "reverse": false
+  },
+  {
+   "guid": "d18c14eb70",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::03 BPMN Gateways",
+   "tags": [
+    "bpmn::gateways",
+    "simplified"
+   ],
+   "front": "An order waits for a customer reply or 7 days, whichever comes first. Which gateway and elements model this?",
+   "back": "An <b>event-based gateway</b> followed by a message catch event and a timer catch event; the first to occur wins and the other is discarded.",
+   "text": "",
+   "image": "",
+   "analogy": "",
    "extra": "",
    "source": "BPMN · Gateways",
    "reverse": false
@@ -517,6 +602,23 @@
    "reverse": false
   },
   {
+   "guid": "1661d770e0",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::05 Modeling Method",
+   "tags": [
+    "bpmn::method",
+    "simplified"
+   ],
+   "front": "Why can a descriptive model not simply be deployed on a process engine?",
+   "back": "It is written for human understanding and omits executable detail such as precise conditions, data mappings and task implementations. It must be made technically precise first.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BPMN · Method",
+   "reverse": false
+  },
+  {
    "guid": "d}b?^}MjI6",
    "type": "basic",
    "deck": "BPMN & Business Architecture::05 Modeling Method",
@@ -597,6 +699,40 @@
    "reverse": false
   },
   {
+   "guid": "f725c3722f",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::06 DMN & CMMN",
+   "tags": [
+    "bpmn::dmn",
+    "simplified"
+   ],
+   "front": "In a Decision Model and Notation (DMN) table with the Unique hit policy, what happens if two rows match the same input?",
+   "back": "The table is invalid for that input, because Unique allows at most one matching rule. Use First, Priority or Collect when overlaps are intended.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DMN",
+   "reverse": false
+  },
+  {
+   "guid": "8931e3f4c4",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::06 DMN & CMMN",
+   "tags": [
+    "bpmn::dmn",
+    "simplified"
+   ],
+   "front": "A discount rule changes weekly. Why model it as a decision rather than as gateway conditions?",
+   "back": "Rules in a Decision Model and Notation (DMN) table can be changed and reviewed by business users without redrawing or redeploying the process, and the diagram stays readable.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DMN",
+   "reverse": false
+  },
+  {
    "guid": "H.8H<AU&&P",
    "type": "basic",
    "deck": "BPMN & Business Architecture::06 DMN & CMMN",
@@ -613,7 +749,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "NFA6L!E:&s",
    "type": "basic",
    "deck": "BPMN & Business Architecture::06 DMN & CMMN",
    "tags": [
@@ -667,10 +803,11 @@
    "type": "basic",
    "deck": "BPMN & Business Architecture::07 Business Architecture Foundations",
    "tags": [
-    "bizarch::domain"
+    "bizarch::domain",
+    "simplified"
    ],
-   "front": "How does business architecture relate to data, application and technology architecture?",
-   "back": "It sets the business context and priorities they must support, keeping IT investment traceable to business need.",
+   "front": "What does business architecture give data, application and technology architecture, and what goes wrong without it?",
+   "back": "It supplies the business context and priorities they must support, keeping IT investment traceable to business need. Without it, technology is built to local demands and drifts from what the business needs.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -731,10 +868,28 @@
    "type": "basic",
    "deck": "BPMN & Business Architecture::07 Business Architecture Foundations",
    "tags": [
-    "bizarch::frameworks"
+    "bizarch::frameworks",
+    "simplified"
    ],
-   "front": "Criteria for choosing a business/enterprise architecture framework?",
-   "back": "Fit with size, sector and change context; how prescriptive it needs to be; existing tools/skills; how well its artefacts map to real decision-making.",
+   "front": "Which context factors should drive the choice of a business/enterprise architecture framework?",
+   "back": "Fit with the organisation's size, sector and change context: a framework suited to one setting can be too heavy or too light in another.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BCS Business Architecture · Frameworks",
+   "reverse": false
+  },
+  {
+   "guid": "2718ad9a23",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::07 Business Architecture Foundations",
+   "tags": [
+    "bizarch::frameworks",
+    "simplified"
+   ],
+   "front": "Beyond organisational fit, what practical criteria decide which architecture framework to adopt?",
+   "back": "How prescriptive it needs to be, which tools and skills already exist, and how well its artefacts map to real decision-making.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -887,6 +1042,23 @@
    "reverse": false
   },
   {
+   "guid": "485f790f86",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::08 Business Architecture Views",
+   "tags": [
+    "bizarch::capability",
+    "simplified"
+   ],
+   "front": "A bank automates manual loan approval. Which changes, the capability or the process, and why?",
+   "back": "The <b>process</b> changes (new steps, new technology). The capability \"approve loans\" stays the same: it describes what the bank can do, not how.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BCS Business Architecture · Capability view",
+   "reverse": false
+  },
+  {
    "guid": "CkjO}gXbUd",
    "type": "basic",
    "deck": "BPMN & Business Architecture::08 Business Architecture Views",
@@ -919,6 +1091,23 @@
    "reverse": false
   },
   {
+   "guid": "749a3a69a8",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::08 Business Architecture Views",
+   "tags": [
+    "bizarch::capability",
+    "simplified"
+   ],
+   "front": "On a capability heat map showing importance and maturity, which capabilities merit investment first?",
+   "back": "Those that are <b>high importance and low maturity</b>: the biggest gap between what the strategy needs and what the organisation can do.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BCS Business Architecture · Capability view",
+   "reverse": false
+  },
+  {
    "guid": "zcWzcZwce/",
    "type": "basic",
    "deck": "BPMN & Business Architecture::08 Business Architecture Views",
@@ -948,6 +1137,23 @@
    "analogy": "",
    "extra": "",
    "source": "BCS Business Architecture · Process/Service View",
+   "reverse": false
+  },
+  {
+   "guid": "e945c5d4cd",
+   "type": "basic",
+   "deck": "BPMN & Business Architecture::08 Business Architecture Views",
+   "tags": [
+    "bizarch::process_service",
+    "simplified"
+   ],
+   "front": "How do capabilities relate to the stages of a value stream?",
+   "back": "Each value stream stage is enabled by one or more capabilities, so mapping capabilities to stages shows which capabilities a given outcome depends on.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "BCS Business Architecture · Process/service view",
    "reverse": false
   },
   {

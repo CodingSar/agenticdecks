@@ -276,6 +276,23 @@
    "reverse": false
   },
   {
+   "guid": "32db635dda",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::03 Modularity & Coupling",
+   "tags": [
+    "SoftwareArchitecture::Modularity",
+    "simplified"
+   ],
+   "front": "A component has a very high <b>afferent</b> coupling (C<sub>a</sub>). What does that imply for changing it?",
+   "back": "Many components depend on it, so changes ripple widely and are risky and costly; it should be stable and ideally abstract.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Modularity",
+   "reverse": false
+  },
+  {
    "guid": "pI5>XwMiA:",
    "type": "basic",
    "deck": "Software Architecture & DDD::03 Modularity & Coupling",
@@ -292,7 +309,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "M>g>dw1K?H",
    "type": "basic",
    "deck": "Software Architecture & DDD::03 Modularity & Coupling",
    "tags": [
@@ -300,6 +317,23 @@
    ],
    "front": "Formula for <b>distance from the main sequence</b> \\(D\\)?",
    "back": "\\(D = |A + I - 1|\\), where \\(A\\) = abstractness (abstract / total elements). Near 0 = healthy balance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Modularity",
+   "reverse": false
+  },
+  {
+   "guid": "a968d80f4f",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::03 Modularity & Coupling",
+   "tags": [
+    "SoftwareArchitecture::Modularity",
+    "simplified"
+   ],
+   "front": "Why should a component that many others depend on be <b>abstract</b> rather than concrete?",
+   "back": "Abstractions can be implemented in new ways without breaking dependents; a concrete, heavily depended-on component is rigid (zone of pain).",
    "text": "",
    "image": "",
    "analogy": "",
@@ -360,11 +394,12 @@
    "type": "cloze",
    "deck": "Software Architecture & DDD::03 Modularity & Coupling",
    "tags": [
-    "SoftwareArchitecture::Modularity"
+    "SoftwareArchitecture::Modularity",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "<b>Dynamic</b> connascence (visible only at runtime): connascence of {{c1::Execution}} (order), {{c2::Timing}}, {{c3::Values}} (values that must change together) and {{c4::Identity}} (same entity referenced).",
+   "text": "<b>Dynamic</b> connascence (visible only at runtime): Execution = {{c1::the order of execution matters}}; Timing = {{c2::the timing of execution matters}}; Values = {{c3::several values must change together}}; Identity = {{c4::several components must reference the same entity}}.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -372,7 +407,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "L*T)DiP|Z1",
    "type": "basic",
    "deck": "Software Architecture & DDD::03 Modularity & Coupling",
    "tags": [
@@ -432,6 +467,23 @@
    "image": "",
    "analogy": "A fleet vs one big ship: each microservice can sail (deploy) on its own; a monolith leaves port all at once.",
    "extra": "Characteristics can differ per quantum, which is a key reason to split a system.",
+   "source": "FoSA · Components",
+   "reverse": false
+  },
+  {
+   "guid": "8b46c7aca2",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::03 Modularity & Coupling",
+   "tags": [
+    "SoftwareArchitecture::Modularity",
+    "simplified"
+   ],
+   "front": "Why does a <b>shared database</b> make several services one architecture quantum?",
+   "back": "They are coupled through the shared schema and data, so they can't be deployed or evolved independently; the database is part of the quantum.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "FoSA · Components",
    "reverse": false
   },
@@ -548,6 +600,23 @@
    "reverse": false
   },
   {
+   "guid": "31c3bfd199",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::04 Architecture Styles",
+   "tags": [
+    "SoftwareArchitecture::Styles",
+    "simplified"
+   ],
+   "front": "What do you lose if a layer in the layered style is made <b>open</b>?",
+   "back": "Layers of isolation: dependents can now reach past it, so changes in that layer can ripple into layers above and beyond it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Architecture Styles",
+   "reverse": false
+  },
+  {
    "guid": "u|/ML+BP$~",
    "type": "basic",
    "deck": "Software Architecture & DDD::04 Architecture Styles",
@@ -580,7 +649,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "Bi=rkIcP1^",
    "type": "basic",
    "deck": "Software Architecture & DDD::04 Architecture Styles",
    "tags": [
@@ -692,7 +761,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "d3`~Ss{Fg.",
    "type": "basic",
    "deck": "Software Architecture & DDD::04 Architecture Styles",
    "tags": [
@@ -735,6 +804,23 @@
    "text": "",
    "image": "",
    "analogy": "Broker = a relay of gossip; mediator = a conductor cueing each section.",
+   "extra": "",
+   "source": "FoSA · Architecture Styles",
+   "reverse": false
+  },
+  {
+   "guid": "b6b71616fb",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::04 Architecture Styles",
+   "tags": [
+    "SoftwareArchitecture::Styles",
+    "simplified"
+   ],
+   "front": "Why are workflow and error handling hard in event-driven <b>broker</b> topology?",
+   "back": "No component owns the whole flow: each processor only knows its own event, so nobody sees overall state or can easily undo or retry a failed step.",
+   "text": "",
+   "image": "",
+   "analogy": "",
    "extra": "",
    "source": "FoSA · Architecture Styles",
    "reverse": false
@@ -788,7 +874,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "sBUzgJ)9Jf",
    "type": "basic",
    "deck": "Software Architecture & DDD::04 Architecture Styles",
    "tags": [
@@ -860,6 +946,23 @@
    ],
    "front": "Why do microservices map one service per <b>bounded context</b>?",
    "back": "Each service owns one model and its data, so there's no shared-schema coupling and each can change and deploy independently.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Architecture Styles",
+   "reverse": false
+  },
+  {
+   "guid": "e5c7df0d36",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::04 Architecture Styles",
+   "tags": [
+    "SoftwareArchitecture::Styles",
+    "simplified"
+   ],
+   "front": "What breaks if two microservices share one database schema?",
+   "back": "A schema change in one forces changes and coordinated deployment in the other, losing independent deployability: the coupling microservices exist to avoid.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -964,6 +1067,23 @@
    "reverse": false
   },
   {
+   "guid": "98508ff983",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::04 Architecture Styles",
+   "tags": [
+    "SoftwareArchitecture::Styles",
+    "simplified"
+   ],
+   "front": "Why do microservices need a saga rather than one transaction?",
+   "back": "Each service owns its own database, so no single local transaction can span them; consistency comes from local steps plus compensations.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "FoSA · Architecture Styles",
+   "reverse": false
+  },
+  {
    "guid": "lbD`p:qhrH",
    "type": "basic",
    "deck": "Software Architecture & DDD::05 Decisions, Risk & Communication",
@@ -980,15 +1100,16 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "n%NpT80<2o",
    "type": "cloze",
    "deck": "Software Architecture & DDD::05 Decisions, Risk & Communication",
    "tags": [
-    "SoftwareArchitecture::Decisions"
+    "SoftwareArchitecture::Decisions",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Typical Architecture Decision Record (ADR) sections: title, {{c1::status}}, {{c2::context}}, {{c3::decision}}, {{c4::consequences}}.",
+   "text": "Architecture Decision Record (ADR) sections: Title; Status = {{c1::proposed, accepted or superseded}}; Context = {{c2::the forces that make a decision necessary}}; Decision = {{c3::the choice made, with its why}}; Consequences = {{c4::the resulting tradeoffs}}.",
    "image": "",
    "analogy": "",
    "extra": "<b>Status</b> values: proposed, accepted, superseded (link to the replacing ADR, never delete).",
@@ -1000,11 +1121,12 @@
    "type": "cloze",
    "deck": "Software Architecture & DDD::05 Decisions, Risk & Communication",
    "tags": [
-    "SoftwareArchitecture::Decisions"
+    "SoftwareArchitecture::Decisions",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "C4 model zoom levels: {{c1::Context}} → {{c2::Container}} → {{c3::Component}} → {{c4::Code}}.",
+   "text": "C4 model zoom levels, from widest to most detailed: Context = {{c1::the system among its users and other systems}}; Container = {{c2::the deployable/runnable applications and data stores}}; Component = {{c3::the building blocks inside one container}}; Code = {{c4::classes and implementation detail}}.",
    "image": "",
    "analogy": "Like zooming a map from country to city to street to building.",
    "extra": "Use consistent notation, a legend and labelled lines.",
@@ -1092,7 +1214,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "J=EmqYP`{3",
    "type": "basic",
    "deck": "Software Architecture & DDD::06 DDD Model & Language",
    "tags": [
@@ -1236,6 +1358,23 @@
    "reverse": false
   },
   {
+   "guid": "2bbd1b3e85",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::07 DDD Tactical Building Blocks",
+   "tags": [
+    "DDD::Tactical",
+    "simplified"
+   ],
+   "front": "Two customers share the same name and address. When must Domain-Driven Design (DDD) still treat them as different objects?",
+   "back": "When they are <b>Entities</b>: identity, not attributes, defines them, so each keeps its own distinct identity.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Building Blocks",
+   "reverse": false
+  },
+  {
    "guid": "Q)wE^%}5f?",
    "type": "basic",
    "deck": "Software Architecture & DDD::07 DDD Tactical Building Blocks",
@@ -1247,6 +1386,23 @@
    "text": "",
    "image": "",
    "analogy": "A €10 note: you don't care which one you get, only its value.",
+   "extra": "",
+   "source": "DDD · Building Blocks",
+   "reverse": false
+  },
+  {
+   "guid": "07abcdfa36",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::07 DDD Tactical Building Blocks",
+   "tags": [
+    "DDD::Tactical",
+    "simplified"
+   ],
+   "front": "Why make Domain-Driven Design (DDD) Value Objects <b>immutable</b>?",
+   "back": "They can be shared freely without aliasing surprises: to \"change\" one, you replace it with a new value, so nobody else's copy shifts under them.",
+   "text": "",
+   "image": "",
+   "analogy": "",
    "extra": "",
    "source": "DDD · Building Blocks",
    "reverse": false
@@ -1332,6 +1488,23 @@
    "reverse": false
   },
   {
+   "guid": "0c58d3c9a9",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::07 DDD Tactical Building Blocks",
+   "tags": [
+    "DDD::Tactical",
+    "simplified"
+   ],
+   "front": "What breaks if outside code holds a reference to an entity <b>inside</b> an aggregate and modifies it directly?",
+   "back": "The aggregate root can't enforce the aggregate's invariants, because changes bypass it and may leave the aggregate inconsistent.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Aggregates",
+   "reverse": false
+  },
+  {
    "guid": "w[%1e:IS$[",
    "type": "basic",
    "deck": "Software Architecture & DDD::07 DDD Tactical Building Blocks",
@@ -1375,6 +1548,23 @@
    "text": "",
    "image": "",
    "analogy": "A library desk: you ask for a book by title; you don't care where the stacks are.",
+   "extra": "",
+   "source": "DDD · Lifecycle",
+   "reverse": false
+  },
+  {
+   "guid": "17ee39cda7",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::07 DDD Tactical Building Blocks",
+   "tags": [
+    "DDD::Tactical",
+    "simplified"
+   ],
+   "front": "What happens to the domain model if domain code queries the database directly instead of via a Repository?",
+   "back": "Persistence details leak into domain logic, making the model harder to read, test and change; the domain no longer reads as plain objects.",
+   "text": "",
+   "image": "",
+   "analogy": "",
    "extra": "",
    "source": "DDD · Lifecycle",
    "reverse": false
@@ -1556,6 +1746,23 @@
    "reverse": false
   },
   {
+   "guid": "525847c35c",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::09 DDD Bounded Contexts & Context Maps",
+   "tags": [
+    "DDD::Strategic",
+    "simplified"
+   ],
+   "front": "\"Customer\" means a lead in Sales but an account holder in Support. What does Domain-Driven Design (DDD) do about it?",
+   "back": "Give each its own Bounded Context and model, where the term has one meaning, and translate explicitly at the boundary on the Context Map.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Strategic Design",
+   "reverse": false
+  },
+  {
    "guid": "v9ApwCqeDY",
    "type": "basic",
    "deck": "Software Architecture & DDD::09 DDD Bounded Contexts & Context Maps",
@@ -1588,7 +1795,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "p_UH-81A#J",
    "type": "basic",
    "deck": "Software Architecture & DDD::09 DDD Bounded Contexts & Context Maps",
    "tags": [
@@ -1668,7 +1875,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "weX~abUr^l",
    "type": "basic",
    "deck": "Software Architecture & DDD::09 DDD Bounded Contexts & Context Maps",
    "tags": [
@@ -1716,7 +1923,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "N#L*EZ!~U<",
    "type": "basic",
    "deck": "Software Architecture & DDD::09 DDD Bounded Contexts & Context Maps",
    "tags": [
@@ -1748,7 +1955,24 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "4e4ac58bcd",
+   "type": "basic",
+   "deck": "Software Architecture & DDD::10 DDD Distillation & Large-Scale Structure",
+   "tags": [
+    "DDD::Distillation",
+    "simplified"
+   ],
+   "front": "Why should you not outsource or buy off-the-shelf the <b>Core Domain</b>?",
+   "back": "It is your differentiator; generic software gives competitors the same capability, and you lose the control and deep model needed to evolve it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "DDD · Distillation",
+   "reverse": false
+  },
+  {
+   "guid": "vcp7#x#p<`",
    "type": "basic",
    "deck": "Software Architecture & DDD::10 DDD Distillation & Large-Scale Structure",
    "tags": [
@@ -1844,7 +2068,7 @@
    "reverse": false
   },
   {
-   "guid": null,
+   "guid": "G$y}Fww;ND",
    "type": "basic",
    "deck": "Software Architecture & DDD::10 DDD Distillation & Large-Scale Structure",
    "tags": [

@@ -1,0 +1,58 @@
+# Connective tissue disease and vasculitis
+
+> **Layer:** [12 Organ-system specialties](../README.md) › [Rheumatology and clinical immunology](README.md)
+> **Builds on:** [Autoimmunity](../../07-microbiology-and-immunology/04-immunity-in-disease/autoimmunity.md), [Hypersensitivity and allergy](../../07-microbiology-and-immunology/04-immunity-in-disease/hypersensitivity-and-allergy.md), [Tolerance and self-recognition](../../07-microbiology-and-immunology/03-adaptive-immunity/tolerance-and-self-recognition.md), [Tissue repair, regeneration and fibrosis](../../08-pathology/01-cell-and-tissue-injury/tissue-repair-regeneration-and-fibrosis.md), [Anti-inflammatory and immunomodulatory drugs](../../09-pharmacology-and-therapeutics/03-drug-classes-by-mechanism/anti-inflammatory-and-immunomodulatory-drugs.md)
+> **Enables:** [Glomerular and tubular diseases](../03-nephrology/glomerular-and-tubular-diseases.md), [Interstitial and restrictive lung disease](../02-pulmonology/interstitial-and-restrictive-lung-disease.md), [The eye and vision loss](../../13-acute-perioperative-and-procedural-care/05-ophthalmology-and-ent/the-eye-and-vision-loss.md), [Pregnancy and its complications](../../14-life-course-mind-and-integrative-care/02-obstetrics-and-gynaecology/pregnancy-and-its-complications.md)
+
+## Essence
+
+The connective tissue diseases and the vasculitides are systemic autoimmunity aimed at targets present in every organ: nuclear components, the endothelium, the vessel wall, the fibroblast. Because the target is everywhere, the disease is everywhere: fever, rash, arthritis, kidney failure, lung fibrosis, stroke or blindness in any combination. Lupus is the archetype of immune-complex injury; systemic sclerosis of uncontrolled fibrosis; the vasculitides of vessel-wall inflammation, classified by vessel calibre. The clinical skill is pattern recognition across organs, and the therapeutic logic is that immunosuppression must be matched to the organ at risk, because the drugs that save a kidney or an eye also kill through infection.
+
+## Core tenets
+
+1. **Lupus is a disease of failed clearance and misdirected antibody.** Apoptotic cells that are not cleared promptly expose nuclear antigens (DNA, histones, ribonucleoproteins); in a susceptible host, these are taken up by dendritic cells, drive interferon production and break B-cell tolerance, yielding antinuclear antibodies ([tolerance and self-recognition](../../07-microbiology-and-immunology/03-adaptive-immunity/tolerance-and-self-recognition.md), [cell death](../../03-cell-biology/02-the-cell-life-cycle/cell-death-apoptosis-necrosis-and-autophagy.md)). Antibody–antigen complexes deposit in glomeruli, skin and vessels and activate complement, a type III hypersensitivity reaction ([hypersensitivity](../../07-microbiology-and-immunology/04-immunity-in-disease/hypersensitivity-and-allergy.md)). Low complement and high anti-double-stranded-DNA antibody therefore track activity, and ultraviolet light, which increases keratinocyte apoptosis, triggers flares.
+
+2. **The organs attacked are the ones that filter immune complexes or express the antigen.** Lupus nephritis is complex deposition in the glomerulus ([glomerular diseases](../03-nephrology/glomerular-and-tubular-diseases.md)); it is often silent, so urine is examined at every visit. Antiphospholipid antibodies bind phospholipid-binding proteins on endothelium and platelets and cause thrombosis and recurrent miscarriage. Nine in ten patients are women of reproductive age, pointing to oestrogen and X-chromosome gene dosage.
+
+3. **Systemic sclerosis is vascular injury that heals by fibrosis and never stops.** Endothelial damage to small arteries produces Raynaud's phenomenon and digital ulcers; the response is an exaggerated fibroblast activation driven by transforming growth factor beta, depositing collagen in skin, lung, gut and kidney ([tissue repair and fibrosis](../../08-pathology/01-cell-and-tissue-injury/tissue-repair-regeneration-and-fibrosis.md), [injury and repair](../../CROSS-CUTTING.md#injury-and-repair)). Death comes from interstitial lung disease and pulmonary arterial hypertension ([interstitial lung disease](../02-pulmonology/interstitial-and-restrictive-lung-disease.md), [pulmonary vascular disease](../02-pulmonology/pulmonary-vascular-disease-and-respiratory-failure.md)). Immunosuppression helps the inflammation but not established fibrosis, which is why early lung screening matters.
+
+4. **Vasculitis is classified by the calibre of vessel, and calibre predicts the clinical picture.** Large-vessel vasculitis (giant cell arteritis) inflames the aorta and its branches, causing headache, jaw claudication and sudden blindness in the old. Medium-vessel disease (polyarteritis nodosa) infarcts organs and forms aneurysms. Small-vessel vasculitis, associated with anti-neutrophil cytoplasmic antibodies (ANCA), destroys glomeruli and alveolar capillaries and produces palpable purpura. The pulmonary–renal syndrome of breathlessness, haemoptysis and rising creatinine is a medical emergency because untreated it destroys both organs within days.
+
+5. **ANCA causes disease by arming the neutrophil against the vessel wall.** The antibodies bind myeloperoxidase or proteinase 3 on the surface of primed neutrophils, activating them to degranulate against endothelium ([complement, phagocytes and the inflammatory cascade](../../07-microbiology-and-immunology/02-innate-immunity/complement-phagocytes-and-the-inflammatory-cascade.md)). ANCA is both marker and mechanism, and B-cell depletion with rituximab induces remission as well as cyclophosphamide with less toxicity.
+
+6. **Investigation is autoantibodies plus biopsy, and biopsy is what the drugs are chosen on.** Antinuclear antibody is sensitive for lupus but positive in many healthy people, so it is interpreted against pre-test probability ([using tests](../../11-clinical-method-and-diagnostics/01-the-clinical-encounter/using-tests-pretest-probability-and-thresholds.md)); specific antibodies narrow the diagnosis. Tissue (kidney, temporal artery, skin) shows whether injury is reversible inflammation or fixed scarring ([histopathology](../../11-clinical-method-and-diagnostics/02-laboratory-medicine/histopathology-cytology-and-molecular-diagnostics.md)), which determines how hard to treat.
+
+7. **Treatment is matched to the organ at risk: induce remission, then maintain it with the least poison.** Glucocorticoids act within hours and save sight and kidneys, but their chronic cost (infection, osteoporosis, diabetes) is now the main cause of long-term harm. Induction uses cyclophosphamide or rituximab for organ-threatening disease; maintenance uses antimetabolites such as mycophenolate; hydroxychloroquine reduces lupus flares with little toxicity ([anti-inflammatory and immunomodulatory drugs](../../09-pharmacology-and-therapeutics/03-drug-classes-by-mechanism/anti-inflammatory-and-immunomodulatory-drugs.md)). Every escalation is a trade of organ damage against infection ([harm and benefit](../../CROSS-CUTTING.md#harm-and-benefit)).
+
+8. **Who else is involved.** These are the most multidisciplinary diseases in medicine. [Nephrology](../03-nephrology/README.md) co-manages lupus and ANCA nephritis and performs the biopsy; [pulmonology](../02-pulmonology/README.md) the fibrosis and pulmonary hypertension; [dermatology](../11-dermatology/README.md) sees the rash first and biopsies it; [ophthalmology](../../13-acute-perioperative-and-procedural-care/05-ophthalmology-and-ent/README.md) treats uveitis and the sight-threatening ischaemia of giant cell arteritis; [neurology](../10-neurology/README.md) the strokes and neuropathies; [obstetrics](../../14-life-course-mind-and-integrative-care/02-obstetrics-and-gynaecology/README.md) the high-risk pregnancies; [haematology](../06-haematology/README.md) the cytopenias and anticoagulation; [infectious diseases](../08-infectious-diseases/README.md) the complications of immunosuppression; [critical care](../../13-acute-perioperative-and-procedural-care/03-critical-care/README.md) the pulmonary–renal syndrome.
+
+## Key concepts
+
+| Term | Meaning |
+|---|---|
+| Antinuclear antibody | Antibody against nuclear components; sensitive screen for lupus and related diseases |
+| Immune complex | Antibody bound to antigen; deposits in tissue and activates complement (type III hypersensitivity) |
+| Antiphospholipid syndrome | Autoantibodies causing thrombosis and pregnancy loss |
+| ANCA | Anti-neutrophil cytoplasmic antibody; marker and mechanism of small-vessel vasculitis |
+| Giant cell arteritis | Large-vessel vasculitis of the old threatening sight; treated before biopsy |
+| Pulmonary–renal syndrome | Simultaneous alveolar haemorrhage and glomerulonephritis from small-vessel vasculitis |
+| Induction and maintenance | Intense therapy to achieve remission, then lower-toxicity therapy to hold it |
+| Damage versus activity | Fixed scarring that drugs cannot reverse versus active inflammation that they can |
+
+## How it fits
+
+- **Below:** loss of tolerance from [autoimmunity](../../07-microbiology-and-immunology/04-immunity-in-disease/autoimmunity.md); immune-complex injury from [hypersensitivity](../../07-microbiology-and-immunology/04-immunity-in-disease/hypersensitivity-and-allergy.md); complement from [the inflammatory cascade](../../07-microbiology-and-immunology/02-innate-immunity/complement-phagocytes-and-the-inflammatory-cascade.md); fibrosis from [tissue repair](../../08-pathology/01-cell-and-tissue-injury/tissue-repair-regeneration-and-fibrosis.md).
+- **Above:** [the eye and vision loss](../../13-acute-perioperative-and-procedural-care/05-ophthalmology-and-ent/the-eye-and-vision-loss.md) covers the ocular emergencies; [pregnancy complications](../../14-life-course-mind-and-integrative-care/02-obstetrics-and-gynaecology/pregnancy-and-its-complications.md) the obstetric ones.
+- **Siblings:** [inflammatory arthritis](inflammatory-arthritis.md) is autoimmunity confined mostly to synovium; [allergy and immunodeficiency](allergy-and-immunodeficiency-in-practice.md) covers the immune system's other two failure modes.
+
+## Common misconceptions
+
+- **"A positive antinuclear antibody means lupus."** It is found in 5–15% of healthy people, more with age; without clinical features it means little.
+- **"Vasculitis is rare, so think of it last."** Giant cell arteritis is the commonest vasculitis of the old and blinds within hours of the first visual symptom; it is treated on suspicion.
+- **"Steroids are the treatment."** They are the bridge; the aim of modern therapy is to minimise their cumulative dose because they now cause more long-term harm than the disease.
+
+## Go deeper
+
+- Firestein, Budd, Gabriel, Koretzky, McInnes and O'Dell (eds), *Firestein & Kelley's Textbook of Rheumatology* (11th ed., 2021): lupus, scleroderma and vasculitis chapters.
+- Tsokos, "Systemic lupus erythematosus" (*New England Journal of Medicine*, 2011): pathogenesis from apoptosis to immune complex.
+- Jennette et al., "2012 Revised International Chapel Hill Consensus Conference Nomenclature of Vasculitides" (*Arthritis & Rheumatism*, 2013): the vessel-calibre classification.
