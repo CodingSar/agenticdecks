@@ -92,6 +92,25 @@
    "reverse": false
   },
   {
+   "guid": "5c704636bb",
+   "type": "basic",
+   "deck": "Kubernetes::01 Architecture & Control Plane",
+   "tags": [
+    "Kubernetes::Architecture_Control_Plane",
+    "Exam::CKA",
+    "Exam::KCNA",
+    "simplified"
+   ],
+   "front": "The etcd cluster becomes unavailable. What keeps working and what stops?",
+   "back": "Running pods keep running, because kubelets and the container runtime need no API server to keep existing containers alive. But nothing can be changed: no scheduling, scaling, healing or new objects, since the API server cannot read or write state.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 11 · CKA/KCNA",
+   "reverse": false
+  },
+  {
    "guid": "fH_o25H&nv",
    "type": "basic",
    "deck": "Kubernetes::01 Architecture & Control Plane",
@@ -173,6 +192,25 @@
    "text": "",
    "image": "",
    "analogy": "A thermostat: you set the target temperature; it keeps measuring and switching the heater until the room matches, and starts again if someone opens a window.",
+   "extra": "",
+   "source": "KIA Ch 11 · KCNA/CGOA",
+   "reverse": false
+  },
+  {
+   "guid": "e0f48d72bd",
+   "type": "basic",
+   "deck": "Kubernetes::01 Architecture & Control Plane",
+   "tags": [
+    "Kubernetes::Architecture_Control_Plane",
+    "Exam::KCNA",
+    "Exam::CGOA",
+    "simplified"
+   ],
+   "front": "You run <code>kubectl apply</code> on a new Deployment. Which components act, in order, until a container runs?",
+   "back": "API server validates and stores it in etcd → Deployment controller creates a ReplicaSet → ReplicaSet controller creates Pods → scheduler binds each Pod to a node → kubelet on that node has the container runtime start it. Each step is triggered by watching the API server.",
+   "text": "",
+   "image": "",
+   "analogy": "",
    "extra": "",
    "source": "KIA Ch 11 · KCNA/CGOA",
    "reverse": false
@@ -476,6 +514,44 @@
    "reverse": false
   },
   {
+   "guid": "b2ccc6fcaf",
+   "type": "basic",
+   "deck": "Kubernetes::02 Workloads & Pods",
+   "tags": [
+    "Kubernetes::Workloads_Pods",
+    "Exam::CKAD",
+    "Exam::CKA",
+    "simplified"
+   ],
+   "front": "A Deployment has 4 replicas, <code>maxSurge: 1</code> and <code>maxUnavailable: 0</code>. How does the rollout proceed?",
+   "back": "It starts 1 new pod (up to 5 total), waits until it is Ready, then terminates one old pod, and repeats. Capacity never drops below 4, at the cost of one extra pod of headroom.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 9 · CKAD/CKA",
+   "reverse": false
+  },
+  {
+   "guid": "52a604d97c",
+   "type": "basic",
+   "deck": "Kubernetes::02 Workloads & Pods",
+   "tags": [
+    "Kubernetes::Workloads_Pods",
+    "Exam::CKAD",
+    "Exam::CKA",
+    "simplified"
+   ],
+   "front": "You delete a pod that a ReplicaSet owns. What happens, and why?",
+   "back": "The ReplicaSet controller sees fewer pods than the desired count and creates a replacement. Manual deletion is not a way to remove a pod; scale or delete the owner instead.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 9 · CKAD/CKA",
+   "reverse": false
+  },
+  {
    "guid": "nk[Yo}]7}_",
    "type": "basic",
    "deck": "Kubernetes::02 Workloads & Pods",
@@ -631,6 +707,24 @@
    "reverse": false
   },
   {
+   "guid": "08b9ec3fc7",
+   "type": "basic",
+   "deck": "Kubernetes::02 Workloads & Pods",
+   "tags": [
+    "Kubernetes::Workloads_Pods",
+    "Exam::CKA",
+    "simplified"
+   ],
+   "front": "When a StatefulSet is scaled down, what happens to the removed pods' PersistentVolumeClaims?",
+   "back": "By default they are <b>retained</b>, so scaling back up reattaches the same data. Cleanup is manual unless a retention policy (<code>persistentVolumeClaimRetentionPolicy</code>) says otherwise.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 10 · CKA",
+   "reverse": false
+  },
+  {
    "guid": "L79i%=8&)y",
    "type": "basic",
    "deck": "Kubernetes::02 Workloads & Pods",
@@ -665,6 +759,42 @@
    "reverse": false
   },
   {
+   "guid": "415fc54b5a",
+   "type": "basic",
+   "deck": "Kubernetes::02 Workloads & Pods",
+   "tags": [
+    "Kubernetes::Workloads_Pods",
+    "Exam::CKAD",
+    "simplified"
+   ],
+   "front": "Why is a missing readiness probe dangerous during a rolling update?",
+   "back": "Without it a pod counts as Ready as soon as its containers start, so traffic reaches a pod that is still booting and the rollout continues before the new version actually works.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 5 · CKAD",
+   "reverse": false
+  },
+  {
+   "guid": "54ea9bcea2",
+   "type": "basic",
+   "deck": "Kubernetes::02 Workloads & Pods",
+   "tags": [
+    "Kubernetes::Workloads_Pods",
+    "Exam::CKAD",
+    "simplified"
+   ],
+   "front": "A pod is alive but temporarily overloaded. Which probe should fail to shed traffic without a restart, and why?",
+   "back": "The <b>readiness</b> probe: it removes the pod from Service endpoints until it recovers. A failing liveness probe would restart it, discarding in-flight work and making the overload worse.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 5 · CKAD",
+   "reverse": false
+  },
+  {
    "guid": "j**-iBEEe$",
    "type": "basic",
    "deck": "Kubernetes::02 Workloads & Pods",
@@ -687,11 +817,12 @@
    "deck": "Kubernetes::02 Workloads & Pods",
    "tags": [
     "Kubernetes::Workloads_Pods",
-    "Exam::CKAD"
+    "Exam::CKAD",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Kubernetes probe handlers: {{c1::httpGet}} (2xx/3xx = healthy), {{c2::tcpSocket}} (connection opens), {{c3::exec}} (exit code 0), {{c4::grpc}} (gRPC health check).",
+   "text": "Kubernetes probe handlers: httpGet is healthy when {{c1::the Hypertext Transfer Protocol (HTTP) status is 2xx/3xx}}; tcpSocket when {{c2::the Transmission Control Protocol (TCP) connection opens}}; exec when {{c3::the command exits with code 0}}; grpc when {{c4::the gRPC health-check response is SERVING}}.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -819,6 +950,24 @@
    "reverse": false
   },
   {
+   "guid": "278a98645f",
+   "type": "basic",
+   "deck": "Kubernetes::03 Scheduling, Resources & Autoscaling",
+   "tags": [
+    "Kubernetes::Scheduling_Resources_Autoscaling",
+    "Exam::CKA",
+    "simplified"
+   ],
+   "front": "How does a topology spread constraint differ from pod anti-affinity for spreading replicas?",
+   "back": "Anti-affinity says \"never share a domain with matching pods\" (all-or-nothing). <code>topologySpreadConstraints</code> keep the pod count per zone/node within <code>maxSkew</code>, giving a balanced spread that still schedules when replicas outnumber domains.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKA · scheduling",
+   "reverse": false
+  },
+  {
    "guid": "rU?3|=zU#M",
    "type": "basic",
    "deck": "Kubernetes::03 Scheduling, Resources & Autoscaling",
@@ -829,6 +978,44 @@
    ],
    "front": "Container resource <b>request</b> vs <b>limit</b>?",
    "back": "<b>Request</b>: the amount the scheduler reserves on a node to place the pod. <b>Limit</b>: the hard runtime cap.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 14 · CKA/CKAD",
+   "reverse": false
+  },
+  {
+   "guid": "6dde23772b",
+   "type": "basic",
+   "deck": "Kubernetes::03 Scheduling, Resources & Autoscaling",
+   "tags": [
+    "Kubernetes::Scheduling_Resources_Autoscaling",
+    "Exam::CKA",
+    "Exam::CKAD",
+    "simplified"
+   ],
+   "front": "Why does the scheduler place pods by resource requests rather than by actual usage?",
+   "back": "Requests are a stable, declared reservation. Actual usage fluctuates, so placing by it could overcommit a node once pods burst. If you set a limit but no request, the request defaults to the limit.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 14 · CKA/CKAD",
+   "reverse": false
+  },
+  {
+   "guid": "355cf49f5e",
+   "type": "basic",
+   "deck": "Kubernetes::03 Scheduling, Resources & Autoscaling",
+   "tags": [
+    "Kubernetes::Scheduling_Resources_Autoscaling",
+    "Exam::CKA",
+    "Exam::CKAD",
+    "simplified"
+   ],
+   "front": "A pod requests more CPU than any node in the cluster has. What do you see?",
+   "back": "The pod stays <b>Pending</b>; <code>kubectl describe pod</code> shows a <code>FailedScheduling</code> event such as \"Insufficient cpu\". No node passes the scheduler's filter step.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -859,11 +1046,12 @@
    "deck": "Kubernetes::03 Scheduling, Resources & Autoscaling",
    "tags": [
     "Kubernetes::Scheduling_Resources_Autoscaling",
-    "Exam::CKA"
+    "Exam::CKA",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Pod quality of service (QoS) classes: {{c1::Guaranteed}} = every container has requests == limits for CPU and memory; {{c2::Burstable}} = some requests/limits set but not Guaranteed; {{c3::BestEffort}} = none set.",
+   "text": "Pod quality of service (QoS) classes: Guaranteed = {{c1::every container has CPU and memory requests equal to limits}}; Burstable = {{c2::at least one request or limit is set, but not Guaranteed}}; BestEffort = {{c3::no requests or limits at all}}.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -936,6 +1124,25 @@
    "image": "",
    "analogy": "HPA is a supermarket opening more checkout lanes when the queues get long, and closing them when it's quiet.",
    "extra": "<b>Pitfall:</b> utilization is a % of the <b>request</b>; no requests set = HPA can't compute CPU utilization. Needs metrics-server.",
+   "source": "KIA Ch 15 · CKA/CKAD",
+   "reverse": false
+  },
+  {
+   "guid": "e29d9961e9",
+   "type": "basic",
+   "deck": "Kubernetes::03 Scheduling, Resources & Autoscaling",
+   "tags": [
+    "Kubernetes::Scheduling_Resources_Autoscaling",
+    "Exam::CKA",
+    "Exam::CKAD",
+    "simplified"
+   ],
+   "front": "Why does a CPU-utilization horizontal pod autoscaler do nothing if the pods have no CPU requests?",
+   "back": "Utilization is measured as a percentage <b>of the request</b>. With no request there is no denominator, so the autoscaler cannot compute a value (it also needs metrics-server).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "KIA Ch 15 · CKA/CKAD",
    "reverse": false
   },
@@ -1096,6 +1303,42 @@
    "reverse": false
   },
   {
+   "guid": "fc8eaefd4a",
+   "type": "basic",
+   "deck": "Kubernetes::04 Networking & Services",
+   "tags": [
+    "Kubernetes::Networking_Services",
+    "Exam::CKA",
+    "simplified"
+   ],
+   "front": "A Service exists but has no endpoints. What are the likely causes?",
+   "back": "The selector does not match the pod labels, the pods are not Ready (failing readiness probe), or the Service is in a different namespace from the pods. Check with <code>kubectl get endpointslices</code> and compare labels.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 5 · CKA",
+   "reverse": false
+  },
+  {
+   "guid": "b68566703e",
+   "type": "basic",
+   "deck": "Kubernetes::04 Networking & Services",
+   "tags": [
+    "Kubernetes::Networking_Services",
+    "Exam::CKA",
+    "simplified"
+   ],
+   "front": "Trace what happens from a pod becoming Ready until Service traffic can reach it.",
+   "back": "The kubelet reports the pod Ready → the EndpointSlice controller adds its IP:port to the Service's EndpointSlice → kube-proxy on each node updates its rules → new connections to the Service IP can be load-balanced to the pod.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "KIA Ch 5 · CKA",
+   "reverse": false
+  },
+  {
    "guid": "Eg,N(-$231",
    "type": "basic",
    "deck": "Kubernetes::04 Networking & Services",
@@ -1205,11 +1448,12 @@
    "deck": "Kubernetes::04 Networking & Services",
    "tags": [
     "Kubernetes::Networking_Services",
-    "Exam::CKA"
+    "Exam::CKA",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Gateway API resources by role: {{c1::GatewayClass}} (the controller/infrastructure type), {{c2::Gateway}} (a listener instance, owned by cluster operators), {{c3::HTTPRoute}} (routing rules, owned by app teams).",
+   "text": "Gateway API resources by role: GatewayClass = {{c1::the controller/infrastructure type}}; Gateway = {{c2::a listener instance, owned by cluster operators}}; HTTPRoute = {{c3::routing rules, owned by app teams}}.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -1376,6 +1620,24 @@
    "reverse": false
   },
   {
+   "guid": "76bc75d596",
+   "type": "basic",
+   "deck": "Kubernetes::05 Storage",
+   "tags": [
+    "Kubernetes::Storage",
+    "Exam::CKA",
+    "simplified"
+   ],
+   "front": "A Deployment with 3 replicas shares one ReadWriteOnce persistent volume claim and its pods land on different nodes. What breaks?",
+   "back": "ReadWriteOnce allows read-write mounting by a single <b>node</b>, so pods on other nodes cannot attach the volume and stay stuck. Use ReadWriteMany storage, one volume per pod (StatefulSet), or co-locate the pods.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKA · storage",
+   "reverse": false
+  },
+  {
    "guid": "e#[Eh[!B>r",
    "type": "cloze",
    "deck": "Kubernetes::05 Storage",
@@ -1398,11 +1660,12 @@
    "deck": "Kubernetes::05 Storage",
    "tags": [
     "Kubernetes::Storage",
-    "Exam::CKA"
+    "Exam::CKA",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Persistent volume (PV) reclaim policies (after the claim is deleted): {{c1::Retain}} keeps the volume and data for manual cleanup; {{c2::Delete}} removes the backing storage asset; {{c3::Recycle}} (deprecated) scrubbed it for reuse.",
+   "text": "Persistent volume (PV) reclaim policies (after the claim is deleted): Retain = {{c1::keeps the volume and data for manual cleanup}}; Delete = {{c2::removes the backing storage asset}}; Recycle (deprecated) = {{c3::scrubbed the volume for reuse}}.",
    "image": "",
    "analogy": "",
    "extra": "Dynamically provisioned PVs inherit the StorageClass <code>reclaimPolicy</code>, default <b>Delete</b>.",
@@ -1432,9 +1695,10 @@
    "deck": "Kubernetes::06 Config & Secrets",
    "tags": [
     "Kubernetes::Config_Secrets",
-    "Exam::CKAD"
+    "Exam::CKAD",
+    "simplified"
    ],
-   "front": "How does a Secret differ from a ConfigMap?",
+   "front": "When would you use a Secret instead of a ConfigMap, and what extra handling does it get?",
    "back": "Same consumption model (env vars or files), but meant for sensitive data: values are base64-encoded, can be mounted on tmpfs, and access can be restricted separately with RBAC.",
    "text": "",
    "image": "",
@@ -1498,16 +1762,17 @@
   },
   {
    "guid": "klkq$Nx|aL",
-   "type": "cloze",
+   "type": "basic",
    "deck": "Kubernetes::07 Security & Hardening",
    "tags": [
     "Kubernetes::Security_Hardening",
     "Exam::CKS",
-    "Exam::KCSA"
+    "Exam::KCSA",
+    "simplified"
    ],
-   "front": "",
-   "back": "",
-   "text": "The 4Cs of cloud native security, outermost to innermost: {{c1::Cloud}} → {{c2::Cluster}} → {{c3::Container}} → {{c4::Code}}.",
+   "front": "List the 4Cs of cloud native security from outermost to innermost, and what the nesting implies.",
+   "back": "<b>Cloud</b> → <b>Cluster</b> → <b>Container</b> → <b>Code</b>. Each layer's security builds on the one outside it, so a hardened container cannot make up for an insecure cluster or cloud layer.",
+   "text": "",
    "image": "",
    "analogy": "Nested Russian dolls: if the outer doll is open, the inner ones are exposed.",
    "extra": "A weak outer layer can't be compensated by strong inner layers.",
@@ -1638,6 +1903,24 @@
    "reverse": false
   },
   {
+   "guid": "5560642513",
+   "type": "basic",
+   "deck": "Kubernetes::07 Security & Hardening",
+   "tags": [
+    "Kubernetes::Security_Hardening",
+    "Exam::CKA",
+    "simplified"
+   ],
+   "front": "How do you let a pod's ServiceAccount read pods in only one namespace?",
+   "back": "Create a <b>Role</b> allowing <code>get/list/watch</code> on <code>pods</code> in that namespace, and a <b>RoleBinding</b> in that namespace whose subject is the ServiceAccount. Both are namespaced, so no access elsewhere.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKA · RBAC",
+   "reverse": false
+  },
+  {
    "guid": "nhOyhhX#@U",
    "type": "basic",
    "deck": "Kubernetes::07 Security & Hardening",
@@ -1746,11 +2029,12 @@
    "deck": "Kubernetes::07 Security & Hardening",
    "tags": [
     "Kubernetes::Security_Hardening",
-    "Exam::CKS"
+    "Exam::CKS",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Pod Security Standards: {{c1::privileged}} = unrestricted; {{c2::baseline}} = blocks known privilege escalations (privileged, hostNetwork, hostPath); {{c3::restricted}} = hardened (non-root, drop ALL caps, seccomp RuntimeDefault).",
+   "text": "Pod Security Standards: privileged = {{c1::unrestricted}}; baseline = {{c2::blocks known privilege escalations (privileged, hostNetwork, hostPath)}}; restricted = {{c3::hardened: non-root, drop ALL capabilities, seccomp RuntimeDefault}}.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -1883,11 +2167,12 @@
    "deck": "Kubernetes::07 Security & Hardening",
    "tags": [
     "Kubernetes::Security_Hardening",
-    "Exam::CKS"
+    "Exam::CKS",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Kubernetes audit levels, least to most detail: {{c1::None}} → {{c2::Metadata}} (who, what, when) → {{c3::Request}} (+ request body) → {{c4::RequestResponse}} (+ response body).",
+   "text": "Kubernetes audit levels: None = {{c1::nothing logged}}; Metadata = {{c2::who, what, when (no bodies)}}; Request = {{c3::metadata plus the request body}}; RequestResponse = {{c4::metadata plus request and response bodies}}.",
    "image": "",
    "analogy": "",
    "extra": "<b>Tip:</b> log Secrets at <code>Metadata</code> only, or the audit log leaks them.",
@@ -2272,15 +2557,16 @@
   },
   {
    "guid": "N`ES5bWD}`",
-   "type": "cloze",
+   "type": "basic",
    "deck": "Kubernetes::08 Cluster Operations & Troubleshooting",
    "tags": [
     "Kubernetes::Cluster_Operations_Troubleshooting",
-    "Exam::CKA"
+    "Exam::CKA",
+    "simplified"
    ],
-   "front": "",
-   "back": "",
-   "text": "kubeadm upgrade on the control-plane node: upgrade the {{c1::kubeadm}} package → run {{c2::<code>kubeadm upgrade plan</code>, then <code>kubeadm upgrade apply vX.Y.Z</code>}} → drain, upgrade {{c3::kubelet and kubectl}}, restart kubelet, uncordon.",
+   "front": "List every step to upgrade a kubeadm control-plane node, and why drain brackets the kubelet upgrade.",
+   "back": "Upgrade the kubeadm package; <code>kubeadm upgrade plan</code>, then <code>kubeadm upgrade apply vX.Y.Z</code>; <b>drain</b> the node; upgrade kubelet and kubectl; restart kubelet; <b>uncordon</b>. Drain evicts workloads first so the kubelet restart does not disrupt them.",
+   "text": "",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -2335,6 +2621,42 @@
    "image": "",
    "analogy": "Cordon is a 'no new guests' sign on a hotel floor; drain also politely moves the existing guests to other floors.",
    "extra": "Typical flags: <code>--ignore-daemonsets --delete-emptydir-data</code>.",
+   "source": "CKA · node maintenance",
+   "reverse": false
+  },
+  {
+   "guid": "f911822af0",
+   "type": "basic",
+   "deck": "Kubernetes::08 Cluster Operations & Troubleshooting",
+   "tags": [
+    "Kubernetes::Cluster_Operations_Troubleshooting",
+    "Exam::CKA",
+    "simplified"
+   ],
+   "front": "What does a PodDisruptionBudget protect against, and which operations honour it?",
+   "back": "It limits how many replicas of an app can be down at once during <b>voluntary</b> disruptions such as <code>kubectl drain</code> and evictions. It does not protect against involuntary failures like a node crash.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "CKA · node maintenance",
+   "reverse": false
+  },
+  {
+   "guid": "ecc74a4ebc",
+   "type": "basic",
+   "deck": "Kubernetes::08 Cluster Operations & Troubleshooting",
+   "tags": [
+    "Kubernetes::Cluster_Operations_Troubleshooting",
+    "Exam::CKA",
+    "simplified"
+   ],
+   "front": "A <code>kubectl drain</code> hangs on one node. What are two common causes?",
+   "back": "A PodDisruptionBudget would be violated by evicting the pod, so the eviction keeps being refused; or DaemonSet pods block it until you pass <code>--ignore-daemonsets</code> (and bare pods or local-data pods need extra flags).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "CKA · node maintenance",
    "reverse": false
   },
@@ -3333,9 +3655,10 @@
    "deck": "Kubernetes::10 Service Mesh & Cilium",
    "tags": [
     "Kubernetes::Service_Mesh_Cilium",
-    "Exam::CCA"
+    "Exam::CCA",
+    "simplified"
    ],
-   "front": "How does Cilium's identity-based policy differ from IP-based rules?",
+   "front": "Why does Cilium enforce policy on identities rather than on IP addresses?",
    "back": "Each endpoint (usually a pod) gets a numeric security <b>identity</b> derived from its labels; policy is enforced on identities, so it stays correct as pods churn and IPs are reused.",
    "text": "",
    "image": "",
@@ -3469,9 +3792,10 @@
    "deck": "Kubernetes::10 Service Mesh & Cilium",
    "tags": [
     "Kubernetes::Service_Mesh_Cilium",
-    "Exam::CCA"
+    "Exam::CCA",
+    "simplified"
    ],
-   "front": "How does Cilium relate to Ingress and the Gateway API?",
+   "front": "Which ingress-path components can Cilium itself take over, and what does that consolidate?",
    "back": "Cilium can be the Ingress / Gateway API controller itself (Envoy + extended Berkeley Packet Filter (eBPF)), consolidating container network interface (CNI), load balancing and ingress in one dataplane.",
    "text": "",
    "image": "",
@@ -3623,10 +3947,11 @@
    "deck": "Kubernetes::11 Cloud Native Ecosystem",
    "tags": [
     "Kubernetes::Cloud_Native_Ecosystem",
-    "Exam::CGOA"
+    "Exam::CGOA",
+    "simplified"
    ],
-   "front": "How does GitOps relate to CI/CD?",
-   "back": "CI builds and tests artifacts outside the cluster. GitOps is one way to do the <b>CD</b> half: declarative, Git-driven, pull-based and continuously reconciled.",
+   "front": "Which half of CI/CD does GitOps cover, and what makes it different from a push-based pipeline?",
+   "back": "CI builds and tests artifacts outside the cluster. GitOps covers the <b>CD</b> half: declarative, Git-driven, <b>pull-based</b> (an in-cluster agent pulls and continuously reconciles) instead of a pipeline pushing to the cluster.",
    "text": "",
    "image": "",
    "analogy": "",
