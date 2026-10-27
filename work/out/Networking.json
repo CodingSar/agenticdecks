@@ -1827,12 +1827,12 @@
     "networking::troubleshooting",
     "simplified"
    ],
-   "front": "A TCP connect() fails after about 63 s instead of immediately. Explain the number and what it tells you about the network.",
-   "back": "Synchronize (SYN) retries back off 1, 2, 4, 8, 16, 32 s; with <code>tcp_syn_retries=6</code> the total is 63 s (7 → 127 s). That pattern means packets are being silently <b>dropped</b>; an active reject fails at once with \"connection refused\".",
+   "front": "A TCP connect() fails after about 127 s instead of immediately. Explain the number and what it tells you about the network.",
+   "back": "Synchronize (SYN) retransmissions back off 1, 2, 4, 8, 16, 32 s, then the kernel waits one more 64 s before giving up. With the default <code>tcp_syn_retries=6</code>, the 6th retransmission is sent at 63 s and connect() fails at 127 s (with 5 retries it fails at 63 s, with 7 at 255 s). That pattern means packets are being silently <b>dropped</b>; an active reject fails at once with \"connection refused\".",
    "text": "",
    "image": "",
-   "analogy": "Knocking, waiting twice as long each time, and leaving after the sixth knock. A slammed door would have told you at once.",
-   "extra": "",
+   "analogy": "Knocking, waiting twice as long each time, and leaving after the sixth knock plus one last long wait. A slammed door would have told you at once.",
+   "extra": "Linux kernel docs, ip-sysctl (tcp_syn_retries): https://www.kernel.org/doc/html/latest/networking/ip-sysctl.html",
    "source": "Below CNI · Load balancing",
    "reverse": false,
    "guid": "t%k0|40R>%"

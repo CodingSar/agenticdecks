@@ -1207,14 +1207,15 @@
    "type": "basic",
    "deck": "Robotics: Arduino to Physical AI::04 Actuators & Power Transmission",
    "tags": [
-    "robotics::04-actuators-power-transmission"
+    "robotics::04-actuators-power-transmission",
+    "simplified"
    ],
    "front": "Hobby servo: what is the control signal?",
-   "back": "50 Hz pulses (20 ms period); width <b>1.0–2.0 ms</b> ≈ 0–180°, 1.5 ms = centre (many accept 0.5–2.5 ms).",
+   "back": "50 Hz pulses (20 ms period); width <b>~1.0–2.0 ms</b> covers roughly the central 90–120° of travel on many hobby servos, 1.5 ms = centre. Full ~180° usually needs about 0.5–2.5 ms (the Arduino Servo library defaults to 544–2400 µs for 0–180°); check the datasheet.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "",
+   "extra": "Source: https://www.arduino.cc/reference/en/libraries/servo/attach/ (default min 544 µs, max 2400 µs). Span per ms varies by servo.",
    "source": "Arduino Documentation",
    "reverse": false
   },

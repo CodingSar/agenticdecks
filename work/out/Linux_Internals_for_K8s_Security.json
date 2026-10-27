@@ -960,14 +960,15 @@
    "type": "basic",
    "deck": "Linux Internals for Kubernetes & Security::04 Cgroups",
    "tags": [
-    "Linux::cgroups"
+    "Linux::cgroups",
+    "simplified"
    ],
    "front": "Which cgroup version should current Kubernetes nodes run?",
-   "back": "<b>cgroup v2</b> (default on Red Hat Enterprise Linux (RHEL) 9+, Ubuntu 22.04+); Kubernetes treats v1 as legacy (maintenance mode).",
+   "back": "<b>cgroup v2</b> (default on Red Hat Enterprise Linux (RHEL) 9+, Ubuntu 22.04+); cgroup v1 has been in maintenance mode since Kubernetes 1.31, and from 1.35 the kubelet refuses to start on a v1 node unless failCgroupV1 is set to false.",
    "text": "",
    "image": "",
    "analogy": "",
-   "extra": "",
+   "extra": "https://kubernetes.io/blog/2026/10/06/kubernetes-cgroups-v2-shift/ ; https://kubernetes.io/blog/2024/08/14/kubernetes-1-31-moving-cgroup-v1-support-maintenance-mode/",
    "source": "Cgroups",
    "reverse": false
   },
@@ -2331,14 +2332,15 @@
    "type": "cloze",
    "deck": "Linux Internals for Kubernetes & Security::09 Networking Internals",
    "tags": [
-    "Linux::networking"
+    "Linux::networking",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "kube-proxy modes: {{c1::iptables}}: long-time default, now maintenance mode; {{c2::IPVS}}: deprecated in 1.35; {{c3::nftables}}: general availability (GA) in 1.33, recommended on kernel 5.13+.",
+   "text": "kube-proxy modes: {{c1::iptables}}: long-time default on Linux; {{c2::IPVS}} (IP Virtual Server): deprecated in Kubernetes 1.35; {{c3::nftables}}: general availability (GA) in 1.33, recommended on kernel 5.13+.",
    "image": "",
    "analogy": "",
-   "extra": "",
+   "extra": "https://www.k8s.dev/resources/keps/5495/",
    "source": "Networking Internals",
    "reverse": false
   },
