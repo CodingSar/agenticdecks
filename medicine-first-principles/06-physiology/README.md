@@ -23,14 +23,14 @@ The one abstraction this layer contributes is **the regulated variable**: a quan
 |---|---|---|
 | [01 Integrative principles](01-integrative-principles/README.md) | The whole-body variables (volume, osmolality, pH, temperature, energy, time) and their defence | 00, 01 |
 | [02 Nervous system](02-nervous-system/README.md) | Fast signalling: excitable membranes, synapses, sensation, movement, autonomic control, mind, pain | 00, 02, 05 |
-| [03 Cardiovascular system](03-cardiovascular-system/README.md) | The pump, its timing, pressure and flow, exchange at the capillary | 00, 02 (autonomic) |
-| [04 Respiratory system](04-respiratory-system/README.md) | Moving air, exchanging gas, matching air to blood, control by chemistry | 00, 03, 02 (brainstem) |
+| [03 Cardiovascular system](03-cardiovascular-system/README.md) | The pump, its timing, pressure and flow, exchange at the capillary, the lymphatic return | 00, 02 (autonomic) |
+| [04 Respiratory system](04-respiratory-system/README.md) | Moving air, exchanging gas, the low-pressure pulmonary circuit, matching air to blood, control by chemistry | 00, 03, 02 (brainstem) |
 | [05 Renal system](05-renal-system/README.md) | Filtering plasma and tuning what is kept: volume, osmolality, potassium, acid | 01 (fluids, acid–base), 03 (perfusion) |
 | [06 Gastrointestinal system](06-gastrointestinal-system/README.md) | Intake: motility, secretion, absorption, the liver as hub, the gut as barrier | 02 (enteric control), 07 (gut hormones) |
 | [07 Endocrine system](07-endocrine-system/README.md) | Slow signalling: hormone axes, glucose, thyroid, adrenal, calcium and reproductive control | 01 (feedback), 02 (hypothalamus) |
 | [08 Blood](08-blood/README.md) | The carrier: red cells and oxygen, haemostasis, blood groups | 04 (oxygen transport), 03 (flow) |
 | [09 Reproduction and the life course](09-reproduction-and-the-life-course/README.md) | Gametes, the cycle, pregnancy, fetus and newborn as a body with different set points | 07, 03, 04 |
-| [10 Musculoskeletal system and skin](10-musculoskeletal-system-and-skin/README.md) | Movement and the outer boundary: muscle energetics, bone turnover, skin as barrier and sensor | 02 (motor control), 01 (thermoregulation), 07 (calcium) |
+| [10 Musculoskeletal system and skin](10-musculoskeletal-system-and-skin/README.md) | Movement and the outer boundary: skeletal and smooth muscle, bone turnover, skin as barrier and sensor | 02 (motor control, autonomic), 01 (thermoregulation), 07 (calcium) |
 
 ```
           brain and autonomic nerves (02)        hormones (07)
@@ -46,7 +46,7 @@ The one abstraction this layer contributes is **the regulated variable**: a quan
         muscle, bone, skin (10)   reproduction, fetus, newborn (09)
 ```
 
-Read 01 first: it names the variables everything else defends. Then 02, the fast controller every other system uses. 03, 04 and 08 are the oxygen supply chain. 05 closes the loop on volume, osmolality and acid that 01 opened. 06 and 07 are intake and slow control. 09 and 10 apply all of it to a different body or to the effectors that do mechanical work.
+Read 01 first: it names the variables everything else defends. Then 02, the fast controller every other system uses. 03, 04 and 08 are the oxygen supply chain. 05 closes the loop on volume, osmolality and acid that 01 opened. 06 and 07 are intake and slow control. 09 and 10 apply all of it to a different body or to the effectors that do mechanical work; the smooth muscle leaf in 10 is the effector that 03, 04 and 06 all assume.
 
 ## Connections to neighbouring layers
 

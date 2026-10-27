@@ -1,7 +1,7 @@
 # Ventilation–perfusion matching
 
 > **Layer:** [06 Physiology](../README.md) › [Respiratory system](README.md)
-> **Builds on:** [Gas exchange and transport](gas-exchange-and-transport.md), [Ventilation and lung mechanics](ventilation-and-lung-mechanics.md), [Hemodynamics and blood pressure regulation](../03-cardiovascular-system/hemodynamics-and-blood-pressure-regulation.md), [Microcirculation and capillary exchange](../03-cardiovascular-system/microcirculation-and-capillary-exchange.md)
+> **Builds on:** [Gas exchange and transport](gas-exchange-and-transport.md), [Ventilation and lung mechanics](ventilation-and-lung-mechanics.md), [The pulmonary circulation](the-pulmonary-circulation.md), [Hemodynamics and blood pressure regulation](../03-cardiovascular-system/hemodynamics-and-blood-pressure-regulation.md)
 > **Enables:** [Pulmonary vascular disease and respiratory failure](../../12-organ-system-specialties/02-pulmonology/pulmonary-vascular-disease-and-respiratory-failure.md), [Pneumonia and respiratory infections](../../12-organ-system-specialties/02-pulmonology/pneumonia-and-respiratory-infections.md), [Thrombosis, embolism and infarction](../../08-pathology/02-hemodynamic-disorders/thrombosis-embolism-and-infarction.md), [Respiratory failure and mechanical ventilation](../../13-acute-perioperative-and-procedural-care/03-critical-care/respiratory-failure-and-mechanical-ventilation.md), [General and regional anaesthesia](../../13-acute-perioperative-and-procedural-care/02-anaesthesia-and-perioperative-medicine/general-and-regional-anaesthesia.md)
 
 ## Essence
@@ -22,7 +22,7 @@ Arterial blood gases are decided not by how much air and blood the lung receives
 
 6. **Hypoxic pulmonary vasoconstriction steers blood toward air, uniquely in this circulation.** Systemic arterioles dilate to hypoxia; pulmonary arterioles constrict when alveolar PO2 falls below ~70 mmHg, through inhibition of oxygen-sensitive potassium channels in their smooth muscle. A consolidated region thus loses its blood flow to better-ventilated lung, which limits the shunt. The same reflex closes the fetal pulmonary circulation and opens it at the first breath. When the whole lung is hypoxic (altitude, chronic lung disease) every vessel constricts, pulmonary pressure rises and the right ventricle hypertrophies and fails (cor pulmonale). Anaesthetics, vasodilators and sepsis blunt the reflex and worsen oxygenation.
 
-7. **The pulmonary circulation is low-pressure and recruitable, so its resistance falls as flow rises.** Pulmonary vascular resistance is about a tenth of the systemic; as cardiac output triples in exercise, closed capillaries open and open ones distend, so pressure rises little. Resistance rises at high lung volumes (alveolar vessels compressed), one reason high-pressure ventilation loads the right heart. Pulmonary capillary pressure is ~7–10 mmHg against an oncotic pressure of ~25, so the Starling balance favours a dry alveolus ([capillary exchange](../03-cardiovascular-system/microcirculation-and-capillary-exchange.md)); oedema forms when left atrial pressure exceeds ~20–25 mmHg or the barrier leaks.
+7. **Perfusion is supplied by a low-pressure, recruitable circuit, so mismatch is corrected cheaply but pressure rises when the correction is global.** Because pulmonary resistance is a tenth of systemic and falls as flow rises, diverting blood away from a hypoxic region costs little; constricting the whole lung, as at altitude or in chronic lung disease, raises pulmonary pressure and loads the right ventricle. The circuit's pressures, zones, oedema threshold and right-heart consequences are in [the pulmonary circulation](the-pulmonary-circulation.md).
 
 ## Key concepts
 
@@ -34,9 +34,9 @@ Arterial blood gases are decided not by how much air and blood the lung receives
 
 ## How it fits
 
-- **Below:** a unit's gas tensions from [gas exchange](gas-exchange-and-transport.md); regional ventilation from [lung mechanics](ventilation-and-lung-mechanics.md); pressure–flow and Starling forces from [hemodynamics](../03-cardiovascular-system/hemodynamics-and-blood-pressure-regulation.md) and [microcirculation](../03-cardiovascular-system/microcirculation-and-capillary-exchange.md).
+- **Below:** a unit's gas tensions from [gas exchange](gas-exchange-and-transport.md); regional ventilation from [lung mechanics](ventilation-and-lung-mechanics.md); regional perfusion, the zones and hypoxic vasoconstriction from [the pulmonary circulation](the-pulmonary-circulation.md); pressure–flow from [hemodynamics](../03-cardiovascular-system/hemodynamics-and-blood-pressure-regulation.md).
 - **Above:** [pulmonary hypertension and respiratory failure](../../12-organ-system-specialties/02-pulmonology/pulmonary-vascular-disease-and-respiratory-failure.md) are tenets 3, 4 and 6; [pneumonia](../../12-organ-system-specialties/02-pulmonology/pneumonia-and-respiratory-infections.md) is shunt; [pulmonary embolism](../../08-pathology/02-hemodynamic-disorders/thrombosis-embolism-and-infarction.md) is dead space; [mechanical ventilation](../../13-acute-perioperative-and-procedural-care/03-critical-care/respiratory-failure-and-mechanical-ventilation.md) and [anaesthesia](../../13-acute-perioperative-and-procedural-care/02-anaesthesia-and-perioperative-medicine/general-and-regional-anaesthesia.md) alter zones and the hypoxic reflex.
-- **Siblings:** the chemoreflex that compensates mismatch for carbon dioxide is [control of breathing](control-of-breathing.md).
+- **Siblings:** the perfusion half of the ratio is [the pulmonary circulation](the-pulmonary-circulation.md); the chemoreflex that compensates mismatch for carbon dioxide is [control of breathing](control-of-breathing.md).
 
 ## Common misconceptions
 

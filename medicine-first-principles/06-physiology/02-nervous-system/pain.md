@@ -10,7 +10,7 @@ Pain is a sensory system with a threat detector at the periphery and a volume co
 
 ## Core tenets
 
-1. **Nociceptors are specialised, high-threshold, and come in two speeds.** Free nerve endings carry channels opened by noxious heat and acid (TRPV1, also opened by capsaicin), by mechanical injury and by adenosine triphosphate from broken cells. Thinly myelinated Aδ fibres (~5–30 m/s) carry sharp, localised first pain; unmyelinated C fibres (<2 m/s) carry the dull, burning second pain. Nociceptors adapt little and are silent in health. People born without functional Nav1.7 sodium channels feel no pain and accumulate injuries, which shows the system's purpose.
+1. **Nociceptors are specialised, high-threshold, and come in two speeds.** Free nerve endings carry channels opened by noxious heat and acid (transient receptor potential vanilloid 1, TRPV1, also opened by capsaicin), by mechanical injury and by adenosine triphosphate from broken cells. Thinly myelinated Aδ fibres (~5–30 m/s) carry sharp, localised first pain; unmyelinated C fibres (<2 m/s) carry the dull, burning second pain. Nociceptors adapt little and are silent in health. People born without functional Nav1.7 sodium channels feel no pain and accumulate injuries, which shows the system's purpose.
 
 2. **The dorsal horn is the first gate, and its output can be turned down by other sensation.** Nociceptive afferents release glutamate and substance P onto second-order neurons in the superficial laminae. Melzack and Wall's gate control theory (1965) proposed, and later work confirmed, that large-diameter touch afferents excite inhibitory interneurons that dampen these neurons, which is why rubbing a bruise helps. The same interneurons are the target of descending inhibition.
 
