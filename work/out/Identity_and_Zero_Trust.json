@@ -148,6 +148,23 @@
    "reverse": false
   },
   {
+   "guid": "0e3a48afdd",
+   "type": "basic",
+   "deck": "Identity & Zero Trust::01 Identity Concepts",
+   "tags": [
+    "identity::concepts",
+    "simplified"
+   ],
+   "front": "Why is linking accounts by an <b>unverified email</b> claim dangerous?",
+   "back": "An attacker registers at a lax identity provider (IdP) with the victim's email and gets linked to the victim's account: account takeover. Link on <code>iss</code>+<code>sub</code>, or only on verified emails from trusted IdPs.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Identity · Concepts",
+   "reverse": false
+  },
+  {
    "guid": "PbM~<,GgWL",
    "type": "basic",
    "deck": "Identity & Zero Trust::01 Identity Concepts",
@@ -168,11 +185,12 @@
    "type": "cloze",
    "deck": "Identity & Zero Trust::01 Identity Concepts",
    "tags": [
-    "identity::concepts"
+    "identity::concepts",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "National Institute of Standards and Technology (NIST) 800-63 Identity Assurance: {{c1::IAL1}} = self-asserted attributes, no proofing; {{c2::IAL2}} = remote or in-person proofing against evidence; {{c3::IAL3}} = in-person (or supervised remote) proofing with physical evidence verification.",
+   "text": "National Institute of Standards and Technology (NIST) 800-63 Identity Assurance Level (IAL): IAL1 = {{c1::self-asserted attributes, no proofing}}; IAL2 = {{c2::remote or in-person proofing against evidence}}; IAL3 = {{c3::in-person (or supervised remote) proofing with physical evidence verification}}.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -184,11 +202,12 @@
    "type": "cloze",
    "deck": "Identity & Zero Trust::01 Identity Concepts",
    "tags": [
-    "identity::concepts"
+    "identity::concepts",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "National Institute of Standards and Technology (NIST) 800-63 Authenticator Assurance: {{c1::AAL1}} = single factor; {{c2::AAL2}} = two factors (or one multi-factor authenticator); {{c3::AAL3}} = hardware-based, verifier-impersonation-resistant authenticator.",
+   "text": "National Institute of Standards and Technology (NIST) 800-63 Authenticator Assurance Level (AAL): AAL1 = {{c1::single factor}}; AAL2 = {{c2::two factors (or one multi-factor authenticator)}}; AAL3 = {{c3::hardware-based, verifier-impersonation-resistant authenticator}}.",
    "image": "",
    "analogy": "",
    "extra": "<b>In practice:</b> authenticator assurance level 3 (AAL3) means Fast IDentity Online 2 (FIDO2) security keys or personal identity verification (PIV) smart cards, not time-based one-time password (TOTP) or push.",
@@ -356,6 +375,23 @@
    "reverse": false
   },
   {
+   "guid": "2bb27d1fff",
+   "type": "basic",
+   "deck": "Identity & Zero Trust::02 Credentials & Authentication",
+   "tags": [
+    "identity::authn",
+    "simplified"
+   ],
+   "front": "Passkeys are enrolled, but password + short message service (SMS) one-time password (OTP) remains as a fallback. What does that do to security?",
+   "back": "The weakest allowed path sets the real strength: an attacker phishes or SIM-swaps the fallback and never meets the phishing-resistant method. Remove or tightly gate fallbacks.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Authentication · NIST 800-63B",
+   "reverse": false
+  },
+  {
    "guid": "NnREr^9n`[",
    "type": "basic",
    "deck": "Identity & Zero Trust::02 Credentials & Authentication",
@@ -479,6 +515,23 @@
    "text": "",
    "image": "<img src=\"idz_pki_chain.svg\">",
    "analogy": "A notarised letter: the notary (CA) vouches that the signature (public key) belongs to the named person.",
+   "extra": "",
+   "source": "PKI · X.509 / RFC 5280",
+   "reverse": false
+  },
+  {
+   "guid": "d0ec65e1f8",
+   "type": "basic",
+   "deck": "Identity & Zero Trust::03 PKI & Certificates",
+   "tags": [
+    "identity::pki",
+    "simplified"
+   ],
+   "front": "A server presents a chain that validates to a trusted root, but its hostname is not in the Subject Alternative Name (SAN). What happens, and why?",
+   "back": "Clients reject it with a name mismatch. A valid chain proves who signed the certificate, but the SAN is what binds the key to the name the client asked for.",
+   "text": "",
+   "image": "",
+   "analogy": "",
    "extra": "",
    "source": "PKI · X.509 / RFC 5280",
    "reverse": false
@@ -804,6 +857,23 @@
    "reverse": false
   },
   {
+   "guid": "47a3667f63",
+   "type": "basic",
+   "deck": "Identity & Zero Trust::04 OAuth 2.0",
+   "tags": [
+    "identity::oauth",
+    "simplified"
+   ],
+   "front": "List every step of the OAuth authorization code flow with Proof Key for Code Exchange (PKCE) and what each step protects against.",
+   "back": "1. Client makes a random <code>code_verifier</code> and sends its hash (<code>code_challenge</code>) plus <code>state</code> via the browser. 2. User authenticates and consents at the authorization server (AS). 3. AS redirects back with a <code>code</code> (checked against <code>state</code>: stops forged callbacks). 4. Client sends code + verifier over the back channel (verifier stops a stolen code being used). 5. AS returns tokens directly, never via the URL.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OAuth 2.0 · RFC 6749",
+   "reverse": false
+  },
+  {
    "guid": "i(N8sntZdU",
    "type": "cloze",
    "deck": "Identity & Zero Trust::04 OAuth 2.0",
@@ -846,6 +916,23 @@
    "back": "Authorization code interception: a malicious app on the same device steals the code from the redirect. Without the original <code>code_verifier</code> the stolen code is worthless.",
    "text": "",
    "image": "<img src=\"idz_auth_code_pkce.svg\">",
+   "analogy": "",
+   "extra": "",
+   "source": "OAuth 2.0 · RFC 7636 PKCE",
+   "reverse": false
+  },
+  {
+   "guid": "9c662168c7",
+   "type": "basic",
+   "deck": "Identity & Zero Trust::04 OAuth 2.0",
+   "tags": [
+    "identity::oauth",
+    "simplified"
+   ],
+   "front": "A malicious app on the same device steals the authorization code from the redirect. Why can't it get a token when Proof Key for Code Exchange (PKCE) is used?",
+   "back": "The token endpoint demands the original <code>code_verifier</code>. The attacker saw only the code (and at most the hash, <code>code_challenge</code>), and a hash cannot be reversed to the verifier.",
+   "text": "",
+   "image": "",
    "analogy": "",
    "extra": "",
    "source": "OAuth 2.0 · RFC 7636 PKCE",
@@ -1028,6 +1115,23 @@
    "reverse": false
   },
   {
+   "guid": "ff78ec1511",
+   "type": "basic",
+   "deck": "Identity & Zero Trust::04 OAuth 2.0",
+   "tags": [
+    "identity::oauth",
+    "simplified"
+   ],
+   "front": "What attack becomes possible if a client skips checking the <code>state</code> value on the callback?",
+   "back": "Login cross-site request forgery (CSRF): the attacker sends the victim a callback carrying the attacker's own code, so the victim's session becomes linked to the attacker's account.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OAuth 2.0 · RFC 6749",
+   "reverse": false
+  },
+  {
    "guid": "L^(m.Nr4h+",
    "type": "basic",
    "deck": "Identity & Zero Trust::04 OAuth 2.0",
@@ -1076,6 +1180,23 @@
    "reverse": false
   },
   {
+   "guid": "efbfe30189",
+   "type": "basic",
+   "deck": "Identity & Zero Trust::05 OpenID Connect",
+   "tags": [
+    "identity::oidc",
+    "simplified"
+   ],
+   "front": "Which question does OAuth 2.0 answer, and which does OpenID Connect (OIDC) answer?",
+   "back": "OAuth: \"may this client call that API on the user's behalf?\" (authorization). OIDC: \"who just authenticated, and how?\" (authentication, via the ID token).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenID Connect · Core 1.0",
+   "reverse": false
+  },
+  {
    "guid": "elMCPJ-RBt",
    "type": "basic",
    "deck": "Identity & Zero Trust::05 OpenID Connect",
@@ -1112,11 +1233,12 @@
    "type": "cloze",
    "deck": "Identity & Zero Trust::05 OpenID Connect",
    "tags": [
-    "identity::oidc"
+    "identity::oidc",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Core ID-token claims: {{c1::iss}} = issuer; {{c2::sub}} = stable subject identifier; {{c3::aud}} = client ID it was issued to; {{c4::exp}} = expiry; {{c5::iat}} = issued-at; {{c6::nonce}} = replay binding to the request.",
+   "text": "Core ID-token claims: iss = {{c1::issuer}}; sub = {{c2::stable subject identifier}}; aud = {{c3::client ID it was issued to}}; exp = {{c4::expiry}}; iat = {{c5::issued-at}}; nonce = {{c6::replay binding to the request}}.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -1208,11 +1330,12 @@
    "type": "cloze",
    "deck": "Identity & Zero Trust::05 OpenID Connect",
    "tags": [
-    "identity::oidc"
+    "identity::oidc",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "OpenID Connect (OIDC) standard scopes map to claim sets: {{c1::openid}} (required, requests an ID token), {{c2::profile}} (name, picture…), {{c3::email}}, {{c4::offline_access}} (asks for a refresh token).",
+   "text": "OpenID Connect (OIDC) standard scopes: openid = {{c1::required; requests an ID token}}; profile = {{c2::name, picture and similar claims}}; email = {{c3::email address claims}}; offline_access = {{c4::asks for a refresh token}}.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -1320,11 +1443,12 @@
    "type": "cloze",
    "deck": "Identity & Zero Trust::06 Tokens: JWT, Opaque & Introspection",
    "tags": [
-    "identity::tokens"
+    "identity::tokens",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "A JSON Web Signature (JWS)-style JSON Web Token (JWT) has three Base64url parts: {{c1::header}} (alg, kid, typ) . {{c2::payload}} (claims) . {{c3::signature}}.",
+   "text": "A JSON Web Signature (JWS)-style JSON Web Token (JWT) has three Base64url parts: the header holds {{c1::alg, kid, typ}}; the payload holds {{c2::the claims}}; the signature is computed over {{c3::the header and payload}}.",
    "image": "",
    "analogy": "",
    "extra": "<b>Pitfall:</b> Base64url is encoding, not encryption. Anyone can read the payload; only JSON Web Encryption (JWE) encrypts it.",
@@ -1359,6 +1483,23 @@
    "text": "",
    "image": "",
    "analogy": "JWT = a signed letter you can read yourself; opaque token = a claim ticket you must hand to the counter.",
+   "extra": "",
+   "source": "Tokens · RFC 7519 JWT",
+   "reverse": false
+  },
+  {
+   "guid": "cd051b5955",
+   "type": "basic",
+   "deck": "Identity & Zero Trust::06 Tokens: JWT, Opaque & Introspection",
+   "tags": [
+    "identity::tokens",
+    "simplified"
+   ],
+   "front": "A fired employee holds a JSON Web Token (JWT) access token with 1 hour left. What can they still do, and how do you limit it?",
+   "back": "Any resource server validating locally still accepts it until <code>exp</code>. Limit with short lifetimes, refresh-token revocation, introspection for sensitive APIs, or push revocation events.",
+   "text": "",
+   "image": "",
+   "analogy": "",
    "extra": "",
    "source": "Tokens · RFC 7519 JWT",
    "reverse": false
@@ -1416,11 +1557,12 @@
    "type": "cloze",
    "deck": "Identity & Zero Trust::06 Tokens: JWT, Opaque & Introspection",
    "tags": [
-    "identity::tokens"
+    "identity::tokens",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Mandatory JSON Web Token (JWT) checks: signature with the expected key; {{c1::iss}} equals the trusted issuer; {{c2::aud}} contains this service; {{c3::exp}} not passed (small clock skew); {{c4::nbf}} reached if present.",
+   "text": "Mandatory JSON Web Token (JWT) checks: signature with the expected key; iss {{c1::equals the trusted issuer}}; aud {{c2::contains this service}}; exp {{c3::has not passed (allow small clock skew)}}; nbf {{c4::has been reached, if present}}.",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -1436,6 +1578,23 @@
    ],
    "front": "Why must a resource server check <b>aud</b> even when the signature is valid?",
    "back": "A valid token for another API from the same issuer would otherwise be accepted. Audience restriction stops token reuse across services (confused deputy).",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Tokens · RFC 7519 JWT",
+   "reverse": false
+  },
+  {
+   "guid": "e9fdc3a77a",
+   "type": "basic",
+   "deck": "Identity & Zero Trust::06 Tokens: JWT, Opaque & Introspection",
+   "tags": [
+    "identity::tokens",
+    "simplified"
+   ],
+   "front": "What does a Security Assertion Markup Language (SAML) <b>AudienceRestriction</b> prevent?",
+   "back": "An assertion issued for service provider (SP) A being replayed at SP B. Each SP must reject assertions whose audience is not its own entity ID.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1812,6 +1971,23 @@
    "reverse": false
   },
   {
+   "guid": "cf28ca6faf",
+   "type": "basic",
+   "deck": "Identity & Zero Trust::07 SAML & Legacy Federation",
+   "tags": [
+    "identity::saml",
+    "simplified"
+   ],
+   "front": "Why does Kerberos require roughly synchronised clocks?",
+   "back": "Authenticators carry timestamps that the service checks against a small allowed skew to reject replayed ones, so badly skewed clocks make valid logins fail.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Kerberos · RFC 4120",
+   "reverse": false
+  },
+  {
    "guid": "blgr#._H0D",
    "type": "basic",
    "deck": "Identity & Zero Trust::07 SAML & Legacy Federation",
@@ -1924,6 +2100,23 @@
    "reverse": false
   },
   {
+   "guid": "c14c7a4a3e",
+   "type": "basic",
+   "deck": "Identity & Zero Trust::08 Authorization Models",
+   "tags": [
+    "identity::authz",
+    "simplified"
+   ],
+   "front": "A rule says: \"managers approve expenses under 10,000 only in their own region\". Why is this awkward in role-based access control (RBAC) and natural in attribute-based access control (ABAC)?",
+   "back": "RBAC needs a separate role per region and limit combination (role explosion). ABAC states one policy over attributes: <code>user.region == expense.region</code>, <code>amount &lt; 10000</code>, <code>user.title == manager</code>.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Authorization · Models",
+   "reverse": false
+  },
+  {
    "guid": "L2;V]#auR!",
    "type": "basic",
    "deck": "Identity & Zero Trust::08 Authorization Models",
@@ -1976,11 +2169,12 @@
    "type": "cloze",
    "deck": "Identity & Zero Trust::08 Authorization Models",
    "tags": [
-    "identity::authz"
+    "identity::authz",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Externalised authorization roles: {{c1::PEP}} (Policy Enforcement Point) intercepts the request; {{c2::PDP}} (Policy Decision Point) evaluates policy; {{c3::PIP}} (Policy Information Point) supplies attributes; {{c4::PAP}} (Policy Administration Point) authors policies.",
+   "text": "Externalised authorization roles: Policy Enforcement Point (PEP) {{c1::intercepts the request}}; Policy Decision Point (PDP) {{c2::evaluates policy}}; Policy Information Point (PIP) {{c3::supplies attributes}}; Policy Administration Point (PAP) {{c4::authors policies}}.",
    "image": "<img src=\"idz_pdp_pep_pip.svg\">",
    "analogy": "",
    "extra": "",
@@ -2324,6 +2518,23 @@
    "reverse": false
   },
   {
+   "guid": "17f5d5335e",
+   "type": "basic",
+   "deck": "Identity & Zero Trust::09 Zero Trust Architecture",
+   "tags": [
+    "identity::zerotrust",
+    "simplified"
+   ],
+   "front": "An attacker phishes a valid user's password and tries to log in from an unmanaged laptop. Which Zero Trust input stops them even if the credentials are correct?",
+   "back": "Device identity and posture: no managed-device certificate and no compliant posture means the policy engine denies or limits access, whatever the user credentials say.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Zero Trust · BeyondCorp",
+   "reverse": false
+  },
+  {
    "guid": "dyj.%03qd}",
    "type": "basic",
    "deck": "Identity & Zero Trust::09 Zero Trust Architecture",
@@ -2500,6 +2711,23 @@
    "reverse": false
   },
   {
+   "guid": "f44714072b",
+   "type": "basic",
+   "deck": "Identity & Zero Trust::10 Workload & Machine Identity",
+   "tags": [
+    "identity::workload",
+    "simplified"
+   ],
+   "front": "A workload's X.509 Secure Production Identity Framework for Everyone (SPIFFE) Verifiable Identity Document (SVID) leaks. Why is the damage limited compared with a leaked static API key?",
+   "back": "It is short-lived and names a single workload, so it expires quickly and grants only that workload's authorizations. Rotation is automatic, not a manual clean-up.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Workload Identity · SPIFFE",
+   "reverse": false
+  },
+  {
    "guid": "t,1%aW$]+O",
    "type": "basic",
    "deck": "Identity & Zero Trust::10 Workload & Machine Identity",
@@ -2624,6 +2852,23 @@
    "image": "",
    "analogy": "",
    "extra": "<b>Pitfall:</b> trust policies that match only on issuer let every workload in that issuer assume the role.",
+   "source": "Workload Identity · Cloud Federation",
+   "reverse": false
+  },
+  {
+   "guid": "12caf4a561",
+   "type": "basic",
+   "deck": "Identity & Zero Trust::10 Workload & Machine Identity",
+   "tags": [
+    "identity::workload",
+    "simplified"
+   ],
+   "front": "Why is exchanging an OpenID Connect (OIDC) token for cloud credentials safer than storing a cloud key in a pipeline secret?",
+   "back": "The token is minted per run and short-lived, and the trust policy can pin repo, branch and audience. A stored key is static, copyable and valid from anywhere until someone rotates it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
    "source": "Workload Identity · Cloud Federation",
    "reverse": false
   },
@@ -2799,6 +3044,23 @@
    "text": "",
    "image": "",
    "analogy": "A credit limit: you choose what to buy, but the bank caps the total.",
+   "extra": "",
+   "source": "Cloud IAM · Patterns",
+   "reverse": false
+  },
+  {
+   "guid": "03305e39bf",
+   "type": "basic",
+   "deck": "Identity & Zero Trust::11 Cloud IAM Patterns",
+   "tags": [
+    "identity::cloud_iam",
+    "simplified"
+   ],
+   "front": "An identity has an identity policy allowing <code>s3:*</code> but a permission boundary that excludes <code>s3:DeleteObject</code>. Can it delete objects?",
+   "back": "No. The effective permissions are the intersection of the identity policy and the boundary: an allow must exist in both.",
+   "text": "",
+   "image": "",
+   "analogy": "",
    "extra": "",
    "source": "Cloud IAM · Patterns",
    "reverse": false
@@ -3012,6 +3274,23 @@
    "reverse": false
   },
   {
+   "guid": "55574e49ef",
+   "type": "basic",
+   "deck": "Identity & Zero Trust::12 Sessions, Threats & Operations",
+   "tags": [
+    "identity::sessions",
+    "simplified"
+   ],
+   "front": "What can an attacker still do if <code>HttpOnly</code> is set on the session cookie?",
+   "back": "They cannot read the cookie, but cross-site scripting (XSS) code can still send authenticated requests from the victim's browser. HttpOnly limits cookie theft, not session abuse.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Sessions · OWASP",
+   "reverse": false
+  },
+  {
    "guid": "hDmJR}b&&`",
    "type": "cloze",
    "deck": "Identity & Zero Trust::12 Sessions, Threats & Operations",
@@ -3064,9 +3343,10 @@
    "type": "basic",
    "deck": "Identity & Zero Trust::12 Sessions, Threats & Operations",
    "tags": [
-    "identity::sessions"
+    "identity::sessions",
+    "simplified"
    ],
-   "front": "Why is an OpenID Connect (OIDC) login callback a <b>SameSite</b> pitfall?",
+   "front": "An OpenID Connect (OIDC) login callback fails only when the <code>state</code> cookie is <code>SameSite=Strict</code>. Why?",
    "back": "The identity provider (IdP) POSTs back cross-site (form_post), so a <code>Strict</code> or <code>Lax</code> session/state cookie isn't sent and the flow breaks. Use <code>None; Secure</code> for the state cookie or the <code>code</code> response via GET.",
    "text": "",
    "image": "",
@@ -3180,6 +3460,23 @@
    ],
    "front": "What is the <b>mover</b> stage's design requirement in joiner-mover-leaver?",
    "back": "Access must be recomputed from the new role, not added on top: remove old entitlements first, then grant new ones. Birthright access should derive from attributes, not history.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Identity Governance · IGA",
+   "reverse": false
+  },
+  {
+   "guid": "e9b97aa8f7",
+   "type": "basic",
+   "deck": "Identity & Zero Trust::12 Sessions, Threats & Operations",
+   "tags": [
+    "identity::sessions",
+    "simplified"
+   ],
+   "front": "What is <b>privilege creep</b>, and which joiner-mover-leaver (JML) stage causes it?",
+   "back": "Accumulated entitlements nobody removed. It comes from the mover stage when new access is added on top of old access instead of being recomputed from the new role.",
    "text": "",
    "image": "",
    "analogy": "",
