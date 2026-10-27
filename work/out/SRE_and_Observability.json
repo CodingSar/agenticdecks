@@ -581,6 +581,57 @@
    "reverse": false
   },
   {
+   "guid": "f9dcbbcd65",
+   "type": "basic",
+   "deck": "SRE & Observability::02 SLIs, SLOs & SLAs",
+   "tags": [
+    "sre::slo",
+    "simplified"
+   ],
+   "front": "A service promises a 99.9% availability Service Level Objective (SLO) and depends on one hard dependency that is 99.9% available (independent failures). What is the best availability you can expect?",
+   "back": "About <b>99.8%</b> (0.999 × 0.999 ≈ 0.998). Serial hard dependencies multiply, so you must add redundancy, a fallback or caching to beat it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Book · Ch. 4",
+   "reverse": false
+  },
+  {
+   "guid": "d04795370e",
+   "type": "basic",
+   "deck": "SRE & Observability::02 SLIs, SLOs & SLAs",
+   "tags": [
+    "sre::sli",
+    "simplified"
+   ],
+   "front": "Chain the reasoning from a user journey to a page: which artefacts do you define, in order?",
+   "back": "User journey, then a Service Level Indicator (SLI) (good ÷ valid events), then a Service Level Objective (SLO) target over a window, then the error budget (1 − SLO), then burn-rate alerts on that budget. Each stage derives from the previous one.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Workbook · Ch. 2, 5",
+   "reverse": false
+  },
+  {
+   "guid": "6d906dcf8e",
+   "type": "basic",
+   "deck": "SRE & Observability::02 SLIs, SLOs & SLAs",
+   "tags": [
+    "sre::sli",
+    "simplified"
+   ],
+   "front": "A page-load journey fans out to 100 backend calls and each backend is fast 99% of the time. Roughly what share of page loads sees at least one slow call?",
+   "back": "About <b>63%</b> (1 − 0.99^100). Tail latency is amplified by fan-out, so per-backend 99th percentile (p99) must be far tighter than the user-facing target.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Book · Ch. 4",
+   "reverse": false
+  },
+  {
    "guid": "jgeWP]5x-.",
    "type": "basic",
    "deck": "SRE & Observability::03 Error Budgets & Burn Rate",
@@ -716,11 +767,12 @@
    "type": "cloze",
    "deck": "SRE & Observability::03 Error Budgets & Burn Rate",
    "tags": [
-    "sre::burn_rate"
+    "sre::burn_rate",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Site Reliability Engineering (SRE) Workbook burn-rate tiers: 2% of budget in 1 h = burn rate {{c1::14.4}} (page); 5% in 6 h = burn rate {{c2::6}} (page); 10% in 3 days = burn rate {{c3::1}} (ticket).",
+   "text": "Site Reliability Engineering (SRE) Workbook alert tiers (30-day window): burn rate 14.4 pages when {{c1::2%}} of budget is gone in {{c2::1 h}}; burn rate 6 pages at {{c3::5%}} in {{c4::6 h}}; burn rate 1 raises a {{c5::ticket}} at {{c6::10%}} in {{c7::3 days}}.",
    "image": "",
    "analogy": "",
    "extra": "<b>Derivation:</b> rate = budget fraction × (window ÷ alert window), e.g. 0.02 × 720 h / 1 h = 14.4.",
@@ -837,6 +889,57 @@
    "analogy": "",
    "extra": "",
    "source": "SRE Workbook · Ch. 2",
+   "reverse": false
+  },
+  {
+   "guid": "60d768488b",
+   "type": "basic",
+   "deck": "SRE & Observability::03 Error Budgets & Burn Rate",
+   "tags": [
+    "sre::burn_rate",
+    "simplified"
+   ],
+   "front": "A service has a 99.9% Service Level Objective (SLO) over 30 days. A bug causes 0.5% errors continuously. What burn rate is that, and how long until the budget is gone?",
+   "back": "Burn rate = 0.005 / 0.001 = <b>5</b>. The budget lasts 30 / 5 = <b>6 days</b>. Too slow for a fast page, so only a slow-burn alert or ticket catches it.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Workbook · Ch. 5",
+   "reverse": false
+  },
+  {
+   "guid": "217be36eed",
+   "type": "basic",
+   "deck": "SRE & Observability::03 Error Budgets & Burn Rate",
+   "tags": [
+    "sre::error_budget",
+    "simplified"
+   ],
+   "front": "A 99.9% Service Level Objective (SLO) over 30 days: roughly how many minutes of total outage does the error budget allow?",
+   "back": "About <b>43 minutes</b>: 0.1% of 30 × 24 × 60 = 43,200 minutes is 43.2.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Workbook · Ch. 5",
+   "reverse": false
+  },
+  {
+   "guid": "e987db2532",
+   "type": "basic",
+   "deck": "SRE & Observability::03 Error Budgets & Burn Rate",
+   "tags": [
+    "sre::burn_rate",
+    "simplified"
+   ],
+   "front": "Why would a single alert 'error ratio over 1% for 5 minutes' miss a slow leak that still exhausts a 99.9% Service Level Objective (SLO) budget?",
+   "back": "A steady 0.5% error ratio never crosses the 1% line, yet it burns budget at 5× and empties it in about 6 days. Burn-rate tiers catch it as a slow-burn ticket.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Workbook · Ch. 5",
    "reverse": false
   },
   {
@@ -1373,6 +1476,57 @@
    "reverse": false
   },
   {
+   "guid": "faee688d13",
+   "type": "basic",
+   "deck": "SRE & Observability::05 Metrics & Prometheus Model",
+   "tags": [
+    "sre::prometheus",
+    "simplified"
+   ],
+   "front": "Why write <code>sum(rate(x[5m]))</code> and not <code>rate(sum(x)[5m:])</code> when aggregating counters across instances?",
+   "back": "rate() must see each series separately to detect its own counter resets. Summing first hides a restart in one instance as a sudden drop, giving wrong rates. Rate per series, then sum.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Prometheus docs · Querying functions",
+   "reverse": false
+  },
+  {
+   "guid": "de7497b5f3",
+   "type": "basic",
+   "deck": "SRE & Observability::05 Metrics & Prometheus Model",
+   "tags": [
+    "sre::prometheus",
+    "simplified"
+   ],
+   "front": "How do you alert when a service disappears entirely, given that its metrics just vanish?",
+   "back": "Use <code>absent(up{job=\"svc\"})</code> (or <code>absent()</code> on a key metric). Threshold expressions return no data for a missing series, so they never fire.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Prometheus docs · absent()",
+   "reverse": false
+  },
+  {
+   "guid": "8010f3c85a",
+   "type": "basic",
+   "deck": "SRE & Observability::05 Metrics & Prometheus Model",
+   "tags": [
+    "sre::prometheus",
+    "simplified"
+   ],
+   "front": "A developer wants to add a <code>user_id</code> label to a latency histogram. What goes wrong, and where should that detail go instead?",
+   "back": "Series count multiplies by the number of users (times every bucket), exhausting memory. Put per-user detail on wide events or span attributes, where cardinality is cheap, and keep metric labels low-cardinality.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Observability Engineering · Ch. 2",
+   "reverse": false
+  },
+  {
    "guid": "k1D|+JSWaT",
    "type": "basic",
    "deck": "SRE & Observability::06 Logs & Structured Events",
@@ -1511,27 +1665,11 @@
    "type": "basic",
    "deck": "SRE & Observability::06 Logs & Structured Events",
    "tags": [
-    "sre::logs"
-   ],
-   "front": "When do <b>logs beat metrics</b>?",
-   "back": "When you need the specific case: which user, which request, the exact payload, a rare event, or a question you didn't define a metric for.",
-   "text": "",
-   "image": "",
-   "analogy": "",
-   "extra": "",
-   "source": "Observability Engineering · Ch. 2",
-   "reverse": false
-  },
-  {
-   "guid": "iLgLlT&l&@",
-   "type": "basic",
-   "deck": "SRE & Observability::06 Logs & Structured Events",
-   "tags": [
     "sre::logs",
-    "sre::metrics"
+    "simplified"
    ],
-   "front": "When do <b>metrics beat logs</b>?",
-   "back": "For trends, alerting and long retention: millions of events collapse into a few cheap numbers that are fast to query and compare over months.",
+   "front": "<b>Logs vs metrics</b>: when does each win?",
+   "back": "Logs win when you need the specific case: which user, which request, the exact payload, a rare event, or a question you never defined a metric for. Metrics win for trends, alerting and long retention: millions of events collapse into a few cheap numbers.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1562,10 +1700,11 @@
    "deck": "SRE & Observability::06 Logs & Structured Events",
    "tags": [
     "sre::logs",
-    "sre::tracing"
+    "sre::tracing",
+    "simplified"
    ],
-   "front": "How does a <b>wide event</b> relate to a <b>span</b>?",
-   "back": "A span is a wide event with timing and a parent pointer. Attach enough attributes to spans and they double as your structured logs.",
+   "front": "What is the relationship between a <b>wide event</b> and a <b>span</b>, and what lets a span double as a structured log?",
+   "back": "A span is a wide event that also carries timing and a parent pointer. Attach enough attributes to it (user, version, flags, outcome) and it doubles as your structured log line.",
    "text": "",
    "image": "",
    "analogy": "",
@@ -1624,6 +1763,23 @@
    "reverse": false
   },
   {
+   "guid": "4efbbd3a99",
+   "type": "basic",
+   "deck": "SRE & Observability::06 Logs & Structured Events",
+   "tags": [
+    "sre::logs",
+    "simplified"
+   ],
+   "front": "Why do you record the <b>sample rate</b> on each kept log event when sampling?",
+   "back": "So queries can re-weight: one kept event sampled at 1-in-100 stands for 100 events. Without it, counts and rates computed from the sample are wrong.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "Observability Engineering · Ch. 17",
+   "reverse": false
+  },
+  {
    "guid": "o)_#7g>4!V",
    "type": "cloze",
    "deck": "SRE & Observability::07 Distributed Tracing",
@@ -1660,11 +1816,12 @@
    "type": "cloze",
    "deck": "SRE & Observability::07 Distributed Tracing",
    "tags": [
-    "sre::tracing"
+    "sre::tracing",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "World Wide Web Consortium (W3C) <code>traceparent</code> header: <code>{{c1::00}}-{{c2::&lt;32 hex trace-id&gt;}}-{{c3::&lt;16 hex parent-id&gt;}}-{{c4::01}}</code>: version, trace id, parent span id, flags (01 = sampled).",
+   "text": "World Wide Web Consortium (W3C) <code>traceparent</code> header = <code>00-{{c1::&lt;32 hex trace-id&gt;}}-{{c2::&lt;16 hex parent span id&gt;}}-{{c3::01}}</code>. The first field is the version; the last is the flags byte, where <code>01</code> means \"sampled\".",
    "image": "",
    "analogy": "",
    "extra": "",
@@ -1901,6 +2058,40 @@
    "analogy": "",
    "extra": "<b>Site Reliability Engineering (SRE) link:</b> this mirrors the 'valid events' rule in Service Level Indicators (SLIs): don't count the client's mistakes against your service.",
    "source": "OpenTelemetry · HTTP semconv",
+   "reverse": false
+  },
+  {
+   "guid": "966b16bc01",
+   "type": "basic",
+   "deck": "SRE & Observability::07 Distributed Tracing",
+   "tags": [
+    "sre::tracing",
+    "simplified"
+   ],
+   "front": "One service in a call chain does not forward the <code>traceparent</code> header. What do you see in the tracing backend?",
+   "back": "The trace splits: spans before the gap form one trace, and downstream services start a new root trace with a different trace ID. Every hop, including proxies, must propagate context.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "W3C Trace Context",
+   "reverse": false
+  },
+  {
+   "guid": "f10fc1233f",
+   "type": "basic",
+   "deck": "SRE & Observability::07 Distributed Tracing",
+   "tags": [
+    "sre::tracing",
+    "simplified"
+   ],
+   "front": "What goes wrong if tail-sampling Collectors sit behind a plain round-robin load balancer?",
+   "back": "Spans of one trace land on different Collectors, so no instance sees the whole trace and decisions are made on partial data. Route by trace ID so a trace stays on one instance.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "OpenTelemetry docs · Tail sampling",
    "reverse": false
   },
   {
@@ -2333,11 +2524,12 @@
    "type": "cloze",
    "deck": "SRE & Observability::09 Incident Response",
    "tags": [
-    "sre::oncall"
+    "sre::oncall",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Site Reliability Engineering (SRE) Book on-call sizing: an engineer spends at most {{c1::25%}} of time on call, handles at most {{c2::two}} incidents per 12-hour shift, in a team of at least {{c3::8}} (single site) or 6 + 6 (multi-site).",
+   "text": "Site Reliability Engineering (SRE) Book on-call sizing: an engineer spends at most {{c1::25%}} of time on call and handles at most {{c2::two}} incidents per 12-hour shift; a rotation needs at least {{c3::8 engineers (single site) or 6 + 6 (multi-site)}}.",
    "image": "",
    "analogy": "",
    "extra": "<b>Reasoning:</b> primary + secondary rotations with 25% caps need 8 people; below that, either toil or burnout rises.",
@@ -2813,6 +3005,23 @@
    "reverse": false
   },
   {
+   "guid": "98d59f9606",
+   "type": "basic",
+   "deck": "SRE & Observability::10 Postmortems & Learning",
+   "tags": [
+    "sre::postmortem",
+    "simplified"
+   ],
+   "front": "A draft postmortem says 'the engineer failed to check the config before deploy'. How would a blameless rewrite change it?",
+   "back": "Ask what made skipping the check reasonable: 'the deploy tool gave no config diff and checks were manual, so the change went out unreviewed'. The action item then fixes the tool or process, not the person.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Book · Ch. 15",
+   "reverse": false
+  },
+  {
    "guid": "d$[`%@/<dQ",
    "type": "basic",
    "deck": "SRE & Observability::11 Capacity, Load & Release",
@@ -2881,11 +3090,12 @@
    "type": "cloze",
    "deck": "SRE & Observability::11 Capacity, Load & Release",
    "tags": [
-    "sre::load"
+    "sre::load",
+    "simplified"
    ],
    "front": "",
    "back": "",
-   "text": "Google's request <b>criticality</b> levels, shed from the bottom up: {{c1::CRITICAL_PLUS}} (user-visible, must not fail), {{c2::CRITICAL}}, {{c3::SHEDDABLE_PLUS}} (retries tolerated), {{c4::SHEDDABLE}} (batch, drop freely).",
+   "text": "Google's request criticality levels, shed first to last: {{c1::SHEDDABLE}} (batch, drop freely), then {{c2::SHEDDABLE_PLUS}} (retries tolerated), and only last the protected pair {{c3::CRITICAL}} and {{c4::CRITICAL_PLUS}} (user-visible, must not fail).",
    "image": "",
    "analogy": "",
    "extra": "<b>Point:</b> load shedding is a policy question, criticality is propagated with the request so every layer sheds the same things first.",
@@ -3084,6 +3294,40 @@
    "analogy": "",
    "extra": "",
    "source": "SRE Workbook · Ch. 16",
+   "reverse": false
+  },
+  {
+   "guid": "ce8611ff03",
+   "type": "basic",
+   "deck": "SRE & Observability::11 Capacity, Load & Release",
+   "tags": [
+    "sre::capacity",
+    "simplified"
+   ],
+   "front": "Why should retries use exponential backoff <b>with jitter</b>, not a fixed delay?",
+   "back": "Fixed delays make all failed clients retry at the same instant, creating synchronised waves that re-overload a recovering server. Jitter spreads retries out in time.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Book · Ch. 22",
+   "reverse": false
+  },
+  {
+   "guid": "22dba46a31",
+   "type": "basic",
+   "deck": "SRE & Observability::11 Capacity, Load & Release",
+   "tags": [
+    "sre::capacity",
+    "simplified"
+   ],
+   "front": "Why can a health check that fails under overload make a cascading failure worse?",
+   "back": "Overloaded instances fail the check and are removed or restarted, shifting their load onto the remaining ones, which then fail too. Overload should shed load, not trigger removal.",
+   "text": "",
+   "image": "",
+   "analogy": "",
+   "extra": "",
+   "source": "SRE Book · Ch. 22",
    "reverse": false
   },
   {
