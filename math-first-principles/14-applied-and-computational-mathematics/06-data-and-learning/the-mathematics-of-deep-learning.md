@@ -10,7 +10,7 @@ A neural network is a composition of simple maps: f(x) = W_L σ(⋯ σ(W₁x + b
 
 ## Core tenets
 
-1. **One hidden layer can approximate any continuous function on a compact set.** George Cybenko (1989) proved that sums ∑ aᵢ σ(wᵢ · x + bᵢ) with a sigmoidal σ are dense in the continuous functions on a compact K in ℝ^d; Kurt Hornik, Maxwell Stinchcombe and Halbert White proved a general version the same year. Proof idea: if the sums were not dense, the Hahn–Banach theorem would give a nonzero bounded linear functional vanishing on all of them; by the Riesz representation theorem it is a signed measure μ with ∫ σ(w · x + b) dμ = 0 for all w, b, and one shows this forces μ = 0. Moshe Leshno and coauthors (1993) showed that for continuous σ, density holds if and only if σ is not a polynomial: polynomials of bounded degree form a finite-dimensional, hence closed, space.
+1. **One hidden layer can approximate any continuous function on a compact set.** George Cybenko (1989) proved that sums ∑ aᵢ σ(wᵢ · x + bᵢ) with a sigmoidal σ are dense in the continuous functions on a compact K in ℝ^d; Kurt Hornik and coauthors gave a general version the same year. Proof idea: if the sums were not dense, the Hahn–Banach theorem would give a nonzero bounded linear functional vanishing on all of them; by the Riesz representation theorem it is a signed measure μ with ∫ σ(w · x + b) dμ = 0 for all w, b, and one shows this forces μ = 0. Moshe Leshno and coauthors (1993) showed that for continuous σ, density holds if and only if σ is not a polynomial: polynomials of bounded degree form a finite-dimensional, hence closed, space.
 
 2. **Universal approximation says nothing about size, training or generalisation.** Approximating an arbitrary Lipschitz function in d variables to accuracy ε can need a number of neurons growing like ε^(−d), exponential in dimension. Andrew Barron (1993) identified a class, functions whose Fourier transform has a finite first moment, approximable with error of order 1/√n by n neurons regardless of d. Depth helps: there are functions computed by small deep networks that any shallow network needs exponentially many neurons to approximate. And the theorem is existential: it does not say training finds the approximant.
 
@@ -35,7 +35,6 @@ A neural network is a composition of simple maps: f(x) = W_L σ(⋯ σ(W₁x + b
 | Backpropagation | Reverse-mode computation of the gradient by the chain rule |
 | Strict saddle | A critical point at which the Hessian has a negative eigenvalue |
 | Neural tangent kernel | The kernel governing training of very wide networks near initialisation |
-| Interpolation threshold | The model size at which training data can first be fitted exactly |
 | Double descent | Test error that falls, peaks at the threshold, then falls again |
 | Implicit bias | The preference of an optimiser among the many zero-loss solutions |
 
