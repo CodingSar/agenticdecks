@@ -24,7 +24,7 @@ Iterate a polynomial such as z ↦ z² + c on the complex plane. Most starting p
 
 7. **The Fatou set has no wandering domains.** Dennis Sullivan (1985) proved that every Fatou component of a rational map is eventually periodic, using quasiconformal deformations: a wandering domain would yield infinitely many independent deformations, but maps of fixed degree form a finite-dimensional family. Periodic components are then attracting basins, parabolic basins, Siegel discs or Herman rings, the last impossible for polynomials.
 
-8. **The boundary of M is as wiggly as a planar set can be.** Mitsuhiro Shishikura (1998) proved that ∂M has [Hausdorff dimension](../../09-advanced-analysis/01-measure-and-integration/hausdorff-dimension-and-fractals.md) 2. Whether M is locally connected, the Mandelbrot locally connected (MLC) conjecture, is open as of 2026; it would imply that hyperbolic parameters, those with an attracting cycle, are dense in M, also open as of 2026. Jean-Christophe Yoccoz proved local connectivity at every parameter that is not infinitely renormalisable; the real case of density was proved by Jacek Graczyk and Grzegorz Świątek and by Mikhail Lyubich (1997).
+8. **The boundary of M is as rough as possible.** Mitsuhiro Shishikura (1998) proved that ∂M has [Hausdorff dimension](../../09-advanced-analysis/01-measure-and-integration/hausdorff-dimension-and-fractals.md) 2. Whether M is locally connected, the Mandelbrot locally connected (MLC) conjecture, is open as of 2026; it would imply that hyperbolic parameters, those with an attracting cycle, are dense in M, also open as of 2026. Jean-Christophe Yoccoz proved local connectivity at every parameter that is not infinitely renormalisable; the real case of density was proved by Jacek Graczyk and Grzegorz Świątek and by Mikhail Lyubich (1997).
 
 ## Key concepts
 
@@ -40,7 +40,7 @@ Iterate a polynomial such as z ↦ z² + c on the complex plane. Most starting p
 
 - **Below:** [iterated maps](iterated-maps.md) supply multipliers and the logistic family; [holomorphic functions](../../09-advanced-analysis/02-complex-analysis/holomorphic-functions.md) supply Montel and Schwarz; [conformal maps](../../09-advanced-analysis/02-complex-analysis/conformal-maps-and-the-riemann-mapping-theorem.md) supply the Riemann maps of tenets 4 and 5; [Hausdorff dimension](../../09-advanced-analysis/01-measure-and-integration/hausdorff-dimension-and-fractals.md) measures ∂M.
 - **Above:** [Newton's method](../../14-applied-and-computational-mathematics/01-numerical-analysis/root-finding-and-newtons-method.md) for z³ − 1 has three basins whose common boundary is a Julia set, so every boundary point touches all three; computer pictures guided the subject, a theme of [computers and proof](../../15-mathematics-in-context/computers-and-proof.md); MLC is among the [open problems](../../15-mathematics-in-context/open-problems.md).
-- **Siblings:** [chaos](chaos-and-strange-attractors.md) on J is the expanding kind; [bifurcations](bifurcations.md) of z² + c happen at the boundary of M; [ergodic theory](ergodic-theory.md) gives J its natural measure, the harmonic measure seen from ∞.
+- **Siblings:** [chaos](chaos-and-strange-attractors.md) on J is the expanding kind; [bifurcations](bifurcations.md) of z² + c occur on ∂M; [ergodic theory](ergodic-theory.md) gives J its natural measure, the harmonic measure seen from ∞.
 
 ## Common misconceptions
 
