@@ -1,7 +1,7 @@
 # Numerical Analysis
 
 > **Layer:** [14 Applied and Computational Mathematics](../README.md) › Numerical Analysis
-> **Children:** [Floating Point, Conditioning and Stability](floating-point-conditioning-and-stability.md) · [Numerical Linear Algebra](numerical-linear-algebra.md) · [Root-Finding and Newton's Method](root-finding-and-newtons-method.md) · [Interpolation and Approximation](interpolation-and-approximation.md) · [Numerical Methods for Differential Equations](numerical-methods-for-differential-equations.md) · [Monte Carlo Methods](monte-carlo-methods.md)
+> **Children:** [Floating Point, Conditioning and Stability](floating-point-conditioning-and-stability.md) · [Numerical Linear Algebra](numerical-linear-algebra.md) · [Root-Finding and Newton's Method](root-finding-and-newtons-method.md) · [Interpolation and Approximation](interpolation-and-approximation.md) · [Numerical Methods for Differential Equations](numerical-methods-for-differential-equations.md) · [Monte Carlo Methods](monte-carlo-methods.md) · [The Fast Fourier Transform and Spectral Methods](the-fast-fourier-transform-and-spectral-methods.md)
 
 ## What this area is about
 
@@ -15,7 +15,10 @@ Lloyd Trefethen defined numerical analysis as the study of algorithms for the pr
                  /          |             \
    numerical linear     root-finding     interpolation and
        algebra          (Newton)          approximation
-                \          |             /
+                \          |             /      \
+                 \         |            /   FFT and spectral
+                  \        |           /     methods
+                   \       |          /      /
            numerical methods for differential equations
                            |
                  Monte Carlo methods  (random, not grid-based)
@@ -29,8 +32,9 @@ Lloyd Trefethen defined numerical analysis as the study of algorithms for the pr
 | [Interpolation and approximation](interpolation-and-approximation.md) | Replacing functions by polynomials and splines; where to put the nodes | Floating point, Taylor and Fourier series |
 | [Numerical methods for differential equations](numerical-methods-for-differential-equations.md) | Time-stepping, stability regions, the Courant–Friedrichs–Lewy (CFL) condition, finite elements | All four above |
 | [Monte Carlo methods](monte-carlo-methods.md) | Averaging random samples; dimension-free N^(−1/2) error; Markov chain sampling | Probability, Markov chains |
+| [The fast Fourier transform and spectral methods](the-fast-fourier-transform-and-spectral-methods.md) | The Discrete Fourier Transform (DFT) in O(n log n) operations; fast convolution; spectrally accurate differentiation | Interpolation, numerical linear algebra, Fourier series |
 
-The first leaf supplies the questions every other leaf answers. The middle three are the basic tools, and they call one another: Newton's method in n dimensions is a sequence of linear solves, eigenvalue problems are solved by iteration, and the secant method is linear interpolation. Differential equations combine all of them: an implicit step is a Newton iteration whose linear systems come from a discretisation built from interpolants. Monte Carlo methods stand slightly apart: they give up the deterministic error bounds of the others in exchange for an error rate that does not depend on dimension, which is what makes integrals over hundreds of variables computable at all. A recurring theme is that the best algorithms are short: Jack Dongarra and Francis Sullivan's list of the ten most influential algorithms of the twentieth century (2000) includes the Metropolis algorithm, the simplex method, Krylov subspace iteration, the QR algorithm and the fast Fourier transform.
+The first leaf supplies the questions every other leaf answers. The middle three are the basic tools, and they call one another: Newton's method in n dimensions is a sequence of linear solves, eigenvalue problems are solved by iteration, and the secant method is linear interpolation. Differential equations combine all of them: an implicit step is a Newton iteration whose linear systems come from a discretisation built from interpolants. The fast Fourier transform (FFT) joins interpolation to linear algebra: it diagonalises every circulant matrix, makes convolution cheap, and lets spectral methods differentiate smooth functions with errors that fall faster than any power of the grid spacing. Monte Carlo methods stand slightly apart: they give up the deterministic error bounds of the others in exchange for an error rate that does not depend on dimension, which is what makes integrals over hundreds of variables computable at all. A recurring theme is that the best algorithms are short: Jack Dongarra and Francis Sullivan's list of the ten most influential algorithms of the twentieth century (2000) includes the Metropolis algorithm, the simplex method, Krylov subspace iteration, the QR algorithm and the fast Fourier transform.
 
 ## Connections to sibling areas
 

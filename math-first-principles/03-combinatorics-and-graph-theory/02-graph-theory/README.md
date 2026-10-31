@@ -1,7 +1,7 @@
 # Graph Theory
 
 > **Layer:** [03 Combinatorics and Graph Theory](../README.md) › Graph Theory
-> **Children:** [Graphs and connectivity](graphs-and-connectivity.md) · [Trees](trees.md) · [Matchings and network flows](matchings-and-network-flows.md) · [Colouring and planarity](colouring-and-planarity.md)
+> **Children:** [Graphs and connectivity](graphs-and-connectivity.md) · [Trees](trees.md) · [Matchings and network flows](matchings-and-network-flows.md) · [Colouring and planarity](colouring-and-planarity.md) · [Spectral graph theory and expanders](spectral-graph-theory-and-expanders.md)
 
 ## What this area is about
 A graph records which pairs among a set of objects are connected, and nothing else. That austerity is its strength: the same theorems apply to road networks, molecules, schedules, electrical circuits and the internet. Graph theory asks how global properties (connectedness, the existence of a perfect pairing, the number of colours needed, whether a crossing-free drawing exists) follow from local data. Its answers come in two characteristic forms. Some are exact characterisations, such as "bipartite if and only if no odd cycle" or "planar if and only if no subdivision of K₅ or K₃,₃". Others are min–max theorems in which an obvious obstruction turns out to be the only one, such as Hall's, König's, Menger's and max-flow min-cut. The proofs lean on induction over vertices or edges, double counting, and extremal choices such as a longest path.
@@ -13,6 +13,7 @@ A graph records which pairs among a set of objects are connected, and nothing el
 | [Trees](trees.md) | Minimal connected graphs: characterisations, spanning trees, Cayley's formula, greedy optimisation | Graphs and connectivity |
 | [Matchings and network flows](matchings-and-network-flows.md) | Min–max theorems: Hall, König, max-flow min-cut, augmenting paths | Graphs and connectivity, trees |
 | [Colouring and planarity](colouring-and-planarity.md) | Euler's formula, Kuratowski's theorem, chromatic number, the four colour theorem | Graphs and connectivity, trees |
+| [Spectral graph theory and expanders](spectral-graph-theory-and-expanders.md) | Eigenvalues of adjacency and Laplacian matrices, Cheeger's inequality, expanders, random walks | Graphs and connectivity, trees, matchings and flows |
 
 ```
               graphs and connectivity
@@ -20,13 +21,15 @@ A graph records which pairs among a set of objects are connected, and nothing el
                      trees
                    /       \
      matchings and flows   colouring and planarity
+              |
+     spectral graph theory and expanders
 ```
 
-Graphs and connectivity sets up the language and the first structural results, including the parity arguments behind Euler circuits and bipartiteness. Trees come next because they are the skeleton of every connected graph: a spanning tree certifies connectivity, and removing a leaf is the standard inductive step. The tree then feeds both later leaves. Matchings and flows grow optimal structures by augmenting paths and certify optimality by cuts, and they supply the proof of Menger's theorem, announced in the first leaf. Colouring and planarity starts Euler's formula from a spanning tree, uses it to show planar graphs are sparse, and turns sparsity into colourings by induction, ending with the four colour theorem and its computer proof. The two branches meet again in edge colouring, which splits a bipartite graph into matchings.
+Graphs and connectivity sets up the language and the first structural results, including the parity arguments behind Euler circuits and bipartiteness. Trees come next because they are the skeleton of every connected graph: a spanning tree certifies connectivity, and removing a leaf is the standard inductive step. The tree then feeds both later leaves. Matchings and flows grow optimal structures by augmenting paths and certify optimality by cuts, and they supply the proof of Menger's theorem, announced in the first leaf. Colouring and planarity starts Euler's formula from a spanning tree, uses it to show planar graphs are sparse, and turns sparsity into colourings by induction, ending with the four colour theorem and its computer proof. The two branches meet again in edge colouring, which splits a bipartite graph into matchings. Spectral graph theory comes last and changes method: it reads components, spanning-tree counts and cuts from the eigenvalues of a matrix, and estimates the sparsest cut of all where flows find one exact minimum cut. Its expanders, sparse graphs that no cut splits cheaply, carry the subject into codes, algorithms and number theory.
 
 ## Connections to sibling areas
 - [Enumeration](../01-enumeration/README.md): graphs are counted with its tools; the handshake lemma is double counting, and Cayley's formula and the Catalan count of binary trees come from bijections and generating functions.
-- [Discrete probability](../03-discrete-probability/README.md): random graphs G(n, p) are the main laboratory of the probabilistic method, and random walks on graphs are the simplest Markov chains.
+- [Discrete probability](../03-discrete-probability/README.md): [random graphs](../03-discrete-probability/random-graphs.md) G(n, p) are the main laboratory of the probabilistic method and the standard source of expanders, and random walks on graphs are the simplest Markov chains.
 - [Extremal combinatorics](../04-extremal-combinatorics/README.md): Ramsey and Turán theory ask how many edges or how much order force a given subgraph, and the chromatic number of the forbidden graph decides the answer.
 
 ## Connections across layers
@@ -35,7 +38,7 @@ Graphs and connectivity sets up the language and the first structural results, i
 - In computing, these theorems underlie [graph algorithms](../../../cs-first-principles/05-algorithms-and-data-structures/05-graph-algorithms/README.md).
 
 ## Cross-cutting threads
-- [Duality](../../CROSS-CUTTING.md#duality): matchings against covers, flows against cuts.
+- [Duality](../../CROSS-CUTTING.md#duality): matchings against covers, flows against cuts, eigenvalues against bottlenecks.
 - [Invariants](../../CROSS-CUTTING.md#invariants): degree parity, Euler's V − E + F, the chromatic number.
 - [Impossibility and obstruction](../../CROSS-CUTTING.md#impossibility-and-obstruction): odd cycles, Hall violators, K₅ and K₃,₃ as certificates of what cannot be done.
 - [Local to global](../../CROSS-CUTTING.md#local-to-global): bounded degrees and local sparsity control global colourings.

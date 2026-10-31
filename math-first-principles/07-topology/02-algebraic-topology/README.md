@@ -1,13 +1,13 @@
 # Algebraic Topology
 
 > **Layer:** [07 Topology](../README.md) › Algebraic Topology
-> **Children:** [Homotopy and the Fundamental Group](homotopy-and-the-fundamental-group.md) · [Covering Spaces](covering-spaces.md) · [Homology](homology.md) · [The Euler Characteristic](the-euler-characteristic.md) · [Fixed-Point Theorems](fixed-point-theorems.md)
+> **Children:** [Homotopy and the Fundamental Group](homotopy-and-the-fundamental-group.md) · [Covering Spaces](covering-spaces.md) · [Homology](homology.md) · [The Euler Characteristic](the-euler-characteristic.md) · [Fixed-Point Theorems](fixed-point-theorems.md) · [Higher Homotopy Groups and Fibrations](higher-homotopy-groups-and-fibrations.md) · [Cohomology and Poincaré Duality](cohomology-and-poincare-duality.md)
 
 ## What this area is about
 
 How do you prove that two spaces are not homeomorphic, or that a map with some property cannot exist? Point-set invariants such as compactness and connectedness are too coarse: they cannot tell a sphere from a torus. Algebraic topology attaches algebraic objects, groups and their homomorphisms, to spaces and continuous maps, in a way that is unchanged by continuous deformation. If the groups differ, the spaces differ; if a map would force an impossible homomorphism, the map does not exist.
 
-Two constructions do most of the work. The fundamental group π₁ records loops up to deformation; it is computed from path lifting in covering spaces and from the Seifert–van Kampen theorem, and its subgroups classify connected covers in exact parallel with the Galois correspondence of field theory. Homology replaces loops by formal sums of simplices and holes by cycles that are not boundaries; the identity ∂∂ = 0 makes it computable, and it gives the homology of spheres in every dimension. Their dividends are numerical and geometric: the Euler characteristic, which turns V − E + F into an invariant, and fixed-point theorems such as Brouwer's, which prove existence without construction.
+Two constructions do most of the work. The fundamental group π₁ records loops up to deformation; it is computed from path lifting in covering spaces and from the Seifert–van Kampen theorem, and its subgroups classify connected covers in exact parallel with the Galois correspondence of field theory. Homology replaces loops by formal sums of simplices and holes by cycles that are not boundaries; the identity ∂∂ = 0 makes it computable, and it gives the homology of spheres in every dimension. Their dividends are numerical and geometric: the Euler characteristic, which turns V − E + F into an invariant, and fixed-point theorems such as Brouwer's, which prove existence without construction. Two refinements complete the toolkit. Higher homotopy groups πₙ extend π₁ to maps of spheres, and fibrations compute them, though even the homotopy groups of spheres remain largely unknown. Cohomology dualises homology and adds a product, and on manifolds Poincaré duality pairs complementary degrees.
 
 ## How the children fit together
 
@@ -18,17 +18,21 @@ Two constructions do most of the work. The fundamental group π₁ records loops
 | [Homology](homology.md) | Chains, ∂∂ = 0, homology of spheres, functoriality | Fundamental group, 05 quotient groups, 04 linear algebra |
 | [The Euler characteristic](the-euler-characteristic.md) | χ = V − E + F as an alternating sum of Betti numbers | Homology, 03 planar graphs |
 | [Fixed-point theorems](fixed-point-theorems.md) | Brouwer via no retraction, Lefschetz, Borsuk–Ulam, Nash equilibria | Homology, compactness |
+| [Higher homotopy groups and fibrations](higher-homotopy-groups-and-fibrations.md) | πₙ, the long exact sequence of a fibration, the Hopf map, Hurewicz and Whitehead | Fundamental group, covering spaces, homology |
+| [Cohomology and Poincaré duality](cohomology-and-poincare-duality.md) | Cochains, the cup product ring, Poincaré duality, the intersection form | Homology, Euler characteristic, 04 dual spaces, manifolds |
 
-The fundamental group comes first because it is the most concrete invariant and the one that needs the least machinery: one computation, π₁(S¹) ≅ ℤ, already proves the fundamental theorem of algebra and the two-dimensional Brouwer theorem. Covering spaces are both the tool that computes π₁ and the geometric meaning of its subgroups. Homology trades π₁'s non-abelian subtlety for linear algebra, and so reaches every dimension. The last two leaves cash in: the Euler characteristic is homology's simplest number, and fixed-point theorems are its most famous applications.
+The fundamental group comes first because it is the most concrete invariant and the one that needs the least machinery: one computation, π₁(S¹) ≅ ℤ, already proves the fundamental theorem of algebra and the two-dimensional Brouwer theorem. Covering spaces are both the tool that computes π₁ and the geometric meaning of its subgroups. Homology trades π₁'s non-abelian subtlety for linear algebra, and so reaches every dimension. The next two leaves cash in: the Euler characteristic is homology's simplest number, and fixed-point theorems are its most famous applications. The final two leaves go deeper in the two original directions. Higher homotopy groups generalise π₁, with covering spaces as the first fibrations, and the Hurewicz theorem says where they meet homology. Cohomology reverses homology's arrows to gain a ring structure, and Poincaré duality explains why χ vanishes for closed odd-dimensional manifolds.
 
 ```
    fundamental group <──────> covering spaces
-          │        path lifting computes π₁;
-          │        subgroups of π₁ classify covers
-          ▼
-       homology   (H₁ is π₁ made abelian; every dimension)
-       │      │
-       ▼      ▼
+          │    │   path lifting computes π₁;
+          │    │   subgroups of π₁ classify covers
+          │    └──────────────> higher homotopy groups
+          ▼                     and fibrations
+       homology ─── Hurewicz ───────┘
+       │   │   (H₁ is π₁ made abelian; every dimension)
+       │   └──────────────────> cohomology and
+       ▼                        Poincaré duality
      Euler ─────> fixed-point theorems
   characteristic   (Lefschetz number of the identity is χ)
 ```
@@ -36,13 +40,13 @@ The fundamental group comes first because it is the most concrete invariant and 
 ## Connections to sibling areas
 
 - [Point-set topology](../01-point-set-topology/README.md): compactness of [0, 1] underlies path lifting and the Lebesgue number argument; quotients build cell complexes.
-- [Manifolds](../03-manifolds/README.md): π₁ and χ classify surfaces; knot groups and the Alexander polynomial come from π₁ and covers; the Poincaré conjecture is a statement about π₁.
+- [Manifolds](../03-manifolds/README.md): π₁ and χ classify surfaces; knot groups and the Alexander polynomial come from π₁ and covers; the Poincaré conjecture is a statement about π₁; Poincaré duality and the intersection form constrain closed manifolds.
 
 ## Connections across layers
 
 - [05 Abstract algebra](../../05-abstract-algebra/README.md): groups, presentations, quotient groups and the Galois correspondence are the language and the model.
 - [04 Linear algebra](../../04-linear-algebra/README.md): rank–nullity makes the Euler characteristic an invariant.
-- [08 Geometry](../../08-geometry/README.md): de Rham cohomology recovers homology from calculus, and Gauss–Bonnet equates total curvature with 2πχ.
+- [08 Geometry](../../08-geometry/README.md): de Rham cohomology recovers real cohomology from calculus, Gauss–Bonnet equates total curvature with 2πχ, and characteristic classes of vector bundles are cohomology classes.
 - [13 Structure and metamathematics](../../13-structure-and-metamathematics/README.md): homological algebra generalises chain complexes, and homotopy type theory reads types as spaces.
 - [14 Applied and computational mathematics](../../14-applied-and-computational-mathematics/README.md): Kakutani's fixed-point theorem gives Nash equilibria.
 
@@ -52,4 +56,5 @@ The fundamental group comes first because it is the most concrete invariant and 
 - [Impossibility and obstruction](../../CROSS-CUTTING.md#impossibility-and-obstruction): no retraction of a disc onto its boundary; ℝⁿ is not homeomorphic to ℝᵐ for n ≠ m.
 - [Dictionaries between fields](../../CROSS-CUTTING.md#dictionaries-between-fields): covering spaces and field extensions share one correspondence.
 - [Linearisation](../../CROSS-CUTTING.md#linearisation): homology turns spaces into vector spaces and abelian groups.
+- [Duality](../../CROSS-CUTTING.md#duality): cohomology dualises homology, and Poincaré duality pairs degree k with n − k.
 - [Existence and construction](../../CROSS-CUTTING.md#existence-and-construction): Brouwer proves a fixed point exists without locating it.

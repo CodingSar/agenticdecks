@@ -1,7 +1,7 @@
 # Discrete Probability
 
 > **Layer:** [03 Combinatorics and Graph Theory](../README.md) › Discrete Probability
-> **Children:** [Finite probability spaces](finite-probability-spaces.md) · [Expectation and variance](expectation-and-variance.md) · [The probabilistic method](the-probabilistic-method.md)
+> **Children:** [Finite probability spaces](finite-probability-spaces.md) · [Expectation and variance](expectation-and-variance.md) · [The probabilistic method](the-probabilistic-method.md) · [Random graphs](random-graphs.md)
 
 ## What this area is about
 Probability on a finite or countable set is weighted counting. Every outcome gets a non-negative weight, the weights add up to 1, and the probability of an event is the total weight of its outcomes. That one definition already supports conditioning, independence, Bayes' rule, random variables, expectation, variance and the first inequalities that link averages to certainty. Every statement reduces to a sum, so no limits, integrals or measure theory are needed. This area has two jobs. It is the honest first course in probability: everything in it survives unchanged when [measure-theoretic probability](../../11-probability-and-statistics/README.md) takes over. It is also a proof technique for combinatorics: to show that an object with some property exists, choose an object at random and show that it has the property with positive probability. Erdős turned that idea into a method that still gives the best known bounds for many extremal problems.
@@ -12,18 +12,21 @@ Probability on a finite or countable set is weighted counting. Every outcome get
 | [Finite probability spaces](finite-probability-spaces.md) | Sample spaces, events, conditioning, independence, Bayes' rule, the union bound | Enumeration, sets, countable sets |
 | [Expectation and variance](expectation-and-variance.md) | Random variables, linearity of expectation, indicators, variance, Markov and Chebyshev | Finite probability spaces |
 | [The probabilistic method](the-probabilistic-method.md) | Existence proofs by random choice: union bound, averaging, alteration, second moments, the Local Lemma | Both of the above, graphs |
+| [Random graphs](random-graphs.md) | G(n, p), thresholds, the giant component, connectivity, cliques and colourings of typical graphs | The probabilistic method, expectation and variance, graphs |
 
 ```
 finite probability spaces  ──>  expectation and variance
            \                          /
             ──>  the probabilistic method  <──  graph theory
+                          |
+                    random graphs
 ```
 
-The first leaf turns counting into probability and adds the one new idea, conditioning. The second adds numbers to outcomes. Its key fact is that expectation is linear whether or not the parts are independent, so expected counts become sums of probabilities. The third leaf uses both as tools for existence proofs. The union bound shows that bad events cannot cover the whole space. The averaging principle shows that some outcome is at least the mean. Chebyshev's inequality, used as the second moment method, shows that a count is positive with high probability. Each step adds one tool, and the probabilistic method uses all of them.
+The first leaf turns counting into probability and adds the one new idea, conditioning. The second adds numbers to outcomes. Its key fact is that expectation is linear whether or not the parts are independent, so expected counts become sums of probabilities. The third leaf uses both as tools for existence proofs. The union bound shows that bad events cannot cover the whole space. The averaging principle shows that some outcome is at least the mean. Chebyshev's inequality, used as the second moment method, shows that a count is positive with high probability. Each step adds one tool, and the probabilistic method uses all of them. The fourth leaf turns the method from existence to description: instead of asking whether some graph has a property, it asks what a typical random graph looks like, and finds sudden thresholds at which triangles, a giant component and connectivity appear.
 
 ## Connections to sibling areas
 - [Enumeration](../01-enumeration/README.md): uniform probability is counting divided by counting, the union bound is truncated inclusion–exclusion, and probability generating functions are ordinary generating functions of distributions.
-- [Graph theory](../02-graph-theory/README.md): random graphs G(n, p) are the main objects of the probabilistic method, and random walks on graphs are the simplest Markov chains.
+- [Graph theory](../02-graph-theory/README.md): [random graphs](random-graphs.md) G(n, p) are the main objects of the probabilistic method, random regular graphs are [expanders](../02-graph-theory/spectral-graph-theory-and-expanders.md), and random walks on graphs are the simplest Markov chains.
 - [Extremal combinatorics](../04-extremal-combinatorics/README.md): random constructions give the lower bounds in Ramsey theory and the matching constructions in extremal graph theory.
 
 ## Connections across layers
