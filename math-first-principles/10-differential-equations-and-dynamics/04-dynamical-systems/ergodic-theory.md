@@ -1,7 +1,7 @@
 # Ergodic Theory
 
 > **Layer:** [10 Differential Equations and Dynamics](../README.md) › [Dynamical Systems](README.md)
-> **Builds on:** [Measure and sigma-algebras](../../09-advanced-analysis/01-measure-and-integration/measure-and-sigma-algebras.md), [The Lebesgue integral](../../09-advanced-analysis/01-measure-and-integration/the-lebesgue-integral.md), [Hilbert spaces](../../09-advanced-analysis/03-functional-analysis/hilbert-spaces.md), [Fourier series](../../09-advanced-analysis/04-harmonic-analysis/fourier-series.md), [Iterated maps](iterated-maps.md), [Chaos and strange attractors](chaos-and-strange-attractors.md)
+> **Builds on:** [Measure and sigma-algebras](../../09-advanced-analysis/01-measure-and-integration/measure-and-sigma-algebras.md), [The Lebesgue integral](../../09-advanced-analysis/01-measure-and-integration/the-lebesgue-integral.md), [Hilbert spaces](../../09-advanced-analysis/03-functional-analysis/hilbert-spaces.md), [Fourier series](../../09-advanced-analysis/04-harmonic-analysis/fourier-series.md), [Iterated maps](iterated-maps.md)
 > **Enables:** [Hamiltonian systems and integrability](hamiltonian-systems-and-integrability.md), [The law of large numbers](../../11-probability-and-statistics/02-limit-theorems/the-law-of-large-numbers.md), [Markov chains](../../11-probability-and-statistics/03-stochastic-processes/markov-chains.md), [Monte Carlo methods](../../14-applied-and-computational-mathematics/01-numerical-analysis/monte-carlo-methods.md), [Information theory](../../14-applied-and-computational-mathematics/03-information-codes-and-cryptography/information-theory.md)
 
 ## Essence

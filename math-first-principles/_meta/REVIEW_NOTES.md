@@ -18,6 +18,8 @@ Collected from writer reports, to be resolved in the review pass.
 - **13 (W14):** candidate leaves: Turing degrees and relative computability; topos theory; stability, classification theory and o-minimality (a fifth model-theory leaf).
 - **04 (W5):** candidate leaves: principal component analysis (in 11 or 14); symmetric and Clifford algebras; classical matrix groups.
 
+- **03 (W4):** candidate leaves: random graphs (G(n, p), thresholds, giant component); designs, Latin squares and finite geometries; algebraic and spectral graph theory with expanders; matroids; combinatorial optimisation; algebraic combinatorics (symmetric functions, Young tableaux).
+
 ## Claims to verify
 
 ### Layer 01 (W2)
@@ -105,6 +107,17 @@ Collected from writer reports, to be resolved in the review pass.
 - **Claims:** ω ≈ 2.37; algebraic dual of ℝ[x] has uncountable dimension; inverse costs about three times a solve; R₀ thresholds; QR convergence; 7-dimensional cross product; ℓ¹ not reflexive, Lᵖ reflexive for 1 < p < ∞.
 - **Books:** Axler 4th 2024; Strang 6th 2023; Lax 2nd 2007; Landsberg 2012; Lang 2002; Seneta 2nd 1981; Serre 1973; Arnold 1974/1978; Meyer 2000; Langville–Meyer 2006; Horn–Johnson 1985; Trefethen–Bau 1997; Stewart 1993.
 
+### Layer 03 (W4)
+
+- **Recent results:** Campos–Griffiths–Morris–Sahasrabudhe 2023, R(k, k) ≤ (4 − ε)ᵏ; PFR over 𝔽₂ⁿ 2023 and its Lean formalisation; Kelley–Meka 2023 "same shape as Behrend" (check: the exponent differs, so soften to "the same general form").
+- **Small Ramsey numbers:** "R(5, 5) between 43 and 48" is likely out of date: the coordinator believes the upper bound was lowered to 46 in 2024 (Angeltveit–McKay); verify and update. R(3,4) = 9, R(3,5) = 14, R(4,4) = 18, R(3,3,3) = 17; Erdős "aliens" anecdote.
+- **Open as of 2026:** Turán tetrahedron 5/9; union-closed sets (Gilmer 2022 and later fractions); Erdős progression conjecture (Bloom–Sisask 2020); Erdős–Szemerédi sum–product; Skolem problem; ex(n, C₈) and K₄,₄ exponents.
+- **Attributions:** Hall 1935; König 1931; Berge 1957; Kuratowski 1930; Guthrie 1852; Kempe 1879; Heawood 1890; Hardy–Ramanujan 1918; Erdős 1959; Moser–Tardos 2010; Pascal–Fermat 1654; Kolmogorov 1933; Mirsky 1971; Dilworth 1950; Sperner 1928; Kővári–Sós–Turán 1954; Erdős–Stone 1946; Gowers 1997, 2001; Kahn–Kalai 1993; Behrend 1946; Paris–Harrington 1977; Schur 1916; van der Waerden 1927; Hales–Jewett 1963; Ruzsa 1994; ex(n, C₄) ~ n^(3/2)/2; Klein bottle the only Heawood exception (6 colours).
+- **Other:** Stanley's 200+ Catalan families; Latin rectangles via Hall; Plünnecke–Ruzsa statement.
+- **Books:** Elaydi 3rd 2005; Stanley vol. 1 2nd 2012; Grinstead–Snell 2nd 1997; Benjamin–Quinn 2003; Conlon–Fox–Sudakov 2015; Füredi–Simonovits 2013; Babai–Frankl 1992; Anderson 1987; Zhao 2023; Tao 2008.
+
 ## Cross-layer follow-ups (coordinator, after review pass)
 
 - Root README names layer 14 "Applied & Computational Mathematics"; the files use "and". Align the root README.
+
+- 03 links assume planned files cover: Borsuk–Ulam in 07 `fixed-point-theorems.md` (W8 confirms it does); Ramsey's theorem in 13 `proof-theory-and-reverse-mathematics.md`; diagonal Ramsey bounds in 15 `open-problems.md`; VC dimension in 14 `statistical-learning-theory.md`. Check after all drafts land.

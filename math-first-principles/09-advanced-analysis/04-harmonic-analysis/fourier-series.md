@@ -2,7 +2,7 @@
 
 > **Layer:** [09 Advanced Analysis](../README.md) › [Harmonic Analysis](README.md)
 > **Builds on:** [Hilbert Spaces](../03-functional-analysis/hilbert-spaces.md), [Lᵖ Spaces](../01-measure-and-integration/lp-spaces.md), [Uniform Convergence](../../06-real-analysis/01-limits-and-convergence/uniform-convergence.md), [The Exponential and Trigonometric Functions](../../06-real-analysis/02-calculus-of-one-variable/the-exponential-and-trigonometric-functions.md), [Hahn–Banach and Baire Category](../03-functional-analysis/hahn-banach-and-baire-category.md)
-> **Enables:** [The Fourier Transform](the-fourier-transform.md), [Fourier Analysis on Groups](fourier-analysis-on-groups.md), [The Heat Equation](../../10-differential-equations-and-dynamics/02-partial-differential-equations/the-heat-equation.md), [Fourier Analysis (CS)](../../../cs-first-principles/01-mathematical-foundations/05-continuous-mathematics/fourier-analysis.md)
+> **Enables:** [The Fourier Transform](the-fourier-transform.md), [Fourier Analysis on Groups](fourier-analysis-on-groups.md), [The Heat Equation](../../10-differential-equations-and-dynamics/02-partial-differential-equations/the-heat-equation.md), [Fourier Analysis (computer science)](../../../cs-first-principles/01-mathematical-foundations/05-continuous-mathematics/fourier-analysis.md)
 
 ## Essence
 

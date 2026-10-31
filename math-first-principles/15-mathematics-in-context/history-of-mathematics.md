@@ -16,7 +16,7 @@ Mathematics began as calculation for practical ends and became, in Greece, a ded
 
 3. **India, China and the Islamic world built the arithmetic and algebra that Europe inherited.** Indian mathematicians developed decimal place value with a symbol for zero; Aryabhata wrote in 499 and Brahmagupta in 628 gave rules for computing with zero and negative numbers. In Kerala, Madhava (fourteenth century) found infinite series for sine, cosine and arctangent. The Chinese *Nine Chapters on the Mathematical Art* solved linear systems by what is now called Gaussian elimination, and Liu Hui's commentary (263) approximated π by polygons. In Baghdad around 820, al-Khwārizmī wrote the book whose title gave "algebra" and whose author's name gave "algorithm". Fibonacci's *Liber Abaci* (1202) carried Hindu–Arabic numerals to Europe; Cardano's *Ars Magna* (1545) published the solution of the cubic and quartic.
 
-4. **Coordinates and the calculus gave unprecedented power without secure foundations.** Descartes's *La Géométrie* (1637) turned curves into equations. Pascal and Fermat founded probability in letters of 1654. Newton and Leibniz independently created the calculus; Leibniz published first in 1684, Newton's *Principia* appeared in 1687. Both used infinitely small quantities, which George Berkeley mocked in *The Analyst* (1734) as "ghosts of departed quantities". Euler and others nevertheless produced a flood of correct results by manipulations no one could justify.
+4. **Coordinates and the calculus gave unprecedented power without secure foundations.** Descartes's *La Géométrie* (1637) turned curves into equations. Pascal and Fermat founded probability in letters of 1654. Newton and Leibniz independently created the calculus; Leibniz published first in 1684, Newton's *Principia* appeared in 1687. Both used infinitely small quantities, which George Berkeley mocked in *The Analyst* (1734) as "ghosts of departed quantities". Euler and others still produced a flood of correct results.
 
 5. **The nineteenth century rebuilt analysis on limits and the real numbers.** Cauchy's *Cours d'analyse* (1821) defined continuity and convergence by limits; Weierstrass made them precise with ε and δ. Dedekind (1872) and Cantor constructed the real numbers from the rationals. Geometry was liberated at the same time: Lobachevsky (1829) and Bolyai (1832) published consistent geometries in which Euclid's parallel postulate fails, and Riemann's lecture of 1854 founded the geometry of curved spaces. Klein's Erlangen programme (1872) classified geometries by their symmetry groups. Axioms ceased to be self-evident truths and became chosen assumptions.
 
@@ -51,6 +51,6 @@ Mathematics began as calculation for practical ends and became, in Greece, a ded
 
 ## Go deeper
 
-- V. J. Katz, *A History of Mathematics: An Introduction* (3rd ed., 2009): a comprehensive standard textbook, including non-European traditions.
+- V. J. Katz, *A History of Mathematics: An Introduction* (3rd ed., 2009): the standard textbook, including non-European traditions.
 - M. Kline, *Mathematical Thought from Ancient to Modern Times* (1972): a detailed history of ideas.
 - J. Stillwell, *Mathematics and Its History* (3rd ed., 2010): history told through the mathematics itself.
