@@ -22,7 +22,7 @@ A ⇒ B         a method turning any proof of A into a proof of B
 ∃x A(x)       an object a and a proof of A(a)
 ```
 
-2. **Some classical laws are lost; many survive.** Without a decision between A and ¬A, A ∨ ¬A has no BHK proof in general. Lost: excluded middle, ¬¬A ⇒ A, proof by contradiction of positive statements, and ¬∀x ¬P(x) ⇒ ∃x P(x). Kept: A ⇒ ¬¬A, ¬¬¬A ⇔ ¬A, ¬(A ∨ B) ⇔ ¬A ∧ ¬B, and proving a negation by refuting its opposite. Even ¬¬(A ∨ ¬A) is provable: if ¬(A ∨ ¬A), then A would give A ∨ ¬A, so ¬A, which also gives A ∨ ¬A, a contradiction. Excluded middle cannot be refuted, only not asserted.
+2. **Some classical laws are lost; many survive.** Without a decision between A and ¬A, A ∨ ¬A has no BHK proof in general. Lost: excluded middle, ¬¬A ⇒ A, proof by contradiction of positive statements, and ¬∀x ¬P(x) ⇒ ∃x P(x). Kept: A ⇒ ¬¬A, ¬¬¬A ⇔ ¬A, ¬(A ∨ B) ⇔ ¬A ∧ ¬B, and proving a negation by refuting its opposite. Yet ¬¬(A ∨ ¬A) is provable: if ¬(A ∨ ¬A), then A would give A ∨ ¬A, so ¬A, which also gives A ∨ ¬A, a contradiction.
 
 3. **A classical existence proof can name no witness.** Claim: there are irrational a and b with aᵇ rational. Either √2^(√2) is rational, and a = b = √2 works; or it is irrational, and a = √2^(√2), b = √2 gives aᵇ = √2² = 2. The proof does not say which case holds. (The Gelfond–Schneider theorem of 1934 shows that √2^(√2) is transcendental, so the second.) A constructive proof names the pair: a = √2 and b = log₂ 9, irrational since 2ᵖ = 9^q has no solution in positive integers, with aᵇ = 2^(log₂ 3) = 3.
 
@@ -34,7 +34,7 @@ A ⇒ B         a method turning any proof of A into a proof of B
 
 7. **Proofs are programs: the Curry–Howard correspondence.** Curry (1934) observed that the types of the basic combinators are the axioms A1 and A2 of the Hilbert system in [Formal Proof Systems](../01-formal-logic/formal-proof-systems.md). Howard (written 1969, published 1980) extended this to natural deduction: a proof of A ⇒ B is a function, of A ∧ B a pair, of A ∨ B a tagged value, and simplifying a proof is running a program in the typed [lambda calculus](../../../cs-first-principles/02-theory-of-computation/03-computability/lambda-calculus.md). Martin-Löf's dependent type theory extends this to quantifiers, and proof assistants such as Agda and Lean build on it ([Type Theory and Alternative Foundations](../../01-sets-and-foundations/03-axiomatic-set-theory/type-theory-and-alternative-foundations.md), [Higher Categories and Homotopy Type Theory](../../13-structure-and-metamathematics/01-category-theory/higher-categories-and-homotopy-type-theory.md)).
 
-8. **Constructive mathematics is a practice, not only a logic.** Bishop's *Foundations of Constructive Analysis* (1967) showed that much of analysis can be done constructively. Brouwer went further, adopting principles under which every function from ℝ to ℝ is continuous, which contradict classical mathematics. The choice between them is the [existence and construction](../../CROSS-CUTTING.md#existence-and-construction) question made precise.
+8. **Constructive mathematics is a practice, not only a logic.** Bishop's *Foundations of Constructive Analysis* (1967) showed that much of analysis can be done constructively, compatibly with classical mathematics. Brouwer went further, adopting principles under which every function from ℝ to ℝ is continuous, which contradict classical mathematics. The choice between them is the [existence and construction](../../CROSS-CUTTING.md#existence-and-construction) question made precise.
 
 ## Key concepts
 
