@@ -4,7 +4,7 @@
 > **Children:** [Enumeration](01-enumeration/README.md) · [Graph Theory](02-graph-theory/README.md) · [Discrete Probability](03-discrete-probability/README.md) · [Extremal Combinatorics](04-extremal-combinatorics/README.md)
 
 ## What this area is about
-Combinatorics is the mathematics of finite structures: how many there are, how they are arranged, and which patterns they cannot avoid. Its objects are the simplest in mathematics, such as subsets, permutations, graphs and colourings. Its questions are easy to state and often very hard to answer. This layer covers four areas. Enumeration counts structures exactly, through bijections, inclusion–exclusion, generating functions and recurrences. Graph theory studies pairwise connections: connectivity, trees, matchings, flows, colourings and planar drawings. Discrete probability treats chance on finite and countable sets as weighted counting and turns it into a method for proving existence. Extremal combinatorics asks how large or disordered a structure can be before a pattern is forced, from Ramsey's theorem to Szemerédi's theorem on arithmetic progressions.
+Combinatorics is the mathematics of finite structures: how many there are, how they are arranged, and which patterns they cannot avoid. Its objects are the simplest in mathematics, such as subsets, permutations, graphs and colourings. Its questions are easy to state and often very hard to answer. This layer covers four areas. Enumeration counts structures exactly, through bijections, inclusion–exclusion, generating functions and recurrences. Graph theory studies pairwise connections: connectivity, trees, matchings, flows, colourings, planar drawings and the eigenvalues of graphs. Discrete probability treats chance on finite and countable sets as weighted counting, turns it into a method for proving existence, and describes what a typical random graph looks like. Extremal combinatorics asks how large or disordered a structure can be before a pattern is forced, from Ramsey's theorem to Szemerédi's theorem on arithmetic progressions.
 
 The basic abstraction is **the finite structure studied by counting and by extremal choice**. Most proofs here either count something in two ways, or choose an extreme object (a longest path, a smallest counterexample, a maximum matching) and show that it has the required property. The style of the field is a large stock of problems and techniques, held together by a few powerful methods rather than by a single axiomatic theory.
 
@@ -17,8 +17,8 @@ The layers above use it in turn. [Linear algebra](../04-linear-algebra/README.md
 | Child | Its role in the whole | Depends on |
 |---|---|---|
 | [Enumeration](01-enumeration/README.md) | Exact counting: binomial coefficients, inclusion–exclusion, pigeonhole, generating functions, recurrences, classical sequences | Layers 00–02 |
-| [Graph Theory](02-graph-theory/README.md) | Connections: connectivity, trees, matchings and flows, colouring and planarity | Enumeration |
-| [Discrete Probability](03-discrete-probability/README.md) | Weighted counting: probability spaces, expectation and variance, the probabilistic method | Enumeration, graph theory |
+| [Graph Theory](02-graph-theory/README.md) | Connections: connectivity, trees, matchings and flows, colouring and planarity, spectra and expanders | Enumeration |
+| [Discrete Probability](03-discrete-probability/README.md) | Weighted counting: probability spaces, expectation and variance, the probabilistic method, random graphs | Enumeration, graph theory |
 | [Extremal Combinatorics](04-extremal-combinatorics/README.md) | Forced structure: Ramsey, Turán, Sperner, Szemerédi, Green–Tao | All three above |
 
 ```

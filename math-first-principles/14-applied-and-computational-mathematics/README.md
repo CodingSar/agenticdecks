@@ -33,12 +33,12 @@ Above it, only [mathematics in context](../15-mathematics-in-context/README.md) 
 
 | Child | Its role in the whole | Depends on |
 |---|---|---|
-| [Numerical analysis](01-numerical-analysis/README.md) | Algorithms for continuous problems, with condition numbers, stability and convergence rates | Linear algebra, analysis, differential equations |
+| [Numerical analysis](01-numerical-analysis/README.md) | Algorithms for continuous problems, with condition numbers, stability and convergence rates; the fast Fourier transform and spectral methods | Linear algebra, analysis, differential equations |
 | [Optimisation](02-optimisation/README.md) | Linear and convex programming, duality, and gradient methods with optimal rates | Convex geometry, numerical analysis |
 | [Information, codes and cryptography](03-information-codes-and-cryptography/README.md) | Limits of compression and communication, algebraic codes, and public-key and post-quantum cryptography | Probability, finite fields, number theory |
 | [Mathematical modelling](04-mathematical-modelling/README.md) | Turning systems into equations: scaling, control, biology, quantum mechanics and relativity | Differential equations, numerical analysis, optimisation |
 | [Games, decisions and finance](05-games-decisions-and-finance/README.md) | Strategic choice, collective choice and the pricing of risk | Optimisation, probability, stochastic calculus |
-| [Data and learning](06-data-and-learning/README.md) | When finite data determine a model: learning theory, random matrices, compressed sensing, deep learning | Optimisation, probability, information theory |
+| [Data and learning](06-data-and-learning/README.md) | When finite data determine a model: learning theory, random matrices, compressed sensing, deep learning, optimal transport | Optimisation, probability, information theory |
 
 The toolkits come first and lean on each other: interior-point methods are Newton's method plus numerical linear algebra, gradient descent is explicit Euler on a gradient flow, Reed–Solomon decoding is interpolation over a finite field, and channel capacity is a concave maximisation. The worlds then use all three. A model in physics or biology becomes a prediction only through numerical solution, and becomes a design through optimal control. Game theory's minimax theorem is linear programming duality, and option prices are computed by Monte Carlo simulation. Learning is stochastic optimisation in floating point, judged by bounds that come from information theory and concentration of measure.
 
@@ -47,11 +47,12 @@ The toolkits come first and lean on each other: interior-point methods are Newto
 - [04 Linear algebra](../04-linear-algebra/README.md): matrix factorisations, the singular value decomposition and positive definiteness are the inner loop of numerics, optimisation and learning.
 - [06 Real analysis](../06-real-analysis/README.md): Taylor expansion, contraction mappings and Lagrange multipliers become error bounds, iterations and optimality conditions.
 - [08 Geometry](../08-geometry/README.md): convex sets give duality, polytopes give linear programming, and lattices give codes and post-quantum cryptography.
+- [09 Advanced analysis](../09-advanced-analysis/README.md): Fourier analysis gives the fast Fourier transform and sampling theory, and functional analysis gives universal approximation and the operators of quantum mechanics.
 - [10 Differential equations and dynamics](../10-differential-equations-and-dynamics/README.md): existence theorems become numerical methods, and stability theory becomes control.
 - [11 Probability and statistics](../11-probability-and-statistics/README.md): limit theorems underlie Monte Carlo methods, information theory and learning theory; stochastic calculus underlies finance.
 - [12 Number theory and algebraic geometry](../12-number-theory-and-algebraic-geometry/README.md): elliptic curves secure communication, and curves over finite fields give codes beating the Gilbert–Varshamov bound.
 - [13 Structure and metamathematics](../13-structure-and-metamathematics/README.md): computability marks what no algorithm can do, the backdrop to every complexity bound here.
-- [15 Mathematics in context](../15-mathematics-in-context/README.md): computer-assisted proof, open problems such as strongly polynomial linear programming, and the social role of cryptography and learning.
+- [15 Mathematics in context](../15-mathematics-in-context/README.md): computer-assisted proof, open problems such as P versus NP (whether polynomial time equals nondeterministic polynomial time), and the social role of cryptography and learning.
 
 ## Cross-cutting threads
 

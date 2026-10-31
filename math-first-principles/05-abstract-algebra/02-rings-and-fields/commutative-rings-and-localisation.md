@@ -1,0 +1,59 @@
+# Commutative Rings and Localisation
+
+> **Layer:** [05 Abstract Algebra](../README.md) › [Rings and Fields](README.md)
+> **Builds on:** [Rings and Ideals](rings-and-ideals.md), [Factorisation in Integral Domains](factorisation-in-integral-domains.md), [Polynomial Rings](polynomial-rings.md)
+> **Enables:** [Varieties and the Nullstellensatz](../../12-number-theory-and-algebraic-geometry/03-algebraic-geometry/varieties-and-the-nullstellensatz.md), [Schemes](../../12-number-theory-and-algebraic-geometry/03-algebraic-geometry/schemes.md), [Ideals and the Class Group](../../12-number-theory-and-algebraic-geometry/01-algebraic-number-theory/ideals-and-the-class-group.md), [p-adic Numbers and Local Fields](../../12-number-theory-and-algebraic-geometry/01-algebraic-number-theory/p-adic-numbers-and-local-fields.md)
+
+## Essence
+
+Commutative algebra treats a ring as a space and its elements as functions on that space. The points are the prime ideals, which together form the prime spectrum Spec R; an element f "vanishes" at a prime P when f ∈ P. Localisation is the tool for zooming in: inverting the elements outside P keeps only what happens near P, just as ℤ₍ₚ₎, the fractions whose denominators are prime to p, keeps only the arithmetic of the single prime p. A finiteness condition, the Noetherian property, makes the spaces tame. These three ideas, spectrum, localisation and Noetherian rings, are the bridge from this layer to algebraic geometry and algebraic number theory.
+
+## Core tenets
+
+1. **Localisation inverts a multiplicative set, and is characterised by a universal property.** Let S ⊆ R contain 1 and be closed under multiplication. S⁻¹R consists of fractions r/s with s ∈ S, where r/s = r′/s′ when t(rs′ − r′s) = 0 for some t ∈ S; the extra t is needed when R has zero divisors. The map R → S⁻¹R sends every element of S to a unit, and any homomorphism R → A with that property factors through it uniquely. For a domain and S = R ∖ {0} this is the field of fractions, which builds ℚ from ℤ. Other cases: R_f = R[1/f] from the powers of f, and ℤ₍ₚ₎ from S = ℤ ∖ pℤ.
+
+2. **The primes of S⁻¹R are the primes of R that miss S.** Sending P to S⁻¹P and pulling back along R → S⁻¹R are mutually inverse, order-preserving bijections between primes of R disjoint from S and primes of S⁻¹R. For a prime P and S = R ∖ P this gives R_P, a local ring: it has exactly one maximal ideal, P·R_P, because every prime of R_P comes from a prime inside P. So ℤ₍ₚ₎ has only two primes, (0) and (p). Localisation also commutes with quotients: S⁻¹(R/I) ≅ S⁻¹R / S⁻¹I.
+
+3. **Being zero is a local property.** If an element m of an R-module M becomes zero in M_P for every maximal ideal P, then m = 0. Otherwise the annihilator of m, the set of r with rm = 0, is a proper ideal, so it lies in some maximal ideal P by Zorn's lemma, and no s outside P kills m; so m/1 ≠ 0 in M_P. Many properties, such as an element being a unit or a map being injective, are checked prime by prime in the same way.
+
+4. **The nilradical is the intersection of all prime ideals.** A nilpotent f, with fⁿ = 0 ∈ P, lies in every prime P. Conversely, if f is not nilpotent, then 0 is not among its powers, so R_f is a non-zero ring; it has a maximal ideal, and its pullback to R is a prime that does not contain f. In the language of functions: f vanishes at every point exactly when it is nilpotent. Hilbert's Nullstellensatz, stated in [Rings and Ideals](rings-and-ideals.md), is the sharper version for finitely generated algebras over ℂ, where maximal ideals alone suffice.
+
+5. **Spec R is a topological space, and ring maps give continuous maps backwards.** The Zariski topology takes as closed sets the V(I), the primes containing an ideal I; then V(I) ∪ V(J) = V(IJ) and the intersection of the V(Iₐ) is V(∑Iₐ). Spec ℤ has a closed point (p) for each prime p and one generic point (0), whose closure is everything. A homomorphism φ: R → A sends a prime Q of A to the prime φ⁻¹(Q), and this map is continuous. Maximal ideals alone would not do: ℤ → ℚ pulls the maximal ideal 0 back to the non-maximal prime (0). The open set where f does not vanish is Spec R_f.
+
+6. **Noetherian rings: every ideal is finitely generated, equivalently every ascending chain of ideals stops.** If I₁ ⊆ I₂ ⊆ ⋯ is a chain, its union is an ideal; if that union is finitely generated, the generators all lie in some Iₙ, and the chain is constant from there. Conversely, an ideal that is not finitely generated yields a strictly increasing chain (a₁) ⊂ (a₁, a₂) ⊂ ⋯. Fields and principal ideal domains are Noetherian, and by Hilbert's basis theorem in [Polynomial Rings](polynomial-rings.md) so is k[x₁, …, xₙ]; quotients and localisations of Noetherian rings remain Noetherian. The ring k[x₁, x₂, …] in infinitely many variables is not.
+
+7. **In a Noetherian ring every radical ideal is a finite intersection of primes.** Take a counterexample I that is maximal among counterexamples, which Noetherian rings allow. I is not prime, so ab ∈ I with a, b ∉ I; one checks that I is the intersection of the radicals of I + (a) and I + (b), which are larger and so are finite intersections of primes, a contradiction. Geometrically, every closed set in Spec R, and every algebraic variety, is a finite union of irreducible pieces.
+
+8. **Krull dimension counts the longest chain of primes.** It is the largest n with a chain P₀ ⊊ P₁ ⊊ ⋯ ⊊ Pₙ of primes. Fields have dimension 0; ℤ and every principal ideal domain that is not a field have dimension 1, from (0) ⊂ (p); k[x₁, …, xₙ] has dimension n, matching the geometric dimension of n-space, and the chain (0) ⊂ (x₁) ⊂ (x₁, x₂) ⊂ ⋯ shows it is at least n. Nagata found Noetherian rings of infinite dimension, but Noetherian local rings always have finite dimension.
+
+## Key concepts
+
+| Term | Meaning |
+|---|---|
+| Multiplicative set | A subset containing 1 and closed under products |
+| Localisation S⁻¹R | Fractions r/s with s ∈ S; elements of S become units |
+| Local ring | A ring with exactly one maximal ideal, such as R_P |
+| ℤ₍ₚ₎ | Rationals whose denominator is prime to p |
+| Nilradical | The nilpotent elements; the intersection of all primes |
+| Spec R | The set of prime ideals with the Zariski topology |
+| Generic point | A prime whose closure is a whole irreducible piece, such as (0) in Spec ℤ |
+| Noetherian ring | Every ideal is finitely generated; ascending chains of ideals stop |
+| Krull dimension | Length of the longest chain of prime ideals |
+
+## How it fits
+
+- **Below:** prime and maximal ideals and Zorn's lemma come from [Rings and Ideals](rings-and-ideals.md); the field of fractions generalises the passage from ℤ to ℚ in [integers and rational numbers](../../02-number-systems/01-constructing-the-numbers/integers-and-rational-numbers.md).
+- **Above:** [varieties](../../12-number-theory-and-algebraic-geometry/03-algebraic-geometry/varieties-and-the-nullstellensatz.md) are the maximal ideals of finitely generated algebras, and [schemes](../../12-number-theory-and-algebraic-geometry/03-algebraic-geometry/schemes.md) glue spectra along the localisations R_f; rings of integers in [ideals and the class group](../../12-number-theory-and-algebraic-geometry/01-algebraic-number-theory/ideals-and-the-class-group.md) are Noetherian domains of dimension 1, and completing ℤ₍ₚ₎ gives the [p-adic integers](../../12-number-theory-and-algebraic-geometry/01-algebraic-number-theory/p-adic-numbers-and-local-fields.md).
+- **Siblings:** [Factorisation in Integral Domains](factorisation-in-integral-domains.md) uses the field of fractions for Gauss's lemma; [Polynomial Rings](polynomial-rings.md) supplies the Noetherian examples; [Modules](../04-modules-and-representations/modules.md) localise in exactly the same way as rings.
+
+## Common misconceptions
+
+- **"Localisation only adds elements."** R → S⁻¹R kills every element annihilated by some s ∈ S. In ℤ/6 the set {1, 3} is multiplicative, and inverting 3 kills 2 and 4, leaving ℤ/2.
+- **"A subring of a Noetherian ring is Noetherian."** k[x₁, x₂, …] is not Noetherian, yet it sits inside its field of fractions, which is.
+- **"The points of Spec R should be its maximal ideals."** Without non-maximal primes such as (0) in ℤ, ring maps would not induce maps of spaces (tenet 5).
+
+## Go deeper
+
+- Michael Atiyah and Ian Macdonald, *Introduction to Commutative Algebra* (1969): chapter 3 on localisation and chapters 6 and 7 on Noetherian rings.
+- Miles Reid, *Undergraduate Commutative Algebra* (1995): Spec, the Nullstellensatz and dimension with geometric pictures.
+- David Eisenbud, *Commutative Algebra with a View Toward Algebraic Geometry* (1995): the full theory, with the geometry kept in sight.

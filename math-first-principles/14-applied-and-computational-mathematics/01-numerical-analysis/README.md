@@ -15,13 +15,13 @@ Lloyd Trefethen defined numerical analysis as the study of algorithms for the pr
                  /          |             \
    numerical linear     root-finding     interpolation and
        algebra          (Newton)          approximation
-                \          |             /      \
-                 \         |            /   FFT and spectral
-                  \        |           /     methods
-                   \       |          /      /
+                \          |             /
            numerical methods for differential equations
                            |
                  Monte Carlo methods  (random, not grid-based)
+
+   numerical linear algebra + interpolation ──► FFT and spectral methods
+                                    (fast convolution, spectral accuracy)
 ```
 
 | Child | Its role in the whole | Depends on |
