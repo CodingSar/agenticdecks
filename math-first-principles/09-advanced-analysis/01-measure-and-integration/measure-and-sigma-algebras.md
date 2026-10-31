@@ -23,7 +23,7 @@ A measure assigns a size (length, area, probability) to sets and is countably ad
 
    The translates cover [0, 1] because each x differs from its class's chosen point by a rational in [−1, 1], and they are disjoint because V meets each class once. The sum is 0 or ∞, so no value of m(V) works, and one must measure only the sets of a σ-algebra.
 
-3. **The axiom of choice, not geometry, makes such sets exist.** Robert Solovay (1970) showed that Zermelo–Fraenkel set theory (ZF) with only dependent choice is consistent with "every set of reals is Lebesgue measurable", if an inaccessible cardinal is consistent; see [forcing](../../13-structure-and-metamathematics/03-model-theory-and-independence/forcing-and-independence.md). In ℝ³, choice gives the Banach–Tarski paradox (1924): a ball can be cut into five pieces that reassemble by rigid motions into two balls of the same size. The pieces are not measurable; the paradox rests on a free group on two generators inside the rotation group of ℝ³.
+3. **The axiom of choice, not geometry, makes such sets exist.** Robert Solovay (1970) showed that Zermelo–Fraenkel set theory (ZF) with only dependent choice is consistent with "every set of reals is Lebesgue measurable", if an inaccessible cardinal is consistent; see [forcing](../../13-structure-and-metamathematics/03-model-theory-and-independence/forcing-and-independence.md). In ℝ³, choice gives the Banach–Tarski paradox (1924): a ball can be cut into five pieces that reassemble by rigid motions into two copies of itself. The pieces are not measurable; it rests on a free group on two generators inside the rotation group of ℝ³.
 
 4. **Outer measure is defined for every set but is only subadditive.** Lebesgue outer measure is m∗(A) = inf ∑ ℓ(Iₙ), over countable covers of A by open intervals Iₙ of lengths ℓ(Iₙ). It is monotone, translation-invariant and countably subadditive. Covering the n-th rational by an interval of length ε/2ⁿ gives m∗(ℚ) = 0, while compactness of [a, b] gives m∗([a, b]) = b − a. Finite covers, as in Jordan content, give ℚ ∩ [0, 1] outer content 1 and inner content 0, so countable covers are the decisive change.
 
@@ -56,10 +56,10 @@ A measure assigns a size (length, area, probability) to sets and is countably ad
 
 - **"Measure zero means countable"**: the Cantor set is uncountable and has measure 0.
 - **"A dense open set fills most of the interval"**: the intervals of tenet 4 form a dense open set of measure at most ε.
-- **"Non-measurable sets might turn up in practice"**: every set built from intervals by countable operations is Borel, and without the axiom of choice no non-measurable set can be proved to exist.
+- **"Non-measurable sets might turn up in practice"**: every set built from intervals by countable operations is Borel, and without the axiom of choice no non-measurable set can be proved to exist, if an inaccessible cardinal is consistent (tenet 3).
 
 ## Go deeper
 
-- Terence Tao, *An Introduction to Measure Theory* (2011): from Jordan content to Lebesgue measure, every step motivated.
-- Elias M. Stein and Rami Shakarchi, *Real Analysis* (2005): a clear modern course.
-- Paul R. Halmos, *Measure Theory* (1950): the classic abstract treatment.
+- Terence Tao, *An Introduction to Measure Theory* (2011): from Jordan content to Lebesgue measure.
+- Elias M. Stein and Rami Shakarchi, *Real Analysis* (2005): a modern course.
+- Paul R. Halmos, *Measure Theory* (1950): the classic treatment.

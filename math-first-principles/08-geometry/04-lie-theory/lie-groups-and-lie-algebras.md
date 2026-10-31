@@ -42,7 +42,7 @@ A Lie group is a group that is also a smooth manifold, with smooth multiplicatio
 
 - **Below:** [Group actions](../../05-abstract-algebra/01-groups/group-actions.md) give the algebra, [smooth manifolds](../../07-topology/03-manifolds/topological-and-smooth-manifolds.md) the geometry, and covering spaces the global picture.
 - **Above:** Conservation laws in mechanics, and symmetry in [quantum mechanics](../../14-applied-and-computational-mathematics/04-mathematical-modelling/the-mathematics-of-quantum-mechanics.md), where SU(2) gives spin.
-- **Siblings:** [The classification](the-classification-of-simple-lie-algebras.md) sorts the building-block algebras; [representations](representations-of-lie-groups.md) study how groups act linearly; [Riemannian manifolds](../02-differential-geometry/riemannian-manifolds.md) carry isometry groups that are Lie groups.
+- **Siblings:** [The classification](the-classification-of-simple-lie-algebras.md) sorts the building-block algebras; [representations](representations-of-lie-groups.md) study how groups act linearly; [Riemannian manifolds](../02-differential-geometry/riemannian-manifolds.md) carry isometry groups that are Lie groups; Lie groups are the structure groups of [vector bundles](../02-differential-geometry/vector-bundles-connections-and-characteristic-classes.md) and act on [symplectic manifolds](../02-differential-geometry/symplectic-geometry.md) through moment maps.
 
 ## Common misconceptions
 

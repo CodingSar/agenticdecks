@@ -26,11 +26,11 @@ The one idea this layer contributes is that a structure is defined by its operat
 | Child | Its role in the whole | Depends on |
 |---|---|---|
 | [Groups](01-groups/README.md) | One operation: symmetry, quotients, actions, Sylow theory, simple groups and presentations | Sets, number theory |
-| [Rings and Fields](02-rings-and-fields/README.md) | Two operations: ideals, factorisation, polynomials, extensions and finite fields | Groups |
+| [Rings and Fields](02-rings-and-fields/README.md) | Two operations: ideals, factorisation, polynomials, extensions, finite fields, and localisation and the prime spectrum | Groups |
 | [Galois Theory](03-galois-theory/README.md) | Fields studied through their symmetry groups; the quintic and the Greek construction problems | Groups, rings and fields |
 | [Modules and Representations](04-modules-and-representations/README.md) | Linear algebra over rings, and groups acting by matrices | Groups, rings and fields, linear algebra |
 
-Groups come first because they have the fewest axioms and the most examples, and because their basic constructions, the normal subgroup and the quotient, are reused in every later area as the ideal and the quotient ring, or the submodule and the quotient module. Rings and fields add a second operation, and the area ends with field extensions measured by linear algebra. Galois theory then joins the first two areas: it studies a field extension through a finite group, and solves classical problems by that translation. Modules and representations bring linear algebra back as the main tool, with the structure theorem for modules over a principal ideal domain and character theory for finite groups.
+Groups come first because they have the fewest axioms and the most examples, and because their basic constructions, the normal subgroup and the quotient, are reused in every later area as the ideal and the quotient ring, or the submodule and the quotient module. Rings and fields add a second operation; the area reaches field extensions measured by linear algebra, and ends with localisation and the prime spectrum, which hand rings on to algebraic geometry. Galois theory then joins the first two areas: it studies a field extension through a finite group, and solves classical problems by that translation. Modules and representations bring linear algebra back as the main tool, with the structure theorem for modules over a principal ideal domain and character theory for finite groups.
 
 ```
           groups ─────────────────────────────┐

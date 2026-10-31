@@ -7,7 +7,7 @@
 
 This layer asks how laws of change determine the future. Since Newton, the laws of science have mostly been written as differential equations: a rule giving the rate of change of a state in terms of the state itself. Knowing the law is only the start. One must show it has solutions and that they are unique, understand them when no formula exists, and describe what happens over long times.
 
-Four areas share the work. Ordinary differential equations evolve a finite-dimensional state in time and supply existence, uniqueness, linearisation and stability. Partial differential equations evolve fields, functions of space and time, through three model types: elliptic for equilibrium, parabolic for diffusion and hyperbolic for waves. The calculus of variations finds the equations of physics as conditions for an integral to be stationary, and links symmetries to conservation laws. Dynamical systems study long-term behaviour qualitatively: bifurcations, chaos, ergodic statistics and the conservative world of Hamiltonian mechanics.
+Four areas share the work. Ordinary differential equations evolve a finite-dimensional state in time and supply existence, uniqueness, linearisation and stability. Partial differential equations evolve fields, functions of space and time, through three model types: elliptic for equilibrium, parabolic for diffusion and hyperbolic for waves. The calculus of variations finds the equations of physics as conditions for an integral to be stationary, and links symmetries to conservation laws. Dynamical systems study long-term behaviour qualitatively: bifurcations, chaos, ergodic statistics, the conservative world of Hamiltonian mechanics, and the Julia and Mandelbrot sets of complex dynamics.
 
 The common thread is a change of viewpoint, from solving equations to understanding solution spaces. A solution is a fixed point of an integral operator, a minimiser of an energy, an element of a Sobolev space, or an orbit of a flow, and each viewpoint brings the analysis of the lower layers to bear. The layer's contribution to the stack is this theory of evolution: when a law of change determines a future, what that future looks like, and how far it can be predicted.
 
@@ -24,7 +24,7 @@ Layers above depend on it. [Probability](../11-probability-and-statistics/README
 | [Ordinary Differential Equations](01-ordinary-differential-equations/README.md) | Existence, linear systems, stability, boundary value problems | 06, 04 |
 | [Partial Differential Equations](02-partial-differential-equations/README.md) | Characteristics, the three model equations, weak solutions, nonlinear equations | Ordinary differential equations, 09 |
 | [Calculus of Variations](03-calculus-of-variations/README.md) | Euler–Lagrange equations, Noether's theorem, existence of minimisers | Ordinary and partial differential equations, 08, 09 |
-| [Dynamical Systems](04-dynamical-systems/README.md) | Maps, bifurcations, chaos, ergodic theory, Hamiltonian systems | Ordinary differential equations, calculus of variations, 09 |
+| [Dynamical Systems](04-dynamical-systems/README.md) | Maps, bifurcations, chaos, ergodic theory, Hamiltonian systems, complex dynamics | Ordinary differential equations, calculus of variations, 09 |
 
 ```
                 ordinary differential equations

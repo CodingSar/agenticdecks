@@ -43,7 +43,7 @@ Gaussian curvature changes when a surface is dented, but the Gauss–Bonnet theo
 ## How it fits
 
 - **Below:** [Surfaces and Gaussian curvature](surfaces-and-gaussian-curvature.md) define K; [the Euler characteristic](../../07-topology/02-algebraic-topology/the-euler-characteristic.md) and the classification of surfaces supply the topology; Green's theorem does the local work.
-- **Above:** Index theory and characteristic classes generalise it; [Riemann–Roch](../../12-number-theory-and-algebraic-geometry/03-algebraic-geometry/algebraic-curves-and-riemann-roch.md) for curves relates degree and genus in the same spirit.
+- **Above:** Index theory and [characteristic classes](vector-bundles-connections-and-characteristic-classes.md) generalise it; [Riemann–Roch](../../12-number-theory-and-algebraic-geometry/03-algebraic-geometry/algebraic-curves-and-riemann-roch.md) for curves relates degree and genus in the same spirit.
 - **Siblings:** [Differential forms](differential-forms-and-de-rham-cohomology.md) give the language of Chern's proof; [Riemannian manifolds](riemannian-manifolds.md) extend curvature to higher dimensions; [polytopes](../03-convex-and-discrete-geometry/polytopes.md) carry the discrete version through Euler's formula.
 
 ## Common misconceptions

@@ -2,7 +2,7 @@
 
 > **Layer:** [05 Abstract Algebra](../README.md) › [Rings and Fields](README.md)
 > **Builds on:** [Rings and Ideals](rings-and-ideals.md), [Primes and Unique Factorisation](../../02-number-systems/02-elementary-number-theory/primes-and-unique-factorisation.md), [Divisibility and the Euclidean Algorithm](../../02-number-systems/02-elementary-number-theory/divisibility-and-the-euclidean-algorithm.md)
-> **Enables:** [Polynomial Rings](polynomial-rings.md), [Modules](../04-modules-and-representations/modules.md), [Ideals and the Class Group](../../12-number-theory-and-algebraic-geometry/01-algebraic-number-theory/ideals-and-the-class-group.md), [Number Fields and Algebraic Integers](../../12-number-theory-and-algebraic-geometry/01-algebraic-number-theory/number-fields-and-algebraic-integers.md), [Fermat's Last Theorem](../../12-number-theory-and-algebraic-geometry/04-elliptic-curves-and-modular-forms/fermats-last-theorem.md)
+> **Enables:** [Polynomial Rings](polynomial-rings.md), [Commutative Rings and Localisation](commutative-rings-and-localisation.md), [Modules](../04-modules-and-representations/modules.md), [Ideals and the Class Group](../../12-number-theory-and-algebraic-geometry/01-algebraic-number-theory/ideals-and-the-class-group.md), [Number Fields and Algebraic Integers](../../12-number-theory-and-algebraic-geometry/01-algebraic-number-theory/number-fields-and-algebraic-integers.md), [Fermat's Last Theorem](../../12-number-theory-and-algebraic-geometry/04-elliptic-curves-and-modular-forms/fermats-last-theorem.md)
 
 ## Essence
 
@@ -48,7 +48,7 @@ Unique factorisation into primes feels like a law of nature, but it is a propert
 
 - **Below:** the Euclidean algorithm and Euclid's lemma from [divisibility](../../02-number-systems/02-elementary-number-theory/divisibility-and-the-euclidean-algorithm.md) and [unique factorisation](../../02-number-systems/02-elementary-number-theory/primes-and-unique-factorisation.md) are the special case R = ℤ.
 - **Above:** [number fields](../../12-number-theory-and-algebraic-geometry/01-algebraic-number-theory/number-fields-and-algebraic-integers.md) and [the class group](../../12-number-theory-and-algebraic-geometry/01-algebraic-number-theory/ideals-and-the-class-group.md) develop the ideal factorisation of tenet 6; the history of [Fermat's last theorem](../../12-number-theory-and-algebraic-geometry/04-elliptic-curves-and-modular-forms/fermats-last-theorem.md) runs through Kummer.
-- **Siblings:** [polynomial rings](polynomial-rings.md) show F[x] is Euclidean and that unique factorisation passes from R to R[x]; [modules over a PID](../04-modules-and-representations/modules.md) have a structure theorem because ideals are principal.
+- **Siblings:** [polynomial rings](polynomial-rings.md) show F[x] is Euclidean and that unique factorisation passes from R to R[x]; [modules over a PID](../04-modules-and-representations/modules.md) have a structure theorem because ideals are principal; [localisation](commutative-rings-and-localisation.md) builds the field of fractions and rings such as ℤ₍ₚ₎ that see one prime at a time.
 
 ## Common misconceptions
 

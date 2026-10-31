@@ -24,7 +24,7 @@ Differential forms are the things that can be integrated over curves, surfaces a
 
 7. **De Rham's theorem: H^k_dR(M) ≅ H^k(M; ℝ).** Integrating closed forms over smooth cycles defines a map from de Rham cohomology to the dual of real [homology](../../07-topology/02-algebraic-topology/homology.md). Stokes makes it well defined: an exact form integrates to 0 over a cycle, and a closed form integrates to 0 over a boundary. De Rham (1931) proved this map is an isomorphism, so calculus computes topology. The Hodge theorem adds that, given a metric on a compact manifold, each class contains exactly one harmonic form.
 
-8. **Forms are the native language of physics and analysis.** Maxwell's equations become dF = 0 and d⋆F = J for the electromagnetic 2-form F. Cauchy's theorem in [complex analysis](../../09-advanced-analysis/02-complex-analysis/cauchys-theorem-and-its-consequences.md) is Stokes applied to the closed form f(z) dz, and the symplectic form of [Hamiltonian mechanics](../../10-differential-equations-and-dynamics/04-dynamical-systems/hamiltonian-systems-and-integrability.md) is a closed non-degenerate 2-form.
+8. **Forms are the native language of physics and analysis.** Maxwell's equations become dF = 0 and d⋆F = J for the electromagnetic 2-form F. Cauchy's theorem in [complex analysis](../../09-advanced-analysis/02-complex-analysis/cauchys-theorem-and-its-consequences.md) is Stokes applied to the closed form f(z) dz, and the [symplectic form](symplectic-geometry.md) of [Hamiltonian mechanics](../../10-differential-equations-and-dynamics/04-dynamical-systems/hamiltonian-systems-and-integrability.md) is a closed non-degenerate 2-form.
 
 ## Key concepts
 
@@ -44,7 +44,7 @@ Differential forms are the things that can be integrated over curves, surfaces a
 
 - **Below:** [Exterior algebra](../../04-linear-algebra/04-multilinear-algebra/exterior-algebra.md) supplies the wedge, multivariable calculus the change of variables and the classical integral theorems, and [homology](../../07-topology/02-algebraic-topology/homology.md) the topology that de Rham recovers.
 - **Above:** Chain complexes with d ∘ d = 0 are the subject of [homological algebra](../../13-structure-and-metamathematics/01-category-theory/homological-algebra.md); symplectic forms underlie Hamiltonian systems.
-- **Siblings:** Chern's proof of [Gauss–Bonnet](the-gauss-bonnet-theorem.md) writes the curvature as a form; [Riemannian manifolds](riemannian-manifolds.md) add a metric, which gives the Hodge star and harmonic forms.
+- **Siblings:** Chern's proof of [Gauss–Bonnet](the-gauss-bonnet-theorem.md) writes the curvature as a form; [Riemannian manifolds](riemannian-manifolds.md) add a metric, which gives the Hodge star and harmonic forms; connections and curvature on [vector bundles](vector-bundles-connections-and-characteristic-classes.md) are matrix-valued forms.
 
 ## Common misconceptions
 

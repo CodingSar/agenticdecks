@@ -1,7 +1,7 @@
 # Schemes
 
 > **Layer:** [12 Number Theory and Algebraic Geometry](../README.md) › [Algebraic Geometry](README.md)
-> **Builds on:** [Varieties and the Nullstellensatz](varieties-and-the-nullstellensatz.md), [Algebraic Curves and Riemann–Roch](algebraic-curves-and-riemann-roch.md), [Number Fields and Algebraic Integers](../01-algebraic-number-theory/number-fields-and-algebraic-integers.md), [Rings and Ideals](../../05-abstract-algebra/02-rings-and-fields/rings-and-ideals.md)
+> **Builds on:** [Varieties and the Nullstellensatz](varieties-and-the-nullstellensatz.md), [Algebraic Curves and Riemann–Roch](algebraic-curves-and-riemann-roch.md), [Number Fields and Algebraic Integers](../01-algebraic-number-theory/number-fields-and-algebraic-integers.md), [Rings and Ideals](../../05-abstract-algebra/02-rings-and-fields/rings-and-ideals.md), [Commutative Rings and Localisation](../../05-abstract-algebra/02-rings-and-fields/commutative-rings-and-localisation.md)
 > **Enables:** [Fermat's Last Theorem](../04-elliptic-curves-and-modular-forms/fermats-last-theorem.md), [The Langlands Programme](../04-elliptic-curves-and-modular-forms/the-langlands-programme.md), [Categories and Functors](../../13-structure-and-metamathematics/01-category-theory/categories-and-functors.md), [Homological Algebra](../../13-structure-and-metamathematics/01-category-theory/homological-algebra.md)
 
 ## Essence

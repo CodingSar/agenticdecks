@@ -46,7 +46,7 @@ Riemann's 1854 lecture on the hypotheses underlying geometry took Gauss's intrin
 
 - **Below:** [Smooth manifolds](../../07-topology/03-manifolds/topological-and-smooth-manifolds.md) carry the structure, tensors express the metric, and the intrinsic geometry of [surfaces](surfaces-and-gaussian-curvature.md) is the two-dimensional case.
 - **Above:** Variational problems in [calculus of variations](../../10-differential-equations-and-dynamics/03-calculus-of-variations/the-euler-lagrange-equation.md), general relativity, and Ricci flow in three-manifold topology.
-- **Siblings:** [Differential forms](differential-forms-and-de-rham-cohomology.md) gain the Hodge star from a metric; [Lie groups](../04-lie-theory/lie-groups-and-lie-algebras.md) carry invariant metrics, and compact ones have non-negative sectional curvature for a bi-invariant metric.
+- **Siblings:** [Differential forms](differential-forms-and-de-rham-cohomology.md) gain the Hodge star from a metric; [Lie groups](../04-lie-theory/lie-groups-and-lie-algebras.md) carry invariant metrics; the Levi-Civita connection is the model for connections on [vector bundles](vector-bundles-connections-and-characteristic-classes.md), and [symplectic geometry](symplectic-geometry.md) is the antisymmetric counterpart.
 
 ## Common misconceptions
 

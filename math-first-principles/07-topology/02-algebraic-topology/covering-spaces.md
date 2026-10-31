@@ -50,7 +50,7 @@ A covering map p: E → X looks, over each small open set of X, like a stack of 
 
 - **Below:** Path lifting and π₁ come from [homotopy and the fundamental group](homotopy-and-the-fundamental-group.md); [group actions](../../05-abstract-algebra/01-groups/group-actions.md) and [quotient groups](../../05-abstract-algebra/01-groups/homomorphisms-and-quotient-groups.md) describe fibres and deck groups; [the Galois correspondence](../../05-abstract-algebra/03-galois-theory/the-galois-correspondence.md) is the algebraic model.
 - **Above:** Multivalued functions live on [Riemann surfaces](../../09-advanced-analysis/02-complex-analysis/analytic-continuation-and-riemann-surfaces.md); cyclic covers of a knot complement give the Alexander polynomial in [knot theory](../03-manifolds/knot-theory.md); universal covers carry the geometries of [three-manifolds](../03-manifolds/three-manifolds-and-the-poincare-conjecture.md); a connected [Lie group](../../08-geometry/04-lie-theory/lie-groups-and-lie-algebras.md) has a simply connected cover with the same Lie algebra.
-- **Siblings:** The proof that π₁(S¹) ≅ ℤ in the [previous leaf](homotopy-and-the-fundamental-group.md) is the cover ℝ → S¹ at work; [the Euler characteristic](the-euler-characteristic.md) multiplies by n under an n-sheeted cover.
+- **Siblings:** The proof that π₁(S¹) ≅ ℤ in the [previous leaf](homotopy-and-the-fundamental-group.md) is the cover ℝ → S¹ at work; [the Euler characteristic](the-euler-characteristic.md) multiplies by n under an n-sheeted cover; covers are the fibrations with discrete fibre, so they leave [higher homotopy groups](higher-homotopy-groups-and-fibrations.md) unchanged.
 
 ## Common misconceptions
 

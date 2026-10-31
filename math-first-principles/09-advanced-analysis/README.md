@@ -23,7 +23,7 @@ It sits before [differential equations](../10-differential-equations-and-dynamic
 |---|---|---|
 | [Measure and Integration](01-measure-and-integration/README.md) | Size of sets, the Lebesgue integral, Lᵖ spaces, densities, fractal dimension | 06, 01 |
 | [Complex Analysis](02-complex-analysis/README.md) | Holomorphic functions, Cauchy's theorem, residues, conformal maps, Riemann surfaces | 06, 02, 07 |
-| [Functional Analysis](03-functional-analysis/README.md) | Banach and Hilbert spaces, the big four theorems, spectral theory | Measure and integration, 04, 06 |
+| [Functional Analysis](03-functional-analysis/README.md) | Banach and Hilbert spaces, the big four theorems, spectral theory, Fredholm operators | Measure and integration, 04, 06 |
 | [Harmonic Analysis](04-harmonic-analysis/README.md) | Fourier series and transforms, distributions, groups | All three siblings, 05 |
 
 ```
@@ -37,7 +37,7 @@ It sits before [differential equations](../10-differential-equations-and-dynamic
            (stands alone)      (uses all three)
 ```
 
-The order of the arrows is the order of dependence. Measure theory comes first, because the Lᵖ spaces it produces are the first examples of Banach spaces and L² is the model Hilbert space. Functional analysis then abstracts the structure of those spaces and, through spectral theory, generalises diagonalisation. Complex analysis needs neither: it grows directly from 06 and 07 and could be read first. Harmonic analysis draws on all three: Lebesgue integrals for its coefficients, Hilbert-space geometry for L² convergence, uniform boundedness for divergence, and complex analysis for transforms and Laurent series. Two links cross the diagram: Liouville's theorem from complex analysis proves that every operator has a non-empty spectrum, and Hilbert-space methods prove that Riemann surfaces carry meromorphic functions.
+The order of the arrows is the order of dependence. Measure theory comes first, because the Lᵖ spaces it produces are the first examples of Banach spaces and L² is the model Hilbert space. Functional analysis then abstracts the structure of those spaces and, through spectral theory and Fredholm theory, generalises diagonalisation and the rank–nullity count. Complex analysis needs neither: it grows directly from 06 and 07 and could be read first. Harmonic analysis draws on all three: Lebesgue integrals for its coefficients, Hilbert-space geometry for L² convergence, uniform boundedness for divergence, and complex analysis for transforms and Laurent series. Two links cross the diagram: Liouville's theorem from complex analysis proves that every operator has a non-empty spectrum, and Hilbert-space methods prove that Riemann surfaces carry meromorphic functions.
 
 ## Connections to neighbouring layers
 

@@ -2,7 +2,7 @@
 
 > **Layer:** [05 Abstract Algebra](../README.md) › [Rings and Fields](README.md)
 > **Builds on:** [Rings and Ideals](rings-and-ideals.md), [Factorisation in Integral Domains](factorisation-in-integral-domains.md), [The Complex Numbers](../../02-number-systems/01-constructing-the-numbers/the-complex-numbers.md)
-> **Enables:** [Field Extensions](field-extensions.md), [Finite Fields](finite-fields.md), [Solvability by Radicals](../03-galois-theory/solvability-by-radicals.md), [Varieties and the Nullstellensatz](../../12-number-theory-and-algebraic-geometry/03-algebraic-geometry/varieties-and-the-nullstellensatz.md), [Error-Correcting Codes](../../14-applied-and-computational-mathematics/03-information-codes-and-cryptography/error-correcting-codes.md)
+> **Enables:** [Field Extensions](field-extensions.md), [Finite Fields](finite-fields.md), [Solvability by Radicals](../03-galois-theory/solvability-by-radicals.md), [Commutative Rings and Localisation](commutative-rings-and-localisation.md), [Varieties and the Nullstellensatz](../../12-number-theory-and-algebraic-geometry/03-algebraic-geometry/varieties-and-the-nullstellensatz.md), [Error-Correcting Codes](../../14-applied-and-computational-mathematics/03-information-codes-and-cryptography/error-correcting-codes.md)
 
 ## Essence
 
@@ -43,7 +43,7 @@ A polynomial over a ring R is a formal expression a₀ + a₁x + ⋯ + aₙxⁿ,
 
 - **Below:** [the complex numbers](../../02-number-systems/01-constructing-the-numbers/the-complex-numbers.md) reappear as ℝ[x]/(x² + 1), and polynomial division mirrors division with remainder in ℤ.
 - **Above:** polynomial ideals describe [varieties](../../12-number-theory-and-algebraic-geometry/03-algebraic-geometry/varieties-and-the-nullstellensatz.md); cyclic codes such as Reed–Solomon codes are ideals in 𝔽_q[x]/(xⁿ − 1), the core of [error-correcting codes](../../14-applied-and-computational-mathematics/03-information-codes-and-cryptography/error-correcting-codes.md).
-- **Siblings:** [field extensions](field-extensions.md) are built as F[x]/(f); [finite fields](finite-fields.md) come from irreducible polynomials over 𝔽ₚ; [solvability by radicals](../03-galois-theory/solvability-by-radicals.md) needs Eisenstein for x⁵ − 6x + 3.
+- **Siblings:** [field extensions](field-extensions.md) are built as F[x]/(f); [finite fields](finite-fields.md) come from irreducible polynomials over 𝔽ₚ; [solvability by radicals](../03-galois-theory/solvability-by-radicals.md) needs Eisenstein for x⁵ − 6x + 3; [commutative rings and localisation](commutative-rings-and-localisation.md) build on Hilbert's basis theorem to study Noetherian rings and their dimension.
 
 ## Common misconceptions
 

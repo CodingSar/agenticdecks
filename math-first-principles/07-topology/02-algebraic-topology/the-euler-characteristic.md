@@ -28,7 +28,7 @@ For any convex polyhedron, vertices minus edges plus faces equals 2: a cube has 
 
 6. **χ is total curvature and counts zeros and fixed points.** The Gauss–Bonnet theorem says that for a closed surface with Gaussian curvature K, ∫ K dA = 2π·χ: no metric on the torus can be positively curved everywhere ([the Gauss–Bonnet theorem](../../08-geometry/02-differential-geometry/the-gauss-bonnet-theorem.md)). The Poincaré–Hopf theorem says that the indices of the zeros of a vector field with isolated zeros on a closed manifold sum to χ, which explains the hairy ball theorem (χ(S²) = 2 ≠ 0). And χ is the Lefschetz number of the identity map, linking it to [fixed-point theorems](fixed-point-theorems.md).
 
-7. **χ is a weak invariant, and odd-dimensional closed manifolds hide it.** Every closed odd-dimensional manifold has χ = 0 (a consequence of Poincaré duality), so χ says nothing about 3-manifolds. Spaces with the same χ can differ: the torus and the Klein bottle both have χ = 0, and so does the circle S¹. χ is the first shadow of homology, not a replacement for it.
+7. **χ is a weak invariant, and odd-dimensional closed manifolds hide it.** Every closed odd-dimensional manifold has χ = 0 (a consequence of [Poincaré duality](cohomology-and-poincare-duality.md)), so χ says nothing about 3-manifolds. Spaces with the same χ can differ: the torus and the Klein bottle both have χ = 0, and so does the circle S¹. χ is the first shadow of homology, not a replacement for it.
 
 ## Key concepts
 

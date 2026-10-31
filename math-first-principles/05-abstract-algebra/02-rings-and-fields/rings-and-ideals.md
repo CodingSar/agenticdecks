@@ -2,7 +2,7 @@
 
 > **Layer:** [05 Abstract Algebra](../README.md) › [Rings and Fields](README.md)
 > **Builds on:** [Homomorphisms and Quotient Groups](../01-groups/homomorphisms-and-quotient-groups.md), [Modular Arithmetic](../../02-number-systems/02-elementary-number-theory/modular-arithmetic.md), [The Axiom of Choice](../../01-sets-and-foundations/03-axiomatic-set-theory/the-axiom-of-choice.md)
-> **Enables:** [Factorisation in Integral Domains](factorisation-in-integral-domains.md), [Polynomial Rings](polynomial-rings.md), [Modules](../04-modules-and-representations/modules.md), [Varieties and the Nullstellensatz](../../12-number-theory-and-algebraic-geometry/03-algebraic-geometry/varieties-and-the-nullstellensatz.md), [Schemes](../../12-number-theory-and-algebraic-geometry/03-algebraic-geometry/schemes.md)
+> **Enables:** [Factorisation in Integral Domains](factorisation-in-integral-domains.md), [Polynomial Rings](polynomial-rings.md), [Commutative Rings and Localisation](commutative-rings-and-localisation.md), [Modules](../04-modules-and-representations/modules.md), [Varieties and the Nullstellensatz](../../12-number-theory-and-algebraic-geometry/03-algebraic-geometry/varieties-and-the-nullstellensatz.md), [Schemes](../../12-number-theory-and-algebraic-geometry/03-algebraic-geometry/schemes.md)
 
 ## Essence
 
@@ -44,7 +44,7 @@ A ring is a set where you can add, subtract and multiply, as in ℤ, polynomials
 
 - **Below:** quotient rings repeat the construction of [quotient groups](../01-groups/homomorphisms-and-quotient-groups.md); ℤ/n from [modular arithmetic](../../02-number-systems/02-elementary-number-theory/modular-arithmetic.md) is the model; maximal ideals exist by [the axiom of choice](../../01-sets-and-foundations/03-axiomatic-set-theory/the-axiom-of-choice.md).
 - **Above:** [the Nullstellensatz](../../12-number-theory-and-algebraic-geometry/03-algebraic-geometry/varieties-and-the-nullstellensatz.md) matches ideals with geometry, and [schemes](../../12-number-theory-and-algebraic-geometry/03-algebraic-geometry/schemes.md) take the prime ideals of any ring as the points of a space.
-- **Siblings:** [factorisation](factorisation-in-integral-domains.md) asks when elements factor uniquely; [polynomial rings](polynomial-rings.md) build fields as quotients by maximal ideals; [modules](../04-modules-and-representations/modules.md) generalise ideals and quotients together.
+- **Siblings:** [factorisation](factorisation-in-integral-domains.md) asks when elements factor uniquely; [polynomial rings](polynomial-rings.md) build fields as quotients by maximal ideals; [modules](../04-modules-and-representations/modules.md) generalise ideals and quotients together; [commutative rings and localisation](commutative-rings-and-localisation.md) make the prime ideals into a space, Spec R.
 
 ## Common misconceptions
 

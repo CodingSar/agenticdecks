@@ -1,13 +1,13 @@
 # Rings and Fields
 
 > **Layer:** [05 Abstract Algebra](../README.md) › Rings and Fields
-> **Children:** [Rings and Ideals](rings-and-ideals.md) · [Factorisation in Integral Domains](factorisation-in-integral-domains.md) · [Polynomial Rings](polynomial-rings.md) · [Field Extensions](field-extensions.md) · [Finite Fields](finite-fields.md)
+> **Children:** [Rings and Ideals](rings-and-ideals.md) · [Factorisation in Integral Domains](factorisation-in-integral-domains.md) · [Polynomial Rings](polynomial-rings.md) · [Field Extensions](field-extensions.md) · [Finite Fields](finite-fields.md) · [Commutative Rings and Localisation](commutative-rings-and-localisation.md)
 
 ## What this area is about
 
 Groups have one operation; most of arithmetic has two. A ring adds and multiplies, as ℤ, polynomials and matrices do, and a field also divides, as ℚ, ℝ, ℂ and ℤ/p do. This area takes the familiar facts of school arithmetic, such as division with remainder, unique factorisation into primes and the roots of polynomials, and asks which hypotheses each one really needs. The answers are precise: ideals replace numbers, quotients by maximal ideals manufacture fields, unique factorisation holds in some rings and fails in others, and field extensions become vector spaces whose dimensions obey a multiplication law.
 
-The area ends with two complete classifications: every finite field is 𝔽_q for a prime power q, and every algebraic extension sits inside an algebraic closure. These are the raw materials of Galois theory, number theory, algebraic geometry and coding theory.
+The field-theoretic line ends with two complete classifications: every finite field is 𝔽_q for a prime power q, and every algebraic extension sits inside an algebraic closure. A second line returns to general commutative rings, treating the prime ideals as the points of a space and localising to study one point at a time. These are the raw materials of Galois theory, number theory, algebraic geometry and coding theory.
 
 ## How the children fit together
 
@@ -18,10 +18,14 @@ The area ends with two complete classifications: every finite field is 𝔽_q fo
 | [Polynomial Rings](polynomial-rings.md) | F[x] as a Euclidean domain; irreducibility tests; building fields as F[x]/(f) | Factorisation |
 | [Field Extensions](field-extensions.md) | Degree, the tower law, splitting fields, algebraic closure, separability | Polynomial rings |
 | [Finite Fields](finite-fields.md) | Existence and uniqueness of 𝔽_q; its cyclic multiplicative group | Field extensions |
+| [Commutative Rings and Localisation](commutative-rings-and-localisation.md) | Localisation, the prime spectrum, Noetherian rings and dimension; the bridge to algebraic geometry | Rings and ideals, polynomial rings |
 
-The order is a funnel. Rings and ideals supply the general language; factorisation studies the best-behaved rings; polynomial rings over a field are the most useful of those, and their quotients by irreducible polynomials are fields. Field extensions then measure how far a new field is from an old one by a dimension, and finite fields are the case where everything can be computed.
+The order is a funnel. Rings and ideals supply the general language; factorisation studies the best-behaved rings; polynomial rings over a field are the most useful of those, and their quotients by irreducible polynomials are fields. Field extensions then measure how far a new field is from an old one by a dimension, and finite fields are the case where everything can be computed. Commutative rings and localisation branch off after polynomial rings: Hilbert's basis theorem makes polynomial rings Noetherian, and the leaf turns ideals into the geometry that layer 12 develops.
 
 ```
+                             commutative rings and localisation ──> layer 12 geometry
+                                              ^
+                                              │
 rings and ideals ──> factorisation ──> polynomial rings ──> field extensions ──> finite fields
         │                                     │                     │
         v                                     v                     v
