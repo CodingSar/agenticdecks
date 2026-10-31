@@ -10,7 +10,7 @@ The Discrete Fourier Transform (DFT) turns n samples of a signal into n frequenc
 
 ## Core tenets
 
-1. **The DFT is a unitary matrix, up to scale.** With ω = e^(−2πi/n), the DFT of a vector f is Ff, where F has entries ω^(jk) for j, k = 0, …, n − 1. Its rows are sampled characters of the cyclic group of order n, which are orthogonal, so F*F = nI. Because F/√n is unitary, the transform is perfectly conditioned.
+1. **The DFT is a unitary matrix, up to scale.** With ω = e^(−2πi/n), the DFT of a vector f is Ff, where F has entries ω^(jk) for j, k = 0, …, n − 1. Its rows are sampled characters of the cyclic group of order n, which are orthogonal, so FᴴF = nI, where Fᴴ is the conjugate transpose. Because F/√n is unitary, the transform is perfectly conditioned.
 
 2. **The FFT factors F into log₂ n sparse stages.** For n = 2m, splitting f into even and odd entries writes a DFT of length n as two of length m combined by n further operations, so the cost T(n) = 2T(m) + O(n) gives O(n log n). James Cooley and John Tukey published the algorithm in 1965; Carl Friedrich Gauss had used the idea around 1805, in work printed only after his death. In floating point the computed transform has relative error of order u log n, where u is the unit roundoff, smaller than the order u·n bound for summing the definition directly.
 
