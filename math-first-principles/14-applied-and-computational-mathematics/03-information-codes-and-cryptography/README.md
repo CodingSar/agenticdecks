@@ -26,7 +26,7 @@ The unifying idea is that a message is an element of a large finite set, and tha
 |---|---|---|
 | [Information theory](information-theory.md) | The limits: entropy, the source coding theorem, channel capacity and the noisy-channel coding theorem | Probability, counting |
 | [Error-correcting codes](error-correcting-codes.md) | The constructions: linear codes, distance bounds, Hamming and Reed–Solomon codes, and capacity-approaching codes | Information theory, finite fields |
-| [Cryptography](cryptography.md) | Security: perfect secrecy, one-way functions, Diffie–Hellman, RSA, elliptic curves, quantum attacks and post-quantum standards | Number theory, finite fields, information theory |
+| [Cryptography](cryptography.md) | Security: perfect secrecy, one-way functions, Diffie–Hellman, Rivest–Shamir–Adleman (RSA), elliptic curves, quantum attacks and post-quantum standards | Number theory, finite fields, information theory |
 
 Read information theory first: its theorems are existence statements, proved by random choice, which say what any scheme can achieve. Error-correcting codes then try to reach those limits with explicit structure, since a random code cannot be decoded efficiently. Cryptography uses information theory to define perfect secrecy, finds it too costly, and moves to computational security, where the question is no longer what is possible but what is feasible.
 

@@ -9,6 +9,8 @@ Collected from writer reports, to be resolved in the review pass.
 - **07 (W8):** candidate leaves: higher homotopy groups and fibrations; cohomology, cup products and Poincaré duality; CW complexes; vector bundles and characteristic classes; Morse theory; four-manifolds; topological data analysis (in 14). Knot theory could later split into classical and quantum invariants.
 - **11 (W12):** candidate leaves: Poisson processes and continuous-time Markov chains; large deviations; stable laws and heavy tails; nonparametric statistics and the bootstrap; time series; causal inference (exists only in the medicine tree).
 
+- **05 (W6):** optional leaves: commutative and Noetherian rings (localisation, prime spectrum) as a bridge to 12; group extensions and cohomology.
+
 ## Claims to verify
 
 ### Layer 01 (W2)
@@ -47,5 +49,14 @@ Collected from writer reports, to be resolved in the review pass.
 - **Processes and statistics:** Doeblin 1938; Bayer–Diaconis 1992; Pólya 1921; Metropolis 1953; Brown 1827; Bachelier 1900; Einstein 1905; Wiener 1923; Paley–Wiener–Zygmund 1933; Kakutani 1944; Itô 1944, 1951; Kac 1949; Black–Scholes–Merton 1973; Girsanov 1960; Fisher 1922; Stein 1956; James–Stein 1961; Rao 1945; Cramér 1946; Neyman–Scott 1948; uniform-maximum variance θ²/(n(n + 2)); Neyman–Pearson 1933; Wilks 1938; Student 1908; Benjamini–Hochberg 1995; ASA statement 2016; Bayes 1763; Laplace 1774; de Finetti 1931; Doob 1949; Diaconis–Freedman 1986; Geman and Geman 1984; Gelfand–Smith 1990; Gauss 1821–1823; Aitken 1935; Galton 1886; Hoerl–Kennard 1970; Tibshirani 1996.
 - **Worked numbers:** 1000 coin tosses P(S ≥ 600) bounds; the 36% false-discovery example; Chebyshev versus Hoeffding sample sizes; 0.99³⁰ ≈ 0.74.
 - **Books:** check all edition years listed in the Go deeper sections.
+
+### Layer 05 (W6)
+
+- **Groups:** Burnside's lemma known to Frobenius; McKay 1959 (Cauchy); Wielandt's Sylow proof; Jordan 1870, Hölder 1889; Burnside pᵃqᵇ 1904.
+- **Finite simple groups:** Feit–Thompson 1963, 255 pages, Coq 2012; 16 Lie-type families, 26 sporadics, Tits group; Monster order ≈ 8 × 10⁵³, Griess 1982; Aschbacher–Smith 2004; Gorenstein–Lyons–Solomon since 1994; "nearly 50 billion" groups of order 1024; Conway–Norton 1979, Borcherds 1992.
+- **Presentations:** Novikov 1955, Boone; Dehn 1911; Higman 1961; Adian–Rabin; Markov on 4-manifolds.
+- **Rings and fields:** Lamé 1847; Kummer and 23; ℤ[(1+√−19)/2] PID not Euclidean; Hilbert basis 1890; Steinitz 1910; Wedderburn 1905; AES polynomial x⁸ + x⁴ + x³ + x + 1.
+- **Galois theory:** Shafarevich (solvable groups over ℚ); inverse Galois problem and sixth Fermat prime open; Cardano 1545; Ruffini 1799; Abel 1824; Hermite 1858, 1873; Wantzel 1837; Lindemann 1882; Gauss 1796/1801; 641 × 6700417; Frobenius 1896.
+- **Books:** Cox–Little–O'Shea 4th 2015; Lidl–Niederreiter 1994; Serre 1977; James–Liebeck 2nd 2001; Artin 2nd 2011; Cox 2nd 2012; Stewart 4th 2015; Ireland–Rosen 2nd 1990; Stewart–Tall 3rd 2002; Lyndon–Schupp 1977; Stillwell 2nd 1993.
 
 ## Cross-layer follow-ups (coordinator, after review pass)
