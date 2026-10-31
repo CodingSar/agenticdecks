@@ -68,6 +68,17 @@ Collected from writer reports, to be resolved in the review pass.
 - **Information, codes, cryptography:** Kullback–Leibler 1951; Huffman 1952; Lempel–Ziv 1977/78; rate–distortion 1959; Tietäväinen, Zinoviev–Leontiev 1973; Singleton 1964; Gilbert 1952; Varshamov 1957; Tsfasman–Vlăduţ–Zink 1982; Berlekamp 1968; Berlekamp–McEliece–van Tilborg 1978; Guruswami–Sudan 1999; Gallager 1960/63; turbo 1993; Arıkan 2009; Shoup 1997; Cocks 1973, declassified 1997; Koblitz–Miller 1985; RSA-250 2020; Grover 1996; Regev 2005; SIKE 2022; McEliece 1978; LDPC and polar both in 5G; 256-bit curve ≈ 3,072-bit RSA; Kelly criterion as capacity.
 - **Open as of 2026:** polynomial pivot rule; polynomial Hirsch; strongly polynomial LP; Gilbert–Varshamov tightness; relay and broadcast capacity; one-way functions; RSA versus factoring; Shor at cryptographic size.
 
+### Layer 00 (W1)
+
+- **Logic and proof theory:** Post 1921; Church and Turing 1936; Gentzen 1934–35; Jaśkowski 1934; Gentzen 1936; Szabo 1969; J. A. Robinson 1965; Haken 1985; Cook–Reckhow 1979; Henkin 1949; Rosser 1936; Lindström 1969; compactness of logic as compactness of the space of complete theories.
+- **Model theory:** A. Robinson 1961; de Bruijn–Erdős 1951.
+- **Foundations:** Gödel 1938; Cohen 1963; Kirby–Paris 1982; Frege 1893, 1903; Russell 1902; CH "debated as of 2026".
+- **Geometry:** Hilbert's "tables, chairs and beer mugs"; Pasch 1882; Saccheri 1733; Lobachevsky 1829; Bolyai 1832; Beltrami 1868.
+- **Computation and formal proof:** Appel–Haken 1976; Kempe 1879; Heawood 1890; Gonthier 2005; Hales 1998, Flyspeck 2014; Heule–Kullmann–Marek 2016 (7824/7825, about 200 TB).
+- **Number theory and analysis:** Euler's sum-of-powers conjecture; Lander–Parkin 1966; Elkies 1988; Weierstrass 1872; Erdős 1947; Littlewood 1914; Fermat's descent for x⁴ + y⁴ = z²; Gelfond–Schneider 1934.
+- **Constructive logic:** Heyting 1930; Kolmogorov 1932; Kripke 1965; Gödel and Gentzen 1933; Curry 1934; Howard 1969/1980; Bishop 1967; Brouwer's continuity principle.
+- **Books:** Velleman 3rd 2019; Hammack 3rd 2018; Graham–Knuth–Patashnik 2nd 1994; Alon–Spencer 4th 2016; Greenberg 4th 2008; Kunen 1980; van Dalen 5th 2013; Wadler 2015; Heath 1908; Hartshorne 2000; Gelbaum–Olmsted 1964; Steen–Seebach 1970.
+
 ## Cross-layer follow-ups (coordinator, after review pass)
 
 - Root README names layer 14 "Applied & Computational Mathematics"; the files use "and". Align the root README.
