@@ -20,6 +20,8 @@ Collected from writer reports, to be resolved in the review pass.
 
 - **03 (W4):** candidate leaves: random graphs (G(n, p), thresholds, giant component); designs, Latin squares and finite geometries; algebraic and spectral graph theory with expanders; matroids; combinatorial optimisation; algebraic combinatorics (symmetric functions, Young tableaux).
 
+- **09 (W10):** candidate leaves: compact operators and Fredholm theory (09/03); wavelets and time-frequency analysis (09/04); elliptic functions (09/02); Hardy spaces, singular integrals, operator algebras; the general spectral theorem (now split between 09 and 14). Cross-link ergodic theorems (10) from 09/01.
+
 ## Claims to verify
 
 ### Layer 01 (W2)
@@ -115,6 +117,14 @@ Collected from writer reports, to be resolved in the review pass.
 - **Attributions:** Hall 1935; König 1931; Berge 1957; Kuratowski 1930; Guthrie 1852; Kempe 1879; Heawood 1890; Hardy–Ramanujan 1918; Erdős 1959; Moser–Tardos 2010; Pascal–Fermat 1654; Kolmogorov 1933; Mirsky 1971; Dilworth 1950; Sperner 1928; Kővári–Sós–Turán 1954; Erdős–Stone 1946; Gowers 1997, 2001; Kahn–Kalai 1993; Behrend 1946; Paris–Harrington 1977; Schur 1916; van der Waerden 1927; Hales–Jewett 1963; Ruzsa 1994; ex(n, C₄) ~ n^(3/2)/2; Klein bottle the only Heawood exception (6 colours).
 - **Other:** Stanley's 200+ Catalan families; Latin rectangles via Hall; Plünnecke–Ruzsa statement.
 - **Books:** Elaydi 3rd 2005; Stanley vol. 1 2nd 2012; Grinstead–Snell 2nd 1997; Benjamin–Quinn 2003; Conlon–Fox–Sudakov 2015; Füredi–Simonovits 2013; Babai–Frankl 1992; Anderson 1987; Zhao 2023; Tao 2008.
+
+### Layer 09 (W10)
+
+- **Measure and integration:** Vitali 1905; Solovay 1970; Banach–Tarski 1924, five pieces; Lebesgue 1902; Riesz–Fischer 1907; Radon 1913; Nikodym 1930; von Neumann L² proof; Kolmogorov 1933; Hausdorff 1918; Hutchinson 1981; Mandelbrot 1975; Shishikura 1998; Cantor mass-distribution constant 2.
+- **Complex analysis:** Riemann 1851 and Dirichlet principle; Poincaré ball versus bidisc; Koebe and Poincaré 1907; Riemann 1859; ∑z^(2ⁿ) radial behaviour.
+- **Functional analysis:** Hahn and Banach late 1920s; Banach–Steinhaus 1927; Banach 1932; Banach–Mazurkiewicz 1931; Weierstrass 1872; Enflo 1973; Riesz and Fréchet 1907; Hahn–Banach without choice for separable spaces; Phillips (c₀ uncomplemented in ℓ^∞); Lᵖ (p ≠ 2) not Hilbertian; Lebesgue constants (4/π²)·log n.
+- **Harmonic analysis:** Fourier 1822; Dirichlet 1829; du Bois-Reymond 1873; Fejér 1900; Gibbs about 9%; Kolmogorov 1923, 1926; Carleson 1966 (Luzin); Hunt 1968; Kahane–Katznelson; Dini–Lipschitz; Weyl 1916; Plancherel 1910; uncertainty constant 1/(16π²); Schwartz late 1940s, Fields 1950; multiplication impossibility 1950s; Malgrange–Ehrenpreis mid-1950s; Lewy 1957 statement (distributional form came later); Sobolev 1930s; Haar 1933; Pontryagin 1934, van Kampen 1935; Peter–Weyl 1927; Cooley–Tukey 1965, Gauss c. 1805; Roth 1953; Shor 1994; Tate 1950; MacWilliams via Walsh–Hadamard.
+- **Books:** Ahlfors 3rd 1979; Needham 1997; Forster 1981; Brezis 2011; Lax 2002; Kreyszig 1978; Reed–Simon I 1972; Rudin FA 2nd 1991; Oxtoby 2nd 1980; Young 1988; Stein–Shakarchi 2003, 2003, 2005, 2011; Körner 1988; Katznelson 1968; Rudin 1962; Terras 1999; Strichartz 1994; Hörmander I 1983; Grubb 2009; Flajolet–Sedgewick 2009; Lieb–Loss 2nd 2001; Folland 2nd 1999; Rudin RCA 3rd 1987; Falconer 1990; Mandelbrot 1982; Tao 2011; Halmos 1950.
 
 ## Cross-layer follow-ups (coordinator, after review pass)
 

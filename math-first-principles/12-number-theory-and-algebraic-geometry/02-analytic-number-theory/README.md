@@ -7,7 +7,7 @@
 
 Euclid proved that there are infinitely many primes; analytic number theory asks how many, how they are spread out, and in which patterns they occur. The method is to encode arithmetic in functions and study those functions with analysis. Euler's product turns unique factorisation into an identity for the zeta function ζ(s); Riemann's continuation of ζ to the complex plane turns the distribution of primes into the location of its zeros; Dirichlet's characters, Fourier analysis on the group (ℤ/q)^×, separate primes by residue class. Where these tools fail, sieves count by inclusion–exclusion and the circle method counts sums of primes by integrating exponential sums.
 
-The unifying idea is that *primes are counted through generating functions*, whose poles give main terms and whose zeros give errors. The results are asymptotic and quantitative, and the open problems are the sharpest forms: the Riemann Hypothesis, the twin prime conjecture and binary Goldbach, all open as of 2026.
+The unifying idea is that *primes are counted through generating functions*, whose poles give main terms and whose zeros give errors. The results are asymptotic and quantitative, and the open problems are the sharpest forms: the Riemann Hypothesis (RH), the twin prime conjecture and binary Goldbach, all open as of 2026.
 
 ## How the children fit together
 
