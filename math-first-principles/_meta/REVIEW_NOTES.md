@@ -15,6 +15,9 @@ Collected from writer reports, to be resolved in the review pass.
 
 - **08 (W9):** candidate leaves: symplectic geometry; fibre bundles, connections and characteristic classes (gauge theory); geometric group theory.
 
+- **13 (W14):** candidate leaves: Turing degrees and relative computability; topos theory; stability, classification theory and o-minimality (a fifth model-theory leaf).
+- **04 (W5):** candidate leaves: principal component analysis (in 11 or 14); symmetric and Clifford algebras; classical matrix groups.
+
 ## Claims to verify
 
 ### Layer 01 (W2)
@@ -88,6 +91,19 @@ Collected from writer reports, to be resolved in the review pass.
 - **Convex and discrete:** McMullen 1970; Santos 2010; polynomial Hirsch open; Dehn 1900; Gauss 1831; Lagrange hexagonal lattice; Hales 1998/2005, Flyspeck 2014; Cohn–Elkies 2003; Viazovska 2016/2017, dimension 24, Fields 2022; optimal density known only in 1, 2, 3, 8, 24; LLL 1982; ML-KEM 2024; Thompson 1983; Conway–Sloane 1988.
 - **Lie theory:** Cartan closed-subgroup theorem; diag(−2, −½) not an exponential in SL(2, ℝ) (trace argument; looks right); universal cover of SL(2, ℝ) has no faithful finite-dimensional representation; Killing 1888–1890; Cartan 1894; Langlands dual via reversed Dynkin arrows; Kac–Moody; Cartan 1913; Weyl 1925–1926; Peter–Weyl 1927; Wigner 1939; non-compact simple groups have no non-trivial finite-dimensional unitary representations; eightfold way.
 - **Books:** Chevalley 1946; Stillwell 2008; Hall 2003; Humphreys 1972; Fulton–Harris 1991; Hawkins 2000; Bröcker–tom Dieck 1985; Sternberg 1994; Weyl 1928 (German original).
+
+### Layer 13 (W14)
+
+- **Category theory:** Freyd non-concretisability (c. 1970); Grothendieck universe ⇔ inaccessible; Kan 1958; Tôhoku 1957; Verdier 1960s; Hilbert syzygy 1890; Poincaré homology sphere π₁ of order 120; Quillen 1967; *Pursuing Stacks* 1983; Boardman–Vogt 1973; Curry, Howard 1969/1980, Lambek; Griffin 1990; Hofmann–Streicher 1994; Awodey–Warren, Voevodsky; simplicial model uses inaccessibles; cubical authors; Licata–Shulman 2013; mathlib and uniqueness of identity proofs; Riehl–Verity 2022; Lawvere–Tierney and forcing; Lawvere 1969.
+- **Computability and incompleteness:** Ackermann 1928; Kleene 1936; Turing 1936/1937; Specker 1949; computable reals a real closed field; Rice 1953; totality Π₂-complete; Hilbert–Ackermann 1928; Löwenheim 1915; DPR 1961; Matiyasevich 1970; JSWW 1976; Hilbert's tenth by degree (4 undecidable, 2 decidable via Siegel 1972, 3 open); Dehn 1911; Novikov 1955, Boone; Adian–Rabin; Markov 1958; Magnus 1932; BB(5) = 47,176,870 (2024); Yedidia–Aaronson 2016 (7,918 states, later under 800); Rosser 1936; Feferman 1960; Q has 7 axioms; Gentzen 1935, 1936, 1943; Statman, Orevkov 1979; ordinals ω^ω (PRA), Γ₀ (ATR₀); Big Five table; Friedman 1975; Harrington and Friedman conservativity; Goodstein 1944 values; Kirby–Paris 1982; Paris–Harrington 1977.
+- **Model theory:** Lindström 1969; Tennenbaum 1959; A. Robinson 1961, 1966; Morley 1965; ω + (ω* + ω)·η; Tarski 1948, 1951; Macintyre–Wilkie 1996; Wilkie 1996; Collins 1975; Davenport–Heintz 1988; Fischer–Rabin 1974; Presburger 1929; J. Robinson 1949; Ax–Kochen, Ershov 1965; Szmielew 1955; Trakhtenbrot 1950; Hrushovski 1996.
+- **Forcing and large cardinals:** Gödel 1938/1940; Cohen 1963; Rasiowa–Sikorski; Easton 1970; Suslin (Jech 1967, Tennenbaum 1968, Solovay–Tennenbaum 1971); Shelah 1974; Lévy–Solovay 1967; Foreman–Magidor–Shelah 1988; Woodin and "V = Ultimate L"; Chow 2009; Shoenfield Σ¹₂; Ulam 1930; Scott 1961; Kunen 1971; Martin 1970; Martin–Steel 1989; Solovay 1970, Shelah 1984; AD equiconsistent with infinitely many Woodins; Maddy 1988; Reinhardt open.
+
+### Layer 04 (W5)
+
+- **Dates:** Peano 1888 (vector space axioms); Hamel 1905; Blass 1984; Jordan 1870; Cayley 1858, Frobenius 1878; Perron 1907; Frobenius 1912; Sylvester 1852; Cramer 1750; Grassmann 1844; Gram 1883; Schmidt 1907; Eckart–Young 1936; Moore 1920; Penrose 1955; Pearson 1901; Hotelling 1933; Leslie 1945; Brin–Page 1998 (α ≈ 0.85); Strassen 1969; de Silva–Lim 2008; Eilenberg–Mac Lane 1945 and V → V∗∗; Lagrange 1770s, Gauss 1801; *Nine Chapters*.
+- **Claims:** ω ≈ 2.37; algebraic dual of ℝ[x] has uncountable dimension; inverse costs about three times a solve; R₀ thresholds; QR convergence; 7-dimensional cross product; ℓ¹ not reflexive, Lᵖ reflexive for 1 < p < ∞.
+- **Books:** Axler 4th 2024; Strang 6th 2023; Lax 2nd 2007; Landsberg 2012; Lang 2002; Seneta 2nd 1981; Serre 1973; Arnold 1974/1978; Meyer 2000; Langville–Meyer 2006; Horn–Johnson 1985; Trefethen–Bau 1997; Stewart 1993.
 
 ## Cross-layer follow-ups (coordinator, after review pass)
 
