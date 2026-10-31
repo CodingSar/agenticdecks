@@ -26,6 +26,8 @@ Collected from writer reports, to be resolved in the review pass.
 
 - **10 (W11):** layer 07 has no Jordan curve theorem leaf (Poincaré–Bendixson would link to it); complex dynamics (Julia and Mandelbrot sets, Douady–Hubbard) has no home, candidate leaf in 10/04 or 09.
 
+- **14–15 (W16):** 14/05 decision theory (expected utility, Markov decision processes) and mechanism design/auctions; 14/06 optimal transport and kernel methods; 14/04 inverse problems and tomography; statistical mechanics and quantum information have no home; 15 might add "mathematics and the sciences".
+
 ## Claims to verify
 
 ### Layer 01 (W2)
@@ -170,6 +172,18 @@ Collected from writer reports, to be resolved in the review pass.
 - Books: Teschl 2012; Axler et al. 2001; Mörters–Peres 2010; Coddington–Levinson 1955; Moler–Van Loan 2003; Perko 2001; Hirsch–Smale–Devaney 2013; Evans 2010; Lax 1973; Whitham 1974. Undated: Strogatz 2nd, Dacorogna, Lyapunov, Strauss.
 - Style: "ODE" appears unexpanded inside Tucker's paper title in chaos Go deeper (acceptable as a title).
 
+### Layers 14/04–06 and 15 (W16)
+
+- 14/04–05: Buckingham 1914; Nyquist 1932; Doyle 1978; Choquet-Bruhat 1952; Stone 1932; Lovelock's theorem as stated; Verhulst 1838; May 1976; Cox–Ross–Rubinstein 1979; Harrison–Pliska 1981; Dalang–Morton–Willinger 1990; Delbaen–Schachermayer 1994; PPAD-completeness 2006; Maynard Smith–Price 1973; Axelrod 1984; Duncan Black 1948; "about 9%" Condorcet-cycle probability; Vapnik–Chervonenkis (VC) theory c. 1971.
+- 14/06: Gaussian concentration constant 2e^(−t²/2); Lévy isoperimetric attribution; Wigner 1955; Marchenko–Pastur 1967; BBP threshold 1 + √γ (2005); Montgomery 1973; Shannon 1949 and precursors; Candès restricted isometry property (RIP) constant √2 − 1 (2008); Candès–Recht 2009; CD-audio figures; compressed sensing in clinical MRI; Cybenko 1989; Hornik et al. 1989; Leshno et al. 1993 (hypotheses simplified); Barron 1993; Rumelhart–Hinton–Williams 1986; Jacot–Gabriel–Hongler 2018; Zhang et al. 2017; Belkin et al. 2019 (title from memory); landscape claims (deep linear networks, strict saddles) uncited and simplified.
+- 15 history: YBC 7289 dates; Rhind c. 1550 BCE; Madhava 14th century; Liu Hui 263; al-Khwārizmī c. 820; Lobachevsky 1829, Bolyai 1832; Bourbaki from 1939.
+- 15 philosophy: Benacerraf 1965, 1973; Bishop 1967; Gentzen 1936 (ε₀); Hamming 1980; Field 1980; Gödel 1940.
+- 15 practice: Pólya conjecture 1919, counterexample 906,150,257 (1980); Odlyzko–te Riele 1985; Littlewood 1914; BBP formula 1995; Voevodsky errors; De Millo–Lipton–Perlis 1979; Thurston 1994; Polymath January 2009.
+- 15 computers and proof: Appel–Haken "nearly two thousand" configurations; Robertson–Sanders–Seymour–Thomas 1997 (633); Gonthier 2005; Hales 1998/2005; Flyspeck 2014; Boolean Pythagorean triples 2016 (7,825; ≈200 TB); S(5) = 160 (2017); Lean 2013; Coq renamed Rocq 2025; Feit–Thompson formalised 2012; Liquid Tensor December 2020/June 2021/July 2022; PFR formalised in about three weeks; FunSearch December 2023; AlphaGeometry January 2024 (25 of 30); IMO silver July 2024; **least sure:** July 2025 IMO gold-medal reports (DeepMind, OpenAI).
+- 15 open problems: Conrey 1989 (> 40%); Leray 1934; Caffarelli–Kohn–Nirenberg 1982; Bhargava positive proportion for BSD; Chen 1973; Goldbach to 4 × 10¹⁸ (12 says "beyond 10¹⁸": make consistent); Helfgott 2013 "widely accepted"; Collatz to ≈ 2⁶⁸; Tao 2019; Conway 1972; Masser–Oesterlé 1985; Mochizuki 2021; Scholze–Stix 2018.
+- 15 learning and teaching: Skemp 1976; Tall–Vinner 1981; Sweller 1988; Kirschner–Sweller–Clark 2006; Roediger–Karpicke 2006; Shulman 1986; Ma 1999; TIMSS 1995; PISA 2000.
+- 15 society: GPS "tens of microseconds per day"; Radon 1917; 1979 Nobel (CT); Sally Clark 1999/2003, "1 in 73 million"; Berkeley 1973 data, 1975 paper; Gaussian copula 2000; Kleinberg–Mullainathan–Raghavan 2016; Chouldechova 2017; Viazovska Fields 2022; Uhlenbeck Abel 2019; Cost of Knowledge 2012; arXiv 1991.
+
 ## Cross-layer follow-ups (coordinator, after review pass)
 
 - Root README names layer 14 "Applied & Computational Mathematics"; the files use "and". Align the root README.
@@ -181,3 +195,5 @@ Collected from writer reports, to be resolved in the review pass.
 - (12, W13) Planned targets to confirm once written: 13 `higher-categories-and-homotopy-type-theory` (from Langlands Enables), 13 `quantifier-elimination-and-decidable-theories` (from Nullstellensatz Enables), 14 `error-correcting-codes` (Goppa codes, from curves Enables), 14 `high-dimensional-geometry-and-random-matrices` (from zeta Enables).
 
 - (10, W11) Confirm 06 `compactness-in-metric-spaces` covers Arzelà–Ascoli; 07 `topological-spaces-and-continuous-maps` defines homeomorphism (stability leaf); 09 distributions fits as Builds on of characteristics. 03 additive-combinatorics is linked from 10 body text only.
+
+- (14–15, W16) Sibling-tree links from 15: README → medicine history-of-medicine; history-of-mathematics Enables → CS history-of-computing and medicine history-of-medicine; philosophy-of-mathematics Enables → medicine the-scientific-method-and-models (loose fit); open-problems Enables → CS p-np-and-np-completeness. Goldbach verification bound differs between 12 and 15.

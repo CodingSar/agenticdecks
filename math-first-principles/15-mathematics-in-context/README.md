@@ -37,7 +37,7 @@ Read history first: it explains why the nineteenth century demanded rigour, why 
 - **[14 Applied and Computational Mathematics](../14-applied-and-computational-mathematics/README.md):** the route by which mathematics reaches society, and the source of the machine learning now entering research.
 - **[12 Number Theory and Algebraic Geometry](../12-number-theory-and-algebraic-geometry/README.md):** home of the Riemann hypothesis, the Birch and Swinnerton-Dyer conjecture, abc and Fermat's last theorem.
 - **[11 Probability and Statistics](../11-probability-and-statistics/README.md):** statistical reasoning, and its misuse, is where mathematics most often meets law and policy.
-- **[03 Combinatorics and Graph Theory](../03-combinatorics-and-graph-theory/README.md):** the source of the first computer-assisted proofs and of the large SAT-solver proofs.
+- **[03 Combinatorics and Graph Theory](../03-combinatorics-and-graph-theory/README.md):** the source of the first computer-assisted proofs and of the large proofs found by satisfiability (SAT) solvers.
 
 ## Connections across layers
 
