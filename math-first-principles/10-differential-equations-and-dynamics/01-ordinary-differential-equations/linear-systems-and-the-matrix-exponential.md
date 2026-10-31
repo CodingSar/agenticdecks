@@ -1,0 +1,76 @@
+# Linear Systems and the Matrix Exponential
+
+> **Layer:** [10 Differential Equations and Dynamics](../README.md) › [Ordinary Differential Equations](README.md)
+> **Builds on:** [Existence and uniqueness](existence-and-uniqueness.md), [Eigenvalues and diagonalisation](../../04-linear-algebra/02-determinants-and-eigenvalues/eigenvalues-and-diagonalisation.md), [Jordan normal form](../../04-linear-algebra/02-determinants-and-eigenvalues/jordan-normal-form.md), [The exponential and trigonometric functions](../../06-real-analysis/02-calculus-of-one-variable/the-exponential-and-trigonometric-functions.md)
+> **Enables:** [Stability and phase portraits](stability-and-phase-portraits.md), [Control theory](../../14-applied-and-computational-mathematics/04-mathematical-modelling/control-theory.md), [Markov chains](../../11-probability-and-statistics/03-stochastic-processes/markov-chains.md), [The mathematics of quantum mechanics](../../14-applied-and-computational-mathematics/04-mathematical-modelling/the-mathematics-of-quantum-mechanics.md)
+
+## Essence
+
+The linear system x′ = Ax, with x ∈ ℝⁿ and A a constant n × n matrix, is the one large class of differential equations solved completely: x(t) = e^(tA)·x(0), where the matrix exponential e^(tA) = I + tA + t²A²/2! + … is the same series as eᵗ. Every question about the solutions becomes a question about A. Its eigenvalues give the rates of growth, decay and rotation, its Jordan blocks give polynomial corrections, and its trace gives the rate at which volume changes. Linear systems matter far beyond themselves, because near an equilibrium every smooth system looks linear.
+
+## Core tenets
+
+1. **The exponential series always converges and solves the system for all time.** Since ‖Aᵏ‖ ≤ ‖A‖ᵏ for an operator norm, the series is dominated by e^(|t|·‖A‖), and differentiating term by term gives (d/dt)e^(tA) = A·e^(tA). The field Ax is globally Lipschitz with constant ‖A‖, so solutions exist for all t ∈ ℝ and are unique, and they form an n-dimensional vector space spanned by the columns of e^(tA). Linear equations never blow up.
+
+2. **e^(A+B) = e^A·e^B requires AB = BA.** The scalar law comes from the binomial theorem, which needs the factors to commute. Here it fails:
+
+   ```
+   A = | 0 1 |   B = | 0 0 |   e^A·e^B = | 2 1 |   e^(A+B) = | cosh 1  sinh 1 |
+       | 0 0 |       | 1 0 |             | 1 1 |             | sinh 1  cosh 1 |
+   ```
+
+   The traces are 3 and 2·cosh 1 ≈ 3.086. For the same reason x′ = A(t)x is not solved by the exponential of ∫A unless the matrices A(t) commute with one another.
+
+3. **Diagonalising A splits the system into independent modes.** If A = PDP⁻¹ with D diagonal, then e^(tA) = P·e^(tD)·P⁻¹, and e^(tD) has diagonal entries e^(λᵢt): each eigenvector direction grows or decays at its own rate. A complex pair λ = a ± iω gives e^(at) times a rotation at angular frequency ω. The oscillator y″ = −ω²y, with state (y, y′), has
+
+   ```
+   e^(tA) = |  cos ωt      (sin ωt)/ω |
+            | −ω·sin ωt     cos ωt    |
+   ```
+
+   a rotation of phase space, which is why springs, circuits and pendulums oscillate.
+
+4. **A defective matrix adds polynomial factors.** Every matrix splits as A = S + N with S diagonalisable, N nilpotent and SN = NS (the Jordan–Chevalley decomposition), so e^(tA) = e^(tS)·e^(tN), and e^(tN) is a polynomial in t because Nᵏ = 0. Solutions are sums of terms tʲ·e^(λt). The critically damped oscillator y″ + 2y′ + y = 0 has the double eigenvalue −1 and solutions e^(−t) and t·e^(−t); resonance in y″ + y = sin t gives the growing response −(t/2)·cos t by the same mechanism.
+
+5. **The spectrum decides the long run but not the transient.** Every solution tends to 0 if and only if every eigenvalue has negative real part, since each term tʲ·e^(λt) then decays, the exponential beating the polynomial. In the short run a non-normal matrix can mislead: for x′ = −x + 50y, y′ = −2y from (0, 1), both eigenvalues are negative, yet x = 50(e^(−t) − e^(−2t)) climbs to 12.5 at t = ln 2 before decaying.
+
+6. **Duhamel's formula solves the forced system.** By variation of constants, x′ = Ax + g(t) has the solution
+
+   ```
+   x(t) = e^(tA)·x(0) + ∫ from 0 to t of e^((t − s)A)·g(s) ds.
+   ```
+
+   Each input g(s) is carried by the free dynamics for the remaining time t − s, and the results add. With e^(tA) replaced by the heat or wave propagator, the same formula solves forced partial differential equations and drives the existence theory for nonlinear ones.
+
+7. **The trace measures volume, and the exponential joins algebra to geometry.** Liouville's formula det e^(tA) = e^(t·tr A) says the flow multiplies volumes by e^(t·tr A), because tr A is the divergence of the field Ax; trace zero means volume is preserved, as in every [Hamiltonian system](../04-dynamical-systems/hamiltonian-systems-and-integrability.md). If A is skew-symmetric, e^(tA) is a rotation. In general t ↦ e^(tA) is the one-parameter subgroup generated by A, the bridge from a [Lie algebra to its Lie group](../../08-geometry/04-lie-theory/lie-groups-and-lie-algebras.md).
+
+## Key concepts
+
+| Term | Meaning |
+|---|---|
+| Matrix exponential | e^A = ∑ Aᵏ/k! over k ≥ 0, convergent for every square matrix |
+| Fundamental matrix | A matrix whose columns form a basis of solutions; e^(tA) is the one equal to I at t = 0 |
+| Mode | A solution e^(λt)·v along an eigenvector v with eigenvalue λ |
+| Nilpotent matrix | N with Nᵏ = 0 for some k |
+| Jordan–Chevalley decomposition | A = S + N with S diagonalisable, N nilpotent and SN = NS |
+| Non-normal matrix | A matrix with no orthonormal basis of eigenvectors |
+| Duhamel's formula | The forced solution as free evolution of the initial state plus propagated inputs |
+| Trace | The sum of the diagonal entries, equal to the sum of the eigenvalues |
+
+## How it fits
+
+- **Below:** solving x′ = Ax is the [eigenvalue theory](../../04-linear-algebra/02-determinants-and-eigenvalues/eigenvalues-and-diagonalisation.md) and [Jordan normal form](../../04-linear-algebra/02-determinants-and-eigenvalues/jordan-normal-form.md) of linear algebra applied to the exponential series.
+- **Above:** [control theory](../../14-applied-and-computational-mathematics/04-mathematical-modelling/control-theory.md) asks which states the input g in Duhamel's formula can reach; a continuous-time [Markov chain](../../11-probability-and-statistics/03-stochastic-processes/markov-chains.md) with rate matrix Q has transition probabilities e^(tQ); the Schrödinger equation iψ′ = Hψ is solved by the unitary group e^(−itH) of [quantum mechanics](../../14-applied-and-computational-mathematics/04-mathematical-modelling/the-mathematics-of-quantum-mechanics.md). Pharmacology's [compartment models](../../../medicine-first-principles/01-quantitative-and-scientific-foundations/03-systems-and-models/compartment-models-and-exponential-processes.md) are linear systems of transfer rates.
+- **Siblings:** [existence and uniqueness](existence-and-uniqueness.md) is automatic here; [stability](stability-and-phase-portraits.md) uses this system as the model near every equilibrium; [boundary value problems](boundary-value-problems-and-sturm-liouville-theory.md) are linear too, but data at two ends turns computing an exponential into finding eigenvalues.
+
+## Common misconceptions
+
+- **"e^(A+B) = e^A·e^B for all matrices."**: only when AB = BA. The correction terms are built from the commutator AB − BA, as the Baker–Campbell–Hausdorff formula records.
+- **"To compute e^(tA), sum the series."**: for the 1 × 1 matrix −20 the terms reach 20²⁰/20! ≈ 4.3 × 10⁷ before cancelling to e^(−20) ≈ 2 × 10⁻⁹, so rounding swamps the answer. Practical methods scale and square, e^A = (e^(A/2ᵏ))^(2ᵏ), with a rational approximation for the small matrix.
+- **"Negative eigenvalues mean every solution shrinks steadily."**: they fix only the long-run rate; non-normal matrices allow large transient growth first.
+
+## Go deeper
+
+- Morris W. Hirsch, Stephen Smale and Robert L. Devaney, *Differential Equations, Dynamical Systems, and an Introduction to Chaos* (3rd edition, 2013): every canonical form of a planar linear system, worked in full.
+- Vladimir I. Arnold, *Ordinary Differential Equations*: the exponential as a one-parameter group.
+- Cleve Moler and Charles Van Loan, "Nineteen Dubious Ways to Compute the Exponential of a Matrix, Twenty-Five Years Later" (2003): why the obvious algorithms fail.

@@ -1,0 +1,65 @@
+# Measure and σ-Algebras
+
+> **Layer:** [09 Advanced Analysis](../README.md) › [Measure and Integration](README.md)
+> **Builds on:** [The Riemann Integral](../../06-real-analysis/02-calculus-of-one-variable/the-riemann-integral.md), [Countable Sets](../../01-sets-and-foundations/02-infinity-and-cardinality/countable-sets.md), [Equivalence Relations and Quotients](../../01-sets-and-foundations/01-sets-relations-and-functions/equivalence-relations-and-quotients.md), [The Axiom of Choice](../../01-sets-and-foundations/03-axiomatic-set-theory/the-axiom-of-choice.md)
+> **Enables:** [The Lebesgue Integral](the-lebesgue-integral.md), [Hausdorff Dimension and Fractals](hausdorff-dimension-and-fractals.md), [Probability Spaces and Kolmogorov's Axioms](../../11-probability-and-statistics/01-measure-theoretic-probability/probability-spaces-and-kolmogorovs-axioms.md), [Ergodic Theory](../../10-differential-equations-and-dynamics/04-dynamical-systems/ergodic-theory.md), [Forcing and Independence](../../13-structure-and-metamathematics/03-model-theory-and-independence/forcing-and-independence.md)
+
+## Essence
+
+A measure assigns a size (length, area, probability) to sets and is countably additive: the size of a countable disjoint union is the sum of the sizes. The Riemann integral handles only sets that finitely many boxes approximate well. Lebesgue measure extends length to a vast family of subsets of ℝ that is closed under countable operations, a σ-algebra. The construction rests on one idea: give every set an outer size from countable covers by intervals, then keep the sets that split every other set additively. The price is that, if the axiom of choice holds, some subsets of ℝ have no length at all.
+
+## Core tenets
+
+1. **A measure is a countably additive function on a σ-algebra.** A σ-algebra Σ on a set X contains ∅ and is closed under complements and countable unions. A measure μ: Σ → [0, ∞] has μ(∅) = 0 and μ(A₁ ∪ A₂ ∪ …) = ∑ μ(Aₙ) for disjoint Aₙ. Given finite additivity, this is equivalent to continuity: if A₁ ⊆ A₂ ⊆ … then μ(Aₙ) → μ(⋃Aₙ), which later lets limits pass through integrals. Uncountable additivity would fail at once, since each point of [0, 1] has length 0.
+
+2. **Under the axiom of choice, no translation-invariant measure gives every subset of ℝ a length.** Giuseppe Vitali's argument (1905) assumes a measure m on all subsets with m([0, 1]) = 1 and m(A + q) = m(A):
+
+   ```
+   x ~ y  ⇔  x − y ∈ ℚ                   an equivalence relation on [0, 1]
+   V  = one point from each class         needs the axiom of choice
+   V + q,  q ∈ ℚ ∩ [−1, 1]                countably many, pairwise disjoint
+   [0, 1] ⊆ ⋃ (V + q) ⊆ [−1, 2]   ⇒   1 ≤ m(V) + m(V) + … ≤ 3
+   ```
+
+   The translates cover [0, 1] because each x differs from its class's chosen point by a rational in [−1, 1], and they are disjoint because V meets each class once. The sum is 0 or ∞, so no value of m(V) works, and one must measure only the sets of a σ-algebra.
+
+3. **The axiom of choice, not geometry, makes such sets exist.** Robert Solovay (1970) showed that Zermelo–Fraenkel set theory (ZF) with only dependent choice is consistent with "every set of reals is Lebesgue measurable", if an inaccessible cardinal is consistent; see [forcing](../../13-structure-and-metamathematics/03-model-theory-and-independence/forcing-and-independence.md). In ℝ³, choice gives the Banach–Tarski paradox (1924): a ball can be cut into five pieces that reassemble by rigid motions into two balls of the same size. The pieces are not measurable; the paradox rests on a free group on two generators inside the rotation group of ℝ³.
+
+4. **Outer measure is defined for every set but is only subadditive.** Lebesgue outer measure is m∗(A) = inf ∑ ℓ(Iₙ), over countable covers of A by open intervals Iₙ of lengths ℓ(Iₙ). It is monotone, translation-invariant and countably subadditive. Covering the n-th rational by an interval of length ε/2ⁿ gives m∗(ℚ) = 0, while compactness of [a, b] gives m∗([a, b]) = b − a. Finite covers, as in Jordan content, give ℚ ∩ [0, 1] outer content 1 and inner content 0, so countable covers are the decisive change.
+
+5. **Carathéodory's criterion selects the sets on which additivity holds.** A set E is measurable when m∗(A) = m∗(A ∩ E) + m∗(A ∖ E) for every A ⊆ ℝ, so E splits every set cleanly. Constantin Carathéodory proved that the measurable sets form a σ-algebra on which m∗ is a measure. Intervals pass the test, so every Borel set is measurable. The proof uses only the axioms of an outer measure, so it turns any outer measure into a measure; [Hausdorff measure](hausdorff-dimension-and-fractals.md) is built this way.
+
+6. **Carathéodory's extension theorem builds most measures in practice.** Let 𝒜 be an algebra of subsets of X (closed under complements and finite unions) and μ₀ a premeasure on it (countably additive whenever a countable disjoint union stays in 𝒜). Then μ₀ extends to a measure on the σ-algebra generated by 𝒜, uniquely if X is a countable union of sets of finite μ₀-measure (σ-finiteness). Total length on finite unions of intervals gives Lebesgue measure; cylinder sets of coin tosses give the [probability](../../11-probability-and-statistics/01-measure-theoretic-probability/probability-spaces-and-kolmogorovs-axioms.md) of infinite sequences. Without σ-finiteness uniqueness fails: on ℚ, every non-empty finite union of sets (a, b] ∩ ℚ is infinite, so counting measure and twice it agree on these yet differ on points.
+
+7. **There are far more Lebesgue sets than Borel sets.** The Borel σ-algebra is generated by the countably many intervals with rational endpoints, which allows only 𝔠 = 2^ℵ₀ Borel sets. The Cantor set has measure 0, since the removed intervals have total length 1/3 + 2/9 + 4/27 + … = 1, yet it has 𝔠 points, and all 2^𝔠 of its subsets are null and hence Lebesgue measurable. Yet each measurable set differs from some Borel set by a null set.
+
+## Key concepts
+
+| Term | Meaning |
+|---|---|
+| σ-algebra | A family of subsets containing ∅, closed under complements and countable unions |
+| Measure | A function μ: Σ → [0, ∞] with μ(∅) = 0, countably additive on disjoint sets |
+| Borel σ-algebra | The smallest σ-algebra on ℝ containing all open sets |
+| Outer measure | A monotone, countably subadditive set function defined on every subset |
+| Carathéodory measurable | A set E with m∗(A) = m∗(A ∩ E) + m∗(A ∖ E) for every A |
+| Premeasure | A countably additive function on an algebra of sets |
+| σ-finite | X is a countable union of sets of finite measure |
+| Null set | A set of measure 0; for Lebesgue measure, every subset of one is measurable |
+
+## How it fits
+
+- **Below:** the [Riemann integral](../../06-real-analysis/02-calculus-of-one-variable/the-riemann-integral.md) measures only Jordan-measurable sets; [countability](../../01-sets-and-foundations/02-infinity-and-cardinality/countable-sets.md) is where additivity stops; Vitali's set picks representatives of a [quotient](../../01-sets-and-foundations/01-sets-relations-and-functions/equivalence-relations-and-quotients.md) by the [axiom of choice](../../01-sets-and-foundations/03-axiomatic-set-theory/the-axiom-of-choice.md).
+- **Above:** a probability space is a measure space of total mass 1, the start of [layer 11](../../11-probability-and-statistics/README.md); [ergodic theory](../../10-differential-equations-and-dynamics/04-dynamical-systems/ergodic-theory.md) studies maps that preserve a measure.
+- **Siblings:** the [Lebesgue integral](the-lebesgue-integral.md) is built on measurable sets; [Hausdorff dimension](hausdorff-dimension-and-fractals.md) reuses Carathéodory's construction; the [Radon–Nikodym theorem](the-radon-nikodym-theorem.md) compares two measures on one σ-algebra.
+
+## Common misconceptions
+
+- **"Measure zero means countable"**: the Cantor set is uncountable and has measure 0.
+- **"A dense open set fills most of the interval"**: the intervals of tenet 4 form a dense open set of measure at most ε.
+- **"Non-measurable sets might turn up in practice"**: every set built from intervals by countable operations is Borel, and without the axiom of choice no non-measurable set can be proved to exist.
+
+## Go deeper
+
+- Terence Tao, *An Introduction to Measure Theory* (2011): from Jordan content to Lebesgue measure, every step motivated.
+- Elias M. Stein and Rami Shakarchi, *Real Analysis* (2005): a clear modern course.
+- Paul R. Halmos, *Measure Theory* (1950): the classic abstract treatment.
