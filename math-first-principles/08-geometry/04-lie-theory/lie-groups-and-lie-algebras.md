@@ -54,4 +54,4 @@ A Lie group is a group that is also a smooth manifold, with smooth multiplicatio
 
 - Stillwell, *Naive Lie Theory* (2008): matrix groups and quaternions with minimal prerequisites.
 - Hall, *Lie Groups, Lie Algebras, and Representations* (2003): matrix Lie groups done properly.
-- Needham's and Baez's expositions aside, the classic is Chevalley, *Theory of Lie Groups* (1946): the first modern global treatment.
+- Chevalley, *Theory of Lie Groups* (1946): the first modern global treatment.

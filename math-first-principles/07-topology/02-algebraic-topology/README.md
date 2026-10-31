@@ -22,14 +22,15 @@ Two constructions do most of the work. The fundamental group π₁ records loops
 The fundamental group comes first because it is the most concrete invariant and the one that needs the least machinery: one computation, π₁(S¹) ≅ ℤ, already proves the fundamental theorem of algebra and the two-dimensional Brouwer theorem. Covering spaces are both the tool that computes π₁ and the geometric meaning of its subgroups. Homology trades π₁'s non-abelian subtlety for linear algebra, and so reaches every dimension. The last two leaves cash in: the Euler characteristic is homology's simplest number, and fixed-point theorems are its most famous applications.
 
 ```
-   fundamental group  <──────>  covering spaces
-          │   (path lifting computes π₁; subgroups classify covers)
+   fundamental group <──────> covering spaces
+          │        path lifting computes π₁;
+          │        subgroups of π₁ classify covers
           ▼
-       homology  (abelianised π₁ in degree 1; every dimension)
+       homology   (H₁ is π₁ made abelian; every dimension)
        │      │
        ▼      ▼
-   Euler    fixed-point theorems
-   characteristic ──┘ (L(identity) = χ)
+     Euler ─────> fixed-point theorems
+  characteristic   (Lefschetz number of the identity is χ)
 ```
 
 ## Connections to sibling areas

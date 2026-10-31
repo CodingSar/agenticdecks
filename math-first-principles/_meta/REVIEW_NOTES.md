@@ -21,4 +21,10 @@ Collected from writer reports, to be resolved in the review pass.
 - **Quotients:** Novikov and Boone 1950s.
 - **Books:** Artin *Algebra* 2nd edition 2011 or 2010; check all other edition years.
 
+### Layer 02 (W3)
+
+- **Constructing the numbers:** Peano and Dedekind starting at 1; Benacerraf 1965; Paris–Harrington 1977; Dedekind's 1872 √2·√3 = √6 claim; Cantor 1872 with Heine and Méray; Cantor 1874, 1891; Bombelli 1572; Gauss 1799 thesis and four proofs; Lindemann–Weierstrass general form 1885 and its statement; Roth 1955; Baker 1966; Apéry 1978; Nesterenko 1996; Frobenius 1877; Hurwitz 1898; Graves and Cayley octonions; Degen's eight-square identity; Kervaire and Bott–Milnor 1958; Ostrowski 1916; Hensel 1897; Cayley–Dickson sign convention.
+- **Elementary number theory:** Lamé 1844 and 1847; Bachet and Bézout; Gauss 1801 unique factorisation; Fermat 1640; Euler 1763; Zhang 2013 (70,000,000); Polymath 246 (2014); Helfgott 2013; Alford–Granville–Pomerance 1994; AKS 2002/2004; Artin's conjecture 1927, Hooley 1967 under GRH; Legendre 1798; "more than two hundred proofs" of reciprocity; Artin reciprocity 1927 and Hilbert's ninth problem; Brahmagupta, Bhāskara II, Fermat c. 1637, Lagrange 1770; Selmer 1951; Jones–Sato–Wada–Wiens 1976; Davis–Putnam–Robinson 1961.
+- **Books:** Knuth vol. 2 3rd edition 1997; Tao *Analysis I* 2006; Fine and Rosenberger 1997; Matiyasevich 1993; Davis 1973; Koblitz 2nd edition 1994; Cox 2nd edition 2013; Lemmermeyer 2000; Shoup 2nd edition 2009; Crandall and Pomerance 2nd edition 2005.
+
 ## Cross-layer follow-ups (coordinator, after review pass)

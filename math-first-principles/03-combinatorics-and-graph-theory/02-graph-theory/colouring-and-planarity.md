@@ -22,7 +22,7 @@ A proper colouring gives adjacent vertices different colours, and the chromatic 
 
 7. **Colouring depends on the surface.** On the torus, of Euler characteristic 0, Euler's formula permits denser graphs: the complete graph K₇ embeds there, and seven colours are needed and suffice. Ringel and Youngs completed Heawood's formula for the number of colours needed on every other closed surface, with one exception, the Klein bottle, which needs 6. The plane, the simplest surface, was the hardest case.
 
-8. **Edge colouring is almost determined by the maximum degree.** A proper edge colouring gives edges at a common vertex different colours, so it needs at least Δ colours; Vizing's theorem says Δ + 1 always suffice for simple graphs. Bipartite graphs need exactly Δ, by splitting into matchings ([matchings](matchings-and-network-flows.md))
+8. **Edge colouring is almost determined by the maximum degree.** A proper edge colouring gives edges at a common vertex different colours, so it needs at least Δ colours; Vizing's theorem says Δ + 1 always suffice for simple graphs. Bipartite graphs need exactly Δ, by splitting into matchings ([matchings](matchings-and-network-flows.md)).
 
 ## Key concepts
 | Term | Meaning |

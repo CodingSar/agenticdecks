@@ -14,7 +14,7 @@ A stochastic process is a family of random variables indexed by time: a random w
 | [Markov chains](markov-chains.md) | Memoryless evolution; stationary distributions, convergence, mixing, recurrence | No earlier child; uses conditional expectation and the law of large numbers |
 | [Martingales](martingales.md) | Fair games; optional stopping and almost sure convergence | Markov chains |
 | [Brownian motion](brownian-motion.md) | The continuous scaling limit of random walks; Gaussian, Markov and a martingale | Markov chains, martingales |
-| [Stochastic calculus](stochastic-calculus.md) | Integration against Brownian motion, Itô's formula, stochastic differential equations | Martingales, Brownian motion |
+| [Stochastic calculus](stochastic-calculus.md) | Integration against Brownian motion, Itô's formula, stochastic differential equations (SDEs) | Martingales, Brownian motion |
 
 Read them in order. Markov chains come first because they need the least: a matrix and a starting distribution. Martingales add the betting point of view, and the two meet when a harmonic function h, with Ph = h, turns a chain X into a martingale h(Xₙ). Brownian motion arrives as the limit of random walks, and both earlier ideas apply to it at once. Stochastic calculus then makes the martingale transform continuous and turns Brownian motion into a tool for building new processes.
 
