@@ -11,6 +11,8 @@ Collected from writer reports, to be resolved in the review pass.
 
 - **05 (W6):** optional leaves: commutative and Noetherian rings (localisation, prime spectrum) as a bridge to 12; group extensions and cohomology.
 
+- **14 (W15):** candidate leaves: FFT and spectral methods; combinatorial and integer optimisation; quadrature; computational complexity (P versus NP) in 13 or 14; quantum computation has no home in the math tree (CS leaf linked instead).
+
 ## Claims to verify
 
 ### Layer 01 (W2)
@@ -59,4 +61,13 @@ Collected from writer reports, to be resolved in the review pass.
 - **Galois theory:** Shafarevich (solvable groups over ℚ); inverse Galois problem and sixth Fermat prime open; Cardano 1545; Ruffini 1799; Abel 1824; Hermite 1858, 1873; Wantzel 1837; Lindemann 1882; Gauss 1796/1801; 641 × 6700417; Frobenius 1896.
 - **Books:** Cox–Little–O'Shea 4th 2015; Lidl–Niederreiter 1994; Serre 1977; James–Liebeck 2nd 2001; Artin 2nd 2011; Cox 2nd 2012; Stewart 4th 2015; Ireland–Rosen 2nd 1990; Stewart–Tall 3rd 2002; Lyndon–Schupp 1977; Stillwell 2nd 1993.
 
+### Layer 14, parts 01–03 (W15)
+
+- **Numerical analysis:** Wilkinson c. 1960; Householder 1958; Hestenes–Stiefel 1952; Francis/Kublanovskaya c. 1961; Runge 1895, 1901; Kutta 1901; Dormand–Prince 1980; Dahlquist 1963; Crank–Nicolson 1947; Lax–Richtmyer 1956; Courant 1943; Faber 1914; Bernstein 1912; Schoenberg 1946; Cayley 1879; Shamir 1979; Metropolis 1953; Hastings 1970; Dyer–Frieze–Kannan 1991; Bárány–Füredi; Hubbard–Schleicher–Sutherland 2001; Dongarra–Sullivan 2000; Lebesgue-constant asymptotics; growth factors "only partly understood".
+- **Optimisation:** Bland 1977; Klee–Minty 1972; Santos 2010/2012 (43 dimensions, 86 facets); Spielman–Teng 2001; Khachiyan 1979; Karmarkar 1984; Farkas 1902; Kantorovich 1939; Slater 1950; Karush 1939; Kuhn–Tucker 1951; Goemans–Williamson 1995 (0.878); Nesterov–Nemirovski 1994; Nesterov 1983; Nemirovski–Yudin 1983; Polyak 1964; Lasso 1996; Markowitz 1952; Adam 2015; Rockafellar 1993 paraphrase; heavy ball failure; strict saddles avoided almost surely.
+- **Information, codes, cryptography:** Kullback–Leibler 1951; Huffman 1952; Lempel–Ziv 1977/78; rate–distortion 1959; Tietäväinen, Zinoviev–Leontiev 1973; Singleton 1964; Gilbert 1952; Varshamov 1957; Tsfasman–Vlăduţ–Zink 1982; Berlekamp 1968; Berlekamp–McEliece–van Tilborg 1978; Guruswami–Sudan 1999; Gallager 1960/63; turbo 1993; Arıkan 2009; Shoup 1997; Cocks 1973, declassified 1997; Koblitz–Miller 1985; RSA-250 2020; Grover 1996; Regev 2005; SIKE 2022; McEliece 1978; LDPC and polar both in 5G; 256-bit curve ≈ 3,072-bit RSA; Kelly criterion as capacity.
+- **Open as of 2026:** polynomial pivot rule; polynomial Hirsch; strongly polynomial LP; Gilbert–Varshamov tightness; relay and broadcast capacity; one-way functions; RSA versus factoring; Shor at cryptographic size.
+
 ## Cross-layer follow-ups (coordinator, after review pass)
+
+- Root README names layer 14 "Applied & Computational Mathematics"; the files use "and". Align the root README.
