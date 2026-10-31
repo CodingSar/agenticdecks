@@ -24,6 +24,8 @@ Collected from writer reports, to be resolved in the review pass.
 
 - **06 (W7):** number `04-metric-spaces` before `03-calculus-of-several-variables`, since 03 builds on 04; move `estimates-and-inequalities` earlier in area 01; add a leaf on power series and analytic functions.
 
+- **10 (W11):** layer 07 has no Jordan curve theorem leaf (Poincaré–Bendixson would link to it); complex dynamics (Julia and Mandelbrot sets, Douady–Hubbard) has no home, candidate leaf in 10/04 or 09.
+
 ## Claims to verify
 
 ### Layer 01 (W2)
@@ -149,6 +151,25 @@ Collected from writer reports, to be resolved in the review pass.
 - 04: Weil's extension of Mordell 1928; Hasse's bound 1930s; Hecke operators 1930s; Elkies rank ≥ 28 curve 2006; Gross–Zagier 1986, Kolyvagin 1989; Koblitz and Miller 1985; 256-bit curve ≈ 3072-bit RSA; Sato–Tate "Taylor and collaborators", no year; Frey mid-1980s, Hellegouarch first; Ribet 1986; Euler n = 3 1770; Wiles June 1993 Isaac Newton Institute, fix September 1994, Annals 1995; Khare–Wintenberger published 2009; Viazovska 2016, dimension 24 with collaborators; local Langlands GL(n) Harris–Taylor, Henniart c. 2000; Ngô 2008/2010, Fields 2010; geometric Langlands "proof announced in 2024 by Gaitsgory, Raskin and collaborators" (check refereeing status); "open as of 2026" list: general reciprocity/functoriality, BSD, RH, twin primes, binary Goldbach, Siegel zeros, Hilbert's 12th, boundedness of ranks.
 - Writer verified by computation: 2(3, 5) on y² = x³ − 2; #E(𝔽₁₃) = 19; η(z)²η(11z)² coefficients; σ₇ identity; Jacobi four-square; j coefficients; τ values.
 
+### Layer 10 (W11)
+
+- Ordinary differential equations: Grobman 1959, Hartman 1960; Sturm and Liouville 1830s; Kakutani 1944.
+- First-order: Kružkov 1970; Glimm 1965; multi-dimensional conservation-law systems "largely open as of 2026"; Crandall–Lions 1983.
+- Heat: Tychonoff 1935 and growth class A·e^(a|x|²); Widder 1975; Ricci flow Hamilton 1982, Perelman 2002–2003.
+- Wave: d'Alembert 1747; Courant–Friedrichs–Lewy (CFL) 1928; Kac 1966; Gordon–Webb–Wolpert 1992; Fritz John 4th 1982; Courant–Hilbert II 1962.
+- Weak solutions: Lax–Milgram 1954; De Giorgi 1957, Nash 1958, De Giorgi counterexample 1968; Brezis 2011; Gilbarg–Trudinger 2nd 1983.
+- Nonlinear: Hopf 1950, Cole 1951; Zabusky–Kruskal 1965; Gardner–Greene–Kruskal–Miura 1967; Lax 1968; Fujita 1966; Fefferman 2000, Navier–Stokes open as of 2026 (check 2025 computer-assisted blow-up work does not change the wording); Leray 1934; Caffarelli–Kohn–Nirenberg 1982; Escauriaza–Seregin–Šverák 2003; Tao 2016; Buckmaster–Vicol 2019; Turing 1952; Tao 2006; Drazin–Johnson 1989.
+- Euler–Lagrange: Johann Bernoulli 1696; Euler and Lagrange 1740s–1750s; Gelfand–Fomin 1963; Feynman II ch. 19 (1964); Lanczos 1949; brachistochrone integral ∫√((1 + y′²)/y).
+- Noether: 1918; Tavel translation 1971; invited to Göttingen 1915; Pauli 1926 and the four-dimensional hydrogen symmetry; swing as parametric pumping; Kosmann-Schwarzbach 2011; Olver 2nd 1993; Arnold 2nd 1989.
+- Minimisers: Weierstrass 1870; Hilbert 1900; Ball–James 1987; Morrey 1952; Ball 1977; Ambrosetti–Rabinowitz 1973; Giusti 2003; Struwe 4th 2008.
+- Iterated maps: May 1976; Feigenbaum 1978; Lanford 1982; Li–Yorke 1975; Sharkovskii 1964; Graczyk–Świątek and Lyubich 1997; Jakobson 1981; Douady–Hubbard 1982; parameters 3.5441 and 3.5644; Devaney 2nd 1989; de Melo–van Strien 1993.
+- Bifurcations: Hopf 1942; Guckenheimer–Holmes 1983; Kuznetsov 3rd 2004; amplitude ≈ 2√μ for x″ − (μ − x²)x′ + x = 0.
+- Chaos: Lorenz 1963; exponents ≈ 0.906, 0, −14.57; dimension ≈ 2.06; Hopf value 470/19; 0.506/0.506127 anecdote; 1972 butterfly talk; Banks et al. 1992; Poincaré 1890; Hénon 1976; Benedicks–Carleson 1991; classical Hénon attractor unproven as of 2026; Smale's 14th problem 1998; Tucker 2002; Gleick 1987.
+- Ergodic: Zermelo 1896; Birkhoff 1931; von Neumann 1932; Weyl 1916; Kolmogorov 1958, Sinai 1959 settling von Neumann's question; Ornstein 1970; Szemerédi 1975; Furstenberg 1977; Furstenberg–Katznelson 1978; Green–Tao 2004/2008 "ideas from this approach"; Walters 1982; Furstenberg book 1981; Einsiedler–Ward 2011.
+- Hamiltonian: Gromov 1985; Dirac 1925; Kovalevskaya 1888; Kolmogorov 1954, Arnold 1963, Moser 1962, τ > n − 1; Arnold diffusion 1964; Nekhoroshev 1977; Laskar 1989; Poincaré non-integrability wording; Moser 1973; *Les méthodes nouvelles* 1892–1899.
+- Books: Teschl 2012; Axler et al. 2001; Mörters–Peres 2010; Coddington–Levinson 1955; Moler–Van Loan 2003; Perko 2001; Hirsch–Smale–Devaney 2013; Evans 2010; Lax 1973; Whitham 1974. Undated: Strogatz 2nd, Dacorogna, Lyapunov, Strauss.
+- Style: "ODE" appears unexpanded inside Tucker's paper title in chaos Go deeper (acceptable as a title).
+
 ## Cross-layer follow-ups (coordinator, after review pass)
 
 - Root README names layer 14 "Applied & Computational Mathematics"; the files use "and". Align the root README.
@@ -158,3 +179,5 @@ Collected from writer reports, to be resolved in the review pass.
 - (06, W7) The extrema leaf links to 04 `the-spectral-theorem.md`; completeness/contraction links to 04 `non-negative-matrices-and-perron-frobenius.md`. Both are body-only links; confirm the targets cover what 06 assumes.
 
 - (12, W13) Planned targets to confirm once written: 13 `higher-categories-and-homotopy-type-theory` (from Langlands Enables), 13 `quantifier-elimination-and-decidable-theories` (from Nullstellensatz Enables), 14 `error-correcting-codes` (Goppa codes, from curves Enables), 14 `high-dimensional-geometry-and-random-matrices` (from zeta Enables).
+
+- (10, W11) Confirm 06 `compactness-in-metric-spaces` covers Arzelà–Ascoli; 07 `topological-spaces-and-continuous-maps` defines homeomorphism (stability leaf); 09 distributions fits as Builds on of characteristics. 03 additive-combinatorics is linked from 10 body text only.
