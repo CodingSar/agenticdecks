@@ -10,7 +10,7 @@ Cryptography makes communication secure against an adversary. Its mathematical t
 
 ## Core tenets
 
-1. **Perfect secrecy is possible but expensive.** A cipher is perfectly secret if the ciphertext gives no information about the message: their mutual information is zero. The one-time pad, adding a uniformly random key bit to each message bit modulo 2, achieves it, and Shannon proved that any perfectly secret scheme needs at least as many key bits, in entropy, as message bits. Practical cryptography therefore settles for computational security: no efficient adversary can break the scheme with more than negligible probability.
+1. **Perfect secrecy is possible but expensive.** A cipher is perfectly secret if the ciphertext gives no information about the message: their mutual information is zero. The one-time pad, adding a uniformly random key bit to each message bit modulo 2, achieves it, and Shannon proved that any perfectly secret scheme needs at least as many key bits, in entropy, as message bits. Practice therefore settles for computational security: no efficient adversary can break the scheme with more than negligible probability.
 
 2. **Computational security rests on unproved hardness.** A one-way function is easy to compute and hard to invert on random inputs. Its existence is equivalent to that of pseudorandom generators and of secure digital signatures, and it would imply P ≠ NP (polynomial time differs from nondeterministic polynomial time). Whether one-way functions exist is open as of 2026, so every security proof is conditional: it reduces breaking the scheme to solving a problem believed hard.
 
@@ -49,4 +49,4 @@ Cryptography makes communication secure against an adversary. Its mathematical t
 
 - Jonathan Katz and Yehuda Lindell, *Introduction to Modern Cryptography* (3rd edition, 2020): definitions and proofs.
 - Jeffrey Hoffstein, Jill Pipher and Joseph H. Silverman, *An Introduction to Mathematical Cryptography* (2nd edition, 2014): number theory, elliptic curves and lattices.
-- Neal Koblitz, *A Course in Number Theory and Cryptography* (2nd edition, 1994): a concise mathematical introduction.
+- Neal Koblitz, *A Course in Number Theory and Cryptography* (2nd edition, 1994): concise and mathematical.
