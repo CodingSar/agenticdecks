@@ -22,6 +22,8 @@ Collected from writer reports, to be resolved in the review pass.
 
 - **09 (W10):** candidate leaves: compact operators and Fredholm theory (09/03); wavelets and time-frequency analysis (09/04); elliptic functions (09/02); Hardy spaces, singular integrals, operator algebras; the general spectral theorem (now split between 09 and 14). Cross-link ergodic theorems (10) from 09/01.
 
+- **06 (W7):** number `04-metric-spaces` before `03-calculus-of-several-variables`, since 03 builds on 04; move `estimates-and-inequalities` earlier in area 01; add a leaf on power series and analytic functions.
+
 ## Claims to verify
 
 ### Layer 01 (W2)
@@ -126,8 +128,33 @@ Collected from writer reports, to be resolved in the review pass.
 - **Harmonic analysis:** Fourier 1822; Dirichlet 1829; du Bois-Reymond 1873; Fejér 1900; Gibbs about 9%; Kolmogorov 1923, 1926; Carleson 1966 (Luzin); Hunt 1968; Kahane–Katznelson; Dini–Lipschitz; Weyl 1916; Plancherel 1910; uncertainty constant 1/(16π²); Schwartz late 1940s, Fields 1950; multiplication impossibility 1950s; Malgrange–Ehrenpreis mid-1950s; Lewy 1957 statement (distributional form came later); Sobolev 1930s; Haar 1933; Pontryagin 1934, van Kampen 1935; Peter–Weyl 1927; Cooley–Tukey 1965, Gauss c. 1805; Roth 1953; Shor 1994; Tate 1950; MacWilliams via Walsh–Hadamard.
 - **Books:** Ahlfors 3rd 1979; Needham 1997; Forster 1981; Brezis 2011; Lax 2002; Kreyszig 1978; Reed–Simon I 1972; Rudin FA 2nd 1991; Oxtoby 2nd 1980; Young 1988; Stein–Shakarchi 2003, 2003, 2005, 2011; Körner 1988; Katznelson 1968; Rudin 1962; Terras 1999; Strichartz 1994; Hörmander I 1983; Grubb 2009; Flajolet–Sedgewick 2009; Lieb–Loss 2nd 2001; Folland 2nd 1999; Rudin RCA 3rd 1987; Falconer 1990; Mandelbrot 1982; Tao 2011; Halmos 1950.
 
+### Layer 06 (W7)
+
+- Dates: Riemann 1854; Bolzano intermediate value theorem (IVT) 1817; Cauchy *Cours d'analyse* 1821 and its continuity claim; Weierstrass 1872 with 0 < a < 1, b odd, ab > 1 + 3π/2; Volterra 1881; Oresme 14th century; Fréchet 1906 thesis; Hausdorff named metric spaces 1914; Banach 1922; Green 1828; Hermite 1873; Lindemann 1882.
+- Cantor's Cauchy-sequence construction of ℝ; Liouville and e^(−x²) having no elementary antiderivative.
+- Open as of 2026: irrationality of γ and of π + e.
+- Cauchy-complete non-Archimedean fields.
+- Cauchy-product bound 2(n + 1)/(n + 2).
+- x² + y²(1 − x)³: unique critical point, a strict local minimum, yet unbounded below.
+- Peano's mixed-partials example (values −1 and 1).
+- PageRank as a contraction in ℓ¹.
+- Chapter numbers cited in Rudin and Spivak.
+- Edition years: Körner 1988, Tao 2006, Hairer–Wanner 1996, Steele 2004, Stein–Shakarchi 2005, Hardy–Littlewood–Pólya 1934, Graham–Knuth–Patashnik 2nd 1994, Sutherland 2nd 2009, Ó Searcóid 2007, Kreyszig 1978, Granas–Dugundji 2003, Munkres 1991, Krantz–Parks 2002, Marsden–Tromba 6th 2012, Boyd–Vandenberghe 2004, Nocedal–Wright 2nd 2006, Schey 4th 2005; Knopp undated.
+
+### Layer 12 (W13)
+
+- 01–02 attributions: Kronecker stated Kronecker–Weber (proofs by Weber, Hilbert); Artin reciprocity 1927; class number one: Heegner 1952, Baker and Stark 1960s; Selmer 3x³ + 4y³ + 5z³ 1951; Jensen, infinitely many irregular primes; Chebyshev bounds c. 1850; Mertens 3–4–1 inequality; de la Vallée Poussin error term 1899; Littlewood sign changes 1914; Hardy 1914; Selberg 1942; Newman 1980; Bombieri–Vinogradov 1965; Vinogradov 1937; Chen announced 1966, published 1973.
+- 01–02 claims: Helfgott preprints 2013, computer check with Platt; Polymath bounded gaps 246, parity problem blocks gap 2; Goldbach checked beyond 10¹⁸; RH checked for the first several trillion zeros; 61% heuristic for regular primes; Hardy–Littlewood assumed the Generalised Riemann Hypothesis (GRH) for ternary Goldbach; Euclid-style proofs work only for a² ≡ 1 mod q; Hilbert class field of ℚ(√−5) is ℚ(√−5, i).
+- 03 dates: Hilbert basis theorem 1890, Nullstellensatz 1893, Buchberger 1965; Riemann's inequality 1850s, Roch 1860s; Weil's bound 1940s; EGA 1960–1967 with Dieudonné; FAC 1955; GAGA 1956; étale cohomology with Artin and Verdier.
+- 04: Weil's extension of Mordell 1928; Hasse's bound 1930s; Hecke operators 1930s; Elkies rank ≥ 28 curve 2006; Gross–Zagier 1986, Kolyvagin 1989; Koblitz and Miller 1985; 256-bit curve ≈ 3072-bit RSA; Sato–Tate "Taylor and collaborators", no year; Frey mid-1980s, Hellegouarch first; Ribet 1986; Euler n = 3 1770; Wiles June 1993 Isaac Newton Institute, fix September 1994, Annals 1995; Khare–Wintenberger published 2009; Viazovska 2016, dimension 24 with collaborators; local Langlands GL(n) Harris–Taylor, Henniart c. 2000; Ngô 2008/2010, Fields 2010; geometric Langlands "proof announced in 2024 by Gaitsgory, Raskin and collaborators" (check refereeing status); "open as of 2026" list: general reciprocity/functoriality, BSD, RH, twin primes, binary Goldbach, Siegel zeros, Hilbert's 12th, boundedness of ranks.
+- Writer verified by computation: 2(3, 5) on y² = x³ − 2; #E(𝔽₁₃) = 19; η(z)²η(11z)² coefficients; σ₇ identity; Jacobi four-square; j coefficients; τ values.
+
 ## Cross-layer follow-ups (coordinator, after review pass)
 
 - Root README names layer 14 "Applied & Computational Mathematics"; the files use "and". Align the root README.
 
 - 03 links assume planned files cover: Borsuk–Ulam in 07 `fixed-point-theorems.md` (W8 confirms it does); Ramsey's theorem in 13 `proof-theory-and-reverse-mathematics.md`; diagonal Ramsey bounds in 15 `open-problems.md`; VC dimension in 14 `statistical-learning-theory.md`. Check after all drafts land.
+
+- (06, W7) The extrema leaf links to 04 `the-spectral-theorem.md`; completeness/contraction links to 04 `non-negative-matrices-and-perron-frobenius.md`. Both are body-only links; confirm the targets cover what 06 assumes.
+
+- (12, W13) Planned targets to confirm once written: 13 `higher-categories-and-homotopy-type-theory` (from Langlands Enables), 13 `quantifier-elimination-and-decidable-theories` (from Nullstellensatz Enables), 14 `error-correcting-codes` (Goppa codes, from curves Enables), 14 `high-dimensional-geometry-and-random-matrices` (from zeta Enables).
