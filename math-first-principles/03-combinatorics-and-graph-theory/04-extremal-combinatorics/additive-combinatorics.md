@@ -47,4 +47,4 @@ Additive combinatorics studies the additive structure of sets: when a set of int
 ## Go deeper
 - Tao and Vu, *Additive Combinatorics* (2006): the standard reference for sumsets, Freiman's theorem and Szemerédi's theorem.
 - Zhao, *Graph Theory and Additive Combinatorics* (2023): the graph-theoretic and Fourier routes to Roth and Szemerédi.
-- Green, *Additive Combinatorics* (2009): a review of Tao and Vu that surveys the whole subject.
+- Tao, *Structure and Randomness* (2008): expository essays on the dichotomy behind Szemerédi's and Green–Tao's theorems.
