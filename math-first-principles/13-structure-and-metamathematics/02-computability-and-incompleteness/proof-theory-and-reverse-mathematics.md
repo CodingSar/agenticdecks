@@ -1,7 +1,7 @@
 # Proof Theory and Reverse Mathematics
 
 > **Layer:** [13 Structure and Metamathematics](../README.md) › [Computability and incompleteness](README.md)
-> **Builds on:** [Formal proof systems](../../00-logic-and-proof/01-formal-logic/formal-proof-systems.md), [Ordinal numbers and transfinite induction](../../01-sets-and-foundations/02-infinity-and-cardinality/ordinal-numbers-and-transfinite-induction.md), [Ramsey theory](../../03-combinatorics-and-graph-theory/04-extremal-combinatorics/ramsey-theory.md), [Compactness in metric spaces](../../06-real-analysis/04-metric-spaces/compactness-in-metric-spaces.md), [Gödel's incompleteness theorems](godels-incompleteness-theorems.md)
+> **Builds on:** [Formal proof systems](../../00-logic-and-proof/01-formal-logic/formal-proof-systems.md), [Ordinal numbers and transfinite induction](../../01-sets-and-foundations/02-infinity-and-cardinality/ordinal-numbers-and-transfinite-induction.md), [Ramsey theory](../../03-combinatorics-and-graph-theory/04-extremal-combinatorics/ramsey-theory.md), [Compactness in metric spaces](../../06-real-analysis/03-metric-spaces/compactness-in-metric-spaces.md), [Gödel's incompleteness theorems](godels-incompleteness-theorems.md)
 > **Enables:** [Large cardinals](../03-model-theory-and-independence/large-cardinals.md), [Proof assistants and dependent types](../../../cs-first-principles/06-programming-languages/05-formal-methods/proof-assistants-and-dependent-types.md), [Computers and proof](../../15-mathematics-in-context/computers-and-proof.md), [Philosophy of mathematics](../../15-mathematics-in-context/philosophy-of-mathematics.md)
 
 ## Essence
@@ -45,7 +45,7 @@ After Gödel, the useful question is no longer whether a theory proves its own c
 
 ## How it fits
 
-- **Below:** It studies [formal proofs](../../00-logic-and-proof/01-formal-logic/formal-proof-systems.md) with [transfinite induction](../../01-sets-and-foundations/02-infinity-and-cardinality/ordinal-numbers-and-transfinite-induction.md), and calibrates theorems such as [Ramsey's](../../03-combinatorics-and-graph-theory/04-extremal-combinatorics/ramsey-theory.md) and [Heine–Borel](../../06-real-analysis/04-metric-spaces/compactness-in-metric-spaces.md).
+- **Below:** It studies [formal proofs](../../00-logic-and-proof/01-formal-logic/formal-proof-systems.md) with [transfinite induction](../../01-sets-and-foundations/02-infinity-and-cardinality/ordinal-numbers-and-transfinite-induction.md), and calibrates theorems such as [Ramsey's](../../03-combinatorics-and-graph-theory/04-extremal-combinatorics/ramsey-theory.md) and [Heine–Borel](../../06-real-analysis/03-metric-spaces/compactness-in-metric-spaces.md).
 - **Above:** Cut elimination is evaluation in [proof assistants](../../../cs-first-principles/06-programming-languages/05-formal-methods/proof-assistants-and-dependent-types.md), and the [philosophy of mathematics](../../15-mathematics-in-context/philosophy-of-mathematics.md) uses reverse mathematics to weigh partial versions of Hilbert's programme.
 - **Siblings:** It refines [Gödel's theorems](godels-incompleteness-theorems.md) into a scale of strength that continues upward through [large cardinals](../03-model-theory-and-independence/large-cardinals.md).
 

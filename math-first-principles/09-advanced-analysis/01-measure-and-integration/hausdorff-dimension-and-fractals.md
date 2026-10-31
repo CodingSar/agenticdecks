@@ -1,7 +1,7 @@
 # Hausdorff Dimension and Fractals
 
 > **Layer:** [09 Advanced Analysis](../README.md) › [Measure and Integration](README.md)
-> **Builds on:** [Measure and σ-Algebras](measure-and-sigma-algebras.md), [Metric Spaces and Continuity](../../06-real-analysis/04-metric-spaces/metric-spaces-and-continuity.md), [Completeness and the Contraction Mapping Principle](../../06-real-analysis/04-metric-spaces/completeness-and-the-contraction-mapping-principle.md)
+> **Builds on:** [Measure and σ-Algebras](measure-and-sigma-algebras.md), [Metric Spaces and Continuity](../../06-real-analysis/03-metric-spaces/metric-spaces-and-continuity.md), [Completeness and the Contraction Mapping Principle](../../06-real-analysis/03-metric-spaces/completeness-and-the-contraction-mapping-principle.md)
 > **Enables:** [Iterated Maps](../../10-differential-equations-and-dynamics/04-dynamical-systems/iterated-maps.md), [Chaos and Strange Attractors](../../10-differential-equations-and-dynamics/04-dynamical-systems/chaos-and-strange-attractors.md), [Brownian Motion](../../11-probability-and-statistics/03-stochastic-processes/brownian-motion.md)
 
 ## Essence
@@ -53,7 +53,7 @@ Length, area and volume suit sets of dimension 1, 2 and 3 and fail on others: a 
 
 ## How it fits
 
-- **Below:** diameters and covers live in [metric spaces](../../06-real-analysis/04-metric-spaces/metric-spaces-and-continuity.md); attractors exist by the [contraction mapping principle](../../06-real-analysis/04-metric-spaces/completeness-and-the-contraction-mapping-principle.md); the measure comes from [Carathéodory's construction](measure-and-sigma-algebras.md).
+- **Below:** diameters and covers live in [metric spaces](../../06-real-analysis/03-metric-spaces/metric-spaces-and-continuity.md); attractors exist by the [contraction mapping principle](../../06-real-analysis/03-metric-spaces/completeness-and-the-contraction-mapping-principle.md); the measure comes from [Carathéodory's construction](measure-and-sigma-algebras.md).
 - **Above:** Julia sets of [iterated maps](../../10-differential-equations-and-dynamics/04-dynamical-systems/iterated-maps.md) and [strange attractors](../../10-differential-equations-and-dynamics/04-dynamical-systems/chaos-and-strange-attractors.md) have non-integer dimension, and the boundary of the Mandelbrot set has dimension 2 (Mitsuhiro Shishikura, 1998); paths of [Brownian motion](../../11-probability-and-statistics/03-stochastic-processes/brownian-motion.md) in the plane or higher have dimension 2 almost surely.
 - **Siblings:** the Cantor measure of tenet 3 is the standard [singular measure](the-radon-nikodym-theorem.md); dimension tells apart the null sets of [Lebesgue measure](measure-and-sigma-algebras.md).
 

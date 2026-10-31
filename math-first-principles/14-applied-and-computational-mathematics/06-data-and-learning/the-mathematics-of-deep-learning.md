@@ -1,7 +1,7 @@
 # The Mathematics of Deep Learning
 
 > **Layer:** [14 Applied and Computational Mathematics](../README.md) › [Data and Learning](README.md)
-> **Builds on:** [Statistical Learning Theory](statistical-learning-theory.md), [High-Dimensional Geometry and Random Matrices](high-dimensional-geometry-and-random-matrices.md), [Gradient Methods](../02-optimisation/gradient-methods.md), [The Derivative as a Linear Map](../../06-real-analysis/03-calculus-of-several-variables/the-derivative-as-a-linear-map.md), [Hahn–Banach and Baire Category](../../09-advanced-analysis/03-functional-analysis/hahn-banach-and-baire-category.md)
+> **Builds on:** [Statistical Learning Theory](statistical-learning-theory.md), [High-Dimensional Geometry and Random Matrices](high-dimensional-geometry-and-random-matrices.md), [Gradient Methods](../02-optimisation/gradient-methods.md), [The Derivative as a Linear Map](../../06-real-analysis/04-calculus-of-several-variables/the-derivative-as-a-linear-map.md), [Hahn–Banach and Baire Category](../../09-advanced-analysis/03-functional-analysis/hahn-banach-and-baire-category.md)
 > **Enables:** [Computers and Proof](../../15-mathematics-in-context/computers-and-proof.md), [Mathematics and Society](../../15-mathematics-in-context/mathematics-and-society.md), [Neural Networks and Backpropagation (CS)](../../../cs-first-principles/13-artificial-intelligence/03-deep-learning/neural-networks-and-backpropagation.md), [Training at Scale (CS)](../../../cs-first-principles/13-artificial-intelligence/03-deep-learning/training-at-scale.md)
 
 ## Essence

@@ -42,7 +42,7 @@ The first leaf supplies the questions every other leaf answers. The middle three
 
 ## Connections across layers
 
-The area turns theorems from lower layers into algorithms: the [contraction mapping principle](../../06-real-analysis/04-metric-spaces/completeness-and-the-contraction-mapping-principle.md) into fixed-point iteration, [the spectral theorem](../../04-linear-algebra/03-inner-product-spaces/the-spectral-theorem.md) into the QR algorithm, [weak solutions](../../10-differential-equations-and-dynamics/02-partial-differential-equations/weak-solutions-and-sobolev-spaces.md) into finite elements and the [law of large numbers](../../11-probability-and-statistics/02-limit-theorems/the-law-of-large-numbers.md) into Monte Carlo integration. In return, interval arithmetic makes floating point a tool of rigorous proof (see [computers and proof](../../15-mathematics-in-context/computers-and-proof.md)).
+The area turns theorems from lower layers into algorithms: the [contraction mapping principle](../../06-real-analysis/03-metric-spaces/completeness-and-the-contraction-mapping-principle.md) into fixed-point iteration, [the spectral theorem](../../04-linear-algebra/03-inner-product-spaces/the-spectral-theorem.md) into the QR algorithm, [weak solutions](../../10-differential-equations-and-dynamics/02-partial-differential-equations/weak-solutions-and-sobolev-spaces.md) into finite elements and the [law of large numbers](../../11-probability-and-statistics/02-limit-theorems/the-law-of-large-numbers.md) into Monte Carlo integration. In return, interval arithmetic makes floating point a tool of rigorous proof (see [computers and proof](../../15-mathematics-in-context/computers-and-proof.md)).
 
 ## Cross-cutting threads
 

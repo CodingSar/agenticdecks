@@ -1,7 +1,7 @@
 # Curves and Curvature
 
 > **Layer:** [08 Geometry](../README.md) › [Differential Geometry](README.md)
-> **Builds on:** [The derivative as a linear map](../../06-real-analysis/03-calculus-of-several-variables/the-derivative-as-a-linear-map.md), [Taylor expansion](../../06-real-analysis/02-calculus-of-one-variable/taylor-expansion.md), [Inner products and orthogonality](../../04-linear-algebra/03-inner-product-spaces/inner-products-and-orthogonality.md)
+> **Builds on:** [The derivative as a linear map](../../06-real-analysis/04-calculus-of-several-variables/the-derivative-as-a-linear-map.md), [Taylor expansion](../../06-real-analysis/02-calculus-of-one-variable/taylor-expansion.md), [Inner products and orthogonality](../../04-linear-algebra/03-inner-product-spaces/inner-products-and-orthogonality.md)
 > **Enables:** [Surfaces and Gaussian curvature](surfaces-and-gaussian-curvature.md), [The Gauss–Bonnet theorem](the-gauss-bonnet-theorem.md), [Existence and uniqueness](../../10-differential-equations-and-dynamics/01-ordinary-differential-equations/existence-and-uniqueness.md), [Knot theory](../../07-topology/03-manifolds/knot-theory.md)
 
 ## Essence
@@ -45,7 +45,7 @@ Differential geometry begins by asking how a curve bends. Parametrised by arc le
 
 ## How it fits
 
-- **Below:** [The derivative as a linear map](../../06-real-analysis/03-calculus-of-several-variables/the-derivative-as-a-linear-map.md) and [Taylor expansion](../../06-real-analysis/02-calculus-of-one-variable/taylor-expansion.md) give velocity and the osculating circle; [inner products](../../04-linear-algebra/03-inner-product-spaces/inner-products-and-orthogonality.md) give length and orthogonality.
+- **Below:** [The derivative as a linear map](../../06-real-analysis/04-calculus-of-several-variables/the-derivative-as-a-linear-map.md) and [Taylor expansion](../../06-real-analysis/02-calculus-of-one-variable/taylor-expansion.md) give velocity and the osculating circle; [inner products](../../04-linear-algebra/03-inner-product-spaces/inner-products-and-orthogonality.md) give length and orthogonality.
 - **Above:** Ordinary differential equations reconstruct a curve from its curvature, and total curvature constrains [knots](../../07-topology/03-manifolds/knot-theory.md).
 - **Siblings:** Curves on a surface give the normal curvatures of [surfaces and Gaussian curvature](surfaces-and-gaussian-curvature.md) and the boundary term of [Gauss–Bonnet](the-gauss-bonnet-theorem.md); in [Riemannian manifolds](riemannian-manifolds.md) curves of zero geodesic curvature are geodesics.
 

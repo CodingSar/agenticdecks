@@ -1,7 +1,7 @@
 # 06 Real Analysis
 
 > **Layer:** 06 Real Analysis
-> **Children:** [Limits and Convergence](01-limits-and-convergence/README.md) · [Calculus of One Variable](02-calculus-of-one-variable/README.md) · [Calculus of Several Variables](03-calculus-of-several-variables/README.md) · [Metric Spaces](04-metric-spaces/README.md)
+> **Children:** [Limits and Convergence](01-limits-and-convergence/README.md) · [Calculus of One Variable](02-calculus-of-one-variable/README.md) · [Calculus of Several Variables](04-calculus-of-several-variables/README.md) · [Metric Spaces](03-metric-spaces/README.md)
 
 ## What this area is about
 
@@ -23,8 +23,8 @@ The one idea this layer contributes is **the limit, made rigorous by completenes
 |---|---|---|
 | [Limits and Convergence](01-limits-and-convergence/README.md) | Sequences, series, continuity, uniform convergence and the inequalities that drive all estimates | Completeness of ℝ (layer 02) |
 | [Calculus of One Variable](02-calculus-of-one-variable/README.md) | The derivative, the mean value theorem, Taylor expansion, the Riemann integral, the fundamental theorem, exp and π | Limits and Convergence |
-| [Metric Spaces](04-metric-spaces/README.md) | Distance in general; completeness and the contraction principle; compactness and Arzelà–Ascoli | Limits and Convergence |
-| [Calculus of Several Variables](03-calculus-of-several-variables/README.md) | The derivative as a linear map, inverse and implicit functions, extrema, multiple integrals, the integral theorems | One variable, Metric Spaces, linear algebra (layer 04) |
+| [Metric Spaces](03-metric-spaces/README.md) | Distance in general; completeness and the contraction principle; compactness and Arzelà–Ascoli | Limits and Convergence |
+| [Calculus of Several Variables](04-calculus-of-several-variables/README.md) | The derivative as a linear map, inverse and implicit functions, extrema, multiple integrals, the integral theorems | One variable, Metric Spaces, linear algebra (layer 04) |
 
 ```
              completeness of ℝ  (layer 02)
@@ -36,7 +36,7 @@ The one idea this layer contributes is **the limit, made rigorous by completenes
             03 Calculus of Several Variables
 ```
 
-Begin with [Limits and Convergence](01-limits-and-convergence/README.md), which turns completeness into usable tools. [Calculus of One Variable](02-calculus-of-one-variable/README.md) and [Metric Spaces](04-metric-spaces/README.md) can then be read in either order: one applies limits to derivatives and integrals on the line, the other strips the line down to a distance and proves completeness and compactness theorems in general. [Calculus of Several Variables](03-calculus-of-several-variables/README.md) comes last despite its number, because the inverse function theorem is proved with the contraction mapping principle and the existence of extrema uses compactness. The dependence runs only from 03 to 04, never back.
+Begin with [Limits and Convergence](01-limits-and-convergence/README.md), which turns completeness into usable tools. [Calculus of One Variable](02-calculus-of-one-variable/README.md) and [Metric Spaces](03-metric-spaces/README.md) can then be read in either order: one applies limits to derivatives and integrals on the line, the other strips the line down to a distance and proves completeness and compactness theorems in general. [Calculus of Several Variables](04-calculus-of-several-variables/README.md) comes last despite its number, because the inverse function theorem is proved with the contraction mapping principle and the existence of extrema uses compactness. The dependence runs only from 03 to 04, never back.
 
 ## Connections to neighbouring layers
 

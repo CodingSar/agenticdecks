@@ -30,13 +30,13 @@ Two properties then do most of the work. Completeness says that sequences which 
 
 Start with the first child, which sets up the language and the examples that later leaves test their theorems against: the sup and L¹ metrics on functions, the discrete metric, and ℚ. Completeness comes next because compactness is defined partly in terms of it: a metric space is compact if and only if it is complete and totally bounded. The contraction mapping principle is the first serious theorem in the area and the first time a fixed point is found by an argument that works in any complete space. Compactness then upgrades the theorems of [continuity](../01-limits-and-convergence/continuity.md) from [a, b] to every compact space, and shows, by counterexamples in ℓ² and C[0, 1], that in infinite dimensions closed and bounded is no longer enough.
 
-This area deliberately does not depend on [calculus of several variables](../03-calculus-of-several-variables/README.md). The arrows run the other way: the inverse function theorem there is proved by a contraction, and existence of constrained extrema rests on compactness.
+This area deliberately does not depend on [calculus of several variables](../04-calculus-of-several-variables/README.md). The arrows run the other way: the inverse function theorem there is proved by a contraction, and existence of constrained extrema rests on compactness.
 
 ## Connections to sibling areas
 
 - [Limits and convergence](../01-limits-and-convergence/README.md): every definition here generalises one there. Bolzano–Weierstrass becomes compactness, the Cauchy criterion becomes completeness, and uniform convergence becomes convergence in the sup metric.
 - [Calculus of one variable](../02-calculus-of-one-variable/README.md): the fundamental theorem of calculus turns a differential equation into an integral equation, which the contraction principle solves.
-- [Calculus of several variables](../03-calculus-of-several-variables/README.md): uses the contraction principle for the inverse and implicit function theorems, and compactness for the existence of extrema.
+- [Calculus of several variables](../04-calculus-of-several-variables/README.md): uses the contraction principle for the inverse and implicit function theorems, and compactness for the existence of extrema.
 
 ## Connections across layers
 

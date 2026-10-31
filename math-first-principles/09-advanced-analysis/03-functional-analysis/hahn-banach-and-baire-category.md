@@ -1,7 +1,7 @@
 # Hahn–Banach and Baire Category
 
 > **Layer:** [09 Advanced Analysis](../README.md) › [Functional Analysis](README.md)
-> **Builds on:** [Banach Spaces](banach-spaces.md), [The Axiom of Choice](../../01-sets-and-foundations/03-axiomatic-set-theory/the-axiom-of-choice.md), [Completeness and the Contraction Mapping Principle](../../06-real-analysis/04-metric-spaces/completeness-and-the-contraction-mapping-principle.md), [Convex Sets and Separation](../../08-geometry/03-convex-and-discrete-geometry/convex-sets-and-separation.md)
+> **Builds on:** [Banach Spaces](banach-spaces.md), [The Axiom of Choice](../../01-sets-and-foundations/03-axiomatic-set-theory/the-axiom-of-choice.md), [Completeness and the Contraction Mapping Principle](../../06-real-analysis/03-metric-spaces/completeness-and-the-contraction-mapping-principle.md), [Convex Sets and Separation](../../08-geometry/03-convex-and-discrete-geometry/convex-sets-and-separation.md)
 > **Enables:** [Spectral Theory](spectral-theory.md), [Fourier Series](../04-harmonic-analysis/fourier-series.md), [Convex Optimisation and Duality](../../14-applied-and-computational-mathematics/02-optimisation/convex-optimisation-and-duality.md), [Numerical Methods for Differential Equations](../../14-applied-and-computational-mathematics/01-numerical-analysis/numerical-methods-for-differential-equations.md)
 
 ## Essence
@@ -41,7 +41,7 @@ Four theorems carry most of the weight of functional analysis. The Hahn–Banach
 
 ## How it fits
 
-- **Below:** [completeness](../../06-real-analysis/04-metric-spaces/completeness-and-the-contraction-mapping-principle.md) for Baire; [Zorn's lemma](../../01-sets-and-foundations/03-axiomatic-set-theory/the-axiom-of-choice.md) for Hahn–Banach; [convex separation](../../08-geometry/03-convex-and-discrete-geometry/convex-sets-and-separation.md) in finite dimensions; [Banach spaces](banach-spaces.md) for the setting.
+- **Below:** [completeness](../../06-real-analysis/03-metric-spaces/completeness-and-the-contraction-mapping-principle.md) for Baire; [Zorn's lemma](../../01-sets-and-foundations/03-axiomatic-set-theory/the-axiom-of-choice.md) for Hahn–Banach; [convex separation](../../08-geometry/03-convex-and-discrete-geometry/convex-sets-and-separation.md) in finite dimensions; [Banach spaces](banach-spaces.md) for the setting.
 - **Above:** [convex duality](../../14-applied-and-computational-mathematics/02-optimisation/convex-optimisation-and-duality.md) and [numerical stability](../../14-applied-and-computational-mathematics/01-numerical-analysis/numerical-methods-for-differential-equations.md) in 14; a priori estimates for [partial differential equations](../../10-differential-equations-and-dynamics/02-partial-differential-equations/weak-solutions-and-sobolev-spaces.md) in 10.
 - **Siblings:** [spectral theory](spectral-theory.md) uses Hahn–Banach to show the spectrum is non-empty and the bounded inverse theorem to define it; [Fourier series](../04-harmonic-analysis/fourier-series.md) meet uniform boundedness in the divergence of partial sums; [distributions](../04-harmonic-analysis/distributions.md) are functionals extended by these methods.
 

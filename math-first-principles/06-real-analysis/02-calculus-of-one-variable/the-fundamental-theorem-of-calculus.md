@@ -2,7 +2,7 @@
 
 > **Layer:** [06 Real Analysis](../README.md) › [Calculus of One Variable](README.md)
 > **Builds on:** [The Riemann integral](the-riemann-integral.md), [The derivative and the mean value theorem](the-derivative-and-the-mean-value-theorem.md)
-> **Enables:** [Multiple integrals and change of variables](../03-calculus-of-several-variables/multiple-integrals-and-change-of-variables.md), [Vector calculus and the integral theorems](../03-calculus-of-several-variables/vector-calculus-and-the-integral-theorems.md), [The Lebesgue integral](../../09-advanced-analysis/01-measure-and-integration/the-lebesgue-integral.md), [Existence and uniqueness](../../10-differential-equations-and-dynamics/01-ordinary-differential-equations/existence-and-uniqueness.md), [Stochastic calculus](../../11-probability-and-statistics/03-stochastic-processes/stochastic-calculus.md)
+> **Enables:** [Multiple integrals and change of variables](../04-calculus-of-several-variables/multiple-integrals-and-change-of-variables.md), [Vector calculus and the integral theorems](../04-calculus-of-several-variables/vector-calculus-and-the-integral-theorems.md), [The Lebesgue integral](../../09-advanced-analysis/01-measure-and-integration/the-lebesgue-integral.md), [Existence and uniqueness](../../10-differential-equations-and-dynamics/01-ordinary-differential-equations/existence-and-uniqueness.md), [Stochastic calculus](../../11-probability-and-statistics/03-stochastic-processes/stochastic-calculus.md)
 
 ## Essence
 
@@ -26,7 +26,7 @@ Differentiation measures local change; integration adds up accumulated change. T
 
 6. **Integrals define new functions, including ones with no formula.** Define ln x as the integral of 1/t from 1 to x, for x > 0. Part 1 gives ln′ x = 1/x, and ln(xy) = ln x + ln y because both sides have derivative 1/x in x and agree at x = 1. Every continuous function has an antiderivative by Part 1, but it need not be elementary: Liouville's theory shows that e^(−x²) has no antiderivative built from exp, log, roots and arithmetic, so the error function is defined by an integral.
 
-7. **Differential equations become integral equations.** For continuous f, a continuous y solves y′ = f(t, y) with y(t₀) = y₀ if and only if y(t) = y₀ + ∫ from t₀ to t of f(s, y(s)) ds. The right side is a map on functions, and iterating it is Picard's method. Proving that the iteration converges uses [the contraction mapping principle](../04-metric-spaces/completeness-and-the-contraction-mapping-principle.md), which gives [existence and uniqueness](../../10-differential-equations-and-dynamics/01-ordinary-differential-equations/existence-and-uniqueness.md) for Ordinary Differential Equations (ODEs).
+7. **Differential equations become integral equations.** For continuous f, a continuous y solves y′ = f(t, y) with y(t₀) = y₀ if and only if y(t) = y₀ + ∫ from t₀ to t of f(s, y(s)) ds. The right side is a map on functions, and iterating it is Picard's method. Proving that the iteration converges uses [the contraction mapping principle](../03-metric-spaces/completeness-and-the-contraction-mapping-principle.md), which gives [existence and uniqueness](../../10-differential-equations-and-dynamics/01-ordinary-differential-equations/existence-and-uniqueness.md) for Ordinary Differential Equations (ODEs).
 
 ## Key concepts
 
@@ -44,7 +44,7 @@ Differentiation measures local change; integration adds up accumulated change. T
 ## How it fits
 
 - **Below:** Part 1 uses the definition of [the Riemann integral](the-riemann-integral.md) and continuity; Part 2 uses [the mean value theorem](the-derivative-and-the-mean-value-theorem.md) on every piece of a partition.
-- **Above:** Fubini's theorem and the [change of variables](../03-calculus-of-several-variables/multiple-integrals-and-change-of-variables.md) formula reduce many-variable integrals to this theorem. [Green, Stokes and Gauss](../03-calculus-of-several-variables/vector-calculus-and-the-integral-theorems.md) are its higher-dimensional forms, unified by the general Stokes theorem in [differential forms](../../08-geometry/02-differential-geometry/differential-forms-and-de-rham-cohomology.md). [Stochastic calculus](../../11-probability-and-statistics/03-stochastic-processes/stochastic-calculus.md) needs a new version because Brownian paths have no derivatives.
+- **Above:** Fubini's theorem and the [change of variables](../04-calculus-of-several-variables/multiple-integrals-and-change-of-variables.md) formula reduce many-variable integrals to this theorem. [Green, Stokes and Gauss](../04-calculus-of-several-variables/vector-calculus-and-the-integral-theorems.md) are its higher-dimensional forms, unified by the general Stokes theorem in [differential forms](../../08-geometry/02-differential-geometry/differential-forms-and-de-rham-cohomology.md). [Stochastic calculus](../../11-probability-and-statistics/03-stochastic-processes/stochastic-calculus.md) needs a new version because Brownian paths have no derivatives.
 - **Siblings:** [Taylor expansion](taylor-expansion.md) gets its integral remainder by repeated integration by parts. [The exponential function](the-exponential-and-trigonometric-functions.md) can be defined as the inverse of ln.
 
 ## Common misconceptions

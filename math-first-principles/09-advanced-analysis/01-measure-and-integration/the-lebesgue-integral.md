@@ -1,7 +1,7 @@
 # The Lebesgue Integral
 
 > **Layer:** [09 Advanced Analysis](../README.md) › [Measure and Integration](README.md)
-> **Builds on:** [Measure and σ-Algebras](measure-and-sigma-algebras.md), [The Riemann Integral](../../06-real-analysis/02-calculus-of-one-variable/the-riemann-integral.md), [Uniform Convergence](../../06-real-analysis/01-limits-and-convergence/uniform-convergence.md), [Multiple Integrals and Change of Variables](../../06-real-analysis/03-calculus-of-several-variables/multiple-integrals-and-change-of-variables.md)
+> **Builds on:** [Measure and σ-Algebras](measure-and-sigma-algebras.md), [The Riemann Integral](../../06-real-analysis/02-calculus-of-one-variable/the-riemann-integral.md), [Uniform Convergence](../../06-real-analysis/01-limits-and-convergence/uniform-convergence.md), [Multiple Integrals and Change of Variables](../../06-real-analysis/04-calculus-of-several-variables/multiple-integrals-and-change-of-variables.md)
 > **Enables:** [Lᵖ Spaces](lp-spaces.md), [The Radon–Nikodym Theorem](the-radon-nikodym-theorem.md), [The Fourier Transform](../04-harmonic-analysis/the-fourier-transform.md), [Random Variables and Distributions](../../11-probability-and-statistics/01-measure-theoretic-probability/random-variables-and-distributions.md), [Modes of Convergence](../../11-probability-and-statistics/02-limit-theorems/modes-of-convergence.md)
 
 ## Essence
@@ -55,7 +55,7 @@ Riemann slices the domain into intervals; Henri Lebesgue, in his thesis of 1902,
 
 ## How it fits
 
-- **Below:** the [Riemann integral](../../06-real-analysis/02-calculus-of-one-variable/the-riemann-integral.md) is the special case; [uniform convergence](../../06-real-analysis/01-limits-and-convergence/uniform-convergence.md) was the old, too strong, condition for swapping limits; [multiple integrals](../../06-real-analysis/03-calculus-of-several-variables/multiple-integrals-and-change-of-variables.md) become Fubini's theorem.
+- **Below:** the [Riemann integral](../../06-real-analysis/02-calculus-of-one-variable/the-riemann-integral.md) is the special case; [uniform convergence](../../06-real-analysis/01-limits-and-convergence/uniform-convergence.md) was the old, too strong, condition for swapping limits; [multiple integrals](../../06-real-analysis/04-calculus-of-several-variables/multiple-integrals-and-change-of-variables.md) become Fubini's theorem.
 - **Above:** [modes of convergence](../../11-probability-and-statistics/02-limit-theorems/modes-of-convergence.md) in 11 compare almost-sure convergence with convergence of expectations; the [Fourier transform](../04-harmonic-analysis/the-fourier-transform.md) is an integral whose continuity is dominated convergence.
 - **Siblings:** [measure](measure-and-sigma-algebras.md) supplies the sizes; [Lᵖ spaces](lp-spaces.md) measure functions by integrals of their powers; the [Radon–Nikodym theorem](the-radon-nikodym-theorem.md) asks which measures are integrals of a density.
 

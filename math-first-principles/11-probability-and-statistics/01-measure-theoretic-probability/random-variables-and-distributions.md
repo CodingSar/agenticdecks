@@ -22,7 +22,7 @@ A random variable is a measurable function X : Ω → ℝ, a number whose value 
 
 6. **The characteristic function always exists and turns sums into products.** φ_X(t) = E[e^(itX)] is defined for every law, because ∣e^(itX)∣ = 1; it is the [Fourier transform](../../09-advanced-analysis/04-harmonic-analysis/the-fourier-transform.md) of μ. Lévy's inversion formula recovers μ from φ_X, so φ_X determines the law, and for independent X and Y, φ_(X+Y) = φ_X · φ_Y. The moment generating function E[e^(tX)] uses a real exponent and can be infinite: for the Cauchy law it is infinite for every t ≠ 0, while φ(t) = e^(−∣t∣) is perfectly finite.
 
-7. **The joint law carries the dependence; the marginals do not.** A random vector (X, Y) has a law on ℝ², and its two marginal laws do not determine it. If X′ is an independent copy of X, then (X, X) and (X, X′) have identical marginals but different joint laws: the first lives on the diagonal. Densities of transformed vectors follow from the Jacobian formula for [multiple integrals](../../06-real-analysis/03-calculus-of-several-variables/multiple-integrals-and-change-of-variables.md).
+7. **The joint law carries the dependence; the marginals do not.** A random vector (X, Y) has a law on ℝ², and its two marginal laws do not determine it. If X′ is an independent copy of X, then (X, X) and (X, X′) have identical marginals but different joint laws: the first lives on the diagonal. Densities of transformed vectors follow from the Jacobian formula for [multiple integrals](../../06-real-analysis/04-calculus-of-several-variables/multiple-integrals-and-change-of-variables.md).
 
 ## Key concepts
 

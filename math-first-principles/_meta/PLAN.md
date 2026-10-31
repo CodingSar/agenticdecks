@@ -167,7 +167,7 @@ Covered only in passing: 19 K-theory, 32 Several complex variables and analytic 
 
 | Pass | Work | Result |
 |---|---|---|
-| 1. Draft | 16 writer agents to `WRITER_BRIEF.md` | |
+| 1. Draft | 16 writer agents to `WRITER_BRIEF.md` | 314 files (242 leaves, 72 READMEs), about 304,000 words; 0 checker problems. Writers' taxonomy suggestions, doubtful claims and cross-layer links logged in `REVIEW_NOTES.md`. Taxonomy amended after the draft: areas 06/03 and 06/04 swapped so metric spaces precede several-variable calculus, and 15 leaves added for gaps the writers found |
 | 2. Review | Reviewer agents to `REVIEW_BRIEF.md` | |
 | 3. Index | `CROSS-CUTTING.md` | |
 | 4. Coherence | Audit of the 16 layer READMEs as one bottom-up story | |

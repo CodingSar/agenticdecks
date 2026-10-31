@@ -41,7 +41,7 @@ Read the first two in order: the ring 𝒪_K is defined first, and its ideals ar
 
 ## Connections across layers
 
-- **Below:** [field extensions](../../05-abstract-algebra/02-rings-and-fields/field-extensions.md) and [the Galois correspondence](../../05-abstract-algebra/03-galois-theory/the-galois-correspondence.md) supply the algebra; [quadratic reciprocity](../../02-number-systems/02-elementary-number-theory/quadratic-reciprocity.md) is the first reciprocity law; [completeness](../../06-real-analysis/04-metric-spaces/completeness-and-the-contraction-mapping-principle.md) builds ℚ_p as ℝ is built.
+- **Below:** [field extensions](../../05-abstract-algebra/02-rings-and-fields/field-extensions.md) and [the Galois correspondence](../../05-abstract-algebra/03-galois-theory/the-galois-correspondence.md) supply the algebra; [quadratic reciprocity](../../02-number-systems/02-elementary-number-theory/quadratic-reciprocity.md) is the first reciprocity law; [completeness](../../06-real-analysis/03-metric-spaces/completeness-and-the-contraction-mapping-principle.md) builds ℚ_p as ℝ is built.
 - **Above:** class groups and number fields underlie lattice-based and older number-theoretic [cryptography](../../14-applied-and-computational-mathematics/03-information-codes-and-cryptography/cryptography.md); the cohomological proofs of class field theory were early uses of [homological algebra](../../13-structure-and-metamathematics/01-category-theory/homological-algebra.md).
 
 ## Cross-cutting threads

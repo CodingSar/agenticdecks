@@ -1,7 +1,7 @@
 # Surfaces and Gaussian Curvature
 
 > **Layer:** [08 Geometry](../README.md) › [Differential Geometry](README.md)
-> **Builds on:** [Curves and curvature](curves-and-curvature.md), [Quadratic forms and positive definiteness](../../04-linear-algebra/03-inner-product-spaces/quadratic-forms-and-positive-definiteness.md), [The spectral theorem](../../04-linear-algebra/03-inner-product-spaces/the-spectral-theorem.md), [Inverse and implicit function theorems](../../06-real-analysis/03-calculus-of-several-variables/inverse-and-implicit-function-theorems.md), [Topological and smooth manifolds](../../07-topology/03-manifolds/topological-and-smooth-manifolds.md)
+> **Builds on:** [Curves and curvature](curves-and-curvature.md), [Quadratic forms and positive definiteness](../../04-linear-algebra/03-inner-product-spaces/quadratic-forms-and-positive-definiteness.md), [The spectral theorem](../../04-linear-algebra/03-inner-product-spaces/the-spectral-theorem.md), [Inverse and implicit function theorems](../../06-real-analysis/04-calculus-of-several-variables/inverse-and-implicit-function-theorems.md), [Topological and smooth manifolds](../../07-topology/03-manifolds/topological-and-smooth-manifolds.md)
 > **Enables:** [The Gauss–Bonnet theorem](the-gauss-bonnet-theorem.md), [Riemannian manifolds](riemannian-manifolds.md), [The geometry of general relativity](../../14-applied-and-computational-mathematics/04-mathematical-modelling/the-geometry-of-general-relativity.md)
 
 ## Essence
@@ -10,7 +10,7 @@ A surface in space bends differently in different directions, and two quadratic 
 
 ## Core tenets
 
-1. **The first fundamental form measures length on the surface.** A parametrised surface x(u, v) is regular when x_u and x_v are independent, so by the [inverse function theorem](../../06-real-analysis/03-calculus-of-several-variables/inverse-and-implicit-function-theorems.md) it is locally a smooth graph. Restricting the inner product of ℝ³ to the tangent plane gives the [positive-definite quadratic form](../../04-linear-algebra/03-inner-product-spaces/quadratic-forms-and-positive-definiteness.md) below, with E = ⟨x_u, x_u⟩, F = ⟨x_u, x_v⟩, G = ⟨x_v, x_v⟩. Every length, angle and area measured within the surface comes from E, F and G; this is the data an ant living on the surface could collect.
+1. **The first fundamental form measures length on the surface.** A parametrised surface x(u, v) is regular when x_u and x_v are independent, so by the [inverse function theorem](../../06-real-analysis/04-calculus-of-several-variables/inverse-and-implicit-function-theorems.md) it is locally a smooth graph. Restricting the inner product of ℝ³ to the tangent plane gives the [positive-definite quadratic form](../../04-linear-algebra/03-inner-product-spaces/quadratic-forms-and-positive-definiteness.md) below, with E = ⟨x_u, x_u⟩, F = ⟨x_u, x_v⟩, G = ⟨x_v, x_v⟩. Every length, angle and area measured within the surface comes from E, F and G; this is the data an ant living on the surface could collect.
 
    ```
    I  = E du² + 2F du dv + G dv²       (first form: lengths)

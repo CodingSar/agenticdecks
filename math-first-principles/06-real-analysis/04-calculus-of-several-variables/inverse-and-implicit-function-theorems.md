@@ -1,7 +1,7 @@
 # Inverse and Implicit Function Theorems
 
 > **Layer:** [06 Real Analysis](../README.md) › [Calculus of Several Variables](README.md)
-> **Builds on:** [The derivative as a linear map](the-derivative-as-a-linear-map.md), [Completeness and the contraction mapping principle](../04-metric-spaces/completeness-and-the-contraction-mapping-principle.md), [Linear systems and rank–nullity](../../04-linear-algebra/01-vector-spaces-and-linear-maps/linear-systems-and-rank-nullity.md)
+> **Builds on:** [The derivative as a linear map](the-derivative-as-a-linear-map.md), [Completeness and the contraction mapping principle](../03-metric-spaces/completeness-and-the-contraction-mapping-principle.md), [Linear systems and rank–nullity](../../04-linear-algebra/01-vector-spaces-and-linear-maps/linear-systems-and-rank-nullity.md)
 > **Enables:** [Extrema and Lagrange multipliers](extrema-and-lagrange-multipliers.md), [Topological and smooth manifolds](../../07-topology/03-manifolds/topological-and-smooth-manifolds.md), [Lie groups and Lie algebras](../../08-geometry/04-lie-theory/lie-groups-and-lie-algebras.md), [Root-finding and Newton's method](../../14-applied-and-computational-mathematics/01-numerical-analysis/root-finding-and-newtons-method.md)
 
 ## Essence
@@ -20,7 +20,7 @@ Linear algebra says exactly when a linear system can be solved and how many free
    ```
    Tᵧ(x) = x + A⁻¹(y − f(x))
    ```
-   Its derivative is I − A⁻¹Df(x), which is 0 at a and, because Df is continuous, has operator norm at most ½ on a small closed ball around a. By the mean value inequality Tᵧ is a contraction there, and for y close enough to f(a) it maps the ball into itself. The [contraction mapping principle](../04-metric-spaces/completeness-and-the-contraction-mapping-principle.md) gives exactly one solution in the ball. Estimates from the same inequality show the inverse is differentiable. Newton's method is this iteration with A replaced by Df(xₙ) at each step.
+   Its derivative is I − A⁻¹Df(x), which is 0 at a and, because Df is continuous, has operator norm at most ½ on a small closed ball around a. By the mean value inequality Tᵧ is a contraction there, and for y close enough to f(a) it maps the ball into itself. The [contraction mapping principle](../03-metric-spaces/completeness-and-the-contraction-mapping-principle.md) gives exactly one solution in the ball. Estimates from the same inequality show the inverse is differentiable. Newton's method is this iteration with A replaced by Df(xₙ) at each step.
 
 3. **Each hypothesis is needed.**
    - Invertible derivative: x ↦ x³ is a bijection of ℝ, but its derivative at 0 is 0 and its inverse, the cube root, is not differentiable at 0. And x ↦ x² is not injective on any interval around 0.
@@ -51,7 +51,7 @@ Linear algebra says exactly when a linear system can be solved and how many free
 
 ## How it fits
 
-- **Below:** [The derivative as a linear map](the-derivative-as-a-linear-map.md) supplies Df and the mean value inequality; [completeness and the contraction mapping principle](../04-metric-spaces/completeness-and-the-contraction-mapping-principle.md) supplies the fixed point; [rank–nullity](../../04-linear-algebra/01-vector-spaces-and-linear-maps/linear-systems-and-rank-nullity.md) is the linear model.
+- **Below:** [The derivative as a linear map](the-derivative-as-a-linear-map.md) supplies Df and the mean value inequality; [completeness and the contraction mapping principle](../03-metric-spaces/completeness-and-the-contraction-mapping-principle.md) supplies the fixed point; [rank–nullity](../../04-linear-algebra/01-vector-spaces-and-linear-maps/linear-systems-and-rank-nullity.md) is the linear model.
 - **Above:** Smooth [manifolds](../../07-topology/03-manifolds/topological-and-smooth-manifolds.md) and [Lie groups](../../08-geometry/04-lie-theory/lie-groups-and-lie-algebras.md) are built from regular level sets and local charts. [Newton's method](../../14-applied-and-computational-mathematics/01-numerical-analysis/root-finding-and-newtons-method.md) turns the proof into an algorithm.
 - **Siblings:** [Lagrange multipliers](extrema-and-lagrange-multipliers.md) use the implicit function theorem to parametrise a constraint set. [Change of variables](multiple-integrals-and-change-of-variables.md) needs a local diffeomorphism.
 

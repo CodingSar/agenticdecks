@@ -41,7 +41,7 @@ Analysis proves that things are equal, or that limits exist, by proving inequali
 
 - **Below:** The order and absolute value of [the real numbers](../../02-number-systems/01-constructing-the-numbers/the-real-numbers.md); Cauchy–Schwarz belongs to [inner product spaces](../../04-linear-algebra/03-inner-product-spaces/inner-products-and-orthogonality.md); the limits of [sequences and limits](sequences-and-limits.md) give o its meaning.
 - **Above:** Hölder and Minkowski make the [Lᵖ spaces](../../09-advanced-analysis/01-measure-and-integration/lp-spaces.md) normed spaces. Jensen and its relatives grow into [concentration inequalities](../../11-probability-and-statistics/02-limit-theorems/concentration-inequalities.md). Numerical [error analysis](../../14-applied-and-computational-mathematics/01-numerical-analysis/floating-point-conditioning-and-stability.md) is bookkeeping with O, and computer science uses the same O for [running times](../../../cs-first-principles/02-theory-of-computation/04-complexity/asymptotic-analysis.md).
-- **Siblings:** Every proof in [sequences and limits](sequences-and-limits.md), [series](series.md), [continuity](continuity.md) and [uniform convergence](uniform-convergence.md) applies these tools. [Metric spaces](../04-metric-spaces/metric-spaces-and-continuity.md) take the triangle inequality as an axiom.
+- **Siblings:** Every proof in [sequences and limits](sequences-and-limits.md), [series](series.md), [continuity](continuity.md) and [uniform convergence](uniform-convergence.md) applies these tools. [Metric spaces](../03-metric-spaces/metric-spaces-and-continuity.md) take the triangle inequality as an axiom.
 
 ## Common misconceptions
 

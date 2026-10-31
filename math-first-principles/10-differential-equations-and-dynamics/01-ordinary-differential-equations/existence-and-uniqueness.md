@@ -1,7 +1,7 @@
 # Existence and Uniqueness
 
 > **Layer:** [10 Differential Equations and Dynamics](../README.md) › [Ordinary Differential Equations](README.md)
-> **Builds on:** [Completeness and the contraction mapping principle](../../06-real-analysis/04-metric-spaces/completeness-and-the-contraction-mapping-principle.md), [The fundamental theorem of calculus](../../06-real-analysis/02-calculus-of-one-variable/the-fundamental-theorem-of-calculus.md), [Uniform convergence](../../06-real-analysis/01-limits-and-convergence/uniform-convergence.md), [Compactness in metric spaces](../../06-real-analysis/04-metric-spaces/compactness-in-metric-spaces.md)
+> **Builds on:** [Completeness and the contraction mapping principle](../../06-real-analysis/03-metric-spaces/completeness-and-the-contraction-mapping-principle.md), [The fundamental theorem of calculus](../../06-real-analysis/02-calculus-of-one-variable/the-fundamental-theorem-of-calculus.md), [Uniform convergence](../../06-real-analysis/01-limits-and-convergence/uniform-convergence.md), [Compactness in metric spaces](../../06-real-analysis/03-metric-spaces/compactness-in-metric-spaces.md)
 > **Enables:** [Linear systems and the matrix exponential](linear-systems-and-the-matrix-exponential.md), [Stability and phase portraits](stability-and-phase-portraits.md), [Chaos and strange attractors](../04-dynamical-systems/chaos-and-strange-attractors.md), [Numerical methods for differential equations](../../14-applied-and-computational-mathematics/01-numerical-analysis/numerical-methods-for-differential-equations.md), [Stochastic calculus](../../11-probability-and-statistics/03-stochastic-processes/stochastic-calculus.md)
 
 ## Essence
@@ -42,7 +42,7 @@ An ordinary differential equation (ODE) y′ = f(t, y) prescribes the velocity o
 
 ## How it fits
 
-- **Below:** the proof is the [contraction mapping principle](../../06-real-analysis/04-metric-spaces/completeness-and-the-contraction-mapping-principle.md) in a function space, and Peano's theorem is compactness of equicontinuous families; the same contraction proves the [inverse function theorem](../../06-real-analysis/03-calculus-of-several-variables/inverse-and-implicit-function-theorems.md).
+- **Below:** the proof is the [contraction mapping principle](../../06-real-analysis/03-metric-spaces/completeness-and-the-contraction-mapping-principle.md) in a function space, and Peano's theorem is compactness of equicontinuous families; the same contraction proves the [inverse function theorem](../../06-real-analysis/04-calculus-of-several-variables/inverse-and-implicit-function-theorems.md).
 - **Above:** Picard iteration gives existence for stochastic differential equations (SDEs) in [stochastic calculus](../../11-probability-and-statistics/03-stochastic-processes/stochastic-calculus.md); run in Sobolev spaces, it gives local existence for [nonlinear partial differential equations (PDEs)](../02-partial-differential-equations/nonlinear-pdes.md); Euler polygons become [numerical methods](../../14-applied-and-computational-mathematics/01-numerical-analysis/numerical-methods-for-differential-equations.md), whose error analysis is Grönwall's inequality again.
 - **Siblings:** [linear systems](linear-systems-and-the-matrix-exponential.md) are the case where solutions are explicit and global; [stability](stability-and-phase-portraits.md) studies the flow defined here; [boundary value problems](boundary-value-problems-and-sturm-liouville-theory.md) show that data at two ends, unlike data at one time, can fail to fix a solution.
 

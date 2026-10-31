@@ -2,7 +2,7 @@
 
 > **Layer:** [06 Real Analysis](../README.md) › [Limits and Convergence](README.md)
 > **Builds on:** [Sequences and limits](sequences-and-limits.md), [Series](series.md), [Continuity](continuity.md)
-> **Enables:** [The exponential and trigonometric functions](../02-calculus-of-one-variable/the-exponential-and-trigonometric-functions.md), [Compactness in metric spaces](../04-metric-spaces/compactness-in-metric-spaces.md), [Fourier series](../../09-advanced-analysis/04-harmonic-analysis/fourier-series.md), [Banach spaces](../../09-advanced-analysis/03-functional-analysis/banach-spaces.md), [The Lebesgue integral](../../09-advanced-analysis/01-measure-and-integration/the-lebesgue-integral.md)
+> **Enables:** [The exponential and trigonometric functions](../02-calculus-of-one-variable/the-exponential-and-trigonometric-functions.md), [Compactness in metric spaces](../03-metric-spaces/compactness-in-metric-spaces.md), [Fourier series](../../09-advanced-analysis/04-harmonic-analysis/fourier-series.md), [Banach spaces](../../09-advanced-analysis/03-functional-analysis/banach-spaces.md), [The Lebesgue integral](../../09-advanced-analysis/01-measure-and-integration/the-lebesgue-integral.md)
 
 ## Essence
 
@@ -43,7 +43,7 @@ A sequence of functions fₙ can converge to f in two very different ways. Point
 ## How it fits
 
 - **Below:** The definitions of [sequences and limits](sequences-and-limits.md) and [continuity](continuity.md), now with a sup over x. [Series](series.md) supplies the comparison series for the M-test.
-- **Above:** [exp, sin and cos](../02-calculus-of-one-variable/the-exponential-and-trigonometric-functions.md) are power series handled by tenet 5. [Fourier series](../../09-advanced-analysis/04-harmonic-analysis/fourier-series.md) forced the distinction between pointwise and uniform convergence. Completeness under the sup norm makes the continuous functions a [Banach space](../../09-advanced-analysis/03-functional-analysis/banach-spaces.md) and underlies [Arzelà–Ascoli](../04-metric-spaces/compactness-in-metric-spaces.md). Tenet 7 is the start of [approximation theory](../../14-applied-and-computational-mathematics/01-numerical-analysis/interpolation-and-approximation.md).
+- **Above:** [exp, sin and cos](../02-calculus-of-one-variable/the-exponential-and-trigonometric-functions.md) are power series handled by tenet 5. [Fourier series](../../09-advanced-analysis/04-harmonic-analysis/fourier-series.md) forced the distinction between pointwise and uniform convergence. Completeness under the sup norm makes the continuous functions a [Banach space](../../09-advanced-analysis/03-functional-analysis/banach-spaces.md) and underlies [Arzelà–Ascoli](../03-metric-spaces/compactness-in-metric-spaces.md). Tenet 7 is the start of [approximation theory](../../14-applied-and-computational-mathematics/01-numerical-analysis/interpolation-and-approximation.md).
 - **Siblings:** The ε/3 argument is a pattern from [estimates and inequalities](estimates-and-inequalities.md), applied uniformly in x.
 
 ## Common misconceptions

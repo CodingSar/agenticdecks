@@ -1,7 +1,7 @@
 # Holomorphic Functions
 
 > **Layer:** [09 Advanced Analysis](../README.md) › [Complex Analysis](README.md)
-> **Builds on:** [The Complex Numbers](../../02-number-systems/01-constructing-the-numbers/the-complex-numbers.md), [The Derivative as a Linear Map](../../06-real-analysis/03-calculus-of-several-variables/the-derivative-as-a-linear-map.md), [Series](../../06-real-analysis/01-limits-and-convergence/series.md), [The Exponential and Trigonometric Functions](../../06-real-analysis/02-calculus-of-one-variable/the-exponential-and-trigonometric-functions.md)
+> **Builds on:** [The Complex Numbers](../../02-number-systems/01-constructing-the-numbers/the-complex-numbers.md), [The Derivative as a Linear Map](../../06-real-analysis/04-calculus-of-several-variables/the-derivative-as-a-linear-map.md), [Series](../../06-real-analysis/01-limits-and-convergence/series.md), [The Exponential and Trigonometric Functions](../../06-real-analysis/02-calculus-of-one-variable/the-exponential-and-trigonometric-functions.md)
 > **Enables:** [Cauchy's Theorem and Its Consequences](cauchys-theorem-and-its-consequences.md), [Conformal Maps and the Riemann Mapping Theorem](conformal-maps-and-the-riemann-mapping-theorem.md), [Laplace's Equation and Harmonic Functions](../../10-differential-equations-and-dynamics/02-partial-differential-equations/laplaces-equation-and-harmonic-functions.md)
 
 ## Essence
@@ -45,7 +45,7 @@ A function f of a complex variable is holomorphic on an open set if the limit f�
 
 ## How it fits
 
-- **Below:** [complex numbers](../../02-number-systems/01-constructing-the-numbers/the-complex-numbers.md) supply the field; the [derivative as a linear map](../../06-real-analysis/03-calculus-of-several-variables/the-derivative-as-a-linear-map.md) explains Cauchy–Riemann; [series](../../06-real-analysis/01-limits-and-convergence/series.md) and the [exponential function](../../06-real-analysis/02-calculus-of-one-variable/the-exponential-and-trigonometric-functions.md) give the first examples.
+- **Below:** [complex numbers](../../02-number-systems/01-constructing-the-numbers/the-complex-numbers.md) supply the field; the [derivative as a linear map](../../06-real-analysis/04-calculus-of-several-variables/the-derivative-as-a-linear-map.md) explains Cauchy–Riemann; [series](../../06-real-analysis/01-limits-and-convergence/series.md) and the [exponential function](../../06-real-analysis/02-calculus-of-one-variable/the-exponential-and-trigonometric-functions.md) give the first examples.
 - **Above:** [harmonic functions](../../10-differential-equations-and-dynamics/02-partial-differential-equations/laplaces-equation-and-harmonic-functions.md) in 10; the [Riemann zeta function](../../12-number-theory-and-algebraic-geometry/02-analytic-number-theory/the-riemann-zeta-function.md) and [modular forms](../../12-number-theory-and-algebraic-geometry/04-elliptic-curves-and-modular-forms/modular-forms.md) in 12 are holomorphic functions.
 - **Siblings:** [Cauchy's theorem](cauchys-theorem-and-its-consequences.md) proves tenet 4; [conformal maps](conformal-maps-and-the-riemann-mapping-theorem.md) develop tenet 2; [analytic continuation](analytic-continuation-and-riemann-surfaces.md) develops tenet 6.
 

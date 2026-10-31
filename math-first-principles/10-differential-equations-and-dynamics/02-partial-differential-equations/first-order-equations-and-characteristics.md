@@ -1,7 +1,7 @@
 # First-Order Equations and Characteristics
 
 > **Layer:** [10 Differential Equations and Dynamics](../README.md) › [Partial Differential Equations](README.md)
-> **Builds on:** [Existence and uniqueness](../01-ordinary-differential-equations/existence-and-uniqueness.md), [The derivative as a linear map](../../06-real-analysis/03-calculus-of-several-variables/the-derivative-as-a-linear-map.md), [Inverse and implicit function theorems](../../06-real-analysis/03-calculus-of-several-variables/inverse-and-implicit-function-theorems.md), [Distributions](../../09-advanced-analysis/04-harmonic-analysis/distributions.md)
+> **Builds on:** [Existence and uniqueness](../01-ordinary-differential-equations/existence-and-uniqueness.md), [The derivative as a linear map](../../06-real-analysis/04-calculus-of-several-variables/the-derivative-as-a-linear-map.md), [Inverse and implicit function theorems](../../06-real-analysis/04-calculus-of-several-variables/inverse-and-implicit-function-theorems.md), [Distributions](../../09-advanced-analysis/04-harmonic-analysis/distributions.md)
 > **Enables:** [The wave equation](the-wave-equation.md), [Weak solutions and Sobolev spaces](weak-solutions-and-sobolev-spaces.md), [Nonlinear partial differential equations](nonlinear-pdes.md), [Numerical methods for differential equations](../../14-applied-and-computational-mathematics/01-numerical-analysis/numerical-methods-for-differential-equations.md), [Hamiltonian systems and integrability](../04-dynamical-systems/hamiltonian-systems-and-integrability.md)
 
 ## Essence
@@ -37,7 +37,7 @@ A first-order partial differential equation (PDE) relates a function u of severa
 
 ## How it fits
 
-- **Below:** each characteristic is an [ODE solution](../01-ordinary-differential-equations/existence-and-uniqueness.md), the [inverse function theorem](../../06-real-analysis/03-calculus-of-several-variables/inverse-and-implicit-function-theorems.md) assembles them into a function, and weak solutions use the test-function idea that [distributions](../../09-advanced-analysis/04-harmonic-analysis/distributions.md) make general.
+- **Below:** each characteristic is an [ODE solution](../01-ordinary-differential-equations/existence-and-uniqueness.md), the [inverse function theorem](../../06-real-analysis/04-calculus-of-several-variables/inverse-and-implicit-function-theorems.md) assembles them into a function, and weak solutions use the test-function idea that [distributions](../../09-advanced-analysis/04-harmonic-analysis/distributions.md) make general.
 - **Above:** upwind and shock-capturing schemes in [numerical methods](../../14-applied-and-computational-mathematics/01-numerical-analysis/numerical-methods-for-differential-equations.md) follow the characteristics; the Hamilton–Jacobi equation links to [Hamiltonian systems](../04-dynamical-systems/hamiltonian-systems-and-integrability.md) and is the equation for the value function in [control theory](../../14-applied-and-computational-mathematics/04-mathematical-modelling/control-theory.md).
 - **Siblings:** the [wave equation](the-wave-equation.md) factors into two transport equations; [weak solutions and Sobolev spaces](weak-solutions-and-sobolev-spaces.md) generalise the weak formulation; [nonlinear PDEs](nonlinear-pdes.md) treat shocks as one of three ways smooth solutions fail.
 

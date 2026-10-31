@@ -1,7 +1,7 @@
 # p-adic Numbers and Local Fields
 
 > **Layer:** [12 Number Theory and Algebraic Geometry](../README.md) › [Algebraic Number Theory](README.md)
-> **Builds on:** [Number Fields and Algebraic Integers](number-fields-and-algebraic-integers.md), [Completeness and the Contraction Mapping Principle](../../06-real-analysis/04-metric-spaces/completeness-and-the-contraction-mapping-principle.md), [The Real Numbers](../../02-number-systems/01-constructing-the-numbers/the-real-numbers.md), [Quadratic Forms and Positive Definiteness](../../04-linear-algebra/03-inner-product-spaces/quadratic-forms-and-positive-definiteness.md), [Modular Arithmetic](../../02-number-systems/02-elementary-number-theory/modular-arithmetic.md)
+> **Builds on:** [Number Fields and Algebraic Integers](number-fields-and-algebraic-integers.md), [Completeness and the Contraction Mapping Principle](../../06-real-analysis/03-metric-spaces/completeness-and-the-contraction-mapping-principle.md), [The Real Numbers](../../02-number-systems/01-constructing-the-numbers/the-real-numbers.md), [Quadratic Forms and Positive Definiteness](../../04-linear-algebra/03-inner-product-spaces/quadratic-forms-and-positive-definiteness.md), [Modular Arithmetic](../../02-number-systems/02-elementary-number-theory/modular-arithmetic.md)
 > **Enables:** [Class Field Theory](class-field-theory.md), [Elliptic Curves](../04-elliptic-curves-and-modular-forms/elliptic-curves.md), [The Langlands Programme](../04-elliptic-curves-and-modular-forms/the-langlands-programme.md), [Root-Finding and Newton's Method](../../14-applied-and-computational-mathematics/01-numerical-analysis/root-finding-and-newtons-method.md)
 
 ## Essence
@@ -40,7 +40,7 @@ The real numbers complete ℚ for the usual distance, but ℚ has one other kind
 
 ## How it fits
 
-- **Below:** the [real numbers](../../02-number-systems/01-constructing-the-numbers/the-real-numbers.md) are built by the same completion; [contraction mappings](../../06-real-analysis/04-metric-spaces/completeness-and-the-contraction-mapping-principle.md) explain why Newton's iteration converges; [modular arithmetic](../../02-number-systems/02-elementary-number-theory/modular-arithmetic.md) supplies the finite approximations.
+- **Below:** the [real numbers](../../02-number-systems/01-constructing-the-numbers/the-real-numbers.md) are built by the same completion; [contraction mappings](../../06-real-analysis/03-metric-spaces/completeness-and-the-contraction-mapping-principle.md) explain why Newton's iteration converges; [modular arithmetic](../../02-number-systems/02-elementary-number-theory/modular-arithmetic.md) supplies the finite approximations.
 - **Above:** [elliptic curves](../04-elliptic-curves-and-modular-forms/elliptic-curves.md) use local conditions in Mordell's theorem and the Birch and Swinnerton-Dyer conjecture; [the Langlands programme](../04-elliptic-curves-and-modular-forms/the-langlands-programme.md) is phrased over the adeles; p-adic lifting is [Newton's method](../../14-applied-and-computational-mathematics/01-numerical-analysis/root-finding-and-newtons-method.md) in exact arithmetic.
 - **Siblings:** [number fields](number-fields-and-algebraic-integers.md) are completed at their primes; [class field theory](class-field-theory.md) has a local version over each ℚ_p.
 

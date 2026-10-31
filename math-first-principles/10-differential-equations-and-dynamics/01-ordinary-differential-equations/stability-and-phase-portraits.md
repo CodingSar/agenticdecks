@@ -1,7 +1,7 @@
 # Stability and Phase Portraits
 
 > **Layer:** [10 Differential Equations and Dynamics](../README.md) › [Ordinary Differential Equations](README.md)
-> **Builds on:** [Linear systems and the matrix exponential](linear-systems-and-the-matrix-exponential.md), [Existence and uniqueness](existence-and-uniqueness.md), [The derivative as a linear map](../../06-real-analysis/03-calculus-of-several-variables/the-derivative-as-a-linear-map.md), [Topological spaces and continuous maps](../../07-topology/01-point-set-topology/topological-spaces-and-continuous-maps.md)
+> **Builds on:** [Linear systems and the matrix exponential](linear-systems-and-the-matrix-exponential.md), [Existence and uniqueness](existence-and-uniqueness.md), [The derivative as a linear map](../../06-real-analysis/04-calculus-of-several-variables/the-derivative-as-a-linear-map.md), [Topological spaces and continuous maps](../../07-topology/01-point-set-topology/topological-spaces-and-continuous-maps.md)
 > **Enables:** [Bifurcations](../04-dynamical-systems/bifurcations.md), [Chaos and strange attractors](../04-dynamical-systems/chaos-and-strange-attractors.md), [Control theory](../../14-applied-and-computational-mathematics/04-mathematical-modelling/control-theory.md), [Mathematical biology and epidemics](../../14-applied-and-computational-mathematics/04-mathematical-modelling/mathematical-biology-and-epidemics.md)
 
 ## Essence
@@ -52,7 +52,7 @@ Most nonlinear systems x′ = f(x) have no solution formula, so one asks qualita
 
 ## How it fits
 
-- **Below:** the [derivative as a linear map](../../06-real-analysis/03-calculus-of-several-variables/the-derivative-as-a-linear-map.md) supplies J, [linear systems](linear-systems-and-the-matrix-exponential.md) supply the model behaviour, and a homeomorphism from [topology](../../07-topology/01-point-set-topology/topological-spaces-and-continuous-maps.md) says what "the same portrait" means.
+- **Below:** the [derivative as a linear map](../../06-real-analysis/04-calculus-of-several-variables/the-derivative-as-a-linear-map.md) supplies J, [linear systems](linear-systems-and-the-matrix-exponential.md) supply the model behaviour, and a homeomorphism from [topology](../../07-topology/01-point-set-topology/topological-spaces-and-continuous-maps.md) says what "the same portrait" means.
 - **Above:** a digital latch caught at its balanced point is a saddle, and a state starting at distance d from the stable manifold lingers for a time of order (1/λ)·ln(1/d), λ the unstable eigenvalue: the [metastability](../../../cs-first-principles/03-digital-logic/03-sequential-logic/latches-and-flip-flops.md) problem. [Gradient methods](../../14-applied-and-computational-mathematics/02-optimisation/gradient-methods.md) follow x′ = −∇U, whose Lyapunov function is U, and [bifurcations](../04-dynamical-systems/bifurcations.md) happen exactly where hyperbolicity fails.
 - **Siblings:** [existence and uniqueness](existence-and-uniqueness.md) supplies the flow the portrait draws; [linear systems](linear-systems-and-the-matrix-exponential.md) are its local model; [boundary value problems](boundary-value-problems-and-sturm-liouville-theory.md) ask about one trajectory joining two ends, not the whole flow.
 

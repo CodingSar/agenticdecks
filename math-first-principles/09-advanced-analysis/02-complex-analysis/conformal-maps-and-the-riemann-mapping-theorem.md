@@ -1,7 +1,7 @@
 # Conformal Maps and the Riemann Mapping Theorem
 
 > **Layer:** [09 Advanced Analysis](../README.md) › [Complex Analysis](README.md)
-> **Builds on:** [Holomorphic Functions](holomorphic-functions.md), [Cauchy's Theorem and Its Consequences](cauchys-theorem-and-its-consequences.md), [Compactness in Metric Spaces](../../06-real-analysis/04-metric-spaces/compactness-in-metric-spaces.md), [Non-Euclidean Geometry](../../08-geometry/01-classical-geometry/non-euclidean-geometry.md)
+> **Builds on:** [Holomorphic Functions](holomorphic-functions.md), [Cauchy's Theorem and Its Consequences](cauchys-theorem-and-its-consequences.md), [Compactness in Metric Spaces](../../06-real-analysis/03-metric-spaces/compactness-in-metric-spaces.md), [Non-Euclidean Geometry](../../08-geometry/01-classical-geometry/non-euclidean-geometry.md)
 > **Enables:** [Analytic Continuation and Riemann Surfaces](analytic-continuation-and-riemann-surfaces.md), [Laplace's Equation and Harmonic Functions](../../10-differential-equations-and-dynamics/02-partial-differential-equations/laplaces-equation-and-harmonic-functions.md), [Modular Forms](../../12-number-theory-and-algebraic-geometry/04-elliptic-curves-and-modular-forms/modular-forms.md)
 
 ## Essence
@@ -44,7 +44,7 @@ A holomorphic function with non-zero derivative preserves angles, so it is a con
 
 ## How it fits
 
-- **Below:** the [derivative as rotation and scaling](holomorphic-functions.md) explains angle preservation; [Cauchy's estimates](cauchys-theorem-and-its-consequences.md) and [compactness](../../06-real-analysis/04-metric-spaces/compactness-in-metric-spaces.md) drive the proof; the [hyperbolic plane](../../08-geometry/01-classical-geometry/non-euclidean-geometry.md) explains the disc's symmetries.
+- **Below:** the [derivative as rotation and scaling](holomorphic-functions.md) explains angle preservation; [Cauchy's estimates](cauchys-theorem-and-its-consequences.md) and [compactness](../../06-real-analysis/03-metric-spaces/compactness-in-metric-spaces.md) drive the proof; the [hyperbolic plane](../../08-geometry/01-classical-geometry/non-euclidean-geometry.md) explains the disc's symmetries.
 - **Above:** potential theory and the [Dirichlet problem](../../10-differential-equations-and-dynamics/02-partial-differential-equations/laplaces-equation-and-harmonic-functions.md) in 10; [modular forms](../../12-number-theory-and-algebraic-geometry/04-elliptic-curves-and-modular-forms/modular-forms.md) in 12 live on the upper half-plane modulo a Möbius group.
 - **Siblings:** [Riemann surfaces](analytic-continuation-and-riemann-surfaces.md) extend the theorem to uniformisation; [singularities](singularities-and-residues.md) govern how conformal maps behave at boundary corners.
 

@@ -61,10 +61,12 @@ Every path below is fixed. Writers create exactly these files, so cross-links be
     trees.md
     matchings-and-network-flows.md
     colouring-and-planarity.md
+    spectral-graph-theory-and-expanders.md
   03-discrete-probability/
     finite-probability-spaces.md
     expectation-and-variance.md
     the-probabilistic-method.md
+    random-graphs.md
   04-extremal-combinatorics/
     ramsey-theory.md
     extremal-graph-theory.md
@@ -104,6 +106,7 @@ Every path below is fixed. Writers create exactly these files, so cross-links be
     polynomial-rings.md
     field-extensions.md
     finite-fields.md
+    commutative-rings-and-localisation.md
   03-galois-theory/
     the-galois-correspondence.md
     solvability-by-radicals.md
@@ -124,16 +127,17 @@ Every path below is fixed. Writers create exactly these files, so cross-links be
     the-riemann-integral.md
     the-fundamental-theorem-of-calculus.md
     the-exponential-and-trigonometric-functions.md
-  03-calculus-of-several-variables/
+    power-series-and-analytic-functions.md
+  03-metric-spaces/
+    metric-spaces-and-continuity.md
+    completeness-and-the-contraction-mapping-principle.md
+    compactness-in-metric-spaces.md
+  04-calculus-of-several-variables/
     the-derivative-as-a-linear-map.md
     inverse-and-implicit-function-theorems.md
     extrema-and-lagrange-multipliers.md
     multiple-integrals-and-change-of-variables.md
     vector-calculus-and-the-integral-theorems.md
-  04-metric-spaces/
-    metric-spaces-and-continuity.md
-    completeness-and-the-contraction-mapping-principle.md
-    compactness-in-metric-spaces.md
 07-topology/
   01-point-set-topology/
     topological-spaces-and-continuous-maps.md
@@ -147,6 +151,8 @@ Every path below is fixed. Writers create exactly these files, so cross-links be
     homology.md
     the-euler-characteristic.md
     fixed-point-theorems.md
+    higher-homotopy-groups-and-fibrations.md
+    cohomology-and-poincare-duality.md
   03-manifolds/
     topological-and-smooth-manifolds.md
     classification-of-surfaces.md
@@ -165,6 +171,8 @@ Every path below is fixed. Writers create exactly these files, so cross-links be
     the-gauss-bonnet-theorem.md
     differential-forms-and-de-rham-cohomology.md
     riemannian-manifolds.md
+    vector-bundles-connections-and-characteristic-classes.md
+    symplectic-geometry.md
   03-convex-and-discrete-geometry/
     convex-sets-and-separation.md
     polytopes.md
@@ -191,6 +199,7 @@ Every path below is fixed. Writers create exactly these files, so cross-links be
     hilbert-spaces.md
     hahn-banach-and-baire-category.md
     spectral-theory.md
+    compact-operators-and-fredholm-theory.md
   04-harmonic-analysis/
     fourier-series.md
     the-fourier-transform.md
@@ -219,6 +228,7 @@ Every path below is fixed. Writers create exactly these files, so cross-links be
     chaos-and-strange-attractors.md
     ergodic-theory.md
     hamiltonian-systems-and-integrability.md
+    complex-dynamics.md
 11-probability-and-statistics/
   01-measure-theoretic-probability/
     probability-spaces-and-kolmogorovs-axioms.md
@@ -235,11 +245,13 @@ Every path below is fixed. Writers create exactly these files, so cross-links be
     martingales.md
     brownian-motion.md
     stochastic-calculus.md
+    poisson-processes-and-continuous-time-markov-chains.md
   04-statistical-inference/
     estimation-and-likelihood.md
     hypothesis-tests-and-confidence-intervals.md
     bayesian-inference.md
     linear-models-and-regression.md
+    nonparametric-statistics-and-the-bootstrap.md
 12-number-theory-and-algebraic-geometry/
   01-algebraic-number-theory/
     number-fields-and-algebraic-integers.md
@@ -273,6 +285,7 @@ Every path below is fixed. Writers create exactly these files, so cross-links be
     undecidable-problems.md
     godels-incompleteness-theorems.md
     proof-theory-and-reverse-mathematics.md
+    computational-complexity.md
   03-model-theory-and-independence/
     models-and-the-lowenheim-skolem-theorems.md
     quantifier-elimination-and-decidable-theories.md
@@ -286,6 +299,7 @@ Every path below is fixed. Writers create exactly these files, so cross-links be
     interpolation-and-approximation.md
     numerical-methods-for-differential-equations.md
     monte-carlo-methods.md
+    the-fast-fourier-transform-and-spectral-methods.md
   02-optimisation/
     linear-programming.md
     convex-optimisation-and-duality.md
@@ -309,6 +323,7 @@ Every path below is fixed. Writers create exactly these files, so cross-links be
     high-dimensional-geometry-and-random-matrices.md
     sampling-and-compressed-sensing.md
     the-mathematics-of-deep-learning.md
+    optimal-transport.md
 15-mathematics-in-context/
   history-of-mathematics.md
   philosophy-of-mathematics.md

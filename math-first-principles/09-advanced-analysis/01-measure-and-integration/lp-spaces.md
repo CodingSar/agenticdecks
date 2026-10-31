@@ -1,7 +1,7 @@
 # Lᵖ Spaces
 
 > **Layer:** [09 Advanced Analysis](../README.md) › [Measure and Integration](README.md)
-> **Builds on:** [The Lebesgue Integral](the-lebesgue-integral.md), [Estimates and Inequalities](../../06-real-analysis/01-limits-and-convergence/estimates-and-inequalities.md), [Completeness and the Contraction Mapping Principle](../../06-real-analysis/04-metric-spaces/completeness-and-the-contraction-mapping-principle.md)
+> **Builds on:** [The Lebesgue Integral](the-lebesgue-integral.md), [Estimates and Inequalities](../../06-real-analysis/01-limits-and-convergence/estimates-and-inequalities.md), [Completeness and the Contraction Mapping Principle](../../06-real-analysis/03-metric-spaces/completeness-and-the-contraction-mapping-principle.md)
 > **Enables:** [Banach Spaces](../03-functional-analysis/banach-spaces.md), [Hilbert Spaces](../03-functional-analysis/hilbert-spaces.md), [Fourier Series](../04-harmonic-analysis/fourier-series.md), [Weak Solutions and Sobolev Spaces](../../10-differential-equations-and-dynamics/02-partial-differential-equations/weak-solutions-and-sobolev-spaces.md), [Modes of Convergence](../../11-probability-and-statistics/02-limit-theorems/modes-of-convergence.md)
 
 ## Essence
@@ -47,7 +47,7 @@ For 1 ≤ p < ∞, the space Lᵖ(μ) consists of the measurable functions f wit
 
 ## How it fits
 
-- **Below:** the [Lebesgue integral](the-lebesgue-integral.md) defines the norms; Young, Jensen and Cauchy–Schwarz come from [estimates and inequalities](../../06-real-analysis/01-limits-and-convergence/estimates-and-inequalities.md); completeness is the notion from [metric spaces](../../06-real-analysis/04-metric-spaces/completeness-and-the-contraction-mapping-principle.md).
+- **Below:** the [Lebesgue integral](the-lebesgue-integral.md) defines the norms; Young, Jensen and Cauchy–Schwarz come from [estimates and inequalities](../../06-real-analysis/01-limits-and-convergence/estimates-and-inequalities.md); completeness is the notion from [metric spaces](../../06-real-analysis/03-metric-spaces/completeness-and-the-contraction-mapping-principle.md).
 - **Above:** [Banach spaces](../03-functional-analysis/banach-spaces.md) abstract the Lᵖ family; [Sobolev spaces](../../10-differential-equations-and-dynamics/02-partial-differential-equations/weak-solutions-and-sobolev-spaces.md) in 10 put derivatives in Lᵖ; [Fourier series](../04-harmonic-analysis/fourier-series.md) converge in L²; convergence in Lᵖ is one of the [modes of convergence](../../11-probability-and-statistics/02-limit-theorems/modes-of-convergence.md) of random variables.
 - **Siblings:** the [Radon–Nikodym theorem](the-radon-nikodym-theorem.md) identifies the dual of L¹, and its densities are L¹ functions; [measure](measure-and-sigma-algebras.md) supplies the null sets that are ignored.
 

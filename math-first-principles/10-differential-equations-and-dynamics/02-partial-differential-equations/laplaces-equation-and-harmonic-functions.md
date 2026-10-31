@@ -1,7 +1,7 @@
 # Laplace's Equation and Harmonic Functions
 
 > **Layer:** [10 Differential Equations and Dynamics](../README.md) › [Partial Differential Equations](README.md)
-> **Builds on:** [Vector calculus and the integral theorems](../../06-real-analysis/03-calculus-of-several-variables/vector-calculus-and-the-integral-theorems.md), [Holomorphic functions](../../09-advanced-analysis/02-complex-analysis/holomorphic-functions.md), [Fourier series](../../09-advanced-analysis/04-harmonic-analysis/fourier-series.md), [Distributions](../../09-advanced-analysis/04-harmonic-analysis/distributions.md)
+> **Builds on:** [Vector calculus and the integral theorems](../../06-real-analysis/04-calculus-of-several-variables/vector-calculus-and-the-integral-theorems.md), [Holomorphic functions](../../09-advanced-analysis/02-complex-analysis/holomorphic-functions.md), [Fourier series](../../09-advanced-analysis/04-harmonic-analysis/fourier-series.md), [Distributions](../../09-advanced-analysis/04-harmonic-analysis/distributions.md)
 > **Enables:** [The heat equation](the-heat-equation.md), [Weak solutions and Sobolev spaces](weak-solutions-and-sobolev-spaces.md), [Existence of minimisers](../03-calculus-of-variations/existence-of-minimisers.md), [Brownian motion](../../11-probability-and-statistics/03-stochastic-processes/brownian-motion.md)
 
 ## Essence
@@ -51,7 +51,7 @@ Laplace's equation Δu = 0, where the Laplacian Δu = ∂²u/∂x₁² + … + �
 
 ## How it fits
 
-- **Below:** the [divergence theorem](../../06-real-analysis/03-calculus-of-several-variables/vector-calculus-and-the-integral-theorems.md) gives every identity here; [holomorphic functions](../../09-advanced-analysis/02-complex-analysis/holomorphic-functions.md) supply the planar case; the Poisson kernel is an approximate identity from [Fourier series](../../09-advanced-analysis/04-harmonic-analysis/fourier-series.md); −ΔΦ = δ is a statement about [distributions](../../09-advanced-analysis/04-harmonic-analysis/distributions.md).
+- **Below:** the [divergence theorem](../../06-real-analysis/04-calculus-of-several-variables/vector-calculus-and-the-integral-theorems.md) gives every identity here; [holomorphic functions](../../09-advanced-analysis/02-complex-analysis/holomorphic-functions.md) supply the planar case; the Poisson kernel is an approximate identity from [Fourier series](../../09-advanced-analysis/04-harmonic-analysis/fourier-series.md); −ΔΦ = δ is a statement about [distributions](../../09-advanced-analysis/04-harmonic-analysis/distributions.md).
 - **Above:** Kakutani's formula is a theorem about [Brownian motion](../../11-probability-and-statistics/03-stochastic-processes/brownian-motion.md), and E denotes its expectation; harmonic functions minimise the Dirichlet energy ∫|∇u|², whose troubled history is told in [existence of minimisers](../03-calculus-of-variations/existence-of-minimisers.md).
 - **Siblings:** the [heat equation](the-heat-equation.md) relaxes to a harmonic steady state; [weak solutions](weak-solutions-and-sobolev-spaces.md) prove existence by energy instead of Perron's method; the [wave equation](the-wave-equation.md) shares the Laplacian but propagates at finite speed and has no maximum principle.
 

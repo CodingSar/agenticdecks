@@ -1,7 +1,7 @@
 # Convex Sets and Separation
 
 > **Layer:** [08 Geometry](../README.md) › [Convex and Discrete Geometry](README.md)
-> **Builds on:** [Inner products and orthogonality](../../04-linear-algebra/03-inner-product-spaces/inner-products-and-orthogonality.md), [Dual spaces](../../04-linear-algebra/01-vector-spaces-and-linear-maps/dual-spaces.md), [Linear systems and rank-nullity](../../04-linear-algebra/01-vector-spaces-and-linear-maps/linear-systems-and-rank-nullity.md), [Compactness in metric spaces](../../06-real-analysis/04-metric-spaces/compactness-in-metric-spaces.md)
+> **Builds on:** [Inner products and orthogonality](../../04-linear-algebra/03-inner-product-spaces/inner-products-and-orthogonality.md), [Dual spaces](../../04-linear-algebra/01-vector-spaces-and-linear-maps/dual-spaces.md), [Linear systems and rank-nullity](../../04-linear-algebra/01-vector-spaces-and-linear-maps/linear-systems-and-rank-nullity.md), [Compactness in metric spaces](../../06-real-analysis/03-metric-spaces/compactness-in-metric-spaces.md)
 > **Enables:** [Polytopes](polytopes.md), [Linear programming](../../14-applied-and-computational-mathematics/02-optimisation/linear-programming.md), [Convex optimisation and duality](../../14-applied-and-computational-mathematics/02-optimisation/convex-optimisation-and-duality.md), [Hahn–Banach and Baire category](../../09-advanced-analysis/03-functional-analysis/hahn-banach-and-baire-category.md), [Game theory](../../14-applied-and-computational-mathematics/05-games-decisions-and-finance/game-theory.md)
 
 ## Essence
@@ -39,7 +39,7 @@ A set is convex when it contains the segment between any two of its points. That
 
 ## How it fits
 
-- **Below:** [Inner products](../../04-linear-algebra/03-inner-product-spaces/inner-products-and-orthogonality.md) give distance and angle, linear systems give affine dependence, and [compactness](../../06-real-analysis/04-metric-spaces/compactness-in-metric-spaces.md) gives existence of minima.
+- **Below:** [Inner products](../../04-linear-algebra/03-inner-product-spaces/inner-products-and-orthogonality.md) give distance and angle, linear systems give affine dependence, and [compactness](../../06-real-analysis/03-metric-spaces/compactness-in-metric-spaces.md) gives existence of minima.
 - **Above:** Optimisation duality, the minimax theorem and Hahn–Banach are separation theorems; the computer-science view is in [optimization](../../../cs-first-principles/01-mathematical-foundations/05-continuous-mathematics/optimization.md).
 - **Siblings:** [Polytopes](polytopes.md) are convex hulls of finitely many points; [lattices](lattices-and-sphere-packing.md) meet convex bodies in Minkowski's theorem.
 

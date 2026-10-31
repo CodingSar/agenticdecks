@@ -50,7 +50,7 @@ The proofs about limits and continuity in ℝ use almost nothing but the distanc
 ## How it fits
 
 - **Below:** [Sequences and limits](../01-limits-and-convergence/sequences-and-limits.md) and [continuity](../01-limits-and-convergence/continuity.md) supply the definitions being generalised, and [estimates and inequalities](../01-limits-and-convergence/estimates-and-inequalities.md) proves the triangle inequality for d₂ via Cauchy–Schwarz.
-- **Above:** [Topology](../../07-topology/01-point-set-topology/topological-spaces-and-continuous-maps.md) keeps only the open sets; [Banach spaces](../../09-advanced-analysis/03-functional-analysis/banach-spaces.md) are normed spaces that are complete; the norm ∥·∥ on ℝⁿ is the setting for [calculus of several variables](../03-calculus-of-several-variables/README.md).
+- **Above:** [Topology](../../07-topology/01-point-set-topology/topological-spaces-and-continuous-maps.md) keeps only the open sets; [Banach spaces](../../09-advanced-analysis/03-functional-analysis/banach-spaces.md) are normed spaces that are complete; the norm ∥·∥ on ℝⁿ is the setting for [calculus of several variables](../04-calculus-of-several-variables/README.md).
 - **Siblings:** [Completeness](completeness-and-the-contraction-mapping-principle.md) and [compactness](compactness-in-metric-spaces.md) are the two properties that make metric spaces behave like closed bounded intervals.
 
 ## Common misconceptions

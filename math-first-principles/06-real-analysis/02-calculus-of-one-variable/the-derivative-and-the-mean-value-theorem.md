@@ -2,7 +2,7 @@
 
 > **Layer:** [06 Real Analysis](../README.md) › [Calculus of One Variable](README.md)
 > **Builds on:** [Continuity](../01-limits-and-convergence/continuity.md), [Sequences and limits](../01-limits-and-convergence/sequences-and-limits.md), [Linear maps and matrices](../../04-linear-algebra/01-vector-spaces-and-linear-maps/linear-maps-and-matrices.md)
-> **Enables:** [Taylor expansion](taylor-expansion.md), [The fundamental theorem of calculus](the-fundamental-theorem-of-calculus.md), [The derivative as a linear map](../03-calculus-of-several-variables/the-derivative-as-a-linear-map.md), [Root-finding and Newton's method](../../14-applied-and-computational-mathematics/01-numerical-analysis/root-finding-and-newtons-method.md), [Calculus for computing](../../../cs-first-principles/01-mathematical-foundations/05-continuous-mathematics/calculus.md)
+> **Enables:** [Taylor expansion](taylor-expansion.md), [The fundamental theorem of calculus](the-fundamental-theorem-of-calculus.md), [The derivative as a linear map](../04-calculus-of-several-variables/the-derivative-as-a-linear-map.md), [Root-finding and Newton's method](../../14-applied-and-computational-mathematics/01-numerical-analysis/root-finding-and-newtons-method.md), [Calculus for computing](../../../cs-first-principles/01-mathematical-foundations/05-continuous-mathematics/calculus.md)
 
 ## Essence
 
@@ -41,7 +41,7 @@ The derivative of f at a is the slope of the best linear approximation to f near
 ## How it fits
 
 - **Below:** The derivative is a limit, from [sequences and limits](../01-limits-and-convergence/sequences-and-limits.md). Rolle's theorem needs the extreme value theorem from [continuity](../01-limits-and-convergence/continuity.md), which needs completeness. The approximation h ↦ f′(a)h is a [linear map](../../04-linear-algebra/01-vector-spaces-and-linear-maps/linear-maps-and-matrices.md) from ℝ to ℝ.
-- **Above:** In several variables the derivative becomes a [linear map](../03-calculus-of-several-variables/the-derivative-as-a-linear-map.md) with a matrix. [Newton's method](../../14-applied-and-computational-mathematics/01-numerical-analysis/root-finding-and-newtons-method.md) iterates the linear approximation, and [differential equations](../../10-differential-equations-and-dynamics/01-ordinary-differential-equations/existence-and-uniqueness.md) are statements about derivatives.
+- **Above:** In several variables the derivative becomes a [linear map](../04-calculus-of-several-variables/the-derivative-as-a-linear-map.md) with a matrix. [Newton's method](../../14-applied-and-computational-mathematics/01-numerical-analysis/root-finding-and-newtons-method.md) iterates the linear approximation, and [differential equations](../../10-differential-equations-and-dynamics/01-ordinary-differential-equations/existence-and-uniqueness.md) are statements about derivatives.
 - **Siblings:** [Taylor expansion](taylor-expansion.md) iterates Rolle's theorem to get higher-order approximations. [The fundamental theorem of calculus](the-fundamental-theorem-of-calculus.md) uses the MVT on each piece of a partition. [exp](the-exponential-and-trigonometric-functions.md) is the function equal to its own derivative.
 
 ## Common misconceptions

@@ -38,8 +38,8 @@ The area also has a recurring lesson: hypotheses matter. Pointwise limits break 
 ## Connections to sibling areas
 
 - [Calculus of one variable](../02-calculus-of-one-variable/README.md): the derivative is a limit of difference quotients and the integral a limit of sums. The mean value theorem rests on the extreme value theorem from here, integrability rests on Heine–Cantor, and uniform convergence lets power series be differentiated, which is how exp, sin and cos are built.
-- [Calculus of several variables](../03-calculus-of-several-variables/README.md): the same ε–δ definitions with the norm ∥·∥ in place of |·|. Cauchy–Schwarz explains why the gradient points in the direction of steepest ascent.
-- [Metric spaces](../04-metric-spaces/README.md): keeps only the distance and the triangle inequality, so sequences, continuity and uniform convergence (in the sup metric) become one theory. Bolzano–Weierstrass grows into compactness, and the Cauchy criterion into completeness.
+- [Calculus of several variables](../04-calculus-of-several-variables/README.md): the same ε–δ definitions with the norm ∥·∥ in place of |·|. Cauchy–Schwarz explains why the gradient points in the direction of steepest ascent.
+- [Metric spaces](../03-metric-spaces/README.md): keeps only the distance and the triangle inequality, so sequences, continuity and uniform convergence (in the sup metric) become one theory. Bolzano–Weierstrass grows into compactness, and the Cauchy criterion into completeness.
 
 ## Connections across layers
 

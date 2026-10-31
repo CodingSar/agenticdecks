@@ -1,7 +1,7 @@
 # Cauchy's Theorem and Its Consequences
 
 > **Layer:** [09 Advanced Analysis](../README.md) › [Complex Analysis](README.md)
-> **Builds on:** [Holomorphic Functions](holomorphic-functions.md), [Vector Calculus and the Integral Theorems](../../06-real-analysis/03-calculus-of-several-variables/vector-calculus-and-the-integral-theorems.md), [Uniform Convergence](../../06-real-analysis/01-limits-and-convergence/uniform-convergence.md), [Homotopy and the Fundamental Group](../../07-topology/02-algebraic-topology/homotopy-and-the-fundamental-group.md)
+> **Builds on:** [Holomorphic Functions](holomorphic-functions.md), [Vector Calculus and the Integral Theorems](../../06-real-analysis/04-calculus-of-several-variables/vector-calculus-and-the-integral-theorems.md), [Uniform Convergence](../../06-real-analysis/01-limits-and-convergence/uniform-convergence.md), [Homotopy and the Fundamental Group](../../07-topology/02-algebraic-topology/homotopy-and-the-fundamental-group.md)
 > **Enables:** [Singularities and Residues](singularities-and-residues.md), [Spectral Theory](../03-functional-analysis/spectral-theory.md), [Laplace's Equation and Harmonic Functions](../../10-differential-equations-and-dynamics/02-partial-differential-equations/laplaces-equation-and-harmonic-functions.md), [The Prime Number Theorem](../../12-number-theory-and-algebraic-geometry/02-analytic-number-theory/the-prime-number-theorem.md)
 
 ## Essence
@@ -47,7 +47,7 @@ Cauchy's theorem says that the integral of a holomorphic function around a close
 
 ## How it fits
 
-- **Below:** the [integral theorems of vector calculus](../../06-real-analysis/03-calculus-of-several-variables/vector-calculus-and-the-integral-theorems.md) give the first proof; [homotopy](../../07-topology/02-algebraic-topology/homotopy-and-the-fundamental-group.md) gives the right hypothesis; [uniform convergence](../../06-real-analysis/01-limits-and-convergence/uniform-convergence.md) is what Weierstrass's theorem strengthens.
+- **Below:** the [integral theorems of vector calculus](../../06-real-analysis/04-calculus-of-several-variables/vector-calculus-and-the-integral-theorems.md) give the first proof; [homotopy](../../07-topology/02-algebraic-topology/homotopy-and-the-fundamental-group.md) gives the right hypothesis; [uniform convergence](../../06-real-analysis/01-limits-and-convergence/uniform-convergence.md) is what Weierstrass's theorem strengthens.
 - **Above:** contour integrals relate the zeros of the [zeta function](../../12-number-theory-and-algebraic-geometry/02-analytic-number-theory/the-riemann-zeta-function.md) to primes in the [prime number theorem](../../12-number-theory-and-algebraic-geometry/02-analytic-number-theory/the-prime-number-theorem.md); the mean value property drives potential theory in 10.
 - **Siblings:** [residues](singularities-and-residues.md) handle the curves that wind around singularities; [conformal maps](conformal-maps-and-the-riemann-mapping-theorem.md) use the estimates to extract convergent subsequences; [spectral theory](../03-functional-analysis/spectral-theory.md) borrows Liouville.
 

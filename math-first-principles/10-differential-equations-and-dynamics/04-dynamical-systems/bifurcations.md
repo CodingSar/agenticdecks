@@ -1,7 +1,7 @@
 # Bifurcations
 
 > **Layer:** [10 Differential Equations and Dynamics](../README.md) › [Dynamical Systems](README.md)
-> **Builds on:** [Stability and phase portraits](../01-ordinary-differential-equations/stability-and-phase-portraits.md), [Iterated maps](iterated-maps.md), [Inverse and implicit function theorems](../../06-real-analysis/03-calculus-of-several-variables/inverse-and-implicit-function-theorems.md), [Taylor expansion](../../06-real-analysis/02-calculus-of-one-variable/taylor-expansion.md)
+> **Builds on:** [Stability and phase portraits](../01-ordinary-differential-equations/stability-and-phase-portraits.md), [Iterated maps](iterated-maps.md), [Inverse and implicit function theorems](../../06-real-analysis/04-calculus-of-several-variables/inverse-and-implicit-function-theorems.md), [Taylor expansion](../../06-real-analysis/02-calculus-of-one-variable/taylor-expansion.md)
 > **Enables:** [Chaos and strange attractors](chaos-and-strange-attractors.md), [Mathematical biology and epidemics](../../14-applied-and-computational-mathematics/04-mathematical-modelling/mathematical-biology-and-epidemics.md), [Control theory](../../14-applied-and-computational-mathematics/04-mathematical-modelling/control-theory.md), [Nonlinear dynamics, oscillations and networks](../../../medicine-first-principles/01-quantitative-and-scientific-foundations/03-systems-and-models/nonlinear-dynamics-oscillations-and-networks.md)
 
 ## Essence
@@ -37,7 +37,7 @@ A bifurcation is a qualitative change in a system's behaviour as a parameter pas
 
 ## How it fits
 
-- **Below:** the [implicit function theorem](../../06-real-analysis/03-calculus-of-several-variables/inverse-and-implicit-function-theorems.md) says when nothing happens, [Taylor expansion](../../06-real-analysis/02-calculus-of-one-variable/taylor-expansion.md) produces the normal forms, [stability theory](../01-ordinary-differential-equations/stability-and-phase-portraits.md) supplies hyperbolicity, and [iterated maps](iterated-maps.md) supply period doubling.
+- **Below:** the [implicit function theorem](../../06-real-analysis/04-calculus-of-several-variables/inverse-and-implicit-function-theorems.md) says when nothing happens, [Taylor expansion](../../06-real-analysis/02-calculus-of-one-variable/taylor-expansion.md) produces the normal forms, [stability theory](../01-ordinary-differential-equations/stability-and-phase-portraits.md) supplies hyperbolicity, and [iterated maps](iterated-maps.md) supply period doubling.
 - **Above:** epidemic thresholds and biological switches in [mathematical biology](../../14-applied-and-computational-mathematics/04-mathematical-modelling/mathematical-biology-and-epidemics.md); feedback in [control theory](../../14-applied-and-computational-mathematics/04-mathematical-modelling/control-theory.md) keeps eigenvalues away from the imaginary axis; nerve firing and cardiac rhythms in medicine's [nonlinear dynamics](../../../medicine-first-principles/01-quantitative-and-scientific-foundations/03-systems-and-models/nonlinear-dynamics-oscillations-and-networks.md) begin at Hopf bifurcations.
 - **Siblings:** cascades of bifurcations lead into [chaos](chaos-and-strange-attractors.md); [Hamiltonian systems](hamiltonian-systems-and-integrability.md) have no attractors and bifurcate differently.
 

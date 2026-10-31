@@ -1,7 +1,7 @@
 # Topological Spaces and Continuous Maps
 
 > **Layer:** [07 Topology](../README.md) › [Point-Set Topology](README.md)
-> **Builds on:** [Metric Spaces and Continuity](../../06-real-analysis/04-metric-spaces/metric-spaces-and-continuity.md), [Continuity](../../06-real-analysis/01-limits-and-convergence/continuity.md), [Sets and Set Operations](../../01-sets-and-foundations/01-sets-relations-and-functions/sets-and-set-operations.md)
+> **Builds on:** [Metric Spaces and Continuity](../../06-real-analysis/03-metric-spaces/metric-spaces-and-continuity.md), [Continuity](../../06-real-analysis/01-limits-and-convergence/continuity.md), [Sets and Set Operations](../../01-sets-and-foundations/01-sets-relations-and-functions/sets-and-set-operations.md)
 > **Enables:** [Subspaces, Products and Quotients](subspaces-products-and-quotients.md), [Compactness](compactness.md), [Topological and Smooth Manifolds](../03-manifolds/topological-and-smooth-manifolds.md), [Banach Spaces](../../09-advanced-analysis/03-functional-analysis/banach-spaces.md), [Varieties and the Nullstellensatz](../../12-number-theory-and-algebraic-geometry/03-algebraic-geometry/varieties-and-the-nullstellensatz.md)
 
 ## Essence
@@ -39,7 +39,7 @@ A topological space is a set together with a chosen family of "open" sets, close
 
 ## How it fits
 
-- **Below:** It abstracts the open sets of [metric spaces](../../06-real-analysis/04-metric-spaces/metric-spaces-and-continuity.md) and the ε–δ [continuity](../../06-real-analysis/01-limits-and-convergence/continuity.md) of 06, in the language of [sets](../../01-sets-and-foundations/01-sets-relations-and-functions/sets-and-set-operations.md).
+- **Below:** It abstracts the open sets of [metric spaces](../../06-real-analysis/03-metric-spaces/metric-spaces-and-continuity.md) and the ε–δ [continuity](../../06-real-analysis/01-limits-and-convergence/continuity.md) of 06, in the language of [sets](../../01-sets-and-foundations/01-sets-relations-and-functions/sets-and-set-operations.md).
 - **Above:** [Manifolds](../03-manifolds/topological-and-smooth-manifolds.md), the weak topologies of [functional analysis](../../09-advanced-analysis/03-functional-analysis/banach-spaces.md) and the Zariski topology of [algebraic geometry](../../12-number-theory-and-algebraic-geometry/03-algebraic-geometry/varieties-and-the-nullstellensatz.md) all use this vocabulary.
 - **Siblings:** [Subspaces, products and quotients](subspaces-products-and-quotients.md) make new spaces from old; [compactness](compactness.md), [connectedness](connectedness.md) and the [separation axioms](separation-axioms-and-metrisability.md) are the first invariants defined from open sets alone.
 

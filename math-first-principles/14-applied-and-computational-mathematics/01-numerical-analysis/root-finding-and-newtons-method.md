@@ -1,7 +1,7 @@
 # Root-Finding and Newton's Method
 
 > **Layer:** [14 Applied and Computational Mathematics](../README.md) › [Numerical Analysis](README.md)
-> **Builds on:** [Continuity](../../06-real-analysis/01-limits-and-convergence/continuity.md), [Taylor Expansion](../../06-real-analysis/02-calculus-of-one-variable/taylor-expansion.md), [Completeness and the Contraction Mapping Principle](../../06-real-analysis/04-metric-spaces/completeness-and-the-contraction-mapping-principle.md), [Iterated Maps](../../10-differential-equations-and-dynamics/04-dynamical-systems/iterated-maps.md), [Floating Point, Conditioning and Stability](floating-point-conditioning-and-stability.md)
+> **Builds on:** [Continuity](../../06-real-analysis/01-limits-and-convergence/continuity.md), [Taylor Expansion](../../06-real-analysis/02-calculus-of-one-variable/taylor-expansion.md), [Completeness and the Contraction Mapping Principle](../../06-real-analysis/03-metric-spaces/completeness-and-the-contraction-mapping-principle.md), [Iterated Maps](../../10-differential-equations-and-dynamics/04-dynamical-systems/iterated-maps.md), [Floating Point, Conditioning and Stability](floating-point-conditioning-and-stability.md)
 > **Enables:** [Numerical Methods for Differential Equations](numerical-methods-for-differential-equations.md), [Convex Optimisation and Duality](../02-optimisation/convex-optimisation-and-duality.md), [Mathematical Finance](../05-games-decisions-and-finance/mathematical-finance.md)
 
 ## Essence
@@ -42,7 +42,7 @@ Most equations f(x) = 0 have no formula for their solutions, so we guess and imp
 
 ## How it fits
 
-- **Below:** bisection is the intermediate value theorem of [continuity](../../06-real-analysis/01-limits-and-convergence/continuity.md) as an algorithm; Newton's error formula is [Taylor's theorem](../../06-real-analysis/02-calculus-of-one-variable/taylor-expansion.md); fixed-point iteration is the [contraction mapping principle](../../06-real-analysis/04-metric-spaces/completeness-and-the-contraction-mapping-principle.md); cycles and fractal basins are [iterated maps](../../10-differential-equations-and-dynamics/04-dynamical-systems/iterated-maps.md).
+- **Below:** bisection is the intermediate value theorem of [continuity](../../06-real-analysis/01-limits-and-convergence/continuity.md) as an algorithm; Newton's error formula is [Taylor's theorem](../../06-real-analysis/02-calculus-of-one-variable/taylor-expansion.md); fixed-point iteration is the [contraction mapping principle](../../06-real-analysis/03-metric-spaces/completeness-and-the-contraction-mapping-principle.md); cycles and fractal basins are [iterated maps](../../10-differential-equations-and-dynamics/04-dynamical-systems/iterated-maps.md).
 - **Above:** implicit [time-stepping](numerical-methods-for-differential-equations.md) solves a nonlinear system by Newton's method at every step; Newton's method on ∇f = 0 drives interior-point methods in [convex optimisation](../02-optimisation/convex-optimisation-and-duality.md); implied volatility in [mathematical finance](../05-games-decisions-and-finance/mathematical-finance.md) is a root found this way.
 - **Siblings:** [numerical linear algebra](numerical-linear-algebra.md) supplies the linear solve inside each n-dimensional step; [floating point](floating-point-conditioning-and-stability.md) sets the accuracy any root can have; the secant method is linear [interpolation](interpolation-and-approximation.md) of f.
 

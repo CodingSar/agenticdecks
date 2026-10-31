@@ -22,7 +22,7 @@ Collected from writer reports, to be resolved in the review pass.
 
 - **09 (W10):** candidate leaves: compact operators and Fredholm theory (09/03); wavelets and time-frequency analysis (09/04); elliptic functions (09/02); Hardy spaces, singular integrals, operator algebras; the general spectral theorem (now split between 09 and 14). Cross-link ergodic theorems (10) from 09/01.
 
-- **06 (W7):** number `04-metric-spaces` before `03-calculus-of-several-variables`, since 03 builds on 04; move `estimates-and-inequalities` earlier in area 01; add a leaf on power series and analytic functions.
+- **06 (W7):** number `03-metric-spaces` before `04-calculus-of-several-variables`, since 03 builds on 04; move `estimates-and-inequalities` earlier in area 01; add a leaf on power series and analytic functions.
 
 - **10 (W11):** layer 07 has no Jordan curve theorem leaf (Poincaré–Bendixson would link to it); complex dynamics (Julia and Mandelbrot sets, Douady–Hubbard) has no home, candidate leaf in 10/04 or 09.
 

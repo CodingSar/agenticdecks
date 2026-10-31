@@ -1,7 +1,7 @@
 # Extrema and Lagrange Multipliers
 
 > **Layer:** [06 Real Analysis](../README.md) › [Calculus of Several Variables](README.md)
-> **Builds on:** [The derivative as a linear map](the-derivative-as-a-linear-map.md), [Inverse and implicit function theorems](inverse-and-implicit-function-theorems.md), [Taylor expansion](../02-calculus-of-one-variable/taylor-expansion.md), [Compactness in metric spaces](../04-metric-spaces/compactness-in-metric-spaces.md), [Quadratic forms and positive definiteness](../../04-linear-algebra/03-inner-product-spaces/quadratic-forms-and-positive-definiteness.md)
+> **Builds on:** [The derivative as a linear map](the-derivative-as-a-linear-map.md), [Inverse and implicit function theorems](inverse-and-implicit-function-theorems.md), [Taylor expansion](../02-calculus-of-one-variable/taylor-expansion.md), [Compactness in metric spaces](../03-metric-spaces/compactness-in-metric-spaces.md), [Quadratic forms and positive definiteness](../../04-linear-algebra/03-inner-product-spaces/quadratic-forms-and-positive-definiteness.md)
 > **Enables:** [Convex optimisation and duality](../../14-applied-and-computational-mathematics/02-optimisation/convex-optimisation-and-duality.md), [Gradient methods](../../14-applied-and-computational-mathematics/02-optimisation/gradient-methods.md), [The Euler–Lagrange equation](../../10-differential-equations-and-dynamics/03-calculus-of-variations/the-euler-lagrange-equation.md), [Optimization (CS)](../../../cs-first-principles/01-mathematical-foundations/05-continuous-mathematics/optimization.md)
 
 ## Essence
@@ -12,7 +12,7 @@ Finding the largest or smallest value of a function of several variables takes t
 
 1. **At an interior local extremum of a differentiable function, the gradient vanishes.** If f has a local maximum or minimum at an interior point a, then for each direction u the one-variable function t ↦ f(a + tu) has an extremum at t = 0, so its derivative ⟨∇f(a), u⟩ is 0. Hence ∇f(a) = 0. The converse fails: x² − y² has gradient 0 at the origin, which is a saddle point. At boundary points the gradient need not vanish: x on [0, 1] is largest at x = 1, where its derivative is 1.
 
-2. **Existence comes first, and in two dimensions one critical point is not enough.** A continuous function on a non-empty compact set attains its maximum and minimum, by the extreme value theorem (EVT) of [compactness](../04-metric-spaces/compactness-in-metric-spaces.md). Without compactness, strange things happen. In one variable, a differentiable function whose only critical point is a local minimum has a global minimum there. In two variables this fails:
+2. **Existence comes first, and in two dimensions one critical point is not enough.** A continuous function on a non-empty compact set attains its maximum and minimum, by the extreme value theorem (EVT) of [compactness](../03-metric-spaces/compactness-in-metric-spaces.md). Without compactness, strange things happen. In one variable, a differentiable function whose only critical point is a local minimum has a global minimum there. In two variables this fails:
    ```
    f(x, y) = x² + y²·(1 − x)³
    ```

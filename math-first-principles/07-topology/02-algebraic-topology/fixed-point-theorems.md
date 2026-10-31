@@ -1,7 +1,7 @@
 # Fixed-Point Theorems
 
 > **Layer:** [07 Topology](../README.md) › [Algebraic Topology](README.md)
-> **Builds on:** [Homology](homology.md), [Homotopy and the Fundamental Group](homotopy-and-the-fundamental-group.md), [Compactness](../01-point-set-topology/compactness.md), [Completeness and the Contraction Mapping Principle](../../06-real-analysis/04-metric-spaces/completeness-and-the-contraction-mapping-principle.md)
+> **Builds on:** [Homology](homology.md), [Homotopy and the Fundamental Group](homotopy-and-the-fundamental-group.md), [Compactness](../01-point-set-topology/compactness.md), [Completeness and the Contraction Mapping Principle](../../06-real-analysis/03-metric-spaces/completeness-and-the-contraction-mapping-principle.md)
 > **Enables:** [Game Theory](../../14-applied-and-computational-mathematics/05-games-decisions-and-finance/game-theory.md), [Nonlinear PDEs](../../10-differential-equations-and-dynamics/02-partial-differential-equations/nonlinear-pdes.md), [Convex Sets and Separation](../../08-geometry/03-convex-and-discrete-geometry/convex-sets-and-separation.md)
 
 ## Essence
@@ -16,7 +16,7 @@ Stir a cup of coffee and let it settle: some point of the liquid ends where it s
 
 3. **Brouwer is existence without construction.** The proof gives no point and no algorithm. Combinatorics supplies one: Sperner's lemma says that a suitably labelled triangulation of a simplex has a fully labelled small simplex, and refining the triangulation squeezes these down onto a fixed point. Computing an approximate Brouwer fixed point is, in general, as hard as a complete class of search problems, so the existence proof hides real computational cost.
 
-4. **Contrast: Banach's theorem is constructive and needs a metric.** A contraction of a complete metric space has exactly one fixed point, found by iterating from any start ([contraction mapping principle](../../06-real-analysis/04-metric-spaces/completeness-and-the-contraction-mapping-principle.md)). Brouwer asks far less of the map, only continuity, but far more of the space, and gives neither uniqueness nor a method. Schauder's theorem extends Brouwer to compact convex subsets of Banach spaces (and to continuous maps with relatively compact image), which is how many existence proofs for [nonlinear PDEs](../../10-differential-equations-and-dynamics/02-partial-differential-equations/nonlinear-pdes.md) go.
+4. **Contrast: Banach's theorem is constructive and needs a metric.** A contraction of a complete metric space has exactly one fixed point, found by iterating from any start ([contraction mapping principle](../../06-real-analysis/03-metric-spaces/completeness-and-the-contraction-mapping-principle.md)). Brouwer asks far less of the map, only continuity, but far more of the space, and gives neither uniqueness nor a method. Schauder's theorem extends Brouwer to compact convex subsets of Banach spaces (and to continuous maps with relatively compact image), which is how many existence proofs for [nonlinear PDEs](../../10-differential-equations-and-dynamics/02-partial-differential-equations/nonlinear-pdes.md) go.
 
 5. **Lefschetz counts fixed points with homology.** For a continuous map f of a compact polyhedron X to itself, define the Lefschetz number
 
@@ -43,7 +43,7 @@ Stir a cup of coffee and let it settle: some point of the liquid ends where it s
 
 ## How it fits
 
-- **Below:** the obstruction comes from [homology](homology.md) and, in the plane, from [the fundamental group](homotopy-and-the-fundamental-group.md); [compactness](../01-point-set-topology/compactness.md) is the hypothesis every counterexample attacks; [Banach's principle](../../06-real-analysis/04-metric-spaces/completeness-and-the-contraction-mapping-principle.md) is the metric, constructive counterpart.
+- **Below:** the obstruction comes from [homology](homology.md) and, in the plane, from [the fundamental group](homotopy-and-the-fundamental-group.md); [compactness](../01-point-set-topology/compactness.md) is the hypothesis every counterexample attacks; [Banach's principle](../../06-real-analysis/03-metric-spaces/completeness-and-the-contraction-mapping-principle.md) is the metric, constructive counterpart.
 - **Above:** Kakutani and Nash in [game theory](../../14-applied-and-computational-mathematics/05-games-decisions-and-finance/game-theory.md); Schauder and Leray–Schauder in [nonlinear PDEs](../../10-differential-equations-and-dynamics/02-partial-differential-equations/nonlinear-pdes.md); convexity in [convex sets and separation](../../08-geometry/03-convex-and-discrete-geometry/convex-sets-and-separation.md).
 - **Siblings:** the Lefschetz number of the identity is the [Euler characteristic](the-euler-characteristic.md); lifting arguments from [covering spaces](covering-spaces.md) give the n = 2 case of Borsuk–Ulam.
 

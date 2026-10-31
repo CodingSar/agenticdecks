@@ -2,7 +2,7 @@
 
 > **Layer:** [06 Real Analysis](../README.md) › [Calculus of One Variable](README.md)
 > **Builds on:** [Continuity](../01-limits-and-convergence/continuity.md), [Sequences and limits](../01-limits-and-convergence/sequences-and-limits.md), [The real numbers](../../02-number-systems/01-constructing-the-numbers/the-real-numbers.md)
-> **Enables:** [The fundamental theorem of calculus](the-fundamental-theorem-of-calculus.md), [Multiple integrals and change of variables](../03-calculus-of-several-variables/multiple-integrals-and-change-of-variables.md), [The Lebesgue integral](../../09-advanced-analysis/01-measure-and-integration/the-lebesgue-integral.md), [Measure and sigma-algebras](../../09-advanced-analysis/01-measure-and-integration/measure-and-sigma-algebras.md)
+> **Enables:** [The fundamental theorem of calculus](the-fundamental-theorem-of-calculus.md), [Multiple integrals and change of variables](../04-calculus-of-several-variables/multiple-integrals-and-change-of-variables.md), [The Lebesgue integral](../../09-advanced-analysis/01-measure-and-integration/the-lebesgue-integral.md), [Measure and sigma-algebras](../../09-advanced-analysis/01-measure-and-integration/measure-and-sigma-algebras.md)
 
 ## Essence
 
@@ -48,7 +48,7 @@ The integral of f over [a, b] is meant to be the signed area under its graph. Ri
 ## How it fits
 
 - **Below:** The sup and inf in every sum come from the completeness of [the real numbers](../../02-number-systems/01-constructing-the-numbers/the-real-numbers.md). Integrability of continuous functions uses uniform continuity from [continuity](../01-limits-and-convergence/continuity.md), and the integral is a limit in the sense of [sequences and limits](../01-limits-and-convergence/sequences-and-limits.md).
-- **Above:** The same squeeze over boxes gives [multiple integrals](../03-calculus-of-several-variables/multiple-integrals-and-change-of-variables.md). Tenet 7 is the starting point of [measure](../../09-advanced-analysis/01-measure-and-integration/measure-and-sigma-algebras.md) and [the Lebesgue integral](../../09-advanced-analysis/01-measure-and-integration/the-lebesgue-integral.md), which integrate far more functions and allow limits under mild conditions.
+- **Above:** The same squeeze over boxes gives [multiple integrals](../04-calculus-of-several-variables/multiple-integrals-and-change-of-variables.md). Tenet 7 is the starting point of [measure](../../09-advanced-analysis/01-measure-and-integration/measure-and-sigma-algebras.md) and [the Lebesgue integral](../../09-advanced-analysis/01-measure-and-integration/the-lebesgue-integral.md), which integrate far more functions and allow limits under mild conditions.
 - **Siblings:** [The fundamental theorem of calculus](the-fundamental-theorem-of-calculus.md) connects this definition with antiderivatives, which is how integrals are actually computed. [Uniform convergence](../01-limits-and-convergence/uniform-convergence.md) gives one safe way to pass limits through the integral.
 
 ## Common misconceptions

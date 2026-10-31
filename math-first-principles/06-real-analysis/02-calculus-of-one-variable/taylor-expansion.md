@@ -2,7 +2,7 @@
 
 > **Layer:** [06 Real Analysis](../README.md) › [Calculus of One Variable](README.md)
 > **Builds on:** [The derivative and the mean value theorem](the-derivative-and-the-mean-value-theorem.md), [Series](../01-limits-and-convergence/series.md), [Estimates and inequalities](../01-limits-and-convergence/estimates-and-inequalities.md)
-> **Enables:** [The exponential and trigonometric functions](the-exponential-and-trigonometric-functions.md), [Extrema and Lagrange multipliers](../03-calculus-of-several-variables/extrema-and-lagrange-multipliers.md), [Interpolation and approximation](../../14-applied-and-computational-mathematics/01-numerical-analysis/interpolation-and-approximation.md), [Holomorphic functions](../../09-advanced-analysis/02-complex-analysis/holomorphic-functions.md), [Root-finding and Newton's method](../../14-applied-and-computational-mathematics/01-numerical-analysis/root-finding-and-newtons-method.md)
+> **Enables:** [The exponential and trigonometric functions](the-exponential-and-trigonometric-functions.md), [Extrema and Lagrange multipliers](../04-calculus-of-several-variables/extrema-and-lagrange-multipliers.md), [Interpolation and approximation](../../14-applied-and-computational-mathematics/01-numerical-analysis/interpolation-and-approximation.md), [Holomorphic functions](../../09-advanced-analysis/02-complex-analysis/holomorphic-functions.md), [Root-finding and Newton's method](../../14-applied-and-computational-mathematics/01-numerical-analysis/root-finding-and-newtons-method.md)
 
 ## Essence
 
@@ -44,7 +44,7 @@ The derivative gives the best linear approximation to a function; Taylor expansi
 ## How it fits
 
 - **Below:** The proof iterates Rolle's theorem from [the derivative and the mean value theorem](the-derivative-and-the-mean-value-theorem.md). Taylor series are power series, whose radius comes from [series](../01-limits-and-convergence/series.md), and O and o come from [estimates and inequalities](../01-limits-and-convergence/estimates-and-inequalities.md).
-- **Above:** The second-order expansion with the Hessian decides [extrema](../03-calculus-of-several-variables/extrema-and-lagrange-multipliers.md). Numerical [interpolation and approximation](../../14-applied-and-computational-mathematics/01-numerical-analysis/interpolation-and-approximation.md) and [Newton's method](../../14-applied-and-computational-mathematics/01-numerical-analysis/root-finding-and-newtons-method.md) live on remainder bounds. In [complex analysis](../../09-advanced-analysis/02-complex-analysis/holomorphic-functions.md) every differentiable function is analytic.
+- **Above:** The second-order expansion with the Hessian decides [extrema](../04-calculus-of-several-variables/extrema-and-lagrange-multipliers.md). Numerical [interpolation and approximation](../../14-applied-and-computational-mathematics/01-numerical-analysis/interpolation-and-approximation.md) and [Newton's method](../../14-applied-and-computational-mathematics/01-numerical-analysis/root-finding-and-newtons-method.md) live on remainder bounds. In [complex analysis](../../09-advanced-analysis/02-complex-analysis/holomorphic-functions.md) every differentiable function is analytic.
 - **Siblings:** [exp, sin and cos](the-exponential-and-trigonometric-functions.md) are defined by their Taylor series. The integral remainder uses [the fundamental theorem of calculus](the-fundamental-theorem-of-calculus.md).
 
 ## Common misconceptions

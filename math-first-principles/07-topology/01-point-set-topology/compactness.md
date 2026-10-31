@@ -1,7 +1,7 @@
 # Compactness
 
 > **Layer:** [07 Topology](../README.md) › [Point-Set Topology](README.md)
-> **Builds on:** [Topological Spaces and Continuous Maps](topological-spaces-and-continuous-maps.md), [Subspaces, Products and Quotients](subspaces-products-and-quotients.md), [Compactness in Metric Spaces](../../06-real-analysis/04-metric-spaces/compactness-in-metric-spaces.md), [The Axiom of Choice](../../01-sets-and-foundations/03-axiomatic-set-theory/the-axiom-of-choice.md)
+> **Builds on:** [Topological Spaces and Continuous Maps](topological-spaces-and-continuous-maps.md), [Subspaces, Products and Quotients](subspaces-products-and-quotients.md), [Compactness in Metric Spaces](../../06-real-analysis/03-metric-spaces/compactness-in-metric-spaces.md), [The Axiom of Choice](../../01-sets-and-foundations/03-axiomatic-set-theory/the-axiom-of-choice.md)
 > **Enables:** [Separation Axioms and Metrisability](separation-axioms-and-metrisability.md), [Fixed-Point Theorems](../02-algebraic-topology/fixed-point-theorems.md), [Functional Analysis](../../09-advanced-analysis/03-functional-analysis/README.md), [Existence of Minimisers](../../10-differential-equations-and-dynamics/03-calculus-of-variations/existence-of-minimisers.md)
 
 ## Essence
@@ -38,7 +38,7 @@ A space is compact if every cover of it by open sets has a finite subcover. This
 
 ## How it fits
 
-- **Below:** 06 proved that [compactness in metric spaces](../../06-real-analysis/04-metric-spaces/compactness-in-metric-spaces.md) is equivalent to sequential compactness; here the open-cover definition is primary. Tychonoff's theorem rests on the [axiom of choice](../../01-sets-and-foundations/03-axiomatic-set-theory/the-axiom-of-choice.md).
+- **Below:** 06 proved that [compactness in metric spaces](../../06-real-analysis/03-metric-spaces/compactness-in-metric-spaces.md) is equivalent to sequential compactness; here the open-cover definition is primary. Tychonoff's theorem rests on the [axiom of choice](../../01-sets-and-foundations/03-axiomatic-set-theory/the-axiom-of-choice.md).
 - **Above:** Compactness gives [fixed points](../02-algebraic-topology/fixed-point-theorems.md), the compactness of unit balls in weak topologies in [functional analysis](../../09-advanced-analysis/03-functional-analysis/README.md), and [minimisers](../../10-differential-equations-and-dynamics/03-calculus-of-variations/existence-of-minimisers.md). The compactness theorem of propositional [logic](../../00-logic-and-proof/01-formal-logic/soundness-completeness-and-compactness.md) is the compactness of the product space {0, 1}^V of truth assignments to the variables V.
 - **Siblings:** It uses the product topology of [subspaces, products and quotients](subspaces-products-and-quotients.md), feeds normality in the [separation axioms](separation-axioms-and-metrisability.md), and shares with [connectedness](connectedness.md) the property of surviving continuous images.
 

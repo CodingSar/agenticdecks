@@ -37,7 +37,7 @@ The two strands meet in one theme: the derivative controls the map locally. Its 
 
 - [Limits and convergence](../01-limits-and-convergence/README.md): limits and continuity in ℝⁿ use the norm in place of the absolute value, and Cauchy–Schwarz explains why the gradient gives the steepest ascent.
 - [Calculus of one variable](../02-calculus-of-one-variable/README.md): every proof here reduces to one-variable facts along lines or coordinates: the mean value theorem, Taylor's theorem, the Riemann integral and the FTC.
-- [Metric spaces](../04-metric-spaces/README.md): the contraction mapping principle proves the inverse function theorem, and compactness guarantees that extrema exist. The dependence runs one way, from this area to that one.
+- [Metric spaces](../03-metric-spaces/README.md): the contraction mapping principle proves the inverse function theorem, and compactness guarantees that extrema exist. The dependence runs one way, from this area to that one.
 
 ## Connections across layers
 

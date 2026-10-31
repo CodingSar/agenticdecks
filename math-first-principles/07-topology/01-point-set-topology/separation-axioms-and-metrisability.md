@@ -1,7 +1,7 @@
 # Separation Axioms and Metrisability
 
 > **Layer:** [07 Topology](../README.md) › [Point-Set Topology](README.md)
-> **Builds on:** [Topological Spaces and Continuous Maps](topological-spaces-and-continuous-maps.md), [Subspaces, Products and Quotients](subspaces-products-and-quotients.md), [Compactness](compactness.md), [Metric Spaces and Continuity](../../06-real-analysis/04-metric-spaces/metric-spaces-and-continuity.md)
+> **Builds on:** [Topological Spaces and Continuous Maps](topological-spaces-and-continuous-maps.md), [Subspaces, Products and Quotients](subspaces-products-and-quotients.md), [Compactness](compactness.md), [Metric Spaces and Continuity](../../06-real-analysis/03-metric-spaces/metric-spaces-and-continuity.md)
 > **Enables:** [Topological and Smooth Manifolds](../03-manifolds/topological-and-smooth-manifolds.md), [Banach Spaces](../../09-advanced-analysis/03-functional-analysis/banach-spaces.md), [Varieties and the Nullstellensatz](../../12-number-theory-and-algebraic-geometry/03-algebraic-geometry/varieties-and-the-nullstellensatz.md)
 
 ## Essence
@@ -42,7 +42,7 @@ The axioms of a topology alone allow spaces in which a sequence converges to two
 
 ## How it fits
 
-- **Below:** [Metric spaces](../../06-real-analysis/04-metric-spaces/metric-spaces-and-continuity.md) are the model, since a distance separates everything; this leaf asks which topologies admit one. It uses the product topology of [subspaces, products and quotients](subspaces-products-and-quotients.md) and the arguments of [compactness](compactness.md).
+- **Below:** [Metric spaces](../../06-real-analysis/03-metric-spaces/metric-spaces-and-continuity.md) are the model, since a distance separates everything; this leaf asks which topologies admit one. It uses the product topology of [subspaces, products and quotients](subspaces-products-and-quotients.md) and the arguments of [compactness](compactness.md).
 - **Above:** [Manifolds](../03-manifolds/topological-and-smooth-manifolds.md) assume Hausdorff and second countable, which buys metrics and partitions of unity. Compact Hausdorff spaces K and their Urysohn functions underlie the spaces C(K) of continuous functions in [Banach spaces](../../09-advanced-analysis/03-functional-analysis/banach-spaces.md). The Zariski topology of [varieties](../../12-number-theory-and-algebraic-geometry/03-algebraic-geometry/varieties-and-the-nullstellensatz.md) is T₁ but not Hausdorff, and still the right notion of nearness there.
 - **Siblings:** It completes the toolkit begun in [topological spaces](topological-spaces-and-continuous-maps.md), and with [compactness](compactness.md) it proves that continuous bijections from compact spaces to Hausdorff spaces are homeomorphisms.
 

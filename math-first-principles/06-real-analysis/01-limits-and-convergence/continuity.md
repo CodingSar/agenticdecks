@@ -2,7 +2,7 @@
 
 > **Layer:** [06 Real Analysis](../README.md) › [Limits and Convergence](README.md)
 > **Builds on:** [Sequences and limits](sequences-and-limits.md), [Functions](../../01-sets-and-foundations/01-sets-relations-and-functions/functions.md), [The real numbers](../../02-number-systems/01-constructing-the-numbers/the-real-numbers.md)
-> **Enables:** [The derivative and the mean value theorem](../02-calculus-of-one-variable/the-derivative-and-the-mean-value-theorem.md), [The Riemann integral](../02-calculus-of-one-variable/the-riemann-integral.md), [Metric spaces and continuity](../04-metric-spaces/metric-spaces-and-continuity.md), [Compactness in metric spaces](../04-metric-spaces/compactness-in-metric-spaces.md), [Topological spaces and continuous maps](../../07-topology/01-point-set-topology/topological-spaces-and-continuous-maps.md)
+> **Enables:** [The derivative and the mean value theorem](../02-calculus-of-one-variable/the-derivative-and-the-mean-value-theorem.md), [The Riemann integral](../02-calculus-of-one-variable/the-riemann-integral.md), [Metric spaces and continuity](../03-metric-spaces/metric-spaces-and-continuity.md), [Compactness in metric spaces](../03-metric-spaces/compactness-in-metric-spaces.md), [Topological spaces and continuous maps](../../07-topology/01-point-set-topology/topological-spaces-and-continuous-maps.md)
 
 ## Essence
 
@@ -37,7 +37,7 @@ A function f from a set D ⊆ ℝ to ℝ is continuous at a point a when small c
 ## How it fits
 
 - **Below:** The definition is a limit, from [sequences and limits](sequences-and-limits.md). The big theorems use the supremum and Bolzano–Weierstrass, both forms of the completeness of [the real numbers](../../02-number-systems/01-constructing-the-numbers/the-real-numbers.md). A function here is any rule in the sense of [functions](../../01-sets-and-foundations/01-sets-relations-and-functions/functions.md), not only a formula.
-- **Above:** Continuity is a hypothesis of [the mean value theorem](../02-calculus-of-one-variable/the-derivative-and-the-mean-value-theorem.md) and of [integrability](../02-calculus-of-one-variable/the-riemann-integral.md). [Metric spaces](../04-metric-spaces/metric-spaces-and-continuity.md) restate it with a general distance, and [topology](../../07-topology/01-point-set-topology/topological-spaces-and-continuous-maps.md) restates it as "preimages of open sets are open", dropping distance altogether. Tenets 5 and 6 are special cases of [compactness](../04-metric-spaces/compactness-in-metric-spaces.md).
+- **Above:** Continuity is a hypothesis of [the mean value theorem](../02-calculus-of-one-variable/the-derivative-and-the-mean-value-theorem.md) and of [integrability](../02-calculus-of-one-variable/the-riemann-integral.md). [Metric spaces](../03-metric-spaces/metric-spaces-and-continuity.md) restate it with a general distance, and [topology](../../07-topology/01-point-set-topology/topological-spaces-and-continuous-maps.md) restates it as "preimages of open sets are open", dropping distance altogether. Tenets 5 and 6 are special cases of [compactness](../03-metric-spaces/compactness-in-metric-spaces.md).
 - **Siblings:** [Uniform convergence](uniform-convergence.md) asks when a limit of continuous functions is continuous. [Estimates and inequalities](estimates-and-inequalities.md) supplies the bounds used to find δ.
 
 ## Common misconceptions

@@ -2,7 +2,7 @@
 
 > **Layer:** [06 Real Analysis](../README.md) › [Limits and Convergence](README.md)
 > **Builds on:** [The real numbers](../../02-number-systems/01-constructing-the-numbers/the-real-numbers.md), [Predicate logic and quantifiers](../../00-logic-and-proof/01-formal-logic/predicate-logic-and-quantifiers.md), [Functions](../../01-sets-and-foundations/01-sets-relations-and-functions/functions.md)
-> **Enables:** [Series](series.md), [Continuity](continuity.md), [Metric spaces and continuity](../04-metric-spaces/metric-spaces-and-continuity.md), [Modes of convergence](../../11-probability-and-statistics/02-limit-theorems/modes-of-convergence.md), [Asymptotic analysis](../../../cs-first-principles/02-theory-of-computation/04-complexity/asymptotic-analysis.md)
+> **Enables:** [Series](series.md), [Continuity](continuity.md), [Metric spaces and continuity](../03-metric-spaces/metric-spaces-and-continuity.md), [Modes of convergence](../../11-probability-and-statistics/02-limit-theorems/modes-of-convergence.md), [Asymptotic analysis](../../../cs-first-principles/02-theory-of-computation/04-complexity/asymptotic-analysis.md)
 
 ## Essence
 
@@ -40,7 +40,7 @@ A sequence is a function from ℕ to ℝ, written a₁, a₂, a₃, …. Saying 
 ## How it fits
 
 - **Below:** The completeness of ℝ, built from ℚ in [the real numbers](../../02-number-systems/01-constructing-the-numbers/the-real-numbers.md), is the one assumption behind tenets 4 to 7. The ε–N definition is a sentence of [predicate logic](../../00-logic-and-proof/01-formal-logic/predicate-logic-and-quantifiers.md), and its quantifier order is its whole content.
-- **Above:** [Series](series.md) are sequences of partial sums, [continuity](continuity.md) is the preservation of limits, and derivatives and [integrals](../02-calculus-of-one-variable/the-riemann-integral.md) are limits. [Metric spaces](../04-metric-spaces/metric-spaces-and-continuity.md) keep only the distance the definition uses. Random sequences have several inequivalent [modes of convergence](../../11-probability-and-statistics/02-limit-theorems/modes-of-convergence.md).
+- **Above:** [Series](series.md) are sequences of partial sums, [continuity](continuity.md) is the preservation of limits, and derivatives and [integrals](../02-calculus-of-one-variable/the-riemann-integral.md) are limits. [Metric spaces](../03-metric-spaces/metric-spaces-and-continuity.md) keep only the distance the definition uses. Random sequences have several inequivalent [modes of convergence](../../11-probability-and-statistics/02-limit-theorems/modes-of-convergence.md).
 - **Siblings:** [Estimates and inequalities](estimates-and-inequalities.md) supplies the bounds every ε–N proof needs. [Uniform convergence](uniform-convergence.md) asks the same question of sequences of functions, where it splits into two inequivalent questions.
 
 ## Common misconceptions
