@@ -38,21 +38,21 @@ Mathematics has **two roots**. The *deductive* one (00) says what follows from w
 
 | # | Layer | The question it answers | Its key contribution to the stack |
 |---|---|---|---|
-| 00 | [Logic & Proof](00-logic-and-proof/README.md) | What follows from what, and what counts as a proof? | The rules of inference, the methods of proof, and the axiomatic method itself |
-| 01 | [Sets & Foundations](01-sets-and-foundations/README.md) | What are mathematical objects, and how big can a collection be? | Sets, functions and quotients as the universal building material; sizes of infinity; the axioms that hold it together |
+| 00 | [Logic and Proof](00-logic-and-proof/README.md) | What follows from what, and what counts as a proof? | The rules of inference, the methods of proof, and the axiomatic method itself |
+| 01 | [Sets and Foundations](01-sets-and-foundations/README.md) | What are mathematical objects, and how big can a collection be? | Sets, functions and quotients as the universal building material; sizes of infinity; the axioms that hold it together |
 | 02 | [Number Systems](02-number-systems/README.md) | Where do the numbers come from, and what does each extension buy? | ℕ to ℂ built by induction, quotients and completion; primes and congruences |
-| 03 | [Combinatorics & Graph Theory](03-combinatorics-and-graph-theory/README.md) | How many, and what structure is forced? | Counting arguments, graphs, finite probability and the extremal principle |
+| 03 | [Combinatorics and Graph Theory](03-combinatorics-and-graph-theory/README.md) | How many, and what structure is forced? | Counting arguments, graphs, finite probability and the extremal principle |
 | 04 | [Linear Algebra](04-linear-algebra/README.md) | What can be said about structures that are flat? | Vector spaces and linear maps, classified completely by dimension, rank and eigenvalues |
 | 05 | [Abstract Algebra](05-abstract-algebra/README.md) | What does structure alone imply? | Groups, rings and fields, symmetry made exact, and why the quintic has no formula |
 | 06 | [Real Analysis](06-real-analysis/README.md) | How do we make the infinitely small precise? | The limit, built on completeness: convergence, derivative, integral, metric spaces |
 | 07 | [Topology](07-topology/README.md) | What survives continuous deformation? | Nearness without distance; holes counted by algebra; manifolds |
 | 08 | [Geometry](08-geometry/README.md) | What is preserved, and how does space curve? | Transformation groups, curvature, convexity and Lie groups |
 | 09 | [Advanced Analysis](09-advanced-analysis/README.md) | How do we measure, integrate and decompose in infinite dimensions? | Measure, holomorphy, Banach and Hilbert spaces, Fourier analysis |
-| 10 | [Differential Equations & Dynamics](10-differential-equations-and-dynamics/README.md) | How do laws of change determine the future? | Existence, stability, diffusion and waves, variational principles, chaos |
-| 11 | [Probability & Statistics](11-probability-and-statistics/README.md) | How does certainty emerge from chance, and how do we learn from data? | Probability as measure, limit theorems, stochastic processes, inference |
-| 12 | [Number Theory & Algebraic Geometry](12-number-theory-and-algebraic-geometry/README.md) | What do primes and polynomial equations have in common? | The syntheses: number fields, the zeta function, varieties, elliptic curves, modular forms |
-| 13 | [Structure & Metamathematics](13-structure-and-metamathematics/README.md) | What is mathematics, and what can it not do? | Categories as a common language; the limits of computation, proof and axioms |
-| 14 | [Applied & Computational Mathematics](14-applied-and-computational-mathematics/README.md) | How does mathematics compute, decide and model the world? | Numerics, optimisation, codes and cryptography, models, games, learning |
+| 10 | [Differential Equations and Dynamics](10-differential-equations-and-dynamics/README.md) | How do laws of change determine the future? | Existence, stability, diffusion and waves, variational principles, chaos |
+| 11 | [Probability and Statistics](11-probability-and-statistics/README.md) | How does certainty emerge from chance, and how do we learn from data? | Probability as measure, limit theorems, stochastic processes, inference |
+| 12 | [Number Theory and Algebraic Geometry](12-number-theory-and-algebraic-geometry/README.md) | What do primes and polynomial equations have in common? | The syntheses: number fields, the zeta function, varieties, elliptic curves, modular forms |
+| 13 | [Structure and Metamathematics](13-structure-and-metamathematics/README.md) | What is mathematics, and what can it not do? | Categories as a common language; the limits of computation, proof and axioms |
+| 14 | [Applied and Computational Mathematics](14-applied-and-computational-mathematics/README.md) | How does mathematics compute, decide and model the world? | Numerics, optimisation, codes and cryptography, models, games, learning |
 | 15 | [Mathematics in Context](15-mathematics-in-context/README.md) | Where did it come from, what is it, and what remains open? | History, philosophy, practice, machine-checked proof, open problems, teaching, society |
 
 ## How to read this
