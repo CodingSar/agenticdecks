@@ -10,11 +10,11 @@ Projective geometry began with Renaissance perspective, which keeps straight lin
 
 ## Core tenets
 
-1. **The projective plane is a quotient of a vector space.** Define ℝP² as ℝ³ ∖ {0} modulo v ∼ λv for λ ≠ 0, a [quotient](../../01-sets-and-foundations/01-sets-relations-and-functions/equivalence-relations-and-quotients.md) whose classes are written in homogeneous coordinates [x : y : z]. Points with z ≠ 0 can be scaled to [x : y : 1], a copy of the ordinary plane; the points [x : y : 0] form the line at infinity, one point per direction. A projective line is a plane through 0 in ℝ³, with equation ax + by + cz = 0. The construction works over any field: over the field with two elements it gives the Fano plane, with 7 points and 7 lines.
+1. **The projective plane is a quotient of a vector space.** Define ℝP² as ℝ³ ∖ {0} modulo v ∼ λv for λ ≠ 0, a [quotient](../../01-sets-and-foundations/01-sets-relations-and-functions/equivalence-relations-and-quotients.md) whose classes are written in homogeneous coordinates [x : y : z]. Points with z ≠ 0 can be scaled to [x : y : 1], a copy of the ordinary plane; the points [x : y : 0] form the line at infinity, one point per direction. A projective line is a plane through 0 in ℝ³, with equation ax + by + cz = 0. Over the field with two elements the same construction gives the Fano plane.
 
 2. **Two points determine one line, and two lines meet in exactly one point.** Two independent vectors span exactly one plane, and two distinct planes through 0 in ℝ³ meet in a line, since 2 + 2 − 3 = 1. The parallel lines y = mx + c and y = mx + d meet at [1 : m : 0], their shared direction. Removing the exceptions of Euclidean geometry is what lets [Bézout's theorem](../../12-number-theory-and-algebraic-geometry/03-algebraic-geometry/projective-varieties-and-bezouts-theorem.md) count intersections exactly.
 
-3. **Duality: every theorem has a dual with points and lines exchanged.** The point [a : b : c] corresponds to the line ax + by + cz = 0; this is the passage from a vector space to its [dual space](../../04-linear-algebra/01-vector-spaces-and-linear-maps/dual-spaces.md), which turns lines through 0 into planes through 0. Incidence, "p lies on ℓ", becomes ℓ(p) = 0, which is symmetric in the two, so the dual of any proof is a proof. Pascal's theorem about six points on a conic dualises to Brianchon's theorem about six tangent lines.
+3. **Duality: every theorem has a dual with points and lines exchanged.** The point [a : b : c] corresponds to the line ax + by + cz = 0; this is the passage from a vector space to its [dual space](../../04-linear-algebra/01-vector-spaces-and-linear-maps/dual-spaces.md), which turns lines through 0 into planes through 0. Incidence, "p lies on ℓ", becomes ℓ(p) = 0, which is symmetric in the two, so the dual of any proof is a proof. Pascal's theorem on six points of a conic dualises to Brianchon's on six tangents.
 
 4. **Projective maps can move any four general points to any four, so lengths, angles and parallelism are not invariant.** The projective transformations come from invertible [linear maps](../../04-linear-algebra/01-vector-spaces-and-linear-maps/linear-maps-and-matrices.md) of ℝ³ and form PGL(3, ℝ), invertible 3 × 3 matrices up to scaling, of dimension 8. Given four points with no three collinear, three of them fix a basis up to scaling and the fourth fixes the scalings, so exactly one transformation sends them to any other such four. All non-degenerate conics are equivalent: ellipse, parabola and hyperbola differ only in meeting the line at infinity in 0, 1 or 2 points.
 
@@ -26,7 +26,7 @@ Projective geometry began with Renaissance perspective, which keeps straight lin
 
 6. **Desargues' and Pappus's theorems record the algebra of the coordinates.** Desargues: if two triangles are in perspective from a point, the three intersections of corresponding sides are collinear. Pappus: for A, B, C on one line and A′, B′, C′ on another, the points AB′ ∩ A′B, AC′ ∩ A′C and BC′ ∩ B′C are collinear. Starting from incidence axioms alone, a projective plane has coordinates in a division ring if and only if Desargues holds, and in a field if and only if Pappus holds. Desargues is a theorem in any projective space of dimension at least 3 (lift the triangles into different planes, which meet in a line), but not in every plane: Moulton's plane, with lines bent where they cross an axis, is a counterexample.
 
-7. **Finite projective planes raise an open problem.** The plane over the field with q elements has q² + q + 1 points, with q + 1 on each line, and every known finite projective plane has prime-power order. The Bruck–Ryser theorem (1949) excludes orders such as 6 and 14, and a long computer search by Lam, Thiel and Swiercz (1989) excluded 10. Whether a plane of order 12, or any order that is not a prime power, exists is open as of 2026.
+7. **Finite projective planes raise an open problem.** The plane over the field with q elements has q² + q + 1 points, with q + 1 on each line, and every known finite plane has prime-power order. The Bruck–Ryser theorem (1949) excludes orders such as 6 and 14, and a computer search by Lam, Thiel and Swiercz (1989) excluded 10. Whether a plane of order 12, or any order that is not a prime power, exists is open as of 2026.
 
 ## Key concepts
 
@@ -55,6 +55,6 @@ Projective geometry began with Renaissance perspective, which keeps straight lin
 
 ## Go deeper
 
-- Coxeter, *Projective Geometry*: the classical synthetic treatment, short and elegant.
+- Coxeter, *Projective Geometry*: the classical synthetic treatment.
 - Richter-Gebert, *Perspectives on Projective Geometry* (2011): modern, with cross-ratios, conics and computation.
 - Stillwell, *The Four Pillars of Geometry* (2005): a gentle route from perspective to coordinates and the Pappus–Desargues story.
