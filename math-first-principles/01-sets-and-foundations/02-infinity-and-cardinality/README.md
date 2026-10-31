@@ -26,7 +26,7 @@ The unifying idea is that *size and length are defined by maps, not by counting*
                      (ω, ω+1, …, ω₁; transfinite induction)
 ```
 
-Read in order. Countable sets show that many sets which look bigger than ℕ are not. The diagonal argument shows that some sets are bigger, and that there is no biggest. Cardinal numbers organise the resulting ladder of sizes, and ordinals supply the well-ordered scale on which, with choice, every cardinal sits.
+Read in order. Countable sets show that many sets which look bigger than ℕ are not. The diagonal argument shows that some sets are bigger, and that there is no biggest. Cardinal numbers organise the resulting ladder of sizes, and ordinals supply the well-ordered scale on which, with choice, every cardinal sits. The last two leaves lean on each other: the cardinals leaf defines ∣A∣ as the least ordinal of that size, a forward pointer, while ω₁ and the ordinal arithmetic of the ordinals leaf use countability and size. A reader who prefers definitions before use can read the ordinals leaf first; otherwise read in order and return to tenet 1 of the cardinals leaf afterwards.
 
 Two warnings run through the area. First, several innocent-looking steps (a countable union of countable sets is countable, every infinite set has a countably infinite subset, any two sizes are comparable) quietly use the axiom of choice. Second, the most natural question about sizes, the continuum hypothesis (CH) that nothing lies between ℵ₀ and 2^ℵ₀, cannot be settled by the standard axioms.
 

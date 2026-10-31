@@ -6,7 +6,7 @@
 
 ## Essence
 
-Stir a cup of coffee and let it settle: some point of the liquid ends where it started. These are instances of Brouwer's fixed-point theorem: every continuous map from a closed disc (or ball) to itself fixes a point. The proof is not a calculation that finds the point; it is an argument that a world without one would contain an impossible object, a retraction of the disc onto its boundary, which homology forbids. Lefschetz turned this into a computable count, Borsuk and Ulam found a cousin about antipodal points, and through Kakutani's version the theorem guarantees that every finite game has an equilibrium.
+Stir a cup of coffee and let it settle: some point of the liquid ends where it started. This is an instance of Brouwer's fixed-point theorem: every continuous map from a closed disc (or ball) to itself fixes a point. The proof is not a calculation that finds the point; it is an argument that a world without one would contain an impossible object, a retraction of the disc onto its boundary, which homology forbids. Lefschetz turned this into a computable count, Borsuk and Ulam found a cousin about antipodal points, and through Kakutani's version the theorem guarantees that every finite game has an equilibrium.
 
 ## Core tenets
 
@@ -14,7 +14,7 @@ Stir a cup of coffee and let it settle: some point of the liquid ends where it s
 
 2. **Each hypothesis is needed.** Without compactness it fails: x ↦ x + 1 on ℝ, or a map of the open disc pushing every point towards one boundary point. Without the "no holes" condition it fails: a rotation of an annulus or a circle moves every point. Without continuity it fails trivially: on [0, 1], send x to x + 1/2 when x < 1/2, to x − 1/2 when x > 1/2, and 1/2 to 0. In dimension 1 Brouwer is the intermediate value theorem.
 
-3. **Brouwer is existence without construction.** The proof gives no point and no algorithm. Combinatorics supplies one: Sperner's lemma says that a suitably labelled triangulation of a simplex has a fully labelled small simplex, and refining the triangulation squeezes these down onto a fixed point. Computing an approximate Brouwer fixed point is, in general, as hard as a complete class of search problems, so the existence proof hides real computational cost.
+3. **Brouwer is existence without construction.** The proof gives no point and no algorithm. Combinatorics supplies one: Sperner's lemma says that a suitably labelled triangulation of a simplex has a fully labelled small simplex, and refining the triangulation squeezes these down onto a fixed point. Finding an approximate fixed point of a map given as a circuit is complete for PPAD (Polynomial Parity Arguments on Directed graphs), as is finding a Nash equilibrium, so the existence proof hides real computational cost.
 
 4. **Contrast: Banach's theorem is constructive and needs a metric.** A contraction of a complete metric space has exactly one fixed point, found by iterating from any start ([contraction mapping principle](../../06-real-analysis/03-metric-spaces/completeness-and-the-contraction-mapping-principle.md)). Brouwer asks far less of the map, only continuity, but far more of the space, and gives neither uniqueness nor a method. Schauder's theorem extends Brouwer to compact convex subsets of Banach spaces (and to continuous maps with relatively compact image), which is how many existence proofs for [nonlinear PDEs](../../10-differential-equations-and-dynamics/02-partial-differential-equations/nonlinear-pdes.md) go.
 

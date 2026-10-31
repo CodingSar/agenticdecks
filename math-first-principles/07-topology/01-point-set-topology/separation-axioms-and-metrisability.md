@@ -26,7 +26,7 @@ The axioms of a topology alone allow spaces in which a sequence converges to two
 
    Regular and Hausdorff are necessary, since every metric space has both properties. Second countability is not: an uncountable discrete space is metrisable but has no countable basis. The Nagata–Smirnov theorem gives the exact condition, a regular Hausdorff space with a basis that is a countable union of locally finite families.
 
-6. **For compact spaces and manifolds the answer is simple.** A compact Hausdorff space is metrisable if and only if it is second countable. Manifolds are defined to be Hausdorff and second countable, and being locally Euclidean they are regular, so every manifold is metrisable. The Hausdorff clause is not redundant: the line with two origins is locally Euclidean and second countable but not Hausdorff.
+6. **For compact spaces and manifolds the answer is simple.** A compact Hausdorff space is metrisable if and only if it is second countable. Manifolds are defined to be Hausdorff and second countable, and being locally Euclidean and Hausdorff they are locally compact Hausdorff, hence regular, so every manifold is metrisable. The Hausdorff clause is not redundant: the line with two origins is locally Euclidean and second countable but not Hausdorff.
 
 ## Key concepts
 

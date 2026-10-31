@@ -10,7 +10,7 @@ In ℤ you cannot always divide, but you can always divide with a remainder, and
 
 ## Core tenets
 
-1. **Division with remainder: for integers a and b with b > 0 there are unique q and r with a = qb + r and 0 ≤ r < b.** Take r to be the least element of {a − qb : q ∈ ℤ} ∩ ℕ, which is non-empty, so well-ordering supplies it. If r ≥ b, then r − b would be a smaller element, so r < b. Uniqueness: two such pairs give b ∣ (r − r′), with ∣r − r′∣ < b, so r = r′. Here b ∣ a, "b divides a", means a = kb for some integer k.
+1. **Division with remainder: for integers a and b with b > 0 there are unique q and r with a = qb + r and 0 ≤ r < b.** Take r to be the least element of {a − qb : q ∈ ℤ} ∩ ℕ, which is non-empty, so well-ordering supplies it. If r ≥ b, then r − b would be a smaller element, so r < b. Uniqueness: two such pairs give b ∣ (r − r′), with |r − r′| < b, so r = r′. Here b ∣ a, "b divides a", means a = kb for some integer k.
 
 2. **gcd(a, b) = gcd(b, r) when a = qb + r, so repeated division computes the greatest common divisor.** Any common divisor of a and b divides r = a − qb, and any common divisor of b and r divides a = qb + r, so the two pairs have the same common divisors. The remainders strictly decrease, so the process stops, and the last non-zero remainder is the greatest common divisor:
 

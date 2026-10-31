@@ -46,7 +46,7 @@ Read the first two in order: the ring 𝒪_K is defined first, and its ideals ar
 
 ## Cross-cutting threads
 
-- [Local to global](../../CROSS-CUTTING.md#local-to-global): Hasse–Minkowski, and its failure measured by Ш.
+- [Local to global](../../CROSS-CUTTING.md#local-to-global): Hasse–Minkowski, and its failure for cubics measured by the Tate–Shafarevich group Ш.
 - [Equivalence and quotients](../../CROSS-CUTTING.md#equivalence-and-quotients): the class group is ideals modulo principal ideals.
 - [Impossibility and obstruction](../../CROSS-CUTTING.md#impossibility-and-obstruction): the class group obstructs unique factorisation.
 - [Completeness and compactness](../../CROSS-CUTTING.md#completeness-and-compactness): ℚ_p is a completion, ℤ_p is compact.

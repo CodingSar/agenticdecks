@@ -16,7 +16,7 @@ Social choice theory asks how individual preferences should be combined into a c
 
 3. **Arrow's theorem: with at least three alternatives, no rule except a dictatorship satisfies unrestricted domain, Pareto and independence of irrelevant alternatives (IIA).** The rule must take any profile of rankings from finitely many voters to a transitive social ranking; Pareto requires that if everyone prefers x to y, so does society; IIA requires that society's ranking of x and y depend only on individual rankings of x and y. Call a group decisive for a pair if society follows it whenever all its members agree. Pareto makes the whole electorate decisive. Using a third alternative and IIA, one shows a group decisive for one pair is decisive for every pair, and that if a decisive group is split in two, one part is decisive. Halving a finite electorate ends with a single decisive voter: a dictator.
 
-4. **The decisive groups form an ultrafilter, and the finiteness of the electorate is essential.** The argument shows that decisive groups are closed under supersets and intersections, and of any group or its complement one is decisive: that is an ultrafilter on the set of voters. On a finite set every ultrafilter consists of the sets containing one fixed element, the dictator. With infinitely many voters a non-principal ultrafilter gives a rule satisfying all of Arrow's conditions without a dictator, though such ultrafilters exist only by the axiom of choice and cannot be written down.
+4. **The decisive groups form an ultrafilter, and the finiteness of the electorate is essential.** The argument shows that decisive groups are closed under supersets and intersections, and of any group or its complement one is decisive: that is an ultrafilter on the set of voters. On a finite set every ultrafilter consists of the sets containing one fixed element, the dictator. With infinitely many voters a non-principal ultrafilter gives a rule satisfying all of Arrow's conditions without a dictator, though proving such ultrafilters exist needs a form of the axiom of choice, and none can be written down explicitly.
 
 5. **Each other hypothesis can be dropped, at a price.** With two alternatives, majority rule satisfies all the conditions. The Borda count, which scores 2, 1, 0 for first, second and third place, violates IIA: removing a losing candidate can change the order of the others. If preferences are single-peaked along one axis, such as left to right (Duncan Black, 1948), the majority relation is transitive and the median voter's peak wins. A rule that ignores voters and imposes a fixed ranking escapes by violating Pareto.
 
@@ -51,6 +51,6 @@ Social choice theory asks how individual preferences should be combined into a c
 
 ## Go deeper
 
-- K. J. Arrow, *Social Choice and Individual Values* (1951; 2nd ed. 1963): the original theorem and its framing.
+- K. J. Arrow, *Social Choice and Individual Values* (1951; 2nd edition, 1963): the original theorem and its framing.
 - A. K. Sen, *Collective Choice and Social Welfare* (1970): the classic broader treatment, including Sen's own impossibility result.
 - A. D. Taylor, *Social Choice and the Mathematics of Manipulation* (2005): a clear account of the manipulation theorems.

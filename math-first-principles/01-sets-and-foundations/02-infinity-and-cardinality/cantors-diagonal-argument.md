@@ -6,7 +6,7 @@
 
 ## Essence
 
-Given any list of objects of a certain kind, the diagonal argument builds a new object of that kind that differs from the n-th entry at the n-th place, so it is missing from the list. Applied to subsets it proves Cantor's theorem: no set maps onto its own power set, so there is no largest infinity. Applied to decimal expansions it proves that ℝ is uncountable (Cantor, 1891). The same move, a self-application followed by a twist, proves that the halting problem is undecidable and builds the self-referential sentence in Gödel's incompleteness theorem.
+Given any list of objects of a certain kind, the diagonal argument builds a new object of that kind that differs from the n-th entry at the n-th place, so it is missing from the list. Applied to subsets it proves Cantor's theorem: no set maps onto its own power set, so there is no largest infinity. Applied to decimal expansions it proves that ℝ is uncountable; Cantor published the argument in 1891, for sequences of two symbols. The same move, a self-application followed by a twist, proves that the halting problem is undecidable and builds the self-referential sentence in Gödel's incompleteness theorem.
 
 ## Core tenets
 
@@ -64,4 +64,4 @@ Given any list of objects of a certain kind, the diagonal argument builds a new 
 
 - Georg Cantor, "Über eine elementare Frage der Mannigfaltigkeitslehre" (1891): the original four-page diagonal paper.
 - F. William Lawvere, "Diagonal arguments and Cartesian closed categories" (1969): the fixed-point theorem behind all of them.
-- Noson S. Yanofsky, "A universal approach to self-referential paradoxes, incompleteness and fixed points" (2003): Lawvere's theorem with many examples, from the liar to the halting problem.
+- Noson S. Yanofsky, "A universal approach to self-referential paradoxes, incompleteness and fixed points", *Bulletin of Symbolic Logic* (2003): Lawvere's theorem with many examples, from the liar to the halting problem.

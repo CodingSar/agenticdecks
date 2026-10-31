@@ -26,7 +26,7 @@ The determinant assigns to each square matrix a single number that says by what 
 
 3. **The determinant is signed volume.** The volume of the parallelepiped spanned by the columns is multiplied by c when one column is scaled by c, is unchanged by a shear (adding a multiple of one column to another, by Cavalieri's principle), and is 1 for the unit cube. These are the defining properties up to sign, so ∣det A∣ is that volume. When the columns are dependent the solid is flat, and both the volume and the determinant are 0.
 
-4. **det(AB) = det A · det B.** Fix A and set D(x₁, …, xₙ) = det(Ax₁, …, Axₙ). It is alternating and multilinear, so D(B) = D(I) det B = det A · det B. So det is a homomorphism from GL(n, F) to the non-zero scalars, with kernel SL(n, F), and det(P⁻¹AP) = det A: the determinant is a property of the map, not of the basis.
+4. **det(AB) = det A · det B.** Fix A and set D(x₁, …, xₙ) = det(Ax₁, …, Axₙ). It is alternating and multilinear, so D(B) = D(I) det B = det A · det B. So det is a homomorphism from the general linear group GL(n, F) of invertible matrices to the non-zero scalars, with kernel the special linear group SL(n, F), and det(P⁻¹AP) = det A: the determinant is a property of the map, not of the basis.
 
 5. **A is invertible if and only if det A ≠ 0.** If A is invertible then det A · det A⁻¹ = det I = 1. If not, its columns are dependent, one column is a combination of the others, and multilinearity with the alternating property gives det A = 0. An integer matrix has an inverse with integer entries if and only if det A = ±1.
 

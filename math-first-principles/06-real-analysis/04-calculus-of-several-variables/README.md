@@ -14,8 +14,8 @@ The central idea is that a smooth map looks linear near each point, and that man
 | Child | Its role in the whole | Depends on |
 |---|---|---|
 | [The derivative as a linear map](the-derivative-as-a-linear-map.md) | Defines Df(a), the Jacobian, the gradient and the Hessian; the chain rule as matrix product | One-variable derivative; linear maps (layer 04) |
-| [Inverse and implicit function theorems](inverse-and-implicit-function-theorems.md) | An invertible or full-rank derivative gives local inverses and smooth level sets | The derivative; contraction mapping principle (area 04) |
-| [Extrema and Lagrange multipliers](extrema-and-lagrange-multipliers.md) | Critical points, the Hessian test, and constrained optimisation | The derivative; implicit functions; compactness (area 04) |
+| [Inverse and implicit function theorems](inverse-and-implicit-function-theorems.md) | An invertible or full-rank derivative gives local inverses and smooth level sets | The derivative; contraction mapping principle (area 03) |
+| [Extrema and Lagrange multipliers](extrema-and-lagrange-multipliers.md) | Critical points, the Hessian test, and constrained optimisation | The derivative; implicit functions; compactness (area 03) |
 | [Multiple integrals and change of variables](multiple-integrals-and-change-of-variables.md) | Integrals over regions, Fubini, and the Jacobian determinant | Riemann integral; the derivative; inverse functions |
 | [Vector calculus and the integral theorems](vector-calculus-and-the-integral-theorems.md) | grad, div, curl; Green, Stokes and divergence theorems | Multiple integrals; the derivative; FTC |
 

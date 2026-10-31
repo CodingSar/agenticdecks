@@ -29,7 +29,7 @@
 
 6. **Hurwitz (1898): the only real algebras with identity and a multiplicative Euclidean norm, |xy| = |x| · |y|, are ℝ, ℂ, ℍ and 𝕆.** Equivalently, a bilinear identity writing a product of two sums of n squares as a sum of n squares exists only for n = 1, 2, 4, 8: the identity of ℂ, Euler's four-square identity and Degen's eight-square identity. Without a norm, Kervaire and Bott–Milnor (1958) proved by topology that real division algebras exist only in dimensions 1, 2, 4 and 8.
 
-7. **ℚ has other completions, the p-adic numbers.** For a prime p, set |x|ₚ = p^(−v) when x = pᵛ · a/b with a and b prime to p, and |0|ₚ = 0. This size is ultrametric, |x + y|ₚ ≤ max(|x|ₚ, |y|ₚ), and completing ℚ for it gives the field ℚₚ. In ℚ₂ the series 1 + 2 + 4 + ⋯ converges to −1, since its partial sums 2ⁿ − 1 differ from −1 by 2ⁿ. Ostrowski (1916) proved that every non-trivial absolute value on ℚ is equivalent to the usual one or a p-adic one; they are linked by the product formula, as for 12, where 12 · (1/4) · (1/3) = 1. Layer 12 develops this, starting from Hensel's lemma (1897).
+7. **ℚ has other completions, the p-adic numbers.** For a prime p, set |x|ₚ = p^(−v) when x = pᵛ · a/b with a and b prime to p, and |0|ₚ = 0. This size is ultrametric, |x + y|ₚ ≤ max(|x|ₚ, |y|ₚ), and completing ℚ for it gives the field ℚₚ (Hensel, 1897). In ℚ₂ the series 1 + 2 + 4 + ⋯ converges to −1, since its partial sums 2ⁿ − 1 differ from −1 by 2ⁿ. Ostrowski (1916) proved that every non-trivial absolute value on ℚ is equivalent to the usual one or a p-adic one; they are linked by the product formula, as for 12, where 12 · (1/4) · (1/3) = 1. Layer 12 develops this, starting from Hensel's lemma.
 
 ## Key concepts
 

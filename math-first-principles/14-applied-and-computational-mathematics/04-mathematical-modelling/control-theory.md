@@ -14,7 +14,7 @@ Control theory asks how to choose the inputs to a dynamical system so that it be
 
 2. **The transfer function turns dynamics into algebra, and stability into the location of poles.** With zero initial state the Laplace transform gives Y(s) = G(s)U(s), where G(s) = C(sI − A)⁻¹B. The system is asymptotically stable if and only if every eigenvalue of A has negative real part, since then e^(At) → 0. For a loop with open-loop transfer function L(s), Nyquist's criterion (1932) applies the argument principle to 1 + L(s) around the right half-plane: Z = N + P, where Z counts unstable closed-loop poles, P unstable open-loop poles, and N clockwise encirclements of −1 by the curve L(iω).
 
-3. **Feedback cannot suppress disturbances at every frequency.** The sensitivity S = 1/(1 + L) measures how much of a disturbance survives the loop, and high loop gain makes it small. But for a stable L that falls off at least as fast as 1/s², Bode's integral ∫₀^∞ ln∣S(iω)∣ dω = 0 holds: attenuation at some frequencies forces amplification at others.
+3. **Feedback cannot suppress disturbances at every frequency.** The sensitivity S = 1/(1 + L) measures how much of a disturbance survives the loop, and high loop gain makes it small. But if L is stable and falls off at least as fast as 1/s², and the closed loop is stable, Bode's integral ∫₀^∞ ln∣S(iω)∣ dω = 0 holds: attenuation at some frequencies forces amplification at others.
 
 4. **Controllability: every state can be reached if and only if rank [B, AB, …, Aⁿ⁻¹B] = n.** The solution x(t) = e^(At)x₀ + ∫₀ᵗ e^(A(t−s))Bu(s) ds expands in powers of A, so the reachable directions lie in the span of the columns of the AᵏB, and by Cayley–Hamilton the powers from Aⁿ on add nothing new. Conversely, full rank makes the controllability Gramian invertible, which gives an explicit steering input for any time t > 0. The payoff is pole placement: for controllable (A, B), the eigenvalues of A − BK can be put anywhere, in conjugate pairs.
 
@@ -69,5 +69,5 @@ Control theory asks how to choose the inputs to a dynamical system so that it be
 ## Go deeper
 
 - K. J. Åström and R. M. Murray, *Feedback Systems* (2008): the gentle modern introduction.
-- E. D. Sontag, *Mathematical Control Theory* (2nd ed., 1998): the rigorous treatment, linear and nonlinear.
+- E. D. Sontag, *Mathematical Control Theory* (2nd edition, 1998): the rigorous treatment, linear and nonlinear.
 - R. E. Kalman, "A New Approach to Linear Filtering and Prediction Problems" (1960): the filter's original paper.

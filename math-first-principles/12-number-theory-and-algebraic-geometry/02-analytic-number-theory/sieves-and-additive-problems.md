@@ -24,7 +24,7 @@ Zeta functions count all primes; many questions ask about primes with a twist. A
 
    Near rationals a/q with small q (the major arcs), S is computed from primes in progressions and gives the main term, of size n². Elsewhere (the minor arcs) S must be shown small. Hardy and Littlewood developed the method, assuming GRH, the Generalised Riemann Hypothesis, for this problem; Vinogradov in 1937 bounded S on the minor arcs unconditionally, proving that every sufficiently large odd number is a sum of three primes.
 
-5. **Two primes are much harder than three.** With two primes the main term is of size n, but the trivial bound for the minor arcs is ∫ ∣S∣² ≈ n·log n, larger than the main term, so even a perfect bound for sup ∣S∣ on the minor arcs is not enough. With three primes, ∫ ∣S∣³ ≤ sup ∣S∣ · ∫ ∣S∣² leaves room. This is why binary Goldbach is open as of 2026, though checked by computer for every even number up to beyond 10¹⁸.
+5. **Two primes are much harder than three.** With two primes the main term is of size n, but the trivial bound for the minor arcs is ∫ ∣S∣² ≈ n·log n, larger than the main term, so even a perfect bound for sup ∣S∣ on the minor arcs is not enough. With three primes, ∫ ∣S∣³ ≤ sup ∣S∣ · ∫ ∣S∣² leaves room. This is why binary Goldbach is open as of 2026, though checked by computer for every even number up to 4 × 10¹⁸.
 
 6. **Ternary Goldbach is solved.** Vinogradov's "sufficiently large" was astronomically large. Helfgott, in preprints of 2013, sharpened the major and minor arc estimates until the remaining range was within reach of computation, verified with Platt, proving that every odd number greater than 5 is a sum of three primes.
 

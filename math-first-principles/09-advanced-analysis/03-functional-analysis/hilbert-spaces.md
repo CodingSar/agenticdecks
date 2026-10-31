@@ -48,7 +48,7 @@ A Hilbert space is a Banach space whose norm comes from an inner product ⟨x, y
 
 - **"An orthonormal basis spans the space"**: its finite linear combinations are only dense; vectors are infinite sums.
 - **"Bounded sequences have convergent subsequences"**: only weakly; the basis vectors eₙ have no norm-convergent subsequence.
-- **"Every Banach space is a Hilbert space with some other inner product"**: Lᵖ for p ≠ 2 has no equivalent inner-product norm.
+- **"Every Banach space is a Hilbert space with some other inner product"**: infinite-dimensional Lᵖ for p ≠ 2 has no equivalent inner-product norm.
 
 ## Go deeper
 

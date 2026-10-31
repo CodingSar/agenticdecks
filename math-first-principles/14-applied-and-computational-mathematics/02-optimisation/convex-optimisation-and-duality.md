@@ -23,14 +23,14 @@ A convex optimisation problem minimises a convex function over a convex set, typ
 
 3. **Slater's condition closes the gap.** If the problem is convex and some point satisfies every inequality strictly, then d* = p* and the dual optimum is attained (Morton Slater, 1950). The proof separates two convex sets in the space of (constraint values, objective value): the set of achievable pairs and the set of pairs strictly better than optimal; the separating hyperplane's normal is the optimal multiplier, and strict feasibility keeps it from being vertical. Without such a condition convexity alone is not enough: minimising e^(−x) subject to x²/y ≤ 0 over y > 0 is convex with p* = 1, yet d* = 0.
 
-4. **The Karush–Kuhn–Tucker conditions characterise optima.** Under strong duality, x* and λ* are optimal if and only if
+4. **The Karush–Kuhn–Tucker conditions characterise optima.** For a convex problem with differentiable fᵢ and strong duality, as under Slater's condition, x* and λ* are primal and dual optimal if and only if
 
    ```
    ∇f₀(x*) + λ₁*∇f₁(x*) + ⋯ + λₘ*∇fₘ(x*) = 0     (stationarity)
    fᵢ(x*) ≤ 0,   λᵢ* ≥ 0,   λᵢ*fᵢ(x*) = 0       (feasibility, complementary slackness)
    ```
 
-   for differentiable fᵢ. They generalise Lagrange multipliers to inequalities: an inactive constraint has zero multiplier, and at the optimum −∇f₀ lies in the cone spanned by the gradients of the active constraints. William Karush stated them in a master's thesis (1939); Harold Kuhn and Albert Tucker rediscovered them (1951). For convex problems they are sufficient; for nonconvex ones they are only necessary, under a constraint qualification.
+   They generalise Lagrange multipliers to inequalities: an inactive constraint has zero multiplier, and at the optimum −∇f₀ lies in the cone spanned by the gradients of the active constraints. William Karush stated them in a master's thesis (1939); Harold Kuhn and Albert Tucker rediscovered them (1951). Without convexity they are only necessary, and then only under a constraint qualification.
 
 5. **Multipliers are prices.** If the constraint fᵢ(x) ≤ 0 is relaxed to fᵢ(x) ≤ uᵢ, the optimal value p*(u) is convex in u, and under strong duality −λ* is a subgradient of p* at u = 0. A large multiplier marks a constraint whose loosening pays; a zero multiplier marks one that does not matter locally. This is the economic reading of linear programming duality, now for every convex problem.
 

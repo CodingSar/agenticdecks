@@ -37,8 +37,8 @@ The counterexamples are as important as the theorems. x² sin(1/x) has a discont
 ## Connections to sibling areas
 
 - [Limits and convergence](../01-limits-and-convergence/README.md): supplies every tool used here. The extreme value theorem drives Rolle, Heine–Cantor makes continuous functions integrable, and uniform convergence allows power series to be differentiated term by term.
-- [Calculus of several variables](../04-calculus-of-several-variables/README.md): the derivative becomes a linear map, Taylor's second-order term becomes the Hessian, and the integral and the FTC grow into multiple integrals and the theorems of Green, Stokes and Gauss.
 - [Metric spaces](../03-metric-spaces/README.md): the FTC turns an ordinary differential equation into an integral equation, which the contraction mapping principle then solves.
+- [Calculus of several variables](../04-calculus-of-several-variables/README.md): the derivative becomes a linear map, Taylor's second-order term becomes the Hessian, and the integral and the FTC grow into multiple integrals and the theorems of Green, Stokes and Gauss.
 
 ## Connections across layers
 

@@ -10,7 +10,7 @@ A formal proof system consists of axioms and rules of inference; a derivation is
 
 ## Core tenets
 
-1. **Checking a proof is mechanical; finding one is not.** Rules look only at the shapes of formulas, so a short program blind to their meaning decides whether a list is a derivation: a formal proof is a certificate that needs no trust. Finding one is different: for first-order logic no algorithm decides whether one exists, and for propositional logic no efficient method is known.
+1. **Checking a proof is mechanical; finding one is not.** Rules look only at the shapes of formulas, so a program blind to meaning decides whether a list is a derivation: a formal proof is a certificate that needs no trust. Finding one is different: for first-order logic no algorithm decides whether one exists, and for propositional logic no efficient method is known.
 
 2. **A Hilbert system uses many axioms and one rule.** For ¬ and ⇒ (the others being abbreviations), three axiom schemes and modus ponens suffice; every instance of a scheme is an axiom. Even φ ⇒ φ takes five lines:
 
@@ -31,11 +31,11 @@ MP  from φ and φ ⇒ ψ, infer ψ        (modus ponens)
 
 4. **Natural deduction mirrors how mathematicians argue.** Gentzen (1934–35) and, independently, Jaśkowski (1934) replaced axioms by an introduction rule (how to prove) and an elimination rule (how to use) for each connective and quantifier. To prove ∀x φ(x), prove φ(x) for an x occurring in no open assumption, the formal "let x be arbitrary"; to use ∃x φ(x), assume φ(c) for a new name c and reach a conclusion that does not mention c. These rules give intuitionistic logic; classical logic needs one more, such as double-negation elimination.
 
-5. **Cut elimination: every proof can be made direct.** The sequent calculus derives sequents Γ ⊢ Δ, read "if all of Γ hold, some formula of Δ holds". Its cut rule is the formal use of a lemma: from Γ ⊢ Δ, A and A, Γ ⊢ Δ infer Γ ⊢ Δ, and it is the only rule whose premises contain a formula absent from its conclusion. Gentzen's Hauptsatz says cuts can be removed, so a provable sequent has a proof built from its own subformulas; consistency follows, since no cut-free proof ends in the empty sequent. The price is length, which can grow by a tower of exponentials.
+5. **Cut elimination: every proof can be made direct.** The sequent calculus derives sequents Γ ⊢ Δ, read "if all of Γ hold, some formula of Δ holds". Its cut rule is the formal use of a lemma: from Γ ⊢ Δ, A and A, Γ ⊢ Δ infer Γ ⊢ Δ, and it is the only rule whose premises contain a formula absent from its conclusion. Gentzen's Hauptsatz says cuts can be removed, so a provable sequent has a proof built from its own subformulas; consistency follows, since no cut-free proof ends in the empty sequent. The price is length: it can grow by a tower of exponentials.
 
 6. **Resolution is a single rule built for machines.** Premises and the negated goal become clauses, disjunctions of literals; from A ∨ p and B ∨ ¬p resolution infers A ∨ B, and a clause set is unsatisfiable if and only if repeated resolution reaches the empty clause. Lifted to first-order logic by J. A. Robinson (1965), it underlies Prolog and satisfiability (SAT) solvers. Haken (1985) showed that resolution needs exponentially long refutations of the pigeonhole principle (n + 1 pigeons do not fit in n holes). Cook and Reckhow (1979) showed that some proof system has polynomial-size proofs of all tautologies if and only if NP = coNP, where NP is the class of problems whose "yes" answers have certificates checkable in polynomial time and coNP the class whose "no" answers do: open as of 2026.
 
-7. **Soundness and completeness are theorems about a system, not definitions.** A system is sound if Γ ⊢ φ implies Γ ⊨ φ and complete if the converse holds; neither is automatic. Without A3 the system stays sound but cannot derive ¬¬p ⇒ p, since reading ¬ as constantly true keeps every derivable formula a tautology. Second-order logic with full semantics has no sound, complete, effective system, since its validities cannot be listed.
+7. **Soundness and completeness are theorems about a system, not definitions.** A system is sound if Γ ⊢ φ implies Γ ⊨ φ and complete if the converse holds. Without A3 the system stays sound but cannot derive ¬¬p ⇒ p, since reading ¬ as constantly true keeps every derivable formula valid but makes ¬¬p ⇒ p false for false p. Second-order logic with full semantics has no sound, complete, effective system, since its validities cannot be listed.
 
 ## Key concepts
 
@@ -58,7 +58,7 @@ MP  from φ and φ ⇒ ψ, infer ψ        (modus ponens)
 
 ## Common misconceptions
 
-- **"Mathematicians write formal proofs"**: published proofs are informal arguments that could be expanded into derivations, which is rarely done outside proof assistants.
+- **"Mathematicians write formal proofs"**: published proofs are informal arguments that could be expanded into derivations, rarely done outside proof assistants.
 - **"The proof system defines what is true"**: truth is defined by structures; a proof system is judged against it and can prove too little or, if unsound, falsehoods.
 - **"Removing cuts makes proofs simpler"**: cut-free proofs are more direct but can be enormously longer; lemmas keep real proofs short.
 

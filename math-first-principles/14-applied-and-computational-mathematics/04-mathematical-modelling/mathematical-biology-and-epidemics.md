@@ -57,6 +57,6 @@ Mathematical biology writes populations, infections and tissues as dynamical sys
 
 ## Go deeper
 
-- J. D. Murray, *Mathematical Biology* (3rd ed., two volumes, 2002–2003): the standard reference, including Turing patterns.
+- J. D. Murray, *Mathematical Biology* (3rd edition, two volumes, 2002–2003): the standard reference, including Turing patterns.
 - L. Edelstein-Keshet, *Mathematical Models in Biology* (1988): a gentler introduction built on examples.
 - W. O. Kermack and A. G. McKendrick, "A Contribution to the Mathematical Theory of Epidemics" (1927): the origin of the threshold theorem.

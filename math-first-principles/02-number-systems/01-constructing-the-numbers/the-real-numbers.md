@@ -22,7 +22,7 @@
 
 6. **Completeness has several equivalent forms, each a tool of analysis.** In an ordered field these are equivalent: every non-empty set bounded above has a least upper bound; every bounded increasing sequence converges; every bounded sequence has a convergent subsequence (Bolzano–Weierstrass); the field is Archimedean and every Cauchy sequence converges. All of them fail in ℚ. The intermediate value theorem is proved by taking the supremum of the points where a function is negative, and in ℚ the polynomial x² − 2 is negative at 1, positive at 2 and never zero.
 
-7. **ℝ is uncountable, so almost every real can never be named.** Cantor proved this in 1874 by nested intervals and in 1891 by the diagonal argument: from any list of reals in (0, 1), build a decimal whose n-th digit differs from that of the n-th number, avoiding 0 and 9 so that no number has two expansions. Formulas and programs are finite strings, of which there are countably many; the computable reals, whose digits some program prints (Turing, 1936), form a countable field.
+7. **ℝ is uncountable, so almost every real can never be named.** Cantor proved this in 1874 by nested intervals; his diagonal argument of 1891 gives another proof, here in decimal form: from any list of reals in (0, 1), build a decimal whose n-th digit differs from that of the n-th number, avoiding 0 and 9 so that no number has two expansions. Formulas and programs are finite strings, of which there are countably many; the computable reals, whose digits some program prints (Turing, 1936), form a countable field.
 
 ## Key concepts
 

@@ -22,7 +22,7 @@ Four theorems carry most of the weight of functional analysis. The Hahn–Banach
 
 6. **Closed graph: closed graph implies bounded.** A linear map T between Banach spaces whose graph {(x, Tx)} is closed in X × Y is bounded. Proof idea: the graph is a Banach space, and projection from it onto X is a bounded bijection, whose inverse is bounded by the open mapping theorem. In practice one checks only that xₙ → x and Txₙ → y imply y = Tx. Differentiation from C¹ to C has closed graph, which is consistent: C¹[0,1] with the sup norm is not complete.
 
-7. **Baire proves existence by abundance.** In C[0,1], the functions with a derivative at some point form a countable union of nowhere dense sets, so the nowhere differentiable continuous functions are generic, as Banach and Mazurkiewicz showed in 1931. Weierstrass had exhibited one in 1872.
+7. **Baire proves existence by abundance.** In C[0,1], the functions with a derivative at some point lie in a countable union of nowhere dense sets, so the nowhere differentiable continuous functions are generic, as Banach and Mazurkiewicz showed in 1931. Weierstrass had exhibited one in 1872.
 
 8. **Stability is boundedness.** The Lax equivalence theorem in [numerical analysis](../../14-applied-and-computational-mathematics/01-numerical-analysis/numerical-methods-for-differential-equations.md) says that a consistent scheme for a well-posed linear problem converges if and only if it is stable. That convergence implies stability is uniform boundedness: convergence for every initial datum makes the solution operators pointwise bounded.
 

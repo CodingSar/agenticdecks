@@ -10,7 +10,7 @@ Constructive mathematics requires that a proof of existence provide the object, 
 
 ## Core tenets
 
-1. **A proof is a construction: the Brouwer–Heyting–Kolmogorov (BHK) interpretation.** Instead of truth values, each connective is explained by what counts as a proof of it, following Heyting and Kolmogorov's reading of logic as a calculus of problems (1932):
+1. **A proof is a construction: the Brouwer–Heyting–Kolmogorov (BHK) interpretation.** Instead of truth values, each connective is explained by what counts as a proof of it, following Heyting's proof interpretation and Kolmogorov's reading of logic as a calculus of problems (1932):
 
 ```
 A proof of    consists of

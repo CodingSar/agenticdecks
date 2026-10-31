@@ -48,5 +48,5 @@ Elliptic curves come first and modular forms second; the last tenets of each mee
 - [Dictionaries between fields](../../CROSS-CUTTING.md#dictionaries-between-fields): modularity matches geometry with analysis.
 - [Symmetry](../../CROSS-CUTTING.md#symmetry): modular forms are defined by their symmetry under SL₂(ℤ).
 - [Structure and morphism](../../CROSS-CUTTING.md#structure-and-morphism): the chord-and-tangent group law and Hecke operators.
-- [Local to global](../../CROSS-CUTTING.md#local-to-global): the a_p at each prime assemble into one L-function, and Ш measures what the local data miss.
+- [Local to global](../../CROSS-CUTTING.md#local-to-global): the a_p at each prime assemble into one L-function, and the Tate–Shafarevich group Ш measures what the local data miss.
 - [Impossibility and obstruction](../../CROSS-CUTTING.md#impossibility-and-obstruction): the Frey curve cannot exist.

@@ -48,5 +48,5 @@ The area draws on [finite fields](../../05-abstract-algebra/02-rings-and-fields/
 
 - [Impossibility and obstruction](../../CROSS-CUTTING.md#impossibility-and-obstruction): no compression below entropy, no reliable rate above capacity, no code beyond the Singleton bound.
 - [Randomness and averaging](../../CROSS-CUTTING.md#randomness-and-averaging): random codes prove the coding theorems, and random keys give secrecy.
-- [Existence and construction](../../CROSS-CUTTING.md#existence-and-construction): Shannon proved good codes exist; explicit capacity-achieving codes took sixty years.
+- [Existence and construction](../../CROSS-CUTTING.md#existence-and-construction): Shannon proved good codes exist; practical codes near capacity came only in the 1990s, and polar codes (2009) were proved to reach it with low-complexity decoding.
 - [Dictionaries between fields](../../CROSS-CUTTING.md#dictionaries-between-fields): codes become lattices, and number theory becomes security.

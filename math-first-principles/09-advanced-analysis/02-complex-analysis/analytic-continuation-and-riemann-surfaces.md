@@ -6,7 +6,7 @@
 
 ## Essence
 
-Because a holomorphic function is determined by its values on any small disc, a power series converging near one point can have at most one holomorphic extension along a given path. Following it around different paths, however, can give different answers: the logarithm gains 2πi each time it circles the origin, and the square root changes sign. Riemann's idea was to build the surface on which they are single-valued. The result is the Riemann surface, a one-dimensional complex manifold,. Compact Riemann surfaces turn out to be the same thing as algebraic curves.
+Because a holomorphic function is determined by its values on any small disc, a power series converging near one point can have at most one holomorphic extension along a given path. Following it around different paths, however, can give different answers: the logarithm gains 2πi each time it circles the origin, and the square root changes sign. Riemann's idea was to build the surface on which they are single-valued. The result is the Riemann surface, a one-dimensional complex manifold. Compact Riemann surfaces turn out to be the same thing as algebraic curves.
 
 ## Core tenets
 

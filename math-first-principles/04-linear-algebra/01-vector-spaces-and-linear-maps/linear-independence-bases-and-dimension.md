@@ -18,7 +18,7 @@ A basis is a set of vectors from which every vector can be built in exactly one 
 
 5. **Dimension counts like a size.** For subspaces U and W of a finite-dimensional space, dim(U + W) = dim U + dim W − dim(U ∩ W), proved by extending a basis of U ∩ W separately to bases of U and of W. Two distinct planes through the origin in ℝ³ meet in a line, since 2 + 2 − 3 = 1. Dimension counting of this kind drives later results such as [Sylvester's law](../03-inner-product-spaces/quadratic-forms-and-positive-definiteness.md) and the [Eckart–Young theorem](../03-inner-product-spaces/singular-value-decomposition.md).
 
-6. **Over a finite field, dimension counts elements.** A space of dimension n over ℤ/p has pⁿ elements, one for each coordinate list. Counting ordered bases (the first vector any non-zero one, each later one outside the span so far) gives the order of the group of invertible n × n matrices:
+6. **Over a finite field, dimension counts elements.** A space of dimension n over ℤ/p has pⁿ elements, one for each coordinate list. Counting ordered bases (the first vector any non-zero one, each later one outside the span so far) gives the order of the general linear group GL(n, p) of invertible n × n matrices over ℤ/p:
 
    ```
    |GL(n, p)| = (pⁿ − 1)(pⁿ − p)(pⁿ − p²) ⋯ (pⁿ − pⁿ⁻¹)
