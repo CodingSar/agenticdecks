@@ -2,7 +2,7 @@
 
 > **Layer:** [09 Advanced Analysis](../README.md) › [Complex Analysis](README.md)
 > **Builds on:** [The Complex Numbers](../../02-number-systems/01-constructing-the-numbers/the-complex-numbers.md), [The Derivative as a Linear Map](../../06-real-analysis/04-calculus-of-several-variables/the-derivative-as-a-linear-map.md), [Series](../../06-real-analysis/01-limits-and-convergence/series.md), [The Exponential and Trigonometric Functions](../../06-real-analysis/02-calculus-of-one-variable/the-exponential-and-trigonometric-functions.md)
-> **Enables:** [Cauchy's Theorem and Its Consequences](cauchys-theorem-and-its-consequences.md), [Conformal Maps and the Riemann Mapping Theorem](conformal-maps-and-the-riemann-mapping-theorem.md), [Laplace's Equation and Harmonic Functions](../../10-differential-equations-and-dynamics/02-partial-differential-equations/laplaces-equation-and-harmonic-functions.md)
+> **Enables:** [Cauchy's Theorem and Its Consequences](cauchys-theorem-and-its-consequences.md), [Conformal Maps and the Riemann Mapping Theorem](conformal-maps-and-the-riemann-mapping-theorem.md), [Laplace's Equation and Harmonic Functions](../../10-differential-equations-and-dynamics/02-partial-differential-equations/laplaces-equation-and-harmonic-functions.md), [Complex Dynamics](../../10-differential-equations-and-dynamics/04-dynamical-systems/complex-dynamics.md)
 
 ## Essence
 

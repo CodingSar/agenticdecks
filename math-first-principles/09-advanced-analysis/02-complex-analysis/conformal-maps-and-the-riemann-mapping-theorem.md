@@ -2,7 +2,7 @@
 
 > **Layer:** [09 Advanced Analysis](../README.md) › [Complex Analysis](README.md)
 > **Builds on:** [Holomorphic Functions](holomorphic-functions.md), [Cauchy's Theorem and Its Consequences](cauchys-theorem-and-its-consequences.md), [Compactness in Metric Spaces](../../06-real-analysis/03-metric-spaces/compactness-in-metric-spaces.md), [Non-Euclidean Geometry](../../08-geometry/01-classical-geometry/non-euclidean-geometry.md)
-> **Enables:** [Analytic Continuation and Riemann Surfaces](analytic-continuation-and-riemann-surfaces.md), [Laplace's Equation and Harmonic Functions](../../10-differential-equations-and-dynamics/02-partial-differential-equations/laplaces-equation-and-harmonic-functions.md), [Modular Forms](../../12-number-theory-and-algebraic-geometry/04-elliptic-curves-and-modular-forms/modular-forms.md)
+> **Enables:** [Analytic Continuation and Riemann Surfaces](analytic-continuation-and-riemann-surfaces.md), [Laplace's Equation and Harmonic Functions](../../10-differential-equations-and-dynamics/02-partial-differential-equations/laplaces-equation-and-harmonic-functions.md), [Modular Forms](../../12-number-theory-and-algebraic-geometry/04-elliptic-curves-and-modular-forms/modular-forms.md), [Complex Dynamics](../../10-differential-equations-and-dynamics/04-dynamical-systems/complex-dynamics.md)
 
 ## Essence
 
@@ -10,7 +10,7 @@ A holomorphic function with non-zero derivative preserves angles, so it is a con
 
 ## Core tenets
 
-1. **Holomorphic with f′ ≠ 0 means angle-preserving.** At a point where f′(z₀) = re^(iθ) ≠ 0, the derivative multiplies tangent vectors by r and rotates them by θ, so two curves crossing at z₀ cross at the same angle, with the same orientation, after mapping. Where f′(z₀) = 0, as for z² at 0, angles are multiplied by the order of the zero, so the hypothesis is needed. A holomorphic bijection automatically has f′ ≠ 0 and a holomorphic inverse.
+1. **Holomorphic with f′ ≠ 0 means angle-preserving.** At a point where f′(z₀) = re^(iθ) ≠ 0, the derivative multiplies tangent vectors by r and rotates them by θ, so two curves crossing at z₀ cross at the same angle, with the same orientation, after mapping. Where f′(z₀) = 0, as for z² at 0, angles are multiplied by the order of the zero. A holomorphic bijection automatically has f′ ≠ 0 and a holomorphic inverse.
 
 2. **Möbius transformations are the conformal symmetries of the sphere.** Maps z ↦ (az + b)/(cz + d) with ad − bc ≠ 0 act on the Riemann sphere ℂ ∪ {∞}, compose like 2 × 2 matrices, and form the group PSL(2, ℂ). They send circles and lines to circles and lines, and there is exactly one taking any three distinct points to any other three. The Cayley transform z ↦ (z − i)/(z + i) maps the upper half-plane onto the unit disc, since points nearer i than −i are exactly those with positive imaginary part.
 
@@ -45,7 +45,7 @@ A holomorphic function with non-zero derivative preserves angles, so it is a con
 ## How it fits
 
 - **Below:** the [derivative as rotation and scaling](holomorphic-functions.md) explains angle preservation; [Cauchy's estimates](cauchys-theorem-and-its-consequences.md) and [compactness](../../06-real-analysis/03-metric-spaces/compactness-in-metric-spaces.md) drive the proof; the [hyperbolic plane](../../08-geometry/01-classical-geometry/non-euclidean-geometry.md) explains the disc's symmetries.
-- **Above:** potential theory and the [Dirichlet problem](../../10-differential-equations-and-dynamics/02-partial-differential-equations/laplaces-equation-and-harmonic-functions.md) in 10; [modular forms](../../12-number-theory-and-algebraic-geometry/04-elliptic-curves-and-modular-forms/modular-forms.md) in 12 live on the upper half-plane modulo a Möbius group.
+- **Above:** potential theory and the [Dirichlet problem](../../10-differential-equations-and-dynamics/02-partial-differential-equations/laplaces-equation-and-harmonic-functions.md) in 10; [modular forms](../../12-number-theory-and-algebraic-geometry/04-elliptic-curves-and-modular-forms/modular-forms.md) in 12 live on the upper half-plane modulo a Möbius group; normal families define the Julia sets of [complex dynamics](../../10-differential-equations-and-dynamics/04-dynamical-systems/complex-dynamics.md).
 - **Siblings:** [Riemann surfaces](analytic-continuation-and-riemann-surfaces.md) extend the theorem to uniformisation; [singularities](singularities-and-residues.md) govern how conformal maps behave at boundary corners.
 
 ## Common misconceptions

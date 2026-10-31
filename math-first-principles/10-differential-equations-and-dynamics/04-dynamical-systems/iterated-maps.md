@@ -20,7 +20,7 @@ Iterating a map, xₙ₊₁ = f(xₙ), is the simplest dynamical system: time mo
 
 5. **At r = 4 the logistic map is a coin toss.** The substitution x = sin²(πθ) turns 4x(1 − x) into θ ↦ 2θ mod 1, which shifts the binary digits of θ one place left. So orbits correspond to binary sequences, periodic points are dense, nearby points separate like 2ⁿ (Lyapunov exponent ln 2), and almost every orbit spends time near x in proportion to the density 1/(π·√(x(1 − x))).
 
-6. **Order and chaos are interleaved.** In the logistic family, windows with an attracting cycle are dense among parameters (Graczyk and Świątek; Lyubich; both 1997), the period-3 window opening at r = 1 + √8 ≈ 3.8284. Yet the parameters with chaotic behaviour, an absolutely continuous invariant measure, have positive length (Jakobson, 1981). The complex map z ↦ z² + c contains the logistic family on its real line, and its Mandelbrot set, the c for which the orbit of 0 stays bounded, is connected (Douady and Hubbard, 1982).
+6. **Order and chaos are interleaved.** In the logistic family, windows with an attracting cycle are dense among parameters (Graczyk and Świątek; Lyubich; both 1997), the period-3 window opening at r = 1 + √8 ≈ 3.8284. Yet the parameters with chaotic behaviour, an absolutely continuous invariant measure, have positive length (Jakobson, 1981). The complex map z ↦ z² + c contains the logistic family on its real line, and its [Mandelbrot set](complex-dynamics.md), the c for which the orbit of 0 stays bounded, is connected (Douady and Hubbard, 1982).
 
 ## Key concepts
 
@@ -38,7 +38,7 @@ Iterating a map, xₙ₊₁ = f(xₙ), is the simplest dynamical system: time mo
 
 - **Below:** |f′| < 1 is the [contraction mapping principle](../../06-real-analysis/03-metric-spaces/completeness-and-the-contraction-mapping-principle.md) with its constant from the [mean value theorem](../../06-real-analysis/02-calculus-of-one-variable/the-derivative-and-the-mean-value-theorem.md); linear [recurrence relations](../../03-combinatorics-and-graph-theory/01-enumeration/recurrence-relations.md) are the solvable case; the continuous-time analogue is [stability of equilibria](../01-ordinary-differential-equations/stability-and-phase-portraits.md), with |f′| < 1 in place of negative real part.
 - **Above:** [Newton's method](../../14-applied-and-computational-mathematics/01-numerical-analysis/root-finding-and-newtons-method.md) is an iterated map whose basins in the complex plane are fractal; discrete-generation population models in [mathematical biology](../../14-applied-and-computational-mathematics/04-mathematical-modelling/mathematical-biology-and-epidemics.md) are logistic maps.
-- **Siblings:** [bifurcations](bifurcations.md) classify how fixed points and cycles appear; [chaos](chaos-and-strange-attractors.md) extends the coding of tenet 5 to the horseshoe; [ergodic theory](ergodic-theory.md) explains the invariant density.
+- **Siblings:** [bifurcations](bifurcations.md) classify how fixed points and cycles appear; [chaos](chaos-and-strange-attractors.md) extends the coding of tenet 5 to the horseshoe; [ergodic theory](ergodic-theory.md) explains the invariant density; [complex dynamics](complex-dynamics.md) continues tenet 6 in the complex plane.
 
 ## Common misconceptions
 

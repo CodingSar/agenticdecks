@@ -53,7 +53,7 @@ Looking directly for twice-differentiable solutions of a partial differential eq
 
 - **"A weak solution is an approximate solution."**: it solves an equivalent integrated statement exactly, and if it is smooth it is classical.
 - **"Functions in H¹ are continuous."**: only in one dimension; log log(1/|x|) is an unbounded H¹ function in the plane.
-- **"Lax–Milgram solves every linear elliptic problem."**: it needs coercivity, which fails at eigenvalues, where the Fredholm alternative takes over.
+- **"Lax–Milgram solves every linear elliptic problem."**: it needs coercivity, which fails at eigenvalues, where the [Fredholm alternative](../../09-advanced-analysis/03-functional-analysis/compact-operators-and-fredholm-theory.md) takes over.
 
 ## Go deeper
 
