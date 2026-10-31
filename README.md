@@ -3,6 +3,8 @@
 > Also in this repository: **[Computer Science from First Principles](cs-first-principles/README.md)**, a layered knowledge base of Computer Science from engineering foundations up to AI and society (16 layers, 263 leaf topics, plus a cross-cutting principles index).
 >
 > And **[Medicine from First Principles](medicine-first-principles/README.md)**, the same method applied to Medicine: from the physics and chemistry of living matter, through biochemistry, cells, genetics, anatomy and physiology, microbes and immunity, pathology, pharmacology, evidence and the clinical method, to the branches of medicine and how they interact, and medicine in society (16 layers, 332 leaf topics, plus a cross-cutting principles index).
+>
+> And **[Mathematics from First Principles](math-first-principles/README.md)**, the same method applied to Mathematics: from logic and sets, through the number systems, combinatorics, linear and abstract algebra, real analysis, topology, geometry, advanced analysis, differential equations and probability, to number theory and algebraic geometry, category theory and metamathematics, applied and computational mathematics, and mathematics in context (16 layers, 257 leaf topics, plus a cross-cutting principles index).
 
 Anki decks for a cloud / Kubernetes platform and enterprise architect, consolidated from 44 source decks into 32, plus new decks written from scratch (The Pragmatic Programmer, the general-education series, Identity & Zero Trust, SRE & Observability, Software Engineering Classics, Chemistry, From Source to Silicon, Clean Code & Design Patterns).
 

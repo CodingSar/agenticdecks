@@ -168,12 +168,15 @@ Covered only in passing: 19 K-theory, 32 Several complex variables and analytic 
 | Pass | Work | Result |
 |---|---|---|
 | 1. Draft | 16 writer agents to `WRITER_BRIEF.md` | 314 files (242 leaves, 72 READMEs), about 304,000 words; 0 checker problems. Writers' taxonomy suggestions, doubtful claims and cross-layer links logged in `REVIEW_NOTES.md`. Taxonomy amended after the draft: areas 06/03 and 06/04 swapped so metric spaces precede several-variable calculus, and 15 leaves added for gaps the writers found |
-| 2. Review | Reviewer agents to `REVIEW_BRIEF.md` | |
-| 3. Index | `CROSS-CUTTING.md` | |
-| 4. Coherence | Audit of the 16 layer READMEs as one bottom-up story | |
+| 2. Review | 8 reviewer agents, two layers each (14 alone), to `REVIEW_BRIEF.md`: fact-check every number, date, attribution and citation; tighten hypotheses; write the 15 new leaves; strengthen sibling connections | About 50 factual corrections, among them Cantor's 1891 diagonal argument, R(5,5) ≤ 46 (Angeltveit–McKay 2024), elliptic-curve rank 29 (Elkies–Klagsbrun 2024), the 2025 International Mathematical Olympiad (IMO) results, the convexity hypothesis of the Karush–Kuhn–Tucker (KKT) conditions, and the uses of the axiom of choice; 15 new leaves; 329 files: 257 leaves, 72 READMEs, about 322,000 words |
+| 3. Index | `CROSS-CUTTING.md`: 18 principles traced bottom-up through 206 links, each with a "When it misleads" note, and a closing table of tensions | Every anchor resolves |
+| 4. Coherence | Audit of the 16 layer READMEs as one bottom-up story | Neighbouring layers agree on what each gives and takes; every parent README links all its children, including the 15 new leaves; layer 06 prose follows the new order |
+
+`python3 _meta/check.py` reports 0 problems: every taxonomy path exists, every link and anchor resolves, every leaf has the required sections and length, and no "Builds on" link points upward.
 
 ## 10. Known limits and next iterations
 
 - Leaves are capped at about 1,100 words, so each one gives the idea of a proof, not the proof. The "Go deeper" sources are the next step.
 - There are no exercises, and mathematics is learnt by doing it. Each "Go deeper" list points to a book that has them.
-- Candidate leaves not yet added: K-theory, several complex variables, operator algebras, geometric group theory, symplectic geometry and topology, the representation theory of the symmetric groups, tropical geometry, arithmetic dynamics, combinatorial optimisation, statistical mechanics.
+- Candidate leaves not yet added: K-theory and the Atiyah–Singer index theorem, the Jordan curve theorem, several complex variables, operator algebras, geometric group theory, symplectic topology, the representation theory of the symmetric groups, tropical geometry, arithmetic dynamics, combinatorial optimisation, matroids and designs, statistical mechanics, quantum information, time series, inverse problems, decision theory and mechanism design.
+- Claims that move fast are dated in the text and should be rechecked on each revision: the refereeing of the proof of the geometric Langlands conjecture, bounds on diagonal Ramsey numbers (the post-2023 exponential improvements are mentioned only in outline), record elliptic-curve ranks, and the capabilities of AI systems in competition mathematics and formal proof.
