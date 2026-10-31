@@ -13,6 +13,8 @@ Collected from writer reports, to be resolved in the review pass.
 
 - **14 (W15):** candidate leaves: FFT and spectral methods; combinatorial and integer optimisation; quadrature; computational complexity (P versus NP) in 13 or 14; quantum computation has no home in the math tree (CS leaf linked instead).
 
+- **08 (W9):** candidate leaves: symplectic geometry; fibre bundles, connections and characteristic classes (gauge theory); geometric group theory.
+
 ## Claims to verify
 
 ### Layer 01 (W2)
@@ -78,6 +80,14 @@ Collected from writer reports, to be resolved in the review pass.
 - **Number theory and analysis:** Euler's sum-of-powers conjecture; Lander–Parkin 1966; Elkies 1988; Weierstrass 1872; Erdős 1947; Littlewood 1914; Fermat's descent for x⁴ + y⁴ = z²; Gelfond–Schneider 1934.
 - **Constructive logic:** Heyting 1930; Kolmogorov 1932; Kripke 1965; Gödel and Gentzen 1933; Curry 1934; Howard 1969/1980; Bishop 1967; Brouwer's continuity principle.
 - **Books:** Velleman 3rd 2019; Hammack 3rd 2018; Graham–Knuth–Patashnik 2nd 1994; Alon–Spencer 4th 2016; Greenberg 4th 2008; Kunen 1980; van Dalen 5th 2013; Wadler 2015; Heath 1908; Hartshorne 2000; Gelbaum–Olmsted 1964; Steen–Seebach 1970.
+
+### Layer 08 (W9)
+
+- **Classical geometry:** Pasch 1882; Hilbert's completeness axiom in later editions; Dehn's semi-Euclidean planes; Tarski decidability; Saccheri 1733; Beltrami 1868; Hilbert 1901; Thurston's trichotomy for knot complements; Bruck–Ryser 1949; Lam–Thiel–Swiercz 1989; order 12 open; Fedorov and Schoenflies 1891, 230 versus 219; Bieberbach; Berger 1966; Shechtman 1982; hat and spectre 2023; Sharpe 1997; Greenberg 1974; Thurston 1997.
+- **Differential geometry:** Umlaufsatz; Fenchel; Fáry–Milnor; Gauss 1827; Chern 1944; Atiyah–Singer 1963; de Rham 1931; Hopf–Rinow 1931; Nash 1956; Perelman 2002–2003.
+- **Convex and discrete:** McMullen 1970; Santos 2010; polynomial Hirsch open; Dehn 1900; Gauss 1831; Lagrange hexagonal lattice; Hales 1998/2005, Flyspeck 2014; Cohn–Elkies 2003; Viazovska 2016/2017, dimension 24, Fields 2022; optimal density known only in 1, 2, 3, 8, 24; LLL 1982; ML-KEM 2024; Thompson 1983; Conway–Sloane 1988.
+- **Lie theory:** Cartan closed-subgroup theorem; diag(−2, −½) not an exponential in SL(2, ℝ) (trace argument; looks right); universal cover of SL(2, ℝ) has no faithful finite-dimensional representation; Killing 1888–1890; Cartan 1894; Langlands dual via reversed Dynkin arrows; Kac–Moody; Cartan 1913; Weyl 1925–1926; Peter–Weyl 1927; Wigner 1939; non-compact simple groups have no non-trivial finite-dimensional unitary representations; eightfold way.
+- **Books:** Chevalley 1946; Stillwell 2008; Hall 2003; Humphreys 1972; Fulton–Harris 1991; Hawkins 2000; Bröcker–tom Dieck 1985; Sternberg 1994; Weyl 1928 (German original).
 
 ## Cross-layer follow-ups (coordinator, after review pass)
 
