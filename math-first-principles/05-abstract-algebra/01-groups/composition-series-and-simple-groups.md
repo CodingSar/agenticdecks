@@ -55,6 +55,7 @@ As integers factor into primes, finite groups break into simple groups, those wi
 
 - **"A group is determined by its composition factors."** ℤ/4 and ℤ/2 × ℤ/2 share theirs. The factors are the primes; the gluing is the hard part.
 - **"The classification is one proof that someone has read."** It is spread over hundreds of papers; the consolidated version is unfinished as of 2026.
+
 ## Go deeper
 
 - Ronald Solomon, "A brief history of the classification of the finite simple groups", *Bulletin of the American Mathematical Society* (2001): the history by one of its authors.

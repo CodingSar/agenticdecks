@@ -7,7 +7,7 @@
 
 This layer makes chance rigorous and then turns it around to learn from data. Probability began with games: Blaise Pascal and Pierre de Fermat solved the problem of dividing the stakes of an interrupted game in their correspondence of 1654. For nearly three centuries it had no agreed foundation beyond finite cases, until Andrey Kolmogorov (1933) defined a probability as a measure of total mass 1. That single move imports the whole of measure theory and lets one speak precisely about infinitely many coin tosses, a point chosen from an interval or the path of a diffusing particle.
 
-The layer's first area sets up that framework. The second proves the great limit theorems: averages converge to means (the law of large numbers), fluctuations around them are normal (the Central Limit Theorem, CLT), and large deviations are exponentially rare (concentration). The third studies random evolution in time: Markov chains, martingales, Brownian motion and the stochastic calculus built on it. The fourth inverts the direction, from data back to the distribution that produced them.
+The layer's first area sets up that framework. The second proves the great limit theorems: averages converge to means (the law of large numbers), fluctuations around them are normal (the Central Limit Theorem, CLT), and large deviations are exponentially rare (concentration). The third studies random evolution in time: Markov chains in discrete and continuous time, Poisson processes, martingales, Brownian motion and the stochastic calculus built on it. The fourth inverts the direction, from data back to the distribution that produced them, with or without a parametric model.
 
 The contribution to the stack is **randomness as structure**: independence, conditioning and averaging, which turn uncertainty about single outcomes into near-certainty about aggregates.
 
@@ -23,8 +23,8 @@ Above it, number theory borrows probabilistic models, metamathematics asks what 
 |---|---|---|
 | [Measure-theoretic probability](01-measure-theoretic-probability/README.md) | The framework: probability spaces, random variables, independence, conditional expectation | Nothing in this layer |
 | [Limit theorems](02-limit-theorems/README.md) | What happens to sums of many independent terms: laws of large numbers, CLT, concentration | Measure-theoretic probability |
-| [Stochastic processes](03-stochastic-processes/README.md) | Random evolution with dependence: Markov chains, martingales, Brownian motion, Itô calculus | Measure-theoretic probability, limit theorems |
-| [Statistical inference](04-statistical-inference/README.md) | Learning about the distribution from data: estimation, testing, Bayesian methods, regression | Measure-theoretic probability, limit theorems, stochastic processes |
+| [Stochastic processes](03-stochastic-processes/README.md) | Random evolution with dependence: Markov chains, Poisson processes, martingales, Brownian motion, Itô calculus | Measure-theoretic probability, limit theorems |
+| [Statistical inference](04-statistical-inference/README.md) | Learning about the distribution from data: estimation, testing, Bayesian methods, regression, the bootstrap | Measure-theoretic probability, limit theorems, stochastic processes |
 
 The four areas form a stack with a fork at the top. The framework comes first, because every later statement is about measures and measurable functions. The limit theorems come next, because they are the reason probability says anything definite. Stochastic processes and statistical inference both build on the limit theorems, and each borrows from the other: Markov chain Monte Carlo powers Bayesian computation, and martingales prove that posteriors are consistent.
 

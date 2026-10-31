@@ -22,7 +22,7 @@ Placing the layer after algebraic geometry in layer 12 also reflects history: sc
 | Child | Its role in the whole | Depends on |
 |---|---|---|
 | [Category Theory](01-category-theory/README.md) | The language of structure: functors, Yoneda, adjunctions, homological algebra, higher categories | 01 functions, 04 tensors, 05 algebra, 07 homology |
-| [Computability and Incompleteness](02-computability-and-incompleteness/README.md) | The limits of algorithms and proofs: undecidability, Gödel's theorems, proof-theoretic strength | 00 proof systems, 01 diagonal argument and ordinals, 02 Peano axioms |
+| [Computability and Incompleteness](02-computability-and-incompleteness/README.md) | The limits of algorithms and proofs: undecidability, feasibility in polynomial time, Gödel's theorems, proof-theoretic strength | 00 proof systems, 01 diagonal argument and ordinals, 02 Peano axioms |
 | [Model Theory and Independence](03-model-theory-and-independence/README.md) | Theories through their models: Löwenheim–Skolem, decidable theories, forcing, large cardinals | 00 compactness, 01 ZFC and cardinals, computability |
 
 The three areas are less a sequence than three views of one question: what does a mathematical description determine? Category theory answers at the level of structure: an object is determined up to unique isomorphism by its maps. Computability answers at the level of proof: a formal theory is a program that lists theorems, and diagonalisation shows that no such program captures all arithmetic truth. Model theory answers at the level of meaning: a theory is determined by its models, and building a model where a statement fails is how independence is proved.

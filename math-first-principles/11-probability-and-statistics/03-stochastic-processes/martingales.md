@@ -51,7 +51,7 @@ A martingale is the mathematical model of a fair game: a process whose expected 
 
 - **Below:** [conditional expectation](../01-measure-theoretic-probability/conditional-expectation.md) is the definition; [modes of convergence](../02-limit-theorems/modes-of-convergence.md) and [Lᵖ spaces](../../09-advanced-analysis/01-measure-and-integration/lp-spaces.md) frame the convergence theorems; for a [Markov chain](markov-chains.md), h(Xₙ) is a martingale whenever Ph = h, which turns harmonic functions into probabilities.
 - **Above:** in [mathematical finance](../../14-applied-and-computational-mathematics/05-games-decisions-and-finance/mathematical-finance.md), the absence of arbitrage means that discounted prices are martingales under some equivalent measure; in [Bayesian inference](../04-statistical-inference/bayesian-inference.md), posterior means are Doob martingales, which gives Doob's consistency theorem; McDiarmid's [concentration inequality](../02-limit-theorems/concentration-inequalities.md) is a martingale bound.
-- **Siblings:** [Brownian motion](brownian-motion.md) is the continuous-time martingale, and [stochastic calculus](stochastic-calculus.md) is the theory of continuous-time martingale transforms.
+- **Siblings:** [Brownian motion](brownian-motion.md) is the continuous-time martingale, and [stochastic calculus](stochastic-calculus.md) is the theory of continuous-time martingale transforms; the compensated [Poisson process](poisson-processes-and-continuous-time-markov-chains.md) N(t) − λt is the basic martingale with jumps.
 
 ## Common misconceptions
 

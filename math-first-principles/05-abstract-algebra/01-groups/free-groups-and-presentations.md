@@ -22,7 +22,7 @@ The free group on a set S is the group of reduced words in the letters of S and 
    ```
    A group is finitely presented if S and R can both be finite. To prove that a presentation gives a known group G, check that suitable elements of G satisfy the relations, which gives a surjection onto G, then show that the presented group has at most |G| elements. For Dₙ the relations rewrite every word as rⁱ or rⁱs, at most 2n words.
 
-4. **A group is free exactly when it acts freely on a tree; subgroups of free groups are free.** The Cayley graph of F(S), with a vertex for each element and an edge from g to gs, is a tree, because reduced words are the paths that never backtrack. A subgroup H also acts freely on this tree, and the quotient graph shows that H is free. The Nielsen–Schreier theorem adds that a subgroup of index k in a free group of rank n has rank k(n − 1) + 1. So F₂ contains free groups of every finite rank, and its commutator subgroup is free of infinite rank.
+4. **A group is free exactly when it acts freely on a tree without inverting edges; subgroups of free groups are free.** The Cayley graph of F(S), with a vertex for each element and an edge from g to gs, is a tree, because reduced words are the paths that never backtrack. A subgroup H also acts freely on this tree, and the quotient graph shows that H is free. The Nielsen–Schreier theorem adds that a subgroup of index k in a free group of rank n has rank k(n − 1) + 1. So F₂ contains free groups of every finite rank, and its commutator subgroup is free of infinite rank.
 
 5. **Presentations come from topology.** The fundamental group of a wedge of n circles is free of rank n. A closed orientable surface of genus g has fundamental group ⟨a₁, b₁, …, a_g, b_g | a₁b₁a₁⁻¹b₁⁻¹⋯a_gb_ga_g⁻¹b_g⁻¹⟩. A knot diagram yields a presentation of the group of its complement: the trefoil gives ⟨x, y | xyx = yxy⟩. Conversely, every finitely presented group is the fundamental group of some closed 4-manifold.
 
@@ -30,7 +30,7 @@ The free group on a set S is the group of reduced words in the letters of S and 
 
 7. **The word problem is undecidable in general.** Novikov in 1955, and Boone independently a few years later, built finitely presented groups for which no algorithm decides whether a word equals e. The proof encodes a Turing machine, through a semigroup with unsolvable word problem, into the relations, so that a certain word is trivial exactly when the machine halts; the [halting problem](../../../cs-first-principles/02-theory-of-computation/03-computability/halting-problem-and-undecidability.md) then becomes a question about groups. Consequences: whether a presentation defines the trivial group is undecidable (the Adian–Rabin theorem), and so is homeomorphism of closed 4-manifolds (Markov). Higman's embedding theorem (1961) says that a finitely generated group embeds in a finitely presented one exactly when its relations can be listed by an algorithm.
 
-8. **Many important classes have solvable word problems.** Free groups (reduce the word), finite groups (use the multiplication table), finitely generated abelian groups (linear algebra over ℤ), one-relator groups (Magnus) and hyperbolic groups, which include the surface groups of genus at least 2 that Dehn studied. For hyperbolic groups Dehn's algorithm works: any non-trivial word equal to e contains more than half of a relator, which can be shortened.
+8. **Many important classes have solvable word problems.** Free groups (reduce the word), finite groups (use the multiplication table), finitely generated abelian groups (linear algebra over ℤ), one-relator groups (Magnus) and hyperbolic groups, which include the surface groups of genus at least 2 that Dehn studied. For hyperbolic groups, in a suitable finite presentation, Dehn's algorithm works: any non-trivial word equal to e contains more than half of a relator, which can be shortened.
 
 ## Key concepts
 
@@ -54,7 +54,7 @@ The free group on a set S is the group of reduced words in the letters of S and 
 ## Common misconceptions
 
 - **"A presentation tells you the group."** It may not even reveal whether the group is trivial. ⟨x, y | xyx⁻¹ = y², yxy⁻¹ = x²⟩ is trivial: the relations give x = yx², so y = x⁻¹, and then y = y².
-- **"Undecidable means no instance can be solved."** It means no single algorithm handles every word in every finitely presented group; many groups and most individual words are fine.
+- **"Undecidable means no instance can be solved."** It means no single algorithm handles every word in every finitely presented group; for many groups one exists.
 
 ## Go deeper
 

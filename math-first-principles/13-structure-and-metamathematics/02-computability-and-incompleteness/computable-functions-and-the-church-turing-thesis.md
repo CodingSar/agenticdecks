@@ -49,7 +49,7 @@ Before one can prove that no algorithm solves a problem, "algorithm" needs a mat
 ## Common misconceptions
 
 - **"The thesis has been proved."**: Equivalences between particular models have been proved; the identification with the informal notion of an effective procedure cannot be.
-- **"Computable means feasible."**: The Ackermann function is computable, yet its values at small inputs cannot be written down; feasibility is the subject of complexity theory.
+- **"Computable means feasible."**: The Ackermann function is computable, yet its values at small inputs cannot be written down; feasibility is the subject of [computational complexity](computational-complexity.md).
 - **"Physical computers might compute more."**: That is the separate physical Church–Turing thesis, about what nature allows; it is not part of the mathematical thesis.
 
 ## Go deeper

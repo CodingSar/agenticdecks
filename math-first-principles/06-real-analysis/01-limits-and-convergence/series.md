@@ -2,7 +2,7 @@
 
 > **Layer:** [06 Real Analysis](../README.md) › [Limits and Convergence](README.md)
 > **Builds on:** [Sequences and limits](sequences-and-limits.md), [The real numbers](../../02-number-systems/01-constructing-the-numbers/the-real-numbers.md)
-> **Enables:** [Uniform convergence](uniform-convergence.md), [Taylor expansion](../02-calculus-of-one-variable/taylor-expansion.md), [The exponential and trigonometric functions](../02-calculus-of-one-variable/the-exponential-and-trigonometric-functions.md), [Fourier series](../../09-advanced-analysis/04-harmonic-analysis/fourier-series.md), [The Riemann zeta function](../../12-number-theory-and-algebraic-geometry/02-analytic-number-theory/the-riemann-zeta-function.md)
+> **Enables:** [Uniform convergence](uniform-convergence.md), [Power series and analytic functions](../02-calculus-of-one-variable/power-series-and-analytic-functions.md), [Taylor expansion](../02-calculus-of-one-variable/taylor-expansion.md), [The exponential and trigonometric functions](../02-calculus-of-one-variable/the-exponential-and-trigonometric-functions.md), [Fourier series](../../09-advanced-analysis/04-harmonic-analysis/fourier-series.md), [The Riemann zeta function](../../12-number-theory-and-algebraic-geometry/02-analytic-number-theory/the-riemann-zeta-function.md)
 
 ## Essence
 
@@ -40,7 +40,7 @@ A series a₁ + a₂ + a₃ + ⋯ is not an infinite addition. It is the limit o
 ## How it fits
 
 - **Below:** A series is a sequence of partial sums, so everything rests on [sequences and limits](sequences-and-limits.md) and on the completeness of [the real numbers](../../02-number-systems/01-constructing-the-numbers/the-real-numbers.md), which supplies sums through the Cauchy criterion. [Generating functions](../../03-combinatorics-and-graph-theory/01-enumeration/generating-functions.md) use power series as formal objects, where convergence is not needed.
-- **Above:** [Taylor expansion](../02-calculus-of-one-variable/taylor-expansion.md) asks which functions are sums of power series, and [exp](../02-calculus-of-one-variable/the-exponential-and-trigonometric-functions.md) is defined as one. [Fourier series](../../09-advanced-analysis/04-harmonic-analysis/fourier-series.md) expand in sines and cosines, where convergence is delicate. The [Riemann zeta function](../../12-number-theory-and-algebraic-geometry/02-analytic-number-theory/the-riemann-zeta-function.md) ζ(s) = ∑1/nˢ starts life as a series.
+- **Above:** [Power series](../02-calculus-of-one-variable/power-series-and-analytic-functions.md) become functions that can be differentiated term by term, [Taylor expansion](../02-calculus-of-one-variable/taylor-expansion.md) asks which functions are their sums, and [exp](../02-calculus-of-one-variable/the-exponential-and-trigonometric-functions.md) is defined as one. [Fourier series](../../09-advanced-analysis/04-harmonic-analysis/fourier-series.md) expand in sines and cosines, where convergence is delicate. The [Riemann zeta function](../../12-number-theory-and-algebraic-geometry/02-analytic-number-theory/the-riemann-zeta-function.md) ζ(s) = ∑1/nˢ starts life as a series.
 - **Siblings:** [Uniform convergence](uniform-convergence.md) treats series of functions, whose sums must also be continuous or differentiable. [Estimates and inequalities](estimates-and-inequalities.md) supplies the bounds that comparison tests need.
 
 ## Common misconceptions

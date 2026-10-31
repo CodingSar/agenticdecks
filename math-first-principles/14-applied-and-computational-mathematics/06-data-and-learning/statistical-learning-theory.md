@@ -41,7 +41,7 @@ Statistical learning theory asks when a rule fitted to finitely many examples wi
 
 - **Below:** the law of large numbers says one hypothesis's empirical risk converges; concentration inequalities give the rate; the Sauer–Shelah lemma comes from extremal set theory; linear regression is the classical case of fitting with a bias–variance trade-off.
 - **Above:** [computers and proof](../../15-mathematics-in-context/computers-and-proof.md) discusses learning systems in mathematics; the computing tree's [generalisation](../../../cs-first-principles/13-artificial-intelligence/02-machine-learning-foundations/generalization-and-bias-variance.md) leaf gives the practitioner's view.
-- **Siblings:** [high-dimensional geometry](high-dimensional-geometry-and-random-matrices.md) supplies the concentration tools in sharper form; [deep learning](the-mathematics-of-deep-learning.md) is where these bounds become vacuous and new explanations are needed.
+- **Siblings:** [high-dimensional geometry](high-dimensional-geometry-and-random-matrices.md) supplies the concentration tools in sharper form; [deep learning](the-mathematics-of-deep-learning.md) is where these bounds become vacuous and new explanations are needed; [optimal transport](optimal-transport.md) measures how far an empirical distribution lies from the true one.
 
 ## Common misconceptions
 

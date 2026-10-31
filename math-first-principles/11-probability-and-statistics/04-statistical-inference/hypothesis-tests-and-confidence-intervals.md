@@ -47,7 +47,7 @@ A hypothesis test is a rule for deciding, from data, whether to reject a null hy
 
 - **Below:** [likelihood](estimation-and-likelihood.md) supplies the test statistics; the [central limit theorem](../02-limit-theorems/the-central-limit-theorem.md) and [concentration inequalities](../02-limit-theorems/concentration-inequalities.md) supply approximate and exact-at-every-n intervals.
 - **Above:** [clinical trials](../../../medicine-first-principles/10-epidemiology-and-evidence/02-evidence-based-medicine/randomized-controlled-trials.md) are designed around size and power; the replication crisis and [publication bias](../../../medicine-first-principles/10-epidemiology-and-evidence/02-evidence-based-medicine/research-integrity-and-publication-bias.md) are partly tenet 5 at scale, a theme of [mathematics and society](../../15-mathematics-in-context/mathematics-and-society.md).
-- **Siblings:** t and F tests for coefficients are the workhorses of [linear models](linear-models-and-regression.md); [Bayesian inference](bayesian-inference.md) answers the question a p-value is often mistaken for, the probability of the hypothesis given the data.
+- **Siblings:** t and F tests for coefficients are the workhorses of [linear models](linear-models-and-regression.md); [Bayesian inference](bayesian-inference.md) answers the question a p-value is often mistaken for, the probability of the hypothesis given the data; [rank and permutation tests](nonparametric-statistics-and-the-bootstrap.md) need no parametric model.
 
 ## Common misconceptions
 

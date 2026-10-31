@@ -28,7 +28,7 @@ A polynomial is solvable by radicals when its roots can be written from its coef
    x     −2    −1    0    1    2
    f(x)  −17    8    3   −2   23
    ```
-   So two roots are non-real conjugates. Since 5 divides the degree of the splitting field, Cauchy's theorem gives an element of order 5 in the Galois group, a 5-cycle on the roots. Complex conjugation fixes the three real roots and swaps the other two, a transposition. In S₅ a 5-cycle and a transposition generate the whole group, so Gal(f) = S₅, and the real root near 0.6 is not expressible by radicals.
+   So two roots are non-real conjugates. Since 5 divides the degree of the splitting field, Cauchy's theorem gives an element of order 5 in the Galois group, a 5-cycle on the roots. Complex conjugation fixes the three real roots and swaps the other two, a transposition. In S₅ a 5-cycle and a transposition generate the whole group, so Gal(f) = S₅, and the real root near 0.5 is not expressible by radicals.
 
 7. **Particular quintics can be solvable.** The roots of x⁵ − 2 are ζ·⁵√2 for the fifth roots of unity ζ; its Galois group has order 20 and is solvable. The theorem classifies polynomials one by one; it does not forbid every quintic a formula.
 

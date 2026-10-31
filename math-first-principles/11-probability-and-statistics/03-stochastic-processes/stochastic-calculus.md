@@ -61,7 +61,7 @@ To model a quantity driven by noise, one wants to write dXₜ = b(Xₜ)·dt + σ
 
 - **Below:** [Brownian motion](brownian-motion.md) and its quadratic variation, the [martingale](martingales.md) transform, [L² spaces](../../09-advanced-analysis/01-measure-and-integration/lp-spaces.md) for the isometry, [Taylor expansion](../../06-real-analysis/02-calculus-of-one-variable/taylor-expansion.md) for Itô's formula, and the Picard argument for [ordinary differential equations](../../10-differential-equations-and-dynamics/01-ordinary-differential-equations/existence-and-uniqueness.md).
 - **Above:** [mathematical finance](../../14-applied-and-computational-mathematics/05-games-decisions-and-finance/mathematical-finance.md) prices derivatives with Itô's formula and Girsanov; the Euler–Maruyama scheme in [numerical methods](../../14-applied-and-computational-mathematics/01-numerical-analysis/numerical-methods-for-differential-equations.md) simulates SDEs; diffusion-based [generative models](../../../cs-first-principles/13-artificial-intelligence/04-advanced-paradigms/generative-models.md) run an SDE backwards in time; stochastic gradient descent is studied as an SDE in [deep learning](../../14-applied-and-computational-mathematics/06-data-and-learning/the-mathematics-of-deep-learning.md).
-- **Siblings:** the generator of a diffusion plays the role that P − I plays for a [Markov chain](markov-chains.md).
+- **Siblings:** the generator of a diffusion plays the role that P − I plays for a [Markov chain](markov-chains.md) and the rate matrix Q for a [continuous-time chain](poisson-processes-and-continuous-time-markov-chains.md).
 
 ## Common misconceptions
 

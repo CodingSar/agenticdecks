@@ -1,7 +1,7 @@
 # Stochastic Processes
 
 > **Layer:** [11 Probability and Statistics](../README.md) › Stochastic Processes
-> **Children:** [Markov Chains](markov-chains.md) · [Martingales](martingales.md) · [Brownian Motion](brownian-motion.md) · [Stochastic Calculus](stochastic-calculus.md)
+> **Children:** [Markov Chains](markov-chains.md) · [Poisson Processes and Continuous-Time Markov Chains](poisson-processes-and-continuous-time-markov-chains.md) · [Martingales](martingales.md) · [Brownian Motion](brownian-motion.md) · [Stochastic Calculus](stochastic-calculus.md)
 
 ## What this area is about
 
@@ -12,15 +12,17 @@ A stochastic process is a family of random variables indexed by time: a random w
 | Child | Its role in the whole | Depends on |
 |---|---|---|
 | [Markov chains](markov-chains.md) | Memoryless evolution; stationary distributions, convergence, mixing, recurrence | No earlier child; uses conditional expectation and the law of large numbers |
+| [Poisson processes and continuous-time Markov chains](poisson-processes-and-continuous-time-markov-chains.md) | Random event times; exponential clocks, the generator Q, e^(tQ), queues | Markov chains |
 | [Martingales](martingales.md) | Fair games; optional stopping and almost sure convergence | Markov chains |
 | [Brownian motion](brownian-motion.md) | The continuous scaling limit of random walks; Gaussian, Markov and a martingale | Markov chains, martingales |
 | [Stochastic calculus](stochastic-calculus.md) | Integration against Brownian motion, Itô's formula, stochastic differential equations (SDEs) | Martingales, Brownian motion |
 
-Read them in order. Markov chains come first because they need the least: a matrix and a starting distribution. Martingales add the betting point of view, and the two meet when a harmonic function h, with Ph = h, turns a chain X into a martingale h(Xₙ). Brownian motion arrives as the limit of random walks, and both earlier ideas apply to it at once. Stochastic calculus then makes the martingale transform continuous and turns Brownian motion into a tool for building new processes.
+Read them in order. Markov chains come first because they need the least: a matrix and a starting distribution. Poisson processes and continuous-time chains let the jumps happen at exponential random times, so the matrix P is replaced by a rate matrix Q and matrix powers by e^(tQ); this is the setting of queues and stochastic epidemics. Martingales add the betting point of view, and the two meet when a harmonic function h, with Ph = h, turns a chain X into a martingale h(Xₙ). Brownian motion arrives as the limit of random walks, and both earlier ideas apply to it at once. Stochastic calculus then makes the martingale transform continuous and turns Brownian motion into a tool for building new processes.
 
 ```
    Markov chains ──── simple random walk ──(Donsker scaling)──► Brownian motion
-        │                                                          │
+        │  ╲ exponential clocks                                    │
+        │   ╲──► Poisson processes, rate matrix Q, e^(tQ)          │
         │  Ph = h gives martingales h(Xₙ)                          │
         ▼                                                          ▼
    martingales ───── martingale transform ∑ Hₖ·ΔMₖ ──────► stochastic calculus
@@ -37,7 +39,7 @@ Read them in order. Markov chains come first because they need the least: a matr
 
 From below, the [Perron–Frobenius theorem](../../04-linear-algebra/02-determinants-and-eigenvalues/non-negative-matrices-and-perron-frobenius.md) of 04 gives stationary distributions, [graph connectivity](../../03-combinatorics-and-graph-theory/02-graph-theory/graphs-and-connectivity.md) in 03 gives irreducibility, [ergodic theory](../../10-differential-equations-and-dynamics/04-dynamical-systems/ergodic-theory.md) and the [heat equation](../../10-differential-equations-and-dynamics/02-partial-differential-equations/the-heat-equation.md) of 10 are the deterministic counterparts of chains and diffusions, and the [Lᵖ spaces](../../09-advanced-analysis/01-measure-and-integration/lp-spaces.md) of 09 carry the Itô integral.
 
-Upward, layer 14 uses all four children: [Monte Carlo methods](../../14-applied-and-computational-mathematics/01-numerical-analysis/monte-carlo-methods.md), [mathematical finance](../../14-applied-and-computational-mathematics/05-games-decisions-and-finance/mathematical-finance.md), [epidemic models](../../14-applied-and-computational-mathematics/04-mathematical-modelling/mathematical-biology-and-epidemics.md) and the numerical solution of stochastic differential equations. In the computer-science tree, [Markov chains](../../../cs-first-principles/01-mathematical-foundations/06-probability-and-statistics/markov-chains.md) model queues and algorithms, and [reinforcement learning](../../../cs-first-principles/13-artificial-intelligence/04-advanced-paradigms/reinforcement-learning.md) is built on Markov decision processes.
+Upward, layer 14 uses all five children: [Monte Carlo methods](../../14-applied-and-computational-mathematics/01-numerical-analysis/monte-carlo-methods.md), [mathematical finance](../../14-applied-and-computational-mathematics/05-games-decisions-and-finance/mathematical-finance.md), [epidemic models](../../14-applied-and-computational-mathematics/04-mathematical-modelling/mathematical-biology-and-epidemics.md) and the numerical solution of stochastic differential equations. In the computer-science tree, [Markov chains](../../../cs-first-principles/01-mathematical-foundations/06-probability-and-statistics/markov-chains.md) model queues and algorithms, and [reinforcement learning](../../../cs-first-principles/13-artificial-intelligence/04-advanced-paradigms/reinforcement-learning.md) is built on Markov decision processes.
 
 ## Cross-cutting threads
 

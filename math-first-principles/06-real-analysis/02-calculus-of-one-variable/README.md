@@ -1,13 +1,13 @@
 # Calculus of One Variable
 
 > **Layer:** [06 Real Analysis](../README.md) › Calculus of One Variable
-> **Children:** [The derivative and the mean value theorem](the-derivative-and-the-mean-value-theorem.md) · [Taylor expansion](taylor-expansion.md) · [The Riemann integral](the-riemann-integral.md) · [The fundamental theorem of calculus](the-fundamental-theorem-of-calculus.md) · [The exponential and trigonometric functions](the-exponential-and-trigonometric-functions.md)
+> **Children:** [The derivative and the mean value theorem](the-derivative-and-the-mean-value-theorem.md) · [Taylor expansion](taylor-expansion.md) · [The Riemann integral](the-riemann-integral.md) · [The fundamental theorem of calculus](the-fundamental-theorem-of-calculus.md) · [The exponential and trigonometric functions](the-exponential-and-trigonometric-functions.md) · [Power series and analytic functions](power-series-and-analytic-functions.md)
 
 ## What this area is about
 
 Newton and Leibniz built calculus in the seventeenth century as a set of extraordinarily effective rules, justified by infinitesimals nobody could define. This area rebuilds those rules on the limit. The derivative becomes the limit of difference quotients, and the integral becomes the limit of sums of rectangles. Every familiar fact then needs a proof, and the proofs show which hypotheses each fact depends on.
 
-Two tools carry most of the weight. The mean value theorem (MVT) turns information about the derivative at points into information about the function on whole intervals. The fundamental theorem of calculus (FTC) shows that differentiation and integration are inverse operations. Around them sit Taylor's theorem, which extends the linear approximation to polynomials, and the construction of exp, sin, cos and π from power series.
+Two tools carry most of the weight. The mean value theorem (MVT) turns information about the derivative at points into information about the function on whole intervals. The fundamental theorem of calculus (FTC) shows that differentiation and integration are inverse operations. Around them sit Taylor's theorem, which extends the linear approximation to polynomials, the calculus of power series and the analytic functions they define, and the construction of exp, sin, cos and π from such series.
 
 ## How the children fit together
 
@@ -17,7 +17,8 @@ Two tools carry most of the weight. The mean value theorem (MVT) turns informati
 | [Taylor expansion](taylor-expansion.md) | Best polynomial approximation with remainder bounds; smooth versus analytic | The derivative, series |
 | [The Riemann integral](the-riemann-integral.md) | Area as the squeeze of upper and lower sums; which functions are integrable | Continuity, completeness |
 | [The fundamental theorem of calculus](the-fundamental-theorem-of-calculus.md) | Links the derivative and the integral, with exact hypotheses | The derivative, the Riemann integral |
-| [The exponential and trigonometric functions](the-exponential-and-trigonometric-functions.md) | Defines exp by a power series and derives log, sin, cos, π and Euler's formula | Series, uniform convergence, the derivative |
+| [The exponential and trigonometric functions](the-exponential-and-trigonometric-functions.md) | Defines exp by a power series and derives log, sin, cos, π and Euler's formula | Power series, the derivative, ℂ |
+| [Power series and analytic functions](power-series-and-analytic-functions.md) | Termwise calculus inside the radius, re-expansion, the identity theorem, Abel's theorem | Series, uniform convergence, Taylor expansion |
 
 ```
      continuity, series, uniform convergence  (area 01)
@@ -26,11 +27,12 @@ Two tools carry most of the weight. The mean value theorem (MVT) turns informati
         │            │                 │
    Taylor expansion  └──────┬──────────┘
         │                 FTC
+   power series             │
         └──────┬────────────┘
      exponential and trigonometric functions
 ```
 
-Read the derivative first. The MVT is the engine behind Taylor's theorem, which iterates Rolle's theorem, and behind Part 2 of the FTC, which applies the MVT on every piece of a partition. The Riemann integral can be read independently, since it rests only on continuity and completeness. The FTC joins the two strands. The exponential leaf is a capstone: it uses power series, termwise differentiation and the MVT to build the functions that school calculus takes for granted, and it ends at Euler's formula, where real analysis meets ℂ.
+Read the derivative first. The MVT is the engine behind Taylor's theorem, which iterates Rolle's theorem, and behind Part 2 of the FTC, which applies the MVT on every piece of a partition. The Riemann integral can be read independently, since it rests only on continuity and completeness. The FTC joins the two strands. Power series and analytic functions follow Taylor: they are the functions whose Taylor series converge to them, and the identity theorem shows how rigid they are. The exponential leaf is a capstone: it uses power series, termwise differentiation and the MVT to build the functions that school calculus takes for granted, and it ends at Euler's formula, where real analysis meets ℂ.
 
 The counterexamples are as important as the theorems. x² sin(1/x) has a discontinuous derivative, Volterra's function has a bounded derivative that cannot be Riemann integrated, e^(−1/x²) is smooth but not analytic, and the indicator of ℚ is not Riemann integrable at all. Each one marks a place where a later theory, usually Lebesgue's or complex analysis, does better.
 

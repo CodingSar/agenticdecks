@@ -20,7 +20,7 @@ A ring is a set where you can add, subtract and multiply, as in ℤ, polynomials
 
 5. **Prime need not be maximal.** In ℤ, (0) is prime, since ℤ is a domain, but not maximal. In ℤ[x], the ideal (x) is prime with quotient ℤ, but it lies inside (2, x), whose quotient is the field 𝔽₂ with two elements. In ℤ the non-zero primes and maximal ideals coincide: they are the pℤ, with quotient the field 𝔽ₚ = ℤ/p.
 
-6. **Every proper ideal lies in a maximal ideal, by Zorn's lemma.** A chain of proper ideals has a proper union, because none contains 1, so Zorn's lemma gives a maximal element. In ℤ or any ring where ideals are finitely generated no choice is needed, but in general the statement is equivalent to the axiom of choice. It guarantees that every non-zero ring has a field as a quotient.
+6. **Every proper ideal lies in a maximal ideal, by Zorn's lemma.** A chain of proper ideals has a proper union, because none contains 1, so Zorn's lemma gives a maximal element. In ℤ, or any countable ring, no choice is needed, but in general the statement is equivalent to the axiom of choice. It guarantees that every non-zero ring has a field as a quotient.
 
 7. **The Chinese remainder theorem splits rings.** If I + J = R, then R/(I ∩ J) ≅ R/I × R/J, by sending r to its two residues; surjectivity comes from writing 1 = i + j. For coprime m and n, ℤ/mn ≅ ℤ/m × ℤ/n, which explains why φ(mn) = φ(m)φ(n) for Euler's totient. Without coprimality it fails: ℤ/4 has an element of order 4 and ℤ/2 × ℤ/2 does not.
 

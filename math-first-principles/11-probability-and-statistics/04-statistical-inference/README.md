@@ -1,7 +1,7 @@
 # Statistical Inference
 
 > **Layer:** [11 Probability and Statistics](../README.md) › Statistical Inference
-> **Children:** [Estimation and Likelihood](estimation-and-likelihood.md) · [Hypothesis Tests and Confidence Intervals](hypothesis-tests-and-confidence-intervals.md) · [Bayesian Inference](bayesian-inference.md) · [Linear Models and Regression](linear-models-and-regression.md)
+> **Children:** [Estimation and Likelihood](estimation-and-likelihood.md) · [Hypothesis Tests and Confidence Intervals](hypothesis-tests-and-confidence-intervals.md) · [Bayesian Inference](bayesian-inference.md) · [Linear Models and Regression](linear-models-and-regression.md) · [Nonparametric Statistics and the Bootstrap](nonparametric-statistics-and-the-bootstrap.md)
 
 ## What this area is about
 
@@ -15,8 +15,9 @@ Probability starts from a known distribution and predicts data; statistics start
 | [Hypothesis tests and confidence intervals](hypothesis-tests-and-confidence-intervals.md) | Neyman–Pearson optimality, p-values and their misuse, intervals as inverted tests | Estimation and likelihood |
 | [Bayesian inference](bayesian-inference.md) | Priors, posteriors, conjugacy, exchangeability and Markov chain Monte Carlo | Estimation and likelihood |
 | [Linear models and regression](linear-models-and-regression.md) | Least squares as projection, Gauss–Markov, exact normal theory, regularisation | Estimation and likelihood |
+| [Nonparametric statistics and the bootstrap](nonparametric-statistics-and-the-bootstrap.md) | Empirical distributions, rank and permutation tests, density estimation, resampling | Estimation, tests and intervals |
 
-Start with estimation, which introduces the likelihood and the limits on how well any procedure can do. The other three children then branch from it, and can be read in any order. Testing turns likelihood ratios into decisions with controlled error; Bayesian inference turns the likelihood into a distribution for θ; the linear model is the case where everything can be computed exactly. In the linear model with normal errors the three branches meet: the maximum likelihood estimate is least squares, the optimal tests are t and F tests, and with a flat prior the posterior is centred on the same estimate.
+Start with estimation, which introduces the likelihood and the limits on how well any procedure can do. The next three children branch from it and can be read in any order. Testing turns likelihood ratios into decisions with controlled error; Bayesian inference turns the likelihood into a distribution for θ; the linear model is the case where everything can be computed exactly. In the linear model with normal errors the three branches meet: the maximum likelihood estimate is least squares, the optimal tests are t and F tests, and with a flat prior the posterior is centred on the same estimate. Nonparametric statistics comes last because it drops the model {P_θ} altogether: it estimates the whole distribution by the empirical one, builds exact tests from ranks and permutations, and replaces formulas for standard errors by bootstrap resampling.
 
 ```
                     statistical model {P_θ} and data x
@@ -29,12 +30,14 @@ Start with estimation, which introduces the likelihood and the limits on how wel
                  └────────────────┼────────────────┘
                                   ▼
                 linear Gaussian model: all three agree
+
+          drop the model: empirical distribution F̂ₙ ──► ranks, bootstrap
 ```
 
 ## Connections to sibling areas
 
 - **[Measure-theoretic probability](../01-measure-theoretic-probability/README.md):** a model is a family of laws, a posterior is a regular conditional distribution, and Rao–Blackwell and least squares are both orthogonal projections.
-- **[Limit theorems](../02-limit-theorems/README.md):** the law of large numbers gives consistency, the central limit theorem asymptotic normality and approximate intervals, and concentration inequalities give intervals valid at every sample size.
+- **[Limit theorems](../02-limit-theorems/README.md):** the law of large numbers gives consistency, the central limit theorem asymptotic normality and approximate intervals, Glivenko–Cantelli the convergence of the empirical distribution, and concentration inequalities give intervals valid at every sample size.
 - **[Stochastic processes](../03-stochastic-processes/README.md):** Markov chain Monte Carlo makes Bayesian computation feasible, and martingale convergence proves posterior consistency.
 
 ## Connections across layers

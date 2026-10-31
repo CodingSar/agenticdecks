@@ -1,7 +1,7 @@
 # The Exponential and Trigonometric Functions
 
 > **Layer:** [06 Real Analysis](../README.md) › [Calculus of One Variable](README.md)
-> **Builds on:** [Series](../01-limits-and-convergence/series.md), [Uniform convergence](../01-limits-and-convergence/uniform-convergence.md), [The derivative and the mean value theorem](the-derivative-and-the-mean-value-theorem.md), [Taylor expansion](taylor-expansion.md), [The complex numbers](../../02-number-systems/01-constructing-the-numbers/the-complex-numbers.md)
+> **Builds on:** [Series](../01-limits-and-convergence/series.md), [Uniform convergence](../01-limits-and-convergence/uniform-convergence.md), [The derivative and the mean value theorem](the-derivative-and-the-mean-value-theorem.md), [Power series and analytic functions](power-series-and-analytic-functions.md), [The complex numbers](../../02-number-systems/01-constructing-the-numbers/the-complex-numbers.md)
 > **Enables:** [Linear systems and the matrix exponential](../../10-differential-equations-and-dynamics/01-ordinary-differential-equations/linear-systems-and-the-matrix-exponential.md), [Holomorphic functions](../../09-advanced-analysis/02-complex-analysis/holomorphic-functions.md), [Fourier series](../../09-advanced-analysis/04-harmonic-analysis/fourier-series.md), [Lie groups and Lie algebras](../../08-geometry/04-lie-theory/lie-groups-and-lie-algebras.md), [Compartment models and exponential processes (medicine)](../../../medicine-first-principles/01-quantitative-and-scientific-foundations/03-systems-and-models/compartment-models-and-exponential-processes.md)
 
 ## Essence
@@ -53,7 +53,7 @@ School mathematics defines powers by roots and sin and cos by triangles, then as
 
 - **Below:** [Series](../01-limits-and-convergence/series.md) gives the radius and the Cauchy product; [uniform convergence](../01-limits-and-convergence/uniform-convergence.md) licenses termwise differentiation; [the complex numbers](../../02-number-systems/01-constructing-the-numbers/the-complex-numbers.md) supply the field in which exp(ix) lives.
 - **Above:** The same series defines the [matrix exponential](../../10-differential-equations-and-dynamics/01-ordinary-differential-equations/linear-systems-and-the-matrix-exponential.md) that solves y′ = Ay, and the exponential map of a [Lie group](../../08-geometry/04-lie-theory/lie-groups-and-lie-algebras.md). [Holomorphic functions](../../09-advanced-analysis/02-complex-analysis/holomorphic-functions.md) study exp and its many-valued inverse on ℂ, and [Fourier series](../../09-advanced-analysis/04-harmonic-analysis/fourier-series.md) expand functions in exp(inx). In pharmacology, first-order elimination is exponential decay: see [compartment models (medicine)](../../../medicine-first-principles/01-quantitative-and-scientific-foundations/03-systems-and-models/compartment-models-and-exponential-processes.md).
-- **Siblings:** [Taylor expansion](taylor-expansion.md) explains why the series is the right one. [The fundamental theorem of calculus](the-fundamental-theorem-of-calculus.md) gives the alternative route through ln as an integral.
+- **Siblings:** [Power series](power-series-and-analytic-functions.md) supply the termwise calculus, and [Taylor expansion](taylor-expansion.md) explains why the series is the right one. [The fundamental theorem of calculus](the-fundamental-theorem-of-calculus.md) gives the alternative route through ln as an integral.
 
 ## Common misconceptions
 

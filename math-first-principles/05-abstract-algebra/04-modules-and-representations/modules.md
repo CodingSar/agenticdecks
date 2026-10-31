@@ -22,7 +22,7 @@ A module is a vector space whose scalars come from a ring instead of a field. Th
    ```
    The rank r and the invariant factors dᵢ, up to units, are determined by M. Splitting each R/(dᵢ) by the Chinese remainder theorem into pieces R/(pᵉ) gives the equivalent elementary divisor form.
 
-5. **The proof is Smith normal form.** Write M as Rⁿ modulo the submodule spanned by the relations, the columns of a matrix A. Invertible row and column operations, essentially the Euclidean algorithm, reduce A to a diagonal matrix with entries d₁ ∣ d₂ ∣ ⋯. For the abelian group with generators a, b and relations 2a + 4b = 0 and 6a + 6b = 0:
+5. **The proof is Smith normal form.** Write M as Rⁿ modulo the submodule spanned by the relations, the rows of a matrix A. Invertible row and column operations, essentially the Euclidean algorithm, reduce A to a diagonal matrix with entries d₁ ∣ d₂ ∣ ⋯. For the abelian group with generators a, b and relations 2a + 4b = 0 and 6a + 6b = 0:
    ```
    [2 4]   subtract 3 × row 1   [2  4]   subtract 2 × column 1   [2  0]
    [6 6]   ───────────────────> [0 −6]   ─────────────────────>  [0 −6]

@@ -40,7 +40,7 @@ A problem is a family of yes-or-no questions, and it is decidable if one program
 
 - **Below:** It applies [Cantor's diagonal argument](../../01-sets-and-foundations/02-infinity-and-cardinality/cantors-diagonal-argument.md) to [computable functions](computable-functions-and-the-church-turing-thesis.md), and its targets are [first-order validity](../../00-logic-and-proof/01-formal-logic/predicate-logic-and-quantifiers.md), [Diophantine equations](../../02-number-systems/02-elementary-number-theory/diophantine-equations.md) and [group presentations](../../05-abstract-algebra/01-groups/free-groups-and-presentations.md).
 - **Above:** The [computer science treatment](../../../cs-first-principles/02-theory-of-computation/03-computability/halting-problem-and-undecidability.md) draws consequences for program analysis, and the limits of [computer-assisted proof](../../15-mathematics-in-context/computers-and-proof.md) start here.
-- **Siblings:** [Gödel's theorems](godels-incompleteness-theorems.md) are the proof-theoretic shadow of these results, and [decidable theories](../03-model-theory-and-independence/quantifier-elimination-and-decidable-theories.md) mark where decision procedures do exist.
+- **Siblings:** [Gödel's theorems](godels-incompleteness-theorems.md) are the proof-theoretic shadow of these results, [decidable theories](../03-model-theory-and-independence/quantifier-elimination-and-decidable-theories.md) mark where decision procedures do exist, and [computational complexity](computational-complexity.md) bounds the reductions in time to ask which are feasible.
 
 ## Common misconceptions
 

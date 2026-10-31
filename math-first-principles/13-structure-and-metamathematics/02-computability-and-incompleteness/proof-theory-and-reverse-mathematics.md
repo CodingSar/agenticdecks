@@ -14,7 +14,7 @@ After Gödel, the useful question is no longer whether a theory proves its own c
 
 2. **PA is consistent by induction up to ε₀.** In 1936 Gentzen assigned to each derivation of a contradiction in PA an ordinal below ε₀, the least ordinal with ω^ε = ε, and gave a reduction step that turns it into another such derivation with a smaller ordinal. Since ordinals are well-ordered there is no such derivation. The steps are finitary, formalisable in primitive recursive arithmetic (PRA); the one non-finitary ingredient is the well-ordering of ε₀, which by the second incompleteness theorem PA cannot prove.
 
-3. **Ordinals measure theories.** Gentzen showed in 1943 that PA proves transfinite induction up to each ordinal below ε₀ but not up to ε₀ itself, so ε₀ is the proof-theoretic ordinal of PA. Weaker and stronger theories get smaller and larger ordinals: ω^ω for PRA, Γ₀ for arithmetical transfinite recursion. Ordinal analyses of stronger systems, such as Π¹₁ comprehension, exist; for full second-order arithmetic none is known as of 2026.
+3. **Ordinals measure theories.** Gentzen showed in 1943 that PA proves transfinite induction up to each ordinal below ε₀ but not up to ε₀ itself, so ε₀ is the proof-theoretic ordinal of PA. Weaker and stronger theories get smaller and larger ordinals: ω^ω for PRA, Γ₀ for arithmetical transfinite recursion. Ordinal analyses of stronger systems, such as Π¹₁ comprehension, exist; for full second-order arithmetic none is generally accepted as of 2026.
 
 4. **Reverse mathematics finds the axioms a theorem needs.** Harvey Friedman (1975) and Stephen Simpson worked over a weak base, RCA₀ (the recursive comprehension axiom: Σ⁰₁ induction and the existence of computable sets), and proved theorems equivalent to stronger axioms. Most classical theorems about countable or separable objects fall into five systems, the "Big Five":
 
@@ -25,6 +25,8 @@ After Gödel, the useful question is no longer whether a theory proves its own c
    | ACA₀ (arithmetical comprehension) | Bolzano–Weierstrass; vector spaces have bases; maximal ideals exist; Ramsey's theorem for triples |
    | ATR₀ (arithmetical transfinite recursion) | comparability of countable well-orderings; perfect set theorem |
    | Π¹₁-CA₀ (Π¹₁ comprehension) | Cantor–Bendixson theorem; abelian groups split as divisible ⊕ reduced |
+
+   The best-known exception is Ramsey's theorem for pairs in two colours (RT²₂). David Seetapun (1995) showed it does not imply ACA₀, Jiayi Liu (2012) that it does not imply WKL₀, and Carl Jockusch (1972) that WKL₀ does not prove it, so it lies outside the Big Five.
 
 5. **Strong-looking theories can be conservative over weak ones.** ACA₀ proves exactly the same arithmetical sentences as PA. WKL₀ proves no more Π¹₁ sentences than RCA₀ (Leo Harrington) and no more Π⁰₂ sentences than PRA (Friedman), so the compactness arguments of WKL₀ are finitistically justified in Hilbert's sense for statements of that form.
 

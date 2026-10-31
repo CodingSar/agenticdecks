@@ -35,7 +35,7 @@ The fundamental theorem of calculus says that integrating a derivative over an i
    ```
    ∮_∂D (P dx + Q dy) = ∬_D (∂Q/∂x − ∂P/∂y) dA
    ```
-   Proof idea: for a rectangle, integrate ∂Q/∂x in x first; the fundamental theorem of calculus leaves Q on the two vertical edges, with opposite signs, and the same happens for P on the horizontal edges. For a region made of many rectangles, each interior edge is traversed twice in opposite directions and cancels, leaving only the outer boundary. With P = −y/2 and Q = x/2 it gives area(D) = ½∮(x dy − y dx). Green published the theorem in 1828.
+   Proof idea: for a rectangle, integrate ∂Q/∂x in x first; the fundamental theorem of calculus leaves Q on the two vertical edges, with opposite signs, and the same happens for P on the horizontal edges. For a region made of many rectangles, each interior edge is traversed twice in opposite directions and cancels, leaving only the outer boundary. With P = −y/2 and Q = x/2 it gives area(D) = ½∮(x dy − y dx). Green's 1828 essay contains a closely related result.
 
 6. **Stokes' theorem and the divergence theorem.** For an oriented surface S with boundary curve ∂S, traversed consistently with the normal, and a C¹ field F,
    ```
