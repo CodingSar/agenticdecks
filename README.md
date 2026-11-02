@@ -11,6 +11,7 @@ Anki decks for a cloud / Kubernetes platform and enterprise architect, consolida
 - **Import:** `decks/*.apkg`
 - **Editable source of truth:** `work/out/*.json` (one file per deck) + `media/`
 - **Rebuild:** `pip install genanki && python3 tools/check.py && python3 tools/build.py`
+- **Taxonomy bundles:** `python3 tools/export_taxonomy.py` writes `<taxonomy>/taxonomy-bundle.json` (agenticprofessor SPEC-615 `TaxonomyBundleSchema` v1) for the three first-principles taxonomies; deck links come from each taxonomy's `DECK-MAP.csv` (`topicId,deckName,deckPath`)
 
 ## What changed
 
